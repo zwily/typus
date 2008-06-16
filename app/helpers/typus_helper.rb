@@ -21,7 +21,7 @@ module TypusHelper
   def login_info
     html = "<ul>"
     html << "<li>Logged as #{link_to @current_user.full_name, :controller => 'typus', :model => 'typus_users', :action => 'edit', :id => @current_user.id}</li>"
-    html << "<li>#{link_to "View Site", '/', :target => 'blank'}</li>"
+    html << "<li>#{link_to "View site", '/', :target => 'blank'}</li>"
     html << "<li>#{link_to "Logout", typus_logout_url}</li>"
     html << "</ul>"
     return html
@@ -42,7 +42,7 @@ module TypusHelper
       html << "<tr><th colspan=\"2\">#{module_name}</th></tr>\n"
       Typus.modules(module_name).each do |model|
         html << "<tr class=\"#{cycle('even', 'odd')}\">\n"
-        html << "<td>#{link_to model.to_s.pluralize, :action => 'index', :model => model.delete(" ").tableize}<br /></td>\n"
+        html << "<td>#{link_to model.titleize.pluralize, :action => 'index', :model => model.delete(" ").tableize}<br /></td>\n"
         html << "<td align=\"right\" valign=\"bottom\"><small>"
         html << "#{link_to 'Add', :action => 'new', :model => model.delete(" ").tableize}"
         html << "</small></td>\n</tr>\n"
@@ -61,7 +61,7 @@ module TypusHelper
     case params[:action]
     when "index"
       html << "<ul>"
-      html << "<li>#{link_to "Add #{params[:model].titleize.singularize}", :action => 'new'}</li>"
+      html << "<li>#{link_to "Add #{@model.name.titleize.downcase}", :action => 'new'}</li>"
       html << "</ul>"
       html << more_actions
       html << modules
@@ -72,7 +72,7 @@ module TypusHelper
       html << "</ul>"
     when "edit", "update"
       html << "<ul>"
-      html << "<li>#{link_to "Add #{params[:model].titleize.singularize}", :action => 'new'}</li>"
+      html << "<li>#{link_to "Add #{@model.name.titleize.downcase}", :action => 'new'}</li>"
       html << "</ul>"
       html << "<ul>"
       html << "#{'<li>' + (link_to "Next", :action => "edit", :id => @next.id) + '</li>' if @next}"
@@ -103,11 +103,11 @@ module TypusHelper
     case params[:action]
     when 'index'
       @model.typus_actions_for('list').each do |a|
-        html << "<li>#{link_to a.titleize, :params => params.merge(:controller => "typus/#{params[:model]}", :model => params[:model], :action => a) }</li>"
+        html << "<li>#{link_to a.titleize.capitalize, :params => params.merge(:controller => "typus/#{params[:model]}", :model => params[:model], :action => a) }</li>"
       end
     when 'edit'
       @model.typus_actions_for('form').each do |a|
-        html << "<li>#{link_to a.titleize, :controller => "typus/#{params[:model]}", :model => params[:model], :action => a, :id => params[:id] }</li>"
+        html << "<li>#{link_to a.titleize.capitalize, :controller => "typus/#{params[:model]}", :model => params[:model], :action => a, :id => params[:id] }</li>"
       end
     end
     html = "<ul>#{html}</ul>" if html
@@ -148,7 +148,7 @@ module TypusHelper
       <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
       </form>
     HTML
-    return search if Typus::Configuration.config["#{@model.to_s.titleize}"]["search"]
+    return search if Typus::Configuration.config["#{@model.name}"]["search"]
   end
 
   def filters
@@ -239,7 +239,7 @@ module TypusHelper
     @model.typus_fields_for(fields).each do |column|
       order_by = column[0]
       sort_order = (params[:sort_order] == "asc") ? "desc" : "asc"
-      html << "<th>#{link_to "<div class=\"#{sort_order}\">#{column[0].titleize}</div>", { :params => params.merge( :order_by => order_by, :sort_order => sort_order) }}</th>"
+      html << "<th>#{link_to "<div class=\"#{sort_order}\">#{column[0].titleize.capitalize}</div>", { :params => params.merge( :order_by => order_by, :sort_order => sort_order) }}</th>"
     end
     html << "<th>&nbsp;</th>\n</tr>"
 
@@ -265,7 +265,7 @@ module TypusHelper
         else # 'string', 'integer', 'selector'
           case column[0]
             when /file_name/
-              html << "<td>#{link_to item.send(column[0]) || "", :model => model, :action => 'edit', :id => item.id} (#{link_to "Preview", item.asset.url, :popup => ['Sanoke', 'height=461,width=692']})</td>"
+              html << "<td>#{link_to item.send(column[0]) || "", :model => model, :action => 'edit', :id => item.id} (#{link_to "Preview", item.asset.url, :popup => ['sanoke', 'height=461,width=692']})</td>"
             else
               html << "<td>#{link_to item.send(column[0]) || "", :model => model, :action => 'edit', :id => item.id}</td>"
             end
@@ -280,7 +280,7 @@ module TypusHelper
         @perform = link_to image_tag("typus_trash.gif"), { :model => model, 
                                                            :id => item.id, 
                                                            :params => params.merge(:action => 'destroy') }, 
-                                                           :confirm => "Remove this #{@model.to_s.titleize}?"
+                                                           :confirm => "Remove this #{@model.name.titleize.downcase}?"
       else
         @perform = link_to image_tag("typus_trash.gif"), { :action => "unrelate", 
                                                            :unrelated => model, 
@@ -304,7 +304,7 @@ module TypusHelper
 
     fields.each do |field|
 
-      html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize}</label>"
+      html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>"
 
       # When the field is an asset ...
       case field[0]
@@ -345,7 +345,7 @@ module TypusHelper
         html << "</select>"
       when "collection"
         related = field[0].split("_id").first.capitalize.camelize.constantize
-        html << "#{select :item, "#{field[0]}", related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.to_s.titleize}"}"
+        html << "#{select :item, "#{field[0]}", related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.to_s.downcase}"}"
       else # when "string", "integer", "float", "position"
         html << "#{text_field :item, field[0], :class => 'title'}"
       end
