@@ -2,7 +2,7 @@
 	<%= typus_block("edit_sidebar") || actions %>
 <% end %>
 
-<h2><%= link_to "#{params[:model].titleize}", :action => "index", :model => params[:model], :id => nil %> &rsaquo; Edit</h2>
+<h2><%= link_to @model.name.pluralize.titleize, :action => "index", :model => params[:model], :id => nil %> &rsaquo; Edit</h2>
 
 <%= typus_block("edit_top") %>
 
@@ -10,7 +10,7 @@
             :url  => { :action => "update", :id => @item.id }, 
             :html => { :multipart => true } do |f| %>
   <%= typus_form %>
-  <p><%= submit_tag "Update #{params[:model].titleize.singularize}", :class => 'button' %></p>
+  <p><%= submit_tag "Update #{@model.name.titleize}", :class => 'button' %></p>
 <% end %>
 
 <%= typus_form_has_many %>
