@@ -296,7 +296,7 @@ private
   end
 
   def error_handler(error, redirection = { :action => 'dashboard' })
-    if RAILS_ENV == 'production'
+    unless RAILS_ENV == 'development'
       flash[:error] = error.message.titleize
       redirect_to redirection
     end
