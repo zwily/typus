@@ -11,6 +11,7 @@ namespace :typus do
 
     ##
     # Create the new user with the params.
+    #
     email = ENV['email']
     password = ENV['password'] || generate_password
 
@@ -23,16 +24,12 @@ namespace :typus do
                                  :admin => true, 
                                  :status => true)
       if typus_user.save
-        puts "=> [Typus] Typus User successfully created."
-        puts "   Email: #{typus_user.email}"
-        puts "   Password: #{password}"
+        puts "=> [Typus] Your new password is `#{password}`."
       else
-        puts "=> [Typus] Could not create Typus User."
-        puts "   Provide an email. (rake typus:seed email=foo@bar.com)"
+        puts "=> [Typus] Please, provide a valid email. (rake typus:seed email=foo@bar.com)"
       end
     rescue
-      puts "=> [Typus] Yay! Table doesn't exists."
-      puts "   Please, run `script/generate typus_migration` to create required tables."
+      puts "=> [Typus] Run `script/generate typus_migration` to create required tables."
     end
 
   end
@@ -42,29 +39,26 @@ namespace :typus do
 
     ##
     # Plugins
-    puts "=> [Typus] Installing Required Plugins"
-
-    # Updated repos
+    #
     plugins = [ "git://github.com/thoughtbot/paperclip.git", 
                 "git://github.com/rails/acts_as_list.git", 
                 "git://github.com/rails/acts_as_tree.git" ]
 
     plugins.each do |plugin_url|
-      puts "   - #{plugin_url}"
+      puts "=> [Typus] Installing #{plugin_url}."
       system "script/plugin install #{plugin_url}"
     end
 
     ##
     # Gems
-    puts "=> [Typus] Installing required Gems"
-
+    #
     gems = [ "paginator" ]
 
     gems.each do |gem|
-      puts "   - #{gem}"
+      puts "=> [Typus] Installing #{gem}."
       # If command fails, please, notify user!
-      if !(system "sudo gem install #{gem} --no-rdoc --no-ri") then
-        print "Installing gem #{gem} failed: Error code returned was ", $?, "\n"
+      if !(system "sudo gem install #{gem} --no-rdoc --no-ri")
+        puts "Installing gem #{gem} failed: Error code returned was #{$?}."
       end
     end
 
@@ -72,9 +66,8 @@ namespace :typus do
 
   desc "Copy Typus images and stylesheets"
   task :assets do
-    puts "=> [Typus] Copying files"
     %w( images stylesheets ).each do |folder|
-      puts "   - #{folder}"
+      puts "=> [Typus] Copying #{folder}."
       system "cp #{RAILS_ROOT}/vendor/plugins/typus/public/#{folder}/* #{RAILS_ROOT}/public/#{folder}/"
     end
   end
@@ -88,7 +81,6 @@ namespace :typus do
       ##
       # If typus config file does not file exists or force param is not blank, configure
       if !File.exists? ("#{RAILS_ROOT}/config/typus.yml") or ENV['force']
-        puts "=> [Typus] Creating config/typus.yml"
         require File.dirname(__FILE__) + '/../../../../config/environment'
         typus = File.open("#{RAILS_ROOT}/config/typus.yml", "w+")
         typus.puts "# ------------------------------------------------"
@@ -126,7 +118,6 @@ namespace :typus do
         models.each do |model|
           class_name = eval model.sub(/\.rb$/,'').camelize
           if class_name.new.kind_of?(ActiveRecord::Base)
-            puts( "Processing #{class_name}" )
             class_attributes = class_name.new.attributes.keys
             typus = File.open("#{RAILS_ROOT}/config/typus.yml", "a+")
             typus.puts ""
@@ -150,7 +141,7 @@ namespace :typus do
             typus.puts "  application: Untitled"
             typus.puts "  description:"
             typus.close
-            puts "   - Model #{class_name} added."
+            puts "=> [Typus] #{class_name} added to `config/typus.yml`"
           end
         end
       else
