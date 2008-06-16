@@ -52,8 +52,7 @@ class TypusController < ApplicationController
     end
 
   rescue Exception => error
-    flash[:error] = error.message
-    redirect_to :action => 'dashboard'
+    error_handler(error)
   end
 
   def new
@@ -97,8 +96,7 @@ class TypusController < ApplicationController
       render :action => 'new'
     end
   rescue Exception => error
-    flash[:error] = error.message.titleize
-    redirect_to :params => params.merge(:action => 'index', :id => nil)
+    error_handler(error, {:params => params.merge(:action => 'index', :id => nil)} )
   end
 
   def edit
@@ -137,8 +135,7 @@ class TypusController < ApplicationController
     flash[:success] = "#{@model.to_s.titleize} successfully removed."
     redirect_to :params => params.merge(:action => 'index', :id => nil)
   rescue Exception => error
-    flash[:error] = error.message.titleize
-    redirect_to :params => params.merge(:action => 'index', :id => nil)
+    error_handler(error, { :params => params.merge(:action => 'index', :id => nil) })
   end
 
   # Toggle the status of an item.
@@ -159,8 +156,7 @@ class TypusController < ApplicationController
     flash[:success] = "Position changed ..."
     redirect_to :back
   rescue Exception => error
-    flash[:error] = error.message.titleize
-    redirect_to :action => 'dashboard'
+    error_handler(error)
   end
 
   # Relate a model object to another.
@@ -170,8 +166,7 @@ class TypusController < ApplicationController
     flash[:success] = "#{model_to_relate.to_s.titleize} added to #{@model.to_s.titleize}."
     redirect_to :action => 'edit', :id => params[:id]
   rescue Exception => error
-    flash[:error] = error.message.titleize
-    redirect_to :action => 'dashboard'
+    error_handler(error)
   end
 
   # Remove relationship between models.
@@ -182,8 +177,7 @@ class TypusController < ApplicationController
     flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.to_s.titleize}."
     redirect_to :action => 'edit', :id => params[:id]
   rescue Exception => error
-    flash[:error] = error.message.titleize
-    redirect_to :action => 'dashboard'
+    error_handler(error)
   end
 
   # Basic session creation.
@@ -232,8 +226,7 @@ private
   def set_model
     @model = params[:model].modelize
   rescue Exception => error
-    flash[:error] = error.message.titleize
-    redirect_to :action => 'dashboard'
+    error_handler(error)
   end
 
   # Set default order on the listings.
@@ -300,6 +293,13 @@ private
       redirect_to :controller => 'typus', :action => 'index', :model => params[:model]
     end
 
+  end
+
+  def error_handler(error, redirection = { :action => 'dashboard' })
+    if RAILS_ENV == 'production'
+      flash[:error] = error.message.titleize
+      redirect_to redirection
+    end
   end
 
 end
