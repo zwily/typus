@@ -10,6 +10,12 @@ TODO
 [ ] Release plugin as a gem.
 [ ] Script to allow the plugin to work outside a Rails application.
 [ ] Tests for Datamapper.
+[ ] Show arrows on table header to display order of the list.
+[ ] Extend typus.html.erb to be able to extend header, breadcrumbs and footer.
+[ ] Sort applications by name ASC.
+[ ] Plans to release a 1.0 version ...
+[ ] Make actions more restful.
+[ ] Log activity ... and be able to recover old data.
 
 DONE
 ====
