@@ -9,21 +9,24 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_login_and_redirect_to_dashboard
-    post :login, { :user => { :email => 'admin@typus.org', :password => '12345678' }}
+    post :login, { :user => { :email => 'admin@typus.org', 
+                              :password => '12345678' } }
     assert_equal @request.session[:typus], 1
     assert_response :redirect
     assert_redirected_to typus_dashboard_url
   end
 
   def test_should_not_login_disable_user
-    post :login, { :user => { :email => 'disabled_user@typus.org', :password => '12345678' }}
+    post :login, { :user => { :email => 'disabled_user@typus.org', 
+                              :password => '12345678' } }
     assert_equal @request.session[:typus], nil
     assert_response :redirect
     assert_redirected_to typus_login_url
   end
 
   def test_should_render_index
-    post :login, { :user => { :email => 'admin@typus.org', :password => '12345678' }}
+    post :login, { :user => { :email => 'admin@typus.org', 
+                              :password => '12345678' } }
     assert_equal @request.session[:typus], 1
     get :index, { :model => 'posts' }
     assert_response :success
@@ -47,7 +50,9 @@ class TypusControllerTest < ActionController::TestCase
   def test_should_create_item
     @request.session[:typus] = 1
     items = Post.count
-    post :create, { :model => 'posts', :item => { :title => "This is another title", :body => "This is the body."}}
+    post :create, { :model => 'posts', 
+                    :item => { :title => "This is another title", 
+                               :body => "This is the body." } }
     assert_response :redirect
     assert_redirected_to :action => 'edit'
     assert_equal items + 1, Post.count
