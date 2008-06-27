@@ -6,12 +6,9 @@ begin
     Dependencies.load_paths << File.join(File.dirname(__FILE__), 'app', m)
   end
 
-  %w( sha1 ).each { |lib| require lib }
-
   if File.exists?("#{RAILS_ROOT}/config/typus.yml")
     require 'data_mapper' unless defined?(ActiveRecord)
-    require 'paginator'
-    require 'typus'
+    %w( sha1 paginator typus ).each { |lib| require lib }
     Typus.enable
   else
     puts "=> Typus is not enabled because config file does not exist."
