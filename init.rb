@@ -8,13 +8,14 @@ begin
 
   %w( sha1 ).each { |lib| require lib }
 
-  require 'data_mapper' unless defined?(ActiveRecord)
-  require 'paginator'
-  require 'typus'
-
-  Typus.enable
-
-  Typus::Configuration.options[:version] = '0.9.6'
+  if File.exists?("#{RAILS_ROOT}/config/typus.yml")
+    require 'data_mapper' unless defined?(ActiveRecord)
+    require 'paginator'
+    require 'typus'
+    Typus.enable
+  else
+    puts "=> Typus is not enabled because config file does not exist."
+  end
 
 rescue LoadError
   puts "=> [TYPUS] Install required plugins and gems with `rake typus:dependencies`"
