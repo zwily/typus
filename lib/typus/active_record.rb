@@ -26,21 +26,14 @@ module Typus
     #
     def self.typus_fields_for(filter)
 
-      available_fields = self.model_fields
-
-      if Typus::Configuration.config["#{self.name}"]["fields"].has_key? filter
-        fields = Typus::Configuration.config["#{self.name}"]["fields"][filter]
-        fields = (fields.nil?) ? available_fields : fields.split(", ")
-      else
-        fields = available_fields
-      end
-
       fields_with_type = []
+      fields = Typus::Configuration.config["#{self.name}"]["fields"][filter].split(", ")
+
       fields.each do |f|
 
         ##
         # Get the field_type for each field
-        available_fields.each do |af|
+        self.model_fields.each do |af|
           @field_type = af.last if af.first == f
         end
 
@@ -55,6 +48,7 @@ module Typus
           else @field_type = 'string' if @field_type == ""
         end
 
+        ##
         # @field_type = (eval f.upcase) rescue @field_type
         @field_type = 'selector' if @field_type.class == Array
         fields_with_type << [ f, @field_type ]
@@ -64,6 +58,8 @@ module Typus
 
       return fields_with_type
 
+    rescue
+      self.model_fields
     end
 
     ##
