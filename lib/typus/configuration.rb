@@ -6,8 +6,9 @@ module Typus
     # an initializer.
     #
     # Example:
-    # Typus::Configuration.options[:app_name] = "Your App Name"
-    # Typus::Configuration.options[:per_page] = 15
+    #
+    #   Typus::Configuration.options[:app_name] = "Your App Name"
+    #   Typus::Configuration.options[:per_page] = 15
     #
     @@options = {
         :app_logo => '',
@@ -21,20 +22,21 @@ module Typus
         :version => '',
         :signature => '',
         :form_rows => '10',
-        :form_columns => '10'
+        :form_columns => '10' 
         }
     mattr_reader :options
 
+    ##
     # Read Typus Configuration file
-    # 
-    # Example:
-    #
-    #
-    if ENV["RAILS_ENV"] == 'test'
-      @@config = YAML.load_file("#{File.dirname(__FILE__)}/../../test/typus.yml")
+    case ENV['RAILS_ENV']
+    when 'test'
+      config_file = "#{File.dirname(__FILE__)}/../../test/typus.yml"
     else
-      @@config = YAML.load_file("#{RAILS_ROOT}/config/typus.yml") if File.exists?("#{RAILS_ROOT}/config/typus.yml")
+      config_file = "#{RAILS_ROOT}/config/typus.yml"
     end
+
+    @@config = YAML.load_file(config_file)
+
     mattr_reader :config
 
   end
