@@ -7,7 +7,6 @@ TODO
 [ ] Add `default_filter :active => true`.
 [ ] Javascript for textareas. With Markdown and dropdown with a preview.
 [ ] Link "View Site" opens the window with a javascript popup.
-[ ] If no attributes are not defined on a model, typus uses database.
 [ ] Release plugin as a gem.
 [ ] Script to allow the plugin to work outside a Rails application.
 [ ] Tests for Datamapper.
@@ -49,3 +48,4 @@ DONE
 [X] Check if `will_paginate` exists, otherwise, install it.
 [X] Don't show `will_paginate` message.
 [X] When generation `typus.yml` file, add also the form fields.
+[X] If no attributes are not defined on a model, typus uses database. (20080627)
