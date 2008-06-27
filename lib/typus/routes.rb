@@ -15,9 +15,7 @@ class ActionController::Routing::RouteSet
         i.typus_email_password "#{prefix}/email_password", :action => 'email_password'
         i.typus_index "#{prefix}/:model", :action => 'index'
         i.connect "#{prefix}/:model/:action", :requirements => { :action => /index|new|create/ }
-        # , :action => 'index'
         i.connect "#{prefix}/:model/:id/:action", :requirements => { :action => /edit|update|destroy|position|toggle|relate|unrelate/, :id => /\d+/ }
-        # , :action => 'edit'
       end
 
       ##
@@ -28,6 +26,7 @@ class ActionController::Routing::RouteSet
       yield map
 
     end
+
   end
 
   alias draw draw_with_admin
