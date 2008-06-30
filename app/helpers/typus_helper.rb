@@ -68,21 +68,21 @@ module TypusHelper
       html << submodules
     when "new", "create"
       html << "<ul>"
-      html << "<li>#{link_to "Back to list", :action => 'index'}</li>"
+      html << "<li>#{link_to "Back to list", :params => params.merge(:action => 'index')}</li>"
       html << "</ul>"
     when "edit", "update"
       html << "<ul>"
       html << "<li>#{link_to "Add #{@model.name.titleize.downcase}", :action => 'new'}</li>"
       html << "</ul>"
       html << "<ul>"
-      html << "#{'<li>' + (link_to "Next", :action => "edit", :id => @next.id) + '</li>' if @next}"
-      html << "#{'<li>' + (link_to "Previous", :action => 'edit', :id => @previous.id) + '<li>' if @previous}"
+      html << "#{'<li>' + (link_to "Next", :params => params.merge(:action => "edit", :id => @next.id)) + '</li>' if @next}"
+      html << "#{'<li>' + (link_to "Previous", :params => params.merge(:action => 'edit', :id => @previous.id)) + '<li>' if @previous}"
       html << "</ul>"
       html << more_actions
       html << modules
       html << submodules
       html << "<ul>"
-      html << "<li>#{link_to "Back to list", :action => 'index'}</li>"
+      html << "<li>#{link_to "Back to list", :params => params.merge(:action => 'index', :id => nil)}</li>"
       html << "</ul>"
     else
       html << more_actions
@@ -265,9 +265,9 @@ module TypusHelper
         else # 'string', 'integer', 'selector'
           case column[0]
             when /file_name/
-              html << "<td>#{link_to item.send(column[0]) || "", :model => model, :action => 'edit', :id => item.id} (#{link_to "Preview", item.asset.url, :popup => ['sanoke', 'height=461,width=692']})</td>"
+              html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:model => model, :action => 'edit', :id => item.id)} (#{link_to "Preview", item.asset.url, :popup => ['sanoke', 'height=461,width=692']})</td>"
             else
-              html << "<td>#{link_to item.send(column[0]) || "", :model => model, :action => 'edit', :id => item.id}</td>"
+              html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:model => model, :action => 'edit', :id => item.id)}</td>"
             end
         end
       end
