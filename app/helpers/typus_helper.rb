@@ -428,7 +428,7 @@ module TypusHelper
     first = pager.first.number <= (current_page.number - padding) && pager.last.number >= (current_page.number - padding) ? current_page.number - padding : 1
     last = pager.first.number <= (current_page.number + padding) && pager.last.number >= (current_page.number + padding) ? current_page.number + padding : pager.last.number
     # Print start page if anchors are enabled
-    html << yield(1) if always_show_anchors && !first == 1
+    html << yield(1) if always_show_anchors and not first == 1
     # Print window pages
     first.upto(last) do |page|
       (current_page.number == page && !link_to_current_page) ? html << page.to_s : html << (yield(page)).to_s
