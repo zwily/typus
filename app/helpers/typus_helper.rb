@@ -264,7 +264,7 @@ module TypusHelper
         case column[1]
         when 'boolean'
           image = "#{image_tag(status = item.send(column[0])? "typus_status_true.gif" : "typus_status_false.gif")}"
-          html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:controller => 'typus', :model => model, :action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change this #{@model.to_s.titleize} #{column[0]}?"}</td>"
+          html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:controller => 'typus', :model => model, :action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
         when "datetime"
           html << "<td>#{item.send(column[0]).to_s(:db)}</td>"
         when "collection"
@@ -288,7 +288,7 @@ module TypusHelper
         @perform = link_to image_tag("typus_trash.gif"), { :model => model, 
                                                            :id => item.id, 
                                                            :params => params.merge(:action => 'destroy') }, 
-                                                           :confirm => "Remove this #{@model.name.titleize.downcase}?"
+                                                           :confirm => "Remove entry?"
       else
         @perform = link_to image_tag("typus_trash.gif"), { :action => "unrelate", 
                                                            :unrelated => model, 
@@ -314,7 +314,9 @@ module TypusHelper
 
       html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>"
 
+      ##
       # When the field is an asset ...
+      #
       case field[0]
       when /file_name/
         attribute = field[0].split("_file_name").first
@@ -326,7 +328,9 @@ module TypusHelper
         end
       end
 
+      ##
       # Field Type
+      #
       case field[1]
       when "boolean"
         html << "#{check_box :item, field[0]} Checked if active"
@@ -364,7 +368,9 @@ module TypusHelper
     display_error(error)
   end
 
+  ##
   # FIXME: The admin shouldn't be hardcoded.
+  #
   def typus_form_has_many
     html = ""
     if @item_has_many
@@ -385,7 +391,9 @@ module TypusHelper
     display_error(error)
   end
 
+  ##
   # FIXME: The admin shouldn't be hardcoded.
+  #
   def typus_form_has_and_belongs_to_many
     html = ""
     if @item_has_and_belongs_to_many
@@ -415,6 +423,9 @@ module TypusHelper
     render :partial => "typus/#{params[:model]}/#{name}" rescue nil
   end
 
+  ##
+  # Tree when +acts_as_tree+
+  #
   def expand_tree_into_select_field(categories)
     returning(String.new) do |html|
       categories.each do |category|
@@ -424,6 +435,9 @@ module TypusHelper
     end
   end
 
+  ##
+  # Simple and clean pagination links
+  #
   def windowed_pagination_links(pager, options)
     link_to_current_page = options[:link_to_current_page]
     always_show_anchors = options[:always_show_anchors]
@@ -447,8 +461,8 @@ module TypusHelper
     return html
   end
 
-  def display_error(error)
-    "<div id=\"flash\" class=\"error\"><p>#{error}</p></div>"
-  end
+#  def display_error(error)
+#    "<div id=\"flash\" class=\"error\"><p>#{error}</p></div>"
+#  end
 
 end
