@@ -190,7 +190,8 @@ module Typus
       if condition == {}
         conditions = "id < #{self.id}"
       else
-        conditions = ""
+        conditions = self.class.build_conditions(condition)
+        conditions << " AND id != #{self.id}"
       end
 
       self.class.find :first, 
@@ -204,7 +205,8 @@ module Typus
       if condition == {}
         conditions = "id > #{self.id}"
       else
-        conditions = ""
+        conditions = self.class.build_conditions(condition)
+        conditions << " AND id != #{self.id}"
       end
 
       self.class.find :first, 
