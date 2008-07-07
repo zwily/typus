@@ -4,7 +4,7 @@
   <%= filters %>
 <% end %>
 
-<h2><a href="<%= params[:model] %>"><%= params[:model].titleize %></a> <small><%= link_to "Remove filter", :action => 'index' if request.env['QUERY_STRING'] %></small></h2>
+<h2><%= params[:model].titleize %> <% if request.env['QUERY_STRING'] %><small><%= link_to "Remove filter" %></small><% end %></h2>
 
 <%= typus_block("index_top") %>
 

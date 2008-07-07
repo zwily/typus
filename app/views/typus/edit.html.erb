@@ -2,7 +2,7 @@
 	<%= typus_block("edit_sidebar") || actions %>
 <% end %>
 
-<h2><%= link_to @model.name.pluralize.titleize, :action => "index", :model => params[:model], :id => nil %> &rsaquo; Edit</h2>
+<h2><%= link_to @model.name.pluralize.titleize, :action => 'index' %> &rsaquo; Edit</h2>
 
 <%= typus_block("edit_top") %>
 
