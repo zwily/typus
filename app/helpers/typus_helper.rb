@@ -228,10 +228,10 @@ module TypusHelper
   end
 
   def page_title
-    html = ""
-    html << " &rsaquo; #{params[:model].titleize}" if params[:model]
-    html << " &rsaquo; #{params[:action].titleize}" if params[:action]
-    return html
+    crumbs = []
+    crumbs << Typus::Configuration.options[:app_name]
+    crumbs << params[:model] << params[:action]
+    return crumbs.compact.map { |x| x.titleize }.join(" &rsaquo; ")
   end
 
   def typus_table(model = params[:model], fields = 'list', items = @items)
