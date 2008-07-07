@@ -461,4 +461,8 @@ module TypusHelper
     return html
   end
 
+  def display_error(error)
+    "<div id=\"flash\" class=\"error\"><p>#{error}</p></div>"
+  end
+
 end
