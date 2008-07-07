@@ -49,14 +49,7 @@ class TypusController < ApplicationController
     end
     @items = @pager.page(params[:page])
 
-    ##
-    # Render custom index page otherwise render Typus default
-    #
-    if File.exists?("#{RAILS_ROOT}/app/views/typus/#{params[:model]}/index.html.erb")
-      render :template => "typus/#{params[:model]}/index"
-    else
-      render :template => "typus/index"
-    end
+    select_template(params[:model], 'index')
 
   rescue Exception => error
     error_handler(error)
@@ -71,6 +64,9 @@ class TypusController < ApplicationController
     item_params.delete_if { |key, value| key == 'bta' }
     item_params.delete_if { |key, value| key == 'bti' }
     @item = @model.new(item_params.symbolize_keys)
+
+    select_template(params[:model], 'new')
+
   end
 
   def create
@@ -80,17 +76,20 @@ class TypusController < ApplicationController
 
         ##
         # Recover the session
+        #
         previous = session[:typus_previous]
         btm, bta, bti = previous[:btm], previous[:bta], previous[:bti]
         session[:typus_previous] = nil
 
         ##
         # Model to relate
+        #
         model_to_relate = btm.singularize.camelize.constantize
         @item.send(btm) << model_to_relate.find(bti)
 
         ##
         # And finally redirect to the previous action
+        #
         flash[:success] = "#{@item.class} assigned to #{btm.singularize} successfully."
         redirect_to :action => bta, :model => btm, :id => bti
 
@@ -109,25 +108,12 @@ class TypusController < ApplicationController
   def edit
 
     ##
+    # Link to previous and next, we should pass params ...
     #
-    #
-    condition = ( @model.new.attributes.include? 'created_at' ) ? 'created_at' : @model.primary_key
-    current = ( condition == 'created_at' ) ? @item.created_at : @item.id
+    @previous = @item.previous
+    @next = @item.next
 
-    ##
-    # Link to previous and next
-    #
-    @previous = @model.typus_find_previous(current, condition)
-    @next = @model.typus_find_next(current, condition)
-
-    ##
-    # Render custom index page otherwise render Typus default
-    #
-    if File.exists?("#{RAILS_ROOT}/app/views/typus/#{params[:model]}/edit.html.erb")
-      render :template => "typus/#{params[:model]}/edit"
-    else
-      render :template => "typus/edit"
-    end
+    select_template(params[:model], 'edit')
 
   end
 
@@ -327,6 +313,17 @@ private
       redirect_to :controller => 'typus', :action => 'index', :model => params[:model]
     end
 
+  end
+
+  ##
+  # Select template to render
+  #
+  def select_template(model, template)
+    if File.exists?("#{RAILS_ROOT}/app/views/typus/#{model}/#{template}.html.erb")
+      render :template => "typus/#{model}/#{template}"
+    else
+      render :template => "typus/#{template}"
+    end
   end
 
   ##
