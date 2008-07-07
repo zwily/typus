@@ -43,16 +43,27 @@ module TypusHelper
     end
 
     Typus.applications.each do |module_name|
-      html << "<table>\n"
-      html << "<tr><th colspan=\"2\">#{module_name}</th></tr>\n"
+
+      html << <<-HTML
+        <table>
+          <tr>
+            <th colspan="2">#{module_name}</th>
+          </tr>
+      HTML
+
       Typus.modules(module_name).each do |model|
-        html << "<tr class=\"#{cycle('even', 'odd')}\">\n"
-        html << "<td>#{link_to model.titleize.pluralize, :action => 'index', :model => model.delete(" ").tableize}<br /></td>\n"
-        html << "<td align=\"right\" valign=\"bottom\"><small>"
-        html << "#{link_to 'Add', :action => 'new', :model => model.delete(" ").tableize}"
-        html << "</small></td>\n</tr>\n"
+        html << <<-HTML
+          <tr class="#{cycle('even', 'odd')}">
+            <td>#{link_to model.titleize.pluralize, :action => 'index', :model => model.delete(" ").tableize}<br /></td>
+            <td align="right" valign="bottom"><small>#{link_to 'Add', :action => 'new', :model => model.delete(" ").tableize}</small></td>
+          </tr>
+        HTML
       end
-      html << "</table>\n<br /><div style=\"clear\"></div>"
+      html << <<-HTML
+        </table>
+        <br />
+        <div style="clear"></div>
+      HTML
     end
 
     html << "</div>"
@@ -147,13 +158,15 @@ module TypusHelper
   end
 
   def search
-    search = <<-HTML
-      <h2>Search</h2>
-      <form action="" method="get">
-      <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
-      </form>
-    HTML
-    return search if Typus::Configuration.config["#{@model.name}"]["search"]
+    if Typus::Configuration.config["#{@model.name}"]["search"]
+      search = <<-HTML
+        <h2>Search</h2>
+        <form action="" method="get">
+        <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
+        </form>
+      HTML
+      return search
+    end
   end
 
   def filters
