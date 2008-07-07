@@ -18,8 +18,6 @@ class ActionController::Routing::RouteSet
         i.connect "#{prefix}/:model/:id/:action", :requirements => { :action => /edit|update|destroy|position|toggle|relate|unrelate/, :id => /\d+/ }
       end
 
-      ##
-      # I'm really amazed that this works! I DO LOVE RUBY AND RAILS
       map.connect "#{prefix}/:model/:action", :controller => "typus/#{:model}"
       map.connect "#{prefix}/:model/:id/:action", :controller => "typus/#{:model}"
 
