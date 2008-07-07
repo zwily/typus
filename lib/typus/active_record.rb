@@ -132,6 +132,13 @@ module Typus
     end
 
     ##
+    # This is used by acts_as_tree
+    #
+    def top
+      find :all, :conditions => [ "parent_id IS ?", nil ]
+    end
+
+    ##
     # Build conditions
     #
     # params = request.env['QUERY_STRING']
@@ -211,13 +218,6 @@ module Typus
     #
     def has_children?
       children.size > 0
-    end
-
-    ##
-    # This is used by acts_as_tree
-    #
-    def self.top
-      find :all, :conditions => [ "parent_id IS ?", nil ]
     end
 
     def typus_name
