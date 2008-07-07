@@ -33,7 +33,7 @@ class TypusController < ApplicationController
     # Build the conditions
     #
     conditions = "1 = 1"
-    conditions << " " + (request.env['QUERY_STRING']).build_conditions(@model) if request.env['QUERY_STRING']
+    conditions << " " + @model.build_conditions(request.env['QUERY_STRING']) if request.env['QUERY_STRING']
 
     ##
     # Pagination
