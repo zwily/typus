@@ -12,7 +12,7 @@ class TypusController < ApplicationController
 
   before_filter :find_model, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
 
-  before_filter :check_permissions, :only => [ :new, :create, :edit, :update, :destroy, :toggle ]
+  before_filter :check_permissions, :only => [ :index, :new, :create, :edit, :update, :destroy, :toggle ]
 
   before_filter :set_order, :only => [ :index ]
   before_filter :fields, :only => [ :index ]
@@ -292,27 +292,13 @@ private
 private
 
   ##
-  # Before filter to check if has permission to edit/add the post.
+  # Before filter to check if has permission to index, edit, update & destroy a model.
   #
   def check_permissions
-
-    case params[:action]
-    when 'new'
-      @item = @model.new
-      action = "add" unless can_add? @item
-    when 'edit'
-      action = "edit" unless can_edit? @item
-    when 'destroy'
-      action = "destroy" unless can_destroy? @item
-    when 'toggle'
-      action = "toogle" unless can_toggle? @item
+    unless @current_user.models.include? @model.to_s or @current_user.models.include? "All"
+      flash[:notice] = "You dont have permission to manage #{params[:model].humanize.downcase}."
+      redirect_to typus_dashboard_url
     end
-
-    if action
-      flash[:notice] = "You can't #{action} a #{@item.class.to_s.titleize}."
-      redirect_to :controller => 'typus', :action => 'index', :model => params[:model]
-    end
-
   end
 
   ##
