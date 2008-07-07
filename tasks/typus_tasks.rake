@@ -24,7 +24,7 @@ namespace :typus do
                                  :admin => true, 
                                  :status => true)
       if typus_user.save
-        puts "=> [Typus] Your new password is #{password}."
+        puts "=> [Typus] Your new password is `#{password}`."
       else
         puts "=> [Typus] Please, provide a valid email. (rake typus:seed email=foo@bar.com)"
       end
