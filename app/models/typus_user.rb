@@ -9,6 +9,8 @@ class TypusUser < ActiveRecord::Base
   validates_confirmation_of :password, :if => lambda { |person| person.new_record? or not person.password.blank? }
   validates_length_of :password, :within => 6..40, :if => lambda { |person| person.new_record? or not person.password.blank? }
 
+  validates_inclusion_of :roles, :in => Typus::Configuration.options[:roles]
+
   before_create :generate_token
   before_save :encrypt_password
 
@@ -28,6 +30,19 @@ class TypusUser < ActiveRecord::Base
 
   def authenticated?(password)
     crypted_password == encrypt(password)
+  end
+
+  ##
+  # Models the user has access to ...
+  #
+  def models
+    calculate = {}
+    self.roles.split(', ').each do |role|
+      calculate = Typus::Configuration.roles[role]
+    end
+    return calculate
+  rescue
+    "All"
   end
 
 protected
