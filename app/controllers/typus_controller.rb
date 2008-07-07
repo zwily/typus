@@ -32,8 +32,7 @@ class TypusController < ApplicationController
     ##
     # Build the conditions
     #
-    conditions = "1 = 1"
-    conditions << " " + @model.build_conditions(request.env['QUERY_STRING']) if request.env['QUERY_STRING']
+    conditions = @model.build_conditions(request.env['QUERY_STRING'] || "")
 
     ##
     # Pagination
@@ -42,7 +41,7 @@ class TypusController < ApplicationController
     items_per_page = Typus::Configuration.options[:per_page].to_i
     @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
       @model.find(:all, 
-                  :conditions => "#{conditions}", 
+                  :conditions => conditions, 
                   :order => @order, 
                   :limit => per_page, 
                   :offset => offset)
