@@ -6,22 +6,20 @@ TODO
 [ ] Update CSS with something like a framework.
 [ ] Add `default_filter :active => true`.
 [ ] Javascript for textareas. With Markdown and dropdown with a preview.
-[ ] Link "View Site" opens the window with a javascript popup.
 [ ] Release plugin as a gem.
 [ ] Script to allow the plugin to work outside a Rails application.
-[ ] Tests for Datamapper.
 [ ] Show arrows on table header to display order of the list.
 [ ] Extend typus.html.erb to be able to extend header, breadcrumbs and footer.
-[ ] Sort applications by name ASC.
 [ ] Plans to release a 1.0 version ...
 [ ] Make actions more restful.
-[ ] Log activity ... and be able to recover old data.
 [ ] Fix CSS for Internet Explorer
 [ ] Fix CSS for iPhone
 
 DONE
 ====
 
+[X] Sort applications by name ASC. (20080707)
+[X] Log activity ... and be able to recover old data. (20080704)
 [X] Salted password.
 [X] Update feedback error on empty fields. (20080322)
 [X] Update flash. (20080322)
