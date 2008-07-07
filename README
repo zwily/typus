@@ -50,6 +50,7 @@ You can overwriting the following settings:
     Typus::Configuration.options[:per_page] = "20"
     Typus::Configuration.options[:form_rows] = "20"
     Typus::Configuration.options[:form_columns] = "20"
+    Typus::Configuration.options[:roles] = %w( admin editor )
 
 Place this settings in a initializer at <tt>config/initializers/typus.rb</tt>.
 
@@ -178,6 +179,26 @@ You can customize the interface by placing on <tt>views/typus</tt> the following
     MODEL/_edit_bottom.html.erb
     MODEL/_edit_bottom.html.erb
     MODEL/_edit_sidebar.html.erb
+
+== Roles
+
+Typus has a simple Roles support. By default only two roles are defined, but 
+you can add as many as you want.
+
+    Typus::Configuration.options[:roles] = %w( admin editor )
+
+In <tt>config/typus_roles.yml</tt> you can define the allowed actions per role.
+
+    admin:
+      TypusUser: rw
+      Post: rw
+      Category: rw
+
+    editor:
+      Post: rw
+      Category: ro
+
+NOTE: This is an initial implementation so it can change in the future.
 
 == Acknowledgments
 
