@@ -5,11 +5,8 @@
 
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
-  <title><%= Typus::Configuration.options[:app_name] %> <%= "(#{RAILS_ENV})" unless RAILS_ENV == "production" %></title>
+  <title><%= Typus::Configuration.options[:app_name] %></title>
   <%= stylesheet_link_tag "typus", :media => "screen" %>
-  <style type="text/css">
-    div#dialog { border-color: <%= (Typus::Configuration.options[:color] == "#000") ? "#408BB6" : Typus::Configuration.options[:color] %>; }
-  </style>
 </head>
 
 <body>

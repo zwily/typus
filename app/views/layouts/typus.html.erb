@@ -5,23 +5,16 @@
 
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title><%= Typus::Configuration.options[:app_name] %> <%= page_title || "untitled" %> <%= "(#{RAILS_ENV})" unless RAILS_ENV == "production" %></title>
+  <title><%= Typus::Configuration.options[:app_name] %> <%= page_title || "untitled" %></title>
   <meta http-equiv="imagetoolbar" content="no" />
-  <%= stylesheet_link_tag "typus", :media => "screen" %>
-  <style type="text/css">
-    html, table, div#header, div#footer { background: <%= Typus::Configuration.options[:color] %>; }
-  </style>
 </head>
 
 <body>
 
-<!-- header -->
 <div id="header">
   <%= header %>
 </div>
-<!-- /header -->
 
-<!-- breadcrumbs -->
 <div id="breadcrumbs">
   <div class="left">
     <%= breadcrumbs %>
@@ -31,9 +24,7 @@
   </div>
   <div class="clear"></div>
 </div>
-<!-- /breadcrumbs -->
 
-<!-- wrapper -->
 <div id="wrapper">
   <div id="sidebar">
     <%= yield :sidebar %>
@@ -44,13 +35,10 @@
   </div>
   <div class="clear"></div>
 </div>
-<!-- /wrapper -->
 
-<!-- footer -->
 <div id="footer">
   <%= footer %>
 </div>
-<!-- /footer -->
 
 </body>
 
