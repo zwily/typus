@@ -20,31 +20,38 @@ class TypusController < ApplicationController
 
   ##
   # Application Dashboard
+  #
   def dashboard
   end
 
   ##
   # Index
+  #
   def index
+
+    ##
+    # Build the conditions
+    #
     conditions = "1 = 1"
     conditions << " " + (request.env['QUERY_STRING']).build_conditions(@model) if request.env['QUERY_STRING']
+
+    ##
+    # Pagination
+    #
     items_count = @model.count(:conditions => conditions)
     items_per_page = Typus::Configuration.options[:per_page].to_i
     @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
-      # ActiveRecord
       @model.find(:all, 
                   :conditions => "#{conditions}", 
                   :order => @order, 
                   :limit => per_page, 
                   :offset => offset)
-      # DataMapper
-      # @model.all(:limit => per_page, :offset => offset)
     end
     @items = @pager.page(params[:page])
 
     ##
     # Render custom index page otherwise render Typus default
-
+    #
     if File.exists?("#{RAILS_ROOT}/app/views/typus/#{params[:model]}/index.html.erb")
       render :template => "typus/#{params[:model]}/index"
     else
@@ -101,18 +108,21 @@ class TypusController < ApplicationController
 
   def edit
 
+    ##
+    #
+    #
     condition = ( @model.new.attributes.include? 'created_at' ) ? 'created_at' : @model.primary_key
     current = ( condition == 'created_at' ) ? @item.created_at : @item.id
 
     ##
     # Link to previous and next
-
+    #
     @previous = @model.typus_find_previous(current, condition)
     @next = @model.typus_find_next(current, condition)
 
     ##
     # Render custom index page otherwise render Typus default
-
+    #
     if File.exists?("#{RAILS_ROOT}/app/views/typus/#{params[:model]}/edit.html.erb")
       render :template => "typus/#{params[:model]}/edit"
     else
@@ -121,6 +131,9 @@ class TypusController < ApplicationController
 
   end
 
+  ##
+  # Update an item ...
+  #
   def update
     if @item.update_attributes(params[:item])
       flash[:success] = "#{@model.to_s.titleize} successfully updated."
@@ -130,6 +143,9 @@ class TypusController < ApplicationController
     end
   end
 
+  ##
+  # Destroy an item
+  #
   def destroy
     @item.destroy
     flash[:success] = "#{@model.to_s.titleize} successfully removed."
@@ -138,28 +154,29 @@ class TypusController < ApplicationController
     error_handler(error, { :params => params.merge(:action => 'index', :id => nil) })
   end
 
+  ##
   # Toggle the status of an item.
+  #
   def toggle
     @item.toggle!(params[:field])
     flash[:success] = "#{@model.to_s.titleize.capitalize} #{params[:field]} changed."
     redirect_to :action => 'index', :params => params.merge(:field => nil, :action => 'index', :id => nil)
   end
 
+  ##
   # Change item position
+  #
   def position
-    case params[:go]
-      when 'top':         @item.move_to_top
-      when 'up':          @item.move_higher
-      when 'down':        @item.move_lower
-      when 'bottom':      @item.move_to_bottom
-    end
+    @item.send(params[:go])
     flash[:success] = "Position changed ..."
     redirect_to :back
   rescue Exception => error
     error_handler(error)
   end
 
+  ##
   # Relate a model object to another.
+  #
   def relate
     model_to_relate = params[:related].singularize.camelize.constantize
     @model.find(params[:id]).send(params[:related]) << model_to_relate.find(params[:model_id_to_relate][:related_id])
@@ -169,7 +186,9 @@ class TypusController < ApplicationController
     error_handler(error)
   end
 
+  ##
   # Remove relationship between models.
+  #
   def unrelate
     model_to_unrelate = params[:unrelated].singularize.camelize.constantize
     unrelate = model_to_unrelate.find(params[:unrelated_id])
@@ -180,7 +199,9 @@ class TypusController < ApplicationController
     error_handler(error)
   end
 
-  # Basic session creation.
+  ##
+  # Login
+  #
   def login
     if request.post?
       @user = TypusUser.authenticate(params[:user][:email], params[:user][:password])
@@ -196,12 +217,17 @@ class TypusController < ApplicationController
     end
   end
 
-  # End typus session and redirect to +typus_login+.
+  ##
+  # Logout and redirect to +typus_login+.
+  #
   def logout
     session[:typus] = nil
     redirect_to typus_login_url
   end
 
+  ##
+  # Email password when lost
+  #
   def email_password
     if request.post?
       typus_user = TypusUser.find_by_email(params[:user][:email])
@@ -222,14 +248,18 @@ class TypusController < ApplicationController
 
 private
 
-  # Set the current model.
+  ##
+  # Set current model.
+  #
   def set_model
     @model = params[:model].modelize
   rescue Exception => error
     error_handler(error)
   end
 
+  ##
   # Set default order on the listings.
+  #
   def set_order
     unless params[:order_by]
       @order = @model.typus_order_by
@@ -252,18 +282,21 @@ private
 
   ##
   # Find
+  #
   def find_model
     @item = @model.find(params[:id])
   end
 
   ##
   # Model +fields+
+  #
   def fields
     @fields = @model.typus_fields_for('list')
   end
 
   ##
   # Model +form_fields+ and +form_fields_externals+
+  #
   def form_fields
     @item_fields = @model.typus_fields_for('form')
     @item_has_many = @model.typus_relationships_for('has_many')
@@ -274,6 +307,7 @@ private
 
   ##
   # Before filter to check if has permission to edit/add the post.
+  #
   def check_permissions
 
     case params[:action]
@@ -295,6 +329,9 @@ private
 
   end
 
+  ##
+  #
+  #
   def error_handler(error, redirection = { :action => 'dashboard' })
     unless RAILS_ENV == 'development'
       flash[:error] = error.message.titleize

@@ -1,12 +1,15 @@
 module TypusHelper
 
   def header
-    html = "<h1>#{Typus::Configuration.options[:app_name]}</h1>"
+    "<h1>#{Typus::Configuration.options[:app_name]}</h1>"
+  end
+
+  def footer
+    "<p><a href=\"http://intraducibles.net/projects/typus\" title=\"Typus\">Typus</a></p>"
   end
 
   def breadcrumbs
-    html = "<p>"
-    html << "#{link_to "Home", typus_dashboard_url}"
+    html = "<p>#{link_to "Home", typus_dashboard_url}"
     if params[:model]
       case params[:action]
       when "index"
@@ -19,11 +22,13 @@ module TypusHelper
   end
 
   def login_info
-    html = "<ul>"
-    html << "<li>Logged as #{link_to @current_user.full_name, :controller => 'typus', :model => 'typus_users', :action => 'edit', :id => @current_user.id}</li>"
-    html << "<li>#{link_to "View site", '/', :target => 'blank'}</li>"
-    html << "<li>#{link_to "Logout", typus_logout_url}</li>"
-    html << "</ul>"
+    html = <<-HTML
+      <ul>
+        <li>Logged as #{link_to @current_user.full_name, :controller => 'typus', :model => 'typus_users', :action => 'edit', :id => @current_user.id}</li>
+        <li>#{link_to "View site", '/', :target => 'blank'}</li>
+        <li>#{link_to "Logout", typus_logout_url}</li>
+      </ul>
+    HTML
     return html
   end
 
@@ -259,8 +264,8 @@ module TypusHelper
         when 'tree'
           html << "<td>#{item.parent.typus_name if item.parent}</td>"
         when "position"
-          html << "<td>#{link_to "Up", :params => params.merge(:action => 'position', :id => item.id, :go => 'up')} / 
-                   #{link_to "Down", :params => params.merge(:action => 'position', :id => item.id, :go => 'down')}
+          html << "<td>#{link_to "Up", :params => params.merge(:action => 'position', :id => item.id, :go => 'move_higher')} / 
+                   #{link_to "Down", :params => params.merge(:action => 'position', :id => item.id, :go => 'move_lower')}
                    (#{item.send(column[0])})</td>"
         else # 'string', 'integer', 'selector'
           case column[0]
