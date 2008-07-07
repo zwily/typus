@@ -17,8 +17,13 @@
 
 <!-- header -->
 <div id="header">
+  <%= header %>
+</div>
+<!-- /header -->
+
+<!-- breadcrumbs -->
+<div id="breadcrumbs">
   <div class="left">
-    <%= header %>
     <%= breadcrumbs %>
   </div>
   <div class="right">
@@ -26,7 +31,7 @@
   </div>
   <div class="clear"></div>
 </div>
-<!-- /header -->
+<!-- /breadcrumbs -->
 
 <!-- wrapper -->
 <div id="wrapper">
@@ -43,7 +48,7 @@
 
 <!-- footer -->
 <div id="footer">
-  <p><a href="http://intraducibles.net/projects/typus" title="Typus">Typus <%= Typus::Configuration.options[:version] %></a></p>
+  <%= footer %>
 </div>
 <!-- /footer -->
 
