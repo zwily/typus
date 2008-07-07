@@ -137,7 +137,7 @@ module Typus
     # params = request.env['QUERY_STRING']
     #
     def build_conditions(params)
-      conditions = ""
+      conditions = "1 = 1 "
       params.split('&').each do |q|
         the_key, the_value = q.split("=").first, q.split("=").last
         if the_key == "search"
