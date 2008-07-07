@@ -116,15 +116,12 @@ module TypusHelper
 
   def more_actions
     html = ""
-    case params[:action]
-    when 'index'
-      @model.typus_actions_for('list').each do |a|
-        html << "<li>#{link_to a.titleize.capitalize, :params => params.merge(:controller => "typus/#{params[:model]}", :model => params[:model], :action => a) }</li>"
-      end
-    when 'edit'
-      @model.typus_actions_for('form').each do |a|
-        html << "<li>#{link_to a.titleize.capitalize, :controller => "typus/#{params[:model]}", :model => params[:model], :action => a, :id => params[:id] }</li>"
-      end
+    filter = case params[:action]
+               when 'index' then 'list'
+               when 'edit' then 'form'
+             end
+    @model.typus_actions_for(filter).each do |a|
+      html << "<li>#{link_to a.titleize.capitalize, :params => params.merge(:controller => "typus/#{params[:model]}", :model => params[:model], :action => a, :id => params[:id]) }</li>"
     end
     html = "<ul>#{html}</ul>" if html
   end
