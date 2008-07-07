@@ -4,7 +4,7 @@
   <%= filters %>
 <% end %>
 
-<h2><%= params[:model].titleize %> <% if request.env['QUERY_STRING'] %><small><%= link_to "Remove filter" %></small><% end %></h2>
+<h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; <%= params[:model].titleize %> <% if request.env['QUERY_STRING'] %><small><%= link_to "Remove filter" %></small><% end %></h2>
 
 <%= typus_block("index_top") %>
 
