@@ -11,24 +11,16 @@
 <div id="list">
 
   <% if @items.count > 0 -%>
-    <!-- Listing -->
     <%= typus_table %>
-    <!-- /Listing -->
-    <!-- Pagination -->
     <%= render :partial => 'pagination' if @items.prev || @items.next %>
-    <!-- /Pagination links -->
-  <% elsif @model.count == 0 %>
-    <!-- Shown when there are no items -->
-    <div class="box" id="empty">
-      <p>There are no entries.</p>
-    </div>
-    <!-- /Shown when there are no items -->
   <% else %>
-    <!-- No items under this filter -->
     <div class="box" id="empty">
-      <p>There are no entries under under this filter.</p>
+      <% if @model.count == 0 %>
+        <p>There are no entries.</p>
+      <% else %>
+        <p>There are no entries under this filter.</p>
+      <% end %>
     </div>
-    <!-- /No items under this filter -->
   <% end %>
 
 </div>
