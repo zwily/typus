@@ -154,7 +154,7 @@ class TypusController < ApplicationController
   #
   def position
     @item.send(params[:go])
-    flash[:success] = "Position changed ..."
+    flash[:success] = "Position changed."
     redirect_to :back
   rescue Exception => error
     error_handler(error)

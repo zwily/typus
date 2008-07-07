@@ -272,7 +272,13 @@ module TypusHelper
         when 'tree'
           html << "<td>#{item.parent.typus_name if item.parent}</td>"
         when "position"
-          html << "<td>#{link_to "Up", :params => params.merge(:action => 'position', :id => item.id, :go => 'move_higher')} / #{link_to "Down", :params => params.merge(:action => 'position', :id => item.id, :go => 'move_lower')}</td>"
+          html << "<td>"
+          [["&uarr;", "move_higher"], 
+           ["&darr;", "move_lower"]].each do |position|
+            html << "#{link_to position.first, :params => params.merge(:action => 'position', :id => item.id, :go => position.last)} "
+          end
+          html << "</td>"
+
         else # 'string', 'integer', 'selector'
           html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:model => model, :action => 'edit', :id => item.id)}</td>"
         end
