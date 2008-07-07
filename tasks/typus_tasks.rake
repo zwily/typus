@@ -66,9 +66,38 @@ namespace :typus do
 
   desc "Copy Typus images and stylesheets"
   task :assets do
+    puts "=> [Typus]"
     %w( images stylesheets ).each do |folder|
-      puts "=> [Typus] Copying #{folder}."
+      puts "   - Copying #{folder}."
       system "cp #{RAILS_ROOT}/vendor/plugins/typus/public/#{folder}/* #{RAILS_ROOT}/public/#{folder}/"
+    end
+  end
+
+  desc "Generates `config/typus_roles.yml`"
+  task :configure_roles do
+    begin
+      MODEL_DIR = File.join(RAILS_ROOT, "app/models")
+      Dir.chdir(MODEL_DIR)
+      models = Dir["*.rb"]
+      if !File.exists? ("#{RAILS_ROOT}/config/typus_roles.yml") or ENV['force']
+        require File.dirname(__FILE__) + '/../../../../config/environment'
+        typus = File.open("#{RAILS_ROOT}/config/typus_roles.yml", "w+")
+        typus.puts "admin:"
+        typus.puts "  TypusUser: rw"
+        models.each do |model|
+          class_name = eval model.sub(/\.rb$/,'').camelize
+          if class_name.new.kind_of?(ActiveRecord::Base)
+            typus.puts "  #{class_name}: rw"
+          end
+        end
+        typus.close
+        puts "=> [Typus] `config/typus_roles.yml` successfully created."
+      else
+        puts "=> [Typus] `config/typus_roles.yml` file already exists."
+      end
+    rescue Exception => e
+      puts "#{e.message}"
+      File.delete("#{RAILS_ROOT}/config/typus_roles.yml")
     end
   end
 
@@ -108,10 +137,10 @@ namespace :typus do
         typus.puts ""
         typus.puts "TypusUser:"
         typus.puts "  fields:"
-        typus.puts "    list: first_name, last_name, email, status, admin"
-        typus.puts "    form: first_name, last_name, email, password, password_confirmation"
+        typus.puts "    list: first_name, last_name, email, roles, status"
+        typus.puts "    form: first_name, last_name, roles, email, password, password_confirmation"
         typus.puts "  filters: status"
-        typus.puts "  search: first_name, last_name, email"
+        typus.puts "  search: first_name, last_name, email, roles"
         typus.puts "  application: Typus Admin"
         typus.puts "  description: System Users Administration"
         typus.close
