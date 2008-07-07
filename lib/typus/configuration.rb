@@ -18,7 +18,8 @@ module Typus
                   :prefix => 'admin',
                   :version => '',
                   :form_rows => '10',
-                  :form_columns => '10' }
+                  :form_columns => '10', 
+                  :roles => %w( admin editor ) }
 
     mattr_reader :options
 
@@ -38,6 +39,20 @@ module Typus
     end
 
     mattr_reader :config
+
+    ##
+    # Read Typus Roles
+    #
+    
+    typus_roles = "#{RAILS_ROOT}/config/typus_roles.yml"
+    
+    if File.exists?(typus_roles)
+      @@roles = YAML.load_file(typus_roles)
+    # else
+      # @@roles = nil
+    end
+
+    mattr_reader :roles
 
   end
 
