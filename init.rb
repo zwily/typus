@@ -7,7 +7,6 @@ begin
   end
 
   if File.exists?("#{RAILS_ROOT}/config/typus.yml")
-    require 'data_mapper' unless defined?(ActiveRecord)
     %w( sha1 paginator typus ).each { |lib| require lib }
     Typus.enable
   else
