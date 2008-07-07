@@ -54,11 +54,7 @@ module Typus
     end
 
     def enable_orm
-      if defined?(DataMapper)
-        require 'typus/data_mapper'
-      else
-        require 'typus/active_record'
-      end
+      require 'typus/active_record'
     end
 
     def enable_routes

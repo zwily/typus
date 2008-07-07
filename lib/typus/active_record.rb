@@ -2,12 +2,14 @@ module Typus
 
   class ActiveRecord::Base
 
+    # FIXME: DRY!
     def self.typus_find_previous(current, condition)
       find :first, 
            :order => "#{condition} DESC", 
            :conditions => ["#{condition} < ?", current]
     end
 
+    # FIXME: DRY!
     def self.typus_find_next(current, condition)
       find :first, 
            :order => "#{condition} ASC", 
@@ -67,7 +69,7 @@ module Typus
     #
     # Someday we could use something like:
     #   typus_filters :created_at, :status
-
+    #
     def self.typus_filters
       available_fields = self.model_fields
       fields = Typus::Configuration.config["#{self.name}"]["filters"].split(", ")
@@ -89,7 +91,7 @@ module Typus
     # Someday we could use something like:
     #     typus_list_actions :action_one
     #     typus_form_actions :action_two, :action_three
-
+    #
     def self.typus_actions_for(filter)
       Typus::Configuration.config["#{self.name}"]["actions"][filter].split(", ") rescue []
     end
@@ -103,13 +105,14 @@ module Typus
     #     typus_order_by :title, :created_at
     #
     # Default order is ASC, except for datetime items that is DESC.
-
+    #
     def self.typus_defaults_for(filter)
       Typus::Configuration.config["#{self.name}"][filter].split(", ") rescue []
     end
 
     ##
     # Used for +relationships+
+    #
     def self.typus_relationships_for(filter)
       begin
         Typus::Configuration.config["#{self.name}"]["relationships"][filter].split(", ")
@@ -139,14 +142,14 @@ module Typus
 
     ##
     # This is used by acts_as_tree
-
+    #
     def self.top
       find :all, :conditions => [ "parent_id IS ?", nil ]
     end
 
     ##
     # This is used by acts_as_tree
-
+    #
     def has_children?
       children.size > 0
     end
