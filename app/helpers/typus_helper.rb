@@ -224,22 +224,14 @@ module TypusHelper
     return html
   end
 
-  def signature
-    unless Typus::Configuration.options[:signature].blank?
-      "<div id=\"signature\">#{Typus::Configuration.options[:signature]}</div>"
-    end
-  end
-
-  def fmt_date(date)
-    date.strftime("%d.%m.%Y")
-  end
-
   def typus_table(model = params[:model], fields = 'list', items = @items)
 
     @model = model.camelize.singularize.constantize
     html = "<table>"
 
+    ##
     # Header of the table
+    #
     html << "<tr>"
     @model.typus_fields_for(fields).each do |column|
       order_by = column[0]
@@ -248,38 +240,36 @@ module TypusHelper
     end
     html << "<th>&nbsp;</th>\n</tr>"
 
+    ##
     # Body of the table
+    #
     items.each do |item|
+
       html << "<tr class=\"#{cycle('even', 'odd')}\" id=\"item_#{item.id}\">"
+
       @model.typus_fields_for(fields).each do |column|
         case column[1]
         when 'boolean'
           image = "#{image_tag(status = item.send(column[0])? "typus_status_true.gif" : "typus_status_false.gif")}"
           html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:controller => 'typus', :model => model, :action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change this #{@model.to_s.titleize} #{column[0]}?"}</td>"
         when "datetime"
-          html << "<td width=\"80px\">#{fmt_date(item.send(column[0]))}</td>"
+          html << "<td>#{item.send(column[0]).to_s(:db)}</td>"
         when "collection"
-          this_model = column[0].split("_id").first.capitalize.camelize.constantize
-          html << "<td>#{link_to item.send(column[0].split("_id").first).typus_name, :controller => "typus", :action => "edit", :model => "#{column[0].split("_id").first.pluralize}", :id => item.send(column[0]) if item.send(column[0])}</td>"
+          html << "<td>#{link_to item.send(column[0].split("_id").first).typus_name, :controller => "typus", :action => "edit", :model => "#{column[0].split("_id").first.pluralize}", :id => item.send(column[0])}</td>"
         when 'tree'
           html << "<td>#{item.parent.typus_name if item.parent}</td>"
         when "position"
-          html << "<td>#{link_to "Up", :params => params.merge(:action => 'position', :id => item.id, :go => 'move_higher')} / 
-                   #{link_to "Down", :params => params.merge(:action => 'position', :id => item.id, :go => 'move_lower')}
-                   (#{item.send(column[0])})</td>"
+          html << "<td>#{link_to "Up", :params => params.merge(:action => 'position', :id => item.id, :go => 'move_higher')} / #{link_to "Down", :params => params.merge(:action => 'position', :id => item.id, :go => 'move_lower')}</td>"
         else # 'string', 'integer', 'selector'
-          case column[0]
-            when /file_name/
-              html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:model => model, :action => 'edit', :id => item.id)} (#{link_to "Preview", item.asset.url, :popup => ['sanoke', 'height=461,width=692']})</td>"
-            else
-              html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:model => model, :action => 'edit', :id => item.id)}</td>"
-            end
+          html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:model => model, :action => 'edit', :id => item.id)}</td>"
         end
       end
-      
+
+      ##
       # This controls the action to perform. If we are on a model list we 
       # will remove the entry, but if we inside a model we will remove the 
       # relationship between the models.
+      #
       case params[:model]
       when model
         @perform = link_to image_tag("typus_trash.gif"), { :model => model, 
