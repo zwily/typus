@@ -1,32 +1,23 @@
 module Typus
 
-  class ActiveRecord::Base
+  def self.included(base)
+    base.extend ClassMethods
+  end
 
-    # FIXME: DRY!
-    def self.typus_find_previous(current, condition)
-      find :first, 
-           :order => "#{condition} DESC", 
-           :conditions => ["#{condition} < ?", current]
+  module ClassMethods
+
+    def model_fields
+      columns.map { |u| ["#{u.name}", "#{u.type}"] }
     end
-
-    # FIXME: DRY!
-    def self.typus_find_next(current, condition)
-      find :first, 
-           :order => "#{condition} ASC", 
-           :conditions => ["#{condition} > ?", current]
-    end
-
-    def self.model_fields
-      self.columns.map { |u| ["#{u.name}", "#{u.type}"] }
-    end
-
+    
+    ##
     # Form and list fields
     #
     # Someday we could use something like:
     #   typus_list_fields :name, :created_at, :updated_at, :status
     #   typus_form_fields :name, :body, :excerpt, :created_at
     #
-    def self.typus_fields_for(filter)
+    def typus_fields_for(filter)
 
       fields_with_type = []
       fields = Typus::Configuration.config["#{self.name}"]["fields"][filter].split(", ")
@@ -70,7 +61,7 @@ module Typus
     # Someday we could use something like:
     #   typus_filters :created_at, :status
     #
-    def self.typus_filters
+    def typus_filters
       available_fields = self.model_fields
       fields = Typus::Configuration.config["#{self.name}"]["filters"].split(", ")
       fields_with_type = Array.new
@@ -92,7 +83,7 @@ module Typus
     #     typus_list_actions :action_one
     #     typus_form_actions :action_two, :action_three
     #
-    def self.typus_actions_for(filter)
+    def typus_actions_for(filter)
       Typus::Configuration.config["#{self.name}"]["actions"][filter].split(", ") rescue []
     end
 
@@ -106,14 +97,14 @@ module Typus
     #
     # Default order is ASC, except for datetime items that is DESC.
     #
-    def self.typus_defaults_for(filter)
+    def typus_defaults_for(filter)
       Typus::Configuration.config["#{self.name}"][filter].split(", ") rescue []
     end
 
     ##
     # Used for +relationships+
     #
-    def self.typus_relationships_for(filter)
+    def typus_relationships_for(filter)
       begin
         Typus::Configuration.config["#{self.name}"]["relationships"][filter].split(", ")
       rescue
@@ -125,7 +116,7 @@ module Typus
       end
     end
 
-    def self.typus_order_by
+    def typus_order_by
       fields = Typus::Configuration.config["#{self.name}"]["order_by"].split(", ")
       order = []
       fields.each do |field|
@@ -140,11 +131,36 @@ module Typus
       "id ASC"
     end
 
-    ##
-    # This is used by acts_as_tree
-    #
-    def self.top
-      find :all, :conditions => [ "parent_id IS ?", nil ]
+  end
+
+  module InstanceMethods
+
+    def previous(condition = {})
+
+      if condition == {}
+        conditions = "id < #{self.id}"
+      else
+        conditions = ""
+      end
+
+      self.class.find :first, 
+                      :order => "id DESC", 
+                      :conditions => conditions
+
+    end
+
+    def next(condition = {})
+
+      if condition == {}
+        conditions = "id > #{self.id}"
+      else
+        conditions = ""
+      end
+
+      self.class.find :first, 
+                      :order => "id ASC", 
+                      :conditions => conditions
+
     end
 
     ##
@@ -154,6 +170,13 @@ module Typus
       children.size > 0
     end
 
+    ##
+    # This is used by acts_as_tree
+    #
+    def self.top
+      find :all, :conditions => [ "parent_id IS ?", nil ]
+    end
+
     def typus_name
       name rescue "#{self.class}##{id}"
     end
@@ -161,3 +184,6 @@ module Typus
   end
 
 end
+
+ActiveRecord::Base.send :include, Typus
+ActiveRecord::Base.send :include, Typus::InstanceMethods
