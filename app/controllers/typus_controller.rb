@@ -56,6 +56,7 @@ class TypusController < ApplicationController
   end
 
   def new
+
     item_params = params.dup
     item_params.delete_if { |key, value| key == 'action' }
     item_params.delete_if { |key, value| key == 'controller' }
