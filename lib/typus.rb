@@ -9,7 +9,7 @@ module Typus
           apps << model[1]['application']
         end
       end
-      return apps.uniq
+      return apps.uniq.sort
     end
 
     def modules(app_name)
