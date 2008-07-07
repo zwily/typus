@@ -73,45 +73,45 @@ module TypusHelper
   end
 
   def actions
+
     html = "<h2>Actions</h2>\n"
+
+    ##
+    # Add
+    #
     case params[:action]
-    when "index"
+    when 'index', 'edit', 'update'
       html << "<ul>"
       html << "<li>#{link_to "Add #{@model.name.titleize.downcase}", :action => 'new'}</li>"
       html << "</ul>"
-      html << more_actions
-      html << modules
-      html << submodules
+    end
+    
+    ##
+    # Edit, update ...
+    #
+    case params[:action]
+    when 'edit', 'update'
+      html << "<ul>"
+      html << "<li>#{link_to "Next", :params => params.merge(:action => 'edit', :id => @next.id)}</li>" if @next
+      html << "<li>#{link_to "Previous", :params => params.merge(:action => 'edit', :id => @previous.id)}</li>" if @previous
+      html << "</ul>"
+    end
+
+    ##
+    # index, update, create
+    case params[:action]
     when "new", "create"
       html << "<ul>"
       html << "<li>#{link_to "Back to list", :params => params.merge(:action => 'index')}</li>"
-      html << "</ul>"
-    when "edit", "update"
-      html << "<ul>"
-      html << "<li>#{link_to "Add #{@model.name.titleize.downcase}", :action => 'new'}</li>"
-      html << "</ul>"
-      html << "<ul>"
-      html << "#{'<li>' + (link_to "Next", :params => params.merge(:action => "edit", :id => @next.id)) + '</li>' if @next}"
-      html << "#{'<li>' + (link_to "Previous", :params => params.merge(:action => 'edit', :id => @previous.id)) + '<li>' if @previous}"
-      html << "</ul>"
-      html << more_actions
-      html << modules
-      html << submodules
-      html << "<ul>"
-      html << "<li>#{link_to "Back to list", :params => params.merge(:action => 'index', :id => nil)}</li>"
       html << "</ul>"
     else
       html << more_actions
       html << modules
       html << submodules
-      html << "<ul>"
-      if params[:id]
-        html << "<li>#{link_to "Back to list", :controller => 'typus', :action => 'edit', :id => params[:id]}</li>"
-      else
-        html << "<li>#{link_to "Back to list", :controller => 'typus', :action => 'index'}</li>"
-      end
-      html << "</ul>"
     end
+
+    return html
+
   end
 
   def more_actions
