@@ -1,23 +1,14 @@
 TODO
 ====
 
-[ ] Translations with the Translation plugin.
-[ ] If RedCloth of BlueCloth is defined add message in `text` fields.
-[ ] Update CSS with something like a framework.
-[ ] Add `default_filter :active => true`.
-[ ] Javascript for textareas. With Markdown and dropdown with a preview.
-[ ] Release plugin as a gem.
-[ ] Script to allow the plugin to work outside a Rails application.
-[ ] Show arrows on table header to display order of the list.
-[ ] Extend typus.html.erb to be able to extend header, breadcrumbs and footer.
-[ ] Plans to release a 1.0 version ...
+[ ] If RedCloth or BlueCloth is defined add message in `text` fields.
 [ ] Make actions more restful.
-[ ] Fix CSS for Internet Explorer
-[ ] Fix CSS for iPhone
+[ ] Plans to release a 1.0 version ...
 
 DONE
 ====
 
+[X] Show arrows on table header to display order of the list. (20080707)
 [X] Sort applications by name ASC. (20080707)
 [X] Log activity ... and be able to recover old data. (20080704)
 [X] Salted password.
