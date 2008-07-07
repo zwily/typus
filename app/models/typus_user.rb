@@ -12,19 +12,6 @@ class TypusUser < ActiveRecord::Base
   before_create :generate_token
   before_save :encrypt_password
 
-  # This will get the list of the available models for this user
-  # Currently is not working
-  def models
-    available_models = Typus::Configuration.config
-    models_for_this_user = []
-    available_models.to_a.each do |m|
-      models_for_this_user << m[0].constantize if m[1]['roles'].include? self.role
-    end
-    return models_for_this_user
-  rescue
-    []
-  end
-
   def full_name
     "#{first_name} #{last_name}"
   end
