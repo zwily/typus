@@ -4,7 +4,7 @@ ActiveRecord::Schema.define do
     t.string :email, :first_name, :last_name
     t.string :salt, :crypted_password
     t.boolean :status, :default => false
-    t.boolean :admin, :default => false
+    t.string :roles
     t.timestamps
   end
 

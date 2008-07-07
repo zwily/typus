@@ -6,7 +6,7 @@ admin:
   first_name: Francesc
   last_name: Esplugas
   status: true
-  admin: true
+  roles: admin
   salt: <%= "--#{time}--admin@typus.org--" %>
   crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--admin@typus.org----#{12345678}") %>
 
@@ -16,7 +16,7 @@ user:
   first_name: Typus
   last_name: User
   status: true
-  admin: false
+  roles: editor
   salt: <%= "--#{time}--user@typus.org--" %>
   crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--user@typus.org----#{12345678}") %>
 
@@ -26,6 +26,6 @@ disabled_user:
   first_name: Typus
   last_name: User
   status: false
-  admin: false
+  roles: editor
   salt: <%= "--#{time}--disabled_user@typus.org--" %>
   crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--disabled_user@typus.org----#{12345678}") %>

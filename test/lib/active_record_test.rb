@@ -11,7 +11,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["salt", "string"], 
                        ["crypted_password", "string"], 
                        ["status", "boolean"], 
-                       ["admin", "boolean"], 
+                       ["roles", "string"], 
                        ["created_at", "datetime"], 
                        ["updated_at", "datetime"]]
     assert_equal fields, expected_fields
@@ -22,8 +22,8 @@ class ActiveRecordTest < Test::Unit::TestCase
     expected_fields = [["first_name", "string"], 
                        ["last_name", "string"], 
                        ["email", "string"], 
-                       ["status", "boolean"], 
-                       ["admin", "boolean"]]
+                       ["roles", "string"], 
+                       ["status", "boolean"]]
     assert_equal fields, expected_fields
     assert_equal expected_fields.class, Array
   end
@@ -33,6 +33,7 @@ class ActiveRecordTest < Test::Unit::TestCase
     expected_fields = [["first_name", "string"], 
                        ["last_name", "string"], 
                        ["email", "string"], 
+                       ["roles", "string"], 
                        ["password", "password"], 
                        ["password_confirmation", "password"]]
     assert_equal fields, expected_fields
@@ -43,9 +44,9 @@ class ActiveRecordTest < Test::Unit::TestCase
     fields = TypusUser.typus_fields_for('relationship')
     expected_fields = [["first_name", "string"], 
                        ["last_name", "string"], 
+                       ["roles", "string"], 
                        ["email", "string"], 
-                       ["status", "boolean"], 
-                       ["admin", "boolean"]]
+                       ["status", "boolean"]]
     assert_equal fields, expected_fields
     assert_equal expected_fields.class, Array
   end
@@ -59,7 +60,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["salt", "string"],
                        ["crypted_password", "string"],
                        ["status", "boolean"],
-                       ["admin", "boolean"],
+                       ["roles", "string"],
                        ["created_at", "datetime"],
                        ["updated_at", "datetime"]]
     assert_equal fields, expected_fields
@@ -99,6 +100,27 @@ class ActiveRecordTest < Test::Unit::TestCase
     expected_order = "title ASC, created_at DESC"
     assert_equal order, expected_order
     assert_equal expected_order.class, String
+  end
+
+  def test_should_return_sql_conditions_on_search_for_typus_user
+    query = "search=francesc"
+    processed = TypusUser.build_conditions(query)
+    expected = "1 = 1 AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%') "
+    assert_equal processed, expected
+  end
+
+  def test_should_return_sql_conditions_on_search_and_filter_for_typus_user
+    query = "search=francesc&status=true"
+    processed = TypusUser.build_conditions(query)
+    expected = "1 = 1 AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%') AND status = 't' "
+    assert_equal processed, expected
+  end
+
+  def test_should_return_sql_conditions_on_search_for_post
+    query = "search=pum"
+    processed = TypusUser.build_conditions(query)
+    expected = "1 = 1 AND (LOWER(first_name) LIKE '%pum%' OR LOWER(last_name) LIKE '%pum%' OR LOWER(email) LIKE '%pum%' OR LOWER(roles) LIKE '%pum%') "
+    assert_equal processed, expected
   end
 
 end
