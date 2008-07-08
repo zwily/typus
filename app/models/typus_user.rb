@@ -15,7 +15,7 @@ class TypusUser < ActiveRecord::Base
   before_save :encrypt_password
 
   def full_name
-    "#{first_name} #{last_name}"
+    "#{first_name} #{last_name} (#{roles})"
   end
 
   def reset_password(password, host)
