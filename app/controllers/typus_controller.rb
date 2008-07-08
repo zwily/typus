@@ -122,7 +122,7 @@ class TypusController < ApplicationController
   #
   def update
     if @item.update_attributes(params[:item])
-      flash[:success] = "#{@model.to_s.titleize} successfully updated."
+      flash[:success] = "#{@model.humanize} successfully updated."
       redirect_to :action => 'edit', :id => @item.id
     else
       render :action => 'edit'
@@ -134,7 +134,7 @@ class TypusController < ApplicationController
   #
   def destroy
     @item.destroy
-    flash[:success] = "#{@model.to_s.titleize} successfully removed."
+    flash[:success] = "#{@model.humanize} successfully removed."
     redirect_to :params => params.merge(:action => 'index', :id => nil)
   rescue Exception => error
     error_handler(error, { :params => params.merge(:action => 'index', :id => nil) })
@@ -145,7 +145,7 @@ class TypusController < ApplicationController
   #
   def toggle
     @item.toggle!(params[:field])
-    flash[:success] = "#{@model.to_s.titleize.capitalize} #{params[:field]} changed."
+    flash[:success] = "#{@model.humanize} #{params[:field]} changed."
     redirect_to :action => 'index', :params => params.merge(:field => nil, :action => 'index', :id => nil)
   end
 
@@ -166,7 +166,7 @@ class TypusController < ApplicationController
   def relate
     model_to_relate = params[:related].singularize.camelize.constantize
     @model.find(params[:id]).send(params[:related]) << model_to_relate.find(params[:model_id_to_relate][:related_id])
-    flash[:success] = "#{model_to_relate.to_s.titleize} added to #{@model.to_s.titleize}."
+    flash[:success] = "#{model_to_relate.to_s.titleize} added to #{@model.humanize}."
     redirect_to :action => 'edit', :id => params[:id]
   rescue Exception => error
     error_handler(error)
@@ -179,7 +179,7 @@ class TypusController < ApplicationController
     model_to_unrelate = params[:unrelated].singularize.camelize.constantize
     unrelate = model_to_unrelate.find(params[:unrelated_id])
     @model.find(params[:id]).send(params[:unrelated]).delete(unrelate)
-    flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.to_s.titleize}."
+    flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.humanize}."
     redirect_to :action => 'edit', :id => params[:id]
   rescue Exception => error
     error_handler(error)
