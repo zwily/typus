@@ -44,7 +44,9 @@ module TypusHelper
 
     Typus.applications.each do |module_name|
 
-      html << <<-HTML
+      enabled = false
+
+      html_module = <<-HTML
         <table>
           <tr>
             <th colspan="2">#{module_name}</th>
@@ -52,18 +54,24 @@ module TypusHelper
       HTML
 
       Typus.modules(module_name).each do |model|
-        html << <<-HTML
-          <tr class="#{cycle('even', 'odd')}">
-            <td>#{link_to model.titleize.pluralize, :action => 'index', :model => model.delete(" ").tableize}<br /></td>
-            <td align="right" valign="bottom"><small>#{link_to 'Add', :action => 'new', :model => model.delete(" ").tableize}</small></td>
-          </tr>
-        HTML
+        if @current_user.models.include? model
+          html_module << <<-HTML
+            <tr class="#{cycle('even', 'odd')}">
+              <td>#{link_to model.titleize.pluralize, :action => 'index', :model => model.delete(" ").tableize}<br /></td>
+              <td align="right" valign="bottom"><small>#{link_to 'Add', :action => 'new', :model => model.delete(" ").tableize}</small></td>
+            </tr>
+          HTML
+          enabled = true
+        end
       end
-      html << <<-HTML
+      html_module << <<-HTML
         </table>
         <br />
         <div style="clear"></div>
       HTML
+      
+      html << html_module if enabled
+      
     end
 
     html << "</div>"
