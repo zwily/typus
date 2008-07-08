@@ -1,31 +1,13 @@
 module TypusHelper
 
   def header
-    "<h1>#{Typus::Configuration.options[:app_name]}</h1>"
-  end
-
-  def footer
-    "<p><a href=\"http://intraducibles.net/projects/typus\" title=\"Typus\">Typus</a></p>"
-  end
-
-  def breadcrumbs
-    html = "<p>#{link_to "Home", typus_dashboard_url}"
-    if params[:model]
-      case params[:action]
-      when "index"
-        html << " &rsaquo; #{params[:model].titleize}\n"
-      when "new", "edit", "create"
-        html << " &rsaquo; #{link_to params[:model].titleize, :action => 'index'} &rsaquo; #{params[:action].titleize}"
-      end
-    end
-    html << "</p>"
+    "<h1>#{Typus::Configuration.options[:app_name]} <small>#{link_to "View site", '/', :target => 'blank'}</small></h1>"
   end
 
   def login_info
     html = <<-HTML
       <ul>
         <li>Logged as #{link_to @current_user.full_name, :controller => 'typus', :model => 'typus_users', :action => 'edit', :id => @current_user.id}</li>
-        <li>#{link_to "View site", '/', :target => 'blank'}</li>
         <li>#{link_to "Logout", typus_logout_url}</li>
       </ul>
     HTML
@@ -179,20 +161,20 @@ module TypusHelper
     if @model.typus_filters.size > 0
       html = ""
       @model.typus_filters.each do |f|
-        html << "<h2>#{f[0].titleize}</h2>\n"
+        html << "<h2>#{f[0].humanize}</h2>\n"
         case f[1]
         when 'boolean'
           html << "<ul>\n"
           %w( true false ).each do |status|
             switch = (current_request.include? "#{f[0]}=#{status}") ? 'on' : 'off'
-            html << "<li>#{link_to status.capitalize, { :params => params.merge(f[0] => status) }, :class => switch}</li>"
+            html << "<li>#{link_to status.capitalize, { :params => params.merge(f[0] => status) }, :class => switch}</li>\n"
           end
           html << "</ul>\n"
         when 'datetime'
           html << "<ul>\n"
           %w( today past_7_days this_month this_year ).each do |timeline|
             switch = (current_request.include? "#{f[0]}=#{timeline}") ? 'on' : 'off'
-            html << "<li>#{link_to timeline.titleize, { :params => params.merge(f[0] => timeline) }, :class => switch}</li>"
+            html << "<li>#{link_to timeline.titleize, { :params => params.merge(f[0] => timeline) }, :class => switch}</li>\n"
           end
           html << "</ul>\n"
         when 'integer'
@@ -201,18 +183,18 @@ module TypusHelper
             html << "<ul>\n"
             model.find(:all, :order => model.typus_order_by).each do |item|
               switch = (current_request.include? "#{f[0]}=#{item.id}") ? 'on' : 'off'
-              html << "<li>#{link_to item.typus_name, { :params => params.merge(f[0] => item.id) }, :class => switch}</li>"
+              html << "<li>#{link_to item.typus_name, { :params => params.merge(f[0] => item.id) }, :class => switch}</li>\n"
             end
             html << "</ul>\n"
           end
         when 'string'
           values = eval f[0].upcase
-          html << "<ul>"
+          html << "<ul>\n"
           values.each do |item|
             switch = (current_request.include? "#{f[0]}=#{item.last}") ? 'on' : 'off'
-            html << "<li>#{link_to item.first, { :params => params.merge(f[0] => item.last) }, :class => switch }</li>"
+            html << "<li>#{link_to item.first, { :params => params.merge(f[0] => item.last) }, :class => switch }</li>\n"
           end
-          html << "</ul>"
+          html << "</ul>\n"
         end
       end
     end
