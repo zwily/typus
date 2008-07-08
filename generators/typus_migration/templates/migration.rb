@@ -5,7 +5,7 @@ class CreateTypusUsers < ActiveRecord::Migration
       t.string :email, :salt, :crypted_password
       t.string :first_name, :last_name
       t.boolean :status, :default => false
-      t.boolean :admin, :default => false
+      t.string :roles
       t.timestamps
     end
   end
