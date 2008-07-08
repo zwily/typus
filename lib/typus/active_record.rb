@@ -6,8 +6,18 @@ module Typus
 
   module ClassMethods
 
+    ##
+    #
+    #
     def model_fields
       columns.map { |u| [u.name, u.type.to_s] }
+    end
+
+    ##
+    #
+    #
+    def humanize
+      name.titleize.capitalize
     end
 
     ##
