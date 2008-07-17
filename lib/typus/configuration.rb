@@ -46,7 +46,7 @@ module Typus
     case ENV['RAILS_ENV']
     when 'test'
       config_file = "#{File.dirname(__FILE__)}/../../test/typus_roles.yml"
-      @@config = YAML.load_file(config_file)
+      @@roles = YAML.load_file(config_file)
     else
       typus_roles = "#{RAILS_ROOT}/config/typus_roles.yml"
       if File.exists?(typus_roles)
