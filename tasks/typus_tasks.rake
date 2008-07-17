@@ -21,7 +21,7 @@ namespace :typus do
                                  :password_confirmation => password, 
                                  :first_name => 'Typus', 
                                  :last_name => 'Admin', 
-                                 :admin => true, 
+                                 :roles => 'admin', 
                                  :status => true)
       if typus_user.save
         puts "=> [Typus] Your new password is `#{password}`."
