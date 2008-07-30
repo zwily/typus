@@ -66,9 +66,8 @@ namespace :typus do
 
   desc "Copy Typus images and stylesheets"
   task :assets do
-    puts "=> [Typus]"
+    puts "=> [Typus] Copying images & stylesheets."
     %w( images stylesheets ).each do |folder|
-      puts "   - Copying #{folder}."
       system "cp #{RAILS_ROOT}/vendor/plugins/typus/public/#{folder}/* #{RAILS_ROOT}/public/#{folder}/"
     end
   end
