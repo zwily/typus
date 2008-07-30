@@ -18,8 +18,7 @@ module Typus
                   :prefix => 'admin',
                   :version => '',
                   :form_rows => '10',
-                  :form_columns => '10', 
-                  :roles => %w( admin editor ) }
+                  :form_columns => '10' }
 
     mattr_reader :options
 

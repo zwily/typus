@@ -10,8 +10,8 @@ class TypusUser < ActiveRecord::Base
   validates_length_of :password, :within => 6..40, :if => lambda { |person| person.new_record? or not person.password.blank? }
 
   validates_inclusion_of :roles, 
-                         :in => Typus::Configuration.options[:roles], 
-                         :message => "has to be #{Typus::Configuration.options[:roles].join(", ")}."
+                         :in => Typus::Configuration.roles.keys, 
+                         :message => "has to be in #{Typus::Configuration.roles.keys.join(", ")}."
 
   before_create :generate_token
   before_save :encrypt_password
