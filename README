@@ -6,6 +6,10 @@ As Django Admin, Typus is designed for a single activity:
 
 Once installed and configured you can login at http://application.tld/admin
 
+You can download a sample application from github.
+
+    http://github.com/fesplugas/typus_sample_app/tarball/master
+
 Note: Typus doesn't try to be all the things to all the people.
 
 == Installing
