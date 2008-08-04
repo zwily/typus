@@ -455,7 +455,18 @@ module TypusHelper
   end
 
   def display_error(error)
-    "<div id=\"flash\" class=\"error\"><p>#{error.message + "<br/>" + error.backtrace.join("\n")}</p></div>"
+    log_error error
+    "<div id=\"flash\" class=\"error\"><p>#{error}</p></div>"
+  end
+  
+  def log_error(exception)
+    ActiveSupport::Deprecation.silence do
+        logger.fatal(
+        "Typus Error:\n\n#{exception.class} (#{exception.message}):\n    " +
+        exception.backtrace.join("\n    ") +
+        "\n\n"
+        )
+    end
   end
 
 end
