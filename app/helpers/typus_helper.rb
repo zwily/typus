@@ -305,8 +305,20 @@ module TypusHelper
 
     fields.each do |field|
 
-      html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>"
+      ##
+      # Read only attributes (attributes that begin with "*")
+      #
+      if field[0].first == "*"
+        if params[:action] != "new"
+          attribute = field[0][1..-1]
+          html << "<p><label for=\"item_#{field[0]}\">#{attribute.titleize.capitalize}</label>"
+          html << "<p>#{@item.send(attribute)}"
+        end
+        next
+      end
 
+      html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>"
+      
       ##
       # When the field is an asset ...
       #
