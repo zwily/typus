@@ -47,6 +47,7 @@ module Typus
       enable_string
       enable_authentication
       enable_patches if Rails.vendor_rails?
+      enable_try
     end
 
     def enable_configuration
@@ -72,6 +73,10 @@ module Typus
     def enable_patches
       require 'typus/patches'
     end
+    
+    def enable_try
+      require 'typus/try'
+    end    
 
   end
 

@@ -253,9 +253,9 @@ module TypusHelper
           image = "#{image_tag(status = item.send(column[0])? "typus_status_true.gif" : "typus_status_false.gif")}"
           html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:controller => 'typus', :model => model, :action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
         when "datetime"
-          html << "<td>#{item.send(column[0]).to_s(:db)}</td>"
+          html << "<td>#{item.send(column[0]).to_s(:db) rescue "-"}</td>"
         when "collection"
-          html << "<td>#{link_to item.send(column[0].split("_id").first).typus_name, :controller => "typus", :action => "edit", :model => "#{column[0].split("_id").first.pluralize}", :id => item.send(column[0])}</td>"
+          html << "<td>#{link_to item.send(column[0].split("_id").first).try(:typus_name), :controller => "typus", :action => "edit", :model => "#{column[0].split("_id").first.pluralize}", :id => item.send(column[0])}</td>"
         when 'tree'
           html << "<td>#{item.parent.typus_name if item.parent}</td>"
         when "position"
@@ -455,7 +455,7 @@ module TypusHelper
   end
 
   def display_error(error)
-    "<div id=\"flash\" class=\"error\"><p>#{error}</p></div>"
+    "<div id=\"flash\" class=\"error\"><p>#{error.message + "<br/>" + error.backtrace.join("\n")}</p></div>"
   end
 
 end
