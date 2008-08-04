@@ -233,7 +233,9 @@ module Typus
     end
 
     def typus_name
-      name rescue "#{self.class}##{id}"
+      return to_label if respond_to? :to_label
+      return name if respond_to? :name
+      "#{self.class}##{id}"
     end
 
   end
