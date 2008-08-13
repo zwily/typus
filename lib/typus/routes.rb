@@ -4,6 +4,8 @@ end
 
 ActionController::Routing::Routes.draw do |map|
 
+  prefix = Typus::Configuration.options[:prefix]
+
   map.with_options :controller => 'typus' do |i|
     i.typus_dashboard "#{prefix}", :action => 'dashboard'
     i.typus_login "#{prefix}/login", :action => 'login'
@@ -11,7 +13,7 @@ ActionController::Routing::Routes.draw do |map|
     i.typus_email_password "#{prefix}/email_password", :action => 'email_password'
     i.typus_index "#{prefix}/:model", :action => 'index'
     i.connect "#{prefix}/:model/:action", :requirements => { :action => /index|new|create/ }
-    i.connect "#{prefix}/:model/:id/:action", :requirements => { :action => /edit|update|destroy|position|toggle|relate|unrelate/, :id => /\d+/ }
+    i.connect "#{prefix}/:model/:id/:action", :requirements => { :action => /show|edit|update|destroy|position|toggle|relate|unrelate/, :id => /\d+/ }
   end
 
   map.connect "#{prefix}/:model/:action", :controller => "typus/#{:model}"
