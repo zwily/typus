@@ -15,7 +15,6 @@ module Typus
     @@options = { :app_name => 'Typus Admin',
                   :app_description => '',
                   :per_page => 15,
-                  :prefix => 'admin',
                   :version => '',
                   :form_rows => '10',
                   :form_columns => '10' }
