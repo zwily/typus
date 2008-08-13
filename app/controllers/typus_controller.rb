@@ -117,6 +117,10 @@ class TypusController < ApplicationController
 
   end
 
+  def show
+    
+  end
+
   ##
   # Update an item ...
   #
