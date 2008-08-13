@@ -40,6 +40,14 @@ module Typus
       Typus::Configuration.config[module_name]['application']
     end
 
+    def models
+      m = []
+      Typus::Configuration.config.to_a.each do |model|
+        m << model[0]
+      end
+      return m.sort
+    end
+
     def enable
       enable_configuration
       enable_orm

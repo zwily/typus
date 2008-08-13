@@ -1,10 +1,23 @@
-class ActionController::Routing::RouteSet
+class << ActionController::Routing::Routes;self;end.class_eval do
+  define_method :clear!, lambda {}
+end
 
-  alias draw_without_admin draw
+ActionController::Routing::Routes.draw do |map|
 
-  def draw_with_admin
+  map.namespace :admin do |admin|
 
-    prefix = Typus::Configuration.options[:prefix]
+    Typus.models.each do |m|
+      admin.resources m.tableize, :member => { :position => :get, 
+                                               :toggle => :get, 
+                                               :relate => :get, 
+                                               :unrelate => :get }
+    end
+
+  end
+
+end
+
+=begin
 
     draw_without_admin do |map|
 
@@ -23,10 +36,4 @@ class ActionController::Routing::RouteSet
 
       yield map
 
-    end
-
-  end
-
-  alias draw draw_with_admin
-
-end
+=end
