@@ -63,9 +63,7 @@ class AdminController < ApplicationController
     item_params.delete_if { |key, value| key == 'action' }
     item_params.delete_if { |key, value| key == 'controller' }
     item_params.delete_if { |key, value| key == 'model' }
-    item_params.delete_if { |key, value| key == 'btm' }
-    item_params.delete_if { |key, value| key == 'bta' }
-    item_params.delete_if { |key, value| key == 'bti' }
+    item_params.delete_if { |key, value| key == 'model_id' }
     item_params.delete_if { |key, value| key == 'back_to' }
 
     @item = @model.new(item_params.symbolize_keys)
@@ -78,48 +76,24 @@ class AdminController < ApplicationController
   # Create an item.
   #
   def create
-
     @item = @model.new(params[:item])
-
     if @item.save
-
       if params[:back_to]
-        flash[:success] = "New #{@model.to_s.downcase} created."
+        if params[:model] && params[:model_id]
+          model_to_relate = params[:model].constantize
+          @item.send(params[:model].tableize) << model_to_relate.find(params[:model_id])
+          flash[:success] = "#{@item.class} successfully assigned to #{params[:model].downcase}."
+        else
+          flash[:success] = "New #{@model.to_s.downcase} created."
+        end
         redirect_to params[:back_to]
       else
-
-        if session[:typus_previous]
-
-          ##
-          # Recover the session
-          #
-          previous = session[:typus_previous]
-          btm, bta, bti = previous[:btm], previous[:bta], previous[:bti]
-          session[:typus_previous] = nil
-
-          ##
-          # Model to relate
-          #
-          model_to_relate = btm.singularize.camelize.constantize
-          @item.send(btm) << model_to_relate.find(bti)
-
-          ##
-          # And finally redirect to the previous action
-          #
-          flash[:success] = "#{@item.class} assigned to #{btm.singularize} successfully."
-          redirect_to :action => bta, :model => btm, :id => bti
-
-        else
-          flash[:success] = "#{@model.to_s.titleize} successfully created."
-          redirect_to :action => 'edit', :id => @item.id
-        end
-
+        flash[:success] = "#{@model.to_s.titleize} successfully created."
+        redirect_to :action => 'edit', :id => @item.id
       end
-
     else
       select_template(params[:model], 'new')
     end
-
   rescue Exception => error
     error_handler(error, {:params => params.merge(:action => 'index', :id => nil)} )
   end
@@ -146,7 +120,7 @@ class AdminController < ApplicationController
   def update
     if @item.update_attributes(params[:item])
       flash[:success] = "#{@model.humanize} successfully updated."
-      redirect_to :action => 'edit', :id => @item.id
+      redirect_to :action => 'edit'
     else
       select_template(params[:model], 'edit')
     end
@@ -158,7 +132,7 @@ class AdminController < ApplicationController
   def destroy
     @item.destroy
     flash[:success] = "#{@model.humanize} successfully removed."
-    redirect_to :params => params.merge(:action => 'index', :id => nil)
+    redirect_to :back
   rescue Exception => error
     error_handler(error, { :params => params.merge(:action => 'index', :id => nil) })
   end
@@ -169,7 +143,7 @@ class AdminController < ApplicationController
   def toggle
     @item.toggle!(params[:field])
     flash[:success] = "#{@model.humanize} #{params[:field]} changed."
-    redirect_to :action => 'index', :params => params.merge(:action => 'index', :field => nil, :id => nil)
+    redirect_to :back
   end
 
   ##
@@ -187,25 +161,25 @@ class AdminController < ApplicationController
   # Relate a model object to another.
   #
   def relate
-    model_to_relate = params[:related].singularize.camelize.constantize
-    @model.find(params[:id]).send(params[:related]) << model_to_relate.find(params[:model_id_to_relate][:related_id])
-    flash[:success] = "#{model_to_relate.to_s.titleize} added to #{@model.humanize}."
-    redirect_to :action => 'edit', :id => params[:id]
-  rescue Exception => error
-    error_handler(error)
+    model_to_relate = params[:related][:model].constantize
+    @model.find(params[:id]).send(params[:related][:model].tableize) << model_to_relate.find(params[:related][:id])
+    flash[:success] = "#{model_to_relate.to_s.titleize} added to #{@model.humanize.downcase}."
+    redirect_to :back
+#  rescue Exception => error
+#    error_handler(error)
   end
 
   ##
   # Remove relationship between models.
   #
   def unrelate
-    model_to_unrelate = params[:unrelated].singularize.camelize.constantize
-    unrelate = model_to_unrelate.find(params[:unrelated_id])
-    @model.find(params[:id]).send(params[:unrelated]).delete(unrelate)
-    flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.humanize}."
-    redirect_to :action => 'edit', :id => params[:id]
-  rescue Exception => error
-    error_handler(error)
+    model_to_unrelate = params[:model].constantize
+    unrelate = model_to_unrelate.find(params[:model_id])
+    @model.find(params[:id]).send(params[:model].tableize).delete(unrelate)
+    flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.humanize.downcase}."
+    redirect_to :back
+#  rescue Exception => error
+#    error_handler(error)
   end
 
 private
