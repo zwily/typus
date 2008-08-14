@@ -24,7 +24,9 @@ ActiveRecord::Schema.define do
     t.integer :user_id
   end
 
-  create_table :categories, :force => true, :force => true do |t|
+  add_index :posts, :user_id
+
+  create_table :categories, :force => true do |t|
     t.string :name
     t.string :permalink
     t.text :description
@@ -32,15 +34,28 @@ ActiveRecord::Schema.define do
   end
 
   create_table :categories_posts, :force => true, :id => false do |t|
-     t.column :category_id, :integer
-     t.column :post_id, :integer
+    t.column :category_id, :integer
+    t.column :post_id, :integer
   end
+
+  add_index :categories_posts, :category_id
+  add_index :categories_posts, :post_id
+
+  create_table :posts_tags, :force => true, :id => false do |t|
+    t.column :post_id, :integer
+    t.column :tag_id, :integer
+  end
+
+  add_index :posts_tags, :post_id
+  add_index :posts_tags, :tag_id
 
   create_table :comments, :force => true do |t|
     t.string :email, :name
     t.text :body
     t.integer :post_id
   end
+
+  add_index :comments, :post_id
 
   create_table :schema_info, :force => true do |t|
     t.string :version
