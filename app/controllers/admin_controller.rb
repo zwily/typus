@@ -8,20 +8,14 @@ class AdminController < ApplicationController
   before_filter :current_user
 
   before_filter :set_model
-
   before_filter :find_model, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
 
   before_filter :check_permissions, :only => [ :index, :new, :create, :edit, :update, :destroy, :toggle ]
 
   before_filter :set_order, :only => [ :index ]
+
   before_filter :fields, :only => [ :index ]
   before_filter :form_fields, :only => [ :new, :edit, :create, :update ]
-
-  ##
-  # Application Dashboard
-  #
-  def dashboard
-  end
 
   ##
   # Index
@@ -164,8 +158,8 @@ class AdminController < ApplicationController
     @model.find(params[:id]).send(params[:related][:model].tableize) << model_to_relate.find(params[:related][:id])
     flash[:success] = "#{model_to_relate.to_s.titleize} added to #{@model.humanize.downcase}."
     redirect_to :back
-#  rescue Exception => error
-#    error_handler(error)
+  rescue Exception => error
+    error_handler(error)
   end
 
   ##
@@ -177,8 +171,8 @@ class AdminController < ApplicationController
     @model.find(params[:id]).send(params[:model].tableize).delete(unrelate)
     flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.humanize.downcase}."
     redirect_to :back
-#  rescue Exception => error
-#    error_handler(error)
+  rescue Exception => error
+    error_handler(error)
   end
 
 private
@@ -251,7 +245,7 @@ private
   ##
   # Error handler only active on development.
   #
-  def error_handler(error, redirection = { :action => 'dashboard' })
+  def error_handler(error, redirection = typus_dashboard_url)
     unless RAILS_ENV == 'development'
       flash[:error] = error.message.titleize
       redirect_to redirection
