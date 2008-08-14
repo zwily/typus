@@ -245,7 +245,7 @@ private
   #
   def check_permissions
     unless @current_user.models.include? @model.to_s or @current_user.models.include? "All"
-      flash[:notice] = "You don't have permission to manage #{params[:model].humanize.downcase}."
+      flash[:notice] = "You don't have permission to access this resource."
       redirect_to typus_dashboard_url
     end
   end
