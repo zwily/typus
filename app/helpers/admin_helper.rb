@@ -1,18 +1,6 @@
 module AdminHelper
 
-  def header
-    "<h1>#{Typus::Configuration.options[:app_name]} <small>#{link_to "View site", '/', :target => 'blank'}</small></h1>"
-  end
-
-  def login_info
-    html = <<-HTML
-      <ul>
-        <li>Logged as #{link_to @current_user.full_name, :controller => 'typus', :model => 'typus_users', :action => 'edit', :id => @current_user.id}</li>
-        <li>#{link_to "Logout", typus_logout_url}</li>
-      </ul>
-    HTML
-    return html
-  end
+  include TypusHelper
 
   def actions
 
@@ -163,21 +151,6 @@ module AdminHelper
     nil
   end
 
-  def display_flash_message
-    flash_types = [ :error, :warning, :notice ]
-    flash_type = flash_types.detect{ |a| flash.keys.include?(a) } || flash.keys.first
-    if flash_type
-      "<div id=\"flash\" class=\"%s\"><p>%s</p></div>" % [flash_type.to_s, flash[flash_type]]
-    end
-  end
-
-  def page_title
-    crumbs = []
-    crumbs << Typus::Configuration.options[:app_name]
-    crumbs << params[:model] << params[:action]
-    return crumbs.compact.map { |x| x.titleize }.join(" &rsaquo; ")
-  end
-
   def typus_table(model = @model, fields = 'list', items = @items)
 
     @model = model #.camelize.singularize.constantize
@@ -271,7 +244,7 @@ module AdminHelper
           html << "<p>No Preview Available</p>"
         end
       when /id/
-        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=/#{params[:controller]}/#{params[:id]}/#{params[:action]}" }</small></label>"
+        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>"
       else
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>"
       end
@@ -361,10 +334,6 @@ module AdminHelper
     display_error(error)
   end
 
-  def typus_block(name)
-    render :partial => "typus/#{params[:model]}/#{name}" rescue nil
-  end
-
   ##
   # Tree when +acts_as_tree+
   #
@@ -401,10 +370,6 @@ module AdminHelper
     html << yield(pager.last.number).to_s if always_show_anchors and not last == pager.last.number
     # return the html
     return html
-  end
-
-  def display_error(error)
-    "<div id=\"flash\" class=\"error\"><p>#{error}</p></div>"
   end
 
 end

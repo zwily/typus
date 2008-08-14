@@ -1,7 +1,8 @@
 module TypusHelper
 
   ##
-  # Dashboard list of applications for the dashboard
+  # Applications list on the dashboard
+  #
   def applications
 
     html = "<div id=\"list\">"
@@ -44,12 +45,16 @@ module TypusHelper
 
     html << "</div>"
 
-  rescue Exception => error
-    display_error(error)
+#  rescue Exception => error
+#    display_error(error)
   end
 
   def typus_block(name)
     render :partial => "typus/#{params[:model]}/#{name}" rescue nil
+  end
+
+  def display_error(error)
+    "<div id=\"flash\" class=\"error\"><p>#{error}</p></div>"
   end
 
   def page_title
