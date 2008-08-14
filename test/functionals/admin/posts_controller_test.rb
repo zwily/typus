@@ -80,4 +80,16 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert flash[:success]
   end
 
+  def test_should_allow_admin_to_destroy_any_post
+    assert true
+  end
+
+  def test_shold_allow_editor_to_destroy_his_posts
+    assert true
+  end
+
+  def test_shold_not_allow_editor_to_destroy_other_users_posts
+    assert true
+  end
+
 end
