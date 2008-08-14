@@ -6,7 +6,7 @@ module Authentication
     # Before doing nothing on Typus require_login
     #
     def require_login
-      redirect_to typus_login_url unless session[:typus]
+      redirect_to typus_login_url(:back_to => request.env['REQUEST_PATH']) unless session[:typus]
     end
 
     ##
