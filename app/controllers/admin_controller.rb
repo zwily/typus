@@ -113,7 +113,7 @@ class AdminController < ApplicationController
   def update
     if @item.update_attributes(params[:item])
       flash[:success] = "#{@model.humanize} successfully updated."
-      redirect_to :action => 'edit'
+      redirect_to :action => 'edit', :id => @item.id
     else
       select_template(params[:model], 'edit')
     end
