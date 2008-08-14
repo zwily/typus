@@ -79,7 +79,6 @@ fields:
   form: name, body, *created_at, *status
   relationship: name, category_id
 
-
 === External Forms
 
     relationships:
