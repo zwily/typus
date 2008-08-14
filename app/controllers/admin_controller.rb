@@ -7,7 +7,6 @@ class AdminController < ApplicationController
   before_filter :require_login
   before_filter :current_user
 
-  before_filter :set_previous_action, :except => [ :create ]
   before_filter :set_model
 
   before_filter :find_model, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
@@ -201,18 +200,6 @@ private
       @order = @model.typus_order_by
     else
       @order = "#{params[:order_by]} #{params[:sort_order]}"
-    end
-  end
-
-  # btm: Before this model
-  # bta: Before this action
-  # bti: Before this id
-  def set_previous_action
-    session[:typus_previous] = nil
-    if params[:bta] && params[:btm]
-      previous = Hash.new
-      previous[:btm], previous[:bta], previous[:bti] = params[:btm], params[:bta], params[:bti]
-      session[:typus_previous] = previous
     end
   end
 
