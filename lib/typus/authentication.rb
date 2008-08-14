@@ -14,11 +14,9 @@ module Authentication
     #
     def logged_in?
       return false unless session[:typus]
-      #begin
       @current_user ||= TypusUser.find(session[:typus])
     rescue ActiveRecord::RecordNotFound
       session[:typus] = nil
-      #end
     end
 
     ##
