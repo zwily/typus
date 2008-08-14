@@ -1,0 +1,11 @@
+admin:
+  TypusUser: rw
+  Person: rw
+  Post: rw
+  Category: rw
+  Comment: rw
+
+editor:
+  Category: rw
+  Post: rw
+  Comment: rw
