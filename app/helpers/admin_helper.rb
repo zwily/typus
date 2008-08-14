@@ -147,8 +147,6 @@ module AdminHelper
     message = "You're adding a new #{@model.to_s.downcase} to a #{params[:model].downcase}. "
     message << "Do you want to cancel it? <a href=\"#{params[:back_to]}\">Click Here</a>"
     "<div id=\"flash\" class=\"notice\"><p>#{message}</p></div>"
-  # rescue
-  #  nil
   end
 
   def typus_table(model = @model, fields = 'list', items = @items)
@@ -176,14 +174,14 @@ module AdminHelper
 
       @model.typus_fields_for(fields).each do |column|
         case column[1]
-        when 'boolean'
+        when "boolean"
           image = "#{image_tag(status = item.send(column[0])? "typus_status_true.gif" : "typus_status_false.gif")}"
           html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
         when "datetime"
           html << "<td>#{item.send(column[0]).to_s(:db)}</td>"
         when "collection"
           html << "<td>#{link_to item.send(column[0].split("_id").first).typus_name, :controller => "/admin/#{column[0].split("_id").first.pluralize}", :action => "edit", :id => item.send(column[0])}</td>"
-        when 'tree'
+        when "tree"
           html << "<td>#{item.parent.typus_name if item.parent}</td>"
         when "position"
           html << "<td>"
@@ -192,7 +190,8 @@ module AdminHelper
             html << "#{link_to position.first, :params => params.merge(:action => 'position', :id => item.id, :go => position.last)} "
           end
           html << "</td>"
-
+        when "index"
+          html << "<td width=\"20\">#{link_to item.send(column[0]).to_s.rjust(6, "0"), :params => params.merge(:action => 'edit', :id => item.id)}</td>"
         else # 'string', 'integer', 'selector'
           html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:action => 'edit', :id => item.id)}</td>"
         end
@@ -280,7 +279,7 @@ module AdminHelper
       when "collection"
         related = field[0].split("_id").first.capitalize.camelize.constantize
         html << "#{select :item, "#{field[0]}", related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.to_s.downcase}"}"
-      else # when "string", "integer", "float", "position"
+      else
         html << "#{text_field :item, field[0], :class => 'title'}"
       end
       html << "</p>"
