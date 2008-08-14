@@ -146,8 +146,6 @@ class AdminController < ApplicationController
     @item.send(params[:go])
     flash[:success] = "Position changed."
     redirect_to :back
-  rescue Exception => error
-    error_handler(error)
   end
 
   ##
@@ -158,8 +156,6 @@ class AdminController < ApplicationController
     @model.find(params[:id]).send(params[:related][:model].tableize) << model_to_relate.find(params[:related][:id])
     flash[:success] = "#{model_to_relate.to_s.titleize} added to #{@model.humanize.downcase}."
     redirect_to :back
-  rescue Exception => error
-    error_handler(error)
   end
 
   ##
@@ -171,8 +167,6 @@ class AdminController < ApplicationController
     @model.find(params[:id]).send(params[:model].tableize).delete(unrelate)
     flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.humanize.downcase}."
     redirect_to :back
-  rescue Exception => error
-    error_handler(error)
   end
 
 private
