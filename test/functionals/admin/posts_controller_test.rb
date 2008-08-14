@@ -61,4 +61,16 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_template 'index'
   end
 
+  def test_should_relate_a_tag_to_a_post_and_then_unrelate
+    @request.session[:typus] = 1
+    @request.env["HTTP_REFERER"] = "/admin/posts/1/edit"
+    post :relate, { :id => 1, :related => { :model => "Tag", :id => "1"} }
+    assert_response :redirect
+    assert flash[:success]
+    assert_redirected_to :action => 'edit', :id => 1
+    post :unrelate, { :id => 1, :model => "Tag", :model_id => "1" }
+    assert_response :redirect
+    assert flash[:success]
+  end
+
 end
