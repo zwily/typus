@@ -35,6 +35,12 @@ This action will create a config file on <tt>RAILS_ROOT/config/typus.yml</tt>.
 
     rake typus:configure
 
+Running <tt>rake typus:configure</tt> will generate the required controllers. 
+You can also create them by hand under <tt>app/controllers/admin</tt>
+
+    class Admin::PostsController < AdminController
+    end
+
 === Step 4: Create the needed tables on the db by running.
 
     script/generate typus_migration
@@ -54,13 +60,13 @@ You can overwriting the following settings:
     Typus::Configuration.options[:per_page] = "20"
     Typus::Configuration.options[:form_rows] = "20"
     Typus::Configuration.options[:form_columns] = "20"
-    Typus::Configuration.options[:roles] = %w( admin editor )
 
 Place this settings in a initializer at <tt>config/initializers/typus.rb</tt>.
 
 == Configuration file options
 
-If the configuration file is broken you'll see a <tt>typus.yml</tt> text on the admin interface.
+If the configuration file is broken you'll see a <tt>typus.yml</tt> text on the 
+admin interface.
 
 === Typus Fields
 
@@ -69,7 +75,7 @@ If the configuration file is broken you'll see a <tt>typus.yml</tt> text on the 
       form: name, body, created_at, status
       relationship: name, category_id
 
-NOTE: Upload files only works if you follow Paperclip naming conventions.
+NOTE: Upload files only works if you follow <tt>Paperclip</tt> naming conventions.
 
 === External Forms
 
@@ -99,9 +105,9 @@ Adding minus (-) sign before the attribute will make the order DESC.
 
 These actions will only be available on the context <tt>list</tt> and <tt>form</tt> of Typus.
 
-You'll have to create controllers that inherit from TypusController
+You'll can add those actions to your admin controllers. Example:
 
-    class Typus::NewslettersController < TypusController
+    class Admin::NewslettersController < AdminController
 
       ##
       # Action to deliver emails ...
