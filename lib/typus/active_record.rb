@@ -73,8 +73,9 @@ module Typus
     #
     def typus_filters
       available_fields = self.model_fields
+      return [] unless Typus::Configuration.config["#{self.name}"]["filters"]
       fields = Typus::Configuration.config["#{self.name}"]["filters"].split(", ")
-      fields_with_type = Array.new
+      fields_with_type = []
       fields.each do |f|
         available_fields.each do |af|
           @field_type = af[1] if af[0] == f
@@ -82,8 +83,6 @@ module Typus
         fields_with_type << [ f, @field_type ]
       end
       return fields_with_type
-    rescue
-      []
     end
 
     ##
@@ -127,6 +126,7 @@ module Typus
     end
 
     def typus_order_by
+      return "id ASC" unless Typus::Configuration.config["#{self.name}"]["order_by"]
       fields = Typus::Configuration.config["#{self.name}"]["order_by"].split(", ")
       order = []
       fields.each do |field|
@@ -137,8 +137,6 @@ module Typus
         end
       end
       return order.join(", ")
-    rescue
-      "id ASC"
     end
 
     ##
