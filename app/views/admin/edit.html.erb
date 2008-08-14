@@ -6,8 +6,8 @@
 
 <%= typus_block("edit_top") %>
 
-<% form_for :item, 
-            :url  => { :action => "update", :id => @item.id }, 
+<% form_for @item, 
+            :url  => { :action => 'update' }, 
             :html => { :multipart => true } do |f| %>
   <%= typus_form %>
   <p><%= submit_tag "Update entry", :class => 'button' %></p>
