@@ -144,16 +144,16 @@ module AdminHelper
   end
 
   def display_link_to_previous
-    message = "You're adding a new #{@model.to_s.titleize} to a #{params[:btm].titleize.singularize}. "
-    message << "Do you want to cancel it? <a href=\"/admin/#{params[:btm]}/#{params[:bti]}/edit\">Click Here</a>"
+    message = "You're adding a new #{@model.to_s.downcase} to a #{params[:model].downcase}. "
+    message << "Do you want to cancel it? <a href=\"#{params[:back_to]}\">Click Here</a>"
     "<div id=\"flash\" class=\"notice\"><p>#{message}</p></div>"
-  rescue
-    nil
+  # rescue
+  #  nil
   end
 
   def typus_table(model = @model, fields = 'list', items = @items)
 
-    @model = model #.camelize.singularize.constantize
+    @model = model
     html = "<table>"
 
     ##
@@ -205,14 +205,15 @@ module AdminHelper
       #
       case params[:action]
       when 'index'
-        @perform = link_to image_tag("typus_trash.gif"), { :id => item.id, 
-                                                           :params => params.merge(:action => 'destroy') }, 
-                                                           :confirm => "Remove entry?"
+        @perform = link_to image_tag("typus_trash.gif"), { :action => 'destroy', 
+                                                           :id => item.id }, 
+                                                           :confirm => "Remove entry?", 
+                                                           :method => :delete
       else
         @perform = link_to image_tag("typus_trash.gif"), { :action => "unrelate", 
-                                                           :unrelated => model, 
-                                                           :unrelated_id => item.id, 
-                                                           :id => params[:id] }, 
+                                                           :id => params[:id], 
+                                                           :model => model, 
+                                                           :model_id => item.id }, 
                                                            :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@model.to_s}?"
       end
       html << "<td width=\"10px\">#{@perform}</td>\n</tr>"
@@ -314,19 +315,20 @@ module AdminHelper
     if @item_has_and_belongs_to_many
       @item_has_and_belongs_to_many.each do |field|
         model_to_relate = field.singularize.camelize.constantize
-        html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{link_to "Add new", :model => field, :action => 'new', :btm => params[:model], :bti => params[:id], :bta => params[:action]}</small></h2>"
+        html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{link_to "Add new", "/admin/#{field}/new?back_to=#{request.env['REQUEST_URI']}&model=#{@model}&model_id=#{@item.id}"}</small></h2>"
         items_to_relate = (model_to_relate.find(:all) - @item.send(field))
         if items_to_relate.size > 0
           html << <<-HTML
-            #{form_tag :action => "relate", :related => field, :id => params[:id]}
-            <p>#{ select "model_id_to_relate", :related_id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } }
+            #{form_tag :action => 'relate'}
+            #{hidden_field :related, :model, :value => field.modelize}
+            <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } }
           &nbsp; #{submit_tag "Add", :class => 'button'}
             </form></p>
           HTML
         end
-        current_model = params[:model].singularize.camelize.constantize
+        current_model = @model.to_s.singularize.camelize.constantize
         @items = current_model.find(params[:id]).send(field)
-        html << typus_table(field, 'relationship') if @items.size > 0
+        html << typus_table(field.modelize, 'relationship') if @items.size > 0
       end
     end
     return html
