@@ -9,7 +9,7 @@
 <%= typus_block("new_top") %>
 
 <% form_for :item, 
-            :url  => { :action => "create" }, 
+            :url  => { :action => "create", :back_to => params[:back_to] }, 
             :html => { :multipart => true } do %>
   <%= typus_form %>
   <p><%= submit_tag "Create entry", :class => 'button' %></p>
