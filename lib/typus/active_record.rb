@@ -43,6 +43,7 @@ module Typus
         ##
         # Some custom field_type depending on the attribute name
         case f
+          when 'id':              @field_type = 'index'
           when 'parent_id':       @field_type = 'tree'
           when /_id/:             @field_type = 'collection'
           when /file_name/:       @field_type = 'file'
