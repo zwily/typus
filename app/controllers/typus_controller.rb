@@ -1,5 +1,7 @@
 class TypusController < ApplicationController
 
+  layout 'typus'
+
   filter_parameter_logging :password
 
   include Authentication
