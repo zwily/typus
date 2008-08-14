@@ -6,6 +6,9 @@ class Admin::PostsControllerTest < ActionController::TestCase
     get :index
     assert_response :redirect
     assert_redirected_to typus_login_url
+    get :edit, { :id => 1 }
+    assert_response :redirect
+    assert_redirected_to typus_login_url
   end
 
   def test_should_render_new
@@ -17,15 +20,11 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_create_item
     @request.session[:typus] = 1
-
     items = Post.count
-
-    post :create, { :item => { :title => "This is another title", 
-                               :body => "This is the body.", 
-                               :category => 1 } }
-#    assert_response :redirect
-#    assert_redirected_to :action => 'edit'
-#    assert_equal items + 1, Post.count
+    post :create, { :item => { :title => "This is another title", :body => "Body" } }
+    assert_response :redirect
+    assert_redirected_to :action => 'edit'
+    assert_equal items + 1, Post.count
   end
 
   def test_should_render_edit
@@ -38,7 +37,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_should_update_item
     @request.session[:typus] = 1
     post :update, { :id => 1, :title => "Updated" }
-    assert_response :success
+    assert_response :redirect
+    assert_redirected_to :action => 'edit', :id => 1
   end
 
   def test_should_allow_admin_to_toggle_item
@@ -51,6 +51,14 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_redirected_to :action => 'index'
     assert flash[:success]
     assert Post.find(post.id).status
+  end
+
+  def test_should_perform_a_search
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+    get :index, { :search => 'neinonon' }
+    assert_response :success
+    assert_template 'index'
   end
 
 end
