@@ -27,6 +27,13 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_equal items + 1, Post.count
   end
 
+  def test_should_render_show
+    @request.session[:typus] = 1
+    get :show, { :id => 1 }
+    assert_response :success
+    assert_template 'show'
+  end
+
   def test_should_render_edit
     @request.session[:typus] = 1
     get :edit, { :id => 1 }
