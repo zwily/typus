@@ -144,7 +144,7 @@ module AdminHelper
   end
 
   def display_link_to_previous
-    message = "You're adding a new #{@model.to_s.downcase} to a #{params[:model].downcase}. "
+    message = "You're adding a new #{@model.to_s.downcase} to a model. "
     message << "Do you want to cancel it? <a href=\"#{params[:back_to]}\">Click Here</a>"
     "<div id=\"flash\" class=\"notice\"><p>#{message}</p></div>"
   end
