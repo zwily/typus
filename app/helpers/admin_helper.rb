@@ -94,6 +94,8 @@ module AdminHelper
     else
       ""
     end
+  rescue
+    ""
   end
 
   def search
@@ -203,11 +205,11 @@ module AdminHelper
         case column[1]
         when 'boolean'
           image = "#{image_tag(status = item.send(column[0])? "typus_status_true.gif" : "typus_status_false.gif")}"
-          html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:controller => 'typus', :model => model, :action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
+          html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
         when "datetime"
           html << "<td>#{item.send(column[0]).to_s(:db)}</td>"
         when "collection"
-          html << "<td>#{link_to item.send(column[0].split("_id").first).typus_name, :controller => "typus", :action => "edit", :model => "#{column[0].split("_id").first.pluralize}", :id => item.send(column[0])}</td>"
+          html << "<td>#{link_to item.send(column[0].split("_id").first).typus_name, :controller => "/admin/#{column[0].split("_id").first.pluralize}", :action => "edit", :id => item.send(column[0])}</td>"
         when 'tree'
           html << "<td>#{item.parent.typus_name if item.parent}</td>"
         when "position"
@@ -219,7 +221,7 @@ module AdminHelper
           html << "</td>"
 
         else # 'string', 'integer', 'selector'
-          html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:model => model, :action => 'edit', :id => item.id)}</td>"
+          html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:action => 'edit', :id => item.id)}</td>"
         end
       end
 
@@ -228,10 +230,9 @@ module AdminHelper
       # will remove the entry, but if we inside a model we will remove the 
       # relationship between the models.
       #
-      case params[:model]
-      when model
-        @perform = link_to image_tag("typus_trash.gif"), { :model => model, 
-                                                           :id => item.id, 
+      case params[:action]
+      when 'index'
+        @perform = link_to image_tag("typus_trash.gif"), { :id => item.id, 
                                                            :params => params.merge(:action => 'destroy') }, 
                                                            :confirm => "Remove entry?"
       else
@@ -239,7 +240,7 @@ module AdminHelper
                                                            :unrelated => model, 
                                                            :unrelated_id => item.id, 
                                                            :id => params[:id] }, 
-                                                           :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{params[:model].titleize.singularize}?"
+                                                           :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@model.to_s}?"
       end
       html << "<td width=\"10px\">#{@perform}</td>\n</tr>"
 
@@ -257,8 +258,6 @@ module AdminHelper
 
     fields.each do |field|
 
-      html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>"
-
       ##
       # When the field is an asset ...
       #
@@ -271,6 +270,10 @@ module AdminHelper
         else
           html << "<p>No Preview Available</p>"
         end
+      when /id/
+        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=/#{params[:controller]}/#{params[:id]}/#{params[:action]}" }</small></label>"
+      else
+        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>"
       end
 
       ##
@@ -313,9 +316,6 @@ module AdminHelper
     display_error(error)
   end
 
-  ##
-  # FIXME: The admin shouldn't be hardcoded.
-  #
   def typus_form_has_many
     html = ""
     if @item_has_many
@@ -336,9 +336,6 @@ module AdminHelper
     display_error(error)
   end
 
-  ##
-  # FIXME: The admin shouldn't be hardcoded.
-  #
   def typus_form_has_and_belongs_to_many
     html = ""
     if @item_has_and_belongs_to_many
