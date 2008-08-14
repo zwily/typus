@@ -9,17 +9,21 @@ ActionController::Routing::Routes.draw do |map|
     i.typus_login "admin/login", :action => 'login'
     i.typus_logout "admin/logout", :action => 'logout'
     i.typus_email_password "admin/email_password", :action => 'email_password'
-    i.typus_index "admin/:model", :action => 'index'
+  end
+
+=begin
+
+  map.with_options :controller => 'admin' do |i|
     i.connect "admin/:model/:action", :requirements => { :action => /index|new|create/ }
     i.connect "admin/:model/:id/:action", :requirements => { :action => /show|edit|update|destroy|position|toggle|relate|unrelate/, :id => /\d+/ }
   end
 
-  Typus.models.map { |m| m.tableize }.each do |model|
-    map.connect "admin/#{model}/:action", :controller => "typus/#{model}"
-    map.connect "admin/#{model}/:id/:action", :controller => "typus/#{model}"
-  end
+=end
 
-=begin
+  Typus.models.map { |m| m.tableize }.each do |model|
+    map.connect "admin/#{model}/:action", :controller => "admin/#{model}"
+    map.connect "admin/#{model}/:id/:action", :controller => "admin/#{model}"
+  end
 
   map.namespace :admin do |admin|
 
@@ -31,7 +35,5 @@ ActionController::Routing::Routes.draw do |map|
     end
 
   end
-
-=end
 
 end
