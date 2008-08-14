@@ -1,20 +1,14 @@
-##
-# Here we keep all the model actions
-#
-
 class AdminController < ApplicationController
 
   layout 'typus'
 
-  filter_parameter_logging :password
-
   include Authentication
 
-  before_filter :require_login, :except => [ :login, :logout, :email_password ]
-  before_filter :current_user, :except => [ :login, :logout, :email_password ]
+  before_filter :require_login
+  before_filter :current_user
 
-  before_filter :set_previous_action, :except => [ :dashboard, :login, :logout, :create, :email_password ]
-  before_filter :set_model, :except => [ :dashboard, :login, :logout, :email_password ]
+  before_filter :set_previous_action, :except => [ :create ]
+  before_filter :set_model
 
   before_filter :find_model, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
 
@@ -56,10 +50,13 @@ class AdminController < ApplicationController
 
     select_template(params[:controller].split("/").last.modelize, 'index')
 
-#  rescue Exception => error
-#    error_handler(error)
+  rescue Exception => error
+    error_handler(error)
   end
 
+  ##
+  # New item.
+  #
   def new
 
     item_params = params.dup
@@ -69,78 +66,94 @@ class AdminController < ApplicationController
     item_params.delete_if { |key, value| key == 'btm' }
     item_params.delete_if { |key, value| key == 'bta' }
     item_params.delete_if { |key, value| key == 'bti' }
+    item_params.delete_if { |key, value| key == 'back_to' }
+
     @item = @model.new(item_params.symbolize_keys)
 
     select_template(params[:model], 'new')
 
   end
 
+  ##
+  # Create an item.
+  #
   def create
+
     @item = @model.new(params[:item])
+
     if @item.save
-      if session[:typus_previous]
 
-        ##
-        # Recover the session
-        #
-        previous = session[:typus_previous]
-        btm, bta, bti = previous[:btm], previous[:bta], previous[:bti]
-        session[:typus_previous] = nil
-
-        ##
-        # Model to relate
-        #
-        model_to_relate = btm.singularize.camelize.constantize
-        @item.send(btm) << model_to_relate.find(bti)
-
-        ##
-        # And finally redirect to the previous action
-        #
-        flash[:success] = "#{@item.class} assigned to #{btm.singularize} successfully."
-        redirect_to :action => bta, :model => btm, :id => bti
-
+      if params[:back_to]
+        flash[:success] = "New #{@model.to_s.downcase} created."
+        redirect_to params[:back_to]
       else
-        flash[:success] = "#{@model.to_s.titleize} successfully created."
-        redirect_to :action => 'edit', :id => @item.id
+
+        if session[:typus_previous]
+
+          ##
+          # Recover the session
+          #
+          previous = session[:typus_previous]
+          btm, bta, bti = previous[:btm], previous[:bta], previous[:bti]
+          session[:typus_previous] = nil
+
+          ##
+          # Model to relate
+          #
+          model_to_relate = btm.singularize.camelize.constantize
+          @item.send(btm) << model_to_relate.find(bti)
+
+          ##
+          # And finally redirect to the previous action
+          #
+          flash[:success] = "#{@item.class} assigned to #{btm.singularize} successfully."
+          redirect_to :action => bta, :model => btm, :id => bti
+
+        else
+          flash[:success] = "#{@model.to_s.titleize} successfully created."
+          redirect_to :action => 'edit', :id => @item.id
+        end
+
       end
 
     else
-      render :action => 'new'
+      select_template(params[:model], 'new')
     end
+
   rescue Exception => error
     error_handler(error, {:params => params.merge(:action => 'index', :id => nil)} )
   end
 
+  ##
+  # Edit an item.
+  #
   def edit
-
-    ##
-    # Link to previous and next, we should pass params ...
-    #
-    @previous = @item.previous
-    @next = @item.next
-
+    @previous, @next = @item.previous, @item.next
     select_template(params[:model], 'edit')
-
-  end
-
-  def show
-
   end
 
   ##
-  # Update an item ...
+  # Show an item.
+  #
+  def show
+    @previous, @next = @item.previous, @item.next
+    select_template(params[:model], 'show')
+  end
+
+  ##
+  # Update an item.
   #
   def update
     if @item.update_attributes(params[:item])
       flash[:success] = "#{@model.humanize} successfully updated."
       redirect_to :action => 'edit', :id => @item.id
     else
-      render :action => 'edit'
+      select_template(params[:model], 'edit')
     end
   end
 
   ##
-  # Destroy an item
+  # Destroy an item.
   #
   def destroy
     @item.destroy
@@ -156,11 +169,11 @@ class AdminController < ApplicationController
   def toggle
     @item.toggle!(params[:field])
     flash[:success] = "#{@model.humanize} #{params[:field]} changed."
-    redirect_to :action => 'index', :params => params.merge(:field => nil, :action => 'index', :id => nil)
+    redirect_to :action => 'index', :params => params.merge(:action => 'index', :field => nil, :id => nil)
   end
 
   ##
-  # Change item position
+  # Change item position.
   #
   def position
     @item.send(params[:go])
@@ -193,53 +206,6 @@ class AdminController < ApplicationController
     redirect_to :action => 'edit', :id => params[:id]
   rescue Exception => error
     error_handler(error)
-  end
-
-  ##
-  # Login
-  #
-  def login
-    if request.post?
-      @user = TypusUser.authenticate(params[:user][:email], params[:user][:password])
-      if @user
-        session[:typus] = @user.id
-        redirect_to typus_dashboard_url
-      else
-        flash[:error] = "The Email and/or Password you entered is invalid."
-        redirect_to typus_login_url
-      end
-    else
-      render :layout => 'typus_login'
-    end
-  end
-
-  ##
-  # Logout and redirect to +typus_login+.
-  #
-  def logout
-    session[:typus] = nil
-    redirect_to typus_login_url
-  end
-
-  ##
-  # Email password when lost
-  #
-  def email_password
-    if request.post?
-      typus_user = TypusUser.find_by_email(params[:user][:email])
-      if typus_user
-        password = generate_password
-        host = request.env['HTTP_HOST']
-        typus_user.reset_password(password, host)
-        flash[:success] = "New password sent to #{params[:user][:email]}"
-        redirect_to typus_login_url
-      else
-        flash[:error] = "Email doesn't exist on the system."
-        redirect_to typus_email_password_url
-      end
-    else
-      render :layout => 'typus_login'
-    end
   end
 
 private
@@ -299,10 +265,9 @@ private
     @item_has_and_belongs_to_many = @model.typus_relationships_for('has_and_belongs_to_many')
   end
 
-private
-
   ##
-  # Before filter to check if has permission to index, edit, update & destroy a model.
+  # Before filter to check if has permission to index, edit, update 
+  # & destroy a model.
   #
   def check_permissions
     unless @current_user.models.include? @model.to_s or @current_user.models.include? "All"
@@ -312,7 +277,7 @@ private
   end
 
   ##
-  # Select template to render
+  # Select which template to render.
   #
   def select_template(model, template)
     if File.exists?("#{RAILS_ROOT}/app/views/admin/#{model}/#{template}.html.erb")
@@ -323,7 +288,7 @@ private
   end
 
   ##
-  #
+  # Error handler only active on development.
   #
   def error_handler(error, redirection = { :action => 'dashboard' })
     unless RAILS_ENV == 'development'
