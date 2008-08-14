@@ -11,27 +11,14 @@ ActionController::Routing::Routes.draw do |map|
     i.typus_email_password "admin/email_password", :action => 'email_password'
   end
 
-=begin
-
-  map.with_options :controller => 'admin' do |i|
-    i.connect "admin/:model/:action", :requirements => { :action => /index|new|create/ }
-    i.connect "admin/:model/:id/:action", :requirements => { :action => /show|edit|update|destroy|position|toggle|relate|unrelate/, :id => /\d+/ }
-  end
-
-=end
-
-  Typus.models.map { |m| m.tableize }.each do |model|
-    map.connect "admin/#{model}/:action", :controller => "admin/#{model}"
-    map.connect "admin/#{model}/:id/:action", :controller => "admin/#{model}"
-  end
-
   map.namespace :admin do |admin|
 
     Typus.models.each do |m|
-      admin.resources m.tableize, :member => { :position => :get, 
-                                               :toggle => :get, 
-                                               :relate => :get, 
-                                               :unrelate => :get }
+      admin.resources m.tableize, :collection => { :csv => :get }, 
+                                  :member => { :position => :any, 
+                                               :toggle => :any, 
+                                               :relate => :any, 
+                                               :unrelate => :any }
     end
 
   end
