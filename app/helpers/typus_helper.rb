@@ -466,11 +466,17 @@ module TypusHelper
     return html
   end
 
+  ##
+  #
+  #
   def display_error(error)
     log_error error
     "<div id=\"flash\" class=\"error\"><p>#{error}</p></div>"
   end
-  
+
+  ##
+  #
+  #
   def log_error(exception)
     ActiveSupport::Deprecation.silence do
         logger.fatal(

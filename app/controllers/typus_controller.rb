@@ -289,8 +289,6 @@ private
     @item_has_and_belongs_to_many = @model.typus_relationships_for('has_and_belongs_to_many')
   end
 
-private
-
   ##
   # Before filter to check if has permission to index, edit, update & destroy a model.
   #
