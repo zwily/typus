@@ -6,7 +6,7 @@ module Authentication
     # Before doing nothing on Typus require_login
     #
     def require_login
-      redirect_to :controller => 'typus', :action => 'login' if !session[:typus]
+      redirect_to typus_login_url unless session[:typus]
     end
 
     ##
