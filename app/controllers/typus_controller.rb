@@ -3,7 +3,15 @@ class TypusController < ApplicationController
   include Authentication
 
   filter_parameter_logging :password
+
+  before_filter :require_login, :only => [ :dashboard ]
   before_filter :current_user, :only => [ :dashboard ]
+
+  ##
+  # Application Dashboard
+  #
+  def dashboard
+  end
 
   ##
   # Login
@@ -54,12 +62,6 @@ class TypusController < ApplicationController
     else
       render :layout => 'typus_login'
     end
-  end
-
-  ##
-  # Application Dashboard
-  #
-  def dashboard
   end
 
 end
