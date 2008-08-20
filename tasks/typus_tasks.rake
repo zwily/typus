@@ -90,11 +90,11 @@ namespace :typus do
         require File.dirname(__FILE__) + '/../../../../config/environment'
         typus = File.open("#{RAILS_ROOT}/config/typus_roles.yml", "w+")
         typus.puts "admin:"
-        typus.puts "  TypusUser: rw"
+        typus.puts "  TypusUser: crud"
         models.each do |model|
           class_name = eval model.sub(/\.rb$/,'').camelize
           if class_name.new.kind_of?(ActiveRecord::Base)
-            typus.puts "  #{class_name}: rw"
+            typus.puts "  #{class_name}: crud"
           end
         end
         typus.close
