@@ -116,15 +116,7 @@ module Typus
     # Used for +relationships+
     #
     def typus_relationships_for(filter)
-      begin
-        Typus::Configuration.config["#{self.name}"]["relationships"][filter].split(", ")
-      rescue
-        associations = []
-        self.reflections.each do |name, value|
-          associations << name.to_s if value.macro.to_s == filter
-        end
-        return associations
-      end
+      Typus::Configuration.config["#{self.name}"]["relationships"][filter].split(", ") rescue []
     end
 
     def typus_order_by
