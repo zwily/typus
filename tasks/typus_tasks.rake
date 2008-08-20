@@ -4,7 +4,7 @@ end
 
 namespace :typus do
 
-  desc "Create Typus User `rake typus:seed email=foo@bar.com`"
+  desc "Create TypusUser `rake typus:seed email=foo@bar.com`"
   task :seed => :environment do
 
     include Authentication
@@ -72,7 +72,7 @@ namespace :typus do
     end
   end
 
-  desc "Show current roles"
+  desc "List current roles"
   task :roles => :environment do
     puts "[Typus Roles]"
     Typus::Configuration.roles.each do |role|
@@ -80,7 +80,7 @@ namespace :typus do
     end
   end
 
-  desc "Generates `config/typus_roles.yml`"
+  desc "Generate config/typus_roles.yml"
   task :configure_roles do
     begin
       MODEL_DIR = File.join(RAILS_ROOT, "app/models")
@@ -108,7 +108,7 @@ namespace :typus do
     end
   end
 
-  desc "Generates `config/typus.yml`"
+  desc "Generate config/typus.yml"
   task :configure do
     begin
       MODEL_DIR = File.join(RAILS_ROOT, "app/models")
@@ -178,6 +178,21 @@ namespace :typus do
     rescue Exception => e
       puts "#{e.message}"
       File.delete("#{RAILS_ROOT}/config/typus.yml")
+    end
+  end
+
+  desc "Generate controllers"
+  task :generate_controllers => :environment do
+    puts "[Typus] Generation of needed controllers"
+    Typus.models.each do |model|
+      controller_file = "#{RAILS_ROOT}/app/controllers/admin/#{model.tableize}_controller.rb"
+      if !File.exists? (controller_file)
+        controller = File.open(controller_file, "w+")
+        controller.puts "class Admin::#{model.pluralize}Controller < AdminController"
+        controller.puts "end"
+        controller.close
+        puts "- Admin::#{model.pluralize}Controller successfully created."
+      end
     end
   end
 
