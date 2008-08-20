@@ -12,6 +12,8 @@ class AdminController < ApplicationController
 
   before_filter :check_permissions, :only => [ :index, :new, :create, :edit, :update, :destroy, :toggle ]
 
+  before_filter :check_ownership, :only => [ :destroy ]
+
   before_filter :set_order, :only => [ :index ]
 
   before_filter :fields, :only => [ :index ]
@@ -222,6 +224,16 @@ private
     unless @current_user.models.include? @model.to_s or @current_user.models.include? "All"
       flash[:notice] = "You don't have permission to access this resource."
       redirect_to typus_dashboard_url
+    end
+  end
+
+  ##
+  # A TypusUser cannot destroy himself
+  #
+  def check_ownership
+    if @model.to_s == "TypusUser" and @current_user.id == params[:id].to_i
+      flash[:notice] = "You cannot remove yourself from Typus."
+      redirect_to :back
     end
   end
 
