@@ -1,0 +1,8 @@
+TypusUser:
+  fields:
+    list: first_name, last_name, email, roles, status
+    form: first_name, last_name, roles, *email, password, password_confirmation
+  filters: status
+  search: first_name, last_name, email, roles
+  application: Typus Admin
+  description: System Users Administration
