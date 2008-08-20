@@ -232,14 +232,19 @@ module AdminHelper
       ##
       # Read only attributes (attributes that begin with "*")
       #
+
+=begin
+
       if field[0].first == "*"
-        if params[:action] != "new"
+        if params[:action] != "new" # or params[:action] != "create"
           attribute = field[0][1..-1]
           html << "<p><label for=\"item_#{field[0]}\">#{attribute.titleize.capitalize}</label>"
           html << "<p>#{@item.send(attribute)}"
         end
         next
       end
+
+=end
 
       ##
       # When the field is an asset ...
