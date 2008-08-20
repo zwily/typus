@@ -29,11 +29,12 @@ module Typus
       config_file = "#{File.dirname(__FILE__)}/../../test/typus.yml"
       @@config = YAML.load_file(config_file)
     else
-      config_file = "#{RAILS_ROOT}/config/typus.yml"
-      @@config = YAML.load_file(config_file)
+      @@config = {}
       Dir['vendor/plugins/*/config/typus.yml'].each do |plugin|
         @@config = @@config.merge(YAML.load_file("#{RAILS_ROOT}/#{plugin}"))
       end
+      config_file = "#{RAILS_ROOT}/config/typus.yml"
+      @@config = @@config.merge(YAML.load_file(config_file))
     end
 
     mattr_reader :config
