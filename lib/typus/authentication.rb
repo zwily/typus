@@ -38,4 +38,51 @@ module Authentication
       return password
     end
 
+    ##
+    # Logger user can create records?
+    #
+    def can_create?(model = @model)
+      unless @current_user.models[model.to_s].include? "c"
+        case params[:action]
+        when 'new'
+          flash[:notice] = "#{@current_user.roles.capitalize} cannot add new items."
+        when 'create'
+          flash[:notice] = "#{@current_user.roles.capitalize} cannot create new items."
+        end
+        redirect_to :back
+      end
+    end
+
+    ##
+    # Logged user can read records?
+    #
+    #   @current_user.can_read?
+    #
+    def can_read?(model = @model)
+      unless @current_user.models[model.to_s].include? "r"
+        flash[:notice] = "#{@current_user.roles.capitalize} cannot #{params[:action]} items."
+        redirect_to :back
+      end
+    end
+
+    ##
+    # Logged user can update records?
+    #
+    def can_update?(model = @model)
+      unless @current_user.models[model.to_s].include? "u"
+        flash[:notice] = "#{@current_user.roles.capitalize} cannot #{params[:action]} items."
+        redirect_to :back
+      end
+    end
+
+    ##
+    # Logger user can destroy records?
+    #
+    def can_destroy?(model = @model)
+      unless @current_user.models[model.to_s].include? "d"
+        flash[:notice] = "#{@current_user.roles.capitalize} cannot #{params[:action]} this item."
+        redirect_to :back
+      end
+    end
+
 end

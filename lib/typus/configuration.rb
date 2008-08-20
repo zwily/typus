@@ -19,6 +19,7 @@ module Typus
                   :form_rows => '10',
                   :form_columns => '10' }
 
+
     mattr_reader :options
 
     ##
