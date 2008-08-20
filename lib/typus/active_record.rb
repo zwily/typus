@@ -7,10 +7,19 @@ module Typus
   module ClassMethods
 
     ##
-    #
+    # Return model fields as an array
     #
     def model_fields
       columns.map { |u| [u.name, u.type.to_s] }
+    end
+
+    ##
+    # Return model fields as a hash
+    #
+    def model_fields_hash
+      hash = Hash.new
+      columns.map { |u| hash[u.name.to_sym] = u.type.to_sym }
+      return hash
     end
 
     ##
