@@ -29,3 +29,13 @@ disabled_user:
   roles: editor
   salt: <%= "--#{time}--disabled_user@typus.org--" %>
   crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--disabled_user@typus.org----#{12345678}") %>
+
+designer:
+  id: 4
+  email: designer@typus.org
+  first_name: Typus
+  last_name: Designer
+  status: true
+  roles: designer
+  salt: <%= "--#{time}--disabled_user@typus.org--" %>
+  crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--designer@typus.org----#{12345678}") %>

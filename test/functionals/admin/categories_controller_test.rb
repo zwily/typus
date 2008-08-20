@@ -52,4 +52,45 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_equal third_category.position, 1
   end
 
+  def test_should_allow_admin_to_add_a_category
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+    category = categories(:first)
+    get :new
+    assert_response :success
+  end
+
+  def test_should_not_allow_designer_to_add_a_category
+    designer = typus_users(:designer)
+    @request.session[:typus] = designer.id
+    category = categories(:first)
+    get :new
+    assert_response :redirect
+    assert flash[:notice]
+    assert_match /Designer cannot add new items./, flash[:notice]
+    assert_redirected_to :action => :index
+  end
+
+  def test_should_allow_admin_to_destroy_a_category
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+    category = categories(:first)
+    get :destroy, { :id => category.id, :method => :delete }
+    assert_response :redirect
+    assert flash[:success]
+    assert_match /Category successfully removed./, flash[:success]
+    assert_redirected_to :action => :index
+  end
+
+  def test_should_not_allow_designer_to_destroy_a_category
+    designer = typus_users(:designer)
+    @request.session[:typus] = designer.id
+    category = categories(:first)
+    get :destroy, { :id => category.id, :method => :delete }
+    assert_response :redirect
+    assert flash[:notice]
+    assert_match /Designer cannot destroy this item./, flash[:notice]
+    assert_redirected_to :action => :index
+  end
+
 end

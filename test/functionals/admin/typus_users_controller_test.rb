@@ -9,9 +9,14 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :success
   end
 
-  def test_should_allow_admin_to_update_himself
-    assert true
-  end
+#  def test_should_not_allow_designer_to_add_users
+#    editor = typus_users(:designer)
+#    @request.session[:typus] = editor.id
+#    get :new
+#    assert_response :redirect
+#    assert flash[:notice]
+#    assert_match /You don't have permission to access this resource./, flash[:notice]
+#  end
 
   def test_should_allow_admin_to_update_other_users_profiles
     assert true
