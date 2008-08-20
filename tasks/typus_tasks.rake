@@ -72,6 +72,14 @@ namespace :typus do
     end
   end
 
+  desc "Show current roles"
+  task :roles => :environment do
+    puts "[Typus Roles]"
+    Typus::Configuration.roles.each do |role|
+      puts "- #{role.first.capitalize} has access to #{role.last.keys.join(", ")}"
+    end
+  end
+
   desc "Generates `config/typus_roles.yml`"
   task :configure_roles do
     begin
