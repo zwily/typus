@@ -134,14 +134,6 @@ namespace :typus do
         typus.puts "#"
         typus.puts "# ------------------------------------------------"
         typus.puts ""
-        typus.puts "TypusUser:"
-        typus.puts "  fields:"
-        typus.puts "    list: first_name, last_name, email, roles, status"
-        typus.puts "    form: first_name, last_name, roles, email, password, password_confirmation"
-        typus.puts "  filters: status"
-        typus.puts "  search: first_name, last_name, email, roles"
-        typus.puts "  application: Typus Admin"
-        typus.puts "  description: System Users Administration"
         typus.close
         models.each do |model|
           class_name = eval model.sub(/\.rb$/,'').camelize
