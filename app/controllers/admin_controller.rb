@@ -14,6 +14,11 @@ class AdminController < ApplicationController
 
   before_filter :check_ownership, :only => [ :destroy ]
 
+  before_filter :can_create?, :only => [ :new, :create ]
+  before_filter :can_read?, :only => [ :show ]
+  before_filter :can_update?, :only => [ :edit, :update, :position, :toggle ]
+  before_filter :can_destroy?, :only => [ :destroy ]
+
   before_filter :set_order, :only => [ :index ]
 
   before_filter :fields, :only => [ :index ]
