@@ -47,9 +47,13 @@ module Typus
       config_file = "#{File.dirname(__FILE__)}/../../test/typus_roles.yml"
       @@roles = YAML.load_file(config_file)
     else
-      typus_roles = "#{RAILS_ROOT}/config/typus_roles.yml"
-      if File.exists?(typus_roles)
-        @@roles = YAML.load_file(typus_roles)
+      @@roles = {}
+      Dir['vendor/plugins/*/config/typus_roles.yml'].each do |role|
+        @@roles = @@roles.merge(YAML.load_file("#{RAILS_ROOT}/#{role}"))
+      end
+      typus_roles_file = "#{RAILS_ROOT}/config/typus_roles.yml"
+      if File.exists?(typus_roles_file)
+        @@roles = @@roles.merge(YAML.load_file(typus_roles_file))
       end
     end
 
