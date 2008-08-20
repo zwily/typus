@@ -201,23 +201,20 @@ You can customize the interface by placing on <tt>views/typus</tt> the following
 
 == Roles
 
-Typus has a simple Roles support. By default only two roles are defined, but 
-you can add as many as you want.
-
-    Typus::Configuration.options[:roles] = %w( admin editor )
-
-In <tt>config/typus_roles.yml</tt> you can define the allowed actions per role.
+Typus has roles support. You can can add as many roles as you want. They are
+defined in <tt>config/typus_roles.yml</tt> and you can can define the allowed 
+actions per role.
 
     admin:
-      TypusUser: rw
-      Post: rw
-      Category: rw
+      TypusUser: crud
+      Post: crud
+      Category: crud
 
     editor:
-      Post: rw
-      Category: ro
+      Post: cu
+      Category: cu
 
-NOTE: This is an initial implementation so it can change in the future.
+Note: CRUD stands for Create, Read, Update and Delete.
 
 == Acknowledgments
 
