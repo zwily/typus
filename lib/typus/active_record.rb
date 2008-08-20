@@ -52,7 +52,6 @@ module Typus
         ##
         # Some custom field_type depending on the attribute name
         case f
-          when 'id':              @field_type = 'index'
           when 'parent_id':       @field_type = 'tree'
           when /_id/:             @field_type = 'collection'
           when /file_name/:       @field_type = 'file'
@@ -83,8 +82,9 @@ module Typus
     #
     def typus_filters
       available_fields = self.model_fields
+      return [] unless Typus::Configuration.config["#{self.name}"]["filters"]
       fields = Typus::Configuration.config["#{self.name}"]["filters"].split(", ")
-      fields_with_type = Array.new
+      fields_with_type = []
       fields.each do |f|
         available_fields.each do |af|
           @field_type = af[1] if af[0] == f
@@ -92,8 +92,6 @@ module Typus
         fields_with_type << [ f, @field_type ]
       end
       return fields_with_type
-    rescue
-      []
     end
 
     ##
@@ -129,6 +127,7 @@ module Typus
     end
 
     def typus_order_by
+      return "id ASC" unless Typus::Configuration.config["#{self.name}"]["order_by"]
       fields = Typus::Configuration.config["#{self.name}"]["order_by"].split(", ")
       order = []
       fields.each do |field|
@@ -139,8 +138,6 @@ module Typus
         end
       end
       return order.join(", ")
-    rescue
-      "id ASC"
     end
 
     ##
@@ -235,7 +232,9 @@ module Typus
     end
 
     def typus_name
-      name rescue "#{self.class}##{id}"
+      return to_label if respond_to? :to_label
+      return name if respond_to? :name
+      "#{self.class}##{id}"
     end
 
   end

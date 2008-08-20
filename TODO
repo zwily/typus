@@ -4,6 +4,15 @@ TODO
 [ ] If RedCloth or BlueCloth is defined add message in `text` fields.
 [ ] Make actions more restful.
 [ ] Plans to release a 1.0 version ...
+[ ] Export to CSV action
+[ ] Clean typus_form
+
+[ ] List fields can be defined in model
+[ ] Link to previous and next inside the form
+[ ] Read only item if doesn't belong to the current logged user
+[ ] Define a show action for the read-only items
+[ ] Clean routing system and make it more RESTful
+[ ] Internationalize messages
 
 [ ] Generator to generate controllers ...
 [ ] Test helpers

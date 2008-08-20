@@ -77,6 +77,15 @@ admin interface.
 
 NOTE: Upload files only works if you follow <tt>Paperclip</tt> naming conventions.
 
+EXTRAS: In form fields you can add a "*" making the field read-only, this 
+field will be shown in the form but couldn't be editable. Example with 
+"created_at" and "status" fields being read-only:
+
+    fields:
+      list: name, created_at, category_id, status
+      form: name, body, *created_at, *status
+      relationship: name, category_id
+
 === External Forms
 
     relationships:

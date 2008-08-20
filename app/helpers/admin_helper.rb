@@ -190,8 +190,6 @@ module AdminHelper
             html << "#{link_to position.first, :params => params.merge(:action => 'position', :id => item.id, :go => position.last)} "
           end
           html << "</td>"
-        when "index"
-          html << "<td width=\"20\">#{link_to item.send(column[0]).to_s.rjust(6, "0"), :params => params.merge(:action => 'edit', :id => item.id)}</td>"
         else # 'string', 'integer', 'selector'
           html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:action => 'edit', :id => item.id)}</td>"
         end
@@ -230,6 +228,18 @@ module AdminHelper
     html = error_messages_for :item, :header_tag => "h3"
 
     fields.each do |field|
+
+      ##
+      # Read only attributes (attributes that begin with "*")
+      #
+      if field[0].first == "*"
+        if params[:action] != "new"
+          attribute = field[0][1..-1]
+          html << "<p><label for=\"item_#{field[0]}\">#{attribute.titleize.capitalize}</label>"
+          html << "<p>#{@item.send(attribute)}"
+        end
+        next
+      end
 
       ##
       # When the field is an asset ...
