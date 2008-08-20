@@ -183,6 +183,11 @@ namespace :typus do
 
   desc "Generate controllers"
   task :generate_controllers => :environment do
+    
+    unless File.directory?("#{RAILS_ROOT}/app/controllers/admin")
+      Dir.mkdir("#{RAILS_ROOT}/app/controllers/admin")
+    end
+
     puts "[Typus] Generation of needed controllers"
     Typus.models.each do |model|
       controller_file = "#{RAILS_ROOT}/app/controllers/admin/#{model.tableize}_controller.rb"
@@ -192,8 +197,11 @@ namespace :typus do
         controller.puts "end"
         controller.close
         puts "- Admin::#{model.pluralize}Controller successfully created."
+      else
+        puts "- Admin::#{model.pluralize}Controller already exists."
       end
     end
+
   end
 
 end
