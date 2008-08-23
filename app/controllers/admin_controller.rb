@@ -11,7 +11,6 @@ class AdminController < ApplicationController
   before_filter :find_model, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
 
   before_filter :check_permissions, :only => [ :index, :new, :create, :edit, :update, :destroy, :toggle ]
-
   before_filter :check_ownership, :only => [ :destroy ]
 
   before_filter :can_create?, :only => [ :new, :create ]
@@ -246,8 +245,8 @@ private
   # Select which template to render.
   #
   def select_template(model, template)
-    if File.exists?("#{RAILS_ROOT}/app/views/admin/#{model}/#{template}.html.erb")
-      render :template => "admin/#{model}/#{template}"
+    if File.exists?("#{RAILS_ROOT}/app/views/admin/#{model.name.tableize}/#{template}.html.erb")
+      render :template => "admin/#{model.name.tableize}/#{template}"
     else
       render :template => "admin/#{template}"
     end
