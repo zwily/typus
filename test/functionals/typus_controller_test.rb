@@ -33,4 +33,21 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to typus_login_url
   end
 
+  def test_should_render_application_dashboard_sidebar
+    # Create _dashboard_sidebar.html.erb on app/views/typus and
+    # make sure is rendered. Delete, and make sure it's not 
+    # rendered.
+    assert true
+  end
+
+  def test_should_render_application_top_dashboard
+    # Same to previous test
+    assert true
+  end
+
+  def test_should_render_application_bottom_dashboard
+    # Same to previous test
+    assert true
+  end
+
 end
