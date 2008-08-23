@@ -31,7 +31,7 @@ module Authentication
     ##
     #
     #
-    def generate_password(length=8)
+    def generate_password(length = 8)
       chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
       password = ""
       1.upto(length) { |i| password << chars[rand(chars.size - 1)] }
@@ -40,6 +40,8 @@ module Authentication
 
     ##
     # Logger user can create records?
+    #
+    #   @current_user.can_create?
     #
     def can_create?(model = @model)
       unless @current_user.models[model.to_s].include? "c"
@@ -68,6 +70,8 @@ module Authentication
     ##
     # Logged user can update records?
     #
+    #   @current_user.can_update?
+    #
     def can_update?(model = @model)
       unless @current_user.models[model.to_s].include? "u"
         flash[:notice] = "#{@current_user.roles.capitalize} cannot #{params[:action]} items."
@@ -77,6 +81,8 @@ module Authentication
 
     ##
     # Logger user can destroy records?
+    #
+    #   @current_user.can_destroy?
     #
     def can_destroy?(model = @model)
       unless @current_user.models[model.to_s].include? "d"
