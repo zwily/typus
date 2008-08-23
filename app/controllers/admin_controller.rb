@@ -227,7 +227,7 @@ private
   def check_permissions
     unless @current_user.models.include? @model.to_s or @current_user.models.include? "All"
       flash[:notice] = "You don't have permission to access this resource."
-      redirect_to typus_dashboard_url
+      redirect_to :back
     end
   end
 
