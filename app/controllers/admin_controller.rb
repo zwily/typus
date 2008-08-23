@@ -47,7 +47,7 @@ class AdminController < ApplicationController
     end
     @items = @pager.page(params[:page])
 
-    select_template(params[:controller].split("/").last.modelize, 'index')
+    select_template :index
 
   rescue Exception => error
     error_handler(error)
@@ -67,7 +67,7 @@ class AdminController < ApplicationController
 
     @item = @model.new(item_params.symbolize_keys)
 
-    select_template(params[:model], 'new')
+    select_template :new
 
   end
 
@@ -91,7 +91,7 @@ class AdminController < ApplicationController
         redirect_to :action => 'edit', :id => @item.id
       end
     else
-      select_template(params[:model], 'new')
+      select_template :new
     end
   rescue Exception => error
     error_handler(error, {:params => params.merge(:action => 'index', :id => nil)} )
@@ -102,7 +102,7 @@ class AdminController < ApplicationController
   #
   def edit
     @previous, @next = @item.previous, @item.next
-    select_template(params[:model], 'edit')
+    select_template :edit
   end
 
   ##
@@ -110,7 +110,7 @@ class AdminController < ApplicationController
   #
   def show
     @previous, @next = @item.previous, @item.next
-    select_template(params[:model], 'show')
+    select_template :show
   end
 
   ##
@@ -121,7 +121,7 @@ class AdminController < ApplicationController
       flash[:success] = "#{@model.humanize} successfully updated."
       redirect_to :action => 'edit', :id => @item.id
     else
-      select_template(params[:model], 'edit')
+      select_template :edit
     end
   end
 
@@ -244,7 +244,7 @@ private
   ##
   # Select which template to render.
   #
-  def select_template(model, template)
+  def select_template(template, model = @model)
     if File.exists?("#{RAILS_ROOT}/app/views/admin/#{model.name.tableize}/#{template}.html.erb")
       render :template => "admin/#{model.name.tableize}/#{template}"
     else
