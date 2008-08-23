@@ -1,27 +1,24 @@
 TODO
 ====
 
-[ ] If RedCloth or BlueCloth is defined add message in `text` fields.
-[ ] Make actions more restful.
+[ ] If RedCloth or BlueCloth is defined add message in `text` fields
+[ ] Make actions more restful
 [ ] Plans to release a 1.0 version ...
 [ ] Export to CSV action
 [ ] Clean typus_form
-
 [ ] List fields can be defined in model
 [ ] Link to previous and next inside the form
 [ ] Read only item if doesn't belong to the current logged user
 [ ] Define a show action for the read-only items
-[ ] Clean routing system and make it more RESTful
 [ ] Internationalize messages
-
-[ ] Check admin folder exists before generating controllers
-
-[ ] Generator to generate controllers ...
 [ ] Test helpers
 
 DONE
 ====
 
+[X] Clean routing system and make it more RESTful (20080814)
+[X] Generator to generate controllers ... (20080820)
+[X] Check admin folder exists before generating controllers (20080820)
 [X] Show arrows on table header to display order of the list. (20080707)
 [X] Sort applications by name ASC. (20080707)
 [X] Log activity ... and be able to recover old data. (20080704)
