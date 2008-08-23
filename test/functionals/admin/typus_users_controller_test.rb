@@ -18,11 +18,12 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
   end
 
   def test_should_not_allow_editor_to_add_users
+    @request.env["HTTP_REFERER"] = "/admin"
     user = typus_users(:user)
     @request.session[:typus] = user.id
     get :new
     assert_response :redirect
-    assert_redirected_to typus_dashboard_url
+    assert_redirected_to "/admin"
     assert flash[:notice]
     assert_match /You don't have permission to access this resource./, flash[:notice]
   end
