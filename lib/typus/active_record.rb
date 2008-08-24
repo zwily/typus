@@ -9,11 +9,11 @@ module Typus
     ##
     # FIXME: Currently not doing what we want to ...
     #
-    def list_fields(*options)
-      fields = []
-      options.each { |o| fields << o if o.is_a? Symbol }
-      return fields
-    end
+    # def list_fields(*options)
+    #   fields = []
+    #   options.each { |o| fields << o if o.is_a? Symbol }
+    #   return fields
+    # end
 
     ##
     # Return model fields as an array
