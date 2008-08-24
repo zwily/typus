@@ -86,6 +86,14 @@ module Typus
       require 'typus/object'
     end
 
+    def install
+    end
+
+    def uninstall
+      puts "=> [Typus] Removing images & stylesheets."
+      %w( stylesheets images ).each { |f| File.delete(*Dir["public/#{f}/typus*"]) }
+    end
+
   end
 
 end

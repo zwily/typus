@@ -1,6 +1,3 @@
-puts "=> [Typus] Uninstalling plugin"
+require "#{File.dirname(__FILE__)}/lib/typus"
 
-%w( stylesheets images ).each do |f|
-  puts "=>   Removing #{f.capitalize}"
-  system "rm #{File.dirname(__FILE__)}/../../../public/#{f}/typus*"
-end
+Typus.uninstall
