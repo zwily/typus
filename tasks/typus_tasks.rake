@@ -1,7 +1,3 @@
-task :typus do
-  system "rake -T typus --silent"
-end
-
 namespace :typus do
 
   desc "Create TypusUser `rake typus:seed email=foo@bar.com`"
