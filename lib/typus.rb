@@ -100,7 +100,7 @@ module Typus
       end
       self.models.each do |model|
         controller_file = "#{RAILS_ROOT}/app/controllers/admin/#{model.tableize}_controller.rb"
-        if !File.exists? (controller_file)
+        if !File.exists?(controller_file)
           controller = File.open(controller_file, "w+")
           controller.puts "class Admin::#{model.pluralize}Controller < AdminController"
           controller.puts "end"
