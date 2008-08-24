@@ -55,7 +55,7 @@ namespace :typus do
     gems = [ "paginator" ]
 
     gems.each do |gem|
-      puts "=> [Typus] Installing #{gem}."
+      puts "=> Installing #{gem}."
       # If command fails, please, notify user!
       if !(system "sudo gem install #{gem} --no-rdoc --no-ri")
         puts "Installing gem #{gem} failed: Error code returned was #{$?}."
@@ -97,9 +97,9 @@ namespace :typus do
           end
         end
         typus.close
-        puts "=> [Typus] `config/typus_roles.yml` successfully created."
+        puts "=> `config/typus_roles.yml` successfully created."
       else
-        puts "=> [Typus] `config/typus_roles.yml` file already exists."
+        puts "=> `config/typus_roles.yml` file already exists."
       end
     rescue Exception => e
       puts "#{e.message}"
