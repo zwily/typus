@@ -94,6 +94,24 @@ module Typus
       %w( stylesheets images ).each { |f| File.delete(*Dir["public/#{f}/typus*"]) }
     end
 
+    def generate_controllers
+      unless File.directory?("#{RAILS_ROOT}/app/controllers/admin")
+        Dir.mkdir("#{RAILS_ROOT}/app/controllers/admin")
+      end
+      self.models.each do |model|
+        controller_file = "#{RAILS_ROOT}/app/controllers/admin/#{model.tableize}_controller.rb"
+        if !File.exists? (controller_file)
+          controller = File.open(controller_file, "w+")
+          controller.puts "class Admin::#{model.pluralize}Controller < AdminController"
+          controller.puts "end"
+          controller.close
+          puts "- Admin::#{model.pluralize}Controller successfully created."
+        else
+          puts "- Admin::#{model.pluralize}Controller already exists."
+        end
+      end
+    end
+
   end
 
 end
