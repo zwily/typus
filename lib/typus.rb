@@ -56,6 +56,7 @@ module Typus
       enable_authentication
       enable_patches if Rails.vendor_rails?
       enable_object
+      enable_pagination
     end
 
     def enable_configuration
@@ -84,6 +85,10 @@ module Typus
 
     def enable_object
       require 'typus/object'
+    end
+
+    def enable_pagination
+      require 'vendor/paginator'
     end
 
     def install

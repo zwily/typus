@@ -33,9 +33,6 @@ namespace :typus do
   desc "Install plugin dependencies"
   task :dependencies do
 
-    ##
-    # Plugins
-    #
     plugins = [ "git://github.com/thoughtbot/paperclip.git", 
                 "git://github.com/rails/acts_as_list.git", 
                 "git://github.com/rails/acts_as_tree.git" ]
@@ -43,19 +40,6 @@ namespace :typus do
     plugins.each do |plugin_url|
       puts "=> Installing #{plugin_url}."
       system "script/plugin install #{plugin_url}"
-    end
-
-    ##
-    # Gems
-    #
-    gems = [ "paginator" ]
-
-    gems.each do |gem|
-      puts "=> Installing #{gem}."
-      # If command fails, please, notify user!
-      if !(system "sudo gem install #{gem} --no-rdoc --no-ri")
-        puts "Installing gem #{gem} failed: Error code returned was #{$?}."
-      end
     end
 
   end
