@@ -24,12 +24,12 @@ namespace :typus do
                                  :roles => 'admin', 
                                  :status => true)
       if typus_user.save
-        puts "=> [Typus] Your new password is `#{password}`."
+        puts "=> Your new password is `#{password}`."
       else
-        puts "=> [Typus] Please, provide a valid email. (rake typus:seed email=foo@bar.com)"
+        puts "=> Please, provide a valid email. (rake typus:seed email=foo@bar.com)"
       end
     rescue
-      puts "=> [Typus] Run `script/generate typus_migration` to create required tables."
+      puts "=> Run `script/generate typus_migration` to create required tables."
     end
 
   end
@@ -45,7 +45,7 @@ namespace :typus do
                 "git://github.com/rails/acts_as_tree.git" ]
 
     plugins.each do |plugin_url|
-      puts "=> [Typus] Installing #{plugin_url}."
+      puts "=> Installing #{plugin_url}."
       system "script/plugin install #{plugin_url}"
     end
 
@@ -66,7 +66,7 @@ namespace :typus do
 
   desc "Copy Typus images and stylesheets"
   task :assets do
-    puts "=> [Typus] Copying images & stylesheets."
+    puts "=> Copying images & stylesheets."
     %w( images stylesheets ).each do |folder|
       system "cp #{RAILS_ROOT}/vendor/plugins/typus/public/#{folder}/* #{RAILS_ROOT}/public/#{folder}/"
     end
@@ -74,9 +74,8 @@ namespace :typus do
 
   desc "List current roles"
   task :roles => :environment do
-    puts "[Typus Roles]"
     Typus::Configuration.roles.each do |role|
-      puts "- #{role.first.capitalize} has access to #{role.last.keys.join(", ")}"
+      puts "=> #{role.first.capitalize} has access to #{role.last.keys.join(", ")}."
     end
   end
 
@@ -169,11 +168,11 @@ namespace :typus do
             typus.puts "  application: Untitled"
             typus.puts "  description:"
             typus.close
-            puts "=> [Typus] #{class_name} added to `config/typus.yml`"
+            puts "=> #{class_name} added to `config/typus.yml`"
           end
         end
       else
-        puts "=> [Typus] Configuration file already exists."
+        puts "=> Configuration file already exists."
       end
     rescue Exception => e
       puts "#{e.message}"

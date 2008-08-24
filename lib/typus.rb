@@ -90,7 +90,7 @@ module Typus
     end
 
     def uninstall
-      puts "=> [Typus] Removing images & stylesheets."
+      puts "=> Removing images & stylesheets."
       %w( stylesheets images ).each { |f| File.delete(*Dir["public/#{f}/typus*"]) }
     end
 
@@ -105,9 +105,9 @@ module Typus
           controller.puts "class Admin::#{model.pluralize}Controller < AdminController"
           controller.puts "end"
           controller.close
-          puts "- Admin::#{model.pluralize}Controller successfully created."
+          puts "=> Admin::#{model.pluralize}Controller successfully created."
         else
-          puts "- Admin::#{model.pluralize}Controller already exists."
+          puts "=> Admin::#{model.pluralize}Controller already exists."
         end
       end
     end
