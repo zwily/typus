@@ -7,6 +7,15 @@ module Typus
   module ClassMethods
 
     ##
+    # FIXME: Currently not doing what we want to ...
+    #
+    def list_fields(*options)
+      fields = []
+      options.each { |o| fields << o if o.is_a? Symbol }
+      return fields
+    end
+
+    ##
     # Return model fields as an array
     #
     def model_fields
@@ -32,14 +41,27 @@ module Typus
     ##
     # Form and list fields
     #
-    # Someday we could use something like:
-    #   typus_list_fields :name, :created_at, :updated_at, :status
-    #   typus_form_fields :name, :body, :excerpt, :created_at
+    #   class Post < ActiveRecord::Base
+    #
+    #     def self.list_fields
+    #       [ :title, :category_id, :status ]
+    #     end
+    #
+    #     def self.form_fields
+    #       [ :title, :body, :excerpt, :category_id, :status ]
+    #     end
+    #
+    #   end
     #
     def typus_fields_for(filter)
 
       fields_with_type = []
-      fields = Typus::Configuration.config["#{self.name}"]["fields"][filter].split(", ")
+
+      begin
+        fields = self.send("#{filter}_fields").map { |a| a.to_s }
+      rescue
+        fields = Typus::Configuration.config["#{self.name}"]["fields"][filter].split(", ")
+      end
 
       fields.each do |f|
 
@@ -77,13 +99,22 @@ module Typus
     ##
     # Typus sidebar filters.
     #
-    # Someday we could use something like:
-    #   typus_filters :created_at, :status
+    #   class Post < ActiveRecord::Base
+    #
+    #     def self.filters
+    #       [ :created_at, :status ]
+    #     end
+    #
+    #   end
     #
     def typus_filters
       available_fields = self.model_fields
-      return [] unless Typus::Configuration.config["#{self.name}"]["filters"]
-      fields = Typus::Configuration.config["#{self.name}"]["filters"].split(", ")
+      begin
+        fields = self.filters.map { |a| a.to_s }
+      rescue
+        return [] unless Typus::Configuration.config["#{self.name}"]["filters"]
+        fields = Typus::Configuration.config["#{self.name}"]["filters"].split(", ")
+      end
       fields_with_type = []
       fields.each do |f|
         available_fields.each do |af|
@@ -97,21 +128,33 @@ module Typus
     ##
     #  Extended actions for this model on Typus.
     #
-    # Someday we could use something like:
-    #     typus_list_actions :action_one
-    #     typus_form_actions :action_two, :action_three
+    #    class Post < ActiveRecord::Base
+    #
+    #      def self.list_actions
+    #        [ :rebuild_all ]
+    #      end
+    #
+    #      def self.form_actions
+    #        [ :rebuild, :notify ]
+    #      end
+    #
+    #    end
     #
     def typus_actions_for(filter)
-      Typus::Configuration.config["#{self.name}"]["actions"][filter].split(", ") rescue []
+      begin
+        self.send("#{filter}_actions").map { |a| a.to_s }
+      rescue
+        Typus::Configuration.config["#{self.name}"]["actions"][filter].split(", ") rescue []
+      end
     end
 
     ##
     # Used for +order_by+, +search+ and more ...
     #
     # Someday we could use something like:
+    #
     #     typus_search :title, :details
     #     typus_related :tags, :categories
-    #     typus_order_by :title, :created_at
     #
     # Default order is ASC, except for datetime items that is DESC.
     #
