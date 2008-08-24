@@ -80,4 +80,22 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert flash[:success]
   end
 
+  def test_should_render_posts_sidebar_on_index_show_and_edit
+    # FIXME
+    # Create _posts_sidebar.html.erb on app/views/typus and
+    # make sure is rendered. Delete, and make sure it's not 
+    # rendered.
+    assert true
+  end
+
+  def test_should_render_posts_top_on_index_show_and_edit
+    # Same to previous test
+    assert true
+  end
+
+  def test_should_render_posts_bottom_on_index_show_and_edit
+    # Same to previous test
+    assert true
+  end
+
 end

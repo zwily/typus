@@ -93,4 +93,9 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_redirected_to :action => :index
   end
 
+  def test_should_redirect_to_typus_dashboard_if_user_does_not_have_privileges
+    # This was defined on the commit ffefa3d
+    assert true
+  end
+
 end
