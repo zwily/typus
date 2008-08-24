@@ -229,6 +229,8 @@ private
       flash[:notice] = "You don't have permission to access this resource."
       redirect_to :back
     end
+  rescue
+    redirect_to typus_dashboard_url
   end
 
   ##
