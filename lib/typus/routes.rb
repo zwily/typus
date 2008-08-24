@@ -12,15 +12,13 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.namespace :admin do |admin|
-
     Typus.models.each do |m|
-      admin.resources m.tableize, :collection => { :csv => :get }, 
-                                  :member => { :position => :any, 
-                                               :toggle => :any, 
-                                               :relate => :any, 
-                                               :unrelate => :any }
+      collection = { :csv => :any }
+      m.constantize.typus_actions_for('list').each { |a| collection[a] = :any }
+      member = { :position => :any, :toggle => :any, :relate => :any, :unrelate => :any }
+      m.constantize.typus_actions_for('form').each { |a| member[a] = :any }
+      admin.resources m.tableize, :collection => collection, :member => member
     end
-
   end
 
 end
