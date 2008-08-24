@@ -6,8 +6,6 @@ TODO
 [ ] Export to CSV action
 [ ] Clean typus_form
 [ ] List fields can be defined in model
-[ ] Link to previous and next inside the form
-[ ] Read only item if doesn't belong to the current logged user
 [ ] Define a show action for the read-only items
 [ ] Internationalize messages
 [ ] Test helpers
@@ -15,6 +13,10 @@ TODO
 DONE
 ====
 
+[X] Link to previous and next inside the form (20080824)
+    - Won't move code from sidebar to form.
+[X] Read only item if doesn't belong to the current logged user (20080824)
+    - This has been implemented with the CRUD permissions system.
 [X] Clean routing system and make it more RESTful (20080814)
 [X] Generator to generate controllers ... (20080820)
 [X] Check admin folder exists before generating controllers (20080820)
