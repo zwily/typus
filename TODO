@@ -2,7 +2,6 @@ TODO
 ====
 
 [ ] If RedCloth or BlueCloth is defined add message in `text` fields
-[ ] Make actions more restful
 [ ] Plans to release a 1.0 version ...
 [ ] Export to CSV action
 [ ] Clean typus_form
