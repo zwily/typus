@@ -16,8 +16,12 @@ class TypusUser < ActiveRecord::Base
   before_create :generate_token
   before_save :encrypt_password
 
-  def full_name
+  def full_name_with_role
     "#{first_name} #{last_name} (#{roles})"
+  end
+
+  def full_name
+    "#{first_name} #{last_name}"
   end
 
   def reset_password(password, host)
