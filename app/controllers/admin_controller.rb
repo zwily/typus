@@ -45,9 +45,13 @@ class AdminController < ApplicationController
                   :limit => per_page, 
                   :offset => offset)
     end
+
     @items = @pager.page(params[:page])
 
-    select_template :index
+    respond_to do |format|
+      format.html { select_template :index }
+      format.csv { generate_csv }
+    end
 
   rescue Exception => error
     error_handler(error)
@@ -262,6 +266,10 @@ private
       flash[:error] = error.message.titleize
       redirect_to redirection
     end
+  end
+
+  def generate_csv
+    render :text => "generate_csv"
   end
 
 end
