@@ -11,7 +11,7 @@ class TypusUser < ActiveRecord::Base
 
   validates_inclusion_of :roles, 
                          :in => Typus::Configuration.roles.keys, 
-                         :message => "has to be in #{Typus::Configuration.roles.keys.join(", ")}."
+                         :message => "has to be in #{Typus::Configuration.roles.keys.reverse.join(", ")}."
 
   before_create :generate_token
   before_save :encrypt_password
