@@ -16,6 +16,16 @@ end
 %w( sha1 typus ).each { |lib| require lib }
 
 ##
+# Require FasterCSV. If not available give feedback.
+#
+
+begin
+  require 'fastercsv'
+rescue LoadError
+  puts "=> FasterCSV not available, CSV export from Typus won't work."
+end
+
+##
 # And finally we enable Typus
 #
 Typus.enable
