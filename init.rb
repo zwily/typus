@@ -7,7 +7,7 @@ ActionController::Base.append_view_path(File.join(File.dirname(__FILE__), 'app',
 # Add Typus controllers, models and helpers ...
 #
 %w( controllers models helpers ).each do |m|
-  Dependencies.load_paths << File.join(File.dirname(__FILE__), 'app', m)
+  ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), 'app', m)
 end
 
 ##
