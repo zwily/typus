@@ -58,9 +58,9 @@ module Typus
       fields_with_type = []
 
       begin
-        fields = self.send("#{filter}_fields").map { |a| a.to_s }
+        fields = self.send("#{filter.to_s}_fields").map { |a| a.to_s }
       rescue
-        fields = Typus::Configuration.config["#{self.name}"]["fields"][filter].split(", ")
+        fields = Typus::Configuration.config["#{self.name}"]["fields"][filter.to_s].split(", ")
       end
 
       fields.each do |f|
@@ -90,10 +90,8 @@ module Typus
 
       end
 
-      return fields_with_type
+      return fields_with_type rescue self.model_fields
 
-    rescue
-      self.model_fields
     end
 
     ##
