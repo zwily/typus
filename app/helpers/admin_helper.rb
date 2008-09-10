@@ -258,7 +258,7 @@ module AdminHelper
         else
           html << "<p>No Preview Available</p>"
         end
-      when /id/
+      when /_id/
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>"
       else
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>"

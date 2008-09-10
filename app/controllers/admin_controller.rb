@@ -208,16 +208,16 @@ private
   # Model +fields+
   #
   def fields
-    @fields = @model.typus_fields_for('list')
+    @fields = @model.typus_fields_for(:list)
   end
 
   ##
   # Model +form_fields+ and +form_fields_externals+
   #
   def form_fields
-    @item_fields = @model.typus_fields_for('form')
-    @item_has_many = @model.typus_relationships_for('has_many')
-    @item_has_and_belongs_to_many = @model.typus_relationships_for('has_and_belongs_to_many')
+    @item_fields = @model.typus_fields_for(:form)
+    @item_has_many = @model.typus_relationships_for(:has_many)
+    @item_has_and_belongs_to_many = @model.typus_relationships_for(:has_and_belongs_to_many)
   end
 
   ##
