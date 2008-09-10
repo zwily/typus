@@ -282,6 +282,8 @@ private
     send_data(csv_string,
              :type => 'text/csv; charset=utf-8; header=present',
              :filename => filename)
+  rescue
+    render :text => "FasterCSV is not installed."
   end
 
 end
