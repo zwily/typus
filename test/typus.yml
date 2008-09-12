@@ -11,6 +11,7 @@ Post:
   search: title
   order_by: title, -created_at
   module: Blog
+  application: Blog
 
 TypusUser:
   fields:
@@ -24,3 +25,4 @@ TypusUser:
   search: first_name, last_name, email, roles
   module: Typus
   description: System Users Administration
+  application: Typus Admin
