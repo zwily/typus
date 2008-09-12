@@ -100,22 +100,106 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert flash[:success]
   end
 
-  def test_should_render_posts_sidebar_on_index_show_and_edit
-    # FIXME
-    # Create _posts_sidebar.html.erb on app/views/typus and
-    # make sure is rendered. Delete, and make sure it's not 
-    # rendered.
-    assert true
+  def test_should_render_posts_sidebar_on_index_edit_and_show
+
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+
+    folder = "#{RAILS_ROOT}/app/views/admin/posts"
+    FileUtils.mkdir(folder) unless File.exists? folder
+
+    file = "#{RAILS_ROOT}/app/views/admin/posts/_index_sidebar.html.erb"
+    open(file, 'w+') { |f| f << "Index Sidebar" }
+    assert File.exists? file
+
+    get :index
+    assert_response :success
+    assert_match /Index Sidebar/, @response.body
+
+    file = "#{RAILS_ROOT}/app/views/admin/posts/_edit_sidebar.html.erb"
+    open(file, 'w+') { |f| f << "Edit Sidebar" }
+    assert File.exists? file
+
+    get :edit, { :id => 1 }
+    assert_response :success
+    assert_match /Edit Sidebar/, @response.body
+
+    file = "#{RAILS_ROOT}/app/views/admin/posts/_show_sidebar.html.erb"
+    open(file, 'w+') { |f| f << "Show Sidebar" }
+    assert File.exists? file
+
+    get :show, { :id => 1 }
+    assert_response :success
+    assert_match /Show Sidebar/, @response.body
+
   end
 
   def test_should_render_posts_top_on_index_show_and_edit
-    # Same to previous test
-    assert true
+
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+
+    folder = "#{RAILS_ROOT}/app/views/admin/posts"
+    FileUtils.mkdir(folder) unless File.exists? folder
+
+    file = "#{RAILS_ROOT}/app/views/admin/posts/_index_top.html.erb"
+    open(file, 'w+') { |f| f << "Index Top" }
+    assert File.exists? file
+
+    get :index
+    assert_response :success
+    assert_match /Index Top/, @response.body
+
+    file = "#{RAILS_ROOT}/app/views/admin/posts/_edit_top.html.erb"
+    open(file, 'w+') { |f| f << "Edit Top" }
+    assert File.exists? file
+
+    get :edit, { :id => 1 }
+    assert_response :success
+    assert_match /Edit Top/, @response.body
+
+    file = "#{RAILS_ROOT}/app/views/admin/posts/_show_top.html.erb"
+    open(file, 'w+') { |f| f << "Show Top" }
+    assert File.exists? file
+
+    get :show, { :id => 1 }
+    assert_response :success
+    assert_match /Show Top/, @response.body
+
   end
 
   def test_should_render_posts_bottom_on_index_show_and_edit
-    # Same to previous test
-    assert true
+
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+
+    folder = "#{RAILS_ROOT}/app/views/admin/posts"
+    FileUtils.mkdir(folder) unless File.exists? folder
+
+    file = "#{RAILS_ROOT}/app/views/admin/posts/_index_bottom.html.erb"
+    open(file, 'w+') { |f| f << "Index Bottom" }
+    assert File.exists? file
+
+    get :index
+    assert_response :success
+    assert_match /Index Bottom/, @response.body
+
+    file = "#{RAILS_ROOT}/app/views/admin/posts/_edit_bottom.html.erb"
+    open(file, 'w+') { |f| f << "Edit Bottom" }
+    assert File.exists? file
+
+    get :edit, { :id => 1 }
+    assert_response :success
+    assert_match /Edit Bottom/, @response.body
+
+    file = "#{RAILS_ROOT}/app/views/admin/posts/_show_bottom.html.erb"
+    open(file, 'w+') { |f| f << "Show Bottom" }
+    assert File.exists? file
+
+    get :show, { :id => 1 }
+    assert_response :success
+    assert_match /Show Bottom/, @response.body
+
   end
 
 end

@@ -69,7 +69,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :success
     assert_match /Dashboard Top/, @response.body
 
-    File.delete(file)
+    # File.delete(file)
 
   end
 
@@ -86,7 +86,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :success
     assert_match /Dashboard Bottom/, @response.body
 
-    File.delete(file)
+    # File.delete(file)
 
   end
 
