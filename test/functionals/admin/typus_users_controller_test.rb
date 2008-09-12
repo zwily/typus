@@ -19,7 +19,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_editor_to_add_users
     @request.env["HTTP_REFERER"] = "/admin"
-    user = typus_users(:user)
+    user = typus_users(:editor)
     @request.session[:typus] = user.id
     get :new
     assert_response :redirect

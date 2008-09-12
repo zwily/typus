@@ -10,7 +10,7 @@ admin:
   salt: <%= "--#{time}--admin@typus.org--" %>
   crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--admin@typus.org----#{12345678}") %>
 
-user:
+editor:
   id: 2
   email: user@typus.org
   first_name: Typus

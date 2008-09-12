@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../../test_helper'
 class Admin::CategoriesControllerTest < ActionController::TestCase
 
   def setup
-    user = typus_users(:user)
+    user = typus_users(:editor)
     @request.session[:typus] = user.id
     @request.env["HTTP_REFERER"] = "/admin/categories"
   end
@@ -56,17 +56,14 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_equal third_category.position, 1
   end
 
-=begin
-
   def test_should_allow_admin_to_add_a_category
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
-    category = categories(:first)
-    get :new
-    assert_response :success
+    assert admin.can_create? Category
+    # category = categories(:first)
+    # get :new
+    # assert_response :success
   end
-
-=end
 
   def test_should_not_allow_designer_to_add_a_category
     designer = typus_users(:designer)
