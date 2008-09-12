@@ -50,6 +50,20 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to typus_login_url
   end
 
+  def test_should_render_dashboard
+
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+
+    Typus::Configuration.options[:app_name] = "Typus Admin for the masses"
+
+    get :dashboard
+    assert_response :success
+    assert_template 'dashboard'
+    assert_match /Typus Admin for the masses/, @response.body
+
+  end
+
   def test_should_render_application_dashboard_sidebar
 
     file = "#{RAILS_ROOT}/app/views/typus/_dashboard_sidebar.html.erb"
