@@ -136,7 +136,11 @@ class AdminController < ApplicationController
   def update
     if @item.update_attributes(params[:item])
       flash[:success] = "#{@model.humanize} successfully updated."
-      redirect_to :action => 'edit', :id => @item.id
+      if Typus::Configuration.options[:edit_after_create]
+        redirect_to :action => 'edit', :id => @item.id
+      else
+        redirect_to :action => 'index'
+      end
     else
       select_template :edit
     end
