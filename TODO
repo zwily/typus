@@ -1,12 +1,15 @@
 TODO
 ====
 
-[ ] If RedCloth or BlueCloth is defined add message in `text` fields
-[ ] Plans to release a 1.0 version ...
-[ ] Clean typus_form
-[ ] Define a show action for the read-only items
-[ ] Internationalize messages
-[ ] Test helpers
+[ ] Clean typus_form.
+[ ] Define a show action for the read-only items.
+[ ] Internationalize messages.
+[ ] Test helpers.
+[ ] Selectors for options. (For example roles)
+[ ] Dont show actions the user can not perform.
+[ ] Take care of the params that are passed between actions.
+[ ] Create sample data for posts.
+[ ] Better search.
 
 ON IT
 =====
