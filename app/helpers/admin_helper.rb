@@ -11,9 +11,11 @@ module AdminHelper
     #
     case params[:action]
     when 'index', 'edit', 'update'
-      html << "<ul>"
-      html << "<li>#{link_to "Add #{@model.name.titleize.downcase}", :action => 'new'}</li>"
-      html << "</ul>"
+      if @current_user.can_create? @model
+        html << "<ul>"
+        html << "<li>#{link_to "Add #{@model.name.titleize.downcase}", :action => 'new'}</li>"
+        html << "</ul>"
+      end
     end
     
     ##
@@ -46,12 +48,15 @@ module AdminHelper
 
   def more_actions
     html = ""
-    filter = case params[:action]
-               when 'index' then 'list'
-               when 'edit' then 'form'
-             end
-    @model.typus_actions_for(filter).each do |a|
-      html << "<li>#{link_to a.titleize.capitalize, :params => params.merge(:controller => "typus/#{params[:model]}", :model => params[:model], :action => a, :id => params[:id]) }</li>"
+    case params[:action]
+    when 'index'
+      @model.typus_actions_for(:list).each do |a|
+        html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.to_s.tableize}_url") }</li>"
+      end
+    when 'edit'
+      @model.typus_actions_for(:form).each do |a|
+        html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.to_s.tableize.singularize}_url") }</li>"
+      end
     end
     html = "<ul>#{html}</ul>" if html
   end
@@ -241,14 +246,14 @@ module AdminHelper
         attribute = field[0].split("_file_name").first
         case @item.send("#{attribute}_content_type")
         when /image/
-          html << "<p>#{link_to image_tag(@item.send(attribute).url(:thumb)), @item.send(attribute).url, :popup => ['Sanoke', 'height=461,width=692'], :style => "border: 1px solid #D3D3D3;"}</p>"
+          html << "<p>#{link_to image_tag(@item.send(attribute).url(:thumb)), @item.send(attribute).url, :popup => ['Sanoke', 'height=461,width=692'], :style => "border: 1px solid #D3D3D3;"}</p>\n"
         else
-          html << "<p>No Preview Available</p>"
+          html << "<p>No Preview Available</p>\n"
         end
       when /_id/
-        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>"
+        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>\n"
       else
-        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>"
+        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>\n"
       end
 
       ##
@@ -296,7 +301,7 @@ module AdminHelper
       else
         html << "#{text_field :item, field[0], :class => 'title'}"
       end
-      html << "</p>"
+      html << "</p>\n"
     end
     return html
 #  rescue Exception => error
