@@ -24,7 +24,8 @@ class AdminController < ApplicationController
   before_filter :form_fields, :only => [ :new, :edit, :create, :update ]
 
   ##
-  # Index
+  # This is the main index of the model. With the filters, conditions 
+  # and more. You can get HTML, CSV and XML listings.
   #
   def index
 
@@ -48,9 +49,15 @@ class AdminController < ApplicationController
 
     @items = @pager.page(params[:page])
 
+    ##
+    # Respond with HTML, CSV and XML versions. This feature is only 
+    # available on the index as is where we usually need those file 
+    # versions.
+    #
     respond_to do |format|
       format.html { select_template :index }
       format.csv { generate_csv }
+      format.xml  { render :xml => @items.items }
     end
 
   rescue Exception => error
@@ -76,7 +83,9 @@ class AdminController < ApplicationController
   end
 
   ##
-  # Create an item.
+  # Create new records. There's an special case when we create a 
+  # record from another record. In this case, after the record is 
+  # created we create also the relationship between these models. 
   #
   def create
     @item = @model.new(params[:item])
@@ -150,11 +159,17 @@ class AdminController < ApplicationController
   end
 
   ##
-  # Change item position.
+  # Change item position. This only works if acts_as_list is 
+  # installed. We can then move items:
+  #
+  #   params[:go] = 'move_to_top'
+  #   params[:go] = 'move_higher'
+  #   params[:go] = 'move_lower'
+  #   params[:go] = 'move_to_bottom'
   #
   def position
     @item.send(params[:go])
-    flash[:success] = "Position changed."
+    flash[:success] = "Record moved #{params[:go].gsub(/move_/, '').humanize.downcase}."
     redirect_to :back
   end
 

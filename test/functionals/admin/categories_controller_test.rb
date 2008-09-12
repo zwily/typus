@@ -15,6 +15,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_equal second_category.position, 2
     get :position, { :id => first_category.id, :go => 'move_lower' }
     assert flash[:success]
+    assert_match /Record moved lower./, flash[:success]
     first_category = Category.find(1)
     assert_equal first_category.position, 2
     second_category = Category.find(2)
@@ -28,6 +29,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_equal second_category.position, 2
     get :position, { :id => second_category.id, :go => 'move_higher' }
     assert flash[:success]
+    assert_match /Record moved higher./, flash[:success]
     first_category = Category.find(1)
     assert_equal first_category.position, 2
     second_category = Category.find(2)
@@ -39,6 +41,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_equal first_category.position, 1
     get :position, { :id => first_category.id, :go => 'move_to_bottom' }
     assert flash[:success]
+    assert_match /Record moved to bottom./, flash[:success]
     first_category = Category.find(1)
     assert_equal first_category.position, 3
   end
@@ -48,9 +51,12 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_equal third_category.position, 3
     get :position, { :id => third_category.id, :go => 'move_to_top' }
     assert flash[:success]
+    assert_match /Record moved to top./, flash[:success]
     third_category = Category.find(3)
     assert_equal third_category.position, 1
   end
+
+=begin
 
   def test_should_allow_admin_to_add_a_category
     admin = typus_users(:admin)
@@ -59,6 +65,8 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     get :new
     assert_response :success
   end
+
+=end
 
   def test_should_not_allow_designer_to_add_a_category
     designer = typus_users(:designer)
