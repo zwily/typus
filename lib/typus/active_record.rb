@@ -7,15 +7,6 @@ module Typus
   module ClassMethods
 
     ##
-    # FIXME: Currently not doing what we want to ...
-    #
-    # def list_fields(*options)
-    #   fields = []
-    #   options.each { |o| fields << o if o.is_a? Symbol }
-    #   return fields
-    # end
-
-    ##
     # Return model fields as an array
     #
     def model_fields
@@ -90,7 +81,7 @@ module Typus
 
       end
 
-      return fields_with_type rescue self.model_fields
+      return fields_with_type # rescue self.model_fields
 
     end
 
@@ -266,12 +257,15 @@ module Typus
     end
 
     ##
-    # This is used by acts_as_tree
+    # Used by acts_as_tree to detect children.
     #
     def has_children?
       children.size > 0
     end
 
+    ##
+    #
+    #
     def typus_name
       return to_label if respond_to? :to_label
       return name if respond_to? :name
