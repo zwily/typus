@@ -2,6 +2,12 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class TypusControllerTest < ActionController::TestCase
 
+  def setup
+    @controller = TypusController.new
+    @request = ActionController::TestRequest.new
+    @response = ActionController::TestResponse.new
+  end
+
   def test_should_redirect_to_login
     get :dashboard
     assert_response :redirect
@@ -34,20 +40,54 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_render_application_dashboard_sidebar
-    # Create _dashboard_sidebar.html.erb on app/views/typus and
-    # make sure is rendered. Delete, and make sure it's not 
-    # rendered.
-    assert true
+
+    file = "#{RAILS_ROOT}/app/views/typus/_dashboard_sidebar.html.erb"
+    open(file, 'w') { |f| f << "Dashboard Sidebar" }
+    assert File.exists? file
+
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+
+    get :dashboard
+    assert_response :success
+    assert_match /Dashboard Sidebar/, @response.body
+
+    File.delete(file)
+
   end
 
-  def test_should_render_application_top_dashboard
-    # Same to previous test
-    assert true
+  def test_should_render_application_dashboard_top
+
+    file = "#{RAILS_ROOT}/app/views/typus/_dashboard_top.html.erb"
+    open(file, 'w') { |f| f << "Dashboard Top" }
+    assert File.exists? file
+
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+
+    get :dashboard
+    assert_response :success
+    assert_match /Dashboard Top/, @response.body
+
+    File.delete(file)
+
   end
 
-  def test_should_render_application_bottom_dashboard
-    # Same to previous test
-    assert true
+  def test_should_render_application_dashboard_bottom
+
+    file = "#{RAILS_ROOT}/app/views/typus/_dashboard_bottom.html.erb"
+    open(file, 'w') { |f| f << "Dashboard Bottom" }
+    assert File.exists? file
+
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+
+    get :dashboard
+    assert_response :success
+    assert_match /Dashboard Bottom/, @response.body
+
+    File.delete(file)
+
   end
 
 end
