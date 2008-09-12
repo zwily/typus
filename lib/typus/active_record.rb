@@ -81,7 +81,7 @@ module Typus
 
       end
 
-      return fields_with_type # rescue self.model_fields
+      return fields_with_type rescue self.model_fields
 
     end
 
