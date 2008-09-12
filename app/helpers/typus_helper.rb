@@ -24,15 +24,21 @@ module TypusHelper
 
       Typus.modules(module_name).each do |model|
         if @current_user.models.include? model
-          html_module << <<-HTML
-            <tr class="#{cycle('even', 'odd')}">
-              <td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /></td>
-              <td align="right" valign="bottom"><small>#{link_to 'Add', "/admin/#{model.tableize}/new"}</small></td>
-            </tr>
-          HTML
+
+          html_module << "<tr class=\"#{cycle('even', 'odd')}\">\n"
+          html_module << "<td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /></td>\n"
+
+          html_module << "<td align=\"right\" valign=\"bottom\"><small>"
+          html_module << "#{link_to 'Add', "/admin/#{model.tableize}/new"}" if @current_user.can_create? model
+          html_module << "</small></td>\n"
+
+          html_module << "</tr>"
+
           enabled = true
+
         end
       end
+
       html_module << <<-HTML
         </table>
         <br />
