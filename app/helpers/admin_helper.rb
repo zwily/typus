@@ -2,6 +2,10 @@ module AdminHelper
 
   include TypusHelper
 
+  def typus_block(name)
+    render :partial => "admin/#{@model.to_s.tableize}/#{name}" rescue nil
+  end
+
   def actions
 
     html = ""

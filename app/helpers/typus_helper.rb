@@ -56,7 +56,7 @@ module TypusHelper
   end
 
   def typus_block(name)
-    render :partial => "typus/#{params[:model]}/#{name}" rescue nil
+    render :partial => "typus/#{name}" rescue nil
   end
 
   def display_error(error)
