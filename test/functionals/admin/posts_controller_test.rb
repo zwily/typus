@@ -1,5 +1,8 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
+##
+# Here we test the common crud actions.
+#
 class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_redirect_to_login

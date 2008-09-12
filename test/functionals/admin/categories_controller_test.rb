@@ -1,5 +1,8 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
+##
+# Here we test position action. And roles ...
+#
 class Admin::CategoriesControllerTest < ActionController::TestCase
 
   def setup
