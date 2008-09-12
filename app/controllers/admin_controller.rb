@@ -101,7 +101,11 @@ class AdminController < ApplicationController
         redirect_to params[:back_to]
       else
         flash[:success] = "#{@model.to_s.titleize} successfully created."
-        redirect_to :action => 'edit', :id => @item.id
+        if Typus::Configuration.options[:edit_after_create]
+          redirect_to :action => 'edit', :id => @item.id
+        else
+          redirect_to :action => 'index'
+        end
       end
     else
       select_template :new

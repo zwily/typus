@@ -19,7 +19,8 @@ module Typus
                   :version => '',
                   :form_rows => '10',
                   :form_columns => '10', 
-                  :toggle => true }
+                  :toggle => true, 
+                  :edit_after_create => true }
 
     mattr_reader :options
 

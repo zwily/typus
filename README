@@ -74,7 +74,15 @@ folder (<tt>config/initializers/typus.rb</tt>)
 When you have a boolean on the lists you can toggle it's status from 
 true to false and false to true. You can disable this link with:
 
-    Typus::Configuration.options[:toggle] = true
+    Typus::Configuration.options[:toggle] = false
+
+=== Redirect to index after create a record
+
+After creating a new record you'll be redirected to the record so 
+you can continue editing it. If you prefer to be redirected to the 
+main index you can owerwrite the setting.
+
+    Typus::Configuration.options[:edit_after_create] = false
 
 == Configuration file options
 
