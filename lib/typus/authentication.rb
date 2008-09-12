@@ -3,7 +3,9 @@ module Authentication
   protected
 
     ##
-    # Before doing nothing on Typus require_login
+    # Require require login checks if the user is logged on Typus, 
+    # otherwhise is sent to the login page with a :back_to param to 
+    # return where she tried to go.
     #
     def require_login
       redirect_to typus_login_url(:back_to => request.env['REQUEST_PATH']) unless session[:typus]
@@ -29,7 +31,7 @@ module Authentication
     end
 
     ##
-    #
+    # Password generation using numbers and letters.
     #
     def generate_password(length = 8)
       chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
