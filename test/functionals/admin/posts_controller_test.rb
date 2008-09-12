@@ -18,7 +18,18 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_template 'new'
   end
 
-  def test_should_create_item
+  def test_should_create_item_and_redirect_to_index
+    Typus::Configuration.options[:edit_after_create] = false
+    @request.session[:typus] = 1
+    items = Post.count
+    post :create, { :item => { :title => "This is another title", :body => "Body" } }
+    assert_response :redirect
+    assert_redirected_to :action => 'index'
+    assert_equal items + 1, Post.count
+  end
+
+  def test_should_create_item_and_redirect_to_edit
+    Typus::Configuration.options[:edit_after_create] = true
     @request.session[:typus] = 1
     items = Post.count
     post :create, { :item => { :title => "This is another title", :body => "Body" } }
@@ -41,7 +52,16 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_template 'edit'
   end
 
-  def test_should_update_item
+  def test_should_update_item_and_redirect_to_index
+    Typus::Configuration.options[:edit_after_create] = false
+    @request.session[:typus] = 1
+    post :update, { :id => 1, :title => "Updated" }
+    assert_response :redirect
+    assert_redirected_to :action => 'index'
+  end
+
+  def test_should_update_item_and_redirect_to_edit
+    Typus::Configuration.options[:edit_after_create] = true
     @request.session[:typus] = 1
     post :update, { :id => 1, :title => "Updated" }
     assert_response :redirect
