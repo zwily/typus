@@ -12,7 +12,7 @@
 
   <% if @items.count > 0 -%>
     <%= typus_table %>
-    <%= render :partial => 'pagination' if @items.prev || @items.next %>
+    <%= render :partial => 'admin/pagination' if @items.prev || @items.next %>
   <% else %>
     <div class="box" id="empty">
       <% if @model.count == 0 %>
