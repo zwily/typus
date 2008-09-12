@@ -228,7 +228,7 @@ module Typus
 
     def previous(condition = {})
 
-      if condition == {}
+      if condition.empty?
         conditions = "id < #{self.id}"
       else
         conditions = self.class.build_conditions(condition)
@@ -243,7 +243,7 @@ module Typus
 
     def next(condition = {})
 
-      if condition == {}
+      if condition.empty?
         conditions = "id > #{self.id}"
       else
         conditions = self.class.build_conditions(condition)
