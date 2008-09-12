@@ -90,12 +90,8 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to :action => 'edit', :id => editor.id
 
-#    puts TypusUser.find(editor.id).inspect
-
     assert flash[:success]
     assert_match /Typus user successfully updated./, flash[:success]
-
-    # puts Typus::Configuration.options[:root]
 
   end
 
