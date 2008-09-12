@@ -11,7 +11,8 @@ class AdminController < ApplicationController
   before_filter :find_model, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
 
   before_filter :check_permissions, :only => [ :index, :new, :create, :edit, :update, :destroy, :toggle ]
-  before_filter :check_ownership, :only => [ :destroy ]
+  before_filter :check_role, :only => [ :update ]
+  before_filter :check_ownership, :only => [ :destroy, :toggle ]
 
   before_filter :can_create?, :only => [ :new, :create ]
   before_filter :can_read?, :only => [ :show ]
@@ -261,10 +262,24 @@ private
   end
 
   ##
+  # Before updating a TypusUser we check we can update his role
+  #
+  def check_role
+    if @model == TypusUser
+      unless @current_user.roles.include? Typus::Configuration.options[:root]
+        unless @item.roles == params[:item][:roles]
+          flash[:error] = "Only %s can change roles." % Typus::Configuration.options[:root]
+          redirect_to :back
+        end
+      end
+    end
+  end
+
+  ##
   # A TypusUser cannot destroy himself
   #
   def check_ownership
-    if @model.to_s == "TypusUser" and @current_user.id == params[:id].to_i
+    if @model == TypusUser and @current_user.id == params[:id].to_i
       flash[:notice] = "You cannot remove yourself from Typus."
       redirect_to :back
     end

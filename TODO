@@ -8,8 +8,9 @@ TODO
 [ ] Selectors for options. (For example roles)
 [ ] Dont show actions the user can not perform.
 [ ] Take care of the params that are passed between actions.
-[ ] Create sample data for posts.
 [ ] Better search.
+[ ] Define a way to access things that are not resources, like 
+    Memcached, Reports and other things.
 
 ON IT
 =====
@@ -19,6 +20,9 @@ ON IT
 DONE
 ====
 
+[X] Define the "master" role, so its the unique that can move users 
+    between roles. Test it ... (20080912)
+[X] Tests, tests and tests ... (20080912)
 [X] User can disallow edit after create a new record (20080912)
 [X] User can disallow toggle records. (20080912)
 [X] Read only fields (20090912)
