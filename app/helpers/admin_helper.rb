@@ -4,7 +4,7 @@ module AdminHelper
 
   def actions
 
-    html = "<h2>Actions</h2>\n"
+    html = ""
 
     ##
     # Add
@@ -17,15 +17,15 @@ module AdminHelper
         html << "</ul>"
       end
     end
-    
+
     ##
     # Edit, update ...
     #
     case params[:action]
     when 'edit', 'update'
-      html << "<ul>"
-      html << "<li>#{link_to "Next", :params => params.merge(:action => 'edit', :id => @next.id)}</li>" if @next
-      html << "<li>#{link_to "Previous", :params => params.merge(:action => 'edit', :id => @previous.id)}</li>" if @previous
+      html << "<ul>\n"
+      html << "<li>#{link_to "Next", :params => params.merge(:action => 'edit', :id => @next.id, :search => nil)}</li>" if @next
+      html << "<li>#{link_to "Previous", :params => params.merge(:action => 'edit', :id => @previous.id, :search => nil)}</li>" if @previous
       html << "</ul>"
     end
 
@@ -37,17 +37,23 @@ module AdminHelper
       html << "<li>#{link_to "Back to list", :params => params.merge(:action => 'index')}</li>"
       html << "</ul>"
     else
-      html << more_actions
-      html << modules
-      html << submodules
+      html << more_actions if more_actions
+      html << modules if modules
+      html << submodules if submodules
     end
 
-    return html
+    unless html.empty?
+      return "<h2>Actions</h2>\n#{html}"
+    else
+      return ""
+    end
 
   end
 
   def more_actions
+
     html = ""
+
     case params[:action]
     when 'index'
       @model.typus_actions_for(:list).each do |a|
@@ -58,7 +64,9 @@ module AdminHelper
         html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.to_s.tableize.singularize}_url") }</li>"
       end
     end
-    html = "<ul>#{html}</ul>" if html
+
+    return "<ul>#{html}</ul>" unless html.empty?
+
   end
 
   def modules
@@ -209,19 +217,27 @@ module AdminHelper
       # will remove the entry, but if we inside a model we will remove the 
       # relationship between the models.
       #
-      case params[:action]
-      when 'index'
-        @perform = link_to image_tag("typus_trash.gif"), { :action => 'destroy', 
-                                                           :id => item.id }, 
-                                                           :confirm => "Remove entry?", 
-                                                           :method => :delete
-      else
-        @perform = link_to image_tag("typus_trash.gif"), { :action => "unrelate", 
-                                                           :id => params[:id], 
-                                                           :model => model, 
-                                                           :model_id => item.id }, 
-                                                           :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@model.to_s}?"
+      # Only shown is the user can destroy items.
+      #
+
+      if @current_user.can_destroy? @model
+
+        case params[:action]
+        when 'index'
+          @perform = link_to image_tag("typus_trash.gif"), { :action => 'destroy', 
+                                                             :id => item.id }, 
+                                                             :confirm => "Remove entry?", 
+                                                             :method => :delete
+        else
+          @perform = link_to image_tag("typus_trash.gif"), { :action => "unrelate", 
+                                                             :id => params[:id], 
+                                                             :model => model, 
+                                                             :model_id => item.id }, 
+                                                             :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@model.to_s}?"
+        end
+
       end
+
       html << "<td width=\"10px\">#{@perform}</td>\n</tr>"
 
     end
