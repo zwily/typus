@@ -7,7 +7,6 @@ TODO
 [ ] Define a show action for the read-only items
 [ ] Internationalize messages
 [ ] Test helpers
-[ ] Read only fields
 
 ON IT
 =====
@@ -17,6 +16,7 @@ ON IT
 DONE
 ====
 
+[X] Read only fields (20090912)
 [X] Export to CSV action (20080910)
 [X] Move Paginator to Typus so it's not required as a GEM (20080824)
 [X] Link to previous and next inside the form (20080824)

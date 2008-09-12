@@ -83,13 +83,13 @@ on the admin interface.
 
 NOTE: Upload files only works if you follow <tt>Paperclip</tt> naming conventions.
 
-In form fields you can add a "*" making the field read-only, this field 
-will be shown in the form but couldn't be editable. Example with 
-"created_at" and "status" fields being read-only:
+In form fields you can add an '*' at the end of the field making that 
+field read-only, this field will be shown in the form but won't be 
+editable. Example with the "name" attribute being read-only:
 
     fields:
       list: name, created_at, category_id, status
-      form: name, body, *created_at, *status
+      form: name*, body, created_at, status
       relationship: name, category_id
 
 You can even add "virtual fields". For example you have a model and you 

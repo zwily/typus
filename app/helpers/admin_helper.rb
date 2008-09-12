@@ -230,24 +230,7 @@ module AdminHelper
     fields.each do |field|
 
       ##
-      # Read only attributes (attributes that begin with "*")
-      #
-
-=begin
-
-      if field[0].first == "*"
-        if params[:action] != "new" # or params[:action] != "create"
-          attribute = field[0][1..-1]
-          html << "<p><label for=\"item_#{field[0]}\">#{attribute.titleize.capitalize}</label>"
-          html << "<p>#{@item.send(attribute)}"
-        end
-        next
-      end
-
-=end
-
-      ##
-      # When the field is an asset ...
+      # Labels
       #
       case field[0]
       when /file_name/
@@ -262,6 +245,18 @@ module AdminHelper
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>"
       else
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>"
+      end
+
+      ##
+      # Read only attributes are those which end with an '*'
+      #
+      if field[0].include?('*')
+        field[0].delete!('*')
+        case params[:action]
+        when 'edit'
+          html << "#{@item.send(field[0])}</p>"
+          next
+        end
       end
 
       ##
@@ -300,8 +295,8 @@ module AdminHelper
       html << "</p>"
     end
     return html
-  rescue Exception => error
-    display_error(error)
+#  rescue Exception => error
+#    display_error(error)
   end
 
   def typus_form_has_many
