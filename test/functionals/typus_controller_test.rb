@@ -52,8 +52,6 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :success
     assert_match /Dashboard Sidebar/, @response.body
 
-    File.delete(file)
-
   end
 
   def test_should_render_application_dashboard_top
@@ -69,8 +67,6 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :success
     assert_match /Dashboard Top/, @response.body
 
-    # File.delete(file)
-
   end
 
   def test_should_render_application_dashboard_bottom
@@ -85,8 +81,6 @@ class TypusControllerTest < ActionController::TestCase
     get :dashboard
     assert_response :success
     assert_match /Dashboard Bottom/, @response.body
-
-    # File.delete(file)
 
   end
 
