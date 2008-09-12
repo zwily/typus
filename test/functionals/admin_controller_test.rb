@@ -20,7 +20,7 @@ class AdminControllerTest < ActionController::TestCase
 
     typus_user = typus_users(:editor)
 
-    models = %w( Category Comment Post )
+    models = %w( Category Comment Post TypusUser )
     assert_equal typus_user.models.map(&:first).sort, models.sort
 
     assert typus_user.can_create? Category
@@ -29,6 +29,7 @@ class AdminControllerTest < ActionController::TestCase
     assert typus_user.can_update? Category
     assert typus_user.can_update? Post
     assert typus_user.can_update? Comment
+    assert typus_user.can_update? TypusUser
 
     assert typus_user.can_destroy? Comment
 

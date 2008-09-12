@@ -17,31 +17,82 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert true
   end
 
-  def test_should_not_allow_editor_to_add_users
-    @request.env["HTTP_REFERER"] = "/admin"
+  def test_should_not_allow_editor_to_add_typus_users
+    @request.env["HTTP_REFERER"] = "/admin/typus_users"
     user = typus_users(:editor)
     @request.session[:typus] = user.id
     get :new
     assert_response :redirect
-    assert_redirected_to "/admin"
+    assert_redirected_to "/admin/typus_users"
     assert flash[:notice]
-    assert_match /You don't have permission to access this resource./, flash[:notice]
+    assert_match /Editor cannot add new items./, flash[:notice]
   end
 
   def test_should_allow_editor_to_update_himself
-    assert true
+
+    Typus::Configuration.options[:edit_after_create] = true
+
+    user = typus_users(:editor)
+    @request.session[:typus] = user.id
+
+    get :edit, { :id => user.id }
+    assert_response :success
+
+    post :update, { :id => user.id, :item => { :first_name => "Richard", :last_name => "Ashcroft" }}
+    assert_response :redirect
+    assert_redirected_to :action => 'edit', :id => user.id
+    assert flash[:success]
+    assert_match /Typus user successfully updated./, flash[:success]
+
   end
 
   def test_should_not_allow_editor_to_edit_other_users_profiles
-    assert true
+
+    Typus::Configuration.options[:edit_after_create] = true
+
+    user = typus_users(:editor)
+    @request.session[:typus] = user.id
+
+    admin = typus_users(:admin)
+
+    get :edit, { :id => admin.id }
+    # assert_response :redirect
+
   end
 
   def test_should_not_allow_editor_to_destroy_users
-    assert true
+
+    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+
+    user = typus_users(:editor)
+    @request.session[:typus] = user.id
+
+    admin = typus_users(:admin)
+
+    #assert_difference('Post.count', -1) do
+    delete :destroy, :id => admin.id
+    assert_response :redirect
+    assert_redirected_to "/admin/typus_users"
+
+    assert flash[:notice]
+    assert_match /Editor cannot destroy this item./, flash[:notice]
+
   end
 
   def test_should_not_allow_editor_to_destroy_himself
-    assert true
+
+    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+
+    user = typus_users(:editor)
+    @request.session[:typus] = user.id
+
+    delete :destroy, :id => user.id
+    assert_response :redirect
+    assert_redirected_to "/admin/typus_users"
+
+    assert flash[:notice]
+    assert_match /You cannot remove yourself from Typus./, flash[:notice]
+
   end
 
 end
