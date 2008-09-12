@@ -176,7 +176,11 @@ module AdminHelper
         case column[1]
         when "boolean"
           image = "#{image_tag(status = item.send(column[0])? "typus_status_true.gif" : "typus_status_false.gif")}"
-          html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
+          if Typus::Configuration.options[:toggle]
+            html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
+          else
+            html << "<td width=\"20px\" align=\"center\">#{image}</td>"
+          end
         when "datetime"
           html << "<td>#{item.send(column[0]).to_s(:db)}</td>"
         when "collection"

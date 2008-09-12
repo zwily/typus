@@ -69,6 +69,13 @@ You can overwriting the following settings:
 You can place this settings in a initializer under your initializers 
 folder (<tt>config/initializers/typus.rb</tt>)
 
+=== Disallow toggle
+
+When you have a boolean on the lists you can toggle it's status from 
+true to false and false to true. You can disable this link with:
+
+    Typus::Configuration.options[:toggle] = true
+
 == Configuration file options
 
 If the configuration file is broken you'll see a <tt>typus.yml</tt> text 

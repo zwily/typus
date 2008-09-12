@@ -11,13 +11,15 @@ module Typus
     #   Typus::Configuration.options[:app_name] = "Your App Name"
     #   Typus::Configuration.options[:app_description] = "Your App Description"
     #   Typus::Configuration.options[:per_page] = 15
+    #   Typus::Configuration.options[:toggle] = true
     #
     @@options = { :app_name => 'Typus Admin',
                   :app_description => '',
                   :per_page => 15,
                   :version => '',
                   :form_rows => '10',
-                  :form_columns => '10' }
+                  :form_columns => '10', 
+                  :toggle => true }
 
     mattr_reader :options
 
