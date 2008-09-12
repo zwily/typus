@@ -8,6 +8,17 @@ class TypusControllerTest < ActionController::TestCase
     @response = ActionController::TestResponse.new
   end
 
+  def test_should_render_login
+
+    Typus::Configuration.options[:app_name] = "Typus Admin for the masses"
+
+    get :login
+    assert_response :success
+    assert_template 'login'
+    assert_match /Typus Admin for the masses/, @response.body
+
+  end
+
   def test_should_redirect_to_login
     get :dashboard
     assert_response :redirect
