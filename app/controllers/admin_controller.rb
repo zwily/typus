@@ -177,7 +177,7 @@ class AdminController < ApplicationController
   #
   def position
     @item.send(params[:go])
-    flash[:success] = "Record moved #{params[:go].gsub(/move_/, '').humanize.downcase}."
+    flash[:success] = "Record moved %s." % params[:go].gsub(/move_/, '').humanize.downcase
     redirect_to :back
   end
 
