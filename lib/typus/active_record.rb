@@ -133,7 +133,7 @@ module Typus
       begin
         self.send("#{filter}_actions").map { |a| a.to_s }
       rescue
-        Typus::Configuration.config["#{self.name}"]["actions"][filter].split(", ") rescue []
+        Typus::Configuration.config["#{self.name}"]["actions"][filter.to_s].split(", ") rescue []
       end
     end
 

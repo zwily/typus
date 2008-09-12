@@ -51,6 +51,22 @@ class TypusUser < ActiveRecord::Base
     "All"
   end
 
+  def can_create?(model)
+    self.models[model.to_s].include? "c"
+  end
+
+  def can_read?(model)
+    self.models[model.to_s].include? "r"
+  end
+
+  def can_update?(model)
+    self.models[model.to_s].include? "u"
+  end
+
+  def can_destroy?(model)
+    self.models[model.to_s].include? "d"
+  end
+
 protected
 
   def encrypt_password
