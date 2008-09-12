@@ -145,7 +145,7 @@ module Typus
     #     typus_search :title, :details
     #     typus_related :tags, :categories
     #
-    # Default order is ASC, except for datetime items that is DESC.
+    # Default order is ASC, except for datetime items which is DESC.
     #
     def typus_defaults_for(filter)
       Typus::Configuration.config["#{self.name}"][filter].split(", ") rescue []
@@ -182,7 +182,7 @@ module Typus
     ##
     # Build conditions
     #
-    # params = request.env['QUERY_STRING']
+    #     params = request.env['QUERY_STRING']
     #
     def build_conditions(params)
       conditions = "1 = 1 "
