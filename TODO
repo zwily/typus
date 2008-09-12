@@ -16,6 +16,8 @@ ON IT
 DONE
 ====
 
+[X] User can disallow edit after create a new record (20080912)
+[X] User can disallow toggle records. (20080912)
 [X] Read only fields (20090912)
 [X] Export to CSV action (20080910)
 [X] Move Paginator to Typus so it's not required as a GEM (20080824)
