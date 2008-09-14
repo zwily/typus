@@ -11,6 +11,7 @@ TODO
 [ ] Better search.
 [ ] Define a way to access things that are not resources, like 
     Memcached, Reports and other things.
+[ ] Merge configuration files between plugins and application.
 
 ON IT
 =====
