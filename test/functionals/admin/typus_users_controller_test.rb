@@ -41,6 +41,22 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_not_allow_admin_to_toggle_her_status
+
+    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+
+    get :toggle, { :id => admin.id, :field => 'status' }
+    assert_response :redirect
+    assert_redirected_to "/admin/typus_users"
+
+    assert flash[:notice]
+    assert_match /You cannot toggle your status./, flash[:notice]
+
+  end
+
   def test_should_allow_admin_to_destroy_typus_users
 
     @request.env["HTTP_REFERER"] = "/admin/typus_users"
