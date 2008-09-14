@@ -280,7 +280,12 @@ private
   #
   def check_ownership
     if @model == TypusUser and @current_user.id == params[:id].to_i
-      flash[:notice] = "You cannot remove yourself from Typus."
+      case params[:action]
+      when 'destroy'
+        flash[:notice] = "You cannot remove yourself from Typus."
+      when 'toggle'
+        flash[:notice] = "You cannot toggle your %s." % params[:field]
+      end
       redirect_to :back
     end
   end
