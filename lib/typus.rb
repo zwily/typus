@@ -111,8 +111,6 @@ module Typus
           controller.puts "end"
           controller.close
           puts "=> Admin::#{model.pluralize}Controller successfully created."
-        else
-          puts "=> Admin::#{model.pluralize}Controller already exists."
         end
       end
     end

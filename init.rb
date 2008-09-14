@@ -26,6 +26,11 @@ rescue LoadError
 end
 
 ##
+# Create needed controllers
+#
+Typus.generate_controllers
+
+##
 # And finally we enable Typus
 #
 Typus.enable
