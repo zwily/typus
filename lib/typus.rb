@@ -49,6 +49,7 @@ module Typus
     end
 
     def enable
+      enable_testing_models if RAILS_ENV == 'test'
       enable_configuration
       enable_orm
       enable_routes
@@ -57,6 +58,10 @@ module Typus
       enable_patches if Rails.vendor_rails?
       enable_object
       enable_pagination
+    end
+
+    def enable_testing_models
+      require File.dirname(__FILE__) + "/../test/models"
     end
 
     def enable_configuration

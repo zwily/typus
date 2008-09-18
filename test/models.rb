@@ -8,6 +8,7 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :comments
   belongs_to :user
+  has_and_belongs_to_many :tags
 
 end
 
@@ -25,4 +26,8 @@ class Comment < ActiveRecord::Base
   validates_presence_of :name, :email, :body
   belongs_to :post
 
+end
+
+class Tag < ActiveRecord::Base
+  
 end
