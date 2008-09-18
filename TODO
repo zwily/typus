@@ -6,17 +6,19 @@ TODO
 [ ] Internationalize messages.
 [ ] Test helpers.
 [ ] Selectors for options. (For example roles)
-[ ] Dont show actions the user can not perform.
 [ ] Take care of the params that are passed between actions.
 [ ] Better search.
 [ ] Define a way to access things that are not resources, like 
     Memcached, Reports and other things.
-[ ] Merge configuration files between plugins and application.
+[ ] Actions for a record can be added to the listings.
 
 ON IT
 =====
 
 [ ] List fields can be defined in model
+[ ] Dont show actions the user can not perform.
+[ ] Merge configuration files between plugins and application. Still
+    a little buggy.
 
 DONE
 ====
