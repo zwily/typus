@@ -1,4 +1,11 @@
-test:
+memory:
   adapter: sqlite3
-  database: "/tmp/typus.sqlite3.db"
-  timeout: 5000
+  dbfile: ':memory:'
+
+sqlite3:
+  adapter: sqlite3
+  dbfile: typus.sqlite3.db
+
+sqlite:
+  adapter: sqlite
+  dbfile: typus.sqlite.db
