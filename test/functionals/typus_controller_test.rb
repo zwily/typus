@@ -41,6 +41,23 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to typus_login_url
   end
 
+  def test_should_not_send_new_password_to_unexisting_user
+    post :email_password, { :user => { :email => 'unexisting' } }
+    assert_response :redirect
+    assert_redirected_to typus_email_password_url
+    assert flash[:error]
+    assert_match /Email doesn't exist on the system./, flash[:error]
+  end
+
+  def test_should_send_new_password_to_existing_user
+    admin = typus_users(:admin)
+    post :email_password, { :user => { :email => admin.email } }
+    assert_response :redirect
+    assert_redirected_to typus_login_url
+    assert flash[:success]
+    assert_match /New password sent to #{admin.email}/, flash[:success]
+  end
+
   def test_should_logout
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
