@@ -1,9 +1,7 @@
-class User < ActiveRecord::Base
-
-end
-
-class Person < ActiveRecord::Base
-end
+class User < ActiveRecord::Base; end
+class Person < ActiveRecord::Base; end
+class Tag < ActiveRecord::Base; end
+class Page < ActiveRecord::Base; end
 
 class Post < ActiveRecord::Base
 
@@ -29,12 +27,4 @@ class Comment < ActiveRecord::Base
   validates_presence_of :name, :email, :body
   belongs_to :post
 
-end
-
-class Tag < ActiveRecord::Base
-
-end
-
-class Page < ActiveRecord::Base
-  
 end
