@@ -28,5 +28,9 @@ class Comment < ActiveRecord::Base
 end
 
 class Tag < ActiveRecord::Base
+
+end
+
+class Page < ActiveRecord::Base
   
 end
