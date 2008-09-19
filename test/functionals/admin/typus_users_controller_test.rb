@@ -140,6 +140,8 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     get :edit, { :id => typus_users(:admin).id }
 
+    # assert_response :redirect
+
   end
 
   def test_should_not_allow_editor_to_destroy_users
@@ -176,14 +178,14 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_redirect_to_typus_dashboard_if_user_does_not_have_privileges
 
-    @request.env["HTTP_REFERER"] = "/admin/dashboard"
+    @request.env["HTTP_REFERER"] = "/admin"
 
     user = typus_users(:designer)
     @request.session[:typus] = user.id
 
     get :index
     assert_response :redirect
-    assert_redirected_to "/admin/dashboard"
+    assert_redirected_to "/admin"
 
     assert flash[:notice]
     assert_match /You don't have permission to access this resource./, flash[:notice]

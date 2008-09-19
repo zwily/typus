@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
 ##
-# Here we test the common crud actions.
+# Here we test the CRUD actions.
 #
 class Admin::PostsControllerTest < ActionController::TestCase
 
