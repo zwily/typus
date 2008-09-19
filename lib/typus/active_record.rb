@@ -197,7 +197,7 @@ module Typus
           filter_type = f[1] if f[0] == the_key
           case filter_type
           when "boolean"
-            if %w(sqlite3 sqlite).include? ActiveRecord::Base.configurations[RAILS_ENV]['adapter']
+            if %w(sqlite3 sqlite).include? ActiveRecord::Base.connection.adapter_name.downcase
               conditions << "AND #{f[0]} = '#{the_value[0..0]}' "
             else
               status = (the_value == 'true') ? 1 : 0
