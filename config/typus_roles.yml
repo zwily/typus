@@ -1,2 +1,5 @@
 admin:
   TypusUser: crud
+
+editor:
+  TypusUser: rud
