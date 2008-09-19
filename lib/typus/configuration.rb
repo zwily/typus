@@ -29,38 +29,33 @@ module Typus
     ##
     # Read Typus Configuration file
     #
-    case ENV['RAILS_ENV']
-    when 'test'
-      config_file = "#{File.dirname(__FILE__)}/../../test/config/typus.yml"
-      @@config = YAML.load_file(config_file)
-    else
-      @@config = {}
-      Dir['vendor/plugins/*/config/typus.yml'].each do |plugin|
-        @@config = @@config.merge(YAML.load_file("#{RAILS_ROOT}/#{plugin}"))
-      end
-      config_file = "#{RAILS_ROOT}/config/typus.yml"
-      @@config = @@config.merge(YAML.load_file(config_file))
+
+    folders = Dir['vendor/plugins/*/config/typus.yml']
+    folders << "vendor/plugins/typus/test/config/typus.yml" if ENV['RAILS_ENV'] == 'test'
+
+    @@config = {}
+    folders.each do |plugin|
+      @@config = @@config.merge(YAML.load_file("#{RAILS_ROOT}/#{plugin}"))
     end
+    config_file = "#{RAILS_ROOT}/config/typus.yml"
+    @@config = @@config.merge(YAML.load_file(config_file)) if File.exists? config_file
 
     mattr_reader :config
 
     ##
     # Read Typus Roles
     #
-    case ENV['RAILS_ENV']
-    when 'test'
-      config_file = "#{File.dirname(__FILE__)}/../../test/config/typus_roles.yml"
-      @@roles = YAML.load_file(config_file)
-    else
-      @@roles = {}
-      Dir['vendor/plugins/*/config/typus_roles.yml'].each do |role|
-        @@roles = @@roles.merge(YAML.load_file("#{RAILS_ROOT}/#{role}"))
-      end
-      typus_roles_file = "#{RAILS_ROOT}/config/typus_roles.yml"
-      if File.exists?(typus_roles_file)
-        @@roles = @@roles.merge(YAML.load_file(typus_roles_file))
-      end
+
+    folders = Dir['vendor/plugins/*/config/typus_roles.yml']
+    folders << "vendor/plugins/typus/test/config/typus_roles.yml" if ENV['RAILS_ENV'] == 'test'
+
+    @@roles = {}
+    folders.each do |role|
+      @@roles = @@roles.merge(YAML.load_file("#{RAILS_ROOT}/#{role}"))
     end
+
+    config_file = "#{RAILS_ROOT}/config/typus_roles.yml"
+    @@roles = @@roles.merge(YAML.load_file(config_file)) if File.exists? config_file
 
     mattr_reader :roles
 
