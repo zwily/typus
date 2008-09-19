@@ -73,9 +73,7 @@ module Typus
           else @field_type = 'string' if @field_type == ""
         end
 
-        ##
-        # @field_type = (eval f.upcase) rescue @field_type
-        @field_type = 'selector' if @field_type.class == Array
+        @field_type = 'selector' if @field_type.kind_of? Array
         fields_with_type << [ f, @field_type ]
         @field_type = ""
 

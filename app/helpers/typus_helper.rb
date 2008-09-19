@@ -7,7 +7,7 @@ module TypusHelper
 
     html = "<div id=\"list\">"
 
-    if Typus.applications.size == 0
+    if Typus.applications.empty?
       return display_error("There are not defined applications in config/typus.yml")
     end
 
