@@ -231,4 +231,20 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_show_add_new_link_in_index
+    assert true
+  end
+
+  def test_should_not_show_add_new_link_in_index
+    assert true
+  end
+
+  def test_should_show_remove_record_link_in_index
+    assert true
+  end
+
+  def test_should_not_show_remove_record_link_in_index
+    assert true
+  end
+
 end
