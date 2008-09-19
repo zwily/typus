@@ -63,9 +63,6 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
     assert admin.can_create? Category
-    # category = categories(:first)
-    # get :new
-    # assert_response :success
   end
 
   def test_should_not_allow_designer_to_add_a_category
@@ -99,11 +96,6 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert flash[:notice]
     assert_match /Designer cannot destroy this item./, flash[:notice]
     assert_redirected_to :action => :index
-  end
-
-  def test_should_redirect_to_typus_dashboard_if_user_does_not_have_privileges
-    # This was defined on the commit ffefa3d
-    assert true
   end
 
 end

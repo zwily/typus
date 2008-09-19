@@ -174,4 +174,20 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_redirect_to_typus_dashboard_if_user_does_not_have_privileges
+
+    @request.env["HTTP_REFERER"] = "/admin/dashboard"
+
+    user = typus_users(:designer)
+    @request.session[:typus] = user.id
+
+    get :index
+    assert_response :redirect
+    assert_redirected_to "/admin/dashboard"
+
+    assert flash[:notice]
+    assert_match /You don't have permission to access this resource./, flash[:notice]
+
+  end
+
 end
