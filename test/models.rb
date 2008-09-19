@@ -1,6 +1,5 @@
-class TypusUser < ActiveRecord::Base; end
-
-class Person < ActiveRecord::Base; end
+class Person < ActiveRecord::Base
+end
 
 class Post < ActiveRecord::Base
 

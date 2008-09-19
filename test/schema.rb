@@ -59,10 +59,6 @@ silence_stream(STDOUT) do
 
     add_index :comments, :post_id
 
-    create_table :schema_info, :force => true do |t|
-      t.string :version
-    end
-
   end
 
 end
