@@ -53,7 +53,7 @@ module Authentication
         when 'create'
           flash[:notice] = "#{@current_user.roles.capitalize} cannot create new items."
         end
-        redirect_to :back
+        redirect_to :back rescue redirect_to typus_dashboard_url
       end
     end
 
@@ -65,7 +65,7 @@ module Authentication
     def can_read?(model = @model)
       unless @current_user.can_read? model
         flash[:notice] = "#{@current_user.roles.capitalize} cannot #{params[:action]} items."
-        redirect_to :back
+        redirect_to :back rescue redirect_to typus_dashboard_url
       end
     end
 
@@ -77,7 +77,7 @@ module Authentication
     def can_update?(model = @model)
       unless @current_user.can_update? model
         flash[:notice] = "#{@current_user.roles.capitalize} cannot #{params[:action]} items."
-        redirect_to :back
+        redirect_to :back rescue redirect_to typus_dashboard_url
       end
     end
 
@@ -89,7 +89,7 @@ module Authentication
     def can_destroy?(model = @model)
       unless @current_user.can_destroy? model
         flash[:notice] = "#{@current_user.roles.capitalize} cannot #{params[:action]} this item."
-        redirect_to :back
+        redirect_to :back rescue redirect_to typus_dashboard_url
       end
     end
 
