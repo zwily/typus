@@ -25,7 +25,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["roles", "string"], 
                        ["status", "boolean"]]
     assert_equal fields, expected_fields
-    assert_equal expected_fields.class, Array
+    assert expected_fields.kind_of? Array
   end
 
   def test_should_return_typus_fields_for_form_for_typus_user
@@ -37,7 +37,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["password", "password"], 
                        ["password_confirmation", "password"]]
     assert_equal fields, expected_fields
-    assert_equal expected_fields.class, Array
+    assert expected_fields.kind_of? Array
   end
 
   def test_should_return_typus_fields_for_relationship_for_typus_user
@@ -48,7 +48,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["email", "string"], 
                        ["status", "boolean"]]
     assert_equal fields, expected_fields
-    assert_equal expected_fields.class, Array
+    assert expected_fields.kind_of? Array
   end
 
 =begin
@@ -66,7 +66,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["created_at", "datetime"],
                        ["updated_at", "datetime"]]
     assert_equal fields, expected_fields
-    assert_equal expected_fields.class, Array
+    assert expected_fields.kind_of? Array
   end
 
 =end
@@ -75,35 +75,35 @@ class ActiveRecordTest < Test::Unit::TestCase
     filters = TypusUser.typus_filters
     expected_filters = [["status", "boolean"]]
     assert_equal filters, expected_filters
-    assert_equal expected_filters.class, Array
+    assert expected_filters.kind_of? Array
   end
 
   def test_should_return_actions_on_list_for_typus_user
     actions = TypusUser.typus_actions_for('list')
     expected_actions = []
     assert_equal actions, expected_actions
-    assert_equal expected_actions.class, Array
+    assert expected_actions.kind_of? Array
   end
 
   def test_should_return_actions_on_list_for_post
     actions = Post.typus_actions_for('list')
     expected_actions = [ "cleanup" ]
     assert_equal actions, expected_actions
-    assert_equal expected_actions.class, Array
+    assert expected_actions.kind_of? Array
   end
 
   def test_should_return_actions_on_form_for_post
     actions = Post.typus_actions_for('form')
     expected_actions = [ "send_as_newsletter", "preview" ]
     assert_equal actions, expected_actions
-    assert_equal expected_actions.class, Array
+    assert expected_actions.kind_of? Array
   end
 
   def test_should_return_order_by_for_model
     order = Post.typus_order_by
     expected_order = "title ASC, created_at DESC"
     assert_equal order, expected_order
-    assert_equal expected_order.class, String
+    assert expected_order.kind_of? String
   end
 
   def test_should_return_sql_conditions_on_search_for_typus_user
