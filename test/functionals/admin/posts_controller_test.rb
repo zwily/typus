@@ -205,4 +205,30 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_check_redirection_when_theres_no_http_referer_on_new
+
+    typus_user = typus_users(:designer)
+    @request.session[:typus] = typus_user.id
+
+    get :new
+    assert_response :redirect
+    assert_redirected_to typus_dashboard_url
+
+    assert flash[:notice]
+    assert_match /Designer cannot add new items./, flash[:notice]
+
+    @request.env["HTTP_REFERER"] = "/admin/posts"
+
+    typus_user = typus_users(:designer)
+    @request.session[:typus] = typus_user.id
+
+    get :new
+    assert_response :redirect
+    assert_redirected_to "/admin/posts"
+
+    assert flash[:notice]
+    assert_match /Designer cannot add new items./, flash[:notice]
+
+  end
+
 end
