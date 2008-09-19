@@ -247,4 +247,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert true
   end
 
+  def test_should_disable_toggle_and_check_links_are_disabled
+    assert true
+  end
+
 end
