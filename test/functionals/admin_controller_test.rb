@@ -42,13 +42,13 @@ class AdminControllerTest < ActionController::TestCase
     models = %w( Category Post )
     assert_equal typus_user.models.map(&:first).sort, models.sort
 
-    assert typus_user.can_create? Post
+    assert !typus_user.can_create?(Post)
 
     assert typus_user.can_read? Category
     assert typus_user.can_read? Post
 
     assert typus_user.can_update? Category
-    assert typus_user.can_update? Post
+    assert !typus_user.can_update?(Post)
 
   end
 
