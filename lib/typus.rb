@@ -61,7 +61,7 @@ module Typus
     end
 
     def enable_testing_models
-      require File.dirname(__FILE__) + "/../test/models"
+      require File.dirname(__FILE__) + "/../test/test_models"
     end
 
     def enable_configuration

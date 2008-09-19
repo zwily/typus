@@ -31,7 +31,7 @@ module Typus
     #
     case ENV['RAILS_ENV']
     when 'test'
-      config_file = "#{File.dirname(__FILE__)}/../../test/typus.yml"
+      config_file = "#{File.dirname(__FILE__)}/../../test/config/typus.yml"
       @@config = YAML.load_file(config_file)
     else
       @@config = {}
@@ -49,7 +49,7 @@ module Typus
     #
     case ENV['RAILS_ENV']
     when 'test'
-      config_file = "#{File.dirname(__FILE__)}/../../test/typus_roles.yml"
+      config_file = "#{File.dirname(__FILE__)}/../../test/config/typus_roles.yml"
       @@roles = YAML.load_file(config_file)
     else
       @@roles = {}

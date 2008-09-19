@@ -7,7 +7,7 @@ require 'test/unit'
 require 'action_controller/test_process'
 require 'active_record/fixtures'
 
-require File.dirname(__FILE__) + "/schema"
+require File.dirname(__FILE__) + "/test_schema"
 
 Test::Unit::TestCase.fixture_path = File.dirname(__FILE__) + '/fixtures/'
 
