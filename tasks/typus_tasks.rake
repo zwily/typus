@@ -20,12 +20,12 @@ namespace :typus do
                                  :roles => 'admin', 
                                  :status => true)
       if typus_user.save
-        puts "=> Your new password is `#{password}`."
+        puts "=> Your new password is #{password}"
       else
         puts "=> Please, provide a valid email. (rake typus:seed email=foo@bar.com)"
       end
     rescue
-      puts "=> Run `script/generate typus_migration` to create required tables."
+      puts "=> Run `script/generate typus_migration` to create required tables"
     end
 
   end
@@ -154,9 +154,9 @@ namespace :typus do
       else
         puts "=> Configuration file already exists."
       end
-    rescue Exception => e
-      puts "#{e.message}"
-      File.delete("#{RAILS_ROOT}/config/typus.yml")
+#    rescue Exception => e
+#      puts "#{e.message} ........."
+#      File.delete("#{RAILS_ROOT}/config/typus.yml")
     end
   end
 
