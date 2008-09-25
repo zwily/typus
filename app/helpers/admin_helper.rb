@@ -191,7 +191,7 @@ module AdminHelper
         when "boolean"
           image = "#{image_tag(status = item.send(column[0])? "typus_status_true.gif" : "typus_status_false.gif")}"
           if Typus::Configuration.options[:toggle]
-            html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
+            html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:controller => "admin/#{model.to_s.tableize}", :action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
           else
             html << "<td width=\"20px\" align=\"center\">#{image}</td>"
           end
@@ -205,11 +205,11 @@ module AdminHelper
           html << "<td>"
           [["&uarr;", "move_higher"], 
            ["&darr;", "move_lower"]].each do |position|
-            html << "#{link_to position.first, :params => params.merge(:action => 'position', :id => item.id, :go => position.last)} "
+            html << "#{link_to position.first, :params => params.merge(:controller => "admin/#{model.to_s.tableize}", :action => 'position', :id => item.id, :go => position.last)} "
           end
           html << "</td>"
         else # 'string', 'integer', 'selector'
-          html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:action => 'edit', :id => item.id)}</td>"
+          html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:controller => "admin/#{model.to_s.tableize}", :action => 'edit', :id => item.id)}</td>"
         end
       end
 
@@ -225,12 +225,14 @@ module AdminHelper
 
         case params[:action]
         when 'index'
-          @perform = link_to image_tag("typus_trash.gif"), { :action => 'destroy', 
+          @perform = link_to image_tag("typus_trash.gif"), { :controller => "admin/#{model.to_s.tableize}", 
+                                                             :action => 'destroy', 
                                                              :id => item.id }, 
                                                              :confirm => "Remove entry?", 
                                                              :method => :delete
         else
-          @perform = link_to image_tag("typus_trash.gif"), { :action => "unrelate", 
+          @perform = link_to image_tag("typus_trash.gif"), { :controller => "admin/#{model.to_s.tableize}", 
+                                                             :action => "unrelate", 
                                                              :id => params[:id], 
                                                              :model => model, 
                                                              :model_id => item.id }, 
