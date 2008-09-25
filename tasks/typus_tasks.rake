@@ -60,19 +60,18 @@ namespace :typus do
   end
 
   desc "Generate config/typus_roles.yml"
-  task :configure_roles do
+  task :configure_roles => :environment do
     begin
       MODEL_DIR = File.join(RAILS_ROOT, "app/models")
       Dir.chdir(MODEL_DIR)
       models = Dir["*.rb"]
       if !File.exists? ("#{RAILS_ROOT}/config/typus_roles.yml") or ENV['force']
-        require File.dirname(__FILE__) + '/../../../../config/environment'
         typus = File.open("#{RAILS_ROOT}/config/typus_roles.yml", "w+")
         typus.puts "admin:"
         typus.puts "  TypusUser: crud"
         models.each do |model|
           class_name = eval model.sub(/\.rb$/,'').camelize
-          if class_name.new.kind_of?(ActiveRecord::Base)
+          if class_name.superclass.to_s.include?("ActiveRecord::Base")
             typus.puts "  #{class_name}: crud"
           end
         end
@@ -88,7 +87,7 @@ namespace :typus do
   end
 
   desc "Generate config/typus.yml"
-  task :configure do
+  task :configure => :environment do
     begin
       MODEL_DIR = File.join(RAILS_ROOT, "app/models")
       Dir.chdir(MODEL_DIR)
@@ -96,7 +95,6 @@ namespace :typus do
       ##
       # If typus config file does not file exists or force param is not blank, configure
       if !File.exists? ("#{RAILS_ROOT}/config/typus.yml") or ENV['force']
-        require File.dirname(__FILE__) + '/../../../../config/environment'
         typus = File.open("#{RAILS_ROOT}/config/typus.yml", "w+")
         typus.puts "# ------------------------------------------------"
         typus.puts "# Typus Admin Configuration File"
@@ -124,7 +122,7 @@ namespace :typus do
         typus.close
         models.each do |model|
           class_name = eval model.sub(/\.rb$/,'').camelize
-          if class_name.new.kind_of?(ActiveRecord::Base)
+          if class_name.superclass.to_s.include?("ActiveRecord::Base")
             class_attributes = class_name.new.attributes.keys
             typus = File.open("#{RAILS_ROOT}/config/typus.yml", "a+")
             typus.puts ""
@@ -154,9 +152,9 @@ namespace :typus do
       else
         puts "=> Configuration file already exists."
       end
-#    rescue Exception => e
-#      puts "#{e.message} ........."
-#      File.delete("#{RAILS_ROOT}/config/typus.yml")
+    rescue Exception => e
+      puts "#{e.message} ........."
+      File.delete("#{RAILS_ROOT}/config/typus.yml")
     end
   end
 
