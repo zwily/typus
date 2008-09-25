@@ -49,37 +49,54 @@ module Typus
       fields_with_type = []
 
       begin
-        fields = self.send("#{filter.to_s}_fields").map { |a| a.to_s }
+        if self.respond_to? ("#{filter.to_s}_fields")
+          fields = self.send("#{filter.to_s}_fields").map { |a| a.to_s }
+        else
+          fields = Typus::Configuration.config["#{self.name}"]["fields"][filter.to_s].split(", ")
+        end
       rescue
-        fields = Typus::Configuration.config["#{self.name}"]["fields"][filter.to_s].split(", ")
+        filter = 'list'
+        retry
       end
 
-      fields.each do |f|
+      begin
 
-        ##
-        # Get the field_type for each field
-        self.model_fields.each do |af|
-          @field_type = af.last if af.first == f
+        fields.each do |f|
+
+          ##
+          # Get the field_type for each field
+          self.model_fields.each do |af|
+            @field_type = af.last if af.first == f
+          end
+
+          ##
+          # Some custom field_type depending on the attribute name
+          case f
+            when 'parent_id':       @field_type = 'tree'
+            when /_id/:             @field_type = 'collection'
+            when /file_name/:       @field_type = 'file'
+            when /password/:        @field_type = 'password'
+            when 'position':        @field_type = 'position'
+            else @field_type = 'string' if @field_type == ""
+          end
+
+          @field_type = 'selector' if @field_type.kind_of? Array
+          fields_with_type << [ f, @field_type ]
+          @field_type = ""
+
         end
 
-        ##
-        # Some custom field_type depending on the attribute name
-        case f
-          when 'parent_id':       @field_type = 'tree'
-          when /_id/:             @field_type = 'collection'
-          when /file_name/:       @field_type = 'file'
-          when /password/:        @field_type = 'password'
-          when 'position':        @field_type = 'position'
-          else @field_type = 'string' if @field_type == ""
-        end
-
-        @field_type = 'selector' if @field_type.kind_of? Array
-        fields_with_type << [ f, @field_type ]
-        @field_type = ""
-
+      rescue
+        fields = Typus::Configuration.config["#{self.name}"]["fields"]["list"].split(", ")
+        retry
       end
 
-      return fields_with_type rescue self.model_fields
+      logger.info "===================================="
+      logger.info "=> #{fields_with_type}"
+      logger.info "===================================="
+
+
+      return fields_with_type
 
     end
 

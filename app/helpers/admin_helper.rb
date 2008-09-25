@@ -168,14 +168,14 @@ module AdminHelper
 
   def typus_table(model = @model, fields = 'list', items = @items)
 
-    @model = model
+    # @model = model
     html = "<table>"
 
     ##
     # Header of the table
     #
     html << "<tr>"
-    @model.typus_fields_for(fields).each do |column|
+    model.typus_fields_for(fields).each do |column|
       order_by = column[0]
       sort_order = (params[:sort_order] == "asc") ? "desc" : "asc"
       html << "<th>#{link_to "<div class=\"#{sort_order}\">#{column[0].titleize.capitalize}</div>", { :params => params.merge( :order_by => order_by, :sort_order => sort_order) }}</th>"
@@ -189,7 +189,7 @@ module AdminHelper
 
       html << "<tr class=\"#{cycle('even', 'odd')}\" id=\"item_#{item.id}\">"
 
-      @model.typus_fields_for(fields).each do |column|
+      model.typus_fields_for(fields).each do |column|
         case column[1]
         when "boolean"
           image = "#{image_tag(status = item.send(column[0])? "typus_status_true.gif" : "typus_status_false.gif")}"
@@ -224,7 +224,7 @@ module AdminHelper
       # Only shown is the user can destroy items.
       #
 
-      if @current_user.can_destroy? @model
+      if @current_user.can_destroy? model
 
         case params[:action]
         when 'index'
@@ -324,8 +324,8 @@ module AdminHelper
       html << "</p>\n"
     end
     return html
-#  rescue Exception => error
-#    display_error(error)
+  rescue Exception => error
+    display_error(error)
   end
 
   def typus_form_has_many
@@ -333,11 +333,11 @@ module AdminHelper
     if @item_has_many
       @item_has_many.each do |field|
         model_to_relate = field.singularize.camelize.constantize
-        html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{ link_to "Add new", :model => field, :action => 'new', "#{params[:model].singularize.downcase}_id" => @item.id, :btm => params[:model], :bti => params[:id], :bta => "edit" }</small></h2>"
-        current_model = params[:model].singularize.camelize.constantize
-        @items = current_model.find(params[:id]).send(field)
+        html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{ link_to "Add new", :model => field, :action => 'new', "#{@model.to_s.tableize.singularize}_id" => @item.id, :btm => params[:model], :bti => params[:id], :bta => "edit" }</small></h2>"
+        current_model = @model
+        @items = @model.find(params[:id]).send(field)
         if @items.size > 0
-          html << typus_table(field, 'relationship')
+          html << typus_table(@items[0].class, 'relationship', @items)
         else
           html << "<div id=\"flash\" class=\"notice\"><p>There are no #{field.titleize.downcase}.</p></div>"
         end
