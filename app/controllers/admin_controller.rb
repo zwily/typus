@@ -94,7 +94,9 @@ class AdminController < ApplicationController
       if params[:back_to]
         if params[:model] && params[:model_id]
           model_to_relate = params[:model].constantize
-          @item.send(params[:model].tableize) << model_to_relate.find(params[:model_id])
+          if @item.respond_to? params[:model].tableize
+            @item.send(params[:model].tableize) << model_to_relate.find(params[:model_id])
+          end
           flash[:success] = "#{@item.class} successfully assigned to #{params[:model].downcase}."
         else
           flash[:success] = "New #{@model.to_s.downcase} created."
@@ -111,8 +113,6 @@ class AdminController < ApplicationController
     else
       select_template :new
     end
-  rescue Exception => error
-    error_handler(error, {:params => params.merge(:action => 'index', :id => nil)} )
   end
 
   ##

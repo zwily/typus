@@ -233,9 +233,9 @@ module AdminHelper
         else
           @perform = link_to image_tag("typus_trash.gif"), { :controller => "admin/#{model.to_s.tableize}", 
                                                              :action => "unrelate", 
-                                                             :id => params[:id], 
-                                                             :model => model, 
-                                                             :model_id => item.id }, 
+                                                             :id => item.id, 
+                                                             :model => @model, 
+                                                             :model_id => params[:id] }, 
                                                              :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@model.to_s}?"
         end
 
@@ -328,7 +328,7 @@ module AdminHelper
     if @item_has_many
       @item_has_many.each do |field|
         model_to_relate = field.singularize.camelize.constantize
-        html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{ link_to "Add new", :model => field, :action => 'new', "#{@model.to_s.tableize.singularize}_id" => @item.id, :btm => params[:model], :bti => params[:id], :bta => "edit" }</small></h2>"
+        html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{link_to "Add new", "/admin/#{field}/new?back_to=#{request.env['REQUEST_URI']}&model=#{@model}&model_id=#{@item.id}"}</small></h2>"
         current_model = @model
         @items = @model.find(params[:id]).send(field)
         if @items.size > 0
