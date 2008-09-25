@@ -91,11 +91,6 @@ module Typus
         retry
       end
 
-      logger.info "===================================="
-      logger.info "=> #{fields_with_type}"
-      logger.info "===================================="
-
-
       return fields_with_type
 
     end
