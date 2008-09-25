@@ -153,7 +153,7 @@ module Typus
     # Used for +relationships+
     #
     def typus_relationships_for(filter)
-      Typus::Configuration.config["#{self.name}"]["relationships"][filter].split(", ") rescue []
+      Typus::Configuration.config["#{self.name}"]["relationships"]["#{filter.to_s}"].split(", ") rescue []
     end
 
     def typus_order_by
