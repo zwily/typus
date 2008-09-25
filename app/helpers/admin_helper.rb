@@ -104,15 +104,13 @@ module AdminHelper
   end
 
   def search
-    if Typus::Configuration.config["#{@model.name}"]["search"]
-      search = <<-HTML
-        <h2>Search</h2>
-        <form action="" method="get">
-        <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
-        </form>
-      HTML
-      return search
-    end
+    search = <<-HTML
+      <h2>Search</h2>
+      <form action="" method="get">
+      <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
+      </form>
+    HTML
+    return search if Typus::Configuration.config["#{@model.name}"]["search"]
   end
 
   def filters
@@ -168,7 +166,6 @@ module AdminHelper
 
   def typus_table(model = @model, fields = 'list', items = @items)
 
-    # @model = model
     html = "<table>"
 
     ##
@@ -248,8 +245,6 @@ module AdminHelper
 
     html << "</table>"
 
-  rescue Exception => error
-    display_error(error)
   end
 
   def typus_form(fields = @item_fields)
@@ -324,8 +319,6 @@ module AdminHelper
       html << "</p>\n"
     end
     return html
-  rescue Exception => error
-    display_error(error)
   end
 
   def typus_form_has_many
@@ -344,8 +337,6 @@ module AdminHelper
       end
     end
     return html
-  rescue Exception => error
-    display_error(error)
   end
 
   def typus_form_has_and_belongs_to_many
@@ -370,8 +361,6 @@ module AdminHelper
       end
     end
     return html
-  rescue Exception => error
-    display_error(error)
   end
 
   ##
