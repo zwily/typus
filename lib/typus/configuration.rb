@@ -13,6 +13,7 @@ module Typus
     #   Typus::Configuration.options[:per_page] = 15
     #   Typus::Configuration.options[:toggle] = true
     #   Typus::Configuration.options[:root] = 'admin'
+    #   Typus::Configuration.options[:password_recover] = false
     #
     @@options = { :app_name => 'Typus Admin',
                   :app_description => '',
@@ -22,7 +23,8 @@ module Typus
                   :form_columns => '10', 
                   :toggle => true, 
                   :edit_after_create => true, 
-                  :root => 'admin' }
+                  :root => 'admin', 
+                  :password_recover => true }
 
     mattr_reader :options
 

@@ -69,6 +69,13 @@ You can overwriting the following settings:
 You can place this settings in a initializer under your initializers 
 folder (<tt>config/initializers/typus.rb</tt>)
 
+=== Disable password recover
+
+You can disable password recover on the login page. By default, password
+recovery is enabled.
+
+    Typus::Configuration.options[:password_recover] = false
+
 === Disallow toggle
 
 When you have a boolean on the lists you can toggle it's status from 
