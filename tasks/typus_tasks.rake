@@ -94,7 +94,7 @@ namespace :typus do
       models = Dir["*.rb"]
       ##
       # If typus config file does not file exists or force param is not blank, configure
-      if !File.exists? ("#{RAILS_ROOT}/config/typus.yml") or ENV['force']
+      if !File.exists? ("#{RAILS_ROOT}/config/typus.yml") and !models.empty? # ENV['force']
         typus = File.open("#{RAILS_ROOT}/config/typus.yml", "w+")
         typus.puts "# ------------------------------------------------"
         typus.puts "# Typus Admin Configuration File"
@@ -150,7 +150,7 @@ namespace :typus do
           end
         end
       else
-        puts "=> Configuration file already exists."
+        puts "=> Configuration file already exists or there are no models." 
       end
     rescue Exception => e
       puts "#{e.message} ........."
