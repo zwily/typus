@@ -105,13 +105,28 @@ module Typus
     end
 
     def generate_controllers
-      unless File.directory?("#{RAILS_ROOT}/app/controllers/admin")
-        Dir.mkdir("#{RAILS_ROOT}/app/controllers/admin")
-      end
+
+      ##
+      # Cread admin folder for controllers if needed.
+      #
+      admin_controllers = "#{RAILS_ROOT}/app/controllers/admin"
+      Dir.mkdir(admin_controllers) unless File.directory?(admin_controllers)
+
+      ##
+      # Get a list of all the available controllers
+      #
+      files = Dir['vendor/plugins/*/app/controllers/admin/*.rb']
+      files += Dir['app/controllers/admin/*.rb']
+      files = files.map { |i| i.split("/").last }
+
+      ##
+      # Generate needed controllers
+      #
       self.models.each do |model|
-        controller_file = "#{RAILS_ROOT}/app/controllers/admin/#{model.tableize}_controller.rb"
-        if !File.exists?(controller_file)
-          controller = File.open(controller_file, "w+")
+        controller_filename = "#{model.tableize}_controller.rb"
+        controller_location = "#{admin_controllers}/#{controller_filename}"
+        if !files.include?(controller_filename)
+          controller = File.open(controller_location, "w+")
           controller.puts "class Admin::#{model.pluralize}Controller < AdminController"
           controller.puts "end"
           controller.close
