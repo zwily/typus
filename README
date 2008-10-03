@@ -18,43 +18,24 @@ You can view the available tasks running:
 
     rake -T typus
 
-=== Step 1: Install dependencies.
+=== Configure
 
-This task will install for you *paperclip* file upload plugin, 
-*acts_as_list*, *acts_as_tree*.
-
-    rake typus:dependencies
-
-=== Step 2: Copy stylesheets to your public/ folder.
-
-    rake typus:assets
-
-=== Step 3: Create an initial configuration file
-
-This action will create a config file on <tt>RAILS_ROOT/config/typus.yml</tt>.
+This task will copy required assets to the public folder of your Rails 
+application, will generate configuration files on 'config' folder and 
+will install some required plugins.
 
     rake typus:configure
-
-Running <tt>rake typus:configure</tt> will generate the required controllers. 
-You can also create them by hand under <tt>app/controllers/admin</tt>
-
-    class Admin::PostsController < AdminController
-    end
-
-=== Step 4: Create the needed tables on the db by running.
 
 Create TypusUsers migration and migrate your database:
 
     script/generate typus_migration
     rake db:migrate
 
-Create the first user:
+And finally create the first user:
 
     rake typus:seed email='youremail@yourdomain.com' RAILS_ENV=production
 
-=== Step 5: Start your application.
-
-Start your application and go to http://application.tld/admin/
+Now you can start your application and go to http://application.tld/admin/
 
 == Plugin Configuration Options
 

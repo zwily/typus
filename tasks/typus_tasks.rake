@@ -2,6 +2,9 @@ namespace :typus do
 
   PLUGIN_ROOT = File.dirname(__FILE__) + '/../'
 
+  desc "Configure Typus"
+  task :configure => ["assets", "generate_roles", "generate_config", "dependencies"]
+
   desc "Create TypusUser `rake typus:seed email=foo@bar.com`"
   task :seed => :environment do
 
@@ -32,21 +35,28 @@ namespace :typus do
 
   end
 
-  desc "Install plugin dependencies"
+  # desc "Install Typus plugins"
+  task :plugins do
+
+    plugins = [ "git://github.com/fesplugas/simplified_blog.git", 
+                "git://github.com/fesplugas/simplified_activity_stream.git" ]
+
+    system "script/plugin install #{plugins.join(' ')}"
+
+  end
+
+  # desc "Install Typus dependencies (paperclip, acts_as_list, acts_as_tree)"
   task :dependencies do
 
     plugins = [ "git://github.com/thoughtbot/paperclip.git", 
                 "git://github.com/rails/acts_as_list.git", 
                 "git://github.com/rails/acts_as_tree.git" ]
 
-    plugins.each do |plugin_url|
-      puts "=> Installing #{plugin_url}."
-      system "script/plugin install #{plugin_url}"
-    end
+    system "script/plugin install #{plugins.join(' ')}"
 
   end
-  
-  desc "Installs the Typus images, stylesheets and javascripts"
+
+  # desc "Installs Typus images, stylesheets and javascripts"
   task :assets do
     %w( images stylesheets ).each do |folder|
       FileUtils.cp Dir[PLUGIN_ROOT + "/public/#{folder}/*.*"], RAILS_ROOT + "/public/#{folder}"
@@ -61,8 +71,8 @@ namespace :typus do
     end
   end
 
-  desc "Generate config/typus_roles.yml"
-  task :configure_roles => :environment do
+  # desc "Generate config/typus_roles.yml"
+  task :generate_roles => :environment do
     begin
       MODEL_DIR = File.join(RAILS_ROOT, "app/models")
       Dir.chdir(MODEL_DIR)
@@ -78,9 +88,9 @@ namespace :typus do
           end
         end
         typus.close
-        puts "=> `config/typus_roles.yml` successfully created."
+        puts "=> Roles configuration file (typus_roles.yml) successfully created."
       else
-        puts "=> `config/typus_roles.yml` file already exists."
+        puts "=> Roles configuration file (typus_roles.yml) already exists."
       end
     rescue Exception => e
       puts "#{e.message}"
@@ -88,15 +98,15 @@ namespace :typus do
     end
   end
 
-  desc "Generate config/typus.yml"
-  task :configure => :environment do
+  # desc "Generate config/typus.yml"
+  task :generate_config => :environment do
     begin
       MODEL_DIR = File.join(RAILS_ROOT, "app/models")
       Dir.chdir(MODEL_DIR)
       models = Dir["*.rb"]
       ##
       # If typus config file does not file exists or force param is not blank, configure
-      if !File.exists? ("#{RAILS_ROOT}/config/typus.yml") and !models.empty? # ENV['force']
+      if !File.exists? ("#{RAILS_ROOT}/config/typus.yml") and !models.empty?
         typus = File.open("#{RAILS_ROOT}/config/typus.yml", "w+")
         typus.puts "# ------------------------------------------------"
         typus.puts "# Typus Admin Configuration File"
@@ -152,17 +162,12 @@ namespace :typus do
           end
         end
       else
-        puts "=> Configuration file already exists or there are no models." 
+        puts "=> Configuration file (typus.yml) already exists or there are no models." 
       end
     rescue Exception => e
       puts "#{e.message} ........."
       File.delete("#{RAILS_ROOT}/config/typus.yml")
     end
-  end
-
-  desc "Generate controllers"
-  task :generate_controllers => :environment do
-    Typus.generate_controllers
   end
 
 end
