@@ -50,7 +50,7 @@ module Typus
 
     def enable
       enable_testing_models if RAILS_ENV == 'test'
-      enable_configuration
+      # enable_configuration
       enable_orm
       enable_routes
       enable_string
@@ -65,9 +65,9 @@ module Typus
       require File.dirname(__FILE__) + "/../test/test_models"
     end
 
-    def enable_configuration
-      require 'typus/configuration'
-    end
+    # def enable_configuration
+    #   require 'typus/configuration'
+    # end
 
     def enable_orm
       require 'typus/active_record'

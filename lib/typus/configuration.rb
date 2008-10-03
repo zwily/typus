@@ -54,14 +54,17 @@ module Typus
     folders = Dir['vendor/plugins/*/config/typus_roles.yml']
     folders << "vendor/plugins/typus/test/config/typus_roles.yml" if ENV['RAILS_ENV'] == 'test'
 
-    @@roles = {}
+    @@roles = { 'admin' => {} }
     folders.each do |role|
-      @@roles = @@roles.merge(YAML.load_file("#{RAILS_ROOT}/#{role}"))
+      YAML.load_file("#{RAILS_ROOT}/#{role}").each do |key, value|
+        @@roles['admin'] = @@roles['admin'].merge(value)
+      end
     end
 
     config_file = "#{RAILS_ROOT}/config/typus_roles.yml"
     if File.exists?(config_file) && !File.zero?(config_file)
-      @@roles = @@roles.merge(YAML.load_file(config_file))
+      app_roles = YAML.load_file(config_file)
+      @@roles['admin'] = @@roles['admin'].merge(app_roles['admin'])
     end
 
     mattr_reader :roles
