@@ -54,6 +54,7 @@ module Typus
       enable_orm
       enable_routes
       enable_string
+      enable_hash
       enable_authentication
       enable_patches if Rails.vendor_rails?
       enable_object
@@ -78,6 +79,10 @@ module Typus
 
     def enable_string
       require 'typus/string'
+    end
+
+    def enable_hash
+      require 'typus/hash'
     end
 
     def enable_authentication

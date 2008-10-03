@@ -44,7 +44,7 @@ class TypusUser < ActiveRecord::Base
   def models
     calculate = {}
     self.roles.split(', ').each do |role|
-      calculate = Typus::Configuration.roles[role]
+      calculate = Typus::Configuration.roles[role].compact
     end
     return calculate
   rescue
