@@ -12,6 +12,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["crypted_password", "string"], 
                        ["status", "boolean"], 
                        ["roles", "string"], 
+                       ["token", "string"], 
                        ["created_at", "datetime"], 
                        ["updated_at", "datetime"]]
     assert_equal fields, expected_fields
