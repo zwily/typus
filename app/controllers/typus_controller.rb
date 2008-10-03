@@ -52,10 +52,8 @@ class TypusController < ApplicationController
     if request.post?
       typus_user = TypusUser.find_by_email(params[:user][:email])
       if typus_user
-        password = generate_password
-        host = request.env['HTTP_HOST']
-        typus_user.reset_password(password, host)
-        flash[:success] = "New password sent to #{params[:user][:email]}"
+        typus_user.reset_password(request.env['HTTP_HOST'])
+        flash[:success] = "Reset password link sent to your email."
         redirect_to typus_login_url
       else
         flash[:error] = "Email doesn't exist on the system."
@@ -66,6 +64,24 @@ class TypusController < ApplicationController
     end
   end
 
+  def reset_password
+    if request.post?
+      typus_user = TypusUser.find_by_token(params[:user][:token])
+      if typus_user.update_attributes(params[:user])
+        flash[:success] = "You can login with your new password."
+        redirect_to typus_login_url
+      else
+        flash[:error] = "Passwords don't match."
+        redirect_to :action => 'reset_password', :token => params[:user][:token]
+      end
+    else
+      if TypusUser.find_by_token(params[:token])
+        render :layout => 'typus_login'
+      else
+        render :text => "A valid token is required."
+      end
+    end
+  end
 
 private
 

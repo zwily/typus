@@ -2,10 +2,14 @@ class CreateTypusUsers < ActiveRecord::Migration
 
   def self.up
     create_table :typus_users do |t|
-      t.string :email, :salt, :crypted_password
-      t.string :first_name, :last_name
+      t.string :email, :null => false
+      t.string :salt, :null => false
+      t.string :crypted_password, :null => false
+      t.string :first_name, :null => false
+      t.string :last_name, :null => false
       t.boolean :status, :default => false
-      t.string :roles
+      t.string :roles, :null => false
+      t.string :token, :null => false
       t.timestamps
     end
   end

@@ -9,6 +9,7 @@ ActionController::Routing::Routes.draw do |map|
     i.typus_login "admin/login", :action => 'login'
     i.typus_logout "admin/logout", :action => 'logout'
     i.typus_email_password "admin/email_password", :action => 'email_password'
+    i.typus_reset_password "admin/reset_password", :action => 'reset_password'
   end
 
   map.namespace :admin do |admin|

@@ -13,7 +13,7 @@ class TypusUser < ActiveRecord::Base
                          :in => Typus::Configuration.roles.keys, 
                          :message => "has to be in #{Typus::Configuration.roles.keys.reverse.join(", ")}."
 
-  before_create :generate_token
+  before_create :set_token
   before_save :encrypt_password
 
   def full_name_with_role
@@ -24,9 +24,8 @@ class TypusUser < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def reset_password(password, host)
-    TypusMailer.deliver_password(self, password, host)
-    self.update_attributes(:password => password, :password_confirmation => password)
+  def reset_password(host)
+    TypusMailer.deliver_reset_password_link(self, host)
   end
 
   def self.authenticate(email, password)
@@ -79,8 +78,9 @@ protected
     Digest::SHA1.hexdigest("--#{salt}--#{password}")
   end
 
-  def generate_token
-    @attributes['token'] = Digest::SHA1.hexdigest((object_id + rand(255)).to_s).slice(0..15)
+  def set_token
+    record = "#{self.class.name}#{id}"
+    @attributes['token'] = CGI::Session.generate_unique_id(record).first(12)
   end
 
 end
