@@ -48,16 +48,15 @@ class TypusController < ApplicationController
   ##
   # Email password when lost
   #
-  def email_password
+  def recover_password
     if request.post?
       typus_user = TypusUser.find_by_email(params[:user][:email])
       if typus_user
         typus_user.reset_password(request.env['HTTP_HOST'])
-        flash[:success] = "Reset password link sent to your email."
+        flash[:success] = "Password recovery link sent to your email."
         redirect_to typus_login_url
       else
-        flash[:error] = "Email doesn't exist on the system."
-        redirect_to typus_email_password_url
+        redirect_to typus_recover_password_url
       end
     else
       render :layout => 'typus_login'
