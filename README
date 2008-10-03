@@ -6,17 +6,13 @@ As Django Admin, Typus is designed for a single activity:
 
 Once installed and configured you can login at http://application.tld/admin
 
-You can download a sample application from github.
-
-    http://github.com/fesplugas/typus_demo/tarball/master
-
 Note: Typus doesn't try to be all the things to all the people.
 
 == Installing
 
 You can view the available tasks running:
 
-    rake -T typus
+    $ rake -T typus
 
 === Configure
 
@@ -24,16 +20,16 @@ This task will copy required assets to the public folder of your Rails
 application, will generate configuration files on 'config' folder and 
 will install some required plugins.
 
-    rake typus:configure
+    $ rake typus:configure
 
 Create TypusUsers migration and migrate your database:
 
-    script/generate typus_migration
-    rake db:migrate
+    $ script/generate typus_migration
+    $ rake db:migrate
 
 And finally create the first user:
 
-    rake typus:seed email='youremail@yourdomain.com' RAILS_ENV=production
+    $ rake typus:seed email='youremail@yourdomain.com' RAILS_ENV=production
 
 Now you can start your application and go to http://application.tld/admin/
 
