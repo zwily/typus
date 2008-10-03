@@ -15,12 +15,13 @@ TODO
 ON IT
 =====
 
-[ ] List fields can be defined in model
+[ ] List fields can be defined in model.
 [ ] Dont show actions the user can not perform.
 
 DONE
 ====
 
+[X] Password recovery now sends an email with a link to recover. (20081003)
 [X] Merge configuration files between plugins and application. Still
     a little buggy. (20081003)
 [X] Cleaned installation. `rake typus:configure` does the job. (20081003)
