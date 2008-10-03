@@ -102,6 +102,7 @@ module Typus
     end
 
     def install
+      puts "=> Run `rake typus:configure`"
     end
 
     def uninstall
