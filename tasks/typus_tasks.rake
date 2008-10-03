@@ -1,5 +1,7 @@
 namespace :typus do
 
+  PLUGIN_ROOT = File.dirname(__FILE__) + '/../'
+
   desc "Create TypusUser `rake typus:seed email=foo@bar.com`"
   task :seed => :environment do
 
@@ -43,13 +45,13 @@ namespace :typus do
     end
 
   end
-
-  desc "Copy Typus images and stylesheets"
+  
+  desc "Installs the Typus images, stylesheets and javascripts"
   task :assets do
-    puts "=> Copying images & stylesheets."
     %w( images stylesheets ).each do |folder|
-      system "cp #{RAILS_ROOT}/vendor/plugins/typus/public/#{folder}/* #{RAILS_ROOT}/public/#{folder}/"
+      FileUtils.cp Dir[PLUGIN_ROOT + "/public/#{folder}/*.*"], RAILS_ROOT + "/public/#{folder}"
     end
+    puts "=> Typus images & stylesheets successfully installed."
   end
 
   desc "List current roles"
