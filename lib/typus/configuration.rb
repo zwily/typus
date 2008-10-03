@@ -41,7 +41,9 @@ module Typus
     end
 
     config_file = "#{RAILS_ROOT}/config/typus.yml"
-    @@config = @@config.merge(YAML.load_file(config_file)) if File.exists? config_file
+    if File.exists?(config_file) && !File.zero?(config_file)
+      @@config = @@config.merge(YAML.load_file(config_file))
+    end
 
     mattr_reader :config
 
@@ -58,7 +60,9 @@ module Typus
     end
 
     config_file = "#{RAILS_ROOT}/config/typus_roles.yml"
-    @@roles = @@roles.merge(YAML.load_file(config_file)) if File.exists? config_file
+    if File.exists?(config_file) && !File.zero?(config_file)
+      @@roles = @@roles.merge(YAML.load_file(config_file))
+    end
 
     mattr_reader :roles
 
