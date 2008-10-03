@@ -23,6 +23,10 @@ ON IT
 DONE
 ====
 
+[X] If typus_roles is empty there no error. (20081003)
+[X] Hash#compact (2008103)
+[X] Application is correctly merged with plugins. (20081003)
+[X] Roles are correctly inherited from plugins. (20081003)
 [X] Define the "master" role, so its the unique that can move users 
     between roles. Test it ... (20080912)
 [X] Tests, tests and tests ... (20080912)
