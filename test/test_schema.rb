@@ -7,6 +7,7 @@ silence_stream(STDOUT) do
       t.string :salt, :crypted_password
       t.boolean :status, :default => false
       t.string :roles
+      t.string :token
       t.timestamps
     end
 
