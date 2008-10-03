@@ -28,7 +28,7 @@ end
 ##
 # Create needed controllers
 #
-Typus.generate_controllers
+Typus.generate_controllers unless RAILS_ENV == 'test'
 
 ##
 # And finally we enable Typus
