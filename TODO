@@ -11,6 +11,8 @@ TODO
 [ ] Define a way to access things that are not resources, like 
     Memcached, Reports and other things.
 [ ] Actions for a record can be added to the listings.
+[ ] Define username and email to send emails from, otherwise use first 
+    created user that is enable and it's admin (root).
 
 ON IT
 =====
