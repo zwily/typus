@@ -55,7 +55,7 @@ folder (<tt>config/initializers/typus.rb</tt>)
 You can disable password recover on the login page. By default, password
 recovery is enabled.
 
-    Typus::Configuration.options[:password_recover] = false
+    Typus::Configuration.options[:recover_password] = false
 
 === Disallow toggle
 

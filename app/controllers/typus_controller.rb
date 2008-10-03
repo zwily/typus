@@ -7,7 +7,7 @@ class TypusController < ApplicationController
   before_filter :require_login, :only => [ :dashboard ]
   before_filter :current_user, :only => [ :dashboard ]
 
-  before_filter :password_recover_disabled?, :only => [ :email_password ]
+  before_filter :recover_password_disabled?, :only => [ :email_password ]
 
   ##
   # Application Dashboard
@@ -84,8 +84,8 @@ class TypusController < ApplicationController
 
 private
 
-  def password_recover_disabled?
-    redirect_to typus_login_url unless Typus::Configuration.options[:password_recover]
+  def recover_password_disabled?
+    redirect_to typus_login_url unless Typus::Configuration.options[:recover_password]
   end
 
 end

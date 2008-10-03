@@ -5,7 +5,7 @@
   <%= text_field :user, :email, :size => "20", :class => "title" %></p>
   <p><label for="password">Password</label>
   <%= password_field :user, :password, :size => "20", :class => "title" %></p>
-  <p><%= submit_tag "Sign in", :class => 'button' %> <%= link_to "Recover password", typus_recover_password_url if Typus::Configuration.options[:password_recover] %></p>
+  <p><%= submit_tag "Sign in", :class => 'button' %> <%= link_to "Recover password", typus_recover_password_url if Typus::Configuration.options[:recover_password] %></p>
 <% end %>
 
 <%= typus_block("login_bottom") %>
