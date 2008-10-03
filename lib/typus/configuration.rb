@@ -39,6 +39,7 @@ module Typus
     folders.each do |plugin|
       @@config = @@config.merge(YAML.load_file("#{RAILS_ROOT}/#{plugin}"))
     end
+
     config_file = "#{RAILS_ROOT}/config/typus.yml"
     @@config = @@config.merge(YAML.load_file(config_file)) if File.exists? config_file
 
