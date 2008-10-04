@@ -14,6 +14,7 @@ module Typus
     #   Typus::Configuration.options[:toggle] = true
     #   Typus::Configuration.options[:root] = 'admin'
     #   Typus::Configuration.options[:recover_password] = false
+    #   Typus::Configuration.options[:disable_typus_enabled_plugins] = true
     #
     @@options = { :app_name => 'Typus Admin',
                   :app_description => '',
@@ -24,7 +25,8 @@ module Typus
                   :toggle => true, 
                   :edit_after_create => true, 
                   :root => 'admin', 
-                  :recover_password => true }
+                  :recover_password => true, 
+                  :disable_typus_enabled_plugins => false }
 
     mattr_reader :options
 
@@ -32,7 +34,9 @@ module Typus
     # Read Typus Configuration file
     #
 
-    folders = Dir['vendor/plugins/*/config/typus.yml']
+    switch = @@options[:disable_typus_enabled_plugins] ? 'typus' : '*'
+
+    folders = Dir["vendor/plugins/#{switch}/config/typus.yml"]
     folders << "vendor/plugins/typus/test/config/typus.yml" if ENV['RAILS_ENV'] == 'test'
 
     @@config = {}
@@ -51,7 +55,7 @@ module Typus
     # Read Typus Roles
     #
 
-    folders = Dir['vendor/plugins/*/config/typus_roles.yml']
+    folders = Dir["vendor/plugins/#{switch}/config/typus_roles.yml"]
     folders << "vendor/plugins/typus/test/config/typus_roles.yml" if ENV['RAILS_ENV'] == 'test'
 
     @@roles = { 'admin' => {} }
