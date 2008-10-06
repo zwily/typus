@@ -65,7 +65,6 @@ module TypusHelper
 
   def page_title
     crumbs = []
-    crumbs << Typus::Configuration.options[:app_name]
     crumbs << params[:model] << params[:action]
     return crumbs.compact.map { |x| x.titleize }.join(" &rsaquo; ")
   end
