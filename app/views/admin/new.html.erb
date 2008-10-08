@@ -15,7 +15,7 @@
                        :model_id => params[:model_id] }, 
             :html => { :multipart => true } do |f| %>
   <%= typus_form %>
-  <p><%= submit_tag "Create entry", :class => 'button' %></p>
+  <p><%= submit_tag "Create entry", :disable_with => "Creating entry", :class => 'button' %></p>
 <% end %>
 
 <%= typus_block("new_bottom") %>
