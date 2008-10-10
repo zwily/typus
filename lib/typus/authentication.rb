@@ -8,7 +8,10 @@ module Authentication
     # return where she tried to go.
     #
     def require_login
-      redirect_to typus_login_url(:back_to => request.env['REQUEST_URI']) unless session[:typus]
+      unless session[:typus]
+        back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
+        redirect_to typus_login_url(:back_to => back_to)
+      end
     end
 
     ##
