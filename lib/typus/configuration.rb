@@ -40,8 +40,8 @@ module Typus
     folders << "vendor/plugins/typus/test/config/typus.yml" if ENV['RAILS_ENV'] == 'test'
 
     @@config = {}
-    folders.each do |plugin|
-      @@config = @@config.merge(YAML.load_file("#{RAILS_ROOT}/#{plugin}"))
+    folders.each do |folder|
+      @@config = @@config.merge(YAML.load_file("#{RAILS_ROOT}/#{folder}"))
     end
 
     config_file = "#{RAILS_ROOT}/config/typus.yml"
@@ -59,8 +59,8 @@ module Typus
     folders << "vendor/plugins/typus/test/config/typus_roles.yml" if ENV['RAILS_ENV'] == 'test'
 
     @@roles = { 'admin' => {} }
-    folders.each do |role|
-      YAML.load_file("#{RAILS_ROOT}/#{role}").each do |key, value|
+    folders.each do |folder|
+      YAML.load_file("#{RAILS_ROOT}/#{folder}").each do |key, value|
         @@roles['admin'] = @@roles['admin'].merge(value)
       end
     end
@@ -68,7 +68,14 @@ module Typus
     config_file = "#{RAILS_ROOT}/config/typus_roles.yml"
     if File.exists?(config_file) && !File.zero?(config_file)
       app_roles = YAML.load_file(config_file)
-      @@roles['admin'] = @@roles['admin'].merge(app_roles['admin'])
+      app_roles.each do |key, value|
+        case key
+        when 'admin'
+          @@roles[key] = @@roles[key].merge(app_roles[key])
+        else
+          @@roles[key] = value
+        end
+      end
     end
 
     mattr_reader :roles
