@@ -294,11 +294,11 @@ module AdminHelper
       when "file"
         html << "#{file_field :item, field[0].split("_").first, :style => "border: 0px;"}"
       when "datetime"
-        html << "#{datetime_select :item, field[0], { :minute_step => 5 }}"
+        html << "#{datetime_select :item, field[0], { :minute_step => Typus::Configuration.options[:minute_step] }}"
       when "password"
         html << "#{password_field :item, field[0], :class => 'title'}"
       when "text"
-        html << "#{text_area :item, field[0], :class => 'text', :rows => '10'}"
+        html << "#{text_area :item, field[0], :class => 'text', :rows => Typus::Configuration.options[:form_rows]}"
       when "tree"
         html << "<select id=\"item_#{field[0]}\" name=\"item[#{field[0]}]\">\n"
         html << %{<option value=""></option>}
