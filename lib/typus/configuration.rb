@@ -16,12 +16,13 @@ module Typus
     #   Typus::Configuration.options[:recover_password] = false
     #   Typus::Configuration.options[:disable_typus_enabled_plugins] = true
     #
-    @@options = { :app_name => 'Typus Admin',
-                  :app_description => '',
-                  :per_page => 15,
-                  :version => '',
-                  :form_rows => '10',
-                  :form_columns => '10', 
+    @@options = { :app_name => 'Typus Admin', 
+                  :app_description => '', 
+                  :per_page => 15, 
+                  :version => '', 
+                  :form_rows => 10, 
+                  :form_columns => 10, 
+                  :minute_step => 5, 
                   :toggle => true, 
                   :edit_after_create => true, 
                   :root => 'admin', 
