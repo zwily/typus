@@ -287,6 +287,15 @@ actions per role.
 
 Note: CRUD stands for Create, Read, Update and Delete.
 
+== Typus Enabled Plugins
+
+Typus can use external plugins to extend functionality. Some of them 
+are available on GitHub licensed under the MIT License.
+
+    http://github.com/fesplugas/simplified_blog/tree/master
+
+You can use them as example on how to integrate your plugins into Typus.
+
 == Acknowledgments
 
 - Isaac Feliu - http://railslab.net
@@ -298,9 +307,11 @@ Note: CRUD stands for Create, Read, Update and Delete.
 
 == Author, contact & bugs
 
-You can contact me at <francesc.esplugas@gmail.com>
-
-BROWSE SOURCE on GitHub: http://github.com/fesplugas/typus
+- You can contact me at <francesc.esplugas@gmail.com>
+- Recommend me at http://workingwithrails.com/person/5061-francesc-esplugas
+- Browse source on GitHub: http://github.com/fesplugas/typus/tree/master
+- Visit the wiki http://github.com/fesplugas/typus/wikis
+- Report bugs http://github.com/fesplugas/typus/wikis/bugs
 
 Copyright (c) 2007-2008 Francesc Esplugas Marti, released under the 
 MIT license
