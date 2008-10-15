@@ -1,4 +1,4 @@
-= Typus
+# Typus
 
 As Django Admin, Typus is designed for a single activity:
 
@@ -8,13 +8,13 @@ Once installed and configured you can login at http://application.tld/admin
 
 Note: Typus doesn't try to be all the things to all the people.
 
-== Installing
+## Installing
 
 You can view the available tasks running:
 
     $ rake -T typus
 
-=== Configure
+### Configure
 
 This task will copy required assets to the public folder of your Rails 
 application, will generate configuration files on 'config' folder and 
@@ -33,7 +33,7 @@ And finally create the first user:
 
 Now you can start your application and go to http://application.tld/admin/
 
-== Plugin Configuration Options
+## Plugin Configuration Options
 
 You can overwriting the following settings:
 
@@ -47,21 +47,21 @@ You can overwriting the following settings:
 You can place this settings in a initializer under your initializers 
 folder (<tt>config/initializers/typus.rb</tt>)
 
-=== Disable password recover
+### Disable password recover
 
 You can disable password recover on the login page. By default, password
 recovery is enabled.
 
     Typus::Configuration.options[:recover_password] = false
 
-=== Disallow toggle
+### Disallow toggle
 
 When you have a boolean on the lists you can toggle it's status from 
 true to false and false to true. You can disable this link with:
 
     Typus::Configuration.options[:toggle] = false
 
-=== Redirect to index after create a record
+### Redirect to index after create a record
 
 After creating a new record you'll be redirected to the record so 
 you can continue editing it. If you prefer to be redirected to the 
@@ -69,12 +69,12 @@ main index you can owerwrite the setting.
 
     Typus::Configuration.options[:edit_after_create] = false
 
-== Configuration file options
+## Configuration file options
 
 If the configuration file is broken you'll see a <tt>typus.yml</tt> text 
 on the admin interface.
 
-=== Typus Fields
+### Typus Fields
 
     fields:
       list: name, created_at, category_id, status
@@ -117,13 +117,13 @@ You can add `slug` a as attribute and it'll be shown on the lists.
         list: title, slug
         form: title
 
-=== External Forms
+### External Forms
 
     relationships:
       has_and_belongs_to_many: users
       has_many: projects
 
-=== Filters
+### Filters
 
 You can define filters per model on the config file ...
 
@@ -139,7 +139,7 @@ Or directly on the model:
 
     end
 
-=== Order
+### Order
 
 Adding minus (-) sign before the attribute will make the order DESC.
 
@@ -155,7 +155,7 @@ Or directly on the model:
 
     end
 
-=== Searches
+### Searches
 
 You can define search filters on typus.yml
 
@@ -171,7 +171,7 @@ Or directly on the model:
 
     end
 
-=== Want more actions?
+### Want more actions?
 
     actions:
       list: notify_all
@@ -228,7 +228,7 @@ Example: (Blog)
     Tag:
       module: Post
 
-== Custom Views
+## Custom Views
 
 You can add your custom views to match your application requirements. Views 
 you can customize.
@@ -237,25 +237,25 @@ you can customize.
     edit.html.erb
     show.html.erb
 
-=== Example
+### Example
 
 Need a custom view on the Articles listing? 
 
 Under <tt>app/view/typus/articles</tt> add the file 
 <tt>index.html.erb</tt> and Typus default listing will be overrided.
 
-== Customize Interface
+## Customize Interface
 
 You can customize the interface by placing on <tt>views/admin</tt> 
 the following files.
 
-=== Dashboard
+### Dashboard
 
     views/typus/_dashboard_sidebar.html.erb
     views/typus/_dashboard_top.html.erb
     views/typus/_dashboard_bottom.html.erb
 
-=== Models
+### Models
 
     views/admin/MODEL/_index_top.html.erb
     views/admin/MODEL/_index_bottom.html.erb
@@ -270,7 +270,7 @@ the following files.
     views/admin/MODEL/_show_bottom.html.erb
     views/admin/MODEL/_show_sidebar.html.erb
 
-== Roles
+## Roles
 
 Typus has roles support. You can can add as many roles as you want. They are
 defined in <tt>config/typus_roles.yml</tt> and you can can define the allowed 
@@ -287,7 +287,7 @@ actions per role.
 
 Note: CRUD stands for Create, Read, Update and Delete.
 
-== Typus Enabled Plugins
+## Typus Enabled Plugins
 
 Typus can use external plugins to extend functionality. Some of them 
 are available on GitHub licensed under the MIT License.
@@ -296,7 +296,7 @@ are available on GitHub licensed under the MIT License.
 
 You can use them as example on how to integrate your plugins into Typus.
 
-== Acknowledgments
+## Acknowledgments
 
 - Isaac Feliu - http://railslab.net
 - Jaime Iniesta - http://railes.net
@@ -305,7 +305,7 @@ You can use them as example on how to integrate your plugins into Typus.
 - Xavier Noria (fxn) - http://www.hashref.com
 - Sergio Espeja - http://github.com/spejman
 
-== Author, contact & bugs
+## Author, contact & bugs
 
 - You can contact me at <francesc.esplugas@gmail.com>
 - Recommend me at http://workingwithrails.com/person/5061-francesc-esplugas
