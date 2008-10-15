@@ -39,10 +39,10 @@ You can overwriting the following settings:
 
     Typus::Configuration.options[:app_name] = "Your app name"
     Typus::Configuration.options[:app_description] = "App Details"
-    Typus::Configuration.options[:per_page] = 20 (default 15)
-    Typus::Configuration.options[:form_rows] = 20 (default 10)
-    Typus::Configuration.options[:form_columns] = 20 (default 10)
-    Typus::Configuration.options[:minute_step] = 15 (default 5)
+    Typus::Configuration.options[:per_page] = 20 # default is 15
+    Typus::Configuration.options[:form_rows] = 20 # default is 10
+    Typus::Configuration.options[:form_columns] = 20 # default is 10
+    Typus::Configuration.options[:minute_step] = 15 # default is 5
 
 You can place this settings in a initializer under your initializers 
 folder (`config/initializers/typus.rb`)
