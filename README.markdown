@@ -4,9 +4,11 @@ As Django Admin, Typus is designed for a single activity:
 
     Trusted users editing structured content.
 
-Once installed and configured you can login at http://application.tld/admin
+Once installed and configured you can login at <http://application.tld/admin>
 
-Note: Typus doesn't try to be all the things to all the people.
+Screenshots on the [wiki](http://github.com/fesplugas/typus/wikis)
+
+**Note:** Typus doesn't try to be all the things to all the people.
 
 ## Installing
 
@@ -309,10 +311,10 @@ You can use them as example on how to integrate your plugins into Typus.
 ## Author, contact & bugs
 
 - You can contact me at <francesc.esplugas@gmail.com>
-- Recommend me at http://workingwithrails.com/person/5061-francesc-esplugas
-- Browse source on GitHub: http://github.com/fesplugas/typus/tree/master
-- Visit the wiki http://github.com/fesplugas/typus/wikis
-- Report bugs http://github.com/fesplugas/typus/wikis/bugs
+- Recommend me at <http://workingwithrails.com/person/5061-francesc-esplugas>
+- Browse source on GitHub <http://github.com/fesplugas/typus/tree/master>
+- Visit the wiki <http://github.com/fesplugas/typus/wikis>
+- Report bugs <http://github.com/fesplugas/typus/wikis/bugs>
 
 Copyright (c) 2007-2008 Francesc Esplugas Marti, released under the 
 MIT license
