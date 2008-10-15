@@ -11,8 +11,6 @@ TODO
 [ ] Define a way to access things that are not resources, like 
     Memcached, Reports and other things.
 [ ] Actions for a record can be added to the listings.
-[ ] Define username and email to send emails from, otherwise use first 
-    created user that is enable and it's admin (root).
 
 ON IT
 =====
@@ -23,6 +21,8 @@ ON IT
 DONE
 ====
 
+[ ] Define username and email to send emails from, otherwise use first 
+    created user that is enable and it's admin (root). (20081015)
 [X] Password recovery now sends an email with a link to recover. (20081003)
 [X] Merge configuration files between plugins and application. Still
     a little buggy. (20081003)
