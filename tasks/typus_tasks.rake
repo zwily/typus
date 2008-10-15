@@ -126,7 +126,7 @@ namespace :typus do
         typus.puts "#     has_many: "
         typus.puts "#   filters: status, created_at, category_id"
         typus.puts "#   search: title body"
-        typus.puts "#   application: Content"
+        typus.puts "#   application: Application"
         typus.puts "#   description: Some text to describe the model"
         typus.puts "#"
         typus.puts "# ------------------------------------------------"
@@ -145,7 +145,7 @@ namespace :typus do
             typus.puts "  fields:"
             typus.puts "    list: #{list.join(", ")}"
             typus.puts "    form: #{list.join(", ")}"
-            typus.puts "    relationship: #{list.join(", ")}"
+            typus.puts "    relationship:"
             typus.puts "  actions:"
             typus.puts "    list:"
             typus.puts "    form:"
@@ -155,7 +155,7 @@ namespace :typus do
             typus.puts "    has_many:"
             typus.puts "  filters:"
             typus.puts "  search:"
-            typus.puts "  application: Untitled"
+            typus.puts "  application: Application"
             typus.puts "  description:"
             typus.close
             puts "=> #{class_name} added to `config/typus.yml`"
@@ -165,7 +165,7 @@ namespace :typus do
         puts "=> Configuration file (typus.yml) already exists or there are no models." 
       end
     rescue Exception => e
-      puts "#{e.message} ........."
+      puts "#{e.message}"
       File.delete("#{RAILS_ROOT}/config/typus.yml")
     end
   end
