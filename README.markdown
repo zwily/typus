@@ -37,7 +37,7 @@ Now you can start your application and go to http://application.tld/admin/
 
 ## Plugin Configuration Options
 
-You can overwriting the following settings:
+You can overwrite the following settings:
 
     Typus::Configuration.options[:app_name] = "Your app name"
     Typus::Configuration.options[:app_description] = "App Details"
@@ -45,9 +45,10 @@ You can overwriting the following settings:
     Typus::Configuration.options[:form_rows] = 20 # default is 10
     Typus::Configuration.options[:form_columns] = 20 # default is 10
     Typus::Configuration.options[:minute_step] = 15 # default is 5
+    Typus::Configuration.options[:email] = 'admin@application.tld'
 
 You can place this settings in a initializer under your initializers 
-folder (`config/initializers/typus.rb`)
+folder. (`config/initializers/typus.rb`)
 
 ### Disable password recover
 

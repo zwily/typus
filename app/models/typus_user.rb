@@ -24,8 +24,8 @@ class TypusUser < ActiveRecord::Base
     "#{first_name} #{last_name}"
   end
 
-  def reset_password(host)
-    TypusMailer.deliver_reset_password_link(self, host)
+  def reset_password
+    TypusMailer.deliver_reset_password_link(self)
   end
 
   def self.authenticate(email, password)

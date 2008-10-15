@@ -2,12 +2,11 @@ class TypusMailer < ActionMailer::Base
 
   self.template_root = "#{File.dirname(__FILE__)}/../views"
 
-  def reset_password_link(user, host)
+  def reset_password_link(user)
     @subject    = "[#{Typus::Configuration.options[:app_name]}] Reset password"
-    @body       = { :user => user, :host => host }
+    @body       = { :user => user }
     @recipients = user.email
-    typus_user  = TypusUser.find(:first)
-    @from       = "\"#{typus_user.full_name}\" <#{typus_user.email}>"
+    @from       = Typus::Configuration.options[:email]
     @sent_on    = Time.now
     @headers    = {}
   end
