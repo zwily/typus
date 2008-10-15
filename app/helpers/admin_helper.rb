@@ -198,7 +198,11 @@ module AdminHelper
         when "datetime"
           html << "<td>#{item.send(column[0]).to_s(:db)}</td>"
         when "collection"
-          html << "<td>#{link_to item.send(column[0].split("_id").first).typus_name, :controller => "/admin/#{column[0].split("_id").first.pluralize}", :action => "edit", :id => item.send(column[0])}</td>"
+          begin
+            html << "<td>#{link_to item.send(column[0].split("_id").first).typus_name, :controller => "/admin/#{column[0].split("_id").first.pluralize}", :action => "edit", :id => item.send(column[0])}</td>"
+          rescue
+            html << "<td></td>"
+          end
         when "tree"
           html << "<td>#{item.parent.typus_name if item.parent}</td>"
         when "position"
