@@ -45,7 +45,7 @@ You can overwriting the following settings:
     Typus::Configuration.options[:minute_step] = 15 (default 5)
 
 You can place this settings in a initializer under your initializers 
-folder (<tt>config/initializers/typus.rb</tt>)
+folder (`config/initializers/typus.rb`)
 
 ### Disable password recover
 
@@ -71,7 +71,7 @@ main index you can owerwrite the setting.
 
 ## Configuration file options
 
-If the configuration file is broken you'll see a <tt>typus.yml</tt> text 
+If the configuration file is broken you'll see a `typus.yml` text 
 on the admin interface.
 
 ### Typus Fields
@@ -81,7 +81,8 @@ on the admin interface.
       form: name, body, created_at, status
       relationship: name, category_id
 
-NOTE: Upload files only works if you follow <tt>Paperclip</tt> naming conventions.
+NOTE: Upload files only works if you follow `Paperclip` naming 
+conventions.
 
 In form fields you can add an '*' at the end of the field making that 
 field read-only, this field will be shown in the form but won't be 
@@ -194,17 +195,17 @@ You'll can add those actions to your admin controllers. Example:
 
 For feedback you can use the following flash methods.
 
-- <tt>flash[:notice]</tt> just some feedback.
-- <tt>flash[:error]</tt> when there's something wrong.
-- <tt>flash[:success]</tt> when the action successfully finished.
+- `flash[:notice]` just some feedback.
+- `flash[:error]` when there's something wrong.
+- `flash[:success]` when the action successfully finished.
 
 ### Applications, modules and submodules
 
-To group modules into an application use <tt>application<tt>.
+To group modules into an application use *application*.
 
     application: CMS
 
-Each module has submodules grouped using <tt>module</tt>.
+Each module has submodules grouped using *module*.
 
     module: Article
 
@@ -241,13 +242,13 @@ you can customize.
 
 Need a custom view on the Articles listing? 
 
-Under <tt>app/view/typus/articles</tt> add the file 
-<tt>index.html.erb</tt> and Typus default listing will be overrided.
+Under `app/view/typus/articles` add the file `index.html.erb` and 
+Typus default listing will be overrided.
 
 ## Customize Interface
 
-You can customize the interface by placing on <tt>views/admin</tt> 
-the following files.
+You can customize the interface by placing on `views/admin` the 
+following files.
 
 ### Dashboard
 
@@ -272,9 +273,9 @@ the following files.
 
 ## Roles
 
-Typus has roles support. You can can add as many roles as you want. They are
-defined in <tt>config/typus_roles.yml</tt> and you can can define the allowed 
-actions per role.
+Typus has roles support. You can can add as many roles as you want. 
+They are defined in `config/typus_roles.yml` and you can can define 
+the allowed actions per role.
 
     admin:
       TypusUser: crud
