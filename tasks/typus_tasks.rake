@@ -35,7 +35,7 @@ namespace :typus do
 
   end
 
-  # desc "Install Typus plugins"
+  desc "Install Typus plugins"
   task :plugins do
 
     plugins = [ "git://github.com/fesplugas/simplified_blog.git", 
@@ -45,7 +45,7 @@ namespace :typus do
 
   end
 
-  # desc "Install Typus dependencies (paperclip, acts_as_list, acts_as_tree)"
+  desc "Install Typus dependencies (paperclip, acts_as_list, acts_as_tree)"
   task :dependencies do
 
     plugins = [ "git://github.com/thoughtbot/paperclip.git", 
@@ -56,7 +56,7 @@ namespace :typus do
 
   end
 
-  # desc "Installs Typus images, stylesheets and javascripts"
+  desc "Installs Typus images, stylesheets and javascripts"
   task :assets do
     %w( images stylesheets ).each do |folder|
       FileUtils.cp Dir[PLUGIN_ROOT + "/public/#{folder}/*.*"], RAILS_ROOT + "/public/#{folder}"
@@ -71,7 +71,7 @@ namespace :typus do
     end
   end
 
-  # desc "Generate config/typus_roles.yml"
+  desc "Generate config/typus_roles.yml"
   task :generate_roles => :environment do
     begin
       MODEL_DIR = File.join(RAILS_ROOT, "app/models")
@@ -98,7 +98,7 @@ namespace :typus do
     end
   end
 
-  # desc "Generate config/typus.yml"
+  desc "Generate config/typus.yml"
   task :generate_config => :environment do
     begin
       MODEL_DIR = File.join(RAILS_ROOT, "app/models")
