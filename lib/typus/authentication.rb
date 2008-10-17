@@ -78,9 +78,20 @@ module Authentication
     #   @current_user.can_update?
     #
     def can_update?(model = @model)
-      unless @current_user.can_update? model
-        flash[:notice] = "#{@current_user.roles.capitalize} cannot #{params[:action]} items."
-        redirect_to :back rescue redirect_to typus_dashboard_url
+      if model.new.kind_of? TypusUser
+
+        return if Typus::Configuration.options[:root] == @current_user.roles
+
+        if !(params[:id] == session[:typus].to_s)
+          flash[:notice] = "As you're not the admin or the owner of this record you cannot edit it."
+          redirect_to :back rescue redirect_to typus_dashboard_url
+        end
+
+      else
+        unless @current_user.can_update? model
+          flash[:notice] = "#{@current_user.roles.capitalize} cannot #{params[:action]} items."
+          redirect_to :back rescue redirect_to typus_dashboard_url
+        end
       end
     end
 

@@ -130,10 +130,10 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   end
 
-  # FIXME
   def test_should_not_allow_editor_to_edit_other_users_profiles
 
     Typus::Configuration.options[:edit_after_create] = true
+    @request.env["HTTP_REFERER"] = "/admin/typus_users"
 
     user = typus_users(:editor)
     @request.session[:typus] = user.id
@@ -143,10 +143,10 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_template 'edit'
 
     get :edit, { :id => typus_users(:admin).id }
-    assert_response :success
-    assert_template 'edit'
-    # assert_response :redirect
-    # assert_redirected_to :action => :index
+    assert_response :redirect
+    assert_redirected_to "/admin/typus_users"
+    assert flash[:notice]
+    assert_match /As you're not the admin or the owner of this record you cannot edit it./, flash[:notice]
 
   end
 
