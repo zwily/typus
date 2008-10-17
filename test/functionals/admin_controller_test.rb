@@ -26,14 +26,24 @@ class AdminControllerTest < ActionController::TestCase
     assert_equal models.sort, typus_user.models.map(&:first).sort
 
     assert typus_user.can_create? Category
+    assert !typus_user.can_create?(Comment)
     assert typus_user.can_create? Post
+    assert !typus_user.can_create?(TypusUser)
+
+    assert !typus_user.can_read?(Category)
+    assert !typus_user.can_read?(Comment)
+    assert !typus_user.can_read?(Post)
+    assert !typus_user.can_read?(TypusUser)
 
     assert typus_user.can_update? Category
-    assert typus_user.can_update? Post
     assert typus_user.can_update? Comment
+    assert typus_user.can_update? Post
     assert typus_user.can_update? TypusUser
 
+    assert !typus_user.can_destroy?(Category)
     assert typus_user.can_destroy? Comment
+    assert !typus_user.can_destroy?(Post)
+    assert !typus_user.can_destroy?(TypusUser)
 
   end
 
