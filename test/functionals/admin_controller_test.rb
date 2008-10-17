@@ -2,6 +2,11 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class AdminControllerTest < ActionController::TestCase
 
+  def test_should_get_list_of_roles
+    roles = %w( admin editor designer )
+    assert_equal roles.sort, Typus::Configuration.roles.map(&:first).sort
+  end
+
   def test_admin_role_settings
 
     typus_user = typus_users(:admin)
@@ -63,11 +68,6 @@ class AdminControllerTest < ActionController::TestCase
     assert typus_user.can_update? Category
     assert !typus_user.can_update?(Post)
 
-  end
-
-  def test_should_get_list_of_roles
-    roles = %w( admin editor designer )
-    assert_equal roles.sort, Typus::Configuration.roles.map(&:first).sort
   end
 
   def test_configuration_options
