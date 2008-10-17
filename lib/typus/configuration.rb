@@ -40,7 +40,7 @@ module Typus
     switch = @@options[:disable_typus_enabled_plugins] ? 'typus' : '*'
 
     folders = Dir["vendor/plugins/#{switch}/config/typus.yml"]
-    folders << "vendor/plugins/typus/test/config/typus.yml" if ENV['RAILS_ENV'] == 'test'
+    folders = ["vendor/plugins/typus/test/config/typus.yml"] if ENV['RAILS_ENV'] == 'test'
 
     @@config = {}
     folders.each do |folder|
@@ -59,7 +59,7 @@ module Typus
     #
 
     folders = Dir["vendor/plugins/#{switch}/config/typus_roles.yml"]
-    folders << "vendor/plugins/typus/test/config/typus_roles.yml" if ENV['RAILS_ENV'] == 'test'
+    folders = ["vendor/plugins/typus/test/config/typus_roles.yml"] if ENV['RAILS_ENV'] == 'test'
 
     @@roles = { 'admin' => {} }
     folders.each do |folder|
@@ -68,7 +68,12 @@ module Typus
       end
     end
 
-    config_file = "#{RAILS_ROOT}/config/typus_roles.yml"
+    if ENV['RAILS_ENV'] == 'test'
+      config_file = "#{RAILS_ROOT}/vendor/plugins/typus/test/config/typus_roles.yml"
+    else
+      config_file = "#{RAILS_ROOT}/config/typus_roles.yml"
+    end
+
     if File.exists?(config_file) && !File.zero?(config_file)
       app_roles = YAML.load_file(config_file)
       app_roles.each do |key, value|
