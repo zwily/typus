@@ -4,7 +4,8 @@ class TypusMailerTest < ActiveSupport::TestCase
 
   def setup
     @user = typus_users(:admin)
-    @response = TypusMailer.deliver_reset_password_link(@user, "http://0.0.0.0:3000")
+    ActionMailer::Base.default_url_options[:host] = 'http://test.host'
+    @response = TypusMailer.deliver_reset_password_link(@user)
   end
 
   def test_should_check_email_contains_application_name_on_subject_and_body
@@ -22,6 +23,6 @@ class TypusMailerTest < ActiveSupport::TestCase
 
   def test_should_check_email_contains_signature
     assert_match /--\n#{Typus::Configuration.options[:app_name]}/, @response.body
-  end
+ end
 
 end
