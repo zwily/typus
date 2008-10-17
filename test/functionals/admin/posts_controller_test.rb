@@ -8,10 +8,10 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_should_redirect_to_login
     get :index
     assert_response :redirect
-    assert_redirected_to typus_login_url
+    assert_redirected_to typus_login_url(:back_to => '/admin/posts')
     get :edit, { :id => 1 }
     assert_response :redirect
-    assert_redirected_to typus_login_url
+    assert_redirected_to typus_login_url(:back_to => '/admin/posts')
   end
 
   def test_should_render_new
