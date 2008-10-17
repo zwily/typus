@@ -52,25 +52,15 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert expected_fields.kind_of? Array
   end
 
-=begin
-
   def test_should_return_all_fields_for_undefined_field_type_on_typus_user
-    fields = TypusUser.typus_fields_for(:undefined)
-    expected_fields = [["id", "integer"],
-                       ["email", "string"],
-                       ["first_name", "string"],
-                       ["last_name", "string"],
-                       ["salt", "string"],
-                       ["crypted_password", "string"],
-                       ["status", "boolean"],
-                       ["roles", "string"],
-                       ["created_at", "datetime"],
-                       ["updated_at", "datetime"]]
-    assert_equal fields, expected_fields
+    expected_fields = [["first_name", "string"], 
+                       ["last_name", "string"], 
+                       ["email", "string"], 
+                       ["roles", "string"], 
+                       ["status", "boolean"]]
+    assert_equal expected_fields, TypusUser.typus_fields_for(:undefined)
     assert expected_fields.kind_of? Array
   end
-
-=end
 
   def test_should_return_filters_for_typus_user
     filters = TypusUser.typus_filters
