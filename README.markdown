@@ -300,6 +300,14 @@ are available on GitHub licensed under the MIT License.
 
 You can use them as example on how to integrate your plugins into Typus.
 
+If you have an existing plugin and you want to integrate it with Typus use
+the `typus_plugin` generator.
+
+    $ script/generate plugin your_plugin
+    $ script/generate typus_plugin your_plugin
+
+Usually a Typus plugin contains `models`, `controllers` & `views.`.
+
 ## Acknowledgments
 
 - Isaac Feliu - http://railslab.net
