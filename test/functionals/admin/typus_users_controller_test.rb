@@ -138,9 +138,15 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     user = typus_users(:editor)
     @request.session[:typus] = user.id
 
-    get :edit, { :id => typus_users(:admin).id }
+    get :edit, { :id => user.id }
+    assert_response :success
+    assert_template 'edit'
 
+    get :edit, { :id => typus_users(:admin).id }
+    assert_response :success
+    assert_template 'edit'
     # assert_response :redirect
+    # assert_redirected_to :action => :index
 
   end
 
