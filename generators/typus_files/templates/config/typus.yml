@@ -1,0 +1,45 @@
+###
+## Typus Configuration File
+##
+#
+# Post:
+#   fields:
+#     list: title, category_id, created_at, status
+#     form: title, body, status, created_at
+#     relationship: title, status
+#   actions:
+#     list: cleanup
+#     form: send_as_newsletter
+#   order_by: created_at
+#   relationships:
+#     has_and_belongs_to_many:
+#     has_many:
+#   filters: status, created_at, category_id
+#   search: title body
+#   application: Application
+#   description: Some text to describe the model
+#
+# ------------------------------------------------
+
+<%- ar_models.each do |model| -%>
+<%- model_attributes = model.new.attributes.keys -%>
+<%- model_attributes.delete('content') -%>
+<%- model_attributes.delete('body') -%>
+<%= model %>:
+  fields:
+    list: <%= model_attributes.join(", ") %>
+    form: <%= model_attributes.join(", ") %>
+    relationship:
+  actions:
+    list:
+    form:
+  order_by:
+  relationships:
+    has_and_belongs_to_many:
+    has_many:
+  filters:
+  search:
+  application: Application
+  description:
+
+<%- end -%>

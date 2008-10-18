@@ -1,0 +1,5 @@
+admin:
+  TypusUser: crud
+  <%- ar_models.each do |model| -%>
+  <%= model %>: crud
+  <%- end -%>
