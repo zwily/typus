@@ -15,6 +15,7 @@ Screenshots on the [wiki](http://github.com/fesplugas/typus/wikis)
 You can view the available tasks running:
 
     $ rake -T typus
+    (in /home/fesplugas/projects/typus_platform)
     rake typus:dependencies  # Install Typus dependencies (paperclip, acts_as_l....
     rake typus:plugins       # Install Typus plugins
     rake typus:roles         # List current roles
@@ -43,16 +44,19 @@ Now you can start your application and go to http://application.tld/admin/
 
 You can overwrite the following settings:
 
-    Typus::Configuration.options[:app_name] = "Your app name"
-    Typus::Configuration.options[:app_description] = "App Details"
-    Typus::Configuration.options[:per_page] = 20 # default is 15
-    Typus::Configuration.options[:form_rows] = 20 # default is 10
-    Typus::Configuration.options[:form_columns] = 20 # default is 10
-    Typus::Configuration.options[:minute_step] = 15 # default is 5
-    Typus::Configuration.options[:email] = 'admin@application.tld'
+    Typus::Configuration.options[:app_name]
+    Typus::Configuration.options[:app_description]
+    Typus::Configuration.options[:per_page]
+    Typus::Configuration.options[:form_rows]
+    Typus::Configuration.options[:form_columns]
+    Typus::Configuration.options[:minute_step]
+    Typus::Configuration.options[:email]
+    Typus::Configuration.options[:toggle]
+    Typus::Configuration.options[:edit_after_create]
+    Typus::Configuration.options[:root]
+    Typus::Configuration.options[:recover_password]
 
-You can place this settings in a initializer under your initializers 
-folder. (`config/initializers/typus.rb`)
+You can overwrite this settings in the initializer `typus.rb`.
 
 ### Disable password recover
 
