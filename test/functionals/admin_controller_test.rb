@@ -71,7 +71,7 @@ class AdminControllerTest < ActionController::TestCase
   end
 
   def test_configuration_options
-    assert_equal "Typus Admin", Typus::Configuration.options[:app_name]
+    assert_equal "Typus", Typus::Configuration.options[:app_name]
     assert_equal "", Typus::Configuration.options[:app_description]
     assert_equal 15, Typus::Configuration.options[:per_page]
     assert_equal 10, Typus::Configuration.options[:form_rows]
