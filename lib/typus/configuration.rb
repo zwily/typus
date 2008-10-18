@@ -17,7 +17,7 @@ module Typus
     #   Typus::Configuration.options[:disable_typus_enabled_plugins] = true
     #   Typus::Configuration.options[:email] = 'admin@application.tld'
     #
-    @@options = { :app_name => 'Typus Admin', 
+    @@options = { :app_name => 'Typus', 
                   :app_description => '', 
                   :per_page => 15, 
                   :version => '', 
