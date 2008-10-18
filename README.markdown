@@ -15,6 +15,10 @@ Screenshots on the [wiki](http://github.com/fesplugas/typus/wikis)
 You can view the available tasks running:
 
     $ rake -T typus
+    rake typus:dependencies  # Install Typus dependencies (paperclip, acts_as_l....
+    rake typus:plugins       # Install Typus plugins
+    rake typus:roles         # List current roles
+    rake typus:seed          # Create TypusUser `rake typus:seed email=foo@bar....
 
 ### Configure
 
@@ -22,7 +26,7 @@ This task will copy required assets to the public folder of your Rails
 application, will generate configuration files on 'config' folder and 
 will install some required plugins.
 
-    $ rake typus:configure
+    $ script/generate typus_files
 
 Create TypusUsers migration and migrate your database:
 
