@@ -24,6 +24,9 @@ class TypusFilesGenerator < Rails::Generator::Base
         m.template "config/#{file}", "config/#{file}", :assigns => { :ar_models => ar_models }
       end
 
+      # initializers
+      m.file "initializers/typus.rb", "config/initializers/typus.rb"
+
       # stylesheets and images
       m.file "stylesheets/typus.css", "public/stylesheets/typus.css"
       files = %w( typus_spinner.gif typus_trash.gif typus_status_false.gif typus_status_true.gif )
