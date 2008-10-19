@@ -1,12 +1,12 @@
 <% content_for :sidebar do %>
-  <%= typus_block("index_sidebar") || actions %>
+  <%= typus_block :index_sidebar || actions %>
   <%= search %>
   <%= filters %>
 <% end %>
 
 <h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; <%= @model.name.pluralize.titleize %> <% if request.env['QUERY_STRING'] %><small><%= link_to "Remove filter" %></small><% end %></h2>
 
-<%= typus_block("index_top") %>
+<%= typus_block :index_top %>
 
 <div id="list">
 
@@ -25,4 +25,4 @@
 
 </div>
 
-<%= typus_block("index_bottom") %>
+<%= typus_block :index_bottom %>
