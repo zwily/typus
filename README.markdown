@@ -2,13 +2,15 @@
 
 As Django Admin, Typus is designed for a single activity:
 
-    Trusted users editing structured content.
+> Trusted users editing structured content.
 
-Once installed and configured you can login at <http://application.tld/admin>
+Keep in mind that:
+
+> Typus doesn't try to be all the things to all the people.
+
+Once installed and configured you can login at <http://example.com/admin>
 
 Screenshots on the [wiki](http://github.com/fesplugas/typus/wikis)
-
-**Note:** Typus doesn't try to be all the things to all the people.
 
 ## Installing
 
@@ -38,7 +40,7 @@ And finally create the first user:
 
     $ rake typus:seed email='john@example.com' RAILS_ENV=production
 
-Now you can start your application and go to http://application.tld/admin/
+Now you can start your application and go to <http://example.com/admin>
 
 ## Plugin Configuration Options
 
