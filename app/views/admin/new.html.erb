@@ -1,5 +1,6 @@
 <% content_for :sidebar do %>
-  <%= typus_block :new_sidebar || actions %>
+  <%= typus_block :new_sidebar %>
+  <%= actions %>
 <% end %>
 
 <%= display_link_to_previous if params[:back_to] %>
