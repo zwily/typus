@@ -6,7 +6,7 @@ class TypusFilesGenerator < Rails::Generator::Base
 
       ##
       # For creating `typus.yml` and `typus_roles.yml` we need first to detect 
-      # the available AR models.
+      # the available AR models of the application, not the plugins.
       #
       Dir.chdir(File.join(RAILS_ROOT, "app/models"))
       models, ar_models = Dir["*.rb"], []
