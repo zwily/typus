@@ -35,6 +35,7 @@ module AdminHelper
 
     ##
     # index, update, create
+    #
     case params[:action]
     when "new", "create"
       html << "<ul>"
@@ -391,17 +392,25 @@ module AdminHelper
     pg = params[:page].blank? ? 1 : params[:page].to_i
     current_page = pager.page(pg)
     html = ""
+    ##
     # Calculate the window start and end pages
+    #
     padding = padding < 0 ? 0 : padding
     first = pager.first.number <= (current_page.number - padding) && pager.last.number >= (current_page.number - padding) ? current_page.number - padding : 1
     last = pager.first.number <= (current_page.number + padding) && pager.last.number >= (current_page.number + padding) ? current_page.number + padding : pager.last.number
+    ##
     # Print start page if anchors are enabled
+    #
     html << yield(1) if always_show_anchors and not first == 1
+    ##
     # Print window pages
+    #
     first.upto(last) do |page|
       (current_page.number == page && !link_to_current_page) ? html << page.to_s : html << (yield(page)).to_s
     end
+    ##
     # Print end page if anchors are enabled
+    #
     html << yield(pager.last.number).to_s if always_show_anchors and not last == pager.last.number
     # return the html
     return html
