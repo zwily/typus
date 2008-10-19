@@ -7,7 +7,7 @@ class TypusUser < ActiveRecord::Base
   validates_uniqueness_of :email
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
   validates_confirmation_of :password, :if => lambda { |person| person.new_record? or not person.password.blank? }
-  validates_length_of :password, :within => 6..40, :if => lambda { |person| person.new_record? or not person.password.blank? }
+  validates_length_of :password, :within => Typus::Configuration.options[:password]..40, :if => lambda { |person| person.new_record? or not person.password.blank? }
 
   validates_inclusion_of :roles, 
                          :in => Typus::Configuration.roles.keys, 
