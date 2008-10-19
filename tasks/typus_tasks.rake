@@ -22,7 +22,7 @@ namespace :typus do
       if typus_user.save
         puts "=> Your new password is #{password}"
       else
-        puts "=> Please, provide a valid email. (rake typus:seed email=foo@bar.com)"
+        puts "=> Please, provide a valid email. (rake typus:seed email=john@example.com)"
       end
     rescue
       puts "=> Run `script/generate typus_migration` to create required tables"
