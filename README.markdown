@@ -36,7 +36,7 @@ Create TypusUsers migration and migrate your database:
 
 And finally create the first user:
 
-    $ rake typus:seed email='youremail@yourdomain.com' RAILS_ENV=production
+    $ rake typus:seed email='john@example.com' RAILS_ENV=production
 
 Now you can start your application and go to http://application.tld/admin/
 

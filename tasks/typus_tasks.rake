@@ -2,7 +2,7 @@ namespace :typus do
 
   PLUGIN_ROOT = File.dirname(__FILE__) + '/../'
 
-  desc "Create TypusUser `rake typus:seed email=john@example.com`"
+  desc "Create TypusUser (rake typus:seed email=john@example.com)"
   task :seed => :environment do
 
     include Authentication
