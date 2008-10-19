@@ -101,15 +101,6 @@ module Typus
       require 'vendor/paginator'
     end
 
-    def install
-      puts "=> Run `rake typus:configure`"
-    end
-
-    def uninstall
-      puts "=> Removing images & stylesheets."
-      %w( stylesheets images ).each { |f| File.delete(*Dir["public/#{f}/typus*"]) }
-    end
-
     def generate_controllers
 
       ##
