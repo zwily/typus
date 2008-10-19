@@ -302,12 +302,27 @@ the allowed actions per role.
       Post: cu
       Category: cu
 
+If you're using a Typus enabled plugin, it will probably have defined roles 
+for the new application functionality. You can overwrite them from the 
+configuration file.
+
 Note: CRUD stands for Create, Read, Update and Delete.
+
+### Tip
+
+1. Roles for a user?
+
+You can create a role for a user using directly the username nickname. For 
+example, the user Francesc Esplugas:
+
+    fesplugas:
+      TypusUser: u
+      Post: crud
 
 ## Typus Enabled Plugins
 
 Typus can use external plugins to extend functionality. Some of them 
-are available on GitHub licensed under the MIT License.
+are available on GitHub licensed under the MIT License. For example:
 
     http://github.com/fesplugas/simplified_blog/tree/master
 
@@ -319,7 +334,9 @@ the `typus_plugin` generator.
     $ script/generate plugin your_plugin
     $ script/generate typus_plugin your_plugin
 
-Usually a Typus plugin contains `models`, `controllers` & `views.`.
+Usually a Typus plugin contains `models`, `controllers` & `views.`. The 
+plugin will have a `init.rb` which will merge the load paths for those 
+folders.
 
 ## Acknowledgments
 
