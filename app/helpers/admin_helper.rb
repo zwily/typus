@@ -3,7 +3,7 @@ module AdminHelper
   include TypusHelper
 
   def typus_block(name)
-    render :partial => "admin/#{@model.to_s.tableize}/#{name}" rescue nil
+    render :partial => "admin/#{@model.name.tableize}/#{name}" rescue nil
   end
 
   def actions
@@ -61,11 +61,11 @@ module AdminHelper
     case params[:action]
     when 'index'
       @model.typus_actions_for(:list).each do |a|
-        html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.to_s.tableize}_url") }</li>"
+        html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.name.tableize}_url") }</li>"
       end
     when 'edit'
       @model.typus_actions_for(:form).each do |a|
-        html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.to_s.tableize.singularize}_url") }</li>"
+        html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.name.tableize.singularize}_url") }</li>"
       end
     end
 
@@ -159,7 +159,7 @@ module AdminHelper
   end
 
   def display_link_to_previous
-    message = "You're adding a new #{@model.to_s.downcase} to a model. "
+    message = "You're adding a new #{@model.name.downcase} to a model. "
     message << "Do you want to cancel it? <a href=\"#{params[:back_to]}\">Click Here</a>"
     "<div id=\"flash\" class=\"notice\"><p>#{message}</p></div>"
   end
@@ -191,7 +191,7 @@ module AdminHelper
         when "boolean"
           image = "#{image_tag(status = item.send(column[0])? "typus_status_true.gif" : "typus_status_false.gif")}"
           if Typus::Configuration.options[:toggle]
-            html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:controller => "admin/#{model.to_s.tableize}", :action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
+            html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:controller => "admin/#{model.name.tableize}", :action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
           else
             html << "<td width=\"20px\" align=\"center\">#{image}</td>"
           end
@@ -209,11 +209,11 @@ module AdminHelper
           html << "<td>"
           [["&uarr;", "move_higher"], 
            ["&darr;", "move_lower"]].each do |position|
-            html << "#{link_to position.first, :params => params.merge(:controller => "admin/#{model.to_s.tableize}", :action => 'position', :id => item.id, :go => position.last)} "
+            html << "#{link_to position.first, :params => params.merge(:controller => "admin/#{model.name.tableize}", :action => 'position', :id => item.id, :go => position.last)} "
           end
           html << "</td>"
         else # 'string', 'integer', 'selector'
-          html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:controller => "admin/#{model.to_s.tableize}", :action => 'edit', :id => item.id)}</td>"
+          html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:controller => "admin/#{model.name.tableize}", :action => 'edit', :id => item.id)}</td>"
         end
       end
 
@@ -229,18 +229,18 @@ module AdminHelper
 
         case params[:action]
         when 'index'
-          @perform = link_to image_tag("typus_trash.gif"), { :controller => "admin/#{model.to_s.tableize}", 
+          @perform = link_to image_tag("typus_trash.gif"), { :controller => "admin/#{model.name.tableize}", 
                                                              :action => 'destroy', 
                                                              :id => item.id }, 
                                                              :confirm => "Remove entry?", 
                                                              :method => :delete
         else
-          @perform = link_to image_tag("typus_trash.gif"), { :controller => "admin/#{model.to_s.tableize}", 
+          @perform = link_to image_tag("typus_trash.gif"), { :controller => "admin/#{model.name.tableize}", 
                                                              :action => "unrelate", 
                                                              :id => item.id, 
                                                              :model => @model, 
                                                              :model_id => params[:id] }, 
-                                                             :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@model.to_s}?"
+                                                             :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@model.name}?"
         end
 
       end
@@ -318,7 +318,7 @@ module AdminHelper
         html << "</select>"
       when "collection"
         related = field[0].split("_id").first.capitalize.camelize.constantize
-        html << "#{select :item, "#{field[0]}", related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.to_s.downcase}"}"
+        html << "#{select :item, "#{field[0]}", related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}"
       else
         html << "#{text_field :item, field[0], :class => 'title'}"
       end
@@ -361,7 +361,7 @@ module AdminHelper
             </form></p>
           HTML
         end
-        current_model = @model.to_s.singularize.camelize.constantize
+        current_model = @model.name.singularize.camelize.constantize
         @items = current_model.find(params[:id]).send(field)
         html << typus_table(field.modelize, 'relationship') if @items.size > 0
       end
