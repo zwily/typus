@@ -2,7 +2,7 @@ class TypusUser < ActiveRecord::Base
 
   attr_accessor :password
 
-  validates_presence_of :email, :first_name, :last_name
+  validates_presence_of :email
   validates_presence_of :password, :password_confirmation, :if => :new_record?
   validates_uniqueness_of :email
   validates_format_of :email, :with => /^([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})$/i
@@ -17,7 +17,11 @@ class TypusUser < ActiveRecord::Base
   before_save :encrypt_password
 
   def full_name_with_role
-    "#{first_name} #{last_name} (#{roles})"
+    if !first_name.empty? && !last_name.empty?
+      "#{first_name} #{last_name} (#{roles})"
+    else
+      "#{email} (#{roles})"
+    end
   end
 
   def full_name

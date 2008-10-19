@@ -17,9 +17,7 @@ namespace :typus do
       typus_user = TypusUser.new(:email => email, 
                                  :password => password, 
                                  :password_confirmation => password, 
-                                 :first_name => 'Typus', 
-                                 :last_name => 'Admin', 
-                                 :roles => 'admin', 
+                                 :roles => Typus::Configuration.options[:root], 
                                  :status => true)
       if typus_user.save
         puts "=> Your new password is #{password}"
