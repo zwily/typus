@@ -11,11 +11,15 @@
 
 <body>
 
+  <%= typus_block :top, :login %>
+
   <div id="dialog">
     <h1><%= link_to Typus::Configuration.options[:app_name], :action => "login" %></h1>
     <%= display_flash_message %>
     <%= yield %>
   </div>
+
+  <%= typus_block :bottom, :login %>
 
 </body>
 

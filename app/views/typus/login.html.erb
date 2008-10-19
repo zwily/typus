@@ -1,5 +1,3 @@
-<%= typus_block :login_top %>
-
 <% form_tag :action => 'login', :back_to => params[:back_to] do %>
   <p><label for="email">Email</label>
   <%= text_field :user, :email, :size => "20", :class => "title" %></p>
@@ -7,5 +5,3 @@
   <%= password_field :user, :password, :size => "20", :class => "title" %></p>
   <p><%= submit_tag "Sign in", :class => 'button' %> <%= link_to "Recover password", typus_recover_password_url if Typus::Configuration.options[:recover_password] %></p>
 <% end %>
-
-<%= typus_block :login_bottom %>

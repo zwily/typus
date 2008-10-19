@@ -55,8 +55,8 @@ module TypusHelper
 #    display_error(error)
   end
 
-  def typus_block(name)
-    render :partial => "typus/#{name}" rescue nil
+  def typus_block(name, location)
+    render :partial => "admin/#{location}/#{name}" rescue nil
   end
 
   def display_error(error)
