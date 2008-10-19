@@ -79,7 +79,7 @@ class AdminControllerTest < ActionController::TestCase
     assert_equal 5, Typus::Configuration.options[:minute_step]
     assert_equal true, Typus::Configuration.options[:toggle]
     assert_equal true, Typus::Configuration.options[:edit_after_create]
-    assert_equal 'admin@application.tld', Typus::Configuration.options[:email]
+    assert_equal 'admin@example.com', Typus::Configuration.options[:email]
   end
 
 end
