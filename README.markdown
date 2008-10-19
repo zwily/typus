@@ -261,26 +261,31 @@ Typus default listing will be overrided.
 You can customize the interface by placing on `views/admin` the 
 following files.
 
+### Login Page
+
+    views/admin/login/_bottom.html.erb
+    views/admin/login/_top.html.erb
+
 ### Dashboard
 
-    views/typus/_dashboard_sidebar.html.erb
-    views/typus/_dashboard_top.html.erb
-    views/typus/_dashboard_bottom.html.erb
+    views/admin/dashboard/_bottom.html.erb
+    views/admin/dashboard/_sidebar.html.erb
+    views/admin/dashboard/_top.html.erb
 
 ### Models
 
-    views/admin/MODEL/_index_top.html.erb
-    views/admin/MODEL/_index_bottom.html.erb
-    views/admin/MODEL/_index_sidebar.html.erb
-    views/admin/MODEL/_new_top.html.erb
-    views/admin/MODEL/_new_bottom.html.erb
-    views/admin/MODEL/_new_sidebar.html.erb
-    views/admin/MODEL/_edit_top.html.erb
     views/admin/MODEL/_edit_bottom.html.erb
     views/admin/MODEL/_edit_sidebar.html.erb
-    views/admin/MODEL/_show_top.html.erb
+    views/admin/MODEL/_edit_top.html.erb
+    views/admin/MODEL/_index_bottom.html.erb
+    views/admin/MODEL/_index_sidebar.html.erb
+    views/admin/MODEL/_index_top.html.erb
+    views/admin/MODEL/_new_bottom.html.erb
+    views/admin/MODEL/_new_sidebar.html.erb
+    views/admin/MODEL/_new_top.html.erb
     views/admin/MODEL/_show_bottom.html.erb
     views/admin/MODEL/_show_sidebar.html.erb
+    views/admin/MODEL/_show_top.html.erb
 
 ## Roles
 
