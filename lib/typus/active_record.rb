@@ -65,12 +65,14 @@ module Typus
 
           ##
           # Get the field_type for each field
+          #
           self.model_fields.each do |af|
             @field_type = af.last if af.first == f
           end
 
           ##
           # Some custom field_type depending on the attribute name
+          #
           case f
             when 'parent_id':       @field_type = 'tree'
             when /_id/:             @field_type = 'collection'
