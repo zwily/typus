@@ -16,13 +16,30 @@ class TypusUserTest < ActiveSupport::TestCase
     assert typus_user.errors.invalid?(:email)
   end
 
-  def test_should_verify_lenght_of_password
+  def test_should_verify_length_of_password_when_under_within
     data = { :password => "1234", :password_confirmation => "1234" }
     typus_user = create_typus_user(data)
     assert !typus_user.valid?
     assert typus_user.errors.invalid?(:password)
-    data = { :password => "1234567812345678123456781234567812345678123456781234567812345678", 
-             :password_confirmation => "1234567812345678123456781234567812345678123456781234567812345678" }
+  end
+
+  def test_should_verify_length_of_password_when_its_within_on_lower_limit
+    data = { :password => "=" * 8, 
+             :password_confirmation => "=" * 8 }
+    typus_user = create_typus_user(data)
+    assert typus_user.valid?
+  end
+
+  def test_should_verify_length_of_password_when_its_within_on_upper_limit
+    data = { :password => "=" * 40, 
+             :password_confirmation => "=" * 40 }
+    typus_user = create_typus_user(data)
+    assert typus_user.valid?
+  end
+
+  def test_should_verify_length_of_password_when_its_over_within
+    data = { :password => "=" * 50, 
+             :password_confirmation => "=" * 50 }
     typus_user = create_typus_user(data)
     assert !typus_user.valid?
     assert typus_user.errors.invalid?(:password)
