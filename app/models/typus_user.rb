@@ -23,6 +23,7 @@ class TypusUser < ActiveRecord::Base
       full_name ="#{email}"
     end
     full_name << " (#{roles})" if role
+    return full_name
   end
 
   def reset_password
