@@ -16,16 +16,13 @@ class TypusUser < ActiveRecord::Base
   before_create :set_token
   before_save :encrypt_password
 
-  def full_name_with_role
+  def full_name(role = false)
     if !first_name.empty? && !last_name.empty?
-      "#{first_name} #{last_name} (#{roles})"
+      full_name = "#{first_name} #{last_name}"
     else
-      "#{email} (#{roles})"
+      full_name ="#{email}"
     end
-  end
-
-  def full_name
-    "#{first_name} #{last_name}"
+    full_name << " (#{roles})" if role
   end
 
   def reset_password

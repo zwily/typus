@@ -76,7 +76,7 @@ module TypusHelper
   def login_info
     html = <<-HTML
       <ul>
-        <li>Logged as #{link_to @current_user.full_name_with_role, :controller => 'admin/typus_users', :action => 'edit', :id => @current_user.id}</li>
+        <li>Logged as #{link_to @current_user.full_name(true), :controller => 'admin/typus_users', :action => 'edit', :id => @current_user.id}</li>
         <li>#{link_to "Logout", typus_logout_url}</li>
       </ul>
     HTML
