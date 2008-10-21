@@ -4,6 +4,12 @@ class AdminController < ApplicationController
 
   include Authentication
 
+  if Typus::Configuration.options[:ssl]
+    include SslRequirement
+    ssl_required :index, :new, :create, :edit, :show, :update, :destroy, 
+                 :toggle, :position, :relate, :unrelate
+  end
+
   before_filter :require_login
   before_filter :current_user
 

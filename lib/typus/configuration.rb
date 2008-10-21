@@ -17,6 +17,7 @@ module Typus
     #   Typus::Configuration.options[:disable_typus_enabled_plugins] = true
     #   Typus::Configuration.options[:email] = 'admin@example.com'
     #   Typus::Configuration.options[:password] = 8
+    #   Typus::Configuration.options[:ssl] = false
     #
     @@options = { :app_name => 'Typus', 
                   :app_description => '', 
@@ -31,7 +32,8 @@ module Typus
                   :recover_password => true, 
                   :disable_typus_enabled_plugins => false, 
                   :email => 'admin@example.com', 
-                  :password => 8 }
+                  :password => 8, 
+                  :ssl => false }
 
     mattr_reader :options
 
