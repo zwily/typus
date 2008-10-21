@@ -3,15 +3,15 @@ require File.dirname(__FILE__) + '/../test_helper'
 class StringTest < Test::Unit::TestCase
 
   def test_modelize
-    assert_equal "people".modelize, Person
-    assert_equal "categories".modelize, Category
-    assert_equal "typus_users".modelize, TypusUser
+    assert_equal Person, "people".modelize
+    assert_equal Category, "categories".modelize
+    assert_equal TypusUser, "typus_users".modelize
   end
 
   def test_to_class
-    assert_equal "people".to_class, Person
-    assert_equal "categories".to_class, Category
-    assert_equal "typus_users".to_class, TypusUser
+    assert_equal Person, "people".to_class
+    assert_equal Category, "categories".to_class
+    assert_equal TypusUser, "typus_users".to_class
   end
 
 end
