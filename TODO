@@ -11,7 +11,6 @@ TODO
 [ ] Define a way to access things that are not resources, like 
     Memcached, Reports and other things.
 [ ] Actions for a record can be added to the listings.
-[ ] Be able to enable https for the admin.
 [ ] If gettext is not installed, define the _() method.
 
 ON IT
@@ -24,6 +23,7 @@ ON IT
 DONE
 ====
 
+[X] Be able to enable https for the admin. SSL branch. (20081021)
 [X] Define username and email to send emails from, otherwise use first 
     created user that is enable and it's admin (root). (20081015)
 [X] Password recovery now sends an email with a link to recover. (20081003)
