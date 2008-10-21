@@ -117,11 +117,11 @@ module Typus
         fields = Typus::Configuration.config["#{self.name}"]["filters"].split(", ")
       end
       fields_with_type = []
-      fields.each do |f|
-        available_fields.each do |af|
-          @field_type = af[1] if af[0] == f
+      fields.each do |field|
+        if available_fields.map { |a| a.first }.include? field
+          type = available_fields.map { |a| a.last if field == a.first }.compact.first
+          fields_with_type << [ field, type ]
         end
-        fields_with_type << [ f, @field_type ]
       end
       return fields_with_type
     end
