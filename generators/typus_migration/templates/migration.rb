@@ -5,8 +5,8 @@ class CreateTypusUsers < ActiveRecord::Migration
       t.string :email, :null => false
       t.string :salt, :null => false
       t.string :crypted_password, :null => false
-      t.string :first_name, :null => false
-      t.string :last_name, :null => false
+      t.string :first_name, :default => "", :null => false
+      t.string :last_name, :default => "", :null => false
       t.boolean :status, :default => false
       t.string :roles, :null => false
       t.string :token, :null => false
