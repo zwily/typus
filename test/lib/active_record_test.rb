@@ -63,10 +63,13 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_filters_for_typus_user
-    filters = TypusUser.typus_filters
-    expected_filters = [["status", "boolean"]]
-    assert_equal filters, expected_filters
-    assert expected_filters.kind_of? Array
+    assert_equal [["status", "boolean"]], TypusUser.typus_filters
+    assert TypusUser.typus_filters.kind_of? Array
+  end
+
+  def test_should_return_filters_for_pages
+    assert_equal [['status', 'boolean']], Page.typus_filters
+    assert Page.typus_filters.kind_of? Array
   end
 
   def test_should_return_actions_on_list_for_typus_user

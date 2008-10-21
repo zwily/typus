@@ -60,4 +60,10 @@ ActiveRecord::Schema.define do
 
   add_index :comments, :post_id
 
+  create_table :pages, :force => true do |t|
+    t.string :title
+    t.text :body
+    t.boolean :status
+  end
+
 end
