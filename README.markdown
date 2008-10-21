@@ -58,6 +58,7 @@ You can overwrite the following settings:
     Typus::Configuration.options[:root]
     Typus::Configuration.options[:recover_password]
     Typus::Configuration.options[:password]
+    Typus::Configuration.options[:ssl]
 
 You can overwrite this settings in the initializer `typus.rb`.
 
@@ -340,6 +341,17 @@ the `typus_plugin` generator.
 Usually a Typus plugin contains `models`, `controllers` & `views.`. The 
 plugin will have a `init.rb` which will merge the load paths for those 
 folders.
+
+## Typus & SSL
+
+You can use SSL on Typus. To enable it update the initializer.
+
+    Typus::Configuration.options[:ssl] = true
+
+Remember to install the `ssl_requirement` plugin to be able to use this 
+feature.
+
+    $ script/plugin install git://github.com/rails/ssl_requirement.git
 
 ## Acknowledgments
 
