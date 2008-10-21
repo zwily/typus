@@ -17,10 +17,6 @@ class TypusMailerTest < ActiveSupport::TestCase
     assert_match /#{@user.token}/, @response.body
   end
 
-  def test_should_check_email_contains_user_full_name
-    assert_match /#{@user.full_name}/, @response.body
-  end
-
   def test_should_check_email_contains_signature
     assert_match /--\n#{Typus::Configuration.options[:app_name]}/, @response.body
  end
