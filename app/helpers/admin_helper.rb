@@ -297,7 +297,7 @@ module AdminHelper
       when "boolean"
         html << "#{check_box :item, field[0]} Checked if active"
       when "file"
-        html << "#{file_field :item, field[0].split("_").first, :style => "border: 0px;"}"
+        html << "#{file_field :item, field[0].split("_file_name").first, :style => "border: 0px;"}"
       when "datetime"
         html << "#{datetime_select :item, field[0], { :minute_step => Typus::Configuration.options[:minute_step] }}"
       when "password"
