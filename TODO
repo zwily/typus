@@ -11,6 +11,7 @@ TODO
 [ ] Define a way to access things that are not resources, like 
     Memcached, Reports and other things.
 [ ] Actions for a record can be added to the listings.
+[ ] What happens if there's a role that no longer exists?
 
 ON IT
 =====
