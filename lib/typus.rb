@@ -48,7 +48,12 @@ module Typus
       return m.sort
     end
 
+    def version
+      VERSION::STRING
+    end
+
     def enable
+      enable_version
       enable_testing_models if RAILS_ENV == 'test'
       enable_orm
       enable_routes
@@ -58,6 +63,10 @@ module Typus
       enable_patches if Rails.vendor_rails?
       enable_object
       enable_pagination
+    end
+
+    def enable_version
+      require 'typus/version'
     end
 
     def enable_testing_models
