@@ -3,7 +3,7 @@ require 'typus'
 begin
   require 'fastercsv'
 rescue LoadError
-  puts "=> FasterCSV not available, CSV export from Typus won't work."
+  puts "[typus] FasterCSV gem not installed. CSV export from Typus won't work."
 end
 
 # Create needed controllers
