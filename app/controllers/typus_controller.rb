@@ -13,7 +13,7 @@ class TypusController < ApplicationController
   before_filter :require_login, :only => [ :dashboard ]
   before_filter :current_user, :only => [ :dashboard ]
 
-  before_filter :recover_password_disabled?, :only => [ :email_password ]
+  before_filter :recover_password_disabled?, :only => [ :recover_password, :reset_password ]
 
   ##
   # Application Dashboard
@@ -54,8 +54,6 @@ class TypusController < ApplicationController
   ##
   # Email password when lost
   #
-  #   request.env['HTTP_HOST']
-  #
   def recover_password
     if request.post?
       typus_user = TypusUser.find_by_email(params[:user][:email])
@@ -72,6 +70,10 @@ class TypusController < ApplicationController
     end
   end
 
+  ##
+  # Available if Typus::Configuration.options[:recover_password] is
+  # enabled. Enabled by default.
+  #
   def reset_password
     if request.post?
       typus_user = TypusUser.find_by_token(params[:user][:token])

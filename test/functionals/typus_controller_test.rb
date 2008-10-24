@@ -2,6 +2,10 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class TypusControllerTest < ActionController::TestCase
 
+  def setup
+    Typus::Configuration.options[:recover_password] = true
+  end
+
   def test_should_render_login
 
     Typus::Configuration.options[:app_name] = "Typus Admin for the masses"
@@ -93,6 +97,26 @@ class TypusControllerTest < ActionController::TestCase
     assert_template 'dashboard'
     assert_match /Typus Admin for the masses/, @response.body
 
+  end
+
+  def test_should_not_allow_recover_password_if_disabled
+    get :recover_password
+    assert_response :success
+    assert_template 'recover_password'
+    Typus::Configuration.options[:recover_password] = false
+    get :recover_password
+    assert_response :redirect
+    assert_redirected_to typus_login_url
+  end
+
+  def test_should_not_allow_reset_password_if_disabled
+    get :reset_password
+    assert_response :success
+    assert_template 'reset_password'
+    Typus::Configuration.options[:recover_password] = false
+    get :reset_password
+    assert_response :redirect
+    assert_redirected_to typus_login_url
   end
 
 =begin
