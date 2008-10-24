@@ -2,12 +2,6 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class TypusControllerTest < ActionController::TestCase
 
-  def setup
-    @controller = TypusController.new
-    @request = ActionController::TestRequest.new
-    @response = ActionController::TestResponse.new
-  end
-
   def test_should_render_login
 
     Typus::Configuration.options[:app_name] = "Typus Admin for the masses"
