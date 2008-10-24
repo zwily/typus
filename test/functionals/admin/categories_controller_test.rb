@@ -62,7 +62,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
   def test_should_allow_admin_to_add_a_category
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
-    assert admin.can_create? Category
+    assert admin.can_create?(Category)
   end
 
   def test_should_not_allow_designer_to_add_a_category

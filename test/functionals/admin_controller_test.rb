@@ -15,10 +15,10 @@ class AdminControllerTest < ActionController::TestCase
     models = %w( TypusUser Person Post Comment Category )
     assert_equal models.sort, typus_user.models.map(&:first).sort
 
-    models.each { |model| assert typus_user.can_create? model }
-    models.each { |model| assert typus_user.can_read? model }
-    models.each { |model| assert typus_user.can_update? model }
-    models.each { |model| assert typus_user.can_destroy? model }
+    models.each { |model| assert typus_user.can_create?(model) }
+    models.each { |model| assert typus_user.can_read?(model) }
+    models.each { |model| assert typus_user.can_update?(model) }
+    models.each { |model| assert typus_user.can_destroy?(model) }
 
   end
 
@@ -30,9 +30,9 @@ class AdminControllerTest < ActionController::TestCase
     models = %w( Category Comment Post TypusUser )
     assert_equal models.sort, typus_user.models.map(&:first).sort
 
-    assert typus_user.can_create? Category
+    assert typus_user.can_create?(Category)
     assert !typus_user.can_create?(Comment)
-    assert typus_user.can_create? Post
+    assert typus_user.can_create?(Post)
     assert !typus_user.can_create?(TypusUser)
 
     assert !typus_user.can_read?(Category)
@@ -40,13 +40,13 @@ class AdminControllerTest < ActionController::TestCase
     assert !typus_user.can_read?(Post)
     assert !typus_user.can_read?(TypusUser)
 
-    assert typus_user.can_update? Category
-    assert typus_user.can_update? Comment
-    assert typus_user.can_update? Post
-    assert typus_user.can_update? TypusUser
+    assert typus_user.can_update?(Category)
+    assert typus_user.can_update?(Comment)
+    assert typus_user.can_update?(Post)
+    assert typus_user.can_update?(TypusUser)
 
     assert !typus_user.can_destroy?(Category)
-    assert typus_user.can_destroy? Comment
+    assert typus_user.can_destroy?(Comment)
     assert !typus_user.can_destroy?(Post)
     assert !typus_user.can_destroy?(TypusUser)
 
@@ -62,10 +62,10 @@ class AdminControllerTest < ActionController::TestCase
 
     assert !typus_user.can_create?(Post)
 
-    assert typus_user.can_read? Category
-    assert typus_user.can_read? Post
+    assert typus_user.can_read?(Category)
+    assert typus_user.can_read?(Post)
 
-    assert typus_user.can_update? Category
+    assert typus_user.can_update?(Category)
     assert !typus_user.can_update?(Post)
 
   end

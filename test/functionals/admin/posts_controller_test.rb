@@ -113,7 +113,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     file = "#{RAILS_ROOT}/app/views/admin/posts/_index_sidebar.html.erb"
     open(file, 'w+') { |f| f << "Index Sidebar" }
-    assert File.exists? file
+    assert File.exists?(file)
 
     get :index
     assert_response :success
@@ -121,7 +121,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     file = "#{RAILS_ROOT}/app/views/admin/posts/_edit_sidebar.html.erb"
     open(file, 'w+') { |f| f << "Edit Sidebar" }
-    assert File.exists? file
+    assert File.exists?(file)
 
     get :edit, { :id => 1 }
     assert_response :success
@@ -129,7 +129,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     file = "#{RAILS_ROOT}/app/views/admin/posts/_show_sidebar.html.erb"
     open(file, 'w+') { |f| f << "Show Sidebar" }
-    assert File.exists? file
+    assert File.exists?(file)
 
     get :show, { :id => 1 }
     assert_response :success
@@ -147,7 +147,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     file = "#{RAILS_ROOT}/app/views/admin/posts/_index_top.html.erb"
     open(file, 'w+') { |f| f << "Index Top" }
-    assert File.exists? file
+    assert File.exists?(file)
 
     get :index
     assert_response :success
@@ -155,7 +155,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     file = "#{RAILS_ROOT}/app/views/admin/posts/_edit_top.html.erb"
     open(file, 'w+') { |f| f << "Edit Top" }
-    assert File.exists? file
+    assert File.exists?(file)
 
     get :edit, { :id => 1 }
     assert_response :success
@@ -163,7 +163,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     file = "#{RAILS_ROOT}/app/views/admin/posts/_show_top.html.erb"
     open(file, 'w+') { |f| f << "Show Top" }
-    assert File.exists? file
+    assert File.exists?(file)
 
     get :show, { :id => 1 }
     assert_response :success
@@ -181,7 +181,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     file = "#{RAILS_ROOT}/app/views/admin/posts/_index_bottom.html.erb"
     open(file, 'w+') { |f| f << "Index Bottom" }
-    assert File.exists? file
+    assert File.exists?(file)
 
     get :index
     assert_response :success
@@ -189,7 +189,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     file = "#{RAILS_ROOT}/app/views/admin/posts/_edit_bottom.html.erb"
     open(file, 'w+') { |f| f << "Edit Bottom" }
-    assert File.exists? file
+    assert File.exists?(file)
 
     get :edit, { :id => 1 }
     assert_response :success
@@ -197,7 +197,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     file = "#{RAILS_ROOT}/app/views/admin/posts/_show_bottom.html.erb"
     open(file, 'w+') { |f| f << "Show Bottom" }
-    assert File.exists? file
+    assert File.exists?(file)
 
     get :show, { :id => 1 }
     assert_response :success
