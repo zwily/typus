@@ -2,6 +2,15 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class TypusUserTest < ActiveSupport::TestCase
 
+  def test_should_verify_attributes
+    assert TypusUser.instance_methods.include?('first_name')
+    assert TypusUser.instance_methods.include?('last_name')
+    assert TypusUser.instance_methods.include?('email')
+    assert TypusUser.instance_methods.include?('roles')
+    assert TypusUser.instance_methods.include?('salt')
+    assert TypusUser.instance_methods.include?('crypted_password')
+  end
+
   def test_check_email_format
     data = { :email => 'admin' }
     typus_user = create_typus_user(data)
