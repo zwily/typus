@@ -26,17 +26,19 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_login_and_redirect_to_dashboard
-    post :login, { :user => { :email => 'admin@example.com', 
+    typus_user = typus_users(:admin)
+    post :login, { :user => { :email => typus_user.email, 
                               :password => '12345678' } }
-    assert_equal @request.session[:typus], 1
+    assert_equal 1, @request.session[:typus]
     assert_response :redirect
     assert_redirected_to typus_dashboard_url
   end
 
   def test_should_not_login_disabled_user
-    post :login, { :user => { :email => 'disabled_user@example.com', 
+    typus_user = typus_users(:disabled_user)
+    post :login, { :user => { :email => typus_user.email, 
                               :password => '12345678' } }
-    assert_equal @request.session[:typus], nil
+    assert_nil @request.session[:typus]
     assert_response :redirect
     assert_redirected_to typus_login_url
   end
@@ -50,7 +52,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to typus_dashboard_url
     get :dashboard
     assert_redirected_to typus_login_url
-    assert_equal @request.session[:typus], nil
+    assert_nil @request.session[:typus]
     assert flash[:error]
     assert_match /role doesn't exist on the system./, flash[:error]
   end
@@ -77,9 +79,12 @@ class TypusControllerTest < ActionController::TestCase
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
     get :logout
-    assert_equal @request.session[:typus], nil
+    assert_nil @request.session[:typus]
     assert_response :redirect
     assert_redirected_to typus_login_url
+    assert !flash[:notice]
+    assert !flash[:error]
+    assert !flash[:warning]
   end
 
   def test_should_render_dashboard
