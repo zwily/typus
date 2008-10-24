@@ -113,8 +113,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_editor_to_update_himself_to_become_admin
 
-    Typus::Configuration.options[:root] = 'admin'
-
     editor = typus_users(:editor)
     @request.session[:typus] = editor.id
     @request.env["HTTP_REFERER"] = "/admin/typus_users/#{editor.id}/edit"
@@ -132,7 +130,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_editor_to_edit_other_users_profiles
 
-    Typus::Configuration.options[:edit_after_create] = true
     @request.env["HTTP_REFERER"] = "/admin/typus_users"
 
     user = typus_users(:editor)
@@ -195,6 +192,43 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     assert flash[:notice]
     assert_match /You don't have permission to access this resource./, flash[:notice]
+
+  end
+
+  def test_should_change_root_to_editor_so_editor_can_edit_others_content
+
+    typus_user = typus_users(:editor)
+    @request.session[:typus] = typus_user.id
+
+    assert_equal 'editor', typus_user.roles
+
+    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+    get :edit, :id => typus_user.id
+    assert_response :success
+
+    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+    get :edit, :id => typus_users(:admin).id
+    assert_response :redirect
+    assert_redirected_to "/admin/typus_users"
+    assert flash[:notice]
+    assert_match /As you're not the admin or the owner of this record you cannot edit it./, flash[:notice]
+
+    ##
+    # Here we change the behavior, editor has become root, so he 
+    # has access to all TypusUser records.
+    #
+
+    Typus::Configuration.options[:root] = 'editor'
+
+    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+    get :edit, :id => typus_user.id
+    assert_response :success
+
+    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+    get :edit, :id => typus_users(:admin).id
+    assert_response :success
+
+    Typus::Configuration.options[:root] = 'admin'
 
   end
 
