@@ -47,16 +47,18 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_show
     typus_user = typus_users(:admin)
+    post_ = posts(:published)
     @request.session[:typus] = typus_user.id
-    get :show, { :id => 1 }
+    get :show, { :id => post_.id }
     assert_response :success
     assert_template 'show'
   end
 
   def test_should_render_edit
     typus_user = typus_users(:admin)
+    post_ = posts(:published)
     @request.session[:typus] = typus_user.id
-    get :edit, { :id => 1 }
+    get :edit, { :id => post_.id }
     assert_response :success
     assert_template 'edit'
   end
@@ -65,7 +67,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
     Typus::Configuration.options[:edit_after_create] = false
     typus_user = typus_users(:admin)
     @request.session[:typus] = typus_user.id
-    post :update, { :id => 1, :title => "Updated" }
+    post_ = posts(:published)
+    post :update, { :id => post_.id, :title => "Updated" }
     assert_response :redirect
     assert_redirected_to :action => 'index'
   end
@@ -74,9 +77,10 @@ class Admin::PostsControllerTest < ActionController::TestCase
     Typus::Configuration.options[:edit_after_create] = true
     typus_user = typus_users(:admin)
     @request.session[:typus] = typus_user.id
-    post :update, { :id => 1, :title => "Updated" }
+    post_ = posts(:published)
+    post :update, { :id => post_.id, :title => "Updated" }
     assert_response :redirect
-    assert_redirected_to :action => 'edit', :id => 1
+    assert_redirected_to :action => 'edit', :id => post_.id
   end
 
   def test_should_allow_admin_to_toggle_item
@@ -102,13 +106,14 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_should_relate_a_tag_to_a_post_and_then_unrelate
     typus_user = typus_users(:admin)
     tag = tags(:first)
+    post_ = posts(:published)
     @request.session[:typus] = typus_user.id
-    @request.env["HTTP_REFERER"] = "/admin/posts/1/edit"
-    post :relate, { :id => 1, :related => { :model => "Tag", :id => tag.id } }
+    @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit"
+    post :relate, { :id => post_.id, :related => { :model => "Tag", :id => tag.id } }
     assert_response :redirect
     assert flash[:success]
-    assert_redirected_to :action => 'edit', :id => 1
-    post :unrelate, { :id => 1, :model => "Tag", :model_id => tag.id }
+    assert_redirected_to :action => 'edit', :id => post_.id
+    post :unrelate, { :id => post_.id, :model => "Tag", :model_id => tag.id }
     assert_response :redirect
     assert flash[:success]
   end
@@ -117,6 +122,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     typus_user = typus_users(:admin)
     @request.session[:typus] = typus_user.id
+
+    post_ = posts(:published)
 
     folder = "#{RAILS_ROOT}/app/views/admin/posts"
     FileUtils.mkdir(folder) unless File.exists? folder
@@ -133,7 +140,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     open(file, 'w+') { |f| f << "Edit Sidebar" }
     assert File.exists?(file)
 
-    get :edit, { :id => 1 }
+    get :edit, { :id => post_.id }
     assert_response :success
     assert_match /Edit Sidebar/, @response.body
 
@@ -141,7 +148,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     open(file, 'w+') { |f| f << "Show Sidebar" }
     assert File.exists?(file)
 
-    get :show, { :id => 1 }
+    get :show, { :id => post_.id }
     assert_response :success
     assert_match /Show Sidebar/, @response.body
 
@@ -151,6 +158,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     typus_user = typus_users(:admin)
     @request.session[:typus] = typus_user.id
+
+    post_ = posts(:published)
 
     folder = "#{RAILS_ROOT}/app/views/admin/posts"
     FileUtils.mkdir(folder) unless File.exists? folder
@@ -167,7 +176,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     open(file, 'w+') { |f| f << "Edit Top" }
     assert File.exists?(file)
 
-    get :edit, { :id => 1 }
+    get :edit, { :id => post_.id }
     assert_response :success
     assert_match /Edit Top/, @response.body
 
@@ -175,7 +184,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     open(file, 'w+') { |f| f << "Show Top" }
     assert File.exists?(file)
 
-    get :show, { :id => 1 }
+    get :show, { :id => post_.id }
     assert_response :success
     assert_match /Show Top/, @response.body
 
@@ -185,6 +194,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     typus_user = typus_users(:admin)
     @request.session[:typus] = typus_user.id
+
+    post_ = posts(:published)
 
     folder = "#{RAILS_ROOT}/app/views/admin/posts"
     FileUtils.mkdir(folder) unless File.exists? folder
@@ -201,7 +212,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     open(file, 'w+') { |f| f << "Edit Bottom" }
     assert File.exists?(file)
 
-    get :edit, { :id => 1 }
+    get :edit, { :id => post_.id }
     assert_response :success
     assert_match /Edit Bottom/, @response.body
 
@@ -209,7 +220,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     open(file, 'w+') { |f| f << "Show Bottom" }
     assert File.exists?(file)
 
-    get :show, { :id => 1 }
+    get :show, { :id => post_.id }
     assert_response :success
     assert_match /Show Bottom/, @response.body
 
