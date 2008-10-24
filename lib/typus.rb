@@ -69,13 +69,6 @@ module Typus
       enable_pagination
     end
 
-
-    ##
-    # Add Typus controllers, models and helpers ...
-    #
-    #%w( controllers models helpers ).each do |m|
-    #end
-
     def enable_models
       ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), '..', 'app', 'models')
     end
@@ -135,7 +128,7 @@ module Typus
     def generate_controllers
 
       ##
-      # Cread admin folder for controllers if needed.
+      # Create admin folder for controllers if doesn't exist.
       #
       admin_controllers = "#{RAILS_ROOT}/app/controllers/admin"
       Dir.mkdir(admin_controllers) unless File.directory?(admin_controllers)
@@ -148,7 +141,7 @@ module Typus
       files = files.map { |i| i.split("/").last }
 
       ##
-      # Generate needed controllers
+      # Generate unexisting controllers.
       #
       self.models.each do |model|
         controller_filename = "#{model.tableize}_controller.rb"
