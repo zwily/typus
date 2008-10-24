@@ -53,6 +53,10 @@ module Typus
     end
 
     def enable
+      enable_models
+      enable_views
+      enable_controllers
+      enable_helpers
       enable_version
       enable_testing_models if RAILS_ENV == 'test'
       enable_orm
@@ -63,6 +67,29 @@ module Typus
       enable_patches if Rails.vendor_rails?
       enable_object
       enable_pagination
+    end
+
+
+    ##
+    # Add Typus controllers, models and helpers ...
+    #
+    #%w( controllers models helpers ).each do |m|
+    #end
+
+    def enable_models
+      ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), '..', 'app', 'models')
+    end
+
+    def enable_views
+      ActionController::Base.append_view_path(File.join(File.dirname(__FILE__), '..', 'app', 'views'))
+    end
+
+    def enable_controllers
+      ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), '..', 'app', 'controllers')
+    end
+
+    def enable_helpers
+      ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), '..', 'app', 'helpers')
     end
 
     def enable_version
