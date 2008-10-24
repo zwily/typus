@@ -19,10 +19,8 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     get :position, { :id => first_category.id, :go => 'move_lower' }
     assert flash[:success]
     assert_match /Record moved lower./, flash[:success]
-    first_category = Category.find(1)
-    assert_equal 2, first_category.position
-    second_category = Category.find(2)
-    assert_equal 1, second_category.position
+    assert_equal 2, first_category.reload.position
+    assert_equal 1, second_category.reload.position
   end
 
   def test_should_position_item_one_step_up
@@ -33,10 +31,8 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     get :position, { :id => second_category.id, :go => 'move_higher' }
     assert flash[:success]
     assert_match /Record moved higher./, flash[:success]
-    first_category = Category.find(1)
-    assert_equal 2, first_category.position
-    second_category = Category.find(2)
-    assert_equal 1, second_category.position
+    assert_equal 2, first_category.reload.position
+    assert_equal 1, second_category.reload.position
   end
 
   def test_should_position_top_item_to_bottom
@@ -45,8 +41,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     get :position, { :id => first_category.id, :go => 'move_to_bottom' }
     assert flash[:success]
     assert_match /Record moved to bottom./, flash[:success]
-    first_category = Category.find(1)
-    assert_equal 3, first_category.position
+    assert_equal 3, first_category.reload.position
   end
 
   def test_should_position_bottom_item_to_top
@@ -55,8 +50,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     get :position, { :id => third_category.id, :go => 'move_to_top' }
     assert flash[:success]
     assert_match /Record moved to top./, flash[:success]
-    third_category = Category.find(3)
-    assert_equal 1, third_category.position
+    assert_equal 1, third_category.reload.position
   end
 
   def test_should_allow_admin_to_add_a_category
