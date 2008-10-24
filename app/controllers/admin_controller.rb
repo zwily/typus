@@ -168,8 +168,12 @@ class AdminController < ApplicationController
   # Toggle the status of an item.
   #
   def toggle
-    @item.toggle!(params[:field])
-    flash[:success] = "#{@model.humanize} #{params[:field]} changed."
+    if Typus::Configuration.options[:toggle]
+      @item.toggle!(params[:field])
+      flash[:success] = "#{@model.humanize} #{params[:field]} changed."
+    else
+      flash[:warning] = "Toggle is disabled."
+    end
     redirect_to :back
   end
 

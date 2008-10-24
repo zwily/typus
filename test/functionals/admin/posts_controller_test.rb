@@ -269,7 +269,18 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_disable_toggle_and_check_links_are_disabled
-    assert true
+    Typus::Configuration.options[:toggle] = false
+    @request.env["HTTP_REFERER"] = "/admin/posts"
+    typus_user = typus_users(:admin)
+    post = posts(:unpublished)
+    @request.session[:typus] = typus_user.id
+    get :toggle, { :id => post.id, :field => 'status' }
+    assert_response :redirect
+    assert_redirected_to :action => 'index'
+    assert !flash[:success]
+    assert flash[:warning]
+    assert_match /Toggle is disabled/, flash[:warning]
+    Typus::Configuration.options[:toggle] = true
   end
 
 end
