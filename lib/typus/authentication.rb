@@ -31,6 +31,11 @@ module Authentication
     #
     def current_user
       @current_user if logged_in?
+      unless Typus::Configuration.roles.keys.include? @current_user.roles
+        session[:typus] = nil
+        flash[:error] = "#{@current_user.roles.capitalize} role doesn't exist on the system."
+        redirect_to typus_login_url
+      end
     end
 
     ##

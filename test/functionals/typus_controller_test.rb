@@ -41,6 +41,20 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to typus_login_url
   end
 
+  def test_should_not_login_removed_role
+    typus_user = typus_users(:removed_role)
+    post :login, { :user => { :email => typus_user.email, 
+                              :password => '12345678' } }
+    assert_equal @request.session[:typus], typus_user.id
+    assert_response :redirect
+    assert_redirected_to typus_dashboard_url
+    get :dashboard
+    assert_redirected_to typus_login_url
+    assert_equal @request.session[:typus], nil
+    assert flash[:error]
+    assert_match /role doesn't exist on the system./, flash[:error]
+  end
+
   def test_should_not_send_recovery_password_link_to_unexisting_user
     post :recover_password, { :user => { :email => 'unexisting' } }
     assert_response :redirect
