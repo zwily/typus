@@ -2,40 +2,50 @@
 
 admin:
   id: 1
-  email: admin@typus.org
-  first_name: Francesc
-  last_name: Esplugas
+  email: admin@example.com
+  first_name: Admin
+  last_name: Example
   status: true
   roles: admin
-  salt: <%= "--#{time}--admin@typus.org--" %>
-  crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--admin@typus.org----#{12345678}") %>
+  salt: <%= "--#{time}--admin@example.com--" %>
+  crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--admin@example.com----#{12345678}") %>
 
 editor:
   id: 2
-  email: user@typus.org
-  first_name: Typus
-  last_name: User
+  email: editor@example.com
+  first_name: Editor
+  last_name: Example
   status: true
   roles: editor
-  salt: <%= "--#{time}--user@typus.org--" %>
-  crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--user@typus.org----#{12345678}") %>
+  salt: <%= "--#{time}--editor@example.com--" %>
+  crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--editor@example.com----#{12345678}") %>
 
 disabled_user:
   id: 3
-  email: disabled_user@typus.org
+  email: disabled_user@example.com
   first_name: Typus
   last_name: User
   status: false
   roles: editor
-  salt: <%= "--#{time}--disabled_user@typus.org--" %>
-  crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--disabled_user@typus.org----#{12345678}") %>
+  salt: <%= "--#{time}--disabled_user@example.com--" %>
+  crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--disabled_user@example.com----#{12345678}") %>
 
 designer:
   id: 4
-  email: designer@typus.org
-  first_name: Typus
-  last_name: Designer
+  email: designer@example.com
+  first_name: Designer
+  last_name: Example
   status: true
   roles: designer
-  salt: <%= "--#{time}--disabled_user@typus.org--" %>
-  crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--designer@typus.org----#{12345678}") %>
+  salt: <%= "--#{time}--designer@example.com--" %>
+  crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--designer@example.com----#{12345678}") %>
+
+removed:
+  id: 5
+  email: removed@example.com
+  first_name: Removed
+  last_name: Example
+  status: true
+  roles: removed
+  salt: <%= "--#{time}--removed@example.com--" %>
+  crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--removed@example.com----#{12345678}") %>

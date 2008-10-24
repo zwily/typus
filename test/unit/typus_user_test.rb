@@ -55,7 +55,7 @@ class TypusUserTest < ActiveSupport::TestCase
 protected
 
   def create_typus_user(options = {})
-    data = { :email => "admin@example.com", 
+    data = { :email => "test@example.com", 
              :password => "12345678", :password_confirmation => "12345678", 
              :roles => Typus::Configuration.options[:root] }.merge(options)
     TypusUser.create(data)

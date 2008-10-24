@@ -26,15 +26,15 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_login_and_redirect_to_dashboard
-    post :login, { :user => { :email => 'admin@typus.org', 
+    post :login, { :user => { :email => 'admin@example.com', 
                               :password => '12345678' } }
     assert_equal @request.session[:typus], 1
     assert_response :redirect
     assert_redirected_to typus_dashboard_url
   end
 
-  def test_should_not_login_disable_user
-    post :login, { :user => { :email => 'disabled_user@typus.org', 
+  def test_should_not_login_disabled_user
+    post :login, { :user => { :email => 'disabled_user@example.com', 
                               :password => '12345678' } }
     assert_equal @request.session[:typus], nil
     assert_response :redirect

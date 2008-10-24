@@ -26,11 +26,11 @@ class TypusTest < Test::Unit::TestCase
     assert Person.kind_of?(Class)
   end
 
-  def test_should_verify_is_fixtures_are_loaded
+  def test_should_verify_fixtures_are_loaded
     assert_equal 3, Category.count
     assert_equal 2, Post.count
     assert_equal 4, Tag.count
-    assert_equal 4, TypusUser.count
+    assert_equal 5, TypusUser.count
   end
 
 end
