@@ -101,13 +101,14 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_relate_a_tag_to_a_post_and_then_unrelate
     typus_user = typus_users(:admin)
+    tag = tags(:first)
     @request.session[:typus] = typus_user.id
     @request.env["HTTP_REFERER"] = "/admin/posts/1/edit"
-    post :relate, { :id => 1, :related => { :model => "Tag", :id => "1"} }
+    post :relate, { :id => 1, :related => { :model => "Tag", :id => tag.id } }
     assert_response :redirect
     assert flash[:success]
     assert_redirected_to :action => 'edit', :id => 1
-    post :unrelate, { :id => 1, :model => "Tag", :model_id => "1" }
+    post :unrelate, { :id => 1, :model => "Tag", :model_id => tag.id }
     assert_response :redirect
     assert flash[:success]
   end
