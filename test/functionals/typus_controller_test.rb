@@ -23,7 +23,7 @@ class TypusControllerTest < ActionController::TestCase
     typus_user = typus_users(:admin)
     post :login, { :user => { :email => typus_user.email, 
                               :password => '12345678' } }
-    assert_equal 1, @request.session[:typus]
+    assert_equal typus_user.id, @request.session[:typus]
     assert_response :redirect
     assert_redirected_to typus_dashboard_url
   end
@@ -83,8 +83,8 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_render_dashboard
 
-    admin = typus_users(:admin)
-    @request.session[:typus] = admin.id
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
 
     Typus::Configuration.options[:app_name] = "Typus Admin for the masses"
 

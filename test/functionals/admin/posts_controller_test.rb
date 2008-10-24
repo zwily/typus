@@ -15,15 +15,18 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_render_new
-    @request.session[:typus] = 1
+    typus_user = typus_users(:admin)
+    test_should_update_item_and_redirect_to_index
+    @request.session[:typus] = typus_user.id
     get :new
     assert_response :success
     assert_template 'new'
   end
 
   def test_should_create_item_and_redirect_to_index
+    typus_user = typus_users(:admin)
     Typus::Configuration.options[:edit_after_create] = false
-    @request.session[:typus] = 1
+    @request.session[:typus] = typus_user.id
     items = Post.count
     post :create, { :item => { :title => "This is another title", :body => "Body" } }
     assert_response :redirect
@@ -32,8 +35,9 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_create_item_and_redirect_to_edit
+    typus_user = typus_users(:admin)
     Typus::Configuration.options[:edit_after_create] = true
-    @request.session[:typus] = 1
+    @request.session[:typus] = typus_user.id
     items = Post.count
     post :create, { :item => { :title => "This is another title", :body => "Body" } }
     assert_response :redirect
@@ -42,14 +46,16 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_render_show
-    @request.session[:typus] = 1
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
     get :show, { :id => 1 }
     assert_response :success
     assert_template 'show'
   end
 
   def test_should_render_edit
-    @request.session[:typus] = 1
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
     get :edit, { :id => 1 }
     assert_response :success
     assert_template 'edit'
@@ -57,7 +63,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_update_item_and_redirect_to_index
     Typus::Configuration.options[:edit_after_create] = false
-    @request.session[:typus] = 1
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
     post :update, { :id => 1, :title => "Updated" }
     assert_response :redirect
     assert_redirected_to :action => 'index'
@@ -65,7 +72,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_update_item_and_redirect_to_edit
     Typus::Configuration.options[:edit_after_create] = true
-    @request.session[:typus] = 1
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
     post :update, { :id => 1, :title => "Updated" }
     assert_response :redirect
     assert_redirected_to :action => 'edit', :id => 1
@@ -73,9 +81,9 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_allow_admin_to_toggle_item
     @request.env["HTTP_REFERER"] = "/admin/posts"
-    admin = typus_users(:admin)
+    typus_user = typus_users(:admin)
     post = posts(:unpublished)
-    @request.session[:typus] = admin.id
+    @request.session[:typus] = typus_user.id
     get :toggle, { :id => post.id, :field => 'status' }
     assert_response :redirect
     assert_redirected_to :action => 'index'
@@ -84,15 +92,16 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_perform_a_search
-    admin = typus_users(:admin)
-    @request.session[:typus] = admin.id
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
     get :index, { :search => 'neinonon' }
     assert_response :success
     assert_template 'index'
   end
 
   def test_should_relate_a_tag_to_a_post_and_then_unrelate
-    @request.session[:typus] = 1
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
     @request.env["HTTP_REFERER"] = "/admin/posts/1/edit"
     post :relate, { :id => 1, :related => { :model => "Tag", :id => "1"} }
     assert_response :redirect
@@ -105,8 +114,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_posts_sidebar_on_index_edit_and_show
 
-    admin = typus_users(:admin)
-    @request.session[:typus] = admin.id
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
 
     folder = "#{RAILS_ROOT}/app/views/admin/posts"
     FileUtils.mkdir(folder) unless File.exists? folder
@@ -139,8 +148,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_posts_top_on_index_show_and_edit
 
-    admin = typus_users(:admin)
-    @request.session[:typus] = admin.id
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
 
     folder = "#{RAILS_ROOT}/app/views/admin/posts"
     FileUtils.mkdir(folder) unless File.exists? folder
@@ -173,8 +182,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_posts_bottom_on_index_show_and_edit
 
-    admin = typus_users(:admin)
-    @request.session[:typus] = admin.id
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
 
     folder = "#{RAILS_ROOT}/app/views/admin/posts"
     FileUtils.mkdir(folder) unless File.exists? folder
