@@ -53,6 +53,8 @@ module Typus
     end
 
     def enable
+      enable_config
+      enable_roles
       enable_models
       enable_views
       enable_controllers
@@ -67,8 +69,6 @@ module Typus
       enable_patches if Rails.vendor_rails?
       enable_object
       enable_pagination
-      enable_config
-      enable_roles
     end
 
     def enable_models
