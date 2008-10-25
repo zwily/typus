@@ -10,6 +10,8 @@ class AdminController < ApplicationController
                  :toggle, :position, :relate, :unrelate
   end
 
+  before_filter :reload_config_et_roles if Rails.env == 'development'
+
   before_filter :require_login
   before_filter :current_user
 
@@ -337,6 +339,12 @@ private
              :filename => filename)
   rescue
     render :text => "FasterCSV is not installed."
+  end
+
+  def reload_config_et_roles
+    logger.info "[typus] Configuration files have been reloaded."
+    Typus::Configuration.roles!
+    Typus::Configuration.config!
   end
 
 end

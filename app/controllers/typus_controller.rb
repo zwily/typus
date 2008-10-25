@@ -10,6 +10,8 @@ class TypusController < ApplicationController
 
   filter_parameter_logging :password
 
+  before_filter :reload_config_et_roles if Rails.env == 'development'
+
   before_filter :require_login, :only => [ :dashboard ]
   before_filter :current_user, :only => [ :dashboard ]
 
@@ -97,6 +99,12 @@ private
 
   def recover_password_disabled?
     redirect_to typus_login_url unless Typus::Configuration.options[:recover_password]
+  end
+
+  def reload_config_et_roles
+    logger.info "[typus] Configuration files have been reloaded."
+    Typus::Configuration.roles!
+    Typus::Configuration.config!
   end
 
 end
