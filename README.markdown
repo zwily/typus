@@ -187,6 +187,47 @@ Or directly on the model:
 
     end
 
+### Selectors
+
+Need a selector, to select gender, size, status, the encoding status 
+of a video or whatever in the model? 
+
+    Person:
+      fields:
+        list: ...
+        form: first_name, last_name, gender, size, status
+      selectors: gender, size, status
+
+From now on the form, if you have enabled them on the list/form you'll see 
+a selector with the options that you define in your model.
+
+Example:
+
+    ##
+    # app/models/video.rb
+    #
+    class Video < ActiveRecord::Base
+
+      validates_inclusion_of :status, :in => self.status
+
+      def self.status
+        %w( pending encoding encoded error published )
+      end
+
+    end
+
+    ##
+    # typus.yml
+    #
+    Video:
+      fields:
+        list: title, status
+        form: title, status
+      selectors: status
+
+If the selector is not defined, you'll see a **text field** instead of a 
+*select field*.
+
 ### Want more actions?
 
     actions:

@@ -310,11 +310,11 @@ module AdminHelper
         html << "#{expand_tree_into_select_field(@item.class.top)}"
         html << "</select>\n"
       when "selector"
-        values = eval field[0].upcase
+        values = @item.class.send(field[0])
         html << "<select id=\"item_#{field[0]}\" name=\"item[#{field[0]}]\">"
-        html << "<option value=\"\">Select a #{field[0].titleize}</option>"
+        html << "<option value=\"\">Select a #{field[0].singularize}</option>"
         values.each do |value|
-          html << "<option #{"selected" if @item.send(field[0]).to_s == value.last.to_s} value=\"#{value.last}\">#{value.first}</option>"
+          html << "<option #{"selected" if @item.send(field[0]).to_s == value.to_s} value=\"#{value}\">#{value}</option>"
         end
         html << "</select>"
       when "collection"

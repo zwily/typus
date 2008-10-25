@@ -32,3 +32,4 @@ TypusUser:
   module: Typus
   description: System Users Administration
   application: Typus Admin
+  selectors: roles

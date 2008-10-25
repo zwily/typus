@@ -21,7 +21,7 @@ class ActiveRecordTest < Test::Unit::TestCase
     expected_fields = [["first_name", "string"], 
                        ["last_name", "string"], 
                        ["email", "string"], 
-                       ["roles", "string"], 
+                       ["roles", "selector"], 
                        ["status", "boolean"]]
     assert_equal expected_fields, TypusUser.typus_fields_for(:list)
   end
@@ -30,7 +30,7 @@ class ActiveRecordTest < Test::Unit::TestCase
     expected_fields = [["first_name", "string"], 
                        ["last_name", "string"], 
                        ["email", "string"], 
-                       ["roles", "string"], 
+                       ["roles", "selector"], 
                        ["password", "password"], 
                        ["password_confirmation", "password"]]
     assert_equal expected_fields, TypusUser.typus_fields_for(:form)
@@ -39,7 +39,7 @@ class ActiveRecordTest < Test::Unit::TestCase
   def test_should_return_typus_fields_for_relationship_for_typus_user
     expected_fields = [["first_name", "string"], 
                        ["last_name", "string"], 
-                       ["roles", "string"], 
+                       ["roles", "selector"], 
                        ["email", "string"], 
                        ["status", "boolean"]]
     assert_equal expected_fields, TypusUser.typus_fields_for(:relationship)
@@ -49,7 +49,7 @@ class ActiveRecordTest < Test::Unit::TestCase
     expected_fields = [["first_name", "string"], 
                        ["last_name", "string"], 
                        ["email", "string"], 
-                       ["roles", "string"], 
+                       ["roles", "selector"], 
                        ["status", "boolean"]]
     assert_equal expected_fields, TypusUser.typus_fields_for(:undefined)
   end

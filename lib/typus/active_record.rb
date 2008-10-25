@@ -85,9 +85,11 @@ module Typus
             when /file_name/:       attribute_type = 'file'
             when /password/:        attribute_type = 'password'
             when 'position':        attribute_type = 'position'
+            when self.typus_selectors.join(',')
+              attribute_type = 'selector'
           end
 
-          attribute_type = 'selector' if attribute_type.kind_of?(Array)
+          # attribute_type = 'selector' if attribute_type.kind_of?(Array)
           fields_with_type << [ field, attribute_type ]
 
         end
@@ -165,6 +167,13 @@ module Typus
     #
     def typus_defaults_for(filter)
       Typus::Configuration.config["#{self.name}"][filter].split(", ") rescue []
+    end
+
+    ##
+    #
+    #
+    def typus_selectors
+      Typus::Configuration.config["#{self.name}"]['selectors'].split(", ") rescue []
     end
 
     ##

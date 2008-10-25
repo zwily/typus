@@ -1,5 +1,9 @@
 class TypusUser < ActiveRecord::Base
 
+  def self.roles
+    Typus::Configuration.roles.keys
+  end
+
   attr_accessor :password
 
   validates_presence_of :email
@@ -10,7 +14,7 @@ class TypusUser < ActiveRecord::Base
   validates_length_of :password, :within => Typus::Configuration.options[:password]..40, :if => lambda { |person| person.new_record? or not person.password.blank? }
 
   validates_inclusion_of :roles, 
-                         :in => Typus::Configuration.roles.keys, 
+                         :in => self.roles, 
                          :message => "has to be in #{Typus::Configuration.roles.keys.reverse.join(", ")}."
 
   before_create :set_token
