@@ -71,6 +71,14 @@ module Typus
       enable_pagination
     end
 
+    def enable_config
+      Typus::Configuration.config!
+    end
+
+    def enable_roles
+      Typus::Configuration.roles!
+    end
+
     def enable_models
       ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), '..', 'app', 'models')
     end
@@ -125,14 +133,6 @@ module Typus
 
     def enable_pagination
       require 'vendor/paginator'
-    end
-
-    def enable_config
-      Typus::Configuration.config!
-    end
-
-    def enable_roles
-      Typus::Configuration.roles!
     end
 
     def generate_controllers
