@@ -12,6 +12,8 @@ TODO
     Memcached, Reports and other things.
 [ ] Actions for a record can be added to the listings.
 [ ] What happens if there's a role that no longer exists?
+[ ] Namespace or renamed test models to avoid conflicts with application.
+[ ] Create roles and config methods to load yml files.
 
 ON IT
 =====
