@@ -119,6 +119,18 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to typus_login_url
   end
 
+  def test_should_verify_typus_login_layout_includes_version
+    get :login
+    assert_match /<!-- Typus #{Typus.version} -->/, @response.body
+  end
+
+  def test_should_verify_typus_layout_includes_version
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
+    get :dashboard
+    assert_match /<!-- Typus #{Typus.version} -->/, @response.body
+  end
+
 =begin
 
   def test_should_render_application_dashboard_sidebar
