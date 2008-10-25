@@ -35,7 +35,7 @@ module Typus
                   :password => 8, 
                   :ssl => false }
 
-    mattr_reader :options
+    mattr_accessor :options
 
     ##
     # Read Typus Configuration file
@@ -56,7 +56,7 @@ module Typus
       @@config = @@config.merge(YAML.load_file(config_file))
     end
 
-    mattr_reader :config
+    mattr_accessor :config
 
     ##
     # Read Typus Roles
@@ -90,7 +90,7 @@ module Typus
       end
     end
 
-    mattr_reader :roles
+    mattr_accessor :roles
 
   end
 
