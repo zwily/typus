@@ -69,6 +69,7 @@ module Typus
       enable_patches if Rails.vendor_rails?
       enable_object
       enable_pagination
+      enable_environments
     end
 
     def enable_config
@@ -133,6 +134,10 @@ module Typus
 
     def enable_pagination
       require 'vendor/paginator'
+    end
+
+    def enable_environments
+      require 'vendor/environments'
     end
 
     def generate_controllers

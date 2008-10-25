@@ -10,7 +10,7 @@ class AdminController < ApplicationController
                  :toggle, :position, :relate, :unrelate
   end
 
-  before_filter :reload_config_et_roles if Rails.env == 'development'
+  before_filter :reload_config_et_roles if Rails.development?
 
   before_filter :require_login
   before_filter :current_user

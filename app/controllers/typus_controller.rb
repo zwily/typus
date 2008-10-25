@@ -10,7 +10,7 @@ class TypusController < ApplicationController
 
   filter_parameter_logging :password
 
-  before_filter :reload_config_et_roles if Rails.env == 'development'
+  before_filter :reload_config_et_roles if Rails.development?
 
   before_filter :require_login, :only => [ :dashboard ]
   before_filter :current_user, :only => [ :dashboard ]
