@@ -12,11 +12,8 @@ TODO
     Memcached, Reports and other things.
 [ ] Actions for a record can be added to the listings.
 [ ] Namespace or rename test models to avoid conflicts with application.
-[ ] Remove 'disable_with' on forms.
 [ ] "No preview available" when displaying paperclip attachments should 
     show other information as the content type, file size.
-[ ] Show version number on the footer of the application. Define a way to 
-    version the application.
 
 ON IT
 =====
@@ -28,6 +25,9 @@ ON IT
 DONE
 ====
 
+[X] Remove 'disable_with' on forms. (20081025)
+[X] Show version number on the footer of the application. Define a way to 
+    version the application. (20081025)
 [X] Database for testing should be defined by the plugin, not use the 
     application one. Using SQLite3 on memory. (20081025)
 [X] Instead of "Application" on typus.yml for the application name, 
