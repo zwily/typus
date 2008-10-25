@@ -4,7 +4,6 @@ TODO
 [ ] Better search.
 [ ] Clean typus_form.
 [ ] Take care of the params that are passed between actions.
-[ ] Read only fields on new, for "auto-generated" attributes.
 [ ] Define a show action for the read-only items.
 [ ] Test helpers.
 [ ] Define a way to access things that are not resources, like 
@@ -24,6 +23,7 @@ ON IT
 DONE
 ====
 
+[X] Read only fields on new, for "auto-generated" attributes. (20081025)
 [X] Selectors for options. (For example roles) (20081025)
 [X] Remove 'disable_with' on forms. (20081025)
 [X] Show version number on the footer of the application. Define a way to 
