@@ -17,8 +17,6 @@ TODO
     show other information as the content type, file size.
 [ ] Show version number on the footer of the application. Define a way to 
     version the application.
-[ ] Database for testing should be defined by the plugin, not use the 
-    application one.
 
 ON IT
 =====
@@ -30,6 +28,8 @@ ON IT
 DONE
 ====
 
+[X] Database for testing should be defined by the plugin, not use the 
+    application one. Using SQLite3 on memory. (20081025)
 [X] Instead of "Application" on typus.yml for the application name, 
     use the real application name by using the folder name of the 
     application. (20081025)

@@ -3,6 +3,8 @@ ENV['RAILS_ENV'] = "test"
 
 require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environment")
 
+ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :dbfile => ":memory:")
+
 require 'test/unit'
 require 'action_controller/test_process'
 require 'active_record/fixtures'
