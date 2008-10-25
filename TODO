@@ -19,8 +19,6 @@ TODO
     version the application.
 [ ] Database for testing should be defined by the plugin, not use the 
     application one.
-[ ] Instead of "Application" on typus.yml for the application name, use 
-    the real application name by using the folder name of the application.
 
 ON IT
 =====
@@ -32,6 +30,9 @@ ON IT
 DONE
 ====
 
+[X] Instead of "Application" on typus.yml for the application name, 
+    use the real application name by using the folder name of the 
+    application. (20081025)
 [X] Create roles and config methods to load yml files. (20081025)
 [X] Test the "version" method. And other methods. (20081025)
 [X] What happens if there's a role that no longer exists? (20081025)

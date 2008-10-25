@@ -39,7 +39,7 @@
     has_many:
   filters:
   search:
-  application: Application
+  application: <%= application %>
   description:
 
 <%- end -%>

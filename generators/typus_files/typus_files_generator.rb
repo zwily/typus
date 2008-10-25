@@ -17,11 +17,16 @@ class TypusFilesGenerator < Rails::Generator::Base
           ar_models << class_name
         end
       end
-
+      
+      ##
       # configuration files
+      #
+      application = RAILS_ROOT.split("/").last.titleize
       files = %w( typus.yml typus_roles.yml )
       files.each do |file|
-        m.template "config/#{file}", "config/#{file}", :assigns => { :ar_models => ar_models }
+        m.template "config/#{file}", 
+                   "config/#{file}", 
+                   :assigns => { :ar_models => ar_models, :application => application }
       end
 
       # initializers
