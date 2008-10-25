@@ -15,7 +15,8 @@
 #     has_and_belongs_to_many:
 #     has_many:
 #   filters: status, created_at, category_id
-#   search: title body
+#   search: title, body
+#   selectors: status
 #   application: Application
 #   description: Some text to describe the model
 #
@@ -39,6 +40,7 @@
     has_many:
   filters:
   search:
+  selectors:
   application: <%= application %>
   description:
 
