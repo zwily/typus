@@ -49,7 +49,7 @@ module Typus
       fields_with_type = []
 
       begin
-        if self.respond_to? ("#{filter.to_s}_fields")
+        if self.respond_to?("#{filter.to_s}_fields")
           fields = self.send("#{filter.to_s}_fields").map { |a| a.to_s }
         else
           fields = Typus::Configuration.config["#{self.name}"]["fields"][filter.to_s].split(", ")
@@ -61,30 +61,34 @@ module Typus
 
       begin
 
-        fields.each do |f|
+        fields.each do |field|
 
           ##
           # Get the field_type for each field
           #
           self.model_fields.each do |af|
-            @field_type = af.last if af.first == f
+            @attribute_type = af.last if af.first == field
           end
+
+          ##
+          # Believe me, I don't know why I have to do this, otherwise
+          # the plugin doesn't work.
+          #
+          attribute_type = @attribute_type
 
           ##
           # Some custom field_type depending on the attribute name
           #
-          case f
-            when 'parent_id':       @field_type = 'tree'
-            when /_id/:             @field_type = 'collection'
-            when /file_name/:       @field_type = 'file'
-            when /password/:        @field_type = 'password'
-            when 'position':        @field_type = 'position'
-            else @field_type = 'string' if @field_type == ""
+          case field
+            when 'parent_id':       attribute_type = 'tree'
+            when /_id/:             attribute_type = 'collection'
+            when /file_name/:       attribute_type = 'file'
+            when /password/:        attribute_type = 'password'
+            when 'position':        attribute_type = 'position'
           end
 
-          @field_type = 'selector' if @field_type.kind_of? Array
-          fields_with_type << [ f, @field_type ]
-          @field_type = ""
+          attribute_type = 'selector' if attribute_type.kind_of?(Array)
+          fields_with_type << [ field, attribute_type ]
 
         end
 
