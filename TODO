@@ -20,6 +20,10 @@ TODO
 [ ] Show version number on the footer of the application. Define a way to 
     version the application.
 [ ] Test the "version" method.
+[ ] Database for testing should be defined by the plugin, not use the 
+    application one.
+[ ] Instead of "Application" on typus.yml for the application name, use 
+    the real application name by using the folder name of the application.
 
 ON IT
 =====
