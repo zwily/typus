@@ -89,7 +89,10 @@ module Typus
               attribute_type = 'selector'
           end
 
-          # attribute_type = 'selector' if attribute_type.kind_of?(Array)
+          ##
+          # And finally insert the field and the attribute_type 
+          # into the fields_with_type.
+          #
           fields_with_type << [ field, attribute_type ]
 
         end
