@@ -14,6 +14,12 @@ TODO
 [ ] What happens if there's a role that no longer exists?
 [ ] Namespace or renamed test models to avoid conflicts with application.
 [ ] Create roles and config methods to load yml files.
+[ ] Remove 'disable_with' on forms.
+[ ] "No preview available" when displaying paperclip attachments should 
+    show other information as the content type, file size.
+[ ] Show version number on the footer of the application. Define a way to 
+    version the application.
+[ ] Test the "version" method.
 
 ON IT
 =====
