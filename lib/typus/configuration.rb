@@ -38,22 +38,33 @@ module Typus
     mattr_accessor :options
 
     ##
+    # This switch allows us to disable Typus plugins, used only for
+    # demo purposes.
+    #
+    @@switch = @@options[:disable_typus_enabled_plugins] ? 'typus' : '*'
+
+    ##
     # Read Typus Configuration file
     #
+    #   Typus::Configuration.config! overwrites @@config
+    #
+    def self.config!
 
-    switch = @@options[:disable_typus_enabled_plugins] ? 'typus' : '*'
+      folders = Dir["vendor/plugins/#{@@switch}/config/typus.yml"]
+      folders = ["vendor/plugins/typus/test/config/typus.yml"] if ENV['RAILS_ENV'] == 'test'
 
-    folders = Dir["vendor/plugins/#{switch}/config/typus.yml"]
-    folders = ["vendor/plugins/typus/test/config/typus.yml"] if ENV['RAILS_ENV'] == 'test'
+      @@config = {}
+      folders.each do |folder|
+        @@config = @@config.merge(YAML.load_file("#{RAILS_ROOT}/#{folder}"))
+      end
 
-    @@config = {}
-    folders.each do |folder|
-      @@config = @@config.merge(YAML.load_file("#{RAILS_ROOT}/#{folder}"))
-    end
+      config_file = "#{RAILS_ROOT}/config/typus.yml"
+      if File.exists?(config_file) && !File.zero?(config_file)
+        @@config = @@config.merge(YAML.load_file(config_file))
+      end
 
-    config_file = "#{RAILS_ROOT}/config/typus.yml"
-    if File.exists?(config_file) && !File.zero?(config_file)
-      @@config = @@config.merge(YAML.load_file(config_file))
+      return @@config
+
     end
 
     mattr_accessor :config
@@ -61,33 +72,40 @@ module Typus
     ##
     # Read Typus Roles
     #
+    #   Typus::Configuration.roles! overwrites @@roles
+    #
+    def self.roles!
 
-    folders = Dir["vendor/plugins/#{switch}/config/typus_roles.yml"]
-    folders = ["vendor/plugins/typus/test/config/typus_roles.yml"] if ENV['RAILS_ENV'] == 'test'
+      folders = Dir["vendor/plugins/#{@@switch}/config/typus_roles.yml"]
+      folders = ["vendor/plugins/typus/test/config/typus_roles.yml"] if ENV['RAILS_ENV'] == 'test'
 
-    @@roles = { 'admin' => {} }
-    folders.each do |folder|
-      YAML.load_file("#{RAILS_ROOT}/#{folder}").each do |key, value|
-        @@roles['admin'] = @@roles['admin'].merge(value)
-      end
-    end
-
-    if ENV['RAILS_ENV'] == 'test'
-      config_file = "#{RAILS_ROOT}/vendor/plugins/typus/test/config/typus_roles.yml"
-    else
-      config_file = "#{RAILS_ROOT}/config/typus_roles.yml"
-    end
-
-    if File.exists?(config_file) && !File.zero?(config_file)
-      app_roles = YAML.load_file(config_file)
-      app_roles.each do |key, value|
-        case key
-        when 'admin'
-          @@roles[key] = @@roles[key].merge(app_roles[key])
-        else
-          @@roles[key] = value
+      @@roles = { 'admin' => {} }
+      folders.each do |folder|
+        YAML.load_file("#{RAILS_ROOT}/#{folder}").each do |key, value|
+          @@roles['admin'] = @@roles['admin'].merge(value)
         end
       end
+
+      if ENV['RAILS_ENV'] == 'test'
+        config_file = "#{RAILS_ROOT}/vendor/plugins/typus/test/config/typus_roles.yml"
+      else
+        config_file = "#{RAILS_ROOT}/config/typus_roles.yml"
+      end
+
+      if File.exists?(config_file) && !File.zero?(config_file)
+        app_roles = YAML.load_file(config_file)
+        app_roles.each do |key, value|
+          case key
+          when 'admin'
+            @@roles[key] = @@roles[key].merge(app_roles[key])
+          else
+            @@roles[key] = value
+          end
+        end
+      end
+
+      return @@roles
+
     end
 
     mattr_accessor :roles
