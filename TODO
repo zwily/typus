@@ -7,7 +7,6 @@ TODO
 [ ] Read only fields on new, for "auto-generated" attributes.
 [ ] Define a show action for the read-only items.
 [ ] Test helpers.
-[ ] Selectors for options. (For example roles)
 [ ] Define a way to access things that are not resources, like 
     Memcached, Reports and other things.
 [ ] Actions for a record can be added to the listings.
@@ -25,6 +24,7 @@ ON IT
 DONE
 ====
 
+[X] Selectors for options. (For example roles) (20081025)
 [X] Remove 'disable_with' on forms. (20081025)
 [X] Show version number on the footer of the application. Define a way to 
     version the application. (20081025)
