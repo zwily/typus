@@ -274,6 +274,8 @@ module AdminHelper
         end
       when /_id/
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>\n"
+      when /#/
+        html << "<p><label for=\"item_#{field[0]}\">#{field[0].split('#').first.titleize.capitalize}</label>\n"
       else
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>\n"
       end
@@ -285,6 +287,18 @@ module AdminHelper
         field[0].delete!('*')
         case params[:action]
         when 'edit'
+          html << "#{@item.send(field[0])}</p>"
+          next
+        end
+      end
+
+      ##
+      #
+      #
+      if field[0].include?('#')
+        field[0].delete!('#')
+        case params[:action]
+        when 'new', 'edit'
           html << "#{@item.send(field[0])}</p>"
           next
         end
