@@ -261,6 +261,20 @@ module AdminHelper
     fields.each do |field|
 
       ##
+      # Read only fields.
+      #
+      if @model.typus_field_options_for('read_only').include?(field[0])
+        field[1] = 'read_only' if %w( edit ).include?(params[:action])
+      end
+
+      ##
+      # Auto generated fields.
+      #
+      if @model.typus_field_options_for('auto_generated').include?(field[0])
+        field[1] = 'auto_generated' if %w( new edit ).include?(params[:action])
+      end
+
+      ##
       # Labels
       #
       case field[0]
@@ -274,34 +288,9 @@ module AdminHelper
         end
       when /_id/
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>\n"
-      when /#/
-        html << "<p><label for=\"item_#{field[0]}\">#{field[0].split('#').first.titleize.capitalize}</label>\n"
       else
-        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}</label>\n"
-      end
-
-      ##
-      # Read only attributes are those which end with an '*'
-      #
-      if field[0].include?('*')
-        field[0].delete!('*')
-        case params[:action]
-        when 'edit'
-          html << "#{@item.send(field[0])}</p>"
-          next
-        end
-      end
-
-      ##
-      #
-      #
-      if field[0].include?('#')
-        field[0].delete!('#')
-        case params[:action]
-        when 'new', 'edit'
-          html << "#{@item.send(field[0])}</p>"
-          next
-        end
+        comment = %w( read_only auto_generated ).include?(field[1]) ? (field[1] + " field").titleize : nil
+        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{comment}</small></label>\n"
       end
 
       ##
@@ -334,6 +323,8 @@ module AdminHelper
       when "collection"
         related = field[0].split("_id").first.capitalize.camelize.constantize
         html << "#{select :item, "#{field[0]}", related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}"
+      when "read_only", "auto_generated"
+        html << "#{text_field :item, field[0], :class => 'title', :readonly => 'readonly', :style => 'background: #FFFCE1;'}"
       else
         html << "#{text_field :item, field[0], :class => 'title'}"
       end

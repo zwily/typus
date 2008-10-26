@@ -173,10 +173,17 @@ module Typus
     end
 
     ##
-    #
+    # This has to be removed.
     #
     def typus_selectors
       Typus::Configuration.config["#{self.name}"]['selectors'].split(", ") rescue []
+    end
+
+    ##
+    #
+    #
+    def typus_field_options_for(filter)
+      Typus::Configuration.config["#{self.name}"]['fields']['options'][filter].split(", ") rescue []
     end
 
     ##

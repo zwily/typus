@@ -9,6 +9,10 @@ Post:
     list: title, created_at, status
     form: title, body, created_at, status
     relationship: title, created_at
+    options:
+      selectors: status
+      read_only: permalink
+      auto_generated: created_at
   actions:
     list: cleanup
     form: send_as_newsletter, preview

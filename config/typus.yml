@@ -2,8 +2,9 @@ TypusUser:
   fields:
     list: email, roles, status
     form: first_name, last_name, roles, email, password, password_confirmation
+    options:
+      selectors: roles
   filters: status
   search: first_name, last_name, email, roles
   application: Typus Admin
-  selectors: roles
   description: System Users Administration

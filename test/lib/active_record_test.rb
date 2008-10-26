@@ -74,6 +74,12 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal [ "send_as_newsletter", "preview" ], Post.typus_actions_for('form')
   end
 
+  def test_should_return_field_options_for_post
+    assert_equal %w( status ), Post.typus_field_options_for('selectors')
+    assert_equal %w( permalink ), Post.typus_field_options_for('read_only')
+    assert_equal %w( created_at ), Post.typus_field_options_for('auto_generated')
+  end
+
   def test_should_return_order_by_for_model
     assert_equal "title ASC, created_at DESC", Post.typus_order_by
   end

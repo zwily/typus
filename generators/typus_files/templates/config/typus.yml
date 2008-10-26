@@ -7,6 +7,10 @@
 #     list: title, category_id, created_at, status
 #     form: title, body, status, created_at
 #     relationship: title, status
+#     options:
+#       selectors:
+#       read_only:
+#       auto_generated:
 #   actions:
 #     list: cleanup
 #     form: send_as_newsletter
@@ -16,7 +20,6 @@
 #     has_many:
 #   filters: status, created_at, category_id
 #   search: title, body
-#   selectors: status
 #   application: Application
 #   description: Some text to describe the model
 #
@@ -31,6 +34,10 @@
     list: <%= model_attributes.join(", ") %>
     form: <%= model_attributes.join(", ") %>
     relationship:
+    options:
+      selectors:
+      read_only:
+      auto_generated:
   actions:
     list:
     form:
@@ -40,7 +47,6 @@
     has_many:
   filters:
   search:
-  selectors:
   application: <%= application %>
   description:
 
