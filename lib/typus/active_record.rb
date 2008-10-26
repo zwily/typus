@@ -52,7 +52,7 @@ module Typus
         if self.respond_to?("#{filter.to_s}_fields")
           fields = self.send("#{filter.to_s}_fields").map { |a| a.to_s }
         else
-          fields = Typus::Configuration.config["#{self.name}"]["fields"][filter.to_s].split(", ")
+          fields = Typus::Configuration.config[self.name]['fields'][filter.to_s].split(', ')
         end
       rescue
         filter = 'list'
@@ -98,7 +98,7 @@ module Typus
         end
 
       rescue
-        fields = Typus::Configuration.config["#{self.name}"]["fields"]["list"].split(", ")
+        fields = Typus::Configuration.config[self.name]['fields']['list'].split(', ')
         retry
       end
 
@@ -122,8 +122,8 @@ module Typus
       begin
         fields = self.filters.map { |a| a.to_s }
       rescue
-        return [] unless Typus::Configuration.config["#{self.name}"]["filters"]
-        fields = Typus::Configuration.config["#{self.name}"]["filters"].split(", ")
+        return [] unless Typus::Configuration.config[self.name]['filters']
+        fields = Typus::Configuration.config[self.name]['filters'].split(', ')
       end
       fields_with_type = []
       fields.each do |field|
