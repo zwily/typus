@@ -427,11 +427,8 @@ feature.
 
 ## Acknowledgments
 
-- Isaac Feliu - http://railslab.net
-- Jaime Iniesta - http://railes.net
-- supercoco9, sd and hydrus (sort_by)
 - Laia Gargallo - http://azotacalles.net
-- Xavier Noria (fxn) - http://www.hashref.com
+- Isaac Feliu - http://railslab.net
 - Sergio Espeja - http://github.com/spejman
 
 ## Author, contact & bugs

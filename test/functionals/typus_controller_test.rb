@@ -100,23 +100,44 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_not_allow_recover_password_if_disabled
+
     get :recover_password
+
     assert_response :success
     assert_template 'recover_password'
+
     Typus::Configuration.options[:recover_password] = false
     get :recover_password
+
     assert_response :redirect
     assert_redirected_to typus_login_url
+
   end
 
   def test_should_not_allow_reset_password_if_disabled
+
     get :reset_password
+
     assert_response :success
     assert_template 'reset_password'
+
     Typus::Configuration.options[:recover_password] = false
     get :reset_password
+
     assert_response :redirect
     assert_redirected_to typus_login_url
+
+  end
+
+  def test_should_verify_typus_login_layout_does_not_include_recover_password_link
+
+    get :login
+    assert_match /Recover password/, @response.body
+
+    Typus::Configuration.options[:recover_password] = false
+    get :login
+    assert !@response.body.include?("Recover password")
+
   end
 
   def test_should_verify_typus_login_layout_includes_version
@@ -131,61 +152,49 @@ class TypusControllerTest < ActionController::TestCase
     assert_match /<!-- Typus #{Typus.version} -->/, @response.body
   end
 
-=begin
+  def test_should_render_typus_login_top
+    get :login
+    assert_response :success
+    assert_match /_top.html.erb/, @response.body
+  end
+
+  def test_should_render_typus_login_bottom
+    get :login
+    assert_response :success
+    assert_match /_bottom.html.erb/, @response.body
+  end
 
   def test_should_render_application_dashboard_sidebar
 
-    file = "#{RAILS_ROOT}/app/views/typus/_dashboard_sidebar.html.erb"
-    open(file, 'w') { |f| f << "Dashboard Sidebar" }
-    assert File.exists? file
-
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
 
     get :dashboard
     assert_response :success
-    assert_match /Dashboard Sidebar/, @response.body
+    assert_match /_sidebar.html.erb/, @response.body
 
   end
-
-=end
-
-=begin
 
   def test_should_render_application_dashboard_top
 
-    file = "#{RAILS_ROOT}/app/views/typus/_dashboard_top.html.erb"
-    open(file, 'w') { |f| f << "Dashboard Top" }
-    assert File.exists? file
-
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
 
     get :dashboard
     assert_response :success
-    assert_match /Dashboard Top/, @response.body
+    assert_match /_top.html.erb/, @response.body
 
   end
-
-=end
-
-=begin
 
   def test_should_render_application_dashboard_bottom
 
-    file = "#{RAILS_ROOT}/app/views/typus/_dashboard_bottom.html.erb"
-    open(file, 'w') { |f| f << "Dashboard Bottom" }
-    assert File.exists? file
-
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
 
     get :dashboard
     assert_response :success
-    assert_match /Dashboard Bottom/, @response.body
+    assert_match /_bottom.html.erb/, @response.body
 
   end
-
-=end
 
 end
