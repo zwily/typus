@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
 ##
-# Here we test the CRUD actions.
+# Here we test the CRUD actions and template extensions rendering
 #
 class Admin::PostsControllerTest < ActionController::TestCase
 
@@ -125,32 +125,17 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     post_ = posts(:published)
 
-    folder = "#{RAILS_ROOT}/app/views/admin/posts"
-    FileUtils.mkdir(folder) unless File.exists? folder
-
-    file = "#{RAILS_ROOT}/app/views/admin/posts/_index_sidebar.html.erb"
-    open(file, 'w+') { |f| f << "Index Sidebar" }
-    assert File.exists?(file)
-
     get :index
     assert_response :success
-    assert_match /Index Sidebar/, @response.body
-
-    file = "#{RAILS_ROOT}/app/views/admin/posts/_edit_sidebar.html.erb"
-    open(file, 'w+') { |f| f << "Edit Sidebar" }
-    assert File.exists?(file)
+    assert_match /_index_sidebar.html.erb/, @response.body
 
     get :edit, { :id => post_.id }
     assert_response :success
-    assert_match /Edit Sidebar/, @response.body
-
-    file = "#{RAILS_ROOT}/app/views/admin/posts/_show_sidebar.html.erb"
-    open(file, 'w+') { |f| f << "Show Sidebar" }
-    assert File.exists?(file)
+    assert_match /_edit_sidebar.html.erb/, @response.body
 
     get :show, { :id => post_.id }
     assert_response :success
-    assert_match /Show Sidebar/, @response.body
+    assert_match /_show_sidebar.html.erb/, @response.body
 
   end
 
@@ -161,32 +146,17 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     post_ = posts(:published)
 
-    folder = "#{RAILS_ROOT}/app/views/admin/posts"
-    FileUtils.mkdir(folder) unless File.exists? folder
-
-    file = "#{RAILS_ROOT}/app/views/admin/posts/_index_top.html.erb"
-    open(file, 'w+') { |f| f << "Index Top" }
-    assert File.exists?(file)
-
     get :index
     assert_response :success
-    assert_match /Index Top/, @response.body
-
-    file = "#{RAILS_ROOT}/app/views/admin/posts/_edit_top.html.erb"
-    open(file, 'w+') { |f| f << "Edit Top" }
-    assert File.exists?(file)
+    assert_match /_index_top.html.erb/, @response.body
 
     get :edit, { :id => post_.id }
     assert_response :success
-    assert_match /Edit Top/, @response.body
-
-    file = "#{RAILS_ROOT}/app/views/admin/posts/_show_top.html.erb"
-    open(file, 'w+') { |f| f << "Show Top" }
-    assert File.exists?(file)
+    assert_match /_edit_top.html.erb/, @response.body
 
     get :show, { :id => post_.id }
     assert_response :success
-    assert_match /Show Top/, @response.body
+    assert_match /_show_top.html.erb/, @response.body
 
   end
 
@@ -197,32 +167,17 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     post_ = posts(:published)
 
-    folder = "#{RAILS_ROOT}/app/views/admin/posts"
-    FileUtils.mkdir(folder) unless File.exists? folder
-
-    file = "#{RAILS_ROOT}/app/views/admin/posts/_index_bottom.html.erb"
-    open(file, 'w+') { |f| f << "Index Bottom" }
-    assert File.exists?(file)
-
     get :index
     assert_response :success
-    assert_match /Index Bottom/, @response.body
-
-    file = "#{RAILS_ROOT}/app/views/admin/posts/_edit_bottom.html.erb"
-    open(file, 'w+') { |f| f << "Edit Bottom" }
-    assert File.exists?(file)
+    assert_match /_index_bottom.html.erb/, @response.body
 
     get :edit, { :id => post_.id }
     assert_response :success
-    assert_match /Edit Bottom/, @response.body
-
-    file = "#{RAILS_ROOT}/app/views/admin/posts/_show_bottom.html.erb"
-    open(file, 'w+') { |f| f << "Show Bottom" }
-    assert File.exists?(file)
+    assert_match /_edit_bottom.html.erb/, @response.body
 
     get :show, { :id => post_.id }
     assert_response :success
-    assert_match /Show Bottom/, @response.body
+    assert_match /_show_bottom.html.erb/, @response.body
 
   end
 
