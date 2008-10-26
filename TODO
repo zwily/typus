@@ -9,7 +9,9 @@ TODO
 [ ] Define a way to access things that are not resources, like 
     Memcached, Reports and other things.
 [ ] Actions for a record can be added to the listings.
-[ ] Namespace or rename test models to avoid conflicts with application.
+[ ] Remove application paths for models, controllers, views and 
+    helpers when testing to avoid conflicts between plugin and 
+    application.
 [ ] "No preview available" when displaying paperclip attachments should 
     show other information as the content type, file size.
 
