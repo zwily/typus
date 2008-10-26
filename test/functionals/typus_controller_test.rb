@@ -100,23 +100,44 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_not_allow_recover_password_if_disabled
+
     get :recover_password
+
     assert_response :success
     assert_template 'recover_password'
+
     Typus::Configuration.options[:recover_password] = false
     get :recover_password
+
     assert_response :redirect
     assert_redirected_to typus_login_url
+
   end
 
   def test_should_not_allow_reset_password_if_disabled
+
     get :reset_password
+
     assert_response :success
     assert_template 'reset_password'
+
     Typus::Configuration.options[:recover_password] = false
     get :reset_password
+
     assert_response :redirect
     assert_redirected_to typus_login_url
+
+  end
+
+  def test_should_verify_typus_login_layout_does_not_include_recover_password_link
+
+    get :login
+    assert_match /Recover password/, @response.body
+
+    Typus::Configuration.options[:recover_password] = false
+    get :login
+    assert !@response.body.include?("Recover password")
+
   end
 
   def test_should_verify_typus_login_layout_includes_version
