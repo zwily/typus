@@ -13,6 +13,8 @@ Post:
       selectors: status
       read_only: permalink
       auto_generated: created_at
+  relationships:
+    has_and_belongs_to_many: tags
   actions:
     list: cleanup
     form: send_as_newsletter, preview

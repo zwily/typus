@@ -154,7 +154,7 @@ module Typus
       begin
         self.send("#{filter}_actions").map { |a| a.to_s }
       rescue
-        Typus::Configuration.config["#{self.name}"]["actions"][filter.to_s].split(", ") rescue []
+        Typus::Configuration.config[self.name]['actions'][filter.to_s].split(', ') rescue []
       end
     end
 
@@ -169,33 +169,33 @@ module Typus
     # Default order is ASC, except for datetime items which is DESC.
     #
     def typus_defaults_for(filter)
-      Typus::Configuration.config["#{self.name}"][filter].split(", ") rescue []
+      Typus::Configuration.config[self.name][filter.to_s].split(', ') rescue []
     end
 
     ##
     # This has to be removed.
     #
     def typus_selectors
-      Typus::Configuration.config["#{self.name}"]['selectors'].split(", ") rescue []
+      Typus::Configuration.config[self.name]['selectors'].split(', ') rescue []
     end
 
     ##
     #
     #
     def typus_field_options_for(filter)
-      Typus::Configuration.config["#{self.name}"]['fields']['options'][filter].split(", ") rescue []
+      Typus::Configuration.config[self.name]['fields']['options'][filter.to_s].split(', ') rescue []
     end
 
     ##
     # Used for +relationships+
     #
     def typus_relationships_for(filter)
-      Typus::Configuration.config["#{self.name}"]["relationships"]["#{filter.to_s}"].split(", ") rescue []
+      Typus::Configuration.config[self.name]['relationships'][filter.to_s].split(', ') rescue []
     end
 
     def typus_order_by
-      return "id ASC" unless Typus::Configuration.config["#{self.name}"]["order_by"]
-      fields = Typus::Configuration.config["#{self.name}"]["order_by"].split(", ")
+      return "id ASC" unless Typus::Configuration.config[self.name]['order_by']
+      fields = Typus::Configuration.config[self.name]['order_by'].split(', ')
       order = []
       fields.each do |field|
         if field.include?("-")

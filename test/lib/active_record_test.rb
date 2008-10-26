@@ -23,6 +23,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["email", "string"], 
                        ["roles", "selector"], 
                        ["status", "boolean"]]
+    assert_equal expected_fields, TypusUser.typus_fields_for('list')
     assert_equal expected_fields, TypusUser.typus_fields_for(:list)
   end
 
@@ -33,6 +34,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["roles", "selector"], 
                        ["password", "password"], 
                        ["password_confirmation", "password"]]
+    assert_equal expected_fields, TypusUser.typus_fields_for('form')
     assert_equal expected_fields, TypusUser.typus_fields_for(:form)
   end
 
@@ -42,6 +44,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["roles", "selector"], 
                        ["email", "string"], 
                        ["status", "boolean"]]
+    assert_equal expected_fields, TypusUser.typus_fields_for('relationship')
     assert_equal expected_fields, TypusUser.typus_fields_for(:relationship)
   end
 
@@ -51,6 +54,7 @@ class ActiveRecordTest < Test::Unit::TestCase
                        ["email", "string"], 
                        ["roles", "selector"], 
                        ["status", "boolean"]]
+    assert_equal expected_fields, TypusUser.typus_fields_for('undefined')
     assert_equal expected_fields, TypusUser.typus_fields_for(:undefined)
   end
 
@@ -63,21 +67,41 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_actions_on_list_for_typus_user
-    assert_equal [], TypusUser.typus_actions_for('list')
+    assert TypusUser.typus_actions_for('list').empty?
+    assert TypusUser.typus_actions_for(:list).empty?
   end
 
   def test_should_return_actions_on_list_for_post
-    assert_equal [ "cleanup" ], Post.typus_actions_for('list')
+    assert_equal ["cleanup"], Post.typus_actions_for('list')
+    assert_equal ["cleanup"], Post.typus_actions_for(:list)
   end
 
   def test_should_return_actions_on_form_for_post
-    assert_equal [ "send_as_newsletter", "preview" ], Post.typus_actions_for('form')
+    assert_equal ["send_as_newsletter", "preview"], Post.typus_actions_for('form')
+    assert_equal ["send_as_newsletter", "preview"], Post.typus_actions_for(:form)
   end
 
   def test_should_return_field_options_for_post
-    assert_equal %w( status ), Post.typus_field_options_for('selectors')
-    assert_equal %w( permalink ), Post.typus_field_options_for('read_only')
-    assert_equal %w( created_at ), Post.typus_field_options_for('auto_generated')
+    assert_equal ["status"], Post.typus_field_options_for('selectors')
+    assert_equal ["status"], Post.typus_field_options_for(:selectors)
+    assert_equal ["permalink"], Post.typus_field_options_for('read_only')
+    assert_equal ["permalink"], Post.typus_field_options_for(:read_only)
+    assert_equal ["created_at"], Post.typus_field_options_for('auto_generated')
+    assert_equal ["created_at"], Post.typus_field_options_for(:auto_generated)
+  end
+
+  def test_should_return_defaults_for_post
+    assert_equal ["title"], Post.typus_defaults_for('search')
+    assert_equal ["title"], Post.typus_defaults_for(:search)
+    assert_equal ["title", "-created_at"], Post.typus_defaults_for('order_by')
+    assert_equal ["title", "-created_at"], Post.typus_defaults_for(:order_by)
+  end
+
+  def test_should_return_relationships_for_post
+    assert_equal ["tags"], Post.typus_relationships_for('has_and_belongs_to_many')
+    assert_equal ["tags"], Post.typus_relationships_for(:has_and_belongs_to_many)
+    assert Post.typus_relationships_for('has_many').empty?
+    assert Post.typus_relationships_for(:has_many).empty?
   end
 
   def test_should_return_order_by_for_model
