@@ -9,7 +9,6 @@ TODO
 [ ] Define a way to access things that are not resources, like 
     Memcached, Reports and other things.
 [ ] Actions for a record can be added to the listings.
-[ ] Namespace or rename test models to avoid conflicts with application.
 [ ] "No preview available" when displaying paperclip attachments should 
     show other information as the content type, file size.
 
@@ -23,6 +22,8 @@ ON IT
 DONE
 ====
 
+[X] Namespace or rename test models to avoid conflicts with 
+    application. (20081026)
 [X] Read only fields on new, for "auto-generated" attributes. (20081025)
 [X] Selectors for options. (For example roles) (20081025)
 [X] Remove 'disable_with' on forms. (20081025)
