@@ -15,6 +15,10 @@ class Post < ActiveRecord::Base
     "plugin"
   end
 
+  def self.status
+    %w( pending published unpublished )
+  end
+
 end
 
 class Category < ActiveRecord::Base
