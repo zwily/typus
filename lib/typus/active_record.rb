@@ -85,9 +85,11 @@ module Typus
             when /file_name/:       attribute_type = 'file'
             when /password/:        attribute_type = 'password'
             when 'position':        attribute_type = 'position'
-            when self.typus_field_options_for(:selectors).join(',')
+            when self.typus_selectors.join(',')
               attribute_type = 'selector'
           end
+
+          # field_options_for(:selectors)
 
           ##
           # And finally insert the field and the attribute_type 
@@ -175,9 +177,9 @@ module Typus
     ##
     # This has to be removed.
     #
-#    def typus_selectors
-#      Typus::Configuration.config[self.name]['fields']['options']['selectors'].split(', ') rescue []
-#    end
+    def typus_selectors
+      Typus::Configuration.config[self.name]['fields']['options']['selectors'].split(', ') rescue []
+    end
 
     ##
     #
