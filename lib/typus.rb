@@ -85,7 +85,7 @@ module Typus
     end
 
     def enable_views
-      ActionController::Base.view_paths << File.join(File.dirname(__FILE__), '..', 'app', 'views')
+      ActionController::Base.append_view_path(File.join(File.dirname(__FILE__), '..', 'app', 'views'))
     end
 
     def enable_controllers
