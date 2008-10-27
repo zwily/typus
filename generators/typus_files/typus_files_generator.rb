@@ -4,6 +4,8 @@ class TypusFilesGenerator < Rails::Generator::Base
 
     record do |m|
 
+      application = RAILS_ROOT.split("/").last.titleize
+
       ##
       # For creating `typus.yml` and `typus_roles.yml` we need first to detect 
       # the available AR models of the application, not the plugins.
@@ -17,11 +19,10 @@ class TypusFilesGenerator < Rails::Generator::Base
           ar_models << class_name
         end
       end
-      
+
       ##
       # configuration files
       #
-      application = RAILS_ROOT.split("/").last.titleize
       files = %w( typus.yml typus_roles.yml )
       files.each do |file|
         m.template "config/#{file}", 
@@ -30,7 +31,9 @@ class TypusFilesGenerator < Rails::Generator::Base
       end
 
       # initializers
-      m.file "initializers/typus.rb", "config/initializers/typus.rb"
+      m.template "initializers/typus.rb", 
+                 "config/initializers/typus.rb", 
+                 :assigns => { :application => application }
 
       # stylesheets and images
       m.file "stylesheets/typus.css", "public/stylesheets/typus.css"

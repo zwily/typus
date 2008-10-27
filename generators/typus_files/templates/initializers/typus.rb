@@ -4,7 +4,6 @@
 ##
 
 =begin
-Typus::Configuration.options[:app_name] = "Typus"
 Typus::Configuration.options[:app_description] = ""
 Typus::Configuration.options[:per_page] = 15
 Typus::Configuration.options[:form_rows] = 10
@@ -18,3 +17,5 @@ Typus::Configuration.options[:recover_password] = true
 Typus::Configuration.options[:password] = 8
 Typus::Configuration.options[:ssl] = false
 =end
+
+Typus::Configuration.options[:app_name] = "<%= application %>"
