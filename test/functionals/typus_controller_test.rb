@@ -202,7 +202,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_match /<title>#{Typus::Configuration.options[:app_name]}<\/title>/, @response.body
   end
 
-  def test_should_verify_page_title_on_login
+  def test_should_verify_page_title_on_dashboard
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
     get :dashboard
