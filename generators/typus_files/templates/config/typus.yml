@@ -11,6 +11,7 @@
 #       selectors:
 #       read_only:
 #       auto_generated:
+#       questions:
 #   actions:
 #     list: cleanup
 #     form: send_as_newsletter
@@ -38,6 +39,7 @@
       selectors:
       read_only:
       auto_generated:
+      questions:
   actions:
     list:
     form:

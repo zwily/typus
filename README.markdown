@@ -216,6 +216,20 @@ Or directly on the model:
 
     end
 
+### Questions?
+
+Sometimes on your forms you want to ask questions.
+
+- Is highlighted?
+- On newsletter?
+
+    Story:
+      fields:
+        list: title, is_highlighted
+        form: title, body, is_highlighted
+        options:
+          questions: is_highlighted
+
 ### Selectors
 
 Need a selector, to select gender, size, status, the encoding status 

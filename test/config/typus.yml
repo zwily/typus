@@ -13,6 +13,7 @@ Post:
       selectors: status
       read_only: permalink
       auto_generated: created_at
+      questions: status
   relationships:
     has_and_belongs_to_many: tags
   actions:
