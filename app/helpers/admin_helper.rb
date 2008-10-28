@@ -275,6 +275,13 @@ module AdminHelper
       end
 
       ##
+      # Questions
+      #
+      if @model.typus_field_options_for('questions').include?(field[0])
+        question = true
+      end
+
+      ##
       # Labels
       #
       case field[0]
@@ -293,7 +300,7 @@ module AdminHelper
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>\n"
       else
         comment = %w( read_only auto_generated ).include?(field[1]) ? (field[1] + " field").titleize : nil
-        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{comment}</small></label>\n"
+        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}#{"?" if question} <small>#{comment}</small></label>\n"
       end
 
       ##
