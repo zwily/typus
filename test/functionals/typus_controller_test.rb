@@ -197,4 +197,16 @@ class TypusControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_verify_page_title_on_login
+    get :login
+    assert_match /<title>#{Typus::Configuration.options[:app_name]}<\/title>/, @response.body
+  end
+
+  def test_should_verify_page_title_on_dashboard
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+    get :dashboard
+    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Dashboard<\/title>/, @response.body
+  end
+
 end

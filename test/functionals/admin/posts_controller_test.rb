@@ -238,4 +238,26 @@ class Admin::PostsControllerTest < ActionController::TestCase
     Typus::Configuration.options[:toggle] = true
   end
 
+  def test_should_verify_page_title_on_index
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+    get :index
+    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Posts<\/title>/, @response.body
+  end
+
+  def test_should_verify_page_title_on_new
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+    get :new
+    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Posts &rsaquo; New<\/title>/, @response.body
+  end
+
+  def test_should_verify_page_title_on_edit
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+    post_ = posts(:published)
+    get :edit, :id => post_.id
+    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Posts &rsaquo; Edit &rsaquo; #{post_.id}<\/title>/, @response.body
+  end
+
 end

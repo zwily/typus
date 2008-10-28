@@ -14,8 +14,8 @@ ActiveSupport::Dependencies.load_paths.delete(File.join(RAILS_ROOT, 'app/models'
 # Load only the plugin view_paths to be able to test extensions.
 #
 ActionController::Base.view_paths = []
-ActionController::Base.view_paths << File.join(RAILS_ROOT, 'vendor/plugins/typus/app/views')
-ActionController::Base.view_paths << File.join(RAILS_ROOT, 'vendor/plugins/typus/test/fixtures/views')
+ActionController::Base.append_view_path(File.join(RAILS_ROOT, 'vendor/plugins/typus/app/views'))
+ActionController::Base.append_view_path(File.join(RAILS_ROOT, 'vendor/plugins/typus/test/fixtures/views'))
 
 require 'test/unit'
 require 'action_controller/test_process'

@@ -55,10 +55,6 @@ module Typus
     def enable
       enable_config
       enable_roles
-      enable_models
-      enable_views
-      enable_controllers
-      enable_helpers
       enable_version
       enable_testing_models if RAILS_ENV == 'test'
       enable_orm
@@ -78,22 +74,6 @@ module Typus
 
     def enable_roles
       Typus::Configuration.roles!
-    end
-
-    def enable_models
-      ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), '..', 'app', 'models')
-    end
-
-    def enable_views
-      ActionController::Base.view_paths << File.join(File.dirname(__FILE__), '..', 'app', 'views')
-    end
-
-    def enable_controllers
-      ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), '..', 'app', 'controllers')
-    end
-
-    def enable_helpers
-      ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), '..', 'app', 'helpers')
     end
 
     def enable_version
