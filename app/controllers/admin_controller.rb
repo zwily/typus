@@ -98,20 +98,17 @@ class AdminController < ApplicationController
   #
   def create
     @item = @model.new(params[:item])
-    if @item.save
+    if @item.valid?
       if params[:back_to]
         if params[:model] && params[:model_id]
           model_to_relate = params[:model].constantize
           if @item.respond_to?(params[:model].tableize)
-            ##
-            # This is the case of many_to_many
-            #
+            @item.save
+            # This is the case of habtm
             @item.send(params[:model].tableize) << model_to_relate.find(params[:model_id])
           else
-            ##
             # This is the case of a polymorphic relationship.
-            #
-            model_to_relate.find(params[:model_id]).send(@item.class.name.tableize) << @item
+            model_to_relate.find(params[:model_id]).send(@item.class.name.tableize).create(params[:item])
           end
           flash[:success] = "#{@item.class} successfully assigned to #{params[:model].downcase}."
         else
