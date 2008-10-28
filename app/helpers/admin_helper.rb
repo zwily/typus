@@ -280,11 +280,14 @@ module AdminHelper
       case field[0]
       when /file_name/
         attribute = field[0].split("_file_name").first
-        case @item.send("#{attribute}_content_type")
+        content_type = @item.send("#{attribute}_content_type")
+        case content_type
         when /image/
           html << "<p>#{link_to image_tag(@item.send(attribute).url(:thumb)), @item.send(attribute).url, :popup => ['Sanoke', 'height=461,width=692'], :style => "border: 1px solid #D3D3D3;"}</p>\n"
+        when /flash/
+          html << "<p>No preview available for an <strong>Adobe Flash</strong> file.</p>"
         else
-          html << "<p>No Preview Available</p>\n"
+          html << "<p>No preview available (#{content_type})</p>\n"
         end
       when /_id/
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>\n"
