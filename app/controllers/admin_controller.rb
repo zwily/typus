@@ -217,15 +217,11 @@ class AdminController < ApplicationController
     model_to_unrelate = params[:model].constantize
     unrelate = model_to_unrelate.find(params[:model_id])
     if @model.find(params[:id]).respond_to?(params[:model].tableize)
-      ##
       # Unrelate a habtm
-      #
       @model.find(params[:id]).send(params[:model].tableize).delete(unrelate)
       flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.humanize.downcase}."
     else
-      ##
       # Unrelate a polymorphic relationship
-      #
       @model.find(params[:id]).destroy
       flash[:success] = "#{@model.humanize.titleize} removed from #{model_to_unrelate.to_s.downcase}."
     end
