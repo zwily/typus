@@ -102,8 +102,16 @@ class AdminController < ApplicationController
       if params[:back_to]
         if params[:model] && params[:model_id]
           model_to_relate = params[:model].constantize
-          if @item.respond_to? params[:model].tableize
+          if @item.respond_to?(params[:model].tableize)
+            ##
+            # This is the case of many_to_many
+            #
             @item.send(params[:model].tableize) << model_to_relate.find(params[:model_id])
+          else
+            ##
+            # This is the case of a polymorphic relationship.
+            #
+            model_to_relate.find(params[:model_id]).send(@item.class.name.tableize) << @item
           end
           flash[:success] = "#{@item.class} successfully assigned to #{params[:model].downcase}."
         else
@@ -210,8 +218,19 @@ class AdminController < ApplicationController
   def unrelate
     model_to_unrelate = params[:model].constantize
     unrelate = model_to_unrelate.find(params[:model_id])
-    @model.find(params[:id]).send(params[:model].tableize).delete(unrelate)
-    flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.humanize.downcase}."
+    if @model.find(params[:id]).respond_to?(params[:model].tableize)
+      ##
+      # Unrelate a habtm
+      #
+      @model.find(params[:id]).send(params[:model].tableize).delete(unrelate)
+      flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.humanize.downcase}."
+    else
+      ##
+      # Unrelate a polymorphic relationship
+      #
+      @model.find(params[:id]).destroy
+      flash[:success] = "#{@model.humanize.titleize} removed from #{model_to_unrelate.to_s.downcase}."
+    end
     redirect_to :back
   end
 
