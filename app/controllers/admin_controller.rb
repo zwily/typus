@@ -330,10 +330,8 @@ private
   # Error handler only active on development.
   #
   def error_handler(error, redirection = typus_dashboard_url)
-    # unless RAILS_ENV == 'development'
-      flash[:error] = error.message + "(#{@model})"
-      redirect_to redirection
-    # end
+    flash[:error] = error.message + "(#{@model})"
+    redirect_to redirection
   end
 
   def generate_csv
