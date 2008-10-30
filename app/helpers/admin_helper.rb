@@ -47,11 +47,8 @@ module AdminHelper
       html << submodules if submodules
     end
 
-    unless html.empty?
-      return "<h2>Actions</h2>\n#{html}"
-    else
-      return ""
-    end
+    html = "<h2>Actions</h2>\n#{html}" unless html.empty?
+    return html
 
   end
 
