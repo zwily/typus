@@ -131,4 +131,14 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal [typus_users(:admin), typus_users(:disabled_user)], typus_users(:editor).previous_and_next
   end
 
+  def test_should_verify_typus_name_is_working_properly
+    assert Category.new.respond_to?(:name)
+    assert_equal "First Category", categories(:first).typus_name
+    assert Post.new.respond_to?(:to_label)
+    assert_equal "Labeled post", posts(:published).typus_name
+    assert !Page.new.respond_to?(:name)
+    assert !Page.new.respond_to?(:to_label)
+    assert_equal "Page#1", pages(:published).typus_name
+  end
+
 end

@@ -295,9 +295,9 @@ module Typus
     #
     #
     def typus_name
-      return to_label if respond_to? :to_label
-      return name if respond_to? :name
-      "#{self.class}##{id}"
+      return to_label if respond_to?(:to_label)
+      return name if respond_to?(:name)
+      return "#{self.class}##{id}"
     end
 
   end
