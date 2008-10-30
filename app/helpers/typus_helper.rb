@@ -67,7 +67,6 @@ module TypusHelper
     crumbs = []
     crumbs << @model.to_s.pluralize if @model
     crumbs << params[:action] unless %w( index ).include?(params[:action])
-    crumbs << params[:id]
     return crumbs.compact.map { |x| x.titleize }.join(" &rsaquo; ")
   end
 

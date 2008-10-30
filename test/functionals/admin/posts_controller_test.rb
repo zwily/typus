@@ -257,7 +257,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     @request.session[:typus] = admin.id
     post_ = posts(:published)
     get :edit, :id => post_.id
-    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Posts &rsaquo; Edit &rsaquo; #{post_.id}<\/title>/, @response.body
+    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Posts &rsaquo; Edit<\/title>/, @response.body
   end
 
 end
