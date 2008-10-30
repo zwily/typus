@@ -160,7 +160,7 @@ end
 
           controller.puts(content)
           controller.close
-          puts "=> Admin::#{model.pluralize}Controller successfully created."
+          puts "[typus] Admin::#{model.pluralize}Controller successfully created."
         end
 
         ##
@@ -184,7 +184,7 @@ end
 
           helper.puts(content)
           helper.close
-          puts "=> Admin::#{model.pluralize}Helper successfully created."
+          puts "[typus] Admin::#{model.pluralize}Helper successfully created."
         end
 
         ##
@@ -215,7 +215,7 @@ end
 
           test.puts(content)
           test.close
-          puts "=> Admin::#{model.pluralize}ControllerTest successfully created."
+          puts "[typus] Admin::#{model.pluralize}ControllerTest successfully created."
         end
 
       end
