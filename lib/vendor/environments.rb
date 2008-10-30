@@ -12,10 +12,6 @@ module Rails
     environment == 'test'
   end
 
-  def self.staging?
-    environment == 'staging'
-  end
-
   def self.production?
     environment == 'production'
   end
