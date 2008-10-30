@@ -37,7 +37,7 @@ module AdminHelper
     # index, update, create
     #
     case params[:action]
-    when "new", "create"
+    when 'new', 'create'
       html << "<ul>"
       html << "<li>#{link_to "Back to list", :params => params.merge(:action => 'index')}</li>"
       html << "</ul>"
@@ -92,7 +92,7 @@ module AdminHelper
       <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
       </form>
     HTML
-    return search if Typus::Configuration.config["#{@model.name}"]["search"]
+    return search if Typus::Configuration.config[@model.name]['search']
   end
 
   def filters
@@ -244,21 +244,21 @@ module AdminHelper
       ##
       # Read only fields.
       #
-      if @model.typus_field_options_for('read_only').include?(field[0])
+      if @model.typus_field_options_for(:read_only).include?(field[0])
         field[1] = 'read_only' if %w( edit ).include?(params[:action])
       end
 
       ##
       # Auto generated fields.
       #
-      if @model.typus_field_options_for('auto_generated').include?(field[0])
+      if @model.typus_field_options_for(:auto_generated).include?(field[0])
         field[1] = 'auto_generated' if %w( new edit ).include?(params[:action])
       end
 
       ##
       # Questions
       #
-      if @model.typus_field_options_for('questions').include?(field[0])
+      if @model.typus_field_options_for(:questions).include?(field[0])
         question = true
       end
 
