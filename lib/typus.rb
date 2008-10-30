@@ -5,9 +5,7 @@ module Typus
     def applications
       apps = []
       Typus::Configuration.config.to_a.each do |model|
-        if model[1].has_key? 'application'
-          apps << model[1]['application']
-        end
+        apps << model[1]['application'] if model[1].has_key? 'application'
       end
       return apps.uniq.sort
     end
@@ -15,9 +13,7 @@ module Typus
     def modules(app_name)
       submodules = []
       Typus::Configuration.config.to_a.each do |model|
-        if model[1]['application'] == app_name
-          submodules << model[0]
-        end
+        submodules << model[0] if model[1]['application'] == app_name
       end
       return submodules.sort
     end
@@ -25,19 +21,19 @@ module Typus
     def submodules(module_name)
       submodules = []
       Typus::Configuration.config.to_a.each do |model|
-        if model[1]['module'] == module_name
-          submodules << model[0]
-        end
+        submodules << model[0] if model[1]['module'] == module_name
       end
       return submodules.sort
     end
 
     def parent_module(submodule_name)
-      Typus::Configuration.config[submodule_name]['module']
+      parent = Typus::Configuration.config[submodule_name]['module']
+      return (!parent.nil?) ? parent : []
     end
 
     def parent_application(module_name)
-      Typus::Configuration.config[module_name]['application']
+      parent = Typus::Configuration.config[module_name]['application']
+      return (!parent.nil?) ? parent : []
     end
 
     def models
