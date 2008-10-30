@@ -42,9 +42,9 @@ module AdminHelper
       html << "<li>#{link_to "Back to list", :params => params.merge(:action => 'index')}</li>"
       html << "</ul>"
     else
-      html << more_actions if more_actions
-      html << modules if modules
-      html << submodules if submodules
+      html << more_actions
+      html << modules
+      html << submodules
     end
 
     html = "<h2>Actions</h2>\n#{html}" unless html.empty?
@@ -61,37 +61,28 @@ module AdminHelper
         html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.name.downcase}_url") }</li>"
       end
     end
-    return "<ul>#{html}</ul>" unless html.empty?
+    html = "<ul>#{html}</ul>" unless html.empty?
+    return html
   end
 
   def modules
     html = ""
-    Typus.parent_module(params[:model].singularize.titleize).each do |m|
+    Typus.parent_module(@model.name).each do |m|
       model_cleaned = m.split(" ").join("").tableize
       html << "<li>#{ link_to m, :controller => "typus", :model => model_cleaned }</li>"
     end
-    unless html.empty?
-      html = "<h2>Modules</h2>\n<ul>#{html}</ul>"
-    else
-      ""
-    end
-  rescue
-    ""
+    html = "<h2>Modules</h2>\n<ul>#{html}</ul>" unless html.empty?
+    return html
   end
 
   def submodules
     html = ""
-    Typus.submodules(params[:model].singularize.titleize).each do |m|
+    Typus.submodules(@model.name).each do |m|
       model_cleaned = m.split(" ").join("").tableize
       html << "<li>#{ link_to m, :controller => "typus", :model => model_cleaned }</li>"
     end
-    unless html.empty?
-      html = "<h2>Submodules</h2>\n<ul>#{html}</ul>"
-    else
-      ""
-    end
-  rescue
-    ""
+    html = "<h2>Submodules</h2>\n<ul>#{html}</ul>" unless html.empty?
+    return html
   end
 
   def search
