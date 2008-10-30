@@ -17,6 +17,7 @@ module Typus
     #   Typus::Configuration.options[:disable_typus_enabled_plugins] = true
     #   Typus::Configuration.options[:email] = 'admin@example.com'
     #   Typus::Configuration.options[:password] = 8
+    #   Typus::Configuration.options[:special_characters_on_password] = true
     #   Typus::Configuration.options[:ssl] = false
     #
     @@options = { :app_name => 'Typus', 
@@ -33,6 +34,7 @@ module Typus
                   :disable_typus_enabled_plugins => false, 
                   :email => 'admin@example.com', 
                   :password => 8, 
+                  :special_characters_on_password => false, 
                   :ssl => false }
 
     mattr_accessor :options
