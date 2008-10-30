@@ -15,14 +15,14 @@ ActiveSupport::Dependencies.load_paths.delete(File.join(RAILS_ROOT, 'app/models'
 # test the plugin without touching the application.
 #
 %w( models controllers helpers ).each do |folder|
-  ActiveSupport::Dependencies.load_paths << File.join(RAILS_ROOT, 'vendor/plugins/typus/test/fixtures', folder)
+  ActiveSupport::Dependencies.load_paths << File.join(RAILS_ROOT, 'vendor/plugins/typus/test/fixtures/app', folder)
 end
 
 ##
 # Load only the plugin view_paths to be able to test extensions.
 #
 ActionController::Base.view_paths = []
-%w( app/views test/fixtures/views ).each do |folder|
+%w( app/views test/fixtures/app/views ).each do |folder|
   ActionController::Base.append_view_path(File.join(RAILS_ROOT, 'vendor/plugins/typus', folder))
 end
 
