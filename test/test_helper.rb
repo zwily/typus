@@ -11,8 +11,8 @@ ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :dbfile => ":memo
 ActiveSupport::Dependencies.load_paths.delete(File.join(RAILS_ROOT, 'app/models'))
 
 ##
-# We want to have our own controllers and models to be able to 
-# test the plugin without touching the application.
+# We want to have our own controllers, helpers and models to be able 
+# to test the plugin without touching the application.
 #
 %w( models controllers helpers ).each do |folder|
   ActiveSupport::Dependencies.load_paths << File.join(RAILS_ROOT, 'vendor/plugins/typus/test/fixtures/app', folder)
