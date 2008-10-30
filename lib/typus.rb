@@ -53,70 +53,18 @@ module Typus
     end
 
     def enable
-      enable_config
-      enable_roles
-      enable_version
-      enable_testing_models if RAILS_ENV == 'test'
-      enable_orm
-      enable_routes
-      enable_string
-      enable_hash
-      enable_authentication
-      enable_patches if Rails.vendor_rails?
-      enable_object
-      enable_pagination
-      enable_environments
-    end
-
-    def enable_config
       Typus::Configuration.config!
-    end
-
-    def enable_roles
       Typus::Configuration.roles!
-    end
-
-    def enable_version
       require 'typus/version'
-    end
-
-    def enable_testing_models
-      require File.dirname(__FILE__) + "/../test/test_models"
-    end
-
-    def enable_orm
+      require File.dirname(__FILE__) + "/../test/test_models" if RAILS_ENV == 'test'
       require 'typus/active_record'
-    end
-
-    def enable_routes
       require 'typus/routes'
-    end
-
-    def enable_string
       require 'typus/string'
-    end
-
-    def enable_hash
       require 'typus/hash'
-    end
-
-    def enable_authentication
       require 'typus/authentication'
-    end
-
-    def enable_patches
-      require 'typus/patches'
-    end
-
-    def enable_object
+      require 'typus/patches' if Rails.vendor_rails?
       require 'typus/object'
-    end
-
-    def enable_pagination
       require 'vendor/paginator'
-    end
-
-    def enable_environments
       require 'vendor/environments'
     end
 
