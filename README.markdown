@@ -8,9 +8,9 @@ Keep in mind that:
 
 > Typus doesn't try to be all the things to all the people.
 
-Once installed and configured you can login at <http://example.com/admin>
+Once installed and configured you can login at <http://example.com/admin>.
 
-Screenshots on the [wiki](http://github.com/fesplugas/typus/wikis)
+Screenshots on the [wiki](http://github.com/fesplugas/typus/wikis).
 
 ## Installing
 
@@ -224,6 +224,8 @@ Sometimes on your forms you want to ask questions.
 - Is highlighted?
 - On newsletter?
 
+And you can enable them with the questions option.
+
     Story:
       fields:
         list: title, is_highlighted
@@ -399,17 +401,6 @@ configuration file.
 
 Note: CRUD stands for Create, Read, Update and Delete.
 
-### Tip
-
-1. Roles for a user?
-
-You can create a role for a user using directly the username nickname. For 
-example, the user Francesc Esplugas:
-
-    fesplugas:
-      TypusUser: u
-      Post: crud
-
 ## Typus Enabled Plugins
 
 Typus can use external plugins to extend functionality. Some of them 
@@ -425,7 +416,7 @@ the `typus_plugin` generator.
     $ script/generate plugin your_plugin
     $ script/generate typus_plugin your_plugin
 
-Usually a Typus plugin contains `models`, `controllers` & `views.`. The 
+Usually a Typus plugin contains `models`, `controllers` & `views`. The 
 plugin will have a `init.rb` which will merge the load paths for those 
 folders.
 
@@ -439,6 +430,17 @@ Remember to install the `ssl_requirement` plugin to be able to use this
 feature.
 
     $ script/plugin install git://github.com/rails/ssl_requirement.git
+
+## Tip & Tricks
+
+### Roles for a user?
+
+You can create a role for a user using directly the username nickname. For 
+example, the user Francesc Esplugas:
+
+    fesplugas:
+      TypusUser: u
+      Post: crud
 
 ## Acknowledgments
 
