@@ -33,11 +33,4 @@ class TypusTest < Test::Unit::TestCase
     assert_equal 5, TypusUser.count
   end
 
-  def test_should_verify_typus_responds_to_some_questions
-    assert Typus.respond_to?('version')
-    assert Typus.respond_to?('applications')
-    assert Typus.respond_to?('models')
-    assert Typus.respond_to?('modules')
-  end
-
 end

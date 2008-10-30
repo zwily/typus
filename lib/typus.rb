@@ -37,11 +37,9 @@ module Typus
     end
 
     def models
-      m = []
-      Typus::Configuration.config.to_a.each do |model|
-        m << model[0]
-      end
-      return m.sort
+      models = []
+      Typus::Configuration.config.to_a.each { |m| models << m[0] }
+      return models.sort
     end
 
     def version
