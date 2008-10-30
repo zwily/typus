@@ -44,15 +44,13 @@ module TypusHelper
         <br />
         <div style="clear"></div>
       HTML
-      
+
       html << html_module if enabled
-      
+
     end
 
     html << "</div>"
 
-#  rescue Exception => error
-#    display_error(error)
   end
 
   def typus_block(name, location)
