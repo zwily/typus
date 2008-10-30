@@ -56,22 +56,15 @@ module AdminHelper
   end
 
   def more_actions
-
     html = ""
-
-    case params[:action]
-    when 'index'
-      @model.typus_actions_for(:list).each do |a|
+    @model.typus_actions_for(params[:action]).each do |a|
+      begin
         html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.name.tableize}_url") }</li>"
-      end
-    when 'edit'
-      @model.typus_actions_for(:form).each do |a|
-        html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.name.tableize.singularize}_url") }</li>"
+      rescue
+        html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.name.downcase}_url") }</li>"
       end
     end
-
     return "<ul>#{html}</ul>" unless html.empty?
-
   end
 
   def modules

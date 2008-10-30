@@ -140,11 +140,11 @@ module Typus
     #
     #    class Post < ActiveRecord::Base
     #
-    #      def self.list_actions
+    #      def self.typus_actions_for_index
     #        [ :rebuild_all ]
     #      end
     #
-    #      def self.form_actions
+    #      def self.typus_actions_for_edit
     #        [ :rebuild, :notify ]
     #      end
     #
@@ -152,7 +152,7 @@ module Typus
     #
     def typus_actions_for(filter)
       begin
-        self.send("#{filter}_actions").map { |a| a.to_s }
+        self.send("typus_actions_for_#{filter}").map { |a| a.to_s }
       rescue
         Typus::Configuration.config[self.name]['actions'][filter.to_s].split(', ') rescue []
       end

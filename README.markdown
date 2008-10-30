@@ -276,12 +276,12 @@ If the selector is not defined, you'll see a **text field** instead of a
 ### Want more actions?
 
     actions:
-      list: notify_all
-      form: notify
+      index: notify_all
+      edit: notify
 
-These actions will only be available on the context <tt>list</tt> and <tt>form</tt> of Typus.
+These actions will only be available on the requested action.
 
-You'll can add those actions to your admin controllers. Example:
+You can add those actions to your admin controllers. Example:
 
     class Admin::NewslettersController < AdminController
 

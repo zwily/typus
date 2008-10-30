@@ -13,8 +13,9 @@
 #       auto_generated:
 #       questions:
 #   actions:
-#     list: cleanup
-#     form: send_as_newsletter
+#     index: cleanup
+#     edit: send_as_newsletter
+#     show: rebuild
 #   order_by: created_at
 #   relationships:
 #     has_and_belongs_to_many:
@@ -41,8 +42,8 @@
       auto_generated:
       questions:
   actions:
-    list:
-    form:
+    index:
+    edit:
   order_by:
   relationships:
     has_and_belongs_to_many:
