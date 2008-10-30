@@ -254,7 +254,7 @@ module Typus
 
   module InstanceMethods
 
-    def previous(condition = {})
+    def previous_and_next(condition = {})
 
       if condition.empty?
         conditions = "id < #{self.id}"
@@ -263,13 +263,10 @@ module Typus
         conditions << " AND id != #{self.id}"
       end
 
-      self.class.find :first, 
-                      :order => "id DESC", 
-                      :conditions => conditions
-
-    end
-
-    def next(condition = {})
+      previous_ = self.class.find :first, 
+                                  :select => [:id], 
+                                  :order => "id DESC", 
+                                  :conditions => conditions
 
       if condition.empty?
         conditions = "id > #{self.id}"
@@ -278,9 +275,12 @@ module Typus
         conditions << " AND id != #{self.id}"
       end
 
-      self.class.find :first, 
-                      :order => "id ASC", 
-                      :conditions => conditions
+      next_ = self.class.find :first, 
+                              :select => [:id], 
+                              :order => "id ASC", 
+                              :conditions => conditions
+
+      return previous_, next_
 
     end
 

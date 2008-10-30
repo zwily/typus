@@ -125,4 +125,10 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal expected, TypusUser.build_conditions("search=pum")
   end
 
+  def test_should_verify_previous_and_next_is_working
+    assert TypusUser.new.respond_to?(:previous_and_next)
+    assert typus_users(:admin).previous_and_next.kind_of?(Array)
+    assert_equal [typus_users(:admin), typus_users(:disabled_user)], typus_users(:editor).previous_and_next
+  end
+
 end

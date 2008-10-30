@@ -133,7 +133,7 @@ class AdminController < ApplicationController
   # Edit an item.
   #
   def edit
-    @previous, @next = @item.previous, @item.next
+    @previous, @next = @item.previous_and_next
     select_template :edit
   end
 
@@ -141,7 +141,7 @@ class AdminController < ApplicationController
   # Show an item.
   #
   def show
-    @previous, @next = @item.previous, @item.next
+    @previous, @next = @item.previous_and_next
     select_template :show
   end
 

@@ -1,6 +1,7 @@
 <% time = Time.now.to_s %>
 
 admin:
+  id: 1
   email: admin@example.com
   first_name: Admin
   last_name: Example
@@ -10,6 +11,7 @@ admin:
   crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--admin@example.com----#{12345678}") %>
 
 editor:
+  id: 2
   email: editor@example.com
   first_name: Editor
   last_name: Example
@@ -19,6 +21,7 @@ editor:
   crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--editor@example.com----#{12345678}") %>
 
 disabled_user:
+  id: 3
   email: disabled_user@example.com
   first_name: Typus
   last_name: User
@@ -28,6 +31,7 @@ disabled_user:
   crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--disabled_user@example.com----#{12345678}") %>
 
 designer:
+  id: 4
   email: designer@example.com
   first_name: Designer
   last_name: Example
@@ -37,6 +41,7 @@ designer:
   crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--designer@example.com----#{12345678}") %>
 
 removed_role:
+  id: 5
   email: removed@example.com
   first_name: Removed
   last_name: Example
