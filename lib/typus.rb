@@ -47,6 +47,7 @@ module Typus
     end
 
     def enable
+      require 'vendor/environments'
       Typus::Configuration.config!
       Typus::Configuration.roles!
       require 'typus/version'
@@ -60,7 +61,6 @@ module Typus
       require 'typus/object'
       require 'typus/greetings'
       require 'vendor/paginator'
-      require 'vendor/environments'
     end
 
     def generate_controllers

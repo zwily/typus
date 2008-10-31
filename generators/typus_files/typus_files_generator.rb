@@ -4,7 +4,7 @@ class TypusFilesGenerator < Rails::Generator::Base
 
     record do |m|
 
-      application = RAILS_ROOT.split("/").last.titleize
+      application = RAILS_ROOT.split("/").last
 
       ##
       # For creating `typus.yml` and `typus_roles.yml` we need first to detect 
