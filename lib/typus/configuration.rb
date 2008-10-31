@@ -61,7 +61,7 @@ module Typus
       end
 
       config_file = "#{RAILS_ROOT}/config/typus.yml"
-      if File.exists?(config_file) && !File.zero?(config_file)
+      if File.exists?(config_file) && !File.zero?(config_file) && !Rails.test?
         @@config = @@config.merge(YAML.load_file(config_file))
       end
 
