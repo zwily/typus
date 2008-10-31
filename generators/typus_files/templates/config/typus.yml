@@ -28,13 +28,12 @@
 # ------------------------------------------------
 
 <%- ar_models.each do |model| -%>
-<%- model_attributes = model.new.attributes.keys -%>
-<%- model_attributes.delete('content') -%>
-<%- model_attributes.delete('body') -%>
+<%- list = model.columns.collect { |i| [ i.name, i.sql_type ] if i.name != 'id' && i.sql_type != 'text' }.compact.map(&:first) -%>
+<%- form = model.columns.collect { |i| [ i.name, i.sql_type ] if i.name != 'id' }.compact.map(&:first) -%>
 <%= model %>:
   fields:
-    list: <%= model_attributes.join(", ") %>
-    form: <%= model_attributes.join(", ") %>
+    list: <%= list.map.join(', ') %>
+    form: <%= form.map.join(', ') %>
     relationship:
     options:
       selectors:
