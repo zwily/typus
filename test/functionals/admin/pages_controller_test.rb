@@ -3,7 +3,7 @@ require File.dirname(__FILE__) + '/../../test_helper'
 ##
 # Here we test habtm, hm, polimorphism, relate and unrelate.
 #
-class Admin::CategoriesControllerTest < ActionController::TestCase
+class Admin::PagesControllerTest < ActionController::TestCase
 
   def setup
 
