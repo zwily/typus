@@ -66,4 +66,11 @@ ActiveRecord::Schema.define do
     t.boolean :status
   end
 
+  create_table :assets, :force => true do |t|
+    t.string :caption
+    t.string :assetable_type
+    t.integer :assetable_id
+    t.integer :position
+  end
+
 end

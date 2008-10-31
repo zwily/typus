@@ -1,7 +1,18 @@
 class User < ActiveRecord::Base; end
 class Person < ActiveRecord::Base; end
 class Tag < ActiveRecord::Base; end
-class Page < ActiveRecord::Base; end
+
+class Page < ActiveRecord::Base
+
+  has_many :assets, :as => :assetable, :dependent => :destroy
+
+end
+
+class Asset < ActiveRecord::Base
+
+  belongs_to :assetable, :polymorphic => true
+
+end
 
 class Post < ActiveRecord::Base
 

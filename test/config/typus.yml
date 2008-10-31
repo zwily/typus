@@ -3,6 +3,13 @@ Page:
     list: title, body, status 
     form: title, body, status
   filters: status, created_at
+  relationships:
+    has_many: assets
+
+Asset:
+  fields:
+    list: caption
+    form: caption
 
 Post:
   fields:

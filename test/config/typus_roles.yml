@@ -4,6 +4,8 @@ admin:
   Post: crud
   Comment: crud
   Category: crud
+  Page: crud
+  Asset: crud
 
 editor:
   Category: cu

@@ -27,7 +27,7 @@ class TypusTest < Test::Unit::TestCase
   def test_should_return_models_and_should_be_sorted
     assert Typus.respond_to?('models')
     assert Typus.models.kind_of?(Array)
-    assert_equal %w( Page Post TypusUser ), Typus.models
+    assert_equal %w( Asset Page Post TypusUser ), Typus.models
   end
 
   def test_should_verify_modules

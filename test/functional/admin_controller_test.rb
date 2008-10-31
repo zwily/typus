@@ -12,7 +12,7 @@ class AdminControllerTest < ActionController::TestCase
     typus_user = typus_users(:admin)
     assert_equal 'admin', typus_user.roles
 
-    models = %w( TypusUser Person Post Comment Category )
+    models = %w( TypusUser Person Post Comment Category Page Asset )
     assert_equal models.sort, typus_user.models.map(&:first).sort
 
     models.each { |model| assert typus_user.can_create?(model) }
