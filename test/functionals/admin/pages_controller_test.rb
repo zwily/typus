@@ -9,7 +9,10 @@ class Admin::PagesControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_verify_me
+  ##
+  # A page has many assets, and the relationship is polymorphic.
+  #
+  def test_should_create_a_poliymorphic_assets_for_a_page
     assert true
   end
 
