@@ -36,7 +36,8 @@ Create TypusUsers migration and migrate your database:
     $ script/generate typus_migration
     $ rake db:migrate
 
-And finally create the first user:
+And finally create the first user. You can do it from a terminal, or 
+going to the admin page.
 
     $ rake typus:seed email='john@example.com' RAILS_ENV=production
 
