@@ -45,7 +45,7 @@ class TypusControllerTest < ActionController::TestCase
     typus_user = typus_users(:removed_role)
     post :login, { :user => { :email => typus_user.email, 
                               :password => '12345678' } }
-    assert_equal @request.session[:typus], typus_user.id
+    assert_equal typus_user.id, @request.session[:typus]
     assert_response :redirect
     assert_redirected_to typus_dashboard_url
     get :dashboard
