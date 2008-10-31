@@ -209,4 +209,28 @@ class TypusControllerTest < ActionController::TestCase
     assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Dashboard<\/title>/, @response.body
   end
 
+  def test_should_create_first_typus_user
+    TypusUser.destroy_all
+    assert_nil @request.session[:typus]
+    assert TypusUser.find(:all).empty?
+    get :login
+    assert_response :redirect
+    assert_redirected_to :action => 'setup'
+    post :setup, :user => { :email => 'example.com' }
+    assert_response :redirect
+    assert_redirected_to :action => 'setup'
+    assert flash[:error]
+    assert_equal "Please, provide a valid email.", flash[:error]
+    post :setup, :user => { :email => 'john@example.com' }
+    assert_response :redirect
+    assert_redirected_to :action => 'dashboard'
+    assert flash[:notice]
+    assert_match /Your new password is/, flash[:notice]
+    assert @request.session[:typus]
+    assert !(TypusUser.find(:all).empty?)
+    @request.session[:typus] = nil
+    get :setup
+    assert_redirected_to :action => 'login'
+  end
+
 end

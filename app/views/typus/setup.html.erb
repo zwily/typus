@@ -1,0 +1,5 @@
+<% form_tag :action => 'setup' do %>
+  <p><label for="email">Email</label>
+  <%= text_field :user, :email, :size => "20", :class => "title" %></p>
+  <p><%= submit_tag "Generate account", :class => 'button' %></p>
+<% end %>

@@ -10,7 +10,7 @@ class TypusController < ApplicationController
 
   filter_parameter_logging :password
 
-  before_filter :reload_config_et_roles if Rails.development?
+  before_filter :reload_config_et_roles, :only => [ :dashboard ] if Rails.development?
 
   before_filter :require_login, :only => [ :dashboard ]
   before_filter :current_user, :only => [ :dashboard ]
@@ -27,6 +27,12 @@ class TypusController < ApplicationController
   # Login
   #
   def login
+
+    if TypusUser.count == 0
+      redirect_to :action => 'setup'
+      return
+    end
+
     if request.post?
       @user = TypusUser.authenticate(params[:user][:email], params[:user][:password])
       if @user
@@ -93,6 +99,35 @@ class TypusController < ApplicationController
         render :text => "A valid token is required."
       end
     end
+  end
+
+  def setup
+
+    if TypusUser.count > 0
+      redirect_to :action => 'login'
+      return
+    end
+
+    if request.post?
+      password = generate_password
+      @typus_user = TypusUser.new(:email => params[:user][:email], 
+                                  :password => password, 
+                                  :password_confirmation => password, 
+                                  :roles => Typus::Configuration.options[:root], 
+                                  :status => true)
+      if @typus_user.save
+        session[:typus] = @typus_user.id
+        flash[:notice] = "Your new password is #{password}."
+        redirect_to :action => 'dashboard'
+      else
+        flash[:error] = "Please, provide a valid email."
+        redirect_to :action => 'setup'
+      end
+
+    else
+      render :layout => 'typus_login'
+    end
+
   end
 
 private
