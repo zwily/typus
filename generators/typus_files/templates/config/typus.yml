@@ -28,7 +28,7 @@
 # ------------------------------------------------
 
 <%- ar_models.each do |model| -%>
-<%- list = model.columns.collect { |i| [ i.name, i.sql_type ] if i.name != 'id' && i.sql_type != 'text' }.compact.map(&:first) -%>
+<%- list = model.columns.collect { |i| [ i.name, i.sql_type ] if i.sql_type != 'text' }.compact.map(&:first) -%>
 <%- form = model.columns.collect { |i| [ i.name, i.sql_type ] if i.name != 'id' }.compact.map(&:first) -%>
 <%= model %>:
   fields:
