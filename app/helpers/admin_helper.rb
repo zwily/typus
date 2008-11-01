@@ -194,7 +194,11 @@ module AdminHelper
           end
           html << "<td>#{html_position.join("/")}</td>"
         else # 'string', 'integer', 'selector'
-          html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:controller => "admin/#{model.name.tableize}", :action => 'edit', :id => item.id)}</td>"
+          if model.typus_fields_for(fields).first == column
+            html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:controller => "admin/#{model.name.tableize}", :action => 'edit', :id => item.id)}</td>"
+          else
+            html << "<td>#{item.send(column[0])}</td>"
+          end
         end
       end
 
