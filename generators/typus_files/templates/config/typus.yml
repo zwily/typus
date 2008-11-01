@@ -4,7 +4,7 @@
 #
 # Post:
 #   fields:
-#     list: title, category_id, created_at, status
+#     list: id, title, category_id, created_at, status
 #     form: title, body, status, created_at
 #     relationship: title, status
 #     options:
