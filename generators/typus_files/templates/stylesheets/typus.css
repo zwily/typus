@@ -143,6 +143,14 @@ a.on {
       font-weight: bold;
     }
 
+  #content ul {
+    margin: 0px 0px 0px 15px;
+    list-style: square;
+  }
+
+    #content li {
+    }
+
   #content p {
     margin: 1em 0em;
   }
