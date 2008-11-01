@@ -86,13 +86,15 @@ module AdminHelper
   end
 
   def search
+    return "" if Typus::Configuration.config[@model.name]['search'].nil?
     search = <<-HTML
       <h2>Search</h2>
       <form action="" method="get">
       <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
       </form>
+      <p style="margin: -10px 0px 10px 0px;"><small>Searching by #{Typus::Configuration.config[@model.name]['search'].split(', ').join(', ').titleize.downcase}.</small></p>
     HTML
-    return search if Typus::Configuration.config[@model.name]['search']
+    return search
   end
 
   def filters
