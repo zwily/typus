@@ -169,7 +169,7 @@ a.on {
 #sidebar {
   float: right;
   margin: 1.5em;
-  width: 20em;
+  width: 22em;
 }
 
   #sidebar label {
@@ -371,8 +371,8 @@ h2 {
 
 .errorExplanation p { font-weight: bold; padding: 0px 5px;}
 .errorExplanation h3 { display: none;}
-.errorExplanation ul { margin-bottom: 10px; }
-.errorExplanation li { list-style: none; padding: 0px 5px; }
+.errorExplanation ul { margin: 0px 0px 10px 25px!important; }
+.errorExplanation li { list-style: square; padding: 0px 0px; }
 
 /* searchbox
 ---------------------------------------------------------- */
