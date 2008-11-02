@@ -4,6 +4,20 @@ class TypusFilesGenerator < Rails::Generator::Base
 
     record do |m|
 
+      ##
+      # This is a little buggy, but it works as expected. We should use 
+      # the Dir[] to detect all the existing migrations as Rails should 
+      # do it for us.
+      #
+      migrations = ['create_typus_users']
+      migrations.each do |migration|
+        if Dir["db/migrate/[0-9]*_*.rb"].grep(/[0-9]+_#{migration}.rb$/).empty?
+          m.migration_template "db/#{migration}.rb", 
+                               "db/migrate", 
+                               { :migration_file_name => migration }
+        end
+      end
+
       application = RAILS_ROOT.split("/").last
 
       ##

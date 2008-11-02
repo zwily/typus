@@ -25,15 +25,14 @@ You can view the available tasks running:
 
 ### Configure
 
-This task will copy required assets to the public folder of your Rails 
-application, will generate configuration files on 'config' folder and 
-will install some required plugins.
+This task copies required assets to the public folder of your Rails 
+application, generates configuration files on `config` folder and 
+generates the required database migration files.
 
     $ script/generate typus_files
 
-Create TypusUsers migration and migrate your database:
+After creating the files you can migrate your database:
 
-    $ script/generate typus_migration
     $ rake db:migrate
 
 And finally create the first user. You can do it from a terminal, or 
