@@ -6,6 +6,22 @@ require File.dirname(__FILE__) + '/../test_helper'
 #
 class PageTest < ActiveSupport::TestCase
 
+  def test_should_verify_admin_fields_for_list_are_overwrited
+    assert_equal 'title, body, status', Typus::Configuration.config['Page']['fields']['list']
+
+    assert Page.respond_to?('admin_fields_for_list')
+    assert_equal Page.admin_fields_for_list, Page.typus_fields_for('list').map { |i| i.first }
+
+  end
+
+  def test_should_verify_admin_fields_for_form_are_overwrited
+    assert_equal 'title, body, status', Typus::Configuration.config['Page']['fields']['form']
+
+    assert Page.respond_to?('admin_fields_for_form')
+    assert_equal Page.admin_fields_for_form, Page.typus_fields_for('form').map { |i| i.first }
+
+  end
+
   def test_should_verify_admin_order_by_is_defined_in_the_model
 
     assert_nil Typus::Configuration.config['Page']['order_by']

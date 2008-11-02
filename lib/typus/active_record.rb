@@ -37,11 +37,11 @@ module Typus
     #
     #   class Post < ActiveRecord::Base
     #
-    #     def self.list_fields
+    #     def self.admin_fields_for_list
     #       [ :title, :category_id, :status ]
     #     end
     #
-    #     def self.form_fields
+    #     def self.admin_fields_for_form
     #       [ :title, :body, :excerpt, :category_id, :status ]
     #     end
     #
@@ -52,8 +52,8 @@ module Typus
       fields_with_type = []
 
       begin
-        if self.respond_to?("#{filter.to_s}_fields")
-          fields = self.send("#{filter.to_s}_fields").map { |a| a.to_s }
+        if self.respond_to?("admin_fields_for_#{filter}")
+          fields = self.send("admin_fields_for_#{filter}").map { |a| a.to_s }
         else
           fields = Typus::Configuration.config[self.name]['fields'][filter.to_s].split(', ')
         end

@@ -26,6 +26,14 @@ class Page < ActiveRecord::Base
     [ 'rebuild' ]
   end
 
+  def self.admin_fields_for_list
+    [ 'title' ]
+  end
+
+  def self.admin_fields_for_form
+    [ 'title', 'body' ]
+  end
+
 end
 
 class Asset < ActiveRecord::Base
