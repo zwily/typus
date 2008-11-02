@@ -114,7 +114,7 @@ module Typus
     #
     #   class Post < ActiveRecord::Base
     #
-    #     def self.filters
+    #     def self.admin_filters
     #       [ :created_at, :status ]
     #     end
     #
@@ -122,9 +122,9 @@ module Typus
     #
     def typus_filters
       available_fields = self.model_fields
-      begin
-        fields = self.filters.map { |a| a.to_s }
-      rescue
+      if self.respond_to?('admin_filters')
+        fields = self.admin_filters.map { |a| a.to_s }
+      else
         return [] unless Typus::Configuration.config[self.name]['filters']
         fields = Typus::Configuration.config[self.name]['filters'].split(', ')
       end
@@ -143,19 +143,19 @@ module Typus
     #
     #    class Post < ActiveRecord::Base
     #
-    #      def self.typus_actions_for_index
+    #      def self.admin_actions_for_index
     #        [ :rebuild_all ]
     #      end
     #
-    #      def self.typus_actions_for_edit
+    #      def self.admin_actions_for_edit
     #        [ :rebuild, :notify ]
     #      end
     #
     #    end
     #
     def typus_actions_for(filter)
-      if self.respond_to?("typus_actions_for_#{filter}")
-        self.send("typus_actions_for_#{filter}").map { |a| a.to_s }
+      if self.respond_to?("admin_actions_for_#{filter}")
+        self.send("admin_actions_for_#{filter}").map { |a| a.to_s }
       else
         Typus::Configuration.config[self.name]['actions'][filter.to_s].split(', ') rescue []
       end
