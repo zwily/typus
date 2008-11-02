@@ -4,7 +4,7 @@ TypusUser:
     form: first_name, last_name, roles, email, password, password_confirmation
     options:
       selectors: roles
-  filters: status
+  filters: status, roles
   search: first_name, last_name, email, roles
   application: Typus Admin
   description: System Users Administration
