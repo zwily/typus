@@ -9,6 +9,9 @@ module Typus
     ##
     # Return model fields as an array
     #
+    # We cannot use hash for getting the model fields as we would 
+    # have the fields unsorted.
+    #
     def model_fields
       columns.map { |u| [u.name, u.type.to_s] }
     end
