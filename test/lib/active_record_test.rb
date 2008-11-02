@@ -112,17 +112,20 @@ class ActiveRecordTest < Test::Unit::TestCase
 
   def test_should_return_sql_conditions_on_search_for_typus_user
     expected = "1 = 1 AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%') "
-    assert_equal expected, TypusUser.build_conditions("search=francesc")
+    params = { :search => 'francesc' }
+    assert_equal expected, TypusUser.build_conditions(params)
   end
 
   def test_should_return_sql_conditions_on_search_and_filter_for_typus_user
-    expected = "1 = 1 AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%') AND status = 't' "
-    assert_equal expected, TypusUser.build_conditions("search=francesc&status=true")
+    expected = "1 = 1 AND status = 't' AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%') "
+    params = { :search => 'francesc', :status => 'true' }
+    assert_equal expected, TypusUser.build_conditions(params)
   end
 
   def test_should_return_sql_conditions_on_search_for_post
     expected = "1 = 1 AND (LOWER(first_name) LIKE '%pum%' OR LOWER(last_name) LIKE '%pum%' OR LOWER(email) LIKE '%pum%' OR LOWER(roles) LIKE '%pum%') "
-    assert_equal expected, TypusUser.build_conditions("search=pum")
+    params = { :search => 'pum' }
+    assert_equal expected, TypusUser.build_conditions(params)
   end
 
   def test_should_verify_previous_and_next_is_working

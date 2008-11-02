@@ -41,7 +41,7 @@ class AdminController < ApplicationController
     ##
     # Build the conditions
     #
-    conditions = @model.build_conditions(request.env['QUERY_STRING'] || "")
+    conditions = @model.build_conditions(params || "")
 
     ##
     # Pagination

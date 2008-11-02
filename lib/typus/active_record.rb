@@ -210,29 +210,43 @@ module Typus
     ##
     # Build conditions
     #
-    #     params = request.env['QUERY_STRING']
-    #
     def build_conditions(params)
+
       conditions = "1 = 1 "
-      params.split('&').each do |q|
-        the_key, the_value = q.split("=").first, q.split("=").last
-        if the_key == "search"
-          search = Array.new
-          self.typus_defaults_for('search').each { |s| search << "LOWER(#{s}) LIKE '%#{CGI.unescape(the_value)}%'" }
-          conditions << "AND (#{search.join(" OR ")}) "
+
+      params.each do |key, value|
+
+        ##
+        # When a search is performed.
+        #
+        if key == :search
+          search = []
+          self.typus_defaults_for(:search).each do |s|
+            search << "LOWER(#{s}) LIKE '%#{value}%'"
+          end
+          conditions << "AND (#{search.join(' OR ')}) "
         end
+
+        ##
+        # Sidebar filters:
+        #
+        #   - Booleans: true, false
+        #   - Datetime: today, past_7_days, this_month, this_year
+        #   - Integer: *_id (P.ej. category_id)
+        #   - String: 
+        #
         self.model_fields.each do |f|
-          filter_type = f[1] if f[0] == the_key
+          filter_type = f.last if f.first.to_sym == key
           case filter_type
           when "boolean"
             if %w(sqlite3 sqlite).include? ActiveRecord::Base.connection.adapter_name.downcase
-              conditions << "AND #{f[0]} = '#{the_value[0..0]}' "
+              conditions << "AND #{f.first} = '#{value[0..0]}' "
             else
-              status = (the_value == 'true') ? 1 : 0
-              conditions << "AND #{f[0]} = '#{status}' "
+              status = (value == 'true') ? 1 : 0
+              conditions << "AND #{f.first} = '#{status}' "
             end
           when "datetime"
-            case the_value
+            case value
             when 'today':         start_date, end_date = Time.today, Time.today.tomorrow
             when 'past_7_days':   start_date, end_date = 6.days.ago.midnight, Time.today.tomorrow
             when 'this_month':    start_date, end_date = Time.today.last_month, Time.today.tomorrow
@@ -241,13 +255,16 @@ module Typus
             start_date, end_date = start_date.to_s(:db), end_date.to_s(:db)
             conditions << "AND created_at > '#{start_date}' AND created_at < '#{end_date}' "
           when "integer"
-            conditions << "AND #{f[0]} = #{the_value} " if f[0].include? "_id"
+            conditions << "AND #{f.first} = #{value} " if f.first.include?("_id")
           when "string"
-            conditions << "AND #{f[0]} = '#{the_value}' "
+            conditions << "AND #{f.first} = '#{value}' "
           end
         end
+
       end
+
       return conditions
+
     end
 
   end
