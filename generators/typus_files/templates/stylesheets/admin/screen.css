@@ -18,7 +18,7 @@ Updated:   November 2008
 ---------------------------------------------------------- */
 
 h1 { font-size: 2em; line-height: 1; margin-bottom: 0.5em; }
-h2 { font-size: 1.5em; margin-bottom: 0.75em; }
+h2 { font-size: 1.5em; margin: 0px 0px 20px 0px; }
 h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
 h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; height: 1.25em; }
 h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
@@ -354,13 +354,6 @@ legend {
   padding: 0px 5px;
 }
 
-/* headings
----------------------------------------------------------- */
-
-h2 {
-  margin: 0px 0px 20px 0px;
-}
-
 /* rails errors
 ---------------------------------------------------------- */
 
@@ -397,10 +390,12 @@ h2 {
 }
 
 input#search {
+  border: 1px solid #999;
+  font-size: 1.2em;
   padding: 3px;
 }
 
-/* dialog
+/* dialog and login (login page)
 ---------------------------------------------------------- */
 
 body#login {
