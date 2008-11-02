@@ -130,12 +130,15 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_sql_conditions_on_filtering_typus_users_by_status
+
     expected = "1 = 1 AND status = 't' "
     params = { :status => 'true' }
     assert_equal expected, TypusUser.build_conditions(params)
+
     expected = "1 = 1 AND status = 'f' "
     params = { :status => 'false' }
     assert_equal expected, TypusUser.build_conditions(params)
+
   end
 
   def test_should_return_sql_conditions_on_filtering_typus_users_by_created_at
