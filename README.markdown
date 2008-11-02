@@ -380,6 +380,11 @@ following files.
     views/admin/MODEL/_show_sidebar.html.erb
     views/admin/MODEL/_show_top.html.erb
 
+Example:
+
+    views/admin/posts/_index_top.html.erb
+    views/admin/typus_users/_edit_top.html.erb
+
 ## Roles
 
 Typus has roles support. You can can add as many roles as you want. 
