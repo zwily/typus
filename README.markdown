@@ -12,6 +12,34 @@ Once installed and configured you can login at <http://example.com/admin>.
 
 Screenshots on the [wiki](http://github.com/fesplugas/typus/wikis).
 
+## Before using Typus
+
+Typus is in production in several websites, as we are work on new 
+projects we make small changes to the API. This means that sometimes 
+the definition of the configuration files can change a little bit so 
+you've to update. Here's a list of the last API changes.
+
+### Redefinition of actions (2008/10/31)
+
+This will allow us to define actions per action. Code is now cleaner 
+and easier to read.
+
+Before
+
+    Post:
+      actions:
+        list: action_for_list
+        form: action_for_form
+
+After
+
+    Post:
+      actions:
+        index: action_for_index
+        edit: action_for_edit
+        show: action_for_show
+        sort: action_for_sort
+
 ## Installing
 
 You can view the available tasks running:
