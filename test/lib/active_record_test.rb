@@ -68,14 +68,14 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert TypusUser.typus_actions_for(:list).empty?
   end
 
-  def test_should_return_actions_on_list_for_post
-    assert_equal ["cleanup"], Post.typus_actions_for('list')
-    assert_equal ["cleanup"], Post.typus_actions_for(:list)
+  def test_should_return_post_actions_on_index
+    assert_equal ["cleanup"], Post.typus_actions_for('index')
+    assert_equal ["cleanup"], Post.typus_actions_for(:index)
   end
 
-  def test_should_return_actions_on_form_for_post
-    assert_equal ["send_as_newsletter", "preview"], Post.typus_actions_for('form')
-    assert_equal ["send_as_newsletter", "preview"], Post.typus_actions_for(:form)
+  def test_should_return_post_actions_on_edit
+    assert_equal ["send_as_newsletter", "preview"], Post.typus_actions_for('edit')
+    assert_equal ["send_as_newsletter", "preview"], Post.typus_actions_for(:edit)
   end
 
   def test_should_return_field_options_for_post
