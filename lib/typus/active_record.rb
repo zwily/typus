@@ -244,7 +244,7 @@ module Typus
         ##
         # When a search is performed.
         #
-        if key == :search
+        if key == 'search'
           search = []
           self.typus_defaults_for(:search).each do |s|
             search << "LOWER(#{s}) LIKE '%#{value}%'"
@@ -261,7 +261,7 @@ module Typus
         #   - String: 
         #
         self.model_fields.each do |f|
-          filter_type = f.last if f.first.to_sym == key
+          filter_type = f.last if f.first == key
           case filter_type
           when "boolean"
             if %w(sqlite3 sqlite).include? ActiveRecord::Base.connection.adapter_name.downcase
