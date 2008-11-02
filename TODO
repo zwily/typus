@@ -1,8 +1,9 @@
 TODO
 ====
 
-[ ] Better search.
+[ ] Better search, filters cleanup.
 [ ] Clean typus_form.
+[ ] Clean typus_table.
 [ ] Take care of the params that are passed between actions.
 [ ] Define a show action for the read-only items.
 [ ] Test helpers.
@@ -11,6 +12,13 @@ TODO
 [ ] Actions for a record can be added to the listings.
 [ ] "No preview available" when displaying paperclip attachments should 
     show other information as the content type, file size.
+[ ] Icon on search box.
+[ ] Remove duplicated code from admin_helper and typus_helper.
+[ ] Move assets to typus folder. (admin?)
+[ ] Remove user generator from console (?)
+[ ] One step configuration. typus_files should also generate the 
+migration.
+[ ] Dont generate the typus_users_controller under RAILS_ROOT/app/controoller/admin
 
 ON IT
 =====
