@@ -1,7 +1,6 @@
 TODO
 ====
 
-[ ] Better search, filters cleanup.
 [ ] Clean typus_form.
 [ ] Clean typus_table.
 [ ] Take care of the params that are passed between actions.
@@ -28,6 +27,7 @@ ON IT
 DONE
 ====
 
+[X] Better search, filters cleanup. (20081102)
 [X] One step configuration. typus_files should also generate the 
 migration. (20081102)
 [X] Move assets to admin folder. (20081102)

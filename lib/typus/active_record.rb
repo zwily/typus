@@ -240,11 +240,11 @@ module Typus
           case filter_type
           when "boolean"
             if %w(sqlite3 sqlite).include? ActiveRecord::Base.connection.adapter_name.downcase
-              conditions << "AND #{f.first} = '#{value[0..0]}' "
+              status = value[0..0]
             else
               status = (value == 'true') ? 1 : 0
-              conditions << "AND #{f.first} = '#{status}' "
             end
+            conditions << "AND #{f.first} = '#{status}' "
           when "datetime"
             case value
             when 'today':         start_date, end_date = Time.today, Time.today.tomorrow
