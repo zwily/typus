@@ -173,7 +173,7 @@ module AdminHelper
       model.typus_fields_for(fields).each do |column|
         case column[1]
         when "boolean"
-          image = "#{image_tag(status = item.send(column[0])? "typus_status_true.gif" : "typus_status_false.gif")}"
+          image = "#{image_tag(status = item.send(column[0])? "admin/status_true.gif" : "admin/status_false.gif")}"
           if Typus::Configuration.options[:toggle]
             html << "<td width=\"20px\" align=\"center\">#{link_to image, { :params => params.merge(:controller => "admin/#{model.name.tableize}", :action => 'toggle', :field => column[0], :id => item.id) } , :confirm => "Change #{column[0]}?"}</td>"
           else
@@ -216,13 +216,13 @@ module AdminHelper
 
         case params[:action]
         when 'index'
-          @perform = link_to image_tag("typus_trash.gif"), { :controller => "admin/#{model.name.tableize}", 
+          @perform = link_to image_tag("admin/trash.gif"), { :controller => "admin/#{model.name.tableize}", 
                                                              :action => 'destroy', 
                                                              :id => item.id }, 
                                                              :confirm => "Remove entry?", 
                                                              :method => :delete
         else
-          @perform = link_to image_tag("typus_trash.gif"), { :controller => "admin/#{model.name.tableize}", 
+          @perform = link_to image_tag("admin/trash.gif"), { :controller => "admin/#{model.name.tableize}", 
                                                              :action => "unrelate", 
                                                              :id => item.id, 
                                                              :model => @model, 

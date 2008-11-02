@@ -35,10 +35,15 @@ class TypusFilesGenerator < Rails::Generator::Base
                  "config/initializers/typus.rb", 
                  :assigns => { :application => application }
 
+      ["#{RAILS_ROOT}/public/stylesheets/admin", 
+      "#{RAILS_ROOT}/public/images/admin" ].each do |folder|
+        Dir.mkdir(folder) unless File.directory?(folder)
+      end
+
       # stylesheets and images
-      m.file "stylesheets/typus.css", "public/stylesheets/typus.css"
-      files = %w( typus_spinner.gif typus_trash.gif typus_status_false.gif typus_status_true.gif )
-      files.each { |file| m.file "images/#{file}", "public/images/#{file}" }
+      m.file "stylesheets/admin/screen.css", "public/stylesheets/admin/screen.css"
+      files = %w( spinner.gif trash.gif status_false.gif status_true.gif )
+      files.each { |file| m.file "images/admin/#{file}", "public/images/admin/#{file}" }
 
     end
 
