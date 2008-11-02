@@ -154,9 +154,9 @@ module Typus
     #    end
     #
     def typus_actions_for(filter)
-      begin
+      if self.respond_to?("typus_actions_for_#{filter}")
         self.send("typus_actions_for_#{filter}").map { |a| a.to_s }
-      rescue
+      else
         Typus::Configuration.config[self.name]['actions'][filter.to_s].split(', ') rescue []
       end
     end
