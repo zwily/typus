@@ -3,7 +3,6 @@ TODO
 
 [ ] Clean typus_form.
 [ ] Clean typus_table.
-[ ] Take care of the params that are passed between actions.
 [ ] Define a show action for the read-only items. This will be 
     if the user has only permission to r the items and not update.
 [ ] Test helpers.
@@ -16,17 +15,21 @@ TODO
 [ ] Remove duplicated code from admin_helper and typus_helper.
 [ ] Remove user generator from console (?)
 [ ] Sidebar filter for *_id can be a selector or a list of links.
+[ ] Dont show actions the user can not perform.
+[ ] Block for example newsletter#generate ... Maybe here we'll have 
+    to redefine the typus_roles file. With something more complex than 
+    crud actions.
 
 ON IT
 =====
 
-[ ] List fields can be defined in model.
-[ ] Dont show actions the user can not perform.
 [ ] Internationalize messages. (i18n branch)
 
 DONE
 ====
 
+[X] List fields can be defined in model. (20081102)
+[X] Take care of the params that are passed between actions. (20081102)
 [X] Dont generate the typus_users_controller under 
     RAILS_ROOT/app/controoller/admin (20081102)
 [X] Better search, filters cleanup. (20081102)
