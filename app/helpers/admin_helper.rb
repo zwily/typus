@@ -54,12 +54,8 @@ module AdminHelper
 
   def more_actions
     html = ""
-    @model.typus_actions_for(params[:action]).each do |a|
-      begin
-        html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.name.tableize}_url") }</li>"
-      rescue
-        html << "<li>#{link_to a.titleize.capitalize, send("#{a}_admin_#{@model.name.downcase}_url") }</li>"
-      end
+    @model.typus_actions_for(params[:action]).each do |action|
+      html << "<li>#{link_to action.titleize.capitalize, :params => params.merge(:action => action)}</li>"
     end
     html = "<ul>#{html}</ul>" unless html.empty?
     return html
