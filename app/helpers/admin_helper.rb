@@ -300,7 +300,7 @@ module AdminHelper
       when "datetime"
         html << "#{datetime_select :item, field[0], { :minute_step => Typus::Configuration.options[:minute_step] }}"
       when "password"
-        html << "#{password_field :item, field[0], :class => 'title'}"
+        html << "#{password_field :item, field[0], :class => 'box'}"
       when "text"
         html << "#{text_area :item, field[0], :class => 'text', :rows => Typus::Configuration.options[:form_rows]}"
       when "tree"
@@ -320,9 +320,9 @@ module AdminHelper
         related = field[0].split("_id").first.capitalize.camelize.constantize
         html << "#{select :item, "#{field[0]}", related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}"
       when "read_only", "auto_generated"
-        html << "#{text_field :item, field[0], :class => 'title', :readonly => 'readonly', :style => 'background: #FFFCE1;'}"
+        html << "#{text_field :item, field[0], :class => 'box', :readonly => 'readonly', :style => 'background: #FFFCE1;'}"
       else
-        html << "#{text_field :item, field[0], :class => 'title'}"
+        html << "#{text_field :item, field[0], :class => 'box'}"
       end
       html << "</p>\n"
     end
