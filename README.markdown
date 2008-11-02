@@ -444,10 +444,10 @@ example, the user Francesc Esplugas:
 
 ## Acknowledgments
 
-- Laia Gargallo (My girl) - http://azotacalles.net
-- Isaac Feliu (Help on refactoring) - http://railslab.net
-- Sergio Espeja (Feedback & patches) - http://github.com/spejman
-- Lluis Folch (Icons, feedback & crazy ideas) - http://wet-floor.com
+- Laia Gargallo (My girl) - <http://azotacalles.net>
+- Isaac Feliu (Help on refactoring) - <http://railslab.net>
+- Sergio Espeja (Feedback & patches) - <http://github.com/spejman>
+- Lluis Folch (Icons, feedback & crazy ideas) - <http://wet-floor.com>
 
 ## Author, contact & bugs
 
