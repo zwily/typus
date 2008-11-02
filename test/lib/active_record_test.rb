@@ -161,7 +161,6 @@ class ActiveRecordTest < Test::Unit::TestCase
 
   end
 
-
   def test_should_verify_previous_and_next_is_working
     assert TypusUser.new.respond_to?(:previous_and_next)
     assert typus_users(:admin).previous_and_next.kind_of?(Array)
