@@ -5,7 +5,8 @@ TODO
 [ ] Clean typus_form.
 [ ] Clean typus_table.
 [ ] Take care of the params that are passed between actions.
-[ ] Define a show action for the read-only items.
+[ ] Define a show action for the read-only items. This will be 
+    if the user has only permission to r the items and not update.
 [ ] Test helpers.
 [ ] Define a way to access things that are not resources, like 
     Memcached, Reports and other things.
@@ -14,10 +15,7 @@ TODO
     show other information as the content type, file size.
 [ ] Icon on search box.
 [ ] Remove duplicated code from admin_helper and typus_helper.
-[ ] Move assets to typus folder. (admin?)
 [ ] Remove user generator from console (?)
-[ ] One step configuration. typus_files should also generate the 
-migration.
 [ ] Dont generate the typus_users_controller under RAILS_ROOT/app/controoller/admin
 
 ON IT
@@ -30,6 +28,9 @@ ON IT
 DONE
 ====
 
+[X] One step configuration. typus_files should also generate the 
+migration. (20081102)
+[X] Move assets to admin folder. (20081102)
 [X] Remove application paths for models, controllers, views and 
     helpers when testing to avoid conflicts between plugin and 
     application. (20081026)
