@@ -6,6 +6,26 @@ class Page < ActiveRecord::Base
 
   has_many :assets, :as => :assetable, :dependent => :destroy
 
+  def self.admin_order_by
+    [ 'status' ]
+  end
+
+  def self.admin_search
+    [ 'title', 'body' ]
+  end
+
+  def self.admin_filters
+    [ 'status', 'created_at' ]
+  end
+
+  def self.admin_actions_for_index
+    [ 'rebuild_all' ]
+  end
+
+  def self.admin_actions_for_edit
+    [ 'rebuild' ]
+  end
+
 end
 
 class Asset < ActiveRecord::Base

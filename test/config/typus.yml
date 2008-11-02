@@ -2,7 +2,7 @@ Page:
   fields:
     list: title, body, status 
     form: title, body, status
-  filters: status, created_at
+#  filters: status, created_at
   relationships:
     has_many: assets
 
@@ -43,7 +43,7 @@ TypusUser:
   actions:
     list:
     form:
-  filters: status
+  filters: status, unexisting
   search: first_name, last_name, email, roles
   module: Typus
   description: System Users Administration

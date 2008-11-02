@@ -123,7 +123,7 @@ module Typus
     def typus_filters
       available_fields = self.model_fields
       if self.respond_to?('admin_filters')
-        fields = self.admin_filters.map { |a| a.to_s }
+        fields = self.admin_filters
       else
         return [] unless Typus::Configuration.config[self.name]['filters']
         fields = Typus::Configuration.config[self.name]['filters'].split(', ')
@@ -154,25 +154,31 @@ module Typus
     #    end
     #
     def typus_actions_for(filter)
-      if self.respond_to?("admin_actions_for_#{filter}")
+      begin
         self.send("admin_actions_for_#{filter}").map { |a| a.to_s }
-      else
+      rescue
         Typus::Configuration.config[self.name]['actions'][filter.to_s].split(', ') rescue []
       end
     end
 
     ##
-    # Used for +order_by+, +search+ and more ...
+    # Used for +search+.
     #
-    # Someday we could use something like:
+    #   class Post < ActiveRecord::Base
     #
-    #     typus_search :title, :details
-    #     typus_related :tags, :categories
+    #     def self.admin_search
+    #       [ 'title', 'details' ]
+    #     end
     #
-    # Default order is ASC, except for datetime items which is DESC.
+    #   end
     #
     def typus_defaults_for(filter)
-      Typus::Configuration.config[self.name][filter.to_s].split(', ') rescue []
+      if self.respond_to?("admin_#{filter}") || self.respond_to?("admin_#{filter}")
+        defaults = self.send("admin_#{filter}")
+      else
+        defaults = Typus::Configuration.config[self.name][filter.to_s].split(', ') rescue []
+      end
+      return defaults
     end
 
     ##
@@ -189,15 +195,34 @@ module Typus
       Typus::Configuration.config[self.name]['relationships'][filter.to_s].split(', ') rescue []
     end
 
+    ##
+    # Used for order_by
+    #
+    #   class Post < ActiveRecord::Base
+    #
+    #     def self.admin_order_by
+    #       [ '-created_at', 'name' ]
+    #     end
+    #
+    #   end
+    #
     def typus_order_by
-      return "id ASC" unless Typus::Configuration.config[self.name]['order_by']
-      fields = Typus::Configuration.config[self.name]['order_by'].split(', ')
+
+      begin
+        fields = self.send("admin_order_by").map { |a| a.to_s }
+      rescue
+        return "id ASC" unless Typus::Configuration.config[self.name]['order_by']
+        fields = Typus::Configuration.config[self.name]['order_by'].split(', ')
+      end
+
       order = []
       fields.each do |field|
-        order_by = (field.include?("-")) ? "#{field.delete("-")} DESC" : "#{field} ASC"
+        order_by = (field.include?("-")) ? "#{field.delete('-')} DESC" : "#{field} ASC"
         order << order_by
       end
-      return order.join(", ")
+
+      return order.join(', ')
+
     end
 
     ##
