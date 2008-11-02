@@ -23,8 +23,8 @@ Post:
   relationships:
     has_and_belongs_to_many: tags
   actions:
-    list: cleanup
-    form: send_as_newsletter, preview
+    index: cleanup
+    edit: send_as_newsletter, preview
   related: categories
   filters: status, created_at, category
   search: title
@@ -39,9 +39,6 @@ TypusUser:
     relationship: first_name, last_name, roles, email, status
     options:
       selectors: roles
-  actions:
-    list:
-    form:
   filters: status, roles, unexisting
   search: first_name, last_name, email, roles
   module: Typus
