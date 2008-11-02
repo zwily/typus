@@ -15,7 +15,7 @@ TODO
 [ ] Icon on search box.
 [ ] Remove duplicated code from admin_helper and typus_helper.
 [ ] Remove user generator from console (?)
-[ ] Dont generate the typus_users_controller under RAILS_ROOT/app/controoller/admin
+[ ] Sidebar filter for *_id can be a selector or a list of links.
 
 ON IT
 =====
@@ -27,6 +27,8 @@ ON IT
 DONE
 ====
 
+[X] Dont generate the typus_users_controller under 
+    RAILS_ROOT/app/controoller/admin (20081102)
 [X] Better search, filters cleanup. (20081102)
 [X] One step configuration. typus_files should also generate the 
 migration. (20081102)
