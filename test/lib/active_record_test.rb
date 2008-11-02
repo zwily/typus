@@ -59,8 +59,8 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_filters_for_typus_user
-    assert_equal "status, unexisting", Typus::Configuration.config['TypusUser']['filters']
-    assert_equal [["status", "boolean"]], TypusUser.typus_filters
+    assert_equal "status, roles, unexisting", Typus::Configuration.config['TypusUser']['filters']
+    assert_equal [["status", "boolean"], ["roles", "string"]], TypusUser.typus_filters
   end
 
   def test_should_return_actions_on_list_for_typus_user

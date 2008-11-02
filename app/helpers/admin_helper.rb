@@ -129,11 +129,11 @@ module AdminHelper
             html << "</ul>\n"
           end
         when 'string'
-          values = eval f[0].upcase
+          values = @model.send(f[0])
           html << "<ul>\n"
           values.each do |item|
             switch = (current_request.include? "#{f[0]}=#{item.last}") ? 'on' : 'off'
-            html << "<li>#{link_to item.first, { :params => params.merge(f[0] => item.last) }, :class => switch }</li>\n"
+            html << "<li>#{link_to item.capitalize, { :params => params.merge(f[0] => item) }, :class => switch }</li>\n"
           end
           html << "</ul>\n"
         end
