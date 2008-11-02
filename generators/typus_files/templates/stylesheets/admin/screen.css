@@ -434,7 +434,7 @@ div#dialog {
     margin: 0px 10px 10px 0px;
   }
 
-    #dialog input.title {
+    #dialog input.box {
       font-size: 20px;
       padding: 5px;
       width: 21em;
