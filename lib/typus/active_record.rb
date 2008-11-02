@@ -194,11 +194,8 @@ module Typus
       fields = Typus::Configuration.config[self.name]['order_by'].split(', ')
       order = []
       fields.each do |field|
-        if field.include?("-")
-          order << "#{field.delete("-")} DESC"
-        else
-          order << "#{field} ASC"
-        end
+        order_by = (field.include?("-")) ? "#{field.delete("-")} DESC" : "#{field} ASC"
+        order << order_by
       end
       return order.join(", ")
     end
