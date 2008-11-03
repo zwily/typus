@@ -15,10 +15,6 @@ TODO
 [ ] Remove duplicated code from admin_helper and typus_helper.
 [ ] Remove user generator from console (?)
 [ ] Sidebar filter for *_id can be a selector or a list of links.
-[ ] Dont show actions the user can not perform.
-[ ] Block for example newsletter#generate ... Maybe here we'll have 
-    to redefine the typus_roles file. With something more complex than 
-    crud actions.
 
 ON IT
 =====
@@ -28,6 +24,10 @@ ON IT
 DONE
 ====
 
+[X] Block for example newsletter#generate ... Maybe here we'll have 
+    to redefine the typus_roles file. With something more complex than 
+    crud actions. (20081103)
+[X] Dont show actions the user can not perform. (20081103)
 [X] List fields can be defined in model. (20081102)
 [X] Take care of the params that are passed between actions. (20081102)
 [X] Dont generate the typus_users_controller under 
