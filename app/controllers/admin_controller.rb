@@ -118,6 +118,7 @@ class AdminController < ApplicationController
           end
           flash[:success] = "#{@item.class} successfully assigned to #{params[:model].downcase}."
         else
+          @item.save
           flash[:success] = "New #{@model.to_s.downcase} created."
         end
         redirect_to params[:back_to]
