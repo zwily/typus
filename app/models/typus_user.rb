@@ -57,19 +57,19 @@ class TypusUser < ActiveRecord::Base
   end
 
   def can_create?(model)
-    self.models[model.to_s].include? "c"
+    self.models[model.to_s].split(', ').include?('create')
   end
 
   def can_read?(model)
-    self.models[model.to_s].include? "r"
+    self.models[model.to_s].split(', ').include?('read')
   end
 
   def can_update?(model)
-    self.models[model.to_s].include? "u"
+    self.models[model.to_s].split(', ').include?('update')
   end
 
   def can_destroy?(model)
-    self.models[model.to_s].include? "d"
+    self.models[model.to_s].split(', ').include?('delete')
   end
 
 protected

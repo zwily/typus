@@ -420,19 +420,17 @@ They are defined in `config/typus_roles.yml` and you can can define
 the allowed actions per role.
 
     admin:
-      TypusUser: crud
-      Post: crud
-      Category: crud
+      TypusUser: create, read, update, delete
+      Post: create, read, update, delete
+      Category: create, read, update, delete
 
     editor:
-      Post: cu
-      Category: cu
+      Post: create, update
+      Category: create, update
 
 If you're using a Typus enabled plugin, it will probably have defined roles 
 for the new application functionality. You can overwrite them from the 
 configuration file.
-
-Note: CRUD stands for Create, Read, Update and Delete.
 
 ## Typus Enabled Plugins
 

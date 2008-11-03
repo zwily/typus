@@ -1,2 +1,2 @@
 admin:
-  TypusUser: crud
+  TypusUser: create, read, update, delete

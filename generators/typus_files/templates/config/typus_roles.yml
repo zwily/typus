@@ -1,5 +1,5 @@
 admin:
-  TypusUser: crud
+  TypusUser: create, read, update, delete
   <%- ar_models.each do |model| -%>
-  <%= model %>: crud
+  <%= model %>: create, read, update, delete
   <%- end -%>

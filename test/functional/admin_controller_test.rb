@@ -15,10 +15,10 @@ class AdminControllerTest < ActionController::TestCase
     models = %w( TypusUser Person Post Comment Category Page Asset )
     assert_equal models.sort, typus_user.models.map(&:first).sort
 
-    models.each { |model| assert typus_user.can_create?(model) }
-    models.each { |model| assert typus_user.can_read?(model) }
-    models.each { |model| assert typus_user.can_update?(model) }
-    models.each { |model| assert typus_user.can_destroy?(model) }
+    models.each { |model| assert typus_user.can_create?(model), "#{model} - can_create?" }
+    models.each { |model| assert typus_user.can_read?(model), "#{model} - can_read?" }
+    models.each { |model| assert typus_user.can_update?(model), "#{model} - can_update?" }
+    models.each { |model| assert typus_user.can_destroy?(model), "#{model} - can_destroy?" }
 
   end
 

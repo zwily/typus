@@ -1,18 +1,18 @@
 admin:
-  TypusUser: crud
-  Person: crud
-  Post: crud
-  Comment: crud
-  Category: crud
-  Page: crud
-  Asset: crud
+  TypusUser: create, read, update, delete
+  Person: create, read, update, delete
+  Post: create, read, update, delete
+  Comment: create, read, update, delete
+  Category: create, read, update, delete
+  Page: create, read, update, delete
+  Asset: create, read, update, delete
 
 editor:
-  Category: cu
-  Post: cu
-  Comment: ud
-  TypusUser: u
+  Category: create, update
+  Post: create, update
+  Comment: update, delete
+  TypusUser: update
 
 designer:
-  Category: ru
-  Post: r
+  Category: read, update
+  Post: read
