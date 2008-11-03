@@ -90,7 +90,7 @@ module AdminHelper
       <form action="" method="get">
       <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
       </form>
-      <p style="margin: -10px 0px 10px 0px;"><small>Searching by #{Typus::Configuration.config[@model.name]['search'].split(', ').join(', ').titleize.downcase}.</small></p>
+      <p style="margin: -10px 0px 10px 0px;"><small>Searching by #{Typus::Configuration.config[@model.name]['search'].split(', ').to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
     HTML
     return search
   end
