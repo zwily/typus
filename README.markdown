@@ -225,7 +225,7 @@ Or directly on the model:
 
     class Post < ActiveRecord::Base
 
-      def self.filters
+      def self.admin_filters
         [ :status, :author_id, :created_at ]
       end
 
@@ -241,7 +241,7 @@ Or directly on the model:
 
     class Post < ActiveRecord::Base
 
-      def self.order_by
+      def self.admin_order_by
         [ '-attribute1', 'attribute2' ]
       end
 
@@ -257,7 +257,7 @@ Or directly on the model:
 
     class Post < ActiveRecord::Base
 
-      def self.search
+      def self.admin_search
         [ :attribute1, :attribute2 ]
       end
 
