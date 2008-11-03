@@ -19,6 +19,24 @@ projects we make small changes to the API. This means that sometimes
 the definition of the configuration files can change a little bit so 
 you've to update. Here's a list of the last API changes.
 
+### Redefinition of roles (2008/11/03)
+
+Previously roles only allowed to defined permissions for the CRUD 
+actions. From 2008/11/03 you can define any action on the roles. 
+The afected file is `config/typus_roles.yml`.
+
+Before
+
+    admin:
+      TypusUser: crud
+      Newsletter: crud
+
+After
+
+    admin:
+      TypusUser: create, read, update, delete
+      Newsletter: create, read, update, delete, generate, preview, deliver
+
 ### Redefinition of actions (2008/10/31)
 
 This will allow us to define actions per action. Code is now cleaner 
