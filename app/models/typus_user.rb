@@ -56,20 +56,23 @@ class TypusUser < ActiveRecord::Base
     "All"
   end
 
-  def can_create?(model)
-    self.models[model.to_s].split(', ').include?('create')
-  end
+  def can_perform?(model, action)
 
-  def can_read?(model)
-    self.models[model.to_s].split(', ').include?('read')
-  end
+    case action
+    when 'new', 'create'
+      _action = 'create'
+    when 'index', 'show'
+      _action = 'read'
+    when 'edit', 'update', 'position', 'toggle'
+      _action = 'update'
+    when 'destroy'
+      _action = 'delete'
+    else
+      _action = action
+    end
 
-  def can_update?(model)
-    self.models[model.to_s].split(', ').include?('update')
-  end
+    self.models[model.to_s].split(', ').include?(_action)
 
-  def can_destroy?(model)
-    self.models[model.to_s].split(', ').include?('delete')
   end
 
 protected

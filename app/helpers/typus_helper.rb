@@ -29,7 +29,7 @@ module TypusHelper
           html_module << "<td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /></td>\n"
 
           html_module << "<td align=\"right\" valign=\"bottom\"><small>"
-          html_module << "#{link_to 'Add', "/admin/#{model.tableize}/new"}" if @current_user.can_create? model
+          html_module << "#{link_to 'Add', "/admin/#{model.tableize}/new"}" if @current_user.can_perform?(model, 'create')
           html_module << "</small></td>\n"
 
           html_module << "</tr>"

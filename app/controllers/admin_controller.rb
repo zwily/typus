@@ -19,13 +19,19 @@ class AdminController < ApplicationController
   before_filter :find_model, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
 
   before_filter :check_permissions, :only => [ :index, :new, :create, :edit, :update, :destroy, :toggle ]
+
+  ##
+  # This is only used for the TypusUser model.
+  #
   before_filter :check_role, :only => [ :update ]
   before_filter :check_ownership, :only => [ :destroy, :toggle ]
 
-  before_filter :can_create?, :only => [ :new, :create ]
-  before_filter :can_read?, :only => [ :show ]
-  before_filter :can_update?, :only => [ :edit, :update, :position, :toggle ]
-  before_filter :can_destroy?, :only => [ :destroy ]
+  ##
+  # This is user for all the models.
+  #
+  before_filter :can_perform?
+
+  # @current_user.models[model.to_s]]
 
   before_filter :set_order, :only => [ :index ]
 
@@ -356,6 +362,31 @@ private
     logger.info "[typus] Configuration files have been reloaded."
     Typus::Configuration.roles!
     Typus::Configuration.config!
+  end
+
+  def can_perform?
+
+    case params[:action]
+    when 'new', 'create'
+      action = 'create'
+    when 'index', 'show'
+      message = "#{@current_user.roles.capitalize} can't display items."
+      action = 'read'
+    when 'edit', 'update', 'position', 'toggle'
+      action = 'update'
+    when 'destroy'
+      message = "#{@current_user.roles.capitalize} can't destroy this item."
+      action = 'delete'
+    else
+      message = "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
+      action = params[:action]
+    end
+
+    unless @current_user.can_perform?(@model, action)
+      flash[:notice] = message || "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
+      redirect_to :back rescue redirect_to typus_dashboard_url
+    end
+
   end
 
 end
