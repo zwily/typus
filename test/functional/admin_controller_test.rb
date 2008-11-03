@@ -32,34 +32,26 @@ class AdminControllerTest < ActionController::TestCase
     ##
     # Category: create, update
     #
-    assert typus_user.can_perform?(Category, 'create')
-    assert !typus_user.can_perform?(Category, 'read')
-    assert typus_user.can_perform?(Category, 'update')
-    assert !typus_user.can_perform?(Category, 'delete')
+    %w( create update ).each { |action| assert typus_user.can_perform?(Category, action) }
+    %w( read delete ).each { |action| assert !typus_user.can_perform?(Category, action) }
 
     ##
     # Post: create, update
     #
-    assert typus_user.can_perform?(Post, 'create')
-    assert !typus_user.can_perform?(Post, 'read')
-    assert typus_user.can_perform?(Post, 'update')
-    assert !typus_user.can_perform?(Post, 'delete')
+    %w( create update ).each { |action| assert typus_user.can_perform?(Post, action) }
+    %w( read delete ).each { |action| assert !typus_user.can_perform?(Post, action) }
 
     ##
     # Comment: update, delete
     #
-    assert !typus_user.can_perform?(Comment, 'create')
-    assert !typus_user.can_perform?(Comment, 'read')
-    assert typus_user.can_perform?(Comment, 'update')
-    assert typus_user.can_perform?(Comment, 'delete')
+    %w( update delete ).each { |action| assert typus_user.can_perform?(Comment, action) }
+    %w( create read ).each { |action| assert !typus_user.can_perform?(Comment, action) }
 
     ##
     # TypusUser: update
     #
-    assert !typus_user.can_perform?(TypusUser, 'create')
-    assert !typus_user.can_perform?(TypusUser, 'read')
-    assert typus_user.can_perform?(TypusUser, 'update')
-    assert !typus_user.can_perform?(TypusUser, 'delete')
+    %w( update ).each { |action| assert typus_user.can_perform?(TypusUser, action) }
+    %w( create read delete ).each { |action| assert !typus_user.can_perform?(TypusUser, action) }
 
   end
 
