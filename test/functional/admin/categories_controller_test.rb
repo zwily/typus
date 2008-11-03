@@ -78,14 +78,11 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
     category = categories(:first)
-#    get :destroy, { :id => category.id, :method => :delete }
-#    assert_response :redirect
-=begin
+    get :destroy, { :id => category.id }
+    assert_response :redirect
     assert flash[:success]
     assert_match /Category successfully removed./, flash[:success]
-=end
-#    assert_redirected_to :action => :index
-
+    assert_redirected_to :action => :index
   end
 
   def test_should_not_allow_designer_to_destroy_a_category
