@@ -324,9 +324,13 @@ If the selector is not defined, you'll see a **text field** instead of a
 
 ### Want more actions?
 
-    actions:
-      index: notify_all
-      edit: notify
+    Post:
+      fields:
+        list: ...
+        form: ...
+      actions:
+        index: notify_all
+        edit: notify
 
 These actions will only be available on the requested action.
 
@@ -392,8 +396,8 @@ you can customize.
 
 Need a custom view on the Articles listing? 
 
-Under `app/view/typus/articles` add the file `index.html.erb` and 
-Typus default listing will be overrided.
+Under `app/view/admin/articles` add the file `index.html.erb` and 
+Typus default `index.html.erb` will be replaced.
 
 ## Customize Interface
 
@@ -439,7 +443,7 @@ the allowed actions per role.
 
     admin:
       TypusUser: create, read, update, delete
-      Post: create, read, update, delete
+      Post: create, read, update, delete, rebuild
       Category: create, read, update, delete
 
     editor:
@@ -488,8 +492,8 @@ You can create a role for a user using directly the username nickname. For
 example, the user Francesc Esplugas:
 
     fesplugas:
-      TypusUser: u
-      Post: crud
+      TypusUser: update
+      Post: create, read, update, delete
 
 ## Acknowledgments
 
