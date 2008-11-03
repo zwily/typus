@@ -372,10 +372,17 @@ private
     when 'index', 'show'
       message = "#{@current_user.roles.capitalize} can't display items."
       action = 'read'
-    when 'edit', 'update', 'position', 'toggle'
+    when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
       action = 'update'
+      if @model.new.kind_of?(TypusUser)
+        return if Typus::Configuration.options[:root] == @current_user.roles
+        if !(params[:id].to_s == session[:typus].to_s)
+          flash[:notice] = "As you're not the admin or the owner of this record you cannot edit this record."
+          redirect_to :back rescue redirect_to typus_dashboard_url
+        end
+      end
     when 'destroy'
-      message = "#{@current_user.roles.capitalize} can't destroy this item."
+      message = "#{@current_user.roles.capitalize} can't delete this item."
       action = 'delete'
     else
       message = "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
