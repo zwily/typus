@@ -69,36 +69,36 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_post_actions_on_index
-    assert_equal ["cleanup"], Post.typus_actions_for('index')
-    assert_equal ["cleanup"], Post.typus_actions_for(:index)
+    assert_equal %w( cleanup ), Post.typus_actions_for('index')
+    assert_equal %w( cleanup ), Post.typus_actions_for(:index)
   end
 
   def test_should_return_post_actions_on_edit
-    assert_equal ["send_as_newsletter", "preview"], Post.typus_actions_for('edit')
-    assert_equal ["send_as_newsletter", "preview"], Post.typus_actions_for(:edit)
+    assert_equal %w( send_as_newsletter preview ), Post.typus_actions_for('edit')
+    assert_equal %w( send_as_newsletter preview ), Post.typus_actions_for(:edit)
   end
 
   def test_should_return_field_options_for_post
-    assert_equal ["status"], Post.typus_field_options_for('selectors')
-    assert_equal ["status"], Post.typus_field_options_for(:selectors)
-    assert_equal ["permalink"], Post.typus_field_options_for('read_only')
-    assert_equal ["permalink"], Post.typus_field_options_for(:read_only)
-    assert_equal ["created_at"], Post.typus_field_options_for('auto_generated')
-    assert_equal ["created_at"], Post.typus_field_options_for(:auto_generated)
-    assert_equal ["status"], Post.typus_field_options_for('questions')
-    assert_equal ["status"], Post.typus_field_options_for(:questions)
+    assert_equal %w( status ), Post.typus_field_options_for('selectors')
+    assert_equal %w( status ), Post.typus_field_options_for(:selectors)
+    assert_equal %w( permalink ), Post.typus_field_options_for('read_only')
+    assert_equal %w( permalink ), Post.typus_field_options_for(:read_only)
+    assert_equal %w( created_at ), Post.typus_field_options_for('auto_generated')
+    assert_equal %w( created_at ), Post.typus_field_options_for(:auto_generated)
+    assert_equal %w( status ), Post.typus_field_options_for('questions')
+    assert_equal %w( status ), Post.typus_field_options_for(:questions)
   end
 
   def test_should_return_defaults_for_post
-    assert_equal ["title"], Post.typus_defaults_for('search')
-    assert_equal ["title"], Post.typus_defaults_for(:search)
-    assert_equal ["title", "-created_at"], Post.typus_defaults_for('order_by')
-    assert_equal ["title", "-created_at"], Post.typus_defaults_for(:order_by)
+    assert_equal %w( title ), Post.typus_defaults_for('search')
+    assert_equal %w( title ), Post.typus_defaults_for(:search)
+    assert_equal %w( title -created_at ), Post.typus_defaults_for('order_by')
+    assert_equal %w( title -created_at ), Post.typus_defaults_for(:order_by)
   end
 
   def test_should_return_relationships_for_post
-    assert_equal ["tags"], Post.typus_relationships_for('has_and_belongs_to_many')
-    assert_equal ["tags"], Post.typus_relationships_for(:has_and_belongs_to_many)
+    assert_equal %w( tags ), Post.typus_relationships_for('has_and_belongs_to_many')
+    assert_equal %w( tags ), Post.typus_relationships_for(:has_and_belongs_to_many)
     assert Post.typus_relationships_for('has_many').empty?
     assert Post.typus_relationships_for(:has_many).empty?
   end
@@ -162,13 +162,13 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_verify_previous_and_next_is_working
-    assert TypusUser.new.respond_to?(:previous_and_next)
+    assert TypusUser.instance_methods.include?('previous_and_next')
     assert typus_users(:admin).previous_and_next.kind_of?(Array)
     assert_equal [typus_users(:admin), typus_users(:disabled_user)], typus_users(:editor).previous_and_next
   end
 
   def test_should_verify_typus_name_is_working_properly
-    assert Category.new.respond_to?(:name)
+    assert Category.new.respond_to?('name')
     assert_equal "First Category", categories(:first).typus_name
     assert Post.new.respond_to?(:to_label)
     assert_equal "Labeled post", posts(:published).typus_name
