@@ -5,6 +5,10 @@ require File.dirname(__FILE__) + '/../../test_helper'
 #
 class Admin::TypusUsersControllerTest < ActionController::TestCase
 
+  def setup
+    Typus::Configuration.options[:root] = 'admin'
+  end
+
   def test_should_allow_admin_to_create_typus_users
 
     typus_user = typus_users(:admin)
@@ -67,7 +71,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to "/admin/typus_users"
     assert flash[:notice]
-    assert_match /Editor cannot add new items./, flash[:notice]
+    assert_equal "Editor can't perform action. (new)", flash[:notice].to_s
 
   end
 
@@ -127,7 +131,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to "/admin/typus_users"
     assert flash[:notice]
-    assert_match /As you're not the admin or the owner of this record you cannot edit it./, flash[:notice]
+    assert_match /As you're not the admin or the owner of this record you cannot edit this record./, flash[:notice]
 
   end
 
@@ -141,7 +145,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to "/admin/typus_users"
     assert flash[:notice]
-    assert_match /Editor cannot destroy this item./, flash[:notice]
+    assert_match /Editor can't delete this item./, flash[:notice]
 
   end
 
@@ -191,7 +195,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to "/admin/typus_users"
     assert flash[:notice]
-    assert_match /As you're not the admin or the owner of this record you cannot edit it./, flash[:notice]
+    assert_match /As you're not the admin or the owner of this record you cannot edit this record./, flash[:notice]
 
     ##
     # Here we change the behavior, editor has become root, so he 
@@ -209,8 +213,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     get :edit, :id => typus_users(:admin).id
 
     assert_response :success
-
-    Typus::Configuration.options[:root] = 'admin'
 
   end
 

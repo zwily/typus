@@ -15,10 +15,9 @@ class AdminControllerTest < ActionController::TestCase
     models = %w( TypusUser Person Post Comment Category Page Asset )
     assert_equal models.sort, typus_user.models.map(&:first).sort
 
-    models.each { |model| assert typus_user.can_create?(model), "#{model} - can_create?" }
-    models.each { |model| assert typus_user.can_read?(model), "#{model} - can_read?" }
-    models.each { |model| assert typus_user.can_update?(model), "#{model} - can_update?" }
-    models.each { |model| assert typus_user.can_destroy?(model), "#{model} - can_destroy?" }
+    %w( create read update destroy ).each do |action|
+      models.each { |model| assert typus_user.can_perform?(model, action) }
+    end
 
   end
 
@@ -30,25 +29,37 @@ class AdminControllerTest < ActionController::TestCase
     models = %w( Category Comment Post TypusUser )
     assert_equal models.sort, typus_user.models.map(&:first).sort
 
-    assert typus_user.can_create?(Category)
-    assert !typus_user.can_create?(Comment)
-    assert typus_user.can_create?(Post)
-    assert !typus_user.can_create?(TypusUser)
+    ##
+    # Category: create, update
+    #
+    assert typus_user.can_perform?(Category, 'create')
+    assert !typus_user.can_perform?(Category, 'read')
+    assert typus_user.can_perform?(Category, 'update')
+    assert !typus_user.can_perform?(Category, 'delete')
 
-    assert !typus_user.can_read?(Category)
-    assert !typus_user.can_read?(Comment)
-    assert !typus_user.can_read?(Post)
-    assert !typus_user.can_read?(TypusUser)
+    ##
+    # Post: create, update
+    #
+    assert typus_user.can_perform?(Post, 'create')
+    assert !typus_user.can_perform?(Post, 'read')
+    assert typus_user.can_perform?(Post, 'update')
+    assert !typus_user.can_perform?(Post, 'delete')
 
-    assert typus_user.can_update?(Category)
-    assert typus_user.can_update?(Comment)
-    assert typus_user.can_update?(Post)
-    assert typus_user.can_update?(TypusUser)
+    ##
+    # Comment: update, delete
+    #
+    assert !typus_user.can_perform?(Comment, 'create')
+    assert !typus_user.can_perform?(Comment, 'read')
+    assert typus_user.can_perform?(Comment, 'update')
+    assert typus_user.can_perform?(Comment, 'delete')
 
-    assert !typus_user.can_destroy?(Category)
-    assert typus_user.can_destroy?(Comment)
-    assert !typus_user.can_destroy?(Post)
-    assert !typus_user.can_destroy?(TypusUser)
+    ##
+    # TypusUser: update
+    #
+    assert !typus_user.can_perform?(TypusUser, 'create')
+    assert !typus_user.can_perform?(TypusUser, 'read')
+    assert typus_user.can_perform?(TypusUser, 'update')
+    assert !typus_user.can_perform?(TypusUser, 'delete')
 
   end
 
@@ -60,13 +71,21 @@ class AdminControllerTest < ActionController::TestCase
     models = %w( Category Post )
     assert_equal models.sort, typus_user.models.map(&:first).sort
 
-    assert !typus_user.can_create?(Post)
+    ##
+    #  Category: read, update
+    #
+    assert !typus_user.can_perform?(Category, 'create')
+    assert typus_user.can_perform?(Category, 'read')
+    assert typus_user.can_perform?(Category, 'update')
+    assert !typus_user.can_perform?(Category, 'delete')
 
-    assert typus_user.can_read?(Category)
-    assert typus_user.can_read?(Post)
-
-    assert typus_user.can_update?(Category)
-    assert !typus_user.can_update?(Post)
+    ##
+    #  Post: read
+    #
+    assert !typus_user.can_perform?(Post, 'create')
+    assert typus_user.can_perform?(Post, 'read')
+    assert !typus_user.can_perform?(Post, 'update')
+    assert !typus_user.can_perform?(Post, 'delete')
 
   end
 
