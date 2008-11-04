@@ -1,6 +1,6 @@
 require File.dirname(__FILE__) + '/../test_helper'
 
-class AdminControllerTest < ActionController::TestCase
+class TypusRolesTest < ActiveSupport::TestCase
 
   def test_should_get_list_of_roles
     roles = %w( admin editor designer )
