@@ -46,6 +46,27 @@ module Typus
       return models.sort
     end
 
+    def resources
+
+      all_resources = []
+      Typus::Configuration.roles.each do |key, value|
+        all_resources += Typus::Configuration.roles[key].keys
+      end
+      all_resources.uniq!.sort!
+
+      resources = []
+      all_resources.each do |resource|
+        begin
+          resource.constantize
+        rescue
+          resources << resource
+        end
+      end
+
+      return resources.uniq.sort
+
+    end
+
     def version
       VERSION::STRING
     end
