@@ -6,8 +6,8 @@ require File.dirname(__FILE__) + '/../../test_helper'
 class Admin::StatusControllerTest < ActionController::TestCase
 
   def setup
-    typus_user = typus_users(:admin)
-    @request.session[:typus] = typus_user.id
+    @typus_user = typus_users(:admin)
+    @request.session[:typus] = @typus_user.id
   end
 
   def test_should_verify_admin_can_go_to_index
@@ -20,6 +20,17 @@ class Admin::StatusControllerTest < ActionController::TestCase
     get :show
     assert_response :redirect
     assert_redirected_to typus_dashboard_url
+    assert flash[:notice]
+    assert_match /#{@typus_user.roles.capitalize} can't perform action./, flash[:notice]
+  end
+
+  def test_should_verify_user_can_not_go_to_index
+    typus_user = typus_users(:editor)
+    @request.session[:typus] = typus_user.id
+    get :index
+    assert_response :redirect
+    assert flash[:notice]
+    assert_match /#{typus_user.roles.capitalize} can't perform action./, flash[:notice]
   end
 
 end
