@@ -5,17 +5,29 @@ class TypusController < ApplicationController
   if Typus::Configuration.options[:ssl]
     include SslRequirement
     ssl_required :dashboard, 
-                 :login, :logout, :recover_password, :reset_password
+                 :login, :logout, 
+                 :recover_password, :reset_password
   end
 
   filter_parameter_logging :password
 
-  before_filter :reload_config_et_roles, :only => [ :dashboard ] if Rails.development?
+  before_filter :reload_config_et_roles if Rails.development?
 
-  before_filter :require_login, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
-  before_filter :current_user, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
+  before_filter :require_login, :except => [ :login, :logout, 
+                                             :recover_password, :reset_password, 
+                                             :setup ]
 
-  before_filter :recover_password_disabled?, :only => [ :recover_password, :reset_password ]
+  before_filter :current_user, :except => [ :login, :logout, 
+                                            :recover_password, :reset_password, 
+                                            :setup ]
+
+  before_filter :can_perform?, :except => [ :dashboard, 
+                                            :login, :logout, 
+                                            :recover_password, :reset_password, 
+                                            :setup ]
+
+  before_filter :recover_password_disabled?, :only => [ :recover_password, 
+                                                        :reset_password ]
 
   ##
   # Application Dashboard
@@ -140,6 +152,15 @@ private
     logger.info "[typus] Configuration files have been reloaded."
     Typus::Configuration.roles!
     Typus::Configuration.config!
+  end
+
+  def can_perform?
+    controller = params[:controller].split('/').last
+    action = params[:action]
+    unless @current_user.can_perform?(controller.camelize, action, { :special => true })
+      flash[:notice] = "#{@current_user.roles.capitalize} can't go to #{action} on #{controller.humanize.downcase}."
+      redirect_to :back rescue redirect_to typus_dashboard_url
+    end
   end
 
 end

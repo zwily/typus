@@ -4,20 +4,7 @@
 ##
 class Admin::StatusController < TypusController
 
-  before_filter :can_perform?
-
   def index
-  end
-
-  private
-
-  def can_perform?
-
-    unless @current_user.can_perform?('Status', params[:action], { :special => true })
-      flash[:notice] = "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
-      redirect_to :back rescue redirect_to typus_dashboard_url
-    end
-
   end
 
 end

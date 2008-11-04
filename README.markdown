@@ -454,6 +454,31 @@ If you're using a Typus enabled plugin, it will probably have defined roles
 for the new application functionality. You can overwrite them from the 
 configuration file.
 
+## Resources which are not models
+
+Want to manage **memcached**, see the current **starling** queue or have 
+an special resource which is not related to any model?
+
+    ##
+    # config/typus_roles.yml
+    admin:
+      Backup: index
+
+Create a controller on `app/controllers/admin`.
+
+    script/generate controller admin/backup index
+
+Make it inherit from TypusController.
+
+    class Admin::StatusController < TypusController
+
+      def index
+      end
+
+    end
+
+And your controller will be protected with the roles you've defined. 
+
 ## Typus Enabled Plugins
 
 Typus can use external plugins to extend functionality. Some of them 
