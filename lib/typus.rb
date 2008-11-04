@@ -18,6 +18,10 @@ module Typus
       return submodules.sort
     end
 
+    def module_description(module_name)
+      Typus::Configuration.config[module_name]['description']
+    end
+
     def submodules(module_name)
       submodules = []
       Typus::Configuration.config.to_a.each do |model|

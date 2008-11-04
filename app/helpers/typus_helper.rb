@@ -25,10 +25,12 @@ module TypusHelper
       Typus.modules(module_name).each do |model|
         if @current_user.models.include? model
 
-          html_module << "<tr class=\"#{cycle('even', 'odd')}\">\n"
-          html_module << "<td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /></td>\n"
+          description = Typus.module_description(model)
 
-          html_module << "<td align=\"right\" valign=\"bottom\"><small>"
+          html_module << "<tr class=\"#{cycle('even', 'odd')}\">\n"
+          html_module << "<td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /><small>#{description}</small></td>\n"
+
+          html_module << "<td align=\"right\" style=\"vertical-align: bottom;\"><small>"
           html_module << "#{link_to 'Add', "/admin/#{model.tableize}/new"}" if @current_user.can_perform?(model, 'create')
           html_module << "</small></td>\n"
 
