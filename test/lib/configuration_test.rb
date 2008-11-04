@@ -22,12 +22,12 @@ class ConfigurationTest < Test::Unit::TestCase
   end
 
   def test_should_verify_typus_roles_is_loaded
-    assert Typus::Configuration.respond_to?('roles!')
+    assert Typus::Configuration.respond_to?(:roles!)
     assert Typus::Configuration.roles!.kind_of?(Hash)
   end
 
   def test_should_verify_typus_config_file_is_loaded
-    assert Typus::Configuration.respond_to?('config!')
+    assert Typus::Configuration.respond_to?(:config!)
     assert Typus::Configuration.config!.kind_of?(Hash)
   end
 

@@ -7,6 +7,7 @@ require File.dirname(__FILE__) + '/../test_helper'
 class PageTest < ActiveSupport::TestCase
 
   def test_should_verify_admin_fields_for_list_are_overwrited
+
     assert_equal 'title, body, status', Typus::Configuration.config['Page']['fields']['list']
 
     assert Page.respond_to?('admin_fields_for_list')
@@ -15,6 +16,7 @@ class PageTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_admin_fields_for_form_are_overwrited
+
     assert_equal 'title, body, status', Typus::Configuration.config['Page']['fields']['form']
 
     assert Page.respond_to?('admin_fields_for_form')

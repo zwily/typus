@@ -20,6 +20,7 @@ class Admin::StatusControllerTest < ActionController::TestCase
     @request.session[:typus] = nil
     get :index
     assert_response :redirect
+    assert_redirected_to typus_login_url(:back_to => '/admin/status')
   end
 
   def test_should_verify_admin_can_not_go_to_show
