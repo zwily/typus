@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
 ##
-# Here we test position action.
+# Here we test position action if acts as list is installed.
 #
 class Admin::CategoriesControllerTest < ActionController::TestCase
 
