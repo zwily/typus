@@ -2,6 +2,16 @@ module Typus
 
   module Configuration
 
+    module Reloader
+
+      def reload_config_et_roles
+        logger.info "[typus] Configuration files have been reloaded."
+        Typus::Configuration.roles!
+        Typus::Configuration.config!
+      end
+
+    end
+
     ##
     # Default application options that can be overwritten from
     # an initializer.

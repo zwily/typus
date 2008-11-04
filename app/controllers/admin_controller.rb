@@ -3,6 +3,7 @@ class AdminController < ApplicationController
   layout 'typus'
 
   include Authentication
+  include Typus::Configuration::Reloader
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
@@ -10,7 +11,9 @@ class AdminController < ApplicationController
                  :toggle, :position, :relate, :unrelate
   end
 
-  before_filter :reload_config_et_roles if Rails.development?
+  if Rails.development?
+    before_filter :reload_config_et_roles
+  end
 
   before_filter :require_login
   before_filter :current_user
@@ -29,7 +32,7 @@ class AdminController < ApplicationController
   ##
   # Check if the user can perform the action on the current resource
   #
-  before_filter :can_perform?
+  before_filter :can_perform_action?
 
   before_filter :set_order, :only => [ :index ]
 
@@ -279,48 +282,6 @@ private
   end
 
   ##
-  # Before filter to check if has permission to index, edit, update 
-  # & destroy a model.
-  #
-  def check_permissions
-    unless @current_user.resources.include? @model.to_s or @current_user.resources.include? "All"
-      flash[:notice] = "You don't have permission to access this resource."
-      redirect_to :back
-    end
-  rescue
-    redirect_to typus_dashboard_url
-  end
-
-  ##
-  # Before updating a TypusUser we check we can update his role
-  #
-  def check_role
-    if @model == TypusUser
-      unless @current_user.roles.include? Typus::Configuration.options[:root]
-        unless @item.roles == params[:item][:roles]
-          flash[:error] = "Only %s can change roles." % Typus::Configuration.options[:root]
-          redirect_to :back
-        end
-      end
-    end
-  end
-
-  ##
-  # A TypusUser cannot destroy himself
-  #
-  def check_ownership
-    if @model == TypusUser and @current_user.id == params[:id].to_i
-      case params[:action]
-      when 'destroy'
-        flash[:notice] = "You cannot remove yourself from Typus."
-      when 'toggle'
-        flash[:notice] = "You cannot toggle your %s." % params[:field]
-      end
-      redirect_to :back
-    end
-  end
-
-  ##
   # Select which template to render.
   #
   def select_template(template, model = @model)
@@ -355,38 +316,6 @@ private
              :filename => filename)
   rescue
     render :text => "FasterCSV is not installed."
-  end
-
-  def reload_config_et_roles
-    logger.info "[typus] Configuration files have been reloaded."
-    Typus::Configuration.roles!
-    Typus::Configuration.config!
-  end
-
-  def can_perform?
-
-    case params[:action]
-    when 'index', 'show'
-      message = "#{@current_user.roles.capitalize} can't display items."
-    when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
-      if @model.new.kind_of?(TypusUser)
-        return if Typus::Configuration.options[:root] == @current_user.roles
-        if !(params[:id].to_s == session[:typus].to_s)
-          flash[:notice] = "As you're not the admin or the owner of this record you cannot edit this record."
-          redirect_to :back rescue redirect_to typus_dashboard_url
-        end
-      end
-    when 'destroy'
-      message = "#{@current_user.roles.capitalize} can't delete this item."
-    else
-      message = "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
-    end
-
-    unless @current_user.can_perform?(@model, params[:action])
-      flash[:notice] = message || "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
-      redirect_to :back rescue redirect_to typus_dashboard_url
-    end
-
   end
 
 end

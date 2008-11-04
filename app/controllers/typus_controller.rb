@@ -1,6 +1,7 @@
 class TypusController < ApplicationController
 
   include Authentication
+  include Typus::Configuration::Reloader
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
@@ -9,9 +10,11 @@ class TypusController < ApplicationController
                  :recover_password, :reset_password
   end
 
-  filter_parameter_logging :password
+  if Rails.development?
+    before_filter :reload_config_et_roles
+  end
 
-  before_filter :reload_config_et_roles if Rails.development?
+  filter_parameter_logging :password
 
   before_filter :require_login, :except => [ :login, :logout, 
                                              :recover_password, :reset_password, 
@@ -146,21 +149,6 @@ private
 
   def recover_password_disabled?
     redirect_to typus_login_url unless Typus::Configuration.options[:recover_password]
-  end
-
-  def reload_config_et_roles
-    logger.info "[typus] Configuration files have been reloaded."
-    Typus::Configuration.roles!
-    Typus::Configuration.config!
-  end
-
-  def can_perform?
-    controller = params[:controller].split('/').last
-    action = params[:action]
-    unless @current_user.can_perform?(controller.camelize, action, { :special => true })
-      flash[:notice] = "#{@current_user.roles.capitalize} can't go to #{action} on #{controller.humanize.downcase}."
-      redirect_to :back rescue redirect_to typus_dashboard_url
-    end
   end
 
 end
