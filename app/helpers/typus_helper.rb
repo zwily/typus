@@ -23,7 +23,7 @@ module TypusHelper
       HTML
 
       Typus.modules(module_name).each do |model|
-        if @current_user.models.include? model
+        if @current_user.resources.include? model
 
           description = Typus.module_description(model)
 

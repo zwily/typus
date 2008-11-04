@@ -46,7 +46,7 @@ class TypusUser < ActiveRecord::Base
   ##
   # Models the user has access to ...
   #
-  def models
+  def resources
     calculate = {}
     self.roles.split(', ').each do |role|
       calculate = Typus::Configuration.roles[role].compact
@@ -56,22 +56,26 @@ class TypusUser < ActiveRecord::Base
     "All"
   end
 
-  def can_perform?(model, action)
+  def can_perform?(resource, action, options = {})
 
-    case action
-    when 'new', 'create'
-      _action = 'create'
-    when 'index', 'show'
-      _action = 'read'
-    when 'edit', 'update', 'position', 'toggle'
-      _action = 'update'
-    when 'destroy'
-      _action = 'delete'
-    else
+    if options[:special]
       _action = action
+    else
+      case action
+      when 'new', 'create'
+        _action = 'create'
+      when 'index', 'show'
+        _action = 'read'
+      when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
+        _action = 'update'
+      when 'destroy'
+        _action = 'delete'
+      else
+        _action = action
+      end
     end
 
-    self.models[model.to_s].split(', ').include?(_action)
+    self.resources[resource.to_s].split(', ').include?(_action) rescue false
 
   end
 

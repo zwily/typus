@@ -6,6 +6,8 @@ admin:
   Category: create, read, update, delete
   Page: create, read, update, delete
   Asset: create, read, update, delete
+  Status: index
+  Order:
 
 editor:
   Category: create, update

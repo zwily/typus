@@ -12,8 +12,8 @@ class TypusController < ApplicationController
 
   before_filter :reload_config_et_roles, :only => [ :dashboard ] if Rails.development?
 
-  before_filter :require_login, :only => [ :dashboard ]
-  before_filter :current_user, :only => [ :dashboard ]
+  before_filter :require_login, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
+  before_filter :current_user, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
 
   before_filter :recover_password_disabled?, :only => [ :recover_password, :reset_password ]
 

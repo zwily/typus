@@ -27,11 +27,9 @@ class AdminController < ApplicationController
   before_filter :check_ownership, :only => [ :destroy, :toggle ]
 
   ##
-  # This is user for all the models.
+  # Check if the user can perform the action on the current resource
   #
   before_filter :can_perform?
-
-  # @current_user.models[model.to_s]]
 
   before_filter :set_order, :only => [ :index ]
 
@@ -285,7 +283,7 @@ private
   # & destroy a model.
   #
   def check_permissions
-    unless @current_user.models.include? @model.to_s or @current_user.models.include? "All"
+    unless @current_user.resources.include? @model.to_s or @current_user.resources.include? "All"
       flash[:notice] = "You don't have permission to access this resource."
       redirect_to :back
     end
@@ -368,13 +366,9 @@ private
   def can_perform?
 
     case params[:action]
-    when 'new', 'create'
-      action = 'create'
     when 'index', 'show'
       message = "#{@current_user.roles.capitalize} can't display items."
-      action = 'read'
     when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
-      action = 'update'
       if @model.new.kind_of?(TypusUser)
         return if Typus::Configuration.options[:root] == @current_user.roles
         if !(params[:id].to_s == session[:typus].to_s)
@@ -384,13 +378,11 @@ private
       end
     when 'destroy'
       message = "#{@current_user.roles.capitalize} can't delete this item."
-      action = 'delete'
     else
       message = "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
-      action = params[:action]
     end
 
-    unless @current_user.can_perform?(@model, action)
+    unless @current_user.can_perform?(@model, params[:action])
       flash[:notice] = message || "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
       redirect_to :back rescue redirect_to typus_dashboard_url
     end

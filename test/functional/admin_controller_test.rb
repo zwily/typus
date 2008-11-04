@@ -12,12 +12,34 @@ class AdminControllerTest < ActionController::TestCase
     typus_user = typus_users(:admin)
     assert_equal 'admin', typus_user.roles
 
-    models = %w( TypusUser Person Post Comment Category Page Asset )
-    assert_equal models.sort, typus_user.models.map(&:first).sort
+    models = %w( TypusUser Person Post Comment Category Page Asset Status )
+    assert_equal models.sort, typus_user.resources.map(&:first).sort
+
+    ##
+    # Order exists on the roles, but, as we compact the hash, the
+    # resource is removed.
+    #
+    assert !typus_user.resources.map(&:first).include?('Order')
+
+    models.delete('Status')
 
     %w( create read update destroy ).each do |action|
       models.each { |model| assert typus_user.can_perform?(model, action) }
     end
+
+    ##
+    # The Order resource doesn't have an index action, so we 
+    # say it's not available.
+    #
+    assert !typus_user.can_perform?('Order', 'index')
+
+    ##
+    # The Status resource has an index action, but not a show one.
+    # We add the { :special => true } option to by-pass the action 
+    # renaming performed in the TypusUser#can_perform? method.
+    #
+    assert typus_user.can_perform?('Status', 'index', { :special => true })
+    assert !typus_user.can_perform?('Status', 'show', { :special => true })
 
   end
 
@@ -27,7 +49,7 @@ class AdminControllerTest < ActionController::TestCase
     assert_equal 'editor', typus_user.roles
 
     models = %w( Category Comment Post TypusUser )
-    assert_equal models.sort, typus_user.models.map(&:first).sort
+    assert_equal models.sort, typus_user.resources.map(&:first).sort
 
     ##
     # Category: create, update
@@ -61,7 +83,7 @@ class AdminControllerTest < ActionController::TestCase
     assert_equal 'designer', typus_user.roles
 
     models = %w( Category Post )
-    assert_equal models.sort, typus_user.models.map(&:first).sort
+    assert_equal models.sort, typus_user.resources.map(&:first).sort
 
     ##
     #  Category: read, update
