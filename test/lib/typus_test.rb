@@ -30,6 +30,11 @@ class TypusTest < Test::Unit::TestCase
     assert_equal %w( Asset Page Post TypusUser ), Typus.models
   end
 
+  def test_should_return_description_of_module
+    assert Typus.respond_to?('module_description')
+    assert_equal "System Users Administration", Typus.module_description('TypusUser')
+  end
+
   def test_should_verify_modules
     assert Typus.respond_to?('modules')
   end
