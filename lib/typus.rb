@@ -179,7 +179,7 @@ end
 
           controller.puts(content)
           controller.close
-          puts "[typus] Admin::#{resource}Controller successfully created."
+          puts "=> [typus] Admin::#{resource}Controller successfully created."
 
         end
 
@@ -198,7 +198,7 @@ end
           RAW
           view.puts(content)
           view.close
-          puts "[typus] app/views/admin/#{resource.tableize.singularize}/index.html.erb successfully created."
+          puts "=> [typus] app/views/admin/#{resource.tableize.singularize}/index.html.erb successfully created."
         end
 
       end
