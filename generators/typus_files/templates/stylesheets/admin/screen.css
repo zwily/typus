@@ -63,8 +63,9 @@ a:hover {
 }
 
 a.on {
-  color: #333;
+  font-weight: bold;
   text-decoration: underline;
+  color: #333;
 }
 
 /* header
@@ -141,6 +142,10 @@ a.on {
 
     #content h2 a {
       font-weight: bold;
+    }
+
+    #content h2 small {
+      font-size: 0.75em;
     }
 
   #content ul {
