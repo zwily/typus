@@ -5,32 +5,16 @@ class TypusController < ApplicationController
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
-    ssl_required :dashboard, 
-                 :login, :logout, 
-                 :recover_password, :reset_password
-  end
-
-  if Rails.development?
-    before_filter :reload_config_et_roles
+    ssl_required :dashboard, :login, :logout, :recover_password, :reset_password
   end
 
   filter_parameter_logging :password
 
-  before_filter :require_login, :except => [ :login, :logout, 
-                                             :recover_password, :reset_password, 
-                                             :setup ]
-
-  before_filter :current_user, :except => [ :login, :logout, 
-                                            :recover_password, :reset_password, 
-                                            :setup ]
-
-  before_filter :can_perform?, :except => [ :dashboard, 
-                                            :login, :logout, 
-                                            :recover_password, :reset_password, 
-                                            :setup ]
-
-  before_filter :recover_password_disabled?, :only => [ :recover_password, 
-                                                        :reset_password ]
+  before_filter :reload_config_et_roles
+  before_filter :require_login, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
+  before_filter :current_user, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
+  before_filter :can_perform?, :except => [ :dashboard, :login, :logout, :recover_password, :reset_password, :setup ]
+  before_filter :recover_password_disabled?, :only => [ :recover_password, :reset_password ]
 
   ##
   # Application Dashboard

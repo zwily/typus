@@ -7,13 +7,10 @@ class AdminController < ApplicationController
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
-    ssl_required :index, :new, :create, :edit, :show, :update, :destroy, 
-                 :toggle, :position, :relate, :unrelate
+    ssl_required :index, :new, :create, :edit, :show, :update, :destroy, :toggle, :position, :relate, :unrelate
   end
 
-  if Rails.development?
-    before_filter :reload_config_et_roles
-  end
+  before_filter :reload_config_et_roles
 
   before_filter :require_login
   before_filter :current_user
@@ -238,6 +235,8 @@ private
 
   ##
   # Set default order on the listings.
+  #
+  #     @order = "id ASC"
   #
   def set_order
     unless params[:order_by]
