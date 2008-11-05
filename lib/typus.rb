@@ -4,28 +4,24 @@ module Typus
 
     def applications
       apps = []
-      Typus::Configuration.config.to_a.each do |model|
-        apps << model[1]['application'] if model[1].has_key? 'application'
+      Typus::Configuration.config.each do |key, value|
+        apps << value['application']
       end
-      return apps.uniq.sort
+      return apps.compact.uniq.sort
     end
 
-    def modules(app_name)
-      submodules = []
-      Typus::Configuration.config.to_a.each do |model|
-        submodules << model[0] if model[1]['application'] == app_name
+    def modules(application)
+      modules = []
+      Typus::Configuration.config.each do |key, value|
+        modules << key if value['application'] == application
       end
-      return submodules.sort
+      return modules.sort
     end
 
-    def module_description(module_name)
-      Typus::Configuration.config[module_name]['description']
-    end
-
-    def submodules(module_name)
+    def submodules(modulo)
       submodules = []
-      Typus::Configuration.config.to_a.each do |model|
-        submodules << model[0] if model[1]['module'] == module_name
+      Typus::Configuration.config.each do |key, value|
+        submodules << key if key['module'] == modulo
       end
       return submodules.sort
     end
@@ -65,6 +61,10 @@ module Typus
 
       return resources.uniq.sort
 
+    end
+
+    def module_description(modulo)
+      Typus::Configuration.config[modulo]['description']
     end
 
     def version
