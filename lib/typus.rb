@@ -153,28 +153,13 @@ module Typus
 ##
 class Admin::#{resource}Controller < TypusController
 
-=begin
-
   ##
-  # You can overwrite any of the AdminController methods.
+  # This controller was generated because you have defined a resource 
+  # on your `typus_roles.yml` file.
   #
-  def index
-  end
-
-  ##
-  # You can extend the AdminController with your actions.
+  #     admin:
+  #       #{resource}: index
   #
-  # This actions have to be defined in `typus.yml`.
-  #
-  #   Post:
-  #     actions:
-  #       index: action_for_the_index
-  #       edit: action_for_the_edit
-  #
-  def your_action
-  end
-
-=end
 
   def index
     
@@ -204,7 +189,7 @@ end
           RAW
           view.puts(content)
           view.close
-          puts "[typus] View for admin/#{resource.tableize.singularize} successfully created."
+          puts "[typus] app/views/admin/#{resource.tableize.singularize}/index.html.erb successfully created."
         end
 
       end
