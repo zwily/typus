@@ -24,20 +24,14 @@ module TypusHelper
 
       Typus.modules(module_name).each do |model|
         if @current_user.resources.include? model
-
           description = Typus.module_description(model)
-
           html_module << "<tr class=\"#{cycle('even', 'odd')}\">\n"
           html_module << "<td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /><small>#{description}</small></td>\n"
-
           html_module << "<td align=\"right\" style=\"vertical-align: bottom;\"><small>"
           html_module << "#{link_to 'Add', "/admin/#{model.tableize}/new"}" if @current_user.can_perform?(model, 'create')
           html_module << "</small></td>\n"
-
           html_module << "</tr>"
-
           enabled = true
-
         end
       end
 
@@ -52,6 +46,45 @@ module TypusHelper
     end
 
     html << "</div>"
+
+  end
+
+  ##
+  # Resources (wich are not models) on the dashboard.
+  #
+  def resources
+
+    available = []
+
+    Typus.resources.each do |resource|
+      available << resource if @current_user.resources.include?(resource)
+    end
+
+    if !available.empty?
+
+      html = <<-HTML
+        <table>
+          <tr>
+            <th colspan="2">Resources</th>
+          </tr>
+      HTML
+
+      available.each do |resource|
+        html << "<tr class=\"#{cycle('even', 'odd')}\">\n"
+        html << "<td>#{link_to resource.titleize, "/admin/#{resource.tableize.singularize}"}</td>\n"
+        html << "<td align=\"right\" style=\"vertical-align: bottom;\"></td>\n"
+        html << "</tr>"
+      end
+
+      html << <<-HTML
+        </table>
+        <br />
+        <div style="clear"></div>
+      HTML
+
+    end
+
+    return html rescue nil
 
   end
 
