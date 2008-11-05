@@ -464,20 +464,10 @@ an special resource which is not related to any model?
     admin:
       Backup: index
 
-Create a controller on `app/controllers/admin`.
+When you start **Typus** a controller and a view will be created.
 
-    script/generate controller admin/backup index
-
-Make it inherit from TypusController.
-
-    class Admin::StatusController < TypusController
-
-      def index
-      end
-
-    end
-
-And your controller will be protected with the roles you've defined. 
+    app/controllers/admin/backup_controller.rb
+    app/views/admin/backup/index.html
 
 ## Typus Enabled Plugins
 
