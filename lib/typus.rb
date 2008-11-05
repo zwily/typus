@@ -35,14 +35,14 @@ module Typus
       return submodules.sort
     end
 
-    def parent_module(name)
-      parent = Typus::Configuration.config[name]['module']
-      return (!parent.nil?) ? parent : []
-    end
-
-    def parent_application(name)
-      parent = Typus::Configuration.config[name]['application']
-      return (!parent.nil?) ? parent : []
+    ##
+    # Parent
+    #
+    #  Typus::Configuration.config['Post']['module']
+    #  Typus::Configuration.config['Post']['application']
+    #
+    def parent(model, name)
+      Typus::Configuration.config[model][name] || ''
     end
 
     def models

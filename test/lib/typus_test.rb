@@ -18,16 +18,23 @@ class TypusTest < Test::Unit::TestCase
     assert_equal ["Category"], Typus.module("Post")
   end
 
-  def test_should_verify_parent_module
-    assert Typus.respond_to?(:parent_module)
-    assert Typus.parent_module(TypusUser.name).kind_of?(String)
-    assert_equal "Typus", Typus.parent_module(TypusUser.name)
+  def test_should_verify_parent_exists
+    assert Typus.respond_to?(:parent)
   end
 
-  def test_should_verify_parent_application
-    assert Typus.respond_to?(:parent_application)
-    assert Typus.parent_application(TypusUser.name).kind_of?(String)
-    assert_equal "Typus Admin", Typus.parent_application(TypusUser.name)
+  def test_should_verify_parent_for_module
+    assert Typus.parent(TypusUser.name, 'module').kind_of?(String)
+    assert_equal "Typus", Typus.parent(TypusUser.name, 'module')
+  end
+
+  def test_should_verify_parent_for_application
+    assert Typus.parent(TypusUser.name, 'application').kind_of?(String)
+    assert_equal "Typus Admin", Typus.parent(TypusUser.name, 'application')
+  end
+
+  def test_should_verify_parent_for_nothing
+    assert Typus.parent(TypusUser.name, 'nothing').kind_of?(String)
+    assert_equal '', Typus.parent(TypusUser.name, 'nothing')
   end
 
   def test_should_return_models_and_should_be_sorted

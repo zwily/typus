@@ -66,7 +66,7 @@ module AdminHelper
   def block(name)
 
     models = case name
-             when 'parent_module': Typus.parent_module(@model.name)
+             when 'parent_module': Typus.parent(@model.name, 'module')
              when 'submodules':    Typus.module(@model.name)
              else []
     end
