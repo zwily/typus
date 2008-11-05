@@ -6,13 +6,9 @@ TODO
 [ ] Define a show action for the read-only items. This will be 
     if the user has only permission to r the items and not update.
 [ ] Test helpers.
-[ ] Define a way to access things that are not resources, like 
-    Memcached, Reports and other things.
-[ ] Actions for a record can be added to the listings.
 [ ] "No preview available" when displaying paperclip attachments should 
     show other information as the content type, file size.
 [ ] Icon on search box.
-[ ] Remove duplicated code from admin_helper and typus_helper.
 [ ] Remove user generator from console (?)
 [ ] Sidebar filter for *_id can be a selector or a list of links.
 
@@ -20,10 +16,18 @@ ON IT
 =====
 
 [ ] Internationalize messages. (i18n branch)
+[ ] Actions for a record can be added to the listings.
 
 DONE
 ====
 
+[X] Refactored application method on typus_helper.
+[X] Moved code from admin_controller to an authentication module.
+[X] Moved code from typus_controller and admin_controller to the 
+    configuration module.
+[X] Remove duplicated code from admin_helper and typus_helper. (20081105)
+[X] Define a way to access things that are not resources, like 
+    Memcached, Reports and other things. (20081105)
 [X] Block for example newsletter#generate ... Maybe here we'll have 
     to redefine the typus_roles file. With something more complex than 
     crud actions. (20081103)
