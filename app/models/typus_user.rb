@@ -1,7 +1,7 @@
 class TypusUser < ActiveRecord::Base
 
   def self.roles
-    Typus::Configuration.roles.keys
+    Typus::Configuration.roles.keys.sort
   end
 
   attr_accessor :password
