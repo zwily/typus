@@ -101,9 +101,10 @@ module TypusHelper
 
   def page_title
     crumbs = []
-    crumbs << @model.to_s.pluralize if @model
-    crumbs << params[:action] unless %w( index ).include?(params[:action])
-    return crumbs.compact.map { |x| x.titleize }.join(" &rsaquo; ")
+    crumbs << Typus::Configuration.options[:app_name]
+    crumbs << @model.name.pluralize if @model
+    crumbs << params[:action].titleize unless %w( index ).include?(params[:action])
+    return crumbs.compact.map { |x| x }.join(" &rsaquo; ")
   end
 
   def header
