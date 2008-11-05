@@ -119,6 +119,14 @@ module AdminHelper
         when 'integer'
           model = f[0].split("_id").first.capitalize.camelize.constantize
           if model.count > 0
+            ##
+            # Here we have the option of having a selector.
+            #
+            # TODO
+            #
+            ##
+            # Or having a simple list.
+            #
             html << "<ul>\n"
             model.find(:all, :order => model.typus_order_by).each do |item|
               switch = (current_request.include? "#{f[0]}=#{item.id}") ? 'on' : 'off'
@@ -126,16 +134,20 @@ module AdminHelper
             end
             html << "</ul>\n"
           else
-            html << "No available #{model.pluralize}"
+            html << "<p>No available #{model.name.downcase.pluralize}.</p>"
           end
         when 'string'
           values = @model.send(f[0])
-          html << "<ul>\n"
-          values.each do |item|
-            switch = (current_request.include? "#{f[0]}=#{item.last}") ? 'on' : 'off'
-            html << "<li>#{link_to item.capitalize, { :params => params.merge(f[0] => item) }, :class => switch }</li>\n"
+          if !values.empty?
+            html << "<ul>\n"
+            values.each do |item|
+              switch = current_request.include?("#{f[0]}=#{item}") ? 'on' : 'off'
+              html << "<li>#{link_to item.capitalize, { :params => params.merge(f[0] => item) }, :class => switch }</li>\n"
+            end
+            html << "</ul>\n"
+          else
+            html << "<p>No available values.</p>"
           end
-          html << "</ul>\n"
         end
       end
     end
