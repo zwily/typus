@@ -5,43 +5,46 @@ module TypusHelper
   #
   def applications
 
-    html = "<div id=\"list\">"
-
     if Typus.applications.empty?
       return display_error("There are not defined applications in config/typus.yml")
     end
 
+    html = "<div id=\"list\">"
+
     Typus.applications.each do |module_name|
 
-      enabled = false
+      available = []
 
-      html_module = <<-HTML
-        <table>
-          <tr>
-            <th colspan="2">#{module_name}</th>
-          </tr>
-      HTML
-
-      Typus.modules(module_name).each do |model|
-        if @current_user.resources.include? model
-          description = Typus.module_description(model)
-          html_module << "<tr class=\"#{cycle('even', 'odd')}\">\n"
-          html_module << "<td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /><small>#{description}</small></td>\n"
-          html_module << "<td align=\"right\" style=\"vertical-align: bottom;\"><small>"
-          html_module << "#{link_to 'Add', "/admin/#{model.tableize}/new"}" if @current_user.can_perform?(model, 'create')
-          html_module << "</small></td>\n"
-          html_module << "</tr>"
-          enabled = true
-        end
+      Typus.modules(module_name).each do |resource|
+        available << resource if @current_user.resources.include?(resource)
       end
 
-      html_module << <<-HTML
-        </table>
-        <br />
-        <div style="clear"></div>
-      HTML
+      if !available.empty?
 
-      html << html_module if enabled
+        html << <<-HTML
+          <table>
+            <tr>
+              <th colspan="2">#{module_name}</th>
+            </tr>
+        HTML
+
+        available.each do |model|
+          description = Typus.module_description(model)
+          html << "<tr class=\"#{cycle('even', 'odd')}\">\n"
+          html << "<td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /><small>#{description}</small></td>\n"
+          html << "<td align=\"right\" style=\"vertical-align: bottom;\"><small>"
+          html << "#{link_to 'Add', "/admin/#{model.tableize}/new"}" if @current_user.can_perform?(model, 'create')
+          html << "</small></td>\n"
+          html << "</tr>"
+        end
+
+        html << <<-HTML
+          </table>
+          <br />
+          <div style="clear"></div>
+        HTML
+
+      end
 
     end
 
