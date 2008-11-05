@@ -8,12 +8,6 @@ end
 require 'sha1'
 require 'typus'
 
-begin
-  require 'fastercsv'
-rescue LoadError
-  puts "=> [typus] FasterCSV gem not installed. CSV export from Typus won't work."
-end
-
 ##
 # And finally we enable Typus
 #
