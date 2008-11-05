@@ -35,18 +35,6 @@ module Typus
       return submodules.sort
     end
 
-=begin
-
-    def submodules(modulo)
-      submodules = []
-      Typus::Configuration.config.each do |key, value|
-        submodules << key if key['module'] == modulo
-      end
-      return submodules.sort
-    end
-
-=end
-
     def parent_module(name)
       parent = Typus::Configuration.config[name]['module']
       return (!parent.nil?) ? parent : []

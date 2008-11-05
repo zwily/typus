@@ -1,14 +1,20 @@
 Page:
   fields:
-    list: title, body, status 
+    # Body field is overwrited from a Page class method.
+    list: title, body, status
     form: title, body, status
   relationships:
     has_many: assets
+  application: Site
 
 Asset:
   fields:
     list: caption
     form: caption
+  application: Site
+
+Category:
+  module: Post
 
 Post:
   fields:
@@ -29,7 +35,6 @@ Post:
   filters: status, created_at, category
   search: title
   order_by: title, -created_at
-  module: Blog
   application: Blog
 
 TypusUser:
