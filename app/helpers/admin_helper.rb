@@ -125,6 +125,8 @@ module AdminHelper
               html << "<li>#{link_to item.typus_name, { :params => params.merge(f[0] => item.id) }, :class => switch}</li>\n"
             end
             html << "</ul>\n"
+          else
+            html << "No available #{model.pluralize}"
           end
         when 'string'
           values = @model.send(f[0])
