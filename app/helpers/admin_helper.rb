@@ -170,9 +170,12 @@ module AdminHelper
   end
 
   def display_link_to_previous
-    message = "You're adding a new #{@model.name.downcase} to a model. "
-    message << "Do you want to cancel it? <a href=\"#{params[:back_to]}\">Click Here</a>"
-    "<div id=\"flash\" class=\"notice\"><p>#{message}</p></div>"
+    html = <<-HTML
+<div id="flash" class="notice">
+<p>You're adding a new #{@model.name.downcase} to a model. Do you want to cancel it? <a href=\"#{params[:back_to]}\">Click Here</a></p>
+</div>
+    HTML
+    return html
   end
 
   def typus_table(model = @model, fields = 'list', items = @items)
@@ -210,7 +213,7 @@ module AdminHelper
           html << "<td>#{item.send(column[0]).to_s(:db)}</td>"
         when "collection"
           begin
-            html << "<td>#{link_to item.send(column[0].split("_id").first).typus_name, :controller => "/admin/#{column[0].split("_id").first.pluralize}", :action => "edit", :id => item.send(column[0])}</td>"
+            html << "<td>#{link_to item.send(column[0].split("_id").first).typus_name, :controller => "admin/#{column[0].split("_id").first.pluralize}", :action => "edit", :id => item.send(column[0])}</td>"
           rescue
             html << "<td></td>"
           end
