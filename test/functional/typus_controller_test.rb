@@ -4,17 +4,13 @@ class TypusControllerTest < ActionController::TestCase
 
   def setup
     Typus::Configuration.options[:recover_password] = true
+    Typus::Configuration.options[:app_name] = "Typus Admin for the masses"
   end
 
   def test_should_render_login
-
-    Typus::Configuration.options[:app_name] = "Typus Admin for the masses"
-
     get :login
     assert_response :success
     assert_template 'login'
-    assert_match /Typus Admin for the masses/, @response.body
-
   end
 
   def test_should_redirect_to_login
@@ -89,8 +85,6 @@ class TypusControllerTest < ActionController::TestCase
 
     typus_user = typus_users(:admin)
     @request.session[:typus] = typus_user.id
-
-    Typus::Configuration.options[:app_name] = "Typus Admin for the masses"
 
     get :dashboard
     assert_response :success
@@ -199,7 +193,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_verify_page_title_on_login
     get :login
-    assert_match /<title>#{Typus::Configuration.options[:app_name]}<\/title>/, @response.body
+    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Login<\/title>/, @response.body
   end
 
   def test_should_verify_page_title_on_dashboard
