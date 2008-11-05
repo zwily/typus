@@ -9,12 +9,11 @@ TODO
 [ ] "No preview available" when displaying paperclip attachments should 
     show other information as the content type, file size.
 [ ] Icon on search box.
-[ ] Remove user generator from console (?)
-[ ] Sidebar filter for *_id can be a selector or a list of links.
 
 ON IT
 =====
 
+[ ] Sidebar filter for *_id can be a selector or a list of links.
 [ ] Internationalize messages. (i18n branch)
 [ ] Actions for a record can be added to the listings.
 
