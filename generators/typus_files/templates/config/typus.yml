@@ -25,7 +25,7 @@
 #   application: Application
 #   description: Some text to describe the model
 #
-# ------------------------------------------------
+###
 
 <%- ar_models.each do |model| -%>
 <%- list = model.columns.collect { |i| [ i.name, i.sql_type ] if i.sql_type != 'text' }.compact.map(&:first) -%>
