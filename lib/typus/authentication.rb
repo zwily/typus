@@ -52,45 +52,75 @@ protected
   end
 
   ##
-  # Before filter to check if has permission to index, edit, update 
-  # & destroy a model.
+  # Action is available on:
   #
-  def check_permissions
-    unless @current_user.resources.include? @model.to_s or @current_user.resources.include? "All"
-      flash[:notice] = "You don't have permission to access this resource."
-      redirect_to :back
-    end
-  rescue
-    redirect_to typus_dashboard_url
-  end
+  #     edit, update, toggle and destroy
+  #
+  def can_perform_action_on_typus_user?
 
-  ##
-  # Before updating a TypusUser we check we can update his role
-  #
-  def check_role
-    if @model == TypusUser
-      unless @current_user.roles.include? Typus::Configuration.options[:root]
-        unless @item.roles == params[:item][:roles]
-          flash[:error] = "Only %s can change roles." % Typus::Configuration.options[:root]
-          redirect_to :back
+    return if !@item.kind_of?(TypusUser)
+
+    current_user = (@current_user == @item)
+    current_user_is_root = (@current_user.roles == Typus::Configuration.options[:root])
+
+    case params[:action]
+    when 'edit'
+
+      ##
+      # Only admin can toggle typus user status, but not herself.
+      #
+      if !current_user_is_root
+        if !current_user
+          flash[:notice] = "As you're not the admin or the owner of this record you cannot edit it."
+          redirect_to :back rescue redirect_to typus_dashboard_url
         end
       end
-    end
-  end
 
-  ##
-  # A TypusUser cannot destroy himself
-  #
-  def check_ownership
-    if @model == TypusUser and @current_user.id == params[:id].to_i
-      case params[:action]
-      when 'destroy'
-        flash[:notice] = "You cannot remove yourself from Typus."
-      when 'toggle'
-        flash[:notice] = "You cannot toggle your %s." % params[:field]
+    when 'update'
+
+      ##
+      # The current_user cannot change his role. This applies also 
+      # for the admin.
+      #
+      if current_user
+        unless @item.roles == params[:item][:roles]
+          flash[:error] = "You can't change your role."
+          redirect_to :back rescue redirect_to typus_dashboard_url
+        end
       end
-      redirect_to :back
+
+    when 'toggle'
+
+      ##
+      # Only admin can toggle typus user status, but not herself.
+      #
+      if current_user_is_root
+        if current_user
+          flash[:notice] = "You can't toggle your status."
+          redirect_to :back rescue redirect_to typus_dashboard_url
+        end
+      else
+        flash[:notice] = "You're not allowed to toggle status."
+        redirect_to :back rescue redirect_to typus_dashboard_url
+      end
+
+    when 'destroy'
+
+      ##
+      # Admin can remove anything except herself.
+      #
+      if current_user_is_root
+        if current_user
+          flash[:notice] = "You can't remove yourself from Typus."
+          redirect_to :back rescue redirect_to typus_dashboard_url
+        end
+      else
+        flash[:notice] = "You're not allowed to remove Typus Users."
+        redirect_to :back rescue redirect_to typus_dashboard_url
+      end
+
     end
+
   end
 
   ##
@@ -103,13 +133,6 @@ protected
     when 'index', 'show'
       message = "#{@current_user.roles.capitalize} can't display items."
     when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
-      if @model.new.kind_of?(TypusUser)
-        return if Typus::Configuration.options[:root] == @current_user.roles
-        if !(params[:id].to_s == session[:typus].to_s)
-          flash[:notice] = "As you're not the admin or the owner of this record you cannot edit this record."
-          redirect_to :back rescue redirect_to typus_dashboard_url
-        end
-      end
     when 'destroy'
       message = "#{@current_user.roles.capitalize} can't delete this item."
     else

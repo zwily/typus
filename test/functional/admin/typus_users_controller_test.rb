@@ -19,43 +19,43 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_not_allow_admin_to_destroy_himself
-
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
-    typus_user = typus_users(:admin)
-    @request.session[:typus] = typus_user.id
-    delete :destroy, :id => typus_user.id
-
-    assert_response :redirect
-    assert_redirected_to "/admin/typus_users"
-    assert flash[:notice]
-    assert_match /You cannot remove yourself from Typus./, flash[:notice]
-
-  end
-
   def test_should_not_allow_admin_to_toggle_her_status
 
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+    @request.env['HTTP_REFERER'] = "/admin/typus_users"
     typus_user = typus_users(:admin)
     @request.session[:typus] = typus_user.id
     get :toggle, { :id => typus_user.id, :field => 'status' }
 
     assert_response :redirect
-    assert_redirected_to "/admin/typus_users"
+    assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:notice]
-    assert_match /You cannot toggle your status./, flash[:notice]
+    assert_match /You can't toggle your status./, flash[:notice]
 
   end
 
-  def test_should_allow_admin_to_destroy_typus_users
+  def test_should_verify_admin_cannot_destroy_herself
 
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+    @request.env['HTTP_REFERER'] = "/admin/typus_users"
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
+    delete :destroy, :id => typus_user.id
+
+    assert_response :redirect
+    assert_redirected_to @request.env['HTTP_REFERER']
+    assert flash[:notice]
+    assert_match /You can't remove yourself from Typus./, flash[:notice]
+
+  end
+
+  def test_should_verify_admin_can_destroy_others
+
+    @request.env['HTTP_REFERER'] = "/admin/typus_users"
     typus_user = typus_users(:admin)
     @request.session[:typus] = typus_user.id
     delete :destroy, :id => typus_users(:editor).id
 
     assert_response :redirect
-    assert_redirected_to "/admin/typus_users"
+    assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:success]
     assert_match /Typus user successfully removed./, flash[:success]
 
@@ -63,13 +63,13 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_editor_to_create_typus_users
 
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+    @request.env['HTTP_REFERER'] = "/admin/typus_users"
     typus_user = typus_users(:editor)
     @request.session[:typus] = typus_user.id
     get :new
 
     assert_response :redirect
-    assert_redirected_to "/admin/typus_users"
+    assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:notice]
     assert_equal "Editor can't perform action. (new)", flash[:notice].to_s
 
@@ -80,7 +80,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     Typus::Configuration.options[:edit_after_create] = true
     typus_user = typus_users(:editor)
     @request.session[:typus] = typus_user.id
-    @request.env["HTTP_REFERER"] = "/admin/typus_users/#{typus_user.id}/edit"
+    @request.env['HTTP_REFERER'] = "/admin/typus_users/#{typus_user.id}/edit"
     get :edit, { :id => typus_user.id }
 
     assert_response :success
@@ -92,7 +92,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
                                :roles => "editor" } }
 
     assert_response :redirect
-    assert_redirected_to :action => 'edit', :id => typus_user.id
+    assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:success]
     assert_match /Typus user successfully updated./, flash[:success]
 
@@ -102,7 +102,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     typus_user = typus_users(:editor)
     @request.session[:typus] = typus_user.id
-    @request.env["HTTP_REFERER"] = "/admin/typus_users/#{typus_user.id}/edit"
+    @request.env['HTTP_REFERER'] = "/admin/typus_users/#{typus_user.id}/edit"
 
     assert_equal 'editor', typus_user.roles
 
@@ -110,15 +110,15 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
                     :item => { :roles => 'admin' } }
 
     assert_response :redirect
-    assert_redirected_to "/admin/typus_users/#{typus_user.id}/edit"
+    assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:error]
-    assert_match /Only admin can change roles./, flash[:error]
+    assert_match /You can't change your role./, flash[:error]
 
   end
 
   def test_should_not_allow_editor_to_edit_other_users_profiles
 
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+    @request.env['HTTP_REFERER'] = "/admin/typus_users"
     typus_user = typus_users(:editor)
     @request.session[:typus] = typus_user.id
     get :edit, { :id => typus_user.id }
@@ -129,51 +129,51 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     get :edit, { :id => typus_users(:admin).id }
 
     assert_response :redirect
-    assert_redirected_to "/admin/typus_users"
+    assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:notice]
-    assert_match /As you're not the admin or the owner of this record you cannot edit this record./, flash[:notice]
+    assert_match /As you're not the admin or the owner of this record you cannot edit it./, flash[:notice]
 
   end
 
   def test_should_not_allow_editor_to_destroy_users
 
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+    @request.env['HTTP_REFERER'] = "/admin/typus_users"
     typus_user = typus_users(:editor)
     @request.session[:typus] = typus_user.id
     delete :destroy, :id => typus_users(:admin).id
 
     assert_response :redirect
-    assert_redirected_to "/admin/typus_users"
+    assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:notice]
-    assert_match /Editor can't delete this item./, flash[:notice]
+    assert_match /You're not allowed to remove Typus Users./, flash[:notice]
 
   end
 
-  def test_should_not_allow_editor_to_destroy_himself
+  def test_should_not_allow_editor_to_destroy_herself
 
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
+    @request.env['HTTP_REFERER'] = "/admin/typus_users"
     typus_user = typus_users(:editor)
     @request.session[:typus] = typus_user.id
     delete :destroy, :id => typus_user.id
 
     assert_response :redirect
-    assert_redirected_to "/admin/typus_users"
+    assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:notice]
-    assert_match /You cannot remove yourself from Typus./, flash[:notice]
+    assert_match /You're not allowed to remove Typus Users./, flash[:notice]
 
   end
 
   def test_should_redirect_to_typus_dashboard_if_user_does_not_have_privileges
 
-    @request.env["HTTP_REFERER"] = "/admin"
+    @request.env['HTTP_REFERER'] = "/admin"
     typus_user = typus_users(:designer)
     @request.session[:typus] = typus_user.id
     get :index
 
     assert_response :redirect
-    assert_redirected_to "/admin"
+    assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:notice]
-    assert_match /You don't have permission to access this resource./, flash[:notice]
+    assert_match /Designer can't display items./, flash[:notice]
 
   end
 
@@ -181,21 +181,18 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     typus_user = typus_users(:editor)
     @request.session[:typus] = typus_user.id
+    @request.env['HTTP_REFERER'] = "/admin/typus_users"
 
     assert_equal 'editor', typus_user.roles
 
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
     get :edit, :id => typus_user.id
-
     assert_response :success
 
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
     get :edit, :id => typus_users(:admin).id
-
     assert_response :redirect
-    assert_redirected_to "/admin/typus_users"
+    assert_redirected_to @request.env["HTTP_REFERER"]
     assert flash[:notice]
-    assert_match /As you're not the admin or the owner of this record you cannot edit this record./, flash[:notice]
+    assert_match /As you're not the admin or the owner of this record you cannot edit it./, flash[:notice]
 
     ##
     # Here we change the behavior, editor has become root, so he 
@@ -204,14 +201,10 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     Typus::Configuration.options[:root] = 'editor'
 
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
     get :edit, :id => typus_user.id
-
     assert_response :success
 
-    @request.env["HTTP_REFERER"] = "/admin/typus_users"
     get :edit, :id => typus_users(:admin).id
-
     assert_response :success
 
   end

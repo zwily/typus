@@ -21,17 +21,7 @@ class AdminController < ApplicationController
   before_filter :set_model
   before_filter :find_model, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
 
-  before_filter :check_permissions, :only => [ :index, :new, :create, :edit, :update, :destroy, :toggle ]
-
-  ##
-  # This is only used for the TypusUser model.
-  #
-  before_filter :check_role, :only => [ :update ]
-  before_filter :check_ownership, :only => [ :destroy, :toggle ]
-
-  ##
-  # Check if the user can perform the action on the current resource
-  #
+  before_filter :can_perform_action_on_typus_user?, :only => [ :edit, :update, :toggle, :destroy ]
   before_filter :can_perform_action?
 
   before_filter :set_order, :only => [ :index ]
