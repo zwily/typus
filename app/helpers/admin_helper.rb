@@ -335,18 +335,24 @@ module AdminHelper
       when "text"
         html << "#{text_area :item, field[0], :class => 'text', :rows => Typus::Configuration.options[:form_rows]}"
       when "tree"
-        html << "<select id=\"item_#{field[0]}\" name=\"item[#{field[0]}]\">\n"
-        html << %{<option value=""></option>}
-        html << "#{expand_tree_into_select_field(@item.class.top)}"
-        html << "</select>\n"
+        html << <<-HTML
+<select id="item_#{field[0]}" name="item[#{field[0]}]">
+  <option value=""></option>
+  #{expand_tree_into_select_field(@item.class.top)}
+</select>
+        HTML
       when "selector"
         values = @item.class.send(field[0])
-        html << "<select id=\"item_#{field[0]}\" name=\"item[#{field[0]}]\">"
-        html << "<option value=\"\">Select a #{field[0].singularize}</option>"
+        options = ""
         values.each do |value|
-          html << "<option #{"selected" if @item.send(field[0]).to_s == value.to_s} value=\"#{value}\">#{value}</option>"
+          options << "<option #{'selected' if @item.send(field[0]).to_s == value.to_s} value=\"#{value}\">#{value}</option>"
         end
-        html << "</select>"
+        html << <<-HTML
+<select id="item_#{field[0]}" name="item[#{field[0]}]">
+  <option value="">Select a #{field[0].singularize}</option>
+  #{options}
+</select>
+        HTML
       when "collection"
         related = field[0].split("_id").first.capitalize.camelize.constantize
         html << "#{select :item, "#{field[0]}", related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}"
