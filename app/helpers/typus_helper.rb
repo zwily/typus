@@ -11,11 +11,11 @@ module TypusHelper
 
     html = "<div id=\"list\">"
 
-    Typus.applications.each do |module_name|
+    Typus.applications.each do |app|
 
       available = []
 
-      Typus.modules(module_name).each do |resource|
+      Typus.application(app).each do |resource|
         available << resource if @current_user.resources.include?(resource)
       end
 
@@ -24,7 +24,7 @@ module TypusHelper
         html << <<-HTML
           <table>
             <tr>
-              <th colspan="2">#{module_name}</th>
+              <th colspan="2">#{app}</th>
             </tr>
         HTML
 

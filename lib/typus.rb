@@ -2,6 +2,9 @@ module Typus
 
   class << self
 
+    ##
+    # Returns a list of all the applications.
+    #
     def applications
       apps = []
       Typus::Configuration.config.each do |key, value|
@@ -10,13 +13,29 @@ module Typus
       return apps.compact.uniq.sort
     end
 
-    def modules(application)
+    ##
+    # Returns a list of the modules of an application.
+    #
+    def application(name)
       modules = []
       Typus::Configuration.config.each do |key, value|
-        modules << key if value['application'] == application
+        modules << key if value['application'] == name
       end
       return modules.sort
     end
+
+    ##
+    # Returns a list of the submodules of a module.
+    #
+    def module(name)
+      submodules = []
+      Typus::Configuration.config.each do |key, value|
+        submodules << key if value['module'] == name
+      end
+      return submodules.sort
+    end
+
+=begin
 
     def submodules(modulo)
       submodules = []
@@ -26,13 +45,15 @@ module Typus
       return submodules.sort
     end
 
-    def parent_module(submodule_name)
-      parent = Typus::Configuration.config[submodule_name]['module']
+=end
+
+    def parent_module(name)
+      parent = Typus::Configuration.config[name]['module']
       return (!parent.nil?) ? parent : []
     end
 
-    def parent_application(module_name)
-      parent = Typus::Configuration.config[module_name]['application']
+    def parent_application(name)
+      parent = Typus::Configuration.config[name]['application']
       return (!parent.nil?) ? parent : []
     end
 

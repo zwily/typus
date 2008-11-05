@@ -43,8 +43,8 @@ module AdminHelper
       html << "</ul>"
     else
       html << more_actions
-      html << modules
-      html << submodules
+      html << block('parent_module')
+      html << block('submodules')
     end
 
     html = "<h2>Actions</h2>\n#{html}" unless html.empty?
@@ -63,24 +63,23 @@ module AdminHelper
     return html
   end
 
-  def modules
-    html = ""
-    Typus.parent_module(@model.name).each do |m|
-      model_cleaned = m.split(" ").join("").tableize
-      html << "<li>#{ link_to m, :controller => "typus", :model => model_cleaned }</li>"
-    end
-    html = "<h2>Modules</h2>\n<ul>#{html}</ul>" unless html.empty?
-    return html
-  end
+  def block(name)
 
-  def submodules
-    html = ""
-    Typus.submodules(@model.name).each do |m|
-      model_cleaned = m.split(" ").join("").tableize
-      html << "<li>#{ link_to m, :controller => "typus", :model => model_cleaned }</li>"
+    models = case name
+             when 'parent_module': Typus.parent_module(@model.name)
+             when 'submodules':    Typus.module(@model.name)
+             else []
     end
-    html = "<h2>Submodules</h2>\n<ul>#{html}</ul>" unless html.empty?
+
+    html = ""
+    models.each do |m|
+      model_cleaned = m.split(" ").join("").tableize
+      html << "<li>#{link_to m, :controller => "admin/#{model_cleaned}"}</li>"
+    end
+    html = "<h2>#{name.humanize}</h2>\n<ul>#{html}</ul>" unless html.empty?
+
     return html
+
   end
 
   def search

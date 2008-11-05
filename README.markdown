@@ -371,7 +371,7 @@ Example: (E-Commerce Application)
       application: ECommerce
     Category:
       module: Product
-    Option Type:
+    OptionType:
       module: Product
 
 Example: (Blog)
