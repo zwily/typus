@@ -86,11 +86,9 @@ class AdminController < ApplicationController
   def new
 
     item_params = params.dup
-    item_params.delete_if { |key, value| key == 'action' }
-    item_params.delete_if { |key, value| key == 'controller' }
-    item_params.delete_if { |key, value| key == 'model' }
-    item_params.delete_if { |key, value| key == 'model_id' }
-    item_params.delete_if { |key, value| key == 'back_to' }
+    %w( action controller model model_id back_to ).each do |black|
+      item_params.delete(black)
+    end
 
     @item = @model.new(item_params.symbolize_keys)
 
