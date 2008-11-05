@@ -403,14 +403,31 @@ input#search {
 /* dialog and login (login page)
 ---------------------------------------------------------- */
 
-body#login {
-  background: #000;
+div#top_dialog {
+  height: 20px;
+  color: #FFF;
+  margin: 5em auto 0em auto;
+  padding: 0.75em 1.25em;
+  width: 36em;
 }
+
+div#bottom_dialog {
+  height: 20px;
+  color: #FFF;
+  margin: 0em auto;
+  line-height: 18px;
+  width: 36em;
+  text-align: center;
+}
+
+  div#bottom_dialog a {
+    color: #408BB6;
+  }
 
 div#dialog {
   background: #FFF;
   border: 0.35em solid #408BB6;
-  margin: 7.5em auto;
+  margin: 1em auto;
   padding: 0.75em 1.25em;
   width: 36em;
 }
