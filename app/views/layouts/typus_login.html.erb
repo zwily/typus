@@ -11,7 +11,9 @@
 
 <body>
 
-  <%= typus_block :top, :login %>
+  <div id="top_dialog">
+    <%= typus_block :top, :login %>
+  </div>
 
   <div id="dialog">
     <h1><%= link_to Typus::Configuration.options[:app_name], :action => "login" %></h1>
@@ -19,7 +21,9 @@
     <%= yield %>
   </div>
 
-  <%= typus_block :bottom, :login %>
+  <div id="bottom_dialog">
+    <%= typus_block :bottom, :login %>
+  </div>
 
 </body>
 
