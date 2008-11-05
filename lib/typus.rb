@@ -52,7 +52,7 @@ module Typus
       Typus::Configuration.roles.each do |key, value|
         all_resources += Typus::Configuration.roles[key].keys
       end
-      all_resources.uniq!.sort!
+      all_resources.uniq!
 
       resources = []
       all_resources.each do |resource|
