@@ -406,7 +406,7 @@ module AdminHelper
   def expand_tree_into_select_field(categories)
     returning(String.new) do |html|
       categories.each do |category|
-        html << %{<option #{"selected" if @item.parent_id == category.id} value="#{ category.id }">#{ "-" * category.ancestors.size } #{category.name}</option>}
+        html << %{<option #{"selected" if @item.parent_id == category.id} value="#{category.id}">#{"-" * category.ancestors.size} #{category.name}</option>}
         html << expand_tree_into_select_field(category.children) if category.has_children?
       end
     end
