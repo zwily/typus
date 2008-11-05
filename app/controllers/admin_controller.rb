@@ -240,7 +240,8 @@ private
   # Set current model.
   #
   def set_model
-    @model = params[:controller].split("/").last.modelize
+    @model_as_resource = params[:controller].split("/").last
+    @model = @model_as_resource.to_class
   rescue Exception => error
     error_handler(error)
   end
