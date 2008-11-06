@@ -192,9 +192,19 @@ end
           Dir.mkdir(view_folder) unless File.directory?(view_folder)
           view = File.open("#{view_folder}/#{view_filename}", "w+")
           content = <<-RAW
+
+<!-- Sidebar -->
+
+<% content_for :sidebar do %>
+  <%= typus_block :sidebar, :dashboard %>
+<% end %>
+
+<!-- Content -->
+
 <h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; #{resource.titleize}</h2>
 
 <p>And here we do whatever we want to ...</p>
+
           RAW
           view.puts(content)
           view.close
