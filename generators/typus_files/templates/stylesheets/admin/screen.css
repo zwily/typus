@@ -14,9 +14,9 @@ Updated:   November 2008
 ---------------------------------------------------------- */
 
 html {
+  background: #000;
   height: 100%;
   margin-bottom: 1px;
-  background: #000;
 }
 
 /* body
@@ -45,17 +45,17 @@ a:hover {
 }
 
 a.on {
+  color: #333;
   font-weight: bold;
   text-decoration: underline;
-  color: #333;
 }
 
 /* header
 ---------------------------------------------------------- */
 
 #header {
-  color: #FFF;
   background: #000;
+  color: #FFF;
   padding: 1em 1.5em;
 }
 
@@ -86,7 +86,7 @@ a.on {
     #header .right li {
       list-style: none;
       display: inline;
-      padding: 0em 0em 0em 1em;
+      padding-left: 1em;
     }
 
 /* wrapper
@@ -94,7 +94,6 @@ a.on {
 
 #wrapper {
   background: #FFF;
-  border: 0px;
   min-height: 400px;
 }
 
@@ -102,8 +101,8 @@ a.on {
 ---------------------------------------------------------- */
 
 #content {
+  margin-right: 25em;
   padding: 0.5em 1.5em;
-  margin: 0em 25em 0em 0em;
 }
 
   #content h2 {
@@ -155,20 +154,20 @@ a.on {
     }
 
   #content pre {
-    padding: 1em;
-    margin: 1em 0em;
     background: #000;
     color: #FFF;
     font-size: 1.25em;
+    margin: 1em 0em;
     overflow: auto;
+    padding: 1em;
   }
 
   #content blockquote {
+    border-left: 1px solid #999;
     font-size: 1.25em;
     font-family: georgia;
-    padding: 0em 1em;
     margin: 1em;
-    border-left: 1px solid #999;
+    padding: 0em 1em;
   }
 
   #content table {
@@ -176,7 +175,7 @@ a.on {
   }
 
   #content h2+table {
-    margin: 0em 0 0 0;
+    margin: 0em; /* Here we overwrite a preference */
   }
 
 /* sidebar
@@ -210,7 +209,7 @@ a.on {
   }
 
   #sidebar form {
-    margin: 0 0 1.25em 0;
+    margin-bottom: 1.25em;
   }
 
   #sidebar ul {
@@ -244,19 +243,19 @@ a.on {
 }
 
   #content input.text {
+    border: 1px solid #999;
     display: block;
     font-size: 1.2em;
     font-weight: normal;
     padding: 3px;
     width: 100%;
-    border: 1px solid #999;
   }
 
   input.button {
-    font-size: 1em;
     background: #408BB6;
     border: 2px solid #408BB6;
     color: #FFF;
+    font-size: 1em;
     font-weight: bold;
     padding: 5px 7px;
   }
@@ -289,8 +288,8 @@ a.on {
 ---------------------------------------------------------- */
 
 label {
-  font-weight: bold;
   display: block;
+  font-weight: bold;
   margin-bottom: 5px;
 }
 
@@ -298,20 +297,13 @@ strong {
   font-weight: bold;
 }
 
-/* notice & dialogs
----------------------------------------------------------- */
-
-.dialog {
-  margin: 10px 0px 20px 0px;
-}
-
 /* tables
 ---------------------------------------------------------- */
 
 table {
   border-spacing: 0px;
-  width: 100%;
   text-align: left;
+  width: 100%;
 }
 
   table small {
@@ -338,8 +330,8 @@ table {
 
     table tr.even:hover,
     table tr.odd:hover {
-      color: #FFF;
       background: #000!important;
+      color: #FFF;
     }
 
     table tr.even:hover a,
@@ -369,29 +361,6 @@ table {
     color: black;
   }
 
-/* fieldsets
----------------------------------------------------------- */
-
-fieldset {
-  border: 1px dotted #999;
-  padding: 10px;
-  margin: 0px 0px 20px 0px;
-}
-
-  fieldset.on {
-    border: 1px solid #408BB6;
-  }
-
-  fieldset.on legend {
-    color: #408BB6;
-    text-transform: uppercase;
-  }
-
-legend {
-  font-size: 15px;
-  padding: 0px 5px;
-}
-
 /* rails errors
 ---------------------------------------------------------- */
 
@@ -401,31 +370,44 @@ legend {
 }
 
 .fieldWithErrors input {
-  margin-top: -7px;
-  border: 1px solid #FBC2C4;
   background: #FBE3E4;
+  border: 1px solid #FBC2C4;
+  margin-top: -7px;
 }
 
 .errorExplanation {
-  border: 2px solid #FBC2C4;
   background: #FBE3E4;
+  border: 2px solid #FBC2C4;
   color: #8a1f11;
   padding: 0em 2px;
   width: 100%;
 }
 
-.errorExplanation p { font-weight: bold; padding: 0px 5px;}
-.errorExplanation h3 { display: none;}
-.errorExplanation ul { margin: 0px 0px 10px 25px!important; }
-.errorExplanation li { list-style: square; padding: 0px 0px; }
+  .errorExplanation h3 {
+    display: none;
+  }
+
+  .errorExplanation p {
+    font-weight: bold;
+    padding: 0px 5px;
+  }
+
+  .errorExplanation ul {
+    margin: 0px 0px 10px 25px!important;
+  }
+
+  .errorExplanation li {
+    list-style: square;
+    padding: 0px 0px;
+  }
 
 /* searchbox
 ---------------------------------------------------------- */
 
 .box {
   border: 1px solid #D3D3D3;
-  padding: 0.25em 1em;
   margin: 1em 0em;
+  padding: 0.25em 1em;
 }
 
 input#search {
@@ -438,20 +420,20 @@ input#search {
 ---------------------------------------------------------- */
 
 div#top_dialog {
-  height: 20px;
   color: #FFF;
+  height: 20px;
   margin: 5em auto 0em auto;
   padding: 0.75em 1.25em;
   width: 36em;
 }
 
 div#bottom_dialog {
-  height: 20px;
   color: #FFF;
-  margin: 0em auto;
+  height: 20px;
   line-height: 18px;
-  width: 36em;
+  margin: 0em auto;
   text-align: center;
+  width: 36em;
 }
 
   div#bottom_dialog a {
@@ -469,7 +451,7 @@ div#dialog {
   div#dialog h1 {
     font-size: 2em;
     font-weight: bold;
-    margin: 0.5em 0em;
+    margin: 0.5em 0;
   }
 
     div#dialog h1 a {
@@ -493,7 +475,7 @@ div#dialog {
     }
 
   div#dialog p {
-    margin: 1em 0em;
+    margin: 1em 0;
   }
 
   div#dialog li a {
@@ -504,24 +486,23 @@ div#dialog {
   }
 
   #dialog input.text {
-    font-size: 2em;
-    padding: 0.2em 0.2em;
     border: 1px solid #999;
+    font-size: 2em;
+    padding: 0.2em;
     width: 100%;
   }
 
   #dialog input.button {
     font-size: 1em;
-    padding: 0px;
-    padding: 0.5em 0.5em;
+    padding: 0.5em;
   }
 
 /* pagination
 ---------------------------------------------------------- */
 
 .pagination {
-  border-top: 1px solid #F5F5F5;
   border-bottom: 1px solid #F5F5F5;
+  border-top: 1px solid #F5F5F5;
   margin: 1.5em auto 0em auto;
   padding: 1em;
   text-align: center;
@@ -536,8 +517,8 @@ div#dialog {
 
   .pagination a:hover,
   .pagination a:active {
-    color: #FFF;
     background: #000;
+    color: #FFF;
   }
 
   .pagination span.current {
@@ -570,14 +551,15 @@ div#dialog {
   .error p,
   .notice p, 
   .success p {
+    font-weight: bold;
     margin: 0 0.5em!important;
     padding: 0.75em 0.25em;
   }
 
 .error {
   background: #FBE3E4;
-  color: #8a1f11;
   border-color: #FBC2C4;
+  color: #8a1f11;
 }
 
   .error a {
@@ -586,8 +568,8 @@ div#dialog {
 
 .notice { 
   background: #FFF6BF;
-  color: #514721;
   border-color: #FFD324;
+  color: #514721;
 }
 
   .notice a { 
@@ -596,8 +578,8 @@ div#dialog {
 
 .success {
   background: #E6EFC2;
-  color: #264409;
   border-color: #C6D880;
+  color: #264409;
 }
 
   .success a {
