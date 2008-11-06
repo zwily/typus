@@ -9,6 +9,7 @@ protected
   #
   def require_login
     unless session[:typus]
+      # session[:typus] = TypusUser.find(:first) ## Use me for demo!
       back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
       redirect_to typus_login_url(:back_to => back_to)
     end
