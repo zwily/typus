@@ -95,6 +95,7 @@ a.on {
 #wrapper {
   background: #FFF;
   min-height: 400px;
+  min-width: 800px;
 }
 
 /* content
