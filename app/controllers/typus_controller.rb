@@ -116,14 +116,15 @@ class TypusController < ApplicationController
                                   :status => true)
       if @typus_user.save
         session[:typus] = @typus_user.id
-        flash[:notice] = "Your new password is #{password}."
+        flash[:notice] = "Your new password is <strong>#{password}</strong>."
         redirect_to :action => 'dashboard'
       else
-        flash[:error] = "Please, provide a valid email."
+        flash[:error] = "<strong>Yay!</strong> That doesn't seem like a valid email address."
         redirect_to :action => 'setup'
       end
 
     else
+      flash[:success] = "<strong>Welcome to Typus!</strong> Write your email to create a typus user."
       render :layout => 'typus_login'
     end
 
