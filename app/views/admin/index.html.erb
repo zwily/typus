@@ -9,21 +9,17 @@
 
 <%= typus_block :index_top %>
 
-<div id="list">
-
-  <% if @items.count > 0 -%>
-    <%= typus_table %>
-    <%= render :partial => 'admin/pagination' if @items.prev || @items.next %>
-  <% else %>
-    <div class="box" id="empty">
-      <% if @model.count == 0 %>
-        <p>There are no entries.</p>
-      <% else %>
-        <p>There are no entries under this filter.</p>
-      <% end %>
-    </div>
-  <% end %>
-
-</div>
+<% if @items.count > 0 -%>
+  <%= typus_table %>
+  <%= render :partial => 'admin/pagination' if @items.prev || @items.next %>
+<% else %>
+  <div class="box" id="empty">
+    <% if @model.count == 0 %>
+      <p>There are no entries.</p>
+    <% else %>
+      <p>There are no entries under this filter.</p>
+    <% end %>
+  </div>
+<% end %>
 
 <%= typus_block :index_bottom %>
