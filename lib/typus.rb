@@ -150,7 +150,7 @@ module Typus
       #
       self.resources.each do |resource|
 
-        controller_filename = "#{resource.tableize.singularize}_controller.rb"
+        controller_filename = "#{resource.underscore}_controller.rb"
         controller_location = "#{admin_controllers_folder}/#{controller_filename}"
 
         if !admin_controllers.include?(controller_filename)
@@ -185,7 +185,7 @@ end
 
         ##
         # And now we create the view.
-        view_folder = "#{admin_views_folder}/#{resource.tableize.singularize}"
+        view_folder = "#{admin_views_folder}/#{resource.underscore}"
         view_filename = "index.html.erb"
 
         if !File.exists?("#{view_folder}/#{view_filename}")
@@ -208,7 +208,7 @@ end
           RAW
           view.puts(content)
           view.close
-          puts "=> [typus] app/views/admin/#{resource.tableize.singularize}/index.html.erb successfully created."
+          puts "=> [typus] app/views/admin/#{resource.underscore}/index.html.erb successfully created."
         end
 
       end
