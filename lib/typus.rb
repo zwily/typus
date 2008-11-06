@@ -213,11 +213,14 @@ end
 
       end
 
+      models = self.models
+      models.delete("TypusUser")
+
       ##
       # Generate unexisting controllers for resources which are tied to a 
       # model.
       #
-      self.models.each do |model|
+      models.each do |model|
 
         ##
         # Controller app/controllers/admin/*
