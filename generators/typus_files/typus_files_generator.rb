@@ -44,7 +44,9 @@ class TypusFilesGenerator < Rails::Generator::Base
                    :assigns => { :ar_models => ar_models, :application => application }
       end
 
+      ##
       # initializers
+      #
       m.template "initializers/typus.rb", 
                  "config/initializers/typus.rb", 
                  :assigns => { :application => application }
@@ -54,8 +56,15 @@ class TypusFilesGenerator < Rails::Generator::Base
         Dir.mkdir(folder) unless File.directory?(folder)
       end
 
-      # stylesheets and images
+      ##
+      # stylesheets
+      #
       m.file "stylesheets/admin/screen.css", "public/stylesheets/admin/screen.css"
+      m.file "stylesheets/admin/reset.css", "public/stylesheets/admin/reset.css"
+
+      ##
+      # images
+      #
       files = %w( spinner.gif trash.gif status_false.gif status_true.gif )
       files.each { |file| m.file "images/admin/#{file}", "public/images/admin/#{file}" }
 
