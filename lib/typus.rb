@@ -97,7 +97,7 @@ module Typus
       require 'vendor/paginator'
     end
 
-    def generate_controllers
+    def generator
 
       ##
       # Create app/controllers/admin if doesn't exist.

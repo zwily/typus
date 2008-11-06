@@ -16,4 +16,4 @@ Typus.enable
 ##
 # Autogenerator for the models.
 #
-Typus.generate_controllers unless RAILS_ENV == 'test'
+Typus.generator unless RAILS_ENV == 'test'

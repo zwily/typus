@@ -61,4 +61,8 @@ class TypusTest < Test::Unit::TestCase
     assert Typus.respond_to?(:enable)
   end
 
+  def test_should_verify_enable_exists
+    assert Typus.respond_to?(:generator)
+  end
+
 end
