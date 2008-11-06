@@ -9,7 +9,7 @@ module TypusHelper
       return display_error("There are not defined applications in config/typus.yml")
     end
 
-    html = "<div id=\"list\">"
+    html = ""
 
     Typus.applications.each do |app|
 
@@ -32,7 +32,7 @@ module TypusHelper
           description = Typus.module_description(model)
           html << "<tr class=\"#{cycle('even', 'odd')}\">\n"
           html << "<td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /><small>#{description}</small></td>\n"
-          html << "<td align=\"right\" style=\"vertical-align: bottom;\"><small>"
+          html << "<td class=\"right\"><small>"
           html << "#{link_to 'Add', "/admin/#{model.tableize}/new"}" if @current_user.can_perform?(model, 'create')
           html << "</small></td>\n"
           html << "</tr>"
@@ -40,15 +40,13 @@ module TypusHelper
 
         html << <<-HTML
           </table>
-          <br />
-          <div style="clear"></div>
         HTML
 
       end
 
     end
 
-    html << "</div>"
+    return html
 
   end
 
@@ -81,8 +79,6 @@ module TypusHelper
 
       html << <<-HTML
         </table>
-        <br />
-        <div style="clear"></div>
       HTML
 
     end
