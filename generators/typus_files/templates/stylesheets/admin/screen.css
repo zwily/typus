@@ -10,22 +10,6 @@ Updated:   November 2008
 
 @import url(reset.css);
 
-/* typography definition
----------------------------------------------------------- */
-
-/*
-
-h1 { font-size: 2em; margin: 0em; }
-h2 { font-size: 1.5em; margin: 0em; }
-h3 { font-size: 1.25em; margin: 0em; }
-h4 { font-size: 1em; margin: 0em; }
-h5 { font-size: 1em; margin: 0em; }
-h6 { font-size: 1em; font-weight: bold; }
-
-h1 img, h2 img, h3 img, h4 img, h5 img, h6 img { margin: 0; }
-
-code { font-size: 1.2em; }
-*/
 /* html
 ---------------------------------------------------------- */
 
@@ -118,14 +102,13 @@ a.on {
 ---------------------------------------------------------- */
 
 #content {
-  padding: 0.25em 1.5em 1.5em 1.5em;
+  padding: 1.5em;
   margin: 0em 25em 0em 0em;
 }
 
   #content h2 {
     font-size: 1.5em;
     font-weight: bold;
-    margin: 0.5em 0em;
   }
 
     #content h2 a {
@@ -306,6 +289,10 @@ label {
   margin-bottom: 5px;
 }
 
+strong {
+  font-weight: bold;
+}
+
 /* notice & dialogs
 ---------------------------------------------------------- */
 
@@ -432,7 +419,8 @@ legend {
 
 .box {
   border: 1px solid #D3D3D3;
-  padding: 5px 10px;
+  padding: 0.25em 1em;
+  margin: 1em 0em;
 }
 
 input#search {
