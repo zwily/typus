@@ -117,8 +117,17 @@ a.on {
     }
 
     #content h2 small {
-      font-size: 0.75em;
+      font-size: 0.70em;
     }
+
+      #content h2 small a {
+        color: #999;
+      }
+
+      #content h2 small a:hover {
+        color: #408BB6;
+        text-decoration: none;
+      }
 
   #content h3 {
     font-size: 1.25em;
@@ -152,6 +161,15 @@ a.on {
 
     #content p a:hover {
       color: #408BB6;
+    }
+
+    #content p small {
+      font-size: 0.85em;
+    }
+
+    #content p small a {
+      color: #999;
+      text-decoration: none;
     }
 
   #content pre {

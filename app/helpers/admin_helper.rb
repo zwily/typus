@@ -314,7 +314,7 @@ module AdminHelper
           html << "<p>No preview available (#{content_type})</p>\n" if %w( index ).include? params[:action]
         end
       when /_id/
-        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add a new #{field[0].titleize.downcase}", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>\n"
+        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add new", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>\n"
       else
         comment = %w( read_only auto_generated ).include?(field[1]) ? (field[1] + " field").titleize : nil
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}#{"?" if question} <small>#{comment}</small></label>\n"
