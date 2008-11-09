@@ -11,11 +11,22 @@ class TypusUserTest < ActiveSupport::TestCase
     assert TypusUser.instance_methods.include?('crypted_password')
   end
 
-  def test_check_email_format
+  def test_should_verify_email_format
+
     data = { :email => 'admin' }
     typus_user = create_typus_user(data)
     assert !typus_user.valid?
     assert typus_user.errors.invalid?(:email)
+
+    email = <<-END
+this_is_chelm@example.com
+<script>location.href="http://spammersite.com"</script>
+END
+    data = { :email => email }
+    typus_user = create_typus_user(data)
+    assert !typus_user.valid?
+    assert typus_user.errors.invalid?(:email)
+
   end
 
   def test_should_verify_email_is_unique
