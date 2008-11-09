@@ -24,6 +24,7 @@ ActiveRecord::Schema.define do
     t.text :body
     t.boolean :status
     t.timestamps
+    t.datetime :published_at
     t.integer :user_id
   end
 

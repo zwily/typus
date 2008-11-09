@@ -143,22 +143,28 @@ class ActiveRecordTest < Test::Unit::TestCase
 
   def test_should_return_sql_conditions_on_filtering_typus_users_by_created_at
 
-    expected = "created_at > '#{Time.today.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}'"
+    expected = "created_at BETWEEN '#{Time.today.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}'"
     params = { 'created_at' => 'today' }
     assert_equal expected, TypusUser.build_conditions(params)
 
-    expected = "created_at > '#{6.days.ago.midnight.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}'"
+    expected = "created_at BETWEEN '#{6.days.ago.midnight.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}'"
     params = { 'created_at' => 'past_7_days' }
     assert_equal expected, TypusUser.build_conditions(params)
 
-    expected = "created_at > '#{Time.today.last_month.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}'"
+    expected = "created_at BETWEEN '#{Time.today.last_month.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}'"
     params = { 'created_at' => 'this_month' }
     assert_equal expected, TypusUser.build_conditions(params)
 
-    expected = "created_at > '#{Time.today.last_year.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}'"
+    expected = "created_at BETWEEN '#{Time.today.last_year.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}'"
     params = { 'created_at' => 'this_year' }
     assert_equal expected, TypusUser.build_conditions(params)
 
+  end
+
+  def test_should_return_sql_conditions_on_filtering_posts_by_published_at
+    expected = "published_at BETWEEN '#{Time.today.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}'"
+    params = { 'published_at' => 'today' }
+    assert_equal expected, Post.build_conditions(params)
   end
 
   def test_should_verify_previous_and_next_is_working

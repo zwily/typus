@@ -257,30 +257,28 @@ module Typus
         #
         #   - Booleans: true, false
         #   - Datetime: today, past_7_days, this_month, this_year
-        #   - Integer: *_id (P.ej. category_id)
-        #   - String: 
+        #   - Integer & String: *_id and "selectors" (P.ej. category_id)
         #
         self.model_fields.each do |f|
           filter_type = f.last if f.first == key
           case filter_type
           when "boolean"
-            if %w(sqlite3 sqlite).include? ActiveRecord::Base.connection.adapter_name.downcase
-              status = value[0..0]
-            else
-              status = (value == 'true') ? 1 : 0
-            end
+            status = case ActiveRecord::Base.connection.adapter_name.downcase
+                     when /sqlite3|sqlite/
+                       (value == 'true') ? 't' : 'f'
+                     else
+                       (value == 'true') ? 1 : 0
+                     end
             conditions << "#{f.first} = '#{status}'"
           when "datetime"
-            case value
-            when 'today':         start_date, end_date = Time.today, Time.today.tomorrow
-            when 'past_7_days':   start_date, end_date = 6.days.ago.midnight, Time.today.tomorrow
-            when 'this_month':    start_date, end_date = Time.today.last_month, Time.today.tomorrow
-            when 'this_year':     start_date, end_date = Time.today.last_year, Time.today.tomorrow
-            end
-            conditions << "created_at > '#{start_date.to_s(:db)}' AND created_at < '#{end_date.to_s(:db)}'"
-          when "integer"
-            conditions << "#{f.first} = #{value}" if f.first.include?("_id")
-          when "string"
+            interval = case value
+                       when 'today':         Time.today..Time.today.tomorrow
+                       when 'past_7_days':   6.days.ago.midnight..Time.today.tomorrow
+                       when 'this_month':    Time.today.last_month..Time.today.tomorrow
+                       when 'this_year':     Time.today.last_year..Time.today.tomorrow
+                       end
+            conditions << "#{f.first} BETWEEN '#{interval.first.to_s(:db)}' AND '#{interval.last.to_s(:db)}'"
+          when "integer", "string"
             conditions << "#{f.first} = '#{value}'"
           end
         end
