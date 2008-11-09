@@ -122,22 +122,38 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_sql_conditions_on_search_and_filter_for_typus_user
-    expected = "status = 't' AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
+
+    case ENV['DB']
+    when /mysql/
+      boolean_true = "status = '1'"
+      boolean_false = "status = '0'"
+    else
+      boolean_true = "status = 't'"
+      boolean_false = "status = 'f'"
+    end
+
+    expected = "#{boolean_true} AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
     params = { 'search' => 'francesc', 'status' => 'true' }
     assert_equal expected, TypusUser.build_conditions(params)
     params = { 'search' => 'francesc', 'status' => 'false' }
-    assert_match /status = 'f'/, TypusUser.build_conditions(params)
+    assert_match /#{boolean_false}/, TypusUser.build_conditions(params)
   end
 
   def test_should_return_sql_conditions_on_filtering_typus_users_by_status
 
-    expected = "status = 't'"
-    params = { 'status' => 'true' }
-    assert_equal expected, TypusUser.build_conditions(params)
+    case ENV['DB']
+    when /mysql/
+      boolean_true = "status = '1'"
+      boolean_false = "status = '0'"
+    else
+      boolean_true = "status = 't'"
+      boolean_false = "status = 'f'"
+    end
 
-    expected = "status = 'f'"
+    params = { 'status' => 'true' }
+    assert_equal boolean_true, TypusUser.build_conditions(params)
     params = { 'status' => 'false' }
-    assert_equal expected, TypusUser.build_conditions(params)
+    assert_equal boolean_false, TypusUser.build_conditions(params)
 
   end
 

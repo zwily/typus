@@ -3,7 +3,16 @@ ENV['RAILS_ENV'] = "test"
 
 require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environment")
 
-ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :dbfile => ":memory:")
+##
+# Test with different DB settings:
+connection = case ENV['DB']
+             when /mysql/
+               { :adapter => 'mysql', :username => 'root', :database => 'typus_test' }
+             else
+               { :adapter => "sqlite3", :dbfile => ":memory:" }
+             end
+
+ActiveRecord::Base.establish_connection(connection)
 
 ##
 # Remove the application load_paths for app/models to avoid conflicts.
