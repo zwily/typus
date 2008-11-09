@@ -510,6 +510,16 @@ example, the user Francesc Esplugas:
       TypusUser: update
       Post: create, read, update, delete
 
+## Testing the plugin
+
+You can test the plugin by running `rake`. Tests will be performed against 
+a SQLite3 database in memory. You can also run tests against PostgreSQL and 
+MySQL databases. You have to create databases, both are called `typus_test`. 
+Once you've created them you can run the tests.
+
+    $ rake DB=mysql
+    $ rake DB=psql
+
 ## Acknowledgments
 
 - Laia Gargallo (My girl) - <http://azotacalles.net>
