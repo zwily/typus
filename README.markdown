@@ -67,7 +67,6 @@ You can view the available tasks running:
     rake typus:dependencies  # Install Typus dependencies (paperclip, acts_as_l....
     rake typus:plugins       # Install Typus plugins
     rake typus:roles         # List current roles
-    rake typus:seed          # Create TypusUser `rake typus:seed email=foo@bar....
 
 ### Configure
 
@@ -77,16 +76,12 @@ generates the required database migration files.
 
     $ script/generate typus_files
 
-After creating the files you can migrate your database:
+After creating the files migrate your database:
 
     $ rake db:migrate
 
-And finally create the first user. You can do it from a terminal, or 
-going to the admin page.
-
-    $ rake typus:seed email='john@example.com' RAILS_ENV=production
-
-Now you can start your application and go to <http://example.com/admin>
+And finally create the first user, to do it, start the application 
+server, go to <http://0.0.0.0:3000/admin> and follow the instructions.
 
 ## Plugin Configuration Options
 

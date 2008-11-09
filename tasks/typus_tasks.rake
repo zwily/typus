@@ -1,35 +1,5 @@
 namespace :typus do
 
-  PLUGIN_ROOT = File.dirname(__FILE__) + '/../'
-
-  desc "Create TypusUser (rake typus:seed email=john@example.com)"
-  task :seed => :environment do
-
-    include Authentication
-
-    ##
-    # Create the new user with the params.
-    #
-    email = ENV['email']
-    password = ENV['password'] || generate_password
-
-    begin
-      typus_user = TypusUser.new(:email => email, 
-                                 :password => password, 
-                                 :password_confirmation => password, 
-                                 :roles => Typus::Configuration.options[:root], 
-                                 :status => true)
-      if typus_user.save
-        puts "=> Your new password is #{password}"
-      else
-        puts "=> Please, provide a valid email. (rake typus:seed email=john@example.com)"
-      end
-    rescue
-      puts "=> Run `script/generate typus_migration` to create required tables"
-    end
-
-  end
-
   desc "Install Typus plugins"
   task :plugins do
 
