@@ -237,7 +237,7 @@ module Typus
     #
     def build_conditions(params)
 
-      conditions = "1 = 1 "
+      conditions = []
 
       params.each do |key, value|
 
@@ -249,7 +249,7 @@ module Typus
           self.typus_defaults_for(:search).each do |s|
             search << "LOWER(#{s}) LIKE '%#{value}%'"
           end
-          conditions << "AND (#{search.join(' OR ')}) "
+          conditions << "(#{search.join(' OR ')})"
         end
 
         ##
@@ -269,7 +269,7 @@ module Typus
             else
               status = (value == 'true') ? 1 : 0
             end
-            conditions << "AND #{f.first} = '#{status}' "
+            conditions << "#{f.first} = '#{status}'"
           when "datetime"
             case value
             when 'today':         start_date, end_date = Time.today, Time.today.tomorrow
@@ -277,18 +277,17 @@ module Typus
             when 'this_month':    start_date, end_date = Time.today.last_month, Time.today.tomorrow
             when 'this_year':     start_date, end_date = Time.today.last_year, Time.today.tomorrow
             end
-            start_date, end_date = start_date.to_s(:db), end_date.to_s(:db)
-            conditions << "AND created_at > '#{start_date}' AND created_at < '#{end_date}' "
+            conditions << "created_at > '#{start_date.to_s(:db)}' AND created_at < '#{end_date.to_s(:db)}'"
           when "integer"
-            conditions << "AND #{f.first} = #{value} " if f.first.include?("_id")
+            conditions << "#{f.first} = #{value}" if f.first.include?("_id")
           when "string"
-            conditions << "AND #{f.first} = '#{value}' "
+            conditions << "#{f.first} = '#{value}'"
           end
         end
 
       end
 
-      return conditions
+      return conditions.join(" AND ")
 
     end
 

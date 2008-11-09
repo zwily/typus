@@ -35,7 +35,7 @@ class AdminController < ApplicationController
     ##
     # Build the conditions
     #
-    conditions = @model.build_conditions(params || "")
+    conditions = @model.build_conditions(params)
 
     ##
     # Pagination

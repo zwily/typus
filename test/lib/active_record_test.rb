@@ -108,13 +108,13 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_sql_conditions_on_search_for_typus_user
-    expected = "1 = 1 AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%') "
+    expected = "(LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
     params = { 'search' => 'francesc' }
     assert_equal expected, TypusUser.build_conditions(params)
   end
 
   def test_should_return_sql_conditions_on_search_and_filter_for_typus_user
-    expected = "1 = 1 AND status = 't' AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%') "
+    expected = "status = 't' AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
     params = { 'search' => 'francesc', 'status' => 'true' }
     assert_equal expected, TypusUser.build_conditions(params)
     params = { 'search' => 'francesc', 'status' => 'false' }
@@ -122,7 +122,7 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_sql_conditions_on_search_and_filter_for_typus_user
-    expected = "1 = 1 AND status = 't' AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%') "
+    expected = "status = 't' AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
     params = { 'search' => 'francesc', 'status' => 'true' }
     assert_equal expected, TypusUser.build_conditions(params)
     params = { 'search' => 'francesc', 'status' => 'false' }
@@ -131,11 +131,11 @@ class ActiveRecordTest < Test::Unit::TestCase
 
   def test_should_return_sql_conditions_on_filtering_typus_users_by_status
 
-    expected = "1 = 1 AND status = 't' "
+    expected = "status = 't'"
     params = { 'status' => 'true' }
     assert_equal expected, TypusUser.build_conditions(params)
 
-    expected = "1 = 1 AND status = 'f' "
+    expected = "status = 'f'"
     params = { 'status' => 'false' }
     assert_equal expected, TypusUser.build_conditions(params)
 
@@ -143,19 +143,19 @@ class ActiveRecordTest < Test::Unit::TestCase
 
   def test_should_return_sql_conditions_on_filtering_typus_users_by_created_at
 
-    expected = "1 = 1 AND created_at > '#{Time.today.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}' "
+    expected = "created_at > '#{Time.today.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}'"
     params = { 'created_at' => 'today' }
     assert_equal expected, TypusUser.build_conditions(params)
 
-    expected = "1 = 1 AND created_at > '#{6.days.ago.midnight.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}' "
+    expected = "created_at > '#{6.days.ago.midnight.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}'"
     params = { 'created_at' => 'past_7_days' }
     assert_equal expected, TypusUser.build_conditions(params)
 
-    expected = "1 = 1 AND created_at > '#{Time.today.last_month.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}' "
+    expected = "created_at > '#{Time.today.last_month.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}'"
     params = { 'created_at' => 'this_month' }
     assert_equal expected, TypusUser.build_conditions(params)
 
-    expected = "1 = 1 AND created_at > '#{Time.today.last_year.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}' "
+    expected = "created_at > '#{Time.today.last_year.to_s(:db)}' AND created_at < '#{Time.today.tomorrow.to_s(:db)}'"
     params = { 'created_at' => 'this_year' }
     assert_equal expected, TypusUser.build_conditions(params)
 
