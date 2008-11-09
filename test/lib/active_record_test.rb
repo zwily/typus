@@ -124,7 +124,7 @@ class ActiveRecordTest < Test::Unit::TestCase
   def test_should_return_sql_conditions_on_search_and_filter_for_typus_user
 
     case ENV['DB']
-    when /mysql/
+    when /mysql|psql/
       boolean_true = "status = '1'"
       boolean_false = "status = '0'"
     else
@@ -142,7 +142,7 @@ class ActiveRecordTest < Test::Unit::TestCase
   def test_should_return_sql_conditions_on_filtering_typus_users_by_status
 
     case ENV['DB']
-    when /mysql/
+    when /mysql|psql/
       boolean_true = "status = '1'"
       boolean_false = "status = '0'"
     else
