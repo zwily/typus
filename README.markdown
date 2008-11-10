@@ -516,7 +516,7 @@ MySQL databases. You have to create databases, both are called `typus_test`.
 Once you've created them you can run the tests.
 
     $ rake DB=mysql
-    $ rake DB=psql
+    $ rake DB=postgresql
 
 ## Acknowledgments
 

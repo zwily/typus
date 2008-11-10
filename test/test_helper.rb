@@ -8,7 +8,7 @@ require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environme
 connection = case ENV['DB']
              when /mysql/
                { :adapter => 'mysql', :username => 'root', :database => 'typus_test' }
-             when /psql/
+             when /postgresql/
                { :adapter => 'postgresql', :encoding => 'unicode', :database => 'typus_test' }
              else
                { :adapter => "sqlite3", :dbfile => ":memory:" }
