@@ -73,8 +73,8 @@ class AdminController < ApplicationController
   def new
 
     item_params = params.dup
-    %w( action controller model model_id back_to ).each do |black|
-      item_params.delete(black)
+    %w( action controller model model_id back_to ).each do |param|
+      item_params.delete(param)
     end
 
     @item = @model.new(item_params.symbolize_keys)
