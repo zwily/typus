@@ -457,7 +457,10 @@ an special resource which is not related to any model?
     ##
     # config/typus_roles.yml
     admin:
-      Backup: index
+      Backup: index, download_db, download_media
+      MemCached: index
+      ApplicationLog: index
+      Git: index, commit
 
 When you start **Typus** a controller and a view will be created.
 
