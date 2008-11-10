@@ -307,7 +307,7 @@ module AdminHelper
         html << "<p><label for=\"item_#{field[0]}\">#{attribute.titleize.capitalize}</label>\n"
         case content_type
         when /image/
-          html << "<p>#{link_to image_tag(@item.send(attribute).url(:thumb)), @item.send(attribute).url, :popup => ['Sanoke', 'height=461,width=692'], :style => "border: 1px solid #D3D3D3;"}</p>\n"
+          html << "<p>#{link_to image_tag(@item.send(attribute).url(:thumb)), @item.send(attribute).url, :style => "border: 1px solid #D3D3D3;"}</p>\n"
         when /flash/
           html << "<p>No preview available for an <strong>Adobe Flash</strong> file.</p>"
         else
