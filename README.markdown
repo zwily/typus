@@ -190,7 +190,7 @@ need special attributes like an slug, which is generated from the title.
       validates_presence_of :title
 
       def slug
-        title.to_url
+        title.parameterize
       end
 
     end
