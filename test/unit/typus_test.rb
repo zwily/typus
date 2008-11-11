@@ -16,6 +16,7 @@ class TypusTest < Test::Unit::TestCase
 
   def test_should_verify_category_model_exists
     assert Category.kind_of?(Class)
+    assert Category.respond_to?(:typus), "Category#typus class_method not defined"
   end
 
   def test_shoud_verify_post_model_exists

@@ -19,13 +19,14 @@ ActiveRecord::Base.establish_connection(connection)
 ##
 # Remove the application load_paths for app/models to avoid conflicts.
 #
-ActiveSupport::Dependencies.load_paths.delete(File.join(RAILS_ROOT, 'app/models'))
+ActiveSupport::Dependencies.load_paths = [ ]
 
 ##
 # We want to have our own controllers, helpers and models to be able 
 # to test the plugin without touching the application.
 #
 %w( models controllers helpers ).each do |folder|
+  ActiveSupport::Dependencies.load_paths << File.join(RAILS_ROOT, 'vendor/plugins/typus/app', folder)
   ActiveSupport::Dependencies.load_paths << File.join(RAILS_ROOT, 'vendor/plugins/typus/test/fixtures/app', folder)
 end
 
