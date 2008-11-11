@@ -117,17 +117,8 @@ a.on {
     }
 
     #content h2 small {
-      font-size: 0.70em;
+      font-size: 0.75em;
     }
-
-      #content h2 small a {
-        color: #999;
-      }
-
-      #content h2 small a:hover {
-        color: #408BB6;
-        text-decoration: none;
-      }
 
   #content h3 {
     font-size: 1.25em;
@@ -161,15 +152,6 @@ a.on {
 
     #content p a:hover {
       color: #408BB6;
-    }
-
-    #content p small {
-      font-size: 0.85em;
-    }
-
-    #content p small a {
-      color: #999;
-      text-decoration: none;
     }
 
   #content pre {
@@ -253,13 +235,33 @@ a.on {
 
 #footer {
   border: 2px solid #000;
+  color: white;
 }
+
+  #footer p {
+    font-size: 0.9em;
+    margin: 1em 1.5em;
+  }
+
+  #footer a {
+    color: white;
+    font-weight: bold;
+  }
 
 /* form
 ---------------------------------------------------------- */
 
 #content form {
 }
+
+  #content form ul {
+    margin: 0;
+  }
+
+  #content form ul li {
+    list-style: none;
+    margin: 1em 0;
+  }
 
   #content input.text {
     border: 1px solid #999;
@@ -452,11 +454,12 @@ div#bottom_dialog {
   line-height: 18px;
   margin: 0em auto;
   text-align: center;
-  width: 36em;
+  font-size: 0.9em;
 }
 
   div#bottom_dialog a {
-    color: #408BB6;
+    color: #FFF;
+    font-weight: bold;
   }
 
 div#dialog {
