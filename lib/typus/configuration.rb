@@ -45,7 +45,6 @@ module Typus
                   :edit_after_create => true, 
                   :root => 'admin', 
                   :recover_password => true, 
-                  :disable_typus_enabled_plugins => false, 
                   :email => 'admin@example.com', 
                   :password => 8, 
                   :special_characters_on_password => false, 
@@ -55,27 +54,29 @@ module Typus
     mattr_accessor :options
 
     ##
-    # This switch allows us to disable Typus plugins, used only for
-    # demo purposes.
-    #
-    @@switch = @@options[:disable_typus_enabled_plugins] ? 'typus' : '*'
-
-    ##
     # Read Typus Configuration file
     #
     #   Typus::Configuration.config! overwrites @@config
     #
     def self.config!
 
-      folders = Dir["vendor/plugins/#{@@switch}/config/typus.yml"]
-      folders = ["vendor/plugins/typus/test/config/typus.yml"] if ENV['RAILS_ENV'] == 'test'
+      folders = if Rails.test?
+                  ["vendor/plugins/typus/test/config/typus.yml"]
+                else
+                  Dir["vendor/plugins/*/config/typus.yml"]
+                end
 
       @@config = {}
       folders.each do |folder|
         @@config = @@config.merge(YAML.load_file("#{RAILS_ROOT}/#{folder}"))
       end
 
-      config_file = "#{RAILS_ROOT}/config/typus.yml"
+      config_file = if Rails.test?
+                      "#{RAILS_ROOT}/vendor/plugins/typus/test/config/typus.yml"
+                    else
+                      "#{RAILS_ROOT}/config/typus.yml"
+                    end
+
       if File.exists?(config_file) && !File.zero?(config_file) && !Rails.test?
         @@config = @@config.merge(YAML.load_file(config_file))
       end
@@ -93,8 +94,11 @@ module Typus
     #
     def self.roles!
 
-      folders = Dir["vendor/plugins/#{@@switch}/config/typus_roles.yml"]
-      folders = ["vendor/plugins/typus/test/config/typus_roles.yml"] if ENV['RAILS_ENV'] == 'test'
+      folders = if Rails.test?
+                  ["vendor/plugins/typus/test/config/typus_roles.yml"]
+                else
+                  Dir["vendor/plugins/*/config/typus_roles.yml"]
+                end
 
       @@roles = { 'admin' => {} }
 
@@ -108,11 +112,11 @@ module Typus
         end
       end
 
-      if ENV['RAILS_ENV'] == 'test'
-        config_file = "#{RAILS_ROOT}/vendor/plugins/typus/test/config/typus_roles.yml"
-      else
-        config_file = "#{RAILS_ROOT}/config/typus_roles.yml"
-      end
+      config_file = if Rails.test?
+                      "#{RAILS_ROOT}/vendor/plugins/typus/test/config/typus_roles.yml"
+                    else
+                      "#{RAILS_ROOT}/config/typus_roles.yml"
+                    end
 
       if File.exists?(config_file) && !File.zero?(config_file)
         app_roles = YAML.load_file(config_file)
