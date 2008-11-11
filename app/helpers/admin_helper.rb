@@ -307,7 +307,7 @@ module AdminHelper
         html << "<p><label for=\"item_#{field[0]}\">#{attribute.titleize.capitalize}</label>\n"
         case content_type
         when /image/
-          html << "<p>#{link_to image_tag(@item.send(attribute).url(:thumb)), @item.send(attribute).url, :popup => ['Sanoke', 'height=461,width=692'], :style => "border: 1px solid #D3D3D3;"}</p>\n"
+          html << "<p>#{link_to image_tag(@item.send(attribute).url(:thumb)), @item.send(attribute).url, :style => "border: 1px solid #D3D3D3;"}</p>\n"
         when /flash/
           html << "<p>No preview available for an <strong>Adobe Flash</strong> file.</p>"
         else
@@ -349,7 +349,7 @@ module AdminHelper
         end
         html << <<-HTML
 <select id="item_#{field[0]}" name="item[#{field[0]}]">
-  <option value="">Select a #{field[0].singularize}</option>
+  <option value="">Select a #{field[0]}</option>
   #{options}
 </select>
         HTML
@@ -364,6 +364,88 @@ module AdminHelper
       html << "</p>\n"
     end
     return html
+  end
+
+  def build_form(fields = @item_fields)
+    returning(String.new) do |html|
+      fields.each do |field|
+        case field.last
+        when "boolean":         html << typus_boolean_field(field.first, field.last)
+        when "text":            html << typus_text_field(field.first, field.last)
+        when "file":            html << typus_file_field(field.first, field.last)
+        when "password":        html << typus_password_field(field.first, field.last)
+        when "selector":        html << typus_selector_field(field.first, field.last)
+        when "collection":      html << typus_collection_field(field.first, field.last)
+        when "read_only", 
+             "auto_generated":  html << ""
+        else
+          html << typus_default_field(field.first, field.last)
+        end
+      end
+    end
+  end
+
+  def typus_default_field(attribute, value)
+    returning(String.new) do |html|
+      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
+      html << "#{text_field :item, attribute, :class => 'text'}</li>"
+    end
+  end
+
+  def typus_text_field(attribute, value)
+    returning(String.new) do |html|
+      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
+      html << "#{text_area :item, attribute, :class => 'text', :rows => Typus::Configuration.options[:form_rows]}</li>"
+    end
+  end
+
+  def typus_selector_field(attribute, value)
+    returning(String.new) do |html|
+      options = ""
+      @item.class.send(attribute).each do |option|
+        options << "<option #{'selected' if @item.send(attribute).to_s == option.to_s} value=\"#{option}\">#{option}</option>"
+      end
+      html << <<-HTML
+<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
+<select id="item_#{attribute}" name="item[#{attribute}]">
+  <option value="">Select a #{attribute}</option>
+  #{options}
+</select></li>
+      HTML
+    end
+  end
+
+  def typus_collection_field(attribute, value)
+    returning(String.new) do |html|
+      related = attribute.split("_id").first.capitalize.camelize.constantize
+      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
+      html << "#{select :item, attribute, related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}</li>"
+    end
+  end
+
+  def typus_string_field(attribute, value)
+    returning(String.new) do |html|
+      html << "<li><label for=\"item_#{field.first}\">#{field.first.titleize.capitalize}</label>"
+      html << "#{file_field :item, field[0].split("_file_name").first, :style => "border: 0px;"}"
+    end
+  end
+
+  def typus_password_field(attribute, value)
+    returning(String.new) do |html|
+      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
+      html << "#{password_field :item, attribute, :class => 'text'}"
+    end
+  end
+
+  def typus_boolean_field(attribute, value)
+    "#{check_box :item, attribute} Checked if active"
+  end
+
+  def typus_file_field(attribute, value)
+    returning(String.new) do |html|
+      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
+      html << "#{file_field :item, attribute.split("_file_name").first, :style => "border: 0px;"}"
+    end
   end
 
   def typus_form_has_many
