@@ -349,7 +349,7 @@ module AdminHelper
         end
         html << <<-HTML
 <select id="item_#{field[0]}" name="item[#{field[0]}]">
-  <option value="">Select a #{field[0].singularize}</option>
+  <option value="">Select a #{field[0]}</option>
   #{options}
 </select>
         HTML
