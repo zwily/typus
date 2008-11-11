@@ -270,32 +270,26 @@ module AdminHelper
 
   end
 
-  def typus_form(fields = @item_fields)
+=begin
 
-    html = error_messages_for :item, :header_tag => "h3"
-
-    fields.each do |field|
-
-      ##
       # Read only fields.
-      #
       if @model.typus_field_options_for(:read_only).include?(field[0])
         field[1] = 'read_only' if %w( edit ).include?(params[:action])
       end
 
-      ##
       # Auto generated fields.
-      #
       if @model.typus_field_options_for(:auto_generated).include?(field[0])
         field[1] = 'auto_generated' if %w( new edit ).include?(params[:action])
       end
 
-      ##
       # Questions
-      #
       if @model.typus_field_options_for(:questions).include?(field[0])
         question = true
       end
+
+=end
+
+=begin
 
       ##
       # Labels
@@ -320,68 +314,48 @@ module AdminHelper
         html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}#{"?" if question} <small>#{comment}</small></label>\n"
       end
 
-      ##
-      # Field Type
-      #
-      case field[1]
-      when "boolean"
-        html << "#{check_box :item, field[0]} Checked if active"
-      when "file"
-        html << "#{file_field :item, field[0].split("_file_name").first, :style => "border: 0px;"}"
-      when "datetime"
-        html << "#{datetime_select :item, field[0], { :minute_step => Typus::Configuration.options[:minute_step] }}"
-      when "password"
-        html << "#{password_field :item, field[0], :class => 'text'}"
-      when "text"
-        html << "#{text_area :item, field[0], :class => 'text', :rows => Typus::Configuration.options[:form_rows]}"
-      when "tree"
-        html << <<-HTML
-<select id="item_#{field[0]}" name="item[#{field[0]}]">
-  <option value=""></option>
-  #{expand_tree_into_select_field(@item.class.top)}
-</select>
-        HTML
-      when "selector"
-        values = @item.class.send(field[0])
-        options = ""
-        values.each do |value|
-          options << "<option #{'selected' if @item.send(field[0]).to_s == value.to_s} value=\"#{value}\">#{value}</option>"
-        end
-        html << <<-HTML
-<select id="item_#{field[0]}" name="item[#{field[0]}]">
-  <option value="">Select a #{field[0]}</option>
-  #{options}
-</select>
-        HTML
-      when "collection"
-        related = field[0].split("_id").first.capitalize.camelize.constantize
-        html << "#{select :item, "#{field[0]}", related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}"
-      when "read_only", "auto_generated"
-        html << "#{text_field :item, field[0], :class => 'text', :readonly => 'readonly', :style => 'background: #FFFCE1;'}"
-      else
-        html << "#{text_field :item, field[0], :class => 'text'}"
-      end
-      html << "</p>\n"
-    end
-    return html
-  end
+=end
 
   def build_form(fields = @item_fields)
     returning(String.new) do |html|
+      html << "#{error_messages_for :item, :header_tag => "h3"}"
+      html << "<ul>"
       fields.each do |field|
         case field.last
         when "boolean":         html << typus_boolean_field(field.first, field.last)
+        when "datetime":        html << typus_datetime_field(field.first, field.last)
         when "text":            html << typus_text_field(field.first, field.last)
         when "file":            html << typus_file_field(field.first, field.last)
         when "password":        html << typus_password_field(field.first, field.last)
         when "selector":        html << typus_selector_field(field.first, field.last)
         when "collection":      html << typus_collection_field(field.first, field.last)
+        when "tree":            html << typus_tree_field(field.first, field.last)
         when "read_only", 
-             "auto_generated":  html << ""
+             "auto_generated":  html << typus_special_field(field.first, first.last)
         else
           html << typus_default_field(field.first, field.last)
         end
       end
+      html << "</ul>"
+    end
+  end
+
+  def typus_tree_field(attribute, value)
+    returning(String.new) do |html|
+      html << <<-HTML
+<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
+    <select id="item_#{field[0]}" name="item[#{field[0]}]">
+      <option value=""></option>
+      #{expand_tree_into_select_field(@item.class.top)}
+    </select></li>
+      HTML
+    end
+  end
+
+  def typus_special_field(attribute, value)
+    returning(String.new) do |html|
+      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
+      html << "#{text_field :item, field[0], :class => 'text', :readonly => 'readonly', :style => 'background: #FFFCE1;'}</li>"
     end
   end
 
@@ -389,6 +363,13 @@ module AdminHelper
     returning(String.new) do |html|
       html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
       html << "#{text_field :item, attribute, :class => 'text'}</li>"
+    end
+  end
+
+  def typus_datetime_field(attribute, value)
+    returning(String.new) do |html|
+      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
+      html << "#{datetime_select :item, field[0], { :minute_step => Typus::Configuration.options[:minute_step] }}</li>"
     end
   end
 
@@ -438,7 +419,10 @@ module AdminHelper
   end
 
   def typus_boolean_field(attribute, value)
-    "#{check_box :item, attribute} Checked if active"
+    returning(String.new) do |html|
+      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
+      html << "#{check_box :item, attribute} Checked if active"
+    end
   end
 
   def typus_file_field(attribute, value)

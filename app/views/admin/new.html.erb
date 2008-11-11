@@ -15,7 +15,7 @@
                        :model => params[:model], 
                        :model_id => params[:model_id] }, 
             :html => { :multipart => true } do |f| %>
-  <%= typus_form %>
+  <%= build_form %>
   <p><%= submit_tag "Create entry", :class => 'button' %></p>
 <% end %>
 

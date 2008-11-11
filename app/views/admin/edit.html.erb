@@ -10,7 +10,7 @@
 <% form_for @item, 
             :url  => { :action => 'update' }, 
             :html => { :multipart => true } do |f| %>
-  <%= typus_form %>
+  <%= build_form %>
   <p><%= submit_tag "Update entry", :class => 'button' %></p>
 <% end %>
 
