@@ -5,6 +5,8 @@
   <%= filters %>
 <% end %>
 
+<%= typus_block :index %>
+
 <h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; <%= @model.name.pluralize.titleize %> <% if request.env['QUERY_STRING'] && !request.env['QUERY_STRING'].blank? %><small><%= link_to "Remove filter" %></small><% end %></h2>
 
 <%= typus_block :index_top %>
