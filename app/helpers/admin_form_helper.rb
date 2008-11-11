@@ -62,7 +62,7 @@ module AdminFormHelper
       html << <<-HTML
 <li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
 <select id="item_#{attribute}" name="item[#{attribute}]">
-  <option value="">Select a #{attribute}</option>
+  <option value="">Select an option</option>
   #{options}
 </select></li>
       HTML
