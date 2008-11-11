@@ -97,9 +97,14 @@ module Typus
       folders = ["vendor/plugins/typus/test/config/typus_roles.yml"] if ENV['RAILS_ENV'] == 'test'
 
       @@roles = { 'admin' => {} }
+
       folders.each do |folder|
         YAML.load_file("#{RAILS_ROOT}/#{folder}").each do |key, value|
-          @@roles['admin'] = @@roles['admin'].merge(value)
+          begin
+            @@roles[key] = @@roles[key].merge(value)
+          rescue
+            @@roles[key] = value
+          end
         end
       end
 
