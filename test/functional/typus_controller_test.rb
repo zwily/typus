@@ -143,7 +143,8 @@ class TypusControllerTest < ActionController::TestCase
     typus_user = typus_users(:admin)
     @request.session[:typus] = typus_user.id
     get :dashboard
-    assert_match /<!-- Typus #{Typus.version} -->/, @response.body
+    assert_match /Dear developer/, @response.body
+    assert_match /#{Typus.version}/, @response.body
   end
 
   def test_should_render_typus_login_top
