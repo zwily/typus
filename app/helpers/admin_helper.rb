@@ -395,7 +395,7 @@ module AdminHelper
       case content_type
       when /image/
         html << "#{link_to image_tag(@item.send(attribute_display).url(:thumb)), @item.send(attribute_display).url, :style => "border: 1px solid #D3D3D3;"}<br /><br />"
-      else
+      when /pdf|flv|quicktime/
         html << "<p>No preview available. (#{content_type.split('/').last})</p>"
       end
 
