@@ -103,13 +103,13 @@ a.on {
 
 #content {
   margin-right: 25em;
-  padding: 0.5em 1.5em;
+  padding: 1.5em;
 }
 
   #content h2 {
     font-size: 1.5em;
     font-weight: bold;
-    margin: 0.5em 0em;
+    margin: 0em 0em 0.5em 0em;
   }
 
     #content h2 a {
@@ -185,7 +185,7 @@ a.on {
 
 #sidebar {
   float: right;
-  margin: 1.25em 1.5em;
+  padding: 1.5em;
   width: 22em;
 }
 
@@ -575,9 +575,7 @@ div#dialog {
 .success { 
   border: 2px solid #CCC;
   font-weight: bold;
-  margin: 1em 0em;
-  padding: 0 0.5em 0 0;
-  width: 100%;
+  margin: 0em 0em 1em 0em;
 }
 
   .error p,
