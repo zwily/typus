@@ -275,11 +275,10 @@ a.on {
 
   #content input.text {
     border: 1px solid #999;
-    display: block;
-    font-size: 1.2em;
+    font-size: 1.5em;
     font-weight: normal;
-    padding: 3px;
-    width: 100%;
+    padding: 0.25em;
+    width: 95%;
   }
 
   input.button {
@@ -474,9 +473,9 @@ div#bottom_dialog {
 
 div#dialog {
   background: #FFF;
-  border: 0.35em solid #408BB6;
+  border: 0.5em solid #408BB6;
   margin: 1em auto;
-  padding: 0em 2.5em 0em 1.5em;
+  padding: 0em 1.5em;
   width: 35em;
 }
 
@@ -511,7 +510,8 @@ div#dialog {
   }
 
   div#dialog li a {
-    margin-left: 0.5em;
+    margin: 0.5em;
+    display: inline;
   }
 
   #dialog form {
@@ -520,13 +520,14 @@ div#dialog {
   #dialog input.text {
     border: 1px solid #999;
     font-size: 2em;
-    padding: 0.2em;
-    width: 100%;
+    padding: 0.25em;
+    width: 16.75em;
   }
 
   #dialog input.button {
     font-size: 1em;
     padding: 0.5em;
+    margin: 0em 0em 0.5em 0em;
   }
 
 /* pagination
@@ -572,8 +573,8 @@ div#dialog {
 
 .error,
 .notice, 
-.success { 
-  border: 2px solid #CCC;
+.success {
+  border: 1px solid #CCC;
   font-weight: bold;
   margin: 0em 0em 1em 0em;
 }
@@ -582,18 +583,18 @@ div#dialog {
   .notice p, 
   .success p {
     font-weight: bold;
-    margin: 0 0.5em!important;
-    padding: 0.75em 0.25em;
+    margin: 0em!important;
+    padding: 1em;
   }
 
 .error {
   background: #FBE3E4;
   border-color: #FBC2C4;
-  color: #8a1f11;
+  color: #8A1F11;
 }
 
   .error a {
-    color: #8a1f11;
+    color: #8A1F11;
   }
 
 .notice { 
