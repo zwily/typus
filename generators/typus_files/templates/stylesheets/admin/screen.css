@@ -263,6 +263,15 @@ a.on {
     margin: 1em 0;
   }
 
+    #content form ul li p {
+      margin: 0.5em 0;
+    }
+
+  #content form small {
+    font-size: 0.9em;
+    font-weight: normal;
+  }
+
   #content input.text {
     border: 1px solid #999;
     display: block;
@@ -392,8 +401,7 @@ table {
 
 .fieldWithErrors input {
   background: #FBE3E4;
-  border: 1px solid #FBC2C4;
-  margin-top: -7px;
+  border: 1px solid #8A1F11!important;
 }
 
 .errorExplanation {
@@ -417,9 +425,10 @@ table {
     margin: 0px 0px 10px 25px!important;
   }
 
-  .errorExplanation li {
-    list-style: square;
-    padding: 0px 0px;
+  .errorExplanation ul li {
+    list-style: square!important;
+    padding: 0;
+    margin: 0!important;
   }
 
 /* searchbox

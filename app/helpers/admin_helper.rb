@@ -270,58 +270,13 @@ module AdminHelper
 
   end
 
-=begin
-
-      # Read only fields.
-      if @model.typus_field_options_for(:read_only).include?(field[0])
-        field[1] = 'read_only' if %w( edit ).include?(params[:action])
-      end
-
-      # Auto generated fields.
-      if @model.typus_field_options_for(:auto_generated).include?(field[0])
-        field[1] = 'auto_generated' if %w( new edit ).include?(params[:action])
-      end
-
-      # Questions
-      if @model.typus_field_options_for(:questions).include?(field[0])
-        question = true
-      end
-
-=end
-
-=begin
-
-      ##
-      # Labels
-      #
-      case field[0]
-      when /file_name/
-        attribute = field[0].split("_file_name").first
-        content_type = @item.send("#{attribute}_content_type")
-        html << "<p><label for=\"item_#{field[0]}\">#{attribute.titleize.capitalize}</label>\n"
-        case content_type
-        when /image/
-          html << "<p>#{link_to image_tag(@item.send(attribute).url(:thumb)), @item.send(attribute).url, :style => "border: 1px solid #D3D3D3;"}</p>\n"
-        when /flash/
-          html << "<p>No preview available for an <strong>Adobe Flash</strong> file.</p>"
-        else
-          html << "<p>No preview available (#{content_type})</p>\n" if %w( index ).include? params[:action]
-        end
-      when /_id/
-        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize} <small>#{link_to "Add new", "/admin/#{field[0].titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>\n"
-      else
-        comment = %w( read_only auto_generated ).include?(field[1]) ? (field[1] + " field").titleize : nil
-        html << "<p><label for=\"item_#{field[0]}\">#{field[0].titleize.capitalize}#{"?" if question} <small>#{comment}</small></label>\n"
-      end
-
-=end
-
   def build_form(fields = @item_fields)
     returning(String.new) do |html|
       html << "#{error_messages_for :item, :header_tag => "h3"}"
       html << "<ul>"
       fields.each do |field|
         case field.last
+        when "string":          html << typus_string_field(field.first, field.last)
         when "boolean":         html << typus_boolean_field(field.first, field.last)
         when "datetime":        html << typus_datetime_field(field.first, field.last)
         when "text":            html << typus_text_field(field.first, field.last)
@@ -330,10 +285,8 @@ module AdminHelper
         when "selector":        html << typus_selector_field(field.first, field.last)
         when "collection":      html << typus_collection_field(field.first, field.last)
         when "tree":            html << typus_tree_field(field.first, field.last)
-        when "read_only", 
-             "auto_generated":  html << typus_special_field(field.first, first.last)
         else
-          html << typus_default_field(field.first, field.last)
+          html << typus_string_field(field.first, field.last)
         end
       end
       html << "</ul>"
@@ -344,7 +297,7 @@ module AdminHelper
     returning(String.new) do |html|
       html << <<-HTML
 <li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
-    <select id="item_#{field[0]}" name="item[#{field[0]}]">
+    <select id="item_#{attribute}" name="item[#{attribute}]">
       <option value=""></option>
       #{expand_tree_into_select_field(@item.class.top)}
     </select></li>
@@ -352,24 +305,10 @@ module AdminHelper
     end
   end
 
-  def typus_special_field(attribute, value)
-    returning(String.new) do |html|
-      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
-      html << "#{text_field :item, field[0], :class => 'text', :readonly => 'readonly', :style => 'background: #FFFCE1;'}</li>"
-    end
-  end
-
-  def typus_default_field(attribute, value)
-    returning(String.new) do |html|
-      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
-      html << "#{text_field :item, attribute, :class => 'text'}</li>"
-    end
-  end
-
   def typus_datetime_field(attribute, value)
     returning(String.new) do |html|
       html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
-      html << "#{datetime_select :item, field[0], { :minute_step => Typus::Configuration.options[:minute_step] }}</li>"
+      html << "#{datetime_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }}</li>"
     end
   end
 
@@ -399,16 +338,34 @@ module AdminHelper
   def typus_collection_field(attribute, value)
     returning(String.new) do |html|
       related = attribute.split("_id").first.capitalize.camelize.constantize
-      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
-      html << "#{select :item, attribute, related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}</li>"
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{link_to "Add new", "/admin/#{attribute.titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}" }</small></label>
+#{select :item, attribute, related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}</li>
+      HTML
     end
   end
 
   def typus_string_field(attribute, value)
-    returning(String.new) do |html|
-      html << "<li><label for=\"item_#{field.first}\">#{field.first.titleize.capitalize}</label>"
-      html << "#{file_field :item, field[0].split("_file_name").first, :style => "border: 0px;"}"
+
+    # Read only fields.
+    if @model.typus_field_options_for(:read_only).include?(attribute)
+      value = 'read_only' if %w( edit ).include?(params[:action])
     end
+
+    # Auto generated fields.
+    if @model.typus_field_options_for(:auto_generated).include?(attribute)
+      value = 'auto_generated' if %w( new edit ).include?(params[:action])
+    end
+
+    comment = %w( read_only auto_generated ).include?(value) ? (value + " field").titleize : ""
+
+    returning(String.new) do |html|
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{comment}</small></label>
+#{text_field :item, attribute, :class => 'text'}</li>
+      HTML
+    end
+
   end
 
   def typus_password_field(attribute, value)
@@ -419,17 +376,33 @@ module AdminHelper
   end
 
   def typus_boolean_field(attribute, value)
+    question = true if @model.typus_field_options_for(:questions).include?(attribute)
     returning(String.new) do |html|
-      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
-      html << "#{check_box :item, attribute} Checked if active"
+      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}#{"?" if question}</label>"
+      html << "#{check_box :item, attribute} Checked if active</li>"
     end
   end
 
   def typus_file_field(attribute, value)
+
+    attribute_display = attribute.split("_file_name").first
+    content_type = @item.send("#{attribute_display}_content_type")
+
     returning(String.new) do |html|
-      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
-      html << "#{file_field :item, attribute.split("_file_name").first, :style => "border: 0px;"}"
+
+      html << "<li><label for=\"item_#{attribute}\">#{attribute_display.titleize.capitalize}</label>"
+
+      case content_type
+      when /image/
+        html << "#{link_to image_tag(@item.send(attribute_display).url(:thumb)), @item.send(attribute_display).url, :style => "border: 1px solid #D3D3D3;"}<br /><br />"
+      else
+        html << "<p>No preview available. (#{content_type.split('/').last})</p>"
+      end
+
+      html << "#{file_field :item, attribute.split("_file_name").first}</li>"
+
     end
+
   end
 
   def typus_form_has_many
