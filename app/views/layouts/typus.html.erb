@@ -9,9 +9,6 @@
   <meta http-equiv="imagetoolbar" content="no" />
   <%= stylesheet_link_tag "admin/screen", :media => "screen" %>
   <%= yield :javascript -%>
-  <style type="text/css">
-    html, table, div#header, div#footer { background: #000; }
-  </style>
 </head>
 
 <body onload="<%= yield :onload %>">
