@@ -1,17 +1,17 @@
 require 'forwardable'
 
 class Paginator
-  
+
   VERSION = '1.1.0'
-  
+
   include Enumerable
 
   class ArgumentError < ::ArgumentError; end
   class MissingCountError < ArgumentError; end
-  class MissingSelectError < ArgumentError; end  
-  
-  attr_reader :per_page, :count 
-  
+  class MissingSelectError < ArgumentError; end
+
+  attr_reader :per_page, :count
+
   # Instantiate a new Paginator object
   #
   # Provide:
@@ -28,28 +28,28 @@ class Paginator
     end
     @select = select
   end
-  
+
   # Total number of pages
   def number_of_pages
      (@count / @per_page).to_i + (@count % @per_page > 0 ? 1 : 0)
   end
-  
+
   # First page object
   def first
     page 1
   end
-  
+
   # Last page object
   def last
     page number_of_pages
   end
-  
+
   def each
     1.upto(number_of_pages) do |number|
       yield page(number)
     end
   end
-  
+
   # Retrieve page object by number
   def page(number)
     number = (n = number.to_i) > 0 ? n : 1
@@ -60,54 +60,54 @@ class Paginator
       @select.call(*args)
     })
   end
-  
+
   # Page object
   #
   # Retrieves items for a page and provides metadata about the position
   # of the page in the paginator
   class Page
-    
+
     include Enumerable
-        
+
     attr_reader :number, :pager
-    
+
     def initialize(pager, number, select) #:nodoc:
       @pager, @number = pager, number
       @offset = (number - 1) * pager.per_page
       @select = select
     end
-    
+
     # Retrieve the items for this page
     # * Caches
     def items
       @items ||= @select.call
     end
-    
+
     # Checks to see if there's a page before this one
     def prev?
       @number > 1
     end
-    
- #   # Get previous page (if possible)
-   def prev
-     @pager.page(@number - 1) if prev?
-   end
-    
+
+    # Get previous page (if possible)
+    def prev
+      @pager.page(@number - 1) if prev?
+    end
+
     # Checks to see if there's a page after this one
     def next?
       @number < @pager.number_of_pages
     end
-    
+
     # Get next page (if possible)
-   def next
-     @pager.page(@number + 1) if next?
-   end
-    
+    def next
+      @pager.page(@number + 1) if next?
+    end
+
     # The "item number" of the first item on this page
     def first_item_number
       1 + @offset
     end
-    
+
     # The "item number" of the last item on this page
     def last_item_number
       if next?
@@ -116,15 +116,15 @@ class Paginator
         @pager.count
       end
     end
-    
+
     def ==(other) #:nodoc:
       @pager == other.pager && self.number == other.number
     end
-    
+
     def each(&block)
       items.each(&block)
     end
-    
+
     def method_missing(meth, *args, &block) #:nodoc:
       if @pager.respond_to?(meth)
         @pager.__send__(meth, *args, &block)
@@ -132,7 +132,7 @@ class Paginator
         super
       end
     end
-    
+
   end
-  
+
 end

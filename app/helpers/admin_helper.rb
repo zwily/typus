@@ -87,9 +87,9 @@ module AdminHelper
     return "" if Typus::Configuration.config[@model.name]['search'].nil?
 
     search_params = params.dup
-    search_params.delete('action')
-    search_params.delete('controller')
-    search_params.delete('search')
+    %w( action controller search page ).each do |param|
+      search_params.delete(param)
+    end
 
     hidden_params = ""
     search_params.each do |key, value|
@@ -120,14 +120,14 @@ module AdminHelper
           html << "<ul>\n"
           %w( true false ).each do |status|
             switch = (current_request.include? "#{f[0]}=#{status}") ? 'on' : 'off'
-            html << "<li>#{link_to status.capitalize, { :params => params.merge(f[0] => status) }, :class => switch}</li>\n"
+            html << "<li>#{link_to status.capitalize, { :params => params.merge(f[0] => status, :page => nil) }, :class => switch}</li>\n"
           end
           html << "</ul>\n"
         when 'datetime'
           html << "<ul>\n"
           %w( today past_7_days this_month this_year ).each do |timeline|
             switch = (current_request.include? "#{f[0]}=#{timeline}") ? 'on' : 'off'
-            html << "<li>#{link_to timeline.titleize, { :params => params.merge(f[0] => timeline) }, :class => switch}</li>\n"
+            html << "<li>#{link_to timeline.titleize, { :params => params.merge(f[0] => timeline, :page => nil) }, :class => switch}</li>\n"
           end
           html << "</ul>\n"
         when 'integer'
@@ -144,7 +144,7 @@ module AdminHelper
             html << "<ul>\n"
             model.find(:all, :order => model.typus_order_by).each do |item|
               switch = (current_request.include? "#{f[0]}=#{item.id}") ? 'on' : 'off'
-              html << "<li>#{link_to item.typus_name, { :params => params.merge(f[0] => item.id) }, :class => switch}</li>\n"
+              html << "<li>#{link_to item.typus_name, { :params => params.merge(f[0] => item.id, :page => nil) }, :class => switch}</li>\n"
             end
             html << "</ul>\n"
           else
