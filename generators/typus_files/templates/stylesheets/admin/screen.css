@@ -173,6 +173,7 @@ a.on {
 
   #content table {
     margin: 1em 0em;
+    background: #000;
   }
 
   #content h2+table {
@@ -330,65 +331,64 @@ strong {
 /* tables
 ---------------------------------------------------------- */
 
-table {
+#content table {
   border-spacing: 0px;
   text-align: left;
   width: 100%;
-  background: #000;
 }
 
-  table small {
+  #content table small {
     font-size: 0.8em;
   }
 
-  table th {
+  #content table th {
     color: #FFF;
     font-weight: normal;
     padding: 4px;
   }
 
-    table th a {
+    #content table th a {
       color: #FFF!important;
     }
 
-  table td.right {
+  #content table td.right {
     text-align: right;
   }
 
-  table tr.even {
+  #content table tr.even {
     background: #FFF!important;
   }
 
-    table tr.even:hover,
-    table tr.odd:hover {
+    #content table tr.even:hover,
+    #content table tr.odd:hover {
       background: #000!important;
       color: #FFF;
     }
 
-    table tr.even:hover a,
-    table tr.odd:hover a {
+    #content table tr.even:hover a,
+    #content table tr.odd:hover a {
       color: #FFF!important;
     }
 
-  table tr.odd {
+  #content table tr.odd {
     background: #F5F5F5;
   }
 
-  table td {
+  #content table td {
     border: none;
     font-weight: normal;
     padding: 3px 4px;
     vertical-align: top;
   }
 
-  table a,
-  table a:link,
-  table a:visited,
-  table a:active {
+  #content table a,
+  #content table a:link,
+  #content table a:visited,
+  #content table a:active {
     font-weight: normal;
   }
 
-  table a:hover {
+  #content table a:hover {
     color: black;
   }
 
