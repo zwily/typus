@@ -78,7 +78,8 @@ module Typus
                     end
 
       if File.exists?(config_file) && !File.zero?(config_file) && !Rails.test?
-        @@config = @@config.merge(YAML.load_file(config_file))
+        data = YAML.load_file(config_file)
+        @@config = @@config.merge(data) if data
       end
 
       return @@config
@@ -123,7 +124,10 @@ module Typus
         app_roles.each do |key, value|
           case key
           when 'admin'
-            @@roles[key] = @@roles[key].merge(app_roles[key])
+            begin
+              @@roles[key] = @@roles[key].merge(app_roles[key])
+            rescue
+            end
           else
             @@roles[key] = value
           end
