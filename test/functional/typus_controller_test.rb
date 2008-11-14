@@ -156,7 +156,7 @@ class TypusControllerTest < ActionController::TestCase
   def test_should_render_typus_login_bottom
     get :login
     assert_response :success
-    login_bottom = "<p><a href=\"http://typus-admin.com/\">Typus Admin</a> is super easy admin"
+    login_bottom = "Typus Admin"
     assert_match /#{login_bottom}/, @response.body
   end
 
