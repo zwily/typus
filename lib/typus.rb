@@ -214,7 +214,6 @@ end
       end
 
       models = self.models
-      models.delete("TypusUser")
 
       ##
       # Generate unexisting controllers for resources which are tied to a 
