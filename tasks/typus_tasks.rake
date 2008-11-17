@@ -29,27 +29,4 @@ namespace :typus do
     end
   end
 
-  desc "Generate specdoc-style documentation from tests"
-  task :specs do
-
-    puts 'Started'
-    timer, count = Time.now, 0
-
-    File.open(RAILS_ROOT + '/doc/TYPUS_SPECDOC', 'w') do |file|
-      Dir.glob('vendor/plugins/typus/test/**/*_test.rb').each do |test|
-        test =~ /.*\/([^\/].*)_test.rb$/
-        file.puts "#{$1.gsub('_', ' ').capitalize} should" if $1
-        File.read(test).map { |line| /test_should_(.*)$/.match line }.compact.each do |spec|
-          file.puts "- #{spec[1].gsub('_', ' ')}"
-          sleep 0.001; print '.'; $stdout.flush; count += 1
-        end
-        file.puts
-      end
-    end
-
-    puts "\nFinished in #{Time.now - timer} seconds.\n"
-    puts "#{count} specifications documented"
-
-  end
-
 end
