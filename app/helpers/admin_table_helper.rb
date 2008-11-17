@@ -53,7 +53,7 @@ module AdminTableHelper
           html << "<td>#{html_position.join("/")}</td>"
         else # 'string', 'integer', 'selector'
           if model.typus_fields_for(fields).first == column
-            html << "<td>#{link_to item.send(column[0]) || "", :params => params.merge(:controller => "admin/#{model.name.tableize}", :action => 'edit', :id => item.id)}"
+            html << "<td>#{link_to item.send(column[0]) || "", :controller => "admin/#{model.name.tableize}", :action => 'edit', :id => item.id}"
             html << "<br /><small>#{"Custom actions go here, but only if exist." if Typus::Configuration.options[:actions_on_table]}</small></td>"
           else
             html << "<td>#{item.send(column[0])}</td>"
