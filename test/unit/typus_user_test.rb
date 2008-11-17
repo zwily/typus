@@ -2,83 +2,74 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class TypusUserTest < ActiveSupport::TestCase
 
-  def test_should_verify_attributes
-    assert TypusUser.instance_methods.include?('first_name')
-    assert TypusUser.instance_methods.include?('last_name')
-    assert TypusUser.instance_methods.include?('email')
-    assert TypusUser.instance_methods.include?('roles')
-    assert TypusUser.instance_methods.include?('salt')
-    assert TypusUser.instance_methods.include?('crypted_password')
+  def setup
+    @data = { :email => "test@example.com", 
+             :password => "12345678", 
+             :password_confirmation => "12345678", 
+             :roles => Typus::Configuration.options[:root] }
+    @typus_user = TypusUser.new(@data)
+  end
+
+  def test_should_verify_typus_user_attributes
+    %w( first_name last_name email roles salt crypted_password ).each do |attribute|
+      assert TypusUser.instance_methods.include?(attribute)
+    end
   end
 
   def test_should_verify_email_format
+    @typus_user.email = 'admin'
+    assert !@typus_user.valid?
+    assert @typus_user.errors.invalid?(:email)
+  end
 
-    data = { :email => 'admin' }
-    typus_user = create_typus_user(data)
-    assert !typus_user.valid?
-    assert typus_user.errors.invalid?(:email)
-
+  def test_should_verify_email_is_not_valid
     email = <<-END
 this_is_chelm@example.com
 <script>location.href="http://spammersite.com"</script>
 END
-    data = { :email => email }
-    typus_user = create_typus_user(data)
-    assert !typus_user.valid?
-    assert typus_user.errors.invalid?(:email)
-
+    @typus_user.email = email
+    assert !@typus_user.valid?
+    assert @typus_user.errors.invalid?(:email)
   end
 
   def test_should_verify_email_is_unique
-    create_typus_user
-    typus_user = create_typus_user
-    assert !typus_user.valid?
-    assert typus_user.errors.invalid?(:email)
+    @typus_user.save
+    @another_typus_user = TypusUser.new(@data)
+    assert !@another_typus_user.valid?
+    assert @another_typus_user.errors.invalid?(:email)
   end
 
   def test_should_verify_length_of_password_when_under_within
-    data = { :password => "1234", :password_confirmation => "1234" }
-    typus_user = create_typus_user(data)
-    assert !typus_user.valid?
-    assert typus_user.errors.invalid?(:password)
+    @typus_user.password = '1234'
+    @typus_user.password_confirmation = '1234'
+    assert !@typus_user.valid?
+    assert @typus_user.errors.invalid?(:password)
   end
 
   def test_should_verify_length_of_password_when_its_within_on_lower_limit
-    data = { :password => "=" * 8, 
-             :password_confirmation => "=" * 8 }
-    typus_user = create_typus_user(data)
-    assert typus_user.valid?
+    @typus_user.password = "=" * 8
+    @typus_user.password_confirmation = "=" * 8
+    assert @typus_user.valid?
   end
 
   def test_should_verify_length_of_password_when_its_within_on_upper_limit
-    data = { :password => "=" * 40, 
-             :password_confirmation => "=" * 40 }
-    typus_user = create_typus_user(data)
-    assert typus_user.valid?
+    @typus_user.password = "=" * 40
+    @typus_user.password_confirmation = "=" * 40
+    assert @typus_user.valid?
   end
 
   def test_should_verify_length_of_password_when_its_over_within
-    data = { :password => "=" * 50, 
-             :password_confirmation => "=" * 50 }
-    typus_user = create_typus_user(data)
-    assert !typus_user.valid?
-    assert typus_user.errors.invalid?(:password)
+    @typus_user.password = "=" * 50
+    @typus_user.password_confirmation = "=" * 50
+    assert !@typus_user.valid?
+    assert @typus_user.errors.invalid?(:password)
   end
 
   def test_should_verify_confirmation_of_password
-    data = { :password => "12345678", :password_confirmation => "87654321" }
-    typus_user = create_typus_user(data)
-    assert !typus_user.valid?
-    assert typus_user.errors.invalid?(:password)
-  end
-
-protected
-
-  def create_typus_user(options = {})
-    data = { :email => "test@example.com", 
-             :password => "12345678", :password_confirmation => "12345678", 
-             :roles => Typus::Configuration.options[:root] }.merge(options)
-    TypusUser.create(data)
+    @typus_user.password = "12345678"
+    @typus_user.password_confirmation = "87654321"
+    assert !@typus_user.valid?
+    assert @typus_user.errors.invalid?(:password)
   end
 
 end
