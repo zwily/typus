@@ -19,6 +19,16 @@ projects we make small changes to the API. This means that sometimes
 the definition of the configuration files can change a little bit so 
 you've to update. Here's a list of the last API changes.
 
+### Typus configuration files (2008/11/18)
+
+Typus configuration files are now located under the `config/typus` 
+folder. This will make the files easier to mantain when you have 
+an application with a lot of controllers.
+
+After the feedback I got at the "Conferencia Rails '08" I wont talk 
+anymore about typus plugins as it's a little confising. The generator 
+for the plugins is also removed.
+
 ### Redefinition of roles (2008/11/03)
 
 Previously roles only allowed to defined permissions for the CRUD 
@@ -467,25 +477,6 @@ When you start **Typus** a controller and a view will be created.
 
     app/controllers/admin/backup_controller.rb
     app/views/admin/backup/index.html
-
-## Typus Enabled Plugins
-
-Typus can use external plugins to extend functionality. Some of them 
-are available on GitHub licensed under the MIT License. For example:
-
-    http://github.com/fesplugas/simplified_blog/tree/master
-
-You can use them as example on how to integrate your plugins into Typus.
-
-If you have an existing plugin and you want to integrate it with Typus use
-the `typus_plugin` generator.
-
-    $ script/generate plugin your_plugin
-    $ script/generate typus_plugin your_plugin
-
-Usually a Typus plugin contains `models`, `controllers` & `views`. The 
-plugin will have a `init.rb` which will merge the load paths for those 
-folders.
 
 ## Typus & SSL
 
