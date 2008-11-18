@@ -1,5 +1,0 @@
-NAME
-     typus_plugin - adds files to your plugins to enable them for Typus.
-
-EXAMPLE
-      ./script/generate typus_plugin
