@@ -246,7 +246,12 @@ a.on {
 
   #footer a {
     color: white;
-    font-weight: bold;
+    font-weight: normal;
+    text-decoration: underline;
+  }
+
+  #footer a:hover {
+    color: #408BB6;
   }
 
 /* form
