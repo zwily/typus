@@ -37,10 +37,13 @@ class TypusFilesGenerator < Rails::Generator::Base
       ##
       # configuration files
       #
-      files = %w( typus.yml typus_roles.yml )
+      folder = "#{RAILS_ROOT}/config/typus"
+      Dir.mkdir(folder) unless File.directory?(folder)
+
+      files = %w( typus.yml typus_roles.yml application.yml application_roles.yml )
       files.each do |file|
-        m.template "config/#{file}", 
-                   "config/#{file}", 
+        m.template "config/typus/#{file}", 
+                   "config/typus/#{file}", 
                    :assigns => { :ar_models => ar_models, :application => application }
       end
 
