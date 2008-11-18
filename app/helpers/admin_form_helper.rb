@@ -147,7 +147,7 @@ module AdminFormHelper
         html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{link_to "Add new", "/admin/#{field}/new?back_to=#{request.env['REQUEST_URI']}&model=#{@model}&model_id=#{@item.id}"}</small></h2>"
         current_model = @model
         @items = @model.find(params[:id]).send(field)
-        if @items.size > 0
+        if !@items.empty?
           html << typus_table(@items[0].class, 'relationship', @items)
         else
           html << "<div id=\"flash\" class=\"notice\"><p>There are no #{field.titleize.downcase}.</p></div>"
@@ -164,7 +164,7 @@ module AdminFormHelper
         model_to_relate = field.singularize.camelize.constantize
         html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{link_to "Add new", "/admin/#{field}/new?back_to=#{request.env['REQUEST_URI']}&model=#{@model}&model_id=#{@item.id}"}</small></h2>"
         items_to_relate = (model_to_relate.find(:all) - @item.send(field))
-        if items_to_relate.size > 0
+        if !items_to_relate.empty?
           html << <<-HTML
             #{form_tag :action => 'relate'}
             #{hidden_field :related, :model, :value => field.modelize}
@@ -175,7 +175,11 @@ module AdminFormHelper
         end
         current_model = @model.name.singularize.camelize.constantize
         @items = current_model.find(params[:id]).send(field)
-        html << typus_table(field.modelize, 'relationship') if @items.size > 0
+        if !@items.empty?
+          html << typus_table(field.modelize, 'relationship')
+        else
+          html << "<div id=\"flash\" class=\"notice\"><p>There are no #{field.titleize.downcase}.</p></div>"
+        end
       end
     end
     return html
