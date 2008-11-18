@@ -66,18 +66,14 @@ module Typus
 
         fields.each do |field|
 
+          attribute_type = 'string'
+
           ##
           # Get the field_type for each field
           #
           self.model_fields.each do |af|
-            @attribute_type = af.last if af.first == field
+            attribute_type = af.last if af.first == field
           end
-
-          ##
-          # Believe me, I don't know why I have to do this, otherwise
-          # the plugin doesn't work.
-          #
-          attribute_type = @attribute_type
 
           ##
           # Some custom field_type depending on the attribute name
