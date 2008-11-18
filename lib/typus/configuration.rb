@@ -63,7 +63,7 @@ module Typus
       folders = if Rails.test?
                   ["vendor/plugins/typus/test/config/typus.yml"]
                 else
-                  Dir["vendor/plugins/*/config/typus.yml"]
+                  Dir["config/typus/*"] - Dir["config/typus/*"].grep(/roles.yml/)
                 end
 
       @@config = {}
@@ -98,7 +98,7 @@ module Typus
       folders = if Rails.test?
                   ["vendor/plugins/typus/test/config/typus_roles.yml"]
                 else
-                  Dir["vendor/plugins/*/config/typus_roles.yml"]
+                  Dir["config/typus/*_roles.yml"]
                 end
 
       @@roles = { 'admin' => {} }
