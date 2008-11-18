@@ -71,17 +71,6 @@ module Typus
         @@config = @@config.merge(YAML.load_file("#{RAILS_ROOT}/#{folder}"))
       end
 
-      config_file = if Rails.test?
-                      "#{RAILS_ROOT}/vendor/plugins/typus/test/config/typus.yml"
-                    else
-                      "#{RAILS_ROOT}/config/typus.yml"
-                    end
-
-      if File.exists?(config_file) && !File.zero?(config_file) && !Rails.test?
-        data = YAML.load_file(config_file)
-        @@config = @@config.merge(data) if data
-      end
-
       return @@config
 
     end
@@ -108,27 +97,6 @@ module Typus
           begin
             @@roles[key] = @@roles[key].merge(value)
           rescue
-            @@roles[key] = value
-          end
-        end
-      end
-
-      config_file = if Rails.test?
-                      "#{RAILS_ROOT}/vendor/plugins/typus/test/config/typus_roles.yml"
-                    else
-                      "#{RAILS_ROOT}/config/typus_roles.yml"
-                    end
-
-      if File.exists?(config_file) && !File.zero?(config_file)
-        app_roles = YAML.load_file(config_file)
-        app_roles.each do |key, value|
-          case key
-          when 'admin'
-            begin
-              @@roles[key] = @@roles[key].merge(app_roles[key])
-            rescue
-            end
-          else
             @@roles[key] = value
           end
         end
