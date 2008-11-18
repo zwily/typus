@@ -73,7 +73,7 @@ class AdminController < ApplicationController
   def new
 
     item_params = params.dup
-    %w( action controller model model_id back_to ).each do |param|
+    %w( action controller model model_id back_to attribute ).each do |param|
       item_params.delete(param)
     end
 
@@ -103,11 +103,12 @@ class AdminController < ApplicationController
             model_to_relate.find(params[:model_id]).send(@item.class.name.tableize).create(params[:item])
           end
           flash[:success] = "#{@item.class} successfully assigned to #{params[:model].downcase}."
+          redirect_to params[:back_to]
         else
           @item.save
           flash[:success] = "New #{@model.to_s.downcase} created."
+          redirect_to "#{params[:back_to]}?#{params[:attribute]}=#{@item.id}"
         end
-        redirect_to params[:back_to]
       else
         @item.save
         flash[:success] = "#{@model.to_s.titleize} successfully created."
@@ -126,6 +127,15 @@ class AdminController < ApplicationController
   # Edit an item.
   #
   def edit
+    ##
+    # We assign the params passed trough the url
+    #
+    item_params = params.dup
+    %w( action controller model model_id back_to id ).each do |param|
+      item_params.delete(param)
+    end
+    @item.attributes = item_params
+
     @previous, @next = @item.previous_and_next
     select_template :edit
   end
