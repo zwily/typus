@@ -18,12 +18,7 @@ module AdminTableHelper
       if model.model_fields.map(&:first).include?(field)
         html << "<th>#{link_to "<div class=\"#{sort_order}\">#{field.titleize.capitalize}</div>", { :params => params.merge( :order_by => order_by, :sort_order => sort_order) }}</th>"
       else
-        case field
-        when "hidden"
-          html << "<th></th>"
-        else
-          html << "<th>#{field.titleize.capitalize}</th>"
-        end
+        html << "<th>#{field.titleize.capitalize}</th>"
       end
     end
     html << "<th>&nbsp;</th>\n</tr>"
