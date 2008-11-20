@@ -120,6 +120,10 @@ a.on {
       font-size: 0.75em;
     }
 
+    #content h2 small a {
+      color: #666;
+    }
+
   #content h3 {
     font-size: 1.25em;
     font-weight: bold;
