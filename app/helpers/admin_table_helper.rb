@@ -12,10 +12,14 @@ module AdminTableHelper
     # Header of the table
     #
     html << "<tr>"
-    model.typus_fields_for(fields).each do |column|
-      order_by = column[0]
+    model.typus_fields_for(fields).map(&:first).each do |field|
+      order_by = field
       sort_order = (params[:sort_order] == "asc") ? "desc" : "asc"
-      html << "<th>#{link_to "<div class=\"#{sort_order}\">#{column[0].titleize.capitalize}</div>", { :params => params.merge( :order_by => order_by, :sort_order => sort_order) }}</th>"
+      if model.model_fields.map(&:first).include?(field)
+        html << "<th>#{link_to "<div class=\"#{sort_order}\">#{field.titleize.capitalize}</div>", { :params => params.merge( :order_by => order_by, :sort_order => sort_order) }}</th>"
+      else
+        html << "<th>#{field.titleize.capitalize}</th>"
+      end
     end
     html << "<th>&nbsp;</th>\n</tr>"
 
@@ -35,7 +39,7 @@ module AdminTableHelper
           else
             html << "<td width=\"20px\" align=\"center\">#{image}</td>"
           end
-        when "datetime"
+        when "datetime", "date"
           html << "<td>#{item.send(column[0]).to_s(:db)}</td>"
         when "collection"
           begin
