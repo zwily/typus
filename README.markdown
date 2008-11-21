@@ -12,13 +12,6 @@ Once installed and configured you can login at <http://example.com/admin>.
 
 Screenshots on the [wiki](http://github.com/fesplugas/typus/wikis).
 
-## Before using Typus
-
-Typus is in production in several websites, as we are work on new 
-projects we make small changes to the API. This means that sometimes 
-the definition of the configuration files can change a little bit so 
-you've to update. Here's a list of the last API changes.
-
 ## Installing
 
 You can view the available tasks running:
@@ -90,8 +83,9 @@ main index you can owerwrite the setting.
 
 ## Configuration file options
 
-If the configuration file is broken you'll see a `typus.yml` text 
-on the admin interface.
+You can configure all **Typus** settings from the `application.yml` 
+file located under the `config/typus` folder. This file is created 
+once you run the `typus_files` generator.
 
 ### Typus Fields
 
@@ -160,7 +154,7 @@ need special attributes like an slug, which is generated from the title.
 You can add `slug` a as attribute and it'll be shown on the lists.
 
     ##
-    # config/typus.yml
+    # config/typus/application.yml
     Post:
       fields:
         list: title, slug
@@ -206,7 +200,7 @@ Or directly on the model:
 
 ### Searches
 
-You can define search filters on typus.yml
+You can define search filters on `config/typus/application.yml`
 
     search: attribute1, attribute2
 
@@ -267,7 +261,7 @@ Example:
     end
 
     ##
-    # typus.yml
+    # config/typus/application.yml
     #
     Video:
       fields:
