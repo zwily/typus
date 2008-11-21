@@ -19,55 +19,6 @@ projects we make small changes to the API. This means that sometimes
 the definition of the configuration files can change a little bit so 
 you've to update. Here's a list of the last API changes.
 
-### Typus configuration files (2008/11/18)
-
-Typus configuration files are now located under the `config/typus` 
-folder. This will make the files easier to mantain when you have 
-an application with a lot of controllers.
-
-After the feedback I got at the "Conferencia Rails '08" I wont talk 
-anymore about typus plugins as it's a little confising. The generator 
-for the plugins is also removed.
-
-### Redefinition of roles (2008/11/03)
-
-Previously roles only allowed to defined permissions for the CRUD 
-actions. From 2008/11/03 you can define any action on the roles. 
-The afected file is `config/typus_roles.yml`.
-
-Before
-
-    admin:
-      TypusUser: crud
-      Newsletter: crud
-
-After
-
-    admin:
-      TypusUser: create, read, update, delete
-      Newsletter: create, read, update, delete, generate, preview, deliver
-
-### Redefinition of actions (2008/10/31)
-
-This will allow us to define actions per action. Code is now cleaner 
-and easier to read.
-
-Before
-
-    Post:
-      actions:
-        list: action_for_list
-        form: action_for_form
-
-After
-
-    Post:
-      actions:
-        index: action_for_index
-        edit: action_for_edit
-        show: action_for_show
-        sort: action_for_sort
-
 ## Installing
 
 You can view the available tasks running:
