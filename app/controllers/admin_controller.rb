@@ -291,7 +291,7 @@ private
   end
 
   ##
-  # Error handler only active on development.
+  # Error handler
   #
   def error_handler(error, redirection = typus_dashboard_url)
     flash[:error] = error.message + "(#{@model})"
