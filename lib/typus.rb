@@ -90,7 +90,6 @@ module Typus
       require 'typus/string'
       require 'typus/hash'
       require 'typus/authentication'
-      require 'typus/patches' if Rails.vendor_rails?
       require 'typus/object'
       require 'typus/greetings'
       require 'vendor/paginator'
