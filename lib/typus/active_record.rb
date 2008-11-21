@@ -84,8 +84,10 @@ module Typus
             when /file_name/:       attribute_type = 'file'
             when /password/:        attribute_type = 'password'
             when 'position':        attribute_type = 'position'
-            when self.typus_field_options_for(:selectors).join(', ')
-              attribute_type = 'selector'
+          end
+
+          if self.typus_field_options_for(:selectors).include?(field)
+            attribute_type = 'selector'
           end
 
           ##
