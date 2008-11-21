@@ -16,4 +16,4 @@ Typus.enable
 ##
 # Autogenerator for the models.
 #
-Typus.generator unless RAILS_ENV == 'test'
+Typus.generator unless Rails.env.test?

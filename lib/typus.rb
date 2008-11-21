@@ -81,11 +81,10 @@ module Typus
     end
 
     def enable
-      require 'vendor/environments'
       Typus::Configuration.config!
       Typus::Configuration.roles!
       require 'typus/version'
-      require File.dirname(__FILE__) + "/../test/test_models" if RAILS_ENV == 'test'
+      require File.dirname(__FILE__) + "/../test/test_models" if Rails.env.test?
       require 'typus/active_record'
       require 'typus/routes'
       require 'typus/string'
