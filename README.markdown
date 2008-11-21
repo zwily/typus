@@ -389,8 +389,8 @@ Example:
 ## Roles
 
 Typus has roles support. You can can add as many roles as you want. 
-They are defined in `config/typus_roles.yml` and you can can define 
-the allowed actions per role.
+They are defined in `config/typus/application_roles.yml` and you 
+can can define the allowed actions per role.
 
     admin:
       TypusUser: create, read, update, delete
@@ -401,17 +401,13 @@ the allowed actions per role.
       Post: create, update
       Category: create, update
 
-If you're using a Typus enabled plugin, it will probably have defined roles 
-for the new application functionality. You can overwrite them from the 
-configuration file.
-
 ## Resources which are not models
 
 Want to manage **memcached**, see the current **starling** queue or have 
 an special resource which is not related to any model?
 
     ##
-    # config/typus_roles.yml
+    # config/typus/application_roles.yml
     admin:
       Backup: index, download_db, download_media
       MemCached: index
@@ -454,6 +450,18 @@ Once you've created them you can run the tests.
 
     $ rake DB=mysql
     $ rake DB=postgresql
+
+## Splitting configuration files
+
+You can split your configuration files in several files so it can be easier 
+to mantain.
+
+    config/typus/application.yml
+    config/typus/newsletter.yml
+    config/typus/blog.yml
+    config/typus/application_roles.yml
+    config/typus/newsletter_roles.yml
+    config/typus/blog_roles.yml
 
 ## Acknowledgments
 
