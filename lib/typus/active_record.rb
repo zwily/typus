@@ -277,7 +277,7 @@ module Typus
                        end
             conditions << "#{f.first} BETWEEN '#{interval.first.to_s(:db)}' AND '#{interval.last.to_s(:db)}'"
           when "integer", "string"
-            conditions << "#{f.first} = '#{value}'"
+            conditions << "#{f.first} = \"#{value}\""
           end
         end
 
