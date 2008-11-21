@@ -143,11 +143,9 @@ module AdminFormHelper
     html = ""
     if @item_has_many
       @item_has_many.each do |field|
-        model_to_relate = field.singularize.camelize.constantize
-        html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{link_to "Add new", "/admin/#{field}/new?back_to=#{request.env['REQUEST_URI']}&model=#{@model}&model_id=#{@item.id}"}</small></h2>"
-        current_model = @model
+        html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{link_to "Add new", "/admin/#{field}/new?back_to=#{request.env['REQUEST_URI']}&#{@model.name.downcase}_id=#{@item.id}"}</small></h2>"
         @items = @model.find(params[:id]).send(field)
-        if !@items.empty?
+        unless @items.empty?
           html << typus_table(@items[0].class, 'relationship', @items)
         else
           html << "<div id=\"flash\" class=\"notice\"><p>There are no #{field.titleize.downcase}.</p></div>"
