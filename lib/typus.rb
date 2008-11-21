@@ -76,14 +76,9 @@ module Typus
       Typus::Configuration.config[modulo]['description']
     end
 
-    def version
-      VERSION::STRING
-    end
-
     def enable
       Typus::Configuration.config!
       Typus::Configuration.roles!
-      require 'typus/version'
       require File.dirname(__FILE__) + "/../test/test_models" if Rails.env.test?
       require 'typus/active_record'
       require 'typus/routes'

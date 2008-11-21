@@ -53,10 +53,6 @@ class TypusTest < Test::Unit::TestCase
     assert_equal "System Users Administration", Typus.module_description('TypusUser')
   end
 
-  def test_should_verify_version
-    assert Typus.respond_to?(:version)
-  end
-
   def test_should_verify_enable_exists
     assert Typus.respond_to?(:enable)
   end
