@@ -6,7 +6,7 @@ module TypusHelper
   def applications
 
     if Typus.applications.empty?
-      return display_error("There are not defined applications in config/typus.yml")
+      return display_error("There are not defined applications in config/typus/*.yml")
     end
 
     html = ""
@@ -19,27 +19,29 @@ module TypusHelper
         available << resource if @current_user.resources.include?(resource)
       end
 
-      if !available.empty?
+      unless available.empty?
 
         html << <<-HTML
-          <table>
-            <tr>
-              <th colspan="2">#{app}</th>
-            </tr>
+<table>
+<tr>
+  <th colspan="2">#{app}</th>
+</tr>
         HTML
 
         available.each do |model|
           description = Typus.module_description(model)
-          html << "<tr class=\"#{cycle('even', 'odd')}\">\n"
-          html << "<td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /><small>#{description}</small></td>\n"
-          html << "<td class=\"right\"><small>"
-          html << "#{link_to 'Add', "/admin/#{model.tableize}/new"}" if @current_user.can_perform?(model, 'create')
-          html << "</small></td>\n"
-          html << "</tr>"
+          html << <<-HTML
+<tr class=\"#{cycle('even', 'odd')}\">
+<td>#{link_to model.titleize.pluralize, "/admin/#{model.tableize}"}<br /><small>#{description}</small></td>
+<td class=\"right\"><small>
+  #{link_to 'Add', "/admin/#{model.tableize}/new" if @current_user.can_perform?(model, 'create')}
+</small></td>
+</tr>
+          HTML
         end
 
         html << <<-HTML
-          </table>
+</table>
         HTML
 
       end
@@ -115,10 +117,10 @@ module TypusHelper
 
   def login_info
     html = <<-HTML
-      <ul>
-        <li>Logged as #{link_to @current_user.full_name(true), :controller => 'admin/typus_users', :action => 'edit', :id => @current_user.id}</li>
-        <li>#{link_to "Logout", typus_logout_url}</li>
-      </ul>
+<ul>
+  <li>Logged as #{link_to @current_user.full_name(true), :controller => 'admin/typus_users', :action => 'edit', :id => @current_user.id}</li>
+  <li>#{link_to "Logout", typus_logout_url}</li>
+</ul>
     HTML
     return html
   end
