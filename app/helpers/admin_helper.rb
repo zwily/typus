@@ -11,12 +11,13 @@ module AdminHelper
   end
 
   def display_link_to_previous
-    html = <<-HTML
+    returning(String.new) do |html|
+      html << <<-HTML
 <div id="flash" class="notice">
-<p>You're adding a new #{@model.name.downcase} to a model. Do you want to cancel it? <a href=\"#{params[:back_to]}\">Click Here</a></p>
+<p>You're adding a new #{@model.name.downcase} to a model. Do you want to cancel it? <a href="#{params[:back_to]}">Click Here</a></p>
 </div>
-    HTML
-    return html
+      HTML
+    end
   end
 
   ##
