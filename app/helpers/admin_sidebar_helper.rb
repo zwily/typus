@@ -10,9 +10,11 @@ module AdminSidebarHelper
     case params[:action]
     when 'index', 'edit', 'update'
       if @current_user.can_perform?(@model, 'create')
-        html << "<ul>"
-        html << "<li>#{link_to "Add #{@model.name.titleize.downcase}", :action => 'new'}</li>"
-        html << "</ul>"
+        html << <<-HTML
+<ul>
+<li>#{link_to "Add #{@model.name.titleize.downcase}", :action => 'new'}</li>
+</ul>
+        HTML
       end
     end
 
@@ -21,10 +23,12 @@ module AdminSidebarHelper
     #
     case params[:action]
     when 'edit', 'update'
-      html << "<ul>\n"
-      html << "<li>#{link_to "Next", :params => params.merge(:action => 'edit', :id => @next.id, :search => nil)}</li>" if @next
-      html << "<li>#{link_to "Previous", :params => params.merge(:action => 'edit', :id => @previous.id, :search => nil)}</li>" if @previous
-      html << "</ul>"
+      html << <<-HTML
+<ul>
+<li>#{link_to "Next", :params => params.merge(:action => 'edit', :id => @next.id, :search => nil) if @next}</li>
+<li>#{link_to "Previous", :params => params.merge(:action => 'edit', :id => @previous.id, :search => nil) if @previous}</li>
+</ul>
+      HTML
     end
 
     ##
@@ -32,9 +36,11 @@ module AdminSidebarHelper
     #
     case params[:action]
     when 'new', 'create'
-      html << "<ul>"
-      html << "<li>#{link_to "Back to list", :params => params.merge(:action => 'index')}</li>"
-      html << "</ul>"
+      html << <<-HTML
+<ul>
+<li>#{link_to "Back to list", :params => params.merge(:action => 'index')}</li>
+</ul>
+      HTML
     else
       html << more_actions
       html << block('parent_module')
