@@ -294,8 +294,12 @@ private
   # Error handler
   #
   def error_handler(error, redirection = typus_dashboard_url)
-    flash[:error] = error.message + "(#{@model})"
-    redirect_to redirection
+    if Rails.env.production?
+      flash[:error] = error.message + "(#{@model})"
+      redirect_to redirection
+    else
+      raise error
+    end
   end
 
   def generate_csv
