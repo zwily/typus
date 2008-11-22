@@ -70,8 +70,17 @@ module AdminFormHelper
   def typus_selector_field(attribute, value)
     returning(String.new) do |html|
       options = ""
-      @item.class.send(attribute).each do |option|
-        options << "<option #{'selected' if @item.send(attribute).to_s == option.to_s} value=\"#{option}\">#{option}</option>"
+      @model.send(attribute).each do |option|
+        case option.kind_of?(Array)
+        when true
+          options << <<-HTML
+<option #{'selected' if @item.send(attribute).to_s == option.last.to_s} value="#{option.last}">#{option.first}</option>
+          HTML
+        else
+          options << <<-HTML
+<option #{'selected' if @item.send(attribute).to_s == option.to_s} value="#{option}">#{option}</option>
+          HTML
+        end
       end
       html << <<-HTML
 <li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
