@@ -44,16 +44,10 @@ class TypusUser < ActiveRecord::Base
   end
 
   ##
-  # Models the user has access to ...
+  # Resources TypusUser has access to ...
   #
   def resources
-    calculate = {}
-    self.roles.split(', ').each do |role|
-      calculate = Typus::Configuration.roles[role].compact
-    end
-    return calculate
-  rescue
-    "All"
+    Typus::Configuration.roles[self.roles].compact
   end
 
   def can_perform?(resource, action, options = {})
