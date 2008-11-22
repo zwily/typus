@@ -10,7 +10,6 @@ module AdminFormHelper
       html << "<ul>"
       fields.each do |field|
         case field.last
-        when "string":          html << typus_string_field(field.first, field.last)
         when "boolean":         html << typus_boolean_field(field.first, field.last)
         when "datetime":        html << typus_datetime_field(field.first, field.last)
         when "date":            html << typus_date_field(field.first, field.last)
