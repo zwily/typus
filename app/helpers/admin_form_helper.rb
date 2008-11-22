@@ -41,15 +41,19 @@ module AdminFormHelper
 
   def typus_datetime_field(attribute, value)
     returning(String.new) do |html|
-      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
-      html << "#{datetime_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }}</li>"
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+#{datetime_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }}</li>
+      HTML
     end
   end
 
   def typus_text_field(attribute, value)
     returning(String.new) do |html|
-      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
-      html << "#{text_area :item, attribute, :class => 'text', :rows => Typus::Configuration.options[:form_rows]}</li>"
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+#{text_area :item, attribute, :class => 'text', :rows => Typus::Configuration.options[:form_rows]}</li>
+      HTML
     end
   end
 
@@ -104,16 +108,20 @@ module AdminFormHelper
 
   def typus_password_field(attribute, value)
     returning(String.new) do |html|
-      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>"
-      html << "#{password_field :item, attribute, :class => 'text'}"
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+#{password_field :item, attribute, :class => 'text'}</li>
+      HTML
     end
   end
 
   def typus_boolean_field(attribute, value)
     question = true if @model.typus_field_options_for(:questions).include?(attribute)
     returning(String.new) do |html|
-      html << "<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}#{"?" if question}</label>"
-      html << "#{check_box :item, attribute} Checked if active</li>"
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}#{'?' if question}</label>
+#{check_box :item, attribute} Checked if active</li>
+      HTML
     end
   end
 
@@ -124,7 +132,9 @@ module AdminFormHelper
 
     returning(String.new) do |html|
 
-      html << "<li><label for=\"item_#{attribute}\">#{attribute_display.titleize.capitalize}</label>"
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute_display.titleize.capitalize}</label>
+      HTML
 
       case content_type
       when /image/
@@ -143,12 +153,16 @@ module AdminFormHelper
     html = ""
     if @item_has_many
       @item_has_many.each do |field|
-        html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{link_to "Add new", "/admin/#{field}/new?back_to=#{request.env['REQUEST_URI']}&#{@model.name.downcase}_id=#{@item.id}"}</small></h2>"
+        html << <<-HTML
+<h2 style="margin: 20px 0px 10px 0px;">#{link_to field.titleize, :controller => "admin/#{field}"} <small>#{link_to "Add new", :controller => "admin/#{field}", :action => 'new', :back_to => request.env['REQUEST_URI'], "#{@model.name.downcase}_id" => @item.id}</small></h2>
+        HTML
         @items = @model.find(params[:id]).send(field)
         unless @items.empty?
           html << typus_table(@items[0].class, 'relationship', @items)
         else
-          html << "<div id=\"flash\" class=\"notice\"><p>There are no #{field.titleize.downcase}.</p></div>"
+          html << <<-HTML
+<div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
+          HTML
         end
       end
     end
@@ -160,15 +174,15 @@ module AdminFormHelper
     if @item_has_and_belongs_to_many
       @item_has_and_belongs_to_many.each do |field|
         model_to_relate = field.singularize.camelize.constantize
-        html << "<h2 style=\"margin: 20px 0px 10px 0px;\"><a href=\"/admin/#{field}\">#{field.titleize}</a> <small>#{link_to "Add new", "/admin/#{field}/new?back_to=#{request.env['REQUEST_URI']}&model=#{@model}&model_id=#{@item.id}"}</small></h2>"
+        html << <<-HTML
+<h2 style="margin: 20px 0px 10px 0px;"><a href="/admin/#{field}">#{field.titleize}</a> <small>#{link_to "Add new", "/admin/#{field}/new?back_to=#{request.env['REQUEST_URI']}&model=#{@model}&model_id=#{@item.id}"}</small></h2>
+        HTML
         items_to_relate = (model_to_relate.find(:all) - @item.send(field))
         if !items_to_relate.empty?
           html << <<-HTML
-            #{form_tag :action => 'relate'}
-            #{hidden_field :related, :model, :value => field.modelize}
-            <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } }
-          &nbsp; #{submit_tag "Add", :class => 'button'}
-            </form></p>
+#{form_tag :action => 'relate'}
+#{hidden_field :related, :model, :value => field.modelize}
+<p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag "Add", :class => 'button'}</form></p>
           HTML
         end
         current_model = @model.name.singularize.camelize.constantize
@@ -176,7 +190,9 @@ module AdminFormHelper
         if !@items.empty?
           html << typus_table(field.modelize, 'relationship')
         else
-          html << "<div id=\"flash\" class=\"notice\"><p>There are no #{field.titleize.downcase}.</p></div>"
+          html << <<-HTML
+<div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
+          HTML
         end
       end
     end
