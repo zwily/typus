@@ -61,18 +61,17 @@ class TypusUser < ActiveRecord::Base
     if options[:special]
       _action = action
     else
-      case action
-      when 'new', 'create'
-        _action = 'create'
-      when 'index', 'show'
-        _action = 'read'
-      when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
-        _action = 'update'
-      when 'destroy'
-        _action = 'delete'
-      else
-        _action = action
-      end
+      _action = case action
+                when 'new', 'create':       'create'
+                when 'index', 'show':       'read'
+                when 'edit', 'update':      'update'
+                when 'position':            'update'
+                when 'toggle':              'update'
+                when 'relate', 'unrelate':  'update'
+                when 'destroy':             'delete'
+                else
+                  action
+                end
     end
 
     self.resources[resource.to_s].split(', ').include?(_action) rescue false
