@@ -61,13 +61,13 @@ module TypusHelper
       available << resource if @current_user.resources.include?(resource)
     end
 
-    if !available.empty?
+    unless available.empty?
 
       html = <<-HTML
-        <table>
-          <tr>
-            <th colspan="2">Resources</th>
-          </tr>
+<table>
+<tr>
+  <th colspan="2">Resources</th>
+</tr>
       HTML
 
       available.each do |resource|
