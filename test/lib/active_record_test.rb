@@ -183,6 +183,11 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal expected, Post.build_conditions(params)
   end
 
+  def test_should_return_sql_conditions_on_filtering_posts_by_string
+    # This case should verify when we have a filter like "Won't Fix"
+    # it's currently implemented, but not tested. :(
+  end
+
   def test_should_verify_previous_and_next_is_working
     assert TypusUser.instance_methods.include?('previous_and_next')
     assert typus_users(:admin).previous_and_next.kind_of?(Array)
