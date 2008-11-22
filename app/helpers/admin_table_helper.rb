@@ -72,7 +72,7 @@ module AdminTableHelper
 
     end
 
-    html << "</table>"
+      html << "</table>"
 
     end
 
@@ -87,17 +87,23 @@ module AdminTableHelper
   def typus_table_string_field(item, column, fields)
     returning(String.new) do |html|
       if item.class.typus_fields_for(fields).first == column
-        html << "<td>#{link_to item.send(column[0]) || "", :controller => "admin/#{item.class.name.tableize}", :action => 'edit', :id => item.id}"
-        html << "<br /><small>#{"Custom actions go here, but only if exist." if Typus::Configuration.options[:actions_on_table]}</small></td>"
+        html << <<-HTML
+<td>#{link_to item.send(column[0]) || "", :controller => "admin/#{item.class.name.tableize}", :action => 'edit', :id => item.id}
+<br /><small>#{"Custom actions go here, but only if exist." if Typus::Configuration.options[:actions_on_table]}</small></td>
+        HTML
       else
-        html << "<td>#{item.send(column[0])}</td>"
+        html << <<-HTML
+<td>#{item.send(column[0])}</td>
+        HTML
       end
     end
   end
 
   def typus_table_tree_field(item, column)
     returning(String.new) do |html|
-      html << "<td>#{item.parent.typus_name if item.parent}</td>"
+      html << <<-HTML
+<td>#{item.parent.typus_name if item.parent}</td>
+      HTML
     end
   end
 
@@ -105,9 +111,13 @@ module AdminTableHelper
     returning(String.new) do |html|
       html_position = []
       [["Up", "move_higher"], ["Down", "move_lower"]].each do |position|
-        html_position << "#{link_to position.first, :params => params.merge(:controller => "admin/#{item.class.name.tableize}", :action => 'position', :id => item.id, :go => position.last)}"
+        html_position << <<-HTML
+#{link_to position.first, :params => params.merge(:controller => "admin/#{item.class.name.tableize}", :action => 'position', :id => item.id, :go => position.last)}
+        HTML
       end
-      html << "<td>#{html_position.join("/")}</td>"
+      html << <<-HTML
+<td>#{html_position.join('/ ')}</td>
+      HTML
     end
   end
 
