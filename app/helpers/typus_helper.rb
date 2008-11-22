@@ -71,14 +71,16 @@ module TypusHelper
       HTML
 
       available.each do |resource|
-        html << "<tr class=\"#{cycle('even', 'odd')}\">\n"
-        html << "<td>#{link_to resource.titleize, "/admin/#{resource.underscore}"}</td>\n"
-        html << "<td align=\"right\" style=\"vertical-align: bottom;\"></td>\n"
-        html << "</tr>"
+        html << <<-HTML
+<tr class="#{cycle('even', 'odd')}">
+  <td>#{link_to resource.titleize, "/admin/#{resource.underscore}"}</td>
+  <td align="right" style="vertical-align: bottom;"></td>
+</tr>
+        HTML
       end
 
       html << <<-HTML
-        </table>
+</table>
       HTML
 
     end
