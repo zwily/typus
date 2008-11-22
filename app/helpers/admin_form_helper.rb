@@ -176,7 +176,7 @@ module AdminFormHelper
         HTML
         @items = @model.find(params[:id]).send(field)
         unless @items.empty?
-          html << typus_table(@items[0].class, 'relationship', @items)
+          html << build_table(@items[0].class, 'relationship', @items)
         else
           html << <<-HTML
 <div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
@@ -205,8 +205,8 @@ module AdminFormHelper
         end
         current_model = @model.name.singularize.camelize.constantize
         @items = current_model.find(params[:id]).send(field)
-        if !@items.empty?
-          html << typus_table(field.modelize, 'relationship')
+        unless @items.empty?
+          html << build_table(field.modelize, 'relationship')
         else
           html << <<-HTML
 <div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
