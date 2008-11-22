@@ -31,10 +31,10 @@ module AdminFormHelper
     returning(String.new) do |html|
       html << <<-HTML
 <li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
-    <select id="item_#{attribute}" name="item[#{attribute}]">
-      <option value=""></option>
-      #{expand_tree_into_select_field(@item.class.top)}
-    </select></li>
+<select id="item_#{attribute}" name="item[#{attribute}]">
+  <option value=""></option>
+  #{expand_tree_into_select_field(@item.class.top)}
+</select></li>
       HTML
     end
   end
@@ -51,8 +51,8 @@ module AdminFormHelper
     def typus_date_field(attribute, value)
       returning(String.new) do |html|
         html << <<-HTML
-  <li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
-  #{date_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }}</li>
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+#{date_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }}</li>
         HTML
       end
     end
