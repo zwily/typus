@@ -131,7 +131,14 @@ module AdminTableHelper
 
   def typus_table_boolean_field(item, column)
 
-    image = "admin/status_#{item.send(column[0])}.gif"
+    unless item.send(column[0]).nil?
+      image = "admin/status_#{item.send(column[0])}.gif"
+    else
+      ##
+      # If the column is null we show the false icon.
+      #
+      image = "admin/status_false.gif"
+    end
 
     returning(String.new) do |html|
 
