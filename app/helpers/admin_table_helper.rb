@@ -124,7 +124,7 @@ module AdminTableHelper
   def typus_table_datetime_field(item, column)
     returning(String.new) do |html|
       html << <<-HTML
-<td>#{item.send(column[0]).to_s(:db)}</td>
+<td>#{!item.send(column[0]).nil? ? item.send(column[0]).to_s(:db) : 'nil'}</td>
       HTML
     end
   end
