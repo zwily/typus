@@ -107,7 +107,7 @@ class AdminController < ApplicationController
         else
           @item.save
           flash[:success] = "New #{@model.to_s.downcase} created."
-          redirect_to "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
+          redirect_to "/#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
         end
       else
         @item.save

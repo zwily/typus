@@ -93,12 +93,22 @@ module AdminFormHelper
 
   def typus_collection_field(attribute, value)
     returning(String.new) do |html|
-      related = attribute.split("_id").first.capitalize.camelize.constantize
+
+      related = attribute.split("_id").first.camelize.constantize
+
+      # "/admin/#{}/new?
+
+      #if params[:id]
+      back_to = []
+      back_to << params[:controller] << params[:id]<< params[:action]
+      back_to = back_to.compact.join("/") # back_to = "/#{params[:controller]}/#{params[:id]}/#{params[:action]}" # request.env['REQUEST_URI']
+
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{link_to "Add new", "/admin/#{attribute.titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}&selected=#{attribute}", :confirm => "Are you sure you want to leave this page?\nAny unsaved data will be lost." }</small></label>
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{link_to "Add new", { :controller => attribute.titleize.tableize, :action => 'new', :back_to => back_to, :selected => attribute }, :confirm => "Are you sure you want to leave this page?\nAny unsaved data will be lost." }</small></label>
 #{select :item, attribute, related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}</li>
       HTML
     end
+
   end
 
   def typus_string_field(attribute, value)
