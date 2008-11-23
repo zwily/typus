@@ -470,12 +470,12 @@ to mantain.
 - Sergio Espeja (Feedback & patches) - <http://github.com/spejman>
 - Lluis Folch (Icons, feedback & crazy ideas) - <http://wet-floor.com>
 
-## Author, contact & bugs
+## Author, contact, bugs, mailing list and more
 
-- You can contact me at <francesc.esplugas@gmail.com>
 - Recommend me at <http://workingwithrails.com/person/5061-francesc-esplugas>
 - Browse source on GitHub <http://github.com/fesplugas/typus/tree/master>
 - Visit the wiki <http://github.com/fesplugas/typus/wikis>
+- Group <http://groups.google.es/group/typus>
 - Report bugs <http://github.com/fesplugas/typus/wikis/bugs>
 
 Copyright (c) 2007-2008 Francesc Esplugas Marti, released under the 
