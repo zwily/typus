@@ -182,7 +182,10 @@ module AdminFormHelper
       if @item_has_many
         @item_has_many.each do |field|
           html << <<-HTML
-<h2>#{link_to field.titleize, :controller => "admin/#{field}"} <small>#{link_to "Add new", :controller => "admin/#{field}", :action => 'new', :back_to => back_to, "#{@model.name.downcase}_id" => @item.id}</small></h2>
+<h2>
+#{link_to field.titleize, :controller => field}
+<small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => back_to, "#{@model.name.downcase}_id" => @item.id}</small>
+</h2>
           HTML
           @items = @model.find(params[:id]).send(field)
           unless @items.empty?
@@ -208,7 +211,7 @@ module AdminFormHelper
           model_to_relate = field.singularize.camelize.constantize
           html << <<-HTML
 <h2>
-<a href="/admin/#{field}">#{field.titleize}</a>
+#{link_to field.titleize, :controller => field}
 <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => back_to, :model => @model, :model_id => @item.id}</small>
 </h2>
           HTML
