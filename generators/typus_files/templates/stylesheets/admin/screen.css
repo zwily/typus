@@ -262,6 +262,7 @@ a.on {
 ---------------------------------------------------------- */
 
 #content form {
+  margin: 0em 0em 2em 0em;
 }
 
   #content form ul {
@@ -447,6 +448,12 @@ strong {
   border: 1px solid #D3D3D3;
   margin: 1em 0em;
   padding: 0.25em 1em;
+}
+
+.box_relationships {
+  border: 1px solid #D3D3D3;
+  margin: 1em 0em 0em 0em;
+  padding: 1em 1em;
 }
 
 input#search {

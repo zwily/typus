@@ -182,7 +182,7 @@ module AdminFormHelper
 
       @item_has_many.each do |field|
         html << <<-HTML
-<div class="box">
+<div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}
   <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => back_to, :model => @model, :model_id => @item.id}</small>
@@ -211,7 +211,7 @@ module AdminFormHelper
       @item_has_and_belongs_to_many.each do |field|
         model_to_relate = field.singularize.camelize.constantize
         html << <<-HTML
-<div class="box">
+<div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}
   <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => back_to, :model => @model, :model_id => @item.id}</small>
