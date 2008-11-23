@@ -176,7 +176,7 @@ module AdminFormHelper
       if @item_has_many
         @item_has_many.each do |field|
           html << <<-HTML
-  <h2 style="margin: 20px 0px 10px 0px;">#{link_to field.titleize, :controller => "admin/#{field}"} <small>#{link_to "Add new", :controller => "admin/#{field}", :action => 'new', :back_to => request.env['REQUEST_URI'], "#{@model.name.downcase}_id" => @item.id}</small></h2>
+  <h2>#{link_to field.titleize, :controller => "admin/#{field}"} <small>#{link_to "Add new", :controller => "admin/#{field}", :action => 'new', :back_to => request.env['REQUEST_URI'], "#{@model.name.downcase}_id" => @item.id}</small></h2>
           HTML
           @items = @model.find(params[:id]).send(field)
           unless @items.empty?
@@ -203,7 +203,7 @@ module AdminFormHelper
           back_to = back_to.compact.join("/")
 
           html << <<-HTML
-  <h2 style="margin: 20px 0px 10px 0px;">
+  <h2>
   <a href="/admin/#{field}">#{field.titleize}</a>
   <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => back_to, :model => @model, :model_id => @item.id}</small>
   </h2>
