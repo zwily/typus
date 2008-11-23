@@ -95,7 +95,7 @@ module AdminFormHelper
     returning(String.new) do |html|
       related = attribute.split("_id").first.capitalize.camelize.constantize
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{link_to "Add new", "/admin/#{attribute.titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}&attribute=#{attribute}", :confirm => "Are you sure you want to leave this page?\nAny unsaved data will be lost." }</small></label>
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{link_to "Add new", "/admin/#{attribute.titleize.tableize}/new?back_to=#{request.env['REQUEST_URI']}&selected=#{attribute}", :confirm => "Are you sure you want to leave this page?\nAny unsaved data will be lost." }</small></label>
 #{select :item, attribute, related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}</li>
       HTML
     end

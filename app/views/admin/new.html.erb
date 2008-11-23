@@ -14,7 +14,7 @@
 <% form_for @item, 
             :url  => { :action => 'create', 
                        :back_to => params[:back_to], 
-                       :attribute => params[:attribute], 
+                       :selected => params[:selected], 
                        :model => params[:model], 
                        :model_id => params[:model_id] }, 
             :html => { :multipart => true } do |f| %>

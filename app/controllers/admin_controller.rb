@@ -73,7 +73,7 @@ class AdminController < ApplicationController
   def new
 
     item_params = params.dup
-    %w( action controller model model_id back_to attribute ).each do |param|
+    %w( action controller model model_id back_to selected ).each do |param|
       item_params.delete(param)
     end
 
@@ -107,7 +107,7 @@ class AdminController < ApplicationController
         else
           @item.save
           flash[:success] = "New #{@model.to_s.downcase} created."
-          redirect_to "#{params[:back_to]}?#{params[:attribute]}=#{@item.id}"
+          redirect_to "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
         end
       else
         @item.save
