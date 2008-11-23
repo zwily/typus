@@ -25,8 +25,8 @@ module AdminSidebarHelper
     when 'edit', 'update'
       html << <<-HTML
 <ul>
-<li>#{link_to "Next", :params => params.merge(:action => 'edit', :id => @next.id, :search => nil) if @next}</li>
-<li>#{link_to "Previous", :params => params.merge(:action => 'edit', :id => @previous.id, :search => nil) if @previous}</li>
+<li>#{link_to "Next", :id => @next.id if @next}</li>
+<li>#{link_to "Previous", :id => @previous.id if @previous}</li>
 </ul>
       HTML
     end
@@ -56,7 +56,7 @@ module AdminSidebarHelper
     html = ""
     @model.typus_actions_for(params[:action]).each do |action|
       if @current_user.can_perform?(@model, action)
-        html << "<li>#{link_to action.titleize.capitalize, :params => params.merge(:action => action)}</li>"
+        html << "<li>#{link_to action.titleize.capitalize, :action => action}</li>"
       end
     end
     html = "<ul>#{html}</ul>" unless html.empty?
