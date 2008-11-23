@@ -92,11 +92,11 @@ module AdminFormHelper
   end
 
   def typus_collection_field(attribute, value)
+
+    back_to = ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
+    related = attribute.split("_id").first.camelize.constantize
+
     returning(String.new) do |html|
-      related = attribute.split("_id").first.camelize.constantize
-      back_to = []
-      back_to << params[:controller] << params[:id]<< params[:action]
-      back_to = back_to.compact.join("/")
       html << <<-HTML
 <li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{link_to "Add new", { :controller => attribute.titleize.tableize, :action => 'new', :back_to => back_to, :selected => attribute }, :confirm => "Are you sure you want to leave this page?\nAny unsaved data will be lost." }</small></label>
 #{select :item, attribute, related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, :prompt => "Select a #{related.name.downcase}"}</li>
@@ -138,13 +138,16 @@ module AdminFormHelper
   end
 
   def typus_boolean_field(attribute, value)
+
     question = true if @model.typus_field_options_for(:questions).include?(attribute)
+
     returning(String.new) do |html|
       html << <<-HTML
 <li><label for="item_#{attribute}">#{attribute.titleize.capitalize}#{'?' if question}</label>
 #{check_box :item, attribute} Checked if active</li>
       HTML
     end
+
   end
 
   def typus_file_field(attribute, value)
@@ -172,48 +175,49 @@ module AdminFormHelper
   end
 
   def typus_form_has_many
+
+    back_to = ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
+
     returning(String.new) do |html|
       if @item_has_many
         @item_has_many.each do |field|
           html << <<-HTML
-  <h2>#{link_to field.titleize, :controller => "admin/#{field}"} <small>#{link_to "Add new", :controller => "admin/#{field}", :action => 'new', :back_to => request.env['REQUEST_URI'], "#{@model.name.downcase}_id" => @item.id}</small></h2>
+<h2>#{link_to field.titleize, :controller => "admin/#{field}"} <small>#{link_to "Add new", :controller => "admin/#{field}", :action => 'new', :back_to => back_to, "#{@model.name.downcase}_id" => @item.id}</small></h2>
           HTML
           @items = @model.find(params[:id]).send(field)
           unless @items.empty?
             html << build_table(@items[0].class, 'relationship', @items)
           else
             html << <<-HTML
-  <div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
+<div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
             HTML
           end
         end
       end
     end
+
   end
 
   def typus_form_has_and_belongs_to_many
+
+    back_to = ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
+
     returning(String.new) do |html|
       if @item_has_and_belongs_to_many
         @item_has_and_belongs_to_many.each do |field|
-
           model_to_relate = field.singularize.camelize.constantize
-
-          back_to = []
-          back_to << params[:controller] << params[:id]<< params[:action]
-          back_to = back_to.compact.join("/")
-
           html << <<-HTML
-  <h2>
-  <a href="/admin/#{field}">#{field.titleize}</a>
-  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => back_to, :model => @model, :model_id => @item.id}</small>
-  </h2>
+<h2>
+<a href="/admin/#{field}">#{field.titleize}</a>
+<small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => back_to, :model => @model, :model_id => @item.id}</small>
+</h2>
           HTML
           items_to_relate = (model_to_relate.find(:all) - @item.send(field))
           if !items_to_relate.empty?
             html << <<-HTML
-  #{form_tag :action => 'relate'}
-  #{hidden_field :related, :model, :value => field.modelize}
-  <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag "Add", :class => 'button'}</form></p>
+#{form_tag :action => 'relate'}
+#{hidden_field :related, :model, :value => field.modelize}
+<p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag "Add", :class => 'button'}</form></p>
             HTML
           end
           current_model = @model.name.singularize.camelize.constantize
@@ -222,12 +226,13 @@ module AdminFormHelper
             html << build_table(field.modelize, 'relationship')
           else
             html << <<-HTML
-  <div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
+<div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
             HTML
           end
         end
       end
     end
+
   end
 
   ##
