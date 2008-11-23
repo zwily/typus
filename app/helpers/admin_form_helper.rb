@@ -172,23 +172,23 @@ module AdminFormHelper
   end
 
   def typus_form_has_many
-    html = ""
-    if @item_has_many
-      @item_has_many.each do |field|
-        html << <<-HTML
-<h2 style="margin: 20px 0px 10px 0px;">#{link_to field.titleize, :controller => "admin/#{field}"} <small>#{link_to "Add new", :controller => "admin/#{field}", :action => 'new', :back_to => request.env['REQUEST_URI'], "#{@model.name.downcase}_id" => @item.id}</small></h2>
-        HTML
-        @items = @model.find(params[:id]).send(field)
-        unless @items.empty?
-          html << build_table(@items[0].class, 'relationship', @items)
-        else
+    returning(String.new) do |html|
+      if @item_has_many
+        @item_has_many.each do |field|
           html << <<-HTML
-<div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
+  <h2 style="margin: 20px 0px 10px 0px;">#{link_to field.titleize, :controller => "admin/#{field}"} <small>#{link_to "Add new", :controller => "admin/#{field}", :action => 'new', :back_to => request.env['REQUEST_URI'], "#{@model.name.downcase}_id" => @item.id}</small></h2>
           HTML
+          @items = @model.find(params[:id]).send(field)
+          unless @items.empty?
+            html << build_table(@items[0].class, 'relationship', @items)
+          else
+            html << <<-HTML
+  <div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
+            HTML
+          end
         end
       end
     end
-    return html
   end
 
   def typus_form_has_and_belongs_to_many
