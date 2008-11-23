@@ -93,7 +93,7 @@ module AdminFormHelper
 
   def typus_collection_field(attribute, value)
 
-    back_to = ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
+    back_to = "/" + ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
     related = attribute.split("_id").first.camelize.constantize
 
     returning(String.new) do |html|
@@ -200,7 +200,7 @@ module AdminFormHelper
 
   def typus_form_has_and_belongs_to_many
 
-    back_to = ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
+    back_to = "/" + ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
 
     returning(String.new) do |html|
       if @item_has_and_belongs_to_many
