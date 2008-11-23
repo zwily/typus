@@ -176,7 +176,7 @@ module AdminFormHelper
 
   def typus_form_has_many
 
-    back_to = ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
+    back_to = "/" + ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
 
     returning(String.new) do |html|
       if @item_has_many
@@ -184,7 +184,7 @@ module AdminFormHelper
           html << <<-HTML
 <h2>
 #{link_to field.titleize, :controller => field}
-<small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => back_to, "#{@model.name.downcase}_id" => @item.id}</small>
+<small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => back_to, :model => @model, :model_id => @item.id}</small>
 </h2>
           HTML
           @items = @model.find(params[:id]).send(field)
