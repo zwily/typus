@@ -39,23 +39,23 @@ module AdminTableHelper
 
         case params[:action]
         when 'index'
-          @perform = link_to image_tag("admin/trash.gif"), { :controller => "admin/#{model.name.tableize}", 
-                                                             :action => 'destroy', 
-                                                             :id => item.id }, 
-                                                             :confirm => "Remove entry?", 
-                                                             :method => :delete
+          perform = link_to image_tag("admin/trash.gif"), { :controller => "admin/#{model.name.tableize}", 
+                                                            :action => 'destroy', 
+                                                            :id => item.id }, 
+                                                            :confirm => "Remove entry?", 
+                                                            :method => :delete
         else
-          @perform = link_to image_tag("admin/trash.gif"), { :controller => "admin/#{model.name.tableize}", 
-                                                             :action => "unrelate", 
-                                                             :id => item.id, 
-                                                             :model => @model, 
-                                                             :model_id => params[:id] }, 
-                                                             :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@model.name}?"
+          perform = link_to image_tag("admin/trash.gif"), { :controller => "admin/#{model.name.tableize}", 
+                                                            :action => "unrelate", 
+                                                            :id => item.id, 
+                                                            :model => @model, 
+                                                            :model_id => params[:id] }, 
+                                                            :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@model.name}?"
         end
 
       end
 
-      html << "<td width=\"10px\">#{@perform}</td>\n</tr>"
+      html << "<td width=\"10px\">#{perform}</td>\n</tr>"
 
     end
 
