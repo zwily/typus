@@ -59,6 +59,14 @@ You can overwrite the following settings:
 
 You can overwrite this settings in the initializer `typus.rb`.
 
+### Special Route
+
+To overwrite the default prefix path of your application place the 
+following configuration option on `development.rb`, `production.rb` 
+on the `config/environments` folder.
+
+    Typus::Configuration.options[:prefix] = "backoffice"
+
 ### Disable password recover
 
 You can disable password recover on the login page. By default, password

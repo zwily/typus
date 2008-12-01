@@ -49,7 +49,8 @@ module Typus
                   :password => 8, 
                   :special_characters_on_password => false, 
                   :ssl => false, 
-                  :actions_on_table => false }
+                  :actions_on_table => false, 
+                  :prefix => 'admin' }
 
     mattr_accessor :options
 
