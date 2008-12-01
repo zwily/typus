@@ -19,7 +19,6 @@ You can view the available tasks running:
     $ rake -T typus
     (in /home/fesplugas/projects/typus_platform)
     rake typus:dependencies  # Install Typus dependencies (paperclip, acts_as_l....
-    rake typus:plugins       # Install Typus plugins
     rake typus:roles         # List current roles
     rake typus:specs         # Generate specdoc-style documentation from tests
 
