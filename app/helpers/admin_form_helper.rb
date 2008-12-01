@@ -168,7 +168,7 @@ module AdminFormHelper
         html << "<p>No preview available. (#{content_type.split('/').last})</p>"
       end
 
-      html << "#{file_field :item, attribute.split("_file_name").first,:disabled => attribute_disabled?(attribute) }</li>"
+      html << "#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>"
 
     end
 
