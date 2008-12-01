@@ -80,10 +80,13 @@ module Typus
           #
           case field
             when 'parent_id':       attribute_type = 'tree'
-            when /_id/:             attribute_type = 'collection'
             when /file_name/:       attribute_type = 'file'
             when /password/:        attribute_type = 'password'
             when 'position':        attribute_type = 'position'
+          end
+
+          if self.reflect_on_association(field.split('_id').first.to_sym)
+            attribute_type = 'collection'
           end
 
           if self.typus_field_options_for(:selectors).include?(field)
