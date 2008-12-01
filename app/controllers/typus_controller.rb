@@ -130,7 +130,7 @@ class TypusController < ApplicationController
 
   end
 
-  def configuration
+  def overview
   end
 
 private
