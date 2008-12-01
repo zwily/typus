@@ -90,6 +90,11 @@ module AdminTableHelper
     "<td></td>"
   end
 
+  ##
+  # When detection of the attributes is made a default attribute 
+  # type is set. From the string_field we display other content 
+  # types.
+  #
   def typus_table_string_field(item, column, fields)
     returning(String.new) do |html|
       if item.class.typus_fields_for(fields).first == column
@@ -98,9 +103,15 @@ module AdminTableHelper
 <br /><small>#{"Custom actions go here, but only if exist." if Typus::Configuration.options[:actions_on_table]}</small></td>
         HTML
       else
-        html << <<-HTML
+        if item.send(column[0]).kind_of?(Array)
+          html << <<-HTML
+<td>#{item.send(column[0]).map { |i| i.typus_name }.join(', ')}</td>
+          HTML
+        else
+          html << <<-HTML
 <td>#{item.send(column[0])}</td>
-        HTML
+          HTML
+        end
       end
     end
   end
