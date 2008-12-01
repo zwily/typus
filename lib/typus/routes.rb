@@ -6,6 +6,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.with_options :controller => 'typus', :path_prefix => Typus::Configuration.options[:prefix] do |i|
     i.typus_dashboard "", :action => 'dashboard'
+    i.typus_overview "overview", :action => 'overview'
     i.typus_login "login", :action => 'login'
     i.typus_logout "logout", :action => 'logout'
     i.typus_setup "setup", :action => 'setup'
