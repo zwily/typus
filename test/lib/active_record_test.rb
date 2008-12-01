@@ -84,6 +84,15 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal [["status", "boolean"], ["roles", "string"]], TypusUser.typus_filters
   end
 
+  def test_should_return_filters_for_post
+    expected = [["status", "boolean"], 
+                ["created_at", "datetime"], 
+                ["user", "collection"], 
+                ["user_id", "integer"]]
+    assert_equal expected.map { |i| i.first }.join(', '), Typus::Configuration.config['Post']['filters']
+    assert_equal expected, Post.typus_filters
+  end
+
   def test_should_return_actions_on_list_for_typus_user
     assert TypusUser.typus_actions_for('list').empty?
     assert TypusUser.typus_actions_for(:list).empty?

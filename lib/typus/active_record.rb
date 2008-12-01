@@ -122,21 +122,37 @@ module Typus
     #   end
     #
     def typus_filters
+
       available_fields = self.model_fields
+
       if self.respond_to?('admin_filters')
         fields = self.admin_filters
       else
         return [] unless Typus::Configuration.config[self.name]['filters']
         fields = Typus::Configuration.config[self.name]['filters'].split(', ')
       end
+
       fields_with_type = []
+
       fields.each do |field|
-        if available_fields.map { |a| a.first }.include? field
-          type = available_fields.map { |a| a.last if field == a.first }.compact.first
-          fields_with_type << [ field, type ]
+
+        ##
+        # Is the field available as a reflection?
+        #
+        if self.reflect_on_association(field.to_sym)
+          attribute_type = 'collection'
         end
+
+        if available_fields.map { |a| a.first }.include?(field)
+          attribute_type = available_fields.map { |a| a.last if field == a.first }.compact.first
+        end
+
+        fields_with_type << [field, attribute_type] if attribute_type
+
       end
+
       return fields_with_type
+
     end
 
     ##

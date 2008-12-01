@@ -32,7 +32,7 @@ Post:
     index: cleanup
     edit: send_as_newsletter, preview
   related: categories
-  filters: status, created_at, category
+  filters: status, created_at, user, user_id
   search: title
   order_by: title, -created_at
   application: Blog
