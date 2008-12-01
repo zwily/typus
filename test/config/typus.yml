@@ -18,7 +18,7 @@ Category:
 
 Post:
   fields:
-    list: title, user, created_at, status
+    list: title, user, user_id, created_at, status
     form: title, user, body, created_at, status
     relationship: title, created_at
     options:

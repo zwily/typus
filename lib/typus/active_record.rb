@@ -85,7 +85,7 @@ module Typus
             when 'position':        attribute_type = 'position'
           end
 
-          if self.reflect_on_association(field.split('_id').first.to_sym)
+          if self.reflect_on_association(field.to_sym)
             attribute_type = 'collection'
           end
 

@@ -42,6 +42,7 @@ class ActiveRecordTest < Test::Unit::TestCase
   def test_should_return_typus_fields_for_list_for_post
     expected_fields = [["title", "string"],
                        ["user", "collection"],
+                       ["user_id", "integer"],
                        ["created_at", "datetime"],
                        ["status", "selector"]]
     assert_equal expected_fields, Post.typus_fields_for(:list)
