@@ -208,10 +208,6 @@ module Typus
     ##
     # Used for +relationships+
     #
-    def typus_relationships_for(filter)
-      Typus::Configuration.config[self.name]['relationships'][filter.to_s].split(', ') rescue []
-    end
-
     def typus_relationships
       Typus::Configuration.config[self.name]['relationships'].split(', ') rescue []
     end
