@@ -212,6 +212,10 @@ module Typus
       Typus::Configuration.config[self.name]['relationships'][filter.to_s].split(', ') rescue []
     end
 
+    def typus_relationships
+      Typus::Configuration.config[self.name]['relationships'].split(', ') rescue []
+    end
+
     ##
     # Used for order_by
     #

@@ -176,6 +176,19 @@ module AdminFormHelper
 
   end
 
+  def typus_relationships
+    returning(String.new) do |html|
+      @item_relationships.each do |relationship|
+        case @model.reflect_on_association(relationship.to_sym).macro
+        when :has_many
+          html << typus_form_has_many
+        when :has_and_belongs_to_many
+          html << typus_form_has_and_belongs_to_many
+        end
+      end
+    end
+  end
+
   def typus_form_has_many
 
     back_to = "/" + ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
