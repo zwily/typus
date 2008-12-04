@@ -9,11 +9,14 @@ require 'sha1'
 require 'typus'
 
 ##
-# And finally we enable Typus
+# We don't want to enable or generate files if we are running a generator
 #
-Typus.enable
+scripts = %w( script/generate script/destroy )
 
 ##
-# Autogenerator for the models.
+# Enable Typus and run the generator unless we are on Rails.env.test?
 #
-Typus.generator unless Rails.env.test?
+unless scripts.include?($0)
+  Typus.enable
+  Typus.generator unless Rails.env.test?
+end
