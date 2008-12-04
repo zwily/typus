@@ -54,8 +54,8 @@ class TypusFilesGenerator < Rails::Generator::Base
                  "config/initializers/typus.rb", 
                  :assigns => { :application => application }
 
-      ["#{Rails.root}/public/stylesheets/admin", 
-      "#{Rails.root}/public/images/admin" ].each do |folder|
+      [ "#{Rails.root}/public/stylesheets/admin", 
+        "#{Rails.root}/public/images/admin" ].each do |folder|
         Dir.mkdir(folder) unless File.directory?(folder)
       end
 
