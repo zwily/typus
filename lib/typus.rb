@@ -77,7 +77,6 @@ module Typus
     end
 
     def enable
-      load("#{RAILS_ROOT}/config/initializers/inflections.rb")
       Typus::Configuration.config!
       Typus::Configuration.roles!
       require File.dirname(__FILE__) + "/../test/test_models" if Rails.env.test?
