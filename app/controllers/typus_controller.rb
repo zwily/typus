@@ -27,10 +27,7 @@ class TypusController < ApplicationController
   #
   def login
 
-    if TypusUser.count == 0
-      redirect_to :action => 'setup'
-      return
-    end
+    redirect_to :action => 'setup' and return if TypusUser.count.zero?
 
     if request.post?
       @user = TypusUser.authenticate(params[:user][:email], params[:user][:password])
