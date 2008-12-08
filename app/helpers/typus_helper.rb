@@ -87,7 +87,7 @@ module TypusHelper
 
     end
 
-    return html rescue nil
+    return html
 
   end
 
