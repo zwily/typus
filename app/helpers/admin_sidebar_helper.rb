@@ -84,28 +84,26 @@ module AdminSidebarHelper
 
   def search
 
-    return "" if Typus::Configuration.config[@model.name]['search'].nil?
+    unless Typus::Configuration.config[@model.name]['search'].nil?
 
-    search_params = params.dup
-    %w( action controller search page ).each do |param|
-      search_params.delete(param)
-    end
+      search_params = params.dup
+      %w( action controller search page ).each { |p| search_params.delete(p) }
 
-    hidden_params = ""
-    search_params.each do |key, value|
-      hidden_params << "#{hidden_field_tag key, value}\n"
-    end
+      hidden_params = []
+      search_params.each { |key, value| hidden_params << hidden_field_tag(key, value) }
 
-    search = <<-HTML
+      search = <<-HTML
 <h2>Search</h2>
 <form action="" method="get">
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
-#{hidden_params}
+#{hidden_params.join("\n")}
 </form>
 <p style="margin: -10px 0px 10px 0px;"><small>Searching by #{Typus::Configuration.config[@model.name]['search'].split(', ').to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
-    HTML
+      HTML
 
-    return search
+      return search
+
+    end
 
   end
 
