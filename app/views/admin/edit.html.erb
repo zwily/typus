@@ -10,7 +10,7 @@
 <%= typus_block :model => @model.name.tableize, :partial => :edit_top %>
 
 <% form_for @item, 
-            :url  => { :action => 'update' }, 
+            :url  => { :action => 'update', :id => @item.id }, 
             :html => { :multipart => true } do |f| %>
   <%= build_form %>
   <p><%= submit_tag "Update entry", :class => 'button' %></p>
