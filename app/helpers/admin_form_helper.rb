@@ -84,7 +84,7 @@ module AdminFormHelper
       html << <<-HTML
 <li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
 <select id="item_#{attribute}" name="item[#{attribute}]" <%= attribute_disabled?(attribute) ? 'disabled="disabled"' : '' %>>
-  <option value="">Select an option</option>
+  <option value=""></option>
   #{options}
 </select></li>
       HTML
