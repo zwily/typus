@@ -1,15 +1,15 @@
 <% content_for :sidebar do %>
-  <%= typus_block :new_sidebar %>
+  <%= typus_block :model => @model.name.tableize, :partial => :new_sidebar %>
   <%= actions %>
 <% end %>
 
-<%= typus_block :new %>
+<%= typus_block :model => @model.name.tableize, :partial => :new %>
 
 <%= display_link_to_previous if params[:back_to] %>
 
 <h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; <%= link_to @model.name.pluralize.titleize, :action => "index" %> &rsaquo; New</h2>
 
-<%= typus_block :new_top %>
+<%= typus_block :model => @model.name.tableize, :partial => :new_top %>
 
 <% form_for @item, 
             :url  => { :action => 'create', 
@@ -22,4 +22,4 @@
   <p><%= submit_tag "Create entry", :class => 'button' %></p>
 <% end %>
 
-<%= typus_block :new_bottom %>
+<%= typus_block :model => @model.name.tableize, :partial => :new_bottom %>

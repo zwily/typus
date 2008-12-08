@@ -91,12 +91,10 @@ module TypusHelper
 
   end
 
-  def typus_block(name, location = nil)
-    if location
-      render :partial => "admin/#{location}/#{name}" rescue nil
-    else
-      render :partial => "admin/#{name}" rescue nil
-    end
+  def typus_block(*args)
+    options = args.extract_options!
+    file = ([] << "admin" << options[:model] << options[:location] << options[:partial])
+    render :partial => file.compact.join('/') rescue nil
   end
 
   def display_error(error)

@@ -1,15 +1,15 @@
 <% content_for :sidebar do %>
-  <%= typus_block :index_sidebar %>
+  <%= typus_block :model => @model.name.tableize, :partial => :index_sidebar %>
   <%= actions %>
   <%= search %>
   <%= filters %>
 <% end %>
 
-<%= typus_block :index %>
+<%= typus_block :model => @model.name.tableize, :partial => :index %>
 
 <h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; <%= @model.name.pluralize.titleize %> <% if request.env['QUERY_STRING'] && !request.env['QUERY_STRING'].blank? %><small><%= link_to "Remove filter" %></small><% end %></h2>
 
-<%= typus_block :index_top %>
+<%= typus_block :model => @model.name.tableize, :partial => :index_top %>
 
 <% if @items.count > 0 -%>
   <%= build_table %>
@@ -24,4 +24,4 @@
   </div>
 <% end %>
 
-<%= typus_block :index_bottom %>
+<%= typus_block :model => @model.name.tableize, :partial => :index_bottom %>

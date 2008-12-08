@@ -6,10 +6,6 @@ module AdminHelper
   include AdminFormHelper
   include AdminTableHelper
 
-  def typus_block(name)
-    render :partial => "admin/#{@model.name.tableize}/#{name}" rescue nil
-  end
-
   def display_link_to_previous
     returning(String.new) do |html|
       html << <<-HTML

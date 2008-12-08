@@ -1,14 +1,14 @@
 <% content_for :sidebar do %>
-  <%= typus_block :show_sidebar %>
+  <%= typus_block :model => @model.name.tableize, :partial => :show_sidebar %>
   <%= actions %>
 <% end %>
 
-<%= typus_block :show %>
+<%= typus_block :model => @model.name.tableize, :partial => :show %>
 
 <h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; <%= link_to @model.name.pluralize.titleize, :action => 'index' %> &rsaquo; Show</h2>
 
-<%= typus_block :show_top %>
+<%= typus_block :model => @model.name.tableize, :partial => :show_top %>
 
 <%=h @item.inspect %>
 
-<%= typus_block :show_bottom %>
+<%= typus_block :model => @model.name.tableize, :partial => :show_bottom %>
