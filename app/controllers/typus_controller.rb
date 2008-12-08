@@ -99,10 +99,7 @@ class TypusController < ApplicationController
 
   def setup
 
-    if TypusUser.count > 0
-      redirect_to :action => 'login'
-      return
-    end
+    redirect_to :action => 'login' and return unless TypusUser.count.zero?
 
     if request.post?
       password = generate_password
