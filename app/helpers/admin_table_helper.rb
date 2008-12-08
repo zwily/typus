@@ -19,6 +19,7 @@ module AdminTableHelper
           case column[1]
           when "boolean":           html << typus_table_boolean_field(item, column)
           when "datetime", "date":  html << typus_table_datetime_field(item, column)
+          when "time":              html << typus_table_time_field(item, column)
           when "collection":        html << typus_table_collection_field(item, column)
           when "tree":              html << typus_table_tree_field(item, column)
           when "position":          html << typus_table_position_field(item, column)
@@ -142,6 +143,14 @@ module AdminTableHelper
     returning(String.new) do |html|
       html << <<-HTML
 <td>#{!item.send(column[0]).nil? ? item.send(column[0]).to_s(:db) : 'nil'}</td>
+      HTML
+    end
+  end
+
+  def typus_table_time_field(item, column)
+    returning(String.new) do |html|
+      html << <<-HTML
+<td>#{item.send(column[0])}</td>
       HTML
     end
   end

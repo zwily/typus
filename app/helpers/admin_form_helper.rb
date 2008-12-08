@@ -11,6 +11,7 @@ module AdminFormHelper
       fields.each do |field|
         case field.last
         when "boolean":         html << typus_boolean_field(field.first, field.last)
+        when "time":            html << typus_time_field(field.first, field.last)
         when "datetime":        html << typus_datetime_field(field.first, field.last)
         when "date":            html << typus_date_field(field.first, field.last)
         when "text":            html << typus_text_field(field.first, field.last)
@@ -48,14 +49,23 @@ module AdminFormHelper
     end
   end
 
-    def typus_date_field(attribute, value)
-      returning(String.new) do |html|
-        html << <<-HTML
+  def typus_date_field(attribute, value)
+    returning(String.new) do |html|
+      html << <<-HTML
 <li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
 #{date_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
-        HTML
-      end
+      HTML
     end
+  end
+
+  def typus_time_field(attribute, value)
+    returning(String.new) do |html|
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+#{time_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
+      HTML
+    end
+  end
 
   def typus_text_field(attribute, value)
     returning(String.new) do |html|
