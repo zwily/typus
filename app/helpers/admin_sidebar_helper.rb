@@ -114,13 +114,8 @@ module AdminSidebarHelper
       @model.typus_filters.each do |f|
         html << "<h2>#{f[0].humanize}</h2>\n"
         case f[1]
-        when 'boolean'
-          html << "<ul>\n"
-          %w( true false ).each do |status|
-            switch = (current_request.include? "#{f[0]}=#{status}") ? 'on' : 'off'
-            html << "<li>#{link_to status.capitalize, { :params => params.merge(f[0] => status, :page => nil) }, :class => switch}</li>\n"
-          end
-          html << "</ul>\n"
+        when 'boolean':      html << boolean_filter(current_request, f[0])
+        when 'string':       html << string_filter(current_request, f[0])
         when 'datetime'
           html << "<ul>\n"
           %w( today past_7_days this_month this_year ).each do |timeline|
@@ -149,24 +144,39 @@ module AdminSidebarHelper
           else
             html << "<p>No available #{model.name.downcase.pluralize}.</p>"
           end
-        when 'string'
-          values = @model.send(f[0])
-          if !values.empty?
-            html << "<ul>\n"
-            values.each do |item|
-              switch = current_request.include?("#{f[0]}=#{item}") ? 'on' : 'off'
-              html << "<li>#{link_to item.capitalize, { :params => params.merge(f[0] => item) }, :class => switch }</li>\n"
-            end
-            html << "</ul>\n"
-          else
-            html << "<p>No available values.</p>"
-          end
         else
           html << "<p>Unknown</p>"
         end
       end
     end
     return html
+  end
+
+  def boolean_filter(request, filter)
+    returning(String.new) do |html|
+      html << "<ul>\n"
+      %w( true false ).each do |status|
+        switch = (request.include? "#{filter}=#{status}") ? 'on' : 'off'
+        html << "<li>#{link_to status.capitalize, { :params => params.merge(filter => status, :page => nil) }, :class => switch}</li>\n"
+      end
+      html << "</ul>\n"
+    end
+  end
+
+  def string_filter(request, filter)
+    values = @model.send(filter)
+    returning(String.new) do |html|
+      if !values.empty?
+        html << "<ul>\n"
+        values.each do |item|
+          switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
+          html << "<li>#{link_to item.capitalize, { :params => params.merge(filter => item) }, :class => switch }</li>\n"
+        end
+        html << "</ul>\n"
+      else
+        html << "<p>No available #{filter}.</p>"
+      end
+    end
   end
 
 end
