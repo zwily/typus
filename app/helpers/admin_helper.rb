@@ -16,6 +16,15 @@ module AdminHelper
     end
   end
 
+  def build_list
+    template = "#{Rails.root}/app/views/admin/#{@model.name.tableize}/_#{@model.name.tableize.singularize}.html.erb"
+    if File.exists?(template)
+      render :partial => template.gsub('/_', '/'), :collection => @items, :as => :item
+    else
+      build_table
+    end
+  end
+
   ##
   # Simple and clean pagination links
   #

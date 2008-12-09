@@ -12,7 +12,7 @@
 <%= typus_block :model => @model.name.tableize, :partial => :index_top %>
 
 <% unless @items.count.zero? -%>
-  <%= build_table %>
+  <%= build_list %>
   <%= render :partial => 'admin/pagination' if @items.prev || @items.next %>
 <% else %>
   <div class="box" id="empty">
