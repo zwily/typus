@@ -5,9 +5,11 @@ module Typus
     module Reloader
 
       def reload_config_et_roles
-        logger.info "[typus] Configuration files have been reloaded."
-        Typus::Configuration.roles!
-        Typus::Configuration.config!
+        if Rails.env.development?
+          logger.info "[typus] Configuration files have been reloaded."
+          Typus::Configuration.roles!
+          Typus::Configuration.config!
+        end
       end
 
     end
