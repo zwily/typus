@@ -245,14 +245,14 @@ module AdminFormHelper
       unless items_to_relate.empty?
         html << <<-HTML
   #{form_tag :action => 'relate'}
-  #{hidden_field :related, :model, :value => field.modelize}
+  #{hidden_field :related, :model, :value => field.to_class}
   <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag "Add", :class => 'button'}</form></p>
         HTML
       end
       current_model = @model.name.singularize.camelize.constantize
       @items = current_model.find(params[:id]).send(field)
       unless @items.empty?
-        html << build_table(field.modelize, 'relationship')
+        html << build_table(field.to_class, 'relationship')
       else
         html << <<-HTML
   <div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>

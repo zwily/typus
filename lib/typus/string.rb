@@ -1,11 +1,7 @@
 class String
 
-  def modelize
-    self.singularize.camelize.constantize
-  end
-
   def to_class
-    modelize
+    self.singularize.camelize.constantize
   end
 
 end
