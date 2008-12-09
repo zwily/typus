@@ -127,15 +127,10 @@ class AdminController < ApplicationController
   # Edit an item.
   #
   def edit
-    ##
-    # We assign the params passed trough the url
-    #
     item_params = params.dup
-    %w( action controller model model_id back_to id ).each do |param|
-      item_params.delete(param)
-    end
+    %w( action controller model model_id back_to id ).each { |p| item_params.delete(p) }
+    # We assign the params passed trough the url
     @item.attributes = item_params
-
     @previous, @next = @item.previous_and_next
     select_template :edit
   end
