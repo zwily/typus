@@ -16,8 +16,13 @@ module AdminHelper
     end
   end
 
+  ##
+  # If there's a partial with a "microformat" of the data we want to 
+  # display, this will be used, otherwise we use a default table which 
+  # it's build from the options defined on the yaml configuration file.
+  #
   def build_list
-    template = "#{Rails.root}/app/views/admin/#{@model.name.tableize}/_#{@model.name.tableize.singularize}.html.erb"
+    template = "app/views/admin/#{@model.name.tableize}/_#{@model.name.tableize.singularize}.html.erb"
     if File.exists?(template)
       render :partial => template.gsub('/_', '/'), :collection => @items, :as => :item
     else
