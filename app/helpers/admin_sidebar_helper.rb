@@ -139,12 +139,16 @@ module AdminSidebarHelper
         ##
         # Or having a simple list.
         #
-        html << "<ul>\n"
+        items = []
         model.find(:all, :order => model.typus_order_by).each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'on' : 'off'
-          html << "<li>#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch }</li>\n"
+          items << "<li>#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch }</li>"
         end
-        html << "</ul>\n"
+        html << <<-HTML
+<ul>
+#{items.join("\n")}
+</ul>
+        HTML
       else
         html << "<p>No available #{model.name.downcase.pluralize}.</p>"
       end
@@ -153,23 +157,31 @@ module AdminSidebarHelper
 
   def datetime_filter(request, filter)
     returning(String.new) do |html|
-      html << "<ul>\n"
+      items = []
       %w( today past_7_days this_month this_year ).each do |timeline|
         switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
-        html << "<li>#{link_to timeline.titleize, { :params => params.merge(filter => timeline, :page => nil) }, :class => switch}</li>\n"
+        items << "<li>#{link_to timeline.titleize, { :params => params.merge(filter => timeline, :page => nil) }, :class => switch}</li>"
       end
-      html << "</ul>\n"
+      html << <<-HTML
+<ul>
+#{items.join("\n")}
+</ul>
+      HTML
     end
   end
 
   def boolean_filter(request, filter)
     returning(String.new) do |html|
-      html << "<ul>\n"
+      items = []
       %w( true false ).each do |status|
         switch = request.include?("#{filter}=#{status}") ? 'on' : 'off'
-        html << "<li>#{link_to status.capitalize, { :params => params.merge(filter => status, :page => nil) }, :class => switch}</li>\n"
+        items << "<li>#{link_to status.capitalize, { :params => params.merge(filter => status, :page => nil) }, :class => switch}</li>"
       end
-      html << "</ul>\n"
+      html << <<-HTML
+<ul>
+#{items.join("\n")}
+</ul>
+      HTML
     end
   end
 
@@ -177,12 +189,16 @@ module AdminSidebarHelper
     values = @model.send(filter)
     returning(String.new) do |html|
       unless values.empty?
-        html << "<ul>\n"
+        items = []
         values.each do |item|
           switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
-          html << "<li>#{link_to item.capitalize, { :params => params.merge(filter => item) }, :class => switch }</li>\n"
+          items << "<li>#{link_to item.capitalize, { :params => params.merge(filter => item) }, :class => switch }</li>"
         end
-        html << "</ul>\n"
+        html << <<-HTML
+<ul>
+#{items.join("\n")}
+</ul>
+        HTML
       else
         html << "<p>No available #{filter}.</p>"
       end
