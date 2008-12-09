@@ -11,12 +11,12 @@
 
 <%= typus_block :model => @model.name.tableize, :partial => :index_top %>
 
-<% if @items.count > 0 -%>
+<% unless @items.count.zero? -%>
   <%= build_table %>
   <%= render :partial => 'admin/pagination' if @items.prev || @items.next %>
 <% else %>
   <div class="box" id="empty">
-    <% if @model.count == 0 %>
+    <% if @model.count.zero? %>
       <p>There are no entries.</p>
     <% else %>
       <p>There are no entries under this filter.</p>
