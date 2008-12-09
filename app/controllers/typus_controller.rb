@@ -45,6 +45,7 @@ class TypusController < ApplicationController
     else
       render :layout => 'typus_login'
     end
+
   end
 
   ##
@@ -102,12 +103,14 @@ class TypusController < ApplicationController
     redirect_to :action => 'login' and return unless TypusUser.count.zero?
 
     if request.post?
+
       password = generate_password
       @typus_user = TypusUser.new(:email => params[:user][:email], 
                                   :password => password, 
                                   :password_confirmation => password, 
                                   :roles => Typus::Configuration.options[:root], 
                                   :status => true)
+
       if @typus_user.save
         session[:typus] = @typus_user.id
         flash[:notice] = "Your new password is <strong>#{password}</strong>."
@@ -118,8 +121,10 @@ class TypusController < ApplicationController
       end
 
     else
+
       flash[:success] = "<strong>Welcome to Typus!</strong> Write your email to create a typus user."
       render :layout => 'typus_login'
+
     end
 
   end
