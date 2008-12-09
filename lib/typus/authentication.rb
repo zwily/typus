@@ -65,7 +65,7 @@ protected
   #
   def can_perform_action_on_typus_user?
 
-    return if !@item.kind_of?(TypusUser)
+    return unless @item.kind_of?(TypusUser)
 
     current_user = (@current_user == @item)
     current_user_is_root = (@current_user.roles == Typus::Configuration.options[:root])
