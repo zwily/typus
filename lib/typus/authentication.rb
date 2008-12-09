@@ -3,9 +3,9 @@ module Authentication
 protected
 
   ##
-  # Require require login checks if the user is logged on Typus, 
-  # otherwhise is sent to the login page with a :back_to param to 
-  # return where she tried to go.
+  # Require login checks if the user is logged on Typus, otherwise 
+  # is sent to the login page with a :back_to param to return where 
+  # she tried to go.
   #
   # Use this for demo!
   #
@@ -22,24 +22,27 @@ protected
   # Check if the user is logged on the system.
   #
   def logged_in?
-    return false unless session[:typus]
-    begin
-      @current_user ||= TypusUser.find(session[:typus])
-    rescue ActiveRecord::RecordNotFound
-      session[:typus] = nil
-    end
+    @current_user ||= TypusUser.find(session[:typus])
+  rescue
+    session[:typus] = nil
+    return false
   end
 
   ##
-  # Return the current user
+  # Return the current user. The important thing here is that if the 
+  # roles does not longer exist on the system the user will be logged 
+  # off from Typus.
   #
   def current_user
-    @current_user if logged_in?
-    unless Typus::Configuration.roles.keys.include? @current_user.roles
+
+    (logged_in?) ? @current_user : redirect_to(typus_login_url)
+
+    unless Typus::Configuration.roles.keys.include?(@current_user.roles)
       session[:typus] = nil
       flash[:error] = "#{@current_user.roles.capitalize} role doesn't exist on the system."
       redirect_to typus_login_url
     end
+
   end
 
   ##
