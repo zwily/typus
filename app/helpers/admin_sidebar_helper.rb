@@ -109,41 +109,15 @@ module AdminSidebarHelper
 
   def filters
     current_request = request.env['QUERY_STRING'] || []
-    if @model.typus_filters.size > 0
+    unless @model.typus_filters.empty?
       html = ""
       @model.typus_filters.each do |f|
-        html << "<h2>#{f[0].humanize}</h2>\n"
-        case f[1]
-        when 'boolean':      html << boolean_filter(current_request, f[0])
-        when 'string':       html << string_filter(current_request, f[0])
-        when 'datetime'
-          html << "<ul>\n"
-          %w( today past_7_days this_month this_year ).each do |timeline|
-            switch = (current_request.include? "#{f[0]}=#{timeline}") ? 'on' : 'off'
-            html << "<li>#{link_to timeline.titleize, { :params => params.merge(f[0] => timeline, :page => nil) }, :class => switch}</li>\n"
-          end
-          html << "</ul>\n"
-        when 'collection'
-          model = f[0].capitalize.camelize.constantize
-          related_fk = @model.reflect_on_association(f.first.to_sym).primary_key_name
-          if !model.count.zero?
-            ##
-            # Here we have the option of having a selector.
-            #
-            # TODO
-            #
-            ##
-            # Or having a simple list.
-            #
-            html << "<ul>\n"
-            model.find(:all, :order => model.typus_order_by).each do |item|
-              switch = (current_request.include? "#{related_fk}=#{item.id}") ? 'on' : 'off'
-              html << "<li>#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch }</li>\n"
-            end
-            html << "</ul>\n"
-          else
-            html << "<p>No available #{model.name.downcase.pluralize}.</p>"
-          end
+        html << "<h2>#{f.first.humanize}</h2>\n"
+        case f.last
+        when 'boolean':      html << boolean_filter(current_request, f.first)
+        when 'string':       html << string_filter(current_request, f.first)
+        when 'datetime':     html << datetime_filter(current_request, f.first)
+        when 'collection':   html << collection_filter(current_request, f.first)
         else
           html << "<p>Unknown</p>"
         end
@@ -152,11 +126,47 @@ module AdminSidebarHelper
     return html
   end
 
+  def collection_filter(request, filter)
+    model = filter.capitalize.camelize.constantize
+    related_fk = @model.reflect_on_association(filter.to_sym).primary_key_name
+    returning(String.new) do |html|
+      unless model.count.zero?
+        ##
+        # Here we have the option of having a selector.
+        #
+        # TODO
+        #
+        ##
+        # Or having a simple list.
+        #
+        html << "<ul>\n"
+        model.find(:all, :order => model.typus_order_by).each do |item|
+          switch = request.include?("#{related_fk}=#{item.id}") ? 'on' : 'off'
+          html << "<li>#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch }</li>\n"
+        end
+        html << "</ul>\n"
+      else
+        html << "<p>No available #{model.name.downcase.pluralize}.</p>"
+      end
+    end
+  end
+
+  def datetime_filter(request, filter)
+    returning(String.new) do |html|
+      html << "<ul>\n"
+      %w( today past_7_days this_month this_year ).each do |timeline|
+        switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
+        html << "<li>#{link_to timeline.titleize, { :params => params.merge(filter => timeline, :page => nil) }, :class => switch}</li>\n"
+      end
+      html << "</ul>\n"
+    end
+  end
+
   def boolean_filter(request, filter)
     returning(String.new) do |html|
       html << "<ul>\n"
       %w( true false ).each do |status|
-        switch = (request.include? "#{filter}=#{status}") ? 'on' : 'off'
+        switch = request.include?("#{filter}=#{status}") ? 'on' : 'off'
         html << "<li>#{link_to status.capitalize, { :params => params.merge(filter => status, :page => nil) }, :class => switch}</li>\n"
       end
       html << "</ul>\n"
@@ -166,7 +176,7 @@ module AdminSidebarHelper
   def string_filter(request, filter)
     values = @model.send(filter)
     returning(String.new) do |html|
-      if !values.empty?
+      unless values.empty?
         html << "<ul>\n"
         values.each do |item|
           switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
