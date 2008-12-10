@@ -23,7 +23,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_equal 2, page.assets.size
 
     get :new, { :back_to => "/admin/pages/#{page.id}/edit", :model => page.class.name, :model_id => page.id }
-    assert_match /You're adding a new asset to a model. Do you want to cancel it?/, @response.body
+    assert_match /You're adding a new \"Asset\" to a model. Do you want to cancel it?/, @response.body
 
     post :create, { :back_to => "/admin/pages/#{page.id}/edit", :model => page.class.name, :model_id => page.id }
     assert_response :redirect
