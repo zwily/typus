@@ -84,6 +84,7 @@ module Typus
       require 'typus/routes'
       require 'typus/string'
       require 'typus/hash'
+      require 'typus/export'
       require 'typus/authentication'
       require 'typus/object'
       require 'typus/greetings'
