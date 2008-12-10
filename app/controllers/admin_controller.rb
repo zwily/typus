@@ -29,14 +29,10 @@ class AdminController < ApplicationController
   #
   def index
 
-    ##
     # Build the conditions
-    #
     conditions = @model.build_conditions(params)
 
-    ##
     # Pagination
-    #
     items_count = @model.count(:conditions => conditions)
     items_per_page = Typus::Configuration.options[:per_page].to_i
     @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
@@ -49,11 +45,9 @@ class AdminController < ApplicationController
 
     @items = @pager.page(params[:page])
 
-    ##
     # Respond with HTML, CSV and XML versions. This feature is only 
     # available on the index as is where we usually need those file 
     # versions.
-    #
     respond_to do |format|
       format.html { select_template :index }
       format.csv { generate_csv }
