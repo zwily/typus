@@ -22,8 +22,8 @@ class AdminController < ApplicationController
 
   before_filter :set_order, :only => [ :index ]
 
-  before_filter :fields, :only => [ :index ]
-  before_filter :form_fields, :only => [ :new, :edit, :create, :update ]
+  before_filter :set_fields, :only => [ :index ]
+  before_filter :set_form_fields, :only => [ :new, :edit, :create, :update ]
 
   ##
   # This is the main index of the model. With the filters, conditions 
@@ -260,14 +260,14 @@ private
   ##
   # Model +fields+
   #
-  def fields
+  def set_fields
     @fields = @model.typus_fields_for(:list)
   end
 
   ##
   # Model +form_fields+ and +form_fields_externals+
   #
-  def form_fields
+  def set_form_fields
     @item_fields = @model.typus_fields_for(:form)
     @item_relationships = @model.typus_relationships
   end
