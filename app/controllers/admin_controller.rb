@@ -261,9 +261,9 @@ private
   ##
   # Select which template to render.
   #
-  def select_template(template, model = @resource[:class])
-    if File.exists?("app/views/admin/#{model.name.tableize}/#{template}.html.erb")
-      render :template => "admin/#{model.name.tableize}/#{template}"
+  def select_template(template, resource = @resource[:table_name])
+    if File.exists?("app/views/admin/#{resource}/#{template}.html.erb")
+      render :template => "admin/#{resource}/#{template}"
     else
       render :template => "admin/#{template}"
     end
