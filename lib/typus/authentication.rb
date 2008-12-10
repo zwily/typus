@@ -12,7 +12,9 @@ protected
   #     session[:typus] = TypusUser.find(:first)
   #
   def require_login
-    unless session[:typus]
+    if session[:typus]
+      set_current_user
+    else
       back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
       redirect_to typus_login_url(:back_to => back_to)
     end
@@ -23,7 +25,7 @@ protected
   # roles does not longer exist on the system the user will be logged 
   # off from Typus.
   #
-  def current_user
+  def set_current_user
     @current_user ||= TypusUser.find(session[:typus])
     raise unless Typus::Configuration.roles.keys.include?(@current_user.roles)
   rescue

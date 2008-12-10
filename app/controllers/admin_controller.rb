@@ -13,7 +13,6 @@ class AdminController < ApplicationController
   before_filter :reload_config_et_roles
 
   before_filter :require_login
-  before_filter :current_user
 
   before_filter :set_model
   before_filter :find_model, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
