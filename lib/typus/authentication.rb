@@ -19,30 +19,17 @@ protected
   end
 
   ##
-  # Check if the user is logged on the system.
-  #
-  def logged_in?
-    @current_user ||= TypusUser.find(session[:typus])
-  rescue
-    session[:typus] = nil
-    return false
-  end
-
-  ##
   # Return the current user. The important thing here is that if the 
   # roles does not longer exist on the system the user will be logged 
   # off from Typus.
   #
   def current_user
-
-    (logged_in?) ? @current_user : redirect_to(typus_login_url)
-
-    unless Typus::Configuration.roles.keys.include?(@current_user.roles)
-      session[:typus] = nil
-      flash[:error] = "#{@current_user.roles.capitalize} role doesn't exist on the system."
-      redirect_to typus_login_url
-    end
-
+    @current_user ||= TypusUser.find(session[:typus])
+    raise unless Typus::Configuration.roles.keys.include?(@current_user.roles)
+  rescue
+    flash[:error] = "Error! Typus user or role doesn't exist."
+    session[:typus] = nil
+    redirect_to typus_login_url
   end
 
   ##
