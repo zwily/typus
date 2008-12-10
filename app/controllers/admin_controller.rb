@@ -54,12 +54,12 @@ class AdminController < ApplicationController
       format.xml  { render :xml => @items.items }
     end
 
-#  rescue Exception => error
-#    error_handler(error)
+  rescue Exception => error
+    error_handler(error)
   end
 
   ##
-  # New item.
+  # New record.
   #
   def new
 
@@ -115,7 +115,7 @@ class AdminController < ApplicationController
   end
 
   ##
-  # Edit an item.
+  # Edit a record.
   #
   def edit
     item_params = params.dup
@@ -127,7 +127,7 @@ class AdminController < ApplicationController
   end
 
   ##
-  # Show an item.
+  # Show a record.
   #
   def show
     @previous, @next = @item.previous_and_next
@@ -135,7 +135,7 @@ class AdminController < ApplicationController
   end
 
   ##
-  # Update an item.
+  # Update a record.
   #
   def update
     if @item.update_attributes(params[:item])
@@ -151,7 +151,7 @@ class AdminController < ApplicationController
   end
 
   ##
-  # Destroy an item.
+  # Destroy a record.
   #
   def destroy
     @item.destroy
