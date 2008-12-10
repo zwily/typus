@@ -5,7 +5,7 @@
 
 <%= typus_block :model => @resource[:table_name], :partial => :edit %>
 
-<h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; <%= link_to @resource[:class].name.pluralize.titleize, :action => 'index' %> &rsaquo; Edit</h2>
+<h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; <%= link_to @resource[:class_name_humanized].pluralize, :action => 'index' %> &rsaquo; Edit</h2>
 
 <%= typus_block :model => @resource[:table_name], :partial => :edit_top %>
 
