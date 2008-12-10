@@ -93,7 +93,7 @@ module Typus
                   Dir["config/typus/*_roles.yml"]
                 end
 
-      @@roles = { 'admin' => {} }
+      @@roles = { options[:root] => {} }
 
       folders.each do |folder|
         YAML.load_file("#{Rails.root}/#{folder}").each do |key, value|
