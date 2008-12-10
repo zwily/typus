@@ -104,7 +104,7 @@ module TypusHelper
   def page_title
     crumbs = []
     crumbs << Typus::Configuration.options[:app_name]
-    crumbs << @model.name.pluralize if @model
+    crumbs << @resource[:class_name].pluralize if @resource
     crumbs << params[:action].titleize unless %w( index ).include?(params[:action])
     return crumbs.compact.map { |x| x }.join(" &rsaquo; ")
   end

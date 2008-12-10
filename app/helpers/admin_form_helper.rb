@@ -79,7 +79,7 @@ module AdminFormHelper
   def typus_selector_field(attribute, value)
     returning(String.new) do |html|
       options = ""
-      @model.send(attribute).each do |option|
+      @resource[:class].send(attribute).each do |option|
         case option.kind_of?(Array)
         when true
           options << <<-HTML
@@ -110,8 +110,8 @@ module AdminFormHelper
     params[:action] = (params[:action] == 'create') ? 'new' : params[:action]
     back_to = "/" + ([] << params[:controller] << params[:id] << params[:action]).compact.join('/')
 
-    related = @model.reflect_on_association(attribute.to_sym).class_name.constantize
-    related_fk = @model.reflect_on_association(attribute.to_sym).primary_key_name
+    related = @resource[:class].reflect_on_association(attribute.to_sym).class_name.constantize
+    related_fk = @resource[:class].reflect_on_association(attribute.to_sym).primary_key_name
 
     returning(String.new) do |html|
       html << <<-HTML
@@ -125,12 +125,12 @@ module AdminFormHelper
   def typus_string_field(attribute, value)
 
     # Read only fields.
-    if @model.typus_field_options_for(:read_only).include?(attribute)
+    if @resource[:class].typus_field_options_for(:read_only).include?(attribute)
       value = 'read_only' if %w( edit ).include?(params[:action])
     end
 
     # Auto generated fields.
-    if @model.typus_field_options_for(:auto_generated).include?(attribute)
+    if @resource[:class].typus_field_options_for(:auto_generated).include?(attribute)
       value = 'auto_generated' if %w( new edit ).include?(params[:action])
     end
 
@@ -156,7 +156,7 @@ module AdminFormHelper
 
   def typus_boolean_field(attribute, value)
 
-    question = true if @model.typus_field_options_for(:questions).include?(attribute)
+    question = true if @resource[:class].typus_field_options_for(:questions).include?(attribute)
 
     returning(String.new) do |html|
       html << <<-HTML
@@ -197,7 +197,7 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       @item_relationships.each do |relationship|
-        case @model.reflect_on_association(relationship.to_sym).macro
+        case @resource[:class].reflect_on_association(relationship.to_sym).macro
         when :has_many
           html << typus_form_has_many(relationship)
         when :has_and_belongs_to_many
@@ -214,10 +214,10 @@ module AdminFormHelper
 <div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}
-  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :model => @model, :model_id => @item.id}</small>
+  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :model => @resource[:class], :model_id => @item.id}</small>
   </h2>
       HTML
-      @items = @model.find(params[:id]).send(field)
+      @items = @resource[:class].find(params[:id]).send(field)
       unless @items.empty?
         html << build_table(@items[0].class, 'relationship', @items)
       else
@@ -238,7 +238,7 @@ module AdminFormHelper
 <div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}
-  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :model => @model, :model_id => @item.id}</small>
+  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :model => @resource[:class], :model_id => @item.id}</small>
   </h2>
       HTML
       items_to_relate = (model_to_relate.find(:all) - @item.send(field))
@@ -249,7 +249,7 @@ module AdminFormHelper
   <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag "Add", :class => 'button'}</form></p>
         HTML
       end
-      current_model = @model.name.singularize.camelize.constantize
+      current_model = @resource[:class].name.singularize.camelize.constantize
       @items = current_model.find(params[:id]).send(field)
       unless @items.empty?
         html << build_table(field.to_class, 'relationship')
@@ -265,10 +265,10 @@ module AdminFormHelper
   end
 
   def attribute_disabled?(attribute)
-    if @model.accessible_attributes.nil?
+    if @resource[:class].accessible_attributes.nil?
       return false
     else
-      return !@model.accessible_attributes.include?(attribute)
+      return !@resource[:class].accessible_attributes.include?(attribute)
     end
   end
 

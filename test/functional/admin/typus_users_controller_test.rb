@@ -57,7 +57,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:success]
-    assert_match /Typus user successfully removed./, flash[:success]
+    assert_match /Typus User successfully removed./, flash[:success]
 
   end
 
@@ -94,7 +94,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:success]
-    assert_match /Typus user successfully updated./, flash[:success]
+    assert_match /Typus User successfully updated./, flash[:success]
 
   end
 

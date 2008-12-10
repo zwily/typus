@@ -10,7 +10,7 @@ module AdminHelper
     returning(String.new) do |html|
       html << <<-HTML
 <div id="flash" class="notice">
-<p>You're adding a new #{@model.name.downcase} to a model. Do you want to cancel it? #{link_to "Click here", params[:back_to]}.</p>
+<p>You're adding a new #{@resource[:class].name.downcase} to a model. Do you want to cancel it? #{link_to "Click here", params[:back_to]}.</p>
 </div>
       HTML
     end
@@ -22,7 +22,7 @@ module AdminHelper
   # it's build from the options defined on the yaml configuration file.
   #
   def build_list
-    template = "app/views/admin/#{@model.name.tableize}/_#{@model.name.tableize.singularize}.html.erb"
+    template = "app/views/admin/#{@resource[:table_name]}/_#{@resource[:table_name].singularize}.html.erb"
     if File.exists?(template)
       render :partial => template.gsub('/_', '/'), :collection => @items, :as => :item
     else

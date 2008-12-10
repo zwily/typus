@@ -3,7 +3,7 @@ module AdminTableHelper
   ##
   # All helpers related to table.
   #
-  def build_table(model = @model, fields = 'list', items = @items)
+  def build_table(model = @resource[:class], fields = 'list', items = @items)
 
     returning(String.new) do |html|
 
@@ -49,9 +49,9 @@ module AdminTableHelper
           perform = link_to image_tag("admin/trash.gif"), { :controller => "admin/#{model.name.tableize}", 
                                                             :action => "unrelate", 
                                                             :id => item.id, 
-                                                            :model => @model, 
+                                                            :model => @resource[:class], 
                                                             :model_id => params[:id] }, 
-                                                            :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@model.name}?"
+                                                            :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@resource[:class].name}?"
         end
 
       end

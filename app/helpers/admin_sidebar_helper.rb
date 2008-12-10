@@ -9,10 +9,10 @@ module AdminSidebarHelper
     #
     case params[:action]
     when 'index', 'edit', 'update'
-      if @current_user.can_perform?(@model, 'create')
+      if @current_user.can_perform?(@resource[:class], 'create')
         html << <<-HTML
 <ul>
-<li>#{link_to "Add #{@model.name.titleize.downcase}", :action => 'new'}</li>
+<li>#{link_to "Add #{@resource[:class].name.titleize.downcase}", :action => 'new'}</li>
 </ul>
         HTML
       end
@@ -54,8 +54,8 @@ module AdminSidebarHelper
 
   def more_actions
     html = ""
-    @model.typus_actions_for(params[:action]).each do |action|
-      if @current_user.can_perform?(@model, action)
+    @resource[:class].typus_actions_for(params[:action]).each do |action|
+      if @current_user.can_perform?(@resource[:class], action)
         html << "<li>#{link_to action.titleize.capitalize, :action => action}</li>"
       end
     end
@@ -66,8 +66,8 @@ module AdminSidebarHelper
   def block(name)
 
     models = case name
-             when 'parent_module': Typus.parent(@model.name, 'module')
-             when 'submodules':    Typus.module(@model.name)
+             when 'parent_module': Typus.parent(@resource[:class].name, 'module')
+             when 'submodules':    Typus.module(@resource[:class].name)
              else []
     end
 
@@ -84,7 +84,7 @@ module AdminSidebarHelper
 
   def search
 
-    unless Typus::Configuration.config[@model.name]['search'].nil?
+    unless Typus::Configuration.config[@resource[:class].name]['search'].nil?
 
       search_params = params.dup
       %w( action controller search page ).each { |p| search_params.delete(p) }
@@ -98,7 +98,7 @@ module AdminSidebarHelper
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.join("\n")}
 </form>
-<p style="margin: -10px 0px 10px 0px;"><small>Searching by #{Typus::Configuration.config[@model.name]['search'].split(', ').to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
+<p style="margin: -10px 0px 10px 0px;"><small>Searching by #{Typus::Configuration.config[@resource[:class].name]['search'].split(', ').to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
       HTML
 
       return search
@@ -109,9 +109,9 @@ module AdminSidebarHelper
 
   def filters
     current_request = request.env['QUERY_STRING'] || []
-    unless @model.typus_filters.empty?
+    unless @resource[:class].typus_filters.empty?
       html = ""
-      @model.typus_filters.each do |f|
+      @resource[:class].typus_filters.each do |f|
         html << "<h2>#{f.first.humanize}</h2>\n"
         case f.last
         when 'boolean':      html << boolean_filter(current_request, f.first)
@@ -128,7 +128,7 @@ module AdminSidebarHelper
 
   def collection_filter(request, filter)
     model = filter.capitalize.camelize.constantize
-    related_fk = @model.reflect_on_association(filter.to_sym).primary_key_name
+    related_fk = @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
     returning(String.new) do |html|
       unless model.count.zero?
         ##
@@ -186,7 +186,7 @@ module AdminSidebarHelper
   end
 
   def string_filter(request, filter)
-    values = @model.send(filter)
+    values = @resource[:class].send(filter)
     returning(String.new) do |html|
       unless values.empty?
         items = []

@@ -135,7 +135,7 @@ protected
       message = "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
     end
 
-    unless @current_user.can_perform?(@model, params[:action])
+    unless @current_user.can_perform?(@resource[:class], params[:action])
       flash[:notice] = message || "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
       redirect_to :back rescue redirect_to typus_dashboard_url
     end

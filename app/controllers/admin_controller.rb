@@ -14,8 +14,8 @@ class AdminController < ApplicationController
 
   before_filter :require_login
 
-  before_filter :set_model
-  before_filter :find_model, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
+  before_filter :set_resource
+  before_filter :find_record, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
 
   before_filter :can_perform_action_on_typus_user?, :only => [ :edit, :update, :toggle, :destroy ]
   before_filter :can_perform_action?
@@ -30,17 +30,17 @@ class AdminController < ApplicationController
   def index
 
     # Build the conditions
-    conditions = @model.build_conditions(params)
+    conditions = @resource[:class].build_conditions(params)
 
     # Pagination
-    items_count = @model.count(:conditions => conditions)
+    items_count = @resource[:class].count(:conditions => conditions)
     items_per_page = Typus::Configuration.options[:per_page].to_i
     @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
-      @model.find(:all, 
-                  :conditions => conditions, 
-                  :order => @order, 
-                  :limit => per_page, 
-                  :offset => offset)
+      @resource[:class].find(:all, 
+                             :conditions => conditions, 
+                             :order => @order, 
+                             :limit => per_page, 
+                             :offset => offset)
     end
 
     @items = @pager.page(params[:page])
@@ -54,8 +54,8 @@ class AdminController < ApplicationController
       format.xml  { render :xml => @items.items }
     end
 
-  rescue Exception => error
-    error_handler(error)
+#  rescue Exception => error
+#    error_handler(error)
   end
 
   ##
@@ -68,7 +68,7 @@ class AdminController < ApplicationController
       item_params.delete(param)
     end
 
-    @item = @model.new(item_params.symbolize_keys)
+    @item = @resource[:class].new(item_params.symbolize_keys)
 
     select_template :new
 
@@ -80,7 +80,7 @@ class AdminController < ApplicationController
   # created we create also the relationship between these models. 
   #
   def create
-    @item = @model.new(params[:item])
+    @item = @resource[:class].new(params[:item])
     if @item.valid?
       if params[:back_to]
         if params[:model] && params[:model_id]
@@ -97,12 +97,12 @@ class AdminController < ApplicationController
           redirect_to params[:back_to]
         else
           @item.save
-          flash[:success] = "New #{@model.to_s.downcase} created."
+          flash[:success] = "New #{@resource[:class_name_humanized]} created."
           redirect_to "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
         end
       else
         @item.save
-        flash[:success] = "#{@model.to_s.titleize} successfully created."
+        flash[:success] = "#{@resource[:class_name_humanized]} successfully created."
         if Typus::Configuration.options[:edit_after_create]
           redirect_to :action => 'edit', :id => @item.id
         else
@@ -139,7 +139,7 @@ class AdminController < ApplicationController
   #
   def update
     if @item.update_attributes(params[:item])
-      flash[:success] = "#{@model.humanize} successfully updated."
+      flash[:success] = "#{@resource[:class_name_humanized]} successfully updated."
       if Typus::Configuration.options[:edit_after_create]
         redirect_to :action => 'edit', :id => @item.id
       else
@@ -155,7 +155,7 @@ class AdminController < ApplicationController
   #
   def destroy
     @item.destroy
-    flash[:success] = "#{@model.humanize} successfully removed."
+    flash[:success] = "#{@resource[:class_name_humanized]} successfully removed."
     redirect_to :back
   rescue Exception => error
     error_handler(error, { :params => params.merge(:action => 'index', :id => nil) })
@@ -167,7 +167,7 @@ class AdminController < ApplicationController
   def toggle
     if Typus::Configuration.options[:toggle]
       @item.toggle!(params[:field])
-      flash[:success] = "#{@model.humanize} #{params[:field]} changed."
+      flash[:success] = "#{@resource[:class_name_humanized]} #{params[:field]} changed."
     else
       flash[:warning] = "Toggle is disabled."
     end
@@ -194,8 +194,8 @@ class AdminController < ApplicationController
   #
   def relate
     model_to_relate = params[:related][:model].constantize
-    @model.find(params[:id]).send(params[:related][:model].tableize) << model_to_relate.find(params[:related][:id])
-    flash[:success] = "#{model_to_relate.to_s.titleize} added to #{@model.humanize.downcase}."
+    @resource[:class].find(params[:id]).send(params[:related][:model].tableize) << model_to_relate.find(params[:related][:id])
+    flash[:success] = "#{model_to_relate.to_s.titleize} added to #{@resource[:class_name_humanized]}."
     redirect_to :back
   end
 
@@ -205,14 +205,14 @@ class AdminController < ApplicationController
   def unrelate
     model_to_unrelate = params[:model].constantize
     unrelate = model_to_unrelate.find(params[:model_id])
-    if @model.find(params[:id]).respond_to?(params[:model].tableize)
+    if @resource[:class].find(params[:id]).respond_to?(params[:model].tableize)
       # Unrelate a habtm
-      @model.find(params[:id]).send(params[:model].tableize).delete(unrelate)
-      flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@model.humanize.downcase}."
+      @resource[:class].find(params[:id]).send(params[:model].tableize).delete(unrelate)
+      flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@resource[:class_name_humanized]}."
     else
       # Unrelate a polymorphic relationship
-      @model.find(params[:id]).destroy
-      flash[:success] = "#{@model.humanize.titleize} removed from #{model_to_unrelate.to_s.downcase}."
+      @resource[:class].find(params[:id]).destroy
+      flash[:success] = "#{@resource[:class_name_humanized]} removed from #{model_to_unrelate.to_s.downcase}."
     end
     redirect_to :back
   end
@@ -220,11 +220,15 @@ class AdminController < ApplicationController
 private
 
   ##
-  # Set current model.
+  # Set current resource.
   #
-  def set_model
-    @model_as_resource = params[:controller].split("/").last
-    @model = @model_as_resource.to_class
+  def set_resource
+    resource = params[:controller].split("/").last
+    @resource = {}
+    @resource[:class] = resource.to_class
+    @resource[:class_name] = resource.to_class.name
+    @resource[:class_name_humanized] = resource.to_class.name.titleize
+    @resource[:table_name] = resource.to_class.table_name
   rescue Exception => error
     error_handler(error)
   end
@@ -233,30 +237,30 @@ private
   # Find model when performing an edit, update, destroy, relate, 
   # unrelate ...
   #
-  def find_model
-    @item = @model.find(params[:id])
+  def find_record
+    @item = @resource[:class].find(params[:id])
   end
 
   ##
   # Set fields and order when performing an index action.
   #
   def set_order_and_list_fields
-    @order = params[:order_by] ? "#{params[:order_by]} #{params[:sort_order]}" : @model.typus_order_by
-    @fields = @model.typus_fields_for(:list)
+    @order = params[:order_by] ? "#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
+    @fields = @resource[:class].typus_fields_for(:list)
   end
 
   ##
   # Model +form_fields+ and +form_fields_externals+
   #
   def set_form_fields
-    @item_fields = @model.typus_fields_for(:form)
-    @item_relationships = @model.typus_relationships
+    @item_fields = @resource[:class].typus_fields_for(:form)
+    @item_relationships = @resource[:class].typus_relationships
   end
 
   ##
   # Select which template to render.
   #
-  def select_template(template, model = @model)
+  def select_template(template, model = @resource[:class])
     if File.exists?("app/views/admin/#{model.name.tableize}/#{template}.html.erb")
       render :template => "admin/#{model.name.tableize}/#{template}"
     else
@@ -269,7 +273,7 @@ private
   #
   def error_handler(error, redirection = typus_dashboard_url)
     if Rails.env.production?
-      flash[:error] = error.message + "(#{@model})"
+      flash[:error] = error.message + "(#{@resource[:class]})"
       redirect_to redirection
     else
       raise error
@@ -280,7 +284,7 @@ private
 
     require 'fastercsv'
 
-    fields = @model.typus_fields_for(:csv).collect { |i| i.first }
+    fields = @resource[:class].typus_fields_for(:csv).collect { |i| i.first }
     csv_string = FasterCSV.generate do |csv|
       csv << fields
       @items.items.each do |item|
@@ -290,7 +294,7 @@ private
       end
     end
 
-    filename = "#{Time.now.strftime("%Y%m%d")}_#{@model.to_s.tableize}.csv"
+    filename = "#{Time.now.strftime("%Y%m%d")}_#{@resource[:table_name]}.csv"
     send_data(csv_string,
              :type => 'text/csv; charset=utf-8; header=present',
              :filename => filename)
