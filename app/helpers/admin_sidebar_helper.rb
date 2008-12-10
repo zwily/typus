@@ -192,7 +192,7 @@ module AdminSidebarHelper
         items = []
         values.each do |item|
           switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
-          items << "<li>#{link_to item.capitalize, { :params => params.merge(filter => item) }, :class => switch }</li>"
+          items << "<li>#{link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch }</li>"
         end
         html << <<-HTML
 <ul>
