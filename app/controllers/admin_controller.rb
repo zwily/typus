@@ -20,8 +20,6 @@ class AdminController < ApplicationController
   before_filter :can_perform_action_on_typus_user?, :only => [ :edit, :update, :toggle, :destroy ]
   before_filter :can_perform_action?
 
-  before_filter :set_order, :only => [ :index ]
-
   before_filter :set_fields, :only => [ :index ]
   before_filter :set_form_fields, :only => [ :new, :edit, :create, :update ]
 
@@ -238,29 +236,18 @@ private
   end
 
   ##
-  # Set default order on the listings.
-  #
-  #     @order = "id ASC"
-  #
-  def set_order
-    unless params[:order_by]
-      @order = @model.typus_order_by
-    else
-      @order = "#{params[:order_by]} #{params[:sort_order]}"
-    end
-  end
-
-  ##
-  # Find
+  # Find model when performing an edit, update, destroy, relate, 
+  # unrelate ...
   #
   def find_model
     @item = @model.find(params[:id])
   end
 
   ##
-  # Model +fields+
+  # Set fields and order when performing an index action.
   #
   def set_fields
+    @order = params[:order_by] ? "#{params[:order_by]} #{params[:sort_order]}" : @model.typus_order_by
     @fields = @model.typus_fields_for(:list)
   end
 
