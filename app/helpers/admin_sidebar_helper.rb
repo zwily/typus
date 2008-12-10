@@ -12,7 +12,7 @@ module AdminSidebarHelper
       if @current_user.can_perform?(@resource[:class], 'create')
         html << <<-HTML
 <ul>
-<li>#{link_to "Add #{@resource[:class].name.titleize.downcase}", :action => 'new'}</li>
+<li>#{link_to "Add #{@resource[:class_name_humanized].downcase}", :action => 'new'}</li>
 </ul>
         HTML
       end
@@ -66,8 +66,8 @@ module AdminSidebarHelper
   def block(name)
 
     models = case name
-             when 'parent_module': Typus.parent(@resource[:class].name, 'module')
-             when 'submodules':    Typus.module(@resource[:class].name)
+             when 'parent_module': Typus.parent(@resource[:class_name], 'module')
+             when 'submodules':    Typus.module(@resource[:class_name])
              else []
     end
 
@@ -84,7 +84,7 @@ module AdminSidebarHelper
 
   def search
 
-    unless Typus::Configuration.config[@resource[:class].name]['search'].nil?
+    unless Typus::Configuration.config[@resource[:class_name]]['search'].nil?
 
       search_params = params.dup
       %w( action controller search page ).each { |p| search_params.delete(p) }
@@ -98,7 +98,7 @@ module AdminSidebarHelper
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.join("\n")}
 </form>
-<p style="margin: -10px 0px 10px 0px;"><small>Searching by #{Typus::Configuration.config[@resource[:class].name]['search'].split(', ').to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
+<p style="margin: -10px 0px 10px 0px;"><small>Searching by #{Typus::Configuration.config[@resource[:class_name]]['search'].split(', ').to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
       HTML
 
       return search
