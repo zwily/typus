@@ -130,15 +130,40 @@ module AdminSidebarHelper
     model = filter.capitalize.camelize.constantize
     related_fk = @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
     returning(String.new) do |html|
-      unless model.count.zero?
-        ##
-        # Here we have the option of having a selector.
-        #
-        # TODO
-        #
-        ##
-        # Or having a simple list.
-        #
+      html << "<p>No available #{model.name.downcase.pluralize}.</p>" and next if model.count.zero?
+      ##
+      # This allows us to use selectors on the sidebar, by default will
+      # use an `ul`, but we can override the setting using:
+      #
+      #     Category:
+      #       sidebar: selector
+      #
+      selector = Typus::Configuration.config[model.name]['sidebar'].split(', ').include?('selector') rescue false
+      if selector
+        items = []
+        model.find(:all, :order => model.typus_order_by).each do |item|
+          switch = request.include?("#{related_fk}=#{item.id}") ? 'selected' : ''
+          items << "<option #{switch} value=\"#{url_for params.merge(related_fk => item.id, :page => nil)}\">#{item.typus_name}</option>"
+        end
+        html << <<-HTML
+<!-- Embedded JS -->
+<script>
+function surfto(form) {
+  var myindex = form.#{model.name.downcase.pluralize}.selectedIndex
+  if (form.#{model.name.downcase.pluralize}.options[myindex].value != "0") {
+    top.location.href = form.#{model.name.downcase.pluralize}.options[myindex].value;
+  }
+}
+</script>
+<!-- /Embedded JS -->
+<p><form class="form" action="#">
+  <select name="#{model.name.downcase.pluralize}" onChange="surfto(this.form)">
+    <option value=\"#{url_for}\">Filter by #{model.name.downcase}</option>
+    #{items.join("\n")}
+  </select>
+</form></p>
+        HTML
+      else
         items = []
         model.find(:all, :order => model.typus_order_by).each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'on' : 'off'
@@ -149,8 +174,6 @@ module AdminSidebarHelper
 #{items.join("\n")}
 </ul>
         HTML
-      else
-        html << "<p>No available #{model.name.downcase.pluralize}.</p>"
       end
     end
   end
