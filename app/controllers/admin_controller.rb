@@ -94,16 +94,16 @@ class AdminController < ApplicationController
             # This is the case of a polymorphic relationship.
             model_to_relate.find(params[:model_id]).send(@item.class.name.tableize).create(params[:item])
           end
-          flash[:success] = "#{@item.class} successfully assigned to #{params[:model].downcase}."
+          flash[:success] = "%s successfully assigned to %s." % [ @item.class, params[:model].downcase ]
           redirect_to params[:back_to]
         else
           @item.save
-          flash[:success] = "New #{@resource[:class_name_humanized]} created."
+          flash[:success] = "New %s created." % @resource[:class_name_humanized]
           redirect_to "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
         end
       else
         @item.save
-        flash[:success] = "#{@resource[:class_name_humanized]} successfully created."
+        flash[:success] = "%s successfully created." % @resource[:class_name_humanized]
         if Typus::Configuration.options[:edit_after_create]
           redirect_to :action => 'edit', :id => @item.id
         else
@@ -140,7 +140,7 @@ class AdminController < ApplicationController
   #
   def update
     if @item.update_attributes(params[:item])
-      flash[:success] = "#{@resource[:class_name_humanized]} successfully updated."
+      flash[:success] = "%s successfully updated." % @resource[:class_name_humanized]
       if Typus::Configuration.options[:edit_after_create]
         redirect_to :action => 'edit', :id => @item.id
       else
@@ -156,7 +156,7 @@ class AdminController < ApplicationController
   #
   def destroy
     @item.destroy
-    flash[:success] = "#{@resource[:class_name_humanized]} successfully removed."
+    flash[:success] = "%s successfully removed." % @resource[:class_name_humanized]
     redirect_to :back
   rescue Exception => error
     error_handler(error, { :params => params.merge(:action => 'index', :id => nil) })
@@ -168,7 +168,7 @@ class AdminController < ApplicationController
   def toggle
     if Typus::Configuration.options[:toggle]
       @item.toggle!(params[:field])
-      flash[:success] = "#{@resource[:class_name_humanized]} #{params[:field]} changed."
+      flash[:success] = "%s %s changed." % [ @resource[:class_name_humanized], params[:field] ]
     else
       flash[:warning] = "Toggle is disabled."
     end
@@ -196,7 +196,7 @@ class AdminController < ApplicationController
   def relate
     model_to_relate = params[:related][:model].constantize
     @resource[:class].find(params[:id]).send(params[:related][:model].tableize) << model_to_relate.find(params[:related][:id])
-    flash[:success] = "#{model_to_relate.to_s.titleize} added to #{@resource[:class_name_humanized]}."
+    flash[:success] = "%s added to %s." % [ model_to_relate.to_s.titleize , @resource[:class_name_humanized] ]
     redirect_to :back
   end
 
@@ -209,11 +209,11 @@ class AdminController < ApplicationController
     if @resource[:class].find(params[:id]).respond_to?(params[:model].tableize)
       # Unrelate a habtm
       @resource[:class].find(params[:id]).send(params[:model].tableize).delete(unrelate)
-      flash[:success] = "#{model_to_unrelate.to_s.titleize} removed from #{@resource[:class_name_humanized]}."
+      flash[:success] = "%s removed from %s." % [ model_to_unrelate.to_s.titleize, @resource[:class_name_humanized] ]
     else
       # Unrelate a polymorphic relationship
       @resource[:class].find(params[:id]).destroy
-      flash[:success] = "#{@resource[:class_name_humanized]} removed from #{model_to_unrelate.to_s.downcase}."
+      flash[:success] = "%s removed from %s." % [ @resource[:class_name_humanized], model_to_unrelate.to_s.downcase ]
     end
     redirect_to :back
   end
