@@ -42,6 +42,7 @@ module Typus
                   :version => '', 
                   :form_rows => 10, 
                   :form_columns => 10, 
+                  :sidebar_selector => 10, 
                   :minute_step => 5, 
                   :toggle => true, 
                   :edit_after_create => true, 

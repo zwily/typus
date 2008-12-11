@@ -131,17 +131,10 @@ module AdminSidebarHelper
     related_fk = @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
     returning(String.new) do |html|
       html << "<p>No available #{model.name.downcase.pluralize}.</p>" and next if model.count.zero?
-      ##
-      # This allows us to use selectors on the sidebar, by default will
-      # use an `ul`, but we can override the setting using:
-      #
-      #     Category:
-      #       sidebar: selector
-      #
-      selector = Typus::Configuration.config[model.name]['sidebar'].split(', ').include?('selector') rescue false
-      if selector
+      related_items = model.find(:all, :order => model.typus_order_by)
+      if related_items.size > Typus::Configuration.options[:sidebar_selector]
         items = []
-        model.find(:all, :order => model.typus_order_by).each do |item|
+        related_items.each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'selected' : ''
           items << "<option #{switch} value=\"#{url_for params.merge(related_fk => item.id, :page => nil)}\">#{item.typus_name}</option>"
         end
@@ -165,7 +158,7 @@ function surfto(form) {
         HTML
       else
         items = []
-        model.find(:all, :order => model.typus_order_by).each do |item|
+        related_items.each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'on' : 'off'
           items << "<li>#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch }</li>"
         end

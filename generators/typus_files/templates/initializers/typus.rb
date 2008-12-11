@@ -11,6 +11,7 @@
   Typus::Configuration.options[:per_page] = 15
   Typus::Configuration.options[:form_rows] = 10
   Typus::Configuration.options[:form_columns] = 10
+  Typus::Configuration.options[:sidebar_selector] = 10
   Typus::Configuration.options[:minute_step] = 5
   Typus::Configuration.options[:email] = 'admin@example.com'
   Typus::Configuration.options[:toggle] = true
