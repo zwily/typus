@@ -86,10 +86,9 @@ module AdminTableHelper
   end
 
   def typus_table_collection_field(item, column)
-    case item.send(column[0])
-    when Array
+    if item.send(column[0]).kind_of?(Array)
       "<td>#{item.send(column[0]).map(&:typus_name).join(', ')}</td>"
-    when NilClass
+    elsif item.send(column[0]).kind_of?(NilClass)
       "<td></td>"
     else
       "<td>#{link_to item.send(column[0]).typus_name, :controller => "admin/#{column[0].pluralize}", :action => "edit", :id => item.send(column[0])}</td>"
