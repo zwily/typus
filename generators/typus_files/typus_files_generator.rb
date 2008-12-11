@@ -20,10 +20,8 @@ class TypusFilesGenerator < Rails::Generator::Base
 
       application = Rails.root.split("/").last
 
-      ##
-      # For creating `typus.yml` and `typus_roles.yml` we need first to detect 
-      # the available AR models of the application, not the plugins.
-      #
+      # For creating `typus.yml` and `typus_roles.yml` we need first to 
+      # detect the available AR models of the application, not the plugins.
       Dir.chdir(File.join(Rails.root, "app/models"))
       models, ar_models = Dir["*.rb"], []
 
@@ -34,9 +32,7 @@ class TypusFilesGenerator < Rails::Generator::Base
         end
       end
 
-      ##
       # configuration files
-      #
       folder = "#{Rails.root}/config/typus"
       Dir.mkdir(folder) unless File.directory?(folder)
 
@@ -47,33 +43,22 @@ class TypusFilesGenerator < Rails::Generator::Base
                    :assigns => { :ar_models => ar_models, :application => application }
       end
 
-      ##
       # initializers
-      #
       m.template "initializers/typus.rb", 
                  "config/initializers/typus.rb", 
                  :assigns => { :application => application }
 
+      # public folders
       [ "#{Rails.root}/public/stylesheets/admin", 
         "#{Rails.root}/public/javascripts/admin", 
         "#{Rails.root}/public/images/admin" ].each do |folder|
         Dir.mkdir(folder) unless File.directory?(folder)
       end
 
-      ##
-      # stylesheets
-      #
       m.file "stylesheets/admin/screen.css", "public/stylesheets/admin/screen.css"
       m.file "stylesheets/admin/reset.css", "public/stylesheets/admin/reset.css"
-
-      ##
-      # javascripts
-      #
       m.file "javascripts/admin/application.js", "public/javascripts/admin/application.js"
 
-      ##
-      # images
-      #
       files = %w( spinner.gif trash.gif status_false.gif status_true.gif )
       files.each { |file| m.file "images/admin/#{file}", "public/images/admin/#{file}" }
 
