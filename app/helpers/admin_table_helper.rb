@@ -88,7 +88,7 @@ module AdminTableHelper
   def typus_table_collection_field(item, column)
     "<td>#{link_to item.send(column[0]).typus_name, :controller => "admin/#{column[0].pluralize}", :action => "edit", :id => item.send(column[0])}</td>"
   rescue
-    "<td>#{item.send(column[0])}</td>"
+    "<td>#{item.send(column[0]).map(&:typus_name).join(', ')}</td>"
   end
 
   ##
