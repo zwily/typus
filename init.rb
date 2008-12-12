@@ -1,4 +1,5 @@
 require 'typus'
+require 'sha1'
 
 ##
 # Load paths. (This will be the first thing I'll remove once 
