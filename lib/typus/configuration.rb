@@ -31,6 +31,7 @@ module Typus
     #   Typus::Configuration.options[:password] = 8
     #   Typus::Configuration.options[:special_characters_on_password] = true
     #   Typus::Configuration.options[:ssl] = false
+    #   Typus::Configuration.options[:icon_on_boolean] = true
     #
     # Experimental options: (don't use in production)
     #
@@ -53,7 +54,8 @@ module Typus
                   :special_characters_on_password => false, 
                   :ssl => false, 
                   :actions_on_table => false, 
-                  :prefix => 'admin' }
+                  :prefix => 'admin', 
+                  :icon_on_boolean => true }
 
     mattr_accessor :options
 

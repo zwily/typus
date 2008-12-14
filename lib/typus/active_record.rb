@@ -243,6 +243,15 @@ module Typus
     end
 
     ##
+    # We are able to define our own booleans.
+    #
+    def typus_boolean
+      boolean = Typus::Configuration.config[self.name]['fields']['options']['boolean'] || 'true, false'
+      return { :true => boolean.split(', ').first.humanize, 
+               :false => boolean.split(', ').last.humanize }
+    end
+
+    ##
     # This is used by acts_as_tree
     #
     def top

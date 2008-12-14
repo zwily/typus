@@ -161,26 +161,28 @@ module AdminTableHelper
 
   def typus_table_boolean_field(item, column)
 
+    boolean_icon = Typus::Configuration.options[:icon_on_boolean]
+    boolean_hash = @resource[:class].typus_boolean
+
     unless item.send(column[0]).nil?
-      image = "admin/status_#{item.send(column[0])}.gif"
+      status = item.send(column[0])
+      content = (boolean_icon) ? image_tag("admin/status_#{status}.gif") : boolean_hash["#{status}".to_sym]
     else
-      ##
       # If the column is null we show the false icon.
-      #
-      image = "admin/status_false.gif"
+      content = (boolean_icon) ? image_tag("admin/status_false.gif") : boolean_hash[:false]
     end
 
     returning(String.new) do |html|
 
       if Typus::Configuration.options[:toggle]
         html << <<-HTML
-<td width="20px" align="center">
-  #{link_to image_tag(image), {:params => params.merge(:controller => "admin/#{item.class.name.tableize}", :action => 'toggle', :field => column[0], :id => item.id)} , :confirm => "Change #{column[0]}?"}
+<td align="center">
+  #{link_to content, {:params => params.merge(:controller => "admin/#{item.class.name.tableize}", :action => 'toggle', :field => column[0], :id => item.id)} , :confirm => "Change #{column[0]}?"}
 </td>
         HTML
       else
         html << <<-HTML
-<td width="20px" align="center">#{image}</td>
+<td align="center">#{content}</td>
         HTML
       end
 
