@@ -451,10 +451,17 @@ example, the user Francesc Esplugas:
 
 ## Testing the plugin
 
-You can test the plugin by running `rake`. Tests will be performed against 
-a SQLite3 database in memory. You can also run tests against PostgreSQL and 
-MySQL databases. You have to create databases, both are called `typus_test`. 
-Once you've created them you can run the tests.
+Use the following steps to test the plugin.
+
+    $ rails typus_test
+    $ cd typus_test/vendor/plugins
+    $ git clone git://github.com/fesplugas/typus.git
+    $ rake
+
+By default tests are be performed against a SQLite3 database in memory.
+You can also run tests against PostgreSQL and MySQL databases. You 
+have to create databases, both are called `typus_test`. Once you've 
+created them you can run the tests.
 
     $ rake DB=mysql
     $ rake DB=postgresql
