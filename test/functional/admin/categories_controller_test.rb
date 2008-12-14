@@ -57,6 +57,12 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_equal 1, third_category.reload.position
   end
 
+  def test_should_verify_items_are_sorted_by_position_on_list
+    get :index
+    assert_response :success
+    assert_equal [ 1, 2, 3 ], assigns['items'].items.map(&:position)
+  end
+
   def test_should_allow_admin_to_add_a_category
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
