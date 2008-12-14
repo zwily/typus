@@ -58,7 +58,7 @@ You can overwrite the following settings:
     Typus::Configuration.options[:password]
     Typus::Configuration.options[:special_characters_on_password]
     Typus::Configuration.options[:ssl]
-    Typus::Configuration.options[:icon_on_boolean] = false
+    Typus::Configuration.options[:icon_on_boolean]
 
 You can overwrite this settings in the initializer `typus.rb`.
 
