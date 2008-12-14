@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
 ##
-# Here we test resources which are not related to a model.
+# Here we test resources which are not related to an ActiveRecord model.
 #
 class Admin::StatusControllerTest < ActionController::TestCase
 
