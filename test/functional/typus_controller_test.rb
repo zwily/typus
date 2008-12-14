@@ -55,9 +55,7 @@ class TypusControllerTest < ActionController::TestCase
     post :recover_password, { :user => { :email => 'unexisting' } }
     assert_response :redirect
     assert_redirected_to typus_recover_password_url
-    assert !flash[:error]
-    assert !flash[:notice]
-    assert !flash[:success]
+    [ :notice, :error, :warning ].each { |f| assert !flash[f] }
   end
 
   def test_should_send_recovery_password_link_to_existing_user
@@ -76,9 +74,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_nil @request.session[:typus]
     assert_response :redirect
     assert_redirected_to typus_login_url
-    assert !flash[:notice]
-    assert !flash[:error]
-    assert !flash[:warning]
+    [ :notice, :error, :warning ].each { |f| assert !flash[f] }
   end
 
   def test_should_render_dashboard
