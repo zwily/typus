@@ -40,6 +40,12 @@ Post:
   order_by: title, -created_at
   application: Blog
 
+Person:
+  fields:
+    list:
+    form:
+  application: Application
+
 TypusUser:
   fields:
     list: first_name, last_name, email, roles, status

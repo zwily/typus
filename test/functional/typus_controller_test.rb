@@ -219,4 +219,38 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to :action => 'login'
   end
 
+  def test_should_show_add_links_in_resources_list_for_admin
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+    get :dashboard
+
+    %w( typus_users people posts pages assets ).each do |resource|
+      assert_match "/admin/#{resource}/new", @response.body
+    end
+
+    %w( statuses orders ).each do |resource|
+      assert_no_match /\/admin\/#{resource}\n/, @response.body
+    end
+
+  end
+
+  def test_should_show_add_links_in_resources_list_for_editor
+    editor = typus_users(:editor)
+    @request.session[:typus] = editor.id
+    get :dashboard
+    assert_match "/admin/posts/new", @response.body
+    assert_no_match /\/admin\/typus_users\/new/, @response.body
+    # We have loaded categories as a module, so are not displayed 
+    # on the applications list.
+    assert_no_match /\/admin\/categories\/new/, @response.body
+  end
+
+  def test_should_show_add_links_in_resources_list_for_designer
+    designer = typus_users(:designer)
+    @request.session[:typus] = designer.id
+    get :dashboard
+    assert_no_match /\/admin\/posts\/new/, @response.body
+    assert_no_match /\/admin\/typus_users\/new/, @response.body
+  end
+
 end
