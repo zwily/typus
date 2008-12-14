@@ -53,6 +53,8 @@ TypusUser:
     relationship: first_name, last_name, roles, email, status
     options:
       selectors: roles
+      booleans:
+        status: active, inactive
   filters: status, roles, unexisting
   search: first_name, last_name, email, roles
   module: Typus

@@ -284,6 +284,29 @@ Example:
 If the selector is not defined, you'll see a **text field** instead of a 
 *select field*.
 
+### Booleans
+
+By default Typus will show all your booleans on the listings with an 
+icon, if you prefer to show it as a text to be more verbose you can 
+disable it with:
+
+    Typus::Configuration.options[:icon_on_boolean]
+
+Boolean text shows *True* & *False*, but you can personalize it "per 
+attribute" to match your application requirements.
+
+    ##
+    # config/typus/application.yml
+    #
+    TypusUser:
+      fields:
+        list: email, status
+        options:
+          booleans:
+            # attribute: TRUE, FALSE
+            default: publicado, no_publicado
+            status: active, inactive
+
 ### Want more actions?
 
     Post:

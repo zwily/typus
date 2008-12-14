@@ -119,6 +119,18 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal %w( status ), Post.typus_field_options_for(:questions)
   end
 
+  def test_should_return_booleans_for_typus_users
+    hash_status = { :true => "Active", :false => "Inactive" }
+    assert_equal hash_status, TypusUser.typus_boolean('status')
+    hash_default = { :true => "True", :false => "False" }
+    assert_equal hash_default, TypusUser.typus_boolean
+  end
+
+  def test_should_return_booleans_for_post
+    hash = { :true => "True", :false => "False" }
+    assert_equal hash, Post.typus_boolean('status')
+  end
+
   def test_should_return_defaults_for_post
     assert_equal %w( title ), Post.typus_defaults_for('search')
     assert_equal %w( title ), Post.typus_defaults_for(:search)

@@ -245,10 +245,11 @@ module Typus
     ##
     # We are able to define our own booleans.
     #
-    def typus_boolean
-      boolean = Typus::Configuration.config[self.name]['fields']['options']['boolean'] || 'true, false'
-      return { :true => boolean.split(', ').first.humanize, 
-               :false => boolean.split(', ').last.humanize }
+    def typus_boolean(attribute = 'default')
+       boolean = Typus::Configuration.config[self.name]['fields']['options']['booleans'][attribute] rescue nil
+       boolean = "true, false" if boolean.nil?
+       return { :true => boolean.split(', ').first.humanize, 
+                :false => boolean.split(', ').last.humanize }
     end
 
     ##

@@ -189,7 +189,7 @@ function surfto(form) {
   def boolean_filter(request, filter)
     returning(String.new) do |html|
       items = []
-      @resource[:class].typus_boolean.each do |key, value|
+      @resource[:class].typus_boolean(filter).each do |key, value|
         switch = request.include?("#{filter}=#{value}") ? 'on' : 'off'
         items << "<li>#{link_to value, { :params => params.merge(filter => key, :page => nil) }, :class => switch}</li>"
       end

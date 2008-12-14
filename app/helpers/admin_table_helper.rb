@@ -162,7 +162,7 @@ module AdminTableHelper
   def typus_table_boolean_field(item, column)
 
     boolean_icon = Typus::Configuration.options[:icon_on_boolean]
-    boolean_hash = @resource[:class].typus_boolean
+    boolean_hash = @resource[:class].typus_boolean(column.first)
 
     unless item.send(column[0]).nil?
       status = item.send(column[0])
