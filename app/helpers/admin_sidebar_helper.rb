@@ -38,7 +38,7 @@ module AdminSidebarHelper
     when 'new', 'create'
       html << <<-HTML
 <ul>
-<li>#{link_to "Back to list", :params => params.merge(:action => 'index')}</li>
+<li>#{link_to "Back to list", :action => 'index'}</li>
 </ul>
       HTML
     else
