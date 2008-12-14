@@ -10,10 +10,10 @@ admin:
   Order:
 
 editor:
-  Category: create, update
-  Post: create, update
-  Comment: update, delete
-  TypusUser: update
+  Category: create, read, update
+  Post: create, read, update
+  Comment: read, update, delete
+  TypusUser: read, update
 
 designer:
   Category: read, update

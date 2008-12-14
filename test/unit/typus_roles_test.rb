@@ -54,26 +54,26 @@ class TypusRolesTest < ActiveSupport::TestCase
     ##
     # Category: create, update
     #
-    %w( create update ).each { |action| assert typus_user.can_perform?(Category, action) }
-    %w( read delete ).each { |action| assert !typus_user.can_perform?(Category, action) }
+    %w( create read update ).each { |action| assert typus_user.can_perform?(Category, action) }
+    %w( delete ).each { |action| assert !typus_user.can_perform?(Category, action) }
 
     ##
     # Post: create, update
     #
-    %w( create update ).each { |action| assert typus_user.can_perform?(Post, action) }
-    %w( read delete ).each { |action| assert !typus_user.can_perform?(Post, action) }
+    %w( create read update ).each { |action| assert typus_user.can_perform?(Post, action) }
+    %w( delete ).each { |action| assert !typus_user.can_perform?(Post, action) }
 
     ##
     # Comment: update, delete
     #
-    %w( update delete ).each { |action| assert typus_user.can_perform?(Comment, action) }
-    %w( create read ).each { |action| assert !typus_user.can_perform?(Comment, action) }
+    %w( read update delete ).each { |action| assert typus_user.can_perform?(Comment, action) }
+    %w( create ).each { |action| assert !typus_user.can_perform?(Comment, action) }
 
     ##
     # TypusUser: update
     #
-    %w( update ).each { |action| assert typus_user.can_perform?(TypusUser, action) }
-    %w( create read delete ).each { |action| assert !typus_user.can_perform?(TypusUser, action) }
+    %w( read update ).each { |action| assert typus_user.can_perform?(TypusUser, action) }
+    %w( create delete ).each { |action| assert !typus_user.can_perform?(TypusUser, action) }
 
   end
 
