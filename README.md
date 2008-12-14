@@ -1,16 +1,19 @@
 # Typus
 
-As Django Admin, Typus is designed for a single activity:
+What's **Typus**? People at GitHub defined **Typus** as ...
+
+> Super easy admin interface for your Rails site.
+
+You can see some screenshots on the [wiki](http://github.com/fesplugas/typus/wikis).
+
+As Django Admin, **Typus** is designed for a "single" activity:
 
 > Trusted users editing structured content.
 
-Keep in mind that:
-
-> Typus doesn't try to be all the things to all the people.
-
-Once installed and configured you can login at <http://example.com/admin>.
-
-Screenshots on the [wiki](http://github.com/fesplugas/typus/wikis).
+Keep in mind that **Typus** doesn't try to be all the things to all 
+the people but it's extensible enough to match lots of use cases. I 
+started to develop it early 2006 and have been updating it to match 
+all my clients sites/projects.
 
 ## Installing
 
@@ -20,13 +23,12 @@ You can view the available tasks running:
     (in /home/fesplugas/projects/typus_platform)
     rake typus:dependencies  # Install Typus dependencies (paperclip, acts_as_l....
     rake typus:roles         # List current roles
-    rake typus:specs         # Generate specdoc-style documentation from tests
 
 ### Configure
 
-This task copies required assets to the public folder of your Rails 
-application, generates configuration files on `config` folder and 
-generates the required database migration files.
+The following generator installs required assets to the public folder 
+of your Rails application, generates configuration files on `config` 
+folder and generates the required database migration files.
 
     $ script/generate typus_files
 
