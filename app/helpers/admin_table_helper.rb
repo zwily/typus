@@ -75,7 +75,7 @@ module AdminTableHelper
       model.typus_fields_for(fields).map(&:first).each do |field|
         order_by = model.reflect_on_association(field.to_sym).primary_key_name rescue field
         sort_order = (params[:sort_order] == 'asc') ? 'desc' : 'asc'
-        if model.model_fields.map(&:first).include?(field) || model.reflect_on_all_associations.map(&:name).include?(field.to_sym)
+        if (model.model_fields.map(&:first).include?(field) || model.reflect_on_all_associations.map(&:name).include?(field.to_sym)) && params[:action] == 'index'
           html << "<th>#{link_to "<div class=\"#{sort_order}\">#{field.titleize.capitalize}</div>", { :params => params.merge(:order_by => order_by, :sort_order => sort_order) }}</th>"
         else
           html << "<th>#{field.titleize.capitalize}</th>"
