@@ -224,12 +224,13 @@ private
   # Set current resource.
   #
   def set_resource
-    resource = params[:controller].split("/").last
+    resource = params[:controller].split('/').last.classify
+    resource_class = resource.constantize
     @resource = {}
-    @resource[:class] = resource.to_class
-    @resource[:class_name] = resource.to_class.name
-    @resource[:class_name_humanized] = resource.to_class.name.titleize
-    @resource[:table_name] = resource.to_class.table_name
+    @resource[:class] = resource_class
+    @resource[:class_name] = resource
+    @resource[:class_name_humanized] = resource.titleize
+    @resource[:table_name] = resource_class.table_name
   rescue Exception => error
     error_handler(error)
   end

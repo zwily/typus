@@ -82,7 +82,6 @@ module Typus
       require File.dirname(__FILE__) + "/../test/test_models" if Rails.env.test?
       require 'typus/active_record'
       require 'typus/routes'
-      require 'typus/string'
       require 'typus/hash'
       require 'typus/export'
       require 'typus/authentication'
