@@ -130,7 +130,7 @@ module AdminSidebarHelper
     model = filter.capitalize.camelize.constantize
     related_fk = @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
     returning(String.new) do |html|
-      html << "<p>No available #{model.name.downcase.pluralize}.</p>" and next if model.count.zero?
+      html << "<p>No available #{model.name.titleize.pluralize.downcase}.</p>" and next if model.count.zero?
       related_items = model.find(:all, :order => model.typus_order_by)
       if related_items.size > Typus::Configuration.options[:sidebar_selector]
         items = []
