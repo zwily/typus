@@ -115,7 +115,7 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{related_fk.titleize} <small>#{link_to "Add new", { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => "Are you sure you want to leave this page?\nAny unsaved data will be lost." }</small></label>
+<li><label for="item_#{attribute}">#{related_fk.humanize} <small>#{link_to "Add new", { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => "Are you sure you want to leave this page?\nAny unsaved data will be lost." }</small></label>
 #{select :item, related_fk, related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
       HTML
     end
