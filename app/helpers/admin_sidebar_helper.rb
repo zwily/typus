@@ -151,7 +151,7 @@ function surfto(form) {
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
   <select name="#{model.name.downcase.pluralize}" onChange="surfto(this.form)">
-    <option value=\"#{url_for}\">Filter by #{model.name.downcase}</option>
+    <option value=\"#{url_for}\">Filter by #{model.name.titleize.humanize}</option>
     #{items.join("\n")}
   </select>
 </form></p>
