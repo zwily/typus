@@ -16,7 +16,7 @@ class AdminController < ApplicationController
   before_filter :require_login
 
   before_filter :set_resource
-  before_filter :find_record, :only => [ :show, :edit, :update, :destroy, :toggle, :position ]
+  before_filter :find_record, :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
   before_filter :can_perform_action_on_typus_user?, :only => [ :edit, :update, :toggle, :destroy ]
   before_filter :can_perform_action?
@@ -199,7 +199,7 @@ class AdminController < ApplicationController
     resource_id = params[:related][:id]
     resource = resource_class.find(resource_id)
 
-    @resource[:class].find(params[:id]).send(params[:related][:model].tableize) << resource
+    @item.send(params[:related][:model].tableize) << resource
 
     flash[:success] = "%s added to %s." % [ resource_class.name.titleize , @resource[:class_name_humanized] ]
     redirect_to :back
@@ -217,9 +217,9 @@ class AdminController < ApplicationController
 
     case resource_class.reflect_on_association(@resource[:table_name].to_sym).macro
     when :has_and_belongs_to_many
-      @resource[:class].find(params[:id]).send(params[:model].tableize).delete(resource)
+      @item.send(params[:model].tableize).delete(resource)
     when :has_many
-      @resource[:class].find(params[:id]).destroy
+      @item.destroy
     end
 
     flash[:success] = "%s removed from %s." % [ @resource[:class_name_humanized], resource_class.name.humanize ]
