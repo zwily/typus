@@ -7,24 +7,19 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def setup
     Typus::Configuration.options[:root] = 'admin'
+    @typus_user = typus_users(:admin)
+    @request.session[:typus] = @typus_user.id
   end
 
   def test_should_allow_admin_to_create_typus_users
-
-    typus_user = typus_users(:admin)
-    @request.session[:typus] = typus_user.id
     get :new
-
     assert_response :success
-
   end
 
   def test_should_not_allow_admin_to_toggle_her_status
 
     @request.env['HTTP_REFERER'] = "/admin/typus_users"
-    typus_user = typus_users(:admin)
-    @request.session[:typus] = typus_user.id
-    get :toggle, { :id => typus_user.id, :field => 'status' }
+    get :toggle, { :id => @typus_user.id, :field => 'status' }
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
@@ -36,9 +31,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
   def test_should_verify_admin_cannot_destroy_herself
 
     @request.env['HTTP_REFERER'] = "/admin/typus_users"
-    typus_user = typus_users(:admin)
-    @request.session[:typus] = typus_user.id
-    delete :destroy, :id => typus_user.id
+    delete :destroy, :id => @typus_user.id
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
@@ -50,8 +43,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
   def test_should_verify_admin_can_destroy_others
 
     @request.env['HTTP_REFERER'] = "/admin/typus_users"
-    typus_user = typus_users(:admin)
-    @request.session[:typus] = typus_user.id
     delete :destroy, :id => typus_users(:editor).id
 
     assert_response :redirect
