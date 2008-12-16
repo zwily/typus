@@ -118,63 +118,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert flash[:success]
   end
 
-  def test_should_render_posts_sidebar_on_index_edit_and_show
-
-    post_ = posts(:published)
-
-    get :index
-    assert_response :success
-    assert_match /_index_sidebar.html.erb/, @response.body
-
-    get :edit, { :id => post_.id }
-    assert_response :success
-    assert_match /_edit_sidebar.html.erb/, @response.body
-
-    get :show, { :id => post_.id }
-    assert_response :success
-    assert_match /_show_sidebar.html.erb/, @response.body
-
-  end
-
-  def test_should_render_posts_top_on_index_show_and_edit
-
-    post_ = posts(:published)
-
-    get :index
-    assert_response :success
-    assert_match /_index_top.html.erb/, @response.body
-
-    get :edit, { :id => post_.id }
-    assert_response :success
-    assert_match /_edit_top.html.erb/, @response.body
-
-    get :show, { :id => post_.id }
-    assert_response :success
-    assert_match /_show_top.html.erb/, @response.body
-
-  end
-
-  def test_should_render_posts_bottom_on_index_show_and_edit
-
-    typus_user = typus_users(:admin)
-    @request.session[:typus] = typus_user.id
-
-    post_ = posts(:published)
-
-    get :index
-    assert_response :success
-    assert_match /_index_bottom.html.erb/, @response.body
-
-    get :edit, { :id => post_.id }
-    assert_response :success
-    assert_match /_edit_bottom.html.erb/, @response.body
-
-    get :show, { :id => post_.id }
-    assert_response :success
-    assert_match /_show_bottom.html.erb/, @response.body
-
-  end
-
   def test_should_check_redirection_when_theres_no_http_referer_on_new
 
     typus_user = typus_users(:designer)
