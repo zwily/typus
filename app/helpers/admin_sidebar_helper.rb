@@ -141,7 +141,7 @@ module AdminSidebarHelper
         html << <<-HTML
 <!-- Embedded JS -->
 <script>
-function surfto(form) {
+function surfto_#{model.name.downcase.pluralize}(form) {
   var myindex = form.#{model.name.downcase.pluralize}.selectedIndex
   if (form.#{model.name.downcase.pluralize}.options[myindex].value != "0") {
     top.location.href = form.#{model.name.downcase.pluralize}.options[myindex].value;
@@ -150,7 +150,7 @@ function surfto(form) {
 </script>
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
-  <select name="#{model.name.downcase.pluralize}" onChange="surfto(this.form)">
+  <select name="#{model.name.downcase.pluralize}" onChange="surfto_#{model.name.downcase.pluralize}(this.form)">
     <option value=\"#{url_for}\">Filter by #{model.name.titleize.humanize}</option>
     #{items.join("\n")}
   </select>
