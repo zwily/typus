@@ -40,6 +40,14 @@ Post:
   order_by: title, -created_at
   application: Blog
 
+Comment:
+  fields:
+    list: email, post, post_id
+    form: email, post
+  filters: post
+  search: email, body
+  application: Blog
+
 Person:
   fields:
     list:

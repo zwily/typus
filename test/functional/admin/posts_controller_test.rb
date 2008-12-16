@@ -1,7 +1,10 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
 ##
-# Here we test the CRUD actions and template extensions rendering
+# Here we test the CRUD actions, template extensions rendering and
+#
+#   - Relate comment which is a has_many relationship.
+#   - Unrelate comment which is a has_many relationship.
 #
 class Admin::PostsControllerTest < ActionController::TestCase
 
@@ -23,6 +26,12 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_render_index
+    get :index
+    assert_response :success
+    assert_template 'index'
+  end
+
   def test_should_render_new
     test_should_update_item_and_redirect_to_index
     get :new
@@ -32,20 +41,20 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_create_item_and_redirect_to_index
     Typus::Configuration.options[:edit_after_create] = false
-    items = Post.count
-    post :create, { :item => { :title => "This is another title", :body => "Body" } }
-    assert_response :redirect
-    assert_redirected_to :action => 'index'
-    assert_equal items + 1, Post.count
+    assert_difference 'Post.count' do
+      post :create, { :item => { :title => "This is another title", :body => "Body" } }
+      assert_response :redirect
+      assert_redirected_to :action => 'index'
+    end
   end
 
   def test_should_create_item_and_redirect_to_edit
     Typus::Configuration.options[:edit_after_create] = true
-    items = Post.count
-    post :create, { :item => { :title => "This is another title", :body => "Body" } }
-    assert_response :redirect
-    assert_redirected_to :action => 'edit'
-    assert_equal items + 1, Post.count
+    assert_difference 'Post.count' do
+      post :create, { :item => { :title => "This is another title", :body => "Body" } }
+      assert_response :redirect
+      assert_redirected_to :action => 'edit'
+    end
   end
 
   def test_should_render_show
