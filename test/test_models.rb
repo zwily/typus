@@ -2,10 +2,6 @@ class User < ActiveRecord::Base
   
 end
 
-class Person < ActiveRecord::Base
-
-end
-
 class Page < ActiveRecord::Base
 
   def self.admin_order_by

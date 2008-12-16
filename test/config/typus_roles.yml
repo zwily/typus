@@ -4,7 +4,6 @@ admin:
   Comment: create, read, update, delete
   TypusUser: create, read, update, delete
   Page: create, read, update, delete
-  Person: create, read, update, delete
   Post: create, read, update, delete
   Status: index
   Order:

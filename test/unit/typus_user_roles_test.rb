@@ -12,7 +12,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     typus_user = typus_users(:admin)
     assert_equal 'admin', typus_user.roles
 
-    models = %w( TypusUser Person Post Comment Category Page Asset Status )
+    models = %w( TypusUser Post Comment Category Page Asset Status )
     assert_equal models.sort, typus_user.resources.map(&:first).sort
 
     # Order exists on the roles, but, as we compact the hash, the

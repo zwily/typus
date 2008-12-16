@@ -74,9 +74,4 @@ ActiveRecord::Schema.define do
     t.integer :position
   end
 
-  create_table :people, :force => true do |t|
-    t.string :first_name
-    t.string :last_name
-  end
-
 end

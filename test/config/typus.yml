@@ -47,12 +47,6 @@ Comment:
   search: email, body
   application: Blog
 
-Person:
-  fields:
-    list:
-    form:
-  application: Application
-
 TypusUser:
   fields:
     list: first_name, last_name, email, roles, status

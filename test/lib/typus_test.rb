@@ -5,7 +5,7 @@ class TypusTest < Test::Unit::TestCase
   def test_should_return_applications_and_should_be_sorted
     assert Typus.respond_to?(:applications)
     assert Typus.applications.kind_of?(Array)
-    assert_equal ["Application", "Blog", "Site", "Typus Admin"], Typus.applications
+    assert_equal ["Blog", "Site", "Typus Admin"], Typus.applications
   end
 
   def test_should_return_modules_of_an_application
@@ -40,7 +40,7 @@ class TypusTest < Test::Unit::TestCase
   def test_should_return_models_and_should_be_sorted
     assert Typus.respond_to?(:models)
     assert Typus.models.kind_of?(Array)
-    assert_equal %w( Asset Category Comment Page Person Post TypusUser ), Typus.models
+    assert_equal %w( Asset Category Comment Page Post TypusUser ), Typus.models
   end
 
   def test_should_verify_resources_class_method

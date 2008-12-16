@@ -224,7 +224,7 @@ class TypusControllerTest < ActionController::TestCase
     @request.session[:typus] = admin.id
     get :dashboard
 
-    %w( typus_users people posts pages assets ).each do |resource|
+    %w( typus_users posts pages assets ).each do |resource|
       assert_match "/admin/#{resource}/new", @response.body
     end
 
