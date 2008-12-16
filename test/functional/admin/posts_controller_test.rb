@@ -270,14 +270,14 @@ class Admin::PostsControllerTest < ActionController::TestCase
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
     get :index
-    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Posts<\/title>/, @response.body
+    assert_select 'title', "#{Typus::Configuration.options[:app_name]} &rsaquo; Posts"
   end
 
   def test_should_verify_page_title_on_new
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
     get :new
-    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Posts &rsaquo; New<\/title>/, @response.body
+    assert_select 'title', "#{Typus::Configuration.options[:app_name]} &rsaquo; Posts &rsaquo; New"
   end
 
   def test_should_verify_page_title_on_edit
@@ -285,7 +285,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     @request.session[:typus] = admin.id
     post_ = posts(:published)
     get :edit, :id => post_.id
-    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Posts &rsaquo; Edit<\/title>/, @response.body
+    assert_select 'title', "#{Typus::Configuration.options[:app_name]} &rsaquo; Posts &rsaquo; Edit"
   end
 
   def test_should_verify_new_and_edit_page_contains_a_link_to_add_a_new_user

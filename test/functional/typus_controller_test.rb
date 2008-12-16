@@ -185,14 +185,14 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_verify_page_title_on_login
     get :login
-    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Login<\/title>/, @response.body
+    assert_select 'title', "#{Typus::Configuration.options[:app_name]} &rsaquo; Login"
   end
 
   def test_should_verify_page_title_on_dashboard
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
     get :dashboard
-    assert_match /<title>#{Typus::Configuration.options[:app_name]} &rsaquo; Dashboard<\/title>/, @response.body
+    assert_select 'title', "#{Typus::Configuration.options[:app_name]} &rsaquo; Dashboard"
   end
 
   def test_should_create_first_typus_user
