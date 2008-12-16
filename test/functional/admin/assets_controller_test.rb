@@ -19,7 +19,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_equal 2, page.assets.size
 
     get :new, { :back_to => "/admin/pages/#{page.id}/edit", :resource => page.class.name, :resource_id => page.id }
-    assert_match /You're adding a new Asset to a Page. Do you want to cancel it?/, @response.body
+    assert_match "You're adding a new Asset to a Page. Do you want to cancel it?", @response.body
 
   end
 
@@ -34,17 +34,14 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
     assert_equal 3, page.assets.size
     assert flash[:success]
-    assert_equal "Asset successfully assigned to page.", flash[:success]
+    assert_equal "Asset successfully assigned to Page.", flash[:success]
 
   end
 
-=begin
-
   def test_should_unrelate_a_polymorphic_relationship
 
-    ##
-    # And after is created, we unrelate them.
-    #
+    page = pages(:published)
+    assert_equal 2, page.assets.size
 
     @request.env["HTTP_REFERER"] = "/admin/pages/#{page.id}/edit"
 
@@ -54,8 +51,8 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert flash[:success]
     assert_match "Asset removed from Page.", flash[:success]
 
-  end
+    assert_equal 1, page.assets.size
 
-=end
+  end
 
 end
