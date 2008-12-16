@@ -6,13 +6,7 @@ class Person < ActiveRecord::Base
 
 end
 
-class Tag < ActiveRecord::Base
-  has_and_belongs_to_many :posts
-end
-
 class Page < ActiveRecord::Base
-
-  has_many :assets, :as => :assetable, :dependent => :destroy
 
   def self.admin_order_by
     [ 'status' ]
@@ -46,7 +40,7 @@ end
 
 class Asset < ActiveRecord::Base
 
-  belongs_to :assetable, :polymorphic => true
+  belongs_to :resource, :polymorphic => true
 
 end
 
@@ -56,7 +50,7 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :comments
   belongs_to :user
-  has_and_belongs_to_many :tags
+  has_many :assets, :as => :resource, :dependent => :destroy
 
   def self.typus
     "plugin"

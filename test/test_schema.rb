@@ -69,8 +69,8 @@ ActiveRecord::Schema.define do
 
   create_table :assets, :force => true do |t|
     t.string :caption
-    t.string :assetable_type
-    t.integer :assetable_id
+    t.string :resource_type
+    t.integer :resource_id
     t.integer :position
   end
 

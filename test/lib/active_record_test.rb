@@ -139,7 +139,7 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_relationships_for_post
-    assert_equal %w( tags ), Post.typus_relationships
+    assert_equal %w( assets categories ), Post.typus_relationships
     assert !Post.typus_relationships.empty?
   end
 
