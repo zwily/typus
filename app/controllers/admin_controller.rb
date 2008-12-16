@@ -194,28 +194,37 @@ class AdminController < ApplicationController
   # Relate a model object to another.
   #
   def relate
-    model_to_relate = params[:related][:model].constantize
-    @resource[:class].find(params[:id]).send(params[:related][:model].tableize) << model_to_relate.find(params[:related][:id])
-    flash[:success] = "%s added to %s." % [ model_to_relate.to_s.titleize , @resource[:class_name_humanized] ]
+
+    resource_class = params[:related][:model].constantize
+    resource_id = params[:related][:id]
+    resource = resource_class.find(resource_id)
+
+    @resource[:class].find(params[:id]).send(params[:related][:model].tableize) << resource
+
+    flash[:success] = "%s added to %s." % [ resource_class.name.titleize , @resource[:class_name_humanized] ]
     redirect_to :back
+
   end
 
   ##
   # Remove relationship between models.
   #
   def unrelate
-    model_to_unrelate = params[:model].constantize
-    unrelate = model_to_unrelate.find(params[:model_id])
-    if @resource[:class].find(params[:id]).respond_to?(params[:model].tableize)
-      # Unrelate a habtm
-      @resource[:class].find(params[:id]).send(params[:model].tableize).delete(unrelate)
-      flash[:success] = "%s removed from %s." % [ model_to_unrelate.to_s.titleize, @resource[:class_name_humanized] ]
-    else
-      # Unrelate a polymorphic relationship
+
+    resource_class = params[:model].constantize
+    resource_id = params[:model_id]
+    resource = resource_class.find(resource_id)
+
+    case resource_class.reflect_on_association(@resource[:table_name].to_sym).macro
+    when :has_and_belongs_to_many
+      @resource[:class].find(params[:id]).send(params[:model].tableize).delete(resource)
+    when :has_many
       @resource[:class].find(params[:id]).destroy
-      flash[:success] = "%s removed from %s." % [ @resource[:class_name_humanized], model_to_unrelate.to_s.downcase ]
     end
+
+    flash[:success] = "%s removed from %s." % [ @resource[:class_name_humanized], resource_class.name.humanize ]
     redirect_to :back
+
   end
 
 private
