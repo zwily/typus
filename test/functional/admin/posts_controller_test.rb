@@ -157,14 +157,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_show_add_new_link_in_index
-
-    get :index
-    assert_response :success
-    assert_match "Add post", @response.body
-
-  end
-
   def test_should_not_show_add_new_link_in_index
 
     typus_user = typus_users(:designer)
@@ -173,25 +165,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_no_match /Add post/, @response.body
-
-  end
-
-  def test_should_show_trash_record_image_and_link_in_index
-
-    get :index
-    assert_response :success
-    assert_match /trash.gif/, @response.body
-
-  end
-
-  def test_should_not_show_remove_record_link_in_index
-
-    typus_user = typus_users(:designer)
-    @request.session[:typus] = typus_user.id
-
-    get :index
-    assert_response :success
-    assert_no_match /trash.gif/, @response.body
 
   end
 
@@ -206,22 +179,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert flash[:warning]
     assert_match /Toggle is disabled/, flash[:warning]
     Typus::Configuration.options[:toggle] = true
-  end
-
-  def test_should_verify_page_title_on_index
-    get :index
-    assert_select 'title', "#{Typus::Configuration.options[:app_name]} &rsaquo; Posts"
-  end
-
-  def test_should_verify_page_title_on_new
-    get :new
-    assert_select 'title', "#{Typus::Configuration.options[:app_name]} &rsaquo; Posts &rsaquo; New"
-  end
-
-  def test_should_verify_page_title_on_edit
-    post_ = posts(:published)
-    get :edit, :id => post_.id
-    assert_select 'title', "#{Typus::Configuration.options[:app_name]} &rsaquo; Posts &rsaquo; Edit"
   end
 
   def test_should_verify_new_and_edit_page_contains_a_link_to_add_a_new_user

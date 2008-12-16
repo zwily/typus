@@ -68,20 +68,20 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     typus_user = typus_users(:designer)
     assert_equal 'designer', typus_user.roles
 
-    models = %w( Category Post )
+    models = %w( Category Comment Post )
     assert_equal models.sort, typus_user.resources.map(&:first).sort
 
     # Category: read, update
-    assert !typus_user.can_perform?(Category, 'create')
-    assert typus_user.can_perform?(Category, 'read')
-    assert typus_user.can_perform?(Category, 'update')
-    assert !typus_user.can_perform?(Category, 'delete')
+    %w( read update ).each { |action| assert typus_user.can_perform?(Category, action) }
+    %w( create delete ).each { |action| assert !typus_user.can_perform?(Category, action) }
+
+    # Comment: read
+    %w( read ).each { |action| assert typus_user.can_perform?(Comment, action) }
+    %w( create update delete ).each { |action| assert !typus_user.can_perform?(Comment, action) }
 
     # Post: read
-    assert !typus_user.can_perform?(Post, 'create')
-    assert typus_user.can_perform?(Post, 'read')
-    assert !typus_user.can_perform?(Post, 'update')
-    assert !typus_user.can_perform?(Post, 'delete')
+    %w( read ).each { |action| assert typus_user.can_perform?(Post, action) }
+    %w( create update delete ).each { |action| assert !typus_user.can_perform?(Post, action) }
 
   end
 
