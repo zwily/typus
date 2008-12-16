@@ -246,7 +246,8 @@ module AdminFormHelper
         html << <<-HTML
   #{form_tag :action => 'relate'}
   #{hidden_field :related, :model, :value => field.classify.constantize}
-  <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag "Add", :class => 'button'}</form></p>
+  <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag "Add", :class => 'button'}</p>
+  </form>
         HTML
       end
       current_model = @resource[:class].name.singularize.camelize.constantize
