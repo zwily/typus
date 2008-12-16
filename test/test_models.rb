@@ -1,5 +1,24 @@
-class User < ActiveRecord::Base
-  
+class Asset < ActiveRecord::Base
+  belongs_to :resource, :polymorphic => true
+end
+
+class Category < ActiveRecord::Base
+
+  acts_as_list if defined? ActiveRecord::Acts::List
+
+  validates_presence_of :name
+  has_and_belongs_to_many :posts
+
+  def self.typus
+  end
+
+end
+
+class Comment < ActiveRecord::Base
+
+  validates_presence_of :name, :email, :body
+  belongs_to :post
+
 end
 
 class Page < ActiveRecord::Base
@@ -34,12 +53,6 @@ class Page < ActiveRecord::Base
 
 end
 
-class Asset < ActiveRecord::Base
-
-  belongs_to :resource, :polymorphic => true
-
-end
-
 class Post < ActiveRecord::Base
 
   validates_presence_of :title, :body
@@ -62,21 +75,6 @@ class Post < ActiveRecord::Base
 
 end
 
-class Category < ActiveRecord::Base
-
-  acts_as_list if defined? ActiveRecord::Acts::List
-
-  validates_presence_of :name
-  has_and_belongs_to_many :posts
-
-  def self.typus
-  end
-
-end
-
-class Comment < ActiveRecord::Base
-
-  validates_presence_of :name, :email, :body
-  belongs_to :post
-
+class User < ActiveRecord::Base
+  has_many :posts
 end

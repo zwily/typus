@@ -11,10 +11,6 @@ ActiveRecord::Schema.define do
     t.timestamps
   end
 
-  create_table :tags, :force => true do |t|
-    t.string :name
-  end
-
   create_table :users, :force => true do |t|
     t.string :first_name, :last_name, :email
   end
