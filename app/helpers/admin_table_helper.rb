@@ -51,7 +51,7 @@ module AdminTableHelper
                                                             :id => item.id, 
                                                             :model => @resource[:class], 
                                                             :model_id => params[:id] }, 
-                                                            :confirm => "Remove #{model.humanize.singularize.downcase} \"#{item.typus_name}\" from #{@resource[:class_name]}?"
+                                                            :confirm => "Unrelate #{model.humanize.singularize} from #{@resource[:class_name]}?"
         end
 
       end

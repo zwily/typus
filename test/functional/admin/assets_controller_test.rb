@@ -13,25 +13,34 @@ class Admin::AssetsControllerTest < ActionController::TestCase
   ##
   # A page has many assets, and the relationship is polymorphic.
   #
-  def test_should_test_polymorphic_relationship
-
-    ##
-    # First we create an asset for a page.
-    #
+  def test_should_test_polymorphic_relationship_message
 
     page = pages(:published)
     assert_equal 2, page.assets.size
 
-    get :new, { :back_to => "/admin/pages/#{page.id}/edit", :model => page.class.name, :model_id => page.id }
-    assert_match /You're adding a new \"Asset\" to a model. Do you want to cancel it?/, @response.body
+    get :new, { :back_to => "/admin/pages/#{page.id}/edit", :resource => page.class.name, :resource_id => page.id }
+    assert_match /You're adding a new Asset to a Page. Do you want to cancel it?/, @response.body
 
-    post :create, { :back_to => "/admin/pages/#{page.id}/edit", :model => page.class.name, :model_id => page.id }
+  end
+
+  def test_should_create_a_polymorphic_relationship
+
+    page = pages(:published)
+    assert_equal 2, page.assets.size
+
+    post :create, { :back_to => "/admin/pages/#{page.id}/edit", :resource => page.class.name, :resource_id => page.id }
     assert_response :redirect
     assert_redirected_to '/admin/pages/1/edit'
 
     assert_equal 3, page.assets.size
     assert flash[:success]
     assert_equal "Asset successfully assigned to page.", flash[:success]
+
+  end
+
+=begin
+
+  def test_should_unrelate_a_polymorphic_relationship
 
     ##
     # And after is created, we unrelate them.
@@ -46,5 +55,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_match "Asset removed from Page.", flash[:success]
 
   end
+
+=end
 
 end

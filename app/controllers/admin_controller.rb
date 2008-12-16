@@ -65,7 +65,7 @@ class AdminController < ApplicationController
   def new
 
     item_params = params.dup
-    %w( action controller model model_id back_to selected ).each do |param|
+    %w( action controller resource resource_id back_to selected ).each do |param|
       item_params.delete(param)
     end
 
@@ -83,32 +83,13 @@ class AdminController < ApplicationController
   def create
     @item = @resource[:class].new(params[:item])
     if @item.valid?
-      if params[:back_to]
-        if params[:model] && params[:model_id]
-          model_to_relate = params[:model].constantize
-          if @item.respond_to?(params[:model].tableize)
-            @item.save
-            # This is the case of habtm
-            @item.send(params[:model].tableize) << model_to_relate.find(params[:model_id])
-          else
-            # This is the case of a polymorphic relationship.
-            model_to_relate.find(params[:model_id]).send(@item.class.name.tableize).create(params[:item])
-          end
-          flash[:success] = "%s successfully assigned to %s." % [ @item.class, params[:model].downcase ]
-          redirect_to params[:back_to]
-        else
-          @item.save
-          flash[:success] = "New %s created." % @resource[:class_name_humanized]
-          redirect_to "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
-        end
+      create_with_back_to and return if params[:back_to]
+      @item.save
+      flash[:success] = "%s successfully created." % @resource[:class_name_humanized]
+      if Typus::Configuration.options[:edit_after_create]
+        redirect_to :action => 'edit', :id => @item.id
       else
-        @item.save
-        flash[:success] = "%s successfully created." % @resource[:class_name_humanized]
-        if Typus::Configuration.options[:edit_after_create]
-          redirect_to :action => 'edit', :id => @item.id
-        else
-          redirect_to :action => 'index'
-        end
+        redirect_to :action => 'index'
       end
     else
       select_template :new
@@ -201,7 +182,7 @@ class AdminController < ApplicationController
 
     @item.send(params[:related][:model].tableize) << resource
 
-    flash[:success] = "%s added to %s." % [ resource_class.name.titleize , @resource[:class_name_humanized] ]
+    flash[:success] = "%s related to %s." % [ resource_class.name.titleize , @resource[:class_name_humanized] ]
     redirect_to :back
 
   end
@@ -218,11 +199,14 @@ class AdminController < ApplicationController
     case resource_class.reflect_on_association(@resource[:table_name].to_sym).macro
     when :has_and_belongs_to_many
       @item.send(params[:model].tableize).delete(resource)
+      message = "%s unrelated from %s."
     when :has_many
       @item.destroy
+      message = "%s removed from %s."
     end
 
-    flash[:success] = "%s removed from %s." % [ @resource[:class_name_humanized], resource_class.name.humanize ]
+    flash[:success] = message % [ @resource[:class_name_humanized], resource_class.name.humanize ]
+
     redirect_to :back
 
   end
@@ -233,13 +217,16 @@ private
   # Set current resource.
   #
   def set_resource
-    resource = params[:controller].split('/').last.classify
-    resource_class = resource.constantize
+
+    resource = params[:controller].split('/').last
+
     @resource = {}
-    @resource[:class] = resource_class
-    @resource[:class_name] = resource
-    @resource[:class_name_humanized] = resource.titleize
-    @resource[:table_name] = resource_class.table_name
+    @resource[:original] = resource
+    @resource[:class] = resource.classify.constantize
+    @resource[:class_name] = resource.classify
+    @resource[:class_name_humanized] = resource.classify.titleize
+    @resource[:table_name] = resource.classify.constantize.table_name
+
   rescue Exception => error
     error_handler(error)
   end
@@ -277,6 +264,38 @@ private
     else
       render :template => "admin/#{template}"
     end
+  end
+
+  ##
+  # Used by create when params[:back_to] is defined.
+  #
+  def create_with_back_to
+
+    if params[:resource] && params[:resource_id]
+
+      resource_class = params[:resource].classify.constantize
+      resource_id = params[:resource_id]
+      resource = resource_class.find(resource_id)
+
+      case @resource[:class].reflect_on_association(params[:resource].to_sym).macro
+      when :has_and_belongs_to_many
+        @item.save
+        @item.send(params[:resource]) << resource
+      when :has_many
+        resource.send(@item.class.name.tableize).create(params[:item])
+      end
+
+      flash[:success] = "%s successfully assigned to %s." % [ @item.class, resource_class.name ]
+      redirect_to params[:back_to]
+
+    else
+
+      @item.save
+      flash[:success] = "%s successfully created." % @resource[:class_name_humanized]
+      redirect_to "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
+
+    end
+
   end
 
   ##

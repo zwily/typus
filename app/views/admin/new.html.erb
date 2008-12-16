@@ -15,8 +15,8 @@
             :url  => { :action => 'create', 
                        :back_to => params[:back_to], 
                        :selected => params[:selected], 
-                       :model => params[:model], 
-                       :model_id => params[:model_id] }, 
+                       :resource => params[:resource], 
+                       :resource_id => params[:resource_id] }, 
             :html => { :multipart => true } do |f| %>
   <%= build_form %>
   <p><%= submit_tag "Create entry", :class => 'button' %></p>

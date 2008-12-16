@@ -7,10 +7,17 @@ module AdminHelper
   include AdminTableHelper
 
   def display_link_to_previous
+
+    message = if params[:resource]
+                "You're adding a new #{@resource[:class_name].titleize} to a #{params[:resource].classify.titleize}."
+              else
+                "You're adding a new #{@resource[:class_name].titleize}."
+              end
+
     returning(String.new) do |html|
       html << <<-HTML
 <div id="flash" class="notice">
-<p>You're adding a new "#{@resource[:class_name].titleize}" to a model. Do you want to cancel it? #{link_to "Click here", params[:back_to]}.</p>
+<p>#{message} Do you want to cancel it? #{link_to "Click here", params[:back_to]}.</p>
 </div>
       HTML
     end
