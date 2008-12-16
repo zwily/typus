@@ -43,7 +43,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to @request.env["HTTP_REFERER"]
     assert flash[:success]
-    assert_match /Asset removed from Page./, flash[:success]
+    assert_match "Asset removed from Page.", flash[:success]
 
   end
 
