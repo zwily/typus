@@ -105,26 +105,24 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_template 'index'
   end
 
-  # This is a habtm
-  def test_should_relate_tag_to_post
-    tag = tags(:first)
+  def test_should_relate_category_to_post_which_is_a_habtm_relationship
+    category = categories(:first)
     post_ = posts(:published)
     @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit"
-    assert_difference('Tag.find(tag.id).posts.count') do
-      post :relate, { :id => post_.id, :related => { :model => "Tag", :id => tag.id } }
+    assert_difference('category.posts.count') do
+      post :relate, { :id => post_.id, :related => { :model => "Category", :id => category.id } }
     end
     assert_response :redirect
     assert flash[:success]
     assert_redirected_to @request.env["HTTP_REFERER"]
   end
 
-  # This is a habtm
-  def test_should_unrelate_tag_from_post
-    tag = tags(:first)
+  def test_should_unrelate_category_from_post_which_is_a_habtm_relationship
+    category = categories(:first)
     post_ = posts(:published)
     @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit"
-    assert_difference('Tag.find(tag.id).posts.count', 0) do
-      post :unrelate, { :id => post_.id, :model => "Tag", :model_id => tag.id }
+    assert_difference('category.posts.count', 0) do
+      post :unrelate, { :id => post_.id, :model => "Category", :model_id => category.id }
     end
     assert_response :redirect
     assert flash[:success]
