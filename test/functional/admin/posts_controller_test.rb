@@ -157,17 +157,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_not_show_add_new_link_in_index
-
-    typus_user = typus_users(:designer)
-    @request.session[:typus] = typus_user.id
-
-    get :index
-    assert_response :success
-    assert_no_match /Add post/, @response.body
-
-  end
-
   def test_should_disable_toggle_and_check_links_are_disabled
     Typus::Configuration.options[:toggle] = false
     @request.env["HTTP_REFERER"] = "/admin/posts"

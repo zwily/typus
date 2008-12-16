@@ -82,6 +82,17 @@ class Admin::CommentsControllerTest < ActionController::TestCase
     assert_match "Add comment", @response.body
   end
 
+  def test_should_not_show_add_new_link_in_index
+
+    typus_user = typus_users(:designer)
+    @request.session[:typus] = typus_user.id
+
+    get :index
+    assert_response :success
+    assert_no_match /Add comment/, @response.body
+
+  end
+
   def test_should_show_trash_record_image_and_link_in_index
     get :index
     assert_response :success
