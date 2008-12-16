@@ -277,12 +277,21 @@ private
       resource_id = params[:resource_id]
       resource = resource_class.find(resource_id)
 
-      case @resource[:class].reflect_on_association(params[:resource].to_sym).macro
-      when :has_and_belongs_to_many
-        @item.save
-        @item.send(params[:resource]) << resource
-      when :has_many
+      begin
+
+        case @resource[:class].reflect_on_association(params[:resource].to_sym).macro
+        when :has_and_belongs_to_many
+          @item.save
+          @item.send(params[:resource]) << resource
+        when :has_many
+          resource.send(@item.class.name.tableize).create(params[:item])
+        end
+
+      rescue
+
+        # OPTIMIZE: Polimorphic
         resource.send(@item.class.name.tableize).create(params[:item])
+
       end
 
       flash[:success] = "%s successfully assigned to %s." % [ @item.class, resource_class.name ]

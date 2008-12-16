@@ -214,7 +214,7 @@ module AdminFormHelper
 <div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}
-  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :model => @resource[:class], :model_id => @item.id}</small>
+  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:original], :resource_id => @item.id}</small>
   </h2>
       HTML
       @items = @resource[:class].find(params[:id]).send(field)
