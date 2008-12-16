@@ -1,7 +1,7 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 
 ##
-# Here we test the CRUD actions, template extensions rendering and
+# Here we test the CRUD actions and ...
 #
 #   - Relate comment which is a has_many relationship.
 #   - Unrelate comment which is a has_many relationship.
@@ -105,17 +105,30 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_template 'index'
   end
 
-  def test_should_relate_a_tag_to_a_post_and_then_unrelate
+  # This is a habtm
+  def test_should_relate_tag_to_post
     tag = tags(:first)
     post_ = posts(:published)
     @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit"
-    post :relate, { :id => post_.id, :related => { :model => "Tag", :id => tag.id } }
+    assert_difference('Tag.find(tag.id).posts.count') do
+      post :relate, { :id => post_.id, :related => { :model => "Tag", :id => tag.id } }
+    end
     assert_response :redirect
     assert flash[:success]
-    assert_redirected_to :action => 'edit', :id => post_.id
-    post :unrelate, { :id => post_.id, :model => "Tag", :model_id => tag.id }
+    assert_redirected_to @request.env["HTTP_REFERER"]
+  end
+
+  # This is a habtm
+  def test_should_unrelate_tag_from_post
+    tag = tags(:first)
+    post_ = posts(:published)
+    @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit"
+    assert_difference('Tag.find(tag.id).posts.count', 0) do
+      post :unrelate, { :id => post_.id, :model => "Tag", :model_id => tag.id }
+    end
     assert_response :redirect
     assert flash[:success]
+    assert_redirected_to @request.env['HTTP_REFERER']
   end
 
   def test_should_check_redirection_when_theres_no_http_referer_on_new

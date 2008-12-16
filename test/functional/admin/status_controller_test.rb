@@ -31,7 +31,7 @@ class Admin::StatusControllerTest < ActionController::TestCase
     assert_match /#{@typus_user.roles.capitalize} can't go to show on status./, flash[:notice]
   end
 
-  def test_should_verify_user_can_not_go_to_index
+  def test_should_verify_editor_can_not_go_to_index
     typus_user = typus_users(:editor)
     @request.session[:typus] = typus_user.id
     get :index
