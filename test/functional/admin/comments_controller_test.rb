@@ -99,4 +99,36 @@ class Admin::CommentsControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_verify_new_and_edit_page_contains_a_link_to_add_a_new_user
+
+    get :new
+    match = "/admin/users/new?back_to=%2Fadmin%2Fposts%2Fnew&amp;selected=user_id"
+    assert_match match, @response.body
+
+    post_ = posts(:published)
+    get :edit, :id => post_.id
+    match = "/admin/users/new?back_to=%2Fadmin%2Fposts%2F1%2Fedit&amp;selected=user_id"
+    assert_match match, @response.body
+
+  end
+
+  def test_should_verify_new_and_edit_page_contains_a_link_to_add_a_new_user
+    get :new
+    match = "/admin/posts/new?back_to=%2Fadmin%2Fcomments%2Fnew&amp;selected=post_id"
+    assert_match match, @response.body
+  end
+
+=begin
+
+  def test_should_verify_new_and_edit_page_contains_a_link_to_add_a_new_user
+
+    post_ = posts(:published)
+    get :edit, :id => post_.id
+    match = "/admin/users/new?back_to=%2Fadmin%2Fposts%2F1%2Fedit&amp;selected=user_id"
+    assert_match match, @response.body
+
+  end
+
+=end
+
 end
