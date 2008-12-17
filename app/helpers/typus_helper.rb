@@ -133,8 +133,12 @@ module TypusHelper
   end
 
   def display_error(error)
-    log_error error
-    "<div id=\"flash\" class=\"error\"><p>#{error}</p></div>"
+    log_error(error)
+    returning(String.new) do |html|
+      html << <<-HTML
+<div id="flash" class="error"><p>#{error}</p></div>
+      HTML
+    end
   end
 
   ##
