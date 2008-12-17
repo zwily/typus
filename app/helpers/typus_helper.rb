@@ -11,7 +11,7 @@ module TypusHelper
 
         available = []
         Typus.application(app).each { |r| available << r if @current_user.resources.include?(r) }
-        return if available.empty?
+        next if available.empty?
 
         html << <<-HTML
 <table>
