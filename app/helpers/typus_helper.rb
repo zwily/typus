@@ -6,7 +6,7 @@ module TypusHelper
   def applications
 
     if Typus.applications.empty?
-      return display_error("There are not defined applications in config/typus/*.yml")
+      return typus_message("There are not defined applications in config/typus/*.yml")
     end
 
     html = ""
@@ -130,10 +130,10 @@ module TypusHelper
     end
   end
 
-  def display_error(error)
+  def typus_message(message, html_class='notice')
     returning(String.new) do |html|
       html << <<-HTML
-<div id="flash" class="error"><p>#{error}</p></div>
+<div id="flash" class="#{html_class}"><p>#{message}</p></div>
       HTML
     end
   end
