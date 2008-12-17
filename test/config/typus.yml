@@ -30,6 +30,8 @@ Post:
       read_only: permalink
       auto_generated: created_at
       questions: status
+      date_formats:
+        created_at: post_short
   relationships: assets, categories
   actions:
     index: cleanup

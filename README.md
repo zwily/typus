@@ -306,6 +306,25 @@ attribute" to match your application requirements.
             default: publicado, no_publicado
             status: active, inactive
 
+### Date Formats
+
+Date formats allows to define the format of the datetime field.
+
+    ##
+    # config/typus/application.yml
+    #
+    Post:
+      fields:
+        list: title, published_at
+        options:
+          date_formats:
+            published_at: post_short
+
+    ##
+    # config/initializers/dates.rb
+    #
+    Time::DATE_FORMATS[:post_short] = "%m/%y"
+
 ### Want more actions?
 
     Post:

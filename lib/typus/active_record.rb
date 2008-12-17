@@ -253,6 +253,15 @@ module Typus
     end
 
     ##
+    # We are able to define how to display dates on Typus
+    #
+    def typus_date_format(attribute = 'default')
+      date_format = Typus::Configuration.config[self.name]['fields']['options']['date_formats'][attribute] rescue nil
+      date_format = :db if date_format.nil?
+      return date_format.to_sym
+    end
+
+    ##
     # This is used by acts_as_tree
     #
     def top

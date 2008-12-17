@@ -131,6 +131,12 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal hash, Post.typus_boolean('status')
   end
 
+  def test_should_return_date_formats_for_post
+    assert_equal :post_short, Post.typus_date_format('created_at')
+    assert_equal :db, Post.typus_date_format
+    assert_equal :db, Post.typus_date_format('unknown')
+  end
+
   def test_should_return_defaults_for_post
     assert_equal %w( title ), Post.typus_defaults_for('search')
     assert_equal %w( title ), Post.typus_defaults_for(:search)
