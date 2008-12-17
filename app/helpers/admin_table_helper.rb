@@ -171,7 +171,7 @@ module AdminTableHelper
 
     returning(String.new) do |html|
 
-      if Typus::Configuration.options[:toggle]
+      if Typus::Configuration.options[:toggle] && !item.send(column[0]).nil?
         html << <<-HTML
 <td align="center">
   #{link_to content, {:params => params.merge(:controller => "admin/#{item.class.name.tableize}", :action => 'toggle', :field => column[0], :id => item.id)} , :confirm => "Change #{column[0].humanize.downcase}?"}
