@@ -97,10 +97,6 @@ module TypusHelper
     render :partial => file.compact.join('/') rescue nil
   end
 
-  def display_error(error)
-    "<div id=\"flash\" class=\"error\"><p>#{error}</p></div>"
-  end
-
   def page_title
     crumbs = []
     crumbs << Typus::Configuration.options[:app_name]
