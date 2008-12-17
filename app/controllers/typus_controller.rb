@@ -19,6 +19,7 @@ class TypusController < ApplicationController
   # Application Dashboard
   #
   def dashboard
+    flash[:notice] = "There are not defined applications in config/typus/*.yml" if Typus.applications.empty?
   end
 
   ##

@@ -5,10 +5,6 @@ module TypusHelper
   #
   def applications
 
-    if Typus.applications.empty?
-      return typus_message("There are not defined applications in config/typus/*.yml")
-    end
-
     returning(String.new) do |html|
 
       Typus.applications.each do |app|
