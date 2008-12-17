@@ -105,7 +105,7 @@ module AdminTableHelper
     returning(String.new) do |html|
       if item.class.typus_fields_for(fields).first == column
         html << <<-HTML
-<td>#{link_to item.send(column[0]) || "", :controller => "admin/#{item.class.name.tableize}", :action => 'edit', :id => item.id}
+<td>#{link_to item.send(column[0]) || 'nil', :controller => "admin/#{item.class.name.tableize}", :action => 'edit', :id => item.id}
 <br /><small>#{"Custom actions go here, but only if exist." if Typus::Configuration.options[:actions_on_table]}</small></td>
         HTML
       else
