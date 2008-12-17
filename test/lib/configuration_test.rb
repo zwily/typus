@@ -15,6 +15,7 @@ class ConfigurationTest < Test::Unit::TestCase
       assert_equal true, Typus::Configuration.options[:edit_after_create]
       assert_equal 'admin@example.com', Typus::Configuration.options[:email]
       assert_equal false, Typus::Configuration.options[:special_characters_on_password]
+      assert_equal 'nil', Typus::Configuration.options[:nil]
     else
       assert Typus::Configuration.respond_to?(:options)
     end

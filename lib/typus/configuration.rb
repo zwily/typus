@@ -52,7 +52,8 @@ module Typus
                   :ssl => false, 
                   :actions_on_table => false, 
                   :prefix => 'admin', 
-                  :icon_on_boolean => true }
+                  :icon_on_boolean => true, 
+                  :nil => 'nil' }
 
     mattr_accessor :options
 

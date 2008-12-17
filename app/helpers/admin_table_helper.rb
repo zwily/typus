@@ -105,7 +105,7 @@ module AdminTableHelper
     returning(String.new) do |html|
       if item.class.typus_fields_for(fields).first == column
         html << <<-HTML
-<td>#{link_to item.send(column[0]) || 'nil', :controller => "admin/#{item.class.name.tableize}", :action => 'edit', :id => item.id}
+<td>#{link_to item.send(column[0]) || Typus::Configuration.options[:nil], :controller => "admin/#{item.class.name.tableize}", :action => 'edit', :id => item.id}
 <br /><small>#{"Custom actions go here, but only if exist." if Typus::Configuration.options[:actions_on_table]}</small></td>
         HTML
       else
@@ -150,7 +150,7 @@ module AdminTableHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<td>#{!item.send(column[0]).nil? ? item.send(column[0]).to_s(date_format) : 'nil'}</td>
+<td>#{!item.send(column[0]).nil? ? item.send(column[0]).to_s(date_format) : Typus::Configuration.options[:nil]}</td>
       HTML
     end
 
@@ -166,7 +166,7 @@ module AdminTableHelper
       content = (boolean_icon) ? image_tag("admin/status_#{status}.gif") : boolean_hash["#{status}".to_sym]
     else
       # If content is nil, we show nil!
-      content = 'nil'
+      content = Typus::Configuration.options[:nil]
     end
 
     returning(String.new) do |html|
