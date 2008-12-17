@@ -18,7 +18,6 @@
   Typus::Configuration.options[:edit_after_create] = true
   Typus::Configuration.options[:root] = 'admin'
   Typus::Configuration.options[:recover_password] = true
-  Typus::Configuration.options[:password] = 8
   Typus::Configuration.options[:special_characters_on_password] = false
   Typus::Configuration.options[:ssl] = false
   Typus::Configuration.options[:icon_on_boolean] = false

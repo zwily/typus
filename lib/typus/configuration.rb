@@ -28,7 +28,6 @@ module Typus
     #   Typus::Configuration.options[:recover_password] = false
     #   Typus::Configuration.options[:disable_typus_enabled_plugins] = true
     #   Typus::Configuration.options[:email] = 'admin@example.com'
-    #   Typus::Configuration.options[:password] = 8
     #   Typus::Configuration.options[:special_characters_on_password] = true
     #   Typus::Configuration.options[:ssl] = false
     #   Typus::Configuration.options[:icon_on_boolean] = true
@@ -40,7 +39,6 @@ module Typus
     @@options = { :app_name => 'Typus', 
                   :app_description => '', 
                   :per_page => 15, 
-                  :version => '', 
                   :form_rows => 10, 
                   :form_columns => 10, 
                   :sidebar_selector => 10, 
@@ -50,7 +48,6 @@ module Typus
                   :root => 'admin', 
                   :recover_password => true, 
                   :email => 'admin@example.com', 
-                  :password => 8, 
                   :special_characters_on_password => false, 
                   :ssl => false, 
                   :actions_on_table => false, 

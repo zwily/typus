@@ -55,7 +55,6 @@ You can overwrite the following settings:
     Typus::Configuration.options[:edit_after_create]
     Typus::Configuration.options[:root]
     Typus::Configuration.options[:recover_password]
-    Typus::Configuration.options[:password]
     Typus::Configuration.options[:special_characters_on_password]
     Typus::Configuration.options[:ssl]
     Typus::Configuration.options[:icon_on_boolean]
