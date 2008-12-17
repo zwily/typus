@@ -125,10 +125,12 @@ module TypusHelper
   end
 
   def display_flash_message
-    flash_types = [ :error, :warning, :notice ]
-    flash_type = flash_types.detect{ |a| flash.keys.include?(a) } || flash.keys.first
-    if flash_type
-      "<div id=\"flash\" class=\"%s\"><p>%s</p></div>" % [flash_type.to_s, flash[flash_type]]
+    return if flash.empty?
+    flash_type = flash.keys.first
+    returning(String.new) do |html|
+      html << <<-HTML
+<div id="flash" class="#{flash_type}"><p>#{flash[flash_type]}</p></div>
+      HTML
     end
   end
 
