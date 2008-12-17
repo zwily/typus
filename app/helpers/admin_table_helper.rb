@@ -165,8 +165,8 @@ module AdminTableHelper
       status = item.send(column[0])
       content = (boolean_icon) ? image_tag("admin/status_#{status}.gif") : boolean_hash["#{status}".to_sym]
     else
-      # If the column is null we show the false icon.
-      content = (boolean_icon) ? image_tag("admin/status_false.gif") : boolean_hash[:false]
+      # If content is nil, we show nil!
+      content = 'nil'
     end
 
     returning(String.new) do |html|
