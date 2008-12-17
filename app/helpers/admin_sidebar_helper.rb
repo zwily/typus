@@ -2,44 +2,47 @@ module AdminSidebarHelper
 
   def actions
 
-    html = ""
+    returning(String.new) do |html|
 
-    case params[:action]
-    when 'index', 'edit', 'update'
-      if @current_user.can_perform?(@resource[:class], 'create')
-        html << <<-HTML
+      html << <<-HTML
+<h2>Actions</h2>
+      HTML
+
+      case params[:action]
+      when 'index', 'edit', 'update'
+        if @current_user.can_perform?(@resource[:class], 'create')
+          html << <<-HTML
 <ul>
 <li>#{link_to "Add #{@resource[:class_name_humanized].downcase}", :action => 'new'}</li>
 </ul>
-        HTML
+          HTML
+        end
       end
-    end
 
-    case params[:action]
-    when 'edit', 'update'
-      html << <<-HTML
+      case params[:action]
+      when 'edit', 'update'
+        html << <<-HTML
 <ul>
 <li>#{link_to "Next", :id => @next.id if @next}</li>
 <li>#{link_to "Previous", :id => @previous.id if @previous}</li>
 </ul>
-      HTML
-    end
+        HTML
+      end
 
-    case params[:action]
-    when 'new', 'create'
-      html << <<-HTML
+      case params[:action]
+      when 'new', 'create'
+        html << <<-HTML
 <ul>
 <li>#{link_to "Back to list", :action => 'index'}</li>
 </ul>
-      HTML
-    else
-      html << more_actions
-      html << block('parent_module')
-      html << block('submodules')
-    end
+        HTML
+      else
+        html << more_actions
+        html << block('parent_module')
+        html << block('submodules')
+      end
 
-    html = "<h2>Actions</h2>\n#{html}" unless html.empty?
-    return html
+    end
 
   end
 
