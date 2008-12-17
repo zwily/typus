@@ -131,24 +131,10 @@ module TypusHelper
   end
 
   def display_error(error)
-    log_error(error)
     returning(String.new) do |html|
       html << <<-HTML
 <div id="flash" class="error"><p>#{error}</p></div>
       HTML
-    end
-  end
-
-  ##
-  #
-  #
-  def log_error(exception)
-    ActiveSupport::Deprecation.silence do
-        logger.fatal(
-        "Typus Error:\n\n#{exception.class} (#{exception.message}):\n    " +
-        exception.backtrace.join("\n    ") +
-        "\n\n"
-        )
     end
   end
 
