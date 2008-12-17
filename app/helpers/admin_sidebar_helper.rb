@@ -4,9 +4,6 @@ module AdminSidebarHelper
 
     html = ""
 
-    ##
-    # Add
-    #
     case params[:action]
     when 'index', 'edit', 'update'
       if @current_user.can_perform?(@resource[:class], 'create')
@@ -18,9 +15,6 @@ module AdminSidebarHelper
       end
     end
 
-    ##
-    # Edit, update ...
-    #
     case params[:action]
     when 'edit', 'update'
       html << <<-HTML
@@ -31,9 +25,6 @@ module AdminSidebarHelper
       HTML
     end
 
-    ##
-    # index, update, create
-    #
     case params[:action]
     when 'new', 'create'
       html << <<-HTML
