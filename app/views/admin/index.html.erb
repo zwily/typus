@@ -7,7 +7,7 @@
 
 <%= typus_block :model => @resource[:table_name], :partial => :index %>
 
-<h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; <%= @resource[:class_name_humanized].pluralize %> <% if request.env['QUERY_STRING'] && !request.env['QUERY_STRING'].blank? %><small><%= link_to "Remove filter" %></small><% end %></h2>
+<h2><%= link_to t("Dashboard"), typus_dashboard_url %> &rsaquo; <%= @resource[:class_name_humanized].pluralize %> <% if request.env['QUERY_STRING'] && !request.env['QUERY_STRING'].blank? %><small><%= link_to "Remove filter" %></small><% end %></h2>
 
 <%= typus_block :model => @resource[:table_name], :partial => :index_top %>
 
@@ -17,9 +17,9 @@
 <% else %>
   <div class="box" id="empty">
     <% if @resource[:class].count.zero? %>
-      <p>There are no entries.</p>
+      <p><%= t("There are no entries.") %></p>
     <% else %>
-      <p>There are no entries under this filter.</p>
+      <p><%= t("There are no entries under this filter.") %></p>
     <% end %>
   </div>
 <% end %>
