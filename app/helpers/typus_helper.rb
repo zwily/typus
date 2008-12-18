@@ -94,15 +94,15 @@ module TypusHelper
   end
 
   def header
-    "<h1>#{Typus::Configuration.options[:app_name]} <small>#{link_to "View site", root_url, :target => 'blank' rescue ''}</small></h1>"
+    "<h1>#{Typus::Configuration.options[:app_name]} <small>#{link_to t("View site"), root_url, :target => 'blank' rescue ''}</small></h1>"
   end
 
   def login_info
     returning(String.new) do |html|
       html << <<-HTML
 <ul>
-  <li>Logged as #{link_to @current_user.full_name(true), :controller => 'admin/typus_users', :action => 'edit', :id => @current_user.id}</li>
-  <li>#{link_to "Logout", typus_logout_url}</li>
+  <li>#{t("Logged as")} #{link_to @current_user.full_name(true), :controller => 'admin/typus_users', :action => 'edit', :id => @current_user.id}</li>
+  <li>#{link_to t("Logout"), typus_logout_url}</li>
 </ul>
       HTML
     end
