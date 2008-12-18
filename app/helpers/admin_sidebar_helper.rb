@@ -5,7 +5,7 @@ module AdminSidebarHelper
     returning(String.new) do |html|
 
       html << <<-HTML
-<h2>Actions</h2>
+<h2>#{t("Actions")}</h2>
       HTML
 
       case params[:action]
@@ -13,7 +13,7 @@ module AdminSidebarHelper
         if @current_user.can_perform?(@resource[:class], 'create')
           html << <<-HTML
 <ul>
-<li>#{link_to "Add #{@resource[:class_name_humanized].downcase}", :action => 'new'}</li>
+<li>#{link_to "#{t("Add")} #{@resource[:class_name_humanized].downcase}", :action => 'new'}</li>
 </ul>
           HTML
         end
@@ -23,8 +23,8 @@ module AdminSidebarHelper
       when 'edit', 'update'
         html << <<-HTML
 <ul>
-<li>#{link_to "Next", :id => @next.id if @next}</li>
-<li>#{link_to "Previous", :id => @previous.id if @previous}</li>
+<li>#{link_to t("Next"), :id => @next.id if @next}</li>
+<li>#{link_to t("Previous"), :id => @previous.id if @previous}</li>
 </ul>
         HTML
       end
@@ -33,7 +33,7 @@ module AdminSidebarHelper
       when 'new', 'create'
         html << <<-HTML
 <ul>
-<li>#{link_to "Back to list", :action => 'index'}</li>
+<li>#{link_to t("Back to list"), :action => 'index'}</li>
 </ul>
         HTML
       else
@@ -87,12 +87,12 @@ module AdminSidebarHelper
       search_params.each { |key, value| hidden_params << hidden_field_tag(key, value) }
 
       search = <<-HTML
-<h2>Search</h2>
+<h2>#{t("Search")}</h2>
 <form action="" method="get">
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.join("\n")}
 </form>
-<p style="margin: -10px 0px 10px 0px;"><small>Searching by #{Typus::Configuration.config[@resource[:class_name]]['search'].split(', ').to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
+<p style="margin: -10px 0px 10px 0px;"><small>#{t("Search by")} #{Typus::Configuration.config[@resource[:class_name]]['search'].split(', ').to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
       HTML
 
       return search
