@@ -89,7 +89,7 @@ module TypusHelper
     crumbs = []
     crumbs << Typus::Configuration.options[:app_name]
     crumbs << @resource[:class_name_humanized].pluralize if @resource
-    crumbs << params[:action].titleize unless %w( index ).include?(params[:action])
+    crumbs << t(params[:action].humanize) unless %w( index ).include?(params[:action])
     return crumbs.compact.map { |x| x }.join(" &rsaquo; ")
   end
 
