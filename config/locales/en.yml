@@ -15,6 +15,5 @@ en:
   "There are not defined applications in config/typus/*.yml": "There are not defined applications in config/typus/*.yml"
   "Overview": "Overview"
   "Options": "Options"
-  "Password": "Password"
   "Password Confirm": "Password Confirm"
   "Change password": "Change password"
