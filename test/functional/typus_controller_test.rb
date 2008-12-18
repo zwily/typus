@@ -64,7 +64,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to typus_login_url
     assert flash[:success]
-    assert_match /Password recovery link sent to your email./, flash[:success]
+    assert_match /Password recovery link sent to your email/, flash[:success]
   end
 
   def test_should_logout
@@ -206,7 +206,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to :action => 'setup'
     assert flash[:error]
-    assert_equal "<strong>Yay!</strong> That doesn't seem like a valid email address.", flash[:error]
+    assert_equal "Yay! That doesn't seem like a valid email address", flash[:error]
     post :setup, :user => { :email => 'john@example.com' }
     assert_response :redirect
     assert_redirected_to :action => 'dashboard'
