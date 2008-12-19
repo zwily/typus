@@ -16,7 +16,7 @@
   </div>
 
   <div id="dialog">
-    <h1><%= link_to Typus::Configuration.options[:app_name], typus_login_url %></h1>
+    <h1><%= link_to Typus::Configuration.options[:app_name], typus_login_path %></h1>
     <%= display_flash_message %>
     <%= yield %>
   </div>
