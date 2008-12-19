@@ -235,6 +235,7 @@ module AdminFormHelper
     returning(String.new) do |html|
       model_to_relate = field.singularize.camelize.constantize
       html << <<-HTML
+<a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}

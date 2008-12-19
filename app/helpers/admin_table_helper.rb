@@ -47,11 +47,10 @@ module AdminTableHelper
                                                             :confirm => "Remove entry?", 
                                                             :method => :delete
         else
-          perform = link_to image_tag("admin/trash.gif"), { :controller => "admin/#{model.name.tableize}", 
-                                                            :action => "unrelate", 
-                                                            :id => item.id, 
-                                                            :model => @resource[:class], 
-                                                            :model_id => params[:id] }, 
+          perform = link_to image_tag("admin/trash.gif"), { :action => "unrelate", 
+                                                            :id => params[:id], 
+                                                            :resource => item.class.name.tableize, 
+                                                            :resource_id => item.id }, 
                                                             :confirm => "Unrelate #{model.humanize.singularize} from #{@resource[:class_name]}?"
         end
 

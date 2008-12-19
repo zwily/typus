@@ -177,13 +177,14 @@ class AdminController < ApplicationController
   def relate
 
     resource_class = params[:related][:model].constantize
+    resource_tableized = params[:related][:model].tableize
     resource_id = params[:related][:id]
     resource = resource_class.find(resource_id)
 
     @item.send(params[:related][:model].tableize) << resource
 
     flash[:success] = t("{{model_a}} related to {{model_b}}.", :model_a => resource_class.name.titleize , :model_b => @resource[:class_name_humanized])
-    redirect_to :back
+    redirect_to :action => 'edit', :id => @item.id, :anchor => resource_tableized
 
   end
 
@@ -192,20 +193,21 @@ class AdminController < ApplicationController
   #
   def unrelate
 
-    resource_class = params[:model].constantize
-    resource_id = params[:model_id]
+    resource_class = params[:resource].classify.constantize
+    resource_tableized = params[:resource]
+    resource_id = params[:resource_id]
     resource = resource_class.find(resource_id)
 
     case resource_class.reflect_on_association(@resource[:table_name].to_sym).macro
     when :has_and_belongs_to_many
-      @item.send(params[:model].tableize).delete(resource)
+      @item.send(params[:resource]).delete(resource)
       flash[:success] = t("{{model_a}} unrelated from {{model_b}}.", :model_a => @resource[:class_name_humanized], :model_b => resource_class.name.humanize)
     when :has_many
       @item.destroy
       flash[:success] = t("{{model_a}} removed from {{model_b}}.", :model_a => @resource[:class_name_humanized], :model_b => resource_class.name.humanize)
     end
 
-    redirect_to :back
+    redirect_to :action => 'edit', :id => @item.id, :anchor => resource_tableized
 
   end
 
