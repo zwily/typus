@@ -24,9 +24,9 @@ module TypusHelper
           description = Typus.module_description(model)
           html << <<-HTML
 <tr class=\"#{cycle('even', 'odd')}\">
-<td>#{link_to model.titleize.pluralize, send("admin_#{model.tableize}_url")}<br /><small>#{description}</small></td>
+<td>#{link_to model.titleize.pluralize, send("admin_#{model.tableize}_path")}<br /><small>#{description}</small></td>
 <td class=\"right\"><small>
-#{link_to 'Add', send("new_admin_#{model.tableize.singularize}_url") if @current_user.can_perform?(model, 'create')}
+#{link_to 'Add', send("new_admin_#{model.tableize.singularize}_path") if @current_user.can_perform?(model, 'create')}
 </small></td>
 </tr>
           HTML
@@ -94,7 +94,7 @@ module TypusHelper
   end
 
   def header
-    "<h1>#{Typus::Configuration.options[:app_name]} <small>#{link_to t("View site"), root_url, :target => 'blank' rescue ''}</small></h1>"
+    "<h1>#{Typus::Configuration.options[:app_name]} <small>#{link_to t("View site"), root_path, :target => 'blank' rescue ''}</small></h1>"
   end
 
   def login_info
@@ -102,7 +102,7 @@ module TypusHelper
       html << <<-HTML
 <ul>
   <li>#{t("Logged as")} #{link_to @current_user.full_name(true), :controller => 'admin/typus_users', :action => 'edit', :id => @current_user.id}</li>
-  <li>#{link_to t("Logout"), typus_logout_url}</li>
+  <li>#{link_to t("Logout"), typus_logout_path}</li>
 </ul>
       HTML
     end

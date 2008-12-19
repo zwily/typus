@@ -4,6 +4,6 @@
   <%= text_field :user, :email, :size => 20, :class => 'text' %></li>
   <li><label for="password"><%= t("Password") %></label>
   <%= password_field :user, :password, :size => 20, :class => 'text' %></li>
-  <li><%= submit_tag t("Sign in"), :class => 'button' %> <%= link_to t("Recover password"), typus_recover_password_url if Typus::Configuration.options[:recover_password] %></li>
+  <li><%= submit_tag t("Sign in"), :class => 'button' %> <%= link_to t("Recover password"), typus_recover_password_path if Typus::Configuration.options[:recover_password] %></li>
   </ul>
 <% end %>
