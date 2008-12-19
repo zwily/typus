@@ -126,6 +126,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
     assert_response :redirect
     assert flash[:success]
+    assert_match "Category unrelated from Post.", flash[:success]
     assert_redirected_to @request.env['HTTP_REFERER']
   end
 
