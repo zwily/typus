@@ -29,7 +29,7 @@ module AdminHelper
   # it's build from the options defined on the yaml configuration file.
   #
   def build_list
-    template = "app/views/admin/#{@resource[:table_name]}/_#{@resource[:table_name].singularize}.html.erb"
+    template = "app/views/admin/#{@resource[:self]}/_#{@resource[:self].singularize}.html.erb"
     if File.exists?(template)
       render :partial => template.gsub('/_', '/'), :collection => @items, :as => :item
     else

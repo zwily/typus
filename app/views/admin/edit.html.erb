@@ -1,13 +1,13 @@
 <% content_for :sidebar do %>
-  <%= typus_block :model => @resource[:table_name], :partial => :edit_sidebar %>
+  <%= typus_block :model => @resource[:self], :partial => :edit_sidebar %>
   <%= actions %>
 <% end %>
 
-<%= typus_block :model => @resource[:table_name], :partial => :edit %>
+<%= typus_block :model => @resource[:self], :partial => :edit %>
 
 <h2><%= link_to t("Dashboard"), typus_dashboard_path %> &rsaquo; <%= link_to @resource[:class_name_humanized].pluralize, :action => 'index' %> &rsaquo; <%= t("Edit") %></h2>
 
-<%= typus_block :model => @resource[:table_name], :partial => :edit_top %>
+<%= typus_block :model => @resource[:self], :partial => :edit_top %>
 
 <% form_for @item, 
             :url  => { :action => 'update', :id => @item.id }, 
@@ -18,4 +18,4 @@
 
 <%= typus_relationships %>
 
-<%= typus_block :model => @resource[:table_name], :partial => :edit_bottom %>
+<%= typus_block :model => @resource[:self], :partial => :edit_bottom %>

@@ -1,13 +1,13 @@
 <% content_for :sidebar do %>
-  <%= typus_block :model => @resource[:table_name], :partial => :show_sidebar %>
+  <%= typus_block :model => @resource[:self], :partial => :show_sidebar %>
   <%= actions %>
 <% end %>
 
-<%= typus_block :model => @resource[:table_name], :partial => :show %>
+<%= typus_block :model => @resource[:self], :partial => :show %>
 
 <h2><%= link_to t("Dashboard"), typus_dashboard_path %> &rsaquo; <%= link_to @resource[:class_name_humanized].pluralize, :action => 'index' %> &rsaquo; <%= t("Show") %></h2>
 
-<%= typus_block :model => @resource[:table_name], :partial => :show_top %>
+<%= typus_block :model => @resource[:self], :partial => :show_top %>
 
 <dl>
 <% @resource[:class].columns.map { |u| u.name }.each do |column| %>
@@ -16,4 +16,4 @@
 <% end %>
 </dl>
 
-<%= typus_block :model => @resource[:table_name], :partial => :show_bottom %>
+<%= typus_block :model => @resource[:self], :partial => :show_bottom %>

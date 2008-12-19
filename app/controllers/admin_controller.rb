@@ -207,7 +207,7 @@ class AdminController < ApplicationController
       flash[:success] = t("{{model_a}} removed from {{model_b}}.", :model_a => resource_class.name.humanize, :model_b => @resource[:class_name_humanized])
     end
 
-    redirect_to :controller => @resource[:original], :action => 'edit', :id => @item.id, :anchor => resource_tableized
+    redirect_to :controller => @resource[:self], :action => 'edit', :id => @item.id, :anchor => resource_tableized
 
   end
 
@@ -221,11 +221,11 @@ private
     resource = params[:controller].split('/').last
 
     @resource = {}
-    @resource[:original] = resource
+    @resource[:self] = resource
     @resource[:class] = resource.classify.constantize
     @resource[:class_name] = resource.classify
     @resource[:class_name_humanized] = resource.classify.titleize
-    @resource[:table_name] = resource.classify.constantize.table_name
+    @resource[:self] = resource
 
   rescue Exception => error
     error_handler(error)
@@ -258,7 +258,7 @@ private
   ##
   # Select which template to render.
   #
-  def select_template(template, resource = @resource[:table_name])
+  def select_template(template, resource = @resource[:self])
     if File.exists?("app/views/admin/#{resource}/#{template}.html.erb")
       render :template => "admin/#{resource}/#{template}"
     else
@@ -295,7 +295,7 @@ private
       end
 
       flash[:success] = t("{{model_a}} successfully assigned to {{model_b}}.", :model_a => @item.class, :model_b => resource_class.name)
-      redirect_to "#{params[:back_to]}##{@resource[:table_name]}"
+      redirect_to "#{params[:back_to]}##{@resource[:self]}"
 
     else
 
