@@ -85,7 +85,7 @@ class AdminController < ApplicationController
     if @item.valid?
       create_with_back_to and return if params[:back_to]
       @item.save
-      flash[:success] = "%s successfully created." % @resource[:class_name_humanized]
+      flash[:success] = t("{{model}} successfully created.", :model => @resource[:class_name_humanized])
       if Typus::Configuration.options[:edit_after_create]
         redirect_to :action => 'edit', :id => @item.id
       else
@@ -121,7 +121,7 @@ class AdminController < ApplicationController
   #
   def update
     if @item.update_attributes(params[:item])
-      flash[:success] = "%s successfully updated." % @resource[:class_name_humanized]
+      flash[:success] = t("{{model}} successfully updated.", :model => @resource[:class_name_humanized])
       if Typus::Configuration.options[:edit_after_create]
         redirect_to :action => 'edit', :id => @item.id
       else
@@ -137,7 +137,7 @@ class AdminController < ApplicationController
   #
   def destroy
     @item.destroy
-    flash[:success] = "%s successfully removed." % @resource[:class_name_humanized]
+    flash[:success] = t("{{model}} successfully removed.", :model => @resource[:class_name_humanized])
     redirect_to :back
   rescue Exception => error
     error_handler(error, { :params => params.merge(:action => 'index', :id => nil) })
@@ -149,9 +149,9 @@ class AdminController < ApplicationController
   def toggle
     if Typus::Configuration.options[:toggle]
       @item.toggle!(params[:field])
-      flash[:success] = "%s %s changed." % [ @resource[:class_name_humanized], params[:field] ]
+      flash[:success] = t("{{model}} {{attribute}} changed.", :model => @resource[:class_name_humanized], :attribute => params[:field].humanize.downcase)
     else
-      flash[:warning] = "Toggle is disabled."
+      flash[:warning] = t("Toggle is disabled.")
     end
     redirect_to :back
   end
@@ -167,7 +167,7 @@ class AdminController < ApplicationController
   #
   def position
     @item.send(params[:go])
-    flash[:success] = "Record moved %s." % params[:go].gsub(/move_/, '').humanize.downcase
+    flash[:success] = t("Record moved {{to}}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
     redirect_to :back
   end
 
@@ -182,7 +182,7 @@ class AdminController < ApplicationController
 
     @item.send(params[:related][:model].tableize) << resource
 
-    flash[:success] = "%s related to %s." % [ resource_class.name.titleize , @resource[:class_name_humanized] ]
+    flash[:success] = t("{{model_a}} related to {{model_b}}.", :model_a => resource_class.name.titleize , :model_b => @resource[:class_name_humanized])
     redirect_to :back
 
   end
@@ -199,13 +199,11 @@ class AdminController < ApplicationController
     case resource_class.reflect_on_association(@resource[:table_name].to_sym).macro
     when :has_and_belongs_to_many
       @item.send(params[:model].tableize).delete(resource)
-      message = "%s unrelated from %s."
+      flash[:success] = t("{{model_a}} unrelated from {{model_b}}.", :model_a => @resource[:class_name_humanized], :model_b => resource_class.name.humanize)
     when :has_many
       @item.destroy
-      message = "%s removed from %s."
+      flash[:success] = t("{{model_a}} removed from {{model_b}}.", :model_a => @resource[:class_name_humanized], :model_b => resource_class.name.humanize)
     end
-
-    flash[:success] = message % [ @resource[:class_name_humanized], resource_class.name.humanize ]
 
     redirect_to :back
 
@@ -294,13 +292,13 @@ private
 
       end
 
-      flash[:success] = "%s successfully assigned to %s." % [ @item.class, resource_class.name ]
+      flash[:success] = t("{{model_a}} successfully assigned to {{model_b}}.", :model_a => @item.class, :model_b => resource_class.name)
       redirect_to params[:back_to]
 
     else
 
       @item.save
-      flash[:success] = "%s successfully created." % @resource[:class_name_humanized]
+      flash[:success] = t("{{model}} successfully created.", :model => @resource[:class_name_humanized])
       redirect_to "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
 
     end
