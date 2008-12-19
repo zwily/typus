@@ -295,7 +295,7 @@ private
       end
 
       flash[:success] = t("{{model_a}} successfully assigned to {{model_b}}.", :model_a => @item.class, :model_b => resource_class.name)
-      redirect_to params[:back_to]
+      redirect_to "#{params[:back_to]}##{@resource[:table_name]}"
 
     else
 

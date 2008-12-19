@@ -211,6 +211,7 @@ module AdminFormHelper
   def typus_form_has_many(field)
     returning(String.new) do |html|
       html << <<-HTML
+<a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}
