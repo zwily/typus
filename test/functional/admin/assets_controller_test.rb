@@ -32,21 +32,4 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_unrelate_a_polymorphic_relationship
-
-    post_ = posts(:published)
-
-    @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit"
-
-    assert_difference('post_.assets.count', -1) do
-      get :unrelate, { :id => post_.assets.first.id, :model => post_.class.name, :model_id => post_.id }
-    end
-
-    assert_response :redirect
-    assert_redirected_to @request.env["HTTP_REFERER"]
-    assert flash[:success]
-    assert_match "Asset removed from Post.", flash[:success]
-
-  end
-
 end

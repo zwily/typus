@@ -108,7 +108,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_should_relate_category_to_post_which_is_a_habtm_relationship
     category = categories(:first)
     post_ = posts(:published)
-    @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit"
+    @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit#categories"
     assert_difference('category.posts.count') do
       post :relate, { :id => post_.id, :related => { :model => "Category", :id => category.id } }
     end
@@ -120,13 +120,33 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_should_unrelate_category_from_post_which_is_a_habtm_relationship
     category = categories(:first)
     post_ = posts(:published)
-    @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit"
+    @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit#categories"
     assert_difference('category.posts.count', 0) do
-      post :unrelate, { :id => post_.id, :model => "Category", :model_id => category.id }
+      post :unrelate, { :id => post_.id, :resource => "categories", :resource_id => category.id }
     end
     assert_response :redirect
     assert flash[:success]
     assert_redirected_to @request.env['HTTP_REFERER']
+  end
+
+  ##
+  # This is a polimorphic relationship.
+  #
+  def test_should_unrelate_an_asset_from_a_post
+
+    post_ = posts(:published)
+
+    @request.env["HTTP_REFERER"] = "/admin/posts/#{post_.id}/edit#assets"
+
+    assert_difference('post_.assets.count', -1) do
+      get :unrelate, { :id => post_.id, :resource => 'assets', :resource_id => post_.assets.first.id }
+    end
+
+    assert_response :redirect
+    assert_redirected_to @request.env["HTTP_REFERER"]
+    assert flash[:success]
+    assert_match "Asset removed from Post.", flash[:success]
+
   end
 
   def test_should_check_redirection_when_theres_no_http_referer_on_new

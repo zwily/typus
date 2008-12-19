@@ -198,16 +198,16 @@ class AdminController < ApplicationController
     resource_id = params[:resource_id]
     resource = resource_class.find(resource_id)
 
-    case resource_class.reflect_on_association(@resource[:table_name].to_sym).macro
+    case @resource[:class].reflect_on_association(params[:resource].to_sym).macro
     when :has_and_belongs_to_many
       @item.send(params[:resource]).delete(resource)
       flash[:success] = t("{{model_a}} unrelated from {{model_b}}.", :model_a => @resource[:class_name_humanized], :model_b => resource_class.name.humanize)
     when :has_many
-      @item.destroy
-      flash[:success] = t("{{model_a}} removed from {{model_b}}.", :model_a => @resource[:class_name_humanized], :model_b => resource_class.name.humanize)
+      resource.destroy
+      flash[:success] = t("{{model_a}} removed from {{model_b}}.", :model_a => resource_class.name.humanize, :model_b => @resource[:class_name_humanized])
     end
 
-    redirect_to :action => 'edit', :id => @item.id, :anchor => resource_tableized
+    redirect_to :controller => @resource[:original], :action => 'edit', :id => @item.id, :anchor => resource_tableized
 
   end
 
