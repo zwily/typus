@@ -201,7 +201,7 @@ class AdminController < ApplicationController
     case @resource[:class].reflect_on_association(params[:resource].to_sym).macro
     when :has_and_belongs_to_many
       @item.send(params[:resource]).delete(resource)
-      flash[:success] = t("{{model_a}} unrelated from {{model_b}}.", :model_a => @resource[:class_name_humanized], :model_b => resource_class.name.humanize)
+      flash[:success] = t("{{model_a}} unrelated from {{model_b}}.", :model_a => resource_class.name.humanize, :model_b => @resource[:class_name_humanized])
     when :has_many
       resource.destroy
       flash[:success] = t("{{model_a}} removed from {{model_b}}.", :model_a => resource_class.name.humanize, :model_b => @resource[:class_name_humanized])
