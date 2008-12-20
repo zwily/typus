@@ -17,13 +17,13 @@ module AdminTableHelper
 
         model.typus_fields_for(fields).each do |column|
           case column[1]
-          when "boolean":           html << typus_table_boolean_field(item, column)
-          when "datetime":          html << typus_table_datetime_field(item, column)
-          when "date":              html << typus_table_datetime_field(item, column)
-          when "time":              html << typus_table_datetime_field(item, column)
-          when "collection":        html << typus_table_collection_field(item, column)
-          when "tree":              html << typus_table_tree_field(item, column)
-          when "position":          html << typus_table_position_field(item, column)
+          when 'boolean':           html << typus_table_boolean_field(item, column)
+          when 'datetime':          html << typus_table_datetime_field(item, column)
+          when 'date':              html << typus_table_datetime_field(item, column)
+          when 'time':              html << typus_table_datetime_field(item, column)
+          when 'collection':        html << typus_table_collection_field(item, column)
+          when 'tree':              html << typus_table_tree_field(item, column)
+          when 'position':          html << typus_table_position_field(item, column)
           else
             html << typus_table_string_field(item, column, fields)
           end
