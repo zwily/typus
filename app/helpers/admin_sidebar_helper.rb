@@ -118,6 +118,8 @@ module AdminSidebarHelper
         when 'string':       html << string_filter(current_request, filter.first)
         when 'datetime':     html << datetime_filter(current_request, filter.first)
         when 'belongs_to':   html << belongs_to_filter(current_request, filter.first)
+        when 'has_and_belongs_to_many':
+          html << has_and_belongs_to_many_filter(current_request, filter.first)
         else
           html << "<p>Unknown</p>"
         end
@@ -169,6 +171,11 @@ function surfto_#{model.name.downcase.pluralize}(form) {
         HTML
       end
     end
+  end
+
+  # TODO: Implement has_and_belongs_to_many_filter
+  def has_and_belongs_to_many_filter(request, filter)
+    return "<p>Unimplemented feature.</p>"
   end
 
   def datetime_filter(request, filter)
