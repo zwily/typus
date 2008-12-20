@@ -78,15 +78,16 @@ module AdminSidebarHelper
 
   def search
 
-    unless Typus::Configuration.config[@resource[:class_name]]['search'].nil?
+    return if Typus::Configuration.config[@resource[:class_name]]['search'].nil?
 
-      search_params = params.dup
-      %w( action controller search page ).each { |p| search_params.delete(p) }
+    search_params = params.dup
+    %w( action controller search page ).each { |p| search_params.delete(p) }
 
-      hidden_params = []
-      search_params.each { |key, value| hidden_params << hidden_field_tag(key, value) }
+    hidden_params = []
+    search_params.each { |key, value| hidden_params << hidden_field_tag(key, value) }
 
-      search = <<-HTML
+    returning(String.new) do |html|
+      html << <<-HTML
 <h2>#{t("Search")}</h2>
 <form action="" method="get">
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
@@ -94,16 +95,16 @@ module AdminSidebarHelper
 </form>
 <p style="margin: -10px 0px 10px 0px;"><small>#{t("Search by")} #{Typus::Configuration.config[@resource[:class_name]]['search'].split(', ').to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
       HTML
-
-      return search
-
     end
 
   end
 
   def filters
-    current_request = request.env['QUERY_STRING'] || []
+
     return if @resource[:class].typus_filters.empty?
+
+    current_request = request.env['QUERY_STRING'] || []
+
     returning(String.new) do |html|
       @resource[:class].typus_filters.each do |f|
         html << "<h2>#{f.first.humanize}</h2>\n"
@@ -117,6 +118,7 @@ module AdminSidebarHelper
         end
       end
     end
+
   end
 
   def collection_filter(request, filter)
