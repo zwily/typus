@@ -128,6 +128,7 @@ class AdminController < ApplicationController
         redirect_to :action => 'index'
       end
     else
+      @previous, @next = @item.previous_and_next
       select_template :edit
     end
   end

@@ -2,6 +2,8 @@ module AdminSidebarHelper
 
   def actions
 
+    actions_list = []
+
     returning(String.new) do |html|
 
       html << <<-HTML
@@ -11,50 +13,39 @@ module AdminSidebarHelper
       case params[:action]
       when 'index', 'edit', 'update'
         if @current_user.can_perform?(@resource[:class], 'create')
-          html << <<-HTML
-<ul>
-<li>#{link_to "#{t("Add")} #{@resource[:class_name_humanized].downcase}", :action => 'new'}</li>
-</ul>
-          HTML
+          actions_list << "<li>#{link_to "#{t("Add")} #{@resource[:class_name_humanized].downcase}", :action => 'new'}</li>"
         end
+        actions_list += more_actions
       end
 
       case params[:action]
-      when 'edit', 'update'
-        html << <<-HTML
-<ul>
-<li>#{link_to t("Next"), :id => @next.id if @next}</li>
-<li>#{link_to t("Previous"), :id => @previous.id if @previous}</li>
-</ul>
-        HTML
+      when 'new', 'create', 'update'
+        actions_list << "<li>#{link_to t("Back to list"), :action => 'index'}</li>"
+        actions_list << more_actions
       end
 
-      case params[:action]
-      when 'new', 'create'
-        html << <<-HTML
+      html << <<-HTML
 <ul>
-<li>#{link_to t("Back to list"), :action => 'index'}</li>
+#{actions_list.join("\n")}
 </ul>
-        HTML
-      else
-        html << more_actions
-        html << block('parent_module')
-        html << block('submodules')
-      end
+      HTML
+
+      html << previous_and_next if %w( edit update ).include?(params[:action])
+      html << block('parent_module')
+      html << block('submodules')
 
     end
 
   end
 
   def more_actions
-    html = ""
-    @resource[:class].typus_actions_for(params[:action]).each do |action|
-      if @current_user.can_perform?(@resource[:class], action)
-        html << "<li>#{link_to action.titleize.capitalize, :action => action}</li>"
+    returning(Array.new) do |actions|
+      @resource[:class].typus_actions_for(params[:action]).each do |action|
+        if @current_user.can_perform?(@resource[:class], action)
+          actions << "<li>#{link_to action.titleize.capitalize, :action => action}</li>"
+        end
       end
     end
-    html = "<ul>#{html}</ul>" unless html.empty?
-    return html
   end
 
   def block(name)
@@ -74,6 +65,20 @@ module AdminSidebarHelper
 
     return html
 
+  end
+
+  def previous_and_next
+    links = []
+    links << "<li>#{link_to t("Next"), :id => @next.id}</li>" if @next
+    links << "<li>#{link_to t("Previous"), :id => @previous.id}</li>" if @previous
+    return "" if links.empty?
+    returning(String.new) do |html|
+      html << <<-HTML
+<ul>
+#{links.join("\n")}
+</ul>
+      HTML
+    end
   end
 
   def search
