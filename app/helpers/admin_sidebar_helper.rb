@@ -103,8 +103,8 @@ module AdminSidebarHelper
 
   def filters
     current_request = request.env['QUERY_STRING'] || []
-    unless @resource[:class].typus_filters.empty?
-      html = ""
+    return if @resource[:class].typus_filters.empty?
+    returning(String.new) do |html|
       @resource[:class].typus_filters.each do |f|
         html << "<h2>#{f.first.humanize}</h2>\n"
         case f.last
@@ -117,7 +117,6 @@ module AdminSidebarHelper
         end
       end
     end
-    return html
   end
 
   def collection_filter(request, filter)
