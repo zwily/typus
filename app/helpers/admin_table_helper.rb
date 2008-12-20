@@ -7,13 +7,17 @@ module AdminTableHelper
 
     returning(String.new) do |html|
 
-      html << "<table>"
+      html << <<-HTML
+<table>
+      HTML
 
       html << typus_table_header(model, fields)
 
       items.each do |item|
 
-        html << "<tr class=\"#{cycle('even', 'odd')}\" id=\"item_#{item.id}\">"
+        html << <<-HTML
+<tr class="#{cycle('even', 'odd')}" id="item_#{item.id}">
+        HTML
 
         model.typus_fields_for(fields).each do |column|
           case column[1]
@@ -21,9 +25,11 @@ module AdminTableHelper
           when 'datetime':          html << typus_table_datetime_field(item, column)
           when 'date':              html << typus_table_datetime_field(item, column)
           when 'time':              html << typus_table_datetime_field(item, column)
-          when 'collection':        html << typus_table_collection_field(item, column)
+          when 'belongs_to':        html << typus_table_belongs_to_field(item, column)
           when 'tree':              html << typus_table_tree_field(item, column)
           when 'position':          html << typus_table_position_field(item, column)
+          when 'has_and_belongs_to_many':
+            html << typus_table_has_and_belongs_to_many_field(item, column)
           else
             html << typus_table_string_field(item, column, fields)
           end
@@ -56,7 +62,10 @@ module AdminTableHelper
 
       end
 
-      html << "<td width=\"10px\">#{perform}</td>\n</tr>"
+      html << <<-HTML
+<td width="10px">#{perform}</td>
+</tr>
+      HTML
 
     end
 
@@ -71,27 +80,38 @@ module AdminTableHelper
   #
   def typus_table_header(model, fields)
     returning(String.new) do |html|
-      html << "<tr>"
+      headers = []
       model.typus_fields_for(fields).map(&:first).each do |field|
         order_by = model.reflect_on_association(field.to_sym).primary_key_name rescue field
         sort_order = (params[:sort_order] == 'asc') ? 'desc' : 'asc'
         if (model.model_fields.map(&:first).include?(field) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(field.to_sym)) && params[:action] == 'index'
-          html << "<th>#{link_to "<div class=\"#{sort_order}\">#{field.titleize.capitalize}</div>", { :params => params.merge(:order_by => order_by, :sort_order => sort_order) }}</th>"
+          headers << "<th>#{link_to "<div class=\"#{sort_order}\">#{field.titleize.capitalize}</div>", { :params => params.merge(:order_by => order_by, :sort_order => sort_order) }}</th>"
         else
-          html << "<th>#{field.titleize.capitalize}</th>"
+          headers << "<th>#{field.titleize.capitalize}</th>"
         end
       end
-      html << "<th>&nbsp;</th>\n</tr>"
+      headers << "<th>&nbsp;</th>"
+      html << <<-HTML
+<tr>
+#{headers.join("\n")}
+</tr>
+      HTML
     end
   end
 
-  def typus_table_collection_field(item, column)
-    if item.send(column[0]).kind_of?(Array)
-      "<td>#{item.send(column[0]).map(&:typus_name).join('<br />')}</td>"
-    elsif item.send(column[0]).kind_of?(NilClass)
+  def typus_table_belongs_to_field(item, column)
+    if item.send(column[0]).kind_of?(NilClass)
       "<td></td>"
     else
-      "<td>#{link_to item.send(column[0]).typus_name, :controller => "admin/#{column[0].pluralize}", :action => "edit", :id => item.send(column[0])}</td>"
+      "<td>#{link_to item.send(column[0]).typus_name, :controller => column[0].pluralize, :action => "edit", :id => item.send(column[0])}</td>"
+    end
+  end
+
+  def typus_table_has_and_belongs_to_many_field(item, column)
+    returning(String.new) do |html|
+      html << <<-HTML
+<td>#{item.send(column[0]).map { |i| i.typus_name }.join('<br />')}</td>
+      HTML
     end
   end
 
@@ -108,15 +128,9 @@ module AdminTableHelper
 <br /><small>#{"Custom actions go here, but only if exist." if Typus::Configuration.options[:actions_on_table]}</small></td>
         HTML
       else
-        if item.send(column[0]).kind_of?(Array)
-          html << <<-HTML
-<td>#{item.send(column[0]).map { |i| i.typus_name }.join(', ')}</td>
-          HTML
-        else
-          html << <<-HTML
+        html << <<-HTML
 <td>#{item.send(column[0])}</td>
-          HTML
-        end
+        HTML
       end
     end
   end

@@ -86,7 +86,7 @@ module Typus
           end
 
           if self.reflect_on_association(field.to_sym)
-            attribute_type = 'collection'
+            attribute_type = self.reflect_on_association(field.to_sym).macro.to_s
           end
 
           if self.typus_field_options_for(:selectors).include?(field)
@@ -136,11 +136,8 @@ module Typus
 
       fields.each do |field|
 
-        ##
-        # Is the field available as a reflection?
-        #
         if self.reflect_on_association(field.to_sym)
-          attribute_type = 'collection'
+          attribute_type = self.reflect_on_association(field.to_sym).macro.to_s
         end
 
         if available_fields.map { |a| a.first }.include?(field)

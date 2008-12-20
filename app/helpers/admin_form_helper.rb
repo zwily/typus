@@ -18,7 +18,7 @@ module AdminFormHelper
         when 'file':            html << typus_file_field(field.first, field.last)
         when 'password':        html << typus_password_field(field.first, field.last)
         when 'selector':        html << typus_selector_field(field.first, field.last)
-        when 'collection':      html << typus_collection_field(field.first, field.last)
+        when 'belongs_to':      html << typus_belongs_to_field(field.first, field.last)
         when 'tree':            html << typus_tree_field(field.first, field.last)
         else
           html << typus_string_field(field.first, field.last)
@@ -101,7 +101,7 @@ module AdminFormHelper
     end
   end
 
-  def typus_collection_field(attribute, value)
+  def typus_belongs_to_field(attribute, value)
 
     ##
     # We only can pass parameters to 'new' and 'edit', so this hack makes

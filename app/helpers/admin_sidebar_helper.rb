@@ -111,13 +111,13 @@ module AdminSidebarHelper
     current_request = request.env['QUERY_STRING'] || []
 
     returning(String.new) do |html|
-      @resource[:class].typus_filters.each do |f|
-        html << "<h2>#{f.first.humanize}</h2>\n"
-        case f.last
-        when 'boolean':      html << boolean_filter(current_request, f.first)
-        when 'string':       html << string_filter(current_request, f.first)
-        when 'datetime':     html << datetime_filter(current_request, f.first)
-        when 'collection':   html << collection_filter(current_request, f.first)
+      @resource[:class].typus_filters.each do |filter|
+        html << "<h2>#{filter.first.humanize}</h2>\n"
+        case filter.last
+        when 'boolean':      html << boolean_filter(current_request, filter.first)
+        when 'string':       html << string_filter(current_request, filter.first)
+        when 'datetime':     html << datetime_filter(current_request, filter.first)
+        when 'belongs_to':   html << belongs_to_filter(current_request, filter.first)
         else
           html << "<p>Unknown</p>"
         end
@@ -126,7 +126,7 @@ module AdminSidebarHelper
 
   end
 
-  def collection_filter(request, filter)
+  def belongs_to_filter(request, filter)
     model = filter.capitalize.camelize.constantize
     related_fk = @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
     returning(String.new) do |html|
