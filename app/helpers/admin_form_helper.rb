@@ -113,9 +113,14 @@ module AdminFormHelper
     related = @resource[:class].reflect_on_association(attribute.to_sym).class_name.constantize
     related_fk = @resource[:class].reflect_on_association(attribute.to_sym).primary_key_name
 
+    message = []
+    message << "Are you sure you want to leave this page?"
+    message << "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."
+    message << "Click OK to continue, or click Cancel to stay on this page."
+
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{related_fk.humanize} <small>#{link_to "Add new", { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => "Are you sure you want to leave this page?\nAny unsaved data will be lost." }</small></label>
+<li><label for="item_#{attribute}">#{related_fk.humanize} <small>#{link_to "Add new", { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") }</small></label>
 #{select :item, related_fk, related.find(:all).collect { |p| [p.typus_name, p.id] }.sort_by { |e| e.first }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
       HTML
     end
