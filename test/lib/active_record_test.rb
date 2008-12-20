@@ -41,7 +41,7 @@ class ActiveRecordTest < Test::Unit::TestCase
 
   def test_should_return_typus_fields_for_list_for_post
     expected_fields = [["title", "string"],
-                       ["user", "collection"],
+                       ["user", "belongs_to"],
                        ["user_id", "integer"],
                        ["created_at", "datetime"],
                        ["status", "selector"]]
@@ -87,7 +87,7 @@ class ActiveRecordTest < Test::Unit::TestCase
   def test_should_return_filters_for_post
     expected = [["status", "boolean"], 
                 ["created_at", "datetime"], 
-                ["user", "collection"], 
+                ["user", "belongs_to"], 
                 ["user_id", "integer"]]
     assert_equal expected.map { |i| i.first }.join(', '), Typus::Configuration.config['Post']['filters']
     assert_equal expected, Post.typus_filters
