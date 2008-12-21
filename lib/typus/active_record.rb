@@ -144,8 +144,8 @@ module Typus
           attribute_type = self.reflect_on_association(field.to_sym).macro
         end
 
-        if available_fields.map { |a| a.first }.include?(field)
-          attribute_type = available_fields.map { |a| a.last if field == a.first }.compact.first
+        if available_fields.map { |a| a.first }.include?(field.to_sym)
+          attribute_type = available_fields.map { |a| a.last if field.to_sym == a.first }.compact.first
         end
 
         fields_with_type << [field, attribute_type] if attribute_type
