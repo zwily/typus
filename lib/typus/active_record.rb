@@ -283,9 +283,9 @@ module Typus
         if key == 'search'
           search = []
           self.typus_defaults_for(:search).each do |s|
-            search << "LOWER(#{s}) LIKE '%#{value}%'"
+            search << ["LOWER(#{s}) LIKE '%#{value}%'"]
           end
-          conditions << "(#{search.join(' OR ')})"
+          conditions = merge_conditions(conditions, search.join(' OR '))
         end
 
         ##

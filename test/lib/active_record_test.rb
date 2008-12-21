@@ -161,41 +161,34 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal expected, TypusUser.build_conditions(params)
   end
 
-  def test_should_return_sql_conditions_on_search_and_filter_for_typus_user
-    expected = "status = 't' AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
-    params = { 'search' => 'francesc', 'status' => 'true' }
-    assert_equal expected, TypusUser.build_conditions(params)
-    params = { 'search' => 'francesc', 'status' => 'false' }
-    assert_match /status = 'f'/, TypusUser.build_conditions(params)
-  end
-
-  def test_should_return_sql_conditions_on_search_and_filter_for_typus_user
+  def test_should_return_sql_conditions_on_search_and_filter_for_typus_user_
 
     case ENV['DB']
     when /mysql|postgresql/
-      boolean_true = "status = '1'"
-      boolean_false = "status = '0'"
+      boolean_true = "(\"typus_users\".\"status\" = '1')"
+      boolean_false = "(\"typus_users\".\"status\" = '0')"
     else
-      boolean_true = "status = 't'"
-      boolean_false = "status = 'f'"
+      boolean_true = "(\"typus_users\".\"status\" = 't')"
+      boolean_false = "(\"typus_users\".\"status\" = 'f')"
     end
 
-    expected = "#{boolean_true} AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
+    expected = "(#{boolean_true}) AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
     params = { 'search' => 'francesc', 'status' => 'true' }
     assert_equal expected, TypusUser.build_conditions(params)
     params = { 'search' => 'francesc', 'status' => 'false' }
     assert_match /#{boolean_false}/, TypusUser.build_conditions(params)
+
   end
 
   def test_should_return_sql_conditions_on_filtering_typus_users_by_status
 
     case ENV['DB']
     when /mysql|postgresql/
-      boolean_true = "status = '1'"
-      boolean_false = "status = '0'"
+      boolean_true = "(\"typus_users\".\"status\" = '1')"
+      boolean_false = "(\"typus_users\".\"status\" = '0')"
     else
-      boolean_true = "status = 't'"
-      boolean_false = "status = 'f'"
+      boolean_true = "(\"typus_users\".\"status\" = 't')"
+      boolean_false = "(\"typus_users\".\"status\" = 'f')"
     end
 
     params = { 'status' => 'true' }
@@ -207,26 +200,26 @@ class ActiveRecordTest < Test::Unit::TestCase
 
   def test_should_return_sql_conditions_on_filtering_typus_users_by_created_at
 
-    expected = "created_at BETWEEN '#{Time.today.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}'"
+    expected = "(created_at BETWEEN '#{Time.today.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}')"
     params = { 'created_at' => 'today' }
     assert_equal expected, TypusUser.build_conditions(params)
 
-    expected = "created_at BETWEEN '#{6.days.ago.midnight.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}'"
+    expected = "(created_at BETWEEN '#{6.days.ago.midnight.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}')"
     params = { 'created_at' => 'past_7_days' }
     assert_equal expected, TypusUser.build_conditions(params)
 
-    expected = "created_at BETWEEN '#{Time.today.last_month.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}'"
+    expected = "(created_at BETWEEN '#{Time.today.last_month.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}')"
     params = { 'created_at' => 'this_month' }
     assert_equal expected, TypusUser.build_conditions(params)
 
-    expected = "created_at BETWEEN '#{Time.today.last_year.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}'"
+    expected = "(created_at BETWEEN '#{Time.today.last_year.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}')"
     params = { 'created_at' => 'this_year' }
     assert_equal expected, TypusUser.build_conditions(params)
 
   end
 
   def test_should_return_sql_conditions_on_filtering_posts_by_published_at
-    expected = "published_at BETWEEN '#{Time.today.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}'"
+    expected = "(published_at BETWEEN '#{Time.today.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}')"
     params = { 'published_at' => 'today' }
     assert_equal expected, Post.build_conditions(params)
   end
