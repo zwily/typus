@@ -273,7 +273,7 @@ module Typus
     #
     def build_conditions(params)
 
-      conditions = []
+      conditions = merge_conditions
 
       params.each do |key, value|
 
@@ -297,18 +297,10 @@ module Typus
         #
         self.model_fields.each do |f|
           filter_type = f.last if f.first.to_s == key
-
-          logger.info "=> Filter Type => #{filter_type}"
-
           case filter_type
           when :boolean
-            status = case ActiveRecord::Base.connection.adapter_name.downcase
-                     when /sqlite3|sqlite/
-                       (value == 'true') ? 't' : 'f'
-                     else
-                       (value == 'true') ? 1 : 0
-                     end
-            conditions << "#{f.first} = '#{status}'"
+            condition = { f.first => (value == 'true') ? true : false }
+            conditions = merge_conditions(conditions, condition)
           when :datetime
             interval = case value
                        when 'today':         Time.today..Time.today.tomorrow
@@ -316,15 +308,17 @@ module Typus
                        when 'this_month':    Time.today.last_month..Time.today.tomorrow
                        when 'this_year':     Time.today.last_year..Time.today.tomorrow
                        end
-            conditions << "#{f.first} BETWEEN '#{interval.first.to_s(:db)}' AND '#{interval.last.to_s(:db)}'"
+            condition = ["#{f.first} BETWEEN ? AND ?", interval.first, interval.last]
+            conditions = merge_conditions(conditions, condition)
           when :integer, :string
-            conditions << "#{f.first} = \"#{value}\""
+            condition = { f.first => value }
+            conditions = merge_conditions(conditions, condition)
           end
         end
 
       end
 
-      return conditions.join(" AND ")
+      return conditions
 
     end
 
