@@ -245,14 +245,14 @@ private
   #
   def set_order_and_list_fields
     @order = params[:order_by] ? "#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
-    @fields = @resource[:class].typus_fields_for(:list)
+    @fields = @resource[:class].typus_fields_for(:list).collect { |i| [ i.first.to_s, i.last ] }
   end
 
   ##
   # Model +form_fields+ and +form_fields_externals+
   #
   def set_form_fields
-    @item_fields = @resource[:class].typus_fields_for(:form)
+    @item_fields = @resource[:class].typus_fields_for(:form).collect { |i| [ i.first.to_s, i.last ] }
     @item_relationships = @resource[:class].typus_relationships
   end
 

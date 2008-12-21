@@ -19,7 +19,7 @@ module AdminTableHelper
 <tr class="#{cycle('even', 'odd')}" id="item_#{item.id}">
         HTML
 
-        model.typus_fields_for(fields).each do |column|
+        model.typus_fields_for(fields).collect { |i| [i.first.to_s, i.last] }.each do |column|
           case column[1]
           when :boolean:           html << typus_table_boolean_field(item, column)
           when :datetime:          html << typus_table_datetime_field(item, column)
@@ -81,10 +81,10 @@ module AdminTableHelper
   def typus_table_header(model, fields)
     returning(String.new) do |html|
       headers = []
-      model.typus_fields_for(fields).map(&:first).each do |field|
+      model.typus_fields_for(fields).map(&:first).collect { |i| i.to_s }.each do |field|
         order_by = model.reflect_on_association(field.to_sym).primary_key_name rescue field
         sort_order = (params[:sort_order] == 'asc') ? 'desc' : 'asc'
-        if (model.model_fields.map(&:first).include?(field) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(field.to_sym)) && params[:action] == 'index'
+        if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(field) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(field.to_sym)) && params[:action] == 'index'
           headers << "<th>#{link_to "<div class=\"#{sort_order}\">#{field.titleize.capitalize}</div>", { :params => params.merge(:order_by => order_by, :sort_order => sort_order) }}</th>"
         else
           headers << "<th>#{field.titleize.capitalize}</th>"
@@ -122,7 +122,7 @@ module AdminTableHelper
   #
   def typus_table_string_field(item, column, fields)
     returning(String.new) do |html|
-      if item.class.typus_fields_for(fields).first == column
+      if item.class.typus_fields_for(fields).first == [ column.first.to_sym, column.last ]
         html << <<-HTML
 <td>#{link_to item.send(column[0]) || Typus::Configuration.options[:nil], :controller => "admin/#{item.class.name.tableize}", :action => 'edit', :id => item.id}
 <br /><small>#{"Custom actions go here, but only if exist." if Typus::Configuration.options[:actions_on_table]}</small></td>
