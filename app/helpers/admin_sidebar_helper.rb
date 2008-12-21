@@ -200,7 +200,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
     returning(String.new) do |html|
       items = []
       @resource[:class].typus_boolean(filter).each do |key, value|
-        switch = request.include?("#{filter}=#{value}") ? 'on' : 'off'
+        switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
         items << "<li>#{link_to value, { :params => params.merge(filter => key, :page => nil) }, :class => switch}</li>"
       end
       html << <<-HTML
