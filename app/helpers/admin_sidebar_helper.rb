@@ -132,8 +132,7 @@ module AdminSidebarHelper
 
     if habtm
       model = filter.classify.constantize
-      related_fk = "FIXME"
-      # @resource[:class].reflect_on_association(filter.to_sym).foreign_key
+      related_fk = @resource[:class].reflect_on_association(:members).association_foreign_key
     else
       model = filter.capitalize.camelize.constantize
       related_fk = @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
