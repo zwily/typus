@@ -10,16 +10,16 @@ module AdminFormHelper
       html << "<ul>"
       fields.each do |field|
         case field.last
-        when 'boolean':         html << typus_boolean_field(field.first, field.last)
-        when 'time':            html << typus_time_field(field.first, field.last)
-        when 'datetime':        html << typus_datetime_field(field.first, field.last)
-        when 'date':            html << typus_date_field(field.first, field.last)
-        when 'text':            html << typus_text_field(field.first, field.last)
-        when 'file':            html << typus_file_field(field.first, field.last)
-        when 'password':        html << typus_password_field(field.first, field.last)
-        when 'selector':        html << typus_selector_field(field.first, field.last)
-        when 'belongs_to':      html << typus_belongs_to_field(field.first, field.last)
-        when 'tree':            html << typus_tree_field(field.first, field.last)
+        when :boolean:         html << typus_boolean_field(field.first, field.last)
+        when :time:            html << typus_time_field(field.first, field.last)
+        when :datetime:        html << typus_datetime_field(field.first, field.last)
+        when :date:            html << typus_date_field(field.first, field.last)
+        when :text:            html << typus_text_field(field.first, field.last)
+        when :file:            html << typus_file_field(field.first, field.last)
+        when :password:        html << typus_password_field(field.first, field.last)
+        when :selector:        html << typus_selector_field(field.first, field.last)
+        when :belongs_to:      html << typus_belongs_to_field(field.first, field.last)
+        when :tree:            html << typus_tree_field(field.first, field.last)
         else
           html << typus_string_field(field.first, field.last)
         end

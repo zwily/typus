@@ -114,12 +114,12 @@ module AdminSidebarHelper
       @resource[:class].typus_filters.each do |filter|
         html << "<h2>#{filter.first.humanize}</h2>\n"
         case filter.last
-        when 'boolean':      html << boolean_filter(current_request, filter.first)
-        when 'string':       html << string_filter(current_request, filter.first)
-        when 'datetime':     html << datetime_filter(current_request, filter.first)
-        when 'belongs_to':   html << belongs_to_filter(current_request, filter.first)
-        when 'has_and_belongs_to_many':
-          html << has_and_belongs_to_many_filter(current_request, filter.first)
+        when :boolean:      html << boolean_filter(current_request, filter.first)
+        when :string:       html << string_filter(current_request, filter.first)
+        when :datetime:     html << datetime_filter(current_request, filter.first)
+        when :belongs_to:   html << relationship_filter(current_request, filter.first)
+        when :has_and_belongs_to_many:
+          html << relationship_filter(current_request, filter.first, true)
         else
           html << "<p>Unknown</p>"
         end
@@ -128,9 +128,17 @@ module AdminSidebarHelper
 
   end
 
-  def belongs_to_filter(request, filter)
-    model = filter.capitalize.camelize.constantize
-    related_fk = @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
+  def relationship_filter(request, filter, habtm = false)
+
+    if habtm
+      model = filter.classify.constantize
+      related_fk = "FIXME"
+      # @resource[:class].reflect_on_association(filter.to_sym).foreign_key
+    else
+      model = filter.capitalize.camelize.constantize
+      related_fk = @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
+    end
+
     returning(String.new) do |html|
       html << "<p>No available #{model.name.titleize.pluralize.downcase}.</p>" and next if model.count.zero?
       related_items = model.find(:all, :order => model.typus_order_by)
@@ -171,11 +179,6 @@ function surfto_#{model.name.downcase.pluralize}(form) {
         HTML
       end
     end
-  end
-
-  # TODO: Implement has_and_belongs_to_many_filter
-  def has_and_belongs_to_many_filter(request, filter)
-    return "<p>Unimplemented feature.</p>"
   end
 
   def datetime_filter(request, filter)

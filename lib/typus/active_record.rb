@@ -13,7 +13,11 @@ module Typus
     # have the fields unsorted.
     #
     def model_fields
-      columns.map { |u| [u.name, u.type.to_s] }
+      columns.map { |u| [u.name.to_sym, u.type] }
+    end
+
+    def model_relationships
+      reflect_on_all_associations.collect { |a| [a.name, a.macro] }
     end
 
     ##
@@ -66,31 +70,31 @@ module Typus
 
         fields.each do |field|
 
-          attribute_type = 'string'
+          attribute_type = :string
 
           ##
           # Get the field_type for each field
           #
-          self.model_fields.each do |af|
-            attribute_type = af.last if af.first == field
+          self.model_fields.each do |model_field|
+            attribute_type = model_field.last if model_field.first == field.to_sym
           end
 
           ##
           # Some custom field_type depending on the attribute name
           #
           case field
-            when 'parent_id':       attribute_type = 'tree'
-            when /file_name/:       attribute_type = 'file'
-            when /password/:        attribute_type = 'password'
-            when 'position':        attribute_type = 'position'
+            when 'parent_id':       attribute_type = :tree
+            when /file_name/:       attribute_type = :file
+            when /password/:        attribute_type = :password
+            when 'position':        attribute_type = :position
           end
 
           if self.reflect_on_association(field.to_sym)
-            attribute_type = self.reflect_on_association(field.to_sym).macro.to_s
+            attribute_type = self.reflect_on_association(field.to_sym).macro
           end
 
           if self.typus_field_options_for(:selectors).include?(field)
-            attribute_type = 'selector'
+            attribute_type = :selector
           end
 
           ##
@@ -137,7 +141,7 @@ module Typus
       fields.each do |field|
 
         if self.reflect_on_association(field.to_sym)
-          attribute_type = self.reflect_on_association(field.to_sym).macro.to_s
+          attribute_type = self.reflect_on_association(field.to_sym).macro
         end
 
         if available_fields.map { |a| a.first }.include?(field)
@@ -293,9 +297,12 @@ module Typus
         #   - Integer & String: *_id and "selectors" (P.ej. category_id)
         #
         self.model_fields.each do |f|
-          filter_type = f.last if f.first == key
+          filter_type = f.last if f.first.to_s == key
+
+          logger.info "=> Filter Type => #{filter_type}"
+
           case filter_type
-          when "boolean"
+          when :boolean
             status = case ActiveRecord::Base.connection.adapter_name.downcase
                      when /sqlite3|sqlite/
                        (value == 'true') ? 't' : 'f'
@@ -303,7 +310,7 @@ module Typus
                        (value == 'true') ? 1 : 0
                      end
             conditions << "#{f.first} = '#{status}'"
-          when "datetime"
+          when :datetime
             interval = case value
                        when 'today':         Time.today..Time.today.tomorrow
                        when 'past_7_days':   6.days.ago.midnight..Time.today.tomorrow
@@ -311,7 +318,7 @@ module Typus
                        when 'this_year':     Time.today.last_year..Time.today.tomorrow
                        end
             conditions << "#{f.first} BETWEEN '#{interval.first.to_s(:db)}' AND '#{interval.last.to_s(:db)}'"
-          when "integer", "string"
+          when :integer, :string
             conditions << "#{f.first} = \"#{value}\""
           end
         end
