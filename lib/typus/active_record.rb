@@ -275,17 +275,23 @@ module Typus
 
       conditions = merge_conditions
 
-      params.each do |key, value|
+      query_params = params.dup
+      %w( action controller ).each { |param| query_params.delete(param) }
 
-        ##
-        # When a search is performed.
-        #
-        if key == 'search'
-          search = []
-          self.typus_defaults_for(:search).each do |s|
-            search << ["LOWER(#{s}) LIKE '%#{value}%'"]
-          end
-          conditions = merge_conditions(conditions, search.join(' OR '))
+      # If a search is performed.
+      if query_params[:search]
+        search = []
+        self.typus_defaults_for(:search).each do |s|
+          search << ["LOWER(#{s}) LIKE '%#{query_params[:search]}%'"]
+        end
+        conditions = merge_conditions(conditions, search.join(' OR '))
+      end
+
+      query_params.each do |key, value|
+
+        if self.model_fields.map(&:first).include?(key.to_sym)
+          index = self.model_fields.map(&:first).index(key.to_sym)
+          filter_type = self.model_fields.map(&:last)[index]
         end
 
         ##
@@ -295,25 +301,24 @@ module Typus
         #   - Datetime: today, past_7_days, this_month, this_year
         #   - Integer & String: *_id and "selectors" (P.ej. category_id)
         #
-        self.model_fields.each do |f|
-          filter_type = f.last if f.first.to_s == key
-          case filter_type
-          when :boolean
-            condition = { f.first => (value == 'true') ? true : false }
-            conditions = merge_conditions(conditions, condition)
-          when :datetime
-            interval = case value
-                       when 'today':         Time.today..Time.today.tomorrow
-                       when 'past_7_days':   6.days.ago.midnight..Time.today.tomorrow
-                       when 'this_month':    Time.today.last_month..Time.today.tomorrow
-                       when 'this_year':     Time.today.last_year..Time.today.tomorrow
-                       end
-            condition = ["#{f.first} BETWEEN ? AND ?", interval.first, interval.last]
-            conditions = merge_conditions(conditions, condition)
-          when :integer, :string
-            condition = { f.first => value }
-            conditions = merge_conditions(conditions, condition)
-          end
+        case filter_type
+        when :boolean
+          condition = { key => (value == 'true') ? true : false }
+          conditions = merge_conditions(conditions, condition)
+        when :datetime
+          interval = case value
+                     when 'today':         Time.today..Time.today.tomorrow
+                     when 'past_7_days':   6.days.ago.midnight..Time.today.tomorrow
+                     when 'this_month':    Time.today.last_month..Time.today.tomorrow
+                     when 'this_year':     Time.today.last_year..Time.today.tomorrow
+                     end
+          condition = ["#{key} BETWEEN ? AND ?", interval.first, interval.last]
+          conditions = merge_conditions(conditions, condition)
+        when :integer, :string
+          condition = { key => value }
+          conditions = merge_conditions(conditions, condition)
+        when :has_and_belongs_to_many
+          logger.info "[typus] has_and_belongs_to_many"
         end
 
       end
