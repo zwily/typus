@@ -157,7 +157,7 @@ class ActiveRecordTest < Test::Unit::TestCase
 
   def test_should_return_sql_conditions_on_search_for_typus_user
     expected = "(LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
-    params = { 'search' => 'francesc' }
+    params = { :search => 'francesc' }
     assert_equal expected, TypusUser.build_conditions(params)
   end
 
@@ -172,10 +172,10 @@ class ActiveRecordTest < Test::Unit::TestCase
       boolean_false = "(\"typus_users\".\"status\" = 'f')"
     end
 
-    expected = "(#{boolean_true}) AND (LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
-    params = { 'search' => 'francesc', 'status' => 'true' }
+    expected = "((LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')) AND #{boolean_true}"
+    params = { :search => 'francesc', :status => 'true' }
     assert_equal expected, TypusUser.build_conditions(params)
-    params = { 'search' => 'francesc', 'status' => 'false' }
+    params = { :search => 'francesc', :status => 'false' }
     assert_match /#{boolean_false}/, TypusUser.build_conditions(params)
 
   end
