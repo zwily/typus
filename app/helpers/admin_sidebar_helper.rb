@@ -138,6 +138,10 @@ module AdminSidebarHelper
       related_fk = @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
     end
 
+    params_without_filter = params.dup
+    %w( controller action page ).each { |p| params_without_filter.delete(p) }
+    params_without_filter.delete(related_fk)
+
     returning(String.new) do |html|
       html << "<p>No available #{model.name.titleize.pluralize.downcase}.</p>" and next if model.count.zero?
       related_items = model.find(:all, :order => model.typus_order_by)
@@ -160,7 +164,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
   <select name="#{model.name.downcase.pluralize}" onChange="surfto_#{model.name.downcase.pluralize}(this.form)">
-    <option value=\"#{url_for}\">Filter by #{model.name.titleize.humanize}</option>
+    <option value=\"#{url_for params_without_filter}\">Filter by #{model.name.titleize.humanize}</option>
     #{items.join("\n")}
   </select>
 </form></p>
