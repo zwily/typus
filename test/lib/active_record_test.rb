@@ -158,7 +158,7 @@ class ActiveRecordTest < Test::Unit::TestCase
   def test_should_return_sql_conditions_on_search_for_typus_user
     expected = "(LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
     params = { :search => 'francesc' }
-    assert_equal expected, TypusUser.build_conditions(params)
+    assert_equal expected, TypusUser.build_conditions(params).first
   end
 
   def test_should_return_sql_conditions_on_search_and_filter_for_typus_user_
@@ -174,9 +174,9 @@ class ActiveRecordTest < Test::Unit::TestCase
 
     expected = "((LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')) AND #{boolean_true}"
     params = { :search => 'francesc', :status => 'true' }
-    assert_equal expected, TypusUser.build_conditions(params)
+    assert_equal expected, TypusUser.build_conditions(params).first
     params = { :search => 'francesc', :status => 'false' }
-    assert_match /#{boolean_false}/, TypusUser.build_conditions(params)
+    assert_match /#{boolean_false}/, TypusUser.build_conditions(params).first
 
   end
 
@@ -192,9 +192,9 @@ class ActiveRecordTest < Test::Unit::TestCase
     end
 
     params = { 'status' => 'true' }
-    assert_equal boolean_true, TypusUser.build_conditions(params)
+    assert_equal boolean_true, TypusUser.build_conditions(params).first
     params = { 'status' => 'false' }
-    assert_equal boolean_false, TypusUser.build_conditions(params)
+    assert_equal boolean_false, TypusUser.build_conditions(params).first
 
   end
 
@@ -202,26 +202,26 @@ class ActiveRecordTest < Test::Unit::TestCase
 
     expected = "(created_at BETWEEN '#{Time.today.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}')"
     params = { 'created_at' => 'today' }
-    assert_equal expected, TypusUser.build_conditions(params)
+    assert_equal expected, TypusUser.build_conditions(params).first
 
     expected = "(created_at BETWEEN '#{6.days.ago.midnight.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}')"
     params = { 'created_at' => 'past_7_days' }
-    assert_equal expected, TypusUser.build_conditions(params)
+    assert_equal expected, TypusUser.build_conditions(params).first
 
     expected = "(created_at BETWEEN '#{Time.today.last_month.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}')"
     params = { 'created_at' => 'this_month' }
-    assert_equal expected, TypusUser.build_conditions(params)
+    assert_equal expected, TypusUser.build_conditions(params).first
 
     expected = "(created_at BETWEEN '#{Time.today.last_year.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}')"
     params = { 'created_at' => 'this_year' }
-    assert_equal expected, TypusUser.build_conditions(params)
+    assert_equal expected, TypusUser.build_conditions(params).first
 
   end
 
   def test_should_return_sql_conditions_on_filtering_posts_by_published_at
     expected = "(published_at BETWEEN '#{Time.today.to_s(:db)}' AND '#{Time.today.tomorrow.to_s(:db)}')"
     params = { 'published_at' => 'today' }
-    assert_equal expected, Post.build_conditions(params)
+    assert_equal expected, Post.build_conditions(params).first
   end
 
   def test_should_return_sql_conditions_on_filtering_posts_by_string
