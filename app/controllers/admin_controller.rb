@@ -31,13 +31,14 @@ class AdminController < ApplicationController
   def index
 
     # Build the conditions
-    conditions = @resource[:class].build_conditions(params)
+    conditions, joins = @resource[:class].build_conditions(params)
 
     # Pagination
-    items_count = @resource[:class].count(:conditions => conditions)
+    items_count = @resource[:class].count(:joins => joins, :conditions => conditions)
     items_per_page = Typus::Configuration.options[:per_page].to_i
     @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
       @resource[:class].find(:all, 
+                             :joins => joins, 
                              :conditions => conditions, 
                              :order => @order, 
                              :limit => per_page, 
@@ -244,7 +245,7 @@ private
   # Set fields and order when performing an index action.
   #
   def set_order_and_list_fields
-    @order = params[:order_by] ? "#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
+    @order = params[:order_by] ? "'#{@resource[:self]}'.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
     @fields = @resource[:class].typus_fields_for(:list).collect { |i| [ i.first.to_s, i.last ] }
   end
 

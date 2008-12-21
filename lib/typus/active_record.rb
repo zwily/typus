@@ -228,7 +228,7 @@ module Typus
       begin
         fields = self.send("admin_order_by").map { |a| a.to_s }
       rescue
-        return "id ASC" unless Typus::Configuration.config[self.name]['order_by']
+        return "'#{self.name.tableize}'.id ASC" unless Typus::Configuration.config[self.name]['order_by']
         fields = Typus::Configuration.config[self.name]['order_by'].split(', ')
       end
 
@@ -274,6 +274,7 @@ module Typus
     def build_conditions(params)
 
       conditions = merge_conditions
+      joins = []
 
       query_params = params.dup
       %w( action controller ).each { |param| query_params.delete(param) }
@@ -292,6 +293,9 @@ module Typus
         if self.model_fields.map(&:first).include?(key.to_sym)
           index = self.model_fields.map(&:first).index(key.to_sym)
           filter_type = self.model_fields.map(&:last)[index]
+        elsif self.model_relationships.map(&:first).include?(key.to_sym)
+          index = self.model_relationships.map(&:first).index(key.to_sym)
+          filter_type = self.model_relationships.map(&:last)[index]
         end
 
         ##
@@ -318,12 +322,14 @@ module Typus
           condition = { key => value }
           conditions = merge_conditions(conditions, condition)
         when :has_and_belongs_to_many
-          logger.info "[typus] has_and_belongs_to_many"
+          condition = {  key => { :id => value } }
+          conditions = merge_conditions(conditions, condition)
+          joins << key.to_sym
         end
 
       end
 
-      return conditions
+      return conditions, joins
 
     end
 
