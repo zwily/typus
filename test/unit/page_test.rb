@@ -64,7 +64,7 @@ class PageTest < ActiveSupport::TestCase
     assert Page.respond_to?('admin_filters')
     assert_equal %w( status created_at ), Page.admin_filters
     assert_equal %w( status ), Page.typus_filters.collect { |i| i.first }
-    assert_equal [["status", "boolean"]], Page.typus_filters
+    assert_equal [["status", :boolean]], Page.typus_filters
 
   end
 
