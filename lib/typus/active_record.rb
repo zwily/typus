@@ -57,9 +57,10 @@ module Typus
 
       begin
         if self.respond_to?("admin_fields_for_#{filter}")
-          fields = self.send("admin_fields_for_#{filter}").map { |a| a.to_s }
+          fields = self.send("admin_fields_for_#{filter}")
         else
-          fields = Typus::Configuration.config[self.name]['fields'][filter.to_s].split(', ')
+          fields = Typus::Configuration.config[self.name]['fields'][filter.to_s]
+          fields = fields.split(', ').collect { |f| f.to_sym }
         end
       rescue
         filter = 'list'
@@ -72,17 +73,13 @@ module Typus
 
           attribute_type = :string
 
-          ##
           # Get the field_type for each field
-          #
           self.model_fields.each do |model_field|
-            attribute_type = model_field.last if model_field.first == field.to_sym
+            attribute_type = model_field.last if model_field.first == field
           end
 
-          ##
-          # Some custom field_type depending on the attribute name
-          #
-          case field
+          # Custom field_type depending on the attribute name.
+          case field.to_s
             when 'parent_id':       attribute_type = :tree
             when /file_name/:       attribute_type = :file
             when /password/:        attribute_type = :password
@@ -90,7 +87,7 @@ module Typus
           end
 
           if self.reflect_on_association(field.to_sym)
-            attribute_type = self.reflect_on_association(field.to_sym).macro
+            attribute_type = self.reflect_on_association(field).macro
           end
 
           if self.typus_field_options_for(:selectors).include?(field)
@@ -133,7 +130,7 @@ module Typus
         fields = self.admin_filters
       else
         return [] unless Typus::Configuration.config[self.name]['filters']
-        fields = Typus::Configuration.config[self.name]['filters'].split(', ')
+        fields = Typus::Configuration.config[self.name]['filters'].split(', ').collect { |i| i.to_sym }
       end
 
       fields_with_type = []
@@ -203,7 +200,9 @@ module Typus
     #
     #
     def typus_field_options_for(filter)
-      Typus::Configuration.config[self.name]['fields']['options'][filter.to_s].split(', ') rescue []
+      Typus::Configuration.config[self.name]['fields']['options'][filter.to_s].split(', ').collect { |i| i.to_sym }
+    rescue
+      []
     end
 
     ##

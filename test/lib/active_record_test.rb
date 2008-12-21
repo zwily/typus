@@ -30,67 +30,67 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_typus_fields_for_list_for_typus_user
-    expected_fields = [["first_name", :string], 
-                       ["last_name", :string], 
-                       ["email", :string], 
-                       ["roles", :selector], 
-                       ["status", :boolean]]
+    expected_fields = [[:first_name, :string], 
+                       [:last_name, :string], 
+                       [:email, :string], 
+                       [:roles, :selector], 
+                       [:status, :boolean]]
     assert_equal expected_fields, TypusUser.typus_fields_for('list')
     assert_equal expected_fields, TypusUser.typus_fields_for(:list)
   end
 
   def test_should_return_typus_fields_for_list_for_post
-    expected_fields = [["title", :string],
-                       ["user", :belongs_to],
-                       ["user_id", :integer],
-                       ["created_at", :datetime],
-                       ["status", :selector]]
+    expected_fields = [[:title, :string],
+                       [:user, :belongs_to],
+                       [:user_id, :integer],
+                       [:created_at, :datetime],
+                       [:status, :selector]]
     assert_equal expected_fields, Post.typus_fields_for(:list)
   end
 
   def test_should_return_typus_fields_for_form_for_typus_user
-    expected_fields = [["first_name", :string], 
-                       ["last_name", :string], 
-                       ["email", :string], 
-                       ["roles", :selector], 
-                       ["password", :password], 
-                       ["password_confirmation", :password]]
+    expected_fields = [[:first_name, :string], 
+                       [:last_name, :string], 
+                       [:email, :string], 
+                       [:roles, :selector], 
+                       [:password, :password], 
+                       [:password_confirmation, :password]]
     assert_equal expected_fields, TypusUser.typus_fields_for('form')
     assert_equal expected_fields, TypusUser.typus_fields_for(:form)
   end
 
   def test_should_return_typus_fields_for_relationship_for_typus_user
-    expected_fields = [["first_name", :string], 
-                       ["last_name", :string], 
-                       ["roles", :selector], 
-                       ["email", :string], 
-                       ["status", :boolean]]
+    expected_fields = [[:first_name, :string], 
+                       [:last_name, :string], 
+                       [:roles, :selector], 
+                       [:email, :string], 
+                       [:status, :boolean]]
     assert_equal expected_fields, TypusUser.typus_fields_for('relationship')
     assert_equal expected_fields, TypusUser.typus_fields_for(:relationship)
   end
 
   def test_should_return_all_fields_for_undefined_field_type_on_typus_user
-    expected_fields = [['first_name', :string], 
-                       ['last_name', :string], 
-                       ['email', :string], 
-                       ['roles', :selector], 
-                       ['status', :boolean]]
+    expected_fields = [[:first_name, :string], 
+                       [:last_name, :string], 
+                       [:email, :string], 
+                       [:roles, :selector], 
+                       [:status, :boolean]]
     assert_equal expected_fields, TypusUser.typus_fields_for('undefined')
     assert_equal expected_fields, TypusUser.typus_fields_for(:undefined)
   end
 
   def test_should_return_filters_for_typus_user
-    expected = [['status', :boolean], 
-                ['roles', :string]]
+    expected = [[:status, :boolean], 
+                [:roles, :string]]
     assert_equal 'status, roles, unexisting', Typus::Configuration.config['TypusUser']['filters']
     assert_equal expected, TypusUser.typus_filters
   end
 
   def test_should_return_post_typus_filters
-    expected = [['status', :boolean], 
-                ['created_at', :datetime], 
-                ['user', :belongs_to], 
-                ['user_id', :integer]]
+    expected = [[:status, :boolean], 
+                [:created_at, :datetime], 
+                [:user, :belongs_to], 
+                [:user_id, :integer]]
     assert_equal expected.map { |i| i.first }.join(', '), Typus::Configuration.config['Post']['filters']
     assert_equal expected, Post.typus_filters
   end
@@ -111,14 +111,14 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_field_options_for_post
-    assert_equal %w( status ), Post.typus_field_options_for('selectors')
-    assert_equal %w( status ), Post.typus_field_options_for(:selectors)
-    assert_equal %w( permalink ), Post.typus_field_options_for('read_only')
-    assert_equal %w( permalink ), Post.typus_field_options_for(:read_only)
-    assert_equal %w( created_at ), Post.typus_field_options_for('auto_generated')
-    assert_equal %w( created_at ), Post.typus_field_options_for(:auto_generated)
-    assert_equal %w( status ), Post.typus_field_options_for('questions')
-    assert_equal %w( status ), Post.typus_field_options_for(:questions)
+    assert_equal [ :status ], Post.typus_field_options_for('selectors')
+    assert_equal [ :status ], Post.typus_field_options_for(:selectors)
+    assert_equal [ :permalink ], Post.typus_field_options_for('read_only')
+    assert_equal [ :permalink ], Post.typus_field_options_for(:read_only)
+    assert_equal [ :created_at ], Post.typus_field_options_for('auto_generated')
+    assert_equal [ :created_at ], Post.typus_field_options_for(:auto_generated)
+    assert_equal [ :status ], Post.typus_field_options_for('questions')
+    assert_equal [ :status ], Post.typus_field_options_for(:questions)
   end
 
   def test_should_return_booleans_for_typus_users
