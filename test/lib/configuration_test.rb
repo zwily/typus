@@ -9,7 +9,6 @@ class ConfigurationTest < Test::Unit::TestCase
       assert_equal "", Typus::Configuration.options[:app_description]
       assert_equal 15, Typus::Configuration.options[:per_page]
       assert_equal 10, Typus::Configuration.options[:form_rows]
-      assert_equal 10, Typus::Configuration.options[:form_columns]
       assert_equal 5, Typus::Configuration.options[:minute_step]
       assert_equal true, Typus::Configuration.options[:toggle]
       assert_equal true, Typus::Configuration.options[:edit_after_create]

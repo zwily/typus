@@ -47,7 +47,6 @@ You can overwrite the following settings:
     Typus::Configuration.options[:app_description]
     Typus::Configuration.options[:per_page]
     Typus::Configuration.options[:form_rows]
-    Typus::Configuration.options[:form_columns]
     Typus::Configuration.options[:sidebar_selector]
     Typus::Configuration.options[:minute_step]
     Typus::Configuration.options[:email]
