@@ -44,7 +44,6 @@ server, go to <http://0.0.0.0:3000/admin> and follow the instructions.
 You can overwrite the following settings:
 
     Typus::Configuration.options[:app_name]
-    Typus::Configuration.options[:app_description]
     Typus::Configuration.options[:per_page]
     Typus::Configuration.options[:form_rows]
     Typus::Configuration.options[:sidebar_selector]
