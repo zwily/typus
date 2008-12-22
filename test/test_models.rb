@@ -69,10 +69,6 @@ class Post < ActiveRecord::Base
     %w( pending published unpublished )
   end
 
-  def to_label
-    "Labeled post"
-  end
-
 end
 
 class User < ActiveRecord::Base
