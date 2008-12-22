@@ -21,7 +21,6 @@ module Typus
     # Example:
     #
     #   Typus::Configuration.options[:app_name] = "Your App Name"
-    #   Typus::Configuration.options[:app_description] = "Your App Description"
     #   Typus::Configuration.options[:per_page] = 15
     #   Typus::Configuration.options[:toggle] = true
     #   Typus::Configuration.options[:root] = 'admin'
@@ -37,7 +36,6 @@ module Typus
     #   Typus::Configuration.options[:actions_on_table] = false
     #
     @@options = { :app_name => 'Typus', 
-                  :app_description => '', 
                   :per_page => 15, 
                   :form_rows => 10, 
                   :sidebar_selector => 10, 

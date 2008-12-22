@@ -6,7 +6,6 @@ class ConfigurationTest < Test::Unit::TestCase
     initializer = "#{Rails.root}/config/initializers/typus.rb"
     if !File.exists?(initializer)
       assert_equal "Typus", Typus::Configuration.options[:app_name]
-      assert_equal "", Typus::Configuration.options[:app_description]
       assert_equal 15, Typus::Configuration.options[:per_page]
       assert_equal 10, Typus::Configuration.options[:form_rows]
       assert_equal 5, Typus::Configuration.options[:minute_step]

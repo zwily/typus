@@ -7,7 +7,6 @@
 
 # Options
 
-  Typus::Configuration.options[:app_description] = ""
   Typus::Configuration.options[:per_page] = 15
   Typus::Configuration.options[:form_rows] = 10
   Typus::Configuration.options[:sidebar_selector] = 10
