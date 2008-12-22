@@ -188,7 +188,7 @@ module Typus
     #   end
     #
     def typus_defaults_for(filter)
-      if self.respond_to?("admin_#{filter}") || self.respond_to?("admin_#{filter}")
+      if self.respond_to?("admin_#{filter}")
         defaults = self.send("admin_#{filter}")
       else
         defaults = Typus::Configuration.config[self.name][filter.to_s].split(', ') rescue []
