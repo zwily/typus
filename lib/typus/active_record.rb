@@ -228,7 +228,7 @@ module Typus
       begin
         fields = self.send("admin_order_by").map { |a| a.to_s }
       rescue
-        return "'#{self.name.tableize}'.id ASC" unless Typus::Configuration.config[self.name]['order_by']
+        return "`#{self.name.tableize}`.id ASC" unless Typus::Configuration.config[self.name]['order_by']
         fields = Typus::Configuration.config[self.name]['order_by'].split(', ')
       end
 

@@ -245,7 +245,7 @@ private
   # Set fields and order when performing an index action.
   #
   def set_order_and_list_fields
-    @order = params[:order_by] ? "'#{@resource[:self]}'.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
+    @order = params[:order_by] ? "`#{@resource[:self]}`.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
     @fields = @resource[:class].typus_fields_for(:list).collect { |i| [ i.first.to_s, i.last ] }
   end
 
