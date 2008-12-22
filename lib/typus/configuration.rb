@@ -40,7 +40,6 @@ module Typus
                   :app_description => '', 
                   :per_page => 15, 
                   :form_rows => 10, 
-                  :form_columns => 10, 
                   :sidebar_selector => 10, 
                   :minute_step => 5, 
                   :toggle => true, 
