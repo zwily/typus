@@ -199,9 +199,7 @@ module Typus
     #
     #
     def typus_field_options_for(filter)
-      Typus::Configuration.config[self.name]['fields']['options'][filter.to_s].split(', ').collect { |i| i.to_sym }
-    rescue
-      []
+      Typus::Configuration.config[self.name]['fields']['options'][filter.to_s].split(', ').collect { |i| i.to_sym } rescue []
     end
 
     ##
