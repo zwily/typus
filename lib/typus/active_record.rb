@@ -234,7 +234,7 @@ module Typus
 
       order = []
       fields.each do |field|
-        order_by = (field.include?("-")) ? "#{field.delete('-')} DESC" : "#{field} ASC"
+        order_by = (field.include?("-")) ? "`#{self.table_name}`.#{field.delete('-')} DESC" : "`#{self.table_name}`.#{field} ASC"
         order << order_by
       end
 

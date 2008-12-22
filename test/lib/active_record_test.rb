@@ -152,7 +152,7 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_order_by_for_model
-    assert_equal "title ASC, created_at DESC", Post.typus_order_by
+    assert_equal "`posts`.title ASC, `posts`.created_at DESC", Post.typus_order_by
   end
 
   def test_should_return_sql_conditions_on_search_for_typus_user

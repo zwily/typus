@@ -29,7 +29,7 @@ class PageTest < ActiveSupport::TestCase
     assert_nil Typus::Configuration.config['Page']['order_by']
 
     assert Page.respond_to?('admin_order_by')
-    assert_equal "status ASC", Page.typus_order_by
+    assert_equal "`pages`.status ASC", Page.typus_order_by
     assert_equal %w( status ), Page.admin_order_by
 
   end

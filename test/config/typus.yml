@@ -41,6 +41,10 @@ Post:
   order_by: title, -created_at
   application: Blog
 
+User:
+  fields:
+    list: first_name, last_name, email
+
 Comment:
   fields:
     list: email, post, post_id
