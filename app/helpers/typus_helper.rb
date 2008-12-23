@@ -101,7 +101,7 @@ module TypusHelper
     returning(String.new) do |html|
       html << <<-HTML
 <ul>
-  <li>#{t("Logged as")} #{link_to @current_user.full_name(true), :controller => 'admin/typus_users', :action => 'edit', :id => @current_user.id}</li>
+  <li>#{t("Logged as")} #{link_to @current_user.full_name(true), :controller => 'typus_users', :action => 'edit', :id => @current_user.id}</li>
   <li>#{link_to t("Logout"), typus_logout_path}</li>
 </ul>
       HTML

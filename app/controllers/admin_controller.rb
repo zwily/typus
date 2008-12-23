@@ -66,7 +66,7 @@ class AdminController < ApplicationController
   def new
 
     item_params = params.dup
-    %w( action controller resource resource_id back_to selected ).each do |param|
+    %w( controller action resource resource_id back_to selected ).each do |param|
       item_params.delete(param)
     end
 
