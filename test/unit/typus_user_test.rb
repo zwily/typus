@@ -3,7 +3,9 @@ require File.dirname(__FILE__) + '/../test_helper'
 class TypusUserTest < ActiveSupport::TestCase
 
   def setup
-    @data = { :email => "test@example.com", 
+    @data = { :first_name => "", 
+              :last_name => "", 
+              :email => "test@example.com", 
               :password => "12345678", 
               :password_confirmation => "12345678", 
               :roles => Typus::Configuration.options[:root] }
