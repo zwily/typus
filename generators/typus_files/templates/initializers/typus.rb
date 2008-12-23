@@ -20,10 +20,6 @@
   Typus::Configuration.options[:ssl] = false
   Typus::Configuration.options[:icon_on_boolean] = false
 
-# Experimental options: (don't use them in production)
-
-  Typus::Configuration.options[:actions_on_table] = false
-
 =end
 
 Typus::Configuration.options[:app_name] = "<%= application %>"

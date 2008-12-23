@@ -31,10 +31,6 @@ module Typus
     #   Typus::Configuration.options[:ssl] = false
     #   Typus::Configuration.options[:icon_on_boolean] = true
     #
-    # Experimental options: (don't use in production)
-    #
-    #   Typus::Configuration.options[:actions_on_table] = false
-    #
     @@options = { :app_name => 'Typus', 
                   :per_page => 15, 
                   :form_rows => 10, 
@@ -47,7 +43,6 @@ module Typus
                   :email => 'admin@example.com', 
                   :special_characters_on_password => false, 
                   :ssl => false, 
-                  :actions_on_table => false, 
                   :prefix => 'admin', 
                   :icon_on_boolean => true, 
                   :nil => 'nil' }
