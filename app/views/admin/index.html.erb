@@ -17,9 +17,9 @@
 <% else %>
   <div class="box" id="empty">
     <% if @resource[:class].count.zero? %>
-      <p><%= t("There are no entries.") %></p>
+      <p><%= t("There are no {{records}}.", :records => @resource[:class_name_humanized].pluralize.downcase) %></p>
     <% else %>
-      <p><%= t("There are no entries under this filter.") %></p>
+      <p><%= t("There are no {{records}} under this filter.", :records => @resource[:class_name_humanized].pluralize.downcase) %></p>
     <% end %>
   </div>
 <% end %>
