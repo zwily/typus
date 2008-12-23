@@ -177,7 +177,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
         items = []
         related_items.each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'on' : 'off'
-          items << "<li>#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch }</li>"
+          items << "<li>#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch}</li>"
         end
         html << <<-HTML
 <ul>
@@ -225,7 +225,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
         items = []
         values.each do |item|
           switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
-          items << "<li>#{link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch }</li>"
+          items << "<li>#{link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch}</li>"
         end
         html << <<-HTML
 <ul>
