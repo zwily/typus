@@ -120,7 +120,8 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{related_fk.humanize} <small>#{link_to "Add new", { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") }</small></label>
+<li><label for="item_#{attribute}">#{related_fk.humanize}
+    <small>#{link_to "Add new", { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small></label>
 #{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
       HTML
     end
