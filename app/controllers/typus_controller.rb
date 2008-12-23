@@ -113,7 +113,7 @@ class TypusController < ApplicationController
 
       if @typus_user.save
         session[:typus] = @typus_user.id
-        flash[:notice] = "Your new password is %s." % password
+        flash[:notice] = t("Your new password is '{{password}}'.", :password => password)
         redirect_to :action => 'dashboard'
       else
         flash[:error] = t("Yay! That doesn't seem like a valid email address.")
@@ -122,7 +122,7 @@ class TypusController < ApplicationController
 
     else
 
-      flash[:success] = t("Welcome to Typus! Write your email to create a typus user.")
+      flash[:success] = t("Welcome! Write your email to create the first user.")
       render :layout => 'typus_login'
 
     end
