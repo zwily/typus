@@ -253,4 +253,12 @@ class TypusControllerTest < ActionController::TestCase
     assert_no_match /\/admin\/typus_users\/new/, @response.body
   end
 
+  def test_should_verify_link_to_edit_typus_user
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+    get :dashboard
+    assert_response :success
+    assert_match /\admin\/typus_users\/#{admin.id}\/edit/, @response.body
+  end
+
 end
