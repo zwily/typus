@@ -121,7 +121,8 @@ module AdminFormHelper
     returning(String.new) do |html|
       html << <<-HTML
 <li><label for="item_#{attribute}">#{related_fk.humanize}
-    <small>#{link_to "Add new", { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small></label>
+    <small>#{link_to "Add new", { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
+    </label>
 #{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
       HTML
     end
@@ -216,12 +217,13 @@ module AdminFormHelper
 
   def typus_form_has_many(field)
     returning(String.new) do |html|
+      model_to_relate = field.classify.constantize
       html << <<-HTML
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}
-  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id}</small>
+  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
       @items = @resource[:class].find(params[:id]).send(field)
@@ -240,13 +242,13 @@ module AdminFormHelper
 
   def typus_form_has_and_belongs_to_many(field)
     returning(String.new) do |html|
-      model_to_relate = field.singularize.camelize.constantize
+      model_to_relate = field.classify.constantize
       html << <<-HTML
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}
-  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id}</small>
+  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
       items_to_relate = (model_to_relate.find(:all) - @item.send(field))
