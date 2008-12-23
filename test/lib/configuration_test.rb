@@ -4,7 +4,7 @@ class ConfigurationTest < Test::Unit::TestCase
 
   def test_should_verify_configuration_options
     initializer = "#{Rails.root}/config/initializers/typus.rb"
-    if !File.exists?(initializer)
+    unless File.exists?(initializer)
       assert_equal "Typus", Typus::Configuration.options[:app_name]
       assert_equal 15, Typus::Configuration.options[:per_page]
       assert_equal 10, Typus::Configuration.options[:form_rows]
