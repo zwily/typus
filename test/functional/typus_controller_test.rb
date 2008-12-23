@@ -258,7 +258,7 @@ class TypusControllerTest < ActionController::TestCase
     @request.session[:typus] = admin.id
     get :dashboard
     assert_response :success
-    assert_match /\admin\/typus_users\/#{admin.id}\/edit/, @response.body
+    assert_match "/admin/typus_users/#{admin.id}/edit", @response.body
   end
 
 end
