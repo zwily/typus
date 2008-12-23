@@ -68,10 +68,13 @@ module AdminSidebarHelper
   end
 
   def previous_and_next
+
     links = []
     links << "<li>#{link_to t("Next"), :id => @next.id}</li>" if @next
     links << "<li>#{link_to t("Previous"), :id => @previous.id}</li>" if @previous
+
     return "" if links.empty?
+
     returning(String.new) do |html|
       html << <<-HTML
 <ul>
@@ -79,6 +82,7 @@ module AdminSidebarHelper
 </ul>
       HTML
     end
+
   end
 
   def search
