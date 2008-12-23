@@ -121,7 +121,7 @@ module AdminFormHelper
     returning(String.new) do |html|
       html << <<-HTML
 <li><label for="item_#{attribute}">#{related_fk.humanize}
-    <small>#{link_to "Add new", { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
+    <small>#{link_to t("Add new"), { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
     </label>
 #{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
       HTML
@@ -223,7 +223,7 @@ module AdminFormHelper
 <div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}
-  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  <small>#{link_to t("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
       @items = @resource[:class].find(params[:id]).send(field)
@@ -231,7 +231,7 @@ module AdminFormHelper
         html << build_table(@items[0].class, 'relationship', @items)
       else
         html << <<-HTML
-<div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
+<div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => field.titleize.downcase)}</p></div>
         HTML
       end
       html << <<-HTML
@@ -248,7 +248,7 @@ module AdminFormHelper
 <div class="box_relationships">
   <h2>
   #{link_to field.titleize, :controller => field}
-  <small>#{link_to "Add new", :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  <small>#{link_to t("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
       items_to_relate = (model_to_relate.find(:all) - @item.send(field))
@@ -265,7 +265,7 @@ module AdminFormHelper
         html << build_table(model_to_relate, 'relationship')
       else
         html << <<-HTML
-  <div id="flash" class="notice"><p>There are no #{field.titleize.downcase}.</p></div>
+  <div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => field.titleize.downcase)}</p></div>
         HTML
       end
       html << <<-HTML
