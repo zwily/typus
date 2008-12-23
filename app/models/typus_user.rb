@@ -68,7 +68,8 @@ class TypusUser < ActiveRecord::Base
                 end
     end
 
-    self.resources[resource.to_s].split(', ').include?(_action) rescue false
+    self.resources[resource.to_s].split(', ').include?(_action)
+    # rescue false
 
   end
 
