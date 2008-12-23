@@ -52,7 +52,7 @@ module AdminTableHelper
                                                             :confirm => "Remove entry?", 
                                                             :method => :delete
         else
-          perform = link_to image_tag("admin/trash.gif"), { :action => "unrelate", 
+          perform = link_to image_tag("admin/trash.gif"), { :action => 'unrelate', 
                                                             :id => params[:id], 
                                                             :resource => item.class.name.tableize, 
                                                             :resource_id => item.id }, 
@@ -102,7 +102,7 @@ module AdminTableHelper
     if item.send(column[0]).kind_of?(NilClass)
       "<td></td>"
     else
-      "<td>#{link_to item.send(column[0]).typus_name, :controller => column[0].pluralize, :action => "edit", :id => item.send(column[0])}</td>"
+      "<td>#{link_to item.send(column[0]).typus_name, :controller => column[0].pluralize, :action => 'edit', :id => item.send(column[0])}</td>"
     end
   end
 
