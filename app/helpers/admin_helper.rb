@@ -9,9 +9,9 @@ module AdminHelper
   def display_link_to_previous
 
     message = if params[:resource]
-                "You're adding a new #{@resource[:class_name].titleize} to a #{params[:resource].classify.titleize}."
+                t("You're adding a new {{resource_from}} to a {{resource_to}}.", :resource_from => @resource[:class_name].titleize, :resource_to => params[:resource].classify.titleize)
               else
-                "You're adding a new #{@resource[:class_name].titleize}."
+                t("You're adding a new {{resource}}.", :resource => @resource[:class_name].titleize)
               end
 
     returning(String.new) do |html|

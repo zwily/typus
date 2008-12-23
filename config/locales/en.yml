@@ -44,6 +44,8 @@ en:
   "{{model}} successfully updated": "{{model}} successfully updated."
   "{{model}} successfully removed": "{{model}} successfully removed."
   "{{model}} {{attribute}} changed": "{{model}} {{attribute}} changed."
+  "You're adding a new {{resource_from}} to a {{resource_to}}": "You're adding a new {{resource_from}} to a {{resource_to}}."
+  "You're adding a new {{resource}}": "You're adding a new {{resource}}."
   "Toggle is disabled": "Toggle is disabled."
   "Record moved {{to}}": "Record moved {{to}}."
   "{{model_a}} related to {{model_b}}": "{{model_a}} related to {{model_b}}."
