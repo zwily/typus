@@ -20,9 +20,11 @@ class TypusUser < ActiveRecord::Base
   before_create :set_token
   before_save :encrypt_password
 
-  def full_name(role = false)
+  def full_name(*args)
+    options = args.extract_options!
     full_name = (!first_name.empty? && !last_name.empty?) ? "#{first_name} #{last_name}" : email
-    full_name << " (#{roles})" if role
+    full_name << " (#{roles})" if options[:display_role]
+    return full_name
   end
 
   def reset_password
