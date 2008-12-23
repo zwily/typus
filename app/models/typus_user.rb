@@ -21,13 +21,8 @@ class TypusUser < ActiveRecord::Base
   before_save :encrypt_password
 
   def full_name(role = false)
-    if !first_name.empty? && !last_name.empty?
-      full_name = "#{first_name} #{last_name}"
-    else
-      full_name ="#{email}"
-    end
+    full_name = (!first_name.empty? && !last_name.empty?) ? "#{first_name} #{last_name}" : email
     full_name << " (#{roles})" if role
-    return full_name
   end
 
   def reset_password
