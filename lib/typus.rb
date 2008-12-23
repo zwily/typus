@@ -104,7 +104,7 @@ module Typus
       #
       admin_controllers = Dir['vendor/plugins/*/app/controllers/admin/*.rb']
       admin_controllers += Dir['app/controllers/admin/*.rb']
-      admin_controllers = admin_controllers.map { |i| i.split("/").last }
+      admin_controllers = admin_controllers.map { |i| i.split('/').last }
 
       ##
       # Create app/views/admin if doesn't exist.
@@ -123,7 +123,7 @@ module Typus
       #
       admin_helpers = Dir['vendor/plugins/*/app/helpers/admin/*.rb']
       admin_helpers += Dir['app/helpers/admin/*.rb']
-      admin_helpers = admin_helpers.map { |i| i.split("/").last }
+      admin_helpers = admin_helpers.map { |i| i.split('/').last }
 
       ##
       # Create test/functional/admin if doesn't exist.
@@ -136,7 +136,7 @@ module Typus
       #
       admin_controller_tests = Dir['vendor/plugins/*/test/functional/admin/*.rb']
       admin_controller_tests += Dir['test/functional/admin/*.rb']
-      admin_controller_tests = admin_controller_tests.map { |i| i.split("/").last }
+      admin_controller_tests = admin_controller_tests.map { |i| i.split('/').last }
 
       ##
       # Generate unexisting controllers for resources which are not tied to
