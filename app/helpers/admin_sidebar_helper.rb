@@ -59,7 +59,7 @@ module AdminSidebarHelper
     html = ""
     models.each do |m|
       model_cleaned = m.split(" ").join("").tableize
-      html << "<li>#{link_to m, :controller => "admin/#{model_cleaned}"}</li>"
+      html << "<li>#{link_to m, :controller => model_cleaned}</li>"
     end
     html = "<h2>#{name.humanize}</h2>\n<ul>#{html}</ul>" unless html.empty?
 

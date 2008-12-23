@@ -47,8 +47,7 @@ module AdminTableHelper
 
         case params[:action]
         when 'index'
-          perform = link_to image_tag("admin/trash.gif"), { :controller => "admin/#{model.name.tableize}", 
-                                                            :action => 'destroy', 
+          perform = link_to image_tag("admin/trash.gif"), { :action => 'destroy', 
                                                             :id => item.id }, 
                                                             :confirm => "Remove entry?", 
                                                             :method => :delete
@@ -124,7 +123,7 @@ module AdminTableHelper
     returning(String.new) do |html|
       if item.class.typus_fields_for(fields).first == [ column.first.to_sym, column.last ]
         html << <<-HTML
-<td>#{link_to item.send(column[0]) || Typus::Configuration.options[:nil], :controller => "admin/#{item.class.name.tableize}", :action => 'edit', :id => item.id}</td>
+<td>#{link_to item.send(column[0]) || Typus::Configuration.options[:nil], :controller => item.class.name.tableize, :action => 'edit', :id => item.id}</td>
         HTML
       else
         html << <<-HTML
@@ -147,7 +146,7 @@ module AdminTableHelper
       html_position = []
       [["Up", "move_higher"], ["Down", "move_lower"]].each do |position|
         html_position << <<-HTML
-#{link_to position.first, :params => params.merge(:controller => "admin/#{item.class.name.tableize}", :action => 'position', :id => item.id, :go => position.last)}
+#{link_to position.first, :params => params.merge(:controller => item.class.name.tableize, :action => 'position', :id => item.id, :go => position.last)}
         HTML
       end
       html << <<-HTML
@@ -186,7 +185,7 @@ module AdminTableHelper
       if Typus::Configuration.options[:toggle] && !item.send(column[0]).nil?
         html << <<-HTML
 <td align="center">
-  #{link_to content, {:params => params.merge(:controller => "admin/#{item.class.name.tableize}", :action => 'toggle', :field => column[0], :id => item.id)} , :confirm => "Change #{column[0].humanize.downcase}?"}
+  #{link_to content, {:params => params.merge(:controller => item.class.name.tableize, :action => 'toggle', :field => column[0], :id => item.id)} , :confirm => "Change #{column[0].humanize.downcase}?"}
 </td>
         HTML
       else
