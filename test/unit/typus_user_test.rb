@@ -4,9 +4,9 @@ class TypusUserTest < ActiveSupport::TestCase
 
   def setup
     @data = { :email => "test@example.com", 
-             :password => "12345678", 
-             :password_confirmation => "12345678", 
-             :roles => Typus::Configuration.options[:root] }
+              :password => "12345678", 
+              :password_confirmation => "12345678", 
+              :roles => Typus::Configuration.options[:root] }
     @typus_user = TypusUser.new(@data)
   end
 
@@ -70,6 +70,18 @@ END
     @typus_user.password_confirmation = "87654321"
     assert !@typus_user.valid?
     assert @typus_user.errors.invalid?(:password)
+  end
+
+  def test_should_return_full_name
+    assert "#{@typus_user.email} (#{@typus_user.roles})", @typus_user.full_name(true)
+    assert "#{@typus_user.email}", @typus_user.full_name
+  end
+
+  def test_should_return_full_name_with_role
+    @typus_user.first_name = "John"
+    @typus_user.last_name = "Smith"
+    assert "John Smith (#{@typus_user.roles})", @typus_user.full_name(true)
+    assert "John Smith", @typus_user.full_name
   end
 
 end
