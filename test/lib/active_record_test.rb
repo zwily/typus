@@ -165,8 +165,8 @@ class ActiveRecordTest < Test::Unit::TestCase
 
     case ENV['DB']
     when /mysql|postgresql/
-      boolean_true = "(\"typus_users\".\"status\" = '1')"
-      boolean_false = "(\"typus_users\".\"status\" = '0')"
+      boolean_true = "(`typus_users`.`status` = 1)"
+      boolean_false = "(`typus_users`.`status` = 0)"
     else
       boolean_true = "(\"typus_users\".\"status\" = 't')"
       boolean_false = "(\"typus_users\".\"status\" = 'f')"
@@ -184,8 +184,8 @@ class ActiveRecordTest < Test::Unit::TestCase
 
     case ENV['DB']
     when /mysql|postgresql/
-      boolean_true = "(\"typus_users\".\"status\" = '1')"
-      boolean_false = "(\"typus_users\".\"status\" = '0')"
+      boolean_true = "(`typus_users`.`status` = 1)"
+      boolean_false = "(`typus_users`.`status` = 0)"
     else
       boolean_true = "(\"typus_users\".\"status\" = 't')"
       boolean_false = "(\"typus_users\".\"status\" = 'f')"
