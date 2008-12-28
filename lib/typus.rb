@@ -82,6 +82,7 @@ module Typus
       I18n.load_path += Dir[File.join(RAILS_ROOT, 'vendor/plugins/typus/config/locales', '*.{rb,yml}')]
       require File.dirname(__FILE__) + "/../test/test_models" if Rails.env.test?
       require 'typus/active_record'
+      require 'typus/string'
       require 'typus/routes'
       require 'typus/hash'
       require 'typus/export'
