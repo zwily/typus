@@ -26,9 +26,13 @@ class TypusFilesGenerator < Rails::Generator::Base
       models, ar_models = Dir["*.rb"], []
 
       models.each do |model|
-        class_name = eval model.sub(/\.rb$/,'').camelize
-        if class_name.superclass.to_s.include?("ActiveRecord::Base")
-          ar_models << class_name
+        class_name = model.sub(/\.rb$/,'').classify
+        begin
+          klass = class_name.constantize
+          ar_models << klass if klass.superclass.to_s.include?("ActiveRecord::Base")
+        rescue Exception => e
+          puts "=> [typus] #{e.message} on `#{class_name}`."
+          exit
         end
       end
 
