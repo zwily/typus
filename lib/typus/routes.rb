@@ -17,9 +17,9 @@ ActionController::Routing::Routes.draw do |map|
   map.namespace :admin do |admin|
     Typus.models.each do |m|
       collection = {}
-      m.constantize.typus_actions_for(:index).each { |a| collection[a] = :any }
+      m.typus_actions_for(:index).each { |a| collection[a] = :any }
       member = { :position => :any, :toggle => :any, :relate => :any, :unrelate => :any }
-      m.constantize.typus_actions_for(:edit).each { |a| member[a] = :any }
+      m.typus_actions_for(:edit).each { |a| member[a] = :any }
       admin.resources m.tableize, :collection => collection, :member => member, :path_prefix => Typus::Configuration.options[:prefix]
     end
   end
