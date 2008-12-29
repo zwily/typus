@@ -30,13 +30,6 @@ module Typus
     end
 
     ##
-    #
-    #
-    def humanize
-      name.titleize.capitalize
-    end
-
-    ##
     # Form and list fields
     #
     #   class Post < ActiveRecord::Base
