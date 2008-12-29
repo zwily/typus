@@ -110,12 +110,13 @@ module AdminSidebarHelper
 
   def filters
 
-    return if @resource[:class].typus_filters.empty?
+    typus_filters = @resource[:class].typus_filters
+    return if typus_filters.empty?
 
     current_request = request.env['QUERY_STRING'] || []
 
     returning(String.new) do |html|
-      @resource[:class].typus_filters.collect { |i| [i.first.to_s, i.last] }.each do |filter|
+      typus_filters.collect { |i| [i.first.to_s, i.last] }.each do |filter|
         html << "<h2>#{filter.first.humanize}</h2>\n"
         case filter.last
         when :boolean:      html << boolean_filter(current_request, filter.first)
