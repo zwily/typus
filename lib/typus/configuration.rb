@@ -4,6 +4,10 @@ module Typus
 
     module Reloader
 
+      ##
+      # Reload configuration files and roles when application is 
+      # running on development.
+      #
       def reload_config_et_roles
         return unless Rails.env.development?
         logger.info "[typus] Configuration files have been reloaded."

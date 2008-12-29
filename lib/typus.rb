@@ -45,6 +45,9 @@ module Typus
       Typus::Configuration.config[model][name] || ''
     end
 
+    ##
+    # Return a list of models.
+    #
     def models
       Typus::Configuration.config.map { |i| i.first }.sort
     end
@@ -74,6 +77,9 @@ module Typus
       Typus::Configuration.config[modulo]['description']
     end
 
+    ##
+    # Load configuration files, translations, modules and extensions.
+    #
     def enable
       Typus::Configuration.config!
       Typus::Configuration.roles!
