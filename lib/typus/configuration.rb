@@ -25,7 +25,6 @@ module Typus
     #   Typus::Configuration.options[:toggle] = true
     #   Typus::Configuration.options[:root] = 'admin'
     #   Typus::Configuration.options[:recover_password] = false
-    #   Typus::Configuration.options[:disable_typus_enabled_plugins] = true
     #   Typus::Configuration.options[:email] = 'admin@example.com'
     #   Typus::Configuration.options[:ssl] = false
     #   Typus::Configuration.options[:icon_on_boolean] = true
