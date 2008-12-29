@@ -31,7 +31,10 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
   def test_should_verify_admin_cannot_destroy_herself
 
     @request.env['HTTP_REFERER'] = "/admin/typus_users"
-    delete :destroy, :id => @typus_user.id
+
+    assert_difference('TypusUser.count', 0) do
+      delete :destroy, :id => @typus_user.id
+    end
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
@@ -43,7 +46,10 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
   def test_should_verify_admin_can_destroy_others
 
     @request.env['HTTP_REFERER'] = "/admin/typus_users"
-    delete :destroy, :id => typus_users(:editor).id
+
+    assert_difference('TypusUser.count', -1) do
+      delete :destroy, :id => typus_users(:editor).id
+    end
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
@@ -102,8 +108,8 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-    assert flash[:error]
-    assert_match /You can't change your role./, flash[:error]
+    assert flash[:notice]
+    assert_match /You can't change your role./, flash[:notice]
 
   end
 

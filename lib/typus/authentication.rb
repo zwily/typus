@@ -56,62 +56,44 @@ protected
     current_user = (@current_user == @item)
     current_user_is_root = (@current_user.roles == Typus::Configuration.options[:root])
 
-    case params[:action]
-    when 'edit'
+    message = case params[:action]
+              when 'edit'
 
-      ##
-      # Only admin can toggle typus user status, but not herself.
-      #
-      if !current_user_is_root
-        if !current_user
-          flash[:notice] = "As you're not the admin or the owner of this record you cannot edit it."
-          redirect_to :back rescue redirect_to typus_dashboard_url
-        end
-      end
+                # Only admin and owner of Typus User can edit.
+                if !current_user_is_root
+                  "As you're not the admin or the owner of this record you cannot edit it." if !current_user
+                end
 
-    when 'update'
+              when 'update'
 
-      ##
-      # The current_user cannot change his role. This applies also 
-      # for the admin.
-      #
-      if current_user
-        unless @item.roles == params[:item][:roles]
-          flash[:error] = "You can't change your role."
-          redirect_to :back rescue redirect_to typus_dashboard_url
-        end
-      end
+                # current_user cannot change her role.
+                if current_user
+                  "You can't change your role." unless @item.roles == params[:item][:roles]
+                end
 
-    when 'toggle'
+              when 'toggle'
 
-      ##
-      # Only admin can toggle typus user status, but not herself.
-      #
-      if current_user_is_root
-        if current_user
-          flash[:notice] = "You can't toggle your status."
-          redirect_to :back rescue redirect_to typus_dashboard_url
-        end
-      else
-        flash[:notice] = "You're not allowed to toggle status."
-        redirect_to :back rescue redirect_to typus_dashboard_url
-      end
+                # Only admin can toggle typus user status, but not herself.
+                if current_user_is_root
+                  "You can't toggle your status." if current_user
+                else
+                  "You're not allowed to toggle status."
+                end
 
-    when 'destroy'
+              when 'destroy'
 
-      ##
-      # Admin can remove anything except herself.
-      #
-      if current_user_is_root
-        if current_user
-          flash[:notice] = "You can't remove yourself from Typus."
-          redirect_to :back rescue redirect_to typus_dashboard_url
-        end
-      else
-        flash[:notice] = "You're not allowed to remove Typus Users."
-        redirect_to :back rescue redirect_to typus_dashboard_url
-      end
+                # Admin can remove anything except herself.
+                if current_user_is_root
+                  "You can't remove yourself from Typus." if current_user
+                else
+                  "You're not allowed to remove Typus Users."
+                end
 
+              end
+
+    if message
+      flash[:notice] = message
+      redirect_to :back rescue redirect_to typus_dashboard_url
     end
 
   end
