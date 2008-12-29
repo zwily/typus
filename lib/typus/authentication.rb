@@ -39,9 +39,6 @@ protected
   #
   def generate_password(length = 8)
     chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
-    if Typus::Configuration.options[:special_characters_on_password]
-      chars += %w( @ # $ % & / ? ! * . , ; : _ - )
-    end
     password = ""
     1.upto(length) { |i| password << chars[rand(chars.size - 1)] }
     return password
