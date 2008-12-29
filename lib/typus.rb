@@ -46,9 +46,7 @@ module Typus
     end
 
     def models
-      models = []
-      Typus::Configuration.config.to_a.each { |m| models << m[0] }
-      return models.sort
+      Typus::Configuration.config.map { |i| i.first }.sort
     end
 
     def resources
