@@ -246,15 +246,15 @@ private
   # Set fields and order when performing an index action.
   #
   def set_order_and_list_fields
-    @order = params[:order_by] ? "`#{@resource[:table_name]}`.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
     @fields = @resource[:class].typus_fields_for(:list).collect { |i| [ i.first.to_s, i.last ] }
+    @order = params[:order_by] ? "`#{@resource[:table_name]}`.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
   end
 
   ##
-  # Model +form_fields+ and +form_fields_externals+
+  # Set fields and detect relationships.
   #
   def set_form_fields
-    @item_fields = @resource[:class].typus_fields_for(:form).collect { |i| [ i.first.to_s, i.last ] }
+    @fields = @resource[:class].typus_fields_for(:form).collect { |i| [ i.first.to_s, i.last ] }
     @item_relationships = @resource[:class].typus_relationships
   end
 

@@ -12,7 +12,7 @@
 <% form_for @item, 
             :url  => { :action => 'update', :id => @item.id }, 
             :html => { :multipart => true } do |f| %>
-  <%= build_form %>
+  <%= build_form(@fields) %>
   <p><%= submit_tag t("Update entry"), :class => 'button' %></p>
 <% end %>
 

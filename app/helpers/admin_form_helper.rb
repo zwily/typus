@@ -4,7 +4,7 @@ module AdminFormHelper
   # All helpers related to form.
   #
 
-  def build_form(fields = @item_fields)
+  def build_form(fields)
     returning(String.new) do |html|
       html << "#{error_messages_for :item, :header_tag => "h3"}"
       html << "<ul>"

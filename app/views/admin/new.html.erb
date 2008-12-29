@@ -18,7 +18,7 @@
                        :resource => params[:resource], 
                        :resource_id => params[:resource_id] }, 
             :html => { :multipart => true } do |f| %>
-  <%= build_form %>
+  <%= build_form(@fields) %>
   <p><%= submit_tag t("Create entry"), :class => 'button' %></p>
 <% end %>
 
