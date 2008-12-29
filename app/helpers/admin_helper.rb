@@ -28,12 +28,12 @@ module AdminHelper
   # display, this will be used, otherwise we use a default table which 
   # it's build from the options defined on the yaml configuration file.
   #
-  def build_list
+  def build_list(model, fields, items)
     template = "app/views/admin/#{@resource[:self]}/_#{@resource[:self].singularize}.html.erb"
     if File.exists?(template)
       render :partial => template.gsub('/_', '/'), :collection => @items, :as => :item
     else
-      build_table
+      build_table(model, fields, items)
     end
   end
 

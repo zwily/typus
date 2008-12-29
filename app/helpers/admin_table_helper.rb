@@ -3,7 +3,7 @@ module AdminTableHelper
   ##
   # All helpers related to table.
   #
-  def build_table(model = @resource[:class], fields = 'list', items = @items)
+  def build_table(model, fields, items)
 
     returning(String.new) do |html|
 
