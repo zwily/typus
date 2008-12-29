@@ -125,15 +125,15 @@ protected
   #
   def can_perform_action?
 
-    case params[:action]
-    when 'index', 'show'
-      message = "#{@current_user.roles.capitalize} can't display items."
-    when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
-    when 'destroy'
-      message = "#{@current_user.roles.capitalize} can't delete this item."
-    else
-      message = "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
-    end
+    message = case params[:action]
+              when 'index', 'show'
+                "#{@current_user.roles.capitalize} can't display items."
+              when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
+              when 'destroy'
+                "#{@current_user.roles.capitalize} can't delete this item."
+              else
+                "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
+              end
 
     unless @current_user.can_perform?(@resource[:class], params[:action])
       flash[:notice] = message || "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
