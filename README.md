@@ -534,5 +534,5 @@ to mantain.
 - Group <http://groups.google.es/group/typus>
 - Report bugs <http://github.com/fesplugas/typus/wikis/bugs>
 
-Copyright (c) 2007-2008 Francesc Esplugas Marti, released under the 
+Copyright (c) 2007-2009 Francesc Esplugas Marti, released under the 
 MIT license
