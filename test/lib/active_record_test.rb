@@ -29,6 +29,18 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal expected_fields, Post.model_fields
   end
 
+  def test_should_return_model_fields_hash_for_post
+    expected_fields = [[:id, :integer],
+                       [:title, :string],
+                       [:body, :text],
+                       [:status, :boolean],
+                       [:created_at, :datetime],
+                       [:updated_at, :datetime],
+                       [:published_at, :datetime],
+                       [:user_id, :integer]]
+    assert_equal expected_fields, Post.model_fields_hash
+  end
+
   def test_should_return_typus_fields_for_list_for_typus_user
     expected_fields = [[:first_name, :string], 
                        [:last_name, :string], 

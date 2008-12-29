@@ -24,7 +24,7 @@ module Typus
     # Return model fields as a hash
     #
     def model_fields_hash
-      hash = Hash.new
+      hash = ActiveSupport::OrderedHash.new
       columns.map { |u| hash[u.name.to_sym] = u.type.to_sym }
       return hash
     end
