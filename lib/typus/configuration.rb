@@ -21,13 +21,6 @@ module Typus
     # Example:
     #
     #   Typus::Configuration.options[:app_name] = "Your App Name"
-    #   Typus::Configuration.options[:per_page] = 15
-    #   Typus::Configuration.options[:toggle] = true
-    #   Typus::Configuration.options[:root] = 'admin'
-    #   Typus::Configuration.options[:recover_password] = false
-    #   Typus::Configuration.options[:email] = 'admin@example.com'
-    #   Typus::Configuration.options[:ssl] = false
-    #   Typus::Configuration.options[:icon_on_boolean] = true
     #
     @@options = { :app_name => 'Typus', 
                   :per_page => 15, 
