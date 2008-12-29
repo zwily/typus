@@ -20,18 +20,19 @@ module AdminTableHelper
         HTML
 
         model.typus_fields_for(fields).collect { |i| [i.first.to_s, i.last] }.each do |column|
-          case column[1]
-          when :boolean:           html << typus_table_boolean_field(item, column)
-          when :datetime:          html << typus_table_datetime_field(item, column)
-          when :date:              html << typus_table_datetime_field(item, column)
-          when :time:              html << typus_table_datetime_field(item, column)
-          when :belongs_to:        html << typus_table_belongs_to_field(item, column)
-          when :tree:              html << typus_table_tree_field(item, column)
-          when :position:          html << typus_table_position_field(item, column)
+
+          case column.last
+          when :boolean:           html << typus_table_boolean_field(item, column.first)
+          when :datetime:          html << typus_table_datetime_field(item, column.first)
+          when :date:              html << typus_table_datetime_field(item, column.first)
+          when :time:              html << typus_table_datetime_field(item, column.first)
+          when :belongs_to:        html << typus_table_belongs_to_field(item, column.first)
+          when :tree:              html << typus_table_tree_field(item, column.first)
+          when :position:          html << typus_table_position_field(item, column.first)
           when :has_and_belongs_to_many:
-            html << typus_table_has_and_belongs_to_many_field(item, column)
+            html << typus_table_has_and_belongs_to_many_field(item, column.first)
           else
-            html << typus_table_string_field(item, column, fields)
+            html << typus_table_string_field(item, column.first, fields)
           end
         end
 
@@ -99,17 +100,17 @@ module AdminTableHelper
   end
 
   def typus_table_belongs_to_field(item, column)
-    if item.send(column[0]).kind_of?(NilClass)
+    if item.send(column).kind_of?(NilClass)
       "<td></td>"
     else
-      "<td>#{link_to item.send(column[0]).typus_name, :controller => column[0].pluralize, :action => 'edit', :id => item.send(column[0])}</td>"
+      "<td>#{link_to item.send(column).typus_name, :controller => column.pluralize, :action => 'edit', :id => item.send(column)}</td>"
     end
   end
 
   def typus_table_has_and_belongs_to_many_field(item, column)
     returning(String.new) do |html|
       html << <<-HTML
-<td>#{item.send(column[0]).map { |i| i.typus_name }.join('<br />')}</td>
+<td>#{item.send(column).map { |i| i.typus_name }.join('<br />')}</td>
       HTML
     end
   end
@@ -121,13 +122,13 @@ module AdminTableHelper
   #
   def typus_table_string_field(item, column, fields)
     returning(String.new) do |html|
-      if item.class.typus_fields_for(fields).first == [ column.first.to_sym, column.last ]
+      if item.class.typus_fields_for(fields).map { |i| i.first }.first == column.to_sym
         html << <<-HTML
-<td>#{link_to item.send(column[0]) || Typus::Configuration.options[:nil], :controller => item.class.name.tableize, :action => 'edit', :id => item.id}</td>
+<td>#{link_to item.send(column) || Typus::Configuration.options[:nil], :controller => item.class.name.tableize, :action => 'edit', :id => item.id}</td>
         HTML
       else
         html << <<-HTML
-<td>#{item.send(column[0])}</td>
+<td>#{item.send(column)}</td>
         HTML
       end
     end
@@ -161,7 +162,7 @@ module AdminTableHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<td>#{!item.send(column[0]).nil? ? item.send(column[0]).to_s(date_format) : Typus::Configuration.options[:nil]}</td>
+<td>#{!item.send(column).nil? ? item.send(column).to_s(date_format) : Typus::Configuration.options[:nil]}</td>
       HTML
     end
 
@@ -172,8 +173,8 @@ module AdminTableHelper
     boolean_icon = Typus::Configuration.options[:icon_on_boolean]
     boolean_hash = @resource[:class].typus_boolean(column.first)
 
-    unless item.send(column[0]).nil?
-      status = item.send(column[0])
+    unless item.send(column).nil?
+      status = item.send(column)
       content = (boolean_icon) ? image_tag("admin/status_#{status}.gif") : boolean_hash["#{status}".to_sym]
     else
       # If content is nil, we show nil!
@@ -182,10 +183,10 @@ module AdminTableHelper
 
     returning(String.new) do |html|
 
-      if Typus::Configuration.options[:toggle] && !item.send(column[0]).nil?
+      if Typus::Configuration.options[:toggle] && !item.send(column).nil?
         html << <<-HTML
 <td align="center">
-  #{link_to content, {:params => params.merge(:controller => item.class.name.tableize, :action => 'toggle', :field => column[0], :id => item.id)} , :confirm => "Change #{column[0].humanize.downcase}?"}
+  #{link_to content, {:params => params.merge(:controller => item.class.name.tableize, :action => 'toggle', :field => column, :id => item.id)} , :confirm => "Change #{column.humanize.downcase}?"}
 </td>
         HTML
       else
