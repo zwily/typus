@@ -26,7 +26,7 @@ module TypusHelper
 <tr class=\"#{cycle('even', 'odd')}\">
 <td>#{link_to model.titleize.pluralize, send("admin_#{model.tableize}_path")}<br /><small>#{description}</small></td>
 <td class=\"right\"><small>
-#{link_to 'Add', send("new_admin_#{model.tableize.singularize}_path") if @current_user.can_perform?(model, 'create')}
+#{link_to t('Add'), send("new_admin_#{model.tableize.singularize}_path") if @current_user.can_perform?(model, 'create')}
 </small></td>
 </tr>
           HTML
