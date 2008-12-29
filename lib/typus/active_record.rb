@@ -336,24 +336,24 @@ module Typus
 
     def previous_and_next(condition = {})
 
-      if condition.empty?
-        conditions = "id < #{self.id}"
-      else
-        conditions = self.class.build_conditions(condition)
-        conditions << " AND id != #{self.id}"
-      end
+      conditions = if condition.empty?
+                     "id < #{self.id}"
+                   else
+                     self.class.build_conditions(condition) \
+                     << " AND id != #{self.id}"
+                   end
 
       previous_ = self.class.find :first, 
                                   :select => [:id], 
                                   :order => "id DESC", 
                                   :conditions => conditions
 
-      if condition.empty?
-        conditions = "id > #{self.id}"
-      else
-        conditions = self.class.build_conditions(condition)
-        conditions << " AND id != #{self.id}"
-      end
+      conditions = if condition.empty?
+                     "id > #{self.id}"
+                   else
+                     self.class.build_conditions(condition) \
+                     << " AND id != #{self.id}"
+                   end
 
       next_ = self.class.find :first, 
                               :select => [:id], 
