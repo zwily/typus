@@ -8,20 +8,20 @@ module AdminFormHelper
     returning(String.new) do |html|
       html << "#{error_messages_for :item, :header_tag => "h3"}"
       html << "<ul>"
-      fields.each do |field|
-        case field.last
-        when :boolean:         html << typus_boolean_field(field.first, field.last)
-        when :time:            html << typus_time_field(field.first, field.last)
-        when :datetime:        html << typus_datetime_field(field.first, field.last)
-        when :date:            html << typus_date_field(field.first, field.last)
-        when :text:            html << typus_text_field(field.first, field.last)
-        when :file:            html << typus_file_field(field.first, field.last)
-        when :password:        html << typus_password_field(field.first, field.last)
-        when :selector:        html << typus_selector_field(field.first, field.last)
-        when :belongs_to:      html << typus_belongs_to_field(field.first, field.last)
-        when :tree:            html << typus_tree_field(field.first, field.last)
+      fields.each do |key, value|
+        case value
+        when :boolean:         html << typus_boolean_field(key, value)
+        when :time:            html << typus_time_field(key, value)
+        when :datetime:        html << typus_datetime_field(key, value)
+        when :date:            html << typus_date_field(key, value)
+        when :text:            html << typus_text_field(key, value)
+        when :file:            html << typus_file_field(key, value)
+        when :password:        html << typus_password_field(key, value)
+        when :selector:        html << typus_selector_field(key, value)
+        when :belongs_to:      html << typus_belongs_to_field(key, value)
+        when :tree:            html << typus_tree_field(key, value)
         else
-          html << typus_string_field(field.first, field.last)
+          html << typus_string_field(key, value)
         end
       end
       html << "</ul>"

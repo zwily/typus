@@ -19,20 +19,19 @@ module AdminTableHelper
 <tr class="#{cycle('even', 'odd')}" id="item_#{item.id}">
         HTML
 
-        model.typus_fields_for(fields).collect { |i| [i.first.to_s, i.last] }.each do |column|
-
-          case column.last
-          when :boolean:           html << typus_table_boolean_field(item, column.first)
-          when :datetime:          html << typus_table_datetime_field(item, column.first)
-          when :date:              html << typus_table_datetime_field(item, column.first)
-          when :time:              html << typus_table_datetime_field(item, column.first)
-          when :belongs_to:        html << typus_table_belongs_to_field(item, column.first)
-          when :tree:              html << typus_table_tree_field(item, column.first)
-          when :position:          html << typus_table_position_field(item, column.first)
+        fields.each do |key, value|
+          case value
+          when :boolean:           html << typus_table_boolean_field(key, item)
+          when :datetime:          html << typus_table_datetime_field(key, item)
+          when :date:              html << typus_table_datetime_field(key, item)
+          when :time:              html << typus_table_datetime_field(key, item)
+          when :belongs_to:        html << typus_table_belongs_to_field(key, item)
+          when :tree:              html << typus_table_tree_field(key, item)
+          when :position:          html << typus_table_position_field(key, item)
           when :has_and_belongs_to_many:
-            html << typus_table_has_and_belongs_to_many_field(item, column.first)
+            html << typus_table_has_and_belongs_to_many_field(key, item)
           else
-            html << typus_table_string_field(item, column.first, fields)
+            html << typus_table_string_field(key, item, fields)
           end
         end
 
@@ -81,7 +80,7 @@ module AdminTableHelper
   def typus_table_header(model, fields)
     returning(String.new) do |html|
       headers = []
-      model.typus_fields_for(fields).map(&:first).collect { |i| i.to_s }.each do |field|
+      fields.map(&:first).collect { |i| i.to_s }.each do |field|
         order_by = model.reflect_on_association(field.to_sym).primary_key_name rescue field
         sort_order = (params[:sort_order] == 'asc') ? 'desc' : 'asc'
         if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(field) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(field.to_sym)) && params[:action] == 'index'
@@ -99,7 +98,7 @@ module AdminTableHelper
     end
   end
 
-  def typus_table_belongs_to_field(item, column)
+  def typus_table_belongs_to_field(column, item)
     if item.send(column).kind_of?(NilClass)
       "<td></td>"
     else
@@ -107,7 +106,7 @@ module AdminTableHelper
     end
   end
 
-  def typus_table_has_and_belongs_to_many_field(item, column)
+  def typus_table_has_and_belongs_to_many_field(column, item)
     returning(String.new) do |html|
       html << <<-HTML
 <td>#{item.send(column).map { |i| i.typus_name }.join('<br />')}</td>
@@ -120,9 +119,9 @@ module AdminTableHelper
   # type is set. From the string_field we display other content 
   # types.
   #
-  def typus_table_string_field(item, column, fields)
+  def typus_table_string_field(column, item, fields)
     returning(String.new) do |html|
-      if item.class.typus_fields_for(fields).map { |i| i.first }.first == column.to_sym
+      if fields.first.first == column
         html << <<-HTML
 <td>#{link_to item.send(column) || Typus::Configuration.options[:nil], :controller => item.class.name.tableize, :action => 'edit', :id => item.id}</td>
         HTML
@@ -134,7 +133,7 @@ module AdminTableHelper
     end
   end
 
-  def typus_table_tree_field(item, column)
+  def typus_table_tree_field(column, item)
     returning(String.new) do |html|
       html << <<-HTML
 <td>#{item.parent.typus_name if item.parent}</td>
@@ -142,7 +141,7 @@ module AdminTableHelper
     end
   end
 
-  def typus_table_position_field(item, column)
+  def typus_table_position_field(column, item)
     returning(String.new) do |html|
       html_position = []
       [["Up", "move_higher"], ["Down", "move_lower"]].each do |position|
@@ -156,7 +155,7 @@ module AdminTableHelper
     end
   end
 
-  def typus_table_datetime_field(item, column)
+  def typus_table_datetime_field(column, item)
 
     date_format = @resource[:class].typus_date_format(column.first)
 
@@ -168,7 +167,7 @@ module AdminTableHelper
 
   end
 
-  def typus_table_boolean_field(item, column)
+  def typus_table_boolean_field(column, item)
 
     boolean_icon = Typus::Configuration.options[:icon_on_boolean]
     boolean_hash = @resource[:class].typus_boolean(column.first)

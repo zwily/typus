@@ -46,7 +46,7 @@ module Typus
     #
     def typus_fields_for(filter)
 
-      fields_with_type = []
+      fields_with_type = ActiveSupport::OrderedHash.new
 
       begin
         if self.respond_to?("admin_fields_for_#{filter}")
@@ -87,11 +87,9 @@ module Typus
             attribute_type = :selector
           end
 
-          ##
           # And finally insert the field and the attribute_type 
-          # into the fields_with_type.
-          #
-          fields_with_type << [ field, attribute_type ]
+          # into the fields_with_type ordered hash.
+          fields_with_type[field.to_s] = attribute_type
 
         end
 
