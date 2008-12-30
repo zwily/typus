@@ -64,12 +64,7 @@ module Typus
 
         fields.each do |field|
 
-          attribute_type = :string
-
-          # Get the field_type for each field
-          self.model_fields.each do |model_field|
-            attribute_type = model_field.last if model_field.first == field
-          end
+          attribute_type = self.model_fields_hash[field]
 
           # Custom field_type depending on the attribute name.
           case field.to_s
