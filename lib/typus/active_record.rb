@@ -102,14 +102,14 @@ module Typus
     #
     def typus_filters
 
+      fields_with_type = ActiveSupport::OrderedHash.new
+
       if self.respond_to?('admin_filters')
         fields = self.admin_filters
       else
         return [] unless Typus::Configuration.config[self.name]['filters']
         fields = Typus::Configuration.config[self.name]['filters'].split(', ').collect { |i| i.to_sym }
       end
-
-      fields_with_type = ActiveSupport::OrderedHash.new
 
       fields.each do |field|
         attribute_type = self.model_fields[field.to_sym]
@@ -192,6 +192,8 @@ module Typus
     #
     def typus_order_by
 
+      order = []
+
       begin
         fields = self.send("admin_order_by").map { |a| a.to_s }
       rescue
@@ -199,7 +201,6 @@ module Typus
         fields = Typus::Configuration.config[self.name]['order_by'].split(', ')
       end
 
-      order = []
       fields.each do |field|
         order_by = (field.include?("-")) ? "`#{self.table_name}`.#{field.delete('-')} DESC" : "`#{self.table_name}`.#{field} ASC"
         order << order_by
@@ -240,8 +241,7 @@ module Typus
     #
     def build_conditions(params)
 
-      conditions = merge_conditions
-      joins = []
+      conditions, joins = merge_conditions, []
 
       query_params = params.dup
       %w( action controller ).each { |param| query_params.delete(param) }
