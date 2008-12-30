@@ -120,15 +120,11 @@ module Typus
       fields_with_type = ActiveSupport::OrderedHash.new
 
       fields.each do |field|
-
         attribute_type = self.model_fields_hash[field]
-
         if self.reflect_on_association(field.to_sym)
           attribute_type = self.reflect_on_association(field.to_sym).macro
         end
-
-        fields_with_type[field.to_s] = attribute_type unless attribute_type.nil?
-
+        fields_with_type[field.to_s] = attribute_type
       end
 
       return fields_with_type
