@@ -6,22 +6,14 @@ module Typus
     # Returns a list of all the applications.
     #
     def applications
-      apps = []
-      Typus::Configuration.config.each do |key, value|
-        apps << value['application']
-      end
-      return apps.compact.uniq.sort
+      Typus::Configuration.config.collect { |i| i.last['application'] }.compact.uniq.sort
     end
 
     ##
     # Returns a list of the modules of an application.
     #
     def application(name)
-      modules = []
-      Typus::Configuration.config.each do |key, value|
-        modules << key if value['application'] == name
-      end
-      return modules.sort
+      Typus::Configuration.config.collect { |i| i.first if i.last['application'] == name }.compact.uniq.sort
     end
 
     ##
