@@ -34,8 +34,9 @@ class ActiveRecordTest < Test::Unit::TestCase
                 [:categories, :has_and_belongs_to_many],
                 [:user, :belongs_to],
                 [:assets, :has_many]]
-    assert_equal expected, Post.model_relationships
-    assert_equal :has_many, Post.model_relationships[:comments]
+    expected.each do |i|
+      assert_equal i.last, Post.model_relationships[i.first]
+    end
   end
 
   def test_should_return_typus_fields_for_list_for_typus_user
