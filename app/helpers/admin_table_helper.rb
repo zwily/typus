@@ -31,7 +31,7 @@ module AdminTableHelper
           when :has_and_belongs_to_many:
             html << typus_table_has_and_belongs_to_many_field(key, item)
           else
-            html << typus_table_string_field(key, item, fields)
+            html << typus_table_string_field(key, item, fields.first.first)
           end
         end
 
@@ -98,18 +98,18 @@ module AdminTableHelper
     end
   end
 
-  def typus_table_belongs_to_field(attribute, value)
-    if value.send(attribute).kind_of?(NilClass)
+  def typus_table_belongs_to_field(attribute, item)
+    if item.send(attribute).kind_of?(NilClass)
       "<td></td>"
     else
-      "<td>#{link_to value.send(attribute).typus_name, :controller => attribute.pluralize, :action => 'edit', :id => value.send(attribute)}</td>"
+      "<td>#{link_to item.send(attribute).typus_name, :controller => attribute.pluralize, :action => 'edit', :id => item.send(attribute)}</td>"
     end
   end
 
-  def typus_table_has_and_belongs_to_many_field(attribute, value)
+  def typus_table_has_and_belongs_to_many_field(attribute, item)
     returning(String.new) do |html|
       html << <<-HTML
-<td>#{value.send(attribute).map { |i| i.typus_name }.join('<br />')}</td>
+<td>#{item.send(attribute).map { |i| i.typus_name }.join('<br />')}</td>
       HTML
     end
   end
@@ -119,34 +119,34 @@ module AdminTableHelper
   # type is set. From the string_field we display other content 
   # types.
   #
-  def typus_table_string_field(column, item, fields)
+  def typus_table_string_field(attribute, item, first_field)
     returning(String.new) do |html|
-      if fields.first.first == column
+      if first_field == attribute
         html << <<-HTML
-<td>#{link_to item.send(column) || Typus::Configuration.options[:nil], :controller => item.class.name.tableize, :action => 'edit', :id => item.id}</td>
+<td>#{link_to item.send(attribute) || Typus::Configuration.options[:nil], :controller => item.class.name.tableize, :action => 'edit', :id => item.id}</td>
         HTML
       else
         html << <<-HTML
-<td>#{item.send(column)}</td>
+<td>#{item.send(attribute)}</td>
         HTML
       end
     end
   end
 
-  def typus_table_tree_field(attribute, value)
+  def typus_table_tree_field(attribute, item)
     returning(String.new) do |html|
       html << <<-HTML
-<td>#{value.parent.typus_name if value.parent}</td>
+<td>#{item.parent.typus_name if item.parent}</td>
       HTML
     end
   end
 
-  def typus_table_position_field(attribute, value)
+  def typus_table_position_field(attribute, item)
     returning(String.new) do |html|
       html_position = []
       [["Up", "move_higher"], ["Down", "move_lower"]].each do |position|
         html_position << <<-HTML
-#{link_to position.first, :params => params.merge(:controller => value.class.name.tableize, :action => 'position', :id => value.id, :go => position.last)}
+#{link_to position.first, :params => params.merge(:controller => item.class.name.tableize, :action => 'position', :id => item.id, :go => position.last)}
         HTML
       end
       html << <<-HTML
@@ -155,25 +155,25 @@ module AdminTableHelper
     end
   end
 
-  def typus_table_datetime_field(column, item)
+  def typus_table_datetime_field(attribute, item)
 
-    date_format = @resource[:class].typus_date_format(column.first)
+    date_format = @resource[:class].typus_date_format(attribute)
 
     returning(String.new) do |html|
       html << <<-HTML
-<td>#{!item.send(column).nil? ? item.send(column).to_s(date_format) : Typus::Configuration.options[:nil]}</td>
+<td>#{!item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : Typus::Configuration.options[:nil]}</td>
       HTML
     end
 
   end
 
-  def typus_table_boolean_field(column, item)
+  def typus_table_boolean_field(attribute, item)
 
     boolean_icon = Typus::Configuration.options[:icon_on_boolean]
-    boolean_hash = @resource[:class].typus_boolean(column.first)
+    boolean_hash = @resource[:class].typus_boolean(attribute)
 
-    unless item.send(column).nil?
-      status = item.send(column)
+    unless item.send(attribute).nil?
+      status = item.send(attribute)
       content = (boolean_icon) ? image_tag("admin/status_#{status}.gif") : boolean_hash["#{status}".to_sym]
     else
       # If content is nil, we show nil!
@@ -182,10 +182,10 @@ module AdminTableHelper
 
     returning(String.new) do |html|
 
-      if Typus::Configuration.options[:toggle] && !item.send(column).nil?
+      if Typus::Configuration.options[:toggle] && !item.send(attribute).nil?
         html << <<-HTML
 <td align="center">
-  #{link_to content, {:params => params.merge(:controller => item.class.name.tableize, :action => 'toggle', :field => column, :id => item.id)} , :confirm => "Change #{column.humanize.downcase}?"}
+  #{link_to content, {:params => params.merge(:controller => item.class.name.tableize, :action => 'toggle', :field => attribute, :id => item.id)} , :confirm => "Change #{attribute.humanize.downcase}?"}
 </td>
         HTML
       else
