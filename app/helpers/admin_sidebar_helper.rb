@@ -116,15 +116,15 @@ module AdminSidebarHelper
     current_request = request.env['QUERY_STRING'] || []
 
     returning(String.new) do |html|
-      typus_filters.collect { |i| [i.first.to_s, i.last] }.each do |filter|
-        html << "<h2>#{filter.first.humanize}</h2>\n"
-        case filter.last
-        when :boolean:      html << boolean_filter(current_request, filter.first)
-        when :string:       html << string_filter(current_request, filter.first)
-        when :datetime:     html << datetime_filter(current_request, filter.first)
-        when :belongs_to:   html << relationship_filter(current_request, filter.first)
+      typus_filters.each do |key, value|
+        html << "<h2>#{key.humanize}</h2>\n"
+        case value
+        when :boolean:      html << boolean_filter(current_request, key)
+        when :string:       html << string_filter(current_request, key)
+        when :datetime:     html << datetime_filter(current_request, key)
+        when :belongs_to:   html << relationship_filter(current_request, key)
         when :has_and_belongs_to_many:
-          html << relationship_filter(current_request, filter.first, true)
+          html << relationship_filter(current_request, key, true)
         else
           html << "<p>Unknown</p>"
         end
