@@ -102,7 +102,7 @@ module AdminTableHelper
     if item.send(attribute).kind_of?(NilClass)
       "<td></td>"
     else
-      "<td>#{link_to item.send(attribute).typus_name, :controller => attribute.pluralize, :action => 'edit', :id => item.send(attribute)}</td>"
+      "<td>#{link_to item.send(attribute).typus_name, :controller => attribute.pluralize, :action => 'edit', :id => item.send(attribute).id}</td>"
     end
   end
 
