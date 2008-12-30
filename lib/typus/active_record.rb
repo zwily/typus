@@ -127,7 +127,7 @@ module Typus
           attribute_type = self.reflect_on_association(field.to_sym).macro
         end
 
-        fields_with_type[field.to_s] = attribute_type if attribute_type
+        fields_with_type[field.to_s] = attribute_type unless attribute_type.nil?
 
       end
 
