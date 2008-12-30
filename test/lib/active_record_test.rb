@@ -92,17 +92,17 @@ class ActiveRecordTest < Test::Unit::TestCase
   end
 
   def test_should_return_filters_for_typus_user
-    expected = [[:status, :boolean], 
-                [:roles, :string]]
+    expected = [['status', :boolean], 
+                ['roles', :string]]
     assert_equal 'status, roles, unexisting', Typus::Configuration.config['TypusUser']['filters']
     assert_equal expected, TypusUser.typus_filters
   end
 
   def test_should_return_post_typus_filters
-    expected = [[:status, :boolean], 
-                [:created_at, :datetime], 
-                [:user, :belongs_to], 
-                [:user_id, :integer]]
+    expected = [['status', :boolean], 
+                ['created_at', :datetime], 
+                ['user', :belongs_to], 
+                ['user_id', :integer]]
     assert_equal expected.map { |i| i.first }.join(', '), Typus::Configuration.config['Post']['filters']
     assert_equal expected, Post.typus_filters
   end
