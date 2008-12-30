@@ -110,8 +110,6 @@ module Typus
     #
     def typus_filters
 
-      available_fields = self.model_fields
-
       if self.respond_to?('admin_filters')
         fields = self.admin_filters
       else
@@ -123,15 +121,13 @@ module Typus
 
       fields.each do |field|
 
+        attribute_type = self.model_fields_hash[field]
+
         if self.reflect_on_association(field.to_sym)
           attribute_type = self.reflect_on_association(field.to_sym).macro
         end
 
-        if available_fields.map { |a| a.first }.include?(field.to_sym)
-          attribute_type = available_fields.map { |a| a.last if field.to_sym == a.first }.compact.first
-        end
-
-        fields_with_type[field] = attribute_type if attribute_type
+        fields_with_type[field.to_s] = attribute_type
 
       end
 
