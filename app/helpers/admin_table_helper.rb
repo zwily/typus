@@ -98,11 +98,11 @@ module AdminTableHelper
     end
   end
 
-  def typus_table_belongs_to_field(column, item)
-    if item.send(column).kind_of?(NilClass)
+  def typus_table_belongs_to_field(attribute, value)
+    if value.send(attribute).kind_of?(NilClass)
       "<td></td>"
     else
-      "<td>#{link_to item.send(column).typus_name, :controller => column.pluralize, :action => 'edit', :id => item.send(column)}</td>"
+      "<td>#{link_to value.send(attribute).typus_name, :controller => attribute.pluralize, :action => 'edit', :id => value.send(attribute)}</td>"
     end
   end
 
