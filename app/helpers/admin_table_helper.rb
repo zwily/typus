@@ -106,10 +106,10 @@ module AdminTableHelper
     end
   end
 
-  def typus_table_has_and_belongs_to_many_field(column, item)
+  def typus_table_has_and_belongs_to_many_field(attribute, value)
     returning(String.new) do |html|
       html << <<-HTML
-<td>#{item.send(column).map { |i| i.typus_name }.join('<br />')}</td>
+<td>#{value.send(attribute).map { |i| i.typus_name }.join('<br />')}</td>
       HTML
     end
   end
@@ -133,10 +133,10 @@ module AdminTableHelper
     end
   end
 
-  def typus_table_tree_field(column, item)
+  def typus_table_tree_field(attribute, value)
     returning(String.new) do |html|
       html << <<-HTML
-<td>#{item.parent.typus_name if item.parent}</td>
+<td>#{value.parent.typus_name if value.parent}</td>
       HTML
     end
   end
