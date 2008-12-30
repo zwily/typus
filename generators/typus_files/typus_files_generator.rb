@@ -4,11 +4,8 @@ class TypusFilesGenerator < Rails::Generator::Base
 
     record do |m|
 
-      ##
-      # This is a little buggy, but it works as expected. We should use 
-      # the Dir[] to detect all the existing migrations as Rails should 
-      # do it for us.
-      #
+      # We use the Dir[] to detect all the existing migrations because 
+      # Rails is not working as expected.
       migrations = ['create_typus_users']
       migrations.each do |migration|
         if Dir["db/migrate/[0-9]*_*.rb"].grep(/[0-9]+_#{migration}.rb$/).empty?
@@ -36,7 +33,7 @@ class TypusFilesGenerator < Rails::Generator::Base
         end
       end
 
-      # configuration files
+      # Configuration files
       folder = "#{Rails.root}/config/typus"
       Dir.mkdir(folder) unless File.directory?(folder)
 
@@ -47,12 +44,12 @@ class TypusFilesGenerator < Rails::Generator::Base
                    :assigns => { :ar_models => ar_models, :application => application }
       end
 
-      # initializers
+      # Initializers
       m.template "initializers/typus.rb", 
                  "config/initializers/typus.rb", 
                  :assigns => { :application => application }
 
-      # public folders
+      # Public folders
       [ "#{Rails.root}/public/stylesheets/admin", 
         "#{Rails.root}/public/javascripts/admin", 
         "#{Rails.root}/public/images/admin" ].each do |folder|
