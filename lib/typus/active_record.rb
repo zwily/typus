@@ -119,7 +119,7 @@ module Typus
         fields = Typus::Configuration.config[self.name]['filters'].split(', ').collect { |i| i.to_sym }
       end
 
-      fields_with_type = []
+      fields_with_type = ActiveSupport::OrderedHash.new
 
       fields.each do |field|
 
@@ -131,7 +131,7 @@ module Typus
           attribute_type = available_fields.map { |a| a.last if field.to_sym == a.first }.compact.first
         end
 
-        fields_with_type << [field, attribute_type] if attribute_type
+        fields_with_type[field] = attribute_type if attribute_type
 
       end
 
