@@ -226,9 +226,9 @@ module AdminFormHelper
   <small>#{link_to t("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
-      @items = @resource[:class].find(params[:id]).send(field)
-      unless @items.empty?
-        html << build_table(model_to_relate, model_to_relate.typus_fields_for(:relationship), @items)
+      items = @resource[:class].find(params[:id]).send(field)
+      unless items.empty?
+        html << build_table(model_to_relate, model_to_relate.typus_fields_for(:relationship), items)
       else
         html << <<-HTML
 <div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => field.titleize.downcase)}</p></div>
@@ -260,9 +260,9 @@ module AdminFormHelper
   </form>
         HTML
       end
-      @items = @resource[:class].find(params[:id]).send(field)
-      unless @items.empty?
-        html << build_table(model_to_relate, 'relationship')
+      items = @resource[:class].find(params[:id]).send(field)
+      unless items.empty?
+        html << build_table(model_to_relate, model_to_relate.typus_fields_for(:relationship), items)
       else
         html << <<-HTML
   <div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => field.titleize.downcase)}</p></div>
