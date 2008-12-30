@@ -257,11 +257,7 @@ module Typus
 
       query_params.each do |key, value|
 
-        filter_type = if self.model_fields.keys.include?(key.to_sym)
-                        self.model_fields[key.to_sym]
-                      elsif self.model_relationships.keys.include?(key.to_sym)
-                        self.model_relationships[key.to_sym]
-                      end
+        filter_type = self.model_fields[key.to_sym] || self.model_relationships[key.to_sym]
 
         ##
         # Sidebar filters:
