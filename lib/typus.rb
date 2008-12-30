@@ -20,11 +20,7 @@ module Typus
     # Returns a list of the submodules of a module.
     #
     def module(name)
-      submodules = []
-      Typus::Configuration.config.each do |key, value|
-        submodules << key if value['module'] == name
-      end
-      return submodules.sort
+      Typus::Configuration.config.collect { |i| i.first if i.last['module'] == name }.compact.uniq.sort
     end
 
     ##
