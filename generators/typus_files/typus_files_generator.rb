@@ -15,7 +15,7 @@ class TypusFilesGenerator < Rails::Generator::Base
         end
       end
 
-      application = Rails.root.to_s.split('/').last
+      application = File.basename(Dir.pwd)
 
       # For creating `typus.yml` and `typus_roles.yml` we need first to 
       # detect the available AR models of the application, not the plugins.
