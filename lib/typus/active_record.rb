@@ -7,25 +7,17 @@ module Typus
   module ClassMethods
 
     ##
-    # Return model fields as an array
-    #
-    # We cannot use hash for getting the model fields as we would 
-    # have the fields unsorted.
+    # Return model fields as a OrderedHash
     #
     def model_fields
-      columns.map { |u| [u.name.to_sym, u.type] }
+      hash = ActiveSupport::OrderedHash.new
+      columns.map { |u| hash[u.name.to_sym] = u.type.to_sym }
+      return hash
     end
 
     def model_relationships
-      reflect_on_all_associations.collect { |a| [a.name, a.macro] }
-    end
-
-    ##
-    # Return model fields as a hash
-    #
-    def model_fields_hash
       hash = ActiveSupport::OrderedHash.new
-      columns.map { |u| hash[u.name.to_sym] = u.type.to_sym }
+      reflect_on_all_associations.map { |i| hash[i.name] = i.macro }
       return hash
     end
 
@@ -64,7 +56,7 @@ module Typus
 
         fields.each do |field|
 
-          attribute_type = self.model_fields_hash[field]
+          attribute_type = self.model_fields[field]
 
           # Custom field_type depending on the attribute name.
           case field.to_s
@@ -120,7 +112,7 @@ module Typus
       fields_with_type = ActiveSupport::OrderedHash.new
 
       fields.each do |field|
-        attribute_type = self.model_fields_hash[field.to_sym]
+        attribute_type = self.model_fields[field.to_sym]
         if self.reflect_on_association(field.to_sym)
           attribute_type = self.reflect_on_association(field.to_sym).macro
         end
@@ -265,13 +257,11 @@ module Typus
 
       query_params.each do |key, value|
 
-        if self.model_fields.map(&:first).include?(key.to_sym)
-          index = self.model_fields.map(&:first).index(key.to_sym)
-          filter_type = self.model_fields.map(&:last)[index]
-        elsif self.model_relationships.map(&:first).include?(key.to_sym)
-          index = self.model_relationships.map(&:first).index(key.to_sym)
-          filter_type = self.model_relationships.map(&:last)[index]
-        end
+        filter_type = if self.model_fields.keys.include?(key.to_sym)
+                        self.model_fields[key.to_sym]
+                      elsif self.model_relationships.keys.include?(key.to_sym)
+                        self.model_relationships[key.to_sym]
+                      end
 
         ##
         # Sidebar filters:
