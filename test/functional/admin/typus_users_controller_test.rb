@@ -66,7 +66,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:notice]
-    assert_match /You can't remove yourself from Typus./, flash[:notice]
+    assert_match /You can't remove yourself./, flash[:notice]
 
   end
 

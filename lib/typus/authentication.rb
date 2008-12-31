@@ -60,32 +60,32 @@ protected
               when 'edit'
 
                 # Only admin and owner of Typus User can edit.
-                if !current_user_is_root
-                  "As you're not the admin or the owner of this record you cannot edit it." if !current_user
+                if !current_user_is_root && !current_user
+                  "As you're not the admin or the owner of this record you cannot edit it."
                 end
 
               when 'update'
 
                 # current_user cannot change her role.
-                if current_user
-                  "You can't change your role." unless @item.roles == params[:item][:roles]
+                if current_user && !(@item.roles == params[:item][:roles])
+                  "You can't change your role."
                 end
 
               when 'toggle'
 
                 # Only admin can toggle typus user status, but not herself.
-                if current_user_is_root
-                  "You can't toggle your status." if current_user
-                else
+                if current_user_is_root && current_user
+                  "You can't toggle your status."
+                elsif !current_user_is_root
                   "You're not allowed to toggle status."
                 end
 
               when 'destroy'
 
                 # Admin can remove anything except herself.
-                if current_user_is_root
-                  "You can't remove yourself from Typus." if current_user
-                else
+                if current_user_is_root && current_user
+                  "You can't remove yourself."
+                elsif !current_user_is_root
                   "You're not allowed to remove Typus Users."
                 end
 
