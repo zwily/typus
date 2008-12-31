@@ -48,7 +48,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to typus_login_url
     assert_nil @request.session[:typus]
     assert flash[:error]
-    assert_equal "Error! Typus user or role doesn't exist.", flash[:error]
+    assert_equal "Error! Typus User or role doesn't exist.", flash[:error]
   end
 
   def test_should_not_send_recovery_password_link_to_unexisting_user

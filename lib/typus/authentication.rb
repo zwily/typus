@@ -29,7 +29,7 @@ protected
     @current_user ||= TypusUser.find(session[:typus])
     raise unless Typus::Configuration.roles.keys.include?(@current_user.roles)
   rescue
-    flash[:error] = "Error! Typus user or role doesn't exist."
+    flash[:error] = "Error! Typus User or role doesn't exist."
     session[:typus] = nil
     redirect_to typus_login_url
   end
