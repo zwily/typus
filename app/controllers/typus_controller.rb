@@ -32,9 +32,9 @@ class TypusController < ApplicationController
     redirect_to :action => 'setup' and return if Typus.user_class.count.zero?
 
     if request.post?
-      @user = Typus.user_class.authenticate(params[:user][:email], params[:user][:password])
-      if @user
-        session[:typus] = @user.id
+      user = Typus.user_class.authenticate(params[:user][:email], params[:user][:password])
+      if user
+        session[:typus] = user.id
         if params[:back_to]
           redirect_to params[:back_to]
         else
