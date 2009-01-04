@@ -20,8 +20,8 @@ class AdminController < ApplicationController
 
   before_filter :check_ownership_of_record, :only => [ :edit, :update, :toggle, :position, :relate, :unrelate, :destroy ]
 
-  before_filter :can_perform_action_on_typus_user?, :only => [ :edit, :update, :toggle, :destroy ]
-  before_filter :can_perform_action?
+  before_filter :check_if_user_can_perform_action_on_user, :only => [ :edit, :update, :toggle, :destroy ]
+  before_filter :check_if_user_can_perform_action
 
   before_filter :set_order_and_list_fields, :only => [ :index ]
   before_filter :set_form_fields, :only => [ :new, :edit, :create, :update ]
