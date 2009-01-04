@@ -101,7 +101,7 @@ protected
   # This method checks if the user can perform the requested action.
   # It works on models, so its available on the admin_controller.
   #
-  def check_if_user_can_perform_action
+  def check_if_user_can_perform_action_on_resource
 
     message = case params[:action]
               when 'index', 'show'
@@ -125,7 +125,7 @@ protected
   # It works on resources, which are not models, so its available on 
   # the typus_controller.
   #
-  def check_if_user_can_perform_resource_action
+  def check_if_user_can_perform_action_on_resource_without_model
     controller = params[:controller].split('/').last
     action = params[:action]
     unless @current_user.can_perform?(controller.camelize, action, { :special => true })

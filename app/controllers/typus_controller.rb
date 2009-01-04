@@ -13,7 +13,7 @@ class TypusController < ApplicationController
   before_filter :reload_config_et_roles
   before_filter :require_login, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
 
-  before_filter :check_if_user_can_perform_resource_action, :except => [ :dashboard, :login, :logout, :recover_password, :reset_password, :setup ]
+  before_filter :check_if_user_can_perform_action_on_resource_without_model, :except => [ :dashboard, :login, :logout, :recover_password, :reset_password, :setup ]
 
   before_filter :recover_password_disabled?, :only => [ :recover_password, :reset_password ]
 
