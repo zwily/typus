@@ -86,4 +86,10 @@ END
     assert "John Smith", @typus_user.full_name
   end
 
+  def test_should_return_verify_is_root
+    assert @typus_user.is_root?
+    editor = typus_users(:editor)
+    assert !editor.is_root?
+  end
+
 end

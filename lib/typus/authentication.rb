@@ -54,13 +54,12 @@ protected
     return unless @item.kind_of?(Typus.user_class)
 
     current_user = (@current_user == @item)
-    current_user_is_root = (@current_user.roles == Typus::Configuration.options[:root])
 
     message = case params[:action]
               when 'edit'
 
                 # Only admin and owner of Typus User can edit.
-                if !current_user_is_root && !current_user
+                if !@current_user.is_root? && !current_user
                   "As you're not the admin or the owner of this record you cannot edit it."
                 end
 
@@ -74,18 +73,18 @@ protected
               when 'toggle'
 
                 # Only admin can toggle typus user status, but not herself.
-                if current_user_is_root && current_user
+                if @current_user.is_root? && current_user
                   "You can't toggle your status."
-                elsif !current_user_is_root
+                elsif !@current_user.is_root?
                   "You're not allowed to toggle status."
                 end
 
               when 'destroy'
 
                 # Admin can remove anything except herself.
-                if current_user_is_root && current_user
+                if @current_user.is_root? && current_user
                   "You can't remove yourself."
-                elsif !current_user_is_root
+                elsif !@current_user.is_root?
                   "You're not allowed to remove Typus Users."
                 end
 

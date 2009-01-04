@@ -69,6 +69,10 @@ class TypusUser < ActiveRecord::Base
 
   end
 
+  def is_root?
+    roles == Typus::Configuration.options[:root]
+  end
+
 protected
 
   def encrypt_password

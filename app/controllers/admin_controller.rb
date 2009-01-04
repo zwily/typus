@@ -18,6 +18,8 @@ class AdminController < ApplicationController
   before_filter :set_resource
   before_filter :find_record, :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
+  before_filter :check_ownership_of_record, :only => [ :edit, :update, :toggle, :position, :relate, :unrelate, :destroy ]
+
   before_filter :can_perform_action_on_typus_user?, :only => [ :edit, :update, :toggle, :destroy ]
   before_filter :can_perform_action?
 
@@ -247,6 +249,29 @@ private
   #
   def find_record
     @item = @resource[:class].find(params[:id])
+  end
+
+  ##
+  # If the record is owned by another user, we only can perform a 
+  # show action on the record. Updated record is also blocked.
+  #
+  #   before_filter :check_ownership_of_record, :only => [ :edit, :update, :destroy ]
+  #
+  def check_ownership_of_record
+
+    # If current_user is a root user, by-pass.
+    return if @current_user.is_root?
+
+    # If the current model doesn't include a key which relates it with the
+    # current_user, by-pass.
+    return unless @item.attributes.include?(Typus.user_fk)
+
+    # If the record is owned by the user ...
+    unless @item.send(Typus.user_fk) == session[:typus]
+      flash[:notice] = "Record owned by another user."
+      redirect_to :action => 'show', :id => @item.id
+    end
+
   end
 
   ##
