@@ -63,10 +63,10 @@ class TypusController < ApplicationController
   #
   def recover_password
     if request.post?
-      typus_user = Typus.user_class.find_by_email(params[:user][:email])
-      if typus_user
+      user = Typus.user_class.find_by_email(params[:user][:email])
+      if user
         ActionMailer::Base.default_url_options[:host] = request.host_with_port
-        typus_user.reset_password
+        user.reset_password
         flash[:success] = t("Password recovery link sent to your email.")
         redirect_to typus_login_url
       else
@@ -83,8 +83,8 @@ class TypusController < ApplicationController
   #
   def reset_password
     if request.post?
-      typus_user = Typus.user_class.find_by_token(params[:user][:token])
-      if typus_user.update_attributes(params[:user])
+      user = Typus.user_class.find_by_token(params[:user][:token])
+      if user.update_attributes(params[:user])
         flash[:success] = t("You can login with your new password.")
         redirect_to typus_login_url
       else
@@ -107,14 +107,15 @@ class TypusController < ApplicationController
     if request.post?
 
       password = generate_password
-      @typus_user = Typus.user_class.new(:email => params[:user][:email], 
-                                         :password => password, 
-                                         :password_confirmation => password, 
-                                         :roles => Typus::Configuration.options[:root], 
-                                         :status => true)
 
-      if @typus_user.save
-        session[:typus] = @typus_user.id
+      user = Typus.user_class.new :email => params[:user][:email], 
+                                  :password => password, 
+                                  :password_confirmation => password, 
+                                  :roles => Typus::Configuration.options[:root], 
+                                  :status => true
+
+      if user.save
+        session[:typus] = user.id
         flash[:notice] = t("Your new password is '{{password}}'.", :password => password)
         redirect_to :action => 'dashboard'
       else
