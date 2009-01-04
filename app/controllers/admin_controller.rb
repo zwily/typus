@@ -82,7 +82,13 @@ class AdminController < ApplicationController
   # created we create also the relationship between these models. 
   #
   def create
+
     @item = @resource[:class].new(params[:item])
+
+    if @item.attributes.include?(Typus.user_fk)
+      @item.attributes = { Typus.user_fk => session[:typus] }
+    end
+
     if @item.valid?
       create_with_back_to and return if params[:back_to]
       @item.save
@@ -95,6 +101,7 @@ class AdminController < ApplicationController
     else
       select_template :new
     end
+
   end
 
   ##
