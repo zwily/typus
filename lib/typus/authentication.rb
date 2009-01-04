@@ -9,7 +9,7 @@ protected
   #
   # Use this for demo!
   #
-  #     session[:typus] = TypusUser.find(:first)
+  #     session[:typus] = Typus.user_class.find(:first)
   #
   def require_login
     if session[:typus]
@@ -26,7 +26,7 @@ protected
   # off from Typus.
   #
   def set_current_user
-    @current_user ||= TypusUser.find(session[:typus])
+    @current_user ||= Typus.user_class.find(session[:typus])
     raise unless Typus::Configuration.roles.keys.include?(@current_user.roles)
   rescue
     flash[:error] = "Error! Typus User or role doesn't exist."
@@ -51,7 +51,7 @@ protected
   #
   def can_perform_action_on_typus_user?
 
-    return unless @item.kind_of?(TypusUser)
+    return unless @item.kind_of?(Typus.user_class)
 
     current_user = (@current_user == @item)
     current_user_is_root = (@current_user.roles == Typus::Configuration.options[:root])

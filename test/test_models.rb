@@ -74,3 +74,7 @@ end
 class User < ActiveRecord::Base
   has_many :posts
 end
+
+class MyUser # < ActiveRecord::Base
+  
+end

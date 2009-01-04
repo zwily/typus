@@ -65,6 +65,10 @@ module Typus
       Typus::Configuration.config[modulo]['description']
     end
 
+    def user_class
+      Typus::Configuration.options[:user_class].constantize
+    end
+
     ##
     # Load configuration files, translations, modules and extensions.
     #

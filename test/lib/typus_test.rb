@@ -61,4 +61,14 @@ class TypusTest < Test::Unit::TestCase
     assert Typus.respond_to?(:generator)
   end
 
+  def test_should_return_user_class
+    assert_equal TypusUser, Typus.user_class
+  end
+
+  def test_should_return_overwrited_user_class
+    Typus::Configuration.options[:user_class] = 'MyUser'
+    assert_equal MyUser, Typus.user_class
+    Typus::Configuration.options[:user_class] = 'TypusUser'
+  end
+
 end

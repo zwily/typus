@@ -27,10 +27,10 @@ class TypusController < ApplicationController
   #
   def login
 
-    redirect_to :action => 'setup' and return if TypusUser.count.zero?
+    redirect_to :action => 'setup' and return if Typus.user_class.count.zero?
 
     if request.post?
-      @user = TypusUser.authenticate(params[:user][:email], params[:user][:password])
+      @user = Typus.user_class.authenticate(params[:user][:email], params[:user][:password])
       if @user
         session[:typus] = @user.id
         if params[:back_to]
@@ -61,7 +61,7 @@ class TypusController < ApplicationController
   #
   def recover_password
     if request.post?
-      typus_user = TypusUser.find_by_email(params[:user][:email])
+      typus_user = Typus.user_class.find_by_email(params[:user][:email])
       if typus_user
         ActionMailer::Base.default_url_options[:host] = request.host_with_port
         typus_user.reset_password
@@ -81,7 +81,7 @@ class TypusController < ApplicationController
   #
   def reset_password
     if request.post?
-      typus_user = TypusUser.find_by_token(params[:user][:token])
+      typus_user = Typus.user_class.find_by_token(params[:user][:token])
       if typus_user.update_attributes(params[:user])
         flash[:success] = t("You can login with your new password.")
         redirect_to typus_login_url
@@ -90,7 +90,7 @@ class TypusController < ApplicationController
         redirect_to :action => 'reset_password', :token => params[:user][:token]
       end
     else
-      if TypusUser.find_by_token(params[:token])
+      if Typus.user_class.find_by_token(params[:token])
         render :layout => 'typus_login'
       else
         render :text => t("A valid token is required.")
@@ -100,16 +100,16 @@ class TypusController < ApplicationController
 
   def setup
 
-    redirect_to :action => 'login' and return unless TypusUser.count.zero?
+    redirect_to :action => 'login' and return unless Typus.user_class.count.zero?
 
     if request.post?
 
       password = generate_password
-      @typus_user = TypusUser.new(:email => params[:user][:email], 
-                                  :password => password, 
-                                  :password_confirmation => password, 
-                                  :roles => Typus::Configuration.options[:root], 
-                                  :status => true)
+      @typus_user = Typus.user_class.new(:email => params[:user][:email], 
+                                         :password => password, 
+                                         :password_confirmation => password, 
+                                         :roles => Typus::Configuration.options[:root], 
+                                         :status => true)
 
       if @typus_user.save
         session[:typus] = @typus_user.id

@@ -38,7 +38,8 @@ module Typus
                   :ssl => false, 
                   :prefix => 'admin', 
                   :icon_on_boolean => true, 
-                  :nil => 'nil' }
+                  :nil => 'nil', 
+                  :user_class => 'TypusUser' }
 
     mattr_accessor :options
 
