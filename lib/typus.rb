@@ -66,7 +66,11 @@ module Typus
     end
 
     def user_class
-      Typus::Configuration.options[:user_class].constantize
+      Typus::Configuration.options[:user_class_name].constantize
+    end
+
+    def user_fk
+      Typus::Configuration.options[:user_fk]
     end
 
     ##

@@ -13,7 +13,8 @@ class ConfigurationTest < Test::Unit::TestCase
       assert_equal true, Typus::Configuration.options[:edit_after_create]
       assert_equal 'admin@example.com', Typus::Configuration.options[:email]
       assert_equal 'nil', Typus::Configuration.options[:nil]
-      assert_equal 'TypusUser', Typus::Configuration.options[:user_class]
+      assert_equal 'TypusUser', Typus::Configuration.options[:user_class_name]
+      assert_equal 'typus_user_id', Typus::Configuration.options[:user_fk]
     else
       assert Typus::Configuration.respond_to?(:options)
     end

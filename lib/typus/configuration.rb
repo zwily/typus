@@ -39,7 +39,8 @@ module Typus
                   :prefix => 'admin', 
                   :icon_on_boolean => true, 
                   :nil => 'nil', 
-                  :user_class => 'TypusUser' }
+                  :user_class_name => 'TypusUser', 
+                  :user_fk => 'typus_user_id' }
 
     mattr_accessor :options
 
