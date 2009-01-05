@@ -36,10 +36,7 @@ ActiveRecord::Schema.define do
     t.boolean :status
     t.timestamps
     t.datetime :published_at
-    t.integer :user_id
   end
-
-  add_index :posts, :user_id
 
   create_table :typus_users, :force => true do |t|
     t.string :email, :first_name, :last_name
@@ -48,10 +45,6 @@ ActiveRecord::Schema.define do
     t.string :roles
     t.string :token
     t.timestamps
-  end
-
-  create_table :users, :force => true do |t|
-    t.string :first_name, :last_name, :email
   end
 
   create_table :categories_posts, :force => true, :id => false do |t|

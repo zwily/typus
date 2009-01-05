@@ -1,5 +1,7 @@
 class Asset < ActiveRecord::Base
+
   belongs_to :resource, :polymorphic => true
+
 end
 
 class Category < ActiveRecord::Base
@@ -58,7 +60,6 @@ class Post < ActiveRecord::Base
   validates_presence_of :title, :body
   has_and_belongs_to_many :categories
   has_many :comments
-  belongs_to :user
   has_many :assets, :as => :resource, :dependent => :destroy
 
   def self.typus
@@ -71,10 +72,6 @@ class Post < ActiveRecord::Base
 
 end
 
-class User < ActiveRecord::Base
-  has_many :posts
-end
-
-class MyUser # < ActiveRecord::Base
+class MyUser
   
 end

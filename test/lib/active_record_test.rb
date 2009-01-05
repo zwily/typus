@@ -24,15 +24,14 @@ class ActiveRecordTest < Test::Unit::TestCase
                        [:status, :boolean],
                        [:created_at, :datetime],
                        [:updated_at, :datetime],
-                       [:published_at, :datetime],
-                       [:user_id, :integer]]
+                       [:published_at, :datetime]]
     assert_equal expected_fields, Post.model_fields
   end
 
   def test_should_return_model_relationships_for_post
     expected = [[:comments, :has_many],
                 [:categories, :has_and_belongs_to_many],
-                [:user, :belongs_to],
+                [:user, nil],
                 [:assets, :has_many]]
     expected.each do |i|
       assert_equal i.last, Post.model_relationships[i.first]
@@ -51,8 +50,6 @@ class ActiveRecordTest < Test::Unit::TestCase
 
   def test_should_return_typus_fields_for_list_for_post
     expected_fields = [['title', :string],
-                       ['user', :belongs_to],
-                       ['user_id', :integer],
                        ['created_at', :datetime],
                        ['status', :selector]]
     assert_equal expected_fields, Post.typus_fields_for(:list)
@@ -100,8 +97,8 @@ class ActiveRecordTest < Test::Unit::TestCase
   def test_should_return_post_typus_filters
     expected = [['status', :boolean], 
                 ['created_at', :datetime], 
-                ['user', :belongs_to], 
-                ['user_id', :integer]]
+                ['user', nil], 
+                ['user_id', nil]]
     assert_equal expected.map { |i| i.first }.join(', '), Typus::Configuration.config['Post']['filters']
     assert_equal expected, Post.typus_filters
   end
