@@ -81,6 +81,7 @@ module Typus
       Typus::Configuration.roles!
       I18n.load_path += Dir[File.join("#{Rails.root}/vendor/plugins/typus/config/locales", '*.{rb,yml}')]
       require File.dirname(__FILE__) + "/../test/test_models" if Rails.env.test?
+      require 'typus/user'
       require 'typus/active_record'
       require 'typus/string'
       require 'typus/routes'

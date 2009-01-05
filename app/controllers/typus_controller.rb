@@ -62,7 +62,7 @@ class TypusController < ApplicationController
       user = Typus.user_class.find_by_email(params[:user][:email])
       if user
         ActionMailer::Base.default_url_options[:host] = request.host_with_port
-        user.reset_password
+        TypusMailer.deliver_reset_password_link(user)
         flash[:success] = t("Password recovery link sent to your email.")
         redirect_to typus_login_url
       else
