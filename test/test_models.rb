@@ -72,6 +72,6 @@ class Post < ActiveRecord::Base
 
 end
 
-class MyUser
+class CustomUser
   
 end

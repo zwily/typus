@@ -66,8 +66,8 @@ class TypusTest < Test::Unit::TestCase
   end
 
   def test_should_return_overwritted_user_class
-    Typus::Configuration.options[:user_class_name] = 'MyUser'
-    assert_equal MyUser, Typus.user_class
+    Typus::Configuration.options[:user_class_name] = 'CustomUser'
+    assert_equal CustomUser, Typus.user_class
     Typus::Configuration.options[:user_class_name] = 'TypusUser'
   end
 
