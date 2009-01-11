@@ -320,6 +320,7 @@ Date formats allows to define the format of the datetime field.
     ##
     # config/initializers/dates.rb
     #
+    # Date::DATE_FORMATS[:post_short] = "%m/%Y"
     Time::DATE_FORMATS[:post_short] = "%m/%y"
 
 ### Want more actions?
