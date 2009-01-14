@@ -1,10 +1,3 @@
-/* ----------------------------------------------------------
-Title:     Typus
-Details:   Master styles for Typus
-Author:    fesplugas@intraducibles.net
-Updated:   November 2008
----------------------------------------------------------- */
-
 /* html
 ---------------------------------------------------------- */
 
@@ -299,7 +292,7 @@ a.on {
 
   #content input.text {
     border: 1px solid #999;
-    font-size: 1.5em;
+    font-size: 20px;
     padding: 5px;
     width: 688px;
   }
@@ -323,7 +316,8 @@ a.on {
 
   #content textarea {
     border: 1px solid #999;
-    font-size: 1.20em;
+    font-family: "Courier";
+    font-size: 14px;
     padding: 3px;
     width: 691px;
   }
