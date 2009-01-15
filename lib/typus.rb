@@ -77,20 +77,26 @@ module Typus
     # Load configuration files, translations, modules and extensions.
     #
     def enable
+
+      require 'typus/string'
+      require 'typus/hash'
+
       Typus::Configuration.config!
       Typus::Configuration.roles!
       I18n.load_path += Dir[File.join("#{Rails.root}/vendor/plugins/typus/config/locales", '*.{rb,yml}')]
+
       require File.dirname(__FILE__) + "/../test/test_models" if Rails.env.test?
+
       require 'typus/user'
       require 'typus/active_record'
-      require 'typus/string'
       require 'typus/routes'
-      require 'typus/hash'
       require 'typus/export'
       require 'typus/authentication'
       require 'typus/object'
       require 'typus/greetings'
+
       require 'vendor/paginator'
+
     end
 
     def generator
