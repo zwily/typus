@@ -29,7 +29,6 @@ class TypusFilesGenerator < Rails::Generator::Base
           ar_models << klass if klass.superclass.to_s.include?("ActiveRecord::Base")
         rescue Exception => e
           puts "=> [typus] #{e.message} on `#{class_name}`."
-          exit
         end
       end
 
