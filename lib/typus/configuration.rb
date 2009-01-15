@@ -85,7 +85,9 @@ module Typus
       @@roles = { options[:root] => {} }
 
       files.each do |file|
-        YAML.load_file("#{Rails.root}/#{file}").each do |key, value|
+        data = YAML.load_file("#{Rails.root}/#{file}")
+        next unless data
+        data.each do |key, value|
           begin
             @@roles[key] = @@roles[key].merge(value)
           rescue
