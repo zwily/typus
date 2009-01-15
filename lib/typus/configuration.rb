@@ -76,7 +76,7 @@ module Typus
     #
     def self.roles!
 
-      folders = if Rails.env.test?
+      files = if Rails.env.test?
                   ["vendor/plugins/typus/test/config/typus_roles.yml"]
                 else
                   Dir["config/typus/*_roles.yml"]
@@ -84,8 +84,8 @@ module Typus
 
       @@roles = { options[:root] => {} }
 
-      folders.each do |folder|
-        YAML.load_file("#{Rails.root}/#{folder}").each do |key, value|
+      files.each do |file|
+        YAML.load_file("#{Rails.root}/#{file}").each do |key, value|
           begin
             @@roles[key] = @@roles[key].merge(value)
           rescue
