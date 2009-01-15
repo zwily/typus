@@ -96,7 +96,7 @@ module Typus
         end
       end
 
-      return @@roles
+      return @@roles.compact
 
     end
 
