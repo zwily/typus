@@ -52,10 +52,10 @@ module Typus
     def self.config!
 
       files = if Rails.env.test?
-                  ["vendor/plugins/typus/test/config/typus.yml"]
-                else
-                  Dir["config/typus/*"] - Dir["config/typus/*"].grep(/roles.yml/)
-                end
+                ["vendor/plugins/typus/test/config/typus.yml"]
+              else
+                Dir["config/typus/*"] - Dir["config/typus/*"].grep(/roles.yml/)
+              end
 
       @@config = {}
       files.each do |file|
@@ -77,10 +77,10 @@ module Typus
     def self.roles!
 
       files = if Rails.env.test?
-                  ["vendor/plugins/typus/test/config/typus_roles.yml"]
-                else
-                  Dir["config/typus/*_roles.yml"]
-                end
+                ["vendor/plugins/typus/test/config/typus_roles.yml"]
+              else
+                Dir["config/typus/*_roles.yml"]
+              end
 
       @@roles = { options[:root] => {} }
 
