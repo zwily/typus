@@ -51,15 +51,16 @@ module Typus
     #
     def self.config!
 
-      folders = if Rails.env.test?
+      files = if Rails.env.test?
                   ["vendor/plugins/typus/test/config/typus.yml"]
                 else
                   Dir["config/typus/*"] - Dir["config/typus/*"].grep(/roles.yml/)
                 end
 
       @@config = {}
-      folders.each do |folder|
-        @@config = @@config.merge(YAML.load_file("#{Rails.root}/#{folder}"))
+      files.each do |file|
+        data = YAML.load_file("#{Rails.root}/#{file}")
+        @@config = @@config.merge(data) if data
       end
 
       return @@config
