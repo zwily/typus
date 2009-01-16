@@ -21,8 +21,10 @@ You can view the available tasks running:
 
     $ rake -T typus
     (in /home/fesplugas/projects/typus_platform)
-    rake typus:misc  # Install Paperclip, acts_as_list, acts_as_tree, si...
-    rake typus:roles         # List current roles
+    rake doc:plugins:typus  # Generate documentation for the typus plugin
+    rake typus:i18n         # Install simplified_translation.
+    rake typus:misc         # Install Paperclip, acts_as_list, acts_as_tree.
+    rake typus:roles        # List current roles
 
 ### Configure
 
