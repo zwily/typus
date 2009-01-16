@@ -1,7 +1,7 @@
 namespace :typus do
 
-  desc "Install Typus dependencies (paperclip, acts_as_list, acts_as_tree, simplified_translation)"
-  task :dependencies do
+  desc "Install Paperclip, acts_as_list, acts_as_tree, simplified_translation."
+  task :misc do
 
     plugins = [ "git://github.com/thoughtbot/paperclip.git", 
                 "git://github.com/rails/acts_as_list.git", 
