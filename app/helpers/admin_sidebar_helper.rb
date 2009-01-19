@@ -59,8 +59,8 @@ module AdminSidebarHelper
 
     returning(String.new) do |html|
       items = []
-      models.each do |m|
-        items << "<li>#{link_to m.titleize, :controller => m.tableize}</li>"
+      models.each do |model|
+        items << "<li>#{link_to model.titleize.capitalize, :controller => model.tableize}</li>"
       end
       html << <<-HTML
 <h2>#{name.humanize}</h2>
