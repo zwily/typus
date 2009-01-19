@@ -28,13 +28,13 @@ module AdminFormHelper
     end
   end
 
-  def typus_tree_field(attribute, value)
+  def typus_tree_field(attribute, value, items = @resource[:class].roots)
     returning(String.new) do |html|
       html << <<-HTML
 <li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
 <select id="item_#{attribute}" name="item[#{attribute}]" <%= attribute_disabled?(attribute) ? 'disabled="disabled"' : '' %>>>
   <option value=""></option>
-  #{expand_tree_into_select_field(@item.class.roots)}
+  #{expand_tree_into_select_field(items)}
 </select></li>
       HTML
     end
