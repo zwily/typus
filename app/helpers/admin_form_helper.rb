@@ -34,7 +34,7 @@ module AdminFormHelper
 <li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
 <select id="item_#{attribute}" name="item[#{attribute}]" <%= attribute_disabled?(attribute) ? 'disabled="disabled"' : '' %>>>
   <option value=""></option>
-  #{expand_tree_into_select_field(@item.class.top)}
+  #{expand_tree_into_select_field(@item.class.roots)}
 </select></li>
       HTML
     end
