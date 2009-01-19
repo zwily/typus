@@ -46,12 +46,18 @@ module AdminFormHelper
     message << "Click OK to continue, or click Cancel to stay on this page."
 
     returning(String.new) do |html|
-      html << <<-HTML
+
+      if related.respond_to?('roots')
+        html << typus_tree_field(related_fk, related.roots, related_fk)
+      else
+        html << <<-HTML
 <li><label for="item_#{attribute}">#{related_fk.humanize}
     <small>#{link_to t("Add new"), { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
     </label>
 #{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
-      HTML
+        HTML
+      end
+
     end
 
   end
@@ -137,9 +143,9 @@ module AdminFormHelper
       end
       html << <<-HTML
 <li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
-<select id="item_#{attribute}" name="item[#{attribute}]" <%= attribute_disabled?(attribute) ? 'disabled="disabled"' : '' %>>
+<select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
-  #{options}
+  #{options.join("\n")}
 </select></li>
       HTML
     end
@@ -163,13 +169,13 @@ module AdminFormHelper
     end
   end
 
-  def typus_tree_field(attribute, items = @resource[:class].roots)
+  def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
     returning(String.new) do |html|
       html << <<-HTML
 <li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
-<select id="item_#{attribute}" name="item[#{attribute}]" <%= attribute_disabled?(attribute) ? 'disabled="disabled"' : '' %>>>
+<select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
-  #{expand_tree_into_select_field(items)}
+  #{expand_tree_into_select_field(items, attribute_virtual)}
 </select></li>
       HTML
     end
@@ -285,11 +291,11 @@ module AdminFormHelper
   ##
   # Tree builder when model +acts_as_tree+
   #
-  def expand_tree_into_select_field(items)
+  def expand_tree_into_select_field(items, attribute)
     returning(String.new) do |html|
       items.each do |item|
-        html << %{<option #{"selected" if @item.parent_id == item.id} value="#{item.id}">#{"&nbsp;&nbsp;" * item.ancestors.size} #{item.typus_name}</option>}
-        html << expand_tree_into_select_field(item.children) if item.has_children?
+        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&rsaquo;&rsaquo;" * item.ancestors.size} #{item.typus_name}</option>\n}
+        html << expand_tree_into_select_field(item.children, attribute) if item.has_children?
       end
     end
   end
