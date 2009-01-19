@@ -128,7 +128,7 @@ module AdminFormHelper
 
   def typus_selector_field(attribute)
     returning(String.new) do |html|
-      options = ""
+      options = []
       @resource[:class].send(attribute).each do |option|
         case option.kind_of?(Array)
         when true
