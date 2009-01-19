@@ -2,43 +2,46 @@ module AdminSidebarHelper
 
   def actions
 
-    actions_list = []
-
     returning(String.new) do |html|
 
       html << <<-HTML
-<h2>#{t("Actions")}</h2>
+#{build_my_list(default_actions, 'actions')}
+#{build_my_list(previous_and_next, 'go_to')}
       HTML
 
-      case params[:action]
-      when 'index', 'edit', 'update'
-        if @current_user.can_perform?(@resource[:class], 'create')
-          actions_list << "<li>#{link_to "#{t("Add")} #{@resource[:class_name_humanized].downcase}", :action => 'new'}</li>"
-        end
-        actions_list += more_actions
+      %w( parent_module submodules ).each do |block|
+        html << <<-HTML
+#{build_my_list(modules(block), block)}
+        HTML
       end
-
-      case params[:action]
-      when 'new', 'create', 'update'
-        actions_list << "<li>#{link_to t("Back to list"), :action => 'index'}</li>"
-        actions_list << more_actions
-      end
-
-      html << <<-HTML
-<ul>
-#{actions_list.join("\n")}
-</ul>
-      HTML
-
-      html << previous_and_next if %w( edit update ).include?(params[:action])
-      html << block('parent_module')
-      html << block('submodules')
 
     end
 
   end
 
-  def more_actions
+  def default_actions
+
+    returning(Array.new) do |items|
+
+      case params[:action]
+      when 'index', 'edit', 'update'
+        if @current_user.can_perform?(@resource[:class], 'create')
+          items << "<li>#{link_to "#{t("Add")} #{@resource[:class_name_humanized].downcase}", :action => 'new'}</li>"
+        end
+      end
+
+      case params[:action]
+      when 'new', 'create', 'edit', 'update'
+        items << "<li>#{link_to t("Back to list"), :action => 'index'}</li>"
+      end
+
+      items += non_crud_actions
+
+    end
+
+  end
+
+  def non_crud_actions
     returning(Array.new) do |actions|
       @resource[:class].typus_actions_for(params[:action]).each do |action|
         if @current_user.can_perform?(@resource[:class], action)
@@ -48,46 +51,41 @@ module AdminSidebarHelper
     end
   end
 
-  def block(name)
+  def build_my_list(items, header = nil)
+    return "" if items.empty?
+    returning(String.new) do |html|
+      html << "<h2>#{header.humanize}</h2>" unless header.nil?
+      html << <<-HTML
+<ul>
+  #{items.join("\n")}
+</ul>
+      HTML
+    end
+  end
+
+  def modules(name)
 
     models = case name
              when 'parent_module': Typus.parent(@resource[:class_name], 'module')
              when 'submodules':    Typus.module(@resource[:class_name])
              end
 
-    return "" if models.empty?
+    return [] if models.empty?
 
-    returning(String.new) do |html|
-      items = []
+    returning(Array.new) do |items|
       models.each do |model|
         items << "<li>#{link_to model.titleize.capitalize, :controller => model.tableize}</li>"
       end
-      html << <<-HTML
-<h2>#{name.humanize}</h2>
-<ul>
-  #{items.join("\n")}
-</ul>
-      HTML
     end
 
   end
 
   def previous_and_next
-
-    items = []
-    items << "<li>#{link_to t("Next"), :id => @next.id}</li>" if @next
-    items << "<li>#{link_to t("Previous"), :id => @previous.id}</li>" if @previous
-
-    return "" if items.empty?
-
-    returning(String.new) do |html|
-      html << <<-HTML
-<ul>
-#{items.join("\n")}
-</ul>
-      HTML
+    return [] unless %w( edit update ).include?(params[:action])
+    returning(Array.new) do |items|
+      items << "<li>#{link_to t("Next"), :action => 'edit', :id => @next.id}</li>" if @next
+      items << "<li>#{link_to t("Previous"), :action => 'edit', :id => @previous.id}</li>" if @previous
     end
-
   end
 
   def search
