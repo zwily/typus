@@ -10,94 +10,21 @@ module AdminFormHelper
       html << "<ul>"
       fields.each do |key, value|
         case value
+        when :belongs_to:      html << typus_belongs_to_field(key)
         when :boolean:         html << typus_boolean_field(key)
-        when :time:            html << typus_time_field(key)
-        when :datetime:        html << typus_datetime_field(key)
         when :date:            html << typus_date_field(key)
-        when :text:            html << typus_text_field(key)
+        when :datetime:        html << typus_datetime_field(key)
         when :file:            html << typus_file_field(key)
         when :password:        html << typus_password_field(key)
         when :selector:        html << typus_selector_field(key)
-        when :belongs_to:      html << typus_belongs_to_field(key)
+        when :text:            html << typus_text_field(key)
+        when :time:            html << typus_time_field(key)
         when :tree:            html << typus_tree_field(key)
         else
           html << typus_string_field(key)
         end
       end
       html << "</ul>"
-    end
-  end
-
-  def typus_tree_field(attribute, items = @resource[:class].roots)
-    returning(String.new) do |html|
-      html << <<-HTML
-<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
-<select id="item_#{attribute}" name="item[#{attribute}]" <%= attribute_disabled?(attribute) ? 'disabled="disabled"' : '' %>>>
-  <option value=""></option>
-  #{expand_tree_into_select_field(items)}
-</select></li>
-      HTML
-    end
-  end
-
-  def typus_datetime_field(attribute)
-    returning(String.new) do |html|
-      html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
-#{datetime_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
-      HTML
-    end
-  end
-
-  def typus_date_field(attribute)
-    returning(String.new) do |html|
-      html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
-#{date_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
-      HTML
-    end
-  end
-
-  def typus_time_field(attribute)
-    returning(String.new) do |html|
-      html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
-#{time_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
-      HTML
-    end
-  end
-
-  def typus_text_field(attribute)
-    returning(String.new) do |html|
-      html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
-#{text_area :item, attribute, :class => 'text', :rows => Typus::Configuration.options[:form_rows], :disabled => attribute_disabled?(attribute)}</li>
-      HTML
-    end
-  end
-
-  def typus_selector_field(attribute)
-    returning(String.new) do |html|
-      options = ""
-      @resource[:class].send(attribute).each do |option|
-        case option.kind_of?(Array)
-        when true
-          options << <<-HTML
-<option #{'selected' if @item.send(attribute).to_s == option.last.to_s} value="#{option.last}">#{option.first}</option>
-          HTML
-        else
-          options << <<-HTML
-<option #{'selected' if @item.send(attribute).to_s == option.to_s} value="#{option}">#{option}</option>
-          HTML
-        end
-      end
-      html << <<-HTML
-<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
-<select id="item_#{attribute}" name="item[#{attribute}]" <%= attribute_disabled?(attribute) ? 'disabled="disabled"' : '' %>>
-  <option value=""></option>
-  #{options}
-</select></li>
-      HTML
     end
   end
 
@@ -129,38 +56,6 @@ module AdminFormHelper
 
   end
 
-  def typus_string_field(attribute)
-
-    # Read only fields.
-    if @resource[:class].typus_field_options_for(:read_only).include?(attribute)
-      value = 'read_only' if %w( edit ).include?(params[:action])
-    end
-
-    # Auto generated fields.
-    if @resource[:class].typus_field_options_for(:auto_generated).include?(attribute)
-      value = 'auto_generated' if %w( new edit ).include?(params[:action])
-    end
-
-    comment = %w( read_only auto_generated ).include?(value) ? (value + " field").titleize : ""
-
-    returning(String.new) do |html|
-      html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{comment}</small></label>
-#{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute) }</li>
-      HTML
-    end
-
-  end
-
-  def typus_password_field(attribute)
-    returning(String.new) do |html|
-      html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
-#{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute)}</li>
-      HTML
-    end
-  end
-
   def typus_boolean_field(attribute)
 
     question = true if @resource[:class].typus_field_options_for(:questions).include?(attribute)
@@ -172,6 +67,24 @@ module AdminFormHelper
       HTML
     end
 
+  end
+
+  def typus_date_field(attribute)
+    returning(String.new) do |html|
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+#{date_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
+      HTML
+    end
+  end
+
+  def typus_datetime_field(attribute)
+    returning(String.new) do |html|
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+#{datetime_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
+      HTML
+    end
   end
 
   def typus_file_field(attribute)
@@ -194,6 +107,93 @@ module AdminFormHelper
 
       html << "#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>"
 
+    end
+
+  end
+
+  def typus_password_field(attribute)
+    returning(String.new) do |html|
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+#{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute)}</li>
+      HTML
+    end
+  end
+
+  def typus_selector_field(attribute)
+    returning(String.new) do |html|
+      options = ""
+      @resource[:class].send(attribute).each do |option|
+        case option.kind_of?(Array)
+        when true
+          options << <<-HTML
+<option #{'selected' if @item.send(attribute).to_s == option.last.to_s} value="#{option.last}">#{option.first}</option>
+          HTML
+        else
+          options << <<-HTML
+<option #{'selected' if @item.send(attribute).to_s == option.to_s} value="#{option}">#{option}</option>
+          HTML
+        end
+      end
+      html << <<-HTML
+<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
+<select id="item_#{attribute}" name="item[#{attribute}]" <%= attribute_disabled?(attribute) ? 'disabled="disabled"' : '' %>>
+  <option value=""></option>
+  #{options}
+</select></li>
+      HTML
+    end
+  end
+
+  def typus_text_field(attribute)
+    returning(String.new) do |html|
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+#{text_area :item, attribute, :class => 'text', :rows => Typus::Configuration.options[:form_rows], :disabled => attribute_disabled?(attribute)}</li>
+      HTML
+    end
+  end
+
+  def typus_time_field(attribute)
+    returning(String.new) do |html|
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+#{time_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
+      HTML
+    end
+  end
+
+  def typus_tree_field(attribute, items = @resource[:class].roots)
+    returning(String.new) do |html|
+      html << <<-HTML
+<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
+<select id="item_#{attribute}" name="item[#{attribute}]" <%= attribute_disabled?(attribute) ? 'disabled="disabled"' : '' %>>>
+  <option value=""></option>
+  #{expand_tree_into_select_field(items)}
+</select></li>
+      HTML
+    end
+  end
+
+  def typus_string_field(attribute)
+
+    # Read only fields.
+    if @resource[:class].typus_field_options_for(:read_only).include?(attribute)
+      value = 'read_only' if %w( edit ).include?(params[:action])
+    end
+
+    # Auto generated fields.
+    if @resource[:class].typus_field_options_for(:auto_generated).include?(attribute)
+      value = 'auto_generated' if %w( new edit ).include?(params[:action])
+    end
+
+    comment = %w( read_only auto_generated ).include?(value) ? (value + " field").titleize : ""
+
+    returning(String.new) do |html|
+      html << <<-HTML
+<li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{comment}</small></label>
+#{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute) }</li>
+      HTML
     end
 
   end
@@ -283,7 +283,7 @@ module AdminFormHelper
   end
 
   ##
-  # Tree when +acts_as_tree+
+  # Tree builder when model +acts_as_tree+
   #
   def expand_tree_into_select_field(items)
     returning(String.new) do |html|
