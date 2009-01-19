@@ -30,12 +30,12 @@ module AdminSidebarHelper
         end
       end
 
+      items << non_crud_actions
+
       case params[:action]
       when 'new', 'create', 'edit', 'update'
         items << "<li>#{link_to t("Back to list"), :action => 'index'}</li>"
       end
-
-      items += non_crud_actions
 
     end
 
