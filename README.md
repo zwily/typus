@@ -57,6 +57,8 @@ You can overwrite the following settings:
     Typus::Configuration.options[:recover_password]
     Typus::Configuration.options[:ssl]
     Typus::Configuration.options[:icon_on_boolean]
+    Typus::Configuration.options[:thumbnail]
+    Typus::Configuration.options[:thumbnail_zoom]
 
 You can overwrite this settings in the initializer `typus.rb`.
 

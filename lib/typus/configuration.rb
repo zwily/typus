@@ -40,7 +40,9 @@ module Typus
                   :icon_on_boolean => true, 
                   :nil => 'nil', 
                   :user_class_name => 'TypusUser', 
-                  :user_fk => 'typus_user_id' }
+                  :user_fk => 'typus_user_id', 
+                  :thumbnail => :thumb, 
+                  :thumbnail_zoom => :normal }
 
     mattr_accessor :options
 

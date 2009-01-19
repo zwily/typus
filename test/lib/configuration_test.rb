@@ -15,6 +15,8 @@ class ConfigurationTest < Test::Unit::TestCase
       assert_equal 'nil', Typus::Configuration.options[:nil]
       assert_equal 'TypusUser', Typus::Configuration.options[:user_class_name]
       assert_equal 'typus_user_id', Typus::Configuration.options[:user_fk]
+      assert_equal :thumb, Typus::Configuration.options[:thumbnail]
+      assert_equal :normal, Typus::Configuration.options[:thumbnail_zoom]
     else
       assert Typus::Configuration.respond_to?(:options)
     end

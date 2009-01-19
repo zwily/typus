@@ -18,6 +18,8 @@
   Typus::Configuration.options[:recover_password] = true
   Typus::Configuration.options[:ssl] = false
   Typus::Configuration.options[:icon_on_boolean] = false
+  Typus::Configuration.options[:thumbnail] = :thumb
+  Typus::Configuration.options[:thumbnail_zoom] = :normal
 
 =end
 
