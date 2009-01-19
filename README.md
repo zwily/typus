@@ -423,15 +423,19 @@ following files.
 
 ### Models
 
+    views/admin/MODEL/_edit.html.erb
     views/admin/MODEL/_edit_bottom.html.erb
     views/admin/MODEL/_edit_sidebar.html.erb
     views/admin/MODEL/_edit_top.html.erb
+    views/admin/MODEL/_index.html.erb
     views/admin/MODEL/_index_bottom.html.erb
     views/admin/MODEL/_index_sidebar.html.erb
     views/admin/MODEL/_index_top.html.erb
+    views/admin/MODEL/_new.html.erb
     views/admin/MODEL/_new_bottom.html.erb
     views/admin/MODEL/_new_sidebar.html.erb
     views/admin/MODEL/_new_top.html.erb
+    views/admin/MODEL/_show.html.erb
     views/admin/MODEL/_show_bottom.html.erb
     views/admin/MODEL/_show_sidebar.html.erb
     views/admin/MODEL/_show_top.html.erb
