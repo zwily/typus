@@ -483,7 +483,7 @@ You can use SSL on Typus. To enable it update the initializer.
 Remember to install the `ssl_requirement` plugin to be able to use this 
 feature.
 
-    $ script/plugin install git://github.com/rails/ssl_requirement.git
+    $ rake typus:ssl
 
 ## Tip & Tricks
 
