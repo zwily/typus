@@ -53,17 +53,22 @@ module AdminSidebarHelper
     models = case name
              when 'parent_module': Typus.parent(@resource[:class_name], 'module')
              when 'submodules':    Typus.module(@resource[:class_name])
-             else []
-    end
+             end
 
-    html = ""
-    models.each do |m|
-      model_cleaned = m.split(" ").join("").tableize
-      html << "<li>#{link_to m, :controller => model_cleaned}</li>"
-    end
-    html = "<h2>#{name.humanize}</h2>\n<ul>#{html}</ul>" unless html.empty?
+    return "" if models.empty?
 
-    return html
+    returning(String.new) do |html|
+      links = []
+      models.each do |m|
+        links << "<li>#{link_to m.titleize, :controller => m.tableize}</li>"
+      end
+      html << <<-HTML
+<h2>#{name.humanize}</h2>
+<ul>
+  #{links.join("\n")}
+</ul>
+      HTML
+    end
 
   end
 
