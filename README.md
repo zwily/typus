@@ -20,11 +20,12 @@ all my clients sites/projects.
 You can view the available tasks running:
 
     $ rake -T typus
-    (in /home/fesplugas/projects/typus_platform)
+    (in /Users/fesplugas/Development/typus_platform)
     rake doc:plugins:typus  # Generate documentation for the typus plugin
-    rake typus:i18n         # Install simplified_translation.
+    rake typus:i18n         # Install simplified_translation plugin.
     rake typus:misc         # Install Paperclip, acts_as_list, acts_as_tree.
     rake typus:roles        # List current roles
+    rake typus:ssl          # Intall ssl_requirement plugin.
 
 ### Configure
 
