@@ -58,14 +58,14 @@ module AdminSidebarHelper
     return "" if models.empty?
 
     returning(String.new) do |html|
-      links = []
+      items = []
       models.each do |m|
-        links << "<li>#{link_to m.titleize, :controller => m.tableize}</li>"
+        items << "<li>#{link_to m.titleize, :controller => m.tableize}</li>"
       end
       html << <<-HTML
 <h2>#{name.humanize}</h2>
 <ul>
-  #{links.join("\n")}
+  #{items.join("\n")}
 </ul>
       HTML
     end
@@ -74,16 +74,16 @@ module AdminSidebarHelper
 
   def previous_and_next
 
-    links = []
-    links << "<li>#{link_to t("Next"), :id => @next.id}</li>" if @next
-    links << "<li>#{link_to t("Previous"), :id => @previous.id}</li>" if @previous
+    items = []
+    items << "<li>#{link_to t("Next"), :id => @next.id}</li>" if @next
+    items << "<li>#{link_to t("Previous"), :id => @previous.id}</li>" if @previous
 
-    return "" if links.empty?
+    return "" if items.empty?
 
     returning(String.new) do |html|
       html << <<-HTML
 <ul>
-#{links.join("\n")}
+#{items.join("\n")}
 </ul>
       HTML
     end
