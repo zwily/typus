@@ -12,8 +12,8 @@ As Django Admin, **Typus** is designed for a "single" activity:
 
 Keep in mind that **Typus** doesn't try to be all the things to all 
 the people but it's extensible enough to match lots of use cases. I 
-started to develop it early 2006 and have been updating it to match 
-all my clients sites/projects.
+started to develop it late 2005 and have been updating it to match 
+all my clients sites/projects requirements.
 
 ## Installing
 
