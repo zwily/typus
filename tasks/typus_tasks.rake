@@ -4,8 +4,7 @@ namespace :typus do
   task :misc do
     plugins = [ "git://github.com/thoughtbot/paperclip.git", 
                 "git://github.com/rails/acts_as_list.git", 
-                "git://github.com/rails/acts_as_tree.git", 
-                "git://github.com/fesplugas/simplified_translation.git" ]
+                "git://github.com/rails/acts_as_tree.git" ]
     system "script/plugin install #{plugins.join(' ')}"
   end
 
