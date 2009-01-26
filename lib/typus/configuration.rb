@@ -42,7 +42,8 @@ module Typus
                   :user_class_name => 'TypusUser', 
                   :user_fk => 'typus_user_id', 
                   :thumbnail => :thumb, 
-                  :thumbnail_zoom => :normal }
+                  :thumbnail_zoom => :normal, 
+                  :config_folder => 'config/typus' }
 
     mattr_accessor :options
 
@@ -53,15 +54,12 @@ module Typus
     #
     def self.config!
 
-      files = if Rails.env.test?
-                ["vendor/plugins/typus/test/config/typus.yml"]
-              else
-                Dir["config/typus/*.yml"].delete_if { |x| x.include?('_roles.yml') }
-              end
+      folder = (Rails.env.test?) ? 'vendor/plugins/typus/test/config' : options[:config_folder]
+      files = Dir["#{Rails.root}/#{folder}/*.yml"].delete_if { |x| x.include?('_roles.yml') }
 
       @@config = {}
       files.each do |file|
-        data = YAML.load_file("#{Rails.root}/#{file}")
+        data = YAML.load_file(file)
         @@config = @@config.merge(data) if data
       end
 
@@ -78,16 +76,13 @@ module Typus
     #
     def self.roles!
 
-      files = if Rails.env.test?
-                ["vendor/plugins/typus/test/config/typus_roles.yml"]
-              else
-                Dir["config/typus/*_roles.yml"]
-              end
+      folder = (Rails.env.test?) ? 'vendor/plugins/typus/test/config' : options[:config_folder]
+      files = Dir["#{Rails.root}/#{folder}/*_roles.yml"]
 
       @@roles = { options[:root] => {} }
 
       files.each do |file|
-        data = YAML.load_file("#{Rails.root}/#{file}")
+        data = YAML.load_file(file)
         next unless data
         data.each do |key, value|
           begin

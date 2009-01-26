@@ -20,6 +20,7 @@
   Typus::Configuration.options[:icon_on_boolean] = false
   Typus::Configuration.options[:thumbnail] = :thumb
   Typus::Configuration.options[:thumbnail_zoom] = :normal
+  Typus::Configuration.options[:config_folder] = 'config/typus'
 
 =end
 

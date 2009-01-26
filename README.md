@@ -60,6 +60,7 @@ You can overwrite the following settings:
     Typus::Configuration.options[:icon_on_boolean]
     Typus::Configuration.options[:thumbnail]
     Typus::Configuration.options[:thumbnail_zoom]
+    Typus::Configuration.options[:config_folder]
 
 You can overwrite this settings in the initializer `typus.rb`.
 
