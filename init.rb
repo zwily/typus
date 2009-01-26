@@ -13,7 +13,7 @@ ActionController::Base.append_view_path(File.join(File.dirname(__FILE__), 'app',
 end
 
 if Rails.env.test?
-  Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config'
+  Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
 end
 
 ##
