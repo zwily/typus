@@ -56,7 +56,7 @@ module Typus
       files = if Rails.env.test?
                 ["vendor/plugins/typus/test/config/typus.yml"]
               else
-                Dir["config/typus/*yml"] - Dir["config/typus/*yml"].grep(/roles.yml/)
+                Dir["config/typus/*.yml"].delete_if { |x| x.include?('_roles.yml') }
               end
 
       @@config = {}
