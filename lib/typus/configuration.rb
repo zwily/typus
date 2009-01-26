@@ -54,8 +54,7 @@ module Typus
     #
     def self.config!
 
-      folder = (Rails.env.test?) ? 'vendor/plugins/typus/test/config' : options[:config_folder]
-      files = Dir["#{Rails.root}/#{folder}/*.yml"].delete_if { |x| x.include?('_roles.yml') }
+      files = Dir["#{Rails.root}/#{options[:config_folder]}/*.yml"].delete_if { |x| x.include?('_roles.yml') }
 
       @@config = {}
       files.each do |file|
@@ -76,8 +75,7 @@ module Typus
     #
     def self.roles!
 
-      folder = (Rails.env.test?) ? 'vendor/plugins/typus/test/config' : options[:config_folder]
-      files = Dir["#{Rails.root}/#{folder}/*_roles.yml"]
+      files = Dir["#{Rails.root}/#{options[:config_folder]}/*_roles.yml"]
 
       @@roles = { options[:root] => {} }
 
