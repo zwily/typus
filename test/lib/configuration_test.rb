@@ -2,6 +2,10 @@ require File.dirname(__FILE__) + '/../test_helper'
 
 class ConfigurationTest < Test::Unit::TestCase
 
+  def teardown
+    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
+  end
+
   def test_should_verify_configuration_options
     initializer = "#{Rails.root}/config/initializers/typus.rb"
     unless File.exists?(initializer)
@@ -35,21 +39,14 @@ class ConfigurationTest < Test::Unit::TestCase
 
   def test_should_load_configuration_files_from_config_broken
     Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/broken'
-
-    ##
-    #
-    #
-
-    # And go back to the default configuration settings folder.
-    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
+    assert_not_equal Typus::Configuration.roles!, {}
+    assert_not_equal Typus::Configuration.config!, {}
   end
 
   def test_should_load_configuration_files_from_config_empty
     Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/empty'
     assert_equal Typus::Configuration.roles!, {}
     assert_equal Typus::Configuration.config!, {}
-    # And go back to the default configuration settings folder.
-    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
   end
 
 end
