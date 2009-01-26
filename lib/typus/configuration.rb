@@ -90,14 +90,9 @@ module Typus
         data = YAML.load_file("#{Rails.root}/#{file}")
         next unless data
         data.each do |key, value|
-          begin
-            @@roles[key] = @@roles[key].merge(value)
-          rescue
-            @@roles[key] = value
-          end
+          @@roles[key] = @@roles[key].merge(value) if value
         end
       end
-
       return @@roles.compact
 
     end
