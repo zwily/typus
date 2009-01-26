@@ -33,4 +33,23 @@ class ConfigurationTest < Test::Unit::TestCase
     assert Typus::Configuration.config!.kind_of?(Hash)
   end
 
+  def test_should_load_configuration_files_from_config_broken
+    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/broken'
+
+    ##
+    #
+    #
+
+    # And go back to the default configuration settings folder.
+    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
+  end
+
+  def test_should_load_configuration_files_from_config_empty
+    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/empty'
+    assert_equal Typus::Configuration.roles!, {}
+    assert_equal Typus::Configuration.config!, {}
+    # And go back to the default configuration settings folder.
+    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
+  end
+
 end
