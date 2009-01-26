@@ -56,7 +56,7 @@ module Typus
       files = if Rails.env.test?
                 ["vendor/plugins/typus/test/config/typus.yml"]
               else
-                Dir["config/typus/*"] - Dir["config/typus/*"].grep(/roles.yml/)
+                Dir["config/typus/*yml"] - Dir["config/typus/*yml"].grep(/roles.yml/)
               end
 
       @@config = {}
