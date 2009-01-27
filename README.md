@@ -61,6 +61,7 @@ You can overwrite the following settings:
     Typus::Configuration.options[:thumbnail]
     Typus::Configuration.options[:thumbnail_zoom]
     Typus::Configuration.options[:config_folder]
+    Typus::Configuration.options[:ignore_missing_translations]
 
 You can overwrite this settings in the initializer `typus.rb`.
 

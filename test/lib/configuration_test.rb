@@ -22,6 +22,7 @@ class ConfigurationTest < Test::Unit::TestCase
       assert_equal :thumb, Typus::Configuration.options[:thumbnail]
       assert_equal :normal, Typus::Configuration.options[:thumbnail_zoom]
       assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
+      assert_equal true, Typus::Configuration.options[:ignore_missing_translations]
     else
       assert Typus::Configuration.respond_to?(:options)
     end

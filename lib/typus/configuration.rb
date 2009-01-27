@@ -43,7 +43,8 @@ module Typus
                   :user_fk => 'typus_user_id', 
                   :thumbnail => :thumb, 
                   :thumbnail_zoom => :normal, 
-                  :config_folder => 'config/typus' }
+                  :config_folder => 'config/typus', 
+                  :ignore_missing_translations => true }
 
     mattr_accessor :options
 

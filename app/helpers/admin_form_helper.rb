@@ -197,7 +197,7 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{comment}</small></label>
+<li><label for="item_#{attribute}">#{t(attribute.titleize.capitalize)} <small>#{comment}</small></label>
 #{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute) }</li>
       HTML
     end
