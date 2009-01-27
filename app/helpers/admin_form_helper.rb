@@ -294,7 +294,7 @@ module AdminFormHelper
   def expand_tree_into_select_field(items, attribute)
     returning(String.new) do |html|
       items.each do |item|
-        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&rsaquo;&rsaquo;" * item.ancestors.size} #{item.typus_name}</option>\n}
+        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 8} &#92;_ #{item.typus_name}</option>\n}
         html << expand_tree_into_select_field(item.children, attribute) if item.has_children?
       end
     end
