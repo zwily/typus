@@ -236,7 +236,7 @@ private
     @resource[:class] = resource.classify.constantize
     @resource[:table_name] = resource.classify.constantize.table_name
     @resource[:class_name] = resource.classify
-    @resource[:class_name_humanized] = t(resource.classify.titleize)
+    @resource[:class_name_humanized] = resource.classify.titleize
     @resource[:self] = resource
 
   rescue Exception => error
