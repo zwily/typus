@@ -49,4 +49,13 @@ class ConfigurationTest < Test::Unit::TestCase
     assert_equal Typus::Configuration.config!, {}
   end
 
+  def test_should_load_configuration_files_from_config_ordered
+    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/ordered'
+    files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
+    expected = files.collect { |file| File.basename(file) }
+    assert_equal expected, ["001_roles.yml", "002_roles.yml"]
+    expected = { "admin" => { "categories" => "read" } }
+    assert_equal expected, Typus::Configuration.roles!
+  end
+
 end
