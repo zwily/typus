@@ -54,7 +54,8 @@ module Typus
     #
     def self.config!
 
-      files = Dir["#{Rails.root}/#{options[:config_folder]}/*.yml"].delete_if { |x| x.include?('_roles.yml') }
+      files = Dir["#{Rails.root}/#{options[:config_folder]}/*.yml"].sort
+      files = files.delete_if { |x| x.include?('_roles.yml') }
 
       @@config = {}
       files.each do |file|
@@ -75,7 +76,7 @@ module Typus
     #
     def self.roles!
 
-      files = Dir["#{Rails.root}/#{options[:config_folder]}/*_roles.yml"]
+      files = Dir["#{Rails.root}/#{options[:config_folder]}/*_roles.yml"].sort
 
       @@roles = { options[:root] => {} }
 
