@@ -53,4 +53,5 @@ es:
   "{{model_a}} unrelated from {{model_b}}": "{{model_a}} no esta relacionado con {{model_b}}."
   "{{model_a}} removed from {{model_b}}": "{{model_a}} borrado de {{model_b}}."
   "Your new password is '{{password}}'": "Tu nueva contraseña es '{{password}}'."
-  "Add new": "Añadir nuevo"
+  "Add entry": "Añadir entrada"
+  "Go to": "Ir a"
