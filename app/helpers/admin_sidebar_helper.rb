@@ -26,7 +26,7 @@ module AdminSidebarHelper
       case params[:action]
       when 'index', 'edit', 'update'
         if @current_user.can_perform?(@resource[:class], 'create')
-          items << "<li>#{link_to "#{t("Add")} #{@resource[:class_name_humanized].downcase}", :action => 'new'}</li>"
+          items << "<li>#{link_to t("Add entry"), :action => 'new'}</li>"
         end
       end
 
@@ -54,7 +54,7 @@ module AdminSidebarHelper
   def build_my_list(items, header = nil)
     return "" if items.empty?
     returning(String.new) do |html|
-      html << "<h2>#{header.humanize}</h2>" unless header.nil?
+      html << "<h2>#{t(header.humanize)}</h2>" unless header.nil?
       html << <<-HTML
 <ul>
   #{items.join("\n")}
@@ -121,7 +121,7 @@ module AdminSidebarHelper
 
     returning(String.new) do |html|
       typus_filters.each do |key, value|
-        html << "<h2>#{key.humanize}</h2>\n"
+        html << "<h2>#{t(key.humanize)}</h2>\n"
         case value
         when :boolean:      html << boolean_filter(current_request, key)
         when :string:       html << string_filter(current_request, key)
