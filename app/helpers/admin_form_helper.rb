@@ -104,16 +104,25 @@ module AdminFormHelper
 
     returning(String.new) do |html|
 
+      if @item.respond_to?('preview') && !params[:action].include?('new')
+
+        preview_link = <<-HTML
+<small><a href="##{@item.class.name}-#{@item.id}-zoom" id="#{@item.class.name}-#{@item.id}">Preview</a></small>
+        HTML
+
+        preview_content = <<-HTML
+<div id="#{@item.class.name}-#{@item.id}-zoom">
+  #{@item.display}
+</div>
+        HTML
+
+      end
+
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_display.titleize.capitalize}</label>
+<li><label for="item_#{attribute}">#{attribute_display.titleize.capitalize} #{preview_link}</label>
       HTML
 
-      case content_type
-      when /image/
-        html << "#{link_to image_tag(@item.send(attribute_display).url(Typus::Configuration.options[:thumbnail])), @item.send(attribute_display).url(Typus::Configuration.options[:thumbnail_zoom]), :style => "border: 1px solid #D3D3D3;"}<br /><br />"
-      when /pdf|flv|quicktime/
-        html << "<p>No preview available. (#{content_type.split('/').last})</p>"
-      end
+      html << preview_content unless preview_content.nil?
 
       html << "#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>"
 
