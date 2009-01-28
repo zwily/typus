@@ -18,7 +18,7 @@ module AdminFormHelper
         when :boolean:         html << typus_boolean_field(attribute, attribute_humanized)
         when :date:            html << typus_date_field(attribute, attribute_humanized)
         when :datetime:        html << typus_datetime_field(attribute, attribute_humanized)
-        when :file:            html << typus_file_field(attribute)
+        when :file:            html << typus_file_field(attribute, attribute_humanized)
         when :password:        html << typus_password_field(attribute, attribute_humanized)
         when :selector:        html << typus_selector_field(attribute, attribute_humanized)
         when :text:            html << typus_text_field(attribute, attribute_humanized)
