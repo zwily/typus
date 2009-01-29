@@ -106,7 +106,7 @@ module AdminSidebarHelper
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.join("\n")}
 </form>
-<p style="margin: -10px 0px 10px 0px;"><small>#{t("Search by")} #{typus_search.split(', ').to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
+<p style="margin: -10px 0px 10px 0px;"><small>#{t("Search by")} #{typus_search.split(', ').collect { |x| t(x) }.to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
       HTML
     end
 
@@ -173,7 +173,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
   <select name="#{model.name.downcase.pluralize}" onChange="surfto_#{model.name.downcase.pluralize}(this.form)">
-    <option value=\"#{url_for params_without_filter}\">Filter by #{model.name.titleize.humanize}</option>
+    <option value=\"#{url_for params_without_filter}\">#{t("Filter by")} #{model.name.titleize.humanize}</option>
     #{items.join("\n")}
   </select>
 </form></p>
@@ -213,7 +213,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
       items = []
       @resource[:class].typus_boolean(filter).each do |key, value|
         switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
-        items << "<li>#{link_to value, { :params => params.merge(filter => key, :page => nil) }, :class => switch}</li>"
+        items << "<li>#{link_to t(value), { :params => params.merge(filter => key, :page => nil) }, :class => switch}</li>"
       end
       html << <<-HTML
 <ul>
