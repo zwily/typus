@@ -100,25 +100,9 @@ module AdminFormHelper
 
     returning(String.new) do |html|
 
-      if @item.respond_to?('preview') && !params[:action].include?('new')
-
-        preview_link = <<-HTML
-<small><a href="##{@item.class.name}-#{@item.id}-zoom" id="#{@item.class.name}-#{@item.id}">Preview</a></small>
-        HTML
-
-        preview_content = <<-HTML
-<div id="#{@item.class.name}-#{@item.id}-zoom">
-  #{@item.display}
-</div>
-        HTML
-
-      end
-
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_display.humanize} #{preview_link}</label>
+<li><label for="item_#{attribute}">#{attribute_display.humanize}</label>
       HTML
-
-      html << preview_content unless preview_content.nil?
 
       html << "#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>"
 
