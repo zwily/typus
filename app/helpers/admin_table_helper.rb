@@ -107,11 +107,9 @@ module AdminTableHelper
   end
 
   def typus_table_has_and_belongs_to_many_field(attribute, item)
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <td>#{item.send(attribute).map { |i| i.typus_name }.join('<br />')}</td>
-      HTML
-    end
+    HTML
   end
 
   ##
@@ -134,11 +132,9 @@ module AdminTableHelper
   end
 
   def typus_table_tree_field(attribute, item)
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <td>#{item.parent.typus_name if item.parent}</td>
-      HTML
-    end
+    HTML
   end
 
   def typus_table_position_field(attribute, item)
@@ -146,7 +142,7 @@ module AdminTableHelper
       html_position = []
       [["Up", "move_higher"], ["Down", "move_lower"]].each do |position|
         html_position << <<-HTML
-#{link_to position.first, :params => params.merge(:controller => item.class.name.tableize, :action => 'position', :id => item.id, :go => position.last)}
+#{link_to t(position.first), :params => params.merge(:controller => item.class.name.tableize, :action => 'position', :id => item.id, :go => position.last)}
         HTML
       end
       html << <<-HTML

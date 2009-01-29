@@ -76,21 +76,17 @@ module AdminFormHelper
   end
 
   def typus_date_field(attribute)
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 #{date_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
-      HTML
-    end
+    HTML
   end
 
   def typus_datetime_field(attribute)
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 #{datetime_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
-      HTML
-    end
+    HTML
   end
 
   def typus_file_field(attribute)
@@ -100,25 +96,9 @@ module AdminFormHelper
 
     returning(String.new) do |html|
 
-      if @item.respond_to?('preview') && !params[:action].include?('new')
-
-        preview_link = <<-HTML
-<small><a href="##{@item.class.name}-#{@item.id}-zoom" id="#{@item.class.name}-#{@item.id}">Preview</a></small>
-        HTML
-
-        preview_content = <<-HTML
-<div id="#{@item.class.name}-#{@item.id}-zoom">
-  #{@item.display}
-</div>
-        HTML
-
-      end
-
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_display.humanize} #{preview_link}</label>
+<li><label for="item_#{attribute}">#{attribute_display.humanize}</label>
       HTML
-
-      html << preview_content unless preview_content.nil?
 
       html << "#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>"
 
@@ -127,12 +107,10 @@ module AdminFormHelper
   end
 
   def typus_password_field(attribute)
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 #{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute)}</li>
-      HTML
-    end
+    HTML
   end
 
   def typus_selector_field(attribute)
@@ -161,21 +139,17 @@ module AdminFormHelper
   end
 
   def typus_text_field(attribute)
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 #{text_area :item, attribute, :class => 'text', :rows => Typus::Configuration.options[:form_rows], :disabled => attribute_disabled?(attribute)}</li>
-      HTML
-    end
+    HTML
   end
 
   def typus_time_field(attribute)
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 #{time_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
-      HTML
-    end
+    HTML
   end
 
   def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
