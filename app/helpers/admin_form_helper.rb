@@ -68,8 +68,8 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}#{'?' if question}</label>
-#{check_box :item, attribute} Checked if active</li>
+<li><label for="item_#{attribute}">#{t(attribute.humanize)}#{'?' if question}</label>
+#{check_box :item, attribute} #{t("Checked if active")}</li>
       HTML
     end
 
@@ -78,7 +78,7 @@ module AdminFormHelper
   def typus_date_field(attribute)
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 #{date_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
       HTML
     end
@@ -87,7 +87,7 @@ module AdminFormHelper
   def typus_datetime_field(attribute)
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 #{datetime_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
       HTML
     end
@@ -101,15 +101,8 @@ module AdminFormHelper
     returning(String.new) do |html|
 
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_display.titleize.capitalize}</label>
+<li><label for="item_#{attribute}">#{attribute_display.humanize}</label>
       HTML
-
-      case content_type
-      when /image/
-        html << "#{link_to image_tag(@item.send(attribute_display).url(Typus::Configuration.options[:thumbnail])), @item.send(attribute_display).url(Typus::Configuration.options[:thumbnail_zoom]), :style => "border: 1px solid #D3D3D3;"}<br /><br />"
-      when /pdf|flv|quicktime/
-        html << "<p>No preview available. (#{content_type.split('/').last})</p>"
-      end
 
       html << "#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>"
 
@@ -120,7 +113,7 @@ module AdminFormHelper
   def typus_password_field(attribute)
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 #{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute)}</li>
       HTML
     end
@@ -142,7 +135,7 @@ module AdminFormHelper
         end
       end
       html << <<-HTML
-<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
+<li><label for=\"item_#{attribute}\">#{t(attribute.humanize)}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
   #{options.join("\n")}
@@ -154,7 +147,7 @@ module AdminFormHelper
   def typus_text_field(attribute)
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 #{text_area :item, attribute, :class => 'text', :rows => Typus::Configuration.options[:form_rows], :disabled => attribute_disabled?(attribute)}</li>
       HTML
     end
@@ -163,7 +156,7 @@ module AdminFormHelper
   def typus_time_field(attribute)
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize}</label>
+<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 #{time_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
       HTML
     end
@@ -172,7 +165,7 @@ module AdminFormHelper
   def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
+<li><label for=\"item_#{attribute}\">#{attribute.humanize}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
   #{expand_tree_into_select_field(items, attribute_virtual)}
@@ -197,7 +190,7 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute.titleize.capitalize} <small>#{comment}</small></label>
+<li><label for="item_#{attribute}">#{t(attribute.humanize)} <small>#{comment}</small></label>
 #{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute) }</li>
       HTML
     end
@@ -294,7 +287,7 @@ module AdminFormHelper
   def expand_tree_into_select_field(items, attribute)
     returning(String.new) do |html|
       items.each do |item|
-        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&rsaquo;&rsaquo;" * item.ancestors.size} #{item.typus_name}</option>\n}
+        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 8} &#92;_ #{item.typus_name}</option>\n}
         html << expand_tree_into_select_field(item.children, attribute) if item.has_children?
       end
     end

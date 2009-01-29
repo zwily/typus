@@ -21,7 +21,9 @@ class ConfigurationTest < Test::Unit::TestCase
       assert_equal 'typus_user_id', Typus::Configuration.options[:user_fk]
       assert_equal :thumb, Typus::Configuration.options[:thumbnail]
       assert_equal :normal, Typus::Configuration.options[:thumbnail_zoom]
-      assert_equal 'config/typus', Typus::Configuration.options[:config_folder]
+      assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
+      assert_equal true, Typus::Configuration.options[:ignore_missing_translations]
+
     else
       assert Typus::Configuration.respond_to?(:options)
     end
@@ -47,6 +49,25 @@ class ConfigurationTest < Test::Unit::TestCase
     Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/empty'
     assert_equal Typus::Configuration.roles!, {}
     assert_equal Typus::Configuration.config!, {}
+  end
+
+
+  def test_should_load_configuration_files_from_config_ordered
+    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/ordered'
+    files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
+    expected = files.collect { |file| File.basename(file) }
+    assert_equal expected, ["001_roles.yml", "002_roles.yml"]
+    expected = { "admin" => { "categories" => "read" } }
+    assert_equal expected, Typus::Configuration.roles!
+  end
+
+  def test_should_load_configuration_files_from_config_unordered
+    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/unordered'
+    files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
+    expected = files.collect { |file| File.basename(file) }
+    assert_equal expected, ["app_one_roles.yml", "app_two_roles.yml"]
+    expected = { "admin" => { "categories" => "read, update" } }
+    assert_equal expected, Typus::Configuration.roles!
   end
 
 end

@@ -21,6 +21,7 @@
   Typus::Configuration.options[:thumbnail] = :thumb
   Typus::Configuration.options[:thumbnail_zoom] = :normal
   Typus::Configuration.options[:config_folder] = 'config/typus'
+  Typus::Configuration.options[:ignore_missing_translations] = true
 
 =end
 
