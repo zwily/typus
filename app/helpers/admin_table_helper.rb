@@ -146,7 +146,7 @@ module AdminTableHelper
       html_position = []
       [["Up", "move_higher"], ["Down", "move_lower"]].each do |position|
         html_position << <<-HTML
-#{link_to position.first, :params => params.merge(:controller => item.class.name.tableize, :action => 'position', :id => item.id, :go => position.last)}
+#{link_to t(position.first), :params => params.merge(:controller => item.class.name.tableize, :action => 'position', :id => item.id, :go => position.last)}
         HTML
       end
       html << <<-HTML
