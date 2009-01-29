@@ -45,7 +45,7 @@ module AdminSidebarHelper
     returning(Array.new) do |actions|
       @resource[:class].typus_actions_for(params[:action]).each do |action|
         if @current_user.can_perform?(@resource[:class], action)
-          actions << "<li>#{link_to action.titleize.capitalize, :action => action}</li>"
+          actions << "<li>#{link_to action.humanize, :action => action}</li>"
         end
       end
     end
@@ -74,7 +74,7 @@ module AdminSidebarHelper
 
     returning(Array.new) do |items|
       models.each do |model|
-        items << "<li>#{link_to model.titleize.capitalize, :controller => model.tableize}</li>"
+        items << "<li>#{link_to model.humanize, :controller => model.tableize}</li>"
       end
     end
 

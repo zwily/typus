@@ -11,7 +11,7 @@ module AdminFormHelper
       fields.each do |key, value|
 
         attribute = key
-        attribute_humanized = t(key.titleize.capitalize)
+        attribute_humanized = t(key.humanize)
 
         case value
         when :belongs_to:      html << typus_belongs_to_field(attribute)
@@ -119,7 +119,7 @@ module AdminFormHelper
       end
 
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_display.titleize.capitalize} #{preview_link}</label>
+<li><label for="item_#{attribute}">#{attribute_display.humanize} #{preview_link}</label>
       HTML
 
       html << preview_content unless preview_content.nil?
@@ -185,7 +185,7 @@ module AdminFormHelper
   def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for=\"item_#{attribute}\">#{attribute.titleize.capitalize}</label>
+<li><label for=\"item_#{attribute}\">#{attribute.humanize}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
   #{expand_tree_into_select_field(items, attribute_virtual)}
