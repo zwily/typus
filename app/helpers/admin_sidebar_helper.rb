@@ -121,7 +121,7 @@ module AdminSidebarHelper
 
     returning(String.new) do |html|
       typus_filters.each do |key, value|
-        html << "<h2>#{t(key.humanize)}</h2>\n"
+        html << "<h2>#{t(key.titleize)}</h2>\n"
         case value
         when :boolean:      html << boolean_filter(current_request, key)
         when :string:       html << string_filter(current_request, key)
@@ -173,7 +173,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
   <select name="#{model.name.downcase.pluralize}" onChange="surfto_#{model.name.downcase.pluralize}(this.form)">
-    <option value=\"#{url_for params_without_filter}\">#{t("Filter by")} #{model.name.titleize.humanize}</option>
+    <option value=\"#{url_for params_without_filter}\">#{t("filter by")} #{t(model.name.titleize)}</option>
     #{items.join("\n")}
   </select>
 </form></p>
