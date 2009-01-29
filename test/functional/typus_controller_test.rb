@@ -130,13 +130,6 @@ class TypusControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_verify_typus_layout_includes_version
-    typus_user = typus_users(:admin)
-    @request.session[:typus] = typus_user.id
-    get :dashboard
-    assert_match /Dear developer/, @response.body
-  end
-
   def test_should_render_typus_login_top
     get :login
     assert_response :success
