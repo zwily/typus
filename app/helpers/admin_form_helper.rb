@@ -11,21 +11,20 @@ module AdminFormHelper
       fields.each do |key, value|
 
         attribute = key
-        attribute_humanized = t(key.humanize)
 
         case value
         when :belongs_to:      html << typus_belongs_to_field(attribute)
-        when :boolean:         html << typus_boolean_field(attribute, attribute_humanized)
-        when :date:            html << typus_date_field(attribute, attribute_humanized)
-        when :datetime:        html << typus_datetime_field(attribute, attribute_humanized)
-        when :file:            html << typus_file_field(attribute, attribute_humanized)
-        when :password:        html << typus_password_field(attribute, attribute_humanized)
-        when :selector:        html << typus_selector_field(attribute, attribute_humanized)
-        when :text:            html << typus_text_field(attribute, attribute_humanized)
-        when :time:            html << typus_time_field(attribute, attribute_humanized)
+        when :boolean:         html << typus_boolean_field(attribute)
+        when :date:            html << typus_date_field(attribute)
+        when :datetime:        html << typus_datetime_field(attribute)
+        when :file:            html << typus_file_field(attribute)
+        when :password:        html << typus_password_field(attribute)
+        when :selector:        html << typus_selector_field(attribute)
+        when :text:            html << typus_text_field(attribute)
+        when :time:            html << typus_time_field(attribute)
         when :tree:            html << typus_tree_field(attribute)
         else
-          html << typus_string_field(attribute, attribute_humanized)
+          html << typus_string_field(attribute)
         end
       end
       html << "</ul>"
@@ -66,38 +65,38 @@ module AdminFormHelper
 
   end
 
-  def typus_boolean_field(attribute, attribute_humanized)
+  def typus_boolean_field(attribute)
 
     question = true if @resource[:class].typus_field_options_for(:questions).include?(attribute)
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_humanized}#{'?' if question}</label>
+<li><label for="item_#{attribute}">#{t(key.humanize)}#{'?' if question}</label>
 #{check_box :item, attribute} #{t("Checked if active")}</li>
       HTML
     end
 
   end
 
-  def typus_date_field(attribute, attribute_humanized)
+  def typus_date_field(attribute)
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_humanized}</label>
+<li><label for="item_#{attribute}">#{t(key.humanize)}</label>
 #{date_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
       HTML
     end
   end
 
-  def typus_datetime_field(attribute, attribute_humanized)
+  def typus_datetime_field(attribute)
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_humanized}</label>
+<li><label for="item_#{attribute}">#{t(key.humanize)}</label>
 #{datetime_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
       HTML
     end
   end
 
-  def typus_file_field(attribute, attribute_humanized)
+  def typus_file_field(attribute)
 
     attribute_display = attribute.split("_file_name").first
     content_type = @item.send("#{attribute_display}_content_type")
@@ -130,16 +129,16 @@ module AdminFormHelper
 
   end
 
-  def typus_password_field(attribute, attribute_humanized)
+  def typus_password_field(attribute)
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_humanized}</label>
+<li><label for="item_#{attribute}">#{t(key.humanize)}</label>
 #{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute)}</li>
       HTML
     end
   end
 
-  def typus_selector_field(attribute, attribute_humanized)
+  def typus_selector_field(attribute)
     returning(String.new) do |html|
       options = []
       @resource[:class].send(attribute).each do |option|
@@ -155,7 +154,7 @@ module AdminFormHelper
         end
       end
       html << <<-HTML
-<li><label for=\"item_#{attribute}\">#{attribute_humanized}</label>
+<li><label for=\"item_#{attribute}\">#{t(key.humanize)}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
   #{options.join("\n")}
@@ -164,19 +163,19 @@ module AdminFormHelper
     end
   end
 
-  def typus_text_field(attribute, attribute_humanized)
+  def typus_text_field(attribute)
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_humanized}</label>
+<li><label for="item_#{attribute}">#{t(key.humanize)}</label>
 #{text_area :item, attribute, :class => 'text', :rows => Typus::Configuration.options[:form_rows], :disabled => attribute_disabled?(attribute)}</li>
       HTML
     end
   end
 
-  def typus_time_field(attribute, attribute_humanized)
+  def typus_time_field(attribute)
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_humanized}</label>
+<li><label for="item_#{attribute}">#{t(key.humanize)}</label>
 #{time_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
       HTML
     end
@@ -194,7 +193,7 @@ module AdminFormHelper
     end
   end
 
-  def typus_string_field(attribute, attribute_humanized)
+  def typus_string_field(attribute)
 
     # Read only fields.
     if @resource[:class].typus_field_options_for(:read_only).include?(attribute)
@@ -210,7 +209,7 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_humanized} <small>#{comment}</small></label>
+<li><label for="item_#{attribute}">#{t(key.humanize)} <small>#{comment}</small></label>
 #{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute) }</li>
       HTML
     end
