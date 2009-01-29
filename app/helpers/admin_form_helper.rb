@@ -9,22 +9,19 @@ module AdminFormHelper
       html << "#{error_messages_for :item, :header_tag => "h3"}"
       html << "<ul>"
       fields.each do |key, value|
-
-        attribute = key
-
         case value
-        when :belongs_to:      html << typus_belongs_to_field(attribute)
-        when :boolean:         html << typus_boolean_field(attribute)
-        when :date:            html << typus_date_field(attribute)
-        when :datetime:        html << typus_datetime_field(attribute)
-        when :file:            html << typus_file_field(attribute)
-        when :password:        html << typus_password_field(attribute)
-        when :selector:        html << typus_selector_field(attribute)
-        when :text:            html << typus_text_field(attribute)
-        when :time:            html << typus_time_field(attribute)
-        when :tree:            html << typus_tree_field(attribute)
+        when :belongs_to:      html << typus_belongs_to_field(key)
+        when :boolean:         html << typus_boolean_field(key)
+        when :date:            html << typus_date_field(key)
+        when :datetime:        html << typus_datetime_field(key)
+        when :file:            html << typus_file_field(key)
+        when :password:        html << typus_password_field(key)
+        when :selector:        html << typus_selector_field(key)
+        when :text:            html << typus_text_field(key)
+        when :time:            html << typus_time_field(key)
+        when :tree:            html << typus_tree_field(key)
         else
-          html << typus_string_field(attribute)
+          html << typus_string_field(key)
         end
       end
       html << "</ul>"
