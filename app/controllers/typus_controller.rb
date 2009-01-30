@@ -1,5 +1,7 @@
 class TypusController < ApplicationController
 
+  layout 'admin_login'
+
   include Authentication
   include Typus::Configuration::Reloader
 
@@ -22,6 +24,7 @@ class TypusController < ApplicationController
   #
   def dashboard
     flash[:notice] = t("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
+    render :layout => 'admin'
   end
 
   ##
@@ -40,8 +43,6 @@ class TypusController < ApplicationController
         flash[:error] = t("The Email and/or Password you entered is invalid.")
         redirect_to admin_login_url
       end
-    else
-      render :layout => 'admin_login'
     end
 
   end
@@ -68,8 +69,6 @@ class TypusController < ApplicationController
       else
         redirect_to admin_recover_password_url
       end
-    else
-      render :layout => 'admin_login'
     end
   end
 
@@ -122,7 +121,6 @@ class TypusController < ApplicationController
     else
 
       flash[:success] = t("Welcome! Write your email to create the first user.")
-      render :layout => 'admin_login'
 
     end
 
