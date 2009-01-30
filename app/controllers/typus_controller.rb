@@ -35,23 +35,23 @@ class TypusController < ApplicationController
       user = Typus.user_class.authenticate(params[:user][:email], params[:user][:password])
       if user
         session[:typus] = user.id
-        redirect_to params[:back_to] || typus_dashboard_url
+        redirect_to params[:back_to] || admin_dashboard_url
       else
         flash[:error] = t("The Email and/or Password you entered is invalid.")
-        redirect_to typus_login_url
+        redirect_to admin_login_url
       end
     else
-      render :layout => 'typus_login'
+      render :layout => 'admin_login'
     end
 
   end
 
   ##
-  # Logout and redirect to +typus_login+.
+  # Logout and redirect to +admin_login+.
   #
   def logout
     session[:typus] = nil
-    redirect_to typus_login_url
+    redirect_to admin_login_url
   end
 
   ##
@@ -64,12 +64,12 @@ class TypusController < ApplicationController
         ActionMailer::Base.default_url_options[:host] = request.host_with_port
         TypusMailer.deliver_reset_password_link(user)
         flash[:success] = t("Password recovery link sent to your email.")
-        redirect_to typus_login_url
+        redirect_to admin_login_url
       else
-        redirect_to typus_recover_password_url
+        redirect_to admin_recover_password_url
       end
     else
-      render :layout => 'typus_login'
+      render :layout => 'admin_login'
     end
   end
 
@@ -82,14 +82,14 @@ class TypusController < ApplicationController
       user = Typus.user_class.find_by_token(params[:user][:token])
       if user.update_attributes(params[:user])
         flash[:success] = t("You can login with your new password.")
-        redirect_to typus_login_url
+        redirect_to admin_login_url
       else
         flash[:error] = t("Passwords don't match.")
         redirect_to :action => 'reset_password', :token => params[:user][:token]
       end
     else
       if Typus.user_class.find_by_token(params[:token])
-        render :layout => 'typus_login'
+        render :layout => 'admin_login'
       else
         render :text => t("A valid token is required.")
       end
@@ -122,7 +122,7 @@ class TypusController < ApplicationController
     else
 
       flash[:success] = t("Welcome! Write your email to create the first user.")
-      render :layout => 'typus_login'
+      render :layout => 'admin_login'
 
     end
 
@@ -134,7 +134,7 @@ class TypusController < ApplicationController
 private
 
   def recover_password_disabled?
-    redirect_to typus_login_url unless Typus::Configuration.options[:recover_password]
+    redirect_to admin_login_url unless Typus::Configuration.options[:recover_password]
   end
 
 end

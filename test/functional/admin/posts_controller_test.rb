@@ -19,10 +19,10 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     get :index
     assert_response :redirect
-    assert_redirected_to typus_login_url(:back_to => '/admin/posts')
+    assert_redirected_to admin_login_url(:back_to => '/admin/posts')
     get :edit, { :id => 1 }
     assert_response :redirect
-    assert_redirected_to typus_login_url(:back_to => '/admin/posts')
+    assert_redirected_to admin_login_url(:back_to => '/admin/posts')
 
   end
 
@@ -157,7 +157,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     get :new
     assert_response :redirect
-    assert_redirected_to typus_dashboard_url
+    assert_redirected_to admin_dashboard_url
 
     assert flash[:notice]
     assert_equal "Designer can't perform action. (new)", flash[:notice]

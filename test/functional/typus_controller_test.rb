@@ -16,7 +16,7 @@ class TypusControllerTest < ActionController::TestCase
   def test_should_redirect_to_login
     get :dashboard
     assert_response :redirect
-    assert_redirected_to typus_login_url
+    assert_redirected_to admin_login_url
   end
 
   def test_should_login_and_redirect_to_dashboard
@@ -25,7 +25,7 @@ class TypusControllerTest < ActionController::TestCase
                               :password => '12345678' } }
     assert_equal typus_user.id, @request.session[:typus]
     assert_response :redirect
-    assert_redirected_to typus_dashboard_url
+    assert_redirected_to admin_dashboard_url
   end
 
   def test_should_not_login_disabled_user
@@ -34,7 +34,7 @@ class TypusControllerTest < ActionController::TestCase
                               :password => '12345678' } }
     assert_nil @request.session[:typus]
     assert_response :redirect
-    assert_redirected_to typus_login_url
+    assert_redirected_to admin_login_url
   end
 
   def test_should_not_login_removed_role
@@ -43,9 +43,9 @@ class TypusControllerTest < ActionController::TestCase
                               :password => '12345678' } }
     assert_equal typus_user.id, @request.session[:typus]
     assert_response :redirect
-    assert_redirected_to typus_dashboard_url
+    assert_redirected_to admin_dashboard_url
     get :dashboard
-    assert_redirected_to typus_login_url
+    assert_redirected_to admin_login_url
     assert_nil @request.session[:typus]
     assert flash[:error]
     assert_equal "Error! Typus User or role doesn't exist.", flash[:error]
@@ -54,7 +54,7 @@ class TypusControllerTest < ActionController::TestCase
   def test_should_not_send_recovery_password_link_to_unexisting_user
     post :recover_password, { :user => { :email => 'unexisting' } }
     assert_response :redirect
-    assert_redirected_to typus_recover_password_url
+    assert_redirected_to admin_recover_password_url
     [ :notice, :error, :warning ].each { |f| assert !flash[f] }
   end
 
@@ -62,7 +62,7 @@ class TypusControllerTest < ActionController::TestCase
     admin = typus_users(:admin)
     post :recover_password, { :user => { :email => admin.email } }
     assert_response :redirect
-    assert_redirected_to typus_login_url
+    assert_redirected_to admin_login_url
     assert flash[:success]
     assert_match /Password recovery link sent to your email/, flash[:success]
   end
@@ -73,7 +73,7 @@ class TypusControllerTest < ActionController::TestCase
     get :logout
     assert_nil @request.session[:typus]
     assert_response :redirect
-    assert_redirected_to typus_login_url
+    assert_redirected_to admin_login_url
     [ :notice, :error, :warning ].each { |f| assert !flash[f] }
   end
 
@@ -100,7 +100,7 @@ class TypusControllerTest < ActionController::TestCase
     get :recover_password
 
     assert_response :redirect
-    assert_redirected_to typus_login_url
+    assert_redirected_to admin_login_url
 
   end
 
@@ -115,11 +115,11 @@ class TypusControllerTest < ActionController::TestCase
     get :reset_password
 
     assert_response :redirect
-    assert_redirected_to typus_login_url
+    assert_redirected_to admin_login_url
 
   end
 
-  def test_should_verify_typus_login_layout_does_not_include_recover_password_link
+  def test_should_verify_admin_login_layout_does_not_include_recover_password_link
 
     get :login
     assert_match /Recover password/, @response.body
@@ -136,7 +136,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_match /_top.html.erb/, @response.body
   end
 
-  def test_should_render_typus_login_bottom
+  def test_should_render_admin_login_bottom
     get :login
     assert_response :success
     login_bottom = "Typus Admin"

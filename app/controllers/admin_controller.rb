@@ -345,7 +345,7 @@ private
   ##
   # Error handler
   #
-  def error_handler(error, redirection = typus_dashboard_url)
+  def error_handler(error, redirection = admin_dashboard_url)
     if Rails.env.production?
       flash[:error] = error.message + "(#{@resource[:class]})"
       redirect_to redirection

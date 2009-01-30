@@ -187,7 +187,7 @@ end
 
 <!-- Content -->
 
-<h2><%= link_to "Dashboard", typus_dashboard_url %> &rsaquo; #{resource.titleize}</h2>
+<h2><%= link_to "Dashboard", admin_dashboard_url %> &rsaquo; #{resource.titleize}</h2>
 
 <p>And here we do whatever we want to ...</p>
 
