@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
 
-  layout 'typus'
+  layout 'admin'
 
   include Authentication
   include Typus::Export
