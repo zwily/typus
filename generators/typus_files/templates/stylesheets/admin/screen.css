@@ -1,14 +1,4 @@
-/* html
----------------------------------------------------------- */
-
-html {
-  background: #000;
-  height: 100%;
-  margin-bottom: 1px;
-}
-
-/* body
----------------------------------------------------------- */
+/* @group Defaults */
 
 body {
   color: #000;
@@ -16,8 +6,35 @@ body {
   font-size: 75%;
 }
 
-/* links
----------------------------------------------------------- */
+html {
+  background: #000;
+  height: 100%;
+  margin-bottom: 1px;
+}
+
+label {
+  display: block;
+  font-weight: bold;
+  margin-bottom: 5px;
+}
+
+strong {
+  font-weight: bold;
+}
+
+dt {
+  float: left;
+  font-weight: bold;
+  width: 200px;
+}
+
+dd {
+  margin: 0 0 0 220px;
+}
+
+/* @end */
+
+/* @group Links */
 
 a, 
 a:visited,
@@ -38,8 +55,9 @@ a.on {
   text-decoration: underline;
 }
 
-/* header
----------------------------------------------------------- */
+/* @end */
+
+/* @group Header */
 
 #header_wrapper {
   background: #000;
@@ -86,8 +104,9 @@ a.on {
       padding-left: 1em;
     }
 
-/* content
----------------------------------------------------------- */
+/* @end */
+
+/* @group Wrapper */
 
 #wrapper {
   background: #FFF;
@@ -99,6 +118,10 @@ a.on {
   margin: 0 auto;
   width: 940px;
 }
+
+/* @end */
+
+/* @group Content */
 
 #content {
   width: 700px;
@@ -189,8 +212,9 @@ a.on {
     margin: 0em; /* Here we overwrite a preference */
   }
 
-/* sidebar
----------------------------------------------------------- */
+/* @end */
+
+/* @group Sidebar */
 
 #sidebar {
   float: left;
@@ -241,8 +265,9 @@ a.on {
     font-size: 0.85em;
   }
 
-/* footer
----------------------------------------------------------- */
+/* @end */
+
+/* @group Footer */
 
 #footer_wrapper {
   background: #000;
@@ -270,8 +295,9 @@ a.on {
     color: #408BB6;
   }
 
-/* form
----------------------------------------------------------- */
+/* @end */
+
+/* @group Content Forms */
 
 #content form {
   margin: 1em 0em 2em 0em;
@@ -327,21 +353,9 @@ a.on {
     font-size: 1.20em;
   }
 
-/* label
----------------------------------------------------------- */
+/* @end */
 
-label {
-  display: block;
-  font-weight: bold;
-  margin-bottom: 5px;
-}
-
-strong {
-  font-weight: bold;
-}
-
-/* tables
----------------------------------------------------------- */
+/* @group Content Tables */
 
 #content table {
   border-spacing: 0px;
@@ -404,21 +418,9 @@ strong {
     color: black;
   }
 
-/* definition lists
----------------------------------------------------------- */
+/* @end */
 
-dt {
-  float: left;
-  font-weight: bold;
-  width: 200px;
-}
-
-dd {
-  margin: 0 0 0 220px;
-}
-
-/* rails errors
----------------------------------------------------------- */
+/* @group Rails Errors */
 
 .formError {
   color: green;
@@ -456,8 +458,9 @@ dd {
     margin: 0!important;
   }
 
-/* searchbox
----------------------------------------------------------- */
+/* @end */
+
+/* Search Box */
 
 .box {
   border: 1px solid #D3D3D3;
@@ -476,8 +479,7 @@ input#search {
   padding: 3px;
 }
 
-/* dialog and login (login page)
----------------------------------------------------------- */
+/* @group Login Page Dialog */
 
 div#top_dialog {
   color: #FFF;
@@ -500,6 +502,10 @@ div#bottom_dialog {
     color: #FFF;
     font-weight: bold;
   }
+
+/* @end */
+
+/* @group Dialog */
 
 div#dialog {
   background: #FFF;
@@ -549,8 +555,9 @@ div#dialog {
     margin: 0.5em 0em;
   }
 
-/* pagination
----------------------------------------------------------- */
+/* @end */
+
+/* @group Pagination */
 
 .pagination {
   border-bottom: 1px solid #F5F5F5;
@@ -587,8 +594,9 @@ div#dialog {
     padding: 2px 3px;
   }
 
-/* Success, notice and error boxes
----------------------------------------------------------- */
+/* @end */
+
+/* @group Success, notice and error boxes */
 
 .error,
 .notice, 
@@ -636,9 +644,12 @@ div#dialog {
     color: #264409;
   }
 
-/* clear
----------------------------------------------------------- */
+/* @end */
+
+/* @group Hacks */
 
 .clear {
   clear: both;
 }
+
+/* @end */
