@@ -41,7 +41,7 @@ class TypusController < ApplicationController
         redirect_to admin_login_url
       end
     else
-      render :layout => 'admin_login'
+      render :layout => 'typus_login'
     end
 
   end
@@ -69,7 +69,7 @@ class TypusController < ApplicationController
         redirect_to admin_recover_password_url
       end
     else
-      render :layout => 'admin_login'
+      render :layout => 'typus_login'
     end
   end
 
@@ -89,7 +89,7 @@ class TypusController < ApplicationController
       end
     else
       if Typus.user_class.find_by_token(params[:token])
-        render :layout => 'admin_login'
+        render :layout => 'typus_login'
       else
         render :text => t("A valid token is required.")
       end
@@ -122,7 +122,7 @@ class TypusController < ApplicationController
     else
 
       flash[:success] = t("Welcome! Write your email to create the first user.")
-      render :layout => 'admin_login'
+      render :layout => 'typus_login'
 
     end
 
