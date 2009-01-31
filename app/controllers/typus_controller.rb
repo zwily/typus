@@ -1,13 +1,13 @@
 class TypusController < ApplicationController
 
-  layout 'admin_login'
+  layout :select_layout
 
   include Authentication
   include Typus::Configuration::Reloader
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
-    ssl_required :dashboard, :login, :logout, :recover_password, :reset_password
+    ssl_required :dashboard, :overview, :login, :logout, :recover_password, :reset_password
   end
 
   filter_parameter_logging :password
@@ -15,9 +15,22 @@ class TypusController < ApplicationController
   before_filter :reload_config_et_roles
   before_filter :require_login, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
 
-  before_filter :check_if_user_can_perform_action_on_resource_without_model, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
+  before_filter :check_if_user_can_perform_action_on_resource_without_model, :except => [ :overview, :dashboard, :login, :logout, :recover_password, :reset_password, :setup ]
 
   before_filter :recover_password_disabled?, :only => [ :recover_password, :reset_password ]
+
+  ##
+  # Application Dashboard
+  #
+  def dashboard
+    flash[:notice] = t("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
+  end
+
+  ##
+  # Configuration Overview
+  #
+  def overview
+  end
 
   ##
   # Login
@@ -116,6 +129,10 @@ private
 
   def recover_password_disabled?
     redirect_to admin_login_url unless Typus::Configuration.options[:recover_password]
+  end
+
+  def select_layout
+    [ 'login', 'logout', 'recover_password', 'reset_password' ].include?(action_name) ? 'typus' : 'admin'
   end
 
 end
