@@ -133,6 +133,7 @@ class TypusControllerTest < ActionController::TestCase
   def test_should_render_admin_login_bottom
     get :login
     assert_response :success
+    assert_select "h1", "whatistypus.com"
     assert_equal 'layouts/typus', @controller.active_layout
   end
 
