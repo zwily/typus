@@ -21,23 +21,23 @@ module AdminSidebarHelper
 
   def default_actions
 
-    returning(Array.new) do |items|
+    items = []
 
-      case params[:action]
-      when 'index', 'edit', 'update'
-        if @current_user.can_perform?(@resource[:class], 'create')
-          items << "<li>#{link_to t("Add entry"), :action => 'new'}</li>"
-        end
+    case params[:action]
+    when 'index', 'edit', 'update'
+      if @current_user.can_perform?(@resource[:class], 'create')
+        items << "<li>#{link_to t("Add entry"), :action => 'new'}</li>"
       end
-
-      items += non_crud_actions
-
-      case params[:action]
-      when 'new', 'create', 'edit', 'update'
-        items << "<li>#{link_to t("Back to list"), :action => 'index'}</li>"
-      end
-
     end
+
+    items += non_crud_actions
+
+    case params[:action]
+    when 'new', 'create', 'edit', 'update'
+      items << "<li>#{link_to t("Back to list"), :action => 'index'}</li>"
+    end
+
+    return items
 
   end
 
