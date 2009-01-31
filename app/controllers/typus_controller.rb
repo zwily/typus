@@ -113,7 +113,7 @@ class TypusController < ApplicationController
         flash[:notice] = t("Your new password is '{{password}}'.", :password => password)
         redirect_to :action => 'dashboard'
       else
-        flash[:error] = t("Yay! That doesn't seem like a valid email address.")
+        flash[:error] = t("That doesn't seem like a valid email address.")
         redirect_to :action => 'setup'
       end
 

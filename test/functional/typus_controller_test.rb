@@ -153,7 +153,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to :action => 'setup'
     assert flash[:error]
-    assert_equal "Yay! That doesn't seem like a valid email address.", flash[:error]
+    assert_equal "That doesn't seem like a valid email address.", flash[:error]
     post :setup, :user => { :email => 'john@example.com' }
     assert_response :redirect
     assert_redirected_to :action => 'dashboard'
