@@ -237,36 +237,17 @@ class TypusControllerTest < ActionController::TestCase
     assert_no_match /\/admin\/typus_users\/new/, @response.body
   end
 
-  def test_should_render_application_dashboard_sidebar
+  def test_should_render_application_dashboard_template_extensions
 
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
 
     get :dashboard
     assert_response :success
-    assert_match /_sidebar.html.erb/, @response.body
 
-  end
-
-  def test_should_render_application_dashboard_top
-
-    admin = typus_users(:admin)
-    @request.session[:typus] = admin.id
-
-    get :dashboard
-    assert_response :success
-    assert_match /_top.html.erb/, @response.body
-
-  end
-
-  def test_should_render_application_dashboard_bottom
-
-    admin = typus_users(:admin)
-    @request.session[:typus] = admin.id
-
-    get :dashboard
-    assert_response :success
-    assert_match /_bottom.html.erb/, @response.body
+    %w( _sidebar.html.erb _top.html.erb _bottom.html.erb ).each do |partial|
+      assert_match partial, @response.body
+    end
 
   end
 
