@@ -151,7 +151,8 @@ class Admin::#{resource}Controller < AdminController
 
   ##
   # This controller was generated because you have defined a resource 
-  # on your `typus_roles.yml` file.
+  # which is not tied to a model on your `config/typus/XXXXXX_roles.yml` 
+  # configuration file.
   #
   #     admin:
   #       #{resource}: index
@@ -193,7 +194,7 @@ end
 
 <!-- Content -->
 
-<h2><%= link_to "Dashboard", admin_dashboard_url %> &rsaquo; #{resource.titleize}</h2>
+<h2><%= link_to t("Dashboard"), admin_dashboard_url %> &rsaquo; #{resource.titleize}</h2>
 
 <p>And here we do whatever we want to ...</p>
 
