@@ -163,6 +163,12 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal "`posts`.title ASC, `posts`.created_at DESC", Post.typus_order_by
   end
 
+
+  def test_should_return_order_by_for_model_without_configuration
+    klass = Class.new(ActiveRecord::Base)
+    assert_equal "``.id ASC", klass.typus_order_by
+  end
+
   def test_should_return_sql_conditions_on_search_for_typus_user
     expected = "(LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
     params = { :search => 'francesc' }
