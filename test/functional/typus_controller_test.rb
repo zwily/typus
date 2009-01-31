@@ -238,17 +238,12 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_render_application_dashboard_template_extensions
-
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
-
     get :dashboard
     assert_response :success
-
-    %w( _sidebar.html.erb _top.html.erb _bottom.html.erb ).each do |partial|
-      assert_match partial, @response.body
-    end
-
+    partials = %w( _sidebar.html.erb _top.html.erb _bottom.html.erb )
+    partials.each { |p| assert_match p, @response.body }
   end
 
 end
