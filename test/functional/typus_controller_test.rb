@@ -182,8 +182,8 @@ class TypusControllerTest < ActionController::TestCase
   def test_should_verify_overview_works
     @request.session[:typus] = typus_users(:admin).id
     get :overview
-#    assert_template 'overview'
     assert_response :success
+    assert_template 'overview'
   end
 
   def test_should_verify_page_title_on_dashboard
