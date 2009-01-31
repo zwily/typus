@@ -127,12 +127,13 @@ class TypusControllerTest < ActionController::TestCase
     get :login
     assert_response :success
     assert_match /_top.html.erb/, @response.body
+    assert_equal 'layouts/typus', @controller.active_layout
   end
 
   def test_should_render_admin_login_bottom
     get :login
     assert_response :success
-    assert_match "Typus", @response.body
+    assert_equal 'layouts/typus', @controller.active_layout
   end
 
   def test_should_verify_page_title_on_login
@@ -177,6 +178,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :success
     assert_template 'dashboard'
     assert_match "whatistypus.com", @response.body
+    assert_equal 'layouts/admin', @controller.active_layout
   end
 
   def test_should_verify_overview_works
@@ -184,6 +186,7 @@ class TypusControllerTest < ActionController::TestCase
     get :overview
     assert_response :success
     assert_template 'overview'
+    assert_equal 'layouts/admin', @controller.active_layout
   end
 
   def test_should_verify_page_title_on_dashboard
