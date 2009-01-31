@@ -5,6 +5,8 @@
 
 <head>
   <meta http-equiv="Content-type" content="text/html; charset=utf-8" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="viewport" content="width=500, initial-scale=0.60, minimum-scale=0.60" />
   <title><%= page_title %></title>
   <%= stylesheet_link_tag "admin/reset", :media => "screen" %>
   <%= stylesheet_link_tag "admin/screen", :media => "screen" %>
@@ -17,7 +19,7 @@
   </div>
 
   <div id="dialog">
-    <h1><%= link_to Typus::Configuration.options[:app_name], typus_login_path %></h1>
+    <h1><%= link_to Typus::Configuration.options[:app_name], admin_login_path %></h1>
     <%= display_flash_message %>
     <%= yield %>
   </div>

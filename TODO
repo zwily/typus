@@ -3,19 +3,13 @@ TODO
 
 [ ] Define a show action for the read-only items. This will be 
     if the user has only permission to r the items and not update.
-[ ] Test helpers.
-[ ] "No preview available" when displaying paperclip attachments should 
-    show other information as the content type, file size.
-
-ON IT
-=====
-
-[ ] Internationalize messages. (i18n branch)
 [ ] Actions for a record can be added to the listings.
+[ ] Test helpers.
 
 DONE
 ====
 
+[X] Internationalize messages. (20090129)
 [X] Clean typus_form.
 [X] Clean typus_table.
 [X] Sidebar filter for *_id can be a selector or a list of links.

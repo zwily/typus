@@ -16,7 +16,7 @@ protected
       set_current_user
     else
       back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
-      redirect_to typus_login_url(:back_to => back_to)
+      redirect_to admin_login_url(:back_to => back_to)
     end
   end
 
@@ -31,7 +31,7 @@ protected
   rescue
     flash[:error] = "Error! Typus User or role doesn't exist."
     session[:typus] = nil
-    redirect_to typus_login_url
+    redirect_to admin_login_url
   end
 
   ##
@@ -92,7 +92,7 @@ protected
 
     if message
       flash[:notice] = message
-      redirect_to :back rescue redirect_to typus_dashboard_url
+      redirect_to :back rescue redirect_to admin_dashboard_url
     end
 
   end
@@ -115,7 +115,7 @@ protected
 
     unless @current_user.can_perform?(@resource[:class], params[:action])
       flash[:notice] = message || "#{@current_user.roles.capitalize} can't perform action. (#{params[:action]})"
-      redirect_to :back rescue redirect_to typus_dashboard_url
+      redirect_to :back rescue redirect_to admin_dashboard_url
     end
 
   end
@@ -130,7 +130,7 @@ protected
     action = params[:action]
     unless @current_user.can_perform?(controller.camelize, action, { :special => true })
       flash[:notice] = "#{@current_user.roles.capitalize} can't go to #{action} on #{controller.humanize.downcase}."
-      redirect_to :back rescue redirect_to typus_dashboard_url
+      redirect_to :back rescue redirect_to admin_dashboard_url
     end
   end
 

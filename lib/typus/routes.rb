@@ -5,13 +5,16 @@ end
 ActionController::Routing::Routes.draw do |map|
 
   map.with_options :controller => 'typus', :path_prefix => Typus::Configuration.options[:prefix] do |i|
-    i.typus_dashboard '', :action => 'dashboard'
-    i.typus_overview 'overview', :action => 'overview'
-    i.typus_login 'login', :action => 'login'
-    i.typus_logout 'logout', :action => 'logout'
-    i.typus_setup 'setup', :action => 'setup'
-    i.typus_recover_password 'recover_password', :action => 'recover_password'
-    i.typus_reset_password 'reset_password', :action => 'reset_password'
+    i.admin_login 'login', :action => 'login'
+    i.admin_logout 'logout', :action => 'logout'
+    i.admin_setup 'setup', :action => 'setup'
+    i.admin_recover_password 'recover_password', :action => 'recover_password'
+    i.admin_reset_password 'reset_password', :action => 'reset_password'
+  end
+
+  map.with_options :controller => 'admin', :path_prefix => Typus::Configuration.options[:prefix] do |i|
+    i.admin_dashboard '', :action => 'dashboard'
+    i.admin_overview 'overview', :action => 'overview'
   end
 
   map.namespace :admin do |admin|

@@ -94,18 +94,19 @@ module TypusHelper
   end
 
   def header
-    "<h1>#{Typus::Configuration.options[:app_name]} <small>#{link_to t("View site"), root_path, :target => 'blank' rescue ''}</small></h1>"
+    <<-HTML
+<h1>#{Typus::Configuration.options[:app_name]} 
+    <small>#{link_to t("View site"), root_path, :target => 'blank' rescue ''}</small></h1>
+    HTML
   end
 
   def login_info
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <ul>
   <li>#{t("Logged as")} #{link_to @current_user.full_name(:display_role => true), edit_admin_typus_user_path(@current_user.id)}</li>
-  <li>#{link_to t("Logout"), typus_logout_path}</li>
+  <li>#{link_to t("Logout"), admin_logout_path}</li>
 </ul>
-      HTML
-    end
+    HTML
   end
 
   def display_flash_message
@@ -118,12 +119,10 @@ module TypusHelper
     end
   end
 
-  def typus_message(message, html_class='notice')
-    returning(String.new) do |html|
-      html << <<-HTML
+  def typus_message(message, html_class = 'notice')
+    <<-HTML
 <div id="flash" class="#{html_class}"><p>#{message}</p></div>
-      HTML
-    end
+    HTML
   end
 
 end

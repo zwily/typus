@@ -6,10 +6,10 @@ class RoutesTest < Test::Unit::TestCase
 
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
-    expected = [ :typus_setup, 
-                 :typus_login, :typus_logout, 
-                 :typus_recover_password, :typus_reset_password, 
-                 :typus_dashboard ]
+    expected = [ :admin_setup, 
+                 :admin_login, :admin_logout, 
+                 :admin_recover_password, :admin_reset_password, 
+                 :admin_dashboard ]
 
     expected.each { |route| assert routes.include?(route) }
 

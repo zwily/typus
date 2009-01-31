@@ -4,23 +4,13 @@ class TypusFilesGenerator < Rails::Generator::Base
 
     record do |m|
 
-      # We use the Dir[] to detect all the existing migrations because 
-      # Rails is not working as expected.
-      migrations = ['create_typus_users']
-      migrations.each do |migration|
-        if Dir["db/migrate/[0-9]*_*.rb"].grep(/[0-9]+_#{migration}.rb$/).empty?
-          m.migration_template "db/#{migration}.rb", 
-                               "db/migrate", 
-                               { :migration_file_name => migration }
-        end
-      end
-
+      # We set a default name for our application.
       application = File.basename(Dir.pwd)
 
       # For creating `typus.yml` and `typus_roles.yml` we need first to 
       # detect the available AR models of the application, not the plugins.
-      Dir.chdir("#{Rails.root}/app/models")
-      models, ar_models = Dir["*.rb"], []
+      models = Dir["#{Rails.root}/app/models/*.rb"].collect { |x| File.basename(x) }
+      ar_models = []
 
       models.each do |model|
         class_name = model.sub(/\.rb$/,'').classify
@@ -61,6 +51,11 @@ class TypusFilesGenerator < Rails::Generator::Base
 
       files = %w( spinner.gif trash.gif status_false.gif status_true.gif )
       files.each { |file| m.file "images/admin/#{file}", "public/images/admin/#{file}" }
+
+      # Migration files.
+      m.migration_template "db/create_typus_users.rb", 
+                           "db/migrate", 
+                            { :migration_file_name => 'create_typus_users' }
 
     end
 

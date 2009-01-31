@@ -187,7 +187,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_redirect_to_typus_dashboard_if_user_does_not_have_privileges
+  def test_should_redirect_to_admin_dashboard_if_user_does_not_have_privileges
 
     @request.env['HTTP_REFERER'] = "/admin"
     typus_user = typus_users(:designer)

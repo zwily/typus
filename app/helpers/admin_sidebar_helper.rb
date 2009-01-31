@@ -21,23 +21,23 @@ module AdminSidebarHelper
 
   def default_actions
 
-    returning(Array.new) do |items|
+    items = []
 
-      case params[:action]
-      when 'index', 'edit', 'update'
-        if @current_user.can_perform?(@resource[:class], 'create')
-          items << "<li>#{link_to t("Add entry"), :action => 'new'}</li>"
-        end
+    case params[:action]
+    when 'index', 'edit', 'update'
+      if @current_user.can_perform?(@resource[:class], 'create')
+        items << "<li>#{link_to t("Add entry"), :action => 'new'}</li>"
       end
-
-      items << non_crud_actions
-
-      case params[:action]
-      when 'new', 'create', 'edit', 'update'
-        items << "<li>#{link_to t("Back to list"), :action => 'index'}</li>"
-      end
-
     end
+
+    items += non_crud_actions
+
+    case params[:action]
+    when 'new', 'create', 'edit', 'update'
+      items << "<li>#{link_to t("Back to list"), :action => 'index'}</li>"
+    end
+
+    return items
 
   end
 
@@ -106,7 +106,7 @@ module AdminSidebarHelper
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.join("\n")}
 </form>
-<p style="margin: -10px 0px 10px 0px;"><small>#{t("Search by")} #{typus_search.split(', ').collect { |x| t(x) }.to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
+<p class="tip">#{t("Search by")} #{typus_search.split(', ').collect { |x| t(x) }.to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</p>
       HTML
     end
 
@@ -121,7 +121,7 @@ module AdminSidebarHelper
 
     returning(String.new) do |html|
       typus_filters.each do |key, value|
-        html << "<h2>#{t(key.humanize)}</h2>\n"
+        html << "<h2>#{t(key.titleize)}</h2>\n"
         case value
         when :boolean:      html << boolean_filter(current_request, key)
         when :string:       html << string_filter(current_request, key)
@@ -173,7 +173,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
   <select name="#{model.name.downcase.pluralize}" onChange="surfto_#{model.name.downcase.pluralize}(this.form)">
-    <option value=\"#{url_for params_without_filter}\">#{t("Filter by")} #{model.name.titleize.humanize}</option>
+    <option value=\"#{url_for params_without_filter}\">#{t("filter by")} #{t(model.name.titleize)}</option>
     #{items.join("\n")}
   </select>
 </form></p>

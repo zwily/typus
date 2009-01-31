@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
 
-  layout 'typus'
+  layout 'admin'
 
   include Authentication
   include Typus::Export
@@ -15,16 +15,29 @@ class AdminController < ApplicationController
 
   before_filter :require_login
 
-  before_filter :set_resource
+  before_filter :set_resource, :except => [ :dashboard, :overview ]
   before_filter :find_record, :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
   before_filter :check_ownership_of_record, :only => [ :edit, :update, :toggle, :position, :relate, :unrelate, :destroy ]
 
   before_filter :check_if_user_can_perform_action_on_user, :only => [ :edit, :update, :toggle, :destroy ]
-  before_filter :check_if_user_can_perform_action_on_resource
+  before_filter :check_if_user_can_perform_action_on_resource, :except => [ :dashboard, :overview ]
 
   before_filter :set_order_and_list_fields, :only => [ :index ]
   before_filter :set_form_fields, :only => [ :new, :edit, :create, :update ]
+
+  ##
+  # Application Dashboard
+  #
+  def dashboard
+    flash[:notice] = t("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
+  end
+
+  ##
+  # Configuration Overview
+  #
+  def overview
+  end
 
   ##
   # This is the main index of the model. With the filters, conditions 
@@ -345,7 +358,7 @@ private
   ##
   # Error handler
   #
-  def error_handler(error, redirection = typus_dashboard_url)
+  def error_handler(error, redirection = admin_dashboard_url)
     if Rails.env.production?
       flash[:error] = error.message + "(#{@resource[:class]})"
       redirect_to redirection
