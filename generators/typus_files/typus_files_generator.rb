@@ -4,6 +4,7 @@ class TypusFilesGenerator < Rails::Generator::Base
 
     record do |m|
 
+      # We set a default name for our application.
       application = File.basename(Dir.pwd)
 
       # For creating `typus.yml` and `typus_roles.yml` we need first to 
