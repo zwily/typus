@@ -5,7 +5,7 @@ class TypusTest < Test::Unit::TestCase
   def test_should_return_applications_and_should_be_sorted
     assert Typus.respond_to?(:applications)
     assert Typus.applications.kind_of?(Array)
-    assert_equal ["Blog", "Site", "Typus Admin"], Typus.applications
+    assert_equal ["Blog", "Site", "Typus"], Typus.applications
   end
 
   def test_should_return_modules_of_an_application
@@ -29,7 +29,7 @@ class TypusTest < Test::Unit::TestCase
 
   def test_should_verify_parent_for_application
     assert Typus.parent(TypusUser.name, 'application').kind_of?(String)
-    assert_equal "Typus Admin", Typus.parent(TypusUser.name, 'application')
+    assert_equal "Typus", Typus.parent(TypusUser.name, 'application')
   end
 
   def test_should_verify_parent_for_nothing

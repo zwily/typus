@@ -4,7 +4,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def setup
     Typus::Configuration.options[:recover_password] = true
-    Typus::Configuration.options[:app_name] = "Typus Admin for the masses"
+    Typus::Configuration.options[:app_name] = "whatistypus.com"
   end
 
   def test_should_render_login
@@ -85,7 +85,7 @@ class TypusControllerTest < ActionController::TestCase
     get :dashboard
     assert_response :success
     assert_template 'dashboard'
-    assert_match /Typus Admin for the masses/, @response.body
+    assert_match "whatistypus.com", @response.body
 
   end
 
@@ -139,8 +139,7 @@ class TypusControllerTest < ActionController::TestCase
   def test_should_render_admin_login_bottom
     get :login
     assert_response :success
-    login_bottom = "Typus Admin"
-    assert_match /#{login_bottom}/, @response.body
+    assert_match "Typus", @response.body
   end
 
   def test_should_render_application_dashboard_sidebar
