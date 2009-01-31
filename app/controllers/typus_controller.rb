@@ -69,20 +69,14 @@ class TypusController < ApplicationController
   # enabled. Enabled by default.
   #
   def reset_password
+    @user = Typus.user_class.find_by_token!(params[:token])
     if request.post?
-      user = Typus.user_class.find_by_token(params[:user][:token])
-      if user.update_attributes(params[:user])
+      if @user.update_attributes(params[:user])
         flash[:success] = t("You can login with your new password.")
         redirect_to admin_login_url
       else
         flash[:error] = t("Passwords don't match.")
-        redirect_to :action => 'reset_password', :token => params[:user][:token]
-      end
-    else
-      if Typus.user_class.find_by_token(params[:token])
-        render :layout => 'admin_login'
-      else
-        render :text => t("A valid token is required.")
+        redirect_to :action => 'reset_password', :token => params[:token]
       end
     end
   end

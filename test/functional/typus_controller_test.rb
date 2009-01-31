@@ -101,6 +101,17 @@ class TypusControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_return_404_when_reseting_passsowrd_if_token_is_invalid
+    assert_raise(ActiveRecord::RecordNotFound) { get :reset_password, { :token => 'INVALID' } }
+  end
+
+  def test_should_allow_a_user_with_valid_token_to_change_password
+    typus_user = typus_users(:admin)
+    get :reset_password, { :token => typus_user.token }
+    assert_response :success
+    assert_template 'reset_password'
+  end
+
   def test_should_verify_admin_login_layout_does_not_include_recover_password_link
 
     get :login
