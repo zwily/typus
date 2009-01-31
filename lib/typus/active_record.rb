@@ -197,8 +197,9 @@ module Typus
       begin
         fields = self.send("admin_order_by").map { |a| a.to_s }
       rescue
-        return "`#{self.table_name}`.id ASC" unless Typus::Configuration.config[self.name]['order_by']
-        fields = Typus::Configuration.config[self.name]['order_by'].split(', ')
+        config = Typus::Configuration.config[self.name]
+        return "`#{self.table_name}`.id ASC" unless config && config['order_by']
+        fields = config['order_by'].split(', ')
       end
 
       fields.each do |field|
