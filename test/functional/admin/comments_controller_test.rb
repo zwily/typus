@@ -12,52 +12,25 @@ class Admin::CommentsControllerTest < ActionController::TestCase
     @comment = comments(:first)
   end
 
-  def test_should_render_posts_sidebar_on_index_edit_and_show
-
+  def test_should_render_posts_extensions_on_index
     get :index
     assert_response :success
-    assert_match /_index_sidebar.html.erb/, @response.body
-
-    get :edit, { :id => @comment.id }
-    assert_response :success
-    assert_match /_edit_sidebar.html.erb/, @response.body
-
-    get :show, { :id => @comment.id }
-    assert_response :success
-    assert_match /_show_sidebar.html.erb/, @response.body
-
+    partials = %w( _index_sidebar.html.erb _index_top.html.erb _index_bottom.html.erb )
+    partials.each { |p| assert_match p, @response.body }
   end
 
-  def test_should_render_posts_top_on_index_show_and_edit
-
-    get :index
-    assert_response :success
-    assert_match /_index_top.html.erb/, @response.body
-
+  def test_should_render_posts_extensions_on_edit
     get :edit, { :id => @comment.id }
     assert_response :success
-    assert_match /_edit_top.html.erb/, @response.body
-
-    get :show, { :id => @comment.id }
-    assert_response :success
-    assert_match /_show_top.html.erb/, @response.body
-
+    partials = %w( _edit_sidebar.html.erb _edit_top.html.erb _edit_bottom.html.erb )
+    partials.each { |p| assert_match p, @response.body }
   end
 
-  def test_should_render_posts_bottom_on_index_show_and_edit
-
-    get :index
-    assert_response :success
-    assert_match /_index_bottom.html.erb/, @response.body
-
-    get :edit, { :id => @comment.id }
-    assert_response :success
-    assert_match /_edit_bottom.html.erb/, @response.body
-
+  def test_should_render_posts_extensions_on_show
     get :show, { :id => @comment.id }
     assert_response :success
-    assert_match /_show_bottom.html.erb/, @response.body
-
+    partials = %w( _show_sidebar.html.erb _show_top.html.erb _show_bottom.html.erb )
+    partials.each { |p| assert_match p, @response.body }
   end
 
   def test_should_verify_page_title_on_index
