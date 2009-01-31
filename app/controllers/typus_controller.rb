@@ -15,17 +15,9 @@ class TypusController < ApplicationController
   before_filter :reload_config_et_roles
   before_filter :require_login, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
 
-  before_filter :check_if_user_can_perform_action_on_resource_without_model, :except => [ :dashboard, :login, :logout, :recover_password, :reset_password, :setup ]
+  before_filter :check_if_user_can_perform_action_on_resource_without_model, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
 
   before_filter :recover_password_disabled?, :only => [ :recover_password, :reset_password ]
-
-  ##
-  # Application Dashboard
-  #
-  def dashboard
-    flash[:notice] = t("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
-    render :layout => 'admin'
-  end
 
   ##
   # Login
@@ -124,9 +116,6 @@ class TypusController < ApplicationController
 
     end
 
-  end
-
-  def overview
   end
 
 private
