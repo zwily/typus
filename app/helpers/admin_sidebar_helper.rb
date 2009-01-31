@@ -106,7 +106,7 @@ module AdminSidebarHelper
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.join("\n")}
 </form>
-<p style="margin: -10px 0px 10px 0px;"><small>#{t("Search by")} #{typus_search.split(', ').collect { |x| t(x) }.to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</small></p>
+<p class="tip">#{t("Search by")} #{typus_search.split(', ').collect { |x| t(x) }.to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</p>
       HTML
     end
 
