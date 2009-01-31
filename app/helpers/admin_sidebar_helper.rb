@@ -30,7 +30,7 @@ module AdminSidebarHelper
         end
       end
 
-      items << non_crud_actions
+      items += non_crud_actions
 
       case params[:action]
       when 'new', 'create', 'edit', 'update'
