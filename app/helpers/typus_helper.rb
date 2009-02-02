@@ -1,6 +1,17 @@
 module TypusHelper
 
   ##
+  #
+  #
+  def quick_edit
+    <<-HTML
+<script type="text/javascript">
+  document.write('<script type="text/javascript" src="#{admin_quick_edit_url}" />');
+</script>
+    HTML
+  end
+
+  ##
   # Applications list on the dashboard
   #
   def applications
