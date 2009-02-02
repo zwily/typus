@@ -5,6 +5,11 @@ module AdminFormHelper
   #
 
   def build_form(fields)
+
+    options = { :start_year => Typus::Configuration.options[:start_year], 
+                :end_year => Typus::Configuration.options[:end_year], 
+                :minute_step => Typus::Configuration.options[:minute_step] }
+
     returning(String.new) do |html|
       html << "#{error_messages_for :item, :header_tag => "h3"}"
       html << "<ul>"
@@ -12,13 +17,13 @@ module AdminFormHelper
         case value
         when :belongs_to:      html << typus_belongs_to_field(key)
         when :boolean:         html << typus_boolean_field(key)
-        when :date:            html << typus_date_field(key)
-        when :datetime:        html << typus_datetime_field(key)
+        when :date:            html << typus_date_field(key, options)
+        when :datetime:        html << typus_datetime_field(key, options)
         when :file:            html << typus_file_field(key)
         when :password:        html << typus_password_field(key)
         when :selector:        html << typus_selector_field(key)
         when :text:            html << typus_text_field(key)
-        when :time:            html << typus_time_field(key)
+        when :time:            html << typus_time_field(key, options)
         when :tree:            html << typus_tree_field(key)
         else
           html << typus_string_field(key)
@@ -75,17 +80,17 @@ module AdminFormHelper
 
   end
 
-  def typus_date_field(attribute)
+  def typus_date_field(attribute, options)
     <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
-#{date_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
+#{date_select :item, attribute, options, { :disabled => attribute_disabled?(attribute)} }</li>
     HTML
   end
 
-  def typus_datetime_field(attribute)
+  def typus_datetime_field(attribute, options)
     <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
-#{datetime_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
+#{datetime_select :item, attribute, options, {:disabled => attribute_disabled?(attribute)}}</li>
     HTML
   end
 
@@ -145,10 +150,10 @@ module AdminFormHelper
     HTML
   end
 
-  def typus_time_field(attribute)
+  def typus_time_field(attribute, options)
     <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
-#{time_select :item, attribute, { :minute_step => Typus::Configuration.options[:minute_step] }, {:disabled => attribute_disabled?(attribute)}}</li>
+#{time_select :item, attribute, options, {:disabled => attribute_disabled?(attribute)}}</li>
     HTML
   end
 

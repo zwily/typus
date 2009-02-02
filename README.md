@@ -51,6 +51,8 @@ You can overwrite the following settings:
     Typus::Configuration.options[:form_rows]
     Typus::Configuration.options[:sidebar_selector]
     Typus::Configuration.options[:minute_step]
+    Typus::Configuration.options[:start_year]
+    Typus::Configuration.options[:end_year]
     Typus::Configuration.options[:email]
     Typus::Configuration.options[:toggle]
     Typus::Configuration.options[:edit_after_create]
