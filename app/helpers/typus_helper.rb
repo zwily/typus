@@ -3,10 +3,10 @@ module TypusHelper
   ##
   #
   #
-  def quick_edit
+  def quick_edit(*args)
     <<-HTML
 <script type="text/javascript">
-  document.write('<script type="text/javascript" src="#{admin_quick_edit_url}" />');
+  document.write('<script type="text/javascript" src="#{admin_quick_edit_url}?#{args.extract_options!.to_query}" />');
 </script>
     HTML
   end

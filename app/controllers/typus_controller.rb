@@ -126,28 +126,21 @@ class TypusController < ApplicationController
   end
 
   def quick_edit
-    unless session[:typus]
-      render :text => ''
-    else
-      @content = <<-HTML
-        var links = '';
-        links += '<div id="quick_edit">';
-        links += '<ul>';
-        links += '<li><a href="#{url_for admin_dashboard_url}">Dashboard</a></li>';
-        links += '</ul>';
-        links += '</div>';
-        links += '<style type="text/css">';
-        links += '<!--';
-        links += '#quick_edit { float: right; position: fixed; background: #000; padding: 5px; text-align: right; }';
-        links += '#quick_edit ul { margin: 0; padding: 0; }';
-        links += '#quick_edit li { display: inline; padding: 0px 5px; }';
-        links += '#quick_edit a { color: #FFF; }'
-        links += '-->';
-        links += '</style>';
-        document.write(links);
+    render :text => '' and return unless session[:typus]
+    @content = <<-HTML
+var links = '';
+links += '<div id="quick_edit">';
+links += '<a href=\"/admin/#{params[:resource]}/#{params[:id]}/edit\">#{params[:message]}</a>';
+links += '</div>';
+links += '<style type="text/css">';
+links += '<!--';
+links += '#quick_edit { font-size: 11px; float: right; position: fixed; right: 0px; background: #000; margin: 5px; padding: 3px 5px; }';
+links += '#quick_edit a { color: #FFF; font-weight: bold; }'
+links += '-->';
+links += '</style>';
+document.write(links);
       HTML
-      render :text => @content
-    end
+    render :text => @content
   end
 
 private
