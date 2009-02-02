@@ -132,7 +132,7 @@ private
   end
 
   def select_layout
-    [ 'login', 'logout', 'recover_password', 'reset_password' ].include?(action_name) ? 'typus' : 'admin'
+    [ 'login', 'logout', 'recover_password', 'reset_password', 'setup' ].include?(action_name) ? 'typus' : 'admin'
   end
 
 end
