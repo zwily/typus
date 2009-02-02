@@ -6,10 +6,14 @@ require 'sha1'
 # Rails 2.3/3 is released.)
 #
 
-ActionController::Base.append_view_path(File.join(File.dirname(__FILE__), 'app', 'views'))
+unless Rails.version == '2.3.0'
 
-%w( models controllers helpers ).each do |folder|
-  ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), 'app', folder)
+  ActionController::Base.append_view_path(File.join(File.dirname(__FILE__), 'app', 'views'))
+
+  %w( models controllers helpers ).each do |folder|
+    ActiveSupport::Dependencies.load_paths << File.join(File.dirname(__FILE__), 'app', folder)
+  end
+
 end
 
 if Rails.env.test?
