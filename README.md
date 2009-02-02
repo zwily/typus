@@ -533,6 +533,14 @@ to mantain.
     config/typus/newsletter_roles.yml
     config/typus/blog_roles.yml
 
+## Quick edit
+
+Example:
+
+    <%= quick_edit :resource => 'your_resource', 
+                   :id => 'resource_id', 
+                   :message => 'Edit' %>
+
 ## Acknowledgments
 
 - Laia Gargallo (My girl) - <http://azotacalles.net>
