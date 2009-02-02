@@ -30,6 +30,8 @@ module Typus
                   :form_rows => 10, 
                   :sidebar_selector => 10, 
                   :minute_step => 5, 
+                  :start_year => nil,
+                  :end_year => nil,
                   :toggle => true, 
                   :edit_after_create => true, 
                   :root => 'admin', 
