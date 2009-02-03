@@ -231,6 +231,14 @@ module Typus
     end
 
     ##
+    # We are able to define which template to use to render the attribute within the form
+    #
+    def typus_template(attribute)
+      template = Typus::Configuration.config[self.name]['fields']['options']['templates'][attribute] rescue nil
+      return template
+    end
+
+    ##
     # Build conditions
     #
     def build_conditions(params)

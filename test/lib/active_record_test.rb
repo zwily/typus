@@ -256,4 +256,10 @@ class ActiveRecordTest < Test::Unit::TestCase
     assert_equal "Page#1", pages(:published).typus_name
   end
 
+  def test_should_verify_typus_template_is_working_properly
+   assert_equal "datepicker", Post.typus_template('published_at')
+   assert_equal nil, Post.typus_template('created_at')
+   assert_equal nil, Post.typus_template('unknown')
+  end
+
 end
