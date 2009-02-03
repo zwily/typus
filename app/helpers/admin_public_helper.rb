@@ -8,7 +8,7 @@ module AdminPublicHelper
     options[:color] ||= '#000'
     html = <<-HTML
 <script type="text/javascript">
-  document.write('<script type="text/javascript" src="#{admin_quick_edit_url}?#{options.to_query}" />');
+  document.write('<script type="text/javascript" src="#{admin_quick_edit_path}?#{options.to_query}" />');
 </script>
     HTML
     return html
