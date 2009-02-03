@@ -535,11 +535,18 @@ to mantain.
 
 ## Quick edit
 
+To enable quick edit include the TypusPublicHelper on your 
+`application_helper.rb`.
+
+    module ApplicationHelper
+      include TypusPublicHelper
+    end
+
 Example:
 
-    <%= quick_edit :resource => 'your_resource', 
-                   :id => 'resource_id', 
-                   :message => 'Edit' %>
+    <%= quick_edit :resource => 'pages', 
+                   :id => @page.id, 
+                   :message => 'Edit this page' %>
 
 ## Acknowledgments
 
