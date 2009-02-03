@@ -4,11 +4,14 @@ module TypusHelper
   #
   #
   def quick_edit(*args)
-    <<-HTML
+    options = args.extract_options!
+    options[:color] ||= '#000'
+    html = <<-HTML
 <script type="text/javascript">
-  document.write('<script type="text/javascript" src="#{admin_quick_edit_url}?#{args.extract_options!.to_query}" />');
+  document.write('<script type="text/javascript" src="#{admin_quick_edit_url}?#{options.to_query}" />');
 </script>
     HTML
+    return html
   end
 
   ##
