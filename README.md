@@ -535,11 +535,11 @@ to mantain.
 
 ## Quick edit
 
-To enable quick edit include the TypusPublicHelper on your 
+To enable quick edit include the AdminPublicHelper on your 
 `application_helper.rb`.
 
     module ApplicationHelper
-      include TypusPublicHelper
+      include AdminPublicHelper
     end
 
 Example:

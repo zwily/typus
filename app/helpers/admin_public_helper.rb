@@ -1,4 +1,4 @@
-module TypusPublicHelper
+module AdminPublicHelper
 
   ##
   #
