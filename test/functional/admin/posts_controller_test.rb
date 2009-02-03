@@ -189,4 +189,9 @@ class Admin::PostsControllerTest < ActionController::TestCase
     Typus::Configuration.options[:toggle] = true
   end
 
+  def test_should_show_form_templates
+    get :create
+    assert_response :success
+    assert_match /datepicker_template_published_at/, @response.body
+  end
 end

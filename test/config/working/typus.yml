@@ -23,7 +23,7 @@ Category:
 Post:
   fields:
     list: title, created_at, status
-    form: title, body, created_at, status
+    form: title, body, created_at, status, published_at
     relationship: title, created_at
     options:
       selectors: status
@@ -32,6 +32,8 @@ Post:
       questions: status
       date_formats:
         created_at: post_short
+      templates:
+        published_at: datepicker
   relationships: assets, categories
   actions:
     index: cleanup

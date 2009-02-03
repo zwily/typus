@@ -14,6 +14,10 @@ module AdminFormHelper
       html << "#{error_messages_for :item, :header_tag => "h3"}"
       html << "<ul>"
       fields.each do |key, value|
+        if template = @resource[:class].typus_template(key)
+          html << typus_template_field(key, template, options)
+          next
+        end
         case value
         when :belongs_to:      html << typus_belongs_to_field(key)
         when :boolean:         html << typus_boolean_field(key)
@@ -266,6 +270,12 @@ module AdminFormHelper
 </div>
       HTML
     end
+  end
+
+  def typus_template_field(attribute, template, options = {})
+    template_name = "admin/templates/#{template}.html.erb"
+    output = render(:partial => template_name, :locals => { :resource => @resource, :attribute => attribute, :options => options } )
+    (output == nil ? "#{attribute}: Can not find the template '#{template}'" : output)
   end
 
   def attribute_disabled?(attribute)
