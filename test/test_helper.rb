@@ -45,7 +45,7 @@ require 'active_record/fixtures'
 require File.dirname(__FILE__) + "/test_schema"
 
 class Test::Unit::TestCase
-  self.fixture_path = File.dirname(__FILE__) + '/fixtures/'
+  self.fixture_path = File.dirname(__FILE__) + '/fixtures'
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
   fixtures :all

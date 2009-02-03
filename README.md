@@ -51,6 +51,8 @@ You can overwrite the following settings:
     Typus::Configuration.options[:form_rows]
     Typus::Configuration.options[:sidebar_selector]
     Typus::Configuration.options[:minute_step]
+    Typus::Configuration.options[:start_year]
+    Typus::Configuration.options[:end_year]
     Typus::Configuration.options[:email]
     Typus::Configuration.options[:toggle]
     Typus::Configuration.options[:edit_after_create]
@@ -530,6 +532,21 @@ to mantain.
     config/typus/application_roles.yml
     config/typus/newsletter_roles.yml
     config/typus/blog_roles.yml
+
+## Quick edit
+
+To enable quick edit include the AdminPublicHelper on your 
+`application_helper.rb`.
+
+    module ApplicationHelper
+      include AdminPublicHelper
+    end
+
+Example:
+
+    <%= quick_edit :resource => 'pages', 
+                   :id => @page.id, 
+                   :message => 'Edit this page' %>
 
 ## Acknowledgments
 

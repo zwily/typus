@@ -190,6 +190,15 @@ class TypusControllerTest < ActionController::TestCase
     assert_equal 'layouts/admin', @controller.active_layout
   end
 
+  def test_should_verify_overview_works
+    @request.session[:typus] = typus_users(:admin).id
+    TypusUser.destroy_all
+    get :setup
+    assert_response :success
+    assert_template 'setup'
+    assert_equal 'layouts/typus', @controller.active_layout
+  end
+
   def test_should_verify_page_title_on_dashboard
     @request.session[:typus] = typus_users(:admin).id
     get :dashboard

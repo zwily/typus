@@ -13,9 +13,9 @@ class TypusController < ApplicationController
   filter_parameter_logging :password
 
   before_filter :reload_config_et_roles
-  before_filter :require_login, :except => [ :login, :logout, :recover_password, :reset_password, :setup ]
+  before_filter :require_login, :except => [ :login, :logout, :recover_password, :reset_password, :setup, :quick_edit ]
 
-  before_filter :check_if_user_can_perform_action_on_resource_without_model, :except => [ :overview, :dashboard, :login, :logout, :recover_password, :reset_password, :setup ]
+  before_filter :check_if_user_can_perform_action_on_resource_without_model, :except => [ :overview, :dashboard, :login, :logout, :recover_password, :reset_password, :setup, :quick_edit ]
 
   before_filter :recover_password_disabled?, :only => [ :recover_password, :reset_password ]
 
@@ -125,6 +125,32 @@ class TypusController < ApplicationController
 
   end
 
+  def quick_edit
+
+    render :text => '' and return unless session[:typus]
+
+    url = url_for :controller => "admin/#{params[:resource]}", 
+                  :action => 'edit', 
+                  :id => params[:id]
+
+    @content = <<-HTML
+var links = '';
+links += '<div id="quick_edit">';
+links += '<a href=\"#{url}\">#{params[:message]}</a>';
+links += '</div>';
+links += '<style type="text/css">';
+links += '<!--';
+links += '#quick_edit { font-size: 11px; float: right; position: fixed; right: 0px; background: #{params[:color]}; margin: 5px; padding: 3px 5px; }';
+links += '#quick_edit a { color: #FFF; font-weight: bold; }'
+links += '-->';
+links += '</style>';
+document.write(links);
+      HTML
+
+    render :text => @content
+
+  end
+
 private
 
   def recover_password_disabled?
@@ -132,7 +158,7 @@ private
   end
 
   def select_layout
-    [ 'login', 'logout', 'recover_password', 'reset_password' ].include?(action_name) ? 'typus' : 'admin'
+    [ 'login', 'logout', 'recover_password', 'reset_password', 'setup' ].include?(action_name) ? 'typus' : 'admin'
   end
 
 end

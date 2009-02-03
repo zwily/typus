@@ -93,6 +93,15 @@ module AdminSidebarHelper
     typus_search = Typus::Configuration.config[@resource[:class_name]]['search']
     return if typus_search.nil?
 
+    to_sentence_options = case Rails.version
+                          when '2.3.0'
+                            { :words_connector => ', ', :last_word_connector => ' & ' }
+                          else
+                            { :skip_last_comma => true, :connector => '&' }
+                          end
+
+    search_by = typus_search.split(', ').collect { |x| t(x) }.to_sentence(to_sentence_options).titleize.downcase
+
     search_params = params.dup
     %w( action controller search page ).each { |p| search_params.delete(p) }
 
@@ -106,7 +115,7 @@ module AdminSidebarHelper
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.join("\n")}
 </form>
-<p class="tip">#{t("Search by")} #{typus_search.split(', ').collect { |x| t(x) }.to_sentence(:skip_last_comma => true, :connector => '&').titleize.downcase}.</p>
+<p class="tip">#{t("Search by")} #{search_by}.</p>
       HTML
     end
 
