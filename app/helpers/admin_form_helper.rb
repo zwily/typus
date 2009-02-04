@@ -275,7 +275,7 @@ module AdminFormHelper
   def typus_template_field(attribute, template, options = {})
     template_name = "admin/templates/#{template}.html.erb"
     output = render(:partial => template_name, :locals => { :resource => @resource, :attribute => attribute, :options => options } )
-    (output == nil ? "#{attribute}: Can not find the template '#{template}'" : output)
+    output || "#{attribute}: Can not find the template '#{template}'"
   end
 
   def attribute_disabled?(attribute)
