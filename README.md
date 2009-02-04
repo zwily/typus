@@ -550,10 +550,17 @@ Example:
 
 ## Acknowledgments
 
-- Laia Gargallo (My girl) - <http://azotacalles.net>
-- Isaac Feliu (Help on refactoring) - <http://railslab.net>
-- Sergio Espeja (Feedback & patches) - <http://github.com/spejman>
-- Lluis Folch (Icons, feedback & crazy ideas) - <http://wet-floor.com>
+- Laia Gargallo (Lover and tea provider) <http://azotacalles.net>
+- Isaac Feliu (Codereview) <http://www.vesne.com>
+- Lluis Folch (Icons, feedback & crazy ideas) <http://wet-floor.com>
+
+## People who has contributed to the project with patches
+
+- Sergio Espeja <http://github.com/spejman>
+- Eadz <http://github.com/eadz>
+- Anthony Underwood <http://github.com/aunderwo>
+- Felipe Talavera <http://github.com/flype>
+- Erik Tigerholm <http://github.com/eriktigerholm>
 
 ## Author, contact, bugs, mailing list and more
 
