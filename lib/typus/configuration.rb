@@ -46,6 +46,7 @@ module Typus
                   :thumbnail => :thumb, 
                   :thumbnail_zoom => :normal, 
                   :config_folder => 'config/typus', 
+                  :template_folder => 'admin/templates',
                   :ignore_missing_translations => true }
 
     mattr_accessor :options
