@@ -470,14 +470,12 @@ folder with Typus::Configuration.options[:template_folder].
           templates:
             published_at: datepicker
 
-    
     ##
     # app/views/admin/templates/_datepicker.html.erb
     #
-    <li><label><%=t(attribute.humanize)%></label>
+    <li><label><%= t(attribute.humanize) %></label>
       <%= calendar_date_select :item, attribute %>
     </li>
-
 
 ## Roles
 
