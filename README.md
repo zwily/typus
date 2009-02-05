@@ -63,7 +63,7 @@ You can overwrite the following settings:
     Typus::Configuration.options[:thumbnail]
     Typus::Configuration.options[:thumbnail_zoom]
     Typus::Configuration.options[:config_folder]
-    Typus::Configuration.options[:template_folder]
+    Typus::Configuration.options[:templates_folder]
     Typus::Configuration.options[:ignore_missing_translations]
 
 You can overwrite this settings in the initializer `typus.rb`.
@@ -458,7 +458,7 @@ attribute will be rendered with the template
 "app/views/admin/templates/_datepicker.html.erb". The 
 resource and the attribute name will be sent as local 
 variables "resource" and "attribute". You can change the 
-folder with Typus::Configuration.options[:template_folder].
+folder with Typus::Configuration.options[:templates_folder].
 
     ##
     # config/typus/application.yml
