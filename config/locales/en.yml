@@ -85,3 +85,6 @@ en:
   "{{current_user_role}} can't display items": "{{current_user_role}} can't display items."
   "Submodules": "Submodules"
   "Parent module": "Parent module"
+  "You can update your password at": "You can update your password at"
+  "If you didn't request a password update, you can ignore this message": "If you didn't request a password update, you can ignore this message."
+  "Have a nice day": "Have a nice day."
