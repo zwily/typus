@@ -105,7 +105,7 @@ protected
 
     message = case params[:action]
               when 'index', 'show'
-                "#{@current_user.roles.capitalize} can't display items."
+                t("{{current_user_role}} can't display items", :current_user_role => @current_user.roles.capitalize)
               when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
               when 'destroy'
                 t("{{current_user_role}} can't delete this item", :current_user_role => @current_user.roles.capitalize )
