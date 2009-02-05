@@ -268,7 +268,7 @@ private
 
     # If the record is owned by the user ...
     unless @item.send(Typus.user_fk) == session[:typus]
-      flash[:notice] = "Record owned by another user."
+      flash[:notice] = t("Record owned by another user.")
       redirect_to :action => 'show', :id => @item.id
     end
 
