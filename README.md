@@ -63,6 +63,7 @@ You can overwrite the following settings:
     Typus::Configuration.options[:thumbnail]
     Typus::Configuration.options[:thumbnail_zoom]
     Typus::Configuration.options[:config_folder]
+    Typus::Configuration.options[:template_folder]
     Typus::Configuration.options[:ignore_missing_translations]
 
 You can overwrite this settings in the initializer `typus.rb`.
@@ -448,6 +449,35 @@ Example:
 
     views/admin/posts/_index_top.html.erb
     views/admin/typus_users/_edit_top.html.erb
+
+### Attribute templates
+
+It is possible to change the presentation for a attribute 
+within the form. In the example below the "published_at" 
+attribute will be rendered with the template 
+"app/views/admin/templates/_datepicker.html.erb". The 
+resource and the attribute name will be sent as the local 
+variables "resource" and "attribute". You can change the 
+folder with  Typus::Configuration.options[:template_folder].
+
+  ##
+  # config/typus/application.yml
+  #
+  Post:
+      fields:
+        list: title, published_at
+        options:
+          templates:
+            published_at: datepicker
+
+    
+  ##
+  # app/views/admin/templates/_datepicker.html.erb
+  #
+  <li><label><%=t(attribute.humanize)%></label>
+    <%= calendar_date_select :item, attribute %>
+  </li>
+
 
 ## Roles
 
