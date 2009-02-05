@@ -456,14 +456,14 @@ It is possible to change the presentation for a attribute
 within the form. In the example below the "published_at" 
 attribute will be rendered with the template 
 "app/views/admin/templates/_datepicker.html.erb". The 
-resource and the attribute name will be sent as the local 
+resource and the attribute name will be sent as local 
 variables "resource" and "attribute". You can change the 
-folder with  Typus::Configuration.options[:template_folder].
+folder with Typus::Configuration.options[:template_folder].
 
-  ##
-  # config/typus/application.yml
-  #
-  Post:
+    ##
+    # config/typus/application.yml
+    #
+    Post:
       fields:
         list: title, published_at
         options:
@@ -471,12 +471,12 @@ folder with  Typus::Configuration.options[:template_folder].
             published_at: datepicker
 
     
-  ##
-  # app/views/admin/templates/_datepicker.html.erb
-  #
-  <li><label><%=t(attribute.humanize)%></label>
-    <%= calendar_date_select :item, attribute %>
-  </li>
+    ##
+    # app/views/admin/templates/_datepicker.html.erb
+    #
+    <li><label><%=t(attribute.humanize)%></label>
+      <%= calendar_date_select :item, attribute %>
+    </li>
 
 
 ## Roles
