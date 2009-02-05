@@ -81,5 +81,5 @@ es:
   "{{current_user_role}} can't perform action ({{action}})": "{{current_user_role}} no puede relizar la accion ({{action}})"
   "Record owned by another user": "Registro propiedad de otro usuario."
   "{{current_user_role}} can't display items": "{{current_user_role}} no puede mostrar los elementos."
-  "Submodule": "Submodulo"
+  "Submodules": "Submodulos"
   "Parent module": "Modulo padre"
