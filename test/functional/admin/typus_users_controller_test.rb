@@ -95,7 +95,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:notice]
-    assert_equal "Editor can't perform action. (new)", flash[:notice].to_s
+    assert_equal "Editor can't perform action (new)", flash[:notice].to_s
 
   end
 
