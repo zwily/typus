@@ -23,6 +23,13 @@ module AdminHelper
     end
   end
 
+  def remove_filter_link(filter = request.env['QUERY_STRING'])
+    return unless filter && !filter.blank?
+    <<-HTML
+<small>#{link_to t("Remove filter")}</small>
+    HTML
+  end
+
   ##
   # If there's a partial with a "microformat" of the data we want to 
   # display, this will be used, otherwise we use a default table which 
