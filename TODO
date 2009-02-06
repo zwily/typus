@@ -1,10 +1,11 @@
-TODO
+TODO (ordered by priority)
 ====
 
-[ ] Define a show action for the read-only items. This will be 
-    if the user has only permission to r the items and not update.
-[ ] Actions for a record can be added to the listings.
 [ ] Test helpers.
+[ ] Make tests pass on Rails `2.3.0`
+[ ] Actions for a record can be added to the listings.
+[ ] Better show action view template.
+[ ] Extract form helpers to templates.
 
 DONE
 ====
