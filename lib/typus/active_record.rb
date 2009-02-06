@@ -104,7 +104,7 @@ module Typus
 
       fields_with_type = ActiveSupport::OrderedHash.new
 
-      if self.respond_to?('admin_filters')
+      if self.respond_to?(:admin_filters)
         fields = self.admin_filters
       else
         return [] unless Typus::Configuration.config[self.name]['filters']

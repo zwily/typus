@@ -255,7 +255,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_typus_name_is_working_properly
-    assert Category.new.respond_to?('name')
+    assert Category.new.respond_to?(:name)
     assert_equal "First Category", categories(:first).typus_name
     assert !Page.new.respond_to?(:name)
     assert_equal "Page#1", pages(:published).typus_name

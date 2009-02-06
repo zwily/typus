@@ -56,7 +56,7 @@ module AdminFormHelper
 
     returning(String.new) do |html|
 
-      if related.respond_to?('roots')
+      if related.respond_to?(:roots)
         html << typus_tree_field(related_fk, related.roots, related_fk)
       else
         html << <<-HTML
