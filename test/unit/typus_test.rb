@@ -1,6 +1,6 @@
 require 'test/test_helper'
 
-class TypusTest < Test::Unit::TestCase
+class TypusTest < ActiveSupport::TestCase
 
   def test_should_verify_models
     assert Category.kind_of?(Class)

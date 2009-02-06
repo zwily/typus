@@ -1,6 +1,6 @@
 require 'test/test_helper'
 
-class ActiveRecordTest < Test::Unit::TestCase
+class ActiveRecordTest < ActiveSupport::TestCase
 
   def test_should_return_model_fields_for_typus_user
     expected_fields = [[:id, :integer], 

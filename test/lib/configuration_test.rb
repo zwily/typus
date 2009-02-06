@@ -1,6 +1,6 @@
 require 'test/test_helper'
 
-class ConfigurationTest < Test::Unit::TestCase
+class ConfigurationTest < ActiveSupport::TestCase
 
   def teardown
     Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'

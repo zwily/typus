@@ -1,6 +1,6 @@
 require 'test/test_helper'
 
-class RoutesTest < Test::Unit::TestCase
+class RoutesTest < ActiveSupport::TestCase
 
   def test_should_verify_typus_named_routes
 

@@ -1,6 +1,6 @@
 require 'test/test_helper'
 
-class TypusHelperTest < Test::Unit::TestCase
+class TypusHelperTest < ActiveSupport::TestCase
 
   include TypusHelper
 

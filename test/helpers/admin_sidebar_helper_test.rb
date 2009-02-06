@@ -1,6 +1,6 @@
 require 'test/test_helper'
 
-class AdminSidebarHelperTest < Test::Unit::TestCase
+class AdminSidebarHelperTest < ActiveSupport::TestCase
 
   include AdminSidebarHelper
 

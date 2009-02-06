@@ -1,6 +1,6 @@
 require 'test/test_helper'
 
-class HashTest < Test::Unit::TestCase
+class HashTest < ActiveSupport::TestCase
 
   def test_should_verify_compact
     hash = { 'a' => '', 'b'=> nil, 'c' => 'hello' }

@@ -1,6 +1,6 @@
 require 'test/test_helper'
 
-class ObjectTest < Test::Unit::TestCase
+class ObjectTest < ActiveSupport::TestCase
 
   def test_should_try_class_method
     assert_equal 'plugin', Post.try('typus')

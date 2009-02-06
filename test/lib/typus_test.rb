@@ -1,6 +1,6 @@
 require 'test/test_helper'
 
-class TypusTest < Test::Unit::TestCase
+class TypusTest < ActiveSupport::TestCase
 
   def test_should_return_applications_and_should_be_sorted
     assert Typus.respond_to?(:applications)

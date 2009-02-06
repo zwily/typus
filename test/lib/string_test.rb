@@ -1,6 +1,6 @@
 require 'test/test_helper'
 
-class StringTest < Test::Unit::TestCase
+class StringTest < ActiveSupport::TestCase
 
   def test_should_verify_typus_actions_for
     assert "TypusUser".typus_actions_for('list').empty?
