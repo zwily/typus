@@ -3,6 +3,7 @@ require 'test/helper'
 class ActiveRecordTest < ActiveSupport::TestCase
 
   def test_should_verify_class
+    # "In Rails 2.3 returns a OrderedHash returns a Hash."
     assert TypusUser.model_fields.kind_of?(Array)
   end
 
