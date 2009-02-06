@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../test_helper'
+require 'test/test_helper'
 
 ##
 # Here we test special methods which allow to overwrite the typus.yml 
