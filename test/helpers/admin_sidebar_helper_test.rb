@@ -4,10 +4,6 @@ class AdminSidebarHelperTest < Test::Unit::TestCase
 
   include AdminSidebarHelper
 
-  def test_default
-    assert true
-  end
-
   def test_build_my_list
 
     output = build_my_list([], header = nil)
