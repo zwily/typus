@@ -33,7 +33,7 @@ module AdminHelper
     if File.exists?(template)
       render :partial => template.gsub('/_', '/'), :collection => @items, :as => :item
     else
-      build_table(model, fields, items)
+      build_typus_table(model, fields, items)
     end
   end
 
