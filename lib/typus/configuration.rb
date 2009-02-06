@@ -80,7 +80,6 @@ module Typus
     #
     def self.roles!
 
-
       files = Dir["#{Rails.root}/#{options[:config_folder]}/*_roles.yml"].sort
 
       @@roles = { options[:root] => {} }
