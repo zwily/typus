@@ -100,10 +100,10 @@ module TypusHelper
     HTML
   end
 
-  def login_info
+  def login_info(user = @current_user)
     <<-HTML
 <ul>
-  <li>#{t("Logged as")} #{link_to @current_user.full_name(:display_role => true), edit_admin_typus_user_path(@current_user.id)}</li>
+  <li>#{t("Logged as")} #{link_to user.full_name(:display_role => true), edit_admin_typus_user_path(user.id)}</li>
   <li>#{link_to t("Logout"), admin_logout_path}</li>
 </ul>
     HTML
