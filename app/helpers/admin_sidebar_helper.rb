@@ -26,7 +26,7 @@ module AdminSidebarHelper
     case params[:action]
     when 'index', 'edit', 'update'
       if @current_user.can_perform?(@resource[:class], 'create')
-        items << "<li>#{link_to t("Add entry"), :action => 'new'}</li>"
+        items << "#{link_to t("Add entry"), :action => 'new'}"
       end
     end
 
@@ -34,7 +34,7 @@ module AdminSidebarHelper
 
     case params[:action]
     when 'new', 'create', 'edit', 'update'
-      items << "<li>#{link_to t("Back to list"), :action => 'index'}</li>"
+      items << "#{link_to t("Back to list"), :action => 'index'}"
     end
 
     return items
@@ -45,7 +45,7 @@ module AdminSidebarHelper
     returning(Array.new) do |actions|
       @resource[:class].typus_actions_for(params[:action]).each do |action|
         if @current_user.can_perform?(@resource[:class], action)
-          actions << "<li>#{link_to action.humanize, :action => action}</li>"
+          actions << "#{link_to action.humanize, :action => action}"
         end
       end
     end
@@ -55,11 +55,11 @@ module AdminSidebarHelper
     return "" if items.empty?
     returning(String.new) do |html|
       html << "<h2>#{t(header.humanize)}</h2>" unless header.nil?
-      html << <<-HTML
-<ul>
-  #{items.join("\n")}
-</ul>
-      HTML
+      html << "<ul>\n"
+      items.each do |item|
+        html << "<li>#{item}</li>\n"
+      end
+      html << "</ul>\n"
     end
   end
 
@@ -74,7 +74,7 @@ module AdminSidebarHelper
 
     returning(Array.new) do |items|
       models.each do |model|
-        items << "<li>#{link_to model.humanize, :controller => model.tableize}</li>"
+        items << "#{link_to model.humanize, :controller => model.tableize}"
       end
     end
 
@@ -83,8 +83,8 @@ module AdminSidebarHelper
   def previous_and_next
     return [] unless %w( edit update ).include?(params[:action])
     returning(Array.new) do |items|
-      items << "<li>#{link_to t("Next"), :action => 'edit', :id => @next.id}</li>" if @next
-      items << "<li>#{link_to t("Previous"), :action => 'edit', :id => @previous.id}</li>" if @previous
+      items << "#{link_to t("Next"), :action => 'edit', :id => @next.id}" if @next
+      items << "#{link_to t("Previous"), :action => 'edit', :id => @previous.id}" if @previous
     end
   end
 
@@ -130,7 +130,6 @@ module AdminSidebarHelper
 
     returning(String.new) do |html|
       typus_filters.each do |key, value|
-        html << "<h2>#{t(key.titleize)}</h2>\n"
         case value
         when :boolean:      html << boolean_filter(current_request, key)
         when :string:       html << string_filter(current_request, key)
@@ -191,45 +190,29 @@ function surfto_#{model.name.downcase.pluralize}(form) {
         items = []
         related_items.each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'on' : 'off'
-          items << "<li>#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch}</li>"
+          items << "#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch}"
         end
-        html << <<-HTML
-<ul>
-#{items.join("\n")}
-</ul>
-        HTML
+        html << build_my_list(items, filter)
       end
     end
   end
 
   def datetime_filter(request, filter)
-    returning(String.new) do |html|
-      items = []
-      %w( today past_7_days this_month this_year ).each do |timeline|
-        switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
-        items << "<li>#{link_to timeline.titleize, { :params => params.merge(filter => timeline, :page => nil) }, :class => switch}</li>"
-      end
-      html << <<-HTML
-<ul>
-#{items.join("\n")}
-</ul>
-      HTML
+    items = []
+    %w( today past_7_days this_month this_year ).each do |timeline|
+      switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
+      items << "#{link_to timeline.titleize, { :params => params.merge(filter => timeline, :page => nil) }, :class => switch}"
     end
+    build_my_list(items, filter)
   end
 
   def boolean_filter(request, filter)
-    returning(String.new) do |html|
-      items = []
-      @resource[:class].typus_boolean(filter).each do |key, value|
-        switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
-        items << "<li>#{link_to t(value), { :params => params.merge(filter => key, :page => nil) }, :class => switch}</li>"
-      end
-      html << <<-HTML
-<ul>
-#{items.join("\n")}
-</ul>
-      HTML
+    items = []
+    @resource[:class].typus_boolean(filter).each do |key, value|
+      switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
+      items << "#{link_to t(value), { :params => params.merge(filter => key, :page => nil) }, :class => switch}"
     end
+    build_my_list(items, filter)
   end
 
   def string_filter(request, filter)
@@ -239,13 +222,9 @@ function surfto_#{model.name.downcase.pluralize}(form) {
         items = []
         values.each do |item|
           switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
-          items << "<li>#{link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch}</li>"
+          items << "#{link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch}"
         end
-        html << <<-HTML
-<ul>
-#{items.join("\n")}
-</ul>
-        HTML
+        html << build_my_list(items, filter)
       else
         html << "<p>No available #{filter}.</p>"
       end
