@@ -1,10 +1,11 @@
 
-ENV['RAILS_ENV'] = "test"
-
+ENV['RAILS_ENV'] = 'test'
 require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environment")
+require 'test_help'
 
 ##
-# Test with different DB settings:
+# Test with different DB settings
+#
 connection = case ENV['DB']
              when /mysql/
                { :adapter => 'mysql', :username => 'root', :database => 'typus_test' }
@@ -39,14 +40,9 @@ ActionController::Base.view_paths = []
   ActionController::Base.append_view_path(File.join(Rails.root, 'vendor/plugins/typus', folder))
 end
 
-require 'test/unit'
-require 'action_controller/test_process'
-require 'active_record/fixtures'
-
 require File.dirname(__FILE__) + "/test_schema"
 
 class ActiveSupport::TestCase
-# class ActiveSupport::TestCase
   self.fixture_path = File.dirname(__FILE__) + '/fixtures'
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
