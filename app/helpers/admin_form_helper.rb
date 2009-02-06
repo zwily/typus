@@ -274,7 +274,7 @@ module AdminFormHelper
 
   def typus_template_field(attribute, template, options = {})
     folder = Typus::Configuration.options[:templates_folder]
-    template_name = File.join(folder, "#{template}.html.erb")
+    template_name = File.join(folder, template)
 
     output = render(:partial => template_name, :locals => { :resource => @resource, :attribute => attribute, :options => options } )
     output || "#{attribute}: Can not find the template '#{template}'"
