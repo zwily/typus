@@ -5,13 +5,13 @@ module AdminSidebarHelper
     returning(String.new) do |html|
 
       html << <<-HTML
-#{build_my_list(default_actions, 'actions')}
-#{build_my_list(previous_and_next, 'go_to')}
+#{build_typus_list(default_actions, 'actions')}
+#{build_typus_list(previous_and_next, 'go_to')}
       HTML
 
       %w( parent_module submodules ).each do |block|
         html << <<-HTML
-#{build_my_list(modules(block), block)}
+#{build_typus_list(modules(block), block)}
         HTML
       end
 
@@ -51,7 +51,7 @@ module AdminSidebarHelper
     end
   end
 
-  def build_my_list(items, header = nil)
+  def build_typus_list(items, header = nil)
     return "" if items.empty?
     returning(String.new) do |html|
       html << "<h2>#{t(header.humanize)}</h2>" unless header.nil?
@@ -192,7 +192,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
           switch = request.include?("#{related_fk}=#{item.id}") ? 'on' : 'off'
           items << "#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch}"
         end
-        html << build_my_list(items, filter)
+        html << build_typus_list(items, filter)
       end
     end
   end
@@ -203,7 +203,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
       switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
       items << "#{link_to timeline.titleize, { :params => params.merge(filter => timeline, :page => nil) }, :class => switch}"
     end
-    build_my_list(items, filter)
+    build_typus_list(items, filter)
   end
 
   def boolean_filter(request, filter)
@@ -212,7 +212,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
       switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
       items << "#{link_to t(value), { :params => params.merge(filter => key, :page => nil) }, :class => switch}"
     end
-    build_my_list(items, filter)
+    build_typus_list(items, filter)
   end
 
   def string_filter(request, filter)
@@ -224,7 +224,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
           switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
           items << "#{link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch}"
         end
-        html << build_my_list(items, filter)
+        html << build_typus_list(items, filter)
       else
         html << "<p>No available #{filter}.</p>"
       end
