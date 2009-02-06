@@ -2,6 +2,10 @@ require 'test/helper'
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
+  def test_should_verify_class
+    assert TypusUser.model_fields.kind_of?(Array)
+  end
+
   def test_should_return_model_fields_for_typus_user
     expected_fields = [[:id, :integer], 
                        [:email, :string], 
