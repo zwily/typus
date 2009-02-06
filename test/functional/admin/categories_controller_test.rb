@@ -1,4 +1,4 @@
-require File.dirname(__FILE__) + '/../../test_helper'
+require 'test/helper'
 
 ##
 # Here we test position action if acts as list is installed.

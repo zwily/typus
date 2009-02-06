@@ -1,4 +1,4 @@
-require 'test/test_helper'
+require 'test/helper'
 
 ##
 # Here we test special methods which allow to overwrite the typus.yml 

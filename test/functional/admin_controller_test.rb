@@ -1,4 +1,4 @@
-require 'test/test_helper'
+require 'test/helper'
 
 class AdminControllerTest < ActionController::TestCase
 end

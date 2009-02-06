@@ -40,7 +40,7 @@ ActionController::Base.view_paths = []
   ActionController::Base.append_view_path(File.join(Rails.root, 'vendor/plugins/typus', folder))
 end
 
-require File.dirname(__FILE__) + "/test_schema"
+require File.dirname(__FILE__) + "/schema"
 
 class ActiveSupport::TestCase
   self.fixture_path = File.dirname(__FILE__) + '/fixtures'

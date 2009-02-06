@@ -1,4 +1,4 @@
-require 'test/test_helper'
+require 'test/helper'
 
 class TypusUserRolesTest < ActiveSupport::TestCase
 
