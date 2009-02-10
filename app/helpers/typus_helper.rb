@@ -85,11 +85,11 @@ module TypusHelper
     render :partial => file.compact.join('/') rescue nil
   end
 
-  def page_title
+  def page_title(action = params[:action])
     crumbs = []
     crumbs << Typus::Configuration.options[:app_name]
     crumbs << @resource[:class_name_humanized].pluralize if @resource
-    crumbs << t(params[:action].humanize) unless %w( index ).include?(params[:action])
+    crumbs << t(action.humanize) unless %w( index ).include?(action)
     return crumbs.compact.map { |x| x }.join(" &rsaquo; ")
   end
 

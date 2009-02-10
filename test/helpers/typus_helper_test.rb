@@ -20,4 +20,11 @@ class TypusHelperTest < ActiveSupport::TestCase
     assert output.nil?
   end
 
+  def test_page_title
+    params = {}
+    Typus::Configuration.options[:app_name] = 'whatistypus.com'
+    output = page_title('custom_action')
+    assert_equal "whatistypus.com &rsaquo; Custom action", output
+  end
+
 end
