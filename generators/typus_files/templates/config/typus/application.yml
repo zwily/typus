@@ -27,8 +27,8 @@
 #
 ###
 <%- ar_models.each do |model| -%>
-<%- list = model.columns.collect { |i| [ i.name, i.sql_type ] if i.sql_type != 'text' }.compact.map(&:first) -%>
-<%- form = model.columns.collect { |i| [ i.name, i.sql_type ] if i.name != 'id' }.compact.map(&:first) -%>
+<%- list = model.columns.reject { |c| c.sql_type == 'text' }.map(&:name) %>
+<%- form = model.columns.reject { |c| c.name == 'id' }.map(&:name) %>
 <%- relationships = [ ] -%>
 <%- [:belongs_to, :has_and_belongs_to_many, :has_many].each do |relationship| -%>
  <%- relationships += model.reflect_on_all_associations(relationship).map { |i| i.name.to_s } -%>
