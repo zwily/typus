@@ -50,9 +50,9 @@ module AdminFormHelper
     related_fk = @resource[:class].reflect_on_association(attribute.to_sym).primary_key_name
 
     message = []
-    message << "Are you sure you want to leave this page?"
-    message << "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."
-    message << "Click OK to continue, or click Cancel to stay on this page."
+    message << t("Are you sure you want to leave this page?")
+    message << t("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost.")
+    message << t("Click OK to continue, or click Cancel to stay on this page.")
 
     returning(String.new) do |html|
 
