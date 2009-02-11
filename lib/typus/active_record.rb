@@ -48,6 +48,7 @@ module Typus
           fields = fields.split(', ').collect { |f| f.to_sym }
         end
       rescue
+        return [] if filter == 'list'
         filter = 'list'
         retry
       end
