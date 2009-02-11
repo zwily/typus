@@ -71,6 +71,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal expected_fields, TypusUser.typus_fields_for(:form)
   end
 
+  def test_should_return_typus_fields_for_a_model_without_configuration
+    expected_fields = [ ] 
+    klass = Class.new(ActiveRecord::Base)
+    assert_equal expected_fields, klass.typus_fields_for(:form)
+    assert_equal expected_fields, klass.typus_fields_for(:list)
+  end
+
   def test_should_return_typus_fields_for_relationship_for_typus_user
     expected_fields = [['first_name', :string], 
                        ['last_name', :string], 
