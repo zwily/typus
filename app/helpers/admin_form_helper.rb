@@ -60,7 +60,7 @@ module AdminFormHelper
         html << typus_tree_field(related_fk, related.roots, related_fk)
       else
         html << <<-HTML
-<li><label for="item_#{attribute}">#{related_fk.humanize}
+<li><label for="item_#{attribute}">#{t(related_fk.humanize)}
     <small>#{link_to t("Add new"), { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
     </label>
 #{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
@@ -106,7 +106,7 @@ module AdminFormHelper
     returning(String.new) do |html|
 
       html << <<-HTML
-<li><label for="item_#{attribute}">#{attribute_display.humanize}</label>
+<li><label for="item_#{attribute}">#{t(attribute_display.humanize)}</label>
       HTML
 
       html << "#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>"
@@ -164,7 +164,7 @@ module AdminFormHelper
   def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for=\"item_#{attribute}\">#{attribute.humanize}</label>
+<li><label for=\"item_#{attribute}\">#{t(attribute.humanize)}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
   #{expand_tree_into_select_field(items, attribute_virtual)}
@@ -220,7 +220,7 @@ module AdminFormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to field.titleize, :controller => field}
+  #{link_to t(field.titleize), :controller => field}
   <small>#{link_to t("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
@@ -229,7 +229,7 @@ module AdminFormHelper
         html << build_typus_table(model_to_relate, model_to_relate.typus_fields_for(:relationship), items)
       else
         html << <<-HTML
-<div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => field.titleize.downcase)}</p></div>
+<div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => t(field.titleize.downcase))}</p></div>
         HTML
       end
       html << <<-HTML
@@ -245,7 +245,7 @@ module AdminFormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to field.titleize, :controller => field}
+  #{link_to t(field.titleize), :controller => field}
   <small>#{link_to t("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
@@ -263,7 +263,7 @@ module AdminFormHelper
         html << build_typus_table(model_to_relate, model_to_relate.typus_fields_for(:relationship), items)
       else
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => field.titleize.downcase)}</p></div>
+  <div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => t(field.titleize.downcase))}</p></div>
         HTML
       end
       html << <<-HTML
