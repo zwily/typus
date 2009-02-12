@@ -4,13 +4,18 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
 <head>
+
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-  <title><%= page_title %></title>
   <meta http-equiv="imagetoolbar" content="no" />
+
+  <title><%= page_title %></title>
+
   <%= stylesheet_link_tag "admin/reset", :media => "screen" %>
   <%= stylesheet_link_tag 'admin/screen', :media => 'screen' %>
+
   <%= javascript_include_tag 'admin/application' %>
   <%= yield :javascript -%>
+
 </head>
 
 <body onload="<%= yield :onload %>">
