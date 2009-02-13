@@ -150,7 +150,7 @@ module AdminFormHelper
   def typus_text_field(attribute)
     <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
-#{text_area :item, attribute, :class => 'text', :rows => Typus::Configuration.options[:form_rows], :disabled => attribute_disabled?(attribute)}</li>
+#{text_area :item, attribute, :class => 'text', :rows => @resource[:class].typus_options_for(:form_rows), :disabled => attribute_disabled?(attribute)}</li>
     HTML
   end
 

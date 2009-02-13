@@ -37,7 +37,7 @@ class AdminController < ApplicationController
 
     # Pagination
     items_count = @resource[:class].count(:joins => joins, :conditions => conditions)
-    items_per_page = Typus::Configuration.options[:per_page].to_i
+    items_per_page = @resource[:class].typus_options_for(:per_page).to_i
     @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
       @resource[:class].find(:all, 
                              :joins => joins, 
