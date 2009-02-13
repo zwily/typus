@@ -162,7 +162,7 @@ module AdminSidebarHelper
     returning(String.new) do |html|
       html << "<p>No available #{model.name.titleize.pluralize.downcase}.</p>" and next if model.count.zero?
       related_items = model.find(:all, :order => model.typus_order_by)
-      if related_items.size > Typus::Configuration.options[:sidebar_selector]
+      if related_items.size > @resource[:class].typus_options_for(:sidebar_selector)
         items = []
         related_items.each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'selected' : ''
