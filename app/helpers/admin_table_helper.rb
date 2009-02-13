@@ -121,7 +121,7 @@ module AdminTableHelper
     returning(String.new) do |html|
       if first_field == attribute
         html << <<-HTML
-<td>#{link_to item.send(attribute) || Typus::Configuration.options[:nil], link_options.merge(:controller => item.class.name.tableize, :action => 'edit', :id => item.id)}</td>
+<td>#{link_to item.send(attribute) || @resource[:class].typus_options_for(:nil), link_options.merge(:controller => item.class.name.tableize, :action => 'edit', :id => item.id)}</td>
         HTML
       else
         html << <<-HTML
@@ -157,7 +157,7 @@ module AdminTableHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<td>#{!item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : Typus::Configuration.options[:nil]}</td>
+<td>#{!item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : @resource[:class].typus_options_for(:nil)}</td>
       HTML
     end
 
@@ -165,7 +165,7 @@ module AdminTableHelper
 
   def typus_table_boolean_field(attribute, item)
 
-    boolean_icon = Typus::Configuration.options[:icon_on_boolean]
+    boolean_icon = @resource[:class].typus_options_for(:icon_on_boolean)
     boolean_hash = @resource[:class].typus_boolean(attribute)
 
     unless item.send(attribute).nil?
@@ -173,12 +173,12 @@ module AdminTableHelper
       content = (boolean_icon) ? image_tag("admin/status_#{status}.gif") : boolean_hash["#{status}".to_sym]
     else
       # If content is nil, we show nil!
-      content = Typus::Configuration.options[:nil]
+      content = @resource[:class].typus_options_for(:nil)
     end
 
     returning(String.new) do |html|
 
-      if Typus::Configuration.options[:toggle] && !item.send(attribute).nil?
+      if @resource[:class].typus_options_for(:toggle) && !item.send(attribute).nil?
         html << <<-HTML
 <td align="center">
   #{link_to content, {:params => params.merge(:controller => item.class.name.tableize, :action => 'toggle', :field => attribute, :id => item.id)} , :confirm => "Change #{attribute.humanize.downcase}?"}

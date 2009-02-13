@@ -162,7 +162,7 @@ class AdminController < ApplicationController
   # Toggle the status of an item.
   #
   def toggle
-    if Typus::Configuration.options[:toggle]
+    if @resource[:class].typus_options_for(:toggle)
       @item.toggle!(params[:field])
       flash[:success] = t("{{model}} {{attribute}} changed.", :model => @resource[:class_name_humanized], :attribute => params[:field].humanize.downcase)
     else

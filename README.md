@@ -79,13 +79,13 @@ overwrite options by model.
         edit_after_create: false
         end_year: 2015
         form_rows: 25
-        icon_on_boolean: true      # Unimplemented by model.
+        icon_on_boolean: true
         minute_step: 15
-        nil: 'nil'                 # Unimplemented by model.
+        nil: 'nil'
         per_page: 5
         sidebar_selector: 5
         start_year: 1990
-        toggle: true               # Unimplemented by model.
+        toggle: true
 
 ### Special Route
 
