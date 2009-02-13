@@ -21,7 +21,7 @@ class TypusHelperTest < ActiveSupport::TestCase
     params = {}
     Typus::Configuration.options[:app_name] = 'whatistypus.com'
     output = page_title('custom_action')
-    assert_equal "whatistypus.com &rsaquo; Custom action", output
+    assert_equal 'whatistypus.com &rsaquo; Custom action', output
   end
 
   def test_header
@@ -39,8 +39,12 @@ class TypusHelperTest < ActiveSupport::TestCase
 
   def test_typus_message
     output = typus_message('chunky bacon', 'yay')
-    assert_match "<div id=\"flash\" class=\"yay\">", output
-    assert_match /<p>chunky bacon<\/p>/, output
+    expected = <<-HTML
+<div id="flash" class="yay">
+  <p>chunky bacon</p>
+</div>
+    HTML
+    assert_equal expected, output
   end
 
 end
