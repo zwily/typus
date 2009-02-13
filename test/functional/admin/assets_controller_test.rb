@@ -32,4 +32,26 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_test_polymorphic_relationship_edit_message
+    post_ = posts(:published)
+    asset_ = assets(:first)
+    get :edit, { :id => asset_.id, :back_to => "/admin/posts/#{post_.id}/edit", :resource => post_.class.name, :resource_id => post_.id }
+    assert_match "You're updating a Asset for a Post. Do you want to cancel it?", @response.body
+  end
+
+  def test_should_return_to_back_to_url
+    Typus::Configuration.options[:edit_after_create] = false
+
+    post_ = posts(:published)
+    asset_ = assets(:first)
+
+    post :update, { :back_to => "/admin/posts/#{post_.id}/edit", :resource => post_.class.name, :resource_id => post_.id, :id => asset_.id }
+    assert_response :redirect
+    assert_redirected_to '/admin/posts/1/edit#assets'
+    assert flash[:success]
+    assert_equal "Asset successfully updated.", flash[:success]
+
+    Typus::Configuration.options[:edit_after_create] = true
+
+  end
 end

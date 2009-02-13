@@ -3,7 +3,7 @@ module AdminTableHelper
   ##
   # All helpers related to table.
   #
-  def build_typus_table(model, fields, items)
+  def build_typus_table(model, fields, items, link_options = { } )
 
     returning(String.new) do |html|
 
@@ -31,7 +31,7 @@ module AdminTableHelper
           when :has_and_belongs_to_many:
             html << typus_table_has_and_belongs_to_many_field(key, item)
           else
-            html << typus_table_string_field(key, item, fields.first.first)
+            html << typus_table_string_field(key, item, fields.first.first, link_options)
           end
         end
 
@@ -117,11 +117,11 @@ module AdminTableHelper
   # type is set. From the string_field we display other content 
   # types.
   #
-  def typus_table_string_field(attribute, item, first_field)
+  def typus_table_string_field(attribute, item, first_field, link_options = {})
     returning(String.new) do |html|
       if first_field == attribute
         html << <<-HTML
-<td>#{link_to item.send(attribute) || Typus::Configuration.options[:nil], :controller => item.class.name.tableize, :action => 'edit', :id => item.id}</td>
+<td>#{link_to item.send(attribute) || Typus::Configuration.options[:nil], link_options.merge(:controller => item.class.name.tableize, :action => 'edit', :id => item.id)}</td>
         HTML
       else
         html << <<-HTML

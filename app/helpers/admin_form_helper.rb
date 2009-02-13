@@ -226,7 +226,7 @@ module AdminFormHelper
       HTML
       items = @resource[:class].find(params[:id]).send(field)
       unless items.empty?
-        html << build_typus_table(model_to_relate, model_to_relate.typus_fields_for(:relationship), items)
+        html << build_typus_table(model_to_relate, model_to_relate.typus_fields_for(:relationship), items, { :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id } )
       else
         html << <<-HTML
 <div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => t(field.titleize.downcase))}</p></div>
