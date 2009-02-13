@@ -4,7 +4,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def setup
     Typus::Configuration.options[:recover_password] = true
-    Typus::Configuration.options[:app_name] = "whatistypus.com"
+    Typus::Configuration.options[:app_name] = 'whatistypus.com'
   end
 
   def test_should_render_login
@@ -42,7 +42,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to admin_login_url
     assert_nil @request.session[:typus]
     assert flash[:error]
-    assert_equal "Error! Typus User or role doesn't exist.", flash[:error]
+    assert_equal 'Error! Typus User or role doesn\'t exist.', flash[:error]
   end
 
   def test_should_not_send_recovery_password_link_to_unexisting_user
@@ -119,7 +119,7 @@ class TypusControllerTest < ActionController::TestCase
 
     Typus::Configuration.options[:recover_password] = false
     get :login
-    assert !@response.body.include?("Recover password")
+    assert !@response.body.include?('Recover password')
 
   end
 
@@ -133,7 +133,7 @@ class TypusControllerTest < ActionController::TestCase
   def test_should_render_admin_login_bottom
     get :login
     assert_response :success
-    assert_select "h1", "whatistypus.com"
+    assert_select 'h1', 'whatistypus.com'
     assert_match /layouts\/typus/, @controller.active_layout.to_s
   end
 
@@ -153,7 +153,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to :action => 'setup'
     assert flash[:error]
-    assert_equal "That doesn't seem like a valid email address.", flash[:error]
+    assert_equal 'That doesn\'t seem like a valid email address.', flash[:error]
     post :setup, :user => { :email => 'john@example.com' }
     assert_response :redirect
     assert_redirected_to :action => 'dashboard'
@@ -178,7 +178,7 @@ class TypusControllerTest < ActionController::TestCase
     get :dashboard
     assert_response :success
     assert_template 'dashboard'
-    assert_match "whatistypus.com", @response.body
+    assert_match 'whatistypus.com', @response.body
     assert_match /layouts\/admin/, @controller.active_layout.to_s
   end
 
@@ -231,7 +231,7 @@ class TypusControllerTest < ActionController::TestCase
     editor = typus_users(:editor)
     @request.session[:typus] = editor.id
     get :dashboard
-    assert_match "/admin/posts/new", @response.body
+    assert_match '/admin/posts/new', @response.body
     assert_no_match /\/admin\/typus_users\/new/, @response.body
     # We have loaded categories as a module, so are not displayed 
     # on the applications list.

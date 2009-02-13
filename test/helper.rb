@@ -16,7 +16,7 @@ connection = case ENV['DB']
              end
 
 ActiveRecord::Base.establish_connection(connection)
-ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
+ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + '/debug.log')
 
 ##
 # Remove the application load_paths for app/models to avoid conflicts.
@@ -40,7 +40,7 @@ ActionController::Base.view_paths = []
   ActionController::Base.append_view_path(File.join(Rails.root, 'vendor/plugins/typus', folder))
 end
 
-require File.dirname(__FILE__) + "/schema"
+require File.dirname(__FILE__) + '/schema'
 
 I18n.locale = :en
 

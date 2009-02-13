@@ -8,7 +8,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
   def setup
     user = typus_users(:editor)
     @request.session[:typus] = user.id
-    @request.env["HTTP_REFERER"] = "/admin/categories"
+    @request.env['HTTP_REFERER'] = '/admin/categories'
   end
 
   def test_should_position_item_one_step_down
@@ -77,7 +77,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     get :new
     assert_response :redirect
     assert flash[:notice]
-    assert_equal "Designer can't perform action (new)", flash[:notice]
+    assert_equal 'Designer can\'t perform action (new)', flash[:notice]
     assert_redirected_to :action => :index
   end
 
