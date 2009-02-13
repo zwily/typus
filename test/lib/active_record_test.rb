@@ -149,14 +149,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_booleans_for_typus_users
-    hash_status = { :true => "Active", :false => "Inactive" }
+    hash_status = { :true => 'Active', :false => 'Inactive' }
     assert_equal hash_status, TypusUser.typus_boolean('status')
-    hash_default = { :true => "True", :false => "False" }
+    hash_default = { :true => 'True', :false => 'False' }
     assert_equal hash_default, TypusUser.typus_boolean
   end
 
   def test_should_return_booleans_for_post
-    hash = { :true => "True", :false => "False" }
+    hash = { :true => 'True', :false => 'False' }
     assert_equal hash, Post.typus_boolean('status')
   end
 
@@ -270,13 +270,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   def test_should_verify_typus_name_is_working_properly
     assert Category.new.respond_to?(:name)
-    assert_equal "First Category", categories(:first).typus_name
+    assert_equal 'First Category', categories(:first).typus_name
     assert !Page.new.respond_to?(:name)
-    assert_equal "Page#1", pages(:published).typus_name
+    assert_equal 'Page#1', pages(:published).typus_name
   end
 
   def test_should_verify_typus_template_is_working_properly
-   assert_equal "datepicker", Post.typus_template('published_at')
+   assert_equal 'datepicker', Post.typus_template('published_at')
    assert_equal nil, Post.typus_template('created_at')
    assert_equal nil, Post.typus_template('unknown')
   end

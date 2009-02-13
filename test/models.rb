@@ -63,7 +63,7 @@ class Post < ActiveRecord::Base
   has_many :assets, :as => :resource, :dependent => :destroy
 
   def self.typus
-    "plugin"
+    'plugin'
   end
 
   def self.status

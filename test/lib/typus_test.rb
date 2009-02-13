@@ -5,17 +5,17 @@ class TypusTest < ActiveSupport::TestCase
   def test_should_return_applications_and_should_be_sorted
     assert Typus.respond_to?(:applications)
     assert Typus.applications.kind_of?(Array)
-    assert_equal ["Blog", "Site", "Typus"], Typus.applications
+    assert_equal %w( Blog Site Typus ), Typus.applications
   end
 
   def test_should_return_modules_of_an_application
     assert Typus.respond_to?(:application)
-    assert_equal ["Comment", "Post"], Typus.application('Blog')
+    assert_equal %w( Comment Post ), Typus.application('Blog')
   end
 
   def test_should_return_modules_of_a_module
     assert Typus.respond_to?(:module)
-    assert_equal ["Category"], Typus.module("Post")
+    assert_equal %w( Category ), Typus.module('Post')
   end
 
   def test_should_verify_parent_exists
@@ -24,12 +24,12 @@ class TypusTest < ActiveSupport::TestCase
 
   def test_should_verify_parent_for_module
     assert Typus.parent(TypusUser.name, 'module').kind_of?(String)
-    assert_equal "Typus", Typus.parent(TypusUser.name, 'module')
+    assert_equal 'Typus', Typus.parent(TypusUser.name, 'module')
   end
 
   def test_should_verify_parent_for_application
     assert Typus.parent(TypusUser.name, 'application').kind_of?(String)
-    assert_equal "Typus", Typus.parent(TypusUser.name, 'application')
+    assert_equal 'Typus', Typus.parent(TypusUser.name, 'application')
   end
 
   def test_should_verify_parent_for_nothing
@@ -50,7 +50,7 @@ class TypusTest < ActiveSupport::TestCase
 
   def test_should_return_description_of_module
     assert Typus.respond_to?(:module_description)
-    assert_equal "System Users Administration", Typus.module_description('TypusUser')
+    assert_equal 'System Users Administration', Typus.module_description('TypusUser')
   end
 
   def test_should_verify_enable_exists
