@@ -111,7 +111,7 @@ class AdminController < ApplicationController
   #
   def edit
     item_params = params.dup
-    %w( action controller model model_id back_to id ).each { |p| item_params.delete(p) }
+    %w( action controller model model_id back_to id resource resource_id ).each { |p| item_params.delete(p) }
     # We assign the params passed trough the url
     @item.attributes = item_params
     @previous, @next = @item.previous_and_next
@@ -135,7 +135,11 @@ class AdminController < ApplicationController
       if Typus::Configuration.options[:edit_after_create]
         redirect_to :action => 'edit', :id => @item.id
       else
-        redirect_to :action => 'index'
+        if params[:back_to]
+          redirect_to "#{params[:back_to]}##{@resource[:self]}"
+        else
+          redirect_to :action => 'index'
+        end
       end
     else
       @previous, @next = @item.previous_and_next
