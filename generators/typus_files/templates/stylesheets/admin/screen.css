@@ -605,10 +605,14 @@ div#dialog {
   padding: 10px;
 }
 
+  .box:hover {
+    border: 1px solid #999;
+  }
+
   .box .preview {
     float: left;
-    width: 150px;
-    margin: 0px 10px 0px 0px;
+    margin: 0px 15px 0px 0px;
+    width: 200px;
   }
 
   .box .content {
