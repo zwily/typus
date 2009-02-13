@@ -67,11 +67,15 @@ You can overwrite the following settings:
 You can overwrite this settings in the initializer `typus.rb` and can 
 overwrite options by model.
 
-    Page:
+    Post:
       options:
         per_page: 5
         form_rows: 25
+        sidebar_selector: 5
         edit_after_create: false
+        minute_step: 15
+        start_year: 1990
+        end_year: 2015
 
 ### Special Route
 

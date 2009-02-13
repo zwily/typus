@@ -6,9 +6,9 @@ module AdminFormHelper
 
   def build_form(fields)
 
-    options = { :start_year => Typus::Configuration.options[:start_year], 
-                :end_year => Typus::Configuration.options[:end_year], 
-                :minute_step => Typus::Configuration.options[:minute_step] }
+    options = { :start_year => @resource[:class].typus_options_for(:start_year), 
+                :end_year => @resource[:class].typus_options_for(:end_year), 
+                :minute_step => @resource[:class].typus_options_for(:minute_step) }
 
     returning(String.new) do |html|
       html << "#{error_messages_for :item, :header_tag => "h3"}"
