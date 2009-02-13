@@ -141,7 +141,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal [ :status ], Post.typus_field_options_for(:questions)
   end
 
-  def test_should_return_options_for_post_and
+  def test_should_return_options_for_post_and_page
     assert_equal 10, Post.typus_options_for(:form_rows)
     assert_equal 10, Post.typus_options_for('form_rows')
     assert_equal 25, Page.typus_options_for(:form_rows)
