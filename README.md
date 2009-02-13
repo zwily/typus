@@ -44,38 +44,48 @@ server, go to <http://0.0.0.0:3000/admin> and follow the instructions.
 
 ## Plugin Configuration Options
 
-You can overwrite the following settings:
+You can overwrite the following settings.
 
     Typus::Configuration.options[:app_name]
-    Typus::Configuration.options[:per_page]
-    Typus::Configuration.options[:form_rows]
-    Typus::Configuration.options[:sidebar_selector]
-    Typus::Configuration.options[:minute_step]
-    Typus::Configuration.options[:start_year]
-    Typus::Configuration.options[:end_year]
-    Typus::Configuration.options[:email]
-    Typus::Configuration.options[:toggle]
-    Typus::Configuration.options[:edit_after_create]
-    Typus::Configuration.options[:root]
-    Typus::Configuration.options[:recover_password]
-    Typus::Configuration.options[:ssl]
-    Typus::Configuration.options[:icon_on_boolean]
     Typus::Configuration.options[:config_folder]
-    Typus::Configuration.options[:templates_folder]
+    Typus::Configuration.options[:email]
     Typus::Configuration.options[:ignore_missing_translations]
+    Typus::Configuration.options[:prefix]
+    Typus::Configuration.options[:recover_password]
+    Typus::Configuration.options[:root]
+    Typus::Configuration.options[:ssl]
+    Typus::Configuration.options[:templates_folder]
+    Typus::Configuration.options[:user_class_name]
+    Typus::Configuration.options[:user_fk]
+
+Model options.
+
+    Typus::Configuration.options[:edit_after_create]
+    Typus::Configuration.options[:end_year]
+    Typus::Configuration.options[:form_rows]
+    Typus::Configuration.options[:icon_on_boolean]
+    Typus::Configuration.options[:minute_step]
+    Typus::Configuration.options[:nil]
+    Typus::Configuration.options[:per_page]
+    Typus::Configuration.options[:sidebar_selector]
+    Typus::Configuration.options[:start_year]
+    Typus::Configuration.options[:toggle]
 
 You can overwrite this settings in the initializer `typus.rb` and can 
 overwrite options by model.
 
     Post:
       options:
-        per_page: 5
-        form_rows: 25
-        sidebar_selector: 5
         edit_after_create: false
-        minute_step: 15
-        start_year: 1990
         end_year: 2015
+        form_rows: 25
+        icon_on_boolean: true      # Unimplemented by model.
+        minute_step: 15
+        nil: 'nil'                 # Unimplemented by model.
+        per_page: 5
+        sidebar_selector: 5
+        start_year: 1990
+        toggle: true               # Unimplemented by model.
 
 ### Special Route
 

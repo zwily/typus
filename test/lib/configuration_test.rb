@@ -9,22 +9,29 @@ class ConfigurationTest < ActiveSupport::TestCase
   def test_should_verify_configuration_options
     initializer = "#{Rails.root}/config/initializers/typus.rb"
     unless File.exists?(initializer)
+      # Application wide settings
       assert_equal "Typus", Typus::Configuration.options[:app_name]
-      assert_equal 15, Typus::Configuration.options[:per_page]
-      assert_equal 10, Typus::Configuration.options[:form_rows]
-      assert_equal 5, Typus::Configuration.options[:minute_step]
-      assert_equal nil, Typus::Configuration.options[:start_year]
-      assert_equal nil, Typus::Configuration.options[:end_year]
-      assert_equal true, Typus::Configuration.options[:toggle]
-      assert_equal true, Typus::Configuration.options[:edit_after_create]
+      assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
       assert_equal 'admin@example.com', Typus::Configuration.options[:email]
-      assert_equal 'nil', Typus::Configuration.options[:nil]
+      assert_equal true, Typus::Configuration.options[:ignore_missing_translations]
+      assert_equal 'admin', Typus::Configuration.options[:prefix]
+      assert_equal true, Typus::Configuration.options[:recover_password]
+      assert_equal 'admin', Typus::Configuration.options[:root]
+      assert_equal false, Typus::Configuration.options[:ssl]
+      assert_equal 'admin/templates', Typus::Configuration.options[:templates_folder]
       assert_equal 'TypusUser', Typus::Configuration.options[:user_class_name]
       assert_equal 'typus_user_id', Typus::Configuration.options[:user_fk]
-      assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
-      assert_equal true, Typus::Configuration.options[:ignore_missing_translations]
-      assert_equal 'admin/templates', Typus::Configuration.options[:templates_folder]
-
+      # Model settings
+      assert_equal true, Typus::Configuration.options[:edit_after_create]
+      assert_equal nil, Typus::Configuration.options[:end_year]
+      assert_equal 10, Typus::Configuration.options[:form_rows]
+      assert_equal true, Typus::Configuration.options[:icon_on_boolean]
+      assert_equal 5, Typus::Configuration.options[:minute_step]
+      assert_equal 'nil', Typus::Configuration.options[:nil]
+      assert_equal 15, Typus::Configuration.options[:per_page]
+      assert_equal 10, Typus::Configuration.options[:sidebar_selector]
+      assert_equal nil, Typus::Configuration.options[:start_year]
+      assert_equal true, Typus::Configuration.options[:toggle]
     else
       assert Typus::Configuration.respond_to?(:options)
     end
