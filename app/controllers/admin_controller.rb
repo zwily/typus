@@ -95,7 +95,7 @@ class AdminController < ApplicationController
       create_with_back_to and return if params[:back_to]
       @item.save
       flash[:success] = t("{{model}} successfully created.", :model => @resource[:class_name_humanized])
-      if Typus::Configuration.options[:edit_after_create]
+      if @resource[:class].typus_options_for(:edit_after_create)
         redirect_to :action => 'edit', :id => @item.id
       else
         redirect_to :action => 'index'
@@ -132,7 +132,7 @@ class AdminController < ApplicationController
   def update
     if @item.update_attributes(params[:item])
       flash[:success] = t("{{model}} successfully updated.", :model => @resource[:class_name_humanized])
-      if Typus::Configuration.options[:edit_after_create]
+      if @resource[:class].typus_options_for(:edit_after_create)
         redirect_to :action => 'edit', :id => @item.id
       else
         if params[:back_to]

@@ -71,6 +71,7 @@ overwrite options by model.
       options:
         per_page: 5
         form_rows: 25
+        edit_after_create: false
 
 ### Special Route
 
