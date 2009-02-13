@@ -60,8 +60,6 @@ You can overwrite the following settings:
     Typus::Configuration.options[:recover_password]
     Typus::Configuration.options[:ssl]
     Typus::Configuration.options[:icon_on_boolean]
-    Typus::Configuration.options[:thumbnail]
-    Typus::Configuration.options[:thumbnail_zoom]
     Typus::Configuration.options[:config_folder]
     Typus::Configuration.options[:templates_folder]
     Typus::Configuration.options[:ignore_missing_translations]

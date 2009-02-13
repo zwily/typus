@@ -43,8 +43,6 @@ module Typus
                   :nil => 'nil', 
                   :user_class_name => 'TypusUser', 
                   :user_fk => 'typus_user_id', 
-                  :thumbnail => :thumb, 
-                  :thumbnail_zoom => :normal, 
                   :config_folder => 'config/typus', 
                   :templates_folder => 'admin/templates',
                   :ignore_missing_translations => true }
