@@ -60,13 +60,17 @@ You can overwrite the following settings:
     Typus::Configuration.options[:recover_password]
     Typus::Configuration.options[:ssl]
     Typus::Configuration.options[:icon_on_boolean]
-    Typus::Configuration.options[:thumbnail]
-    Typus::Configuration.options[:thumbnail_zoom]
     Typus::Configuration.options[:config_folder]
     Typus::Configuration.options[:templates_folder]
     Typus::Configuration.options[:ignore_missing_translations]
 
-You can overwrite this settings in the initializer `typus.rb`.
+You can overwrite this settings in the initializer `typus.rb` and can 
+overwrite options by model.
+
+    Page:
+      options:
+        per_page: 5
+        form_rows: 25
 
 ### Special Route
 

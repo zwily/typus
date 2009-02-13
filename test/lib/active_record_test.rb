@@ -141,6 +141,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal [ :status ], Post.typus_field_options_for(:questions)
   end
 
+  def test_should_return_options_for_post_and
+    assert_equal 10, Post.typus_options_for(:form_rows)
+    assert_equal 10, Post.typus_options_for('form_rows')
+    assert_equal 25, Page.typus_options_for(:form_rows)
+    assert_equal 25, Page.typus_options_for('form_rows')
+  end
+
   def test_should_return_booleans_for_typus_users
     hash_status = { :true => "Active", :false => "Inactive" }
     assert_equal hash_status, TypusUser.typus_boolean('status')

@@ -150,7 +150,7 @@ module AdminFormHelper
   def typus_text_field(attribute)
     <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
-#{text_area :item, attribute, :class => 'text', :rows => Typus::Configuration.options[:form_rows], :disabled => attribute_disabled?(attribute)}</li>
+#{text_area :item, attribute, :class => 'text', :rows => @resource[:class].typus_options_for(:form_rows), :disabled => attribute_disabled?(attribute)}</li>
     HTML
   end
 
@@ -215,7 +215,8 @@ module AdminFormHelper
 
   def typus_form_has_many(field)
     returning(String.new) do |html|
-      model_to_relate = model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
+      model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
+      model_to_relate_as_resource = model_to_relate.name.tableize
       html << <<-HTML
 <a name="#{field}"></a>
 <div class="box_relationships">
@@ -226,7 +227,7 @@ module AdminFormHelper
       HTML
       items = @resource[:class].find(params[:id]).send(field)
       unless items.empty?
-        html << build_typus_table(model_to_relate, model_to_relate.typus_fields_for(:relationship), items)
+        html << build_list(model_to_relate, model_to_relate.typus_fields_for(:relationship), items, model_to_relate_as_resource)
       else
         html << <<-HTML
 <div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => t(field.titleize.downcase))}</p></div>
@@ -240,7 +241,8 @@ module AdminFormHelper
 
   def typus_form_has_and_belongs_to_many(field)
     returning(String.new) do |html|
-      model_to_relate = model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
+      model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
+      model_to_relate_as_resource = model_to_relate.name.tableize
       html << <<-HTML
 <a name="#{field}"></a>
 <div class="box_relationships">
@@ -260,7 +262,7 @@ module AdminFormHelper
       end
       items = @resource[:class].find(params[:id]).send(field)
       unless items.empty?
-        html << build_typus_table(model_to_relate, model_to_relate.typus_fields_for(:relationship), items)
+        html << build_list(model_to_relate, model_to_relate.typus_fields_for(:relationship), model_to_relate_as_resource)
       else
         html << <<-HTML
   <div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => t(field.titleize.downcase))}</p></div>

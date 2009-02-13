@@ -97,6 +97,7 @@ module Typus
       require 'typus/greetings'
 
       require 'vendor/paginator'
+      require 'vendor/active_record'
 
     end
 

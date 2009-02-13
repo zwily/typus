@@ -42,6 +42,8 @@ end
 
 require File.dirname(__FILE__) + "/schema"
 
+I18n.locale = :en
+
 class Object
   def t(*args); args end
 end

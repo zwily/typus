@@ -21,8 +21,6 @@ class ConfigurationTest < ActiveSupport::TestCase
       assert_equal 'nil', Typus::Configuration.options[:nil]
       assert_equal 'TypusUser', Typus::Configuration.options[:user_class_name]
       assert_equal 'typus_user_id', Typus::Configuration.options[:user_fk]
-      assert_equal :thumb, Typus::Configuration.options[:thumbnail]
-      assert_equal :normal, Typus::Configuration.options[:thumbnail_zoom]
       assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
       assert_equal true, Typus::Configuration.options[:ignore_missing_translations]
       assert_equal 'admin/templates', Typus::Configuration.options[:templates_folder]

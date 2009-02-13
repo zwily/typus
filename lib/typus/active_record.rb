@@ -174,6 +174,15 @@ module Typus
     end
 
     ##
+    # We should be able to overwrite options by model.
+    #
+    def typus_options_for(filter)
+      Typus::Configuration.config[self.name]['options'][filter.to_s]
+    rescue
+      Typus::Configuration.options[filter.to_sym]
+    end
+
+    ##
     # Used for +relationships+
     #
     def typus_relationships
