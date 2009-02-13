@@ -23,6 +23,9 @@ class Comment < ActiveRecord::Base
 
 end
 
+class CustomUser
+end
+
 class Page < ActiveRecord::Base
 
   def self.admin_order_by
@@ -62,16 +65,12 @@ class Post < ActiveRecord::Base
   has_many :comments
   has_many :assets, :as => :resource, :dependent => :destroy
 
-  def self.typus
-    'plugin'
-  end
-
   def self.status
     %w( pending published unpublished )
   end
 
-end
+  def self.typus
+    'plugin'
+  end
 
-class CustomUser
-  
 end
