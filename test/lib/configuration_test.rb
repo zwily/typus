@@ -10,7 +10,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     initializer = "#{Rails.root}/config/initializers/typus.rb"
     unless File.exists?(initializer)
       # Application wide settings
-      assert_equal "Typus", Typus::Configuration.options[:app_name]
+      assert_equal 'Typus', Typus::Configuration.options[:app_name]
       assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
       assert_equal 'admin@example.com', Typus::Configuration.options[:email]
       assert_equal true, Typus::Configuration.options[:ignore_missing_translations]
@@ -64,8 +64,8 @@ class ConfigurationTest < ActiveSupport::TestCase
     Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/ordered'
     files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
     expected = files.collect { |file| File.basename(file) }
-    assert_equal expected, ["001_roles.yml", "002_roles.yml"]
-    expected = { "admin" => { "categories" => "read" } }
+    assert_equal expected, ['001_roles.yml', '002_roles.yml']
+    expected = { 'admin' => { 'categories' => 'read' } }
     assert_equal expected, Typus::Configuration.roles!
   end
 
@@ -73,8 +73,8 @@ class ConfigurationTest < ActiveSupport::TestCase
     Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/unordered'
     files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
     expected = files.collect { |file| File.basename(file) }
-    assert_equal expected, ["app_one_roles.yml", "app_two_roles.yml"]
-    expected = { "admin" => { "categories" => "read, update" } }
+    assert_equal expected, ['app_one_roles.yml', 'app_two_roles.yml']
+    expected = { 'admin' => { 'categories' => 'read, update' } }
     assert_equal expected, Typus::Configuration.roles!
   end
 
