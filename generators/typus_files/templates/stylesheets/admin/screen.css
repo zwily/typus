@@ -435,24 +435,15 @@ a.on {
 
 /* @end */
 
-/* Search Box */
-
-.box {
-  border: 1px solid #D3D3D3;
-  margin: 1em 0em;
-  padding: 0.25em 1em;
-}
-
-.box_relationships {
-  border-top: 1px dotted #D3D3D3;
-  padding: 1.5em 0em;
-}
+/* @group Search Box */
 
 input#search {
   border: 1px solid #999;
   font-size: 1.2em;
   padding: 3px;
 }
+
+/* @end */
 
 /* @group Login Page Dialog */
 
@@ -603,6 +594,88 @@ div#dialog {
   .success a {
     color: #264409;
   }
+
+/* @end */
+
+/* @group Microformats */
+
+.box {
+  border: 1px solid #D3D3D3;
+  margin: 1em 0em;
+  padding: 10px;
+}
+
+  .box .preview {
+    float: left;
+    width: 150px;
+    margin: 0px 10px 0px 0px;
+  }
+
+  .box .content {
+  }
+
+    .box .content h2 {
+      font-size: 16px!important;
+      margin: 0px 0px 10px 0px!important;
+    }
+
+    .box .content h3 {
+      font-size: 14px!important;
+      margin: 0px 0px 10px 0px!important;
+    }
+
+    .box .content blockquote p {
+      font-size: 16px!important;
+    }
+
+    .box .content p {
+      font-size: 12px!important;
+      margin: 0px 0px 10px 0px!important;
+    }
+
+    .box .content ul {
+      margin: 0px 0px 10px 20px!important;
+    }
+
+  .box .metadata {
+    float: left;
+    width: 350px;
+  }
+
+    .box .metadata ul {
+      margin: 0!important;
+      padding: 0!important;
+    }
+
+    .box .metadata ul li {
+      list-style: none!important;
+    }
+
+  .box .actions {
+    float: right;
+    position: relative;
+    top: 0px;
+    right: 0px;
+    text-align: right;
+  }
+
+    .box .actions ul {
+      margin: 0px!important;
+    }
+
+    .box .actions ul li {
+      display: inline;
+      list-style: none!important;
+    }
+
+/* @end */
+
+/* @group Clean Me */
+
+.box_relationships {
+  border-top: 1px dotted #D3D3D3;
+  padding: 1.5em 0em;
+}
 
 /* @end */
 
