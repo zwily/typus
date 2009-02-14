@@ -81,8 +81,8 @@ module TypusHelper
 
   def typus_block(*args)
     options = args.extract_options!
-    file = ([] << "admin" << options[:model] << options[:location] << options[:partial])
-    render :partial => file.compact.join('/') rescue nil
+    file = ([] << 'admin' << options[:model] << options[:location] << options[:partial]).compact.join('/')
+    render :partial => file rescue nil
   end
 
   def page_title(action = params[:action])
