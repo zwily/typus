@@ -123,6 +123,15 @@ class TypusControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_render_typus_login_footer
+    expected = 'Typus'
+    get :sign_in
+    assert_response :success
+    assert_match /#{expected}/, @response.body
+    assert_match /layouts\/typus/, @controller.active_layout.to_s
+
+  end
+
   def test_should_render_admin_login_bottom
     get :sign_in
     assert_response :success
