@@ -19,10 +19,10 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     get :index
     assert_response :redirect
-    assert_redirected_to admin_login_url(:back_to => '/admin/posts')
+    assert_redirected_to admin_sign_in_path(:back_to => '/admin/posts')
     get :edit, { :id => 1 }
     assert_response :redirect
-    assert_redirected_to admin_login_url(:back_to => '/admin/posts')
+    assert_redirected_to admin_sign_in_path(:back_to => '/admin/posts')
 
   end
 

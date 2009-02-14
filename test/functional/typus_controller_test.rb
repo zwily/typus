@@ -8,38 +8,38 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_render_login
-    get :login
+    get :sign_in
     assert_response :success
-    assert_template 'login'
+    assert_template 'sign_in'
   end
 
-  def test_should_login_and_redirect_to_dashboard
+  def test_should_sign_in_and_redirect_to_dashboard
     typus_user = typus_users(:admin)
-    post :login, { :user => { :email => typus_user.email, 
-                              :password => '12345678' } }
+    post :sign_in, { :user => { :email => typus_user.email, 
+                                :password => '12345678' } }
     assert_equal typus_user.id, @request.session[:typus]
     assert_response :redirect
     assert_redirected_to admin_dashboard_url
   end
 
-  def test_should_not_login_disabled_user
+  def test_should_not_sign_in_a_disabled_user
     typus_user = typus_users(:disabled_user)
-    post :login, { :user => { :email => typus_user.email, 
-                              :password => '12345678' } }
+    post :sign_in, { :user => { :email => typus_user.email, 
+                                :password => '12345678' } }
     assert_nil @request.session[:typus]
     assert_response :redirect
-    assert_redirected_to admin_login_url
+    assert_redirected_to admin_sign_in_path
   end
 
-  def test_should_not_login_removed_role
+  def test_should_not_sign_in_a_removed_role
     typus_user = typus_users(:removed_role)
-    post :login, { :user => { :email => typus_user.email, 
-                              :password => '12345678' } }
+    post :sign_in, { :user => { :email => typus_user.email, 
+                                :password => '12345678' } }
     assert_equal typus_user.id, @request.session[:typus]
     assert_response :redirect
     assert_redirected_to admin_dashboard_url
     get :dashboard
-    assert_redirected_to admin_login_url
+    assert_redirected_to admin_sign_in_path
     assert_nil @request.session[:typus]
     assert flash[:error]
     assert_equal 'Error! Typus User or role doesn\'t exist.', flash[:error]
@@ -56,18 +56,18 @@ class TypusControllerTest < ActionController::TestCase
     admin = typus_users(:admin)
     post :recover_password, { :user => { :email => admin.email } }
     assert_response :redirect
-    assert_redirected_to admin_login_url
+    assert_redirected_to admin_sign_in_path
     assert flash[:success]
     assert_match /Password recovery link sent to your email/, flash[:success]
   end
 
-  def test_should_logout
+  def test_should_sign_out
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
-    get :logout
+    get :sign_out
     assert_nil @request.session[:typus]
     assert_response :redirect
-    assert_redirected_to admin_login_url
+    assert_redirected_to admin_sign_in_path
     [ :notice, :error, :warning ].each { |f| assert !flash[f] }
   end
 
@@ -82,7 +82,7 @@ class TypusControllerTest < ActionController::TestCase
     get :recover_password
 
     assert_response :redirect
-    assert_redirected_to admin_login_url
+    assert_redirected_to admin_sign_in_path
 
   end
 
@@ -97,7 +97,7 @@ class TypusControllerTest < ActionController::TestCase
     get :reset_password
 
     assert_response :redirect
-    assert_redirected_to admin_login_url
+    assert_redirected_to admin_sign_in_path
 
   end
 
@@ -112,65 +112,65 @@ class TypusControllerTest < ActionController::TestCase
     assert_template 'reset_password'
   end
 
-  def test_should_verify_admin_login_layout_does_not_include_recover_password_link
+  def test_should_verify_admin_sign_in_layout_does_not_include_recover_password_link
 
-    get :login
+    get :sign_in
     assert_match /Recover password/, @response.body
 
     Typus::Configuration.options[:recover_password] = false
-    get :login
+    get :sign_in
     assert !@response.body.include?('Recover password')
 
   end
 
   def test_should_render_typus_login_top
-    get :login
+    get :sign_in
     assert_response :success
     assert_match /_top.html.erb/, @response.body
     assert_match /layouts\/typus/, @controller.active_layout.to_s
   end
 
   def test_should_render_admin_login_bottom
-    get :login
+    get :sign_in
     assert_response :success
     assert_select 'h1', 'whatistypus.com'
     assert_match /layouts\/typus/, @controller.active_layout.to_s
   end
 
-  def test_should_verify_page_title_on_login
-    get :login
-    assert_select 'title', "#{Typus::Configuration.options[:app_name]} &rsaquo; Login"
+  def test_should_verify_page_title_on_sign_in
+    get :sign_in
+    assert_select 'title', "#{Typus::Configuration.options[:app_name]} &rsaquo; Sign in"
   end
 
   def test_should_create_first_typus_user
     TypusUser.destroy_all
     assert_nil @request.session[:typus]
     assert TypusUser.find(:all).empty?
-    get :login
+    get :sign_in
     assert_response :redirect
-    assert_redirected_to :action => 'setup'
-    post :setup, :user => { :email => 'example.com' }
+    assert_redirected_to admin_sign_up_path
+    post :sign_up, :user => { :email => 'example.com' }
     assert_response :redirect
-    assert_redirected_to :action => 'setup'
+    assert_redirected_to admin_sign_up_path
     assert flash[:error]
     assert_equal 'That doesn\'t seem like a valid email address.', flash[:error]
-    post :setup, :user => { :email => 'john@example.com' }
+    post :sign_up, :user => { :email => 'john@example.com' }
     assert_response :redirect
-    assert_redirected_to :action => 'dashboard'
+    assert_redirected_to admin_dashboard_path
     assert flash[:notice]
     assert_match /Your new password is/, flash[:notice]
     assert @request.session[:typus]
     assert !(TypusUser.find(:all).empty?)
     @request.session[:typus] = nil
-    get :setup
-    assert_redirected_to :action => 'login'
+    get :sign_up
+    assert_redirected_to admin_sign_in_path
   end
 
   def test_should_redirect_to_login_if_not_logged
     @request.session[:typus] = nil
     get :overview
     assert_response :redirect
-    assert_redirected_to admin_login_url(:back_to => '/admin/overview')
+    assert_redirected_to admin_sign_in_path(:back_to => '/admin/overview')
   end
 
   def test_should_render_dashboard
@@ -193,9 +193,9 @@ class TypusControllerTest < ActionController::TestCase
   def test_should_verify_overview_works
     @request.session[:typus] = typus_users(:admin).id
     TypusUser.destroy_all
-    get :setup
+    get :sign_up
     assert_response :success
-    assert_template 'setup'
+    assert_template 'sign_up'
     assert_match /layouts\/typus/, @controller.active_layout.to_s
   end
 

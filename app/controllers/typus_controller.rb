@@ -7,17 +7,22 @@ class TypusController < ApplicationController
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
-    ssl_required :dashboard, :overview, :login, :logout, :recover_password, :reset_password
+    ssl_required :dashboard, :overview, :sign_in, :sign_out, :recover_password, :reset_password
   end
 
   filter_parameter_logging :password
 
   before_filter :reload_config_et_roles
-  before_filter :require_login, :except => [ :login, :logout, :recover_password, :reset_password, :setup, :quick_edit ]
+  before_filter :require_login, 
+                :except => [ :sign_up, :sign_in, :sign_out, 
+                             :recover_password, :reset_password, :quick_edit ]
 
-  before_filter :check_if_user_can_perform_action_on_resource_without_model, :except => [ :overview, :dashboard, :login, :logout, :recover_password, :reset_password, :setup, :quick_edit ]
+  before_filter :check_if_user_can_perform_action_on_resource_without_model, 
+                :except => [ :sign_up, :sign_in, :sign_out, 
+                             :overview, :dashboard, :recover_password, :reset_password, :quick_edit ]
 
-  before_filter :recover_password_disabled?, :only => [ :recover_password, :reset_password ]
+  before_filter :recover_password_disabled?, 
+                :only => [ :recover_password, :reset_password ]
 
   ##
   # Application Dashboard
@@ -35,18 +40,18 @@ class TypusController < ApplicationController
   ##
   # Login
   #
-  def login
+  def sign_in
 
-    redirect_to :action => 'setup' and return if Typus.user_class.count.zero?
+    redirect_to admin_sign_up_path and return if Typus.user_class.count.zero?
 
     if request.post?
       user = Typus.user_class.authenticate(params[:user][:email], params[:user][:password])
       if user
         session[:typus] = user.id
-        redirect_to params[:back_to] || admin_dashboard_url
+        redirect_to params[:back_to] || admin_dashboard_path
       else
         flash[:error] = t("The Email and/or Password you entered is invalid.")
-        redirect_to admin_login_url
+        redirect_to admin_sign_in_path
       end
     end
 
@@ -55,9 +60,9 @@ class TypusController < ApplicationController
   ##
   # Logout and redirect to +admin_login+.
   #
-  def logout
+  def sign_out
     session[:typus] = nil
-    redirect_to admin_login_url
+    redirect_to admin_sign_in_path
   end
 
   ##
@@ -70,7 +75,7 @@ class TypusController < ApplicationController
         ActionMailer::Base.default_url_options[:host] = request.host_with_port
         TypusMailer.deliver_reset_password_link(user)
         flash[:success] = t("Password recovery link sent to your email.")
-        redirect_to admin_login_url
+        redirect_to admin_sign_in_path
       else
         redirect_to admin_recover_password_url
       end
@@ -86,17 +91,17 @@ class TypusController < ApplicationController
     if request.post?
       if @user.update_attributes(params[:user])
         flash[:success] = t("You can login with your new password.")
-        redirect_to admin_login_url
+        redirect_to admin_sign_in_path
       else
         flash[:error] = t("Passwords don't match.")
-        redirect_to :action => 'reset_password', :token => params[:token]
+        redirect_to admin_reset_password_path, :token => params[:token]
       end
     end
   end
 
-  def setup
+  def sign_up
 
-    redirect_to :action => 'login' and return unless Typus.user_class.count.zero?
+    redirect_to admin_sign_in_path and return unless Typus.user_class.count.zero?
 
     if request.post?
 
@@ -111,10 +116,10 @@ class TypusController < ApplicationController
       if user.save
         session[:typus] = user.id
         flash[:notice] = t("Your new password is '{{password}}'.", :password => password)
-        redirect_to :action => 'dashboard'
+        redirect_to admin_dashboard_path
       else
         flash[:error] = t("That doesn't seem like a valid email address.")
-        redirect_to :action => 'setup'
+        redirect_to admin_sign_up_path
       end
 
     else
@@ -154,11 +159,11 @@ document.write(links);
 private
 
   def recover_password_disabled?
-    redirect_to admin_login_url unless Typus::Configuration.options[:recover_password]
+    redirect_to admin_sign_in_path unless Typus::Configuration.options[:recover_password]
   end
 
   def select_layout
-    [ 'login', 'logout', 'recover_password', 'reset_password', 'setup' ].include?(action_name) ? 'typus' : 'admin'
+    [ 'sign_up', 'sign_in', 'sign_out', 'recover_password', 'reset_password' ].include?(action_name) ? 'typus' : 'admin'
   end
 
 end

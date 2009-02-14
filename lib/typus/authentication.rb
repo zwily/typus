@@ -16,7 +16,7 @@ protected
       set_current_user
     else
       back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
-      redirect_to admin_login_url(:back_to => back_to)
+      redirect_to admin_sign_in_path(:back_to => back_to)
     end
   end
 
@@ -31,7 +31,7 @@ protected
   rescue
     flash[:error] = t("Error! Typus User or role doesn't exist.")
     session[:typus] = nil
-    redirect_to admin_login_url
+    redirect_to admin_sign_in_path
   end
 
   ##
