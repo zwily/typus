@@ -276,6 +276,7 @@ a.on {
   #footer p {
     color: #FFF;
     font-size: 0.9em;
+    line-height: 18px;
     padding: 1em 0em;
   }
 
@@ -447,7 +448,7 @@ input#search {
 
 /* @group Login Page Dialog */
 
-div#bottom_dialog {
+#bottom_dialog {
   color: #FFF;
   font-size: 0.9em;
   line-height: 18px;
@@ -457,12 +458,12 @@ div#bottom_dialog {
   width: 35em;
 }
 
-  div#bottom_dialog a {
+  #bottom_dialog a {
     color: #FFF;
     font-weight: bold;
   }
 
-div#dialog {
+#dialog {
   background: #FFF;
   border: 0.5em solid #408BB6;
   margin: 5em auto 1em auto;
@@ -470,17 +471,17 @@ div#dialog {
   width: 35em;
 }
 
-  div#dialog h1 {
+  #dialog h1 {
     font-size: 2em;
     font-weight: bold;
     margin: 0.5em 0;
   }
 
-    div#dialog h1 a {
+    #dialog h1 a {
       font-weight: bold;
     }
 
-    div#dialog h1 a:hover {
+    #dialog h1 a:hover {
       color: #000;
       text-decoration: underline;
     }
@@ -489,7 +490,7 @@ div#dialog {
       margin: 1em 0;
     }
 
-  div#dialog li a {
+  #dialog li a {
     margin: 0.5em;
     display: inline;
     font-size: 11px;
