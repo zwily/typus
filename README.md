@@ -17,6 +17,26 @@ all my clients sites/projects requirements.
 
 ## Installing
 
+Install from GitHub.
+
+    $ git clone git://github.com/fesplugas/typus.git vendor/plugins/typus
+
+The `typus_files` generator copies required assets to the public folder 
+of your Rails application, creates configuration files on `config` 
+folder and generates the required database migration files. Make sure to 
+run `rake db:migrate` before running the generator as Typus has to connect 
+to your database to detect the model attributes.
+
+    $ script/generate typus_files
+
+Once `typus_files` generator is run, migrate your database to create the 
+required tables. (only `typus_users` table is created)
+
+    $ rake db:migrate
+
+And finally create the first user, to do it, start the application 
+server, go to <http://0.0.0.0:3000/admin> and follow the instructions.
+
 You can view the available tasks running:
 
     $ rake -T typus
@@ -26,21 +46,6 @@ You can view the available tasks running:
     rake typus:misc         # Install Paperclip, acts_as_list, acts_as_tree.
     rake typus:roles        # List current roles
     rake typus:ssl          # Intall ssl_requirement plugin.
-
-### Configure
-
-The following generator installs required assets to the public folder 
-of your Rails application, generates configuration files on `config` 
-folder and generates the required database migration files.
-
-    $ script/generate typus_files
-
-After creating the files migrate your database:
-
-    $ rake db:migrate
-
-And finally create the first user, to do it, start the application 
-server, go to <http://0.0.0.0:3000/admin> and follow the instructions.
 
 ## Plugin Configuration Options
 
@@ -71,8 +76,8 @@ Model options.
     Typus::Configuration.options[:start_year]
     Typus::Configuration.options[:toggle]
 
-You can overwrite this settings in the initializer `typus.rb` and can 
-overwrite options by model.
+You can also overwrite the model options by model. This is done always 
+from the yaml files under `config/typus`.
 
     Post:
       options:
@@ -571,14 +576,15 @@ created them you can run the tests.
 ## Splitting configuration files
 
 You can split your configuration files in several files so it can be easier 
-to mantain.
+to mantain. (Files will be loaded by alphabetical order so adding 00X can 
+help to load files in an special order.)
 
-    config/typus/application.yml
-    config/typus/newsletter.yml
-    config/typus/blog.yml
-    config/typus/application_roles.yml
-    config/typus/newsletter_roles.yml
-    config/typus/blog_roles.yml
+    config/typus/001-application.yml
+    config/typus/002-newsletter.yml
+    config/typus/003-blog.yml
+    config/typus/001-application_roles.yml
+    config/typus/002-newsletter_roles.yml
+    config/typus/003-blog_roles.yml
 
 ## Quick edit
 
