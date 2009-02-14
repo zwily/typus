@@ -14,10 +14,6 @@
 
 <body>
 
-  <div id="top_dialog">
-    <%= typus_block :location => 'login', :partial => 'top' %>
-  </div>
-
   <div id="dialog">
     <h1><%= link_to Typus::Configuration.options[:app_name], admin_sign_in_path %></h1>
     <%= display_flash_message %>

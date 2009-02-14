@@ -123,13 +123,6 @@ class TypusControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_render_typus_login_top
-    get :sign_in
-    assert_response :success
-    assert_match /_top.html.erb/, @response.body
-    assert_match /layouts\/typus/, @controller.active_layout.to_s
-  end
-
   def test_should_render_admin_login_bottom
     get :sign_in
     assert_response :success
