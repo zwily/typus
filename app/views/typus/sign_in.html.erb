@@ -1,4 +1,4 @@
-<% form_tag :action => 'sign_in', :back_to => params[:back_to] do %>
+<% form_tag admin_sign_in_path(:back_to => params[:back_to]) do %>
   <ul>
   <li><label for="email"><%= t("Email") %></label>
   <%= text_field :user, :email, :size => 20, :class => 'text' %></li>
