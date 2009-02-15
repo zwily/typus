@@ -1,4 +1,4 @@
-class TypusFilesGenerator < Rails::Generator::Base
+class TypusGenerator < Rails::Generator::Base
 
   def manifest
 

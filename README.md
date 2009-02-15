@@ -21,15 +21,15 @@ Install from GitHub.
 
     $ script/plugin install git://github.com/fesplugas/typus.git
 
-The `typus_files` generator copies required assets to the public folder 
+The `typus` generator copies required assets to the public folder 
 of your Rails application, creates configuration files on `config` 
 folder and generates the required database migration files. Make sure to 
 run `rake db:migrate` before running the generator as Typus has to connect 
 to your database to detect the model attributes.
 
-    $ script/generate typus_files
+    $ script/generate typus
 
-Once `typus_files` generator is run, migrate your database to create the 
+Once `typus` generator is run, migrate your database to create the 
 required tables. (only `typus_users` table is created)
 
     $ rake db:migrate
@@ -126,7 +126,7 @@ main index you can owerwrite the setting.
 
 You can configure all **Typus** settings from the `application.yml` 
 file located under the `config/typus` folder. This file is created 
-once you run the `typus_files` generator.
+once you run the `typus` generator.
 
 ### Typus Fields
 

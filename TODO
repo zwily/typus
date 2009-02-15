@@ -31,7 +31,7 @@ DONE
 [X] Dont generate the typus_users_controller under 
     RAILS_ROOT/app/controoller/admin (20081102)
 [X] Better search, filters cleanup. (20081102)
-[X] One step configuration. typus_files should also generate the 
+[X] One step configuration. typus should also generate the 
 migration. (20081102)
 [X] Move assets to admin folder. (20081102)
 [X] Remove application paths for models, controllers, views and 
