@@ -211,7 +211,7 @@ module Typus
       order = []
 
       begin
-        fields = self.send("admin_order_by").map { |a| a.to_s }
+        fields = self.send('admin_order_by').map { |a| a.to_s }
       rescue
         config = Typus::Configuration.config[self.name]
         return "`#{self.table_name}`.id ASC" unless config && config['order_by']
@@ -219,7 +219,7 @@ module Typus
       end
 
       fields.each do |field|
-        order_by = (field.include?("-")) ? "`#{self.table_name}`.#{field.delete('-')} DESC" : "`#{self.table_name}`.#{field} ASC"
+        order_by = (field.include?('-')) ? "`#{self.table_name}`.#{field.delete('-')} DESC" : "`#{self.table_name}`.#{field} ASC"
         order << order_by
       end
 
