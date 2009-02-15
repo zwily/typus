@@ -100,21 +100,26 @@ module Typus
     #  Extended actions for this model on Typus.
     #
     def typus_actions_for(filter)
-      Typus::Configuration.config[self.name]['actions'][filter.to_s].split(', ') rescue []
+      Typus::Configuration.config[self.name]['actions'][filter.to_s].split(', ')
+    rescue
+      []
     end
 
     ##
-    # Used for +search+.
+    # Used for +search+, +relationships+
     #
     def typus_defaults_for(filter)
-      Typus::Configuration.config[self.name][filter.to_s].split(', ') rescue []
+      data = Typus::Configuration.config[self.name][filter.to_s]
+      return (!data.nil?) ? data.split(', ') : []
     end
 
     ##
     #
     #
     def typus_field_options_for(filter)
-      Typus::Configuration.config[self.name]['fields']['options'][filter.to_s].split(', ').collect { |i| i.to_sym } rescue []
+      Typus::Configuration.config[self.name]['fields']['options'][filter.to_s].split(', ').collect { |i| i.to_sym }
+    rescue
+      []
     end
 
     ##
@@ -129,14 +134,6 @@ module Typus
 
       return (!value.nil?) ? value : Typus::Configuration.options[filter.to_sym]
 
-    end
-
-    ##
-    # Used for +relationships+
-    #
-    def typus_relationships
-      data = Typus::Configuration.config[self.name]['relationships']
-      return (!data.nil?) ? data.split(', ') : []
     end
 
     ##

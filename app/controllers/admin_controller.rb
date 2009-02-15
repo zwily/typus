@@ -290,7 +290,7 @@ private
   #
   def set_form_fields
     @fields = @resource[:class].typus_fields_for(:form)
-    @item_relationships = @resource[:class].typus_relationships
+    @item_relationships = @resource[:class].typus_defaults_for('relationships')
   end
 
   ##

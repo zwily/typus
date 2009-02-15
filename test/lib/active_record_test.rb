@@ -183,14 +183,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_relationships_for_post
-    assert_equal %w( assets categories ), Post.typus_relationships
-    assert !Post.typus_relationships.empty?
+    assert_equal %w( assets categories ), Post.typus_defaults_for('relationships')
+    assert !Post.typus_defaults_for('relationships').empty?
   end
 
   def test_should_return_order_by_for_model
     assert_equal "`posts`.title ASC, `posts`.created_at DESC", Post.typus_order_by
   end
-
 
   def test_should_return_order_by_for_model_without_configuration
     klass = Class.new(ActiveRecord::Base)
