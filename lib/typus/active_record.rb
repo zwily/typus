@@ -141,11 +141,10 @@ module Typus
     #
     def typus_order_by
 
-      order = []
+      fields = typus_defaults_for('order_by')
+      return "`#{self.table_name}`.id ASC" if fields.empty?
 
-      config = Typus::Configuration.config[self.name]
-      return "`#{self.table_name}`.id ASC" unless config && config['order_by']
-      fields = config['order_by'].split(', ')
+      order = []
 
       fields.each do |field|
         order_by = (field.include?('-')) ? "`#{self.table_name}`.#{field.delete('-')} DESC" : "`#{self.table_name}`.#{field} ASC"
