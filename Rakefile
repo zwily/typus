@@ -21,7 +21,7 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-desc "Generate specdoc-style documentation from tests"
+desc 'Generate specdoc-style documentation from tests'
 task :specs do
 
   puts 'Started'
