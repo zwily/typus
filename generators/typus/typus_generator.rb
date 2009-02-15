@@ -16,7 +16,7 @@ class TypusGenerator < Rails::Generator::Base
         class_name = model.sub(/\.rb$/,'').classify
         begin
           klass = class_name.constantize
-          ar_models << klass if klass.superclass.to_s.include?("ActiveRecord::Base")
+          ar_models << klass if klass.superclass.to_s.include?('ActiveRecord::Base')
         rescue Exception => e
           puts "=> [typus] #{e.message} on `#{class_name}`."
         end
@@ -34,8 +34,8 @@ class TypusGenerator < Rails::Generator::Base
       end
 
       # Initializers
-      m.template "initializers/typus.rb", 
-                 "config/initializers/typus.rb", 
+      m.template 'initializers/typus.rb', 
+                 'config/initializers/typus.rb', 
                  :assigns => { :application => application }
 
       # Public folders
@@ -45,16 +45,16 @@ class TypusGenerator < Rails::Generator::Base
         Dir.mkdir(folder) unless File.directory?(folder)
       end
 
-      m.file "stylesheets/admin/screen.css", "public/stylesheets/admin/screen.css"
-      m.file "stylesheets/admin/reset.css", "public/stylesheets/admin/reset.css"
-      m.file "javascripts/admin/application.js", "public/javascripts/admin/application.js"
+      m.file 'stylesheets/admin/screen.css', 'public/stylesheets/admin/screen.css'
+      m.file 'stylesheets/admin/reset.css', 'public/stylesheets/admin/reset.css'
+      m.file 'javascripts/admin/application.js', 'public/javascripts/admin/application.js'
 
       files = %w( spinner.gif trash.gif status_false.gif status_true.gif )
       files.each { |file| m.file "images/admin/#{file}", "public/images/admin/#{file}" }
 
-      # Migration files.
-      m.migration_template "db/create_typus_users.rb", 
-                           "db/migrate", 
+      # Migration files
+      m.migration_template 'db/create_typus_users.rb', 
+                           'db/migrate', 
                             { :migration_file_name => 'create_typus_users' }
 
     end
