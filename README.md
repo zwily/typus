@@ -1,8 +1,8 @@
 # Typus
 
-What's **Typus**? People at GitHub defined **Typus** as ...
+What's **Typus**?
 
-> Super easy admin interface for your Rails site.
+> Effortless admin interface for your Rails application.
 
 You can see some screenshots on the [wiki](http://github.com/fesplugas/typus/wikis).
 
