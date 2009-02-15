@@ -24,6 +24,17 @@
 #   search: title, body
 #   application: Application
 #   description: Some text to describe the model
+#   options:
+#     edit_after_create: false
+#     end_year: 2015
+#     form_rows: 25
+#     icon_on_boolean: true
+#     minute_step: 15
+#     nil: 'nil'
+#     per_page: 5
+#     sidebar_selector: 5
+#     start_year: 1990
+#     toggle: true
 #
 ###
 <%- ar_models.each do |model| -%>
