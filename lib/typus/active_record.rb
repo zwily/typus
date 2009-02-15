@@ -178,9 +178,9 @@ module Typus
     #
     def typus_options_for(filter)
 
-      config = Typus::Configuration.config[self.name]
-      unless config['options'].nil?
-        value = config['options'][filter.to_s] unless config['options'][filter.to_s].nil?
+      data = Typus::Configuration.config[self.name]
+      unless data['options'].nil?
+        value = data['options'][filter.to_s] unless data['options'][filter.to_s].nil?
       end
 
       return (!value.nil?) ? value : Typus::Configuration.options[filter.to_sym]
