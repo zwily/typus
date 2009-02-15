@@ -49,8 +49,6 @@ Post:
 User:
   fields:
     list: first_name, last_name, email
-  options:
-    form_rows:
 
 Comment:
   fields:
@@ -74,3 +72,5 @@ TypusUser:
   module: Typus
   description: System Users Administration
   application: Typus
+  options:
+    form_rows:
