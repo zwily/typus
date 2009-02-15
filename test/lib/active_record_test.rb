@@ -152,8 +152,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal 10, Asset.typus_options_for(:form_rows)
     assert_equal 10, Asset.typus_options_for('form_rows')
 
-    assert_equal nil, Category.typus_options_for(:form_rows)
-    assert_equal nil, Category.typus_options_for('form_rows')
+    assert_equal nil, User.typus_options_for(:form_rows)
+    assert_equal nil, User.typus_options_for('form_rows')
 
   end
 
