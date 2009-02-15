@@ -177,12 +177,14 @@ module Typus
     # We should be able to overwrite options by model.
     #
     def typus_options_for(filter)
+
       config = Typus::Configuration.config[self.name]
       unless config['options'].nil?
-        Typus::Configuration.config[self.name]['options'][filter.to_s] unless config['options'][filter.to_s].nil?
-      else
-        Typus::Configuration.options[filter.to_sym]
+        value = config['options'][filter.to_s] unless config['options'][filter.to_s].nil?
       end
+
+      return (!value.nil?) ? value : Typus::Configuration.options[filter.to_sym]
+
     end
 
     ##

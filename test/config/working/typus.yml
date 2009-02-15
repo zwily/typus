@@ -72,5 +72,5 @@ TypusUser:
   module: Typus
   description: System Users Administration
   application: Typus
-#  options:
-#    form_rows:
+  options:
+    form_rows:
