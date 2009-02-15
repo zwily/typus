@@ -81,8 +81,9 @@ module Typus
 
       fields_with_type = ActiveSupport::OrderedHash.new
 
-      return [] unless Typus::Configuration.config[self.name]['filters']
-      fields = Typus::Configuration.config[self.name]['filters'].split(', ').collect { |i| i.to_sym }
+      data = Typus::Configuration.config[self.name]['filters']
+      return [] unless data
+      fields = data.split(', ').collect { |i| i.to_sym }
 
       fields.each do |field|
         attribute_type = self.model_fields[field.to_sym]
