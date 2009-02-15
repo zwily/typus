@@ -191,7 +191,8 @@ module Typus
     # Used for +relationships+
     #
     def typus_relationships
-      Typus::Configuration.config[self.name]['relationships'].split(', ') rescue []
+      data = Typus::Configuration.config[self.name]['relationships']
+      return (!data.nil?) ? data.split(', ') : []
     end
 
     ##
