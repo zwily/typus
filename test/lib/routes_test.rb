@@ -14,12 +14,6 @@ class RoutesTest < ActiveSupport::TestCase
 
   end
 
-  def test_should_verify_typus_generated_routes
-    %w( sign_in sign_out sign_up recover_password reset_password ).each do |route|
-      assert_generates "admin/#{route}", { :controller => 'typus', :action => route }
-    end
-  end
-
   def test_should_verify_admin_routes_for_a_typus_user
 
     routes = ActionController::Routing::Routes.named_routes.routes.keys
