@@ -213,47 +213,17 @@ You can define filters per model on the config file ...
 
     filters: status, author, created_at
 
-Or directly on the model:
-
-    class Post < ActiveRecord::Base
-
-      def self.admin_filters
-        [ :status, :author, :created_at ]
-      end
-
-    end
-
 ### Order
 
 Adding minus (-) sign before the attribute will make the order DESC.
 
     order_by: -attribute1, attribute2
 
-Or directly on the model:
-
-    class Post < ActiveRecord::Base
-
-      def self.admin_order_by
-        [ '-attribute1', 'attribute2' ]
-      end
-
-    end
-
 ### Searches
 
 You can define search filters on `config/typus/application.yml`
 
     search: attribute1, attribute2
-
-Or directly on the model:
-
-    class Post < ActiveRecord::Base
-
-      def self.admin_search
-        [ :attribute1, :attribute2 ]
-      end
-
-    end
 
 ### Questions?
 

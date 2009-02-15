@@ -24,29 +24,13 @@ module Typus
     ##
     # Form and list fields
     #
-    #   class Post < ActiveRecord::Base
-    #
-    #     def self.admin_fields_for_list
-    #       [ :title, :category_id, :status ]
-    #     end
-    #
-    #     def self.admin_fields_for_form
-    #       [ :title, :body, :excerpt, :category_id, :status ]
-    #     end
-    #
-    #   end
-    #
     def typus_fields_for(filter)
 
       fields_with_type = ActiveSupport::OrderedHash.new
 
       begin
-        if self.respond_to?("admin_fields_for_#{filter}")
-          fields = self.send("admin_fields_for_#{filter}")
-        else
-          fields = Typus::Configuration.config[self.name]['fields'][filter.to_s]
-          fields = fields.split(', ').collect { |f| f.to_sym }
-        end
+        fields = Typus::Configuration.config[self.name]['fields'][filter.to_s]
+        fields = fields.split(', ').collect { |f| f.to_sym }
       rescue
         return [] if filter == 'list'
         filter = 'list'
@@ -93,24 +77,12 @@ module Typus
     ##
     # Typus sidebar filters.
     #
-    #   class Post < ActiveRecord::Base
-    #
-    #     def self.admin_filters
-    #       [ :created_at, :status ]
-    #     end
-    #
-    #   end
-    #
     def typus_filters
 
       fields_with_type = ActiveSupport::OrderedHash.new
 
-      if self.respond_to?(:admin_filters)
-        fields = self.admin_filters
-      else
-        return [] unless Typus::Configuration.config[self.name]['filters']
-        fields = Typus::Configuration.config[self.name]['filters'].split(', ').collect { |i| i.to_sym }
-      end
+      return [] unless Typus::Configuration.config[self.name]['filters']
+      fields = Typus::Configuration.config[self.name]['filters'].split(', ').collect { |i| i.to_sym }
 
       fields.each do |field|
         attribute_type = self.model_fields[field.to_sym]
@@ -127,43 +99,15 @@ module Typus
     ##
     #  Extended actions for this model on Typus.
     #
-    #    class Post < ActiveRecord::Base
-    #
-    #      def self.admin_actions_for_index
-    #        [ :rebuild_all ]
-    #      end
-    #
-    #      def self.admin_actions_for_edit
-    #        [ :rebuild, :notify ]
-    #      end
-    #
-    #    end
-    #
     def typus_actions_for(filter)
-      if self.respond_to?("admin_actions_for_#{filter}")
-        self.send("admin_actions_for_#{filter}").map { |a| a.to_s }
-      else
-        Typus::Configuration.config[self.name]['actions'][filter.to_s].split(', ') rescue []
-      end
+      Typus::Configuration.config[self.name]['actions'][filter.to_s].split(', ') rescue []
     end
 
     ##
     # Used for +search+.
     #
-    #   class Post < ActiveRecord::Base
-    #
-    #     def self.admin_search
-    #       [ 'title', 'details' ]
-    #     end
-    #
-    #   end
-    #
     def typus_defaults_for(filter)
-      if self.respond_to?("admin_#{filter}")
-        self.send("admin_#{filter}")
-      else
-        Typus::Configuration.config[self.name][filter.to_s].split(', ') rescue []
-      end
+      Typus::Configuration.config[self.name][filter.to_s].split(', ') rescue []
     end
 
     ##
@@ -198,25 +142,13 @@ module Typus
     ##
     # Used for order_by
     #
-    #   class Post < ActiveRecord::Base
-    #
-    #     def self.admin_order_by
-    #       [ '-created_at', 'name' ]
-    #     end
-    #
-    #   end
-    #
     def typus_order_by
 
       order = []
 
-      begin
-        fields = self.send('admin_order_by').map { |a| a.to_s }
-      rescue
-        config = Typus::Configuration.config[self.name]
-        return "`#{self.table_name}`.id ASC" unless config && config['order_by']
-        fields = config['order_by'].split(', ')
-      end
+      config = Typus::Configuration.config[self.name]
+      return "`#{self.table_name}`.id ASC" unless config && config['order_by']
+      fields = config['order_by'].split(', ')
 
       fields.each do |field|
         order_by = (field.include?('-')) ? "`#{self.table_name}`.#{field.delete('-')} DESC" : "`#{self.table_name}`.#{field} ASC"

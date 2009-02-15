@@ -27,35 +27,6 @@ class CustomUser
 end
 
 class Page < ActiveRecord::Base
-
-  def self.admin_order_by
-    [ 'status' ]
-  end
-
-  def self.admin_search
-    [ 'title', 'body' ]
-  end
-
-  def self.admin_filters
-    [ 'status', 'created_at' ]
-  end
-
-  def self.admin_actions_for_index
-    [ 'rebuild_all' ]
-  end
-
-  def self.admin_actions_for_edit
-    [ 'rebuild' ]
-  end
-
-  def self.admin_fields_for_list
-    [ 'title' ]
-  end
-
-  def self.admin_fields_for_form
-    [ 'title', 'body' ]
-  end
-
 end
 
 class Post < ActiveRecord::Base
