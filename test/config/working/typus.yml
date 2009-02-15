@@ -22,8 +22,6 @@ Category:
     form: name, permalink, position
   order_by: position
   module: Post
-  options:
-    form_rows:
 
 Post:
   fields:
@@ -51,6 +49,8 @@ Post:
 User:
   fields:
     list: first_name, last_name, email
+  options:
+    form_rows:
 
 Comment:
   fields:
