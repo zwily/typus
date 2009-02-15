@@ -142,10 +142,19 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_options_for_post_and_page
+
     assert_equal 10, Post.typus_options_for(:form_rows)
     assert_equal 10, Post.typus_options_for('form_rows')
+
     assert_equal 25, Page.typus_options_for(:form_rows)
     assert_equal 25, Page.typus_options_for('form_rows')
+
+    assert_equal 10, Asset.typus_options_for(:form_rows)
+    assert_equal 10, Asset.typus_options_for('form_rows')
+
+    assert_equal nil, Category.typus_options_for(:form_rows)
+    assert_equal nil, Category.typus_options_for('form_rows')
+
   end
 
   def test_should_return_booleans_for_typus_users
