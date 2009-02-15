@@ -19,7 +19,7 @@ all my clients sites/projects requirements.
 
 Install from GitHub.
 
-    $ git clone git://github.com/fesplugas/typus.git vendor/plugins/typus
+    $ script/plugin install git://github.com/fesplugas/typus.git
 
 The `typus_files` generator copies required assets to the public folder 
 of your Rails application, creates configuration files on `config` 
