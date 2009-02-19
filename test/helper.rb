@@ -21,7 +21,7 @@ ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + '/debug.log')
 ##
 # Remove the application load_paths for app/models to avoid conflicts.
 #
-ActiveSupport::Dependencies.load_paths = [ ]
+ActiveSupport::Dependencies.load_paths = []
 
 ##
 # We want to have our own controllers, helpers and models to be able 
