@@ -9,9 +9,11 @@ module TypusHelper
 
       Typus.applications.each do |app|
 
-        available = []
-        Typus.application(app).each { |r| available << r if @current_user.resources.include?(r) }
-        next if available.empty?
+        available = Typus.application(app).map do |resource|
+                      resource if @current_user.resources.include?(resource)
+                    end
+
+        next if available.compact.empty?
 
         html << <<-HTML
 <table>
@@ -20,7 +22,7 @@ module TypusHelper
 </tr>
         HTML
 
-        available.each do |model|
+        available.compact.each do |model|
           description = Typus.module_description(model)
           html << <<-HTML
 <tr class=\"#{cycle('even', 'odd')}\">
@@ -47,9 +49,10 @@ module TypusHelper
   #
   def resources
 
-    available = []
-    Typus.resources.each { |r| available << r if @current_user.resources.include?(r) }
-    return if available.empty?
+    available = Typus.resources.map do |resource|
+                  resource if @current_user.resources.include?(resource)
+                end
+    return if available.compact.empty?
 
     returning(String.new) do |html|
 
@@ -60,7 +63,7 @@ module TypusHelper
 </tr>
       HTML
 
-      available.each do |resource|
+      available.compact.each do |resource|
 
         html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
