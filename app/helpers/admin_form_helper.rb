@@ -192,7 +192,7 @@ module AdminFormHelper
 
   def typus_relationships
 
-    @back_to = "/" + ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
+    @back_to = '/' + ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
 
     returning(String.new) do |html|
       @item_relationships.each do |relationship|
