@@ -90,7 +90,7 @@ module AdminSidebarHelper
 
   def search
 
-    typus_search = Typus::Configuration.config[@resource[:class_name]]['search']
+    typus_search = @resource[:class].typus_defaults_for('search')
     return if typus_search.nil?
 
     to_sentence_options = case Rails.version
@@ -100,7 +100,7 @@ module AdminSidebarHelper
                             { :skip_last_comma => true, :connector => '&' }
                           end
 
-    search_by = typus_search.split(', ').collect { |x| t(x) }.to_sentence(to_sentence_options).titleize.downcase
+    search_by = typus_search.collect { |x| t(x) }.to_sentence(to_sentence_options).titleize.downcase
 
     search_params = params.dup
     %w( action controller search page ).each { |p| search_params.delete(p) }
