@@ -138,7 +138,7 @@ module AdminFormHelper
         end
       end
       html << <<-HTML
-<li><label for=\"item_#{attribute}\">#{t(attribute.humanize)}</label>
+<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
   #{options.join("\n")}
@@ -164,7 +164,7 @@ module AdminFormHelper
   def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for=\"item_#{attribute}\">#{t(attribute.humanize)}</label>
+<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
   #{expand_tree_into_select_field(items, attribute_virtual)}

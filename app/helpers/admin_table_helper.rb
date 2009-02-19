@@ -84,9 +84,13 @@ module AdminTableHelper
         order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
         sort_order = (params[:sort_order] == 'asc') ? 'desc' : 'asc'
         if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
-          headers << "<th>#{link_to "<div class=\"#{sort_order}\">#{t(key.humanize)}</div>", { :params => params.merge(:order_by => order_by, :sort_order => sort_order) }}</th>"
+          headers << <<-HTML
+<th>#{link_to "<div class=\"#{sort_order}\">#{t(key.humanize)}</div>", { :params => params.merge(:order_by => order_by, :sort_order => sort_order) }}</th>
+          HTML
         else
-          headers << "<th>#{t(key.humanize)}</th>"
+          headers << <<-HTML
+<th>#{t(key.humanize)}</th>
+          HTML
         end
       end
       headers << "<th>&nbsp;</th>"

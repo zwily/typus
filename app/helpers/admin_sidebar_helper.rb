@@ -166,7 +166,9 @@ module AdminSidebarHelper
         items = []
         related_items.each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'selected' : ''
-          items << "<option #{switch} value=\"#{url_for params.merge(related_fk => item.id, :page => nil)}\">#{item.typus_name}</option>"
+          items << <<-HTML
+<option #{switch} value="#{url_for params.merge(related_fk => item.id, :page => nil)}">#{item.typus_name}</option>
+          HTML
         end
         html << <<-HTML
 <!-- Embedded JS -->
@@ -181,7 +183,7 @@ function surfto_#{model.name.downcase.pluralize}(form) {
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
   <select name="#{model.name.downcase.pluralize}" onChange="surfto_#{model.name.downcase.pluralize}(this.form)">
-    <option value=\"#{url_for params_without_filter}\">#{t("filter by")} #{t(model.name.titleize)}</option>
+    <option value="#{url_for params_without_filter}">#{t("filter by")} #{t(model.name.titleize)}</option>
     #{items.join("\n")}
   </select>
 </form></p>
