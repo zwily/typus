@@ -105,8 +105,7 @@ module AdminSidebarHelper
     search_params = params.dup
     %w( action controller search page ).each { |p| search_params.delete(p) }
 
-    hidden_params = []
-    search_params.each { |key, value| hidden_params << hidden_field_tag(key, value) }
+    hidden_params = search_params.map { |key, value| hidden_field_tag(key, value) }
 
     returning(String.new) do |html|
       html << <<-HTML
