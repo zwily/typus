@@ -143,12 +143,11 @@ module AdminTableHelper
 
   def typus_table_position_field(attribute, item)
     returning(String.new) do |html|
-      html_position = []
-      [["Up", "move_higher"], ["Down", "move_lower"]].each do |position|
-        html_position << <<-HTML
+      html_position = [["Up", "move_higher"], ["Down", "move_lower"]].map do |position|
+                        <<-HTML
 #{link_to t(position.first), :params => params.merge(:controller => item.class.name.tableize, :action => 'position', :id => item.id, :go => position.last)}
-        HTML
-      end
+                        HTML
+                      end
       html << <<-HTML
 <td>#{html_position.join('/ ')}</td>
       HTML
