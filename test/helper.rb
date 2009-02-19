@@ -44,10 +44,6 @@ require File.dirname(__FILE__) + '/schema'
 
 I18n.locale = :en
 
-class Object
-  def t(*args); args end
-end
-
 class ActiveSupport::TestCase
   self.fixture_path = File.dirname(__FILE__) + '/fixtures'
   self.use_transactional_fixtures = true
