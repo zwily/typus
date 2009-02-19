@@ -12,13 +12,11 @@ module AdminPublicHelper
     query = options.dup
     [ :color, :link ].each { |o| query.delete(o) }
 
-    html = <<-HTML
+    <<-HTML
 <script type="text/javascript">
   document.write('<script type="text/javascript" src="#{options[:link]}?#{query.to_query}" />');
 </script>
     HTML
-
-    return html
 
   end
 
