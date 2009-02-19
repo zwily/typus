@@ -103,13 +103,10 @@ module AdminFormHelper
     content_type = @item.send("#{attribute_display}_content_type")
 
     returning(String.new) do |html|
-
       html << <<-HTML
 <li><label for="item_#{attribute}">#{t(attribute_display.humanize)}</label>
+#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>
       HTML
-
-      html << "#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>"
-
     end
 
   end
