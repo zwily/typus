@@ -175,7 +175,7 @@ module AdminTableHelper
       status = item.send(attribute)
       content = (boolean_icon) ? image_tag("admin/status_#{status}.gif") : boolean_hash["#{status}".to_sym]
     else
-      # If content is nil, we show nil!
+      # Content is nil, so we show nil.
       content = @resource[:class].typus_options_for(:nil)
     end
 
@@ -189,7 +189,9 @@ module AdminTableHelper
         HTML
       else
         html << <<-HTML
-<td align="center">#{content}</td>
+<td align="center">
+  #{content}
+</td>
         HTML
       end
 
