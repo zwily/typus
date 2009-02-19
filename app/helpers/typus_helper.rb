@@ -88,11 +88,10 @@ module TypusHelper
   end
 
   def page_title(action = params[:action])
-    crumbs = []
-    crumbs << Typus::Configuration.options[:app_name]
+    crumbs = [ Typus::Configuration.options[:app_name] ]
     crumbs << @resource[:class_name_humanized].pluralize if @resource
     crumbs << t(action.humanize) unless %w( index ).include?(action)
-    return crumbs.compact.map { |x| x }.join(" &rsaquo; ")
+    return crumbs.compact.map { |x| x }.join(' &rsaquo; ')
   end
 
   def header
