@@ -7,6 +7,7 @@ module AdminHelper
   include AdminTableHelper
 
   def display_link_to_previous
+
     options = { }
     options[:resource_from] = @resource[:class_name].titleize
     options[:resource_to] = params[:resource].classify.titleize if params[:resource]
@@ -31,6 +32,7 @@ module AdminHelper
 </div>
       HTML
     end
+
   end
 
   def remove_filter_link(filter = request.env['QUERY_STRING'])
