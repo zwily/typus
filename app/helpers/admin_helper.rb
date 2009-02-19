@@ -11,7 +11,7 @@ module AdminHelper
     options[:resource_from] = @resource[:class_name].titleize
     options[:resource_to] = params[:resource].classify.titleize if params[:resource]
 
-    editing = (params[:action] == 'edit' || params[:action] == 'update')
+    editing = %w( edit update ).include?(params[:action])
 
     message = case
               when params[:resource] && editing
