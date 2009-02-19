@@ -12,7 +12,6 @@ module TypusHelper
         available = Typus.application(app).map do |resource|
                       resource if @current_user.resources.include?(resource)
                     end
-
         next if available.compact.empty?
 
         html << <<-HTML
@@ -25,9 +24,9 @@ module TypusHelper
         available.compact.each do |model|
           description = Typus.module_description(model)
           html << <<-HTML
-<tr class=\"#{cycle('even', 'odd')}\">
+<tr class="#{cycle('even', 'odd')}">
 <td>#{link_to t(model.titleize.pluralize), send("admin_#{model.tableize}_path")}<br /><small>#{t(description)}</small></td>
-<td class=\"right\"><small>
+<td class="right"><small>
 #{link_to t('Add'), send("new_admin_#{model.tableize.singularize}_path") if @current_user.can_perform?(model, 'create')}
 </small></td>
 </tr>
