@@ -47,12 +47,12 @@ module AdminTableHelper
 
         case params[:action]
         when 'index'
-          perform = link_to image_tag("admin/trash.gif"), { :action => 'destroy', 
+          perform = link_to image_tag('admin/trash.gif'), { :action => 'destroy', 
                                                             :id => item.id }, 
-                                                            :confirm => "Remove entry?", 
+                                                            :confirm => 'Remove entry?', 
                                                             :method => :delete
         else
-          perform = link_to image_tag("admin/trash.gif"), { :action => 'unrelate', 
+          perform = link_to image_tag('admin/trash.gif'), { :action => 'unrelate', 
                                                             :id => params[:id], 
                                                             :resource => item.class.name.tableize, 
                                                             :resource_id => item.id }, 
