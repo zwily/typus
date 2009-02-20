@@ -222,18 +222,13 @@ function surfto_#{model_pluralized}(form) {
 
   def string_filter(request, filter)
     values = @resource[:class].send(filter)
-    returning(String.new) do |html|
-      unless values.empty?
-        items = []
-        values.each do |item|
-          switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
-          items << "#{link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch}"
-        end
-        html << build_typus_list(items, filter)
-      else
-        html << "<p>No available #{filter}.</p>"
-      end
+    next if values.empty?
+    items = []
+    values.each do |item|
+      switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
+      items << "#{link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch}"
     end
+    build_typus_list(items, filter)
   end
 
 end
