@@ -170,6 +170,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   def test_should_return_booleans_for_typus_users
     hash_status = { :true => 'Active', :false => 'Inactive' }
     assert_equal hash_status, TypusUser.typus_boolean('status')
+    assert_equal hash_status, TypusUser.typus_boolean(:status)
     hash_default = { :true => 'True', :false => 'False' }
     assert_equal hash_default, TypusUser.typus_boolean
   end
@@ -177,12 +178,15 @@ class ActiveRecordTest < ActiveSupport::TestCase
   def test_should_return_booleans_for_post
     hash = { :true => 'True', :false => 'False' }
     assert_equal hash, Post.typus_boolean('status')
+    assert_equal hash, Post.typus_boolean(:status)
   end
 
   def test_should_return_date_formats_for_post
     assert_equal :post_short, Post.typus_date_format('created_at')
+    assert_equal :post_short, Post.typus_date_format(:created_at)
     assert_equal :db, Post.typus_date_format
     assert_equal :db, Post.typus_date_format('unknown')
+    assert_equal :db, Post.typus_date_format(:unknown)
   end
 
   def test_should_return_defaults_for_post
@@ -194,12 +198,15 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   def test_should_return_relationships_for_post
     assert_equal %w( assets categories ), Post.typus_defaults_for('relationships')
+    assert_equal %w( assets categories ), Post.typus_defaults_for(:relationships)
     assert !Post.typus_defaults_for('relationships').empty?
+    assert !Post.typus_defaults_for(:relationships).empty?
   end
 
   def test_should_return_order_by_for_model
     assert_equal "`posts`.title ASC, `posts`.created_at DESC", Post.typus_order_by
     assert_equal %w( title -created_at ), Post.typus_defaults_for('order_by')
+    assert_equal %w( title -created_at ), Post.typus_defaults_for(:order_by)
   end
 
   def test_should_return_sql_conditions_on_search_for_typus_user
@@ -290,9 +297,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_typus_template_is_working_properly
+
    assert_equal 'datepicker', Post.typus_template('published_at')
+   assert_equal 'datepicker', Post.typus_template(:published_at)
+
    assert_equal nil, Post.typus_template('created_at')
    assert_equal nil, Post.typus_template('unknown')
+
   end
 
 end

@@ -142,7 +142,7 @@ module Typus
     #
     def typus_order_by
 
-      fields = typus_defaults_for('order_by')
+      fields = typus_defaults_for(:order_by)
       return "`#{self.table_name}`.id ASC" if fields.empty?
 
       order = []
