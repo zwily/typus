@@ -51,10 +51,11 @@ module AdminSidebarHelper
     end
   end
 
-  def build_typus_list(items, header = nil)
+  def build_typus_list(items, header = nil, selector = nil)
     return "" if items.empty?
     returning(String.new) do |html|
       html << "<h2>#{I18n.t(header.humanize, :default => header.humanize)}</h2>" unless header.nil?
+      next unless selector.nil?
       html << "<ul>\n"
       items.each do |item|
         html << "<li>#{item}</li>\n"
@@ -146,30 +147,25 @@ module AdminSidebarHelper
 
   def relationship_filter(request, filter, habtm = false)
 
-    if habtm
-      model = filter.classify.constantize
-      related_fk = filter
-    else
-      model = filter.capitalize.camelize.constantize
-      related_fk = @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
-    end
+    model = (habtm) ? filter.classify.constantize : filter.capitalize.camelize.constantize
+    related_fk = (habtm) ? filter : @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
 
     params_without_filter = params.dup
     %w( controller action page ).each { |p| params_without_filter.delete(p) }
     params_without_filter.delete(related_fk)
 
+    items = []
+
     returning(String.new) do |html|
-      html << "<p>No available #{model.name.titleize.pluralize.downcase}.</p>" and next if model.count.zero?
       related_items = model.find(:all, :order => model.typus_order_by)
-      if related_items.size > @resource[:class].typus_options_for(:sidebar_selector)
-        items = []
+      if related_items.size > model.typus_options_for(:sidebar_selector)
         related_items.each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'selected' : ''
           items << <<-HTML
 <option #{switch} value="#{url_for params.merge(related_fk => item.id, :page => nil)}">#{item.typus_name}</option>
           HTML
         end
-        html << <<-HTML
+        form = <<-HTML
 <!-- Embedded JS -->
 <script>
 function surfto_#{model.name.downcase.pluralize}(form) {
@@ -188,14 +184,21 @@ function surfto_#{model.name.downcase.pluralize}(form) {
 </form></p>
         HTML
       else
-        items = []
         related_items.each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'on' : 'off'
           items << "#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch}"
         end
+      end
+
+      if form
+        html << build_typus_list(items, filter, true)
+        html << form
+      else
         html << build_typus_list(items, filter)
       end
+
     end
+
   end
 
   def datetime_filter(request, filter)
