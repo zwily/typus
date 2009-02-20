@@ -12,7 +12,7 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       html << (error_messages_for :item, :header_tag => 'h3')
-      html << "<ul>"
+      html << '<ul>'
       fields.each do |key, value|
         if template = @resource[:class].typus_template(key)
           html << typus_template_field(key, template, options)
@@ -33,7 +33,7 @@ module AdminFormHelper
           html << typus_string_field(key)
         end
       end
-      html << "</ul>"
+      html << '</ul>'
     end
   end
 
