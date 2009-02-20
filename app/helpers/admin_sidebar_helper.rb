@@ -91,7 +91,7 @@ module AdminSidebarHelper
   def search
 
     typus_search = @resource[:class].typus_defaults_for('search')
-    return if typus_search.nil?
+    return if typus_search.empty?
 
     to_sentence_options = case Rails.version
                           when '2.3.0'
