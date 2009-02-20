@@ -159,8 +159,8 @@ module Typus
     ##
     # We are able to define our own booleans.
     #
-    def typus_boolean(attribute = 'default')
-      boolean = Typus::Configuration.config[self.name]['fields']['options']['booleans'][attribute] rescue nil
+    def typus_boolean(attribute = :default)
+      boolean = Typus::Configuration.config[self.name]['fields']['options']['booleans'][attribute.to_s] rescue nil
       boolean = "true, false" if boolean.nil?
       return { :true => boolean.split(', ').first.humanize, 
                :false => boolean.split(', ').last.humanize }
@@ -169,8 +169,8 @@ module Typus
     ##
     # We are able to define how to display dates on Typus
     #
-    def typus_date_format(attribute = 'default')
-      date_format = Typus::Configuration.config[self.name]['fields']['options']['date_formats'][attribute] rescue nil
+    def typus_date_format(attribute = :default)
+      date_format = Typus::Configuration.config[self.name]['fields']['options']['date_formats'][attribute.to_s] rescue nil
       date_format = :db if date_format.nil?
       return date_format.to_sym
     end
@@ -179,7 +179,7 @@ module Typus
     # We are able to define which template to use to render the attribute within the form
     #
     def typus_template(attribute)
-      template = Typus::Configuration.config[self.name]['fields']['options']['templates'][attribute] rescue nil
+      template = Typus::Configuration.config[self.name]['fields']['options']['templates'][attribute.to_s] rescue nil
       return template
     end
 
