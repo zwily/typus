@@ -165,19 +165,20 @@ module AdminSidebarHelper
 <option #{switch} value="#{url_for params.merge(related_fk => item.id, :page => nil)}">#{item.typus_name}</option>
           HTML
         end
+        model_pluralized = model.name.downcase.pluralize
         form = <<-HTML
 <!-- Embedded JS -->
 <script>
-function surfto_#{model.name.downcase.pluralize}(form) {
-  var myindex = form.#{model.name.downcase.pluralize}.selectedIndex
-  if (form.#{model.name.downcase.pluralize}.options[myindex].value != "0") {
-    top.location.href = form.#{model.name.downcase.pluralize}.options[myindex].value;
+function surfto_#{model_pluralized}(form) {
+  var myindex = form.#{model_pluralized}.selectedIndex
+  if (form.#{model_pluralized}.options[myindex].value != "0") {
+    top.location.href = form.#{model_pluralized}.options[myindex].value;
   }
 }
 </script>
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
-  <select name="#{model.name.downcase.pluralize}" onChange="surfto_#{model.name.downcase.pluralize}(this.form)">
+  <select name="#{model_pluralized}" onChange="surfto_#{model_pluralized}(this.form)">
     <option value="#{url_for params_without_filter}">#{t("filter by")} #{t(model.name.titleize)}</option>
     #{items.join("\n")}
   </select>
