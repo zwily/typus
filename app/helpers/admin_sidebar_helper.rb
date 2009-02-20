@@ -26,7 +26,7 @@ module AdminSidebarHelper
     case params[:action]
     when 'index', 'edit', 'update'
       if @current_user.can_perform?(@resource[:class], 'create')
-        items << "#{link_to t("Add entry"), :action => 'new'}"
+        items << (link_to t("Add entry"), :action => 'new')
       end
     end
 
@@ -34,7 +34,7 @@ module AdminSidebarHelper
 
     case params[:action]
     when 'new', 'create', 'edit', 'update'
-      items << "#{link_to t("Back to list"), :action => 'index'}"
+      items << (link_to t("Back to list"), :action => 'index')
     end
 
     return items
@@ -45,7 +45,7 @@ module AdminSidebarHelper
     returning(Array.new) do |actions|
       @resource[:class].typus_actions_for(params[:action]).each do |action|
         if @current_user.can_perform?(@resource[:class], action)
-          actions << "#{link_to action.humanize, params.merge(:action => action)}"
+          actions << (link_to action.humanize, params.merge(:action => action))
         end
       end
     end
@@ -75,7 +75,7 @@ module AdminSidebarHelper
 
     returning(Array.new) do |items|
       models.each do |model|
-        items << "#{link_to model.humanize, :controller => model.tableize}"
+        items << (link_to model.humanize, :controller => model.tableize)
       end
     end
 
@@ -84,8 +84,8 @@ module AdminSidebarHelper
   def previous_and_next
     return [] unless %w( edit update ).include?(params[:action])
     returning(Array.new) do |items|
-      items << "#{link_to t("Next"), :action => 'edit', :id => @next.id}" if @next
-      items << "#{link_to t("Previous"), :action => 'edit', :id => @previous.id}" if @previous
+      items << (link_to t("Next"), :action => 'edit', :id => @next.id) if @next
+      items << (link_to t("Previous"), :action => 'edit', :id => @previous.id) if @previous
     end
   end
 
@@ -187,7 +187,7 @@ function surfto_#{model_pluralized}(form) {
       else
         related_items.each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'on' : 'off'
-          items << "#{link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch}"
+          items << (link_to item.typus_name, { :params => params.merge(related_fk => item.id, :page => nil) }, :class => switch)
         end
       end
 
@@ -206,7 +206,7 @@ function surfto_#{model_pluralized}(form) {
     items = []
     %w( today past_7_days this_month this_year ).each do |timeline|
       switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
-      items << "#{link_to timeline.titleize, { :params => params.merge(filter => timeline, :page => nil) }, :class => switch}"
+      items << (link_to timeline.titleize, { :params => params.merge(filter => timeline, :page => nil) }, :class => switch)
     end
     build_typus_list(items, filter)
   end
@@ -215,7 +215,7 @@ function surfto_#{model_pluralized}(form) {
     items = []
     @resource[:class].typus_boolean(filter).each do |key, value|
       switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
-      items << "#{link_to t(value), { :params => params.merge(filter => key, :page => nil) }, :class => switch}"
+      items << (link_to t(value), { :params => params.merge(filter => key, :page => nil) }, :class => switch)
     end
     build_typus_list(items, filter)
   end
@@ -226,7 +226,7 @@ function surfto_#{model_pluralized}(form) {
     items = []
     values.each do |item|
       switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
-      items << "#{link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch}"
+      items << (link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch)
     end
     build_typus_list(items, filter)
   end

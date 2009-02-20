@@ -11,7 +11,7 @@ module AdminFormHelper
                 :minute_step => @resource[:class].typus_options_for(:minute_step) }
 
     returning(String.new) do |html|
-      html << "#{error_messages_for :item, :header_tag => "h3"}"
+      html << (error_messages_for :item, :header_tag => 'h3')
       html << "<ul>"
       fields.each do |key, value|
         if template = @resource[:class].typus_template(key)
