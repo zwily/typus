@@ -133,7 +133,7 @@ module TypusHelper
     returning(String.new) do |html|
       html << <<-HTML
 <ul>
-  <li>#{t("Set language")}:</li>
+  <li>#{I18n.t("Set language", :default => "Set language")}:</li>
       HTML
       Typus.locales.each do |locale|
         html << <<-HTML
