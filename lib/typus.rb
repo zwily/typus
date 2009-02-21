@@ -3,6 +3,13 @@ module Typus
   class << self
 
     ##
+    # Returns a list of the available locales.
+    #
+    def locales
+      Typus::Configuration.options[:locales]
+    end
+
+    ##
     # Returns a list of all the applications.
     #
     def applications
@@ -78,26 +85,34 @@ module Typus
     #
     def enable
 
-      require 'typus/string'
+      # Ruby Extensions
       require 'typus/hash'
+      require 'typus/object'
+      require 'typus/string'
 
       Typus::Configuration.config!
       Typus::Configuration.roles!
       I18n.load_path += Dir[File.join("#{Rails.root}/vendor/plugins/typus/config/locales", '*.{rb,yml}')]
 
       require File.dirname(__FILE__) + "/../test/models" if Rails.env.test?
-      require 'typus/translation_helper' if Typus::Configuration.options[:ignore_missing_translations]
 
-      require 'typus/user'
+      # Rails Extensions
       require 'typus/active_record'
       require 'typus/routes'
-      require 'typus/export'
-      require 'typus/authentication'
-      require 'typus/object'
-      require 'typus/greetings'
 
-      require 'vendor/paginator'
+      # Rails Overwrites
+      require 'typus/translation_helper' if Typus::Configuration.options[:ignore_missing_translations]
+
+      # Mixins
+      require 'typus/authentication'
+      require 'typus/export'
+      require 'typus/greetings'
+      require 'typus/locale'
+      require 'typus/user'
+
+      # Vendor
       require 'vendor/active_record'
+      require 'vendor/paginator'
 
     end
 
