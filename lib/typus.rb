@@ -9,6 +9,9 @@ module Typus
       Typus::Configuration.options[:locales]
     end
 
+    ##
+    # Get the default locale.
+    #
     def default_locale
       locales.map(&:last).first
     end
