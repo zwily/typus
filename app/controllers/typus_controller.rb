@@ -12,6 +12,8 @@ class TypusController < ApplicationController
 
   filter_parameter_logging :password
 
+  before_filter :set_locale
+
   before_filter :reload_config_et_roles
   before_filter :require_login, 
                 :except => [ :sign_up, :sign_in, :sign_out, 
@@ -164,6 +166,10 @@ private
 
   def select_layout
     [ 'sign_up', 'sign_in', 'sign_out', 'recover_password', 'reset_password' ].include?(action_name) ? 'typus' : 'admin'
+  end
+
+  def set_locale
+    I18n.locale = Typus::Configuration.options[:locale]
   end
 
 end

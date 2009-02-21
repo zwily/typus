@@ -36,7 +36,8 @@ module Typus
                       :ssl => false, 
                       :templates_folder => 'admin/templates',
                       :user_class_name => 'TypusUser', 
-                      :user_fk => 'typus_user_id' }
+                      :user_fk => 'typus_user_id', 
+                      :locale => :en }
 
     model_options = { :edit_after_create => true, 
                       :end_year => nil,
