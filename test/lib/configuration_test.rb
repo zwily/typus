@@ -21,6 +21,7 @@ class ConfigurationTest < ActiveSupport::TestCase
       assert_equal 'admin/templates', Typus::Configuration.options[:templates_folder]
       assert_equal 'TypusUser', Typus::Configuration.options[:user_class_name]
       assert_equal 'typus_user_id', Typus::Configuration.options[:user_fk]
+      assert_equal [ [ "English", :en] ], Typus::Configuration.options[:locales]
       # Model settings
       assert_equal true, Typus::Configuration.options[:edit_after_create]
       assert_equal nil, Typus::Configuration.options[:end_year]
