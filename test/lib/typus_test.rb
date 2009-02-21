@@ -2,6 +2,18 @@ require 'test/helper'
 
 class TypusTest < ActiveSupport::TestCase
 
+  def test_should_return_locales
+    assert Typus.respond_to?(:locales)
+    assert Typus.locales.kind_of?(Array)
+    assert_equal [["English", :en]], Typus.locales
+  end
+
+  def test_should_return_default_locale
+    assert Typus.respond_to?(:default_locale)
+    assert Typus.default_locale.kind_of?(Symbol)
+    assert_equal :en, Typus.default_locale
+  end
+
   def test_should_return_applications_and_should_be_sorted
     assert Typus.respond_to?(:applications)
     assert Typus.applications.kind_of?(Array)
