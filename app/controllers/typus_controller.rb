@@ -4,6 +4,7 @@ class TypusController < ApplicationController
 
   include Authentication
   include Typus::Configuration::Reloader
+  include Typus::Locale
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
@@ -21,7 +22,7 @@ class TypusController < ApplicationController
 
   before_filter :check_if_user_can_perform_action_on_resource_without_model, 
                 :except => [ :sign_up, :sign_in, :sign_out, 
-                             :overview, :dashboard, :recover_password, :reset_password, :quick_edit ]
+                             :overview, :dashboard, :recover_password, :reset_password, :quick_edit, :set_locale ]
 
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
@@ -166,10 +167,6 @@ private
 
   def select_layout
     [ 'sign_up', 'sign_in', 'sign_out', 'recover_password', 'reset_password' ].include?(action_name) ? 'typus' : 'admin'
-  end
-
-  def set_locale
-    I18n.locale = Typus::Configuration.options[:locale]
   end
 
 end

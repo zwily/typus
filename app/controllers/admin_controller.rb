@@ -5,6 +5,7 @@ class AdminController < ApplicationController
   include Authentication
   include Typus::Export
   include Typus::Configuration::Reloader
+  include Typus::Locale
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
@@ -14,6 +15,8 @@ class AdminController < ApplicationController
   before_filter :reload_config_et_roles
 
   before_filter :require_login
+
+  before_filter :set_locale
 
   before_filter :set_resource
   before_filter :find_record, :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
