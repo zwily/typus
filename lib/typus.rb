@@ -9,6 +9,10 @@ module Typus
       Typus::Configuration.options[:locales]
     end
 
+    def default_locale
+      locales.map(&:last).first
+    end
+
     ##
     # Returns a list of all the applications.
     #
