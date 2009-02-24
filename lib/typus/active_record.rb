@@ -195,10 +195,9 @@ module Typus
 
       # If a search is performed.
       if query_params[:search]
-        search = []
-        self.typus_defaults_for(:search).each do |s|
-          search << ["LOWER(#{s}) LIKE '%#{query_params[:search]}%'"]
-        end
+        search = self.typus_defaults_for(:search).map do |s|
+                   ["LOWER(#{s}) LIKE '%#{query_params[:search]}%'"]
+                 end
         conditions = merge_conditions(conditions, search.join(' OR '))
       end
 
