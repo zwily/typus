@@ -158,7 +158,7 @@ module Typus
     #
     def typus_boolean(attribute = :default)
       boolean = Typus::Configuration.config[self.name]['fields']['options']['booleans'][attribute.to_s] rescue nil
-      boolean = "true, false" if boolean.nil?
+      boolean = 'true, false' if boolean.nil?
       return { :true => boolean.split(', ').first.humanize, 
                :false => boolean.split(', ').last.humanize }
     end
