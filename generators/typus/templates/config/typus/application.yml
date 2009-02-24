@@ -40,10 +40,9 @@
 <%- ar_models.each do |model| -%>
 <%- list = model.columns.reject { |c| c.sql_type == 'text' }.map(&:name) -%>
 <%- form = model.columns.reject { |c| c.name == 'id' }.map(&:name) -%>
-<%- relationships = [] -%>
-<%- [:belongs_to, :has_and_belongs_to_many, :has_many].each do |relationship| -%>
- <%- relationships += model.reflect_on_all_associations(relationship).map { |i| i.name.to_s } -%>
-<%- end -%>
+<%- relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many ].map do |relationship|
+                     model.reflect_on_all_associations(relationship).map { |i| i.name.to_s }
+                   end -%>
 
 <%= model %>:
   fields:
