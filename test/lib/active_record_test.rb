@@ -279,8 +279,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_sql_conditions_on_filtering_posts_by_string
-    # This case should verify when we have a filter like "Won't Fix"
-    # it's currently implemented, but not tested. :(
+    expected = "(\"typus_users\".\"roles\" = 'admin')"
+    params = { 'roles' => 'admin' }
+    assert_equal expected, TypusUser.build_conditions(params).first
   end
 
   def test_should_verify_previous_and_next_is_working
