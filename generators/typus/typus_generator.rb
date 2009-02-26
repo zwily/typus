@@ -7,8 +7,8 @@ class TypusGenerator < Rails::Generator::Base
       # We set a default name for our application.
       application = File.basename(Dir.pwd)
 
-      # For creating `typus.yml` and `typus_roles.yml` we need first to 
-      # detect the available AR models of the application, not the plugins.
+      # For creating `application.yml` and `application_roles.yml` we need 
+      # to detect available AR models on the application.
       models = Dir["#{Rails.root}/app/models/*.rb"].collect { |x| File.basename(x) }
       ar_models = []
 
@@ -27,16 +27,14 @@ class TypusGenerator < Rails::Generator::Base
       folder = "#{Rails.root}/#{config_folder}"
       Dir.mkdir(folder) unless File.directory?(folder)
 
-      files = %w( typus.yml typus_roles.yml application.yml application_roles.yml )
-      files.each do |file|
-        m.template "config/typus/#{file}", 
-                   "#{config_folder}/#{file}", 
+      Dir["#{Typus.root}/generators/typus/templates/config/typus/*"].each do |f|
+        base = File.basename(f)
+        m.template "config/typus/#{base}", "#{config_folder}/#{base}", 
                    :assigns => { :ar_models => ar_models, :application => application }
       end
 
       # Initializers
-      m.template 'initializers/typus.rb', 
-                 'config/initializers/typus.rb', 
+      m.template 'initializers/typus.rb', 'config/initializers/typus.rb', 
                  :assigns => { :application => application }
 
       # Public folders
@@ -50,14 +48,13 @@ class TypusGenerator < Rails::Generator::Base
       m.file 'stylesheets/admin/reset.css', 'public/stylesheets/admin/reset.css'
       m.file 'javascripts/admin/application.js', 'public/javascripts/admin/application.js'
 
-      Dir["#{Rails.root}/vendor/plugins/typus/generators/typus/templates/images/admin/*"].each do |f|
+      Dir["#{Typus.root}/generators/typus/templates/images/admin/*"].each do |f|
         base = File.basename(f)
         m.file "images/admin/#{base}", "public/images/admin/#{base}"
       end
 
       # Migration files
-      m.migration_template 'db/create_typus_users.rb', 
-                           'db/migrate', 
+      m.migration_template 'db/create_typus_users.rb', 'db/migrate', 
                             { :migration_file_name => 'create_typus_users' }
 
     end
