@@ -167,34 +167,28 @@ module AdminTableHelper
 
   def typus_table_boolean_field(attribute, item)
 
-    boolean_icon = @resource[:class].typus_options_for(:icon_on_boolean)
-    boolean_hash = @resource[:class].typus_boolean(attribute)
+    boolean_icon = item.class.typus_options_for(:icon_on_boolean)
+    boolean_hash = item.class.typus_boolean(attribute)
 
-    unless item.send(attribute).nil?
-      status = item.send(attribute)
-      content = (boolean_icon) ? image_tag("admin/status_#{status}.gif") : boolean_hash["#{status}".to_sym]
-    else
-      # Content is nil, so we show nil.
-      content = @resource[:class].typus_options_for(:nil)
-    end
+    status = item.send(attribute)
 
-    returning(String.new) do |html|
+    link_text = unless item.send(attribute).nil?
+                  (boolean_icon) ? image_tag("admin/status_#{status}.gif") : boolean_hash["#{status}".to_sym]
+                else
+                  item.class.typus_options_for(:nil) # Content is nil, so we show nil.
+                end
 
-      if @resource[:class].typus_options_for(:toggle) && !item.send(attribute).nil?
-        html << <<-HTML
-<td align="center">
-  #{link_to content, {:params => params.merge(:controller => item.class.name.tableize, :action => 'toggle', :field => attribute, :id => item.id)} , :confirm => "Change #{attribute.humanize.downcase}?"}
-</td>
-        HTML
-      else
-        html << <<-HTML
-<td align="center">
-  #{content}
-</td>
-        HTML
-      end
+    content = if item.class.typus_options_for(:toggle) && !item.send(attribute).nil?
+                link_to link_text, { :params => params.merge(:controller => item.class.name.tableize, :action => 'toggle', :field => attribute, :id => item.id) } , :confirm => "Change #{attribute.humanize.downcase}?"
+              else
+                link_text
+              end
 
-    end
+    html = <<-HTML
+<td align="center">#{content}</td>
+    HTML
+
+    return html
 
   end
 
