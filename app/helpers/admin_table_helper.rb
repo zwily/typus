@@ -133,10 +133,9 @@ module AdminTableHelper
               else
                 item.send(attribute)
               end
-    html = <<-HTML
+    <<-HTML
 <td>#{content}</td>
     HTML
-    return html
   end
 
   def typus_table_tree_field(attribute, item)
