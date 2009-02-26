@@ -303,11 +303,12 @@ private
   # Select which template to render.
   #
   def select_template(template, resource = @resource[:self])
-    if File.exists?("app/views/admin/#{resource}/#{template}.html.erb")
-      render :template => "admin/#{resource}/#{template}"
-    else
-      render :template => "admin/#{template}"
-    end
+    file = if File.exists?("app/views/admin/#{resource}/#{template}.html.erb")
+             "admin/#{resource}/#{template}"
+           else
+             "admin/#{template}"
+           end
+    render :template => file
   end
 
   ##
