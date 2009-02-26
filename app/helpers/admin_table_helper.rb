@@ -129,7 +129,7 @@ module AdminTableHelper
   #
   def typus_table_string_field(attribute, item, first_field, link_options = {})
     content = if first_field == attribute
-                link_to item.send(attribute) || @resource[:class].typus_options_for(:nil), link_options.merge(:controller => item.class.name.tableize, :action => 'edit', :id => item.id)
+                link_to item.send(attribute) || item.class.typus_options_for(:nil), link_options.merge(:controller => item.class.name.tableize, :action => 'edit', :id => item.id)
               else
                 item.send(attribute)
               end
@@ -160,7 +160,7 @@ module AdminTableHelper
   def typus_table_datetime_field(attribute, item)
 
     date_format = item.class.typus_date_format(attribute)
-    value = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : @resource[:class].typus_options_for(:nil)
+    value = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
     return "<td>#{value}</td>\n"
 
   end
