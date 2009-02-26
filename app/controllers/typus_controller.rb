@@ -80,7 +80,7 @@ class TypusController < ApplicationController
         flash[:success] = t("Password recovery link sent to your email.")
         redirect_to admin_sign_in_path
       else
-        redirect_to admin_recover_password_url
+        redirect_to admin_recover_password_path
       end
     end
   end
