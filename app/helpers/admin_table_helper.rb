@@ -128,17 +128,15 @@ module AdminTableHelper
   # types.
   #
   def typus_table_string_field(attribute, item, first_field, link_options = {})
-    returning(String.new) do |html|
-      if first_field == attribute
-        html << <<-HTML
-<td>#{link_to item.send(attribute) || @resource[:class].typus_options_for(:nil), link_options.merge(:controller => item.class.name.tableize, :action => 'edit', :id => item.id)}</td>
-        HTML
-      else
-        html << <<-HTML
-<td>#{item.send(attribute)}</td>
-        HTML
-      end
-    end
+    content = if first_field == attribute
+                link_to item.send(attribute) || @resource[:class].typus_options_for(:nil), link_options.merge(:controller => item.class.name.tableize, :action => 'edit', :id => item.id)
+              else
+                item.send(attribute)
+              end
+    html = <<-HTML
+<td>#{content}</td>
+    HTML
+    return html
   end
 
   def typus_table_tree_field(attribute, item)
