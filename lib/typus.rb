@@ -3,6 +3,13 @@ module Typus
   class << self
 
     ##
+    # Typus Root
+    #
+    def root
+      File.dirname(__FILE__) + '/../'
+    end
+
+    ##
     # Returns a list of the available locales.
     #
     def locales
