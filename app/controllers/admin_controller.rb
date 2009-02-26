@@ -284,9 +284,9 @@ private
   # Set fields and order when performing an index action.
   #
   def set_order_and_list_fields
-
+    # Set a default sort_order.
     params[:sort_order] ||= 'desc'
-
+    # Get @fields & @order.
     @fields = @resource[:class].typus_fields_for(:list)
     @order = params[:order_by] ? "`#{@resource[:table_name]}`.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
   end
