@@ -34,7 +34,7 @@ class TypusGenerator < Rails::Generator::Base
       end
 
       # Initializers
-      m.template 'initializers/typus.rb', 'config/initializers/typus.rb', 
+      m.template 'config/initializers/typus.rb', 'config/initializers/typus.rb', 
                  :assigns => { :application => application }
 
       # Public folders
@@ -44,13 +44,13 @@ class TypusGenerator < Rails::Generator::Base
         Dir.mkdir(folder) unless File.directory?(folder)
       end
 
-      m.file 'stylesheets/admin/screen.css', 'public/stylesheets/admin/screen.css'
-      m.file 'stylesheets/admin/reset.css', 'public/stylesheets/admin/reset.css'
-      m.file 'javascripts/admin/application.js', 'public/javascripts/admin/application.js'
+      m.file 'public/stylesheets/admin/screen.css', 'public/stylesheets/admin/screen.css'
+      m.file 'public/stylesheets/admin/reset.css', 'public/stylesheets/admin/reset.css'
+      m.file 'public/javascripts/admin/application.js', 'public/javascripts/admin/application.js'
 
-      Dir["#{Typus.root}/generators/typus/templates/images/admin/*"].each do |f|
+      Dir["#{Typus.root}/generators/typus/templates/public/images/admin/*"].each do |f|
         base = File.basename(f)
-        m.file "images/admin/#{base}", "public/images/admin/#{base}"
+        m.file "public/images/admin/#{base}", "public/images/admin/#{base}"
       end
 
       # Migration files
