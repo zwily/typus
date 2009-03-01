@@ -62,7 +62,11 @@ class AdminTableHelperTest < ActiveSupport::TestCase
     Time::DATE_FORMATS[:post_short] = '%m/%y'
 
     output = typus_table_datetime_field(:created_at, post)
-    assert_equal "<td>11/07</td>\n", output
+    expected = <<-HTML
+<td>11/07</td>
+    HTML
+
+    assert_equal expected, output
 
   end
 
