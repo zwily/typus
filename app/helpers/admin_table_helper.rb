@@ -161,7 +161,12 @@ module AdminTableHelper
 
     date_format = item.class.typus_date_format(attribute)
     value = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
-    return "<td>#{value}</td>\n"
+
+    html = <<-HTML
+<td>#{value}</td>
+    HTML
+
+    return html
 
   end
 
