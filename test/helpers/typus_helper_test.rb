@@ -34,7 +34,20 @@ class TypusHelperTest < ActiveSupport::TestCase
   end
 
   def test_display_flash_message
-    assert true
+
+    message = { :test => 'This is the message.' }
+
+    output = display_flash_message(message)
+    expected = <<-HTML
+<div id="flash" class="test"><p>This is the message.</p></div>
+    HTML
+
+    assert_equal expected, output
+
+    message = {}
+    output = display_flash_message(message)
+    assert output.nil?
+
   end
 
   def test_typus_message

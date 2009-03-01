@@ -110,14 +110,15 @@ module TypusHelper
     HTML
   end
 
-  def display_flash_message
-    return if flash.empty?
-    flash_type = flash.keys.first
-    returning(String.new) do |html|
-      html << <<-HTML
-<div id="flash" class="#{flash_type}"><p>#{flash[flash_type]}</p></div>
-      HTML
-    end
+  def display_flash_message(message = flash)
+
+    return if message.empty?
+    flash_type = message.keys.first
+
+    <<-HTML
+<div id="flash" class="#{flash_type}"><p>#{message[flash_type]}</p></div>
+    HTML
+
   end
 
   def typus_message(message, html_class = 'notice')
