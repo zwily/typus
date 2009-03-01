@@ -25,8 +25,15 @@ class TypusHelperTest < ActiveSupport::TestCase
   end
 
   def test_header
+
     output = header
-    assert_match /#{Typus::Configuration.options[:app_name]}/, output
+    expected = <<-HTML
+<h1>#{Typus::Configuration.options[:app_name]}</h1>
+
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_login_info

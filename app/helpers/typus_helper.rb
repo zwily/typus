@@ -95,17 +95,24 @@ module TypusHelper
   end
 
   def header
-    <<-HTML
-<h1>#{Typus::Configuration.options[:app_name]} 
-    <small>#{link_to t("View site"), root_path, :target => 'blank' rescue ''}</small></h1>
+
+    link_to_site = (link_to I18n.t("View site"), root_path, :target => 'blank') rescue ''
+    link_to_site = "<small>#{link_to_site}</small>" unless link_to_site.empty?
+
+    html = <<-HTML
+<h1>#{Typus::Configuration.options[:app_name]}</h1>
+#{link_to_site}
     HTML
+
+    return html
+
   end
 
   def login_info(user = @current_user)
     <<-HTML
 <ul>
-  <li>#{t("Logged as")} #{link_to user.full_name(:display_role => true), edit_admin_typus_user_path(user.id)}</li>
-  <li>#{link_to t("Sign out"), admin_sign_out_path}</li>
+  <li>#{I18n.t("Logged as")} #{link_to user.full_name(:display_role => true), edit_admin_typus_user_path(user.id)}</li>
+  <li>#{link_to I18n.t("Sign out"), admin_sign_out_path}</li>
 </ul>
     HTML
   end
