@@ -277,11 +277,8 @@ module AdminFormHelper
   end
 
   def attribute_disabled?(attribute, klass = @resource[:class])
-    if klass.accessible_attributes.nil?
-      return false
-    else
-      return !klass.accessible_attributes.include?(attribute)
-    end
+    accessible = klass.accessible_attributes
+    return accessible.nil? ? false : !accessible.include?(attribute)
   end
 
   ##

@@ -114,7 +114,19 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_attribute_disabled
-    assert true
+
+    output = attribute_disabled?('test', Post)
+    expected = false
+    assert_equal expected, output
+
+    Post.expects(:accessible_attributes).returns(['test'])
+    output = attribute_disabled?('test', Post)
+    assert_equal false, output
+
+    Post.expects(:accessible_attributes).returns(['no_test'])
+    output = attribute_disabled?('test', Post)
+    assert output
+
   end
 
   def test_expand_tree_into_select_field
