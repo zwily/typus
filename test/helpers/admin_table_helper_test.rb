@@ -68,21 +68,24 @@ class AdminTableHelperTest < ActiveSupport::TestCase
 
   def test_typus_table_boolean_field
 
-    # FIXME: Here I should use mocks.
-
     Typus::Configuration.options[:icon_on_boolean] = false
     Typus::Configuration.options[:toggle] = false
 
     post = posts(:published)
     output = typus_table_boolean_field(:status, post)
-    assert_equal "<td align=\"center\">True</td>\n", output
+    expected = <<-HTML
+<td align="center">True</td>
+    HTML
+
+    assert_equal expected, output
 
     post = posts(:unpublished)
     output = typus_table_boolean_field(:status, post)
-    assert_equal "<td align=\"center\">False</td>\n", output
+    expected = <<-HTML
+<td align="center">False</td>
+    HTML
 
-    Typus::Configuration.options[:icon_on_boolean] = true
-    Typus::Configuration.options[:toggle] = true
+    assert_equal expected, output
 
   end
 
