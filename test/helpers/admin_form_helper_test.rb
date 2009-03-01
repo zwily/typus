@@ -35,7 +35,14 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_datetime_field
-    assert true
+
+    output = typus_datetime_field('test', {}, Post)
+    expected = <<-HTML
+<li><label for="item_test">Test</label>
+    HTML
+
+    assert_match expected, output
+
   end
 
   def test_typus_file_field

@@ -90,10 +90,10 @@ module AdminFormHelper
     HTML
   end
 
-  def typus_datetime_field(attribute, options)
+  def typus_datetime_field(attribute, options, klass = @resource[:class])
     <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
-#{datetime_select :item, attribute, options, {:disabled => attribute_disabled?(attribute)}}</li>
+#{datetime_select :item, attribute, options, {:disabled => attribute_disabled?(attribute, klass)}}</li>
     HTML
   end
 
