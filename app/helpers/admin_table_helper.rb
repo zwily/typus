@@ -3,7 +3,7 @@ module AdminTableHelper
   ##
   # All helpers related to table.
   #
-  def build_typus_table(model, fields, items, link_options = { } )
+  def build_typus_table(model, fields, items, link_options = {})
 
     returning(String.new) do |html|
 

@@ -47,7 +47,7 @@ module AdminHelper
   # display, this will be used, otherwise we use a default table which 
   # it's build from the options defined on the yaml configuration file.
   #
-  def build_list(model, fields, items, resource = @resource[:self], link_options = { })
+  def build_list(model, fields, items, resource = @resource[:self], link_options = {})
 
     template = "app/views/admin/#{resource}/_#{resource.singularize}.html.erb"
 
