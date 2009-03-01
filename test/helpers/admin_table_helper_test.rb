@@ -23,9 +23,12 @@ class AdminTableHelperTest < ActiveSupport::TestCase
   def test_typus_table_string_field
 
     post = posts(:published)
-
     output = typus_table_string_field(:title, post, :created_at)
-    assert_equal "<td>#{post.title}</td>\n", output
+    expected = <<-HTML
+<td>#{post.title}</td>
+    HTML
+
+    assert_equal expected, output
 
   end
 
