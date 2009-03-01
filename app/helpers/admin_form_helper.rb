@@ -59,7 +59,7 @@ module AdminFormHelper
         html << typus_tree_field(related_fk, related.roots, related_fk)
       else
         html << <<-HTML
-<li><label for="item_#{attribute}">#{t(related_fk.humanize)}
+<li><label for="item_#{attribute}">#{I18n.t(related_fk.humanize, :default => related_fk.humanize)}
     <small>#{link_to t("Add new"), { :controller => attribute.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
     </label>
 #{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
@@ -76,8 +76,9 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{t(attribute.humanize)}#{'?' if question}</label>
-#{check_box :item, attribute} #{t("Checked if active")}</li>
+<li><label for="item_#{attribute}">#
+attribute.humanize)}#{'?' if question}</label>
+#{check_box :item, attribute} #{I18n.t("Checked if active", :default => "Checked if active")}</li>
       HTML
     end
 
@@ -85,14 +86,14 @@ module AdminFormHelper
 
   def typus_date_field(attribute, options)
     <<-HTML
-<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
+<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
 #{date_select :item, attribute, options, { :disabled => attribute_disabled?(attribute)} }</li>
     HTML
   end
 
   def typus_datetime_field(attribute, options)
     <<-HTML
-<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
+<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
 #{datetime_select :item, attribute, options, {:disabled => attribute_disabled?(attribute)}}</li>
     HTML
   end
@@ -104,7 +105,7 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{t(attribute_display.humanize)}</label>
+<li><label for="item_#{attribute}">#{I18n.t(attribute_display.humanize, :default => attribute_display.humanize)}</label>
 #{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>
       HTML
     end
@@ -113,7 +114,7 @@ module AdminFormHelper
 
   def typus_password_field(attribute)
     <<-HTML
-<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
+<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
 #{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute)}</li>
     HTML
   end
@@ -134,7 +135,7 @@ module AdminFormHelper
         end
       end
       html << <<-HTML
-<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
+<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
   #{options.join("\n")}
@@ -159,7 +160,7 @@ module AdminFormHelper
 
   def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
     <<-HTML
-<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
+<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
   #{expand_tree_into_select_field(items, attribute_virtual)}
@@ -183,7 +184,7 @@ module AdminFormHelper
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#{t(attribute.humanize)} <small>#{comment}</small></label>
+<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)} <small>#{comment}</small></label>
 #{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute) }</li>
       HTML
     end
@@ -224,7 +225,7 @@ module AdminFormHelper
         html << build_list(model_to_relate, model_to_relate.typus_fields_for(:relationship), items, model_to_relate_as_resource,  { :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id } )
       else
         html << <<-HTML
-<div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => t(field.titleize.downcase))}</p></div>
+<div id="flash" class="notice"><p>#{I18n.t("There are no {{records}}.", :records => t(field.titleize.downcase), :default => "There are no {{records}}.")}</p></div>
         HTML
       end
       html << <<-HTML
@@ -259,7 +260,7 @@ module AdminFormHelper
         html << build_list(model_to_relate, model_to_relate.typus_fields_for(:relationship), items, model_to_relate_as_resource)
       else
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{t("There are no {{records}}.", :records => t(field.titleize.downcase))}</p></div>
+  <div id="flash" class="notice"><p>#{I18n.t("There are no {{records}}.", :records => t(field.titleize.downcase), :default => "There are no {{records}}.")}</p></div>
         HTML
       end
       html << <<-HTML
