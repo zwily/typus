@@ -3,6 +3,7 @@ require 'test/helper'
 class AdminFormHelperTest < ActiveSupport::TestCase
 
   include AdminFormHelper
+  include ActionView::Helpers::FormHelper
 
   def test_build_form
     assert true
@@ -37,7 +38,15 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_text_field
-    assert true
+
+    output = typus_text_field('test', Post)
+    expected = <<-HTML
+<li><label for="item_test">Test</label>
+<textarea class="text" cols="40" id="item_test" name="item[test]" rows="10"></textarea></li>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_time_field

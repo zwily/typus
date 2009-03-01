@@ -143,10 +143,10 @@ module AdminFormHelper
     end
   end
 
-  def typus_text_field(attribute)
+  def typus_text_field(attribute, klass = @resource[:class])
     <<-HTML
-<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
-#{text_area :item, attribute, :class => 'text', :rows => @resource[:class].typus_options_for(:form_rows), :disabled => attribute_disabled?(attribute)}</li>
+<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
+#{text_area :item, attribute, :class => 'text', :rows => klass.typus_options_for(:form_rows), :disabled => attribute_disabled?(attribute, klass)}</li>
     HTML
   end
 
@@ -276,11 +276,11 @@ module AdminFormHelper
     output || "#{attribute}: Can not find the template '#{template}'"
   end
 
-  def attribute_disabled?(attribute)
-    if @resource[:class].accessible_attributes.nil?
+  def attribute_disabled?(attribute, klass = @resource[:class])
+    if klass.accessible_attributes.nil?
       return false
     else
-      return !@resource[:class].accessible_attributes.include?(attribute)
+      return !klass.accessible_attributes.include?(attribute)
     end
   end
 
