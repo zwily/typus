@@ -28,6 +28,7 @@ ActiveRecord::Schema.define do
     t.string :title
     t.text :body
     t.boolean :status
+    t.integer :parent_id
   end
 
   create_table :posts, :force => true do |t|

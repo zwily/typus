@@ -27,6 +27,9 @@ class CustomUser
 end
 
 class Page < ActiveRecord::Base
+
+  acts_as_tree if defined? ActiveRecord::Acts::Tree
+
 end
 
 class Post < ActiveRecord::Base

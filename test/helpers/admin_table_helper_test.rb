@@ -30,7 +30,23 @@ class AdminTableHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_table_tree_field
-    assert true
+
+    page = pages(:published)
+    output = typus_table_tree_field('test', page)
+    expected = <<-HTML
+<td></td>
+    HTML
+
+    assert_equal expected, output
+
+    page = pages(:unpublished)
+    output = typus_table_tree_field('test', page)
+    expected = <<-HTML
+<td>Page#1</td>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_table_position_field
