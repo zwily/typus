@@ -96,8 +96,11 @@ module TypusHelper
 
   def header
 
-    link_to_site = (link_to I18n.t("View site"), root_path, :target => 'blank') rescue ''
-    link_to_site = "<small>#{link_to_site}</small>" unless link_to_site.empty?
+    if ActionController::Routing::Routes.named_routes.routes.keys.include?(:root)
+      link_to_site = <<-HTML
+<small>#{link_to I18n.t("View site"), root_path, :target => 'blank'}</small>
+      HTML
+    end
 
     html = <<-HTML
 <h1>#{Typus::Configuration.options[:app_name]}</h1>
