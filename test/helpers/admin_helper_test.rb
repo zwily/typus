@@ -11,7 +11,7 @@ class AdminHelperTest < ActiveSupport::TestCase
     output = display_link_to_previous('Post', { :action => 'edit', :back_to => '/back_to_param' })
     expected = <<-HTML
 <div id="flash" class="notice">
-  <p>You're updating a Post. Do you want to cancel it? <a href="/back_to_param">Click here</a>.</p>
+  <p>You're updating a Post. <a href="/back_to_param">Do you want to cancel it?</a></p>
 </div>
     HTML
 

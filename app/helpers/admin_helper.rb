@@ -28,7 +28,7 @@ module AdminHelper
     returning(String.new) do |html|
       html << <<-HTML
 <div id="flash" class="notice">
-  <p>#{ message + I18n.t("Do you want to cancel it?") + link_to(I18n.t("Click here"), _params[:back_to]) }.</p>
+  <p>#{message} #{link_to(I18n.t("Do you want to cancel it?"), _params[:back_to])}</p>
 </div>
       HTML
     end
