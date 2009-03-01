@@ -142,19 +142,22 @@ module TypusHelper
   end
 
   def locales(uri = admin_set_locale_path)
+
     return unless Typus.locales.many?
-    returning(String.new) do |html|
-      html << <<-HTML
+
+    locales_link = Typus.locales.map do |locale|
+                     <<-HTML
+<li><a href="#{uri}?#{locale.last}">#{locale.first}</a></li>
+                     HTML
+                   end
+
+    html = <<-HTML
 <ul>
-  <li>#{I18n.t("Set language", :default => "Set language")}:</li>
-      HTML
-      Typus.locales.each do |locale|
-        html << <<-HTML
-  <li><a href="#{uri}?#{locale.last}">#{locale.first}</a></li>
-        HTML
-      end
-      html << "</ul>\n"
-    end
+<li>#{I18n.t("Set language", :default => "Set language")}:</li>
+#{locales_link.join}
+</ul>
+    HTML
+
   end
 
 end
