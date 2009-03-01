@@ -28,8 +28,7 @@ class TypusHelperTest < ActiveSupport::TestCase
 
     output = header
     expected = <<-HTML
-<h1>#{Typus::Configuration.options[:app_name]}</h1>
-
+<h1>#{Typus::Configuration.options[:app_name]} </h1>
     HTML
 
     assert_equal expected, output

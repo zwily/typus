@@ -108,8 +108,7 @@ module TypusHelper
     end
 
     html = <<-HTML
-<h1>#{Typus::Configuration.options[:app_name]}</h1>
-#{link_to_site}
+<h1>#{Typus::Configuration.options[:app_name]} #{link_to_site}</h1>
     HTML
 
     return html
