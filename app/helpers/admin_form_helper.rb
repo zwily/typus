@@ -97,15 +97,14 @@ module AdminFormHelper
     HTML
   end
 
-  def typus_file_field(attribute)
+  def typus_file_field(attribute, klass = @resource[:class])
 
-    attribute_display = attribute.split("_file_name").first
-    content_type = @item.send("#{attribute_display}_content_type")
+    attribute_display = attribute.split('_file_name').first
 
     returning(String.new) do |html|
       html << <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(attribute_display.humanize, :default => attribute_display.humanize)}</label>
-#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>
+#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute, klass)}</li>
       HTML
     end
 

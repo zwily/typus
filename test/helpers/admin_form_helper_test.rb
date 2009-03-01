@@ -39,7 +39,15 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_file_field
-    assert true
+
+    output = typus_file_field('asset_file_name', Post)
+    expected = <<-HTML
+<li><label for="item_asset_file_name">Asset</label>
+<input id="item_asset" name="item[asset]" size="30" type="file" /></li>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_password_field
