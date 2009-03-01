@@ -82,9 +82,13 @@ module TypusHelper
   end
 
   def typus_block(*args)
+
     options = args.extract_options!
-    file = [ 'admin', options[:model], options[:location], options[:partial] ].compact.join('/')
-    render :partial => file rescue nil
+    template = [ 'admin', options[:model], options[:location], "_#{options[:partial]}.html.erb" ].compact.join('/')
+    exists = ActionController::Base.view_paths.reverse.map { |vp| File.exists?("#{vp}/#{template}") }
+
+    render :partial => template.gsub('/_', '/') if exists.include?(true)
+
   end
 
   def page_title(action = params[:action])
