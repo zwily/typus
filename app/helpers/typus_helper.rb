@@ -158,6 +158,8 @@ module TypusHelper
 </ul>
     HTML
 
+    return html
+
   end
 
 end
