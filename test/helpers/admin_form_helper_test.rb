@@ -16,8 +16,6 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 
   def test_typus_boolean_field
 
-    # TODO: Test klass.typus_field_options_for(:questions).include?(attribute)
-
     output = typus_boolean_field('test', Post)
     expected = <<-HTML
 <li><label for="item_test">Test</label>
@@ -25,6 +23,10 @@ class AdminFormHelperTest < ActiveSupport::TestCase
     HTML
 
     assert_equal expected, output
+
+    Post.expects(:typus_field_options_for).with(:questions).returns('test')
+    output = typus_boolean_field('test', Post)
+    assert_match /Test?/, output
 
   end
 
