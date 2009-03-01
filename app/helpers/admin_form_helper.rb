@@ -150,10 +150,10 @@ module AdminFormHelper
     HTML
   end
 
-  def typus_time_field(attribute, options)
+  def typus_time_field(attribute, options, klass = @resource[:class])
     <<-HTML
-<li><label for="item_#{attribute}">#{t(attribute.humanize)}</label>
-#{time_select :item, attribute, options, {:disabled => attribute_disabled?(attribute)}}</li>
+<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
+#{time_select :item, attribute, options, {:disabled => attribute_disabled?(attribute, klass)}}</li>
     HTML
   end
 

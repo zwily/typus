@@ -4,6 +4,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 
   include AdminFormHelper
   include ActionView::Helpers::FormHelper
+  include ActionView::Helpers::DateHelper
 
   def test_build_form
     assert true
@@ -50,7 +51,14 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_time_field
-    assert true
+
+    output = typus_time_field('test', {}, Post)
+    expected = <<-HTML
+<li><label for="item_test">Test</label>
+    HTML
+
+    assert_match expected, output
+
   end
 
   def test_typus_tree_field
