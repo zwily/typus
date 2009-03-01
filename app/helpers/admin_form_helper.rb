@@ -178,7 +178,7 @@ module AdminFormHelper
       value = 'auto_generated' if %w( new edit ).include?(params[:action])
     end
 
-    comment = %w( read_only auto_generated ).include?(value) ? (value + " field").titleize : ""
+    comment = %w( read_only auto_generated ).include?(value) ? (value + ' field').titleize : ''
 
     returning(String.new) do |html|
       html << <<-HTML
