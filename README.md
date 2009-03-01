@@ -528,6 +528,10 @@ example, the user Francesc Esplugas:
 
 ## Testing the plugin
 
+You need to have `mocha` to test the plugin.
+
+    $ sudo gem install mocha
+
 Use the following steps to test the plugin.
 
     $ rails typus_test
