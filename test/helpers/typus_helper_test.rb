@@ -39,7 +39,9 @@ class TypusHelperTest < ActiveSupport::TestCase
 
     output = display_flash_message(message)
     expected = <<-HTML
-<div id="flash" class="test"><p>This is the message.</p></div>
+<div id="flash" class="test">
+  <p>This is the message.</p>
+</div>
     HTML
 
     assert_equal expected, output

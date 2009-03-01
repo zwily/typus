@@ -116,7 +116,9 @@ module TypusHelper
     flash_type = message.keys.first
 
     <<-HTML
-<div id="flash" class="#{flash_type}"><p>#{message[flash_type]}</p></div>
+<div id="flash" class="#{flash_type}">
+  <p>#{message[flash_type]}</p>
+</div>
     HTML
 
   end
