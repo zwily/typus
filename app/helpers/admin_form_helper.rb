@@ -168,15 +168,15 @@ attribute.humanize)}#{'?' if question}</label>
     HTML
   end
 
-  def typus_string_field(attribute)
+  def typus_string_field(attribute, klass = @resource[:class])
 
     # Read only fields.
-    if @resource[:class].typus_field_options_for(:read_only).include?(attribute)
+    if klass.typus_field_options_for(:read_only).include?(attribute)
       value = 'read_only' if %w( edit ).include?(params[:action])
     end
 
     # Auto generated fields.
-    if @resource[:class].typus_field_options_for(:auto_generated).include?(attribute)
+    if klass.typus_field_options_for(:auto_generated).include?(attribute)
       value = 'auto_generated' if %w( new edit ).include?(params[:action])
     end
 
@@ -185,7 +185,7 @@ attribute.humanize)}#{'?' if question}</label>
     returning(String.new) do |html|
       html << <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)} <small>#{comment}</small></label>
-#{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute) }</li>
+#{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute, klass) }</li>
       HTML
     end
 

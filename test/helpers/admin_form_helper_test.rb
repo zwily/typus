@@ -66,7 +66,15 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_string_field
-    assert true
+
+    output = typus_string_field('test', Post)
+    expected = <<-HTML
+<li><label for="item_test">Test <small></small></label>
+<input class="text" id="item_test" name="item[test]" size="30" type="text" /></li>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_relationships
