@@ -145,16 +145,28 @@ module AdminTableHelper
   end
 
   def typus_table_position_field(attribute, item)
-    returning(String.new) do |html|
-      html_position = [["Up", "move_higher"], ["Down", "move_lower"]].map do |position|
-                        <<-HTML
-#{link_to t(position.first), :params => params.merge(:controller => item.class.name.tableize, :action => 'position', :id => item.id, :go => position.last)}
-                        HTML
-                      end
-      html << <<-HTML
-<td>#{html_position.join('/ ')}</td>
+
+    html_position = []
+
+    [['Up', 'move_higher'], ['Down', 'move_lower']].each do |position|
+
+      options = { :controller => item.class.name.tableize, 
+                  :action => 'position', 
+                  :id => item.id, 
+                  :go => position.last }
+
+      html_position << <<-HTML
+#{link_to t(position.first), :params => params.merge(options)}
       HTML
+
     end
+
+    html = <<-HTML
+<td>#{html_position.join('/ ')}</td>
+    HTML
+
+    return html
+
   end
 
   def typus_table_datetime_field(attribute, item)
