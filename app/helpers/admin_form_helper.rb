@@ -70,14 +70,13 @@ module AdminFormHelper
 
   end
 
-  def typus_boolean_field(attribute)
+  def typus_boolean_field(attribute, klass = @resource[:class])
 
-    question = true if @resource[:class].typus_field_options_for(:questions).include?(attribute)
+    question = true if klass.typus_field_options_for(:questions).include?(attribute)
 
     returning(String.new) do |html|
       html << <<-HTML
-<li><label for="item_#{attribute}">#
-attribute.humanize)}#{'?' if question}</label>
+<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}#{'?' if question}</label>
 #{check_box :item, attribute} #{I18n.t("Checked if active", :default => "Checked if active")}</li>
       HTML
     end
@@ -112,10 +111,10 @@ attribute.humanize)}#{'?' if question}</label>
 
   end
 
-  def typus_password_field(attribute)
+  def typus_password_field(attribute, klass = @resource[:class])
     <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
-#{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute)}</li>
+#{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute, klass)}</li>
     HTML
   end
 

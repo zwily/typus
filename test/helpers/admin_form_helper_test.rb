@@ -15,7 +15,17 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_boolean_field
-    assert true
+
+    # TODO: Test klass.typus_field_options_for(:questions).include?(attribute)
+
+    output = typus_boolean_field('test', Post)
+    expected = <<-HTML
+<li><label for="item_test">Test</label>
+<input id="item_test" name="item[test]" type="checkbox" value="1" /><input name="item[test]" type="hidden" value="0" /> Checked if active</li>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_date_field
@@ -31,7 +41,15 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_password_field
-    assert true
+
+    output = typus_password_field('test', Post)
+    expected = <<-HTML
+<li><label for="item_test">Test</label>
+<input class="text" id="item_test" name="item[test]" size="30" type="password" /></li>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_selector_field
