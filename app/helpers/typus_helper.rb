@@ -85,7 +85,8 @@ module TypusHelper
 
     options = args.extract_options!
     template = [ 'admin', options[:model], options[:location], "_#{options[:partial]}.html.erb" ].compact.join('/')
-    exists = ActionController::Base.view_paths.reverse.map { |vp| File.exists?("#{vp}/#{template}") }
+
+    exists = ActionController::Base.view_paths.map { |vp| File.exists?("#{Rails.root}/#{vp}/#{template}") }
 
     return unless exists.include?(true)
     render :partial => template.gsub('/_', '/')
