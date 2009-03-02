@@ -12,6 +12,8 @@ class AdminController < ApplicationController
     ssl_required :index, :new, :create, :edit, :show, :update, :destroy, :toggle, :position, :relate, :unrelate
   end
 
+  filter_parameter_logging :password
+
   before_filter :reload_config_et_roles
 
   before_filter :require_login
