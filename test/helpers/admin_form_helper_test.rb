@@ -17,10 +17,18 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   def test_typus_boolean_field
 
     output = typus_boolean_field('test', Post)
-    expected = <<-HTML
+
+    expected = if Rails.version == '2.2.2'
+                 <<-HTML
 <li><label for="item_test">Test</label>
 <input id="item_test" name="item[test]" type="checkbox" value="1" /><input name="item[test]" type="hidden" value="0" /> Checked if active</li>
-    HTML
+                 HTML
+               else
+                 <<-HTML
+<li><label for="item_test">Test</label>
+<input name="item[test]" type="hidden" value="0" /><input id="item_test" name="item[test]" type="checkbox" value="1" /> Checked if active</li>
+                 HTML
+               end
 
     assert_equal expected, output
 
