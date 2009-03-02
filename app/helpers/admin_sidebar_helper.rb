@@ -95,7 +95,7 @@ module AdminSidebarHelper
     return if typus_search.empty?
 
     to_sentence_options = case Rails.version
-                          when '2.3.0'
+                          when '2.3.1'
                             { :words_connector => ', ', :last_word_connector => ' & ' }
                           else
                             { :skip_last_comma => true, :connector => '&' }
