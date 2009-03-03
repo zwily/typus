@@ -4,6 +4,7 @@ class AdminTableHelperTest < ActiveSupport::TestCase
 
   include AdminTableHelper
   include ActionView::Helpers::UrlHelper
+  include ActionController::UrlWriter
 
   def test_build_typus_table
     assert true
@@ -19,6 +20,15 @@ class AdminTableHelperTest < ActiveSupport::TestCase
     output = typus_table_belongs_to_field('post', comment)
     expected = <<-HTML
 <td></td>
+    HTML
+
+    assert_equal expected, output
+    default_url_options[:host] = 'test.host'
+
+    comment = comments(:with_post_id)
+    output = typus_table_belongs_to_field('post', comment)
+    expected = <<-HTML
+<td><a href="http://test.host/posts/edit/1">Post#1</a></td>
     HTML
 
     assert_equal expected, output
