@@ -40,6 +40,8 @@ class TypusHelperTest < ActiveSupport::TestCase
 
   def test_login_info
 
+    default_url_options[:host] = 'test.host'
+
     typus_user = typus_users(:admin)
     output = login_info(typus_user)
     expected = <<-HTML
