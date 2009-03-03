@@ -85,7 +85,26 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_selector_field
-    assert true
+
+    @resource = { :class => Post }
+    @item = posts(:published)
+
+    output = typus_selector_field('status')
+
+    expected = <<-HTML
+<li><label for="item_status">Status</label>
+<select id="item_status"  name="item[status]">
+<option value=""></option>
+<option selected value="true">true</option>
+<option  value="false">false</option>
+<option  value="pending">pending</option>
+<option  value="published">published</option>
+<option  value="unpublished">unpublished</option>
+</select></li>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_text_field

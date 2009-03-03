@@ -40,7 +40,7 @@ class Post < ActiveRecord::Base
   has_many :assets, :as => :resource, :dependent => :destroy
 
   def self.status
-    %w( pending published unpublished )
+    %w( true false pending published unpublished )
   end
 
   def self.typus

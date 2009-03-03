@@ -119,20 +119,18 @@ module AdminFormHelper
       @resource[:class].send(attribute).each do |option|
         case option.kind_of?(Array)
         when true
-          options << <<-HTML
-<option #{'selected' if @item.send(attribute).to_s == option.last.to_s} value="#{option.last}">#{option.first}</option>
-          HTML
+          selected = (@item.send(attribute).to_s == option.last.to_s) ? 'selected' : ''
+          options << "<option #{selected} value=\"#{option.last}\">#{option.first}</option>"
         else
-          options << <<-HTML
-<option #{'selected' if @item.send(attribute).to_s == option.to_s} value="#{option}">#{option}</option>
-          HTML
+          selected = (@item.send(attribute).to_s == option.to_s) ? 'selected' : ''
+          options << "<option #{selected} value=\"#{option}\">#{option}</option>"
         end
       end
       html << <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
-  <option value=""></option>
-  #{options.join("\n")}
+<option value=""></option>
+#{options.join("\n")}
 </select></li>
       HTML
     end
