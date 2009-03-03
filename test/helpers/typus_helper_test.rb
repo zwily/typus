@@ -4,6 +4,7 @@ class TypusHelperTest < ActiveSupport::TestCase
 
   include TypusHelper
   include ActionView::Helpers::UrlHelper
+  include ActionView::Helpers::TextHelper
   include ActionController::UrlWriter
 
   def test_applications
