@@ -190,7 +190,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_show_form_templates
-    get :create
+    get :new
     assert_response :success
     assert_match /datepicker_template_published_at/, @response.body
   end
