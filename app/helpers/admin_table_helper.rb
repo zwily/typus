@@ -109,11 +109,12 @@ module AdminTableHelper
   end
 
   def typus_table_belongs_to_field(attribute, item)
-    if item.send(attribute).kind_of?(NilClass)
-      "<td></td>"
-    else
-      "<td>#{link_to item.send(attribute).typus_name, :controller => attribute.pluralize, :action => 'edit', :id => item.send(attribute).id}</td>"
-    end
+    content = if !item.send(attribute).kind_of?(NilClass)
+                link_to item.send(attribute).typus_name, :controller => attribute.pluralize, :action => 'edit', :id => item.send(attribute).id
+              end
+    <<-HTML
+<td>#{content}</td>
+    HTML
   end
 
   def typus_table_has_and_belongs_to_many_field(attribute, item)
@@ -161,11 +162,9 @@ module AdminTableHelper
 
     end
 
-    html = <<-HTML
+    <<-HTML
 <td>#{html_position.join('/ ')}</td>
     HTML
-
-    return html
 
   end
 
@@ -174,11 +173,9 @@ module AdminTableHelper
     date_format = item.class.typus_date_format(attribute)
     value = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
 
-    html = <<-HTML
+    <<-HTML
 <td>#{value}</td>
     HTML
-
-    return html
 
   end
 
@@ -201,11 +198,9 @@ module AdminTableHelper
                 link_text
               end
 
-    html = <<-HTML
+    <<-HTML
 <td align="center">#{content}</td>
     HTML
-
-    return html
 
   end
 

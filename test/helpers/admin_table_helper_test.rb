@@ -3,6 +3,7 @@ require 'test/helper'
 class AdminTableHelperTest < ActiveSupport::TestCase
 
   include AdminTableHelper
+  include ActionView::Helpers::UrlHelper
 
   def test_build_typus_table
     assert true
@@ -13,7 +14,15 @@ class AdminTableHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_table_belongs_to_field
-    assert true
+
+    comment = comments(:without_post_id)
+    output = typus_table_belongs_to_field('post', comment)
+    expected = <<-HTML
+<td></td>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_table_has_and_belongs_to_many_field
