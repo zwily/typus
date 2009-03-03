@@ -74,12 +74,10 @@ module AdminFormHelper
 
     question = true if klass.typus_field_options_for(:questions).include?(attribute)
 
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}#{'?' if question}</label>
 #{check_box :item, attribute} #{I18n.t("Checked if active", :default => "Checked if active")}</li>
-      HTML
-    end
+    HTML
 
   end
 
@@ -101,12 +99,10 @@ module AdminFormHelper
 
     attribute_display = attribute.split('_file_name').first
 
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(attribute_display.humanize, :default => attribute_display.humanize)}</label>
 #{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute, klass)}</li>
-      HTML
-    end
+    HTML
 
   end
 
@@ -180,12 +176,10 @@ module AdminFormHelper
 
     comment = %w( read_only auto_generated ).include?(value) ? (value + ' field').titleize : ''
 
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)} <small>#{comment}</small></label>
 #{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute, klass) }</li>
-      HTML
-    end
+    HTML
 
   end
 
