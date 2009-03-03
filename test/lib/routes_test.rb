@@ -2,7 +2,7 @@ require 'test/helper'
 
 class RoutesTest < ActiveSupport::TestCase
 
-  def test_should_verify_typus_named_routes
+  def test_should_verify_admin_named_routes
 
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
@@ -15,7 +15,7 @@ class RoutesTest < ActiveSupport::TestCase
 
   end
 
-  def test_should_verify_admin_routes_for_a_typus_user
+  def test_should_verify_admin_routes_typus_users
 
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
@@ -28,7 +28,7 @@ class RoutesTest < ActiveSupport::TestCase
 
   end
 
-  def test_should_verify_admin_routes_for_a_post
+  def test_should_verify_default_admin_routes_for_posts
 
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
@@ -37,8 +37,17 @@ class RoutesTest < ActiveSupport::TestCase
                  :position_admin_post, 
                  :toggle_admin_post, 
                  :relate_admin_post,
-                 :unrelate_admin_post, 
-                 :cleanup_admin_posts, 
+                 :unrelate_admin_post ]
+
+    expected.each { |route| assert routes.include?(route) }
+
+  end
+
+  def test_should_verify_custom_admin_routes_for_posts
+
+    routes = ActionController::Routing::Routes.named_routes.routes.keys
+
+    expected = [ :cleanup_admin_posts, 
                  :send_as_newsletter_admin_post, 
                  :preview_admin_post ]
 
