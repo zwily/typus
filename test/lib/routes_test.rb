@@ -15,7 +15,7 @@ class RoutesTest < ActiveSupport::TestCase
 
   end
 
-  def test_should_verify_admin_routes_typus_users
+  def test_should_verify_admin_routes_for_typus_users
 
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
@@ -25,6 +25,11 @@ class RoutesTest < ActiveSupport::TestCase
                  :toggle_admin_typus_user ]
 
     expected.each { |route| assert routes.include?(route) }
+
+    expected = [ :relate_admin_typus_user,
+                 :unrelate_admin_typus_user ]
+
+    expected.each { |route| assert !routes.include?(route) }
 
   end
 
