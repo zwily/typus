@@ -6,7 +6,7 @@ require 'sha1'
 # Rails 2.3/3 is released.)
 #
 
-unless Rails.version == '2.3.1'
+if Rails.version == '2.2.2'
 
   ActionController::Base.append_view_path(File.join(File.dirname(__FILE__), 'app', 'views'))
 
