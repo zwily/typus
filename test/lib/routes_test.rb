@@ -8,7 +8,8 @@ class RoutesTest < ActiveSupport::TestCase
 
     expected = [ :admin_sign_up, :admin_sign_in, :admin_sign_out, 
                  :admin_recover_password, :admin_reset_password, 
-                 :admin_dashboard ]
+                 :admin_dashboard, :admin_overview, 
+                 :admin_quick_edit, :admin_set_locale ]
 
     expected.each { |route| assert routes.include?(route) }
 
