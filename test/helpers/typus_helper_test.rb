@@ -3,6 +3,8 @@ require 'test/helper'
 class TypusHelperTest < ActiveSupport::TestCase
 
   include TypusHelper
+  include ActionView::Helpers::UrlHelper
+  include ActionController::UrlWriter
 
   def test_applications
     assert true
@@ -36,7 +38,18 @@ class TypusHelperTest < ActiveSupport::TestCase
   end
 
   def test_login_info
-    assert true
+
+    typus_user = typus_users(:admin)
+    output = login_info(typus_user)
+    expected = <<-HTML
+<ul>
+  <li>Logged as <a href="http://test.host/admin/typus_users/1/edit">Admin Example (admin)</a></li>
+  <li><a href="http://test.host/admin/sign_out">Sign out</a></li>
+</ul>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_display_flash_message
