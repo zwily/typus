@@ -22,9 +22,7 @@ class RoutesTest < ActiveSupport::TestCase
     expected = [ :admin_typus_users, 
                  :admin_typus_user, 
                  :position_admin_typus_user, 
-                 :toggle_admin_typus_user, 
-                 :relate_admin_typus_user,
-                 :unrelate_admin_typus_user ]
+                 :toggle_admin_typus_user ]
 
     expected.each { |route| assert routes.include?(route) }
 

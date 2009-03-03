@@ -8,4 +8,8 @@ class String
     end
   end
 
+  def typus_defaults_for(filter)
+    Typus::Configuration.config[self][filter.to_s].split(', ') rescue []
+  end
+
 end
