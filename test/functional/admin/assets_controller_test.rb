@@ -55,4 +55,5 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     Typus::Configuration.options[:edit_after_create] = true
 
   end
+
 end
