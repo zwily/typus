@@ -44,7 +44,7 @@ module AdminFormHelper
     # the work to replace the current action.
     #
     params[:action] = (params[:action] == 'create') ? 'new' : params[:action]
-    back_to = '/' + ([] << params[:controller] << params[:id] << params[:action]).compact.join('/')
+    back_to = '/' + [ params[:controller], params[:id], params[:action] ].compact.join('/')
 
     related = @resource[:class].reflect_on_association(attribute.to_sym).class_name.constantize
     related_fk = @resource[:class].reflect_on_association(attribute.to_sym).primary_key_name
@@ -191,7 +191,7 @@ module AdminFormHelper
 
   def typus_relationships
 
-    @back_to = '/' + ([] << params[:controller] << params[:id]<< params[:action]).compact.join('/')
+    @back_to = '/' + [ params[:controller], params[:id], params[:action] ].compact.join('/')
 
     returning(String.new) do |html|
       @item_relationships.each do |relationship|
