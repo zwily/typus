@@ -41,8 +41,8 @@ class TypusControllerTest < ActionController::TestCase
     get :dashboard
     assert_redirected_to admin_sign_in_path
     assert_nil @request.session[:typus]
-    assert flash[:error]
-    assert_equal 'Error! Typus User or role doesn\'t exist.', flash[:error]
+    assert flash[:notice]
+    assert_equal 'Typus user or role no longer exist.', flash[:notice]
   end
 
   def test_should_not_send_recovery_password_link_to_unexisting_user
@@ -69,6 +69,27 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
     [ :notice, :error, :warning ].each { |f| assert !flash[f] }
+  end
+
+  def test_should_verify_we_can_disable_users_and_block_acess_on_the_fly
+
+    admin = typus_users(:admin)
+    @request.session[:typus] = admin.id
+    get :overview
+    assert_response :success
+
+    # Disable user ...
+
+    admin.update_attributes :status => false
+
+    get :overview
+    assert_response :redirect
+    assert_redirected_to admin_sign_in_path(:back_to => '/admin/overview')
+
+    assert flash[:notice]
+    assert_equal "Your typus user has been disabled.", flash[:notice]
+    assert_nil @request.session[:typus]
+
   end
 
   def test_should_not_allow_recover_password_if_disabled

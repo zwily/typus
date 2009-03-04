@@ -26,12 +26,24 @@ protected
   # off from Typus.
   #
   def set_current_user
-    @current_user ||= Typus.user_class.find(session[:typus])
-    raise unless Typus::Configuration.roles.keys.include?(@current_user.roles)
+
+    @current_user = Typus.user_class.find(session[:typus])
+
+    unless Typus::Configuration.roles.keys.include?(@current_user.roles)
+      message = t("Typus user or role no longer exist.", :default => "Typus user or role no longer exist.")
+      raise
+    end
+
+    unless @current_user.status
+      back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
+      message = t("Your typus user has been disabled.", :default => "Your typus user has been disabled.")
+      raise
+    end
+
   rescue
-    flash[:error] = t("Error! Typus User or role doesn't exist.")
+    flash[:notice] = message
     session[:typus] = nil
-    redirect_to admin_sign_in_path
+    redirect_to admin_sign_in_path(:back_to => back_to)
   end
 
   ##
