@@ -38,23 +38,6 @@ class TypusHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_login_info
-
-    default_url_options[:host] = 'test.host'
-
-    typus_user = typus_users(:admin)
-    output = login_info(typus_user)
-    expected = <<-HTML
-<ul>
-  <li>Logged as <a href="http://test.host/admin/typus_users/1/edit">Admin Example (admin)</a></li>
-  <li><a href="http://test.host/admin/sign_out">Sign out</a></li>
-</ul>
-    HTML
-
-    assert_equal expected, output
-
-  end
-
   def test_display_flash_message
 
     message = { :test => 'This is the message.' }

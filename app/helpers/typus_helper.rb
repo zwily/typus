@@ -120,18 +120,11 @@ module TypusHelper
 
   end
 
-  ##
-  # For some reason I cannot use named routes here,
-  #
-  #     edit_admin_typus_user_path(user.id)
-  #     admin_sign_out_path
-  #
-  #
   def login_info(user = @current_user)
     <<-HTML
 <ul>
-  <li>#{I18n.t('Logged as')} #{link_to user.full_name(:display_role => true), :controller => 'admin/typus_users', :action => 'edit', :id => user.id}</li>
-  <li>#{link_to I18n.t('Sign out'), :controller => 'typus', :action => 'sign_out' }</li>
+  <li>#{I18n.t('Logged as')} #{link_to user.full_name(:display_role => true), edit_admin_typus_user_path(user.id)}</li>
+  <li>#{link_to I18n.t('Sign out'), admin_sign_out_path }</li>
 </ul>
     HTML
   end

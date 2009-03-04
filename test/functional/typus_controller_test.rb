@@ -229,10 +229,29 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_verify_link_to_edit_typus_user
+
+    typus_user = typus_users(:admin)
+    @request.session[:typus] = typus_user.id
+    get :dashboard
+    assert_response :success
+
+    assert_match "href=\"\/admin\/typus_users\/#{typus_user.id}\/edit\"", @response.body
+
+    assert_select "body div#header" do
+      assert_select "a", "Admin Example (admin)"
+      assert_select "a", "Sign out"
+    end
+
+  end
+
+  def test_should_verify_link_to_sign_out
+
     @request.session[:typus] = typus_users(:admin).id
     get :dashboard
     assert_response :success
-    assert_match "/admin/typus_users/#{@request.session[:typus]}/edit", @response.body
+
+    assert_match "href=\"\/admin\/sign_out\"", @response.body
+
   end
 
   def test_should_show_add_links_in_resources_list_for_admin
