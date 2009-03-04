@@ -237,9 +237,9 @@ class TypusControllerTest < ActionController::TestCase
 
     assert_match "href=\"\/admin\/typus_users\/#{typus_user.id}\/edit\"", @response.body
 
-    assert_select "body div#header" do
-      assert_select "a", "Admin Example (admin)"
-      assert_select "a", "Sign out"
+    assert_select 'body div#header' do
+      assert_select 'a', 'Admin Example (admin)'
+      assert_select 'a', 'Sign out'
     end
 
   end
