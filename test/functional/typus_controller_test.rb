@@ -213,7 +213,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_match /layouts\/admin/, @controller.active_layout.to_s
   end
 
-  def test_should_verify_overview_works
+  def test_should_verify_sign_up_works
     @request.session[:typus] = typus_users(:admin).id
     TypusUser.destroy_all
     get :sign_up
