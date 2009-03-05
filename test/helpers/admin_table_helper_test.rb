@@ -122,6 +122,9 @@ class AdminTableHelperTest < ActiveSupport::TestCase
 
     assert_equal expected, output
 
+    Typus::Configuration.options[:icon_on_boolean] = true
+    Typus::Configuration.options[:toggle] = true
+
   end
 
 end
