@@ -53,6 +53,8 @@ class AdminTableHelperTest < ActiveSupport::TestCase
 
   def test_typus_table_tree_field
 
+    return unless defined? ActiveRecord::Acts::Tree
+
     page = pages(:published)
     output = typus_table_tree_field('test', page)
     expected = <<-HTML
