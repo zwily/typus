@@ -16,11 +16,11 @@ module AdminHelper
 
     message = case
               when _params[:resource] && editing
-                I18n.t("You're updating a {{resource_from}} for a {{resource_to}}", options)
+                I18n.t("You're updating a {{resource_from}} for {{resource_to}}", options)
               when editing
                 I18n.t("You're updating a {{resource_from}}", options)
               when _params[:resource]
-                I18n.t("You're adding a new {{resource_from}} to a {{resource_to}}", options)
+                I18n.t("You're adding a new {{resource_from}} to {{resource_to}}", options)
               else
                 I18n.t("You're adding a new {{resource_from}}", options)
               end
