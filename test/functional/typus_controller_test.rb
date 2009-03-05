@@ -48,7 +48,7 @@ class TypusControllerTest < ActionController::TestCase
   def test_should_not_send_recovery_password_link_to_unexisting_user
     post :recover_password, { :user => { :email => 'unexisting' } }
     assert_response :redirect
-    assert_redirected_to admin_recover_password_url
+    assert_redirected_to admin_recover_password_path
     [ :notice, :error, :warning ].each { |f| assert !flash[f] }
   end
 
