@@ -157,7 +157,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     get :new
     assert_response :redirect
-    assert_redirected_to admin_dashboard_url
+    assert_redirected_to admin_dashboard_path
 
     assert flash[:notice]
     assert_equal 'Designer can\'t perform action (new)', flash[:notice]

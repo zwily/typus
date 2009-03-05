@@ -87,7 +87,7 @@ end
 
 <!-- Content -->
 
-<h2><%= link_to t("Dashboard"), admin_dashboard_url %> &rsaquo; #{resource.titleize}</h2>
+<h2><%= link_to t("Dashboard"), admin_dashboard_path %> &rsaquo; #{resource.titleize}</h2>
 
 <p>And here we do whatever we want to ...</p>
 

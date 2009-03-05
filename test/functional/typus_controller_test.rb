@@ -19,7 +19,7 @@ class TypusControllerTest < ActionController::TestCase
                                 :password => '12345678' } }
     assert_equal typus_user.id, @request.session[:typus]
     assert_response :redirect
-    assert_redirected_to admin_dashboard_url
+    assert_redirected_to admin_dashboard_path
   end
 
   def test_should_not_sign_in_a_disabled_user
@@ -37,7 +37,7 @@ class TypusControllerTest < ActionController::TestCase
                                 :password => '12345678' } }
     assert_equal typus_user.id, @request.session[:typus]
     assert_response :redirect
-    assert_redirected_to admin_dashboard_url
+    assert_redirected_to admin_dashboard_path
     get :dashboard
     assert_redirected_to admin_sign_in_path
     assert_nil @request.session[:typus]

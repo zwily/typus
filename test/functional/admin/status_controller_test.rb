@@ -26,7 +26,7 @@ class Admin::StatusControllerTest < ActionController::TestCase
   def test_should_verify_admin_can_not_go_to_show
     get :show
     assert_response :redirect
-    assert_redirected_to admin_dashboard_url
+    assert_redirected_to admin_dashboard_path
     assert flash[:notice]
     assert_match /#{@typus_user.roles.capitalize} can't go to show on status./, flash[:notice]
   end

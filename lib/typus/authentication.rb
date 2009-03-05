@@ -102,7 +102,7 @@ protected
 
     if message
       flash[:notice] = message
-      redirect_to :back rescue redirect_to admin_dashboard_url
+      redirect_to :back rescue redirect_to admin_dashboard_path
     end
 
   end
@@ -125,7 +125,7 @@ protected
 
     unless @current_user.can_perform?(@resource[:class], params[:action])
       flash[:notice] = message || t("{{current_user_role}} can't perform action. ({{action}})", :current_user_role => @current_user.roles.capitalize, :action => params[:action] )
-      redirect_to :back rescue redirect_to admin_dashboard_url
+      redirect_to :back rescue redirect_to admin_dashboard_path
     end
 
   end
@@ -140,7 +140,7 @@ protected
     action = params[:action]
     unless @current_user.can_perform?(controller.camelize, action, { :special => true })
       flash[:notice] = t("{{current_user_role}} can't go to {{action}} on {{controller}}", :current_user_role => @current_user.roles.capitalize, :action => action, :controller => controller.humanize.downcase)
-      redirect_to :back rescue redirect_to admin_dashboard_url
+      redirect_to :back rescue redirect_to admin_dashboard_path
     end
   end
 
