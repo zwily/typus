@@ -2,13 +2,14 @@ TODO (ordered by priority)
 ====
 
 [ ] Test helpers.
-[ ] Make tests pass on Rails `2.3.0`.
 [ ] Better show action view template.
 [ ] Extract form helpers to templates.
+[ ] Make TypusUser.salt configurable.
 
 DONE
 ====
 
+[X] Make tests pass on Rails `2.3.0`.
 [X] Actions for a record can be added to the listings. (This can be done 
     from an instance method.)
 [X] Internationalize messages. (20090129)
