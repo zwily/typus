@@ -13,7 +13,6 @@ class ConfigurationTest < ActiveSupport::TestCase
       assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
       assert_equal 'admin@example.com', Typus::Configuration.options[:email]
       assert_equal true, Typus::Configuration.options[:ignore_missing_translations]
-      assert_equal 'admin', Typus::Configuration.options[:prefix]
       assert_equal true, Typus::Configuration.options[:recover_password]
       assert_equal 'admin', Typus::Configuration.options[:root]
       assert_equal false, Typus::Configuration.options[:ssl]
@@ -42,6 +41,10 @@ class ConfigurationTest < ActiveSupport::TestCase
     else
       assert Typus::Configuration.respond_to?(:options)
     end
+  end
+
+  def test_should_verify_options
+    assert_equal 'typus', Typus::Configuration.options[:prefix]
   end
 
   def test_should_verify_typus_roles_is_loaded
