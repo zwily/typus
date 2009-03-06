@@ -5,6 +5,7 @@ TODO (ordered by priority)
 [ ] Better show action view template.
 [ ] Extract form helpers to templates.
 [ ] Make TypusUser.salt configurable.
+[ ] When the migration is run create a default application email.
 
 DONE
 ====
