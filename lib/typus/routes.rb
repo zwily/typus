@@ -22,7 +22,8 @@ ActionController::Routing::Routes.draw do |map|
     # Generate routes for resources.
     #
     Typus.resources.each do |resource|
-      admin.connect "#{resource.underscore}/:action", :controller => resource.underscore
+      admin.connect "#{resource.underscore}/:action", :controller => resource.underscore, 
+                                                      :path_prefix => Typus::Configuration.options[:prefix]
     end
 
     Typus.models.each do |m|
