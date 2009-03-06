@@ -84,7 +84,7 @@ class TypusControllerTest < ActionController::TestCase
 
     get :overview
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path(:back_to => '/admin/overview')
+    assert_redirected_to admin_sign_in_path(:back_to => '/typus/overview')
 
     assert flash[:notice]
     assert_equal "Your typus user has been disabled.", flash[:notice]
@@ -193,7 +193,7 @@ class TypusControllerTest < ActionController::TestCase
     @request.session[:typus] = nil
     get :overview
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path(:back_to => '/admin/overview')
+    assert_redirected_to admin_sign_in_path(:back_to => '/typus/overview')
   end
 
   def test_should_render_dashboard
@@ -235,7 +235,7 @@ class TypusControllerTest < ActionController::TestCase
     get :dashboard
     assert_response :success
 
-    assert_match "href=\"\/admin\/typus_users\/#{typus_user.id}\/edit\"", @response.body
+    assert_match "href=\"\/typus\/typus_users\/#{typus_user.id}\/edit\"", @response.body
 
     assert_select 'body div#header' do
       assert_select 'a', 'Admin Example (admin)'
@@ -250,7 +250,7 @@ class TypusControllerTest < ActionController::TestCase
     get :dashboard
     assert_response :success
 
-    assert_match "href=\"\/admin\/sign_out\"", @response.body
+    assert_match "href=\"\/typus\/sign_out\"", @response.body
 
   end
 
@@ -260,7 +260,7 @@ class TypusControllerTest < ActionController::TestCase
     get :dashboard
 
     %w( typus_users posts pages assets ).each do |resource|
-      assert_match "/admin/#{resource}/new", @response.body
+      assert_match "/typus/#{resource}/new", @response.body
     end
 
     %w( statuses orders ).each do |resource|
@@ -273,7 +273,7 @@ class TypusControllerTest < ActionController::TestCase
     editor = typus_users(:editor)
     @request.session[:typus] = editor.id
     get :dashboard
-    assert_match '/admin/posts/new', @response.body
+    assert_match '/typus/posts/new', @response.body
     assert_no_match /\/admin\/typus_users\/new/, @response.body
     # We have loaded categories as a module, so are not displayed 
     # on the applications list.

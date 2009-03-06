@@ -18,6 +18,7 @@ end
 
 if Rails.env.test?
   Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
+  Typus::Configuration.options[:prefix] = 'typus'
 end
 
 ##
