@@ -100,6 +100,14 @@ on the `config/environments` folder.
 
     Typus::Configuration.options[:prefix] = "backoffice"
 
+### View Missing Translations
+
+If you are a developer who wants to translate Typus, add the following 
+setting on `development.rb` on the `config/environments` folder so all 
+missing translations messages will be shown.
+
+    Typus::Configuration.options[:ignore_missing_translations] = false
+
 ### Disable password recover
 
 You can disable password recover on the login page. By default, password
