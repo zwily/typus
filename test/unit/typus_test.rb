@@ -3,10 +3,8 @@ require 'test/helper'
 class TypusTest < ActiveSupport::TestCase
 
   def test_should_verify_models
-    assert Category.kind_of?(Class)
-    assert Comment.kind_of?(Class)
-    assert Post.kind_of?(Class)
-    assert TypusUser.kind_of?(Class)
+    models = [ Category, Comment, Post, TypusUser ]
+    models.each { |m| assert m.superclass.equal?(ActiveRecord::Base) }
   end
 
   def test_should_verify_fixtures_are_loaded
