@@ -12,14 +12,15 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     typus_user = typus_users(:admin)
     assert_equal 'admin', typus_user.roles
 
-    models = %w( TypusUser Post Comment Category Page Asset Status )
+    models = %w( TypusUser Post Comment Category Page Asset Status Git WatchDog )
     assert_equal models.sort, typus_user.resources.map(&:first).sort
 
     # Order exists on the roles, but, as we compact the hash, the
     # resource is removed.
     assert !typus_user.resources.map(&:first).include?('Order')
 
-    models.delete('Status')
+    resources = %w( Git Status WatchDog )
+    models.delete_if { |m| resources.include?(m) }
 
     %w( create read update destroy ).each do |action|
       models.each { |model| assert typus_user.can_perform?(model, action) }

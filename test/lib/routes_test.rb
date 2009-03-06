@@ -2,6 +2,11 @@ require 'test/helper'
 
 class RoutesTest < ActiveSupport::TestCase
 
+  def setup
+    @controller = ActionController::Base.new
+    @view = ActionView::Base.new
+  end
+
   def test_should_verify_admin_named_routes
 
     routes = ActionController::Routing::Routes.named_routes.routes.keys
@@ -59,5 +64,14 @@ class RoutesTest < ActiveSupport::TestCase
     expected.each { |route| assert routes.include?(route) }
 
   end
+
+=begin
+
+  def test_should_verify_routes_for_resource
+    assert_routing '/admin/watch_dog', :controller => 'admin/watch_dog', :action => 'index'
+    assert_routing '/admin/watch_dog/cleanup', { :controller => 'admin/watch_dog', :action => 'cleanup' }
+  end
+
+=end
 
 end

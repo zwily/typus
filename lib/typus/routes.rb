@@ -18,13 +18,11 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :admin do |admin|
 
+    ##
+    # Generate routes for resources.
+    #
     Typus.resources.each do |resource|
-
-      # FIXME
-      # Typus.resources[resource.to_s].split(', ').each do |action|
-        admin.connect resource.underscore, :controller => resource.underscore, :action => 'index'
-      # end
-
+      admin.connect "#{resource.underscore}/:action", :controller => resource.underscore
     end
 
     Typus.models.each do |m|
