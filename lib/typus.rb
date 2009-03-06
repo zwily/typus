@@ -61,17 +61,37 @@ module Typus
       Typus::Configuration.config.map { |i| i.first }.sort
     end
 
-    def resources
+    ##
+    # Return a list of resources, which are models tableless.
+    #
+    def resources(models = get_model_names)
 
       all_resources = []
       Typus::Configuration.roles.each do |key, value|
         all_resources += Typus::Configuration.roles[key].keys
       end
 
-      resources = []
-      all_resources.uniq.each { |r| r.constantize rescue resources << r }
+      all_resources.delete_if { |x| models.include?(x) }
 
-      return resources.uniq.sort
+      return all_resources
+
+    end
+
+    ##
+    # Get models folders
+    #
+    def get_model_names
+
+      models_folders = [ File.join(Rails.root, 'app/models') ]
+      models_folders += Dir[File.join(Rails.root, 'vendor/plugins/**/app/models') ]
+
+      models = Array.new
+
+      models_folders.each do |models_folder|
+        models += Dir["#{models_folder}/**/*.rb"].collect { |m| File.basename(m).sub(/\.rb$/,'').camelize }
+      end
+
+      return models
 
     end
 

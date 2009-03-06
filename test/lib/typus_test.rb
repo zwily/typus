@@ -57,7 +57,8 @@ class TypusTest < ActiveSupport::TestCase
 
   def test_should_verify_resources_class_method
     assert Typus.respond_to?(:resources)
-    assert_equal %w( Status ), Typus.resources
+    models = Typus.models
+    assert_equal %w( Status ), Typus.resources(models)
   end
 
   def test_should_return_description_of_module
