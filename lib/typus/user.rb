@@ -85,6 +85,7 @@ module Typus
                     end
         end
 
+        # OPTIMIZE
         self.resources[resource.to_s].split(', ').include?(_action) rescue false
 
       end
@@ -97,6 +98,7 @@ module Typus
 
       def encrypt_password
         return if password.blank?
+        # OPTIMIZE
         self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
         self.crypted_password = encrypt(password)
       end
