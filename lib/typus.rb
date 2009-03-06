@@ -78,16 +78,8 @@ module Typus
     # Get models folders
     #
     def get_model_names
-
-      models_folders = [ File.join(Rails.root, 'app/models') ]
-      models_folders += Dir[File.join(Rails.root, 'vendor/plugins/**/app/models') ]
-
-      models = models_folders.map do |models_folder|
-                 Dir["#{models_folder}/**/*.rb"].collect { |m| File.basename(m).sub(/\.rb$/,'').camelize }
-               end
-
-      models.flatten
-
+      Dir[ "#{Rails.root}/app/models/**/*.rb", 
+           "#{Rails.root}/vendor/plugins/**/app/models/**/*.rb" ].collect { |m| File.basename(m).sub(/\.rb$/,'').camelize }
     end
 
     def module_description(modulo)
