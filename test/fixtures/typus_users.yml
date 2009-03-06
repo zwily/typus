@@ -9,6 +9,7 @@ admin:
   roles: admin
   salt: <%= "--#{time}--admin@example.com--" %>
   crypted_password: <%= Digest::SHA1.hexdigest("----#{time}--admin@example.com----#{12345678}") %>
+  token: 1A2B3C4D5E6F
 
 editor:
   id: 2
