@@ -2,13 +2,14 @@ module Typus
 
   def self.generator
 
+    logger = Logger.new("#{RAILS_ROOT}/log/#{Rails.env}.log")
+
     # Create app/controllers/admin if doesn't exist.
     admin_controllers_folder = "#{Rails.root}/app/controllers/admin"
     Dir.mkdir(admin_controllers_folder) unless File.directory?(admin_controllers_folder)
 
     # Get a list of all the available app/controllers/admin
-    admin_controllers = Dir['vendor/plugins/*/app/controllers/admin/*.rb']
-    admin_controllers += Dir['app/controllers/admin/*.rb']
+    admin_controllers = Dir['vendor/plugins/*/app/controllers/admin/*.rb', 'app/controllers/admin/*.rb']
     admin_controllers = admin_controllers.map { |i| File.basename(i) }
 
     # Create app/views/admin if doesn't exist.
@@ -20,8 +21,7 @@ module Typus
     Dir.mkdir(admin_helpers_folder) unless File.directory?(admin_helpers_folder)
 
     # Get a list of all the available app/helpers/admin
-    admin_helpers = Dir['vendor/plugins/*/app/helpers/admin/*.rb']
-    admin_helpers += Dir['app/helpers/admin/*.rb']
+    admin_helpers = Dir['vendor/plugins/*/app/helpers/admin/*.rb', 'app/helpers/admin/*.rb']
     admin_helpers = admin_helpers.map { |i| File.basename(i) }
 
     # Create test/functional/admin if doesn't exist.
@@ -29,8 +29,7 @@ module Typus
     Dir.mkdir(admin_controller_tests_folder) unless File.directory?(admin_controller_tests_folder)
 
     # Get a list of all the available app/helpers/admin
-    admin_controller_tests = Dir['vendor/plugins/*/test/functional/admin/*.rb']
-    admin_controller_tests += Dir['test/functional/admin/*.rb']
+    admin_controller_tests = Dir['vendor/plugins/*/test/functional/admin/*.rb', 'test/functional/admin/*.rb']
     admin_controller_tests = admin_controller_tests.map { |i| File.basename(i) }
 
     # Generate unexisting controllers for resources which are not tied to
@@ -62,11 +61,11 @@ def index
 end
 
 end
-        RAW
+      RAW
 
         controller.puts(content)
         controller.close
-        puts "=> [typus] Admin::#{resource}Controller successfully created."
+        logger.info "=> [typus] Admin::#{resource}Controller successfully created."
 
       end
 
@@ -94,7 +93,7 @@ end
         RAW
         view.puts(content)
         view.close
-        puts "=> [typus] app/views/admin/#{resource.underscore}/index.html.erb successfully created."
+        logger.info "=> [typus] app/views/admin/#{resource.underscore}/index.html.erb successfully created."
       end
 
     end
@@ -147,7 +146,7 @@ end
 
         controller.puts(content)
         controller.close
-        puts "[typus] Admin::#{model.pluralize}Controller successfully created."
+        logger.info "[typus] Admin::#{model.pluralize}Controller successfully created."
       end
 
       # Helper app/helpers/admin/*
@@ -169,7 +168,7 @@ end
 
         helper.puts(content)
         helper.close
-        puts "[typus] Admin::#{model.pluralize}Helper successfully created."
+        logger.info "[typus] Admin::#{model.pluralize}Helper successfully created."
       end
 
       # Test test/functional/admin/*_test.rb
@@ -198,7 +197,7 @@ end
 
         test.puts(content)
         test.close
-        puts "[typus] Admin::#{model.pluralize}ControllerTest successfully created."
+        logger.info "[typus] Admin::#{model.pluralize}ControllerTest successfully created."
       end
 
     end
