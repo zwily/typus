@@ -66,14 +66,11 @@ module Typus
     #
     def resources(models = get_model_names)
 
-      all_resources = []
-      Typus::Configuration.roles.each do |key, value|
-        all_resources += Typus::Configuration.roles[key].keys
-      end
+      all_resources = Typus::Configuration.roles.keys.map do |key|
+                        Typus::Configuration.roles[key].keys
+                      end
 
-      all_resources.delete_if { |x| models.include?(x) }
-
-      return all_resources
+      all_resources.flatten.delete_if { |x| models.include?(x) }
 
     end
 
@@ -85,13 +82,11 @@ module Typus
       models_folders = [ File.join(Rails.root, 'app/models') ]
       models_folders += Dir[File.join(Rails.root, 'vendor/plugins/**/app/models') ]
 
-      models = Array.new
+      models = models_folders.map do |models_folder|
+                 Dir["#{models_folder}/**/*.rb"].collect { |m| File.basename(m).sub(/\.rb$/,'').camelize }
+               end
 
-      models_folders.each do |models_folder|
-        models += Dir["#{models_folder}/**/*.rb"].collect { |m| File.basename(m).sub(/\.rb$/,'').camelize }
-      end
-
-      return models
+      models.flatten
 
     end
 
