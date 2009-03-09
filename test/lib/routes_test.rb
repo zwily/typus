@@ -20,7 +20,7 @@ class RoutesTest < ActiveSupport::TestCase
 
   end
 
-  def test_should_verify_admin_routes_for_typus_users
+  def test_should_verify_admin_named_routes_for_typus_users
 
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
@@ -38,7 +38,7 @@ class RoutesTest < ActiveSupport::TestCase
 
   end
 
-  def test_should_verify_default_admin_routes_for_posts
+  def test_should_verify_default_admin_named_routes_for_posts
 
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
@@ -53,7 +53,7 @@ class RoutesTest < ActiveSupport::TestCase
 
   end
 
-  def test_should_verify_custom_admin_routes_for_posts
+  def test_should_verify_custom_admin_named_routes_for_posts
 
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
@@ -65,7 +65,18 @@ class RoutesTest < ActiveSupport::TestCase
 
   end
 
-  def test_should_verify_routes_for_resource
+  def test_should_verify_generated_routes_for_typus_controller
+
+    actions = [ 'sign_up', 'sign_in', 'sign_out', 
+                'recover_password', 'reset_password', 
+                'overview', 
+                'quick_edit', 'set_locale' ]
+
+    actions.each { |a| assert_routing "/typus/#{a}", :controller => 'typus', :action => a }
+
+  end
+
+  def test_should_verify_generated_routes_for_resource_controller
     assert_routing '/typus/watch_dog', :controller => 'admin/watch_dog', :action => 'index'
     assert_routing '/typus/watch_dog/cleanup', { :controller => 'admin/watch_dog', :action => 'cleanup' }
   end
