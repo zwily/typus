@@ -67,6 +67,8 @@ class RoutesTest < ActiveSupport::TestCase
 
   def test_should_verify_generated_routes_for_typus_controller
 
+    assert_routing '/typus', :controller => 'typus', :action => 'dashboard'
+
     actions = [ 'sign_up', 'sign_in', 'sign_out', 
                 'recover_password', 'reset_password', 
                 'overview', 
