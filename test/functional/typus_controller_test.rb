@@ -150,27 +150,40 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_create_first_typus_user
+
     TypusUser.destroy_all
     assert_nil @request.session[:typus]
     assert TypusUser.find(:all).empty?
+
     get :sign_in
     assert_response :redirect
     assert_redirected_to admin_sign_up_path
+
+    get :sign_up
+    assert flash[:notice]
+    assert_equal 'Write your email to create the first user.', flash[:notice]
+
     post :sign_up, :user => { :email => 'example.com' }
     assert_response :redirect
     assert_redirected_to admin_sign_up_path
     assert flash[:error]
     assert_equal 'That doesn\'t seem like a valid email address.', flash[:error]
+
     post :sign_up, :user => { :email => 'john@example.com' }
     assert_response :redirect
     assert_redirected_to admin_dashboard_path
     assert flash[:notice]
     assert_match /Your new password is/, flash[:notice]
     assert @request.session[:typus]
-    assert !(TypusUser.find(:all).empty?)
-    @request.session[:typus] = nil
+    assert !TypusUser.find(:all).empty?
+
+    get :sign_out
+    assert_nil @request.session[:typus]
+    assert_redirected_to admin_sign_in_path
+
     get :sign_up
     assert_redirected_to admin_sign_in_path
+
   end
 
   def test_should_redirect_to_login_if_not_logged
