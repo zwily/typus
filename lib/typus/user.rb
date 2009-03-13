@@ -17,7 +17,7 @@ module Typus
         validates_presence_of :email
         validates_presence_of :password, :password_confirmation, :if => :new_record?
         validates_uniqueness_of :email
-        validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+        validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/
         validates_confirmation_of :password, :if => lambda { |i| i.new_record? or not i.password.blank? }
         validates_length_of :password, :within => 8..40, :if => lambda { |i| i.new_record? or not i.password.blank? }
         validates_inclusion_of :roles, :in => roles, :message => "has to be #{Typus.roles_sentence}."

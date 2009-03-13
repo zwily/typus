@@ -34,6 +34,33 @@ END
     assert @typus_user.errors.invalid?(:email)
   end
 
+  def test_should_verify_emails_are_downcase
+    email = 'TEST@EXAMPLE.COM'
+    @typus_user.email = email
+    assert !@typus_user.valid?
+    assert @typus_user.errors.invalid?(:email)
+  end
+
+  def test_should_verify_some_valid_emails_schemas
+    emails = [ 'test+filter@example.com', 
+               'test.filter@example.com', 
+               'test@example.co.uk', 
+               'test@example.es' ]
+    emails.each do |email|
+      @typus_user.email = email
+      assert @typus_user.valid?
+    end
+  end
+
+  def test_should_verify_invalid_emails_are_detected
+    emails = [ 'test@example', 'test@example.c', 'testexample.com' ]
+    emails.each do |email|
+      @typus_user.email = email
+      assert !@typus_user.valid?
+      assert @typus_user.errors.invalid?(:email)
+    end
+  end
+
   def test_should_verify_email_is_unique
     @typus_user.save
     @another_typus_user = TypusUser.new(@data)
