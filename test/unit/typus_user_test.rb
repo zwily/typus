@@ -105,4 +105,16 @@ END
     end
   end
 
+  def test_should_verify_salt_on_user_never_changes
+
+    @typus_user.save
+    salt = @typus_user.salt
+    crypted_password = @typus_user.crypted_password
+
+    @typus_user.update_attributes :password => '11111111', :password_confirmation => '11111111'
+    assert_equal salt, @typus_user.salt
+    assert_not_equal crypted_password, @typus_user.crypted_password
+
+  end
+
 end
