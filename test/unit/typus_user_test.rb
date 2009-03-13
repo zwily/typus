@@ -99,6 +99,12 @@ END
     assert !editor.is_root?
   end
 
+  def test_should_verify_authenticated
+    @typus_user.save
+    assert @typus_user.authenticated?('12345678')
+    assert !@typus_user.authenticated?('87654321')
+  end
+
   def test_should_verify_typus_user_can_be_created
     assert_difference 'TypusUser.count' do
       TypusUser.create(@data)
