@@ -95,10 +95,26 @@ END
   end
 
   def test_should_verify_confirmation_of_password
+
     @typus_user.password = '12345678'
     @typus_user.password_confirmation = '87654321'
     assert !@typus_user.valid?
     assert @typus_user.errors.invalid?(:password)
+
+=begin
+
+    @typus_user.password = '12345678'
+    @typus_user.password_confirmation = nil
+    assert !@typus_user.valid?
+    assert @typus_user.errors.invalid?(:password)
+
+=end
+
+    @typus_user.password = '12345678'
+    @typus_user.password_confirmation = ''
+    assert !@typus_user.valid?
+    assert @typus_user.errors.invalid?(:password)
+
   end
 
   def test_should_verify_roles
