@@ -22,8 +22,7 @@ module Typus
         validates_length_of :password, :within => 8..40, :if => lambda { |i| i.new_record? or not i.password.blank? }
         validates_inclusion_of :roles, :in => roles, :message => "has to be #{Typus.roles_sentence}."
 
-        before_create :set_token
-        before_save :encrypt_password
+        before_save :initialize_salt, :encrypt_password, :initialize_token
 
         include InstanceMethods
 
@@ -93,19 +92,29 @@ module Typus
 
     protected
 
+      def generate_hash(string)
+        Digest::SHA1.hexdigest(string)
+      end
+
       def encrypt_password
         return if password.blank?
-        @attributes['salt'] = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
-        @attributes['crypted_password'] = encrypt(password)
+        self.crypted_password = encrypt(password)
       end
 
-      def encrypt(password)
-        Digest::SHA1.hexdigest("--#{salt}--#{password}")
+      def encrypt(string)
+        generate_hash("--#{salt}--#{string}")
       end
 
-      def set_token
-        chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
-        @attributes['token'] = Array.new(12) { chars.rand }.join
+      def initialize_salt
+        self.salt = generate_hash("--#{Time.now.utc.to_s}--#{email}--") if new_record?
+      end
+
+      def initialize_token
+        generate_token if new_record?
+      end
+
+      def generate_token
+        self.token = encrypt("--#{Time.now.utc.to_s}--#{password}--")
       end
 
     end
