@@ -43,8 +43,9 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     typus_user = typus_users(:editor)
     assert_equal 'editor', typus_user.roles
 
-    models = %w( Category Comment Post TypusUser )
-    assert_equal models.sort, typus_user.resources.map(&:first).sort
+    %w( Category Comment Git Post TypusUser ).each do |model|
+      assert typus_user.resources.map(&:first).include?(model)
+    end
 
     # Category: create, read, update
     %w( create read update ).each { |action| assert typus_user.can_perform?(Category, action) }
