@@ -23,7 +23,7 @@ module Typus
 
         validates_inclusion_of :roles, 
                                :in => roles, 
-                               :message => "has to be in #{Typus::Configuration.roles.keys.reverse.join(", ")}."
+                               :message => "has to be #{Typus.roles_sentence}."
 
         before_create :set_token
         before_save :encrypt_password

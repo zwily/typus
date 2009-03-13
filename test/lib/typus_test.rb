@@ -106,6 +106,13 @@ class TypusTest < ActiveSupport::TestCase
                end
     assert_equal expected, Typus.to_sentence_options
 
+    expected = if Rails.version == '2.2.2'
+                 { :skip_last_comma => true, :connector => 'or' }
+               else
+                 { :words_connector => ', ', :last_word_connector => ' or ' }
+               end
+    assert_equal expected, Typus.to_sentence_options('or')
+
   end
 
 end

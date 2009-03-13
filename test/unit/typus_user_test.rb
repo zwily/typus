@@ -74,6 +74,13 @@ END
     assert @typus_user.errors.invalid?(:password)
   end
 
+  def test_should_verify_roles
+    @typus_user.roles = 'unexisting'
+    assert !@typus_user.valid?
+    assert @typus_user.errors.invalid?(:roles)
+    assert_equal "has to be admin, designer or editor.", @typus_user.errors[:roles]
+  end
+
   def test_should_return_full_name
     assert "#{@typus_user.email} (#{@typus_user.roles})", @typus_user.full_name(:display_role => true)
     assert "#{@typus_user.email}", @typus_user.full_name
