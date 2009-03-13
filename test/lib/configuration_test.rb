@@ -13,13 +13,13 @@ class ConfigurationTest < ActiveSupport::TestCase
       assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
       assert_equal 'admin@example.com', Typus::Configuration.options[:email]
       assert_equal true, Typus::Configuration.options[:ignore_missing_translations]
+      assert_equal [ [ "English", :en] ], Typus::Configuration.options[:locales]
       assert_equal true, Typus::Configuration.options[:recover_password]
       assert_equal 'admin', Typus::Configuration.options[:root]
       assert_equal false, Typus::Configuration.options[:ssl]
       assert_equal 'admin/templates', Typus::Configuration.options[:templates_folder]
       assert_equal 'TypusUser', Typus::Configuration.options[:user_class_name]
       assert_equal 'typus_user_id', Typus::Configuration.options[:user_fk]
-      assert_equal [ [ "English", :en] ], Typus::Configuration.options[:locales]
     else
       assert Typus::Configuration.respond_to?(:options)
     end

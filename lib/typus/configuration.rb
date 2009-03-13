@@ -30,14 +30,14 @@ module Typus
                       :config_folder => 'config/typus', 
                       :email => 'admin@example.com', 
                       :ignore_missing_translations => true, 
+                      :locales => [ [ "English", :en ] ], 
                       :prefix => 'admin', 
                       :recover_password => true, 
                       :root => 'admin', 
                       :ssl => false, 
                       :templates_folder => 'admin/templates',
                       :user_class_name => 'TypusUser', 
-                      :user_fk => 'typus_user_id', 
-                      :locales => [ [ "English", :en ] ] }
+                      :user_fk => 'typus_user_id' }
 
     model_options = { :edit_after_create => true, 
                       :end_year => nil,
