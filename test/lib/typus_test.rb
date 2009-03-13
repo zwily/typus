@@ -79,9 +79,9 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   def test_should_return_overwritted_user_class
-    Typus::Configuration.options[:user_class_name] = 'CustomUser'
+    options = { :user_class_name => 'CustomUser' }
+    Typus::Configuration.stubs(:options).returns(options)
     assert_equal CustomUser, Typus.user_class
-    Typus::Configuration.options[:user_class_name] = 'TypusUser'
   end
 
   def test_should_return_user_fk
