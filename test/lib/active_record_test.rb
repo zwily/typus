@@ -4,14 +4,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   def test_should_return_model_fields_for_typus_user
     expected_fields = [[:id, :integer], 
-                       [:email, :string], 
                        [:first_name, :string], 
                        [:last_name, :string], 
+                       [:roles, :string], 
+                       [:email, :string], 
+                       [:status, :boolean], 
+                       [:token, :string], 
                        [:salt, :string], 
                        [:crypted_password, :string], 
-                       [:status, :boolean], 
-                       [:roles, :string], 
-                       [:token, :string], 
                        [:created_at, :datetime], 
                        [:updated_at, :datetime]]
     assert_equal expected_fields.map { |i| i.first }, TypusUser.model_fields.keys
