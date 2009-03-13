@@ -272,13 +272,6 @@ module Typus
     end
 
     ##
-    # Used by acts_as_tree to detect children.
-    #
-    def has_children?
-      children.size > 0
-    end
-
-    ##
     #
     #
     def typus_name
