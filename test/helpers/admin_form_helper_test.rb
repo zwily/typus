@@ -164,17 +164,13 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 
   def test_attribute_disabled
 
-    output = attribute_disabled?('test', Post)
-    expected = false
-    assert_equal expected, output
+    assert !attribute_disabled?('test', Post)
 
     Post.expects(:accessible_attributes).returns(['test'])
-    output = attribute_disabled?('test', Post)
-    assert_equal false, output
+    assert !attribute_disabled?('test', Post)
 
     Post.expects(:accessible_attributes).returns(['no_test'])
-    output = attribute_disabled?('test', Post)
-    assert output
+    assert attribute_disabled?('test', Post)
 
   end
 
