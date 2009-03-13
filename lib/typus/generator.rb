@@ -34,7 +34,7 @@ module Typus
 
     # Generate unexisting controllers for resources which are not tied to
     # a model.
-    self.resources.each do |resource|
+    resources.each do |resource|
 
       controller_filename = "#{resource.underscore}_controller.rb"
       controller_location = "#{admin_controllers_folder}/#{controller_filename}"
@@ -97,8 +97,6 @@ end
       end
 
     end
-
-    models = self.models
 
     # Generate unexisting controllers for resources which are tied to a 
     # model.
