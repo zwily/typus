@@ -3,8 +3,8 @@ require 'test/helper'
 class TypusUserRolesTest < ActiveSupport::TestCase
 
   def test_should_get_list_of_roles
-    roles = %w( admin editor designer )
-    assert_equal roles.sort, Typus::Configuration.roles.map(&:first).sort
+    roles = %w( admin designer editor )
+    assert_equal roles, Typus::Configuration.roles.map(&:first).reverse
   end
 
   def test_admin_role_settings
@@ -12,8 +12,8 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     typus_user = typus_users(:admin)
     assert_equal 'admin', typus_user.roles
 
-    models = %w( TypusUser Post Comment Category Page Asset Status Git WatchDog )
-    assert_equal models.sort, typus_user.resources.map(&:first).sort
+    models = %w( Asset Category Comment Git Page Post Status TypusUser WatchDog )
+    assert_equal models, typus_user.resources.map(&:first).sort
 
     # Order exists on the roles, but, as we compact the hash, the
     # resource is removed.
@@ -71,7 +71,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     assert_equal 'designer', typus_user.roles
 
     models = %w( Category Comment Post )
-    assert_equal models.sort, typus_user.resources.map(&:first).sort
+    assert_equal models, typus_user.resources.map(&:first).sort
 
     # Category: read, update
     %w( read update ).each { |action| assert typus_user.can_perform?(Category, action) }
