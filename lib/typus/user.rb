@@ -96,8 +96,8 @@ module Typus
       def encrypt_password
         return if password.blank?
         # OPTIMIZE
-        self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
-        self.crypted_password = encrypt(password)
+        @attributes['salt'] = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
+        @attributes['crypted_password'] = encrypt(password)
       end
 
       def encrypt(password)
