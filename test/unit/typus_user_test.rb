@@ -82,15 +82,15 @@ END
   end
 
   def test_should_return_full_name
-    assert "#{@typus_user.email} (#{@typus_user.roles})", @typus_user.full_name(:display_role => true)
-    assert "#{@typus_user.email}", @typus_user.full_name
+    assert_equal "#{@typus_user.email} (#{@typus_user.roles})", @typus_user.full_name(:display_role => true)
+    assert_equal "#{@typus_user.email}", @typus_user.full_name
   end
 
   def test_should_return_full_name_with_role
     @typus_user.first_name = 'John'
     @typus_user.last_name = 'Smith'
-    assert "John Smith (#{@typus_user.roles})", @typus_user.full_name(:display_role => true)
-    assert 'John Smith', @typus_user.full_name
+    assert_equal "John Smith (#{@typus_user.roles})", @typus_user.full_name(:display_role => true)
+    assert_equal 'John Smith', @typus_user.full_name
   end
 
   def test_should_return_verify_is_root
