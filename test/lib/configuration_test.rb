@@ -2,10 +2,6 @@ require 'test/helper'
 
 class ConfigurationTest < ActiveSupport::TestCase
 
-  def teardown
-    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
-  end
-
   def test_should_verify_application_wide_configuration_options
     initializer = "#{Rails.root}/config/initializers/typus.rb"
     unless File.exists?(initializer)
@@ -58,20 +54,23 @@ class ConfigurationTest < ActiveSupport::TestCase
   end
 
   def test_should_load_configuration_files_from_config_broken
-    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/broken'
+    options = { :config_folder => 'vendor/plugins/typus/test/config/broken' }
+    Typus::Configuration.stubs(:options).returns(options)
     assert_not_equal Typus::Configuration.roles!, {}
     assert_not_equal Typus::Configuration.config!, {}
   end
 
   def test_should_load_configuration_files_from_config_empty
-    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/empty'
+    options = { :config_folder => 'vendor/plugins/typus/test/config/empty' }
+    Typus::Configuration.stubs(:options).returns(options)
     assert_equal Typus::Configuration.roles!, {}
     assert_equal Typus::Configuration.config!, {}
   end
 
 
   def test_should_load_configuration_files_from_config_ordered
-    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/ordered'
+    options = { :config_folder => 'vendor/plugins/typus/test/config/ordered' }
+    Typus::Configuration.stubs(:options).returns(options)
     files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
     expected = files.collect { |file| File.basename(file) }
     assert_equal expected, ['001_roles.yml', '002_roles.yml']
@@ -80,7 +79,8 @@ class ConfigurationTest < ActiveSupport::TestCase
   end
 
   def test_should_load_configuration_files_from_config_unordered
-    Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/unordered'
+    options = { :config_folder => 'vendor/plugins/typus/test/config/unordered' }
+    Typus::Configuration.stubs(:options).returns(options)
     files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
     expected = files.collect { |file| File.basename(file) }
     assert_equal expected, ['app_one_roles.yml', 'app_two_roles.yml']
