@@ -20,10 +20,7 @@ module Typus
         validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
         validates_confirmation_of :password, :if => lambda { |i| i.new_record? or not i.password.blank? }
         validates_length_of :password, :within => 8..40, :if => lambda { |i| i.new_record? or not i.password.blank? }
-
-        validates_inclusion_of :roles, 
-                               :in => roles, 
-                               :message => "has to be #{Typus.roles_sentence}."
+        validates_inclusion_of :roles, :in => roles, :message => "has to be #{Typus.roles_sentence}."
 
         before_create :set_token
         before_save :encrypt_password
