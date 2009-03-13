@@ -119,7 +119,7 @@ class AdminController < ApplicationController
     %w( action controller model model_id back_to id resource resource_id ).each { |p| item_params.delete(p) }
     # We assign the params passed trough the url
     @item.attributes = item_params
-    @previous, @next = @item.previous_and_next
+    @previous, @next = @item.previous_and_next(item_params)
     select_template :edit
   end
 
