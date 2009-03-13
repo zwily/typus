@@ -241,31 +241,26 @@ module Typus
 
   module InstanceMethods
 
-    def previous_and_next(condition = {})
+    def previous_and_next(condition = {}, klass = self.class)
 
-      conditions = if condition.empty?
-                     "id < #{id}"
-                   else
-                     self.class.build_conditions(condition) \
-                     << " AND id != #{id}"
-                   end
+      previous_conditions = "id < #{id}"
+      next_conditions = "id > #{id}"
 
-      previous_ = self.class.find :first, 
-                                  :select => [:id], 
-                                  :order => "id DESC", 
-                                  :conditions => conditions
+      if !condition.empty?
+        conditions, joins = klass.build_conditions(condition)
+        previous_conditions += " AND #{conditions}"
+        next_conditions += " AND #{conditions}"
+      end
 
-      conditions = if condition.empty?
-                     "id > #{id}"
-                   else
-                     self.class.build_conditions(condition) \
-                     << " AND id != #{id}"
-                   end
+      previous_ = klass.find :first, 
+                             :select => [:id], 
+                             :order => "id DESC", 
+                             :conditions => previous_conditions
 
-      next_ = self.class.find :first, 
-                              :select => [:id], 
-                              :order => "id ASC", 
-                              :conditions => conditions
+      next_ = klass.find :first, 
+                         :select => [:id], 
+                         :order => "id ASC", 
+                         :conditions => next_conditions
 
       return previous_, next_
 
