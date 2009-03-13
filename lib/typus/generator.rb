@@ -144,7 +144,7 @@ end
 
         controller.puts(content)
         controller.close
-        logger.info "[typus] Admin::#{model.pluralize}Controller successfully created."
+        logger.info "=> [typus] Admin::#{model.pluralize}Controller successfully created."
       end
 
       # Helper app/helpers/admin/*
@@ -166,7 +166,7 @@ end
 
         helper.puts(content)
         helper.close
-        logger.info "[typus] Admin::#{model.pluralize}Helper successfully created."
+        logger.info "=> [typus] Admin::#{model.pluralize}Helper successfully created."
       end
 
       # Test test/functional/admin/*_test.rb
@@ -195,7 +195,7 @@ end
 
         test.puts(content)
         test.close
-        logger.info "[typus] Admin::#{model.pluralize}ControllerTest successfully created."
+        logger.info "=> [typus] Admin::#{model.pluralize}ControllerTest successfully created."
       end
 
     end

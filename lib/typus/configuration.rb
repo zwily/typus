@@ -10,7 +10,7 @@ module Typus
       #
       def reload_config_et_roles
         return unless Rails.env.development?
-        logger.info "[typus] Configuration files have been reloaded."
+        logger.info "=> [typus] Configuration files have been reloaded."
         Typus::Configuration.roles!
         Typus::Configuration.config!
       end
