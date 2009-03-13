@@ -6,6 +6,8 @@ TODO (ordered by priority)
 [ ] Extract form helpers to templates.
 [ ] Make TypusUser.salt configurable.
 [ ] When the migration is run create a default application email.
+[ ] Roles priority.
+[ ] Use previous and next with conditions if enabled.
 
 DONE
 ====
