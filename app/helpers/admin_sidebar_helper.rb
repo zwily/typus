@@ -225,7 +225,17 @@ function surfto_#{model_pluralized}(form) {
     items = []
     values.each do |item|
       switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
-      items << (link_to item.capitalize, { :params => params.merge(filter => item, :page => nil) }, :class => switch)
+
+      if values.first.kind_of?(Array)
+        link_name = item.first
+        link_filter = item.last
+      else
+        link_name = item
+        link_filter = item
+      end
+
+      items << (link_to link_name.capitalize, { :params => params.merge(filter => link_filter, :page => nil) }, :class => switch)
+
     end
     build_typus_list(items, filter)
   end
