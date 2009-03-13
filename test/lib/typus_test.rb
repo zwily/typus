@@ -89,9 +89,9 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   def test_should_return_overwritted_user_fk
-    Typus::Configuration.options[:user_fk] = 'my_user_fk'
+    options = { :user_fk => 'my_user_fk' }
+    Typus::Configuration.stubs(:options).returns(options)
     assert_equal 'my_user_fk', Typus.user_fk
-    Typus::Configuration.options[:user_fk] = 'typus_user_id'
   end
 
   def test_should_verify_to_sentence_options
