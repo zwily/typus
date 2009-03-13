@@ -124,6 +124,7 @@ module Typus
       require 'typus/locale'
       require 'typus/user'
       require 'typus/generator'
+      require 'typus/more'
 
       # Vendor
       require 'vendor/active_record'

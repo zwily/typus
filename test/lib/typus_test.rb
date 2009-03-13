@@ -94,4 +94,18 @@ class TypusTest < ActiveSupport::TestCase
     Typus::Configuration.options[:user_fk] = 'typus_user_id'
   end
 
+  def test_should_verify_to_sentence_options
+
+    assert Typus.respond_to?(:to_sentence_options)
+    assert Typus.to_sentence_options.kind_of?(Hash)
+
+    expected = if Rails.version == '2.2.2'
+                 { :skip_last_comma => true, :connector => '&' }
+               else
+                 { :words_connector => ', ', :last_word_connector => ' & ' }
+               end
+    assert_equal expected, Typus.to_sentence_options
+
+  end
+
 end
