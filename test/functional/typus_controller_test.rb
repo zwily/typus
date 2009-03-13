@@ -92,31 +92,15 @@ class TypusControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_not_allow_recover_password_if_disabled
-
-    get :recover_password
-
-    assert_response :success
-    assert_template 'recover_password'
-
-    Typus::Configuration.options[:recover_password] = false
-    get :recover_password
-
-    assert_response :redirect
-    assert_redirected_to admin_sign_in_path
-
-  end
-
   def test_should_not_allow_reset_password_if_disabled
 
-    get :reset_password
-
+    typus_user = typus_users(:admin)
+    get :reset_password, { :token => typus_user.token }
     assert_response :success
     assert_template 'reset_password'
 
     Typus::Configuration.options[:recover_password] = false
     get :reset_password
-
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
 
@@ -133,15 +117,16 @@ class TypusControllerTest < ActionController::TestCase
     assert_template 'reset_password'
   end
 
-  def test_should_verify_admin_sign_in_layout_does_not_include_recover_password_link
-
+  def test_should_verify_typus_sign_in_layout_includes_recover_password_link
+    Typus::Configuration.options[:recover_password] = true
     get :sign_in
-    assert_match /Recover password/, @response.body
+    assert @response.body.include?('Recover password')
+  end
 
+  def test_should_verify_typus_sign_in_layout_does_not_include_recover_password_link
     Typus::Configuration.options[:recover_password] = false
     get :sign_in
     assert !@response.body.include?('Recover password')
-
   end
 
   def test_should_render_typus_login_footer
@@ -150,7 +135,6 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :success
     assert_match /#{expected}/, @response.body
     assert_match /layouts\/typus/, @controller.active_layout.to_s
-
   end
 
   def test_should_render_admin_login_bottom
