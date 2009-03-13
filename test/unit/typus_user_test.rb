@@ -99,4 +99,10 @@ END
     assert !editor.is_root?
   end
 
+  def test_should_verify_typus_user_can_be_created
+    assert_difference 'TypusUser.count' do
+      TypusUser.create(@data)
+    end
+  end
+
 end
