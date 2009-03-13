@@ -92,6 +92,14 @@ from the yaml files under `config/typus`.
         start_year: 1990
         toggle: true
 
+### Recover password
+
+Recover password is disabled by default. To enable it you should 
+provide an email address which will be shown as the sender.
+
+    Typus::Configuration.options[:email] = 'typus@application.com'
+    Typus::Configuration.options[:recover_password] = true
+
 ### Special Route
 
 To overwrite the default prefix path of your application place the 

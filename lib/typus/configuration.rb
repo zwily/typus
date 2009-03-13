@@ -32,7 +32,7 @@ module Typus
                       :ignore_missing_translations => true, 
                       :locales => [ [ "English", :en ] ], 
                       :prefix => 'admin', 
-                      :recover_password => true, 
+                      :recover_password => false, 
                       :root => 'admin', 
                       :ssl => false, 
                       :templates_folder => 'admin/templates',
