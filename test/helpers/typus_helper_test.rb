@@ -22,7 +22,8 @@ class TypusHelperTest < ActiveSupport::TestCase
 
   def test_page_title
     params = {}
-    Typus::Configuration.options[:app_name] = 'whatistypus.com'
+    options = { :app_name => 'whatistypus.com' }
+    Typus::Configuration.stubs(:options).returns(options)
     output = page_title('custom_action')
     assert_equal 'whatistypus.com &rsaquo; Custom action', output
   end
@@ -69,7 +70,8 @@ class TypusHelperTest < ActiveSupport::TestCase
 
   def test_locales
 
-    Typus::Configuration.options[:locales] = [ [ "English", :en ], [ "Español", :es ] ]
+    options = { :locales => [ [ "English", :en ], [ "Español", :es ] ] }
+    Typus::Configuration.stubs(:options).returns(options)
 
     output = locales('set_locale')
     expected = <<-HTML
@@ -81,8 +83,6 @@ class TypusHelperTest < ActiveSupport::TestCase
 </ul>
     HTML
     assert_equal expected, output
-
-    Typus::Configuration.options[:locales] = [ [ "English", :en ] ]
 
   end
 

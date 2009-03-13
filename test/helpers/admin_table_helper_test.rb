@@ -103,8 +103,8 @@ class AdminTableHelperTest < ActiveSupport::TestCase
 
   def test_typus_table_boolean_field
 
-    Typus::Configuration.options[:icon_on_boolean] = false
-    Typus::Configuration.options[:toggle] = false
+    options = { :icon_on_boolean => false, :toggle => false }
+    Typus::Configuration.stubs(:options).returns(options)
 
     post = posts(:published)
     output = typus_table_boolean_field(:status, post)
@@ -121,9 +121,6 @@ class AdminTableHelperTest < ActiveSupport::TestCase
     HTML
 
     assert_equal expected, output
-
-    Typus::Configuration.options[:icon_on_boolean] = true
-    Typus::Configuration.options[:toggle] = true
 
   end
 
