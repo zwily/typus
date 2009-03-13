@@ -22,7 +22,7 @@ module Typus
         validates_length_of :password, :within => 8..40, :if => lambda { |i| i.new_record? or not i.password.blank? }
 
         validates_inclusion_of :roles, 
-                               :in => self.roles, 
+                               :in => roles, 
                                :message => "has to be in #{Typus::Configuration.roles.keys.reverse.join(", ")}."
 
         before_create :set_token
@@ -64,7 +64,7 @@ module Typus
       # Resources TypusUser has access to ...
       #
       def resources
-        Typus::Configuration.roles[self.roles].compact
+        Typus::Configuration.roles[roles].compact
       end
 
       def can_perform?(resource, action, options = {})
@@ -86,7 +86,7 @@ module Typus
         end
 
         # OPTIMIZE
-        self.resources[resource.to_s].split(', ').include?(_action) rescue false
+        resources[resource.to_s].split(', ').include?(_action) rescue false
 
       end
 
@@ -99,8 +99,8 @@ module Typus
       def encrypt_password
         return if password.blank?
         # OPTIMIZE
-        self.salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
-        self.crypted_password = encrypt(password)
+        salt = Digest::SHA1.hexdigest("--#{Time.now.to_s}--#{email}--") if new_record?
+        crypted_password = encrypt(password)
       end
 
       def encrypt(password)
