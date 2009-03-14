@@ -101,7 +101,6 @@ module Typus
 
       # Ruby Extensions
       require 'typus/hash'
-      require 'typus/object'
       require 'typus/string'
 
       Typus::Configuration.config!
