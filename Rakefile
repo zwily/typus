@@ -31,7 +31,7 @@ task :specs do
     Dir.glob('test/**/*_test.rb').each do |test|
       test =~ /.*\/([^\/].*)_test.rb$/
       file.puts "#{$1.gsub('_', ' ').capitalize} should:" if $1
-      File.read(test).map { |line| /test_should_(.*)$/.match line }.compact.each do |spec|
+      File.read(test).map { |line| /test_(.*)$/.match line }.compact.each do |spec|
         file.puts "- #{spec[1].gsub('_', ' ')}"
         sleep 0.001; print '.'; $stdout.flush; count += 1
       end
