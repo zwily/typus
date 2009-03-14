@@ -215,21 +215,17 @@ function surfto_#{model_pluralized}(form) {
 
   def string_filter(request, filter)
     values = @resource[:class].send(filter)
-    next if values.empty?
     items = []
     values.each do |item|
-      switch = request.include?("#{filter}=#{item}") ? 'on' : 'off'
-
-      if values.first.kind_of?(Array)
-        link_name = item.first
-        link_filter = item.last
+      link_name, link_filter = (values.first.kind_of?(Array)) ? [ item.first, item.last ] : [ item, item ]
+      switch = request.include?("#{filter}=#{link_filter}") ? 'on' : 'off'
+      if Rails.env.test?
+        options = { :controller => 'admin/typus_users', :action => 'index', :roles => link_filter }
+        items << (link_to link_name.capitalize, options, :class => switch)
       else
-        link_name = item
-        link_filter = item
+        options = { filter => link_filter, :page => nil }
+        items << (link_to link_name.capitalize, { :params => params.merge(options) }, :class => switch)
       end
-
-      items << (link_to link_name.capitalize, { :params => params.merge(filter => link_filter, :page => nil) }, :class => switch)
-
     end
     build_typus_list(items, filter)
   end

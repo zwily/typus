@@ -3,6 +3,13 @@ require 'test/helper'
 class AdminSidebarHelperTest < ActiveSupport::TestCase
 
   include AdminSidebarHelper
+  include ActionView::Helpers::UrlHelper
+  include ActionController::UrlWriter
+  include ActionView::Helpers::TagHelper
+
+  def setup
+    default_url_options[:host] = 'test.host'
+  end
 
   def test_actions
     assert true
@@ -60,8 +67,81 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     assert true
   end
 
-  def test_string_filter
-    assert true
+  def test_string_filter_when_values_are_strings
+
+    @resource = { :class => TypusUser }
+    request = 'roles=admin&page=1'
+    filter = 'roles'
+
+    @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
+
+    output = string_filter(request, filter)
+    expected = <<-HTML
+<h2>Roles</h2><ul>
+<li><a href="http://test.host/typus/typus_users?roles=admin" class="on">Admin</a></li>
+<li><a href="http://test.host/typus/typus_users?roles=designer" class="off">Designer</a></li>
+<li><a href="http://test.host/typus/typus_users?roles=editor" class="off">Editor</a></li>
+</ul>
+    HTML
+
+    assert_equal expected, output
+
+    @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
+
+    request = 'roles=editor&page=1'
+    output = string_filter(request, filter)
+    expected = <<-HTML
+<h2>Roles</h2><ul>
+<li><a href="http://test.host/typus/typus_users?roles=admin" class="off">Admin</a></li>
+<li><a href="http://test.host/typus/typus_users?roles=designer" class="off">Designer</a></li>
+<li><a href="http://test.host/typus/typus_users?roles=editor" class="on">Editor</a></li>
+</ul>
+    HTML
+
+    assert_equal expected, output
+
+  end
+
+  def test_string_filter_when_values_are_arrays_of_strings
+
+    @resource = { :class => TypusUser }
+    request = 'roles=admin&page=1'
+    filter = 'roles'
+
+    array = [['Administrador', 'admin'], 
+             ['Diseñador', 'designer'], 
+             ['Editor', 'editor']]
+    @resource[:class].expects('roles').returns(array)
+
+    output = string_filter(request, filter)
+    expected = <<-HTML
+<h2>Roles</h2><ul>
+<li><a href="http://test.host/typus/typus_users?roles=admin" class="on">Administrador</a></li>
+<li><a href="http://test.host/typus/typus_users?roles=designer" class="off">Diseñador</a></li>
+<li><a href="http://test.host/typus/typus_users?roles=editor" class="off">Editor</a></li>
+</ul>
+    HTML
+
+    assert_equal expected, output
+
+  end
+
+  def test_string_filter_when_empty_values
+
+    @resource = { :class => TypusUser }
+    request = 'roles=admin'
+    filter = 'roles'
+
+    @resource[:class].expects('roles').returns([])
+    output = string_filter(request, filter)
+    assert output.empty?
+
+  end
+
+  private
+
+  def params
+    { :controller => 'typus_users', :action => 'index' }
   end
 
 end
