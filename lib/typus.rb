@@ -70,7 +70,7 @@ module Typus
                         Typus::Configuration.roles[key].keys
                       end.flatten.sort.uniq!
 
-      all_resources.delete_if { |x| models.include?(x) }
+      all_resources.delete_if { |x| models.include?(x) } rescue []
 
     end
 
