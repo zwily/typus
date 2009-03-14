@@ -93,7 +93,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     Typus::Configuration.stubs(:options).returns(options)
     assert_not_equal Hash.new, Typus::Configuration.roles!
     assert_not_equal Hash.new, Typus::Configuration.config!
-    assert Typus.resources.empty?
+    assert_equal %w( Typus ), Typus.resources
   end
 
 end
