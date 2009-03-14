@@ -470,11 +470,11 @@ Example:
 === Attribute templates
 
 It is possible to change the presentation for a attribute 
-within the form. In the example below the "published_at" 
+within the form. In the example below the <tt>published_at</tt> 
 attribute will be rendered with the template 
-"app/views/admin/templates/_datepicker.html.erb". The 
+<tt>app/views/admin/templates/_datepicker.html.erb</tt>. The 
 resource and the attribute name will be sent as local 
-variables "resource" and "attribute". You can change the 
+variables <tt>resource</tt> and <tt>attribute</tt>. You can change the 
 folder with Typus::Configuration.options[:templates_folder].
 
     ##
@@ -607,7 +607,7 @@ Example:
 - Sergio Espeja (Code) http://github.com/spejman
 - Eadz (Code) http://github.com/eadz
 - Anthony Underwood (Code) http://github.com/aunderwo
-- Felipe Talavera (Code) http://github.com/flype>
+- Felipe Talavera (Code) http://github.com/flype
 - Erik Tigerholm (Code) http://github.com/eriktigerholm
 
 == Author, contact, bugs, mailing list and more
