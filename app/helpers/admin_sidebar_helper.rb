@@ -197,7 +197,8 @@ function surfto_#{model_pluralized}(form) {
     items = []
     %w( today past_7_days this_month this_year ).each do |timeline|
       switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
-      items << (link_to timeline.titleize, { :params => params.merge(filter => timeline, :page => nil) }, :class => switch)
+      options = { "#{filter}".to_sym => timeline, :page => nil }
+      items << (link_to timeline.titleize, params.merge(options), :class => switch)
     end
     build_typus_list(items, filter)
   end

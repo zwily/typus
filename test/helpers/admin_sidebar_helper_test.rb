@@ -60,7 +60,34 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_datetime_filter
-    assert true
+
+    @resource = { :class => TypusUser, :self => 'typus_users' }
+    filter = 'created_at'
+
+    request = ''
+    output = datetime_filter(request, filter)
+    expected = <<-HTML
+<h2>Created at</h2><ul>
+<li><a href="http://test.host/typus/typus_users?created_at=today" class="off">Today</a></li>
+<li><a href="http://test.host/typus/typus_users?created_at=past_7_days" class="off">Past 7 Days</a></li>
+<li><a href="http://test.host/typus/typus_users?created_at=this_month" class="off">This Month</a></li>
+<li><a href="http://test.host/typus/typus_users?created_at=this_year" class="off">This Year</a></li>
+</ul>
+    HTML
+    assert_equal expected, output
+
+    request = 'created_at=today&page=1'
+    output = datetime_filter(request, filter)
+    expected = <<-HTML
+<h2>Created at</h2><ul>
+<li><a href="http://test.host/typus/typus_users?created_at=today" class="on">Today</a></li>
+<li><a href="http://test.host/typus/typus_users?created_at=past_7_days" class="off">Past 7 Days</a></li>
+<li><a href="http://test.host/typus/typus_users?created_at=this_month" class="off">This Month</a></li>
+<li><a href="http://test.host/typus/typus_users?created_at=this_year" class="off">This Year</a></li>
+</ul>
+    HTML
+    assert_equal expected, output
+
   end
 
   def test_boolean_filter
