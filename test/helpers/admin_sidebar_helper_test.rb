@@ -97,11 +97,12 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   def test_string_filter_when_values_are_strings
 
     @resource = { :class => TypusUser, :self => 'typus_users' }
-    request = 'roles=admin&page=1'
     filter = 'roles'
 
-    @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
+    # Roles is admin
 
+    request = 'roles=admin&page=1'
+    @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
     output = string_filter(request, filter)
     expected = <<-HTML
 <h2>Roles</h2><ul>
@@ -110,12 +111,12 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 <li><a href="http://test.host/typus/typus_users?roles=editor" class="off">Editor</a></li>
 </ul>
     HTML
-
     assert_equal expected, output
 
-    @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
+    # Roles is editor
 
     request = 'roles=editor&page=1'
+    @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
     output = string_filter(request, filter)
     expected = <<-HTML
 <h2>Roles</h2><ul>
@@ -124,7 +125,6 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 <li><a href="http://test.host/typus/typus_users?roles=editor" class="on">Editor</a></li>
 </ul>
     HTML
-
     assert_equal expected, output
 
   end
@@ -132,9 +132,9 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   def test_string_filter_when_values_are_arrays_of_strings
 
     @resource = { :class => TypusUser, :self => 'typus_users' }
-    request = 'roles=admin&page=1'
     filter = 'roles'
 
+    request = 'roles=admin&page=1'
     array = [['Administrador', 'admin'], 
              ['Diseñador', 'designer'], 
              ['Editor', 'editor']]
@@ -156,9 +156,9 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   def test_string_filter_when_empty_values
 
     @resource = { :class => TypusUser }
-    request = 'roles=admin&page=1'
     filter = 'roles'
 
+    request = 'roles=admin&page=1'
     @resource[:class].expects('roles').returns([])
     output = string_filter(request, filter)
     assert output.empty?
