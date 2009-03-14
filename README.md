@@ -47,6 +47,13 @@ You can view the available tasks running:
     rake typus:roles        # List current roles
     rake typus:ssl          # Intall ssl_requirement plugin.
 
+### Compatibilty
+
+Typus has been tested with:
+
+- Rails: 2.2.2, 2.3.1 and Egde.
+- Ruby: 1.8.6-p287 and 1.8.7-p72.
+
 ## Plugin Configuration Options
 
 You can overwrite the following settings.
