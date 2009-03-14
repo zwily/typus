@@ -14,11 +14,13 @@ end
 
 desc 'Generate documentation for the typus plugin.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
+  rdoc.rdoc_files.add ['README.rdoc', 'MIT-LICENSE', 'lib/**/*.rb']
   rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Typus'
-  rdoc.options << '--line-numbers' << '--inline-source'
-  rdoc.rdoc_files.include('README')
-  rdoc.rdoc_files.include('lib/**/*.rb')
+  rdoc.title    = 'Typus documentation'
+  rdoc.main = 'README.rdoc'
+  rdoc.options << '--charset=UTF-8'
+  rdoc.options << '--inline-source'
+  rdoc.options << '--line-numbers'
 end
 
 desc 'Generate specdoc-style documentation from tests'
