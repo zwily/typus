@@ -105,7 +105,7 @@ module AdminSidebarHelper
 <h2>#{I18n.t("Search", :default => "Search")}</h2>
 <form action="" method="get">
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
-#{hidden_params.join("\n")}
+#{hidden_params.sort.join("\n")}
 </form>
 <p class="tip">#{I18n.t("Search by", :default => "Search by")} #{search_by}.</p>
     HTML
