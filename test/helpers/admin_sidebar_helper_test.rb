@@ -6,6 +6,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::UrlHelper
   include ActionController::UrlWriter
   include ActionView::Helpers::TagHelper
+  include ActionView::Helpers::FormTagHelper
 
   def setup
     default_url_options[:host] = 'test.host'
@@ -48,7 +49,22 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_search
-    assert true
+
+    @resource = { :class => TypusUser, :self => 'typus_users' }
+
+    output = search
+    expected = <<-HTML
+<h2>Search</h2>
+<form action="" method="get">
+<p><input id="search" name="search" type="text" value=""/></p>
+<input id="action" name="action" type="hidden" value="index" />
+<input id="controller" name="controller" type="hidden" value="admin/typus_users" />
+</form>
+<p class="tip">Search by first name, last name, email & roles.</p>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_filters

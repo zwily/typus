@@ -94,7 +94,7 @@ module AdminSidebarHelper
     typus_search = @resource[:class].typus_defaults_for(:search)
     return if typus_search.empty?
 
-    search_by = typus_search.collect { |x| t(x) }.to_sentence(Typus.to_sentence_options).titleize.downcase
+    search_by = typus_search.collect { |x| I18n.t(x, :default => x) }.to_sentence(Typus.to_sentence_options).titleize.downcase
 
     search_params = params.dup
     %w( action controller search page ).each { |p| search_params.delete(p) }
@@ -102,12 +102,12 @@ module AdminSidebarHelper
     hidden_params = search_params.map { |key, value| hidden_field_tag(key, value) }
 
     <<-HTML
-<h2>#{t("Search")}</h2>
+<h2>#{I18n.t("Search", :default => "Search")}</h2>
 <form action="" method="get">
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.join("\n")}
 </form>
-<p class="tip">#{t("Search by")} #{search_by}.</p>
+<p class="tip">#{I18n.t("Search by", :default => "Search by")} #{search_by}.</p>
     HTML
 
   end
