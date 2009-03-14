@@ -75,8 +75,6 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 
     @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
 
-    params.stubs(:merge).returns({ :controller => 'test', :action => 'index'})
-
     output = string_filter(request, filter)
     expected = <<-HTML
 <h2>Roles</h2><ul>
@@ -89,8 +87,6 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
 
     @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
-
-    params.stubs(:merge).returns({ :controller => 'test', :action => 'index'})
 
     request = 'roles=editor&page=1'
     output = string_filter(request, filter)
