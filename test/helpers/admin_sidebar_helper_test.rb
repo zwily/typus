@@ -64,7 +64,34 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_boolean_filter
-    assert true
+
+    @resource = { :class => TypusUser, :self => 'typus_users' }
+    filter = 'status'
+
+    # Status is true
+
+    request = 'status=true&page=1'
+    output = boolean_filter(request, filter)
+    expected = <<-HTML
+<h2>Status</h2><ul>
+<li><a href="http://test.host/typus/typus_users?status=true" class="on">Active</a></li>
+<li><a href="http://test.host/typus/typus_users?status=false" class="off">Inactive</a></li>
+</ul>
+    HTML
+    assert_equal expected, output
+
+    # Status is false
+
+    request = 'status=false&page=1'
+    output = boolean_filter(request, filter)
+    expected = <<-HTML
+<h2>Status</h2><ul>
+<li><a href="http://test.host/typus/typus_users?status=true" class="off">Active</a></li>
+<li><a href="http://test.host/typus/typus_users?status=false" class="on">Inactive</a></li>
+</ul>
+    HTML
+    assert_equal expected, output
+
   end
 
   def test_string_filter_when_values_are_strings

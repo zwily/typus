@@ -206,7 +206,8 @@ function surfto_#{model_pluralized}(form) {
     items = []
     @resource[:class].typus_boolean(filter).each do |key, value|
       switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
-      items << (link_to t(value), { :params => params.merge(filter => key, :page => nil) }, :class => switch)
+      options = { "#{filter}".to_sym => key, :page => nil }
+      items << (link_to I18n.t(value, :default => value), params.merge(options), :class => switch)
     end
     build_typus_list(items, filter)
   end
