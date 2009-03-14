@@ -101,16 +101,14 @@ module AdminSidebarHelper
 
     hidden_params = search_params.map { |key, value| hidden_field_tag(key, value) }
 
-    returning(String.new) do |html|
-      html << <<-HTML
+    <<-HTML
 <h2>#{t("Search")}</h2>
 <form action="" method="get">
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.join("\n")}
 </form>
 <p class="tip">#{t("Search by")} #{search_by}.</p>
-      HTML
-    end
+    HTML
 
   end
 
