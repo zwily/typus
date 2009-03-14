@@ -69,11 +69,13 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 
   def test_string_filter_when_values_are_strings
 
-    @resource = { :class => TypusUser }
+    @resource = { :class => TypusUser, :self => 'typus_users' }
     request = 'roles=admin&page=1'
     filter = 'roles'
 
     @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
+
+    params.stubs(:merge).returns({ :controller => 'test', :action => 'index'})
 
     output = string_filter(request, filter)
     expected = <<-HTML
@@ -87,6 +89,8 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
 
     @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
+
+    params.stubs(:merge).returns({ :controller => 'test', :action => 'index'})
 
     request = 'roles=editor&page=1'
     output = string_filter(request, filter)
@@ -104,7 +108,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 
   def test_string_filter_when_values_are_arrays_of_strings
 
-    @resource = { :class => TypusUser }
+    @resource = { :class => TypusUser, :self => 'typus_users' }
     request = 'roles=admin&page=1'
     filter = 'roles'
 
@@ -129,7 +133,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   def test_string_filter_when_empty_values
 
     @resource = { :class => TypusUser }
-    request = 'roles=admin'
+    request = 'roles=admin&page=1'
     filter = 'roles'
 
     @resource[:class].expects('roles').returns([])
@@ -141,7 +145,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   private
 
   def params
-    { :controller => 'typus_users', :action => 'index' }
+    { :controller => 'admin/typus_users', :action => 'index' }
   end
 
 end
