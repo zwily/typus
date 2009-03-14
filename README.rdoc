@@ -35,7 +35,7 @@ required tables. (only `typus_users` table is created)
     $ rake db:migrate
 
 And finally create the first user, to do it, start the application 
-server, go to <http://0.0.0.0:3000/admin> and follow the instructions.
+server, go to http://0.0.0.0:3000/admin and follow the instructions.
 
 You can view the available tasks running:
 
