@@ -117,8 +117,8 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     output = boolean_filter(request, filter)
     expected = <<-HTML
 <h2>Status</h2><ul>
-<li><a href="http://test.host/typus/typus_users?status=false" class="off">Inactive</a></li>
 <li><a href="http://test.host/typus/typus_users?status=true" class="on">Active</a></li>
+<li><a href="http://test.host/typus/typus_users?status=false" class="off">Inactive</a></li>
 </ul>
     HTML
     assert_equal expected, output
@@ -129,8 +129,8 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     output = boolean_filter(request, filter)
     expected = <<-HTML
 <h2>Status</h2><ul>
-<li><a href="http://test.host/typus/typus_users?status=false" class="on">Inactive</a></li>
 <li><a href="http://test.host/typus/typus_users?status=true" class="off">Active</a></li>
+<li><a href="http://test.host/typus/typus_users?status=false" class="on">Inactive</a></li>
 </ul>
     HTML
     assert_equal expected, output

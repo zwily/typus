@@ -162,8 +162,8 @@ module Typus
       boolean = 'true, false' if boolean.nil?
 
       hash = ActiveSupport::OrderedHash.new
-      hash = { :true => boolean.split(', ').first.humanize, 
-               :false => boolean.split(', ').last.humanize }
+      hash[:true] = boolean.split(', ').first.humanize
+      hash[:false] = boolean.split(', ').last.humanize
 
       return hash
 
