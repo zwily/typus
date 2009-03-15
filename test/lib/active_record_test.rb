@@ -2,6 +2,10 @@ require 'test/helper'
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
+  def test_should_verify_model_fields_is_an_instance_of_active_support_ordered_hash
+    assert TypusUser.model_fields.instance_of?(ActiveSupport::OrderedHash)
+  end
+
   def test_should_return_model_fields_for_typus_user
     expected_fields = [[:id, :integer], 
                        [:first_name, :string], 
@@ -28,6 +32,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
                        [:published_at, :datetime]]
     assert_equal expected_fields.map { |i| i.first }, Post.model_fields.keys
     assert_equal expected_fields.map { |i| i.last }, Post.model_fields.values
+  end
+
+  def test_should_verify_model_relationships_is_an_instance_of_active_support_ordered_hash
+    assert TypusUser.model_relationships.instance_of?(ActiveSupport::OrderedHash)
   end
 
   def test_should_return_model_relationships_for_post
