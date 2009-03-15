@@ -75,16 +75,16 @@ class TypusControllerTest < ActionController::TestCase
 
     admin = typus_users(:admin)
     @request.session[:typus] = admin.id
-    get :overview
+    get :dashboard
     assert_response :success
 
     # Disable user ...
 
     admin.update_attributes :status => false
 
-    get :overview
+    get :dashboard
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path(:back_to => '/typus/overview')
+    assert_redirected_to admin_sign_in_path
 
     assert flash[:notice]
     assert_equal "Your typus user has been disabled.", flash[:notice]
@@ -188,9 +188,9 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_redirect_to_login_if_not_logged
     @request.session[:typus] = nil
-    get :overview
+    get :dashboard
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path(:back_to => '/typus/overview')
+    assert_redirected_to admin_sign_in_path
   end
 
   def test_should_render_dashboard
@@ -199,14 +199,6 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :success
     assert_template 'dashboard'
     assert_match 'whatistypus.com', @response.body
-    assert_match /layouts\/admin/, @controller.active_layout.to_s
-  end
-
-  def test_should_verify_overview_works
-    @request.session[:typus] = typus_users(:admin).id
-    get :overview
-    assert_response :success
-    assert_template 'overview'
     assert_match /layouts\/admin/, @controller.active_layout.to_s
   end
 
