@@ -177,17 +177,15 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   def test_expand_tree_into_select_field
     return unless defined? ActiveRecord::Acts::Tree
 
-    items = Page.find(:all)
-    @item = Page.find(:first)
+    items = Page.roots
+    @item = Page.find(1)
 
     output = expand_tree_into_select_field(items, 'title')
     expected = <<-HTML
 <option  value="1"> &#92;_ Page#1</option>
-<option  value="2">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#92;_ Page#2</option>
 <option  value="3"> &#92;_ Page#3</option>
 <option  value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#92;_ Page#4</option>
 <option  value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#92;_ Page#5</option>
-<option  value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#92;_ Page#6</option>
     HTML
 
     assert_equal expected, output
