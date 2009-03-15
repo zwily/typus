@@ -40,21 +40,29 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_create_item_and_redirect_to_index
-    Typus::Configuration.options[:edit_after_create] = false
+
+    options = Typus::Configuration.options.merge(:edit_after_create => false)
+    Typus::Configuration.stubs(:options).returns(options)
+
     assert_difference 'Post.count' do
       post :create, { :item => { :title => 'This is another title', :body => 'Body' } }
       assert_response :redirect
       assert_redirected_to :action => 'index'
     end
+
   end
 
   def test_should_create_item_and_redirect_to_edit
-    Typus::Configuration.options[:edit_after_create] = true
+
+    options = Typus::Configuration.options.merge(:edit_after_create => true)
+    Typus::Configuration.stubs(:options).returns(options)
+
     assert_difference 'Post.count' do
       post :create, { :item => { :title => 'This is another title', :body => 'Body' } }
       assert_response :redirect
       assert_redirected_to :action => 'edit'
     end
+
   end
 
   def test_should_render_show
@@ -72,19 +80,27 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_update_item_and_redirect_to_index
-    Typus::Configuration.options[:edit_after_create] = false
+
+    options = Typus::Configuration.options.merge(:edit_after_create => false)
+    Typus::Configuration.stubs(:options).returns(options)
+
     post_ = posts(:published)
     post :update, { :id => post_.id, :title => 'Updated' }
     assert_response :redirect
     assert_redirected_to :action => 'index'
+
   end
 
   def test_should_update_item_and_redirect_to_edit
-    Typus::Configuration.options[:edit_after_create] = true
+
+    options = Typus::Configuration.options.merge(:edit_after_create => true)
+    Typus::Configuration.stubs(:options).returns(options)
+
     post_ = posts(:published)
     post :update, { :id => post_.id, :title => 'Updated' }
     assert_response :redirect
     assert_redirected_to :action => 'edit', :id => post_.id
+
   end
 
   def test_should_allow_admin_to_toggle_item

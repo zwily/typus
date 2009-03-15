@@ -99,7 +99,9 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :success
     assert_template 'reset_password'
 
-    Typus::Configuration.options[:recover_password] = false
+    options = Typus::Configuration.options.merge(:recover_password => false)
+    Typus::Configuration.stubs(:options).returns(options)
+
     get :reset_password
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
@@ -118,13 +120,15 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_verify_typus_sign_in_layout_includes_recover_password_link
-    Typus::Configuration.options[:recover_password] = true
+    options = Typus::Configuration.options.merge(:recover_password => true)
+    Typus::Configuration.stubs(:options).returns(options)
     get :sign_in
     assert @response.body.include?('Recover password')
   end
 
   def test_should_verify_typus_sign_in_layout_does_not_include_recover_password_link
-    Typus::Configuration.options[:recover_password] = false
+    options = Typus::Configuration.options.merge(:recover_password => false)
+    Typus::Configuration.stubs(:options).returns(options)
     get :sign_in
     assert !@response.body.include?('Recover password')
   end
