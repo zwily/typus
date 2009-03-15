@@ -113,7 +113,7 @@ class AdminTableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_table_datetime_field_with_ink
+  def test_typus_table_datetime_field_with_link
 
     post = posts(:published)
     Time::DATE_FORMATS[:post_short] = '%m/%y'

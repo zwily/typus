@@ -19,7 +19,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
     params = { :controller => 'admin/post', :id => 1, :action => :create }
     self.expects(:params).at_least_once.returns(params)
 
-    @current_user  = mock()
+    @current_user = mock()
     @current_user.expects(:can_perform?).with(Post, 'create').returns(false)
 
     expected = <<-HTML
@@ -35,9 +35,9 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_belongs_to_field_diffrent_attribute_name
+  def test_typus_belongs_to_field_with_different_attribute_name
 
-   default_url_options[:host] = 'test.host'
+    default_url_options[:host] = 'test.host'
 
     params = { :controller => 'admin/post', :id => 1, :action => :create }
     self.expects(:params).at_least_once.returns(params)
