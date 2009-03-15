@@ -172,19 +172,22 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_booleans_for_typus_users
+    assert_equal [ :true, :false ], TypusUser.typus_boolean('status').keys
+    assert_equal [ "Active", "Inactive" ], TypusUser.typus_boolean('status').values
+    assert_equal [ :true, :false ], TypusUser.typus_boolean(:status).keys
+    assert_equal [ "Active", "Inactive" ], TypusUser.typus_boolean(:status).values
+  end
 
-    hash_status = [[:true, "Active"], [:false, "Inactive"]]
-    assert_equal hash_status, TypusUser.typus_boolean('status')
-    assert_equal hash_status, TypusUser.typus_boolean(:status)
-    hash_default = [[:true, "True"], [:false, "False"]]
-    assert_equal hash_default, TypusUser.typus_boolean
-
+  def test_should_return_default_booleans_for_typus_users
+    assert_equal [ :true, :false ], TypusUser.typus_boolean.keys
+    assert_equal [ "True", "False" ], TypusUser.typus_boolean.values
   end
 
   def test_should_return_booleans_for_post
-    ordered_hash = [[:true, "True"], [:false, "False"]]
-    assert_equal ordered_hash, Post.typus_boolean('status')
-    assert_equal ordered_hash, Post.typus_boolean(:status)
+    assert_equal [ :true, :false ], Post.typus_boolean('status').keys
+    assert_equal [ "True", "False" ], Post.typus_boolean('status').values
+    assert_equal [ :true, :false ], Post.typus_boolean(:status).keys
+    assert_equal [ "True", "False" ], Post.typus_boolean(:status).values
   end
 
   def test_should_return_date_formats_for_post
