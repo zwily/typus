@@ -178,8 +178,10 @@ class AdminFormHelperTest < ActiveSupport::TestCase
     return unless defined? ActiveRecord::Acts::Tree
 
     items = Page.roots
-    @item = Page.find(1)
 
+    # Page#1 is a root.
+
+    @item = Page.find(1)
     output = expand_tree_into_select_field(items, 'parent_id')
     expected = <<-HTML
 <option  value="1"> &#92;_ Page#1</option>
@@ -189,11 +191,11 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 <option  value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#92;_ Page#5</option>
 <option  value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#92;_ Page#6</option>
     HTML
-
     assert_equal expected, output
 
-    @item = Page.find(4)
+    # Page#4 is a children.
 
+    @item = Page.find(4)
     output = expand_tree_into_select_field(items, 'parent_id')
     expected = <<-HTML
 <option  value="1"> &#92;_ Page#1</option>
@@ -203,7 +205,6 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 <option  value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#92;_ Page#5</option>
 <option  value="6">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &#92;_ Page#6</option>
     HTML
-
     assert_equal expected, output
 
   end
