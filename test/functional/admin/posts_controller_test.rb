@@ -177,7 +177,10 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_disable_toggle_and_check_links_are_disabled
-    Typus::Configuration.options[:toggle] = false
+
+    options = Typus::Configuration.options.merge(:toggle => false)
+    Typus::Configuration.stubs(:options).returns(options)
+
     @request.env['HTTP_REFERER'] = '/typus/posts'
     post = posts(:unpublished)
     get :toggle, { :id => post.id, :field => 'status' }
@@ -186,7 +189,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert !flash[:success]
     assert flash[:warning]
     assert_match /Toggle is disabled/, flash[:warning]
-    Typus::Configuration.options[:toggle] = true
+
   end
 
   def test_should_show_form_templates
