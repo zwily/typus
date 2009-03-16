@@ -54,7 +54,16 @@ class AdminTableHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_table_has_and_belongs_to_many_field
-    flunk 'Not done testing yet.'
+
+    post = Post.find(1)
+
+    output = typus_table_has_and_belongs_to_many_field('comments', post)
+    expected = <<-HTML
+<td>John<br />Me<br />Me</td>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_table_string_field

@@ -50,10 +50,10 @@ class AdminFormHelperTest < ActiveSupport::TestCase
     <small><a href="http://test.host/comments/new?back_to=%2Ftypus%2Fpost%2F1%2Fcreate&selected=favorite_comment_id" onclick="return confirm('Are you sure you want to leave this page?\\n\\nIf you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost\\n\\nClick OK to continue, or click Cancel to stay on this page');">Add new</a></small>
     </label>
 <select id="item_favorite_comment_id" name="item[favorite_comment_id]"><option value=""></option>
-<option value="1"></option>
-<option value="2"></option>
-<option value="3"></option>
-<option value="4"></option></select></li>
+<option value="1">John</option>
+<option value="2">Me</option>
+<option value="3">John</option>
+<option value="4">Me</option></select></li>
     HTML
     assert_equal expected, typus_belongs_to_field('favorite_comment', Post)
 
