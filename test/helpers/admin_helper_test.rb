@@ -25,11 +25,11 @@ class AdminHelperTest < ActiveSupport::TestCase
   end
 
   def test_build_list
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_build_pagination
-    assert true
+    flunk 'Not done testing yet.'
   end
 
 end

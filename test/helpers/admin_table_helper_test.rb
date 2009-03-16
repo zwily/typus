@@ -7,11 +7,11 @@ class AdminTableHelperTest < ActiveSupport::TestCase
   include ActionController::UrlWriter
 
   def test_build_typus_table
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_typus_table_header
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_typus_table_belongs_to_field
@@ -36,7 +36,7 @@ class AdminTableHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_table_has_and_belongs_to_many_field
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_typus_table_string_field

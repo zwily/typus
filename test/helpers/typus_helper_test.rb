@@ -8,11 +8,11 @@ class TypusHelperTest < ActiveSupport::TestCase
   include ActionController::UrlWriter
 
   def test_applications
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_resources
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_typus_block

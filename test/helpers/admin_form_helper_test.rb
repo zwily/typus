@@ -11,7 +11,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   include ActionController::UrlWriter
 
   def test_build_form
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_typus_belongs_to_field
@@ -176,7 +176,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_tree_field
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_typus_string_field
@@ -192,19 +192,19 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_relationships
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_typus_form_has_many
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_typus_form_has_and_belongs_to_many
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_typus_template_field
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_attribute_disabled

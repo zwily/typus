@@ -13,11 +13,11 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_actions
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_default_actions
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_non_crud_actions
@@ -74,7 +74,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_modules
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_previous_and_next
@@ -128,7 +128,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_previous_and_next_with_params
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_search
@@ -154,11 +154,11 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_filters
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_relationship_filter
-    assert true
+    flunk 'Not done testing yet.'
   end
 
   def test_datetime_filter
