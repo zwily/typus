@@ -42,7 +42,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
     params = { :controller => 'admin/post', :id => 1, :action => :create }
     self.expects(:params).at_least_once.returns(params)
 
-    @current_user  = mock()
+    @current_user = mock()
     @current_user.expects(:can_perform?).with(Comment, 'create').returns(true)
 
     expected = <<-HTML
