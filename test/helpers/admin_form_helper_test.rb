@@ -229,8 +229,8 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 <a name="comments"></a>
 <div class="box_relationships">
   <h2>
-  <a href="http://test.host/comments"><p>Comments</p></a>
-  <small><a href="http://test.host/comments/new?resource_id=1"><p>Add new</p></a></small>
+  <a href="http://test.host/comments">Comments</a>
+  <small><a href="http://test.host/comments/new?resource_id=1">Add new</a></small>
   </h2>
 <!-- a_nice_list --></div>
     HTML
@@ -254,10 +254,10 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 <a name="comments"></a>
 <div class="box_relationships">
   <h2>
-  <a href="http://test.host/comments"><p>Comments</p></a>
-  <small><a href="http://test.host/comments/new?resource_id=1"><p>Add new</p></a></small>
+  <a href="http://test.host/comments">Comments</a>
+  <small><a href="http://test.host/comments/new?resource_id=1">Add new</a></small>
   </h2>
-<div id="flash" class="notice"><p>There are no <p>comments</p>.</p></div>
+  <div id="flash" class="notice"><p>There are no comments.</p></div>
 </div>
     HTML
 
