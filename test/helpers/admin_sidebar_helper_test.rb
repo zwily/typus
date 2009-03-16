@@ -127,6 +127,10 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 
   end
 
+  def test_previous_and_next_with_params
+    assert true
+  end
+
   def test_search
 
     @resource = { :class => TypusUser, :self => 'typus_users' }
