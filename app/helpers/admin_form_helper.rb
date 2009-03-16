@@ -223,7 +223,12 @@ module AdminFormHelper
       HTML
       items = @resource[:class].find(params[:id]).send(field)
       unless items.empty?
-        html << build_list(model_to_relate, model_to_relate.typus_fields_for(:relationship), items, model_to_relate_as_resource,  { :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id } )
+        options = { :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id }
+        html << build_list(model_to_relate, 
+                           model_to_relate.typus_fields_for(:relationship), 
+                           items, 
+                           model_to_relate_as_resource, 
+                           options)
       else
         html << <<-HTML
 <div id="flash" class="notice"><p>#{I18n.t("There are no {{records}}.", :records => t(field.titleize.downcase), :default => "There are no {{records}}.")}</p></div>

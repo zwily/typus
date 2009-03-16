@@ -213,8 +213,56 @@ class AdminFormHelperTest < ActiveSupport::TestCase
     assert true
   end
 
-  def test_typus_form_has_many
-    assert true
+  def test_typus_form_has_many_with_items
+
+    @current_user = typus_users(:admin)
+    @resource = { :class => Post }
+    @item = Post.find(1)
+
+    params = { :controller => 'admin/posts', :id => 1, :action => 'edit' }
+    self.expects(:params).at_least_once.returns(params)
+
+    self.stubs(:build_list).returns('<!-- a_nice_list -->')
+
+    output = typus_form_has_many('comments')
+    expected = <<-HTML
+<a name="comments"></a>
+<div class="box_relationships">
+  <h2>
+  <a href="http://test.host/comments"><p>Comments</p></a>
+  <small><a href="http://test.host/comments/new?resource_id=1"><p>Add new</p></a></small>
+  </h2>
+<!-- a_nice_list --></div>
+    HTML
+
+    assert_equal expected, output
+
+  end
+
+  def test_typus_form_has_many_without_items
+
+    @current_user = typus_users(:admin)
+    @resource = { :class => Post }
+    @item = Post.find(1)
+    @item.comments.destroy_all
+
+    params = { :controller => 'admin/posts', :id => 1, :action => 'edit' }
+    self.expects(:params).at_least_once.returns(params)
+
+    output = typus_form_has_many('comments')
+    expected = <<-HTML
+<a name="comments"></a>
+<div class="box_relationships">
+  <h2>
+  <a href="http://test.host/comments"><p>Comments</p></a>
+  <small><a href="http://test.host/comments/new?resource_id=1"><p>Add new</p></a></small>
+  </h2>
+<div id="flash" class="notice"><p>There are no <p>comments</p>.</p></div>
+</div>
+    HTML
+
+    assert_equal expected, output
+    
   end
 
   def test_typus_form_has_and_belongs_to_many
