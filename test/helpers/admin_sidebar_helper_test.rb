@@ -85,6 +85,9 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 
     @resource = { :class => TypusUser, :self => 'typus_users' }
 
+    params = { :controller => 'admin/typus_users', :action => 'index' }
+    self.expects(:params).at_least_once.returns(params)
+
     output = search
     expected = <<-HTML
 <h2>Search</h2>
@@ -112,6 +115,9 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 
     @resource = { :class => TypusUser, :self => 'typus_users' }
     filter = 'created_at'
+
+    params = { :controller => 'admin/typus_users', :action => 'index' }
+    self.expects(:params).at_least_once.returns(params)
 
     request = ''
     output = datetime_filter(request, filter)
@@ -146,6 +152,9 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     @resource = { :class => TypusUser, :self => 'typus_users' }
     filter = 'status'
 
+    params = { :controller => 'admin/typus_users', :action => 'index' }
+    self.expects(:params).at_least_once.returns(params)
+
     # Status is true
 
     request = 'status=true&page=1'
@@ -178,6 +187,9 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 
     @resource = { :class => TypusUser, :self => 'typus_users' }
     filter = 'roles'
+
+    params = { :controller => 'admin/typus_users', :action => 'index' }
+    self.expects(:params).at_least_once.returns(params)
 
     # Roles is admin
 
@@ -216,6 +228,9 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     @resource = { :class => TypusUser, :self => 'typus_users' }
     filter = 'roles'
 
+    params = { :controller => 'admin/typus_users', :action => 'index' }
+    self.expects(:params).at_least_once.returns(params)
+
     request = 'roles=admin&page=1'
     array = [['Administrador', 'admin'], 
              ['Diseñador', 'designer'], 
@@ -246,12 +261,6 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     output = string_filter(request, filter)
     assert output.empty?
 
-  end
-
-  private
-
-  def params
-    { :controller => 'admin/typus_users', :action => 'index' }
   end
 
 end
