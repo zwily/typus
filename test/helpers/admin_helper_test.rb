@@ -31,12 +31,10 @@ class AdminHelperTest < ActiveSupport::TestCase
     items = TypusUser.find(:all)
     resource = 'typus_users'
 
-    def build_typus_table(model, fields, items, link_options)
-      return 'a_list_with_items'
-    end
+    self.stubs(:build_typus_table).returns('a_list_with_items')
 
     output = build_list(model, fields, items, resource)
-    expected = "a_list_with_items"
+    expected = 'a_list_with_items'
 
     assert_equal expected, output
 
@@ -49,10 +47,7 @@ class AdminHelperTest < ActiveSupport::TestCase
     items = TypusUser.find(:all)
     resource = 'typus_users'
 
-    def render(*args)
-      return 'a_template'
-    end
-
+    self.stubs(:render).returns('a_template')
     File.stubs(:exists?).returns(true)
 
     output = build_list(model, fields, items, resource)
