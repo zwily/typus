@@ -156,7 +156,7 @@ module AdminTableHelper
                   :go => position.last }
 
       html_position << <<-HTML
-#{link_to t(position.first), :params => params.merge(options)}
+#{link_to t(position.first), params.merge(options)}
       HTML
 
     end
@@ -196,8 +196,10 @@ module AdminTableHelper
                   item.class.typus_options_for(:nil) # Content is nil, so we show nil.
                 end
 
+    options = { :controller => item.class.name.tableize, :action => 'toggle', :field => attribute, :id => item.id }
+
     content = if item.class.typus_options_for(:toggle) && !item.send(attribute).nil?
-                link_to link_text, { :params => params.merge(:controller => item.class.name.tableize, :action => 'toggle', :field => attribute, :id => item.id) } , :confirm => "Change #{attribute.humanize.downcase}?"
+                link_to link_text, params.merge(options), :confirm => "Change #{attribute.humanize.downcase}?"
               else
                 link_text
               end
