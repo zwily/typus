@@ -176,7 +176,23 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   end
 
   def test_typus_tree_field
-    assert true
+
+    self.stubs(:expand_tree_into_select_field).returns('expand_tree_into_select_field')
+
+    @resource = { :class => Page }
+    items = @resource[:class].roots
+
+    output = typus_tree_field('parent', items)
+    expected = <<-HTML
+<li><label for="item_parent">Parent</label>
+<select id="item_parent"  name="item[parent]">
+  <option value=""></option>
+  expand_tree_into_select_field
+</select></li>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_string_field
