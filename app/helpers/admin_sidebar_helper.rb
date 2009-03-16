@@ -84,8 +84,8 @@ module AdminSidebarHelper
   def previous_and_next
     return [] unless %w( edit update ).include?(params[:action])
     returning(Array.new) do |items|
-      items << (link_to t("Next"), :action => 'edit', :id => @next.id) if @next
-      items << (link_to t("Previous"), :action => 'edit', :id => @previous.id) if @previous
+      items << (link_to I18n.t("Next", :default => "Next"), params.merge(:action => 'edit', :id => @next.id)) if @next
+      items << (link_to I18n.t("Previous", :default => "Previous"), params.merge(:action => 'edit', :id => @previous.id)) if @previous
     end
   end
 

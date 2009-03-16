@@ -78,7 +78,53 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_previous_and_next
-    assert true
+
+    params = { :controller => 'admin/typus_users', :action => 'index' }
+    self.expects(:params).at_least_once.returns(params)
+
+    output = previous_and_next
+    assert output.empty?
+
+    # Test when there are no records.
+
+    typus_user = TypusUser.first
+    @next = nil
+    @previous = nil
+
+    params = { :controller => 'admin/typus_users', :action => 'edit', :id => typus_user.id }
+    self.expects(:params).at_least_once.returns(params)
+
+    output = previous_and_next
+    assert output.empty?
+
+    # Test when we are on the first item.
+
+    typus_user = TypusUser.first
+    @previous, @next = typus_user.previous_and_next
+
+    output = previous_and_next
+    expected = [ "<a href=\"http://test.host/typus/typus_users/#{@next.id}/edit\">Next</a>" ]
+    assert_equal expected, output
+
+    # Test when we are on the last item.
+
+    typus_user = TypusUser.last
+    @previous, @next = typus_user.previous_and_next
+
+    output = previous_and_next
+    expected = [ "<a href=\"http://test.host/typus/typus_users/#{@previous.id}/edit\">Previous</a>" ]
+    assert_equal expected, output
+
+    # Test when we are on the middle.
+
+    typus_user = TypusUser.find(3)
+    @previous, @next = typus_user.previous_and_next
+
+    output = previous_and_next
+    expected = [ "<a href=\"http://test.host/typus/typus_users/#{@next.id}/edit\">Next</a>", 
+                 "<a href=\"http://test.host/typus/typus_users/#{@previous.id}/edit\">Previous</a>" ]
+    assert_equal expected, output
+
   end
 
   def test_search
