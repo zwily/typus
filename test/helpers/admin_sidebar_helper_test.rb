@@ -13,7 +13,40 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_actions
-    flunk 'Not done testing yet.'
+
+    self.expects(:default_actions).returns(['action1', 'action2'])
+    self.expects(:previous_and_next).returns(['previous', 'next'])
+    self.expects(:modules).with('parent_module').returns(['parent_module'])
+    self.expects(:modules).with('submodules').returns(['submodules'])
+
+    output = actions
+    expected = <<-HTML
+<h2>Actions</h2>
+<ul>
+<li>action1</li>
+<li>action2</li>
+</ul>
+
+<h2>Go to</h2>
+<ul>
+<li>previous</li>
+<li>next</li>
+</ul>
+
+<h2>Parent module</h2>
+<ul>
+<li>parent_module</li>
+</ul>
+
+<h2>Submodules</h2>
+<ul>
+<li>submodules</li>
+</ul>
+
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_default_actions
