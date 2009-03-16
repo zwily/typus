@@ -185,10 +185,10 @@ require 'test_helper'
 
 class Admin::#{model.pluralize}ControllerTest < ActionController::TestCase
 
-# Replace this with your real tests.
-test "the truth" do
-  flunk 'Not done testing yet.'
-end
+  # Replace this with your real tests.
+  test "the truth" do
+    flunk 'Not done testing yet.'
+  end
 
 end
         RAW
