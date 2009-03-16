@@ -10,8 +10,26 @@ class AdminTableHelperTest < ActiveSupport::TestCase
     flunk 'Not done testing yet.'
   end
 
+  # TODO: Add tests with params.
   def test_typus_table_header
-    flunk 'Not done testing yet.'
+
+    fields = TypusUser.typus_fields_for(:list)
+
+    params = { :controller => 'admin/typus_users', :action => 'index' }
+    self.expects(:params).at_least_once.returns(params)
+
+    output = typus_table_header(TypusUser, fields)
+    expected = <<-HTML
+<tr>
+<th><a href="http://test.host/typus/typus_users?order_by=email"><div class="">Email</div></a></th>
+<th><a href="http://test.host/typus/typus_users?order_by=roles"><div class="">Roles</div></a></th>
+<th><a href="http://test.host/typus/typus_users?order_by=status"><div class="">Status</div></a></th>
+<th>&nbsp;</th>
+</tr>
+    HTML
+
+    assert_equal expected, output
+
   end
 
   def test_typus_table_belongs_to_field

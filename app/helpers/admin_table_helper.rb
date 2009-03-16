@@ -91,12 +91,11 @@ module AdminTableHelper
                        end
           order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
           switch = (params[:order_by] == key) ? sort_order : ''
-          content = (link_to "<div class=\"#{switch}\">#{content}</div>", { :params => params.merge(:order_by => order_by, :sort_order => sort_order) })
+          options = { :order_by => order_by, :sort_order => sort_order }
+          content = (link_to "<div class=\"#{switch}\">#{content}</div>", params.merge(options))
         end
 
-        headers << <<-HTML
-<th>#{content}</th>
-        HTML
+        headers << "<th>#{content}</th>"
 
       end
       headers << "<th>&nbsp;</th>"
