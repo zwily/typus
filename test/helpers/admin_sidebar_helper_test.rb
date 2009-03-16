@@ -187,7 +187,16 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_filters
-    flunk 'Not done testing yet.'
+
+    @resource = { :class => TypusUser, :self => 'typus_users' }
+
+    @resource[:class].expects(:typus_filters).returns(Array.new)
+
+    output = filters
+    assert output.nil?
+
+    # TODO: Test filters when @resource[:class].typus_filters returns filters.
+
   end
 
   def test_relationship_filter
