@@ -21,7 +21,40 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   end
 
   def test_non_crud_actions
-    assert true
+
+    @resource = { :class => Page }
+    @current_user = typus_users(:admin)
+
+    # Index without params
+
+    params = { :controller => 'admin/pages', :action => 'index' }
+    self.expects(:params).at_least_once.returns(params)
+
+    output = non_crud_actions
+    expected = [ "<a href=\"http://test.host/typus/pages/rebuild_all\">Rebuild all</a>" ]
+    assert output.kind_of?(Array)
+    assert_equal expected, output
+
+    # Index with params
+
+    params = { :controller => 'admin/pages', :action => 'index', :status => true }
+    self.expects(:params).at_least_once.returns(params)
+
+    output = non_crud_actions
+    expected = [ "<a href=\"http://test.host/typus/pages/rebuild_all?status=true\">Rebuild all</a>" ]
+    assert output.kind_of?(Array)
+    assert_equal expected, output
+
+    # Edit
+
+    params = { :controller => 'admin/pages', :action => 'edit', :id => 1 }
+    self.expects(:params).at_least_once.returns(params)
+
+    output = non_crud_actions
+    expected = [ "<a href=\"http://test.host/typus/pages/1/rebuild\">Rebuild</a>" ]
+    assert output.kind_of?(Array)
+    assert_equal expected, output
+
   end
 
   def test_build_typus_list
