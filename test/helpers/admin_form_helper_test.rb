@@ -262,7 +262,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
     HTML
 
     assert_equal expected, output
-    
+
   end
 
   def test_typus_form_has_and_belongs_to_many
