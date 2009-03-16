@@ -248,8 +248,8 @@ module AdminFormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to t(field.titleize), :controller => field}
-  <small>#{link_to t("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  #{link_to I18n.t(field.titleize, :default => field.titleize), :controller => field}
+  <small>#{link_to I18n.t("Add new", :default => "Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
       items_to_relate = (model_to_relate.find(:all) - @item.send(field))
@@ -266,7 +266,7 @@ module AdminFormHelper
         html << build_list(model_to_relate, model_to_relate.typus_fields_for(:relationship), items, model_to_relate_as_resource)
       else
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{I18n.t("There are no {{records}}.", :records => t(field.titleize.downcase), :default => "There are no {{records}}.")}</p></div>
+  <div id="flash" class="notice"><p>#{I18n.t("There are no {{records}}.", :records => I18n.t(field.titleize.downcase, :default => field.titleize.downcase), :default => "There are no {{records}}.")}</p></div>
         HTML
       end
       html << <<-HTML
