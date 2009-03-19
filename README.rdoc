@@ -615,6 +615,7 @@ Example:
 - Anthony Underwood (Code) http://github.com/aunderwo
 - Felipe Talavera (Code) http://github.com/flype
 - Erik Tigerholm (Code) http://github.com/eriktigerholm
+- George Guimarães (Translation to Brazilian Portuguese) http://github.com/georgeguimaraes
 
 == Author, contact, bugs, mailing list and more
 
