@@ -13,7 +13,7 @@ br:
   "A valid token is required": "É necessário um token válido."
   "The Email and/or Password you entered is invalid": "O email e/ou a senha que você colocou são inválidos."
   "There are not defined applications in config/typus/*.yml": "Não há aplicativos definidos em config/typus/*.yml"
-  "Overview": Visão geral"
+  "Overview": "Visão geral"
   "Options": "Opções"
   "Password Confirm": "Confirmação de senha"
   "Change password": "Trocar senha"
