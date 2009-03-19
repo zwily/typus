@@ -68,6 +68,7 @@ You can overwrite the following settings.
     Typus::Configuration.options[:config_folder]
     Typus::Configuration.options[:email]
     Typus::Configuration.options[:ignore_missing_translations]
+    Typus::Configuration.options[:locales]
     Typus::Configuration.options[:prefix]
     Typus::Configuration.options[:recover_password]
     Typus::Configuration.options[:root]
@@ -104,6 +105,25 @@ from the yaml files under <tt>config/typus</tt>.
         sidebar_selector: 5
         start_year: 1990
         toggle: true
+
+=== Translating the interface
+
+By default Typus is in English but you can change this with the 
+following configuration option. (i.e. interface in Español)
+
+    Typus::Configuration.options[:locales] = [ [ "Español", :es ] ]
+
+If you need more than one language you can use the following settings. 
+This will make appear on the right bottom of the site a languages list.
+
+    Typus::Configuration.options[:locales] = [ [ "English", :en ], 
+                                               [ "Español", :es ] ]
+
+Available languages are:
+
+- English
+- Español
+- Brazilian Portuguese
 
 === Recover password
 
@@ -603,7 +623,6 @@ Example:
     <%= quick_edit :resource => 'pages', 
                    :id => @page.id, 
                    :message => 'Edit this page' %>
-
 
 == Contributors
 
