@@ -175,7 +175,7 @@ end
       test_filename = "#{model.tableize}_controller_test.rb"
       test_location = "#{admin_controller_tests_folder}/#{test_filename}"
 
-      if !admin_controller_tests.include?(test_filename)
+      if !admin_controller_tests.include?(test_filename) && File.directory?("#{Rails.root}/test")
         test = File.open(test_location, "w+")
 
         content = <<-RAW
