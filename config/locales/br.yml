@@ -4,7 +4,7 @@ br:
   "Sign in": "Entrar"
   "Recover password": "Recuperar senha"
   "Sign up": "Criar conta"
-  "Write your email to create the first user": "Escreva seu email para criar o primeiro usuário"
+  "Enter your email below to create the first user": "Escreva seu email para criar o primeiro usuário"
   "That doesn't seem like a valid email address": "Este não parece um email válido"
   "I remember my password": "Lembro minha senha"
   "Password recovery link sent to your email": "Link para recuperar senha enviado para seu email."
