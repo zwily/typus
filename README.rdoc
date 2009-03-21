@@ -554,9 +554,9 @@ created.
 
 == Testing the plugin
 
-You need to have <tt>mocha</tt> and <tt>redgreen</tt> to test the plugin.
+You need to have <tt>mocha</tt> installed to test the plugin.
 
-    $ sudo gem install mocha redgreen
+    $ sudo gem install mocha
 
 Use the following steps to test the plugin.
 

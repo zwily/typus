@@ -3,7 +3,11 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environment")
 require 'test_help'
 require 'mocha'
-require 'redgreen'
+
+begin
+  require 'redgreen'
+rescue LoadError
+end
 
 ##
 # Test with different DB settings
