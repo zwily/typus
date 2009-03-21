@@ -15,14 +15,14 @@ Install from GitHub the latest version which works with Rails 2.3.2.
 
     $ script/plugin install git://github.com/fesplugas/typus.git
 
-Once the plugin is installed generate the *Typus* files and migrate 
-your database, only a <tt>typus_users</tt> table is created.
+Once plugin is installed generate *Typus* files and migrate your 
+database (<tt>typus_users</tt> table is created)
 
     $ script/generate typus
     $ rake db:migrate
 
-To create the first user, to do it, start the application server, go 
-to http://0.0.0.0:3000/admin and follow the instructions.
+To create the first user, start the application server, go to 
+http://0.0.0.0:3000/admin and follow the instructions.
 
 === Compatibility and old versions
 
@@ -42,7 +42,7 @@ release of the latest stable version.
 You can view the available tasks running:
 
     $ rake -T typus
-    (in /Users/fesplugas/Development/typus_platform)
+    (in /Users/fesplugas/Development/typus_core)
     rake doc:plugins:typus  # Generate documentation for the typus plugin
     rake typus:i18n         # Install simplified_translation plugin.
     rake typus:misc         # Install Paperclip, acts_as_list, acts_as_tree.
@@ -58,7 +58,7 @@ You can overwrite the following settings.
     Typus::Configuration.options[:email]
     Typus::Configuration.options[:ignore_missing_translations]
     Typus::Configuration.options[:locales]
-    Typus::Configuration.options[:prefix]
+    Typus::Configuration.options[:path_prefix]
     Typus::Configuration.options[:recover_password]
     Typus::Configuration.options[:root]
     Typus::Configuration.options[:ssl]
@@ -97,7 +97,7 @@ from the yaml files under <tt>config/typus</tt>.
 
 === Translating the interface
 
-By default Typus is in English but you can change this with the 
+By default Typus I18n is set to English. You can change this with the 
 following configuration option. (i.e. interface in Español)
 
     Typus::Configuration.options[:locales] = [ [ "Español", :es ] ]
@@ -139,7 +139,7 @@ To overwrite the default prefix path of your application place the
 following configuration option on <tt>development.rb</tt>, <tt>production.rb</tt> 
 on the <tt>config/environments</tt> folder.
 
-    Typus::Configuration.options[:prefix] = 'backoffice'
+    Typus::Configuration.options[:path_prefix] = 'backoffice'
 
 === View Missing Translations
 
@@ -167,7 +167,8 @@ true to false and false to true. You can disable this link with:
 
 After creating a new record you'll be redirected to the record so 
 you can continue editing it. If you prefer to be redirected to the 
-main index you can owerwrite the setting.
+main index you can owerwrite the setting. This setting can be defined 
+globally or by model.
 
     Typus::Configuration.options[:edit_after_create] = false
 
