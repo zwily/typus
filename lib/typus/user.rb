@@ -1,6 +1,6 @@
 module Typus
 
-  module User
+  module EnableAsTypusUser
 
     def self.included(base)
       base.extend(ClassMethods)
@@ -129,4 +129,4 @@ module Typus
 
 end
 
-ActiveRecord::Base.send :include, Typus::User
+ActiveRecord::Base.send :include, Typus::EnableAsTypusUser
