@@ -31,8 +31,6 @@ Page:
   actions:
     index: rebuild_all
     edit: rebuild
-  relationships:
-    has_many: assets
   application: Site
   filters: is_published?
   options:
