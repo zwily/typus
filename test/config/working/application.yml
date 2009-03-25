@@ -23,8 +23,8 @@ Comment:
 Page:
   fields:
     # Body field is overwrited from a Page class method.
-    list: title, body, status
-    form: title, body, status
+    list: title, is_published?
+    form: title, body, is_published?
   actions:
     index: rebuild_all
     edit: rebuild

@@ -27,7 +27,7 @@ ActiveRecord::Schema.define do
   create_table :pages, :force => true do |t|
     t.string :title
     t.text :body
-    t.boolean :status
+    t.boolean :is_published
     t.integer :parent_id
   end
 

@@ -89,6 +89,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal expected_fields, klass.typus_fields_for(:list)
   end
 
+  def test_should_return_typus_fields_for_a_model_which_contains_question_marks
+    expected_fields = [['title', :string],
+                       ['is_published?', :boolean]]
+    assert_equal expected_fields.map { |i| i.first }, Page.typus_fields_for(:list).keys
+    assert_equal expected_fields.map { |i| i.last }, Page.typus_fields_for(:list).values
+  end
+
   def test_should_return_typus_fields_for_relationship_for_typus_user
     expected_fields = [['email', :string], 
                        ['roles', :selector], 
