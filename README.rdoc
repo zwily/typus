@@ -352,7 +352,7 @@ personalize it "per attribute" to match your application requirements.
           booleans:
             # attribute: true, false
             default: publicado, no_publicado
-            status: active, inactive
+            status: ["It's active", "It's inactive"]
 
 This setting can be defined by model or system wide.
 
