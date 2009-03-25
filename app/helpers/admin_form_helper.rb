@@ -77,14 +77,10 @@ module AdminFormHelper
   end
 
   def typus_boolean_field(attribute, klass = @resource[:class])
-
-    question = true if klass.typus_field_options_for(:questions).include?(attribute)
-
     <<-HTML
-<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}#{'?' if question}</label>
+<li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)}</label>
 #{check_box :item, attribute} #{I18n.t("Checked if active", :default => "Checked if active")}</li>
     HTML
-
   end
 
   def typus_date_field(attribute, options, klass = @resource[:class])

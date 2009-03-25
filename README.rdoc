@@ -295,22 +295,6 @@ Define which fields will be used when performing a search on the model.
 
     search: attribute1, attribute2
 
-=== Questions?
-
-Sometimes on your forms you want to ask questions.
-
-- Is highlighted?
-- On newsletter?
-
-And you can enable them with the questions option.
-
-    Story:
-      fields:
-        list: title, is_highlighted
-        form: title, body, is_highlighted
-        options:
-          questions: is_highlighted
-
 === Selectors
 
 Need a selector, to select gender, size, status, the encoding status 

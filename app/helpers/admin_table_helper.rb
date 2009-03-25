@@ -21,7 +21,7 @@ module AdminTableHelper
 
         fields.each do |key, value|
           case value
-          when :boolean:           html << typus_table_boolean_field(key, item)
+          when :boolean:           html << typus_table_boolean_field(key.typus_cleaner, item)
           when :datetime:          html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
           when :date:              html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
           when :time:              html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
@@ -84,13 +84,13 @@ module AdminTableHelper
 
         content = I18n.t(key.humanize, :default => key.humanize)
 
-        if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
+        if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key.typus_cleaner) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
           sort_order = case params[:sort_order]
                        when 'asc':  'desc'
                        when 'desc': 'asc'
                        end
-          order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
-          switch = (params[:order_by] == key) ? sort_order : ''
+          order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key.typus_cleaner
+          switch = (params[:order_by] == key.typus_cleaner) ? sort_order : ''
           options = { :order_by => order_by, :sort_order => sort_order }
           content = (link_to "<div class=\"#{switch}\">#{content}</div>", params.merge(options))
         end

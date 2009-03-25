@@ -149,8 +149,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal [ :permalink ], Post.typus_field_options_for(:read_only)
     assert_equal [ :created_at ], Post.typus_field_options_for('auto_generated')
     assert_equal [ :created_at ], Post.typus_field_options_for(:auto_generated)
-    assert_equal [ :status ], Post.typus_field_options_for('questions')
-    assert_equal [ :status ], Post.typus_field_options_for(:questions)
   end
 
   def test_should_return_options_for_post_and_page
