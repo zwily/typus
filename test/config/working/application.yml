@@ -25,12 +25,16 @@ Page:
     # Body field is overwrited from a Page class method.
     list: title, is_published?
     form: title, body, is_published?
+    options:
+      booleans:
+        is_published: ["Yes, it is", "No, it isn't"]
   actions:
     index: rebuild_all
     edit: rebuild
   relationships:
     has_many: assets
   application: Site
+  filters: is_published?
   options:
     form_rows: 25
 

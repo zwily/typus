@@ -162,9 +162,15 @@ module Typus
       boolean = Typus::Configuration.config[name]['fields']['options']['booleans'][attribute.to_s] rescue nil
       boolean = 'true, false' if boolean.nil?
 
-      hash = ActiveSupport::OrderedHash.new
-      hash[:true] = boolean.split(', ').first.humanize
-      hash[:false] = boolean.split(', ').last.humanize
+      if boolean.kind_of?(Array)
+        hash = ActiveSupport::OrderedHash.new
+        hash[:true] = boolean.first.humanize
+        hash[:false] = boolean.last.humanize
+      else
+        hash = ActiveSupport::OrderedHash.new
+        hash[:true] = boolean.split(', ').first.humanize
+        hash[:false] = boolean.split(', ').last.humanize
+      end
 
       return hash
 

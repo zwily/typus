@@ -206,7 +206,7 @@ function surfto_#{model_pluralized}(form) {
 
   def boolean_filter(request, filter)
     items = []
-    @resource[:class].typus_boolean(filter).each do |key, value|
+    @resource[:class].typus_boolean(filter.typus_cleaner).each do |key, value|
       switch = request.include?("#{filter.typus_cleaner}=#{key}") ? 'on' : 'off'
       options = { "#{filter.typus_cleaner}".to_sym => key, :page => nil }
       items << (link_to I18n.t(value, :default => value), params.merge(options), :class => switch)

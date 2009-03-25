@@ -288,8 +288,8 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     expected = <<-HTML
 <h2>Is published?</h2>
 <ul>
-<li><a href="http://test.host/typus/pages?is_published=true" class="off">True</a></li>
-<li><a href="http://test.host/typus/pages?is_published=false" class="on">False</a></li>
+<li><a href="http://test.host/typus/pages?is_published=true" class="off">Yes, it is</a></li>
+<li><a href="http://test.host/typus/pages?is_published=false" class="on">No, it isn't</a></li>
 </ul>
     HTML
     assert_equal expected, output
