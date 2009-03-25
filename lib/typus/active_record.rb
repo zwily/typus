@@ -190,8 +190,9 @@ module Typus
     # within the form
     #
     def typus_template(attribute)
-      template = Typus::Configuration.config[name]['fields']['options']['templates'][attribute.to_s] rescue nil
-      return template
+      Typus::Configuration.config[name]['fields']['options']['templates'][attribute.to_s]
+    rescue
+      nil
     end
 
     ##
