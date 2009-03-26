@@ -100,3 +100,7 @@ es:
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?"
   "Change {{attribute}}?": "Change {{attribute}}?"
   "Set language": "Cambiar idioma"
+  "Today": "Hoy"
+  "Past 7 days": "Últimos 7 dias"
+  "This month": "Este mes"
+  "This year": "Este año"

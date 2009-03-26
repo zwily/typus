@@ -100,3 +100,8 @@ br:
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?"
   "Change {{attribute}}?": "Change {{attribute}}?"
   "Set language": "Set language"
+  "Set language": "Cambiar idioma"
+  "Today": "Today (missing)"
+  "Past 7 days": "Past 7 days (missing br)"
+  "This month": "This month (missing br)"
+  "This year": "This year (missing br)"
