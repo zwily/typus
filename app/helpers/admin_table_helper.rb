@@ -56,7 +56,10 @@ module AdminTableHelper
                                                             :id => params[:id], 
                                                             :resource => item.class.name.tableize, 
                                                             :resource_id => item.id }, 
-                                                            :confirm => "Unrelate #{model.name.humanize.singularize} from #{@resource[:class_name]}?"
+                                                            :confirm => t("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+                                                                          :default => "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+                                                                          :unrelate_model => model.name.humanize.singularize, 
+                                                                          :unrelate_model_from => @resource[:class_name])
         end
 
       end
