@@ -49,7 +49,7 @@ module AdminTableHelper
         when 'index'
           perform = link_to image_tag('admin/trash.gif'), { :action => 'destroy', 
                                                             :id => item.id }, 
-                                                            :confirm => 'Remove entry?', 
+                                                            :confirm => t('Remove entry?', :default => "Remove entry?"), 
                                                             :method => :delete
         else
           perform = link_to image_tag('admin/trash.gif'), { :action => 'unrelate', 

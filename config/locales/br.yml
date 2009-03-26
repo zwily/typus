@@ -1,6 +1,7 @@
 br:
   "Email": "Email"
   "Password": "Senha"
+  "Password confirmation": "Senha confirmação"
   "Sign in": "Entrar"
   "Recover password": "Recuperar senha"
   "Sign up": "Criar conta"
@@ -15,7 +16,7 @@ br:
   "There are not defined applications in config/typus/*.yml": "Não há aplicativos definidos em config/typus/*.yml"
   "Overview": "Visão geral"
   "Options": "Opções"
-  "Password Confirm": "Confirmação de senha"
+  "Password confirmation": "Confirmação de senha"
   "Change password": "Trocar senha"
   "There are no {{records}}": "Não há {{records}}."
   "There are no {{records}} under this filter": "Não há {{records}} com este filtro."
@@ -93,6 +94,6 @@ br:
   "Do you want to cancel it?": "Quer cancelar?"
   "Click here": "Clique aqui"
   "Are you sure you want to leave this page?": "Tem certeza que quer sair desta página?"
-  "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost":   "Se você fez alterações nos campos e não clicou no botão de Salvar/Atualizar, suas alterações serão perdidas"
+  "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Se você fez alterações nos campos e não clicou no botão de Salvar/Atualizar, suas alterações serão perdidas"
   "Click OK to continue, or click Cancel to stay on this page": "Clique OK para continuar, ou clique em Cancelar para ficar nesta página."
-  
+  "Remove entry?": "Remove entry?"
