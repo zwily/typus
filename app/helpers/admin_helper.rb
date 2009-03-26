@@ -16,13 +16,23 @@ module AdminHelper
 
     message = case
               when _params[:resource] && editing
-                I18n.t("You're updating a {{resource_from}} for {{resource_to}}", :default => "You're updating a {{resource_from}} for {{resource_to}}", options)
+                I18n.t("You're updating a {{resource_from}} for {{resource_to}}", 
+                       :default => "You're updating a {{resource_from}} for {{resource_to}}.", 
+                       :resource_from =>  options[:resource_from], 
+                       :resource_to => options[:resource_to])
               when editing
-                I18n.t("You're updating a {{resource_from}}", :default => "You're updating a {{resource_from}}", options)
+                I18n.t("You're updating a {{resource_from}}", 
+                       :default => "You're updating a {{resource_from}}.", 
+                       :resource_from => options[:resource_from])
               when _params[:resource]
-                I18n.t("You're adding a new {{resource_from}} to {{resource_to}}", :default => "You're adding a new {{resource_from}} to {{resource_to}}", options)
+                I18n.t("You're adding a new {{resource_from}} to {{resource_to}}", 
+                       :default => "You're adding a new {{resource_from}} to {{resource_to}}.", 
+                       :resource_from => options[:resource_from], 
+                       :resource_to => options[:resource_to])
               else
-                I18n.t("You're adding a new {{resource_from}}", :default => "You're adding a new {{resource_from}}", options)
+                I18n.t("You're adding a new {{resource_from}}", 
+                       :default => "You're adding a new {{resource_from}}.", 
+                       :resource_from => options[:resource_from] )
               end
 
     returning(String.new) do |html|
