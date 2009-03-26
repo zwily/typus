@@ -217,7 +217,7 @@ class AdminController < ApplicationController
 
     flash[:success] = t("{{model_a}} related to {{model_b}}", 
                         :default => "{{model_a}} related to {{model_b}}.", 
-                        :model_a => resource_class.name.titleize , 
+                        :model_a => resource_class.name.humanize, 
                         :model_b => @resource[:class_name_humanized])
     redirect_to :action => 'edit', :id => @item.id, :anchor => resource_tableized
 
@@ -266,7 +266,7 @@ private
     @resource[:class] = resource.classify.constantize
     @resource[:table_name] = resource.classify.constantize.table_name
     @resource[:class_name] = resource.classify
-    @resource[:class_name_humanized] = resource.classify.titleize
+    @resource[:class_name_humanized] = resource.humanize.singularize
 
   rescue Exception => error
     error_handler(error)

@@ -94,7 +94,7 @@ module AdminSidebarHelper
     typus_search = @resource[:class].typus_defaults_for(:search)
     return if typus_search.empty?
 
-    search_by = typus_search.collect { |x| I18n.t(x, :default => x) }.to_sentence(Typus.to_sentence_options).titleize.downcase
+    search_by = typus_search.collect { |x| I18n.t(x, :default => x) }.to_sentence(Typus.to_sentence_options)
 
     search_params = params.dup
     %w( action controller search page ).each { |p| search_params.delete(p) }
@@ -107,7 +107,7 @@ module AdminSidebarHelper
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.sort.join("\n")}
 </form>
-<p class="tip">#{I18n.t("Search by", :default => "Search by")} #{search_by}.</p>
+<p class="tip">#{I18n.t("Search by", :default => "Search by")} #{search_by.humanize.downcase}.</p>
     HTML
 
   end
@@ -171,7 +171,7 @@ function surfto_#{model_pluralized}(form) {
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
   <select name="#{model_pluralized}" onChange="surfto_#{model_pluralized}(this.form)">
-    <option value="#{url_for params_without_filter}">#{t("filter by", :default => "filter by")} #{t(model.name.titleize, :default => model.name.titleize)}</option>
+    <option value="#{url_for params_without_filter}">#{t("filter by", :default => "filter by")} #{t(model.name.humanize, :default => model.name.humanize)}</option>
     #{items.join("\n")}
   </select>
 </form></p>

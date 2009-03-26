@@ -9,8 +9,8 @@ module AdminHelper
   def display_link_to_previous(klass_name = @resource[:class_name], _params = params)
 
     options = {}
-    options[:resource_from] = klass_name.titleize
-    options[:resource_to] = _params[:resource].classify.titleize if _params[:resource]
+    options[:resource_from] = klass_name.humanize
+    options[:resource_to] = _params[:resource].classify.humanize if _params[:resource]
 
     editing = %w( edit update ).include?(_params[:action])
 

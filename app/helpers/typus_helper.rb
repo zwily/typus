@@ -25,7 +25,7 @@ module TypusHelper
           description = Typus.module_description(model)
           html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to I18n.t(model.titleize.pluralize, :default => model.titleize.pluralize), send("admin_#{model.tableize}_path")}<br /><small>#{I18n.t(description, :default => "#{description}")}</small></td>
+<td>#{link_to I18n.t(model.humanize.pluralize, :default => model.humanize.pluralize), send("admin_#{model.tableize}_path")}<br /><small>#{I18n.t(description, :default => "#{description}")}</small></td>
 <td class="right"><small>
 #{link_to I18n.t("Add", :default => "Add"), send("new_admin_#{model.tableize.singularize}_path") if @current_user.can_perform?(model, 'create')}
 </small></td>
@@ -66,7 +66,7 @@ module TypusHelper
 
         html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to I18n.t(resource.titleize, :default => resource.titleize), "#{Typus::Configuration.options[:path_prefix]}/#{resource.underscore}"}</td>
+<td>#{link_to I18n.t(resource.humanize, :default => resource.humanize), "#{Typus::Configuration.options[:path_prefix]}/#{resource.underscore}"}</td>
 <td align="right" style="vertical-align: bottom;"></td>
 </tr>
         HTML

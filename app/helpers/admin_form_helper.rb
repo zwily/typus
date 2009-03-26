@@ -177,7 +177,7 @@ module AdminFormHelper
       value = 'auto_generated' if %w( new edit ).include?(params[:action])
     end
 
-    comment = %w( read_only auto_generated ).include?(value) ? (value + ' field').titleize : ''
+    comment = %w( read_only auto_generated ).include?(value) ? (value + ' field').humanize : ''
 
     <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(attribute.humanize, :default => attribute.humanize)} <small>#{comment}</small></label>
@@ -216,7 +216,7 @@ module AdminFormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to I18n.t(field.titleize, :default => field.titleize), :controller => field}
+  #{link_to I18n.t(field.humanize, :default => field.humanize), :controller => field}
   <small>#{link_to I18n.t("Add new", :default => "Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
@@ -230,7 +230,7 @@ module AdminFormHelper
                            options)
       else
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{I18n.t("There are no {{records}}.", :records => I18n.t(field.titleize.downcase, :default => field.titleize.downcase), :default => "There are no {{records}}.")}</p></div>
+  <div id="flash" class="notice"><p>#{I18n.t("There are no {{records}}.", :records => I18n.t(field.humanize.downcase, :default => field.humanize.downcase), :default => "There are no {{records}}.")}</p></div>
         HTML
       end
       html << <<-HTML
@@ -247,7 +247,7 @@ module AdminFormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to I18n.t(field.titleize, :default => field.titleize), :controller => field}
+  #{link_to I18n.t(field.humanize, :default => field.humanize), :controller => field}
   <small>#{link_to I18n.t("Add new", :default => "Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
@@ -265,7 +265,7 @@ module AdminFormHelper
         html << build_list(model_to_relate, model_to_relate.typus_fields_for(:relationship), items, model_to_relate_as_resource)
       else
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{I18n.t("There are no {{records}}.", :records => I18n.t(field.titleize.downcase, :default => field.titleize.downcase), :default => "There are no {{records}}.")}</p></div>
+  <div id="flash" class="notice"><p>#{I18n.t("There are no {{records}}.", :records => I18n.t(field.humanize, :default => field.humanize), :default => "There are no {{records}}.")}</p></div>
         HTML
       end
       html << <<-HTML
