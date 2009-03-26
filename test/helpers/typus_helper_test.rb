@@ -75,12 +75,7 @@ class TypusHelperTest < ActiveSupport::TestCase
 
     output = locales('set_locale')
     expected = <<-HTML
-<ul>
-<li>Set language:</li>
-<li><a href="set_locale?locale=en">English</a></li>
-<li><a href="set_locale?locale=es">Español</a></li>
-
-</ul>
+<p>Set language to <a href=\"set_locale?locale=en\">English</a>, <a href=\"set_locale?locale=es\">Español</a>.</p>
     HTML
     assert_equal expected, output
 

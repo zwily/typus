@@ -150,20 +150,11 @@ module TypusHelper
 
     return unless Typus.locales.many?
 
-    locales_link = Typus.locales.map do |locale|
-                     <<-HTML
-<li><a href="#{uri}?locale=#{locale.last}">#{locale.first}</a></li>
-                     HTML
-                   end
+    locale_links = Typus.locales.map { |l| "<a href=\"#{uri}?locale=#{l.last}\">#{l.first}</a>" }
 
-    html = <<-HTML
-<ul>
-<li>#{I18n.t("Set language", :default => "Set language")}:</li>
-#{locales_link.join}
-</ul>
+    <<-HTML
+<p>#{I18n.t("Set language to", :default => "Set language to")} #{locale_links.join(', ')}.</p>
     HTML
-
-    return html
 
   end
 
