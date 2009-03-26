@@ -3,6 +3,8 @@ require 'test/helper'
 class TypusTest < ActiveSupport::TestCase
 
   def test_should_return_locales
+    initializer = "#{Rails.root}/config/initializers/typus.rb"
+    return if File.exists?(initializer)
     assert Typus.respond_to?(:locales)
     assert Typus.locales.kind_of?(Array)
     assert_equal [["English", :en]], Typus.locales
