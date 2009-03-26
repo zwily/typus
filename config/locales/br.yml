@@ -99,3 +99,4 @@ br:
   "Remove entry?": "Remove entry?"
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?"
   "Change {{attribute}}?": "Change {{attribute}}?"
+  "Set language": "Set language"
