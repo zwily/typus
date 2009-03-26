@@ -202,7 +202,7 @@ module AdminTableHelper
     options = { :controller => item.class.name.tableize, :action => 'toggle', :field => attribute, :id => item.id }
 
     content = if item.class.typus_options_for(:toggle) && !item.send(attribute).nil?
-                link_to link_text, params.merge(options), :confirm => "Change #{attribute.humanize.downcase}?"
+                link_to link_text, params.merge(options), :confirm => t("Change {{attribute}}?", :default => "Change {{attribute}}?", :attribute => attribute.humanize.downcase)
               else
                 link_text
               end
