@@ -25,7 +25,7 @@ module TypusHelper
           description = Typus.module_description(model)
           html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to I18n.t(model.titleize.pluralize, :default => model.titleize.pluralize), send("admin_#{model.tableize}_path")}<br /><small>#{I18n.t(description, :default => description)}</small></td>
+<td>#{link_to I18n.t(model.titleize.pluralize, :default => model.titleize.pluralize), send("admin_#{model.tableize}_path")}<br /><small>#{I18n.t(description, :default => "#{description}")}</small></td>
 <td class="right"><small>
 #{link_to I18n.t("Add", :default => "Add"), send("new_admin_#{model.tableize.singularize}_path") if @current_user.can_perform?(model, 'create')}
 </small></td>
