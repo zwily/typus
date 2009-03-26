@@ -156,7 +156,7 @@ module AdminTableHelper
                   :go => position.last }
 
       html_position << <<-HTML
-#{link_to t(position.first), params.merge(options)}
+#{link_to t(position.first, :default => position.first), params.merge(options)}
       HTML
 
     end

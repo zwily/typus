@@ -26,7 +26,7 @@ module AdminSidebarHelper
     case params[:action]
     when 'index', 'edit', 'update'
       if @current_user.can_perform?(@resource[:class], 'create')
-        items << (link_to t("Add entry"), :action => 'new')
+        items << (link_to t("Add entry", :default => "Add entry"), :action => 'new')
       end
     end
 
@@ -34,7 +34,7 @@ module AdminSidebarHelper
 
     case params[:action]
     when 'new', 'create', 'edit', 'update'
-      items << (link_to t("Back to list"), :action => 'index')
+      items << (link_to t("Back to list", :default => "Back to list"), :action => 'index')
     end
 
     return items
@@ -171,7 +171,7 @@ function surfto_#{model_pluralized}(form) {
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
   <select name="#{model_pluralized}" onChange="surfto_#{model_pluralized}(this.form)">
-    <option value="#{url_for params_without_filter}">#{t("filter by")} #{t(model.name.titleize)}</option>
+    <option value="#{url_for params_without_filter}">#{t("filter by", :default => "filter by")} #{t(model.name.titleize, :default => model.name.titleize)}</option>
     #{items.join("\n")}
   </select>
 </form></p>

@@ -25,9 +25,9 @@ module TypusHelper
           description = Typus.module_description(model)
           html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to I18n.t(model.titleize.pluralize, :default => model.titleize.pluralize), send("admin_#{model.tableize}_path")}<br /><small>#{I18n.t(description, :default => "#{description}")}</small></td>
+<td>#{link_to I18n.t(model.titleize.pluralize, :default => model.titleize.pluralize), send("admin_#{model.tableize}_path")}<br /><small>#{I18n.t(description, :default => description)}</small></td>
 <td class="right"><small>
-#{link_to I18n.t('Add', :default => 'Add'), send("new_admin_#{model.tableize.singularize}_path") if @current_user.can_perform?(model, 'create')}
+#{link_to I18n.t("Add", :default => "Add"), send("new_admin_#{model.tableize.singularize}_path") if @current_user.can_perform?(model, 'create')}
 </small></td>
 </tr>
           HTML
@@ -58,7 +58,7 @@ module TypusHelper
       html << <<-HTML
 <table>
 <tr>
-<th colspan="2">#{I18n.t('Resources')}</th>
+<th colspan="2">#{I18n.t("Resources", :default => "Resources")}</th>
 </tr>
       HTML
 
@@ -104,7 +104,7 @@ module TypusHelper
 
     if ActionController::Routing::Routes.named_routes.routes.keys.include?(:root)
       link_to_site = <<-HTML
-<small>#{link_to I18n.t("View site"), root_path, :target => 'blank'}</small>
+<small>#{link_to I18n.t("View site", :default => "View site"), root_path, :target => 'blank'}</small>
       HTML
     end
 
@@ -119,8 +119,8 @@ module TypusHelper
   def login_info(user = @current_user)
     <<-HTML
 <ul>
-  <li>#{I18n.t('Logged as')} #{link_to user.full_name(:display_role => true), edit_admin_typus_user_path(user.id)}</li>
-  <li>#{link_to I18n.t('Sign out'), admin_sign_out_path }</li>
+  <li>#{I18n.t("Logged as", :default => "Logged as")} #{link_to user.full_name(:display_role => true), edit_admin_typus_user_path(user.id)}</li>
+  <li>#{link_to I18n.t("Sign out", :default => "Sign out"), admin_sign_out_path }</li>
 </ul>
     HTML
   end

@@ -55,9 +55,9 @@ module AdminFormHelper
     related = klass.reflect_on_association(attribute.to_sym).class_name.constantize
     related_fk = klass.reflect_on_association(attribute.to_sym).primary_key_name
 
-    message = [ I18n.t("Are you sure you want to leave this page?"),
-                I18n.t("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."),
-                I18n.t("Click OK to continue, or click Cancel to stay on this page.") ]
+    message = [ I18n.t("Are you sure you want to leave this page?", :default => "Are you sure you want to leave this page?"),
+                I18n.t("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost.", :default => "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."),
+                I18n.t("Click OK to continue, or click Cancel to stay on this page.", :default => "Click OK to continue, or click Cancel to stay on this page.") ]
 
     returning(String.new) do |html|
 
@@ -66,7 +66,7 @@ module AdminFormHelper
       else
         html << <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(related_fk.humanize, :default => related_fk.humanize)}
-    <small>#{link_to I18n.t("Add new"), { :controller => related.class_name.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
+    <small>#{link_to I18n.t("Add new", :default => "Add new"), { :controller => related.class_name.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
     </label>
 #{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute, klass) } }</li>
         HTML
