@@ -272,7 +272,7 @@ private
 
     # If the current model doesn't include a key which relates it with the
     # current_user, by-pass.
-    return unless @item.attributes.include?(Typus.user_fk)
+    return unless @item.respond_to?(Typus.user_fk)
 
     # If the record is owned by the user ...
     unless @item.send(Typus.user_fk) == session[:typus]
