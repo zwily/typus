@@ -593,7 +593,7 @@ Include the helper on your views.
 - Anthony Underwood (Code) http://github.com/aunderwo
 - Felipe Talavera (Code) http://github.com/flype
 - Erik Tigerholm (Code) http://github.com/eriktigerholm
-- George Guimarães (Translation to Brazilian Portuguese) http://github.com/georgeguimaraes
+- George Guimarães (Translation to Brazilian Portuguese and code) http://github.com/georgeguimaraes
 
 == Author, contact, bugs, mailing list and more
 
