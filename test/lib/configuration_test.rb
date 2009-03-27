@@ -65,7 +65,6 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal Hash.new, Typus::Configuration.config!
   end
 
-
   def test_should_load_configuration_files_from_config_ordered
     options = { :config_folder => 'vendor/plugins/typus/test/config/ordered' }
     Typus::Configuration.stubs(:options).returns(options)
