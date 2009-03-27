@@ -2,10 +2,7 @@ require 'test/helper'
 
 class RoutesTest < ActiveSupport::TestCase
 
-  unless Rails.version == '2.2.2'
-    include ActionController::TestCase::Assertions
-    include ActionController::Assertions::RoutingAssertions
-  end
+  include ActionController::TestCase::Assertions
 
   def test_should_verify_admin_named_routes
 
