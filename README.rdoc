@@ -9,6 +9,20 @@ extensible enough to match lots of use cases.
 
 You can see some screenshots on the wiki[http://github.com/fesplugas/typus/wikis].
 
+== Quick demo in 3 steps
+
+Step 1. Create a Rails application using a template.
+
+    $ rails application_with_typus -m http://gist.github.com/86613.txt
+
+Step 2. Start the server:
+
+    $ cd application_with_typus && script/server
+
+Step 3. Go to the admin area and enjoy it!
+
+    http://0.0.0.0:3000/admin
+
 == Installing
 
 Install from GitHub the latest version which it's compatible with 
