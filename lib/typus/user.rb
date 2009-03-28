@@ -116,7 +116,7 @@ module Typus
       end
 
       def generate_token
-        self.token = encrypt("--#{Time.now.utc.to_s}--#{password}--")
+        self.token = encrypt("--#{Time.now.utc.to_s}--#{password}--").first(12)
       end
 
       def password_required?
