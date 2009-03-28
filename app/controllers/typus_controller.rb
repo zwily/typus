@@ -48,8 +48,7 @@ class TypusController < ApplicationController
     redirect_to admin_sign_up_path and return if Typus.user_class.count.zero?
 
     if request.post?
-      user = Typus.user_class.authenticate(params[:user][:email], params[:user][:password])
-      if user
+      if user = Typus.user_class.authenticate(params[:user][:email], params[:user][:password])
         session[:typus] = user.id
         redirect_to params[:back_to] || admin_dashboard_path
       else
