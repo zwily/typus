@@ -121,8 +121,8 @@ class TypusController < ApplicationController
 
       if user.save
         session[:typus] = user.id
-        flash[:notice] = t("Your new password is '{{password}}'", 
-                           :default => "Your new password is '{{password}}'.", :password => password)
+        flash[:notice] = t("Your new password is {{password}}", 
+                           :default => "Your new password is {{password}}.", :password => password)
         redirect_to admin_dashboard_path
       else
         flash[:error] = t("That doesn't seem like a valid email address", 
