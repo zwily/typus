@@ -597,6 +597,17 @@ Include the helper on your views.
                    :id => @page.id, 
                    :message => 'Edit this page' %>
 
+== What is coming to Typus?
+
+There's no a date for this new features, but are things which I'd like 
+to see in Typus in the near future.
+
+- Sphinx search integration when available.
+- Search in multiple models.
+- Nested models.
+- Content Management System generator.
+- Server administration tools.
+
 == Contributors
 
 - Laia Gargallo (Lover and tea provider) http://azotacalles.net
