@@ -30,20 +30,18 @@ protected
     @current_user = Typus.user_class.find(session[:typus])
 
     unless Typus::Configuration.roles.keys.include?(@current_user.role)
-      message = t("Typus user or role no longer exist", 
-                  :default => "Typus user or role no longer exist.")
-      raise
+      raise t("Typus user or role no longer exist", 
+              :default => "Typus user or role no longer exist.")
     end
 
     unless @current_user.status
       back_to = (request.env['REQUEST_URI'] == "/#{Typus::Configuration.options[:path_prefix]}") ? nil : request.env['REQUEST_URI']
-      message = t("Your typus user has been disabled", 
-                  :default => "Your typus user has been disabled.")
-      raise
+      raise t("Your typus user has been disabled", 
+              :default => "Your typus user has been disabled.")
     end
 
-  rescue
-    flash[:notice] = message
+  rescue Exception => error
+    flash[:notice] = error.message
     session[:typus] = nil
     redirect_to admin_sign_in_path(:back_to => back_to)
   end
