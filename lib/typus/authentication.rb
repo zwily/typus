@@ -30,7 +30,7 @@ protected
     @current_user = Typus.user_class.find(session[:typus])
 
     unless @current_user.respond_to?(:role)
-      raise "Run `script/generate -f typus_update_schema_to_01 -f && rake db:migrate` to update database schema."
+      raise "Run `script/generate typus_update_schema_to_01 -f && rake db:migrate` to update database schema."
     end
 
     unless Typus::Configuration.roles.keys.include?(@current_user.role)
