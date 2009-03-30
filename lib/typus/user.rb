@@ -66,9 +66,6 @@ module Typus
         crypted_password == encrypt(password)
       end
 
-      ##
-      # Resources TypusUser has access to ...
-      #
       def resources
         Typus::Configuration.roles[roles].compact
       end
