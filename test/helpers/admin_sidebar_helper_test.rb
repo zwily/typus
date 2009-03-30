@@ -179,7 +179,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 <input id="action" name="action" type="hidden" value="index" />
 <input id="controller" name="controller" type="hidden" value="admin/typus_users" />
 </form>
-<p class="tip">Search by first name, last name, email & roles.</p>
+<p class="tip">Search by first name, last name, email, and roles.</p>
     HTML
 
     assert_equal expected, output

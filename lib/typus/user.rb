@@ -22,7 +22,7 @@ module Typus
         validates_length_of :password, :within => 8..40, :if => :password_required?
         validates_presence_of :password, :if => :password_required?
 
-        validates_inclusion_of :roles, :in => roles, :message => "has to be #{Typus.roles_sentence}."
+        validates_presence_of :roles
 
         before_save :initialize_salt, :encrypt_password, :initialize_token
 

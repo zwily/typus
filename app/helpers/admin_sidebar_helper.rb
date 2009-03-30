@@ -94,7 +94,7 @@ module AdminSidebarHelper
     typus_search = @resource[:class].typus_defaults_for(:search)
     return if typus_search.empty?
 
-    search_by = typus_search.collect { |x| I18n.t(x, :default => x) }.to_sentence(Typus.to_sentence_options)
+    search_by = typus_search.collect { |x| I18n.t(x, :default => x) }.to_sentence
 
     search_params = params.dup
     %w( action controller search page ).each { |p| search_params.delete(p) }

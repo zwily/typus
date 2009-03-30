@@ -100,17 +100,4 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal 'my_user_fk', Typus.user_fk
   end
 
-  def test_should_verify_to_sentence_options
-
-    assert Typus.respond_to?(:to_sentence_options)
-    assert Typus.to_sentence_options.kind_of?(Hash)
-
-    expected = { :words_connector => ', ', :last_word_connector => ' & ' }
-    assert_equal expected, Typus.to_sentence_options
-
-    expected = { :words_connector => ', ', :last_word_connector => ' or ' }
-    assert_equal expected, Typus.to_sentence_options('or')
-
-  end
-
 end

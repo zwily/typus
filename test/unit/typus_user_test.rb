@@ -118,10 +118,10 @@ END
   end
 
   def test_should_verify_roles
-    @typus_user.roles = 'unexisting'
+    @typus_user.roles = ''
     assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:roles)
-    assert_equal "has to be admin, designer or editor.", @typus_user.errors[:roles]
+    assert_equal "can't be blank", @typus_user.errors[:roles]
   end
 
   def test_should_return_full_name
