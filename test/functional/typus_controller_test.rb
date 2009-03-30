@@ -22,6 +22,15 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to admin_dashboard_path
   end
 
+  def test_should_return_message_when_sign_in_fails
+    post :sign_in, { :user => { :email => 'john@example.com', 
+                                :password => 'XXXXXXXX' } }
+    assert_response :redirect
+    assert_redirected_to admin_sign_in_path
+    assert flash[:error]
+    assert_equal "The email and/or password you entered is invalid.", flash[:error]
+  end
+
   def test_should_not_sign_in_a_disabled_user
     typus_user = typus_users(:disabled_user)
     post :sign_in, { :user => { :email => typus_user.email, 
