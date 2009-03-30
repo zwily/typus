@@ -22,7 +22,7 @@ module Typus
         validates_length_of :password, :within => 8..40, :if => :password_required?
         validates_presence_of :password, :if => :password_required?
 
-        validates_presence_of :roles
+        validates_presence_of :role
 
         before_save :initialize_salt, :encrypt_password, :initialize_token
 
@@ -34,7 +34,7 @@ module Typus
 
     module ClassMethodsMixin
 
-      def roles
+      def role
         Typus::Configuration.roles.keys.sort
       end
 
@@ -43,11 +43,11 @@ module Typus
         user && user.authenticated?(password) ? user : nil
       end
 
-      def generate(email, password, roles = Typus::Configuration.options[:root], status = true)
+      def generate(email, password, role = Typus::Configuration.options[:root], status = true)
         new :email => email, 
             :password => password, 
             :password_confirmation => password, 
-            :roles => roles, 
+            :role => role, 
             :status => status
       end
 
@@ -58,7 +58,7 @@ module Typus
       def full_name(*args)
         options = args.extract_options!
         full_name = (!first_name.empty? && !last_name.empty?) ? "#{first_name} #{last_name}" : email
-        full_name << " (#{roles})" if options[:display_role]
+        full_name << " (#{role})" if options[:display_role]
         return full_name
       end
 
@@ -67,7 +67,7 @@ module Typus
       end
 
       def resources
-        Typus::Configuration.roles[roles].compact
+        Typus::Configuration.roles[role].compact
       end
 
       def can_perform?(resource, action, options = {})
@@ -94,7 +94,7 @@ module Typus
       end
 
       def is_root?
-        roles == Typus::Configuration.options[:root]
+        role == Typus::Configuration.options[:root]
       end
 
     protected

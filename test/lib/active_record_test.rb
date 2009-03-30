@@ -10,7 +10,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     expected_fields = [[:id, :integer], 
                        [:first_name, :string], 
                        [:last_name, :string], 
-                       [:roles, :string], 
+                       [:role, :string], 
                        [:email, :string], 
                        [:status, :boolean], 
                        [:token, :string], 
@@ -51,7 +51,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   def test_should_return_typus_fields_for_list_for_typus_user
     expected_fields = [['email', :string], 
-                       ['roles', :selector], 
+                       ['role', :selector], 
                        ['status', :boolean]]
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for('list').keys
     assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for('list').values
@@ -72,7 +72,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   def test_should_return_typus_fields_for_form_for_typus_user
     expected_fields = [['first_name', :string], 
                        ['last_name', :string], 
-                       ['roles', :selector], 
+                       ['role', :selector], 
                        ['email', :string], 
                        ['password', :password], 
                        ['password_confirmation', :password]]
@@ -98,7 +98,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   def test_should_return_typus_fields_for_relationship_for_typus_user
     expected_fields = [['email', :string], 
-                       ['roles', :selector], 
+                       ['role', :selector], 
                        ['status', :boolean]]
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for('relationship').keys
     assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for('relationship').values
@@ -108,7 +108,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   def test_should_return_all_fields_for_undefined_field_type_on_typus_user
     expected_fields = [['email', :string], 
-                       ['roles', :selector], 
+                       ['role', :selector], 
                        ['status', :boolean]]
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for('undefined').keys
     assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for('undefined').values
@@ -118,8 +118,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   def test_should_return_filters_for_typus_user
     expected = [['status', :boolean], 
-                ['roles', :string]]
-    assert_equal 'status, roles', Typus::Configuration.config['TypusUser']['filters']
+                ['role', :string]]
+    assert_equal 'status, role', Typus::Configuration.config['TypusUser']['filters']
     assert_equal expected.map { |i| i.first }, TypusUser.typus_filters.keys
     assert_equal expected.map { |i| i.last }, TypusUser.typus_filters.values
   end
@@ -226,7 +226,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_sql_conditions_on_search_for_typus_user
-    expected = "(LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')"
+    expected = "(LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(role) LIKE '%francesc%')"
     params = { :search => 'francesc' }
     assert_equal expected, TypusUser.build_conditions(params).first
   end
@@ -242,7 +242,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       boolean_false = "(\"typus_users\".\"status\" = 'f')"
     end
 
-    expected = "((LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(roles) LIKE '%francesc%')) AND #{boolean_true}"
+    expected = "((LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(role) LIKE '%francesc%')) AND #{boolean_true}"
     params = { :search => 'francesc', :status => 'true' }
     assert_equal expected, TypusUser.build_conditions(params).first
     params = { :search => 'francesc', :status => 'false' }
@@ -295,8 +295,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_sql_conditions_on_filtering_posts_by_string
-    expected = "(\"typus_users\".\"roles\" = 'admin')"
-    params = { :roles => 'admin' }
+    expected = "(\"typus_users\".\"role\" = 'admin')"
+    params = { :role => 'admin' }
     assert_equal expected, TypusUser.build_conditions(params).first
   end
 

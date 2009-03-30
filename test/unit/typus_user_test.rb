@@ -8,12 +8,12 @@ class TypusUserTest < ActiveSupport::TestCase
               :email => 'test@example.com', 
               :password => '12345678', 
               :password_confirmation => '12345678', 
-              :roles => Typus::Configuration.options[:root] }
+              :role => Typus::Configuration.options[:root] }
     @typus_user = TypusUser.new(@data)
   end
 
   def test_should_verify_typus_user_attributes
-    %w( first_name last_name email roles salt crypted_password ).each do |attribute|
+    %w( first_name last_name email role salt crypted_password ).each do |attribute|
       assert TypusUser.instance_methods.include?(attribute)
     end
   end
@@ -117,22 +117,22 @@ END
 
   end
 
-  def test_should_verify_roles
-    @typus_user.roles = ''
+  def test_should_verify_role
+    @typus_user.role = ''
     assert @typus_user.invalid?
-    assert @typus_user.errors.invalid?(:roles)
-    assert_equal "can't be blank", @typus_user.errors[:roles]
+    assert @typus_user.errors.invalid?(:role)
+    assert_equal "can't be blank", @typus_user.errors[:role]
   end
 
   def test_should_return_full_name
-    assert_equal "#{@typus_user.email} (#{@typus_user.roles})", @typus_user.full_name(:display_role => true)
+    assert_equal "#{@typus_user.email} (#{@typus_user.role})", @typus_user.full_name(:display_role => true)
     assert_equal "#{@typus_user.email}", @typus_user.full_name
   end
 
   def test_should_return_full_name_with_role
     @typus_user.first_name = 'John'
     @typus_user.last_name = 'Smith'
-    assert_equal "John Smith (#{@typus_user.roles})", @typus_user.full_name(:display_role => true)
+    assert_equal "John Smith (#{@typus_user.role})", @typus_user.full_name(:display_role => true)
     assert_equal 'John Smith', @typus_user.full_name
   end
 

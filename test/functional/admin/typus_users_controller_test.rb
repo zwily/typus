@@ -110,12 +110,12 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     get :edit, { :id => typus_user.id }
 
     assert_response :success
-    assert_equal 'editor', typus_user.roles
+    assert_equal 'editor', typus_user.role
 
     post :update, { :id => typus_user.id, 
                     :item => { :first_name => 'Richard', 
                                :last_name => 'Ashcroft', 
-                               :roles => 'editor' } }
+                               :role => 'editor' } }
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
@@ -130,10 +130,10 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     @request.session[:typus] = typus_user.id
     @request.env['HTTP_REFERER'] = "/typus/typus_users/#{typus_user.id}/edit"
 
-    assert_equal 'editor', typus_user.roles
+    assert_equal 'editor', typus_user.role
 
     post :update, { :id => typus_user.id, 
-                    :item => { :roles => 'admin' } }
+                    :item => { :role => 'admin' } }
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
@@ -209,7 +209,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     @request.session[:typus] = typus_user.id
     @request.env['HTTP_REFERER'] = '/admin/typus_users'
 
-    assert_equal 'editor', typus_user.roles
+    assert_equal 'editor', typus_user.role
 
     get :edit, :id => typus_user.id
     assert_response :success

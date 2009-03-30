@@ -179,7 +179,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 <input id="action" name="action" type="hidden" value="index" />
 <input id="controller" name="controller" type="hidden" value="admin/typus_users" />
 </form>
-<p class="tip">Search by first name, last name, email, and roles.</p>
+<p class="tip">Search by first name, last name, email, and role.</p>
     HTML
 
     assert_equal expected, output
@@ -299,37 +299,37 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   def test_string_filter_when_values_are_strings
 
     @resource = { :class => TypusUser, :self => 'typus_users' }
-    filter = 'roles'
+    filter = 'role'
 
     params = { :controller => 'admin/typus_users', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
 
     # Roles is admin
 
-    request = 'roles=admin&page=1'
-    @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
+    request = 'role=admin&page=1'
+    @resource[:class].expects('role').returns(['admin', 'designer', 'editor'])
     output = string_filter(request, filter)
     expected = <<-HTML
-<h2>Roles</h2>
+<h2>Role</h2>
 <ul>
-<li><a href="http://test.host/typus/typus_users?roles=admin" class="on">Admin</a></li>
-<li><a href="http://test.host/typus/typus_users?roles=designer" class="off">Designer</a></li>
-<li><a href="http://test.host/typus/typus_users?roles=editor" class="off">Editor</a></li>
+<li><a href="http://test.host/typus/typus_users?role=admin" class="on">Admin</a></li>
+<li><a href="http://test.host/typus/typus_users?role=designer" class="off">Designer</a></li>
+<li><a href="http://test.host/typus/typus_users?role=editor" class="off">Editor</a></li>
 </ul>
     HTML
     assert_equal expected, output
 
     # Roles is editor
 
-    request = 'roles=editor&page=1'
-    @resource[:class].expects('roles').returns(['admin', 'designer', 'editor'])
+    request = 'role=editor&page=1'
+    @resource[:class].expects('role').returns(['admin', 'designer', 'editor'])
     output = string_filter(request, filter)
     expected = <<-HTML
-<h2>Roles</h2>
+<h2>Role</h2>
 <ul>
-<li><a href="http://test.host/typus/typus_users?roles=admin" class="off">Admin</a></li>
-<li><a href="http://test.host/typus/typus_users?roles=designer" class="off">Designer</a></li>
-<li><a href="http://test.host/typus/typus_users?roles=editor" class="on">Editor</a></li>
+<li><a href="http://test.host/typus/typus_users?role=admin" class="off">Admin</a></li>
+<li><a href="http://test.host/typus/typus_users?role=designer" class="off">Designer</a></li>
+<li><a href="http://test.host/typus/typus_users?role=editor" class="on">Editor</a></li>
 </ul>
     HTML
     assert_equal expected, output
@@ -339,24 +339,24 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   def test_string_filter_when_values_are_arrays_of_strings
 
     @resource = { :class => TypusUser, :self => 'typus_users' }
-    filter = 'roles'
+    filter = 'role'
 
     params = { :controller => 'admin/typus_users', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
 
-    request = 'roles=admin&page=1'
+    request = 'role=admin&page=1'
     array = [['Administrador', 'admin'], 
              ['Diseñador', 'designer'], 
              ['Editor', 'editor']]
-    @resource[:class].expects('roles').returns(array)
+    @resource[:class].expects('role').returns(array)
 
     output = string_filter(request, filter)
     expected = <<-HTML
-<h2>Roles</h2>
+<h2>Role</h2>
 <ul>
-<li><a href="http://test.host/typus/typus_users?roles=admin" class="on">Administrador</a></li>
-<li><a href="http://test.host/typus/typus_users?roles=designer" class="off">Diseñador</a></li>
-<li><a href="http://test.host/typus/typus_users?roles=editor" class="off">Editor</a></li>
+<li><a href="http://test.host/typus/typus_users?role=admin" class="on">Administrador</a></li>
+<li><a href="http://test.host/typus/typus_users?role=designer" class="off">Diseñador</a></li>
+<li><a href="http://test.host/typus/typus_users?role=editor" class="off">Editor</a></li>
 </ul>
     HTML
 
@@ -367,10 +367,10 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
   def test_string_filter_when_empty_values
 
     @resource = { :class => TypusUser }
-    filter = 'roles'
+    filter = 'role'
 
-    request = 'roles=admin&page=1'
-    @resource[:class].expects('roles').returns([])
+    request = 'role=admin&page=1'
+    @resource[:class].expects('role').returns([])
     output = string_filter(request, filter)
     assert output.empty?
 

@@ -29,7 +29,7 @@ protected
 
     @current_user = Typus.user_class.find(session[:typus])
 
-    unless Typus::Configuration.roles.keys.include?(@current_user.roles)
+    unless Typus::Configuration.roles.keys.include?(@current_user.role)
       message = t("Typus user or role no longer exist", 
                   :default => "Typus user or role no longer exist.")
       raise
@@ -79,7 +79,7 @@ protected
               when 'update'
 
                 # current_user cannot change her role.
-                if current_user && !(@item.roles == params[:item][:roles])
+                if current_user && !(@item.role == params[:item][:role])
                   t("You can't change your role", 
                     :default => "You can't change your role.")
                 end
@@ -125,23 +125,23 @@ protected
               when 'index', 'show'
                 t("{{current_user_role}} can't display items", 
                   :default => "{{current_user_role}} can't display items.", 
-                  :current_user_role => @current_user.roles.capitalize)
+                  :current_user_role => @current_user.role.capitalize)
               when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
               when 'destroy'
                 t("{{current_user_role}} can't delete this item", 
                   :default => "{{current_user_role}} can't delete this item.", 
-                  :current_user_role => @current_user.roles.capitalize)
+                  :current_user_role => @current_user.role.capitalize)
               else
                 t("{{current_user_role}} can't perform action ({{action}})", 
                   :default => "{{current_user_role}} can't perform action ({{action}}).", 
-                  :current_user_role => @current_user.roles.capitalize, 
+                  :current_user_role => @current_user.role.capitalize, 
                   :action => params[:action])
               end
 
     unless @current_user.can_perform?(@resource[:class], params[:action])
       flash[:notice] = message || t("{{current_user_role}} can't perform action. ({{action}})", 
                                     :default => "{{current_user_role}} can't perform action. ({{action}})", 
-                                    :current_user_role => @current_user.roles.capitalize, 
+                                    :current_user_role => @current_user.role.capitalize, 
                                     :action => params[:action])
       redirect_to :back rescue redirect_to admin_dashboard_path
     end
@@ -159,7 +159,7 @@ protected
     unless @current_user.can_perform?(controller.camelize, action, { :special => true })
       flash[:notice] = t("{{current_user_role}} can't go to {{action}} on {{controller}}", 
                          :default => "{{current_user_role}} can't go to {{action}} on {{controller}}.", 
-                         :current_user_role => @current_user.roles.capitalize, 
+                         :current_user_role => @current_user.role.capitalize, 
                          :action => action, 
                          :controller => controller.humanize.downcase)
       redirect_to :back rescue redirect_to admin_dashboard_path
