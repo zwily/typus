@@ -43,6 +43,14 @@ module Typus
         user && user.authenticated?(password) ? user : nil
       end
 
+      def generate(email, password, roles = Typus::Configuration.options[:root], status = true)
+        new :email => email, 
+            :password => password, 
+            :password_confirmation => password, 
+            :roles => roles, 
+            :status => status
+      end
+
     end
 
     module InstanceMethods

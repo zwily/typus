@@ -166,4 +166,10 @@ END
 
   end
 
+  def test_should_verify_generate
+    assert TypusUser.respond_to?(:generate)
+    assert TypusUser.generate('demo@example.com', 'XXXXXXXX').valid?
+    assert TypusUser.generate('demo@example.com', 'XXXX').invalid?
+  end
+
 end
