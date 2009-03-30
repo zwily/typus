@@ -168,8 +168,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_equal 'Enter your email below to create the first user.', flash[:notice]
 
     post :sign_up, :user => { :email => 'example.com' }
-    assert_response :redirect
-    assert_redirected_to admin_sign_up_path
+    assert_response :success
     assert flash[:error]
     assert_equal 'That doesn\'t seem like a valid email address.', flash[:error]
 
@@ -177,7 +176,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to admin_dashboard_path
     assert flash[:notice]
-    assert_match /Your new password is/, flash[:notice]
+    assert_equal "Password set to \"hocus-pocus\".", flash[:notice]
     assert @request.session[:typus]
     assert !TypusUser.find(:all).empty?
 
