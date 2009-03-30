@@ -110,19 +110,18 @@ class TypusController < ApplicationController
 
     if request.post?
 
-      email, password = params[:user][:email], generate_password
+      email, password = params[:user][:email], 'hocus-pocus'
       user = Typus.user_class.generate(email, password)
 
       if user.save
         session[:typus] = user.id
-        flash[:notice] = t("Your new password is {{password}}", 
-                           :default => "Your new password is {{password}}.", 
+        flash[:notice] = t("Password set to \"{{password}}\"", 
+                           :default => "Password set to \"{{password}}\".", 
                            :password => password)
         redirect_to admin_dashboard_path
       else
         flash[:error] = t("That doesn't seem like a valid email address", 
                           :default => "That doesn't seem like a valid email address.")
-        redirect_to admin_sign_up_path
       end
 
     else

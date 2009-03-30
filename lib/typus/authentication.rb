@@ -49,14 +49,6 @@ protected
   end
 
   ##
-  # Password generation using numbers and letters.
-  #
-  def generate_password(length = 8)
-    chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
-    return Array.new(length) { chars.rand }.join
-  end
-
-  ##
   # Action is available on:
   #
   #     edit, update, toggle and destroy
