@@ -12,7 +12,7 @@ es:
   "You can login with your new password": "Puedes acceder con tu nueva contraseña."
   "Passwords don't match": "Las Contraseñas no coinciden."
   "A valid token is required": "Se requiere un token válido."
-  "The Email and/or Password you entered is invalid": "El Correo y/o la Contraseña proporcionadas no son válidas."
+  "The email and/or password you entered is invalid": "El correo y/o la contraseña proporcionadas no son válidas."
   "There are not defined applications in config/typus/*.yml": "There are not defined applications in config/typus/*.yml"
   "Overview": "Visión general"
   "Options": "Opciones"

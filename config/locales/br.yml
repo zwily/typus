@@ -12,7 +12,7 @@ br:
   "You can login with your new password": "Você já pode entrar com sua nova senha."
   "Passwords don't match": "As senhas não conferem."
   "A valid token is required": "É necessário um token válido."
-  "The Email and/or Password you entered is invalid": "O email e/ou a senha que você colocou são inválidos."
+  "The email and/or password you entered is invalid": "O email e/ou a senha que você colocou são inválidos."
   "There are not defined applications in config/typus/*.yml": "Não há aplicativos definidos em config/typus/*.yml"
   "Overview": "Visão geral"
   "Options": "Opções"
