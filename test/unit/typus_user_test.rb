@@ -20,7 +20,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
   def test_should_verify_email_format
     @typus_user.email = 'admin'
-    assert !@typus_user.valid?
+    assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:email)
   end
 
@@ -30,14 +30,14 @@ this_is_chelm@example.com
 <script>location.href="http://spammersite.com"</script>
 END
     @typus_user.email = email
-    assert !@typus_user.valid?
+    assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:email)
   end
 
   def test_should_verify_emails_are_downcase
     email = 'TEST@EXAMPLE.COM'
     @typus_user.email = email
-    assert !@typus_user.valid?
+    assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:email)
   end
 
@@ -56,7 +56,7 @@ END
     emails = [ 'test@example', 'test@example.c', 'testexample.com' ]
     emails.each do |email|
       @typus_user.email = email
-      assert !@typus_user.valid?
+      assert @typus_user.invalid?
       assert @typus_user.errors.invalid?(:email)
     end
   end
@@ -64,14 +64,14 @@ END
   def test_should_verify_email_is_unique
     @typus_user.save
     @another_typus_user = TypusUser.new(@data)
-    assert !@another_typus_user.valid?
+    assert @another_typus_user.invalid?
     assert @another_typus_user.errors.invalid?(:email)
   end
 
   def test_should_verify_length_of_password_when_under_within
     @typus_user.password = '1234'
     @typus_user.password_confirmation = '1234'
-    assert !@typus_user.valid?
+    assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:password)
   end
 
@@ -90,7 +90,7 @@ END
   def test_should_verify_length_of_password_when_its_over_within
     @typus_user.password = '=' * 50
     @typus_user.password_confirmation = '=' * 50
-    assert !@typus_user.valid?
+    assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:password)
   end
 
@@ -98,28 +98,28 @@ END
 
     @typus_user.password = '12345678'
     @typus_user.password_confirmation = '87654321'
-    assert !@typus_user.valid?
+    assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:password)
 
 =begin
 
     @typus_user.password = '12345678'
     @typus_user.password_confirmation = nil
-    assert !@typus_user.valid?
+    assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:password)
 
 =end
 
     @typus_user.password = '12345678'
     @typus_user.password_confirmation = ''
-    assert !@typus_user.valid?
+    assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:password)
 
   end
 
   def test_should_verify_roles
     @typus_user.roles = 'unexisting'
-    assert !@typus_user.valid?
+    assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:roles)
     assert_equal "has to be admin, designer or editor.", @typus_user.errors[:roles]
   end
