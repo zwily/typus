@@ -42,7 +42,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to admin_sign_in_path
     assert_nil @request.session[:typus]
     assert flash[:notice]
-    assert_equal 'Typus user or role no longer exist.', flash[:notice]
+    assert_equal 'Role does no longer exists.', flash[:notice]
   end
 
   def test_should_not_send_recovery_password_link_to_unexisting_user
@@ -87,7 +87,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_redirected_to admin_sign_in_path
 
     assert flash[:notice]
-    assert_equal "Your typus user has been disabled.", flash[:notice]
+    assert_equal "Typus user has been disabled.", flash[:notice]
     assert_nil @request.session[:typus]
 
   end

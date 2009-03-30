@@ -29,15 +29,17 @@ protected
 
     @current_user = Typus.user_class.find(session[:typus])
 
+    unless Typus.user_class.respond_to?(:role)
+      raise "Run `script/generate typus_update_schema_to_01 && rake db:migrate` to update database schema."
+    end
+
     unless Typus::Configuration.roles.keys.include?(@current_user.role)
-      raise t("Typus user or role no longer exist", 
-              :default => "Typus user or role no longer exist.")
+      raise "Role does no longer exists."
     end
 
     unless @current_user.status
       back_to = (request.env['REQUEST_URI'] == "/#{Typus::Configuration.options[:path_prefix]}") ? nil : request.env['REQUEST_URI']
-      raise t("Your typus user has been disabled", 
-              :default => "Your typus user has been disabled.")
+      raise "Typus user has been disabled."
     end
 
   rescue Exception => error
