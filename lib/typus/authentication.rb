@@ -30,7 +30,7 @@ protected
     @current_user = Typus.user_class.find(session[:typus])
 
     unless @current_user.respond_to?(:role)
-      raise "Run `script/generate -f typus_update_schema_to_01 -f && rake db:migrate` to update database schema."
+      raise "Run `script/generate typus_update_schema_to_01 -f && rake db:migrate` to update database schema."
     end
 
     unless Typus::Configuration.roles.keys.include?(@current_user.role)
@@ -46,14 +46,6 @@ protected
     flash[:notice] = error.message
     session[:typus] = nil
     redirect_to admin_sign_in_path(:back_to => back_to)
-  end
-
-  ##
-  # Password generation using numbers and letters.
-  #
-  def generate_password(length = 8)
-    chars = ('a'..'z').to_a + ('A'..'Z').to_a + ('0'..'9').to_a
-    return Array.new(length) { chars.rand }.join
   end
 
   ##

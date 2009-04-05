@@ -22,11 +22,9 @@ class RoutesTest < ActiveSupport::TestCase
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
     expected = [ :admin_typus_users, 
-                 :admin_typus_user, 
-                 :position_admin_typus_user, 
-                 :toggle_admin_typus_user ]
+                 :admin_typus_user ]
 
-    expected.each { |route| assert routes.include?(route) }
+    expected.each { |route| assert !routes.include?(route) }
 
     expected = [ :relate_admin_typus_user,
                  :unrelate_admin_typus_user ]
@@ -40,13 +38,9 @@ class RoutesTest < ActiveSupport::TestCase
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
     expected = [ :admin_posts, 
-                 :admin_post, 
-                 :position_admin_post, 
-                 :toggle_admin_post, 
-                 :relate_admin_post,
-                 :unrelate_admin_post ]
+                 :admin_post ]
 
-    expected.each { |route| assert routes.include?(route) }
+    expected.each { |route| assert !routes.include?(route) }
 
   end
 
@@ -58,7 +52,7 @@ class RoutesTest < ActiveSupport::TestCase
                  :send_as_newsletter_admin_post, 
                  :preview_admin_post ]
 
-    expected.each { |route| assert routes.include?(route) }
+    expected.each { |route| assert !routes.include?(route) }
 
   end
 
