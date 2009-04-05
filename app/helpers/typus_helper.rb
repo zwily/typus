@@ -117,12 +117,16 @@ module TypusHelper
   end
 
   def login_info(user = @current_user)
+
+    admin_edit_user_path = "/#{Typus::Configuration.options[:path_prefix]}/#{Typus::Configuration.options[:user_class_name].tableize}/#{user.id}/edit"
+
     <<-HTML
 <ul>
-  <li>#{I18n.t("Logged as", :default => "Logged as")} #{link_to user.full_name(:display_role => true), edit_admin_typus_user_path(user.id)}</li>
+  <li>#{I18n.t("Logged as", :default => "Logged as")} #{link_to user.full_name(:display_role => true), admin_edit_user_path}</li>
   <li>#{link_to I18n.t("Sign out", :default => "Sign out"), admin_sign_out_path }</li>
 </ul>
     HTML
+
   end
 
   def display_flash_message(message = flash)
