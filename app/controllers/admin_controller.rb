@@ -267,7 +267,6 @@ private
     @resource[:table_name] = resource.classify.constantize.table_name
     @resource[:class_name] = resource.classify
     @resource[:class_name_humanized] = resource.humanize.singularize
-    @resource[:controller] = params[:controller]
 
   rescue Exception => error
     error_handler(error)
