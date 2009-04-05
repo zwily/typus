@@ -31,14 +31,8 @@ ActionController::Routing::Routes.draw do |map|
       collection = {}
       m.typus_actions_for(:index).each { |a| collection[a] = :any }
 
-      # Member routes depending on fields & relationships.
+      # Member routes for edit actions
       member = {}
-
-      unless m.typus_defaults_for(:relationships).empty?
-        member[:relate] = :any
-        member[:unrelate] = :any
-      end
-
       m.typus_actions_for(:edit).each { |a| member[a] = :any }
 
       admin.resources m.tableize, :collection => collection, 
