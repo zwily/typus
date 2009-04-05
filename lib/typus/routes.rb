@@ -4,7 +4,9 @@ end
 
 ActionController::Routing::Routes.draw do |map|
 
-  map.with_options :controller => 'typus', :path_prefix => Typus::Configuration.options[:path_prefix] do |i|
+  path_prefix = Typus::Configuration.options[:path_prefix]
+
+  map.with_options :controller => 'typus', :path_prefix => path_prefix do |i|
     i.admin_quick_edit 'quick_edit', :action => 'quick_edit'
     i.admin_dashboard '', :action => 'dashboard'
     i.admin_sign_in 'sign_in', :action => 'sign_in'
@@ -17,7 +19,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :admin do |admin|
 
-    admin.with_options :path_prefix => Typus::Configuration.options[:path_prefix] do |opt|
+    admin.with_options :path_prefix => path_prefix do |opt|
 
       # Routes for tableless resources.
       Typus.resources.each do |resource|
