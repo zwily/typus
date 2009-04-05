@@ -218,7 +218,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   def test_typus_form_has_many_with_items
 
     @current_user = typus_users(:admin)
-    @resource = { :class => Post }
+    @resource = { :class => Post, :self => 'posts' }
     @item = Post.find(1)
 
     params = { :controller => 'admin/posts', :id => 1, :action => 'edit' }
@@ -232,7 +232,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 <div class="box_relationships">
   <h2>
   <a href="http://test.host/typus/comments">Comments</a>
-  <small><a href="http://test.host/typus/comments/new?resource_id=1">Add new</a></small>
+  <small><a href="http://test.host/typus/comments/new?resource=posts">Add new</a></small>
   </h2>
 <!-- a_nice_list --></div>
     HTML
@@ -244,7 +244,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
   def test_typus_form_has_many_without_items
 
     @current_user = typus_users(:admin)
-    @resource = { :class => Post }
+    @resource = { :class => Post, :self => 'posts' }
     @item = Post.find(1)
     @item.comments.destroy_all
 
@@ -257,7 +257,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 <div class="box_relationships">
   <h2>
   <a href="http://test.host/typus/comments">Comments</a>
-  <small><a href="http://test.host/typus/comments/new?resource_id=1">Add new</a></small>
+  <small><a href="http://test.host/typus/comments/new?resource=posts">Add new</a></small>
   </h2>
   <div id="flash" class="notice"><p>There are no comments.</p></div>
 </div>
