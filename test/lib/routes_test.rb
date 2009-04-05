@@ -22,9 +22,7 @@ class RoutesTest < ActiveSupport::TestCase
     routes = ActionController::Routing::Routes.named_routes.routes.keys
 
     expected = [ :admin_typus_users, 
-                 :admin_typus_user, 
-                 :position_admin_typus_user, 
-                 :toggle_admin_typus_user ]
+                 :admin_typus_user ]
 
     expected.each { |route| assert routes.include?(route) }
 
@@ -41,8 +39,6 @@ class RoutesTest < ActiveSupport::TestCase
 
     expected = [ :admin_posts, 
                  :admin_post, 
-                 :position_admin_post, 
-                 :toggle_admin_post, 
                  :relate_admin_post,
                  :unrelate_admin_post ]
 

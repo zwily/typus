@@ -27,24 +27,12 @@ ActionController::Routing::Routes.draw do |map|
 
     Typus.models.each do |m|
 
-      ##
       # Collection routes depending on defined actions.
-      #
       collection = {}
       m.typus_actions_for(:index).each { |a| collection[a] = :any }
 
-      ##
       # Member routes depending on fields & relationships.
-      #
       member = {}
-
-      # Should be only available when acts_as_tree is available on the 
-      # model.
-      member[:position] = :any
-
-      # Should be only available if model has boolean attributes which 
-      # can be toggled.
-      member[:toggle] = :any
 
       unless m.typus_defaults_for(:relationships).empty?
         member[:relate] = :any
