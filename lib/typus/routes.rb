@@ -17,14 +17,13 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :admin do |admin|
 
-    ##
-    # Generate routes for resources.
-    #
+    # Routes for tableless resources.
     Typus.resources.each do |resource|
       admin.connect "#{resource.underscore}/:action", :controller => resource.underscore, 
                                                       :path_prefix => Typus::Configuration.options[:path_prefix]
     end
 
+    # Routes for models.
     Typus.models.each do |model|
 
       # Collection routes depending on defined actions.
