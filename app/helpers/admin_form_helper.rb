@@ -212,12 +212,21 @@ module AdminFormHelper
     returning(String.new) do |html|
       model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
       model_to_relate_as_resource = model_to_relate.name.tableize
+
+      foreign_key = @resource[:class].reflections[field.to_sym].primary_key_name
+
+      link_options = { :controller => "admin/#{field}", 
+                       :action => 'new', 
+                       :back_to => @back_to, 
+                       :resource => @resource[:self], 
+                       foreign_key => @item.id }
+
       html << <<-HTML
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
   #{link_to I18n.t(field.humanize, :default => field.humanize), :controller => "admin/#{field}"}
-  <small>#{link_to I18n.t("Add new", :default => "Add new"), :controller => "admin/#{field}", :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  <small>#{link_to I18n.t("Add new", :default => "Add new"), link_options if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
       items = @resource[:class].find(params[:id]).send(field)
