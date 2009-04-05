@@ -25,17 +25,17 @@ ActionController::Routing::Routes.draw do |map|
                                                       :path_prefix => Typus::Configuration.options[:path_prefix]
     end
 
-    Typus.models.each do |m|
+    Typus.models.each do |model|
 
       # Collection routes depending on defined actions.
       collection = {}
-      m.typus_actions_for(:index).each { |a| collection[a] = :any }
+      model.typus_actions_for(:index).each { |a| collection[a] = :any }
 
       # Member routes for edit actions
       member = {}
-      m.typus_actions_for(:edit).each { |a| member[a] = :any }
+      model.typus_actions_for(:edit).each { |a| member[a] = :any }
 
-      admin.resources m.tableize, :collection => collection, 
+      admin.resources model.tableize, :collection => collection, 
                                   :member => member, 
                                   :path_prefix => Typus::Configuration.options[:path_prefix]
 
