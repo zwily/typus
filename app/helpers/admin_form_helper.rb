@@ -254,7 +254,7 @@ module AdminFormHelper
       items_to_relate = (model_to_relate.find(:all) - @item.send(field))
       unless items_to_relate.empty?
         html << <<-HTML
-  #{form_tag :action => 'relate'}
+  #{form_tag :action => 'relate', :id => @item.id}
   #{hidden_field :related, :model, :value => model_to_relate}
   <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag "Add", :class => 'button'}</p>
   </form>
