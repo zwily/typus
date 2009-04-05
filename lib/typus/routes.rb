@@ -19,28 +19,15 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :admin do |admin|
 
-    admin.with_options :path_prefix => path_prefix do |opt|
+    Typus.resources.each do |resource|
+      admin.connect "#{resource.underscore}/:action", :controller => resource.underscore, :path_prefix => path_prefix
+    end
 
-      # Routes for tableless resources.
-      Typus.resources.each do |resource|
-        opt.connect "#{resource.underscore}/:action", :controller => resource.underscore
+    Typus.models.each do |m|
+      admin.with_options(:path_prefix => path_prefix, :controller  => m.tableize) do |opt|
+        opt.connect "#{m.tableize}/:action", :requirements => { :action => /\D+/ }
+        opt.connect "#{m.tableize}/:id/:action", :action => 'show', :requirements => { :id => /\d+/ }
       end
-
-      # Routes for models.
-      Typus.models.each do |model|
-
-        # Collection routes depending on defined actions.
-        collection = {}
-        model.typus_actions_for(:index).each { |a| collection[a] = :any }
-
-        # Member routes for edit actions
-        member = {}
-        model.typus_actions_for(:edit).each { |a| member[a] = :any }
-
-        opt.resources model.tableize, :collection => collection, :member => member
-
-      end
-
     end
 
   end

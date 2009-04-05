@@ -24,7 +24,7 @@ class RoutesTest < ActiveSupport::TestCase
     expected = [ :admin_typus_users, 
                  :admin_typus_user ]
 
-    expected.each { |route| assert routes.include?(route) }
+    expected.each { |route| assert !routes.include?(route) }
 
     expected = [ :relate_admin_typus_user,
                  :unrelate_admin_typus_user ]
@@ -40,7 +40,7 @@ class RoutesTest < ActiveSupport::TestCase
     expected = [ :admin_posts, 
                  :admin_post ]
 
-    expected.each { |route| assert routes.include?(route) }
+    expected.each { |route| assert !routes.include?(route) }
 
   end
 
@@ -52,7 +52,7 @@ class RoutesTest < ActiveSupport::TestCase
                  :send_as_newsletter_admin_post, 
                  :preview_admin_post ]
 
-    expected.each { |route| assert routes.include?(route) }
+    expected.each { |route| assert !routes.include?(route) }
 
   end
 

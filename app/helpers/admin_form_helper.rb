@@ -69,7 +69,7 @@ module AdminFormHelper
       else
         html << <<-HTML
 <li><label for="item_#{attribute}">#{I18n.t(related_fk.humanize, :default => related_fk.humanize)}
-    <small>#{link_to I18n.t("Add new", :default => "Add new"), { :controller => related.class_name.tableize, :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
+    <small>#{link_to I18n.t("Add new", :default => "Add new"), { :controller => "admin/#{related.class_name.tableize}", :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
     </label>
 #{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute, klass) } }</li>
         HTML
@@ -216,8 +216,8 @@ module AdminFormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to I18n.t(field.humanize, :default => field.humanize), :controller => field}
-  <small>#{link_to I18n.t("Add new", :default => "Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  #{link_to I18n.t(field.humanize, :default => field.humanize), :controller => "admin/#{field}"}
+  <small>#{link_to I18n.t("Add new", :default => "Add new"), :controller => "admin/#{field}", :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
       items = @resource[:class].find(params[:id]).send(field)
