@@ -25,21 +25,8 @@ ActionController::Routing::Routes.draw do |map|
 
     Typus.models.each do |m|
       admin.with_options(:path_prefix => path_prefix, :controller  => m.tableize) do |opt|
-
-        # Index action with format to be able to export items in CSV & XML.
-        opt.connect m.tableize, :action => 'index', :conditions => { :method => :get }
-        opt.connect "#{m.tableize}.:format", :action => 'index', :conditions => { :method => :get }
-
-        opt.connect m.tableize, :action => 'create', :conditions => { :method => :post }
-
-        opt.connect "#{m.tableize}/:id/edit", :action => 'edit', :conditions => { :method => :get }
-        opt.connect "#{m.tableize}/:id", :action => 'update', :conditions => { :method => :put }
-        opt.connect "#{m.tableize}/:id", :action => 'destroy', :conditions => { :method => :delete }
-
-        # More actions.
         opt.connect "#{m.tableize}/:action"
         opt.connect "#{m.tableize}/:id/:action"
-
       end
     end
 
