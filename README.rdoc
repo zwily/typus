@@ -556,10 +556,11 @@ You need to have <tt>mocha</tt> installed to test the plugin.
 
     $ sudo gem install mocha
 
-Use the following steps to test the plugin.
+To test the plugin create an empty application and remove the default 
+routes on <tt>routes.rb</tt>, once the application is created install 
+the plugin and run rake.
 
-    $ rails typus_test
-    $ cd typus_test/vendor/plugins
+    $ cd YOUR_APPLICATION/vendor/plugins
     $ git clone git://github.com/fesplugas/typus.git
     $ rake
 
