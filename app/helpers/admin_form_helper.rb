@@ -47,8 +47,8 @@ module AdminFormHelper
 
     back_to = [ Typus::Configuration.options[:path_prefix], 
                 params[:controller].split('/').last, 
-                params[:id], 
-                params[:action] ]
+                params[:action], 
+                params[:id] ]
 
     back_to = "/#{back_to.compact.join('/')}"
 
@@ -190,8 +190,8 @@ module AdminFormHelper
 
     back_to = [ Typus::Configuration.options[:path_prefix], 
                 params[:controller].split('/').last, 
-                params[:id], 
-                params[:action] ]
+                params[:action], 
+                params[:id] ]
 
     @back_to = "/#{back_to.compact.join('/')}"
 

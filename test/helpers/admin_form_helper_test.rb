@@ -39,7 +39,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 
     default_url_options[:host] = 'test.host'
 
-    params = { :controller => 'admin/post', :id => 1, :action => :create }
+    params = { :controller => 'admin/post', :id => 1, :action => :edit }
     self.expects(:params).at_least_once.returns(params)
 
     @current_user = mock()
@@ -47,7 +47,7 @@ class AdminFormHelperTest < ActiveSupport::TestCase
 
     expected = <<-HTML
 <li><label for="item_favorite_comment">Favorite comment
-    <small><a href="http://test.host/typus/comments/new?back_to=%2Ftypus%2Fpost%2F1%2Fcreate&selected=favorite_comment_id" onclick="return confirm('Are you sure you want to leave this page?\\n\\nIf you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost.\\n\\nClick OK to continue, or click Cancel to stay on this page.');">Add new</a></small>
+    <small><a href="http://test.host/typus/comments/new?back_to=%2Ftypus%2Fpost%2Fedit%2F1&selected=favorite_comment_id" onclick="return confirm('Are you sure you want to leave this page?\\n\\nIf you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost.\\n\\nClick OK to continue, or click Cancel to stay on this page.');">Add new</a></small>
     </label>
 <select id="item_favorite_comment_id" name="item[favorite_comment_id]"><option value=""></option>
 <option value="1">John</option>

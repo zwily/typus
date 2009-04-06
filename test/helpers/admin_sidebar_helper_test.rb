@@ -84,7 +84,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     self.expects(:params).at_least_once.returns(params)
 
     output = non_crud_actions
-    expected = [ "<a href=\"http://test.host/typus/pages/1/rebuild\">Rebuild</a>" ]
+    expected = [ "<a href=\"http://test.host/typus/pages/rebuild/1\">Rebuild</a>" ]
     assert output.kind_of?(Array)
     assert_equal expected, output
 
@@ -136,7 +136,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     @previous, @next = typus_user.previous_and_next
 
     output = previous_and_next
-    expected = [ "<a href=\"http://test.host/typus/typus_users/#{@next.id}/edit\">Next</a>" ]
+    expected = [ "<a href=\"http://test.host/typus/typus_users/edit/#{@next.id}\">Next</a>" ]
     assert_equal expected, output
 
     # Test when we are on the last item.
@@ -145,7 +145,7 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     @previous, @next = typus_user.previous_and_next
 
     output = previous_and_next
-    expected = [ "<a href=\"http://test.host/typus/typus_users/#{@previous.id}/edit\">Previous</a>" ]
+    expected = [ "<a href=\"http://test.host/typus/typus_users/edit/#{@previous.id}\">Previous</a>" ]
     assert_equal expected, output
 
     # Test when we are on the middle.
@@ -154,8 +154,8 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     @previous, @next = typus_user.previous_and_next
 
     output = previous_and_next
-    expected = [ "<a href=\"http://test.host/typus/typus_users/#{@next.id}/edit\">Next</a>", 
-                 "<a href=\"http://test.host/typus/typus_users/#{@previous.id}/edit\">Previous</a>" ]
+    expected = [ "<a href=\"http://test.host/typus/typus_users/edit/#{@next.id}\">Next</a>", 
+                 "<a href=\"http://test.host/typus/typus_users/edit/#{@previous.id}\">Previous</a>" ]
     assert_equal expected, output
 
   end

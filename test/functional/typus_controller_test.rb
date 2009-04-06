@@ -236,7 +236,7 @@ class TypusControllerTest < ActionController::TestCase
     get :dashboard
     assert_response :success
 
-    assert_match "href=\"\/typus\/typus_users\/#{typus_user.id}\/edit\"", @response.body
+    assert_match "href=\"\/typus\/typus_users\/edit\/#{typus_user.id}\"", @response.body
 
     assert_select 'body div#header' do
       assert_select 'a', 'Admin Example (admin)'

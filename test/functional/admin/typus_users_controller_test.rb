@@ -106,7 +106,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     typus_user = typus_users(:editor)
     @request.session[:typus] = typus_user.id
-    @request.env['HTTP_REFERER'] = "/typus/typus_users/#{typus_user.id}/edit"
+    @request.env['HTTP_REFERER'] = "/typus/typus_users/edit/#{typus_user.id}"
     get :edit, { :id => typus_user.id }
 
     assert_response :success

@@ -24,8 +24,10 @@ ActionController::Routing::Routes.draw do |map|
       end
 
       Typus.models.each do |model|
-        i.connect "#{model.tableize}/:action", :controller => model.tableize
-        i.connect "#{model.tableize}/:id/:action", :controller => model.tableize
+        # i.connect "#{model.tableize}/:action", :controller => model.tableize
+        # i.connect "#{model.tableize}/:id/:action", :controller => model.tableize
+        i.connect "#{model.tableize}/:action/:id", :controller => model.tableize
+        i.connect "#{model.tableize}/:action/:id.:format", :controller => model.tableize
       end
 
     end

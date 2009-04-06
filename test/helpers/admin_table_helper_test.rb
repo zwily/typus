@@ -46,7 +46,7 @@ class AdminTableHelperTest < ActiveSupport::TestCase
     comment = comments(:with_post_id)
     output = typus_table_belongs_to_field('post', comment)
     expected = <<-HTML
-<td><a href="http://test.host/typus/posts/1/edit">Post#1</a></td>
+<td><a href="http://test.host/typus/posts/edit/1">Post#1</a></td>
     HTML
 
     assert_equal expected, output
@@ -83,7 +83,7 @@ class AdminTableHelperTest < ActiveSupport::TestCase
     post = posts(:published)
     output = typus_table_string_field(:title, post, :title)
     expected = <<-HTML
-<td><a href="http://test.host/typus/posts/#{post.id}/edit">#{post.title}</a></td>
+<td><a href="http://test.host/typus/posts/edit/#{post.id}">#{post.title}</a></td>
     HTML
 
     assert_equal expected, output
@@ -147,7 +147,7 @@ class AdminTableHelperTest < ActiveSupport::TestCase
 
     output = typus_table_datetime_field(:created_at, post, :created_at)
     expected = <<-HTML
-<td><a href="http://test.host/typus/posts/#{post.id}/edit">11/07</a></td>
+<td><a href="http://test.host/typus/posts/edit/#{post.id}">11/07</a></td>
     HTML
 
     assert_equal expected, output
