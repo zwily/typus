@@ -1,8 +1,5 @@
 module Admin::PublicHelper
 
-  ##
-  #
-  #
   def quick_edit(*args)
 
     options = args.extract_options!
