@@ -1,4 +1,4 @@
-module AdminFormHelper
+module Admin::FormHelper
 
   ##
   # All helpers related to form.

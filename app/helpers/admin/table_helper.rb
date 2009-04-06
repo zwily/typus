@@ -1,4 +1,4 @@
-module AdminTableHelper
+module Admin::TableHelper
 
   ##
   # All helpers related to table.

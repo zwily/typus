@@ -1,4 +1,4 @@
-module AdminPublicHelper
+module Admin::PublicHelper
 
   ##
   #

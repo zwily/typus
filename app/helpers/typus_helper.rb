@@ -68,7 +68,7 @@ module TypusHelper
 
         html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to I18n.t(resource.humanize, :default => resource.humanize), "#{Typus::Configuration.options[:path_prefix]}/#{resource.underscore}"}</td>
+<td>#{link_to I18n.t(resource.humanize, :default => resource.humanize), "/#{Typus::Configuration.options[:path_prefix]}/#{resource.underscore}"}</td>
 <td align="right" style="vertical-align: bottom;"></td>
 </tr>
         HTML

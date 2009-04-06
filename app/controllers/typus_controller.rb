@@ -32,6 +32,10 @@ class TypusController < ApplicationController
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
 
+  def index
+    redirect_to :action => dashboard
+  end
+
   ##
   # Application Dashboard
   #
