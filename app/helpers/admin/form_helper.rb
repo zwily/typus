@@ -45,11 +45,7 @@ module Admin::FormHelper
     #
     params[:action] = (params[:action] == 'create') ? 'new' : params[:action]
 
-    back_to = [ Typus::Configuration.options[:path_prefix], 
-                params[:controller].split('/').last, 
-                params[:action], 
-                params[:id] ]
-
+    back_to = [ params[:controller], params[:action], params[:id] ]
     back_to = "/#{back_to.compact.join('/')}"
 
     related = klass.reflect_on_association(attribute.to_sym).class_name.constantize
@@ -188,8 +184,7 @@ module Admin::FormHelper
 
   def typus_relationships
 
-    back_to = [ Typus::Configuration.options[:path_prefix], 
-                params[:controller].split('/').last, 
+    back_to = [ params[:controller], 
                 params[:action], 
                 params[:id] ]
 

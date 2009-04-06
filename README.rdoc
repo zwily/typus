@@ -71,9 +71,7 @@ You can overwrite the following settings.
     Typus::Configuration.options[:app_name]
     Typus::Configuration.options[:config_folder]
     Typus::Configuration.options[:email]
-    Typus::Configuration.options[:ignore_missing_translations]
     Typus::Configuration.options[:locales]
-    Typus::Configuration.options[:path_prefix]
     Typus::Configuration.options[:recover_password]
     Typus::Configuration.options[:root]
     Typus::Configuration.options[:ssl]
@@ -149,22 +147,6 @@ Remember to install the <tt>ssl_requirement</tt> plugin to be able to
 use this feature.
 
     $ rake typus:ssl
-
-=== Special Route
-
-To overwrite default <tt>prefix_path</tt> of your application place the 
-following configuration option on <tt>development.rb</tt>, <tt>production.rb</tt> 
-on the <tt>config/environments</tt> folder.
-
-    Typus::Configuration.options[:path_prefix] = 'backoffice'
-
-=== View Missing Translations
-
-If you are a developer who wants to translate Typus, add the following 
-setting on <tt>development.rb</tt> on the <tt>config/environments</tt> 
-folder so all missing translations messages will be shown.
-
-    Typus::Configuration.options[:ignore_missing_translations] = false
 
 === Disable password recover
 
