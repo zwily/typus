@@ -1,9 +1,5 @@
 module Admin::FormHelper
 
-  ##
-  # All helpers related to form.
-  #
-
   def build_form(fields)
 
     options = { :start_year => @resource[:class].typus_options_for(:start_year), 
