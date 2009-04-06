@@ -19,15 +19,17 @@ ActionController::Routing::Routes.draw do |map|
 
   map.namespace :admin do |admin|
 
-    Typus.resources.each do |resource|
-      admin.connect "#{resource.underscore}/:action", :controller => resource.underscore, :path_prefix => path_prefix
-    end
+    admin.with_options :path_prefix => path_prefix do |i|
 
-    Typus.models.each do |m|
-      admin.with_options(:path_prefix => path_prefix, :controller  => m.tableize) do |opt|
-        opt.connect "#{m.tableize}/:action"
-        opt.connect "#{m.tableize}/:id/:action"
+      Typus.resources.each do |resource|
+        i.connect "#{resource.underscore}/:action", :controller => resource.underscore
       end
+
+      Typus.models.each do |model|
+        i.connect "#{model.tableize}/:action", :controller => model.tableize
+        i.connect "#{model.tableize}/:id/:action", :controller => model.tableize
+      end
+
     end
 
   end
