@@ -130,7 +130,12 @@ class Admin::MasterController < ApplicationController
   #
   def show
     @previous, @next = @item.previous_and_next
-    select_template :show
+
+    respond_to do |format|
+      format.html { select_template :show }
+      format.xml  { render :xml => @item }
+    end
+
   end
 
   ##
