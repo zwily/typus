@@ -580,6 +580,19 @@ Include the helper on your views.
                    :id => @page.id, 
                    :message => 'Edit this page' %>
 
+== Exporting data in CSV and XML
+
+Typus allows export data on CSV and XML. In order to be able to use it 
+make sure you have the following routes at the end of your <tt>routes.rb</tt>.
+
+    map.connect ':controller.:format'
+    map.connect ':controller/:action/:id.:format'
+
+Want to export a CSV or XML list of TypusUsers.
+
+    http://example.com/admin/typus_users.csv
+    http://example.com/admin/typus_users.xml
+
 == What is coming to Typus?
 
 There's no a date for this new features, but are things which I'd like 
