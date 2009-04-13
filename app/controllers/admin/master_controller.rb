@@ -3,7 +3,7 @@ class Admin::MasterController < ApplicationController
   layout 'admin'
 
   include Authentication
-  include Typus::Export
+  include Typus::Format
   include Typus::Configuration::Reloader
   include Typus::Locale
 
@@ -37,30 +37,12 @@ class Admin::MasterController < ApplicationController
   #
   def index
 
-    # Build the conditions
-    conditions, joins = @resource[:class].build_conditions(params)
+    @conditions, @joins = @resource[:class].build_conditions(params)
 
-    # Pagination
-    items_count = @resource[:class].count(:joins => joins, :conditions => conditions)
-    items_per_page = @resource[:class].typus_options_for(:per_page).to_i
-    @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
-      @resource[:class].find(:all, 
-                             :joins => joins, 
-                             :conditions => conditions, 
-                             :order => @order, 
-                             :limit => per_page, 
-                             :offset => offset)
-    end
-
-    @items = @pager.page(params[:page])
-
-    # Respond with HTML, CSV and XML versions. This feature is only 
-    # available on the index as is where we usually need those file 
-    # versions.
     respond_to do |format|
-      format.html { select_template :index }
-      format.csv { generate_csv }
-      format.xml  { render :xml => @items.items }
+      format.html { generate_html }
+      format.csv  { generate_csv }
+      format.xml  { generate_xml }
     end
 
   rescue Exception => error
