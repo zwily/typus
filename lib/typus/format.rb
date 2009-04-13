@@ -41,7 +41,8 @@ module Typus
     end
 
     def generate_xml
-      render :xml => data
+      fields = @resource[:class].typus_fields_for(:xml).collect { |i| i.first }
+      render :xml => data.to_xml(:only => fields)
     end
 
     def data(*args)
