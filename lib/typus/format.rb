@@ -10,13 +10,7 @@ module Typus
       items_per_page = @resource[:class].typus_options_for(:per_page).to_i
 
       @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
-
-        @resource[:class].find(:all, 
-                               :joins => @joins, 
-                               :conditions => @conditions, 
-                               :order => @order, 
-                               :limit => per_page, 
-                               :offset => offset)
+        data(:limit => per_page, :offset => offset)
       end
 
       @items = @pager.page(params[:page])
@@ -29,12 +23,10 @@ module Typus
 
       require 'fastercsv'
 
-      @items = @resource[:class].find(:all, :joins => @joins, :conditions => @conditions, :order => @order)
-
       fields = @resource[:class].typus_fields_for(:csv).collect { |i| i.first }
       csv_string = FasterCSV.generate do |csv|
         csv << fields
-        @items.each do |item|
+        data.each do |item|
           csv << fields.map { |f| item.send(f) }
         end
       end
@@ -49,8 +41,13 @@ module Typus
     end
 
     def generate_xml
-      @items = @resource[:class].find(:all, :joins => @joins, :conditions => @conditions, :order => @order)
-      render :xml => @items
+      render :xml => data
+    end
+
+    def data(*args)
+      options = { :joins => @joins, :conditions => @conditions, :order => @order }
+      options.merge!(args.extract_options!)
+      @resource[:class].find(:all, options)
     end
 
   end
