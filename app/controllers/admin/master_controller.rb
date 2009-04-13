@@ -3,6 +3,7 @@ class Admin::MasterController < ApplicationController
   layout 'admin'
 
   include Authentication
+  include Typus::Export
   include Typus::Configuration::Reloader
   include Typus::Locale
 
@@ -53,7 +54,14 @@ class Admin::MasterController < ApplicationController
 
     @items = @pager.page(params[:page])
 
-    select_template :index
+    # Respond with HTML, CSV and XML versions. This feature is only 
+    # available on the index as is where we usually need those file 
+    # versions.
+    respond_to do |format|
+      format.html { select_template :index }
+      format.csv { generate_csv }
+      format.xml  { render :xml => @items.items }
+    end
 
   rescue Exception => error
     error_handler(error)
