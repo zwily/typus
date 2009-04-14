@@ -90,6 +90,25 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
 
   end
 
+  def test_export
+
+    @resource = { :class => 'User' }
+
+    params = { :action => 'index' }
+    self.expects(:params).at_least_once.returns(params)
+
+    output = export
+    expected = <<-HTML
+<h2>Export</h2>
+<ul>
+<li><a href="/admin/users.csv">CSV</li>
+</ul>
+    HTML
+
+    assert_equal expected, output
+
+  end
+
   def test_build_typus_list
 
     output = build_typus_list([], header = nil)

@@ -41,8 +41,9 @@ class Admin::MasterController < ApplicationController
 
     respond_to do |format|
       format.html { generate_html }
-      format.csv  { generate_csv }
-      format.xml  { generate_xml }
+      @resource[:class].typus_export_formats.each do |f|
+        format.send(f) { send("generate_#{f}") }
+      end
     end
 
   rescue Exception => error

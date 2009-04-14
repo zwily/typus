@@ -61,3 +61,5 @@ Post:
 User:
   fields:
     list: first_name, last_name, email
+    csv: first_name, last_name, email
+  export: csv
