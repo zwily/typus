@@ -9,7 +9,9 @@ module Admin::SidebarHelper
 #{build_typus_list(previous_and_next, 'go_to')}
       HTML
 
-      html << build_typus_list(export, 'export')
+      html << <<-HTML
+#{build_typus_list(export, 'export')}
+      HTML
 
       %w( parent_module submodules ).each do |block|
         html << <<-HTML
@@ -57,7 +59,7 @@ module Admin::SidebarHelper
     return [] unless params[:action] == 'index'
     returning(Array.new) do |format|
       @resource[:class].typus_export_formats.each do |f|
-        format << (link_to f.upcase, :format => f)
+        format << (link_to f.upcase, params.merge(:format => f))
       end
     end
   end
