@@ -31,7 +31,7 @@ module Typus
         end
       end
 
-      filename = "#{Time.now.strftime("%Y%m%d")}_#{@resource[:self]}.csv"
+      filename = "#{Time.now.strftime("%Y%m%d%H%M%S")}_#{@resource[:self]}.csv"
       send_data(csv_string,
                :type => 'text/csv; charset=utf-8; header=present',
                :filename => filename)
