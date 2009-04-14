@@ -120,9 +120,10 @@ module Typus
       # Mixins
       require 'typus/authentication'
       require 'typus/format'
-      require 'typus/locale'
-      require 'typus/user'
       require 'typus/generator'
+      require 'typus/locale'
+      require 'typus/quick_edit'
+      require 'typus/user'
 
       # Vendor
       require 'vendor/active_record'
