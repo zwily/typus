@@ -617,6 +617,10 @@ to see in Typus in the near future.
 - George Guimarães (Translation to Brazilian Portuguese and code) http://github.com/georgeguimaraes
 - José Valim (Code) http://github.com/josevalim
 
+== Acknowledgments
+
+- Typus uses "Paginator" by Bruce Williams http://codefluency.com
+
 == Author, contact, bugs, mailing list and more
 
 - You can recommend me on http://workingwithrails.com/person/5061-francesc-esplugas
