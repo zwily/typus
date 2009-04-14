@@ -46,7 +46,7 @@ class TypusController < ApplicationController
 
     if request.post?
       if user = Typus.user_class.authenticate(params[:user][:email], params[:user][:password])
-        session[:typus] = user.id
+        session[:typus_user_id] = user.id
         redirect_to params[:back_to] || admin_dashboard_path
       else
         flash[:error] = t("The email and/or password you entered is invalid", 
@@ -58,7 +58,7 @@ class TypusController < ApplicationController
   end
 
   def sign_out
-    session[:typus] = nil
+    session[:typus_user_id] = nil
     redirect_to admin_sign_in_path
   end
 
@@ -104,7 +104,7 @@ class TypusController < ApplicationController
       user = Typus.user_class.generate(email, password)
 
       if user.save
-        session[:typus] = user.id
+        session[:typus_user_id] = user.id
         flash[:notice] = t("Password set to \"{{password}}\"", 
                            :default => "Password set to \"{{password}}\".", 
                            :password => password)
@@ -125,7 +125,7 @@ class TypusController < ApplicationController
 
   def quick_edit
 
-    render :text => '' and return unless session[:typus]
+    render :text => '' and return unless session[:typus_user_id]
 
     url = url_for :controller => "admin/#{params[:resource]}", 
                   :action => 'edit', 

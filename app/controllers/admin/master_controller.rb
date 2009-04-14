@@ -75,7 +75,7 @@ class Admin::MasterController < ApplicationController
     @item = @resource[:class].new(params[:item])
 
     if @item.attributes.include?(Typus.user_fk)
-      @item.attributes = { Typus.user_fk => session[:typus] }
+      @item.attributes = { Typus.user_fk => session[:typus_user_id] }
     end
 
     if @item.valid?
@@ -283,7 +283,7 @@ private
     return unless @item.respond_to?(Typus.user_fk)
 
     # If the record is owned by the user ...
-    unless @item.send(Typus.user_fk) == session[:typus]
+    unless @item.send(Typus.user_fk) == session[:typus_user_id]
       flash[:notice] = t("Record owned by another user", 
                          :default => "Record owned by another user.")
       redirect_to :action => 'show', :id => @item.id

@@ -9,10 +9,10 @@ protected
   #
   # Use this for demo!
   #
-  #     session[:typus] = Typus.user_class.find(:first)
+  #     session[:typus_user_id] = Typus.user_class.find(:first)
   #
   def require_login
-    if session[:typus]
+    if session[:typus_user_id]
       set_current_user
     else
       back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
@@ -27,7 +27,7 @@ protected
   #
   def set_current_user
 
-    @current_user = Typus.user_class.find(session[:typus])
+    @current_user = Typus.user_class.find(session[:typus_user_id])
 
     unless @current_user.respond_to?(:role)
       raise "Run `script/generate typus_update_schema_to_01 -f && rake db:migrate` to update database schema."
@@ -44,7 +44,7 @@ protected
 
   rescue Exception => error
     flash[:notice] = error.message
-    session[:typus] = nil
+    session[:typus_user_id] = nil
     redirect_to admin_sign_in_path(:back_to => back_to)
   end
 
