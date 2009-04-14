@@ -122,6 +122,7 @@ module Typus
       require 'typus/format'
       require 'typus/generator'
       require 'typus/locale'
+      require 'typus/reloader'
       require 'typus/quick_edit'
       require 'typus/user'
 

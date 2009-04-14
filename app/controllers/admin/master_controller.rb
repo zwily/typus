@@ -4,8 +4,8 @@ class Admin::MasterController < ApplicationController
 
   include Typus::Authentication
   include Typus::Format
-  include Typus::Configuration::Reloader
   include Typus::Locale
+  include Typus::Reloader
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement

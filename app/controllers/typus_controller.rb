@@ -3,9 +3,9 @@ class TypusController < ApplicationController
   layout :select_layout
 
   include Typus::Authentication
-  include Typus::Configuration::Reloader
   include Typus::Locale
   include Typus::QuickEdit
+  include Typus::Reloader
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
