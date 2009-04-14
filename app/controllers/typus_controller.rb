@@ -2,7 +2,7 @@ class TypusController < ApplicationController
 
   layout :select_layout
 
-  include Authentication
+  include Typus::Authentication
   include Typus::Configuration::Reloader
   include Typus::Locale
 

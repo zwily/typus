@@ -2,7 +2,7 @@ class Admin::MasterController < ApplicationController
 
   layout 'admin'
 
-  include Authentication
+  include Typus::Authentication
   include Typus::Format
   include Typus::Configuration::Reloader
   include Typus::Locale
