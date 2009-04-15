@@ -11,17 +11,17 @@ You can see some screenshots[http://intraducibles.com/projects/typus].
 
 == Support Typus
 
-1. *Typus* is licensed under the MIT license. As an experiment we 
+*Typus* is licensed under the MIT license. As an experiment we 
 encourage you to support this project by donating[http://intraducibles.com/donate] 
 90 euros if you are a developer or studio. Donations do allow us to spend more 
 time working and supporting the project. All contributions are much appreciated!
 
-2. Hire us to work on your next project. We build large and small websites.
+Hire us to work on your next project. We build large and small websites.
 
-3. Contribute your patches to the community & support people on the 
+Contribute your patches to the community & support people on the 
 mailing list.
 
-4. Tell everybody about Typus, tell your friends and colleagues about 
+Tell everybody about Typus, tell your friends and colleagues about 
 Typus and blog about Typus.
 
 == Quick demo in 3 steps
