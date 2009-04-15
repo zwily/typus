@@ -7,12 +7,12 @@
 *Typus* doesn't try to be all the things to all the people but it's 
 extensible enough to match lots of use cases.
 
-You can see some screenshots on the wiki[http://github.com/fesplugas/typus/wikis].
+You can see some screenshots[http://intraducibles.com/projects/typus].
 
 == Support Typus
 
 1. *Typus* is licensed under the MIT license. As an experiment we 
-encourage you to support this project by donating[http://morninglabs.com/donate] 
+encourage you to support this project by donating[http://intraducibles.com/donate] 
 90 euros if you are a developer or studio. Donations do allow us to spend more 
 time working and supporting the project. All contributions are much appreciated!
 
@@ -658,11 +658,10 @@ to see in Typus in the near future.
 
 == Author, contact, bugs, mailing list and more
 
-- You can recommend me on http://workingwithrails.com/person/5061-francesc-esplugas
-- Browse source on GitHub http://github.com/fesplugas/typus/tree/master
-- Visit the wiki http://github.com/fesplugas/typus/wikis
+- Project site http://intraducibles.com/projects/typus
+- Source http://github.com/fesplugas/typus
 - Google Group http://groups.google.es/group/typus
-- Report bugs http://github.com/fesplugas/typus/wikis/bugs
+- Bugs http://github.com/fesplugas/typus/wikis/bugs
 
 Copyright (c) 2007-2009 Francesc Esplugas Marti, released under the 
 MIT license
