@@ -1,6 +1,6 @@
 = Typus: Effortless admin interface for your Rails application
 
-As Django Admin, *Typus* is designed for a single activity:
+*Typus* is designed for a single activity:
 
     Trusted users editing structured content.
 
@@ -638,7 +638,8 @@ to see in Typus in the near future.
 
 == Acknowledgments
 
-- Typus uses "Paginator" by Bruce Williams http://codefluency.com
+- *Typus* uses "Paginator" by Bruce Williams http://codefluency.com.
+- *Typus* has been inspired by "Django Admin" http://www.djangoproject.com.
 
 == Author, contact, bugs, mailing list and more
 
