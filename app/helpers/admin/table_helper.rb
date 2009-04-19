@@ -59,10 +59,13 @@ module Admin::TableHelper
                                                                           :unrelate_model_from => @resource[:class_name])
         end
 
+        html << <<-HTML
+<td width="10px">#{perform}</td>
+        HTML
+
       end
 
       html << <<-HTML
-<td width="10px">#{perform}</td>
 </tr>
       HTML
 
@@ -98,7 +101,7 @@ module Admin::TableHelper
         headers << "<th>#{content}</th>"
 
       end
-      headers << "<th>&nbsp;</th>"
+      headers << "<th>&nbsp;</th>" if @current_user.can_perform?(model, 'delete')
       html << <<-HTML
 <tr>
 #{headers.join("\n")}
