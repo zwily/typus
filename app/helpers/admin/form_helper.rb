@@ -179,7 +179,7 @@ module Admin::FormHelper
 
   def typus_relationships
 
-    @back_to = '/' + [ params[:controller], params[:action], params[:id] ].controller.join('/')
+    @back_to = '/' + [ params[:controller], params[:action], params[:id] ].compact.join('/')
 
     returning(String.new) do |html|
       @item_relationships.each do |relationship|
