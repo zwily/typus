@@ -41,8 +41,7 @@ module Admin::FormHelper
     #
     params[:action] = (params[:action] == 'create') ? 'new' : params[:action]
 
-    back_to = [ params[:controller], params[:action], params[:id] ]
-    back_to = "/#{back_to.compact.join('/')}"
+    back_to = '/' + [ params[:controller], params[:action], params[:id] ].compact.join('/')
 
     related = klass.reflect_on_association(attribute.to_sym).class_name.constantize
     related_fk = klass.reflect_on_association(attribute.to_sym).primary_key_name
@@ -180,11 +179,7 @@ module Admin::FormHelper
 
   def typus_relationships
 
-    back_to = [ params[:controller], 
-                params[:action], 
-                params[:id] ]
-
-    @back_to = "/#{back_to.compact.join('/')}"
+    @back_to = '/' + [ params[:controller], params[:action], params[:id] ].controller.join('/')
 
     returning(String.new) do |html|
       @item_relationships.each do |relationship|
