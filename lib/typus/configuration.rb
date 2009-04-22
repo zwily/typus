@@ -80,6 +80,7 @@ module Typus
           end
         end
       end
+
       return @@roles.compact
 
     end
