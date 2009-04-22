@@ -185,9 +185,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_table_position_field
-
 =begin
+
+  # FIXME
+
+  def test_typus_table_position_field
 
     category = categories(:first)
     output = typus_table_position_field('position', category)
@@ -195,9 +197,9 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
     assert_equal expected, output
 
-=end
-
   end
+
+=end
 
   def test_typus_table_datetime_field
 

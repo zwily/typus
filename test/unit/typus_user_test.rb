@@ -103,6 +103,8 @@ END
 
 =begin
 
+    # FIXME
+
     @typus_user.password = '12345678'
     @typus_user.password_confirmation = nil
     assert @typus_user.invalid?

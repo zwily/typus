@@ -38,6 +38,8 @@ class TypusTest < ActiveSupport::TestCase
 
 =begin
 
+  # FIXME
+
   def test_should_verify_parent_for_module
     assert Typus.parent(TypusUser.name, 'module').kind_of?(String)
     assert_equal 'Typus', Typus.parent(TypusUser.name, 'module')

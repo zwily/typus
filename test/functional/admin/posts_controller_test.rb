@@ -216,6 +216,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
 =begin
 
+  # FIXME
+
   def test_should_add_back_to_params_for_comment_items
 
     post_ = posts(:published)
