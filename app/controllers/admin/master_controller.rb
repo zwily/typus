@@ -51,7 +51,7 @@ class Admin::MasterController < ApplicationController
   end
 
   ##
-  # New record.
+  # New item.
   #
   def new
 
@@ -67,9 +67,9 @@ class Admin::MasterController < ApplicationController
   end
 
   ##
-  # Create new records. There's an special case when we create a 
-  # record from another record. In this case, after the record is 
-  # created we create also the relationship between these models. 
+  # Create new items. There's an special case when we create an 
+  # item from another item. In this case, after the item is 
+  # created we also create the relationship between these items. 
   #
   def create
 
@@ -97,7 +97,7 @@ class Admin::MasterController < ApplicationController
   end
 
   ##
-  # Edit a record.
+  # Edit an item.
   #
   def edit
     item_params = params.dup
@@ -109,7 +109,7 @@ class Admin::MasterController < ApplicationController
   end
 
   ##
-  # Show a record.
+  # Show an item.
   #
   def show
     @previous, @next = @item.previous_and_next
@@ -122,7 +122,7 @@ class Admin::MasterController < ApplicationController
   end
 
   ##
-  # Update a record.
+  # Update an item.
   #
   def update
     if @item.update_attributes(params[:item])
@@ -145,7 +145,7 @@ class Admin::MasterController < ApplicationController
   end
 
   ##
-  # Destroy a record.
+  # Destroy an item.
   #
   def destroy
     @item.destroy
@@ -269,8 +269,8 @@ private
   end
 
   ##
-  # If the record is owned by another user, we only can perform a 
-  # show action on the record. Updated record is also blocked.
+  # If item is owned by another user, we only can perform a 
+  # show action on the item. Updated item is also blocked.
   #
   #   before_filter :check_ownership_of_record, :only => [ :edit, :update, :destroy ]
   #
@@ -283,7 +283,7 @@ private
     # current_user, by-pass.
     return unless @item.respond_to?(Typus.user_fk)
 
-    # If the record is owned by the user ...
+    # If item is owned by the user ...
     unless @item.send(Typus.user_fk) == session[:typus_user_id]
       flash[:notice] = t("Record owned by another user", 
                          :default => "Record owned by another user.")
