@@ -23,7 +23,7 @@ class Admin::MasterController < ApplicationController
   before_filter :set_resource
   before_filter :find_item, :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
-  before_filter :check_ownership_of_record, :only => [ :edit, :update, :toggle, :position, :relate, :unrelate, :destroy ]
+  before_filter :check_ownership_of_item, :only => [ :edit, :update, :toggle, :position, :relate, :unrelate, :destroy ]
 
   before_filter :check_if_user_can_perform_action_on_user, :only => [ :edit, :update, :toggle, :destroy ]
   before_filter :check_if_user_can_perform_action_on_resource
@@ -272,9 +272,9 @@ private
   # If item is owned by another user, we only can perform a 
   # show action on the item. Updated item is also blocked.
   #
-  #   before_filter :check_ownership_of_record, :only => [ :edit, :update, :destroy ]
+  #   before_filter :check_ownership_of_item, :only => [ :edit, :update, :destroy ]
   #
-  def check_ownership_of_record
+  def check_ownership_of_item
 
     # If current_user is a root user, by-pass.
     return if @current_user.is_root?
