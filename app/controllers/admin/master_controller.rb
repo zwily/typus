@@ -179,9 +179,9 @@ class Admin::MasterController < ApplicationController
   # installed. We can then move items:
   #
   #   params[:go] = 'move_to_top'
-  #   params[:go] = 'move_higher'
-  #   params[:go] = 'move_lower'
-  #   params[:go] = 'move_to_bottom'
+  #
+  # Available positions are move_to_top, move_higher, move_lower, 
+  # move_to_bottom.
   #
   def position
     @item.send(params[:go])
