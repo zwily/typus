@@ -23,9 +23,10 @@ module Typus
     end
 
     ##
-    # Return the current user. The important thing here is that if the 
-    # roles does not longer exist on the system the user will be logged 
-    # off from Typus.
+    # Return the current user.
+    #
+    # NOTE: If role does not longer exist on the system the user will 
+    #       be signed out from Typus.
     #
     def set_current_user
 
