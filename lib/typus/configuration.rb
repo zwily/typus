@@ -8,7 +8,6 @@ module Typus
     typus_options = { :app_name => 'Typus', 
                       :config_folder => 'config/typus', 
                       :email => 'admin@example.com', 
-                      :ignore_missing_translations => true, 
                       :locales => [ [ "English", :en ] ], 
                       :recover_password => false, 
                       :root => 'admin', 
