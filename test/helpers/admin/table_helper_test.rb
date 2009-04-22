@@ -3,6 +3,7 @@ require 'test/helper'
 class Admin::TableHelperTest < ActiveSupport::TestCase
 
   include Admin::TableHelper
+
   include ActionView::Helpers::UrlHelper
   include ActionController::UrlWriter
 
