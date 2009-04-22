@@ -1,8 +1,9 @@
 require 'test/helper'
 
-class AdminFormHelperTest < ActiveSupport::TestCase
+class Admin::FormHelperTest < ActiveSupport::TestCase
 
   include Admin::FormHelper
+
   include ActionView::Helpers::FormHelper
   include ActionView::Helpers::FormOptionsHelper
   include ActionView::Helpers::DateHelper

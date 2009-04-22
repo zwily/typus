@@ -1,6 +1,6 @@
 require 'test/helper'
 
-class AdminTableHelperTest < ActiveSupport::TestCase
+class Admin::TableHelperTest < ActiveSupport::TestCase
 
   include Admin::TableHelper
   include ActionView::Helpers::UrlHelper
