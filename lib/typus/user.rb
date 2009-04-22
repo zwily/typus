@@ -88,7 +88,7 @@ module Typus
                     end
         end
 
-        # OPTIMIZE
+        # OPTIMIZE: We should not use a rescue.
         resources[resource.to_s].split(', ').include?(_action) rescue false
 
       end
