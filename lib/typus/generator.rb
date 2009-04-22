@@ -2,7 +2,7 @@ module Typus
 
   def self.generator
 
-    logger = Logger.new("#{RAILS_ROOT}/log/#{Rails.env}.log")
+    logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log")
 
     # Create app/controllers/admin if doesn't exist.
     admin_controllers_folder = "#{Rails.root}/app/controllers/admin"
