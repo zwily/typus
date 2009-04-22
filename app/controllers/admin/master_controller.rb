@@ -21,7 +21,7 @@ class Admin::MasterController < ApplicationController
   before_filter :set_locale
 
   before_filter :set_resource
-  before_filter :find_record, :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
+  before_filter :find_item, :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
   before_filter :check_ownership_of_record, :only => [ :edit, :update, :toggle, :position, :relate, :unrelate, :destroy ]
 
@@ -264,7 +264,7 @@ private
   # Find model when performing an edit, update, destroy, relate, 
   # unrelate ...
   #
-  def find_record
+  def find_item
     @item = @resource[:class].find(params[:id])
   end
 
