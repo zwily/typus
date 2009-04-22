@@ -6,7 +6,7 @@ module Typus
 
     ##
     # Require login checks if the user is logged on Typus, otherwise 
-    # is sent to the login page with a :back_to param to return where 
+    # is sent to the sign in page with a :back_to param to return where 
     # she tried to go.
     #
     # Use this for demo!
