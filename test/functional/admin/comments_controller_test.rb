@@ -74,13 +74,13 @@ class Admin::CommentsControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_show_trash_record_image_and_link_in_index
+  def test_should_show_trash_item_image_and_link_in_index
     get :index
     assert_response :success
     assert_match /trash.gif/, @response.body
   end
 
-  def test_should_not_show_remove_record_link_in_index
+  def test_should_not_show_remove_item_link_in_index
 
     typus_user = typus_users(:designer)
     @request.session[:typus_user_id] = typus_user.id

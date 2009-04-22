@@ -123,12 +123,12 @@ class Admin::#{model.pluralize}Controller < Admin::MasterController
   #   #{model}:
   #     actions:
   #       index: custom_action
-  #       edit: custom_action_for_a_record
+  #       edit: custom_action_for_an_item
   #
   def custom_action
   end
 
-  def custom_action_for_a_record
+  def custom_action_for_an_item
   end
 
 =end
