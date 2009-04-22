@@ -1,7 +1,7 @@
 require 'test/helper'
 
 ##
-# Here we test position action if acts as list is installed.
+# Test position action if acts as list is installed.
 #
 class Admin::CategoriesControllerTest < ActionController::TestCase
 

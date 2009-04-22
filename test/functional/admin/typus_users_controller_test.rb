@@ -1,7 +1,7 @@
 require 'test/helper'
 
 ##
-# Here we test what the TypusUsers can do.
+# Test what TypusUsers can do.
 #
 class Admin::TypusUsersControllerTest < ActionController::TestCase
 

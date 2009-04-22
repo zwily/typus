@@ -1,7 +1,7 @@
 require 'test/helper'
 
 ##
-# Here we test the CRUD actions and ...
+# Test CRUD actions and ...
 #
 #   - Relate comment which is a has_many relationship.
 #   - Unrelate comment which is a has_many relationship.
