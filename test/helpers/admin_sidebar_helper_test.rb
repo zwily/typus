@@ -216,8 +216,14 @@ class AdminSidebarHelperTest < ActiveSupport::TestCase
     output = filters
     assert output.nil?
 
-    # TODO: Test filters when @resource[:class].typus_filters returns filters.
+  end
 
+  # TODO: Test filters when @resource[:class].typus_filters returns filters.
+  # 
+  # Yes, I know, it's an ugly name for a test, but don't know how to 
+  # name this test. Suggestions are welcome. ;)
+  def test_filters_with_filters
+    assert true
   end
 
   def test_relationship_filter
