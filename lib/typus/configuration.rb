@@ -19,7 +19,8 @@ module Typus
     ##
     # Default model options which can be overwritten from the initializer.
     #
-    model_options = { :edit_after_create => true, 
+    model_options = { :default_action_on_index => 'edit', 
+                      :edit_after_create => true, 
                       :end_year => nil,
                       :form_rows => 10, 
                       :icon_on_boolean => true, 

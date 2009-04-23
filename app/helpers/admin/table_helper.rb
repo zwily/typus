@@ -111,8 +111,10 @@ module Admin::TableHelper
   end
 
   def typus_table_belongs_to_field(attribute, item)
+
+    action = item.send(attribute).class.typus_options_for(:default_action_on_index)
     content = if !item.send(attribute).kind_of?(NilClass)
-                link_to item.send(attribute).typus_name, :controller => "admin/#{attribute.pluralize}", :action => 'edit', :id => item.send(attribute).id
+                link_to item.send(attribute).typus_name, :controller => "admin/#{attribute.pluralize}", :action => action, :id => item.send(attribute).id
               end
     <<-HTML
 <td>#{content}</td>
@@ -132,8 +134,10 @@ module Admin::TableHelper
   #
   def typus_table_string_field(attribute, item, first_field, link_options = {})
 
+    action = item.class.typus_options_for(:default_action_on_index)
+
     content = if first_field == attribute
-                link_to item.send(attribute) || item.class.typus_options_for(:nil), link_options.merge(:controller => "admin/#{item.class.name.tableize}", :action => 'edit', :id => item.id)
+                link_to item.send(attribute) || item.class.typus_options_for(:nil), link_options.merge(:controller => "admin/#{item.class.name.tableize}", :action => action, :id => item.id)
               else
                 item.send(attribute)
               end
@@ -173,10 +177,12 @@ module Admin::TableHelper
 
   def typus_table_datetime_field(attribute, item, first_field = nil, link_options = {} )
 
+    action = item.class.typus_options_for(:default_action_on_index)
+
     date_format = item.class.typus_date_format(attribute)
     value = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
     content = if first_field == attribute
-                link_to value, link_options.merge(:controller => "admin/#{item.class.name.tableize}", :action => 'edit', :id => item.id )
+                link_to value, link_options.merge(:controller => "admin/#{item.class.name.tableize}", :action => action, :id => item.id )
               else
                 value
               end
