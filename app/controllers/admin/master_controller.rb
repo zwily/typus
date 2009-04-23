@@ -85,10 +85,10 @@ class Admin::MasterController < ApplicationController
       flash[:success] = t("{{model}} successfully created", 
                           :default => "{{model}} successfully created.", 
                           :model => @resource[:class_name_humanized])
-      if @resource[:class].typus_options_for(:edit_after_create)
-        redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id
-      else
+      if @resource[:class].typus_options_for(:index_after_save)
         redirect_to :action => 'index'
+      else
+        redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id
       end
     else
       select_template :new
@@ -130,10 +130,10 @@ class Admin::MasterController < ApplicationController
       flash[:success] = t("{{model}} successfully updated", 
                           :default => "{{model}} successfully updated.", 
                           :model => @resource[:class_name_humanized])
-      if @resource[:class].typus_options_for(:edit_after_create)
-        redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id
-      else
+      if @resource[:class].typus_options_for(:index_after_save)
         redirect_to params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
+      else
+        redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id
       end
     else
       @previous, @next = @item.previous_and_next

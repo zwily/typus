@@ -96,7 +96,7 @@ You can overwrite the following settings.
 
 Model options.
 
-    Typus::Configuration.options[:edit_after_create]
+    Typus::Configuration.options[:index_after_save]
     Typus::Configuration.options[:end_year]
     Typus::Configuration.options[:form_rows]
     Typus::Configuration.options[:icon_on_boolean]
@@ -112,7 +112,7 @@ on <tt>config/typus</tt>.
 
     Post:
       options:
-        edit_after_create: false
+        index_after_save: false
         end_year: 2015
         form_rows: 25
         icon_on_boolean: true
@@ -184,7 +184,7 @@ you can continue editing it. If you prefer to be redirected to the
 main index you can owerwrite the setting. This setting can be defined 
 globally or by model.
 
-    Typus::Configuration.options[:edit_after_create] = false
+    Typus::Configuration.options[:index_after_save] = false
 
 == Configuration file options
 

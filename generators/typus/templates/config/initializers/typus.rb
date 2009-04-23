@@ -15,7 +15,7 @@ Typus::Configuration.options[:app_name] = '<%= application %>'
 
 # Model options
 
-# Typus::Configuration.options[:edit_after_create] = true
+# Typus::Configuration.options[:index_after_save] = true
 # Typus::Configuration.options[:end_year] = Time.now.year + 1
 # Typus::Configuration.options[:form_rows] = 10
 # Typus::Configuration.options[:icon_on_boolean] = false

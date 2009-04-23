@@ -41,7 +41,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_create_item_and_redirect_to_index
 
-    options = Typus::Configuration.options.merge(:edit_after_create => false)
+    options = Typus::Configuration.options.merge(:index_after_save => true)
     Typus::Configuration.stubs(:options).returns(options)
 
     assert_difference 'Post.count' do
@@ -54,7 +54,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_create_item_and_redirect_to_edit
 
-    options = Typus::Configuration.options.merge(:edit_after_create => true)
+    options = Typus::Configuration.options.merge(:index_after_save => false)
     Typus::Configuration.stubs(:options).returns(options)
 
     assert_difference 'Post.count' do
@@ -81,7 +81,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_update_item_and_redirect_to_index
 
-    options = Typus::Configuration.options.merge(:edit_after_create => false)
+    options = Typus::Configuration.options.merge(:index_after_save => true)
     Typus::Configuration.stubs(:options).returns(options)
 
     post_ = posts(:published)
@@ -93,7 +93,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_update_item_and_redirect_to_edit
 
-    options = Typus::Configuration.options.merge(:edit_after_create => true)
+    options = Typus::Configuration.options.merge(:index_after_save => false)
     Typus::Configuration.stubs(:options).returns(options)
 
     post_ = posts(:published)
