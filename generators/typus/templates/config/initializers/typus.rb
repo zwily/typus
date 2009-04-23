@@ -13,7 +13,7 @@ Typus::Configuration.options[:app_name] = '<%= application %>'
 # Typus::Configuration.options[:user_class_name] = 'TypusUser'
 # Typus::Configuration.options[:user_fk] = 'typus_user_id'
 
-# Model options
+# Model options which can also be defined by model on the yaml files.
 
 # Typus::Configuration.options[:index_after_save] = true
 # Typus::Configuration.options[:end_year] = Time.now.year + 1
