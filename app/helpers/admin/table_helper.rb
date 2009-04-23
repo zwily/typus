@@ -112,13 +112,16 @@ module Admin::TableHelper
 
   def typus_table_belongs_to_field(attribute, item)
 
-    action = item.send(attribute).class.typus_options_for(:default_action_on_index)
+    action = item.send(attribute).class.typus_options_for(:default_action_on_index) rescue 'edit'
+
     content = if !item.send(attribute).kind_of?(NilClass)
                 link_to item.send(attribute).typus_name, :controller => "admin/#{attribute.pluralize}", :action => action, :id => item.send(attribute).id
               end
+
     <<-HTML
 <td>#{content}</td>
     HTML
+
   end
 
   def typus_table_has_and_belongs_to_many_field(attribute, item)
