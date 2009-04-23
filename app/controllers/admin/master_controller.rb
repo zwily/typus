@@ -133,11 +133,7 @@ class Admin::MasterController < ApplicationController
       if @resource[:class].typus_options_for(:edit_after_create)
         redirect_to :action => 'edit', :id => @item.id
       else
-        if params[:back_to]
-          redirect_to "#{params[:back_to]}##{@resource[:self]}"
-        else
-          redirect_to :action => 'index'
-        end
+        redirect_to params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
       end
     else
       @previous, @next = @item.previous_and_next
