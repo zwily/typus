@@ -112,6 +112,7 @@ class Admin::MasterController < ApplicationController
   # Show an item.
   #
   def show
+
     @previous, @next = @item.previous_and_next
 
     respond_to do |format|
