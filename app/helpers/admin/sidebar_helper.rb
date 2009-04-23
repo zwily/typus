@@ -28,7 +28,7 @@ module Admin::SidebarHelper
     items = []
 
     case params[:action]
-    when 'index', 'edit', 'update'
+    when 'index', 'edit', 'show', 'update'
       if @current_user.can_perform?(@resource[:class], 'create')
         items << (link_to t("Add entry", :default => "Add entry"), :action => 'new')
       end
@@ -37,7 +37,7 @@ module Admin::SidebarHelper
     items += non_crud_actions
 
     case params[:action]
-    when 'new', 'create', 'edit', 'update'
+    when 'new', 'create', 'edit', 'show', 'update'
       items << (link_to t("Back to list", :default => "Back to list"), :action => 'index')
     end
 
