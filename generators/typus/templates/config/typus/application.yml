@@ -27,7 +27,7 @@
 #   application: Application
 #   description: Some text to describe the model
 #   options:
-#     default_action_on_index: show
+#     default_action_on_item: show
 #     edit_after_create: false
 #     end_year: 2015
 #     form_rows: 25
