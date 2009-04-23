@@ -34,6 +34,13 @@ module Admin::SidebarHelper
       end
     end
 
+    case params[:action]
+    when 'show'
+      if @current_user.can_perform?(@resource[:class], 'update')
+        items << (link_to t("Edit entry", :default => "Edit entry"), :action => 'edit', :id => @item.id)
+      end
+    end
+
     items += non_crud_actions
 
     case params[:action]
