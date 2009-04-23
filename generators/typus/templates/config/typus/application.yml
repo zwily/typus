@@ -8,13 +8,13 @@
 #     form: title, body, is_published?, created_at
 #     relationship: title, status
 #     options:
-#       selectors:
-#       read_only:
 #       auto_generated:
-#       date_formats:
-#         created_at: post_long
 #       booleans:
 #         is_published: ["Yes, it is", "No, it isn't"]
+#       date_formats:
+#         created_at: post_long
+#       selectors:
+#       read_only:
 #   actions:
 #     index: cleanup
 #     edit: send_as_newsletter
@@ -28,10 +28,10 @@
 #   description: Some text to describe the model
 #   options:
 #     default_action_on_item: show
-#     index_after_save: false
 #     end_year: 2015
 #     form_rows: 25
 #     icon_on_boolean: true
+#     index_after_save: false
 #     minute_step: 15
 #     nil: 'nil'
 #     per_page: 5
@@ -44,7 +44,7 @@
 <%- list = model.columns.reject { |c| c.sql_type == 'text' }.map(&:name) -%>
 <%- form = model.columns.reject { |c| c.name == 'id' }.map(&:name) -%>
 <%- relationships = [] -%>
-<%- [:belongs_to, :has_and_belongs_to_many, :has_many].each do |relationship| -%>
+<%- [ :belongs_to, :has_and_belongs_to_many, :has_many ].each do |relationship| -%>
  <%- relationships += model.reflect_on_all_associations(relationship).map { |i| i.name.to_s } -%>
 <%- end -%>
 
@@ -54,9 +54,9 @@
     form: <%= form.map.join(', ') %>
     relationship:
     options:
-      selectors:
-      read_only:
       auto_generated:
+      read_only:
+      selectors:
   actions:
     index:
     edit:
