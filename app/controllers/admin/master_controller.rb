@@ -86,7 +86,7 @@ class Admin::MasterController < ApplicationController
                           :default => "{{model}} successfully created.", 
                           :model => @resource[:class_name_humanized])
       if @resource[:class].typus_options_for(:edit_after_create)
-        redirect_to :action => 'edit', :id => @item.id
+        redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id
       else
         redirect_to :action => 'index'
       end
@@ -131,7 +131,7 @@ class Admin::MasterController < ApplicationController
                           :default => "{{model}} successfully updated.", 
                           :model => @resource[:class_name_humanized])
       if @resource[:class].typus_options_for(:edit_after_create)
-        redirect_to :action => 'edit', :id => @item.id
+        redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id
       else
         redirect_to params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
       end
@@ -204,7 +204,10 @@ class Admin::MasterController < ApplicationController
                         :default => "{{model_a}} related to {{model_b}}.", 
                         :model_a => resource_class.name.humanize, 
                         :model_b => @resource[:class_name_humanized])
-    redirect_to :action => 'edit', :id => @item.id, :anchor => resource_tableized
+
+    redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), 
+                :id => @item.id, 
+                :anchor => resource_tableized
 
   end
 
@@ -233,7 +236,10 @@ class Admin::MasterController < ApplicationController
                           :model_b => @resource[:class_name_humanized])
     end
 
-    redirect_to :controller => @resource[:self], :action => 'edit', :id => @item.id, :anchor => resource_tableized
+    redirect_to :controller => @resource[:self], 
+                :action => @resource[:class].typus_options_for(:default_action_on_item), 
+                :id => @item.id, 
+                :anchor => resource_tableized
 
   end
 
