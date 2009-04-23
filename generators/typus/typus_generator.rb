@@ -36,10 +36,45 @@ class TypusGenerator < Rails::Generator::Base
       folder = "#{Rails.root}/#{config_folder}"
       Dir.mkdir(folder) unless File.directory?(folder)
 
+      configuration = ""
+
+      ar_models.each do |model|
+
+        list = model.columns.reject { |c| c.sql_type == 'text' || %w( created_at updated_at ).include?(c.name) }.map(&:name)
+        form = model.columns.reject { |c| %w( id created_at updated_at ).include?(c.name) }.map(&:name)
+        relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many ].map do |relationship|
+                          model.reflect_on_all_associations(relationship).map { |i| i.name.to_s }
+                        end.flatten.sort
+
+        configuration << <<-HTML
+#{model}:
+  fields:
+    list: #{list.join(', ')}
+    form: #{form.join(', ')}
+    relationship:
+    options:
+      auto_generated:
+      read_only:
+      selectors:
+  actions:
+    index:
+    edit:
+  export:
+  order_by:
+  relationships: #{relationships.join(', ')}
+  filters:
+  search:
+  application: #{application}
+  description:
+
+        HTML
+
+      end
+
       Dir["#{Typus.root}/generators/typus/templates/config/typus/*"].each do |f|
         base = File.basename(f)
         m.template "config/typus/#{base}", "#{config_folder}/#{base}", 
-                   :assigns => { :ar_models => ar_models, :application => application }
+                   :assigns => { :configuration => configuration, :ar_models => ar_models }
       end
 
       ##
