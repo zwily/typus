@@ -372,7 +372,7 @@ private
   # Error handler
   #
   def error_handler(error, path = admin_dashboard_path)
-    raise error if Rails.env.development?
+    raise error unless Rails.env.production?
     flash[:error] = "#{error.message} (#{@resource[:class]})"
     redirect_to path
   end
