@@ -561,16 +561,21 @@ created.
 
 == Testing the plugin
 
-You need to have <tt>mocha</tt> installed to test the plugin.
+<tt>Mocha</tt> is required to test the plugin.
 
     $ sudo gem install mocha
 
-To test the plugin create an empty application and remove the default 
-routes on <tt>routes.rb</tt>, once the application is created install 
-the plugin and run rake.
+Create an empty application and make sure you have the following routes 
+at the end of the file.
+
+    map.connect ':controller.:format'
+    map.connect ':controller/:action/:id.:format'
+
+Go to the plugins folder, install *Typus* and run the tests.
 
     $ cd YOUR_APPLICATION/vendor/plugins
     $ git clone git://github.com/fesplugas/typus.git
+    $ cd typus
     $ rake
 
 By default tests are be performed against a SQLite3 database in memory.
