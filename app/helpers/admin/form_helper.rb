@@ -168,13 +168,13 @@ module Admin::FormHelper
       value = 'auto_generated' if %w( new edit ).include?(params[:action])
     end
 
-    comment = %w( read_only auto_generated ).include?(value) ? (value + ' field').humanize : ''
+    comment = %w( read_only auto_generated ).include?(value) ? "<small>#{value} field</small>".humanize : ''
 
     attribute_humanized = I18n.t(attribute.humanize, :default => attribute.humanize)
     attribute_humanized += " (#{attribute})" if attribute.include?('_id')
 
     <<-HTML
-<li><label for="item_#{attribute}">#{attribute_humanized} <small>#{comment}</small></label>
+<li><label for="item_#{attribute}">#{attribute_humanized}#{comment}</label>
 #{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute, klass) }</li>
     HTML
 
