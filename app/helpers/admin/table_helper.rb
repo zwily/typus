@@ -86,6 +86,7 @@ module Admin::TableHelper
       fields.each do |key, value|
 
         content = I18n.t(key.humanize, :default => key.humanize)
+        content += " (#{key})" if key.include?('_id')
 
         if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key.typus_cleaner) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
           sort_order = case params[:sort_order]
