@@ -220,7 +220,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_order_by_for_model
-    assert_equal "`posts`.title ASC, `posts`.created_at DESC", Post.typus_order_by
+    assert_equal "posts.title ASC, posts.created_at DESC", Post.typus_order_by
     assert_equal %w( title -created_at ), Post.typus_defaults_for('order_by')
     assert_equal %w( title -created_at ), Post.typus_defaults_for(:order_by)
   end
@@ -235,11 +235,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     case ENV['DB']
     when /mysql|postgresql/
-      boolean_true = "(`typus_users`.`status` = 1)"
-      boolean_false = "(`typus_users`.`status` = 0)"
+      boolean_true = "(typus_users.status = 1)"
+      boolean_false = "(typus_users.status = 0)"
     else
-      boolean_true = "(\"typus_users\".\"status\" = 't')"
-      boolean_false = "(\"typus_users\".\"status\" = 'f')"
+      boolean_true = "(typus_users.status = 't')"
+      boolean_false = "(typus_users.status = 'f')"
     end
 
     expected = "((LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(role) LIKE '%francesc%')) AND #{boolean_true}"
@@ -254,11 +254,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     case ENV['DB']
     when /mysql|postgresql/
-      boolean_true = "(`typus_users`.`status` = 1)"
-      boolean_false = "(`typus_users`.`status` = 0)"
+      boolean_true = "(typus_users.status = 1)"
+      boolean_false = "(typus_users.status = 0)"
     else
-      boolean_true = "(\"typus_users\".\"status\" = 't')"
-      boolean_false = "(\"typus_users\".\"status\" = 'f')"
+      boolean_true = "(typus_users.status = 't')"
+      boolean_false = "(typus_users.status = 'f')"
     end
 
     params = { :status => 'true' }

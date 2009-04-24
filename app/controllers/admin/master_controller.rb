@@ -303,7 +303,7 @@ private
     params[:sort_order] ||= 'desc'
     # Get @fields & @order.
     @fields = @resource[:class].typus_fields_for(:list)
-    @order = params[:order_by] ? "`#{@resource[:table_name]}`.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
+    @order = params[:order_by] ? "#{@resource[:table_name]}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
   end
 
   ##
