@@ -41,7 +41,7 @@ class Admin::#{resource}Controller < TypusController
 
   ##
   # This controller was generated because you have defined a resource 
-  # which is not tied to a model on your `config/typus/XXXXXX_roles.yml` 
+  # which is not tied to a model on your <tt>config/typus/XXXXXX_roles.yml</tt> 
   # configuration file.
   #
   #     admin:
@@ -118,7 +118,7 @@ class Admin::#{model.pluralize}Controller < Admin::MasterController
   ##
   # You can extend Admin::MasterController with your methods.
   #
-  # This actions have to be defined in `config/typus/application.yml`.
+  # This actions have to be defined in <tt>config/typus/application.yml</tt>.
   #
   #   #{model}:
   #     actions:

@@ -11,7 +11,7 @@ class TypusGenerator < Rails::Generator::Base
       application = File.basename(Dir.pwd)
 
       ##
-      # To create `application.yml` and `application_roles.yml` detect 
+      # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> detect 
       # available AR models on the application.
       #
 
@@ -24,7 +24,7 @@ class TypusGenerator < Rails::Generator::Base
           klass = class_name.constantize
           ar_models << klass if klass.superclass.equal?(ActiveRecord::Base)
         rescue Exception => error
-          puts "=> [typus] #{error.message} on `#{class_name}`."
+          puts "=> [typus] #{error.message} on '#{class_name}'."
         end
       end
 
