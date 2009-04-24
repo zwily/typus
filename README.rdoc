@@ -74,9 +74,10 @@ You can view the available tasks running:
     $ rake -T typus
     (in /Users/fesplugas/Development/typus_core)
     rake doc:plugins:typus  # Generate documentation for the typus plugin
-    rake typus:misc         # Install Paperclip, acts_as_list, acts_as_tree.
-    rake typus:roles        # List current roles
-    rake typus:ssl          # Intall ssl_requirement plugin.
+    rake typus:misc         # Install acts_as_list, acts_as_tree and paperclip.
+    rake typus:more         # Install typus_more.
+    rake typus:roles        # List current roles.
+    rake typus:ssl          # Install ssl_requirement.
 
 == Plugin Configuration Options
 
