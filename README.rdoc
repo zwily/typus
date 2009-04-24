@@ -421,18 +421,15 @@ links on the sidebar of your resource.
 And the actions for those export options are:
 
     def export_csv
-      # Which is already implemented but you can overwrite. On 
-      # `admin/orders_controller.rb`.
+      # Already implemented but you can overwrite it.
     end
 
     def export_xml
-      # Which is already implemented but you can overwrite. On 
-      # `admin/orders_controller.rb`.
+      # Already implemented but you can overwrite it.
     end
 
     def export_pdf
-      # Not implemented, you will have to overwrite on 
-      # `admin/orders_controller.rb`.
+      # Not implemented, so you have to write it.
     end
 
 Please notice that in order to be able to use the export feature you 
@@ -473,13 +470,13 @@ Example: (Blog)
 
 == Custom Interface
 
-You can customize the interface by placing on <tt>views/admin</tt> the 
-following files.
+Customize *Typus* interface by placing on <tt>views/admin</tt> your own 
+views & partials. Typus defaults are good enough but sometimes you need more 
+features.
 
-=== Change default views
+=== Default views
 
-You can add your custom views to match your application requirements. Views 
-you can customize.
+Add your own views to match your application requirements.
 
     index.html.erb
     edit.html.erb
@@ -487,12 +484,13 @@ you can customize.
 
 Need a custom view on the Articles listing?
 
-Under <tt>app/view/admin/articles</tt> add the file <tt>index.html.erb</tt> 
-and Typus default <tt>index.html.erb</tt> will be replaced.
+Under <tt>app/view/admin/articles</tt> drop the file <tt>index.html.erb</tt> 
+and *Typus* default <tt>index.html.erb</tt> will be replaced. Easy, isn't it?
 
-=== Blocks
+=== Blocks on views (partials)
 
-Here's a list of available blocks you can add to your application.
+Here's a list of available blocks you can add to your application. *Typus* 
+views will detect this files, if they're in the right place.
 
     views/admin/login/_{bottom|top}.html.erb
     views/admin/dashboard/_{bottom|sidebar|top}.html.erb
