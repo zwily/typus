@@ -239,7 +239,7 @@ module Typus
                      when 'this_month':    Time.today.last_month..Time.today.tomorrow
                      when 'this_year':     Time.today.last_year..Time.today.tomorrow
                      end
-          condition = ["#{key} BETWEEN ? AND ?", interval.first, interval.last]
+          condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
           conditions = merge_conditions(conditions, condition)
         when :integer, :string
           condition = { key => value }
