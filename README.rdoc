@@ -492,35 +492,18 @@ and Typus default <tt>index.html.erb</tt> will be replaced.
 
 === Blocks
 
-Login Page
+Here's a list of available blocks you can add to your application.
 
-    views/admin/login/_bottom.html.erb
-    views/admin/login/_top.html.erb
-
-Dashboard
-
-    views/admin/dashboard/_bottom.html.erb
-    views/admin/dashboard/_sidebar.html.erb
-    views/admin/dashboard/_top.html.erb
-
-Models
-
-    views/admin/<YOUR_RESOURCE>/_edit.html.erb
-    views/admin/<YOUR_RESOURCE>/_edit_bottom.html.erb
-    views/admin/<YOUR_RESOURCE>/_edit_sidebar.html.erb
-    views/admin/<YOUR_RESOURCE>/_edit_top.html.erb
-    views/admin/<YOUR_RESOURCE>/_index.html.erb
-    views/admin/<YOUR_RESOURCE>/_index_bottom.html.erb
-    views/admin/<YOUR_RESOURCE>/_index_sidebar.html.erb
-    views/admin/<YOUR_RESOURCE>/_index_top.html.erb
-    views/admin/<YOUR_RESOURCE>/_new.html.erb
-    views/admin/<YOUR_RESOURCE>/_new_bottom.html.erb
-    views/admin/<YOUR_RESOURCE>/_new_sidebar.html.erb
-    views/admin/<YOUR_RESOURCE>/_new_top.html.erb
-    views/admin/<YOUR_RESOURCE>/_show.html.erb
-    views/admin/<YOUR_RESOURCE>/_show_bottom.html.erb
-    views/admin/<YOUR_RESOURCE>/_show_sidebar.html.erb
-    views/admin/<YOUR_RESOURCE>/_show_top.html.erb
+    views/admin/login/_{bottom|top}.html.erb
+    views/admin/dashboard/_{bottom|sidebar|top}.html.erb
+    views/admin/RESOURCE/_edit.html.erb
+    views/admin/RESOURCE/_edit_{bottom|sidebar|top}.html.erb
+    views/admin/RESOURCE/_index.html.erb
+    views/admin/RESOURCE/_index_{bottom|sidebar|top}.html.erb
+    views/admin/RESOURCE/_new.html.erb
+    views/admin/RESOURCE/_new_{bottom|sidebar|top}.html.erb
+    views/admin/RESOURCE/_show.html.erb
+    views/admin/RESOURCE/_show_{bottom|sidebar|top}.html.erb
 
 === Attribute templates
 
