@@ -12,9 +12,9 @@ module Admin
       [ :color, :link ].each { |o| query.delete(o) }
 
       <<-HTML
-  <script type="text/javascript">
-    document.write('<script type="text/javascript" src="#{options[:link]}?#{query.to_query}" />');
-  </script>
+<script type="text/javascript">
+  document.write('<script type="text/javascript" src="#{options[:link]}?#{query.to_query}" />');
+</script>
       HTML
 
     end
@@ -22,5 +22,3 @@ module Admin
   end
 
 end
-
-ActionView::Base.send(:include, Admin::PublicHelper)
