@@ -95,10 +95,10 @@ You can overwrite the following settings.
 
 Model options.
 
-    Typus::Configuration.options[:index_after_save]
     Typus::Configuration.options[:end_year]
     Typus::Configuration.options[:form_rows]
     Typus::Configuration.options[:icon_on_boolean]
+    Typus::Configuration.options[:index_after_save]
     Typus::Configuration.options[:minute_step]
     Typus::Configuration.options[:nil]
     Typus::Configuration.options[:per_page]
@@ -111,10 +111,10 @@ on <tt>config/typus</tt>.
 
     Post:
       options:
-        index_after_save: false
         end_year: 2015
         form_rows: 25
         icon_on_boolean: true
+        index_after_save: false
         minute_step: 15
         nil: 'nil'
         per_page: 5
