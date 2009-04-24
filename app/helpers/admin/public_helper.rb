@@ -1,20 +1,26 @@
-module Admin::PublicHelper
+module Admin
 
-  def quick_edit(*args)
+  module PublicHelper
 
-    options = args.extract_options!
-    options[:color] ||= '#000'
-    options[:link] ||= admin_quick_edit_path
+    def quick_edit(*args)
 
-    query = options.dup
-    [ :color, :link ].each { |o| query.delete(o) }
+      options = args.extract_options!
+      options[:color] ||= '#000'
+      options[:link] ||= admin_quick_edit_path
 
-    <<-HTML
-<script type="text/javascript">
-  document.write('<script type="text/javascript" src="#{options[:link]}?#{query.to_query}" />');
-</script>
-    HTML
+      query = options.dup
+      [ :color, :link ].each { |o| query.delete(o) }
+
+      <<-HTML
+  <script type="text/javascript">
+    document.write('<script type="text/javascript" src="#{options[:link]}?#{query.to_query}" />');
+  </script>
+      HTML
+
+    end
 
   end
 
 end
+
+ActionView::Base.send(:include, Admin::PublicHelper)
