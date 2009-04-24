@@ -599,14 +599,14 @@ to mantain. Files are loaded by alphabetical order.
 
 == Quick edit
 
-To enable quick edit include the AdminPublicHelper on your 
+To enable quick edit include the Admin::PublicHelper on your 
 <tt>application_helper.rb</tt>.
 
     module ApplicationHelper
-      include AdminPublicHelper
+      include Admin::PublicHelper
     end
 
-Include the helper on your views.
+And you can start using the helper on your views.
 
     <%= quick_edit :resource => 'pages', 
                    :id => @page.id, 
@@ -620,8 +620,7 @@ to see in Typus in the near future.
 - Sphinx search integration when available.
 - Search in multiple models.
 - Nested models.
-- Content Management System generator.
-- Server administration tools.
+- Content Management System generator. (typus_more)
 
 == Contributors
 
