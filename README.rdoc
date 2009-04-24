@@ -528,9 +528,9 @@ folder with Typus::Configuration.options[:templates_folder].
 
 == Roles
 
-Typus has roles support. You can can add as many roles as you want. 
-They are defined in <tt>config/typus/application_roles.yml</tt> and you 
-can can define the allowed actions per role.
+*Typus* has roles support and you can add as many roles as you want. 
+Define them in your <tt>config/typus/application_roles.yml</tt> 
+configuration file.
 
     admin:
       Category: create, read, update, delete
