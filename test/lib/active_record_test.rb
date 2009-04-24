@@ -229,6 +229,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
     expected = "(LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(role) LIKE '%francesc%')"
     params = { :search => 'francesc' }
     assert_equal expected, TypusUser.build_conditions(params).first
+    params = { :search => 'Francesc' }
+    assert_equal expected, TypusUser.build_conditions(params).first
   end
 
   def test_should_return_sql_conditions_on_search_and_filter_for_typus_user

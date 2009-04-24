@@ -212,7 +212,7 @@ module Typus
       # If a search is performed.
       if query_params[:search]
         search = typus_defaults_for(:search).map do |s|
-                   ["LOWER(#{s}) LIKE '%#{query_params[:search]}%'"]
+                   ["LOWER(#{s}) LIKE '%#{query_params[:search].downcase}%'"]
                  end
         conditions = merge_conditions(conditions, search.join(' OR '))
       end
