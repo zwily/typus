@@ -231,15 +231,15 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal expected, TypusUser.build_conditions(params).first
   end
 
-  def test_should_return_sql_conditions_on_search_and_filter_for_typus_user_
+  def test_should_return_sql_conditions_on_search_and_filter_for_typus_user
 
     case ENV['DB']
     when /mysql|postgresql/
       boolean_true = "(typus_users.status = 1)"
       boolean_false = "(typus_users.status = 0)"
     else
-      boolean_true = "(typus_users.status = 't')"
-      boolean_false = "(typus_users.status = 'f')"
+      boolean_true = "(\"typus_users\".\"status\" = 't')"
+      boolean_false = "(\"typus_users\".\"status\" = 'f')"
     end
 
     expected = "((LOWER(first_name) LIKE '%francesc%' OR LOWER(last_name) LIKE '%francesc%' OR LOWER(email) LIKE '%francesc%' OR LOWER(role) LIKE '%francesc%')) AND #{boolean_true}"
@@ -257,8 +257,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
       boolean_true = "(typus_users.status = 1)"
       boolean_false = "(typus_users.status = 0)"
     else
-      boolean_true = "(typus_users.status = 't')"
-      boolean_false = "(typus_users.status = 'f')"
+      boolean_true = "(\"typus_users\".\"status\" = 't')"
+      boolean_false = "(\"typus_users\".\"status\" = 'f')"
     end
 
     params = { :status => 'true' }
