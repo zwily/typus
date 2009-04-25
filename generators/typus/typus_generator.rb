@@ -8,7 +8,7 @@ class TypusGenerator < Rails::Generator::Base
       # Default name for our application.
       #
 
-      application = File.basename(Dir.pwd)
+      application = Rails.root.basename
 
       ##
       # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> detect 
