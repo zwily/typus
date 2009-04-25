@@ -74,8 +74,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
                        ['last_name', :string], 
                        ['role', :selector], 
                        ['email', :string], 
-                       ['password', :password], 
-                       ['password_confirmation', :password]]
+                       ['password', :password]]
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for('form').keys
     assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for('form').values
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:form).keys
