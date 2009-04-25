@@ -42,6 +42,14 @@ class TypusGenerator < Rails::Generator::Base
 
         list = model.columns.reject { |c| c.sql_type == 'text' || %w( created_at updated_at ).include?(c.name) }.map(&:name)
         form = model.columns.reject { |c| %w( id created_at updated_at ).include?(c.name) }.map(&:name)
+
+        list.each do |i|
+          if i.include?('_id')
+            assoc_name = model.reflect_on_association(i.gsub(/_id/, '').to_sym).macro rescue nil
+            i.gsub!(/_id/, '') if assoc_name == :belongs_to
+          end
+        end
+
         relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many ].map do |relationship|
                           model.reflect_on_all_associations(relationship).map { |i| i.name.to_s }
                         end.flatten.sort
