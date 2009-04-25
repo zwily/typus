@@ -40,9 +40,16 @@ class TypusGenerator < Rails::Generator::Base
 
       ar_models.each do |model|
 
+        # By default we don't want to show in our lists text fields and created_at
+        # and updated_at attributes.
         list = model.columns.reject { |c| c.sql_type == 'text' || %w( created_at updated_at ).include?(c.name) }.map(&:name)
+
+        # By default we don't want to show in our forms created_at and updated_at 
+        # attributes.
         form = model.columns.reject { |c| %w( id created_at updated_at ).include?(c.name) }.map(&:name)
 
+        # Detect relationships using reflection and remove the _id part from 
+        # attributes when relationships is defined in ActiveRecord.
         list.each do |i|
           if i.include?('_id')
             assoc_name = model.reflect_on_association(i.gsub(/_id/, '').to_sym).macro rescue nil
@@ -50,6 +57,7 @@ class TypusGenerator < Rails::Generator::Base
           end
         end
 
+        # Detect relationships using reflection.
         relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many ].map do |relationship|
                           model.reflect_on_all_associations(relationship).map { |i| i.name.to_s }
                         end.flatten.sort
