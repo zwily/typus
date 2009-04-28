@@ -101,7 +101,7 @@ class TypusController < ApplicationController
 
     if request.post?
 
-      email, password = params[:user][:email], 'hocus-pocus'
+      email, password = params[:user][:email], 'columbia'
       user = Typus.user_class.generate(email, password)
 
       if user.save
