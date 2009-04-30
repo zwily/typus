@@ -67,32 +67,32 @@ module Typus
 
                   # Only admin and owner of Typus User can edit.
                   if !@current_user.is_root? && !current_user
-                    _("As you're not the admin or the owner of this record you cannot edit it")
+                    _("As you're not the admin or the owner of this record you cannot edit it.")
                   end
 
                 when 'update'
 
                   # current_user cannot change her role.
                   if current_user && !(@item.role == params[:item][:role])
-                    _("You can't change your role")
+                    _("You can't change your role.")
                   end
 
                 when 'toggle'
 
                   # Only admin can toggle typus user status, but not herself.
                   if @current_user.is_root? && current_user
-                    _("You can't toggle your status")
+                    _("You can't toggle your status.")
                   elsif !@current_user.is_root?
-                    _("You're not allowed to toggle status")
+                    _("You're not allowed to toggle status.")
                   end
 
                 when 'destroy'
 
                   # Admin can remove anything except herself.
                   if @current_user.is_root? && current_user
-                    _("You can't remove yourself")
+                    _("You can't remove yourself.")
                   elsif !@current_user.is_root?
-                    _("You're not allowed to remove Typus Users")
+                    _("You're not allowed to remove Typus Users.")
                   end
 
                 end
@@ -112,20 +112,20 @@ module Typus
 
       message = case params[:action]
                 when 'index', 'show'
-                  _("{{current_user_role}} can't display items", 
+                  _("{{current_user_role}} can't display items.", 
                     :current_user_role => @current_user.role.capitalize)
                 when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
                 when 'destroy'
-                  _("{{current_user_role}} can't delete this item", 
+                  _("{{current_user_role}} can't delete this item.", 
                     :current_user_role => @current_user.role.capitalize)
                 else
-                  _("{{current_user_role}} can't perform action ({{action}})", 
+                  _("{{current_user_role}} can't perform action ({{action}}).", 
                     :current_user_role => @current_user.role.capitalize, 
                     :action => params[:action])
                 end
 
       unless @current_user.can_perform?(@resource[:class], params[:action])
-        flash[:notice] = message || _("{{current_user_role}} can't perform action. ({{action}})", 
+        flash[:notice] = message || _("{{current_user_role}} can't perform action. ({{action}}).", 
                                       :current_user_role => @current_user.role.capitalize, 
                                       :action => params[:action])
         redirect_to :back rescue redirect_to admin_dashboard_path
@@ -142,7 +142,7 @@ module Typus
       controller = params[:controller].split('/').last
       action = params[:action]
       unless @current_user.can_perform?(controller.camelize, action, { :special => true })
-        flash[:notice] = _("{{current_user_role}} can't go to {{action}} on {{controller}}", 
+        flash[:notice] = _("{{current_user_role}} can't go to {{action}} on {{controller}}.", 
                            :current_user_role => @current_user.role.capitalize, 
                            :action => action, 
                            :controller => controller.humanize.downcase)

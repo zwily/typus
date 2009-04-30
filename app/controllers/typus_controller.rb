@@ -49,7 +49,7 @@ class TypusController < ApplicationController
         session[:typus_user_id] = user.id
         redirect_to params[:back_to] || admin_dashboard_path
       else
-        flash[:error] = _("The email and/or password you entered is invalid")
+        flash[:error] = _("The email and/or password you entered is invalid.")
         redirect_to admin_sign_in_path
       end
     end
@@ -101,15 +101,15 @@ class TypusController < ApplicationController
 
       if user.save
         session[:typus_user_id] = user.id
-        flash[:notice] = _("Password set to \"{{password}}\"", :password => password)
+        flash[:notice] = _("Password set to \"{{password}}\".", :password => password)
         redirect_to admin_dashboard_path
       else
-        flash[:error] = _("That doesn't seem like a valid email address")
+        flash[:error] = _("That doesn't seem like a valid email address.")
       end
 
     else
 
-      flash[:notice] = _("Enter your email below to create the first user")
+      flash[:notice] = _("Enter your email below to create the first user.")
 
     end
 

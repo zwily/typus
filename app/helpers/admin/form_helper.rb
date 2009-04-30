@@ -47,8 +47,8 @@ module Admin::FormHelper
     related_fk = klass.reflect_on_association(attribute.to_sym).primary_key_name
 
     message = [ _("Are you sure you want to leave this page?"),
-                _("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost"), 
-                _("Click OK to continue, or click Cancel to stay on this page") ]
+                _("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."), 
+                _("Click OK to continue, or click Cancel to stay on this page.") ]
 
     returning(String.new) do |html|
 

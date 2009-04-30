@@ -125,7 +125,7 @@ class Admin::MasterController < ApplicationController
   #
   def update
     if @item.update_attributes(params[:item])
-      flash[:success] = _("{{model}} successfully updated", :model => @resource[:class_name_humanized])
+      flash[:success] = _("{{model}} successfully updated.", :model => @resource[:class_name_humanized])
       if @resource[:class].typus_options_for(:index_after_save)
         redirect_to params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
       else
@@ -174,7 +174,7 @@ class Admin::MasterController < ApplicationController
   #
   def position
     @item.send(params[:go])
-    flash[:success] = _("Record moved {{to}}", :to => params[:go].gsub(/move_/, '').humanize.downcase)
+    flash[:success] = _("Record moved {{to}}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
     redirect_to :back
   end
 
@@ -336,7 +336,7 @@ private
 
       end
 
-      flash[:success] = _("{{model_a}} successfully assigned to {{model_b}}", 
+      flash[:success] = _("{{model_a}} successfully assigned to {{model_b}}.", 
                           :model_a => @item.class, 
                           :model_b => resource_class.name)
       redirect_to "#{params[:back_to]}##{@resource[:self]}"

@@ -16,18 +16,18 @@ module Admin::MasterHelper
 
     message = case
               when _params[:resource] && editing
-                _("You're updating a {{resource_from}} for {{resource_to}}", 
+                _("You're updating a {{resource_from}} for {{resource_to}}.", 
                   :resource_from =>  options[:resource_from], 
                   :resource_to => options[:resource_to])
               when editing
-                _("You're updating a {{resource_from}}", 
+                _("You're updating a {{resource_from}}.", 
                   :resource_from => options[:resource_from])
               when _params[:resource]
-                _("You're adding a new {{resource_from}} to {{resource_to}}", 
+                _("You're adding a new {{resource_from}} to {{resource_to}}.", 
                   :resource_from => options[:resource_from], 
                   :resource_to => options[:resource_to])
               else
-                _("You're adding a new {{resource_from}}", 
+                _("You're adding a new {{resource_from}}.", 
                   :resource_from => options[:resource_from] )
               end
 
