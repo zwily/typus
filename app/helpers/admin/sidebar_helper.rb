@@ -149,7 +149,7 @@ module Admin::SidebarHelper
         when :has_and_belongs_to_many:
           html << relationship_filter(current_request, key, true)
         else
-          html << "<p>Unknown</p>"
+          html << "<p>#{_('Unknown')}</p>"
         end
       end
     end
