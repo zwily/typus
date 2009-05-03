@@ -138,7 +138,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     post_ = posts(:published)
     @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#categories"
     assert_difference('category.posts.count', 0) do
-      post :unrelate, { :id => post_.id, :resource => 'categories', :resource_id => category.id }
+      post :unrelate, { :id => post_.id, :resource => 'Category', :resource_id => category.id, :association => 'has_and_belongs_to_many' }
     end
     assert_response :redirect
     assert flash[:success]
@@ -156,7 +156,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#assets"
 
     assert_difference('post_.assets.count', -1) do
-      get :unrelate, { :id => post_.id, :resource => 'assets', :resource_id => post_.assets.first.id }
+      get :unrelate, { :id => post_.id, :resource => 'Asset', :resource_id => post_.assets.first.id, :association => 'has_many' }
     end
 
     assert_response :redirect

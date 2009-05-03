@@ -210,7 +210,7 @@ class Admin::MasterController < ApplicationController
 
     case params[:association]
     when 'has_and_belongs_to_many'
-      @item.send(params[:resource]).delete(resource)
+      @item.send(resource_class.table_name).delete(resource)
       flash[:success] = _("{{model_a}} unrelated from {{model_b}}", 
                           :model_a => resource_class.human_name, 
                           :model_b => @resource[:class].human_name)

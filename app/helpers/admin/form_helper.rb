@@ -215,7 +215,7 @@ module Admin::FormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to _(field.humanize), :controller => model_to_relate_as_resource}
+  #{link_to _(field.humanize), :controller => "admin/#{model_to_relate_as_resource}"}
   <small>#{link_to _('Add new'), link_options if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
@@ -250,7 +250,7 @@ module Admin::FormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to _(field.humanize), :controller => model_to_relate_as_resource}
+  #{link_to _(field.humanize), :controller => "admin/#{model_to_relate_as_resource}"}
   <small>#{link_to _('Add new'), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
@@ -292,7 +292,7 @@ module Admin::FormHelper
       html << <<-HTML
 <a name="#{field}"></a>
 <div class="box_relationships">
-  <h2>#{link_to _(field.titleize), :controller => model_to_relate_as_resource}</h2>
+  <h2>#{link_to _(field.titleize), :controller => "admin/#{model_to_relate_as_resource}"}</h2>
       HTML
       items = Array.new
       items << @resource[:class].find(params[:id]).send(field) unless @resource[:class].find(params[:id]).send(field).nil?
