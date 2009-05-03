@@ -73,19 +73,6 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_boolean_field_with_question_mark
-
-    output = typus_boolean_field('is_published?', Post)
-
-    expected = <<-HTML
-<li><label for="item_is_published?">Is published?</label>
-<input name="item[is_published]" type="hidden" value="0" /><input id="item_is_published" name="item[is_published]" type="checkbox" value="1" /> Checked if active</li>
-               HTML
-
-    assert_equal expected, output
-
-  end
-
   def test_typus_date_field
 
     output = typus_date_field('test', {}, Post)

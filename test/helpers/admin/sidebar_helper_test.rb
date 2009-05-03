@@ -303,27 +303,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_boolean_filter_with_question_mark
-
-    @resource = { :class => Page, :self => 'pages' }
-    filter = 'is_published?'
-
-    params = { :controller => 'admin/pages', :action => 'index' }
-    self.expects(:params).at_least_once.returns(params)
-
-    request = 'is_published=false&page=1'
-    output = boolean_filter(request, filter)
-    expected = <<-HTML
-<h2>Is published?</h2>
-<ul>
-<li><a href="http://test.host/admin/pages?is_published=true" class="off">Yes, it is</a></li>
-<li><a href="http://test.host/admin/pages?is_published=false" class="on">No, it isn't</a></li>
-</ul>
-    HTML
-    assert_equal expected, output
-
-  end
-
   def test_string_filter_when_values_are_strings
 
     @resource = { :class => TypusUser, :self => 'typus_users' }

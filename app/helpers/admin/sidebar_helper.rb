@@ -141,7 +141,6 @@ module Admin::SidebarHelper
 
     returning(String.new) do |html|
       typus_filters.each do |key, value|
-        value = :boolean if key.include?('?')
         case value
         when :boolean:      html << boolean_filter(current_request, key)
         when :string:       html << string_filter(current_request, key)
@@ -226,9 +225,9 @@ function surfto_#{model_pluralized}(form) {
 
   def boolean_filter(request, filter)
     items = []
-    @resource[:class].typus_boolean(filter.typus_cleaner).each do |key, value|
-      switch = request.include?("#{filter.typus_cleaner}=#{key}") ? 'on' : 'off'
-      options = { "#{filter.typus_cleaner}".to_sym => key, :page => nil }
+    @resource[:class].typus_boolean(filter).each do |key, value|
+      switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
+      options = { filter.to_sym => key, :page => nil }
       items << (link_to _(value), params.merge(options), :class => switch)
     end
     build_typus_list(items, filter)
