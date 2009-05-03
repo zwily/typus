@@ -236,10 +236,8 @@ private
 
     resource = params[:controller].split('/').last
 
-    @resource = {}
-    @resource[:self] = resource
-    @resource[:class] = resource.classify.constantize
-    @resource[:table_name] = resource.classify.constantize.table_name
+    @resource = { :self => resource, 
+                  :class => resource.classify.constantize }
 
   rescue Exception => error
     error_handler(error)
@@ -289,7 +287,7 @@ private
 
   def set_order
     params[:sort_order] ||= 'desc'
-    @order = params[:order_by] ? "#{@resource[:table_name]}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
+    @order = params[:order_by] ? "#{@resource[:class].table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
   end
 
   def select_template(template, resource = @resource[:self])
