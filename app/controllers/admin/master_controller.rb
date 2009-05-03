@@ -23,7 +23,7 @@ class Admin::MasterController < ApplicationController
   before_filter :set_resource
   before_filter :find_item, :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
-  before_filter :check_ownership_of_item, :only => [ :edit, :update, :toggle, :position, :relate, :unrelate, :destroy ]
+  before_filter :check_ownership_of_item, :only => [ :show, :edit, :update, :toggle, :position, :relate, :unrelate, :destroy ]
 
   before_filter :check_if_user_can_perform_action_on_user, :only => [ :edit, :update, :toggle, :destroy ]
   before_filter :check_if_user_can_perform_action_on_resource
