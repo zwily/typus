@@ -7,7 +7,8 @@
 
 <%= typus_block :model => @resource[:self], :partial => :index %>
 
-<h2><%= link_to _('Dashboard'), admin_dashboard_path %> &rsaquo; <%= _(@resource[:class_name_humanized].pluralize) %> <%= remove_filter_link %></h2>
+<h2><%= link_to _('Dashboard'), admin_dashboard_path %> &rsaquo; 
+    <%= _(@resource[:class_name_humanized].pluralize) %> <%= remove_filter_link %></h2>
 
 <%= typus_block :model => @resource[:self], :partial => :index_top %>
 
