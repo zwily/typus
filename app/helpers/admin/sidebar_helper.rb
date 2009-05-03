@@ -41,7 +41,11 @@ module Admin::SidebarHelper
       end
     end
 
-    items += non_crud_actions
+    @resource[:class].typus_actions_for(params[:action]).each do |action|
+      if @current_user.can_perform?(@resource[:class], action)
+        items << (link_to action.humanize, params.merge(:action => action))
+      end
+    end
 
     case params[:action]
     when 'new', 'create', 'edit', 'show', 'update'
@@ -50,16 +54,6 @@ module Admin::SidebarHelper
 
     return items
 
-  end
-
-  def non_crud_actions
-    returning(Array.new) do |actions|
-      @resource[:class].typus_actions_for(params[:action]).each do |action|
-        if @current_user.can_perform?(@resource[:class], action)
-          actions << (link_to action.humanize, params.merge(:action => action))
-        end
-      end
-    end
   end
 
   def export
