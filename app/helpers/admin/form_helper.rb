@@ -182,7 +182,7 @@ module Admin::FormHelper
     @back_to = '/' + [ params[:controller], params[:action], params[:id] ].compact.join('/')
 
     returning(String.new) do |html|
-      @item_relationships.each do |relationship|
+      @resource[:class].typus_defaults_for(:relationships).each do |relationship|
         case @resource[:class].reflect_on_association(relationship.to_sym).macro
         when :has_many
           html << typus_form_has_many(relationship)

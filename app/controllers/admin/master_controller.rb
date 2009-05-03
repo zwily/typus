@@ -28,9 +28,8 @@ class Admin::MasterController < ApplicationController
   before_filter :check_if_user_can_perform_action_on_user, :only => [ :edit, :update, :toggle, :destroy ]
   before_filter :check_if_user_can_perform_action_on_resource
 
-  before_filter :set_order_and_list_fields, :only => [ :index ]
-  before_filter :set_form_fields, :only => [ :new, :edit, :create, :update ]
-  before_filter :set_fields, :only => [ :show ]
+  before_filter :set_order, :only => [ :index ]
+  before_filter :set_fields, :only => [ :index, :new, :edit, :create, :update, :show ]
 
   ##
   # This is the main index of the model. With the filters, conditions 
@@ -283,29 +282,25 @@ private
   end
 
   ##
-  # Set fields and order when performing an index action.
-  #
-  def set_order_and_list_fields
-    # Set a default sort_order.
-    params[:sort_order] ||= 'desc'
-    # Get @fields & @order.
-    @fields = @resource[:class].typus_fields_for(:list)
-    @order = params[:order_by] ? "#{@resource[:table_name]}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
-  end
-
-  ##
   # Set fields on show action.
   #
   def set_fields
-    @fields = @resource[:class].typus_fields_for(:show)
+    @fields = case params[:action]
+              when 'index'
+                @resource[:class].typus_fields_for(:list)
+              when 'new', 'edit', 'create', 'update'
+                @resource[:class].typus_fields_for(:form)
+              else
+                @resource[:class].typus_fields_for(:show)
+              end
   end
 
   ##
-  # Set fields and detect relationships.
+  # Set order
   #
-  def set_form_fields
-    @fields = @resource[:class].typus_fields_for(:form)
-    @item_relationships = @resource[:class].typus_defaults_for(:relationships)
+  def set_order
+    params[:sort_order] ||= 'desc'
+    @order = params[:order_by] ? "#{@resource[:table_name]}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
   end
 
   ##
