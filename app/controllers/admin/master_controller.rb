@@ -233,12 +233,8 @@ class Admin::MasterController < ApplicationController
 private
 
   def set_resource
-
     resource = params[:controller].split('/').last
-
-    @resource = { :self => resource, 
-                  :class => resource.classify.constantize }
-
+    @resource = { :self => resource, :class => resource.classify.constantize }
   rescue Exception => error
     error_handler(error)
   end
