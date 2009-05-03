@@ -232,9 +232,6 @@ class Admin::MasterController < ApplicationController
 
 private
 
-  ##
-  # Set current resource.
-  #
   def set_resource
 
     resource = params[:controller].split('/').last
@@ -281,9 +278,6 @@ private
 
   end
 
-  ##
-  # Set fields on show action.
-  #
   def set_fields
     @fields = case params[:action]
               when 'index'
@@ -295,17 +289,11 @@ private
               end
   end
 
-  ##
-  # Set order
-  #
   def set_order
     params[:sort_order] ||= 'desc'
     @order = params[:order_by] ? "#{@resource[:table_name]}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
   end
 
-  ##
-  # Select which template to render.
-  #
   def select_template(template, resource = @resource[:self])
     folder = (File.exists?("app/views/admin/#{resource}/#{template}.html.erb")) ? resource : 'resources'
     render :template => "admin/#{folder}/#{template}"
@@ -354,9 +342,6 @@ private
 
   end
 
-  ##
-  # Error handler
-  #
   def error_handler(error, path = admin_dashboard_path)
     raise error unless Rails.env.production?
     flash[:error] = "#{error.message} (#{@resource[:class]})"
