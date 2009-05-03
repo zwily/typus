@@ -75,20 +75,22 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_build_typus_list
-
-    output = build_typus_list([], header = nil)
+  def test_build_typus_list_with_empty_content_and_empty_header
+    output = build_typus_list([], :header => nil)
     assert output.empty?
+  end
 
-    output = build_typus_list(['item1', 'item2'], "Chunky Bacon")
+  def test_build_typus_list_with_content_and_header
+    output = build_typus_list(['item1', 'item2'], :header => "Chunky Bacon")
     assert !output.empty?
     assert_match /Chunky bacon/, output
+  end
 
+  def test_build_typus_list_with_content_without_header
     output = build_typus_list(['item1', 'item2'])
     assert !output.empty?
     assert_no_match /h2/, output
     assert_no_match /\/h2/, output
-
   end
 
   def test_modules

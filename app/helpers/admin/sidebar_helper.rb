@@ -5,17 +5,17 @@ module Admin::SidebarHelper
     returning(String.new) do |html|
 
       html << <<-HTML
-#{build_typus_list(default_actions, 'actions')}
-#{build_typus_list(previous_and_next, 'go_to')}
+#{build_typus_list(default_actions, :header => 'actions')}
+#{build_typus_list(previous_and_next, :header => 'go_to')}
       HTML
 
       html << <<-HTML
-#{build_typus_list(export, 'export')}
+#{build_typus_list(export, :header => 'export')}
       HTML
 
       %w( parent_module submodules ).each do |block|
         html << <<-HTML
-#{build_typus_list(modules(block), block)}
+#{build_typus_list(modules(block), :header => block)}
         HTML
       end
 
@@ -65,17 +65,27 @@ module Admin::SidebarHelper
     end
   end
 
-  def build_typus_list(items, header = nil, selector = nil)
-    return "" if items.empty?
+  def build_typus_list(items, *args)
+
+    options = args.extract_options!
+
+    header = if options[:header]
+               _(options[:header].humanize)
+             elsif options[:attribute]
+               @resource[:class].human_attribute_name(options[:attribute])
+             end
+
+    return String.new if items.empty?
     returning(String.new) do |html|
-      html << "<h2>#{_(header.humanize)}</h2>\n" unless header.nil?
-      next unless selector.nil?
+      html << "<h2>#{header}</h2>\n" unless header.nil?
+      next unless options[:selector].nil?
       html << "<ul>\n"
       items.each do |item|
         html << "<li>#{item}</li>\n"
       end
       html << "</ul>\n"
     end
+
   end
 
   def modules(name)
@@ -197,10 +207,10 @@ function surfto_#{model_pluralized}(form) {
       end
 
       if form
-        html << build_typus_list(items, filter, true)
+        html << build_typus_list(items, :attribute => filter, :selector => true)
         html << form
       else
-        html << build_typus_list(items, filter)
+        html << build_typus_list(items, :attribute => filter)
       end
 
     end
@@ -214,7 +224,7 @@ function surfto_#{model_pluralized}(form) {
       options = { "#{filter}".to_sym => timeline, :page => nil }
       items << (link_to _(timeline.humanize), params.merge(options), :class => switch)
     end
-    build_typus_list(items, filter)
+    build_typus_list(items, :attribute => filter)
   end
 
   def boolean_filter(request, filter)
@@ -224,7 +234,7 @@ function surfto_#{model_pluralized}(form) {
       options = { filter.to_sym => key, :page => nil }
       items << (link_to _(value), params.merge(options), :class => switch)
     end
-    build_typus_list(items, filter)
+    build_typus_list(items, :attribute => filter)
   end
 
   def string_filter(request, filter)
@@ -236,7 +246,7 @@ function surfto_#{model_pluralized}(form) {
       options = { "#{filter}".to_sym => link_filter, :page => nil }
       items << (link_to link_name.capitalize, params.merge(options), :class => switch)
     end
-    build_typus_list(items, filter)
+    build_typus_list(items, :attribute => filter)
   end
 
 end
