@@ -84,7 +84,7 @@ module Admin::TableHelper
       headers = []
       fields.each do |key, value|
 
-        content = _(key.humanize)
+        content = model.human_attribute_name(key)
         content += " (#{key})" if key.include?('_id')
 
         if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key.typus_cleaner) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
@@ -212,7 +212,7 @@ module Admin::TableHelper
     options = { :controller => item.class.name.tableize, :action => 'toggle', :field => attribute, :id => item.id }
 
     content = if item.class.typus_options_for(:toggle) && !item.send(attribute).nil?
-                link_to link_text, params.merge(options), :confirm => _("Change {{attribute}}?", :attribute => attribute.humanize.downcase)
+                link_to link_text, params.merge(options), :confirm => _("Change {{attribute}}?", :attribute => item.class.human_attribute_name(attribute).downcase)
               else
                 link_text
               end
