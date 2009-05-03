@@ -191,7 +191,7 @@ class Admin::MasterController < ApplicationController
     @item.send(params[:related][:model].tableize) << resource
 
     flash[:success] = _("{{model_a}} related to {{model_b}}", 
-                        :model_a => resource_class.name.humanize, 
+                        :model_a => resource_class.human_name, 
                         :model_b => @resource[:class_name_humanized])
 
     redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), 
@@ -214,12 +214,12 @@ class Admin::MasterController < ApplicationController
     when :has_and_belongs_to_many
       @item.send(params[:resource]).delete(resource)
       flash[:success] = _("{{model_a}} unrelated from {{model_b}}", 
-                          :model_a => resource_class.name.humanize, 
+                          :model_a => resource_class.human_name, 
                           :model_b => @resource[:class_name_humanized])
     when :has_many
       resource.destroy
       flash[:success] = _("{{model_a}} removed from {{model_b}}", 
-                          :model_a => resource_class.name.humanize, 
+                          :model_a => resource_class.human_name, 
                           :model_b => @resource[:class_name_humanized])
     end
 
@@ -241,7 +241,7 @@ private
     @resource[:class] = resource.classify.constantize
     @resource[:table_name] = resource.classify.constantize.table_name
     @resource[:class_name] = resource.classify
-    @resource[:class_name_humanized] = resource.humanize.singularize
+    @resource[:class_name_humanized] = resource.classify.constantize.human_name
 
   rescue Exception => error
     error_handler(error)

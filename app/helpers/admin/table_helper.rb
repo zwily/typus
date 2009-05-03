@@ -54,7 +54,7 @@ module Admin::TableHelper
                                                             :resource => item.class.name.tableize, 
                                                             :resource_id => item.id }, 
                                                             :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
-                                                                          :unrelate_model => model.name.humanize.singularize, 
+                                                                          :unrelate_model => model.human_name, 
                                                                           :unrelate_model_from => @resource[:class_name])
         end
 

@@ -27,7 +27,7 @@ module TypusHelper
           new_admin_item_path = { :controller => "admin/#{model.tableize}", :action => 'new'}
           html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to _(model.titleize.capitalize.pluralize), admin_items_path}<br /><small>#{description}</small></td>
+<td>#{link_to _(model.constantize.human_name.pluralize), admin_items_path}<br /><small>#{description}</small></td>
 <td class="right"><small>
 #{link_to _('Add'), new_admin_item_path if @current_user.can_perform?(model, 'create')}
 </small></td>
