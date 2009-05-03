@@ -201,9 +201,10 @@ module Admin::FormHelper
 
       model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
       model_to_relate_as_resource = model_to_relate.name.tableize
-      association = @resource[:class].reflect_on_association(field.to_sym).macro
 
-      foreign_key = @resource[:class].reflections[field.to_sym].primary_key_name
+      reflection = @resource[:class].reflect_on_association(field.to_sym)
+      association = reflection.macro
+      foreign_key = reflection.primary_key_name
 
       link_options = { :controller => "admin/#{field}", 
                        :action => 'new', 
@@ -244,7 +245,9 @@ module Admin::FormHelper
 
       model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
       model_to_relate_as_resource = model_to_relate.name.tableize
-      association = @resource[:class].reflect_on_association(field.to_sym).macro
+
+      reflection = @resource[:class].reflect_on_association(field.to_sym)
+      association = reflection.macro
 
       html << <<-HTML
 <a name="#{field}"></a>
@@ -287,7 +290,9 @@ module Admin::FormHelper
 
       model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
       model_to_relate_as_resource = model_to_relate.name.tableize
-      association = @resource[:class].reflect_on_association(field.to_sym).macro
+
+      reflection = @resource[:class].reflect_on_association(field.to_sym)
+      association = reflection.macro
 
       html << <<-HTML
 <a name="#{field}"></a>
