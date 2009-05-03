@@ -291,7 +291,7 @@ private
               when 'new', 'edit', 'create', 'update'
                 @resource[:class].typus_fields_for(:form)
               else
-                @resource[:class].typus_fields_for(:show)
+                @resource[:class].typus_fields_for(params[:action])
               end
   end
 
