@@ -106,7 +106,7 @@ module Admin::FormHelper
     HTML
   end
 
-  def typus_selector_field(attribute)
+  def typus_selector_field(attribute, klass = @resource[:class])
     returning(String.new) do |html|
       options = []
       @resource[:class].send(attribute).each do |option|
