@@ -240,7 +240,6 @@ private
     @resource[:self] = resource
     @resource[:class] = resource.classify.constantize
     @resource[:table_name] = resource.classify.constantize.table_name
-    @resource[:class_name] = resource.classify
     @resource[:class_human_name] = resource.classify.constantize.human_name
 
   rescue Exception => error

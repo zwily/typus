@@ -91,8 +91,8 @@ module Admin::SidebarHelper
   def modules(name)
 
     models = case name
-             when 'parent_module': Typus.parent(@resource[:class_name], 'module')
-             when 'submodules':    Typus.module(@resource[:class_name])
+             when 'parent_module': Typus.parent(@resource[:class], 'module')
+             when 'submodules':    Typus.module(@resource[:class])
              end
 
     return [] if models.empty?
