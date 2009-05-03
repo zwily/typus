@@ -30,6 +30,7 @@ class Admin::MasterController < ApplicationController
 
   before_filter :set_order_and_list_fields, :only => [ :index ]
   before_filter :set_form_fields, :only => [ :new, :edit, :create, :update ]
+  before_filter :set_fields, :only => [ :show ]
 
   ##
   # This is the main index of the model. With the filters, conditions 
@@ -290,6 +291,13 @@ private
     # Get @fields & @order.
     @fields = @resource[:class].typus_fields_for(:list)
     @order = params[:order_by] ? "#{@resource[:table_name]}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
+  end
+
+  ##
+  # Set fields on show action.
+  #
+  def set_fields
+    @fields = @resource[:class].typus_fields_for(:show)
   end
 
   ##
