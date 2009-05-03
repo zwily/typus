@@ -48,7 +48,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
     expected = <<-HTML
 <li><label for="item_favorite_comment">Favorite comment
-    <small><a href="http://test.host/admin/comments/new?back_to=%2Fadmin%2Fpost%2Fedit%2F1&selected=favorite_comment_id" onclick="return confirm('Are you sure you want to leave this page?\\n\\nIf you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost.\\n\\nClick OK to continue, or click Cancel to stay on this page.');">Add new</a></small>
+    <small><a href="http://test.host/admin/comments/new?back_to=%2Fadmin%2Fpost%2Fedit%2F1&selected=favorite_comment_id" onclick="return confirm('Are you sure you want to leave this page?\\n\\nIf you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost.\\n\\nClick OK to continue, or click Cancel to stay on this page.');">Add</a></small>
     </label>
 <select id="item_favorite_comment_id" name="item[favorite_comment_id]"><option value=""></option>
 <option value="1">John</option>
