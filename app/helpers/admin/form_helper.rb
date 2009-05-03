@@ -184,10 +184,12 @@ module Admin::FormHelper
     returning(String.new) do |html|
       @resource[:class].typus_defaults_for(:relationships).each do |relationship|
         case @resource[:class].reflect_on_association(relationship.to_sym).macro
-        when :has_many
-          html << typus_form_has_many(relationship)
         when :has_and_belongs_to_many
           html << typus_form_has_and_belongs_to_many(relationship)
+        when :has_many
+          html << typus_form_has_many(relationship)
+        when :has_one
+          html << typus_form_has_one(relationship)
         end
       end
     end
@@ -196,8 +198,10 @@ module Admin::FormHelper
 
   def typus_form_has_many(field)
     returning(String.new) do |html|
+
       model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
       model_to_relate_as_resource = model_to_relate.name.tableize
+      association = @resource[:class].reflect_on_association(field.to_sym).macro
 
       foreign_key = @resource[:class].reflections[field.to_sym].primary_key_name
 
@@ -211,7 +215,7 @@ module Admin::FormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to _(field.humanize), :controller => "admin/#{field}"}
+  #{link_to _(field.humanize), :controller => model_to_relate_as_resource}
   <small>#{link_to _('Add new'), link_options if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
@@ -222,7 +226,8 @@ module Admin::FormHelper
                            model_to_relate.typus_fields_for(:relationship), 
                            items, 
                            model_to_relate_as_resource, 
-                           options)
+                           options, 
+                           association)
       else
         html << <<-HTML
   <div id="flash" class="notice"><p>#{_("There are no {{records}}.", :records => _(field.humanize.downcase))}</p></div>
@@ -236,13 +241,16 @@ module Admin::FormHelper
 
   def typus_form_has_and_belongs_to_many(field)
     returning(String.new) do |html|
+
       model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
       model_to_relate_as_resource = model_to_relate.name.tableize
+      association = @resource[:class].reflect_on_association(field.to_sym).macro
+
       html << <<-HTML
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to _(field.humanize), :controller => field}
+  #{link_to _(field.humanize), :controller => model_to_relate_as_resource}
   <small>#{link_to _('Add new'), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
@@ -257,10 +265,48 @@ module Admin::FormHelper
       end
       items = @resource[:class].find(params[:id]).send(field)
       unless items.empty?
-        html << build_list(model_to_relate, model_to_relate.typus_fields_for(:relationship), items, model_to_relate_as_resource)
+        html << build_list(model_to_relate, 
+                           model_to_relate.typus_fields_for(:relationship), 
+                           items, 
+                           model_to_relate_as_resource, 
+                           {}, 
+                           association)
       else
         html << <<-HTML
   <div id="flash" class="notice"><p>#{_("There are no {{records}}.", :records => _(field.humanize))}</p></div>
+        HTML
+      end
+      html << <<-HTML
+</div>
+      HTML
+    end
+  end
+
+  def typus_form_has_one(field)
+    returning(String.new) do |html|
+
+      model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
+      model_to_relate_as_resource = model_to_relate.name.tableize
+      association = @resource[:class].reflect_on_association(field.to_sym).macro
+
+      html << <<-HTML
+<a name="#{field}"></a>
+<div class="box_relationships">
+  <h2>#{link_to _(field.titleize), :controller => model_to_relate_as_resource}</h2>
+      HTML
+      items = Array.new
+      items << @resource[:class].find(params[:id]).send(field) unless @resource[:class].find(params[:id]).send(field).nil?
+      unless items.empty?
+        options = { :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id }
+        html << build_list(model_to_relate, 
+                           model_to_relate.typus_fields_for(:relationship), 
+                           items, 
+                           model_to_relate_as_resource, 
+                           options, 
+                           association)
+      else
+        html << <<-HTML
+  <div id="flash" class="notice"><p>#{_("There is no {{records}}.", :records => _(field.titleize.downcase))}</p></div>
         HTML
       end
       html << <<-HTML

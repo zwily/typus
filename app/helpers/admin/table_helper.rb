@@ -1,6 +1,6 @@
 module Admin::TableHelper
 
-  def build_typus_table(model, fields, items, link_options = {})
+  def build_typus_table(model, fields, items, link_options = {}, association = nil)
 
     returning(String.new) do |html|
 
@@ -51,7 +51,8 @@ module Admin::TableHelper
         else
           perform = link_to image_tag('admin/trash.gif'), { :action => 'unrelate', 
                                                             :id => params[:id], 
-                                                            :resource => item.class.name.tableize, 
+                                                            :association => association, 
+                                                            :resource => model, 
                                                             :resource_id => item.id }, 
                                                             :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
                                                                           :unrelate_model => model.human_name, 

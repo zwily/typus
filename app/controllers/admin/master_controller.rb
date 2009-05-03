@@ -206,17 +206,15 @@ class Admin::MasterController < ApplicationController
   def unrelate
 
     resource_class = params[:resource].classify.constantize
-    resource_tableized = params[:resource]
-    resource_id = params[:resource_id]
-    resource = resource_class.find(resource_id)
+    resource = resource_class.find(params[:resource_id])
 
-    case @resource[:class].reflect_on_association(params[:resource].to_sym).macro
-    when :has_and_belongs_to_many
+    case params[:association]
+    when 'has_and_belongs_to_many'
       @item.send(params[:resource]).delete(resource)
       flash[:success] = _("{{model_a}} unrelated from {{model_b}}", 
                           :model_a => resource_class.human_name, 
                           :model_b => @resource[:class].human_name)
-    when :has_many
+    when 'has_many', 'has_one'
       resource.destroy
       flash[:success] = _("{{model_a}} removed from {{model_b}}", 
                           :model_a => resource_class.human_name, 
@@ -226,7 +224,7 @@ class Admin::MasterController < ApplicationController
     redirect_to :controller => @resource[:self], 
                 :action => @resource[:class].typus_options_for(:default_action_on_item), 
                 :id => @item.id, 
-                :anchor => resource_tableized
+                :anchor => resource_class.table_name
 
   end
 

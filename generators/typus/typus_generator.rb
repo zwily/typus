@@ -61,7 +61,7 @@ class TypusGenerator < Rails::Generator::Base
         end
 
         # Detect relationships using reflection.
-        relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many ].map do |relationship|
+        relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many, :has_one ].map do |relationship|
                           model.reflect_on_all_associations(relationship).map { |i| i.name.to_s }
                         end.flatten.sort
 
