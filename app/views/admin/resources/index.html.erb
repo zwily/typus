@@ -8,7 +8,7 @@
 <%= typus_block :resource => @resource[:self], :partial => :index %>
 
 <h2><%= link_to _('Dashboard'), admin_dashboard_path %> &rsaquo; 
-    <%= _(@resource[:class_human_name].pluralize) %> <%= remove_filter_link %></h2>
+    <%= _(@resource[:class].human_name.pluralize) %> <%= remove_filter_link %></h2>
 
 <%= typus_block :resource => @resource[:self], :partial => :index_top %>
 
@@ -18,9 +18,9 @@
 <% else %>
   <div id="flash" class="notice">
     <% if @resource[:class].count.zero? %>
-      <p><%= _("There are no {{records}}.", :records => @resource[:class_human_name].pluralize.downcase) %></p>
+      <p><%= _("There are no {{records}}.", :records => @resource[:class].human_name.pluralize.downcase) %></p>
     <% else %>
-      <p><%= _("There are no {{records}} under this filter.", :records => @resource[:class_human_name].pluralize.downcase) %></p>
+      <p><%= _("There are no {{records}} under this filter.", :records => @resource[:class].human_name.pluralize.downcase) %></p>
     <% end %>
   </div>
 <% end %>

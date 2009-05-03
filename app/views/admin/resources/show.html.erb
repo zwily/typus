@@ -6,7 +6,7 @@
 <%= typus_block :resource => @resource[:self], :partial => :show %>
 
 <h2><%= link_to _('Dashboard'), admin_dashboard_path %> &rsaquo; 
-    <%= link_to _(@resource[:class_human_name].pluralize), :action => 'index' %> &rsaquo; 
+    <%= link_to _(@resource[:class].human_name.pluralize), :action => 'index' %> &rsaquo; 
     <%= _('Show') %></h2>
 
 <%= typus_block :resource => @resource[:self], :partial => :show_top %>
