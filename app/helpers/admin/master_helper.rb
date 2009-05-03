@@ -6,10 +6,10 @@ module Admin::MasterHelper
   include Admin::FormHelper
   include Admin::TableHelper
 
-  def display_link_to_previous(klass_name = @resource[:class_name], _params = params)
+  def display_link_to_previous(klass = @resource[:class], _params = params)
 
     options = {}
-    options[:resource_from] = klass_name.humanize
+    options[:resource_from] = klass.human_name
     options[:resource_to] = _params[:resource].classify.humanize if _params[:resource]
 
     editing = %w( edit update ).include?(_params[:action])
