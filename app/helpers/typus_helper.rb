@@ -88,7 +88,7 @@ module TypusHelper
   def typus_block(*args)
 
     options = args.extract_options!
-    template = [ 'admin', options[:model], options[:location], "_#{options[:partial]}.html.erb" ].compact.join('/')
+    template = [ 'admin', options[:resource], options[:location], "_#{options[:partial]}.html.erb" ].compact.join('/')
 
     exists = ActionController::Base.view_paths.map { |vp| File.exists?("#{Rails.root}/#{vp}/#{template}") }
 
