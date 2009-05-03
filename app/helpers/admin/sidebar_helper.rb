@@ -118,7 +118,7 @@ module Admin::SidebarHelper
     typus_search = @resource[:class].typus_defaults_for(:search)
     return if typus_search.empty?
 
-    search_by = typus_search.collect { |x| _(x) }.to_sentence
+    search_by = typus_search.collect { |x| @resource[:class].human_attribute_name(x) }.to_sentence
 
     search_params = params.dup
     %w( action controller search page ).each { |p| search_params.delete(p) }
@@ -131,7 +131,7 @@ module Admin::SidebarHelper
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.sort.join("\n")}
 </form>
-<p class="tip">#{_('Search by')} #{search_by.humanize.downcase}.</p>
+<p class="tip">#{_('Search by')} #{search_by.downcase}.</p>
     HTML
 
   end
