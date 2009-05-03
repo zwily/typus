@@ -231,7 +231,7 @@ module Admin::FormHelper
                            association)
       else
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{_("There are no {{records}}.", :records => _(field.humanize.downcase))}</p></div>
+  <div id="flash" class="notice"><p>#{_("There are no {{records}}.", :records => model_to_relate.human_name.pluralize.downcase)}</p></div>
         HTML
       end
       html << <<-HTML
@@ -276,7 +276,7 @@ module Admin::FormHelper
                            association)
       else
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{_("There are no {{records}}.", :records => _(field.humanize))}</p></div>
+  <div id="flash" class="notice"><p>#{_("There are no {{records}}.", :records => model_to_relate.human_name.pluralize.downcase)}</p></div>
         HTML
       end
       html << <<-HTML
@@ -313,7 +313,7 @@ module Admin::FormHelper
                            association)
       else
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{_("There is no {{records}}.", :records => _(field.titleize.downcase))}</p></div>
+  <div id="flash" class="notice"><p>#{_("There is no {{records}}.", :records => model_to_relate.human_name.downcase)}</p></div>
         HTML
       end
       html << <<-HTML
