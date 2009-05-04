@@ -220,7 +220,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 <div class="box_relationships">
   <h2>
   <a href="http://test.host/admin/comments">Comments</a>
-  <small><a href="http://test.host/admin/comments/new?resource=posts&resource_id=1">Add new</a></small>
+  <small><a href="http://test.host/admin/comments/new?resource=post&resource_id=1">Add new</a></small>
   </h2>
 <!-- a_nice_list --></div>
     HTML
@@ -245,7 +245,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 <div class="box_relationships">
   <h2>
   <a href="http://test.host/admin/comments">Comments</a>
-  <small><a href="http://test.host/admin/comments/new?resource=posts&resource_id=1">Add new</a></small>
+  <small><a href="http://test.host/admin/comments/new?resource=post&resource_id=1">Add new</a></small>
   </h2>
   <div id="flash" class="notice"><p>There are no comments.</p></div>
 </div>
