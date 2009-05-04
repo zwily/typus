@@ -306,21 +306,23 @@ private
       resource_class = params[:resource].classify.constantize
       resource_id = params[:resource_id]
       resource = resource_class.find(resource_id)
-      association = @resource[:class].reflect_on_association(params[:resource].to_sym).macro rescue :has_many
+      association = @resource[:class].reflect_on_association(params[:resource].to_sym).macro rescue :polymorphic
     else
-      association = :belongs_to
+      association = :has_many
     end
 
     case association
+    when :belongs_to
+      @item.save
     when :has_and_belongs_to_many
       @item.save
       @item.send(params[:resource]) << resource
     when :has_many
-      resource.send(@item.class.name.tableize).create(params[:item])
-    when :belongs_to
       @item.save
       message = _("{{model}} successfully created.", :model => @resource[:class].human_name)
       path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
+    when :polymorphic
+      resource.send(@item.class.name.tableize).create(params[:item])
     end
 
     flash[:success] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
