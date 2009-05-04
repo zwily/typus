@@ -37,8 +37,11 @@ class Admin::MasterController < ApplicationController
                 :only => [ :index, :new, :edit, :create, :update, :show ]
 
   ##
-  # This is the main index of the model. With the filters, conditions 
-  # and more. You can get HTML, CSV and XML listings.
+  # This is the main index of the model. With filters, conditions 
+  # and more.
+  #
+  # By default application can respond_to html, csv and xml, but you 
+  # can add your formats.
   #
   def index
 
