@@ -116,7 +116,6 @@ module Typus
 
       # Rails Extensions
       require 'typus/active_record'
-      require 'typus/routes'
 
       # Mixins
       require 'typus/authentication'
