@@ -203,8 +203,9 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to :action => 'index'
     assert !flash[:success]
-    assert flash[:warning]
-    assert_match /Toggle is disabled/, flash[:warning]
+    assert !flash[:error]
+    assert flash[:notice]
+    assert_equal "Toggle is disabled.", flash[:notice]
 
   end
 

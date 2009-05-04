@@ -166,7 +166,7 @@ class Admin::MasterController < ApplicationController
                           :model => @resource[:class].human_name, 
                           :attribute => params[:field].humanize.downcase)
     else
-      flash[:warning] = _("Toggle is disabled.")
+      flash[:notice] = _("Toggle is disabled.")
     end
     redirect_to :back
   end
