@@ -210,6 +210,7 @@ module Admin::FormHelper
                        :action => 'new', 
                        :back_to => @back_to, 
                        :resource => @resource[:self], 
+                       :resource_id => @item.id, 
                        foreign_key => @item.id }
 
       html << <<-HTML
