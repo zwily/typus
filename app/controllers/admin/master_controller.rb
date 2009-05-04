@@ -90,7 +90,7 @@ class Admin::MasterController < ApplicationController
     if @item.valid?
       create_with_back_to and return if params[:back_to]
       @item.save
-      flash[:success] = _("{{model}} successfully created", :model => @resource[:class].human_name)
+      flash[:success] = _("{{model}} successfully created.", :model => @resource[:class].human_name)
       if @resource[:class].typus_options_for(:index_after_save)
         redirect_to :action => 'index'
       else
@@ -166,7 +166,7 @@ class Admin::MasterController < ApplicationController
                           :model => @resource[:class].human_name, 
                           :attribute => params[:field].humanize.downcase)
     else
-      flash[:warning] = _("Toggle is disabled")
+      flash[:warning] = _("Toggle is disabled.")
     end
     redirect_to :back
   end
@@ -197,7 +197,7 @@ class Admin::MasterController < ApplicationController
 
     @item.send(resource_tableized) << resource_class.find(params[:related][:id])
 
-    flash[:success] = _("{{model_a}} related to {{model_b}}", 
+    flash[:success] = _("{{model_a}} related to {{model_b}}.", 
                         :model_a => resource_class.human_name, 
                         :model_b => @resource[:class].human_name)
 
@@ -218,10 +218,10 @@ class Admin::MasterController < ApplicationController
     case params[:association]
     when 'has_and_belongs_to_many'
       @item.send(resource_class.table_name).delete(resource)
-      message = "{{model_a}} unrelated from {{model_b}}"
+      message = "{{model_a}} unrelated from {{model_b}}."
     when 'has_many', 'has_one'
       resource.destroy
-      message = "{{model_a}} removed from {{model_b}}"
+      message = "{{model_a}} removed from {{model_b}}."
     end
 
     flash[:success] = _(message, :model_a => resource_class.human_name, :model_b => @resource[:class].human_name)
@@ -267,7 +267,7 @@ private
 
     # If item is owned by the user ...
     unless @item.send(Typus.user_fk) == session[:typus_user_id]
-      flash[:notice] = _("Record owned by another user")
+      flash[:notice] = _("Record owned by another user.")
       redirect_to :action => 'show', :id => @item.id
     end
 
@@ -330,7 +330,7 @@ private
     else
 
       @item.save
-      flash[:success] = _("{{model}} successfully created", :model => @resource[:class].human_name)
+      flash[:success] = _("{{model}} successfully created.", :model => @resource[:class].human_name)
       redirect_to "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
 
     end
