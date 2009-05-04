@@ -209,7 +209,7 @@ module Admin::FormHelper
       link_options = { :controller => "admin/#{field}", 
                        :action => 'new', 
                        :back_to => @back_to, 
-                       :resource => @resource[:self], 
+                       :resource => @resource[:self].singularize, 
                        :resource_id => @item.id, 
                        foreign_key => @item.id }
 
