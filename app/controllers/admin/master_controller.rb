@@ -295,7 +295,10 @@ private
   end
 
   ##
-  # Used by create when params[:back_to] is defined.
+  # When <tt>params[:back_to]</tt> is defined this action is used.
+  #
+  # - <tt>has_and_belongs_to_many</tt> relationships.
+  # - <tt>has_many</tt> relationships (polymorphic ones).
   #
   def create_with_back_to
 
@@ -305,21 +308,14 @@ private
       resource_id = params[:resource_id]
       resource = resource_class.find(resource_id)
 
-      begin
+      association = @resource[:class].reflect_on_association(params[:resource].to_sym).macro rescue :has_many
 
-        case @resource[:class].reflect_on_association(params[:resource].to_sym).macro
-        when :has_and_belongs_to_many
-          @item.save
-          @item.send(params[:resource]) << resource
-        when :has_many
-          resource.send(@item.class.name.tableize).create(params[:item])
-        end
-
-      rescue
-
-        # OPTIMIZE: Polimorphic
+      case association
+      when :has_and_belongs_to_many
+        @item.save
+        @item.send(params[:resource]) << resource
+      when :has_many
         resource.send(@item.class.name.tableize).create(params[:item])
-
       end
 
       flash[:success] = _("{{model_a}} successfully assigned to {{model_b}}.", 
