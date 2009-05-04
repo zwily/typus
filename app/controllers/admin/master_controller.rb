@@ -187,16 +187,15 @@ class Admin::MasterController < ApplicationController
   end
 
   ##
-  # Relate a model object to another.
+  # Relate a model object to another, this action is used only by the 
+  # has_and_belongs_to_many relationships.
   #
   def relate
 
     resource_class = params[:related][:model].constantize
     resource_tableized = params[:related][:model].tableize
-    resource_id = params[:related][:id]
-    resource = resource_class.find(resource_id)
 
-    @item.send(params[:related][:model].tableize) << resource
+    @item.send(resource_tableized) << resource_class.find(params[:related][:id])
 
     flash[:success] = _("{{model_a}} related to {{model_b}}", 
                         :model_a => resource_class.human_name, 
