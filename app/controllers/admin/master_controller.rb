@@ -25,7 +25,7 @@ class Admin::MasterController < ApplicationController
                 :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
   before_filter :check_ownership_of_item, 
-                :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
+                :only => [ :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
   before_filter :check_if_user_can_perform_action_on_user, 
                 :only => [ :edit, :update, :toggle, :destroy ]

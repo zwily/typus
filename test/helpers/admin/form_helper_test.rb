@@ -28,6 +28,8 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     <small></small>
     </label>
 <select id="item_post_id" name="item[post_id]"><option value=""></option>
+<option value="3">Post#3</option>
+<option value="4">Post#4</option>
 <option value="1">Post#1</option>
 <option value="2">Post#2</option></select></li>
     HTML

@@ -234,4 +234,45 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
 =end
 
+  def test_should_verify_root_can_edit_any_record
+    Post.find(:all).each do |post|
+      get :edit, { :id => post.id }
+      assert_response :success
+      assert_template 'edit'
+    end
+  end
+
+  def test_should_verify_editor_can_view_all_records
+    Post.find(:all).each do |post|
+      get :show, { :id => post.id }
+      assert_response :success
+      assert_template 'show'
+    end
+  end
+
+  def test_should_verify_editor_can_edit_their_records
+
+    typus_user = typus_users(:editor)
+    @request.session[:typus_user_id] = typus_user.id
+
+    post = posts(:owned_by_editor)
+    get :edit, { :id => post.id }
+    assert_response :success
+
+  end
+
+  def test_should_verify_editor_cannot_edit_other_users_records
+
+    typus_user = typus_users(:editor)
+    @request.session[:typus_user_id] = typus_user.id
+
+    post = posts(:owned_by_admin)
+    get :edit, { :id => post.id }
+    assert_response :redirect
+    assert_redirected_to :action => 'show', :id => post.id
+    assert flash[:notice]
+    assert_equal "Record owned by another user.", flash[:notice]
+
+  end
+
 end
