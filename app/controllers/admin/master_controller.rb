@@ -134,11 +134,12 @@ class Admin::MasterController < ApplicationController
   def update
     if @item.update_attributes(params[:item])
       flash[:success] = _("{{model}} successfully updated.", :model => @resource[:class].human_name)
-      if @resource[:class].typus_options_for(:index_after_save)
-        redirect_to params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
-      else
-        redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id
-      end
+      path = if @resource[:class].typus_options_for(:index_after_save)
+               params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
+             else
+               { :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id }
+             end
+      redirect_to path
     else
       @previous, @next = @item.previous_and_next
       select_template :edit
