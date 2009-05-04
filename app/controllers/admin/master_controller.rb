@@ -303,33 +303,30 @@ private
   def create_with_back_to
 
     if params[:resource] && params[:resource_id]
-
       resource_class = params[:resource].classify.constantize
       resource_id = params[:resource_id]
       resource = resource_class.find(resource_id)
-
       association = @resource[:class].reflect_on_association(params[:resource].to_sym).macro rescue :has_many
-
-      case association
-      when :has_and_belongs_to_many
-        @item.save
-        @item.send(params[:resource]) << resource
-      when :has_many
-        resource.send(@item.class.name.tableize).create(params[:item])
-      end
-
-      flash[:success] = _("{{model_a}} successfully assigned to {{model_b}}.", 
-                          :model_a => @item.class, 
-                          :model_b => resource_class.name)
-      redirect_to "#{params[:back_to]}##{@resource[:self]}"
-
     else
-
-      @item.save
-      flash[:success] = _("{{model}} successfully created.", :model => @resource[:class].human_name)
-      redirect_to "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
-
+      association = :belongs_to
     end
+
+    case association
+    when :has_and_belongs_to_many
+      @item.save
+      @item.send(params[:resource]) << resource
+    when :has_many
+      resource.send(@item.class.name.tableize).create(params[:item])
+    when :belongs_to
+      @item.save
+      message = _("{{model}} successfully created.", :model => @resource[:class].human_name)
+      path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
+    end
+
+    flash[:success] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
+                                 :model_a => @item.class, 
+                                 :model_b => resource_class.name)
+    redirect_to path || "#{params[:back_to]}##{@resource[:self]}"
 
   end
 
