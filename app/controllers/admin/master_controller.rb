@@ -21,15 +21,20 @@ class Admin::MasterController < ApplicationController
   before_filter :set_locale
 
   before_filter :set_resource
-  before_filter :find_item, :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
+  before_filter :find_item, 
+                :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
-  before_filter :check_ownership_of_item, :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
+  before_filter :check_ownership_of_item, 
+                :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
-  before_filter :check_if_user_can_perform_action_on_user, :only => [ :edit, :update, :toggle, :destroy ]
+  before_filter :check_if_user_can_perform_action_on_user, 
+                :only => [ :edit, :update, :toggle, :destroy ]
   before_filter :check_if_user_can_perform_action_on_resource
 
-  before_filter :set_order, :only => [ :index ]
-  before_filter :set_fields, :only => [ :index, :new, :edit, :create, :update, :show ]
+  before_filter :set_order, 
+                :only => [ :index ]
+  before_filter :set_fields, 
+                :only => [ :index, :new, :edit, :create, :update, :show ]
 
   ##
   # This is the main index of the model. With the filters, conditions 
