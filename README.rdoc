@@ -69,6 +69,7 @@ Typus and blog about Typus.
 - Erik Tigerholm (Code) http://github.com/eriktigerholm
 - George Guimarães (Translation to Brazilian Portuguese and code) http://github.com/georgeguimaraes
 - José Valim (Code) http://github.com/josevalim
+- Luqman Amjad (Code) http://github.com/snake
 
 == Acknowledgments
 
