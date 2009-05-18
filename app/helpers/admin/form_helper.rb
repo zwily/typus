@@ -204,8 +204,7 @@ module Admin::FormHelper
 
       reflection = @resource[:class].reflect_on_association(field.to_sym)
       association = reflection.macro
-      foreign_key = reflection.primary_key_name
-      foreign_key = foreign_key.pluralize if reflection.through_reflection
+      foreign_key = reflection.through_reflection ? foreign_key.pluralize : reflection.primary_key_name
 
       link_options = { :controller => "admin/#{field}", 
                        :action => 'new', 
