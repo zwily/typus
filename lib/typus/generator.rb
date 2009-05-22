@@ -9,7 +9,7 @@ module Typus
     Dir.mkdir(admin_controllers_folder) unless File.directory?(admin_controllers_folder)
 
     # Get a list of all available app/controllers/admin
-    admin_controllers = Dir['vendor/plugins/*/app/controllers/admin/*.rb', 'app/controllers/admin/*.rb']
+    admin_controllers = Dir["#{Rails.root}/vendor/plugins/*/app/controllers/admin/*.rb", "#{Rails.root}/app/controllers/admin/*.rb"]
     admin_controllers = admin_controllers.map { |i| File.basename(i) }
 
     # Create app/views/admin if doesn't exist.
