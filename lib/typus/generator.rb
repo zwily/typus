@@ -23,7 +23,7 @@ module Typus
     end
 
     # Get a list of all available functional test for admin.
-    admin_controller_tests = Dir['vendor/plugins/*/test/functional/admin/*.rb', 'test/functional/admin/*.rb']
+    admin_controller_tests = Dir["#{Rails.root}/vendor/plugins/*/test/functional/admin/*.rb", "#{Rails.root}/test/functional/admin/*.rb"]
     admin_controller_tests = admin_controller_tests.map { |i| File.basename(i) }
 
     # Generate unexisting controllers for resources which are not tied to
