@@ -3,7 +3,7 @@ module Typus
   class << self
 
     def version
-      "1.0.0"
+      "0.9.0"
     end
 
     def root
