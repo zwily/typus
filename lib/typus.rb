@@ -2,6 +2,10 @@ module Typus
 
   class << self
 
+    def version
+      "1.0.0"
+    end
+
     def root
       File.dirname(__FILE__) + '/../'
     end
@@ -80,6 +84,10 @@ module Typus
       Rails.env.test? && Dir.pwd == "#{Rails.root}/vendor/plugins/typus"
     end
 
+    def plugin?
+      File.exists?("#{Rails.root}/vendor/plugins/typus")
+    end
+
     ##
     # Enable application. This is used at boot time.
     #
@@ -92,16 +100,24 @@ module Typus
       require 'typus/object'
       require 'typus/string'
 
+      # Load configuration and roles.
       Typus::Configuration.config!
       Typus::Configuration.roles!
-      I18n.load_path += Dir[File.join("#{Rails.root}/vendor/plugins/typus/config/locales/**/*.{rb,yml}")]
 
+      # Load translation files from the plugin or the gem.
+      if plugin?
+        I18n.load_path += Dir[File.join("#{Rails.root}/vendor/plugins/typus/config/locales/**/*.{rb,yml}")]
+      else
+        Gem.path.each { |g| I18n.load_path += Dir[File.join("#{g}/gems/typus-#{version}/config/locales/**/*.{rb,yml}")] }
+      end
+
+      # Require the test/models on when testing.
       require File.dirname(__FILE__) + '/../test/models' if Typus.testing?
 
-      # Rails Extensions
+      # Rails Extensions.
       require 'typus/active_record'
 
-      # Mixins
+      # Mixins.
       require 'typus/authentication'
       require 'typus/format'
       require 'typus/generator'
@@ -110,7 +126,7 @@ module Typus
       require 'typus/quick_edit'
       require 'typus/user'
 
-      # Vendor
+      # Vendor.
       require 'vendor/active_record'
       require 'vendor/paginator'
 
