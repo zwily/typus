@@ -36,7 +36,7 @@ class TypusGenerator < Rails::Generator::Base
       folder = "#{Rails.root}/#{config_folder}"
       Dir.mkdir(folder) unless File.directory?(folder)
 
-      configuration = ""
+      configuration = { :base => '', :roles => '' }
 
       ar_models.each do |model|
 
@@ -65,7 +65,7 @@ class TypusGenerator < Rails::Generator::Base
                           model.reflect_on_all_associations(relationship).map { |i| i.name.to_s }
                         end.flatten.sort
 
-        configuration << <<-HTML
+        configuration[:base] << <<-CODE
 #{model}:
   fields:
     list: #{list.join(', ')}
@@ -87,14 +87,18 @@ class TypusGenerator < Rails::Generator::Base
   application: #{application}
   description:
 
-        HTML
+        CODE
+
+        configuration[:roles] << <<-CODE
+  #{model}: create, read, update, delete
+        CODE
 
       end
 
       Dir["#{Typus.root}/generators/typus/templates/config/typus/*"].each do |f|
         base = File.basename(f)
         m.template "config/typus/#{base}", "#{config_folder}/#{base}", 
-                   :assigns => { :configuration => configuration, :ar_models => ar_models }
+                   :assigns => { :configuration => configuration }
       end
 
       ##

@@ -20,6 +20,4 @@
 ###
 
 admin:
-  <%- ar_models.each do |model| -%>
-  <%= model %>: create, read, update, delete
-  <%- end -%>
+<%= configuration[:roles] %>
