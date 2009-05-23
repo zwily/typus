@@ -36,13 +36,13 @@ module Typus
     mattr_accessor :options
 
     ##
-    # Read Typus Configuration files placed on <tt>config/typus/*.yml</tt>.
+    # Read Typus Configuration files placed on <tt>config/typus/**/*.yml</tt>.
     #
     #   Typus::Configuration.config! overwrites @@config
     #
     def self.config!
 
-      files = Dir["#{Rails.root}/#{options[:config_folder]}/*.yml"].sort
+      files = Dir["#{Rails.root}/#{options[:config_folder]}/**/*.yml"].sort
       files = files.delete_if { |x| x.include?('_roles.yml') }
 
       @@config = {}
@@ -58,13 +58,13 @@ module Typus
     mattr_accessor :config
 
     ##
-    # Read Typus Roles from configuration files placed on <tt>config/typus/*_roles.yml</tt>.
+    # Read Typus Roles from configuration files placed on <tt>config/typus/**/*_roles.yml</tt>.
     #
     #   Typus::Configuration.roles! overwrites @@roles
     #
     def self.roles!
 
-      files = Dir["#{Rails.root}/#{options[:config_folder]}/*_roles.yml"].sort
+      files = Dir["#{Rails.root}/#{options[:config_folder]}/**/*_roles.yml"].sort
 
       @@roles = { options[:root] => {} }
 
