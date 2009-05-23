@@ -37,7 +37,7 @@ module Typus
                :filename => filename)
 
     rescue LoadError
-      render :text => "FasterCSV is not installed."
+      render :text => _("FasterCSV is not installed.")
     end
 
     def generate_xml

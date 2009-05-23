@@ -33,16 +33,16 @@ module Typus
       @current_user = Typus.user_class.find(session[:typus_user_id])
 
       unless @current_user.respond_to?(:role)
-        raise "Run 'script/generate typus_update_schema_to_01 -f && rake db:migrate' to update database schema."
+        raise _("Run 'script/generate typus_update_schema_to_01 -f && rake db:migrate' to update database schema.")
       end
 
       unless Typus::Configuration.roles.keys.include?(@current_user.role)
-        raise "Role does no longer exists."
+        raise _("Role does no longer exists.")
       end
 
       unless @current_user.status
         back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
-        raise "Typus user has been disabled."
+        raise _("Typus user has been disabled.")
       end
 
     rescue Exception => error
