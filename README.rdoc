@@ -28,13 +28,21 @@ Step 3. Go to the admin area and enjoy it!
 
 == Installing
 
+=== Plugin
+
 Install from GitHub the latest version which it's compatible with 
 Rails 2.3.2.
 
     $ script/plugin install git://github.com/fesplugas/typus.git
 
-Once plugin is installed generate *Typus* files and migrate your 
-database (<tt>typus_users</tt> table is created)
+=== Gem
+
+Add *Typus* to your `config/environment.rb`.
+
+    config.gem 'fesplugas-typus', :lib => 'typus', :source => 'http://gems.github.com'
+
+Once *Typus* is installed, run the generator to create required files and migrate your 
+database. (<tt>typus_users</tt> table is created)
 
     $ script/generate typus
     $ rake db:migrate
