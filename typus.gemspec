@@ -2,7 +2,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{typus}
-  s.version = "1.0.0"
+  s.version = "0.9.0"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
@@ -164,7 +164,8 @@ Gem::Specification.new do |s|
      "test/unit/typus_user_roles_test.rb",
      "test/unit/typus_user_test.rb",
      "test/vendor/active_record_test.rb",
-     "test/vendor/paginator_test.rb"
+     "test/vendor/paginator_test.rb",
+     "typus.gemspec"
   ]
   s.has_rdoc = true
   s.homepage = %q{http://intraducibles.com/projects/typus}
