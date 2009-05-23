@@ -45,7 +45,7 @@ http://0.0.0.0:3000/admin and follow the instructions.
 == Support Typus
 
 *Typus* is licensed under the MIT license. As an experiment we 
-encourage you to support this project by donating[http://intraducibles.com/donate] 
+encourage you to support this project by donating[http://intraducibles.com/projects/typus/donate] 
 90 euros if you are a developer or studio. Donations do allow us to spend more 
 time working and supporting the project. All contributions are much appreciated!
 
