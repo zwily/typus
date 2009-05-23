@@ -14,15 +14,15 @@ extensible enough to match lots of use cases.
 
 == For the impatients: Demo in 3 steps
 
-*Step 1*: Create a Rails application using a template.
+Step 1: Create a Rails application using a template.
 
     $ rails example.com -m http://intraducibles.com/projects/typus/demo.txt
 
-*Step 2*: Start the server:
+Step 2: Start the server:
 
     $ cd example.com && script/server
 
-*Step 3*: Go to the admin area and enjoy it!
+Step 3: Go to the admin area and enjoy it!
 
     http://0.0.0.0:3000/admin
 
