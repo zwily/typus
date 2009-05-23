@@ -8,12 +8,6 @@ namespace :typus do
     system "script/plugin install #{plugins.join(' ')} --force"
   end
 
-  desc 'Install typus_more.'
-  task :more do
-    plugins = [ 'git://github.com/fesplugas/typus_more.git' ]
-    system "script/plugin install #{plugins.join(' ')} --force"
-  end
-
   desc 'List current roles.'
   task :roles => :environment do
     Typus::Configuration.roles.each do |role|
