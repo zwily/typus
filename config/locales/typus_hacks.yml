@@ -8,7 +8,7 @@ es:
     models:
       typus_user: "Typus user"
 
-br:
+pt-BR:
   activerecord:
     models:
       typus_user: "Typus user"
