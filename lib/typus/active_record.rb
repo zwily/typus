@@ -153,9 +153,9 @@ module Typus
 
       order = fields.map do |field|
                 (field.include?('-')) ? "#{table_name}.#{field.delete('-')} DESC" : "#{table_name}.#{field} ASC"
-              end
+              end.join(', ')
 
-      return order.join(', ')
+      return order
 
     end
 
