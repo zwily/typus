@@ -2,30 +2,18 @@ module Typus
 
   class << self
 
-    ##
-    # Typus Root
-    #
     def root
       File.dirname(__FILE__) + '/../'
     end
 
-    ##
-    # Returns a list of the available locales.
-    #
     def locales
       Typus::Configuration.options[:locales]
     end
 
-    ##
-    # Get the default locale.
-    #
     def default_locale
       locales.map(&:last).first
     end
 
-    ##
-    # Returns a list of all the applications.
-    #
     def applications
       Typus::Configuration.config.collect { |i| i.last['application'] }.compact.uniq.sort
     end
@@ -54,9 +42,6 @@ module Typus
       Typus::Configuration.config[model.name][name] || ''
     end
 
-    ##
-    # Return a list of models.
-    #
     def models
       Typus::Configuration.config.map { |i| i.first }.sort
     end
@@ -74,9 +59,6 @@ module Typus
 
     end
 
-    ##
-    # Get models folders
-    #
     def get_model_names
       Dir[ "#{Rails.root}/app/models/**/*.rb", 
            "#{Rails.root}/vendor/plugins/**/app/models/**/*.rb" ].collect { |m| File.basename(m).sub(/\.rb$/,'').camelize }
@@ -99,7 +81,9 @@ module Typus
     end
 
     ##
-    # Load configuration files, translations, modules and extensions.
+    # Enable application. This is used at boot time.
+    #
+    #   Typus.enable
     #
     def enable
 
