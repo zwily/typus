@@ -3,4 +3,5 @@
 _dashboard*
 rdoc/*
 *~
+*.gem
 SPECDOC
