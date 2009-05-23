@@ -32,7 +32,7 @@ Step 3. Go to the admin area and enjoy it!
 
     $ script/plugin install git://github.com/fesplugas/typus.git
 
-*Gem*: Add *Typus* to your `config/environment.rb`.
+*Gem*: Add *Typus* to your <tt>config/environment.rb</tt>.
 
     config.gem 'fesplugas-typus', :lib => 'typus', :source => 'http://gems.github.com'
 
