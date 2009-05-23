@@ -58,9 +58,6 @@ class Admin::MasterController < ApplicationController
     error_handler(error)
   end
 
-  ##
-  # New item.
-  #
   def new
 
     item_params = params.dup
@@ -102,9 +99,6 @@ class Admin::MasterController < ApplicationController
 
   end
 
-  ##
-  # Edit an item.
-  #
   def edit
     item_params = params.dup
     %w( action controller model model_id back_to id resource resource_id ).each { |p| item_params.delete(p) }
@@ -114,9 +108,6 @@ class Admin::MasterController < ApplicationController
     select_template :edit
   end
 
-  ##
-  # Show an item.
-  #
   def show
 
     @previous, @next = @item.previous_and_next
@@ -128,9 +119,6 @@ class Admin::MasterController < ApplicationController
 
   end
 
-  ##
-  # Update an item.
-  #
   def update
     if @item.update_attributes(params[:item])
       flash[:success] = _("{{model}} successfully updated.", :model => @resource[:class].human_name)
@@ -146,9 +134,6 @@ class Admin::MasterController < ApplicationController
     end
   end
 
-  ##
-  # Destroy an item.
-  #
   def destroy
     @item.destroy
     flash[:success] = _("{{model}} successfully removed.", :model => @resource[:class].human_name)
@@ -157,9 +142,6 @@ class Admin::MasterController < ApplicationController
     error_handler(error, params.merge(:action => 'index', :id => nil))
   end
 
-  ##
-  # Toggle the status of an item.
-  #
   def toggle
     if @resource[:class].typus_options_for(:toggle)
       @item.toggle!(params[:field])

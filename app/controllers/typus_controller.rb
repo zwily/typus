@@ -33,9 +33,6 @@ class TypusController < ApplicationController
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
 
-  ##
-  # Application Dashboard
-  #
   def dashboard
     flash[:notice] = _("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
   end
