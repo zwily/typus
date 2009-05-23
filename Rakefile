@@ -45,3 +45,17 @@ task :specs do
   puts "#{count} specifications documented"
 
 end
+
+begin
+  require 'jeweler'
+  Jeweler::Tasks.new do |gemspec|
+    gemspec.name = "typus"
+    gemspec.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
+    gemspec.email = "francesc@intraducibles.com"
+    gemspec.homepage = "http://intraducibles.com/projects/typus"
+    gemspec.description = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
+    gemspec.authors = ["Francesc Esplugas"]
+  end
+rescue LoadError
+  puts "Jeweler not available. Install it with: sudo gem install technicalpickles-jeweler -s http://gems.github.com"
+end
