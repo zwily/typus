@@ -55,7 +55,7 @@ module Typus
                         Typus::Configuration.roles[key].keys
                       end.flatten.sort.uniq
 
-      all_resources.delete_if { |x| models.include?(x) } rescue []
+      all_resources.delete_if { |x| models.include?(x) || x == 'TypusUser' } rescue []
 
     end
 
