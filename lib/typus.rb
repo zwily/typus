@@ -108,8 +108,7 @@ module Typus
       if plugin?
         I18n.load_path += Dir[File.join("#{Rails.root}/vendor/plugins/typus/config/locales/**/*.{rb,yml}")]
       else
-        # FIXME
-        Gem.path.each { |g| I18n.load_path += Dir[File.join("#{g}/gems/*typus*/config/locales/**/*.{rb,yml}")] }
+        Gem.path.each { |g| I18n.load_path += Dir[File.join("#{g}/gems/*typus-#{version}/config/locales/**/*.{rb,yml}")] }
       end
 
       # Require the test/models on when testing.
