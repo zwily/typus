@@ -68,9 +68,10 @@ module Admin::FormHelper
   end
 
   def typus_boolean_field(attribute, klass = @resource[:class])
+    attribute_name = attribute.gsub(/\?$/,'')
     <<-HTML
-<li><label for="item_#{attribute}">#{klass.human_attribute_name(attribute)}</label>
-#{check_box :item, attribute} #{_('Checked if active')}</li>
+<li><label for="item_#{attribute_name}">#{klass.human_attribute_name(attribute)}</label>
+#{check_box :item, attribute_name} #{_('Checked if active')}</li>
     HTML
   end
 
