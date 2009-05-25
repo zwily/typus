@@ -1,7 +1,5 @@
 require 'test/helper'
 
-# require 'paginator'
-
 class PaginatorTest < ActiveSupport::TestCase
 
   PER_PAGE = 10
