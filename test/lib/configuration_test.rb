@@ -75,7 +75,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     Typus::Configuration.stubs(:options).returns(options)
     files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
     expected = files.collect { |file| File.basename(file) }
-    assert_equal expected, ['app_two_roles.yml', 'app_one_roles.yml']
+    assert_equal expected, ['app_one_roles.yml', 'app_two_roles.yml']
     expected = { 'admin' => { 'categories' => 'read, update' } }
     assert_equal expected, Typus::Configuration.roles!
   end
