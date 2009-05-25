@@ -101,17 +101,6 @@ END
     assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:password)
 
-=begin
-
-    # FIXME
-
-    @typus_user.password = '12345678'
-    @typus_user.password_confirmation = nil
-    assert @typus_user.invalid?
-    assert @typus_user.errors.invalid?(:password)
-
-=end
-
     @typus_user.password = '12345678'
     @typus_user.password_confirmation = ''
     assert @typus_user.invalid?
