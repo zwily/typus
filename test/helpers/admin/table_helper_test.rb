@@ -235,7 +235,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     Typus::Configuration.stubs(:options).returns(options)
 
     post = posts(:published)
-    output = typus_table_boolean_field(:status, post)
+    output = typus_table_boolean_field('status', post)
     expected = <<-HTML
 <td align="center">True</td>
     HTML
@@ -243,7 +243,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
 
     post = posts(:unpublished)
-    output = typus_table_boolean_field(:status, post)
+    output = typus_table_boolean_field('status', post)
     expected = <<-HTML
 <td align="center">False</td>
     HTML
