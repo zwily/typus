@@ -3,6 +3,12 @@ ENV['RAILS_ENV'] = 'test'
 require File.expand_path(File.dirname(__FILE__) + "/../../../../config/environment")
 require 'test_help'
 require 'mocha'
+require 'time'
+
+def Time.today
+  t = now()
+  mktime( t.year, t.mon, t.day )
+end unless Time.respond_to? :today
 
 begin
   require 'redgreen'

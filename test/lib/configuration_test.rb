@@ -64,7 +64,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     options = { :config_folder => 'vendor/plugins/typus/test/config/ordered' }
     Typus::Configuration.stubs(:options).returns(options)
     files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
-    expected = files.collect { |file| File.basename(file) }
+    expected = files.collect { |file| File.basename(file) }.sort
     assert_equal expected, ['001_roles.yml', '002_roles.yml']
     expected = { 'admin' => { 'categories' => 'read' } }
     assert_equal expected, Typus::Configuration.roles!
@@ -75,7 +75,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     Typus::Configuration.stubs(:options).returns(options)
     files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
     expected = files.collect { |file| File.basename(file) }
-    assert_equal expected, ['app_one_roles.yml', 'app_two_roles.yml']
+    assert_equal expected, ['app_two_roles.yml', 'app_one_roles.yml']
     expected = { 'admin' => { 'categories' => 'read, update' } }
     assert_equal expected, Typus::Configuration.roles!
   end
