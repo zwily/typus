@@ -215,25 +215,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_match /datepicker_template_published_at/, @response.body
   end
 
-=begin
-
-  # FIXME
-
-  def test_should_add_back_to_params_for_comment_items
-
-    post_ = posts(:published)
-    get :edit, { :id => post_.id }
-    assert_response :success
-    back_to = "/posts/#{post_.id}/edit"
-    re = /<a href="\/typus\/assets\/1\/edit(.*)">This is the caption\.<\/a>/
-    params = re.match(@response.body)
-
-    assert_equal params[1], "?back_to=%2Ftypus%2Fposts%2F1%2Fedit&amp;resource=posts&amp;resource_id=#{post_.id}"
-
-  end
-
-=end
-
   def test_should_verify_root_can_edit_any_record
     Post.find(:all).each do |post|
       get :edit, { :id => post.id }
