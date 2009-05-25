@@ -70,9 +70,10 @@ Typus and blog about Typus.
 - Anthony Underwood (Code) http://github.com/aunderwo
 - Felipe Talavera (Code) http://github.com/flype
 - Erik Tigerholm (Code) http://github.com/eriktigerholm
-- George Guimarães (Translation pt-br and code) http://github.com/georgeguimaraes
+- George Guimarães (Portuguese translation and code) http://github.com/georgeguimaraes
 - José Valim (Code) http://github.com/josevalim
 - Luqman Amjad (Code) http://github.com/snake
+- Alexey Noskov (Russian translation and code) http://github.com/alno
 
 == Acknowledgments
 
