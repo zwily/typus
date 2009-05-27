@@ -6,9 +6,7 @@ if Typus.testing?
 end
 
 ##
-# Typus.enable and run the generator unless we are testing the plugin.
-# Do not Typus.enable or generate files if we are running a rails 
-# generator.
+# Do not Typus.enable or Typus.generate if we are running a generator.
 #
 
 scripts = %w( script/generate script/destroy )
