@@ -67,7 +67,7 @@ class TypusGenerator < Rails::Generator::Base
                           model.reflect_on_all_associations(relationship).map { |i| i.name.to_s }
                         end.flatten.sort
 
-        configuration[:base] << <<-CODE
+        configuration[:base] << <<-RAW
 #{model}:
   fields:
     list: #{list.join(', ')}
@@ -89,11 +89,11 @@ class TypusGenerator < Rails::Generator::Base
   application: #{application}
   description:
 
-        CODE
+        RAW
 
-        configuration[:roles] << <<-CODE
+        configuration[:roles] << <<-RAW
   #{model}: create, read, update, delete
-        CODE
+        RAW
 
       end
 

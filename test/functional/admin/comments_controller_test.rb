@@ -105,13 +105,13 @@ class Admin::CommentsControllerTest < ActionController::TestCase
 
   def test_should_generate_csv
 
-    expected = <<-CSV
+    expected = <<-RAW
 Email,Post
 john@example.com,1
 me@example.com,1
 john@example.com,
 me@example.com,1
-     CSV
+     RAW
 
     get :index, :format => 'csv'
     assert_equal expected, @response.body

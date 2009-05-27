@@ -25,10 +25,10 @@ class TypusUserTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_email_is_not_valid
-    email = <<-END
+    email = <<-RAW
 this_is_chelm@example.com
 <script>location.href="http://spammersite.com"</script>
-END
+    RAW
     @typus_user.email = email
     assert @typus_user.invalid?
     assert @typus_user.errors.invalid?(:email)
