@@ -49,7 +49,6 @@ module Typus
             when /file_name/:       attribute_type = :file
             when /password/:        attribute_type = :password
             when 'position':        attribute_type = :position
-            when /\?/:              attribute_type = :boolean
           end
 
           if reflect_on_association(field)
