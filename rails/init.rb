@@ -1,5 +1,4 @@
 require 'typus'
-require 'sha1'
 
 if Typus.testing?
   Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
