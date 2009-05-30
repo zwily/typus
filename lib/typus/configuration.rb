@@ -13,7 +13,6 @@ module Typus
     #     Typus::Configuration.options[:user_fk]
     #     Typus.user_fk
     #
-    #     # TODO
     #     Typus::Configuration.options[:user_class_name]
     #     Typus.user_class
     #
