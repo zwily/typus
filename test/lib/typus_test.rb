@@ -2,6 +2,16 @@ require 'test/helper'
 
 class TypusTest < ActiveSupport::TestCase
 
+  def test_should_return_version
+    assert Typus.respond_to?(:version)
+    assert Typus.version.kind_of?(String)
+  end
+
+  def test_should_return_path
+    expected = Dir.pwd + '/lib/../'
+    assert_equal expected, Typus.path
+  end
+
   def test_should_return_locales
     initializer = "#{Rails.root}/config/initializers/typus.rb"
     return if File.exists?(initializer)

@@ -3,7 +3,7 @@ module Typus
   class << self
 
     def version
-      @@version ||= File.read("#{root}/VERSION").strip
+      @@version ||= File.read("#{path}/VERSION").strip
     end
 
     def path
