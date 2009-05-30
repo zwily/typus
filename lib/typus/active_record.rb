@@ -245,7 +245,7 @@ module Typus
           condition = { key => value }
           conditions = merge_conditions(conditions, condition)
         when :has_and_belongs_to_many
-          condition = {  key => { :id => value } }
+          condition = { key => { :id => value } }
           conditions = merge_conditions(conditions, condition)
           joins << key.to_sym
         end
