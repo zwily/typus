@@ -3,7 +3,19 @@ module Typus
   module Configuration
 
     ##
-    # Default Typus options which can be overwritten from the initializer.
+    # Default Typus options which can be overwritten from the 
+    # initializer. Example:
+    #
+    #     Typus::Configuration.options[:recover_password]
+    #
+    # Special cases:
+    #
+    #     Typus::Configuration.options[:user_fk]
+    #     Typus.user_fk
+    #
+    #     # TODO
+    #     Typus::Configuration.options[:user_class_name]
+    #     Typus.user_class
     #
     typus_options = { :app_name => 'Typus', 
                       :config_folder => 'config/typus', 
@@ -17,7 +29,10 @@ module Typus
                       :user_fk => 'typus_user_id' }
 
     ##
-    # Default model options which can be overwritten from the initializer.
+    # Default model options which can be overwritten from the 
+    # initializer. Example:
+    #
+    #    Model.typus_options_for(:default_action_on_item)
     #
     model_options = { :default_action_on_item => 'edit', 
                       :end_year => nil,
@@ -26,6 +41,7 @@ module Typus
                       :index_after_save => false, 
                       :minute_step => 5, 
                       :nil => 'nil', 
+                      :only_user_items => false, 
                       :per_page => 15, 
                       :sidebar_selector => 5, 
                       :start_year => nil, 

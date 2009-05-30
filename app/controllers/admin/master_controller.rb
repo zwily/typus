@@ -47,6 +47,8 @@ class Admin::MasterController < ApplicationController
 
     @conditions, @joins = @resource[:class].build_conditions(params)
 
+    check_ownership_of_items if @resource[:class].typus_options_for(:only_user_items)
+
     respond_to do |format|
       format.html { generate_html }
       @resource[:class].typus_export_formats.each do |f|
@@ -252,6 +254,21 @@ private
     unless @item.send(Typus.user_fk) == session[:typus_user_id]
       flash[:notice] = _("Record owned by another user.")
       redirect_to :action => 'show', :id => @item.id
+    end
+
+  end
+
+  def check_ownership_of_items
+
+    # If current_user is a root user, by-pass.
+    return if @current_user.is_root?
+
+    # If current user is not root and @resource has a foreign_key which 
+    # is related to the logged user (Typus.user_fk) we only show the user 
+    # related items.
+    if @resource[:class].columns.map { |u| u.name }.include?(Typus.user_fk)
+      condition = { Typus.user_fk => @current_user }
+      @conditions = @resource[:class].merge_conditions(@conditions, condition)
     end
 
   end

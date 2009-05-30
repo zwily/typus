@@ -15,12 +15,14 @@ Typus::Configuration.options[:app_name] = '<%= application %>'
 
 # Model options which can also be defined by model on the yaml files.
 
-# Typus::Configuration.options[:index_after_save] = true
+# Typus::Configuration.options[:default_action_on_item] = 'edit'
 # Typus::Configuration.options[:end_year] = Time.now.year + 1
 # Typus::Configuration.options[:form_rows] = 10
 # Typus::Configuration.options[:icon_on_boolean] = false
+# Typus::Configuration.options[:index_after_save] = true
 # Typus::Configuration.options[:minute_step] = 5
 # Typus::Configuration.options[:nil] = 'nil'
+# Typus::Configuration.options[:only_user_items] = false
 # Typus::Configuration.options[:per_page] = 15
 # Typus::Configuration.options[:sidebar_selector] = 5
 # Typus::Configuration.options[:start_year] = Time.now.year - 10
