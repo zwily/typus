@@ -97,7 +97,7 @@ class TypusGenerator < Rails::Generator::Base
 
       end
 
-      Dir["#{Typus.root}/generators/typus/templates/config/typus/*"].each do |f|
+      Dir["#{Typus.path}/generators/typus/templates/config/typus/*"].each do |f|
         base = File.basename(f)
         m.template "config/typus/#{base}", "#{config_folder}/#{base}", 
                    :assigns => { :configuration => configuration }
@@ -124,7 +124,7 @@ class TypusGenerator < Rails::Generator::Base
       m.file 'public/stylesheets/admin/reset.css', 'public/stylesheets/admin/reset.css'
       m.file 'public/javascripts/admin/application.js', 'public/javascripts/admin/application.js'
 
-      Dir["#{Typus.root}/generators/typus/templates/public/images/admin/*"].each do |f|
+      Dir["#{Typus.path}/generators/typus/templates/public/images/admin/*"].each do |f|
         base = File.basename(f)
         m.file "public/images/admin/#{base}", "public/images/admin/#{base}"
       end

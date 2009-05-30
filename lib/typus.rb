@@ -6,7 +6,7 @@ module Typus
       @@version ||= File.read("#{root}/VERSION").strip
     end
 
-    def root
+    def path
       File.dirname(__FILE__) + '/../'
     end
 
