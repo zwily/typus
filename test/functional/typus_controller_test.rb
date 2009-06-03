@@ -117,6 +117,13 @@ class TypusControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_sign_in_user_after_password_change
+    typus_user = typus_users(:admin)
+    post :reset_password, { :token => typus_user.token, :user => { :password => '12345678', :password_confirmation => '12345678' } }
+    assert_response :redirect
+    assert_redirected_to admin_dashboard_path
+  end
+
   def test_should_be_redirected_if_password_does_not_match_confirmation
     typus_user = typus_users(:admin)
     post :reset_password, { :token => typus_user.token, :user => { :password => 'drowssap', :password_confirmation => 'drowssap2' } }

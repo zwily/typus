@@ -80,8 +80,8 @@ class TypusController < ApplicationController
       @user.password = params[:user][:password]
       @user.password_confirmation = params[:user][:password_confirmation]
       if @user.save
-        flash[:success] = _("You can login with your new password.")
-        redirect_to admin_sign_in_path
+        session[:typus_user_id] = @user.id
+        redirect_to admin_dashboard_path
       else
         flash[:error] = _("Passwords don't match.")
         redirect_to admin_reset_password_path(:token => params[:token])

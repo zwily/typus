@@ -9,7 +9,6 @@ ru:
   "That doesn't seem like a valid email address": "E-Mail некорректен"
   "I remember my password": "Запомнить пароль"
   "Password recovery link sent to your email": "Ссылка для восставновления пароля выслана по указанному E-Mail"
-  "You can login with your new password": "Вы можете использовать для входа новый пароль"
   "Passwords don't match": "Пароли не совпадают"
   "A valid token is required": "Необходим корректный ключ"
   "The email and/or password you entered is invalid": "E-Mail или пароль введены неверно"
