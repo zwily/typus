@@ -18,6 +18,12 @@ class TypusUserTest < ActiveSupport::TestCase
     end
   end
 
+  def test_should_verify_definition_on_instance_methods
+    %w( is_root? authenticated? ).each do |instance_method|
+      assert TypusUser.instance_methods.include?(instance_method)
+    end
+  end
+
   def test_should_verify_email_format
     @typus_user.email = 'admin'
     assert @typus_user.invalid?
