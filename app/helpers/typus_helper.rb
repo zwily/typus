@@ -88,12 +88,18 @@ module TypusHelper
   def typus_block(*args)
 
     options = args.extract_options!
-    template = [ 'admin', options[:resource], options[:location], "_#{options[:partial]}.html.erb" ].compact.join('/')
 
-    exists = ActionController::Base.view_paths.map { |vp| File.exists?("#{Rails.root}/#{vp}/#{template}") }
+    # OPTIMIZE: File detection should be cleaner. We don't want to have two gsub.
 
-    return unless exists.include?(true)
-    render :partial => template.gsub('/_', '/')
+    partial = "_#{options[:partial]}.html.erb"
+    template = [ 'admin', options[:resource], options[:location], partial ].compact.join('/')
+    resources_template = "app/views/admin/resources/#{partial}"
+
+    if ActionController::Base.view_paths.map { |vp| File.exists?("#{Rails.root}/#{vp}/#{template}") }.include?(true)
+      render template.gsub('/_', '/')
+    elsif File.exists?(resources_template)
+      render resources_template.gsub('/_', '/')
+    end
 
   end
 
