@@ -33,7 +33,7 @@ module Admin::FormHelper
     end
   end
 
-  def typus_belongs_to_field(attribute, klass = @resource[:class])
+  def typus_belongs_to_field(attribute)
 
     ##
     # We only can pass parameters to 'new' and 'edit', so this hack makes
@@ -43,8 +43,8 @@ module Admin::FormHelper
 
     back_to = '/' + [ params[:controller], params[:action], params[:id] ].compact.join('/')
 
-    related = klass.reflect_on_association(attribute.to_sym).class_name.constantize
-    related_fk = klass.reflect_on_association(attribute.to_sym).primary_key_name
+    related = @resource[:class].reflect_on_association(attribute.to_sym).class_name.constantize
+    related_fk = @resource[:class].reflect_on_association(attribute.to_sym).primary_key_name
 
     message = [ _("Are you sure you want to leave this page?"),
                 _("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."), 
@@ -59,7 +59,7 @@ module Admin::FormHelper
 <li><label for="item_#{attribute}">#{_(related_fk.humanize)}
     <small>#{link_to _('Add'), { :controller => "admin/#{related.class_name.tableize}", :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
     </label>
-#{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute, klass) } }</li>
+#{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
         HTML
       end
 
@@ -67,47 +67,47 @@ module Admin::FormHelper
 
   end
 
-  def typus_boolean_field(attribute, klass = @resource[:class])
+  def typus_boolean_field(attribute)
     attribute_name = attribute.gsub(/\?$/,'')
     <<-HTML
-<li><label for="item_#{attribute_name}">#{klass.human_attribute_name(attribute)}</label>
+<li><label for="item_#{attribute_name}">#{@resource[:class].human_attribute_name(attribute)}</label>
 #{check_box :item, attribute_name} #{_('Checked if active')}</li>
     HTML
   end
 
-  def typus_date_field(attribute, options, klass = @resource[:class])
+  def typus_date_field(attribute, options)
     <<-HTML
-<li><label for="item_#{attribute}">#{klass.human_attribute_name(attribute)}</label>
-#{date_select :item, attribute, options, { :disabled => attribute_disabled?(attribute, klass)} }</li>
+<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
+#{date_select :item, attribute, options, { :disabled => attribute_disabled?(attribute)} }</li>
     HTML
   end
 
-  def typus_datetime_field(attribute, options, klass = @resource[:class])
+  def typus_datetime_field(attribute, options)
     <<-HTML
-<li><label for="item_#{attribute}">#{klass.human_attribute_name(attribute)}</label>
-#{datetime_select :item, attribute, options, {:disabled => attribute_disabled?(attribute, klass)}}</li>
+<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
+#{datetime_select :item, attribute, options, {:disabled => attribute_disabled?(attribute)}}</li>
     HTML
   end
 
-  def typus_file_field(attribute, klass = @resource[:class])
+  def typus_file_field(attribute)
 
     attribute_display = attribute.split('_file_name').first
 
     <<-HTML
 <li><label for="item_#{attribute}">#{_(attribute_display.humanize)}</label>
-#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute, klass)}</li>
+#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>
     HTML
 
   end
 
-  def typus_password_field(attribute, klass = @resource[:class])
+  def typus_password_field(attribute)
     <<-HTML
-<li><label for="item_#{attribute}">#{klass.human_attribute_name(attribute)}</label>
-#{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute, klass)}</li>
+<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
+#{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute)}</li>
     HTML
   end
 
-  def typus_selector_field(attribute, klass = @resource[:class])
+  def typus_selector_field(attribute)
     returning(String.new) do |html|
       options = []
       @resource[:class].send(attribute).each do |option|
@@ -121,7 +121,7 @@ module Admin::FormHelper
         end
       end
       html << <<-HTML
-<li><label for="item_#{attribute}">#{klass.human_attribute_name(attribute)}</label>
+<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
 <option value=""></option>
 #{options.join("\n")}
@@ -130,23 +130,23 @@ module Admin::FormHelper
     end
   end
 
-  def typus_text_field(attribute, klass = @resource[:class])
+  def typus_text_field(attribute)
     <<-HTML
-<li><label for="item_#{attribute}">#{klass.human_attribute_name(attribute)}</label>
-#{text_area :item, attribute, :class => 'text', :rows => klass.typus_options_for(:form_rows), :disabled => attribute_disabled?(attribute, klass)}</li>
+<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
+#{text_area :item, attribute, :class => 'text', :rows => @resource[:class].typus_options_for(:form_rows), :disabled => attribute_disabled?(attribute)}</li>
     HTML
   end
 
-  def typus_time_field(attribute, options, klass = @resource[:class])
+  def typus_time_field(attribute, options)
     <<-HTML
-<li><label for="item_#{attribute}">#{klass.human_attribute_name(attribute)}</label>
-#{time_select :item, attribute, options, {:disabled => attribute_disabled?(attribute, klass)}}</li>
+<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
+#{time_select :item, attribute, options, {:disabled => attribute_disabled?(attribute)}}</li>
     HTML
   end
 
-  def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id', klass = @resource[:class])
+  def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
     <<-HTML
-<li><label for="item_#{attribute}">#{klass.human_attribute_name(attribute)}</label>
+<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
 <select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
   <option value=""></option>
   #{expand_tree_into_select_field(items, attribute_virtual)}
@@ -154,26 +154,26 @@ module Admin::FormHelper
     HTML
   end
 
-  def typus_string_field(attribute, klass = @resource[:class])
+  def typus_string_field(attribute)
 
     # Read only fields.
-    if klass.typus_field_options_for(:read_only).include?(attribute)
+    if @resource[:class].typus_field_options_for(:read_only).include?(attribute)
       value = 'read_only' if %w( edit ).include?(params[:action])
     end
 
     # Auto generated fields.
-    if klass.typus_field_options_for(:auto_generated).include?(attribute)
+    if @resource[:class].typus_field_options_for(:auto_generated).include?(attribute)
       value = 'auto_generated' if %w( new edit ).include?(params[:action])
     end
 
     comment = %w( read_only auto_generated ).include?(value) ? "<small>#{value} field</small>".humanize : ''
 
-    attribute_humanized = klass.human_attribute_name(attribute)
+    attribute_humanized = @resource[:class].human_attribute_name(attribute)
     attribute_humanized += " (#{attribute})" if attribute.include?('_id')
 
     <<-HTML
 <li><label for="item_#{attribute}">#{attribute_humanized}#{comment}</label>
-#{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute, klass) }</li>
+#{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute) }</li>
     HTML
 
   end
@@ -332,8 +332,8 @@ module Admin::FormHelper
     output || "#{attribute}: Can not find the template '#{template}'"
   end
 
-  def attribute_disabled?(attribute, klass = @resource[:class])
-    accessible = klass.accessible_attributes
+  def attribute_disabled?(attribute)
+    accessible = @resource[:class].accessible_attributes
     return accessible.nil? ? false : !accessible.include?(attribute)
   end
 

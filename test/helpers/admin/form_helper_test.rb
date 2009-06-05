@@ -22,6 +22,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
     @current_user = mock()
     @current_user.expects(:can_perform?).with(Post, 'create').returns(false)
+    @resource = { :class => Comment }
 
     expected = <<-HTML
 <li><label for="item_post">Post
@@ -34,7 +35,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 <option value="2">Post#2</option></select></li>
     HTML
 
-    assert_equal expected, typus_belongs_to_field('post', Comment)
+    assert_equal expected, typus_belongs_to_field('post')
 
   end
 
@@ -47,6 +48,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
     @current_user = mock()
     @current_user.expects(:can_perform?).with(Comment, 'create').returns(true)
+    @resource = { :class => Post }
 
     expected = <<-HTML
 <li><label for="item_favorite_comment">Favorite comment
@@ -58,13 +60,15 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 <option value="3">John</option>
 <option value="4">Me</option></select></li>
     HTML
-    assert_equal expected, typus_belongs_to_field('favorite_comment', Post)
+    assert_equal expected, typus_belongs_to_field('favorite_comment')
 
   end
 
   def test_typus_boolean_field
 
-    output = typus_boolean_field('test', Post)
+    @resource = { :class => Post }
+
+    output = typus_boolean_field('test')
 
     expected = <<-HTML
 <li><label for="item_test">Test</label>
@@ -77,7 +81,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   def test_typus_date_field
 
-    output = typus_date_field('test', {}, Post)
+    @resource = { :class => Post }
+
+    output = typus_date_field('test', {})
     expected = <<-HTML
 <li><label for="item_test">Test</label>
     HTML
@@ -88,7 +94,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   def test_typus_datetime_field
 
-    output = typus_datetime_field('test', {}, Post)
+    @resource = { :class => Post }
+
+    output = typus_datetime_field('test', {})
     expected = <<-HTML
 <li><label for="item_test">Test</label>
     HTML
@@ -99,7 +107,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   def test_typus_file_field
 
-    output = typus_file_field('asset_file_name', Post)
+    @resource = { :class => Post }
+
+    output = typus_file_field('asset_file_name')
     expected = <<-HTML
 <li><label for="item_asset_file_name">Asset</label>
 <input id="item_asset" name="item[asset]" size="30" type="file" /></li>
@@ -111,7 +121,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   def test_typus_password_field
 
-    output = typus_password_field('test', Post)
+    @resource = { :class => Post }
+
+    output = typus_password_field('test')
     expected = <<-HTML
 <li><label for="item_test">Test</label>
 <input class="text" id="item_test" name="item[test]" size="30" type="password" /></li>
@@ -146,7 +158,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   def test_typus_text_field
 
-    output = typus_text_field('test', Post)
+    @resource = { :class => Post }
+
+    output = typus_text_field('test')
     expected = <<-HTML
 <li><label for="item_test">Test</label>
 <textarea class="text" cols="40" id="item_test" name="item[test]" rows="10"></textarea></li>
@@ -158,7 +172,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   def test_typus_time_field
 
-    output = typus_time_field('test', {}, Post)
+    @resource = { :class => Post }
+
+    output = typus_time_field('test', {})
     expected = <<-HTML
 <li><label for="item_test">Test</label>
     HTML
@@ -191,7 +207,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   def test_typus_string_field
 
-    output = typus_string_field('test', Post)
+    @resource = { :class => Post }
+
+    output = typus_string_field('test')
     expected = <<-HTML
 <li><label for="item_test">Test</label>
 <input class="text" id="item_test" name="item[test]" size="30" type="text" /></li>
@@ -267,13 +285,15 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   def test_attribute_disabled
 
-    assert !attribute_disabled?('test', Post)
+    @resource = { :class => Post }
+
+    assert !attribute_disabled?('test')
 
     Post.expects(:accessible_attributes).returns(['test'])
-    assert !attribute_disabled?('test', Post)
+    assert !attribute_disabled?('test')
 
     Post.expects(:accessible_attributes).returns(['no_test'])
-    assert attribute_disabled?('test', Post)
+    assert attribute_disabled?('test')
 
   end
 
