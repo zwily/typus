@@ -64,7 +64,7 @@ end
       view_folder = "#{admin_views_folder}/#{resource.underscore}"
       view_filename = "index.html.erb"
 
-      if !File.exists?("#{view_folder}/#{view_filename}")
+      if !File.exist?("#{view_folder}/#{view_filename}")
         Dir.mkdir(view_folder) unless File.directory?(view_folder)
         view = File.open("#{view_folder}/#{view_filename}", "w+")
         content = <<-RAW

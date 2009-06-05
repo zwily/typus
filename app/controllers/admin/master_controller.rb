@@ -290,7 +290,7 @@ private
   end
 
   def select_template(template, resource = @resource[:self])
-    folder = (File.exists?("app/views/admin/#{resource}/#{template}.html.erb")) ? resource : 'resources'
+    folder = (File.exist?("app/views/admin/#{resource}/#{template}.html.erb")) ? resource : 'resources'
     render "admin/#{folder}/#{template}"
   end
 

@@ -85,7 +85,7 @@ module Typus
     end
 
     def plugin?
-      File.exists?("#{Rails.root}/vendor/plugins/typus")
+      File.exist?("#{Rails.root}/vendor/plugins/typus")
     end
 
     ##

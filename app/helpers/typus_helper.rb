@@ -95,9 +95,9 @@ module TypusHelper
     template = [ 'admin', options[:resource], options[:location], partial ].compact.join('/')
     resources_template = "app/views/admin/resources/#{partial}"
 
-    if ActionController::Base.view_paths.map { |vp| File.exists?("#{Rails.root}/#{vp}/#{template}") }.include?(true)
+    if ActionController::Base.view_paths.map { |vp| File.exist?("#{Rails.root}/#{vp}/#{template}") }.include?(true)
       render template.gsub('/_', '/')
-    elsif File.exists?(resources_template)
+    elsif File.exist?(resources_template)
       render resources_template.gsub('/_', '/')
     end
 

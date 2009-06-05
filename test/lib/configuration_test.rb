@@ -8,7 +8,7 @@ class ConfigurationTest < ActiveSupport::TestCase
 
   def test_should_verify_application_wide_configuration_options
     initializer = "#{Rails.root}/config/initializers/typus.rb"
-    return if File.exists?(initializer)
+    return if File.exist?(initializer)
     assert_equal 'Typus', Typus::Configuration.options[:app_name]
     assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
     assert_equal 'admin@example.com', Typus::Configuration.options[:email]
@@ -23,7 +23,7 @@ class ConfigurationTest < ActiveSupport::TestCase
 
   def test_should_verify_model_configuration_options
     initializer = "#{Rails.root}/config/initializers/typus.rb"
-    return if File.exists?(initializer)
+    return if File.exist?(initializer)
     assert_equal 'edit', Typus::Configuration.options[:default_action_on_item]
     assert_equal nil, Typus::Configuration.options[:end_year]
     assert_equal 10, Typus::Configuration.options[:form_rows]

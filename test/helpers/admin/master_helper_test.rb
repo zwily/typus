@@ -49,7 +49,7 @@ class Admin::MasterHelperTest < ActiveSupport::TestCase
     resource = 'typus_users'
 
     self.stubs(:render).returns('a_template')
-    File.stubs(:exists?).returns(true)
+    File.stubs(:exist?).returns(true)
 
     output = build_list(model, fields, items, resource)
     expected = 'a_template'
