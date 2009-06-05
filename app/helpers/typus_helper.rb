@@ -89,17 +89,21 @@ module TypusHelper
 
     options = args.extract_options!
 
-    # OPTIMIZE: File detection should be cleaner. We don't want to have two gsub.
+    partials_path = [ 'admin', options[:resource], options[:location] ].compact.join('/')
+    resources_partials_path = 'admin/resources'
 
-    partial = "_#{options[:partial]}.html.erb"
-    template = [ 'admin', options[:resource], options[:location], partial ].compact.join('/')
-    resources_template = "app/views/admin/resources/#{partial}"
+    partials = ActionController::Base.view_paths.map do |view_path|
+      Dir["#{Rails.root}/#{view_path}/#{partials_path}/*"].map { |f| File.basename(f, '.html.erb') }
+    end.flatten
+    resources_partials = Dir["#{Rails.root}/app/views/#{resources_partials_path}/*"].map { |f| File.basename(f, '.html.erb') }
 
-    if ActionController::Base.view_paths.map { |vp| File.exist?("#{Rails.root}/#{vp}/#{template}") }.include?(true)
-      render template.gsub('/_', '/')
-    elsif File.exist?(resources_template)
-      render resources_template.gsub('/_', '/')
-    end
+    partial = "_#{options[:partial]}"
+
+    path = if partials.include?(partial) then partials_path
+           elsif resources_partials.include?(partial) then resources_partials_path
+           end
+
+    render :partial => "#{path}/#{options[:partial]}" if path
 
   end
 
