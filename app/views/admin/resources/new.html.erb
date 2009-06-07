@@ -1,11 +1,10 @@
 <% content_for :sidebar do %>
   <%= typus_block :resource => @resource[:self], :partial => 'sidebar' %>
-  <%= typus_block :resource => @resource[:self], :partial => 'new_sidebar' %>
   <%= actions %>
 <% end %>
 
 <%= typus_block :resource => @resource[:self], :partial => 'content' %>
-<%= typus_block :resource => @resource[:self], :partial => 'new' %>
+
 
 <%= display_link_to_previous if params[:back_to] %>
 
@@ -13,7 +12,7 @@
     <%= link_to _(@resource[:class].human_name.pluralize), :action => 'index' %> &rsaquo; 
     <%= _('New') %></h2>
 
-<%= typus_block :resource => @resource[:self], :partial => 'new_top' %>
+<%= typus_block :resource => @resource[:self], :partial => 'new' %>
 
 <% form_for @item, 
             :url  => { :action => 'create', 
@@ -25,5 +24,3 @@
   <%= build_form(@fields) %>
   <p><%= submit_tag _('Create entry'), :class => 'button' %></p>
 <% end %>
-
-<%= typus_block :resource => @resource[:self], :partial => 'new_bottom' %>

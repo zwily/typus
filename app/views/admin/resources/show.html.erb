@@ -1,17 +1,15 @@
 <% content_for :sidebar do %>
   <%= typus_block :resource => @resource[:self], :partial => 'sidebar' %>
-  <%= typus_block :resource => @resource[:self], :partial => 'show_sidebar' %>
   <%= actions %>
 <% end %>
 
 <%= typus_block :resource => @resource[:self], :partial => 'content' %>
-<%= typus_block :resource => @resource[:self], :partial => 'show' %>
 
 <h2><%= link_to _('Dashboard'), admin_dashboard_path %> &rsaquo; 
     <%= link_to _(@resource[:class].human_name.pluralize), :action => 'index' %> &rsaquo; 
     <%= _('Show') %></h2>
 
-<%= typus_block :resource => @resource[:self], :partial => 'show_top' %>
+<%= typus_block :resource => @resource[:self], :partial => 'show' %>
 
 <dl>
 <%- @fields.map { |u| u.first }.each do |column| -%>
@@ -19,5 +17,3 @@
   <dd><%=h (!@item.send(column).blank?) ? @item.send(column) : 'nil' %></dd>
 <%- end -%>
 </dl>
-
-<%= typus_block :resource => @resource[:self], :partial => 'show_bottom' %>
