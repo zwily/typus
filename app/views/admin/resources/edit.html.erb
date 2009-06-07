@@ -1,11 +1,11 @@
 <% content_for :sidebar do %>
-  <%= typus_block :resource => @resource[:self], :partial => :sidebar %>
-  <%= typus_block :resource => @resource[:self], :partial => :edit_sidebar %>
+  <%= typus_block :resource => @resource[:self], :partial => 'sidebar' %>
+  <%= typus_block :resource => @resource[:self], :partial => 'edit_sidebar' %>
   <%= actions %>
 <% end %>
 
-<%= typus_block :resource => @resource[:self], :partial => :content %>
-<%= typus_block :resource => @resource[:self], :partial => :edit %>
+<%= typus_block :resource => @resource[:self], :partial => 'content' %>
+<%= typus_block :resource => @resource[:self], :partial => 'edit' %>
 
 <%= display_link_to_previous if params[:back_to] %>
 
@@ -13,7 +13,7 @@
     <%= link_to _(@resource[:class].human_name.pluralize), :action => 'index' %> &rsaquo; 
     <%= _('Edit') %></h2>
 
-<%= typus_block :resource => @resource[:self], :partial => :edit_top %>
+<%= typus_block :resource => @resource[:self], :partial => 'edit_top' %>
 
 <% form_for @item, 
             :url  => { :action => 'update',
@@ -28,4 +28,4 @@
 
 <%= typus_relationships %>
 
-<%= typus_block :resource => @resource[:self], :partial => :edit_bottom %>
+<%= typus_block :resource => @resource[:self], :partial => 'edit_bottom' %>
