@@ -11,24 +11,24 @@ class Admin::CommentsControllerTest < ActionController::TestCase
     @comment = comments(:first)
   end
 
-  def test_should_render_posts_extensions_on_index
+  def test_should_render_comments_partials_on_index
     get :index
     assert_response :success
-    partials = %w( _index_sidebar.html.erb _index_top.html.erb _index_bottom.html.erb )
+    partials = %w( _content.html.erb _index.html.erb _sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
-  def test_should_render_posts_extensions_on_edit
+  def test_should_render_comments_partials_on_edit
     get :edit, { :id => @comment.id }
     assert_response :success
-    partials = %w( _edit_sidebar.html.erb _edit_top.html.erb _edit_bottom.html.erb )
+    partials = %w( _content.html.erb _edit.html.erb _sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
-  def test_should_render_posts_extensions_on_show
+  def test_should_render_comments_partials_on_show
     get :show, { :id => @comment.id }
     assert_response :success
-    partials = %w( _show_sidebar.html.erb _show_top.html.erb _show_bottom.html.erb )
+    partials = %w( _content.html.erb _show.html.erb _sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
