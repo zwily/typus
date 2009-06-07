@@ -6,25 +6,32 @@ module Typus
 
       render :text => '' and return unless session[:typus_user_id]
 
-      url = url_for :controller => "admin/#{params[:resource]}", 
-                    :action => 'edit', 
-                    :id => params[:id]
+      links = [[ "Dashboard", admin_dashboard_path ] ]
+      links << [ params[:message], "/admin/#{params[:path]}" ] if params[:message] && params[:path]
 
-      @content = <<-HTML
-  var links = '';
-  links += '<div id="quick_edit">';
-  links += '<a href=\"#{url}\">#{params[:message]}</a>';
-  links += '</div>';
-  links += '<style type="text/css">';
-  links += '<!--';
-  links += '#quick_edit { font-size: 11px; float: right; position: fixed; right: 0px; background: #{params[:color]}; margin: 5px; padding: 3px 5px; }';
-  links += '#quick_edit a { color: #FFF; font-weight: bold; }'
-  links += '-->';
-  links += '</style>';
-  document.write(links);
-        HTML
+      options = links.reverse.map do |link|
+                  "<li><a href=\"#{link.last}\">#{link.first}</a></li>"
+                end
 
-      render :text => @content
+      content = <<-HTML
+var links = '';
+links += '<div id="quick_edit">';
+links += '<ul>';
+links += '#{options}';
+links += '</ul>';
+links += '</div>';
+links += '<style type="text/css">';
+links += '<!--';
+links += '#quick_edit { font-size: 12px; font-family: sans-serif; position: absolute; top: 0px; right: 0px; margin: 10px; }';
+links += '#quick_edit a { color: #FFF; font-weight: bold; text-decoration: none; }'
+links += '#quick_edit ul { margin: 0; padding: 0; }';
+links += '#quick_edit li { display: inline; background: #000; margin: 0 0 0 5px; padding: 3px 5px; }';
+links += '-->';
+links += '</style>';
+document.write(links);
+      HTML
+
+      render :text => content
 
     end
 
