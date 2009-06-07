@@ -6,17 +6,21 @@ class Admin::PublicHelperTest < ActiveSupport::TestCase
 
   def test_quick_edit
 
-    options = { :color => 'CC0000', :link => 'quick_edit', :resource => 'posts', :id => '1', :action => 'edit' }
+    options = { :path => 'articles/edit/1', :message => 'Edit this article' }
     output = quick_edit(options)
 
     html = <<-HTML
 <script type="text/javascript">
-  document.write('<script type="text/javascript" src="quick_edit?action=edit&id=1&resource=posts" />');
+  document.write('<script type="text/javascript" src="quick_edit?message=Edit+this+article&path=articles%2Fedit%2F1" />');
 </script>
     HTML
 
     assert_equal html, output
 
+  end
+
+  def admin_quick_edit_path
+    'quick_edit'
   end
 
 end
