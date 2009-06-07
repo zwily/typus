@@ -89,7 +89,7 @@ module TypusHelper
 
     options = args.extract_options!
 
-    partials_path = [ 'admin', options[:resource], options[:location] ].compact.join('/')
+    partials_path = "admin/#{options[:location]}"
     resources_partials_path = 'admin/resources'
 
     partials = ActionController::Base.view_paths.map do |view_path|

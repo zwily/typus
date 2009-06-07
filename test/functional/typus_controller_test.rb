@@ -315,7 +315,7 @@ class TypusControllerTest < ActionController::TestCase
     @request.session[:typus_user_id] = admin.id
     get :dashboard
     assert_response :success
-    partials = %w( _sidebar.html.erb _content.html.erb )
+    partials = %w( _sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 

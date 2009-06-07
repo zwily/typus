@@ -14,21 +14,28 @@ class Admin::CommentsControllerTest < ActionController::TestCase
   def test_should_render_comments_partials_on_index
     get :index
     assert_response :success
-    partials = %w( _content.html.erb _index.html.erb _sidebar.html.erb )
+    partials = %w( _index.html.erb _sidebar.html.erb )
+    partials.each { |p| assert_match p, @response.body }
+  end
+
+  def test_should_render_comments_partials_on_new
+    get :new
+    assert_response :success
+    partials = %w( _new.html.erb _sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
   def test_should_render_comments_partials_on_edit
     get :edit, { :id => @comment.id }
     assert_response :success
-    partials = %w( _content.html.erb _edit.html.erb _sidebar.html.erb )
+    partials = %w( _edit.html.erb _sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
   def test_should_render_comments_partials_on_show
     get :show, { :id => @comment.id }
     assert_response :success
-    partials = %w( _content.html.erb _show.html.erb _sidebar.html.erb )
+    partials = %w( _show.html.erb _sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
