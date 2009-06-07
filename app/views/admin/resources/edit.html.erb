@@ -1,8 +1,10 @@
 <% content_for :sidebar do %>
+  <%= typus_block :resource => @resource[:self], :partial => :sidebar %>
   <%= typus_block :resource => @resource[:self], :partial => :edit_sidebar %>
   <%= actions %>
 <% end %>
 
+<%= typus_block :resource => @resource[:self], :partial => :content %>
 <%= typus_block :resource => @resource[:self], :partial => :edit %>
 
 <%= display_link_to_previous if params[:back_to] %>

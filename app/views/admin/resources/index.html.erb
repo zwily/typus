@@ -1,10 +1,12 @@
 <% content_for :sidebar do %>
+  <%= typus_block :resource => @resource[:self], :partial => :sidebar %>
   <%= typus_block :resource => @resource[:self], :partial => :index_sidebar %>
   <%= actions %>
   <%= search %>
   <%= filters %>
 <% end %>
 
+<%= typus_block :resource => @resource[:self], :partial => :content %>
 <%= typus_block :resource => @resource[:self], :partial => :index %>
 
 <h2><%= link_to _('Dashboard'), admin_dashboard_path %> &rsaquo; 
