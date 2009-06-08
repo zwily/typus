@@ -8,15 +8,14 @@
 extensible enough to match lots of use cases.
 
 - Project site and documentation http://intraducibles.com/projects/typus
-- Screenshoots http://intraducibles.com/projects/typus/screenshots
 - Plugin source http://github.com/fesplugas/typus/tree
 - Google Group http://groups.google.es/group/typus
 
-== For the impatients: Demo in 3 steps
+== Impatients to see it working?
 
 Step 1: Create a Rails application using a template.
 
-    $ rails example.com -m http://intraducibles.com/projects/typus/demo.txt
+    $ rails example.com -m http://gist.github.com/86613.txt
 
 Step 2: Start the server:
 
@@ -28,13 +27,9 @@ Step 3: Go to the admin area and enjoy it!
 
 == Installing
 
-*Plugin*: Install from GitHub the latest version which it's compatible with Rails 2.3.2.
+Install from GitHub the latest version which it's compatible with Rails 2.3.2.
 
     $ script/plugin install git://github.com/fesplugas/typus.git
-
-*Gem*: Add *Typus* to your <tt>config/environment.rb</tt>.
-
-    config.gem 'fesplugas-typus', :lib => 'typus', :source => 'http://gems.github.com'
 
 Once *Typus* is installed, run the generator to create required files and migrate your 
 database. (<tt>typus_users</tt> table is created)
