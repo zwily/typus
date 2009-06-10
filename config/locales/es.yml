@@ -103,3 +103,4 @@ es:
   "Past 7 days": "Últimos 7 dias"
   "This month": "Este mes"
   "This year": "Este año"
+  "{{model}} filtered by {{filtered_by}}": "{{model}} filtrados por {{filtered_by}}"

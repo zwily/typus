@@ -218,7 +218,7 @@ module Admin::FormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to model_to_relate.human_name.pluralize, :controller => "admin/#{model_to_relate_as_resource}"}
+  #{link_to model_to_relate.human_name.pluralize, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _('{{model}} filtered by {{filtered_by}}', :model => model_to_relate.human_name.pluralize, :filtered_by => @item.typus_name)}
   <small>#{link_to _('Add new'), link_options if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
