@@ -29,23 +29,6 @@ module Typus
       Typus::Configuration.config.collect { |i| i.first if i.last['application'] == name }.compact.uniq.sort
     end
 
-    ##
-    # Returns a list of the submodules of a module.
-    #
-    def module(name)
-      Typus::Configuration.config.collect { |i| i.first if i.last['module'] == name.name }.compact.uniq.sort
-    end
-
-    ##
-    # Parent
-    #
-    #  Typus::Configuration.config['Post']['module']
-    #  Typus::Configuration.config['Post']['application']
-    #
-    def parent(model, name)
-      Typus::Configuration.config[model.name][name] || ''
-    end
-
     def models
       Typus::Configuration.config.map { |i| i.first }.sort
     end

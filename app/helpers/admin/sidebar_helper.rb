@@ -13,12 +13,6 @@ module Admin::SidebarHelper
 #{build_typus_list(export, :header => 'export')}
       HTML
 
-      %w( parent_module submodules ).each do |block|
-        html << <<-HTML
-#{build_typus_list(modules(block), :header => block)}
-        HTML
-      end
-
     end
 
   end
@@ -84,23 +78,6 @@ module Admin::SidebarHelper
         html << "<li>#{item}</li>\n"
       end
       html << "</ul>\n"
-    end
-
-  end
-
-  def modules(name)
-
-    models = case name
-             when 'parent_module': Typus.parent(@resource[:class], 'module')
-             when 'submodules':    Typus.module(@resource[:class])
-             end
-
-    return [] if models.empty?
-
-    returning(Array.new) do |items|
-      models.each do |model|
-        items << (link_to model.humanize, :controller => model.tableize)
-      end
     end
 
   end

@@ -83,8 +83,6 @@ ru:
   "{{current_user_role}} can't perform action ({{action}})": "{{current_user_role}} не может выполнить действие ({{action}})"
   "Record owned by another user": "Запись принадлежит другому пользователю."
   "{{current_user_role}} can't display items": "{{current_user_role}} не может отобразить записи"
-  "Submodules": "Подмодули"
-  "Parent module": "Дочерний модуль"
   "You can update your password at": "Вы можете установить свой пароль на"
   "If you didn't request a password update, you can ignore this message": "Если Вы не запрашивали обновление пароля, Вы можете проигнорировать это сообщение."
   "Have a nice day": "Добрый день."

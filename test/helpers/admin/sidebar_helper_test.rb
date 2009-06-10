@@ -18,8 +18,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     self.expects(:default_actions).returns(['action1', 'action2'])
     self.expects(:previous_and_next).returns(['previous', 'next'])
     self.expects(:export).returns(['csv', 'pdf'])
-    self.expects(:modules).with('parent_module').returns(['parent_module'])
-    self.expects(:modules).with('submodules').returns(['submodules'])
 
     output = actions
     expected = <<-HTML
@@ -39,16 +37,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 <ul>
 <li>csv</li>
 <li>pdf</li>
-</ul>
-
-<h2>Parent module</h2>
-<ul>
-<li>parent_module</li>
-</ul>
-
-<h2>Submodules</h2>
-<ul>
-<li>submodules</li>
 </ul>
 
     HTML
@@ -98,10 +86,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     assert !output.empty?
     assert_no_match /h2/, output
     assert_no_match /\/h2/, output
-  end
-
-  def test_modules
-    assert true
   end
 
   def test_previous_and_next

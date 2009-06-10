@@ -37,25 +37,6 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal %w( Comment Post ), Typus.application('Blog')
   end
 
-  def test_should_return_modules_of_a_module
-    assert Typus.respond_to?(:module)
-    assert_equal %w( Category ), Typus.module(Post)
-  end
-
-  def test_should_verify_parent_exists
-    assert Typus.respond_to?(:parent)
-  end
-
-  def test_should_verify_parent_for_application
-    assert Typus.parent(TypusUser, 'application').kind_of?(String)
-    assert_equal 'Typus', Typus.parent(TypusUser, 'application')
-  end
-
-  def test_should_verify_parent_for_nothing
-    assert Typus.parent(TypusUser, 'nothing').kind_of?(String)
-    assert_equal '', Typus.parent(TypusUser, 'nothing')
-  end
-
   def test_should_return_models_and_should_be_sorted
     assert Typus.respond_to?(:models)
     assert Typus.models.kind_of?(Array)
