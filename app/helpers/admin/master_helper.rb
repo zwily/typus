@@ -6,23 +6,23 @@ module Admin::MasterHelper
   include Admin::FormHelper
   include Admin::TableHelper
 
-  def display_link_to_previous(klass = @resource[:class], _params = params)
+  def display_link_to_previous # (_params = params)
 
     options = {}
-    options[:resource_from] = klass.human_name
-    options[:resource_to] = _params[:resource].classify.humanize if _params[:resource]
+    options[:resource_from] = @resource[:class].human_name
+    options[:resource_to] = params[:resource].classify.humanize if params[:resource]
 
-    editing = %w( edit update ).include?(_params[:action])
+    editing = %w( edit update ).include?(params[:action])
 
     message = case
-              when _params[:resource] && editing
+              when params[:resource] && editing
                 _("You're updating a {{resource_from}} for {{resource_to}}.", 
                   :resource_from =>  options[:resource_from], 
                   :resource_to => options[:resource_to])
               when editing
                 _("You're updating a {{resource_from}}.", 
                   :resource_from => options[:resource_from])
-              when _params[:resource]
+              when params[:resource]
                 _("You're adding a new {{resource_from}} to {{resource_to}}.", 
                   :resource_from => options[:resource_from], 
                   :resource_to => options[:resource_to])
@@ -34,7 +34,7 @@ module Admin::MasterHelper
     returning(String.new) do |html|
       html << <<-HTML
 <div id="flash" class="notice">
-  <p>#{message} #{link_to _("Do you want to cancel it?"), _params[:back_to]}</p>
+  <p>#{message} #{link_to _("Do you want to cancel it?"), params[:back_to]}</p>
 </div>
       HTML
     end
