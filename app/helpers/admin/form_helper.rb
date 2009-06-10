@@ -180,6 +180,7 @@ module Admin::FormHelper
 
   def typus_relationships
 
+    # OPTIMIZE
     @back_to = '/' + [ params[:controller], params[:action], params[:id] ].compact.join('/')
 
     returning(String.new) do |html|
