@@ -127,7 +127,7 @@ class Admin::MasterController < ApplicationController
       path = if @resource[:class].typus_options_for(:index_after_save)
                params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
              else
-               { :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id }
+               { :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id, :back_to => params[:back_to] }
              end
       redirect_to path
     else
