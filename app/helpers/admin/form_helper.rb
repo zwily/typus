@@ -209,7 +209,7 @@ module Admin::FormHelper
 
       link_options = { :controller => "admin/#{field}", 
                        :action => 'new', 
-                       :back_to => @back_to, 
+                       :back_to => "#{@back_to}##{field}", 
                        :resource => @resource[:self].singularize, 
                        :resource_id => @item.id, 
                        foreign_key => @item.id }
@@ -224,7 +224,7 @@ module Admin::FormHelper
       HTML
       items = @resource[:class].find(params[:id]).send(field).find(:all, :order => model_to_relate.typus_order_by)
       unless items.empty?
-        options = { :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id }
+        options = { :back_to => "#{@back_to}##{field}", :resource => @resource[:self], :resource_id => @item.id }
         html << build_list(model_to_relate, 
                            model_to_relate.typus_fields_for(:relationship), 
                            items, 
