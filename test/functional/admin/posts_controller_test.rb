@@ -251,8 +251,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     get :edit, { :id => post.id }
     assert_response :redirect
     assert_redirected_to :action => 'show', :id => post.id
-    assert flash[:notice]
-    assert_equal "Record owned by another user.", flash[:notice]
 
   end
 
