@@ -116,7 +116,10 @@ class Admin::MasterController < ApplicationController
 
     respond_to do |format|
       format.html { select_template :show }
-      format.xml  { render :xml => @item }
+      format.xml do
+        fields = @resource[:class].typus_fields_for(:xml).collect { |i| i.first }
+        render :xml => @item.to_xml(:only => fields)
+      end
     end
 
   end
