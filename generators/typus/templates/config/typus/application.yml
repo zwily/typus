@@ -35,7 +35,7 @@
 #     index_after_save: false
 #     minute_step: 15
 #     nil: 'nil'
-#     only_user_items: false
+#     only_user_items: true
 #     per_page: 5
 #     sidebar_selector: 5
 #     start_year: 1990
