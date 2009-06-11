@@ -3,15 +3,15 @@ class Object
   ##
   # Instead of having to translate strings and defining a default value:
   #
-  #     t('Hello World!', :default => 'Hello World!')
+  #     t("Hello World!", :default => 'Hello World!')
   #
   # We define this method to define the value only once:
   #
-  #     _('Hello World!')
+  #     _("Hello World!")
   #
   # Note that interpolation still works ...
   #
-  #     _('Hello {{world}}!', :world => @world)
+  #     _("Hello {{world}}!", :world => @world)
   #
   def _(msg, *args)
     options = args.extract_options!

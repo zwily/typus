@@ -57,7 +57,7 @@ module Admin::FormHelper
       else
         html << <<-HTML
 <li><label for="item_#{attribute}">#{_(related_fk.humanize)}
-    <small>#{link_to _('Add'), { :controller => "admin/#{related.class_name.tableize}", :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
+    <small>#{link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
     </label>
 #{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
         HTML
@@ -71,7 +71,7 @@ module Admin::FormHelper
     attribute_name = attribute.gsub(/\?$/,'')
     <<-HTML
 <li><label for="item_#{attribute_name}">#{@resource[:class].human_attribute_name(attribute)}</label>
-#{check_box :item, attribute_name} #{_('Checked if active')}</li>
+#{check_box :item, attribute_name} #{_("Checked if active")}</li>
     HTML
   end
 
@@ -225,8 +225,8 @@ module Admin::FormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to model_to_relate.human_name.pluralize, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _('{{model}} filtered by {{filtered_by}}', :model => model_to_relate.human_name.pluralize, :filtered_by => @item.typus_name)}
-  <small>#{link_to _('Add new'), link_options if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  #{link_to model_to_relate.human_name.pluralize, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _("{{model}} filtered by {{filtered_by}}", :model => model_to_relate.human_name.pluralize, :filtered_by => @item.typus_name)}
+  <small>#{link_to _("Add new"), link_options if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
 
@@ -269,7 +269,7 @@ module Admin::FormHelper
 <div class="box_relationships">
   <h2>
   #{link_to model_to_relate.human_name.pluralize, :controller => "admin/#{model_to_relate_as_resource}"}
-  <small>#{link_to _('Add new'), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  <small>#{link_to _("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
       items_to_relate = (model_to_relate.find(:all) - @item.send(field))
@@ -277,7 +277,7 @@ module Admin::FormHelper
         html << <<-HTML
   #{form_tag :action => 'relate', :id => @item.id}
   #{hidden_field :related, :model, :value => model_to_relate}
-  <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _('Add'), :class => 'button'}</p>
+  <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
   </form>
         HTML
       end

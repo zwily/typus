@@ -29,7 +29,7 @@ module TypusHelper
 <tr class="#{cycle('even', 'odd')}">
 <td>#{link_to _(model.constantize.human_name.pluralize), admin_items_path}<br /><small>#{description}</small></td>
 <td class="right"><small>
-#{link_to _('Add'), new_admin_item_path if @current_user.can_perform?(model, 'create')}
+#{link_to _("Add"), new_admin_item_path if @current_user.can_perform?(model, 'create')}
 </small></td>
 </tr>
           HTML
@@ -118,7 +118,7 @@ module TypusHelper
 
     if ActionController::Routing::Routes.named_routes.routes.keys.include?(:root)
       link_to_site = <<-HTML
-<small>#{link_to _('View site'), root_path, :target => 'blank'}</small>
+<small>#{link_to _("View site"), root_path, :target => 'blank'}</small>
       HTML
     end
 
@@ -136,8 +136,8 @@ module TypusHelper
 
     <<-HTML
 <ul>
-  <li>#{_('Logged as')} #{link_to user.name, admin_edit_typus_user_path, :title => "#{user.email} (#{user.role})"}</li>
-  <li>#{link_to _('Sign out'), admin_sign_out_path }</li>
+  <li>#{_("Logged as")} #{link_to user.name, admin_edit_typus_user_path, :title => "#{user.email} (#{user.role})"}</li>
+  <li>#{link_to _("Sign out"), admin_sign_out_path }</li>
 </ul>
     HTML
 
@@ -171,7 +171,7 @@ module TypusHelper
     locale_links = Typus.locales.map { |l| "<a href=\"#{uri}?locale=#{l.last}\">#{l.first.downcase}</a>" }
 
     <<-HTML
-<p>#{_('Set language to')} #{locale_links.join(', ')}.</p>
+<p>#{_("Set language to")} #{locale_links.join(', ')}.</p>
     HTML
 
   end

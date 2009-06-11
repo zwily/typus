@@ -5,9 +5,9 @@
 
 <%= display_link_to_previous if params[:back_to] %>
 
-<h2><%= link_to _('Dashboard'), admin_dashboard_path %> &rsaquo; 
+<h2><%= link_to _("Dashboard"), admin_dashboard_path %> &rsaquo; 
     <%= link_to _(@resource[:class].human_name.pluralize), :action => 'index' %> &rsaquo; 
-    <%= _('Edit') %></h2>
+    <%= _("Edit") %></h2>
 
 <%= typus_block :location => @resource[:self], :partial => 'edit' %>
 
@@ -19,7 +19,7 @@
                        :resource_id => params[:resource_id]},
             :html => { :multipart => true } do |f| %>
   <%= build_form(@fields) %>
-  <p><%= submit_tag _('Update entry'), :class => 'button' %></p>
+  <p><%= submit_tag _("Update entry"), :class => 'button' %></p>
 <% end %>
 
 <%= typus_relationships %>

@@ -44,7 +44,7 @@ module Admin::MasterHelper
   def remove_filter_link(filter = request.env['QUERY_STRING'])
     return unless filter && !filter.blank?
     <<-HTML
-<small>#{link_to _('Remove filter')}</small>
+<small>#{link_to _("Remove filter")}</small>
     HTML
   end
 

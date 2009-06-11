@@ -5,7 +5,7 @@
   <%= filters %>
 <% end %>
 
-<h2><%= link_to _('Dashboard'), admin_dashboard_path %> &rsaquo; 
+<h2><%= link_to _("Dashboard"), admin_dashboard_path %> &rsaquo; 
     <%= _(@resource[:class].human_name.pluralize) %> <%= remove_filter_link %></h2>
 
 <%= typus_block :location => @resource[:self], :partial => 'index' %>

@@ -24,14 +24,14 @@ module Admin::SidebarHelper
     case params[:action]
     when 'index', 'edit', 'show', 'update'
       if @current_user.can_perform?(@resource[:class], 'create')
-        items << (link_to _('Add entry'), :action => 'new')
+        items << (link_to _("Add entry"), :action => 'new')
       end
     end
 
     case params[:action]
     when 'show'
       if @current_user.can_perform?(@resource[:class], 'update')
-        items << (link_to _('Edit entry'), :action => 'edit', :id => @item.id)
+        items << (link_to _("Edit entry"), :action => 'edit', :id => @item.id)
       end
     end
 
@@ -43,7 +43,7 @@ module Admin::SidebarHelper
 
     case params[:action]
     when 'new', 'create', 'edit', 'show', 'update'
-      items << (link_to _('Back to list'), :action => 'index')
+      items << (link_to _("Back to list"), :action => 'index')
     end
 
     return items
@@ -85,8 +85,8 @@ module Admin::SidebarHelper
   def previous_and_next
     return [] unless %w( edit show update ).include?(params[:action])
     returning(Array.new) do |items|
-      items << (link_to _('Next'), params.merge(:id => @next.id)) if @next
-      items << (link_to _('Previous'), params.merge(:id => @previous.id)) if @previous
+      items << (link_to _("Next"), params.merge(:id => @next.id)) if @next
+      items << (link_to _("Previous"), params.merge(:id => @previous.id)) if @previous
     end
   end
 
@@ -103,12 +103,12 @@ module Admin::SidebarHelper
     hidden_params = search_params.map { |key, value| hidden_field_tag(key, value) }
 
     <<-HTML
-<h2>#{_('Search')}</h2>
+<h2>#{_("Search")}</h2>
 <form action="" method="get">
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.sort.join("\n")}
 </form>
-<p class="tip">#{_('Search by')} #{search_by.downcase}.</p>
+<p class="tip">#{_("Search by")} #{search_by.downcase}.</p>
     HTML
 
   end
@@ -130,7 +130,7 @@ module Admin::SidebarHelper
         when :has_and_belongs_to_many:
           html << relationship_filter(current_request, key, true)
         else
-          html << "<p>#{_('Unknown')}</p>"
+          html << "<p>#{_("Unknown")}</p>"
         end
       end
     end
@@ -171,7 +171,7 @@ function surfto_#{model_pluralized}(form) {
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
   <select name="#{model_pluralized}" onChange="surfto_#{model_pluralized}(this.form)">
-    <option value="#{url_for params_without_filter}">#{_('filter by')} #{_(model.human_name)}</option>
+    <option value="#{url_for params_without_filter}">#{_("filter by")} #{_(model.human_name)}</option>
     #{items.join("\n")}
   </select>
 </form></p>
