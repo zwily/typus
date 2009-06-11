@@ -185,7 +185,12 @@ module Admin::FormHelper
 
     returning(String.new) do |html|
       @resource[:class].typus_defaults_for(:relationships).each do |relationship|
-        case @resource[:class].reflect_on_association(relationship.to_sym).macro
+
+        association = @resource[:class].reflect_on_association(relationship.to_sym)
+
+        next if !@current_user.can_perform?(association.class_name.constantize, 'read')
+
+        case association.macro
         when :has_and_belongs_to_many
           html << typus_form_has_and_belongs_to_many(relationship)
         when :has_many
@@ -193,6 +198,7 @@ module Admin::FormHelper
         when :has_one
           html << typus_form_has_one(relationship)
         end
+
       end
     end
 
