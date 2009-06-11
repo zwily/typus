@@ -25,7 +25,7 @@ class TypusHelperTest < ActiveSupport::TestCase
     options = { :app_name => 'whatistypus.com' }
     Typus::Configuration.stubs(:options).returns(options)
     output = page_title('custom_action')
-    assert_equal 'whatistypus.com &rsaquo; Custom action', output
+    assert_equal 'whatistypus.com - Custom action', output
   end
 
   def test_header_with_root_path
