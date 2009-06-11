@@ -136,7 +136,7 @@ module TypusHelper
 
     <<-HTML
 <ul>
-  <li>#{_('Logged as')} #{link_to user.full_name(:display_role => true), admin_edit_typus_user_path}</li>
+  <li>#{_('Logged as')} #{link_to user.name, admin_edit_typus_user_path} (#{user.role})</li>
   <li>#{link_to _('Sign out'), admin_sign_out_path }</li>
 </ul>
     HTML

@@ -260,7 +260,7 @@ class TypusControllerTest < ActionController::TestCase
     assert_match "href=\"\/admin\/typus_users\/edit\/#{typus_user.id}\"", @response.body
 
     assert_select 'body div#header' do
-      assert_select 'a', 'Admin Example (admin)'
+      assert_select 'a', 'Admin Example'
       assert_select 'a', 'Sign out'
     end
 

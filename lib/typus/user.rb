@@ -55,11 +55,8 @@ module Typus
 
     module InstanceMethods
 
-      def full_name(*args)
-        options = args.extract_options!
-        full_name = (!first_name.empty? && !last_name.empty?) ? "#{first_name} #{last_name}" : email
-        full_name << " (#{role})" if options[:display_role]
-        return full_name
+      def name
+        (!first_name.empty? && !last_name.empty?) ? "#{first_name} #{last_name}" : email
       end
 
      def authenticated?(password)

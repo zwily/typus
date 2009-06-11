@@ -121,16 +121,14 @@ this_is_chelm@example.com
     assert_equal "can't be blank", @typus_user.errors[:role]
   end
 
-  def test_should_return_full_name
-    assert_equal "#{@typus_user.email} (#{@typus_user.role})", @typus_user.full_name(:display_role => true)
-    assert_equal "#{@typus_user.email}", @typus_user.full_name
+  def test_should_return_name_when_only_email
+    assert_equal @typus_user.email, @typus_user.name
   end
 
-  def test_should_return_full_name_with_role
+  def test_should_return_name_when_theres_first_name_and_last_name
     @typus_user.first_name = 'John'
     @typus_user.last_name = 'Smith'
-    assert_equal "John Smith (#{@typus_user.role})", @typus_user.full_name(:display_role => true)
-    assert_equal 'John Smith', @typus_user.full_name
+    assert_equal 'John Smith', @typus_user.name
   end
 
   def test_should_return_verify_is_root
