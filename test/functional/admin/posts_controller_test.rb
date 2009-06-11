@@ -244,13 +244,17 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_verify_editor_cannot_edit_other_users_records
 
+    @request.env['HTTP_REFERER'] = '/admin/posts'
+
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
 
     post = posts(:owned_by_admin)
     get :edit, { :id => post.id }
     assert_response :redirect
-    assert_redirected_to :action => 'show', :id => post.id
+    assert_redirected_to '/admin/posts'
+    assert flash[:notice]
+    assert_equal "You don't have permission to access this item.", flash[:notice]
 
   end
 

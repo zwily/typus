@@ -246,13 +246,11 @@ private
     # If current_user is a root user, by-pass.
     return if @current_user.is_root?
 
-    # If the current model doesn't include a key which relates it with the
-    # current_user, by-pass.
-    return unless @item.respond_to?(Typus.user_fk)
-
-    # If item is owned by the user ...
-    unless @item.send(Typus.user_fk) == session[:typus_user_id]
-      redirect_to :action => 'show', :id => @item.id
+    # OPTIMIZE: `typus_users` is currently hard-coded. We should find a good name for this option.
+    if @item.respond_to?('typus_users') && !@item.send('typus_users').include?(@current_user) ||
+       @item.respond_to?(Typus.user_fk) && !(@item.send(Typus.user_fk) == session[:typus_user_id])
+       flash[:notice] = _("You don't have permission to access this item.")
+       redirect_to :back
     end
 
   end
