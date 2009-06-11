@@ -229,7 +229,13 @@ module Admin::FormHelper
   <small>#{link_to _('Add new'), link_options if @current_user.can_perform?(model_to_relate, 'create')}</small>
   </h2>
       HTML
-      items = @resource[:class].find(params[:id]).send(field).find(:all, :order => model_to_relate.typus_order_by)
+
+      conditions = if model_to_relate.typus_options_for(:only_user_items) && !@current_user.is_root?
+                    { Typus.user_fk => @current_user }
+                  end
+
+      items = @resource[:class].find(params[:id]).send(field).find(:all, :order => model_to_relate.typus_order_by, :conditions => conditions)
+
       unless items.empty?
         options = { :back_to => "#{@back_to}##{field}", :resource => @resource[:self], :resource_id => @item.id }
         html << build_list(model_to_relate, 
