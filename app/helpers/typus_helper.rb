@@ -117,14 +117,10 @@ module TypusHelper
   def header
 
     if ActionController::Routing::Routes.named_routes.routes.keys.include?(:root)
-      link_to_site = <<-HTML
-<li>#{link_to _("View site"), root_path, :target => 'blank'}</li>
-      HTML
+      link_to_site = "<li>#{link_to _("View site"), root_path, :target => 'blank'}</li>"
     end
 
-    link_to_dashboard = <<-HTML
-<li>#{link_to _("Dashboard"), admin_dashboard_path}</li>
-    HTML
+    link_to_dashboard = "<li>#{link_to _("Dashboard"), admin_dashboard_path}</li>"
 
     <<-HTML
 <h1>#{Typus::Configuration.options[:app_name]}</h1>

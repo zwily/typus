@@ -39,8 +39,11 @@ class TypusHelperTest < ActiveSupport::TestCase
 
     output = header
     expected = <<-HTML
-<h1>#{Typus::Configuration.options[:app_name]} <small><a href="/">View site</a></small>
-</h1>
+<h1>#{Typus::Configuration.options[:app_name]}</h1>
+<ul>
+  <li><a href="/">View site</a></li>
+  <li><a href="/">View site</a></li>
+</ul>
     HTML
 
     assert_equal expected, output
@@ -52,9 +55,15 @@ class TypusHelperTest < ActiveSupport::TestCase
     # Remove root route from list
     ActionController::Routing::Routes.named_routes.routes.reject! {|key, route| key == :root }
 
+    self.stubs(:link_to).returns(%(<a href="/admin/dashboard">Dashboard</a>))
+
     output = header
     expected = <<-HTML
-<h1>#{Typus::Configuration.options[:app_name]} </h1>
+<h1>#{Typus::Configuration.options[:app_name]}</h1>
+<ul>
+  <li><a href="/admin/dashboard">Dashboard</a></li>
+  
+</ul>
     HTML
 
     assert_equal expected, output
