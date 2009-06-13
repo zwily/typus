@@ -118,12 +118,20 @@ module TypusHelper
 
     if ActionController::Routing::Routes.named_routes.routes.keys.include?(:root)
       link_to_site = <<-HTML
-<small>#{link_to _("View site"), root_path, :target => 'blank'}</small>
+<li>#{link_to _("View site"), root_path, :target => 'blank'}</li>
       HTML
     end
 
+    link_to_dashboard = <<-HTML
+<li>#{link_to _("Dashboard"), admin_dashboard_path}</li>
+    HTML
+
     <<-HTML
-<h1>#{Typus::Configuration.options[:app_name]} #{link_to_site}</h1>
+<h1>#{Typus::Configuration.options[:app_name]}</h1>
+<ul>
+  #{link_to_dashboard}
+  #{link_to_site}
+</ul>
     HTML
 
   end

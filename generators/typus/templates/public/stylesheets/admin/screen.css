@@ -89,13 +89,12 @@ a.on {
   padding: 1em 0;
 }
 
-  #header h1 {	
+  #header h1 {
+    display: block;
+    float: left;
     font-size: 2em;
+    margin-right: 0.25em;
   }
-
-    #header h1 small {
-      font-size: 0.5em;
-    }
 
   #header a {
     color: #FFF;
@@ -110,9 +109,16 @@ a.on {
     margin-top: 1em;
   }
 
+  #header .left ul {
+    display: block;
+    float: left;
+    margin-top: 1em;
+  }
+
+    #header .left li, 
     #header .right li {
       display: inline;
-      padding-left: 1em;
+      padding-left: 0.5em;
     }
 
 /* @end */
