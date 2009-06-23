@@ -262,8 +262,8 @@ module Typus
 
     def previous_and_next(condition = {}, klass = self.class)
 
-      previous_conditions = "id < #{id}"
-      next_conditions = "id > #{id}"
+      previous_conditions = "#{klass.primary_key} < #{id}"
+      next_conditions = "#{klass.primary_key} > #{id}"
 
       if !condition.empty?
         conditions, joins = klass.build_conditions(condition)
@@ -272,13 +272,13 @@ module Typus
       end
 
       previous_ = klass.find :first, 
-                             :select => [:id], 
-                             :order => "id DESC", 
+                             :select => [klass.primary_key], 
+                             :order => "#{klass.primary_key} DESC", 
                              :conditions => previous_conditions
 
       next_ = klass.find :first, 
-                         :select => [:id], 
-                         :order => "id ASC", 
+                         :select => [klass.primary_key], 
+                         :order => "#{klass.primary_key} ASC", 
                          :conditions => next_conditions
 
       return previous_, next_
