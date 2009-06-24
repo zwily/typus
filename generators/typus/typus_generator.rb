@@ -22,7 +22,7 @@ class TypusGenerator < Rails::Generator::Base
         class_name = model.sub(/\.rb$/,'').classify
         begin
           klass = class_name.constantize
-          active_record_model = klass.superclass.equal?(ActiveRecord::Base)
+          active_record_model = klass.superclass.equal?(ActiveRecord::Base) && !klass.abstract_class?
           active_record_model_with_sti = klass.superclass.superclass.equal?(ActiveRecord::Base)
           ar_models << klass if active_record_model || active_record_model_with_sti
         rescue Exception => error
