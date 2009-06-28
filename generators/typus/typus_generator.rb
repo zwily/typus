@@ -40,7 +40,7 @@ class TypusGenerator < Rails::Generator::Base
 
       configuration = { :base => '', :roles => '' }
 
-      ar_models.each do |model|
+      ar_models.sort{ |x,y| x.class_name <=> y.class_name }.each do |model|
 
         # Detect all relationships except polymorphic belongs_to using reflection.
         relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many, :has_one ].map do |relationship|
