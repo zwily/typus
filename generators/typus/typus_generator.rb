@@ -56,36 +56,23 @@ class TypusGenerator < Rails::Generator::Base
 
         model_columns = model.columns - reject_columns
 
-        # OPTIMIZE: Dry
-        #
-        #     model.reflect_on_all_associations(:belongs_to) ...
-        #
-
         # By default we don't want to show in our lists text fields and created_at
         # and updated_at attributes.
         list = model_columns.reject { |c| c.sql_type == 'text' || %w( created_at updated_at ).include?(c.name) }.map(&:name)
-        # But we want attributes of belongs_to relationships to show in our lists 
-        # if those are not polymorphic
-        list << model.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
-
-        list.flatten!
 
         # By default we don't want to show in our forms created_at and updated_at 
         # attributes.
         form = model_columns.reject { |c| %w( id created_at updated_at ).include?(c.name) }.map(&:name)
-        # But we want attributes of belongs_to relationships to show in our forms
-        # if those are not polymorphic
-        form << model.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
-
-        form.flatten!
 
         # By default we want to show all model columns in the show action.
         show = model_columns.map(&:name)
-        # But we want attributes of belongs_to relationships to show in our forms
-        # if those are not polymorphic
-        show << model.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
 
-        show.flatten!
+        # We want attributes of belongs_to relationships to show in our fields 
+        # collections if those are not polymorphic.
+        [ list, form, show ].each do |fields|
+          fields << model.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
+          fields.flatten!
+        end
 
         configuration[:base] << <<-RAW
 #{model}:
