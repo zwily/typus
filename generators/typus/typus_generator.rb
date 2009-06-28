@@ -45,26 +45,34 @@ class TypusGenerator < Rails::Generator::Base
         # Detect all relationships except polymorphic belongs_to using reflection.
         relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many, :has_one ].map do |relationship|
                           model.reflect_on_all_associations(relationship).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
-                        end.flatten.sort   
+                        end.flatten.sort
 
         # Remove foreign key and polymorphic type attributes
         reject_columns = []
-        model.reflect_on_all_associations(:belongs_to).each { |i| 
+        model.reflect_on_all_associations(:belongs_to).each do |i|
           reject_columns << model.columns_hash[i.name.to_s + "_id"]
-          reject_columns << model.columns_hash[i.name.to_s + "_type"] if i.options[:polymorphic] 
-        }
-        
+          reject_columns << model.columns_hash[i.name.to_s + "_type"] if i.options[:polymorphic]
+        end
+
         model_columns = model.columns - reject_columns
-        
+
         # By default we don't want to show in our lists text fields and created_at
         # and updated_at attributes.
         list = model_columns.reject { |c| c.sql_type == 'text' || %w( created_at updated_at ).include?(c.name) }.map(&:name)
-        # But we want attributes of belongs_to relationships to show in our lists if those are not polymorphic
+        # But we want attributes of belongs_to relationships to show in our lists 
+        # if those are not polymorphic
         list << model.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
+
+        list.flatten!
 
         # By default we don't want to show in our forms created_at and updated_at 
         # attributes.
         form = model_columns.reject { |c| %w( id created_at updated_at ).include?(c.name) }.map(&:name)
+        # But we want attributes of belongs_to relationships to show in our forms
+        # if those are not polymorphic
+        form << model.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
+
+        form.flatten!
 
         # By default we want to show all model columns in the show action.
         show = model_columns.map(&:name)
