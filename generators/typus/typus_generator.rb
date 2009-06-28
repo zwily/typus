@@ -50,8 +50,8 @@ class TypusGenerator < Rails::Generator::Base
         # Remove foreign key and polymorphic type attributes
         reject_columns = []
         model.reflect_on_all_associations(:belongs_to).each do |i|
-          reject_columns << model.columns_hash[i.name.to_s + "_id"]
-          reject_columns << model.columns_hash[i.name.to_s + "_type"] if i.options[:polymorphic]
+          reject_columns << model.columns_hash[i.name.to_s + '_id']
+          reject_columns << model.columns_hash[i.name.to_s + '_type'] if i.options[:polymorphic]
         end
 
         model_columns = model.columns - reject_columns
