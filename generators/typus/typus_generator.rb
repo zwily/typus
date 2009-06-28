@@ -56,19 +56,17 @@ class TypusGenerator < Rails::Generator::Base
 
         model_columns = model.columns - reject_columns
 
-        # By default we don't want to show in our lists text fields and created_at
-        # and updated_at attributes.
+        # Don't show `text` fields and timestamps in lists.
         list = model_columns.reject { |c| c.sql_type == 'text' || %w( created_at updated_at ).include?(c.name) }.map(&:name)
 
-        # By default we don't want to show in our forms created_at and updated_at 
-        # attributes.
+        # Don't show timestamps in forms.
         form = model_columns.reject { |c| %w( id created_at updated_at ).include?(c.name) }.map(&:name)
 
-        # By default we want to show all model columns in the show action.
+        # Show all model columns in the show action.
         show = model_columns.map(&:name)
 
-        # We want attributes of belongs_to relationships to show in our fields 
-        # collections if those are not polymorphic.
+        # We want attributes of belongs_to relationships to be shown in our 
+        # field collections if those are not polymorphic.
         [ list, form, show ].each do |fields|
           fields << model.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
           fields.flatten!
