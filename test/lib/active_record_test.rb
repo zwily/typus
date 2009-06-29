@@ -166,6 +166,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal 10, TypusUser.typus_options_for(:form_rows)
     assert_equal 10, TypusUser.typus_options_for('form_rows')
 
+    assert Page.typus_options_for(:on_header)
+    assert !TypusUser.typus_options_for(:on_header)
+
+    assert_nil TypusUser.typus_options_for(:unexisting)
+
   end
 
   def test_should_verify_typus_boolean_is_an_instance_of_active_support_ordered_hash

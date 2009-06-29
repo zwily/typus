@@ -33,6 +33,10 @@ module Typus
       Typus::Configuration.config.map { |i| i.first }.sort
     end
 
+    def models_on_header
+      models.collect { |m| m if m.constantize.typus_options_for(:on_header) }.compact
+    end
+
     ##
     # Return a list of resources, which are models tableless.
     #

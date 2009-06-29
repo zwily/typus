@@ -118,7 +118,11 @@ module TypusHelper
   def header
 
     links = []
-    links << "<li>#{link_to _("Dashboard"), admin_dashboard_path}</li>"
+    links << "<li>#{link_to_unless_current _("Dashboard"), admin_dashboard_path}</li>"
+
+    Typus.models_on_header.each do |model|
+      links << "<li>#{link_to_unless_current model.constantize.typus_human_name.pluralize, :controller => "/admin/#{model.tableize}"}</li>"
+    end
 
     if ActionController::Routing::Routes.named_routes.routes.keys.include?(:root)
       links << "<li>#{link_to _("View site"), root_path, :target => 'blank'}</li>"
@@ -127,7 +131,7 @@ module TypusHelper
     <<-HTML
 <h1>#{Typus::Configuration.options[:app_name]}</h1>
 <ul>
-  #{links.join("\n")}
+#{links.join("\n")}
 </ul>
     HTML
 

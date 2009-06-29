@@ -31,6 +31,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal false, Typus::Configuration.options[:index_after_save]
     assert_equal 5, Typus::Configuration.options[:minute_step]
     assert_equal 'nil', Typus::Configuration.options[:nil]
+    assert_equal false, Typus::Configuration.options[:on_header]
     assert_equal false, Typus::Configuration.options[:only_user_items]
     assert_equal 15, Typus::Configuration.options[:per_page]
     assert_equal 5, Typus::Configuration.options[:sidebar_selector]

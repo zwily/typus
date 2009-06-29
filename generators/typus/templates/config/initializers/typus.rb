@@ -22,6 +22,7 @@ Typus::Configuration.options[:app_name] = '<%= application %>'
 # Typus::Configuration.options[:index_after_save] = true
 # Typus::Configuration.options[:minute_step] = 5
 # Typus::Configuration.options[:nil] = 'nil'
+# Typus::Configuration.options[:on_header] = false
 # Typus::Configuration.options[:only_user_items] = false
 # Typus::Configuration.options[:per_page] = 15
 # Typus::Configuration.options[:sidebar_selector] = 5

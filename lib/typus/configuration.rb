@@ -40,6 +40,7 @@ module Typus
                       :index_after_save => false, 
                       :minute_step => 5, 
                       :nil => 'nil', 
+                      :on_header => false, 
                       :only_user_items => false, 
                       :per_page => 15, 
                       :sidebar_selector => 5, 

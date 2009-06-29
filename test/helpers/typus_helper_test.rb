@@ -36,13 +36,15 @@ class TypusHelperTest < ActiveSupport::TestCase
     # ActionView::Helpers::UrlHelper does not support strings, which are returned by named routes
     # link root_path
     self.stubs(:link_to).returns(%(<a href="/">View site</a>))
+    self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
 
     output = header
     expected = <<-HTML
 <h1>#{Typus::Configuration.options[:app_name]}</h1>
 <ul>
-  <li><a href="/">View site</a></li>
-  <li><a href="/">View site</a></li>
+<li><a href="/admin/dashboard">Dashboard</a></li>
+<li><a href="/admin/dashboard">Dashboard</a></li>
+<li><a href="/">View site</a></li>
 </ul>
     HTML
 
@@ -55,14 +57,14 @@ class TypusHelperTest < ActiveSupport::TestCase
     # Remove root route from list
     ActionController::Routing::Routes.named_routes.routes.reject! {|key, route| key == :root }
 
-    self.stubs(:link_to).returns(%(<a href="/admin/dashboard">Dashboard</a>))
+    self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
 
     output = header
     expected = <<-HTML
 <h1>#{Typus::Configuration.options[:app_name]}</h1>
 <ul>
-  <li><a href="/admin/dashboard">Dashboard</a></li>
-  
+<li><a href="/admin/dashboard">Dashboard</a></li>
+<li><a href="/admin/dashboard">Dashboard</a></li>
 </ul>
     HTML
 

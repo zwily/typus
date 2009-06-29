@@ -37,6 +37,7 @@ Page:
   filters: is_published?
   options:
     form_rows: 25
+    on_header: true
 
 Post:
   fields:
