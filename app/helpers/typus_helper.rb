@@ -27,7 +27,7 @@ module TypusHelper
           new_admin_item_path = { :controller => "admin/#{model.tableize}", :action => 'new'}
           html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to model.constantize.human_name.pluralize, admin_items_path}<br /><small>#{description}</small></td>
+<td>#{link_to model.constantize.typus_human_name.pluralize, admin_items_path}<br /><small>#{description}</small></td>
 <td class="right"><small>
 #{link_to _("Add"), new_admin_item_path if @current_user.can_perform?(model, 'create')}
 </small></td>
@@ -110,7 +110,7 @@ module TypusHelper
 
   def page_title(action = params[:action])
     crumbs = [ ]
-    crumbs << @resource[:class].human_name.pluralize if @resource
+    crumbs << @resource[:class].typus_human_name.pluralize if @resource
     crumbs << _(action.humanize) unless %w( index ).include?(action)
     return "#{Typus::Configuration.options[:app_name]} - " + crumbs.compact.map { |x| x }.join(' &rsaquo; ')
   end

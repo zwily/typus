@@ -9,7 +9,7 @@ module Admin::MasterHelper
   def display_link_to_previous # (_params = params)
 
     options = {}
-    options[:resource_from] = @resource[:class].human_name
+    options[:resource_from] = @resource[:class].typus_human_name
     options[:resource_to] = params[:resource].classify.humanize if params[:resource]
 
     editing = %w( edit update ).include?(params[:action])

@@ -171,7 +171,7 @@ function surfto_#{model_pluralized}(form) {
 <!-- /Embedded JS -->
 <p><form class="form" action="#">
   <select name="#{model_pluralized}" onChange="surfto_#{model_pluralized}(this.form)">
-    <option value="#{url_for params_without_filter}">#{_("filter by")} #{_(model.human_name)}</option>
+    <option value="#{url_for params_without_filter}">#{_("filter by")} #{_(model.typus_human_name)}</option>
     #{items.join("\n")}
   </select>
 </form></p>

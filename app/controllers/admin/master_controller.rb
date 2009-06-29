@@ -89,7 +89,7 @@ class Admin::MasterController < ApplicationController
     if @item.valid?
       create_with_back_to and return if params[:back_to]
       @item.save
-      flash[:success] = _("{{model}} successfully created.", :model => @resource[:class].human_name)
+      flash[:success] = _("{{model}} successfully created.", :model => @resource[:class].typus_human_name)
       if @resource[:class].typus_options_for(:index_after_save)
         redirect_to :action => 'index'
       else
@@ -126,7 +126,7 @@ class Admin::MasterController < ApplicationController
 
   def update
     if @item.update_attributes(params[:item])
-      flash[:success] = _("{{model}} successfully updated.", :model => @resource[:class].human_name)
+      flash[:success] = _("{{model}} successfully updated.", :model => @resource[:class].typus_human_name)
       path = if @resource[:class].typus_options_for(:index_after_save)
                params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
              else
@@ -141,7 +141,7 @@ class Admin::MasterController < ApplicationController
 
   def destroy
     @item.destroy
-    flash[:success] = _("{{model}} successfully removed.", :model => @resource[:class].human_name)
+    flash[:success] = _("{{model}} successfully removed.", :model => @resource[:class].typus_human_name)
     redirect_to :back
   rescue Exception => error
     error_handler(error, params.merge(:action => 'index', :id => nil))
@@ -151,7 +151,7 @@ class Admin::MasterController < ApplicationController
     if @resource[:class].typus_options_for(:toggle)
       @item.toggle!(params[:field])
       flash[:success] = _("{{model}} {{attribute}} changed.", 
-                          :model => @resource[:class].human_name, 
+                          :model => @resource[:class].typus_human_name, 
                           :attribute => params[:field].humanize.downcase)
     else
       flash[:notice] = _("Toggle is disabled.")
@@ -186,8 +186,8 @@ class Admin::MasterController < ApplicationController
     @item.send(resource_tableized) << resource_class.find(params[:related][:id])
 
     flash[:success] = _("{{model_a}} related to {{model_b}}.", 
-                        :model_a => resource_class.human_name, 
-                        :model_b => @resource[:class].human_name)
+                        :model_a => resource_class.typus_human_name, 
+                        :model_b => @resource[:class].typus_human_name)
 
     redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), 
                 :id => @item.id, 
@@ -212,7 +212,7 @@ class Admin::MasterController < ApplicationController
       message = "{{model_a}} removed from {{model_b}}."
     end
 
-    flash[:success] = _(message, :model_a => resource_class.human_name, :model_b => @resource[:class].human_name)
+    flash[:success] = _(message, :model_a => resource_class.typus_human_name, :model_b => @resource[:class].typus_human_name)
 
     redirect_to :controller => @resource[:self], 
                 :action => @resource[:class].typus_options_for(:default_action_on_item), 
@@ -319,7 +319,7 @@ private
       @item.send(params[:resource]) << resource
     when :has_many
       @item.save
-      message = _("{{model}} successfully created.", :model => @resource[:class].human_name)
+      message = _("{{model}} successfully created.", :model => @resource[:class].typus_human_name)
       path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
     when :polymorphic
       resource.send(@item.class.name.tableize).create(params[:item])

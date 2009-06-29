@@ -3,7 +3,7 @@
   <%= actions %>
 <% end %>
 
-<h2><%= link_to @resource[:class].human_name.pluralize, :action => 'index' %> &rsaquo; 
+<h2><%= link_to @resource[:class].typus_human_name.pluralize, :action => 'index' %> &rsaquo; 
     <%= _("Show") %></h2>
 
 <%= typus_block :location => @resource[:self], :partial => 'show' %>

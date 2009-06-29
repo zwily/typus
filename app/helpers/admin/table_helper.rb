@@ -55,8 +55,8 @@ module Admin::TableHelper
                                                             :resource => model, 
                                                             :resource_id => item.id }, 
                                                             :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
-                                                                          :unrelate_model => model.human_name, 
-                                                                          :unrelate_model_from => @resource[:class].human_name)
+                                                                          :unrelate_model => model.typus_human_name, 
+                                                                          :unrelate_model_from => @resource[:class].typus_human_name)
         end
 
         html << <<-HTML

@@ -22,6 +22,20 @@ module Typus
     end
 
     ##
+    # This method is used to change a Rails behavior.
+    #
+    #   typus $ script/console
+    #   Loading development environment (Rails 2.3.2)
+    #   >> TypusUser.human_name
+    #   => "Typususer"
+    #   >> TypusUser.typus_human_name
+    #   => "Typus user"
+    #
+    def typus_human_name
+      human_name(:default => self.name.underscore.humanize)
+    end
+
+    ##
     # Form and list fields
     #
     def typus_fields_for(filter)
