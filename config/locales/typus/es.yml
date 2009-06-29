@@ -104,6 +104,6 @@ es:
   "This month": "Este mes"
   "This year": "Este año"
   "{{model}} filtered by {{filtered_by}}": "{{model}} filtrados por {{filtered_by}}"
-  "True": 
-  "False": 
+  "True": "Verdadero"
+  "False": "Falso"
   "Set language to": "Idioma"
