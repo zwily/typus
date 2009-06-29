@@ -369,8 +369,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
    assert_equal 'datepicker', Post.typus_template('published_at')
    assert_equal 'datepicker', Post.typus_template(:published_at)
 
-   assert_equal nil, Post.typus_template('created_at')
-   assert_equal nil, Post.typus_template('unknown')
+   assert_nil Post.typus_template('created_at')
+   assert_nil Post.typus_template('unknown')
 
   end
 

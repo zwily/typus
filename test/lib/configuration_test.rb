@@ -25,7 +25,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     initializer = "#{Rails.root}/config/initializers/typus.rb"
     return if File.exist?(initializer)
     assert_equal 'edit', Typus::Configuration.options[:default_action_on_item]
-    assert_equal nil, Typus::Configuration.options[:end_year]
+    assert_nil Typus::Configuration.options[:end_year]
     assert_equal 10, Typus::Configuration.options[:form_rows]
     assert_equal true, Typus::Configuration.options[:icon_on_boolean]
     assert_equal false, Typus::Configuration.options[:index_after_save]
@@ -35,7 +35,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal false, Typus::Configuration.options[:only_user_items]
     assert_equal 15, Typus::Configuration.options[:per_page]
     assert_equal 5, Typus::Configuration.options[:sidebar_selector]
-    assert_equal nil, Typus::Configuration.options[:start_year]
+    assert_nil Typus::Configuration.options[:start_year]
     assert_equal true, Typus::Configuration.options[:toggle]
   end
 
