@@ -1,0 +1,103 @@
+es:
+  "Email": 
+  "Password": 
+  "Password confirmation": 
+  "Sign in": 
+  "Recover password": 
+  "Sign up": 
+  "Enter your email below to create the first user": 
+  "That doesn't seem like a valid email address": 
+  "I remember my password": 
+  "Password recovery link sent to your email": 
+  "Passwords don't match": 
+  "A valid token is required": 
+  "The email and/or password you entered is invalid": 
+  "There are not defined applications in config/typus/*.yml": 
+  "Overview": 
+  "Options": 
+  "Password confirm": 
+  "Change password": 
+  "There are no {{records}}": 
+  "There are no {{records}} under this filter": 
+  "Dashboard": 
+  "Create entry": 
+  "Update entry": 
+  "New": 
+  "Show": 
+  "Edit": 
+  "Login": 
+  "Setup": 
+  "Create": 
+  "Sign out": 
+  "Update": 
+  "View site": 
+  "Logged as": 
+  "Remove filter": 
+  "Back to list": 
+  "Actions": 
+  "Add": 
+  "&larr; Previous": 
+  "Next &rarr;": 
+  "Previous": 
+  "Next": 
+  "Search": 
+  "Search by": 
+  "{{model}} successfully updated": 
+  "{{model}} successfully created": 
+  "{{model}} successfully removed": 
+  "{{model}} {{attribute}} changed": 
+  "You're adding a new {{resource_from}} to {{resource_to}}": 
+  "You're adding a new {{resource_from}}": 
+  "You're updating a {{resource_from}} for {{resource_to}}": 
+  "You're updating a {{resource_from}}": 
+  "Toggle is disabled": 
+  "Record moved {{to}}": 
+  "{{model_a}} related to {{model_b}}": 
+  "{{model_a}} successfully assigned to {{model_b}}": 
+  "{{model_a}} unrelated from {{model_b}}": 
+  "{{model_a}} removed from {{model_b}}": 
+  "Your new password is {{password}}": 
+  "Add entry": 
+  "Go to": 
+  "First name": 
+  "Last name": 
+  "Roles": 
+  "Status": 
+  "Typus User": 
+  "System Users Administration": 
+  "Resources": 
+  "Up": 
+  "Down": 
+  "filter by": 
+  "Checked if active": 
+  "As you're not the admin or the owner of this record you cannot edit it": 
+  "You can't change your role": 
+  "Error! Typus User or role doesn't exist": 
+  "You can't toggle your status": 
+  "You're not allowed to toggle status": 
+  "You can't remove yourself": 
+  "You're not allowed to remove Typus Users": 
+  "{{current_user_role}} can't perform action. ({{action}})": 
+  "{{current_user_role}} can't go to {{action}} on {{controller}}": 
+  "{{current_user_role}} can't delete this item": 
+  "{{current_user_role}} can't perform action ({{action}})": 
+  "{{current_user_role}} can't display items": 
+  "You can update your password at": 
+  "If you didn't request a password update, you can ignore this message": 
+  "Have a nice day": 
+  "Reset password": 
+  "Add new": 
+  "Do you want to cancel it?": 
+  "Click here": 
+  "Are you sure you want to leave this page?": 
+  "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": 
+  "Click OK to continue, or click Cancel to stay on this page": 
+  "Remove entry?": 
+  "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": 
+  "Change {{attribute}}?": 
+  "Set language": 
+  "Today": 
+  "Past 7 days": 
+  "This month": 
+  "This year": 
+  "{{model}} filtered by {{filtered_by}}": 
