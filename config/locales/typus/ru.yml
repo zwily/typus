@@ -1,3 +1,6 @@
+# Russian (ru) translations for Typus
+# by Alexey Noskov <http://github.com/alno>
+
 ru:
   "Email": "E-Mail"
   "Password": "Пароль"
@@ -105,3 +108,4 @@ ru:
   "{{model}} filtered by {{filtered_by}}": 
   "True": 
   "False": 
+  "Set language to": 

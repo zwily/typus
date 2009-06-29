@@ -1,3 +1,6 @@
+# Portuguese (pt-br) translations for Typus
+# by George Guimarães <http://github.com/georgeguimaraes>
+
 pt-BR:
   "Email": "Email"
   "Password": "Senha"
@@ -105,3 +108,4 @@ pt-BR:
   "{{model}} filtered by {{filtered_by}}": 
   "True": 
   "False": 
+  "Set language to": 

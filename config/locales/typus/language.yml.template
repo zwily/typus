@@ -1,4 +1,11 @@
-es:
+##
+# This is the complete translating yaml reference for Typus.
+##
+
+# <language> translations for Typus
+# by <your_name> <contact_form>
+
+<language>:
   "Email": 
   "Password": 
   "Password confirmation": 
@@ -103,3 +110,4 @@ es:
   "{{model}} filtered by {{filtered_by}}": 
   "True": 
   "False": 
+  "Set language to": 

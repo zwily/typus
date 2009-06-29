@@ -1,3 +1,6 @@
+# Spanish translations for Typus
+# by Felipe Talavera <http://github.com/flype>
+
 es:
   "Email": "Correo"
   "Password": "Contraseña"
@@ -103,3 +106,4 @@ es:
   "{{model}} filtered by {{filtered_by}}": "{{model}} filtrados por {{filtered_by}}"
   "True": 
   "False": 
+  "Set language to": "Idioma"
