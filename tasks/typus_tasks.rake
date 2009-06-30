@@ -19,8 +19,14 @@ namespace :typus do
 
   desc 'Install ssl_requirement.'
   task :ssl do
-    plugins = [ 'git://github.com/rails/ssl_requirement.git' ]
-    system "script/plugin install #{plugins.join(' ')} --force"
+    system "script/plugin install git://github.com/rails/ssl_requirement.git --force"
+  end
+
+  desc 'Install tiny_mce.'
+  task :tiny_mce do
+    system "script/plugin install git://github.com/kete/tiny_mce.git --force"
+    load File.join Rails.root, 'vendor', 'plugins', 'tiny_mce', 'tasks', 'tiny_mce.rake'
+    Rake::Task["tiny_mce:install"].invoke
   end
 
 end

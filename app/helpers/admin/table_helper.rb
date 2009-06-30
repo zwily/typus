@@ -5,7 +5,7 @@ module Admin::TableHelper
     returning(String.new) do |html|
 
       html << <<-HTML
-<table>
+<table class='typus'>
       HTML
 
       html << typus_table_header(model, fields)

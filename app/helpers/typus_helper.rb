@@ -15,7 +15,7 @@ module TypusHelper
         next if available.compact.empty?
 
         html << <<-HTML
-<table>
+<table class="typus">
 <tr>
 <th colspan="2">#{app}</th>
 </tr>
@@ -58,7 +58,7 @@ module TypusHelper
     returning(String.new) do |html|
 
       html << <<-HTML
-<table>
+<table class="typus">
 <tr>
 <th colspan="2">#{_("Resources")}</th>
 </tr>

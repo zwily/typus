@@ -9,6 +9,14 @@
 #     show: title, category, is_published?
 #     relationship: title, status
 #     options:
+#       tiny_mce:
+#         fields: body
+#         options:
+#           theme: simple
+#           theme_advanced_buttons3_add:
+#             - fulscreen
+#           plugins: 
+#             - fulscreen
 #       auto_generated:
 #       booleans:
 #         is_published: ["Yes, it is", "No, it isn't"]

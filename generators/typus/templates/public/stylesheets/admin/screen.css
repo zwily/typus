@@ -205,12 +205,12 @@ a.on {
     padding: 0em 1em;
   }
 
-  #content table {
+  #content table.typus {
     margin: 1em 0em;
     background: #000;
   }
 
-  #content h2+table {
+  #content h2+table.typus {
     margin: 0em; /* Here we overwrite a preference */
   }
 
@@ -364,21 +364,21 @@ a.on {
 
 /* @group Content Tables */
 
-#content table {
+#content table.typus {
   width: 100%;
 }
 
-  #content table small {
+  #content table.typus small {
     font-size: 0.8em;
   }
 
-  #content table th {
+  #content table.typus th {
     color: #FFF;
     font-weight: normal;
     padding: 4px;
   }
 
-    #content table th a {
+    #content table.typus th a {
       color: #FFF!important;
     }
 
@@ -386,30 +386,30 @@ a.on {
 
     #content .desc { background: transparent url(/images/admin/arrow_down.gif) no-repeat right center; }
 
-  #content table td.right {
+  #content table.typus td.right {
     text-align: right;
   }
 
-  #content table tr.even {
+  #content table.typus tr.even {
     background: #FFF!important;
   }
 
-    #content table tr.even:hover,
-    #content table tr.odd:hover {
+    #content table.typus tr.even:hover,
+    #content table.typus tr.odd:hover {
       background: #000!important;
       color: #FFF;
     }
 
-    #content table tr.even:hover a,
-    #content table tr.odd:hover a {
+    #content table.typus tr.even:hover a,
+    #content table.typus tr.odd:hover a {
       color: #FFF!important;
     }
 
-  #content table tr.odd {
+  #content table.typus tr.odd {
     background: #F5F5F5;
   }
 
-  #content table td {
+  #content table.typus td {
     border: none;
     font-weight: normal;
     padding: 3px 4px;

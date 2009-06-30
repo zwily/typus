@@ -36,6 +36,9 @@ class Admin::MasterController < ApplicationController
   before_filter :set_fields, 
                 :only => [ :index, :new, :edit, :create, :update, :show ]
 
+  before_filter :set_tiny_mce,
+                :only => [ :new, :edit, :create, :update ]
+
   ##
   # This is the main index of the model. With filters, conditions 
   # and more.
@@ -287,6 +290,13 @@ private
   def set_order
     params[:sort_order] ||= 'desc'
     @order = params[:order_by] ? "#{@resource[:class].table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
+  end
+
+  def set_tiny_mce
+    unless @resource[:class].typus_tiny_mce_fields.empty? 
+      options = @resource[:class].typus_tiny_mce_options
+      self.class.class_eval { uses_tiny_mce :options => options } 
+    end
   end
 
   def select_template(template, resource = @resource[:self])

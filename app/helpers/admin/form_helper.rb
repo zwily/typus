@@ -9,6 +9,7 @@ module Admin::FormHelper
     returning(String.new) do |html|
       html << (error_messages_for :item, :header_tag => 'h3')
       html << '<ul>'
+      
       fields.each do |key, value|
         if template = @resource[:class].typus_template(key)
           html << typus_template_field(key, template, options)
@@ -23,6 +24,7 @@ module Admin::FormHelper
         when :password:        html << typus_password_field(key)
         when :selector:        html << typus_selector_field(key)
         when :text:            html << typus_text_field(key)
+        when :tiny_mce:        html << typus_tiny_mce_field(key)
         when :time:            html << typus_time_field(key, options)
         when :tree:            html << typus_tree_field(key)
         else
@@ -134,6 +136,13 @@ module Admin::FormHelper
     <<-HTML
 <li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
 #{text_area :item, attribute, :class => 'text', :rows => @resource[:class].typus_options_for(:form_rows), :disabled => attribute_disabled?(attribute)}</li>
+    HTML
+  end
+
+  def typus_tiny_mce_field(attribute)
+    <<-HTML
+<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
+#{text_area :item, attribute, :class => 'mceEditor', :disabled => attribute_disabled?(attribute)}</li>
     HTML
   end
 

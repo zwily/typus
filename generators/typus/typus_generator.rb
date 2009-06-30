@@ -80,6 +80,9 @@ class TypusGenerator < Rails::Generator::Base
     show: #{show.join(', ')}
     relationship:
     options:
+      tiny_mce:
+        fields:
+        options:
       auto_generated:
       read_only:
       selectors:

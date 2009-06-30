@@ -28,3 +28,6 @@ Typus::Configuration.options[:app_name] = '<%= application %>'
 # Typus::Configuration.options[:sidebar_selector] = 5
 # Typus::Configuration.options[:start_year] = Time.now.year - 10
 # Typus::Configuration.options[:toggle] = true
+# Typus::Configuration.options[:tiny_mce] = { :theme => 'advanced',
+#                                             :theme_advanced_toolbar_location => 'top',
+#                                             :theme_advanced_toolbar_align => 'left' } 
