@@ -10,6 +10,7 @@ extensible enough to match lots of use cases.
 - Project site and documentation http://intraducibles.com/projects/typus
 - Plugin source http://github.com/fesplugas/typus/tree
 - Google Group http://groups.google.es/group/typus
+- Bugs http://typus.lighthouseapp.com/dashboard
 
 == Impatients to see it working?
 
@@ -69,8 +70,8 @@ Typus and blog about Typus.
 - José Valim (Code) http://github.com/josevalim
 - Luqman Amjad (Code) http://github.com/snake
 - Alexey Noskov (Russian translation and code) http://github.com/alno
-- Andres Gutierres (Bugfixes & Feedback) http://github.com/andresgutgon
-- Komzák Nándor (Bugfix & Feedback) http://github.com/rubymood
+- Andres Gutierres (Bugfixes & feedback) http://github.com/andresgutgon
+- Komzák Nándor (Code, bugfixes & feedback) http://github.com/rubymood
 
 == Acknowledgments
 
