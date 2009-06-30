@@ -8,15 +8,6 @@ namespace :typus do
     system "script/plugin install #{plugins.join(' ')} --force"
   end
 
-  desc 'List current roles.'
-  task :roles => :environment do
-    Typus::Configuration.roles.each do |role|
-      puts "\n#{role.first.capitalize} role has access to:"
-      role.last.each { |key, value| puts "- #{key}: #{value}" }
-    end
-    puts "\n"
-  end
-
   desc 'Install ssl_requirement.'
   task :ssl do
     system "script/plugin install git://github.com/rails/ssl_requirement.git --force"
@@ -27,6 +18,15 @@ namespace :typus do
     system "script/plugin install git://github.com/kete/tiny_mce.git --force"
     load File.join Rails.root, 'vendor', 'plugins', 'tiny_mce', 'tasks', 'tiny_mce.rake'
     Rake::Task["tiny_mce:install"].invoke
+  end
+
+  desc 'List current roles.'
+  task :roles => :environment do
+    Typus::Configuration.roles.each do |role|
+      puts "\n#{role.first.capitalize} role has access to:"
+      role.last.each { |key, value| puts "- #{key}: #{value}" }
+    end
+    puts "\n"
   end
 
 end
