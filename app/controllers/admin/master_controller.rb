@@ -36,7 +36,7 @@ class Admin::MasterController < ApplicationController
   before_filter :set_fields, 
                 :only => [ :index, :new, :edit, :create, :update, :show ]
 
-  before_filter :set_tiny_mce,
+  before_filter :set_tiny_mce, 
                 :only => [ :new, :edit, :create, :update ]
 
   ##
@@ -293,9 +293,9 @@ private
   end
 
   def set_tiny_mce
-    unless @resource[:class].typus_tiny_mce_fields.empty? 
+    unless @resource[:class].typus_tiny_mce_fields.empty?
       options = @resource[:class].typus_tiny_mce_options
-      self.class.class_eval { uses_tiny_mce :options => options } 
+      self.class.class_eval { uses_tiny_mce :options => options }
     end
   end
 
