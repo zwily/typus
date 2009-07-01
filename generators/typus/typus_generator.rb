@@ -78,18 +78,9 @@ class TypusGenerator < Rails::Generator::Base
     list: #{list.join(', ')}
     form: #{form.join(', ')}
     show: #{show.join(', ')}
-    relationship:
-    options:
-      tiny_mce:
-        fields:
-        options:
-      auto_generated:
-      read_only:
-      selectors:
   actions:
     index:
     edit:
-  export:
   order_by:
   relationships: #{relationships.join(', ')}
   filters:
