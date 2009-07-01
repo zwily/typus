@@ -2,11 +2,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{typus}
-  s.version = "0.9.10"
+  s.version = "0.9.11"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2009-06-30}
+  s.date = %q{2009-07-01}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -49,6 +49,7 @@ Gem::Specification.new do |s|
      "config/locales/typus/ru.yml",
      "config/routes.rb",
      "generators/typus/templates/config/initializers/typus.rb",
+     "generators/typus/templates/config/typus/README",
      "generators/typus/templates/config/typus/application.yml",
      "generators/typus/templates/config/typus/application_roles.yml",
      "generators/typus/templates/config/typus/typus.yml",
