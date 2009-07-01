@@ -39,8 +39,6 @@ class Admin::MasterController < ApplicationController
   before_filter :set_tiny_mce, 
                 :only => [ :new, :edit, :create, :update ]
 
-  helper_method :tiny_mce_plugin_installed?
-
   ##
   # This is the main index of the model. With filters, conditions 
   # and more.
@@ -349,10 +347,6 @@ private
     raise error unless Rails.env.production?
     flash[:error] = "#{error.message} (#{@resource[:class]})"
     redirect_to path
-  end
-
-  def tiny_mce_plugin_installed?
-    defined?(TinyMCE)
   end
 
 end

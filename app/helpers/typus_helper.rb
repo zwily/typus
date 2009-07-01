@@ -185,4 +185,8 @@ module TypusHelper
 
   end
 
+  def tiny_mce_plugin_installed?
+    defined?(TinyMCE)
+  end
+
 end
