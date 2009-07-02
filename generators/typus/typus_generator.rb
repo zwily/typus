@@ -15,13 +15,12 @@ class TypusGenerator < Rails::Generator::Base
       # available AR models on the application.
       #
 
-      models = Dir["#{Rails.root}/app/models/*.rb"].collect { |x| File.basename(x) }
+      models = Dir["app/models/*.rb"].collect { |x| File.basename(x).sub(/\.rb$/,'').camelize }
       ar_models = []
 
       models.each do |model|
-        class_name = model.sub(/\.rb$/,'').classify
         begin
-          klass = class_name.constantize
+          klass = model.constantize
           active_record_model = klass.superclass.equal?(ActiveRecord::Base) && !klass.abstract_class?
           active_record_model_with_sti = klass.superclass.superclass.equal?(ActiveRecord::Base)
           ar_models << klass if active_record_model || active_record_model_with_sti
