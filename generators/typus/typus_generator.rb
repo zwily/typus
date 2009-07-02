@@ -4,17 +4,11 @@ class TypusGenerator < Rails::Generator::Base
 
     record do |m|
 
-      ##
       # Default name for our application.
-      #
-
       application = Rails.root.basename
 
-      ##
-      # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> detect 
-      # available AR models on the application.
-      #
-
+      # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> 
+      # detect available AR models on the application.
       models = Dir["app/models/*.rb"].collect { |x| File.basename(x).sub(/\.rb$/,'').camelize }
       ar_models = []
 
@@ -29,10 +23,7 @@ class TypusGenerator < Rails::Generator::Base
         end
       end
 
-      ##
       # Configuration files
-      #
-
       config_folder = Typus::Configuration.options[:config_folder]
       folder = "#{Rails.root}/#{config_folder}"
       Dir.mkdir(folder) unless File.directory?(folder)
@@ -101,17 +92,11 @@ class TypusGenerator < Rails::Generator::Base
                    :assigns => { :configuration => configuration }
       end
 
-      ##
-      # Initializers
-      #
-
+      # Initializer
       m.template 'config/initializers/typus.rb', 'config/initializers/typus.rb', 
                  :assigns => { :application => application }
 
-      ##
-      # Public folders
-      #
-
+      # Assets
       [ "#{Rails.root}/public/stylesheets/admin", 
         "#{Rails.root}/public/javascripts/admin", 
         "#{Rails.root}/public/images/admin" ].each do |folder|
@@ -127,10 +112,7 @@ class TypusGenerator < Rails::Generator::Base
         m.file "public/images/admin/#{base}", "public/images/admin/#{base}"
       end
 
-      ##
       # Migration file
-      #
-
       m.migration_template 'db/create_typus_users.rb', 'db/migrate', 
                             { :migration_file_name => 'create_typus_users' }
 
