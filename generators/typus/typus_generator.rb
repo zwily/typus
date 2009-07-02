@@ -9,7 +9,7 @@ class TypusGenerator < Rails::Generator::Base
 
       # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> 
       # detect available AR models on the application.
-      models = Dir["app/models/*.rb"].collect { |x| File.basename(x).sub(/\.rb$/,'').camelize }
+      models = Dir['app/models/*.rb'].collect { |x| File.basename(x).sub(/\.rb$/,'').camelize }
       ar_models = []
 
       models.each do |model|
@@ -25,8 +25,7 @@ class TypusGenerator < Rails::Generator::Base
 
       # Configuration files
       config_folder = Typus::Configuration.options[:config_folder]
-      folder = "#{Rails.root}/#{config_folder}"
-      Dir.mkdir(folder) unless File.directory?(folder)
+      Dir.mkdir(config_folder) unless File.directory?(config_folder)
 
       configuration = { :base => '', :roles => '' }
 
@@ -48,10 +47,8 @@ class TypusGenerator < Rails::Generator::Base
 
         # Don't show `text` fields and timestamps in lists.
         list = model_columns.reject { |c| c.sql_type == 'text' || %w( created_at updated_at ).include?(c.name) }.map(&:name)
-
         # Don't show timestamps in forms.
         form = model_columns.reject { |c| %w( id created_at updated_at ).include?(c.name) }.map(&:name)
-
         # Show all model columns in the show action.
         show = model_columns.map(&:name)
 
@@ -93,26 +90,28 @@ class TypusGenerator < Rails::Generator::Base
       end
 
       # Initializer
-      m.template 'config/initializers/typus.rb', 'config/initializers/typus.rb', 
-                 :assigns => { :application => application }
 
-      # Assets
-      [ "#{Rails.root}/public/stylesheets/admin", 
-        "#{Rails.root}/public/javascripts/admin", 
-        "#{Rails.root}/public/images/admin" ].each do |folder|
-        Dir.mkdir(folder) unless File.directory?(folder)
+      [ 'config/initializers/typus.rb' ].each do |initializer|
+        m.template initializer, initializer, :assigns => { :application => application }
       end
 
-      m.file 'public/stylesheets/admin/screen.css', 'public/stylesheets/admin/screen.css'
-      m.file 'public/stylesheets/admin/reset.css', 'public/stylesheets/admin/reset.css'
-      m.file 'public/javascripts/admin/application.js', 'public/javascripts/admin/application.js'
+      # Assets
+
+      [ 'public/stylesheets/admin', 
+        'public/javascripts/admin', 
+        'public/images/admin' ].each { |f| Dir.mkdir(f) unless File.directory?(f) }
+
+      [ 'public/stylesheets/admin/screen.css', 
+        'public/stylesheets/admin/reset.css', 
+        'public/javascripts/admin/application.js' ].each { |f| m.file f, f }
 
       Dir["#{Typus.path}/generators/typus/templates/public/images/admin/*"].each do |f|
-        base = File.basename(f)
-        m.file "public/images/admin/#{base}", "public/images/admin/#{base}"
+        file = "public/images/admin/#{File.basename(f)}"
+        m.file file, file
       end
 
       # Migration file
+
       m.migration_template 'db/create_typus_users.rb', 'db/migrate', 
                             { :migration_file_name => 'create_typus_users' }
 
