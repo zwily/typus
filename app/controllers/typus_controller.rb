@@ -83,8 +83,7 @@ class TypusController < ApplicationController
         session[:typus_user_id] = @user.id
         redirect_to admin_dashboard_path
       else
-        flash[:error] = _("Passwords don't match.")
-        redirect_to admin_reset_password_path(:token => params[:token])
+        render :action => 'reset_password'
       end
     end
   end

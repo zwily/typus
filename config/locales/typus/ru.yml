@@ -12,7 +12,6 @@ ru:
   "That doesn't seem like a valid email address": "E-Mail некорректен"
   "I remember my password": "Запомнить пароль"
   "Password recovery link sent to your email": "Ссылка для восставновления пароля выслана по указанному E-Mail"
-  "Passwords don't match": "Пароли не совпадают"
   "A valid token is required": "Необходим корректный ключ"
   "The email and/or password you entered is invalid": "E-Mail или пароль введены неверно"
   "There are not defined applications in config/typus/*.yml": "Ни одного приложения не определено в config/typus/*.yml"

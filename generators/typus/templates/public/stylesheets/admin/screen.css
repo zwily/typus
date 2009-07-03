@@ -523,6 +523,15 @@ input#search {
     margin: 0.5em 0em;
   }
 
+  #dialog .errorExplanation ul {
+    margin: 10px 0 10px 0px!important;
+  }
+
+  #dialog .errorExplanation li {
+    font-weight: bold;
+    list-style: none!important;
+  }
+
 /* @end */
 
 /* @group Pagination */

@@ -16,7 +16,6 @@
   "That doesn't seem like a valid email address": 
   "I remember my password": 
   "Password recovery link sent to your email": 
-  "Passwords don't match": 
   "A valid token is required": 
   "The email and/or password you entered is invalid": 
   "There are not defined applications in config/typus/*.yml": 
