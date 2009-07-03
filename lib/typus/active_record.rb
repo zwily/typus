@@ -102,7 +102,7 @@ module Typus
     end
 
     ##
-    #  Tiny_mce fields of the model
+    # Tiny_mce fields of the model
     #
     def typus_tiny_mce_fields
       Typus::Configuration.config[name]['fields']['options']['tiny_mce']['fields'].split(', ')
@@ -134,7 +134,7 @@ module Typus
     end
 
     ##
-    #  Extended actions for this model on Typus.
+    # Extended actions for this model on Typus.
     #
     def typus_actions_for(filter)
       Typus::Configuration.config[name]['actions'][filter.to_s].split(', ')
