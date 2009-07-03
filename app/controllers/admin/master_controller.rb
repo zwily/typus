@@ -293,7 +293,7 @@ private
   end
 
   def set_tiny_mce
-    if !@resource[:class].typus_tiny_mce_fields.empty? && tiny_mce_plugin_installed?
+    if !@resource[:class].typus_tiny_mce_fields.empty? && defined?(TinyMCE)
       options = @resource[:class].typus_tiny_mce_options
       self.class.class_eval { uses_tiny_mce :options => options }
     end
