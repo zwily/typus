@@ -93,8 +93,7 @@ module TypusHelper
     resources_partials_path = 'admin/resources'
 
     partials = ActionController::Base.view_paths.map do |view_path|
-      path = Rails.vendor_rails? ? view_path.path : "#{Rails.root}/#{view_path}"
-      Dir["#{path}/#{partials_path}/*"].map { |f| File.basename(f, '.html.erb') }
+      Dir["#{view_path.path}/#{partials_path}/*"].map { |f| File.basename(f, '.html.erb') }
     end.flatten
     resources_partials = Dir["#{Rails.root}/app/views/#{resources_partials_path}/*"].map { |f| File.basename(f, '.html.erb') }
 
