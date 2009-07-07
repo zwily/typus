@@ -6,7 +6,7 @@ module Typus
 
       render :text => '' and return unless session[:typus_user_id]
 
-      links = [[ "Dashboard", admin_dashboard_path ] ]
+      links = [[ "Dashboard", admin_dashboard_path ]]
       links << [ params[:message], "/admin/#{params[:path]}" ] if params[:message] && params[:path]
 
       options = links.reverse.map do |link|
