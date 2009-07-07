@@ -8,7 +8,7 @@ module Typus
     admin_controllers_folder = "#{Rails.root}/app/controllers/admin"
     Dir.mkdir(admin_controllers_folder) unless File.directory?(admin_controllers_folder)
 
-    # Get a list of all available app/controllers/admin
+    # Get a list of controllers under `app/controllers/admin`.
     admin_controllers = Dir["#{Rails.root}/vendor/plugins/*/app/controllers/admin/*.rb", "#{admin_controllers_folder}/*.rb"]
     admin_controllers = admin_controllers.map { |i| File.basename(i) }
 
@@ -22,12 +22,11 @@ module Typus
       Dir.mkdir(admin_controller_tests_folder) unless File.directory?(admin_controller_tests_folder)
     end
 
-    # Get a list of all available functional test for admin.
+    # Get a list of functional tests under `test/functional/admin`.
     admin_controller_tests = Dir["#{Rails.root}/vendor/plugins/*/test/functional/admin/*.rb", "#{admin_controller_tests_folder}/*.rb"]
     admin_controller_tests = admin_controller_tests.map { |i| File.basename(i) }
 
-    # Generate unexisting controllers for resources which are not tied to
-    # a model.
+    # Generate controllers for tableless models.
     resources.each do |resource|
 
       controller_filename = "#{resource.underscore}_controller.rb"
