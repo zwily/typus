@@ -243,16 +243,26 @@ module Admin::FormHelper
                     { Typus.user_fk => @current_user }
                   end
 
-      items = @resource[:class].find(params[:id]).send(field).find(:all, :order => model_to_relate.typus_order_by, :conditions => conditions)
+      options = { :order => model_to_relate.typus_order_by, :conditions => conditions }
+      items_count = @resource[:class].find(params[:id]).send(field).count(:conditions => conditions)
+      items_per_page = @resource[:class].typus_options_for(:per_page).to_i
 
-      unless items.empty?
+      @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
+        options.merge!({:limit => per_page, :offset => offset})
+        items = @resource[:class].find(params[:id]).send(field).find(:all, options)
+      end
+
+      @items = @pager.page(params[:page])
+
+      unless @items.empty?
         options = { :back_to => "#{@back_to}##{field}", :resource => @resource[:self], :resource_id => @item.id }
         html << build_list(model_to_relate, 
                            model_to_relate.typus_fields_for(:relationship), 
-                           items, 
+                           @items, 
                            model_to_relate_as_resource, 
                            options, 
                            association)
+        html << pagination(:anchor => model_to_relate.name.tableize)
       else
         html << <<-HTML
   <div id="flash" class="notice"><p>#{_("There are no {{records}}.", :records => model_to_relate.typus_human_name.pluralize.downcase)}</p></div>
