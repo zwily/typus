@@ -142,10 +142,12 @@ module TypusHelper
                                    :action => 'edit', 
                                    :id => user.id }
 
+    message = _("Are you sure you want to sign out and end your session?")
+
     <<-HTML
 <ul>
   <li>#{_("Logged as")} #{link_to user.name, admin_edit_typus_user_path, :title => "#{user.email} (#{user.role})"}</li>
-  <li>#{link_to _("Sign out"), admin_sign_out_path }</li>
+  <li>#{link_to _("Sign out"), admin_sign_out_path, { :confirm => message } }</li>
 </ul>
     HTML
 
