@@ -41,8 +41,7 @@ class Admin::#{resource}Controller < TypusController
 
   ##
   # This controller was generated because you have defined a resource 
-  # which is not tied to a model on your <tt>config/typus/XXXXXX_roles.yml</tt> 
-  # configuration file.
+  # on <tt>config/typus/XXXXXX_roles.yml</tt> which is a tableless model.
   #
   #     admin:
   #       #{resource}: index
@@ -105,19 +104,9 @@ class Admin::#{model.pluralize}Controller < Admin::MasterController
 =begin
 
   ##
-  # You can overwrite any Admin::MasterController methods.
+  # You can overwrite and extend Admin::MasterController with your methods.
   #
-  def index
-  end
-
-=end
-
-=begin
-
-  ##
-  # You can extend Admin::MasterController with your methods.
-  #
-  # This actions have to be defined in <tt>config/typus/application.yml</tt>:
+  # Actions have to be defined in <tt>config/typus/application.yml</tt>:
   #
   #   #{model}:
   #     actions:
@@ -133,7 +122,10 @@ class Admin::#{model.pluralize}Controller < Admin::MasterController
   #   editor:
   #     #{model}: create, read, update, custom_action_for_an_item
   #
-  #
+
+  def index
+  end
+
   def custom_action
   end
 
