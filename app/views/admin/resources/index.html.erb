@@ -11,7 +11,7 @@
 
 <% unless @items.count.zero? -%>
   <%= build_list(@resource[:class], @fields, @items) %>
-  <%= render :partial => 'admin/shared/pagination' if @items.prev || @items.next %>
+  <%= pagination %>
 <% else %>
   <div id="flash" class="notice">
     <% if @resource[:class].count.zero? %>

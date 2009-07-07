@@ -65,6 +65,10 @@ module Admin::MasterHelper
 
   end
 
+  def pagination
+    render 'admin/shared/pagination' if @items.prev || @items.next
+  end
+
   ##
   # Simple and clean pagination links
   #
