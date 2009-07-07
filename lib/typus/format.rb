@@ -26,9 +26,7 @@ module Typus
       fields = @resource[:class].typus_fields_for(:csv).collect { |i| i.first }
       csv_string = FasterCSV.generate do |csv|
         csv << fields.map { |f| _(f.humanize) }
-        data.each do |item|
-          csv << fields.map { |f| item.send(f) }
-        end
+        data.each { |i| csv << fields.map { |f| i.send(f) } }
       end
 
       filename = "#{Time.now.strftime("%Y%m%d%H%M%S")}_#{@resource[:self]}.csv"
