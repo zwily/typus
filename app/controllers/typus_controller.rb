@@ -120,7 +120,7 @@ private
   end
 
   def select_layout
-    [ 'sign_up', 'sign_in', 'sign_out', 'recover_password', 'reset_password' ].include?(action_name) ? 'typus' : 'admin'
+    %w( sign_up sign_in sign_out recover_password reset_password ).include?(action_name) ? 'typus' : 'admin'
   end
 
 end
