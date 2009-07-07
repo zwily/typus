@@ -65,7 +65,8 @@ module Admin::MasterHelper
 
   end
 
-  def pagination
+  def pagination(*args)
+    @options = args.extract_options!
     render 'admin/shared/pagination' if @items.prev || @items.next
   end
 

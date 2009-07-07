@@ -106,7 +106,7 @@ class Admin::MasterController < ApplicationController
 
   def edit
     item_params = params.dup
-    %w( action controller model model_id back_to id resource resource_id ).each { |p| item_params.delete(p) }
+    %w( action controller model model_id back_to id resource resource_id page ).each { |p| item_params.delete(p) }
     # We assign the params passed trough the url
     @item.attributes = item_params
     @previous, @next = @item.previous_and_next(item_params)
