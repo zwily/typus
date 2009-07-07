@@ -6,9 +6,7 @@ module Typus
 
   module ClassMethods
 
-    ##
     # Return model fields as a OrderedHash
-    #
     def model_fields
       hash = ActiveSupport::OrderedHash.new
       columns.map { |u| hash[u.name.to_sym] = u.type.to_sym }
@@ -35,9 +33,7 @@ module Typus
       human_name(:default => self.name.underscore.humanize)
     end
 
-    ##
     # Form and list fields
-    #
     def typus_fields_for(filter)
 
       fields_with_type = ActiveSupport::OrderedHash.new
@@ -92,27 +88,21 @@ module Typus
 
     end
 
-    ##
     # Return tiny_mce options of the model merged into the default options
-    #
     def typus_tiny_mce_options
       typus_options_for(:tiny_mce).merge(Typus::Configuration.config[name]['fields']['options']['tiny_mce']['options'].symbolize_keys.delete_if { |key,value| value == nil})
     rescue
       typus_options_for(:tiny_mce)
     end
 
-    ##
     # Tiny_mce fields of the model
-    #
     def typus_tiny_mce_fields
       Typus::Configuration.config[name]['fields']['options']['tiny_mce']['fields'].split(', ')
     rescue
       []
     end
 
-    ##
     # Typus sidebar filters.
-    #
     def typus_filters
 
       fields_with_type = ActiveSupport::OrderedHash.new
@@ -133,35 +123,26 @@ module Typus
 
     end
 
-    ##
     # Extended actions for this model on Typus.
-    #
     def typus_actions_for(filter)
       Typus::Configuration.config[name]['actions'][filter.to_s].split(', ')
     rescue
       []
     end
 
-    ##
     # Used for +search+, +relationships+
-    #
     def typus_defaults_for(filter)
       data = Typus::Configuration.config[name][filter.to_s]
       return (!data.nil?) ? data.split(', ') : []
     end
 
-    ##
-    #
-    #
     def typus_field_options_for(filter)
       Typus::Configuration.config[name]['fields']['options'][filter.to_s].split(', ').collect { |i| i.to_sym }
     rescue
       []
     end
 
-    ##
     # We should be able to overwrite options by model.
-    #
     def typus_options_for(filter)
 
       data = Typus::Configuration.config[name]
@@ -178,9 +159,7 @@ module Typus
       !data['export'].nil? ? data['export'].split(', ') : []
     end
 
-    ##
-    # Used for order_by
-    #
+    # Used for `order_by`.
     def typus_order_by
 
       fields = typus_defaults_for(:order_by)
@@ -194,9 +173,7 @@ module Typus
 
     end
 
-    ##
     # We are able to define our own booleans.
-    #
     def typus_boolean(attribute = :default)
 
       boolean = Typus::Configuration.config[name]['fields']['options']['booleans'][attribute.to_s] rescue nil
@@ -216,28 +193,21 @@ module Typus
 
     end
 
-    ##
     # We are able to define how to display dates on Typus
-    #
     def typus_date_format(attribute = :default)
       date_format = Typus::Configuration.config[name]['fields']['options']['date_formats'][attribute.to_s].to_sym rescue nil
       date_format = :db if date_format.nil?
       return date_format
     end
 
-    ##
     # We are able to define which template to use to render the attribute 
     # within the form
-    #
     def typus_template(attribute)
       Typus::Configuration.config[name]['fields']['options']['templates'][attribute.to_s]
     rescue
       nil
     end
 
-    ##
-    # Build conditions
-    #
     def build_conditions(params)
 
       conditions, joins = merge_conditions, []
@@ -260,9 +230,9 @@ module Typus
         ##
         # Sidebar filters:
         #
-        #   - Booleans: true, false
-        #   - Datetime: today, past_7_days, this_month, this_year
-        #   - Integer & String: *_id and "selectors" (P.ej. category_id)
+        # - Booleans: true, false
+        # - Datetime: today, past_7_days, this_month, this_year
+        # - Integer & String: *_id and "selectors" (p.ej. category_id)
         #
         case filter_type
         when :boolean
