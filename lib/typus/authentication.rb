@@ -4,30 +4,25 @@ module Typus
 
     protected
 
-    ##
     # Require login checks if the user is logged on Typus, otherwise 
     # is sent to the sign in page with a :back_to param to return where 
     # she tried to go.
-    #
-    # Use this for demo!
-    #
-    #     session[:typus_user_id] = Typus.user_class.find(:first)
-    #
     def require_login
+
+      # Uncomment the following line for demo purpouses.
+      # session[:typus_user_id] = Typus.user_class.find(:first)
+
       if session[:typus_user_id]
         set_current_user
       else
         back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
         redirect_to admin_sign_in_path(:back_to => back_to)
       end
+
     end
 
-    ##
-    # Return the current user.
-    #
-    # NOTE: If role does not longer exist on the system the user will 
-    #       be signed out from Typus.
-    #
+    # Return the current user. If role does not longer exist on the 
+    # system @current_user will be signed out from Typus.
     def set_current_user
 
       @current_user = Typus.user_class.find(session[:typus_user_id])
@@ -51,11 +46,7 @@ module Typus
       redirect_to admin_sign_in_path(:back_to => back_to)
     end
 
-    ##
-    # Action is available on:
-    #
-    #     edit, update, toggle and destroy
-    #
+    # Action is available on: edit, update, toggle and destroy
     def check_if_user_can_perform_action_on_user
 
       return unless @item.kind_of?(Typus.user_class)
@@ -104,10 +95,8 @@ module Typus
 
     end
 
-    ##
     # This method checks if the user can perform the requested action.
     # It works on models, so its available on the admin_controller.
-    #
     def check_if_user_can_perform_action_on_resource
 
       message = case params[:action]
@@ -133,11 +122,9 @@ module Typus
 
     end
 
-    ##
     # This method checks if the user can perform the requested action.
     # It works on resources, which are not models, so its available on 
     # the typus_controller.
-    #
     def check_if_user_can_perform_action_on_resource_without_model
       controller = params[:controller].split('/').last
       action = params[:action]
