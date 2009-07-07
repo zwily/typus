@@ -22,9 +22,7 @@ module Typus
       Typus::Configuration.config.collect { |i| i.last['application'] }.compact.uniq.sort
     end
 
-    ##
-    # Returns a list of the modules of an application.
-    #
+    # List of the modules of an application.
     def application(name)
       Typus::Configuration.config.collect { |i| i.first if i.last['application'] == name }.compact.uniq.sort
     end
@@ -37,9 +35,7 @@ module Typus
       models.collect { |m| m if m.constantize.typus_options_for(:on_header) }.compact
     end
 
-    ##
-    # Return a list of resources, which are models tableless.
-    #
+    # List of resources, which are tableless models.
     def resources(models = get_model_names)
 
       all_resources = Typus::Configuration.roles.keys.map do |key|
@@ -75,11 +71,7 @@ module Typus
       File.exist?("#{Rails.root}/vendor/plugins/typus")
     end
 
-    ##
     # Enable application. This is used at boot time.
-    #
-    #   Typus.enable
-    #
     def enable
 
       # Ruby Extensions
