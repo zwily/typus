@@ -263,7 +263,7 @@ private
 
   def check_ownership_of_items
 
-    # If current_user is a root user, by-pass.
+    # By-pass if current_user is root.
     return if @current_user.is_root?
 
     # If current user is not root and @resource has a foreign_key which 
