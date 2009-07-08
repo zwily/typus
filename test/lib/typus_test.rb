@@ -54,11 +54,6 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal %w( Git Order Status WatchDog ), Typus.resources(models)
   end
 
-  def test_should_return_description_of_module
-    assert Typus.respond_to?(:module_description)
-    assert_equal 'System Users Administration', Typus.module_description('TypusUser')
-  end
-
   def test_should_verify_enable_exists
     assert Typus.respond_to?(:enable)
   end

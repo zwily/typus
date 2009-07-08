@@ -51,10 +51,6 @@ module Typus
            "#{Rails.root}/vendor/plugins/**/app/models/**/*.rb" ].collect { |m| File.basename(m).sub(/\.rb$/,'').camelize }
     end
 
-    def module_description(modulo)
-      Typus::Configuration.config[modulo]['description']
-    end
-
     def user_class
       Typus::Configuration.options[:user_class_name].constantize
     end

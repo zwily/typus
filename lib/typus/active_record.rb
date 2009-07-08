@@ -33,6 +33,10 @@ module Typus
       human_name(:default => self.name.underscore.humanize)
     end
 
+    def typus_description
+      Typus::Configuration.config[self.name]['description']
+    end
+
     # Form and list fields
     def typus_fields_for(filter)
 

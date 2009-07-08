@@ -22,7 +22,7 @@ module TypusHelper
         HTML
 
         available.compact.each do |model|
-          description = Typus.module_description(model)
+          description = model.constantize.typus_description
           admin_items_path = { :controller => "admin/#{model.tableize}" }
           new_admin_item_path = { :controller => "admin/#{model.tableize}", :action => 'new'}
           html << <<-HTML

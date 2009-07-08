@@ -50,6 +50,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
   end
 
+  def test_should_return_description_of_a_model
+    assert TypusUser.respond_to?(:typus_description)
+    assert_equal "System Users Administration", TypusUser.typus_description
+  end
+
   def test_should_return_typus_fields_for_list_for_typus_user
     expected_fields = [['email', :string], 
                        ['role', :selector], 
