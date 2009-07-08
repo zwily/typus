@@ -1,5 +1,7 @@
 class TypusController < ApplicationController
 
+  unloadable
+
   layout :select_layout
 
   include Typus::Authentication

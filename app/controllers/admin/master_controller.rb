@@ -1,5 +1,7 @@
 class Admin::MasterController < ApplicationController
 
+  unloadable
+
   layout 'admin'
 
   include Typus::Authentication
