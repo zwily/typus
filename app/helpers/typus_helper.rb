@@ -22,17 +22,22 @@ module TypusHelper
         HTML
 
         available.compact.each do |model|
-          description = model.constantize.typus_description
-          admin_items_path = { :controller => "admin/#{model.tableize}" }
-          new_admin_item_path = { :controller => "admin/#{model.tableize}", :action => 'new'}
+
+          klass = model.constantize
+          klass_resource = klass.name.tableize
+
+          admin_items_path = { :controller => "admin/#{klass_resource}" }
+          new_admin_item_path = { :controller => "admin/#{klass_resource}", :action => 'new'}
+
           html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to model.constantize.typus_human_name.pluralize, admin_items_path}<br /><small>#{description}</small></td>
+<td>#{link_to klass.typus_human_name.pluralize, admin_items_path}<br /><small>#{klass.typus_description}</small></td>
 <td class="right"><small>
-#{link_to _("Add"), new_admin_item_path if @current_user.can_perform?(model, 'create')}
+#{link_to _("Add"), new_admin_item_path if @current_user.can_perform?(klass, 'create')}
 </small></td>
 </tr>
           HTML
+
         end
 
         html << <<-HTML
