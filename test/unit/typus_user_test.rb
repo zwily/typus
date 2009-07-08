@@ -167,4 +167,11 @@ this_is_chelm@example.com
     assert TypusUser.generate('demo@example.com', 'XXXX').invalid?
   end
 
+  def test_should_verify_can_perform?
+    assert TypusUser.instance_methods.include?('can_perform?')
+    @current_user = TypusUser.find(:first)
+    assert @current_user.can_perform?(TypusUser, 'delete')
+    assert @current_user.can_perform?('TypusUser', 'delete')
+  end
+
 end
