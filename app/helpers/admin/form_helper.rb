@@ -245,7 +245,7 @@ module Admin::FormHelper
 
       options = { :order => model_to_relate.typus_order_by, :conditions => conditions }
       items_count = @resource[:class].find(params[:id]).send(field).count(:conditions => conditions)
-      items_per_page = @resource[:class].typus_options_for(:per_page).to_i
+      items_per_page = model_to_relate.typus_options_for(:per_page).to_i
 
       @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
         options.merge!({:limit => per_page, :offset => offset})
