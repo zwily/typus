@@ -44,7 +44,8 @@ module Typus
     end
 
     def data(*args)
-      options = { :joins => @joins, :conditions => @conditions, :order => @order }
+      eager_loading = @resource[:class].reflect_on_all_associations(:belongs_to).map { |i| i.name }
+      options = { :joins => @joins, :conditions => @conditions, :order => @order, :include => eager_loading }
       options.merge!(args.extract_options!)
       @resource[:class].find(:all, options)
     end
