@@ -262,7 +262,7 @@ module Admin::FormHelper
                            model_to_relate_as_resource, 
                            options, 
                            association)
-        html << pagination(:anchor => model_to_relate.name.tableize)
+        html << pagination(:anchor => model_to_relate.name.tableize) unless pagination.nil?
       else
         html << <<-HTML
   <div id="flash" class="notice"><p>#{_("There are no {{records}}.", :records => model_to_relate.typus_human_name.pluralize.downcase)}</p></div>
