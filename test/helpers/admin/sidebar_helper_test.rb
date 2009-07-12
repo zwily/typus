@@ -58,15 +58,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
     output = export
 
-    # FIXME or OPTIMIZE
-
-    begin
-      expected = ["<a href=\"http://test.host/admin/custom_users.csv\">CSV</a>"]
-      assert_equal expected, output
-    rescue
-      expected = ["<a href=\"http://test.host/admin/custom_users?format=csv\">CSV</a>"]
-      assert_equal expected, output
-    end
+    expected = ["<a href=\"http://test.host/admin/custom_users.csv\">CSV</a>"]
+    assert_equal expected, output
 
   end
 
