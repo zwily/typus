@@ -94,7 +94,7 @@ module Typus
 
       # Load translation files from the plugin or the gem.
       if plugin?
-        I18n.load_path += Dir[File.join("#{Rails.root}/vendor/plugins/typus/config/locales/**/*.{rb,yml}")]
+        I18n.load_path += Dir[File.join(Typus.root, 'config', 'locales', '**', '*.{rb,yml}')]
       else
         Gem.path.each { |g| I18n.load_path += Dir[File.join("#{g}/gems/*typus-#{version}/config/locales/**/*.{rb,yml}")] }
       end
