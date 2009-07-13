@@ -5,7 +5,7 @@ class TypusUpdateSchemaTo01Generator < Rails::Generator::Base
     record do |m|
 
       config_folder = Typus::Configuration.options[:config_folder]
-      Dir["#{Typus.path}/generators/typus_update_schema_to_01/templates/config/*"].each do |f|
+      Dir["#{Typus.root}/generators/typus_update_schema_to_01/templates/config/*"].each do |f|
         base = File.basename(f)
         m.template "config/#{base}", "#{config_folder}/#{base}"
       end

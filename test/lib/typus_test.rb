@@ -9,7 +9,7 @@ class TypusTest < ActiveSupport::TestCase
 
   def test_should_return_path
     expected = Dir.pwd + '/lib/../'
-    assert_equal expected, Typus.path
+    assert_equal expected, Typus.root
   end
 
   def test_should_return_locales

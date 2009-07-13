@@ -16,10 +16,10 @@ module Typus
   class << self
 
     def version
-      @@version ||= File.read("#{path}/VERSION").strip
+      @@version ||= File.read("#{root}/VERSION").strip
     end
 
-    def path
+    def root
       File.dirname(__FILE__) + '/../'
     end
 
