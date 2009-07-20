@@ -104,8 +104,8 @@ pt-BR:
   "This year": "Este ano"
   "Created at": "Criado em"
   "Updated at": "Atualizado em"
-  "{{model}} filtered by {{filtered_by}}": 
-  "True": 
-  "False": 
-  "Set language to": 
-  "Are you sure you want to sign out and end your session?": 
+  "{{model}} filtered by {{filtered_by}}": "{{model}} filtrados por {{filtered_by}}"
+  "True": "Verdadeiro"
+  "False": "Falso"
+  "Set language to": "Idioma"
+  "Are you sure you want to sign out and end your session?": "Tem certeza que quer sair e encerrar sua sessão?"
