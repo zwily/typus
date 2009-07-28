@@ -12,5 +12,5 @@ scripts = %w( script/generate script/destroy )
 
 unless scripts.include?($0)
   Typus.enable
-  Typus.generator unless Typus.testing?
+  Typus.generator unless Typus.testing? || ENV['RAILS_ENV'] == 'production'
 end
