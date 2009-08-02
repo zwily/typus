@@ -37,7 +37,7 @@ module Admin::SidebarHelper
 
     @resource[:class].typus_actions_for(params[:action]).each do |action|
       if @current_user.can_perform?(@resource[:class], action)
-        items << (link_to action.humanize, params.merge(:action => action))
+        items << (link_to _(action.humanize), params.merge(:action => action))
       end
     end
 
