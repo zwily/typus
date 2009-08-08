@@ -72,6 +72,7 @@ Typus and blog about Typus.
 - Alexey Noskov (Russian translation and code) http://github.com/alno
 - Andres Gutierres (Bugfixes & feedback) http://github.com/andresgutgon
 - Komzák Nándor (Code, bugfixes & feedback) http://github.com/rubymood
+- Michael Grunewalder (German translation) http://michael.grunewalder.com
 
 == Acknowledgments
 
