@@ -60,7 +60,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_difference 'Post.count' do
       post :create, { :item => { :title => 'This is another title', :body => 'Body' } }
       assert_response :redirect
-      assert_redirected_to :action => 'edit'
+      assert_redirected_to :controller => 'admin/posts', :action => 'edit', :id => Post.last
     end
 
   end
@@ -99,7 +99,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     post_ = posts(:published)
     post :update, { :id => post_.id, :title => 'Updated' }
     assert_response :redirect
-    assert_redirected_to :action => 'edit', :id => post_.id
+    assert_redirected_to :controller => 'admin/posts', :action => 'edit', :id => post_.id
 
   end
 
