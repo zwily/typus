@@ -1,5 +1,3 @@
-require 'typus/extensions/routes'
-
 module Typus
 
   class << self
@@ -69,8 +67,13 @@ module Typus
       File.exist?("#{Rails.root}/vendor/plugins/typus")
     end
 
-    # Enable application. This is used at boot time.
-    def enable
+    def boot!
+
+      return if %w( script/generate script/destroy ).include?($0)
+
+      if testing?
+        Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
+      end
 
       # Ruby Extensions
       require 'typus/hash'
@@ -93,6 +96,7 @@ module Typus
 
       # Rails Extensions.
       require 'typus/active_record'
+      require 'typus/extensions/routes'
 
       # Mixins.
       require 'typus/authentication'
@@ -106,6 +110,9 @@ module Typus
       # Vendor.
       require 'vendor/active_record'
       require 'vendor/paginator'
+
+      # Run controllers generator ...
+      generator unless testing? || Rails.env.production?
 
     end
 
