@@ -23,7 +23,7 @@ module Typus
     end
 
     # Get a list of functional tests under `test/functional/admin`.
-    admin_controller_tests = Dir["#{Rails.root}/vendor/plugins/*/test/functional/admin/*.rb", "#{admin_controller_tests_folder}/*.rb"]
+    admin_controller_tests = Dir["#{admin_controller_tests_folder}/*.rb"]
     admin_controller_tests = admin_controller_tests.map { |i| File.basename(i) }
 
     # Generate controllers for tableless models.
