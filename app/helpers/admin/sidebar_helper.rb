@@ -123,11 +123,11 @@ module Admin::SidebarHelper
     returning(String.new) do |html|
       typus_filters.each do |key, value|
         case value
-        when :boolean:      html << boolean_filter(current_request, key)
-        when :string:       html << string_filter(current_request, key)
-        when :datetime:     html << datetime_filter(current_request, key)
-        when :belongs_to:   html << relationship_filter(current_request, key)
-        when :has_and_belongs_to_many:
+        when :boolean then      html << boolean_filter(current_request, key)
+        when :string then       html << string_filter(current_request, key)
+        when :datetime then     html << datetime_filter(current_request, key)
+        when :belongs_to then   html << relationship_filter(current_request, key)
+        when :has_and_belongs_to_many then
           html << relationship_filter(current_request, key, true)
         else
           html << "<p>#{_("Unknown")}</p>"

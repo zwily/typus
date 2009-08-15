@@ -16,17 +16,17 @@ module Admin::FormHelper
           next
         end
         case value
-        when :belongs_to:      html << typus_belongs_to_field(key)
-        when :boolean:         html << typus_boolean_field(key)
-        when :date:            html << typus_date_field(key, options)
-        when :datetime:        html << typus_datetime_field(key, options)
-        when :file:            html << typus_file_field(key)
-        when :password:        html << typus_password_field(key)
-        when :selector:        html << typus_selector_field(key)
-        when :text:            html << typus_text_field(key)
-        when :tiny_mce:        html << typus_tiny_mce_field(key)
-        when :time:            html << typus_time_field(key, options)
-        when :tree:            html << typus_tree_field(key)
+        when :belongs_to then      html << typus_belongs_to_field(key)
+        when :boolean then         html << typus_boolean_field(key)
+        when :date then            html << typus_date_field(key, options)
+        when :datetime then        html << typus_datetime_field(key, options)
+        when :file then            html << typus_file_field(key)
+        when :password then        html << typus_password_field(key)
+        when :selector then        html << typus_selector_field(key)
+        when :text then            html << typus_text_field(key)
+        when :tiny_mce then        html << typus_tiny_mce_field(key)
+        when :time then            html << typus_time_field(key, options)
+        when :tree then            html << typus_tree_field(key)
         else
           html << typus_string_field(key)
         end

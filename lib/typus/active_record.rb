@@ -59,10 +59,10 @@ module Typus
 
           # Custom field_type depending on the attribute name.
           case field.to_s
-            when 'parent_id':       attribute_type = :tree
-            when /file_name/:       attribute_type = :file
-            when /password/:        attribute_type = :password
-            when 'position':        attribute_type = :position
+            when 'parent_id' then       attribute_type = :tree
+            when /file_name/ then       attribute_type = :file
+            when /password/ then        attribute_type = :password
+            when 'position' then        attribute_type = :position
           end
 
           if reflect_on_association(field)
@@ -244,10 +244,10 @@ module Typus
           conditions = merge_conditions(conditions, condition)
         when :datetime
           interval = case value
-                     when 'today':         Time.new.midnight..Time.new.midnight.tomorrow
-                     when 'past_7_days':   6.days.ago.midnight..Time.new.midnight.tomorrow
-                     when 'this_month':    Time.new.midnight.last_month..Time.new.midnight.tomorrow
-                     when 'this_year':     Time.new.midnight.last_year..Time.new.midnight.tomorrow
+                     when 'today' then         Time.new.midnight..Time.new.midnight.tomorrow
+                     when 'past_7_days' then   6.days.ago.midnight..Time.new.midnight.tomorrow
+                     when 'this_month' then    Time.new.midnight.last_month..Time.new.midnight.tomorrow
+                     when 'this_year' then     Time.new.midnight.last_year..Time.new.midnight.tomorrow
                      end
           condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
           conditions = merge_conditions(conditions, condition)

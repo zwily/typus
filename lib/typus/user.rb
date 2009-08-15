@@ -73,13 +73,13 @@ module Typus
           _action = action
         else
           _action = case action
-                    when 'new', 'create':       'create'
-                    when 'index', 'show':       'read'
-                    when 'edit', 'update':      'update'
-                    when 'position':            'update'
-                    when 'toggle':              'update'
-                    when 'relate', 'unrelate':  'update'
-                    when 'destroy':             'delete'
+                    when 'new', 'create' then       'create'
+                    when 'index', 'show' then       'read'
+                    when 'edit', 'update' then      'update'
+                    when 'position' then            'update'
+                    when 'toggle' then              'update'
+                    when 'relate', 'unrelate' then  'update'
+                    when 'destroy' then             'delete'
                     else
                       action
                     end

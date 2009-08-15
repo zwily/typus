@@ -18,14 +18,14 @@ module Admin::TableHelper
 
         fields.each do |key, value|
           case value
-          when :boolean:           html << typus_table_boolean_field(key, item)
-          when :datetime:          html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
-          when :date:              html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
-          when :time:              html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
-          when :belongs_to:        html << typus_table_belongs_to_field(key, item)
-          when :tree:              html << typus_table_tree_field(key, item)
-          when :position:          html << typus_table_position_field(key, item)
-          when :has_and_belongs_to_many:
+          when :boolean then           html << typus_table_boolean_field(key, item)
+          when :datetime then          html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
+          when :date then              html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
+          when :time then              html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
+          when :belongs_to then        html << typus_table_belongs_to_field(key, item)
+          when :tree then              html << typus_table_tree_field(key, item)
+          when :position then          html << typus_table_position_field(key, item)
+          when :has_and_belongs_to_many then
             html << typus_table_has_and_belongs_to_many_field(key, item)
           else
             html << typus_table_string_field(key, item, fields.keys.first, link_options)
@@ -90,8 +90,8 @@ module Admin::TableHelper
 
         if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
           sort_order = case params[:sort_order]
-                       when 'asc':  'desc'
-                       when 'desc': 'asc'
+                       when 'asc' then  'desc'
+                       when 'desc' then 'asc'
                        end
           order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
           switch = (params[:order_by] == key) ? sort_order : ''
