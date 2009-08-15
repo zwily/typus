@@ -69,6 +69,7 @@ module Typus
 
     def boot!
 
+      # return unless File.exists?("#{Rails.root}/config/initializers/typus.rb") || testing?
       return if %w( script/generate script/destroy ).include?($0)
 
       if testing?
@@ -86,13 +87,13 @@ module Typus
 
       # Load translation files from the plugin or the gem.
       if plugin?
-        I18n.load_path += Dir[File.join(Typus.root, 'config', 'locales', '**', '*.{rb,yml}')]
+        I18n.load_path += Dir[File.join(root, 'config', 'locales', '**', '*.{rb,yml}')]
       else
         Gem.path.each { |g| I18n.load_path += Dir[File.join("#{g}/gems/*typus-#{version}/config/locales/**/*.{rb,yml}")] }
       end
 
       # Require the test/models on when testing.
-      require File.dirname(__FILE__) + '/../test/models' if Typus.testing?
+      require File.dirname(__FILE__) + '/../test/models' if testing?
 
       # Rails Extensions.
       require 'typus/active_record'
