@@ -2,8 +2,6 @@ module Typus
 
   def self.generator
 
-    logger = Logger.new("#{Rails.root}/log/#{Rails.env}.log")
-
     # Create app/controllers/admin if doesn't exist.
     admin_controllers_folder = "#{Rails.root}/app/controllers/admin"
     Dir.mkdir(admin_controllers_folder) unless File.directory?(admin_controllers_folder)
@@ -53,7 +51,6 @@ end
       RAW
 
         File.open(controller_location, "w+") { |f| f << content }
-        logger.info "=> [typus] Admin::#{resource}Controller successfully created."
 
       end
 
@@ -80,7 +77,6 @@ end
         RAW
 
         File.open("#{view_folder}/#{view_filename}", "w+") { |f| f << content}
-        logger.info "=> [typus] app/views/admin/#{resource.underscore}/index.html.erb successfully created."
 
       end
 
@@ -137,7 +133,6 @@ end
         RAW
 
         File.open(controller_location, "w+") { |f| f << content }
-        logger.info "=> [typus] Admin::#{model.pluralize}Controller successfully created."
 
       end
 
@@ -161,7 +156,6 @@ end
         RAW
 
         File.open(test_location, "w+") { |f| f << content }
-        logger.info "=> [typus] Admin::#{model.pluralize}ControllerTest successfully created."
 
       end
 
