@@ -1,3 +1,5 @@
+require 'ftools'
+
 module Typus
 
   def self.generator
@@ -41,25 +43,10 @@ module Typus
       view_filename = "index.html.erb"
 
       if !File.exist?("#{view_folder}/#{view_filename}")
-
         Dir.mkdir(view_folder) unless File.directory?(view_folder)
-
-        content = <<-RAW
-<!-- Sidebar -->
-
-<% content_for :sidebar do %>
-<%= typus_block :location => 'dashboard', :partial => 'sidebar' %>
-<% end %>
-
-<!-- Content -->
-
-<h2>#{resource.humanize}</h2>
-
-<p>And here we do whatever we want to ...</p>
-        RAW
-
-        File.open("#{view_folder}/#{view_filename}", "w+") { |f| f << content}
-
+        origin = "#{File.dirname(__FILE__)}/templates/index.html.erb"
+        destination = "#{view_folder}/#{view_filename}"
+        File.copy(origin, destination)
       end
 
     end
