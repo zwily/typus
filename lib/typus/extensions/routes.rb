@@ -3,8 +3,7 @@ if defined?(ActionController::Routing::RouteSet)
   class ActionController::Routing::RouteSet
 
     def load_routes_with_typus!
-      lib_path = File.dirname(__FILE__)
-      typus_routes = File.join(lib_path, *%w[ .. .. .. config typus_routes.rb ])
+      typus_routes = File.join(File.dirname(__FILE__), 'routes_hack.rb')
       add_configuration_file(typus_routes) unless configuration_files.include?(typus_routes)
       load_routes_without_typus!
     end
