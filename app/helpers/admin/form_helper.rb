@@ -71,9 +71,11 @@ module Admin::FormHelper
 
   def typus_boolean_field(attribute)
     attribute_name = attribute.gsub(/\?$/,'')
+    custom_true = @resource[:class].typus_boolean(attribute)[:true]
+    custom_true = custom_true != 'True' ? custom_true : "Checked if active"
     <<-HTML
-<li><label for="item_#{attribute_name}">#{@resource[:class].human_attribute_name(attribute)}</label>
-#{check_box :item, attribute_name} #{_("Checked if active")}</li>
+<li><label>#{@resource[:class].human_attribute_name(attribute)}</label>
+#{check_box :item, attribute_name} <label class="inline_label" for="item_#{attribute_name}">#{_(custom_true)}</label></li>
     HTML
   end
 

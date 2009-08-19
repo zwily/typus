@@ -360,6 +360,11 @@ a.on {
     font-size: 1.20em;
   }
 
+  #content label.inline_label {
+		display: inline;
+		font-weight: normal;
+	}
+
 /* @end */
 
 /* @group Content Tables */
