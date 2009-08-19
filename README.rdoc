@@ -73,6 +73,9 @@ Typus and blog about Typus.
 - Andres Gutierres (Bugfixes & feedback) http://github.com/andresgutgon
 - Komzák Nándor (Code, bugfixes & feedback) http://github.com/rubymood
 - Michael Grunewalder (German translation) http://michael.grunewalder.com
+- Tim Harvey (Code) http://www.timharvey.net/ 
+- Ned Baldessin (Code) http://github.com/nedbaldessin
+- Robert Rouse (Code) - Ruby 1.9 compatibility fixes.
 
 == Acknowledgments
 
