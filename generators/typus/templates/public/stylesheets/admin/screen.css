@@ -421,6 +421,10 @@ a.on {
     vertical-align: top;
   }
 
+  #content table.typus span.inactive {
+    color: #888;
+  }
+
 /* @end */
 
 /* @group Rails Errors */
