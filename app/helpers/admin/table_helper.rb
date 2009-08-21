@@ -200,21 +200,16 @@ module Admin::TableHelper
 
   def typus_table_boolean_field(attribute, item)
 
-    boolean_icon = item.class.typus_options_for(:icon_on_boolean)
     boolean_hash = item.class.typus_boolean(attribute)
-
     status = item.send(attribute)
-
-    link_text = unless item.send(attribute).nil?
-                  (boolean_icon) ? image_tag("admin/status_#{status}.gif") : boolean_hash["#{status}".to_sym]
-                else
-                  item.class.typus_options_for(:nil) # Content is nil, so we show nil.
-                end
+    link_text = !item.send(attribute).nil? ? boolean_hash["#{status}".to_sym] : item.class.typus_options_for(:nil)
 
     options = { :controller => item.class.name.tableize, :action => 'toggle', :field => attribute.gsub(/\?$/,''), :id => item.id }
 
     content = if item.class.typus_options_for(:toggle) && !item.send(attribute).nil?
-                link_to link_text, params.merge(options), :confirm => _("Change {{attribute}}?", :attribute => item.class.human_attribute_name(attribute).downcase)
+                link_to link_text, params.merge(options), 
+                                   :confirm => _("Change {{attribute}}?", 
+                                   :attribute => item.class.human_attribute_name(attribute).downcase)
               else
                 link_text
               end

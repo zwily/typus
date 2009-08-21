@@ -39,7 +39,6 @@ only have set the most common settings.
         default_action_on_item: show
         end_year: 2015
         form_rows: 25
-        icon_on_boolean: true
         index_after_save: false
         minute_step: 15
         nil: 'nil'

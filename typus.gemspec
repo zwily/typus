@@ -61,8 +61,6 @@ Gem::Specification.new do |s|
      "generators/typus/templates/db/create_typus_users.rb",
      "generators/typus/templates/public/images/admin/arrow_down.gif",
      "generators/typus/templates/public/images/admin/arrow_up.gif",
-     "generators/typus/templates/public/images/admin/status_false.gif",
-     "generators/typus/templates/public/images/admin/status_true.gif",
      "generators/typus/templates/public/images/admin/ui-icons.png",
      "generators/typus/templates/public/javascripts/admin/application.js",
      "generators/typus/templates/public/stylesheets/admin/reset.css",

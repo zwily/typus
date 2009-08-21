@@ -215,7 +215,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_typus_table_boolean_field
 
-    options = { :icon_on_boolean => false, :toggle => false }
+    options = { :toggle => false }
     Typus::Configuration.stubs(:options).returns(options)
 
     post = posts(:published)

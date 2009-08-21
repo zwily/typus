@@ -18,7 +18,6 @@ module Typus
     model_options = { :default_action_on_item => 'edit', 
                       :end_year => nil,
                       :form_rows => 10, 
-                      :icon_on_boolean => true, 
                       :index_after_save => false, 
                       :minute_step => 5, 
                       :nil => 'nil', 

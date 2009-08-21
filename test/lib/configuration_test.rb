@@ -27,7 +27,6 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal 'edit', Typus::Configuration.options[:default_action_on_item]
     assert_nil Typus::Configuration.options[:end_year]
     assert_equal 10, Typus::Configuration.options[:form_rows]
-    assert_equal true, Typus::Configuration.options[:icon_on_boolean]
     assert_equal false, Typus::Configuration.options[:index_after_save]
     assert_equal 5, Typus::Configuration.options[:minute_step]
     assert_equal 'nil', Typus::Configuration.options[:nil]
