@@ -72,8 +72,8 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     output = typus_boolean_field('test')
 
     expected = <<-HTML
-<li><label for="item_test">Test</label>
-<input name="item[test]" type="hidden" value="0" /><input id="item_test" name="item[test]" type="checkbox" value="1" /> Checked if active</li>
+<li><label>Test</label>
+<input name="item[test]" type="hidden" value="0" /><input id="item_test" name="item[test]" type="checkbox" value="1" /> <label class=\"inline_label\" for=\"item_test\">Checked if active</label></li>
                HTML
 
     assert_equal expected, output
