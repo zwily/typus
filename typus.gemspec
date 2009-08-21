@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2009-08-18}
+  s.date = %q{2009-08-21}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
      "config/locales/typus/language.yml.template",
      "config/locales/typus/pt-BR.yml",
      "config/locales/typus/ru.yml",
+     "config/routes.rb",
      "generators/typus/templates/config/initializers/typus.rb",
      "generators/typus/templates/config/typus/README",
      "generators/typus/templates/config/typus/application.yml",
@@ -63,7 +64,7 @@ Gem::Specification.new do |s|
      "generators/typus/templates/public/images/admin/spinner.gif",
      "generators/typus/templates/public/images/admin/status_false.gif",
      "generators/typus/templates/public/images/admin/status_true.gif",
-     "generators/typus/templates/public/images/admin/trash.gif",
+     "generators/typus/templates/public/images/admin/ui-icons.png",
      "generators/typus/templates/public/javascripts/admin/application.js",
      "generators/typus/templates/public/stylesheets/admin/reset.css",
      "generators/typus/templates/public/stylesheets/admin/screen.css",
@@ -76,6 +77,7 @@ Gem::Specification.new do |s|
      "lib/typus/authentication.rb",
      "lib/typus/configuration.rb",
      "lib/typus/extensions/routes.rb",
+     "lib/typus/extensions/routes_hack.rb",
      "lib/typus/format.rb",
      "lib/typus/generator.rb",
      "lib/typus/hash.rb",
@@ -170,11 +172,10 @@ Gem::Specification.new do |s|
      "test/vendor/paginator_test.rb",
      "typus.gemspec"
   ]
-  s.has_rdoc = true
   s.homepage = %q{http://intraducibles.com/projects/typus}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.1}
+  s.rubygems_version = %q{1.3.5}
   s.summary = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.test_files = [
     "test/fixtures/app/controllers/admin/assets_controller.rb",
@@ -218,7 +219,7 @@ Gem::Specification.new do |s|
 
   if s.respond_to? :specification_version then
     current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
-    s.specification_version = 2
+    s.specification_version = 3
 
     if Gem::Version.new(Gem::RubyGemsVersion) >= Gem::Version.new('1.2.0') then
     else

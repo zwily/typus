@@ -39,24 +39,25 @@ module Admin::TableHelper
       #
       # Only shown is the user can destroy items.
       #
-
       if @current_user.can_perform?(model, 'delete')
+
+        trash = "<div class=\"sprite trash\">Trash</div>"
 
         case params[:action]
         when 'index'
-          perform = link_to image_tag('admin/trash.gif'), { :action => 'destroy', 
-                                                            :id => item.id }, 
-                                                            :confirm => _("Remove entry?"), 
-                                                            :method => :delete
+          perform = link_to trash, { :action => 'destroy', 
+                                     :id => item.id }, 
+                                     :confirm => _("Remove entry?"), 
+                                     :method => :delete
         else
-          perform = link_to image_tag('admin/trash.gif'), { :action => 'unrelate', 
-                                                            :id => params[:id], 
-                                                            :association => association, 
-                                                            :resource => model, 
-                                                            :resource_id => item.id }, 
-                                                            :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
-                                                                          :unrelate_model => model.typus_human_name, 
-                                                                          :unrelate_model_from => @resource[:class].typus_human_name)
+          perform = link_to trash, { :action => 'unrelate', 
+                                     :id => params[:id], 
+                                     :association => association, 
+                                     :resource => model, 
+                                     :resource_id => item.id }, 
+                                     :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+                                     :unrelate_model => model.typus_human_name, 
+                                     :unrelate_model_from => @resource[:class].typus_human_name)
         end
 
         html << <<-HTML

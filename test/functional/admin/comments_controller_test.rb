@@ -75,7 +75,7 @@ class Admin::CommentsControllerTest < ActionController::TestCase
   def test_should_show_trash_item_image_and_link_in_index
     get :index
     assert_response :success
-    assert_match /trash.gif/, @response.body
+    assert_match /Trash/, @response.body
   end
 
   def test_should_not_show_remove_item_link_in_index
@@ -85,7 +85,7 @@ class Admin::CommentsControllerTest < ActionController::TestCase
 
     get :index
     assert_response :success
-    assert_no_match /trash.gif/, @response.body
+    assert_no_match /Trash/, @response.body
 
   end
 
