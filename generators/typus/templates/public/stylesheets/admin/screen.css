@@ -207,6 +207,10 @@ input.button { margin: 10px 0 0 0; }
     vertical-align: top;
   }
 
+  #content table.typus span.inactive {
+    color: #888;
+  }
+
 /* @end */
 
 /* @group Rails Errors */
