@@ -4,23 +4,23 @@ module Typus
 
   def self.generator
 
-    # Create app/controllers/admin if doesn't exist.
+    # Create needed folders if doesn't exist.
     admin_controllers_folder = "#{Rails.root}/app/controllers/admin"
-    Dir.mkdir(admin_controllers_folder) unless File.directory?(admin_controllers_folder)
-
-    # Get a list of controllers under `app/controllers/admin`.
-    admin_controllers = Dir["#{Rails.root}/vendor/plugins/*/app/controllers/admin/*.rb", "#{admin_controllers_folder}/*.rb"]
-    admin_controllers = admin_controllers.map { |i| File.basename(i) }
-
-    # Create app/views/admin if doesn't exist.
     admin_views_folder = "#{Rails.root}/app/views/admin"
-    Dir.mkdir(admin_views_folder) unless File.directory?(admin_views_folder)
+
+    [ admin_controllers_folder, admin_views_folder ].each do |folder|
+      Dir.mkdir(folder) unless File.directory?(folder)
+    end
 
     # Create test/functional/admin if doesn't exist.
     admin_controller_tests_folder = "#{Rails.root}/test/functional/admin"
     if File.directory?("#{Rails.root}/test")
       Dir.mkdir(admin_controller_tests_folder) unless File.directory?(admin_controller_tests_folder)
     end
+
+    # Get a list of controllers under `app/controllers/admin`.
+    admin_controllers = Dir["#{Rails.root}/vendor/plugins/*/app/controllers/admin/*.rb", "#{admin_controllers_folder}/*.rb"]
+    admin_controllers = admin_controllers.map { |i| File.basename(i) }
 
     # Get a list of functional tests under `test/functional/admin`.
     admin_controller_tests = Dir["#{admin_controller_tests_folder}/*.rb"]
