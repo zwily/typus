@@ -58,9 +58,35 @@ Typus and blog about Typus.
 
 == Fancyzoom for assets
 
-This feature is a work in progress.
+This feature is a work in progress. It currently works if the attached file is 
+named asset and only previews images.
 
-    # app/views/admin/assets/_index.html.erb
+    # db/migrate/create_photos.rb
+
+    class CreatePhotos < ActiveRecord::Migration
+
+      def self.up
+        create_table :photos do |t|
+          t.string :asset_file_name
+          t.string :asset_content_type
+          t.integer :asset_file_size
+          t.datetime :asset_updated_at
+        end
+      end
+
+      def self.down
+        drop_table :photos
+      end
+
+    end
+
+    # app/models/photo.rb
+
+    class Photo < ActiveRecord::Base
+      has_attached_file :asset, :styles => { :typus => "692x461" }
+    end
+
+    # app/views/admin/photos/_index.html.erb
 
     <%- content_for :javascripts do -%>
 
