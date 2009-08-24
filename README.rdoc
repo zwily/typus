@@ -68,7 +68,7 @@ Typus and blog about Typus.
 - Erik Tigerholm (Code) http://github.com/eriktigerholm
 - George Guimarães (Portuguese translation and code) http://github.com/georgeguimaraes
 - José Valim (Code) http://github.com/josevalim
-- Luqman Amjad (Code) http://github.com/snake
+- Luqman Amjad (Code) http://github.com/luqman
 - Alexey Noskov (Russian translation and code) http://github.com/alno
 - Andres Gutierres (Bugfixes & feedback) http://github.com/andresgutgon
 - Komzák Nándor (Code, bugfixes & feedback) http://github.com/rubymood
