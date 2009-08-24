@@ -8,7 +8,7 @@ module TypusHelper
     returning(String.new) do |html|
 
       Typus.applications.each do |app|
-
+  
         available = Typus.application(app).map do |resource|
                       resource if @current_user.resources.include?(resource)
                     end
@@ -21,7 +21,7 @@ module TypusHelper
 </tr>
         HTML
 
-        available.compact.each do |model|
+        available.compact.sort_by{|x| x.constantize.typus_human_name }.each do |model|
 
           klass = model.constantize
           klass_resource = klass.name.tableize
