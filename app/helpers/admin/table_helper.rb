@@ -21,6 +21,7 @@ module Admin::TableHelper
           when :boolean then           html << typus_table_boolean_field(key, item)
           when :datetime then          html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
           when :date then              html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
+          when :file then              html << typus_table_file_field(key, item, fields.keys.first, link_options)
           when :time then              html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
           when :belongs_to then        html << typus_table_belongs_to_field(key, item)
           when :tree then              html << typus_table_tree_field(key, item)
@@ -151,6 +152,22 @@ module Admin::TableHelper
     <<-HTML
 <td>#{content}</td>
     HTML
+  end
+
+  def typus_table_file_field(attribute, item, first_field, link_options = {})
+
+    action = item.class.typus_options_for(:default_action_on_item)
+
+    content = if first_field == attribute
+                link_to item.send(attribute) || item.class.typus_options_for(:nil), link_options.merge(:controller => "admin/#{item.class.name.tableize}", :action => action, :id => item.id)
+              else
+                item.send(attribute)
+              end
+    <<-HTML
+<td>#{content} <a href="##{item.to_dom(:suffix => 'zoom')}" id="#{item.to_dom}"><small>(Preview)</small></a></td>
+<div id="#{item.to_dom(:suffix => 'zoom')}">#{item.typus_preview}</div>
+    HTML
+
   end
 
   def typus_table_tree_field(attribute, item)

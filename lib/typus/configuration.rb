@@ -6,6 +6,7 @@ module Typus
     typus_options = { :app_name => 'Typus', 
                       :config_folder => 'config/typus', 
                       :email => 'admin@example.com', 
+                      :image_preview_size => 'typus', 
                       :locales => [ [ "English", :en ] ], 
                       :recover_password => false, 
                       :root => 'admin', 

@@ -56,6 +56,29 @@ mailing list.
 Tell everybody about Typus, tell your friends and colleagues about 
 Typus and blog about Typus.
 
+== Fancyzoom for assets
+
+This feature is a work in progress.
+
+    # app/views/admin/assets/_index.html.erb
+
+    <%- content_for :javascripts do -%>
+
+      <%= javascript_include_tag 'admin/prototype' %>
+      <%= javascript_include_tag 'admin/scriptaculous' %>
+      <%= javascript_include_tag 'admin/fancyzoom' %>
+
+      <script type="text/javascript">
+        FancyZoomBox.directory = '/images/admin/fancyzoom';
+        $(document).observe('dom:loaded', function() {
+          <%- @items.each do |item| -%>
+            new FancyZoom('<%= item.to_dom %>');
+          <%- end -%>
+        });
+      </script>
+
+    <%- end -%>
+
 == Contributors
 
 - Laia Gargallo (Lover and tea provider) http://azotacalles.net

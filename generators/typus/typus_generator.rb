@@ -99,15 +99,21 @@ class TypusGenerator < Rails::Generator::Base
 
       [ 'public/stylesheets/admin', 
         'public/javascripts/admin', 
-        'public/images/admin' ].each { |f| Dir.mkdir(f) unless File.directory?(f) }
+        'public/images/admin', 
+        'public/images/admin/fancyzoom' ].each { |f| Dir.mkdir(f) unless File.directory?(f) }
 
       [ 'public/stylesheets/admin/screen.css', 
         'public/stylesheets/admin/reset.css', 
-        'public/javascripts/admin/application.js' ].each { |f| m.file f, f }
+        'public/images/admin/ui-icons.png' ].each { |f| m.file f, f }
 
-      Dir["#{Typus.root}/generators/typus/templates/public/images/admin/*"].each do |f|
-        file = "public/images/admin/#{File.basename(f)}"
+      %w( application builder controls dragdrop effects fancyzoom prototype scriptaculous slider sound ).each do |f|
+        file = "public/javascripts/admin/#{f}.js"
         m.file file, file
+      end
+
+      %w( bl bm br closebox ml mr tl tm tr ).each do |image|
+        file = "public/images/admin/fancyzoom/#{image}"
+        %w( gif png ).each { |e| m.file "#{file}.#{e}", "#{file}.#{e}" }
       end
 
       # Migration file
