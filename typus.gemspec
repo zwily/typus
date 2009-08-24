@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2009-08-21}
+  s.date = %q{2009-08-24}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -59,8 +59,6 @@ Gem::Specification.new do |s|
      "generators/typus/templates/config/typus/typus.yml",
      "generators/typus/templates/config/typus/typus_roles.yml",
      "generators/typus/templates/db/create_typus_users.rb",
-     "generators/typus/templates/public/images/admin/arrow_down.gif",
-     "generators/typus/templates/public/images/admin/arrow_up.gif",
      "generators/typus/templates/public/images/admin/ui-icons.png",
      "generators/typus/templates/public/javascripts/admin/application.js",
      "generators/typus/templates/public/stylesheets/admin/reset.css",

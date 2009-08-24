@@ -180,8 +180,6 @@ input.button { margin: 10px 0 0 0; }
   #content table.typus small { font-size: 0.8em; }
   #content table.typus th { color: #FFF; font-weight: normal; padding: 4px; }
   #content table.typus th a { color: #FFF!important; }
-  #content .asc { background: transparent url(/images/admin/arrow_up.gif) no-repeat right center; }
-  #content .desc { background: transparent url(/images/admin/arrow_down.gif) no-repeat right center; }
   #content table.typus td.right { text-align: right; }
   #content table.typus tr.even { background: #FFF!important; }
 

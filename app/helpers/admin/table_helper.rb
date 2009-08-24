@@ -91,13 +91,15 @@ module Admin::TableHelper
 
         if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
           sort_order = case params[:sort_order]
-                       when 'asc' then  'desc'
-                       when 'desc' then 'asc'
+                       when 'asc'   then  ['desc', '&darr;']
+                       when 'desc'  then  ['asc', '&uarr;']
+                       else
+                         [nil, nil]
                        end
           order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
-          switch = (params[:order_by] == key) ? sort_order : ''
-          options = { :order_by => order_by, :sort_order => sort_order }
-          content = (link_to "<div class=\"#{switch}\">#{content}</div>", params.merge(options))
+          switch = (params[:order_by] == key) ? sort_order.last : ''
+          options = { :order_by => order_by, :sort_order => sort_order.first }
+          content = (link_to "#{content} #{switch}", params.merge(options))
         end
 
         headers << "<th>#{content}</th>"
