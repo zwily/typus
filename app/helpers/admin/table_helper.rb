@@ -35,7 +35,7 @@ module Admin::TableHelper
         end
 
       action = item.class.typus_options_for(:default_action_on_item)
-      content = link_to _(action.capitalize), :action => action, :id => item.id
+      content = link_to _(action.capitalize), :controller => "admin/#{item.class.name.tableize}", :action => action, :id => item.id
       html << <<-HTML
 <td width="10px">#{content}</td>
       HTML
