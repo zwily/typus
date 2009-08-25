@@ -31,7 +31,14 @@ module Admin::TableHelper
           else
             html << typus_table_string_field(key, item, fields.keys.first, link_options)
           end
+
         end
+
+      action = item.class.typus_options_for(:default_action_on_item)
+      content = link_to _(action.capitalize), :action => action, :id => item.id
+      html << <<-HTML
+<td width="10px">#{content}</td>
+      HTML
 
       ##
       # This controls the action to perform. If we are on a model list we 
@@ -135,39 +142,17 @@ module Admin::TableHelper
     HTML
   end
 
-  ##
-  # When detection of the attributes is made a default attribute 
-  # type is set. From the string_field we display other content 
-  # types.
-  #
   def typus_table_string_field(attribute, item, first_field, link_options = {})
-
-    action = item.class.typus_options_for(:default_action_on_item)
-
-    content = if first_field == attribute
-                link_to item.send(attribute) || item.class.typus_options_for(:nil), link_options.merge(:controller => "admin/#{item.class.name.tableize}", :action => action, :id => item.id)
-              else
-                item.send(attribute)
-              end
     <<-HTML
-<td>#{content}</td>
+<td>#{item.send(attribute)}</td>
     HTML
   end
 
   def typus_table_file_field(attribute, item, first_field, link_options = {})
-
-    action = item.class.typus_options_for(:default_action_on_item)
-
-    content = if first_field == attribute
-                link_to item.send(attribute) || item.class.typus_options_for(:nil), link_options.merge(:controller => "admin/#{item.class.name.tableize}", :action => action, :id => item.id)
-              else
-                item.send(attribute)
-              end
     <<-HTML
-<td>#{content} <a href="##{item.to_dom(:suffix => 'zoom')}" id="#{item.to_dom}"><small>(Preview)</small></a></td>
+<td><a href="##{item.to_dom(:suffix => 'zoom')}" id="#{item.to_dom}" title="Click to preview">#{item.send(attribute)}</a></td>
 <div id="#{item.to_dom(:suffix => 'zoom')}">#{item.typus_preview}</div>
     HTML
-
   end
 
   def typus_table_tree_field(attribute, item)
