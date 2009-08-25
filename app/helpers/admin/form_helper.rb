@@ -93,15 +93,25 @@ module Admin::FormHelper
     HTML
   end
 
+  # WEI: Added image preview.
   def typus_file_field(attribute)
-
     attribute_display = attribute.split('_file_name').first
-
+    unless @item.send(attribute).blank?
+      if attachment = @item.send(attribute_display)
+        if (@item.send("#{attribute_display}_content_type") =~ /^image\/.+/) and (attachment.styles.member?(:thumbnail) or attachment.styles.member?(:edit))
+          style = attachment.styles.member?(:thumbnail) ? :thumbnail : :edit
+          preview = image_tag attachment.url(style)
+        else
+          preview = link_to @item.send(attribute), attachment.url
+        end
+      end
+    end
     <<-HTML
-<li><label for="item_#{attribute}">#{_(attribute_display.humanize)}</label>
-#{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}</li>
+    <li><label for="item_#{attribute}">#{_(attribute_display.humanize)}</label>
+      #{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}
+      #{preview}
+    </li>
     HTML
-
   end
 
   def typus_password_field(attribute)
