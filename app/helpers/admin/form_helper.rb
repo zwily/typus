@@ -235,7 +235,9 @@ module Admin::FormHelper
       association = reflection.macro
       foreign_key = reflection.through_reflection ? reflection.primary_key_name.pluralize : reflection.primary_key_name
 
-      link_options = { :controller => "admin/#{field}", 
+      #WEI: Changed link to use type name rather than field:
+      #WEI: link_options = { :controller => "admin/#{field}", 
+      link_options = { :controller => "admin/#{model_to_relate_as_resource.pluralize}", 
                        :action => 'new', 
                        :back_to => "#{@back_to}##{field}", 
                        :resource => @resource[:self].singularize, 
