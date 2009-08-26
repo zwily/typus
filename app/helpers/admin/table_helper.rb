@@ -19,17 +19,17 @@ module Admin::TableHelper
         fields.each do |key, value|
           case value
           when :boolean then           html << typus_table_boolean_field(key, item)
-          when :datetime then          html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
-          when :date then              html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
-          when :file then              html << typus_table_file_field(key, item, fields.keys.first, link_options)
-          when :time then              html << typus_table_datetime_field(key, item, fields.keys.first, link_options)
+          when :datetime then          html << typus_table_datetime_field(key, item, link_options)
+          when :date then              html << typus_table_datetime_field(key, item, link_options)
+          when :file then              html << typus_table_file_field(key, item, link_options)
+          when :time then              html << typus_table_datetime_field(key, item, link_options)
           when :belongs_to then        html << typus_table_belongs_to_field(key, item)
           when :tree then              html << typus_table_tree_field(key, item)
           when :position then          html << typus_table_position_field(key, item)
           when :has_and_belongs_to_many then
             html << typus_table_has_and_belongs_to_many_field(key, item)
           else
-            html << typus_table_string_field(key, item, fields.keys.first, link_options)
+            html << typus_table_string_field(key, item, link_options)
           end
 
         end
@@ -142,13 +142,13 @@ module Admin::TableHelper
     HTML
   end
 
-  def typus_table_string_field(attribute, item, first_field, link_options = {})
+  def typus_table_string_field(attribute, item, link_options = {})
     <<-HTML
 <td>#{item.send(attribute)}</td>
     HTML
   end
 
-  def typus_table_file_field(attribute, item, first_field, link_options = {})
+  def typus_table_file_field(attribute, item, link_options = {})
     <<-HTML
 <td><a href="##{item.to_dom(:suffix => 'zoom')}" id="#{item.to_dom}" title="Click to preview">#{item.send(attribute)}</a></td>
 <div id="#{item.to_dom(:suffix => 'zoom')}">#{item.typus_preview}</div>
@@ -184,17 +184,10 @@ module Admin::TableHelper
 
   end
 
-  def typus_table_datetime_field(attribute, item, first_field = nil, link_options = {} )
-
-    action = item.class.typus_options_for(:default_action_on_item)
+  def typus_table_datetime_field(attribute, item, link_options = {} )
 
     date_format = item.class.typus_date_format(attribute)
-    value = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
-    content = if first_field == attribute
-                link_to value, link_options.merge(:controller => "admin/#{item.class.name.tableize}", :action => action, :id => item.id )
-              else
-                value
-              end
+    content = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
 
     <<-HTML
 <td>#{content}</td>
