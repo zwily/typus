@@ -149,10 +149,20 @@ module Admin::TableHelper
   end
 
   def typus_table_file_field(attribute, item, link_options = {})
-    <<-HTML
+
+    attribute_display = attribute.split('_file_name').first
+
+    if item.asset.styles.member?(:typus_preview) && item.send("#{attribute_display}_content_type") =~ /^image\/.+/
+      <<-HTML
 <td><a href="##{item.to_dom(:suffix => 'zoom')}" id="#{item.to_dom}" title="Click to preview">#{item.send(attribute)}</a></td>
-<div id="#{item.to_dom(:suffix => 'zoom')}">#{item.typus_preview}</div>
-    HTML
+<div id=\"#{item.to_dom(:suffix => 'zoom')}\">#{item.typus_preview}</div>
+      HTML
+    else
+      <<-HTML
+<td>#{link_to item.send(attribute), item.asset.url}</td>
+      HTML
+    end
+
   end
 
   def typus_table_tree_field(attribute, item)

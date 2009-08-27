@@ -12,7 +12,6 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal 'Typus', Typus::Configuration.options[:app_name]
     assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
     assert_equal 'admin@example.com', Typus::Configuration.options[:email]
-    assert_equal 'typus', Typus::Configuration.options[:image_preview_size]
     assert_equal [ [ "English", :en] ], Typus::Configuration.options[:locales]
     assert_equal false, Typus::Configuration.options[:recover_password]
     assert_equal 'admin', Typus::Configuration.options[:root]

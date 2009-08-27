@@ -100,8 +100,8 @@ module Admin::FormHelper
     unless @item.send(attribute).blank?
       attachment = @item.send(attribute_display)
       if @item.send("#{attribute_display}_content_type") =~ /^image\/.+/
-        preview = if attachment.styles.member?(:thumbnail)
-                    image_tag attachment.url(:thumbnail)
+        preview = if attachment.styles.member?(:typus_thumbnail)
+                    image_tag attachment.url(:typus_thumbnail)
                   else
                     link_to @item.send(attribute), attachment.url
                   end
