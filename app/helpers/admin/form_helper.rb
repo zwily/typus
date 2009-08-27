@@ -96,20 +96,20 @@ module Admin::FormHelper
   # Optimize
   def typus_file_field(attribute)
 
-    attribute_display = attribute.split('_file_name').first
+    attachment = attribute.split('_file_name').first
 
     unless @item.send(attribute).blank?
-      attachment = @item.send(attribute_display)
-      preview = if @item.send("#{attribute_display}_content_type") =~ /^image\/.+/ && attachment.styles.member?(:typus_thumbnail)
-                    image_tag attachment.url(:typus_thumbnail)
+      item = @item.send(attachment)
+      preview = if @item.send("#{attachment}_content_type") =~ /^image\/.+/ && item.styles.member?(:typus_thumbnail)
+                    image_tag item.url(:typus_thumbnail)
                   else
-                    link_to @item.send(attribute), attachment.url
+                    link_to @item.send(attribute), item.url
                   end
     end
 
     <<-HTML
-    <li><label for="item_#{attribute}">#{_(attribute_display.humanize)}</label>
-      #{file_field :item, attribute.split("_file_name").first, :disabled => attribute_disabled?(attribute)}
+    <li><label for="item_#{attribute}">#{_(attachment.humanize)}</label>
+      #{file_field :item, attachment, :disabled => attribute_disabled?(attribute)}
       #{preview}
     </li>
     HTML
