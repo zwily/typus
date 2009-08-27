@@ -93,19 +93,18 @@ module Admin::FormHelper
     HTML
   end
 
+  # Optimize
   def typus_file_field(attribute)
 
     attribute_display = attribute.split('_file_name').first
 
     unless @item.send(attribute).blank?
       attachment = @item.send(attribute_display)
-      if @item.send("#{attribute_display}_content_type") =~ /^image\/.+/
-        preview = if attachment.styles.member?(:typus_thumbnail)
+      preview = if @item.send("#{attribute_display}_content_type") =~ /^image\/.+/ && attachment.styles.member?(:typus_thumbnail)
                     image_tag attachment.url(:typus_thumbnail)
                   else
                     link_to @item.send(attribute), attachment.url
                   end
-      end
     end
 
     <<-HTML
