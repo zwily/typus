@@ -93,7 +93,6 @@ module Admin::FormHelper
     HTML
   end
 
-  # WEI: Added image preview.
   def typus_file_field(attribute)
     attribute_display = attribute.split('_file_name').first
     unless @item.send(attribute).blank?
@@ -235,8 +234,6 @@ module Admin::FormHelper
       association = reflection.macro
       foreign_key = reflection.through_reflection ? reflection.primary_key_name.pluralize : reflection.primary_key_name
 
-      #WEI: Changed link to use type name rather than field:
-      #WEI: link_options = { :controller => "admin/#{field}", 
       link_options = { :controller => "admin/#{model_to_relate_as_resource.pluralize}", 
                        :action => 'new', 
                        :back_to => "#{@back_to}##{field}", 
