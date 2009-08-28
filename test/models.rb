@@ -48,4 +48,7 @@ class Post < ActiveRecord::Base
     'plugin'
   end
 
+  def asset_file_name
+  end
+
 end
