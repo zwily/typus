@@ -108,10 +108,10 @@ module Admin::FormHelper
     end
 
     <<-HTML
-    <li><label for="item_#{attribute}">#{_(attachment.humanize)}</label>
-      #{file_field :item, attachment, :disabled => attribute_disabled?(attribute)}
-      #{preview}
-    </li>
+<li><label for="item_#{attribute}">#{_(attachment.humanize)}</label>
+#{file_field :item, attachment, :disabled => attribute_disabled?(attribute)}
+#{preview}
+</li>
     HTML
 
   end

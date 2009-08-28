@@ -109,11 +109,14 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   def test_typus_file_field
 
     @resource = { :class => Post }
+    @item = Post.new
 
     output = typus_file_field('asset_file_name')
     expected = <<-HTML
 <li><label for="item_asset_file_name">Asset</label>
-<input id="item_asset" name="item[asset]" size="30" type="file" /></li>
+<input id="item_asset" name="item[asset]" size="30" type="file" />
+
+</li>
     HTML
 
     assert_equal expected, output
