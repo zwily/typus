@@ -28,10 +28,17 @@ module Admin::SidebarHelper
       end
     end
 
+    # OPTIMIZE
     case params[:action]
     when 'show'
       if @current_user.can_perform?(@resource[:class], 'update')
-        items << (link_to _("Edit entry"), :action => 'edit', :id => @item.id)
+        if @item.typus_user_id?
+          if @item.owned_by?(@current_user)
+            items << (link_to _("Edit entry"), :action => 'edit', :id => @item.id)
+          end
+        else
+          items << (link_to _("Edit entry"), :action => 'edit', :id => @item.id)
+        end
       end
     end
 

@@ -266,6 +266,10 @@ module Typus
 
     end
 
+    def typus_user_id?
+      columns.map { |u| u.name }.include?(Typus.user_fk)
+    end
+
   end
 
   module InstanceMethods
@@ -297,6 +301,14 @@ module Typus
 
     def typus_name
       respond_to?(:name) ? name : "#{self.class}##{id}"
+    end
+
+    def typus_user_id?
+      self.class.typus_user_id?
+    end
+
+    def owned_by?(user)
+      send(Typus.user_fk) == user.id
     end
 
   end

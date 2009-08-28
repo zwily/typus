@@ -88,7 +88,7 @@ class Admin::MasterController < ApplicationController
     @item = @resource[:class].new(params[:item])
 
     if @item.attributes.include?(Typus.user_fk)
-      @item.attributes = { Typus.user_fk => session[:typus_user_id] }
+      @item.attributes = { Typus.user_fk => @current_user.id }
     end
 
     if @item.valid?
@@ -256,7 +256,7 @@ private
 
     # OPTIMIZE: `typus_users` is currently hard-coded. We should find a good name for this option.
     if @item.respond_to?('typus_users') && !@item.send('typus_users').include?(@current_user) ||
-       @item.respond_to?(Typus.user_fk) && !(@item.send(Typus.user_fk) == session[:typus_user_id])
+       @item.respond_to?(Typus.user_fk) && !@item.owned_by?(@current_user)
        flash[:notice] = _("You don't have permission to access this item.")
        redirect_to request.env["HTTP_REFERER"] ? :back : admin_dashboard_path
     end
@@ -271,7 +271,7 @@ private
     # If current user is not root and @resource has a foreign_key which 
     # is related to the logged user (Typus.user_fk) we only show the user 
     # related items.
-    if @resource[:class].columns.map { |u| u.name }.include?(Typus.user_fk)
+    if @resource[:class].typus_user_id?
       condition = { Typus.user_fk => @current_user }
       @conditions = @resource[:class].merge_conditions(@conditions, condition)
     end
