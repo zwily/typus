@@ -285,6 +285,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
     params = { :created_at => 'today' }
     assert_equal expected, TypusUser.build_conditions(params).first
 
+    expected = case ENV['DB']
+               when /postgresql/
+                 "(created_at BETWEEN E'#{3.days.ago.midnight.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
+               else
+                 "(created_at BETWEEN '#{3.days.ago.midnight.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
+               end
+    params = { :created_at => 'last_few_days' }
+    assert_equal expected, TypusUser.build_conditions(params).first
 
     expected = case ENV['DB']
                when /postgresql/
@@ -292,7 +300,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
                else
                  "(created_at BETWEEN '#{6.days.ago.midnight.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
                end
-    params = { :created_at => 'past_7_days' }
+    params = { :created_at => 'last_7_days' }
     assert_equal expected, TypusUser.build_conditions(params).first
 
 
@@ -302,16 +310,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
                else
                  "(created_at BETWEEN '#{Time.new.midnight.last_month.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
                end
-    params = { :created_at => 'this_month' }
-    assert_equal expected, TypusUser.build_conditions(params).first
-
-    expected = case ENV['DB']
-               when /postgresql/
-                 "(created_at BETWEEN E'#{Time.new.midnight.last_year.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
-               else
-                 "(created_at BETWEEN '#{Time.new.midnight.last_year.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
-               end
-    params = { :created_at => 'this_year' }
+    params = { :created_at => 'last_30_days' }
     assert_equal expected, TypusUser.build_conditions(params).first
 
   end

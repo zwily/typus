@@ -99,9 +99,9 @@ ru:
   "Change {{attribute}}?": "Изменить {{attribute}}?"
   "Set language": "Установить язык"
   "Today": "Сегодня"
-  "Past 7 days": "Последние 7 дней"
-  "This month": "Этот месяц"
-  "This year": "Этот год"
+  "Last few days": "Последние дней"
+  "Last 7 days": "Последние 7 дней"
+  "Last 30 days": "Последние 30 дней"
   "Created at": "Создано"
   "Updated at": "Обновлено"
   "{{model}} filtered by {{filtered_by}}": 

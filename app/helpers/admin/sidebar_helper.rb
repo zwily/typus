@@ -201,16 +201,9 @@ function surfto_#{model_pluralized}(form) {
 
   end
 
-  ##
-  # Thinking in update datetime_filters to ...
-  #
-  #     %w( today last_few_days last_7_days last_30_days )
-  #
-  # ... which are the ones used by 'exception_logger'.
-  #
   def datetime_filter(request, filter)
     items = []
-    %w( today past_7_days this_month this_year ).each do |timeline|
+    %w( today last_few_days last_7_days last_30_days ).each do |timeline|
       switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
       options = { filter.to_sym => timeline, :page => nil }
       items << (link_to _(timeline.humanize), params.merge(options), :class => switch)

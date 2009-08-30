@@ -103,9 +103,9 @@
   "Change {{attribute}}?": 
   "Set language": 
   "Today": 
-  "Past 7 days": 
-  "This month": 
-  "This year": 
+  "Last few days": 
+  "Last 7 days": 
+  "Last 30 days": 
   "{{model}} filtered by {{filtered_by}}": 
   "True": 
   "False": 

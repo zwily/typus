@@ -194,9 +194,9 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 <h2>Created at</h2>
 <ul>
 <li><a href="http://test.host/admin/typus_users?created_at=today" class="off">Today</a></li>
-<li><a href="http://test.host/admin/typus_users?created_at=past_7_days" class="off">Past 7 days</a></li>
-<li><a href="http://test.host/admin/typus_users?created_at=this_month" class="off">This month</a></li>
-<li><a href="http://test.host/admin/typus_users?created_at=this_year" class="off">This year</a></li>
+<li><a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a></li>
+<li><a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a></li>
+<li><a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a></li>
 </ul>
     HTML
     assert_equal expected, output
@@ -207,9 +207,9 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 <h2>Created at</h2>
 <ul>
 <li><a href="http://test.host/admin/typus_users?created_at=today" class="on">Today</a></li>
-<li><a href="http://test.host/admin/typus_users?created_at=past_7_days" class="off">Past 7 days</a></li>
-<li><a href="http://test.host/admin/typus_users?created_at=this_month" class="off">This month</a></li>
-<li><a href="http://test.host/admin/typus_users?created_at=this_year" class="off">This year</a></li>
+<li><a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a></li>
+<li><a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a></li>
+<li><a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a></li>
 </ul>
     HTML
     assert_equal expected, output
