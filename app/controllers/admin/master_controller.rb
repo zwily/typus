@@ -147,7 +147,7 @@ class Admin::MasterController < ApplicationController
   def destroy
     @item.destroy
     flash[:success] = _("{{model}} successfully removed.", :model => @resource[:class].typus_human_name)
-    redirect_to request.env["HTTP_REFERER"] || admin_dashboard_path
+    redirect_to request.referer || admin_dashboard_path
   rescue Exception => error
     error_handler(error, params.merge(:action => 'index', :id => nil))
   end
@@ -161,7 +161,7 @@ class Admin::MasterController < ApplicationController
     else
       flash[:notice] = _("Toggle is disabled.")
     end
-    redirect_to request.env["HTTP_REFERER"] || admin_dashboard_path
+    redirect_to request.referer || admin_dashboard_path
   end
 
   ##
@@ -176,7 +176,7 @@ class Admin::MasterController < ApplicationController
   def position
     @item.send(params[:go])
     flash[:success] = _("Record moved {{to}}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
-    redirect_to request.env["HTTP_REFERER"] || admin_dashboard_path
+    redirect_to request.referer || admin_dashboard_path
   end
 
   ##
@@ -258,7 +258,7 @@ private
     if @item.respond_to?('typus_users') && !@item.send('typus_users').include?(@current_user) ||
        @item.respond_to?(Typus.user_fk) && !@item.owned_by?(@current_user)
        flash[:notice] = _("You don't have permission to access this item.")
-       redirect_to request.env["HTTP_REFERER"] || admin_dashboard_path
+       redirect_to request.referer || admin_dashboard_path
     end
 
   end

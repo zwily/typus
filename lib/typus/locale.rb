@@ -6,7 +6,7 @@ module Typus
       if params[:locale]
         I18n.locale = params[:locale]
         session[:typus_locale] = params[:locale]
-        redirect_to request.env["HTTP_REFERER"] || admin_dashboard_path
+        redirect_to request.referer || admin_dashboard_path
       else
         I18n.locale = session[:typus_locale] || Typus.default_locale
       end
