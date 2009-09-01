@@ -58,7 +58,7 @@ module Admin::FormHelper
         html << typus_tree_field(related_fk, related.roots, related_fk)
       else
         html << <<-HTML
-<li><label for="item_#{attribute}">#{_(related_fk.humanize)}
+<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}
     <small>#{link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
     </label>
 #{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
