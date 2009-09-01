@@ -13,7 +13,8 @@ class TypusController < ApplicationController
     include SslRequirement
     ssl_required :sign_in, :sign_out, 
                  :dashboard, 
-                 :recover_password, :reset_password
+                 :recover_password, :reset_password, 
+                 :set_locale
   end
 
   filter_parameter_logging :password
