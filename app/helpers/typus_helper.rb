@@ -149,9 +149,15 @@ module TypusHelper
 
     message = _("Are you sure you want to sign out and end your session?")
 
+    user_details = if user.can_perform?(Typus::Configuration.options[:user_class_name], 'edit')
+                     link_to user.name, admin_edit_typus_user_path, :title => "#{user.email} (#{user.role})"
+                   else
+                     user.name
+                   end
+
     <<-HTML
 <ul>
-  <li>#{_("Logged as")} #{link_to user.name, admin_edit_typus_user_path, :title => "#{user.email} (#{user.role})"}</li>
+  <li>#{_("Logged as")} #{user_details}</li>
   <li>#{link_to _("Sign out"), admin_sign_out_path, { :confirm => message } }</li>
 </ul>
     HTML
