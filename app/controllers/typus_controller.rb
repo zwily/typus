@@ -19,6 +19,8 @@ class TypusController < ApplicationController
 
   filter_parameter_logging :password
 
+  before_filter :verify_typus_users_table_schema
+
   before_filter :set_locale
 
   before_filter :reload_config_et_roles
@@ -117,6 +119,14 @@ class TypusController < ApplicationController
   end
 
 private
+
+  def verify_typus_users_table_schema
+
+    unless Typus.user_class.new.respond_to?(:role)
+      raise _("Run `script/generate typus_update_schema_to_01 -f && rake db:migrate` to update database schema.")
+    end
+
+  end
 
   def recover_password_disabled?
     redirect_to admin_sign_in_path unless Typus::Configuration.options[:recover_password]
