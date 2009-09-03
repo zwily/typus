@@ -25,6 +25,7 @@ module Typus
         validates_presence_of :role
 
         before_save :initialize_salt, :encrypt_password, :initialize_token
+        before_create :set_preferences
 
         serialize :preferences
 
@@ -97,6 +98,10 @@ module Typus
       end
 
     protected
+
+      def set_preferences
+        self.preferences = { :locale => Typus.default_locale }
+      end
 
       def generate_hash(string)
         Digest::SHA1.hexdigest(string)

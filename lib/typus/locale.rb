@@ -6,10 +6,15 @@ module Typus
       if params[:locale]
         I18n.locale = params[:locale]
         session[:typus_locale] = params[:locale]
+        @current_user.update_attributes :preferences => { :locale => params[:locale] }
         redirect_to request.referer || admin_dashboard_path
       else
-        I18n.locale = session[:typus_locale] || Typus.default_locale
+        I18n.locale = @current_user.preferences[:locale]
       end
+    end
+
+    def set_default_locale
+      I18n.locale = Typus.default_locale
     end
 
   end

@@ -21,7 +21,7 @@ class TypusController < ApplicationController
 
   before_filter :verify_typus_users_table_schema
 
-  before_filter :set_locale
+  before_filter :set_default_locale, :except => [ :dashboard ]
 
   before_filter :reload_config_et_roles
   before_filter :require_login, 
@@ -37,6 +37,8 @@ class TypusController < ApplicationController
 
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
+
+  before_filter :set_locale, :only => [ :dashboard ]
 
   def dashboard
     flash[:notice] = _("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
