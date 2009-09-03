@@ -12,7 +12,7 @@ module Typus
         begin
           I18n.locale = @current_user.preferences[:locale]
         rescue
-          @current_user.update_attributes :preferences => { :locale => params[:locale] }
+          @current_user.update_attributes :preferences => { :locale => Typus.default_locale }
           retry
         end
       end
