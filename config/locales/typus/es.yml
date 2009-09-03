@@ -96,7 +96,6 @@ es:
   "Remove entry?": "¿Borrar entrada?"
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?"
   "Change {{attribute}}?": "Change {{attribute}}?"
-  "Set language": "Cambiar idioma"
   "Today": "Hoy"
   "Last few days": "Últimos dias"
   "Last 7 days": "Últimos 7 dias"
@@ -104,5 +103,4 @@ es:
   "{{model}} filtered by {{filtered_by}}": "{{model}} filtrados por {{filtered_by}}"
   "True": "Verdadero"
   "False": "Falso"
-  "Set language to": "Idioma"
   "Are you sure you want to sign out and end your session?": 

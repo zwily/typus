@@ -96,7 +96,6 @@ ru:
   "Remove entry?": "Удалить запись?"
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Отсоединить {{unrelate_model}} от {{unrelate_model_from}}?"
   "Change {{attribute}}?": "Изменить {{attribute}}?"
-  "Set language": "Установить язык"
   "Today": "Сегодня"
   "Last few days": "Последние дней"
   "Last 7 days": "Последние 7 дней"
@@ -106,5 +105,4 @@ ru:
   "{{model}} filtered by {{filtered_by}}": 
   "True": 
   "False": 
-  "Set language to": 
   "Are you sure you want to sign out and end your session?": 

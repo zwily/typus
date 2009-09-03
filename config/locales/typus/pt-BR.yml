@@ -96,7 +96,6 @@ pt-BR:
   "Remove entry?": "Remover entrada?"
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Desvincular {{unrelate_model}} de {{unrelate_model_from}}?"
   "Change {{attribute}}?": "Mudar {{attribute}}?"
-  "Set language": "Mudar idioma"
   "Today": "Hoje"
   "Last few days": "Últimos dias"
   "Last 7 days": "Últimos 7 dias"
@@ -106,5 +105,4 @@ pt-BR:
   "{{model}} filtered by {{filtered_by}}": "{{model}} filtrados por {{filtered_by}}"
   "True": "Verdadeiro"
   "False": "Falso"
-  "Set language to": "Idioma"
   "Are you sure you want to sign out and end your session?": "Tem certeza que quer sair e encerrar sua sessão?"
