@@ -6,7 +6,7 @@ class Admin::MasterController < ApplicationController
 
   include Typus::Authentication
   include Typus::Format
-  include Typus::Locale
+  include Typus::Preferences
   include Typus::Reloader
 
   if Typus::Configuration.options[:ssl]
@@ -20,7 +20,7 @@ class Admin::MasterController < ApplicationController
 
   before_filter :require_login
 
-  before_filter :set_locale
+  before_filter :set_typus_preferences
 
   before_filter :set_resource
   before_filter :find_item, 

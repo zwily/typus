@@ -11,11 +11,11 @@ module Typus
     end
 
     def locales
-      Typus::Configuration.options[:locales]
-    end
-
-    def default_locale
-      locales.map(&:last).first
+      [ [ "German", 'de' ],
+        [ "English", 'en' ], 
+        [ "Español", 'es' ], 
+        [ "Portuguese", 'pt-BR' ], 
+        [ "Russian", 'ru' ] ]
     end
 
     def applications
@@ -103,8 +103,8 @@ module Typus
       require 'typus/authentication'
       require 'typus/format'
       require 'typus/generator'
-      require 'typus/locale'
       require 'typus/preview'
+      require 'typus/preferences'
       require 'typus/reloader'
       require 'typus/quick_edit'
       require 'typus/user'

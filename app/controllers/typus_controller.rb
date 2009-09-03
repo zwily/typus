@@ -5,23 +5,20 @@ class TypusController < ApplicationController
   layout :select_layout
 
   include Typus::Authentication
-  include Typus::Locale
   include Typus::QuickEdit
+  include Typus::Preferences
   include Typus::Reloader
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
     ssl_required :sign_in, :sign_out, 
                  :dashboard, 
-                 :recover_password, :reset_password, 
-                 :set_locale
+                 :recover_password, :reset_password
   end
 
   filter_parameter_logging :password
 
   before_filter :verify_typus_users_table_schema
-
-  before_filter :set_default_locale, :except => [ :dashboard ]
 
   before_filter :reload_config_et_roles
   before_filter :require_login, 
@@ -33,14 +30,15 @@ class TypusController < ApplicationController
                 :except => [ :sign_up, :sign_in, :sign_out, 
                              :dashboard, 
                              :recover_password, :reset_password, 
-                             :quick_edit, :set_locale ]
+                             :quick_edit ]
 
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
 
-  before_filter :set_locale, :only => [ :dashboard ]
+  before_filter :set_typus_preferences, :only => [ :dashboard ]
 
   def dashboard
+    I18n.locale = Typus::Configuration.options[:default_locale]
     flash[:notice] = _("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
   end
 

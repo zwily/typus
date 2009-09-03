@@ -8,7 +8,6 @@ ActionController::Routing::Routes.draw do |map|
     i.admin_sign_up 'sign_up', :action => 'sign_up'
     i.admin_recover_password 'recover_password', :action => 'recover_password'
     i.admin_reset_password 'reset_password', :action => 'reset_password'
-    i.admin_set_locale 'set_locale', :action => 'set_locale'
   end
 
 end

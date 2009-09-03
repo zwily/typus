@@ -5,9 +5,9 @@ module Typus
     # Default options which can be overwritten from the initializer.
     typus_options = { :app_name => 'Typus', 
                       :config_folder => 'config/typus', 
+                      :default_locale => :en, 
                       :email => 'admin@example.com', 
                       :image_preview_size => 'typus', 
-                      :locales => [ [ "English", :en ] ], 
                       :recover_password => false, 
                       :root => 'admin', 
                       :ssl => false, 

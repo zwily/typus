@@ -16,6 +16,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
                        [:token, :string], 
                        [:salt, :string], 
                        [:crypted_password, :string], 
+                       [:preferences, :string], 
                        [:created_at, :datetime], 
                        [:updated_at, :datetime]]
     assert_equal expected_fields.map { |i| i.first }, TypusUser.model_fields.keys

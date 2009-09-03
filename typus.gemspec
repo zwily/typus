@@ -107,6 +107,7 @@ Gem::Specification.new do |s|
      "lib/typus/hash.rb",
      "lib/typus/locale.rb",
      "lib/typus/object.rb",
+     "lib/typus/preferences.rb",
      "lib/typus/preview.rb",
      "lib/typus/quick_edit.rb",
      "lib/typus/reloader.rb",

@@ -8,6 +8,7 @@ admin:
   token: 1A2B3C4D5E6F
   salt: admin
   crypted_password: <%= Digest::SHA1.hexdigest("--admin--#{12345678}") %>
+  preferences: { :locale => :en }
 
 editor:
   id: 2
@@ -19,6 +20,7 @@ editor:
   token: A2B3C4D5E6F1
   salt: editor
   crypted_password: <%= Digest::SHA1.hexdigest("--editor--#{12345678}") %>
+  preferences: { :locale => :en }
 
 disabled_user:
   id: 3
@@ -30,6 +32,7 @@ disabled_user:
   token: 2B3C4D5E6F1A
   salt: disabled_user
   crypted_password: <%= Digest::SHA1.hexdigest("--disabled_user--#{12345678}") %>
+  preferences: { :locale => :en }
 
 designer:
   id: 4
@@ -41,6 +44,7 @@ designer:
   token: B3C4D5E6F1A2
   salt: designer
   crypted_password: <%= Digest::SHA1.hexdigest("--designer--#{12345678}") %>
+  preferences: { :locale => :en }
 
 removed_role:
   id: 5
@@ -52,3 +56,4 @@ removed_role:
   token: 3C4D5E6F1A2B
   salt: removed_role
   crypted_password: <%= Digest::SHA1.hexdigest("--removed_role--#{12345678}") %>
+  preferences: { :locale => :en }

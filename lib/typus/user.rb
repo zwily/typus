@@ -25,7 +25,7 @@ module Typus
         validates_presence_of :role
 
         before_save :initialize_salt, :encrypt_password, :initialize_token
-        before_create :set_preferences
+        before_save :set_preferences
 
         serialize :preferences
 
@@ -39,6 +39,10 @@ module Typus
 
       def role
         Typus::Configuration.roles.keys.sort
+      end
+
+      def language
+        Typus.locales
       end
 
       def authenticate(email, password)
@@ -99,8 +103,18 @@ module Typus
 
     protected
 
+      def language
+        preferences[:locale] rescue Typus::Configuration.options[:default_locale]
+      end
+
+      def language=(locale)
+        self.preferences = { :locale => locale }
+      end
+
       def set_preferences
-        self.preferences = { :locale => Typus.default_locale }
+        if self.preferences.nil? || self.preferences[:locale].nil? || self.preferences[:locale].blank?
+          self.preferences = { :locale => Typus::Configuration.options[:default_locale] }
+        end
       end
 
       def generate_hash(string)

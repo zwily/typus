@@ -185,16 +185,4 @@ module TypusHelper
     HTML
   end
 
-  def locales(uri = admin_set_locale_path)
-
-    return unless Typus.locales.many?
-
-    locale_links = Typus.locales.map { |l| "<a href=\"#{uri}?locale=#{l.last}\">#{l.first.downcase}</a>" }
-
-    <<-HTML
-<p>#{_("Set language to")} #{locale_links.join(', ')}.</p>
-    HTML
-
-  end
-
 end

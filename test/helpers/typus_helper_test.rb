@@ -101,17 +101,4 @@ class TypusHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
   end
 
-  def test_locales
-
-    options = { :locales => [ [ "English", :en ], [ "Español", :es ] ] }
-    Typus::Configuration.stubs(:options).returns(options)
-
-    output = locales('set_locale')
-    expected = <<-HTML
-<p>Set language to <a href=\"set_locale?locale=en\">english</a>, <a href=\"set_locale?locale=es\">español</a>.</p>
-    HTML
-    assert_equal expected, output
-
-  end
-
 end

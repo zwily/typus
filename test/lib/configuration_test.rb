@@ -11,8 +11,8 @@ class ConfigurationTest < ActiveSupport::TestCase
     return if File.exist?(initializer)
     assert_equal 'Typus', Typus::Configuration.options[:app_name]
     assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
+    assert_equal :en, Typus::Configuration.options[:default_locale]
     assert_equal 'admin@example.com', Typus::Configuration.options[:email]
-    assert_equal [ [ "English", :en] ], Typus::Configuration.options[:locales]
     assert_equal false, Typus::Configuration.options[:recover_password]
     assert_equal 'admin', Typus::Configuration.options[:root]
     assert_equal false, Typus::Configuration.options[:ssl]
