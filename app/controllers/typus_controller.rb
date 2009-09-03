@@ -38,8 +38,13 @@ class TypusController < ApplicationController
   before_filter :set_typus_preferences, :only => [ :dashboard ]
 
   def dashboard
-    I18n.locale = Typus::Configuration.options[:default_locale]
-    flash[:notice] = _("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
+    begin
+      I18n.locale = @current_user.preferences[:locale]
+      flash[:notice] = _("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
+    rescue
+      @current_user.update_attributes :preferences => { :locale => Typus::Configuration.options[:default_locale] }
+      retry
+    end
   end
 
   def sign_in
