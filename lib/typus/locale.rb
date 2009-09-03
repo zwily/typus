@@ -9,7 +9,12 @@ module Typus
         @current_user.update_attributes :preferences => { :locale => params[:locale] }
         redirect_to request.referer || admin_dashboard_path
       else
-        I18n.locale = @current_user.preferences[:locale]
+        begin
+          I18n.locale = @current_user.preferences[:locale]
+        rescue
+          @current_user.update_attributes :preferences => { :locale => params[:locale] }
+          retry
+        end
       end
     end
 
