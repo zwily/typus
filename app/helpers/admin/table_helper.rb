@@ -159,14 +159,14 @@ module Admin::TableHelper
 
     attachment = attribute.split('_file_name').first
 
-    if item.asset.styles.member?(:typus_preview) && item.send("#{attachment}_content_type") =~ /^image\/.+/
+    if item.send(attachment).styles.member?(:typus_preview) && item.send("#{attachment}_content_type") =~ /^image\/.+/
       <<-HTML
 <td><a href="##{item.to_dom(:suffix => 'zoom')}" id="#{item.to_dom}" title="Click to preview">#{item.send(attribute)}</a></td>
-<div id=\"#{item.to_dom(:suffix => 'zoom')}\">#{item.typus_preview}</div>
+<div id=\"#{item.to_dom(:suffix => 'zoom')}\">#{item.typus_preview(attachment)}</div>
       HTML
     else
       <<-HTML
-<td>#{link_to item.send(attribute), item.asset.url}</td>
+<td>#{link_to item.send(attribute), item.send(attachment).url}</td>
       HTML
     end
 

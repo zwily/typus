@@ -2,8 +2,8 @@ module Typus
 
   module InstanceMethods
 
-    def typus_preview
-      return "<img src=\"#{asset.url(:typus_preview)}\" />"
+    def typus_preview(attachment)
+      return "<img src=\"#{send(attachment).url(:typus_preview)}\" />"
     end
 
   end

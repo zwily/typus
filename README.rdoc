@@ -77,8 +77,7 @@ Typus and blog about Typus.
 
 == Fancyzoom for assets
 
-This feature is a work in progress. It currently works if the attached file is 
-named asset and only previews images.
+This feature is a work in progress. Only previews images.
 
     # db/migrate/create_photos.rb
 
