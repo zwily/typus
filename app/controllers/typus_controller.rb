@@ -126,6 +126,10 @@ private
       raise _("Run `script/generate typus_update_schema_to_01 -f && rake db:migrate` to update database schema.")
     end
 
+    unless Typus.user_class.new.respond_to?(:preferences)
+      raise _("Run `script/generate typus_update_schema_to_02 -f && rake db:migrate` to update database schema.")
+    end
+
   end
 
   def recover_password_disabled?

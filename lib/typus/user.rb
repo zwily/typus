@@ -26,6 +26,8 @@ module Typus
 
         before_save :initialize_salt, :encrypt_password, :initialize_token
 
+        serialize :preferences
+
         include InstanceMethods
 
       end

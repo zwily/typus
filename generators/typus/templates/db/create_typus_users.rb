@@ -10,6 +10,7 @@ class CreateTypusUsers < ActiveRecord::Migration
       t.string :token, :null => false
       t.string :salt, :null => false
       t.string :crypted_password, :null => false
+      t.string :preferences
       t.timestamps
     end
   end
