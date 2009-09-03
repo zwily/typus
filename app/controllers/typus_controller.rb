@@ -124,7 +124,7 @@ private
 
   def verify_typus_users_table_schema
 
-    unless Typus.user_class.model_fields.keys.include?(:roles)
+    unless Typus.user_class.model_fields.keys.include?(:role)
       raise "Run `script/generate typus_update_schema_to_01 -f && rake db:migrate` to update database schema."
     end
 
