@@ -35,8 +35,6 @@ class TypusController < ApplicationController
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
 
-  before_filter :set_typus_preferences, :only => [ :dashboard ]
-
   def dashboard
     begin
       I18n.locale = @current_user.preferences[:locale]
