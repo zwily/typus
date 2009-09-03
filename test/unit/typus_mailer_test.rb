@@ -26,8 +26,4 @@ class TypusMailerTest < ActiveSupport::TestCase
     assert_match expected, @response.body
   end
 
-  def test_should_check_email_contains_signature
-    assert_match /--\n#{Typus::Configuration.options[:app_name]}/, @response.body
- end
-
 end
