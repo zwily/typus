@@ -87,7 +87,7 @@ module Typus
 
       # Load translation files from the plugin or the gem.
       unless plugin?
-        Gem.path.each { |g| I18n.load_path += Dir[File.join("#{g}/gems/*typus-#{version}/config/locales/*.{rb,yml}")] }
+        Gem.path.each { |g| I18n.load_path += Dir[File.join("#{g}/gems/typus-#{version}/config/locales/*.{rb,yml}")] }
       end
 
       # Require the test/models on when testing.
