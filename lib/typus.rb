@@ -86,9 +86,7 @@ module Typus
       Typus::Configuration.roles!
 
       # Load translation files from the plugin or the gem.
-      if plugin?
-        I18n.load_path += Dir[File.join(root, 'config', 'locales', '*.{rb,yml}')]
-      else
+      unless plugin?
         Gem.path.each { |g| I18n.load_path += Dir[File.join("#{g}/gems/*typus-#{version}/config/locales/*.{rb,yml}")] }
       end
 
