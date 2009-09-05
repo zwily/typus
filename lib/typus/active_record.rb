@@ -278,8 +278,8 @@ module Typus
 
     def previous_and_next(condition = {}, klass = self.class)
 
-      previous_conditions = "#{klass.primary_key} < #{id}"
-      next_conditions = "#{klass.primary_key} > #{id}"
+      previous_conditions = "#{klass.primary_key} < #{quote_value(id)}"
+      next_conditions = "#{klass.primary_key} > #{quote_value(id)}"
 
       if !condition.empty?
         conditions, joins = klass.build_conditions(condition)
