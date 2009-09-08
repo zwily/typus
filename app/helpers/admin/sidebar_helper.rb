@@ -89,7 +89,7 @@ module Admin::SidebarHelper
 
   end
 
-  def previous_and_next
+  def previous_and_next(klass = @resource[:class])
 
     return [] unless %w( edit show update ).include?(params[:action])
 
@@ -98,13 +98,19 @@ module Admin::SidebarHelper
 
     returning(Array.new) do |items|
       if @next
-        conditions = (@resource[:class].typus_user_id? && @current_user.id == @next.send(Typus.user_fk))
-        action = conditions ? 'edit' : 'show'
-        items << (link_to _("Next"), params.merge(:action => action, :id => @next.id)) if @next
+        action = if klass.typus_user_id? && !@current_user.is_root?
+                   @next.owned_by?(@current_user) ? 'edit' : 'show'
+                 else
+                   !@current_user.can_perform?(klass, 'edit') ? 'show' : params[:action]
+                 end
+        items << (link_to _("Next"), params.merge(:action => action, :id => @next.id))
       end
       if @previous
-        conditions = (@resource[:class].typus_user_id? && @current_user.id == @previous.send(Typus.user_fk))
-        action =  conditions ? 'edit' : 'show'
+        action = if klass.typus_user_id? && !@current_user.is_root?
+                   @previous.owned_by?(@current_user) ? 'edit' : 'show'
+                 else
+                   !@current_user.can_perform?(klass, 'edit') ? 'show' : params[:action]
+                 end
         items << (link_to _("Previous"), params.merge(:action => action, :id => @previous.id))
       end
     end
