@@ -258,31 +258,41 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_verify_admin_updating_an_item_does_not_change_typus_user_id
+  def test_should_verify_admin_updating_an_item_does_change_typus_user_id_to_whatever_admin_wants
 
     post_ = posts(:owned_by_editor)
-    post :update, { :id => post_.id, :title => 'Updated', :typus_user_id => 100000000 }
+    post :update, { :id => post_.id, :item => { :title => 'Updated', :typus_user_id => 108 } }
     post_updated = Post.find(post_.id)
+    assert_equal 108, post_updated.typus_user_id
 
-    assert_equal post_updated.typus_user_id, post_.typus_user_id
+  end
+
+  def test_should_verify_editor_updating_an_item_does_not_change_typus_user_id
+
+    typus_user = typus_users(:editor)
+    @request.session[:typus_user_id] = typus_user.id
 
     post_ = posts(:owned_by_editor)
-    post :update, { :id => post_.id, :title => 'Updated', :typus_user_id => nil }
+    post :update, { :id => post_.id, :item => { :title => 'Updated', :typus_user_id => 108 } }
     post_updated = Post.find(post_.id)
+    assert_equal typus_user.id, post_updated.typus_user_id
 
-    assert_equal post_updated.typus_user_id, post_.typus_user_id
+    post_ = posts(:owned_by_editor)
+    post :update, { :id => post_.id, :item => { :title => 'Updated', :typus_user_id => nil } }
+    post_updated = Post.find(post_.id)
+    assert_equal typus_user.id, post_updated.typus_user_id
 
   end
 
   def test_should_verify_typus_user_id_of_item_when_creating_record
 
-    @resource = { :class => Post }
-    @current_user = typus_users(:admin)
+    typus_user = typus_users(:editor)
+    @request.session[:typus_user_id] = typus_user.id
 
-    post :create, { :item => { :title => 'Chunky Bacon', :body => 'Lorem ipsum ...' } }
-    post_ = Post.find_by_title('Chunky Bacon')
+    post :create, { :item => { :title => "Chunky Bacon", :body => "Lorem ipsum ..." } }
+    post_ = Post.find_by_title("Chunky Bacon")
 
-    assert_equal @current_user.id, post_.typus_user_id
+    assert_equal typus_user.id, post_.typus_user_id
 
   end
 
