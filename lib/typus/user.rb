@@ -51,12 +51,12 @@ module Typus
         user && user.authenticated?(password) ? user : nil
       end
 
-      def generate(email, password, role = Typus::Configuration.options[:root], status = true)
-        new :email => email, 
-            :password => password, 
-            :password_confirmation => password, 
-            :role => role, 
-            :status => status
+      def generate(*args)
+        options = args.extract_options!
+        new :email => options[:email], 
+            :password => options[:password], 
+            :password_confirmation => options[:password], 
+            :role => options[:role]
       end
 
     end
