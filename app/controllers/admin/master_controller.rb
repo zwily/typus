@@ -89,7 +89,7 @@ class Admin::MasterController < ApplicationController
 
     @item = @resource[:class].new(params[:item])
 
-    if @item.typus_user_id?
+    if @resource[:class].typus_user_id?
       @item.attributes = { Typus.user_fk => @current_user.id }
     end
 

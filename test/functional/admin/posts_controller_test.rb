@@ -258,4 +258,32 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_verify_admin_updating_an_item_does_not_change_typus_user_id
+
+    post_ = posts(:owned_by_editor)
+    post :update, { :id => post_.id, :title => 'Updated', :typus_user_id => 100000000 }
+    post_updated = Post.find(post_.id)
+
+    assert_equal post_updated.typus_user_id, post_.typus_user_id
+
+    post_ = posts(:owned_by_editor)
+    post :update, { :id => post_.id, :title => 'Updated', :typus_user_id => nil }
+    post_updated = Post.find(post_.id)
+
+    assert_equal post_updated.typus_user_id, post_.typus_user_id
+
+  end
+
+  def test_should_verify_typus_user_id_of_item_when_creating_record
+
+    @resource = { :class => Post }
+    @current_user = typus_users(:admin)
+
+    post :create, { :item => { :title => 'Chunky Bacon', :body => 'Lorem ipsum ...' } }
+    post_ = Post.find_by_title('Chunky Bacon')
+
+    assert_equal @current_user.id, post_.typus_user_id
+
+  end
+
 end
