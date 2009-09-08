@@ -13,6 +13,7 @@ module Typus
         extend ClassMethodsMixin
 
         attr_accessor :password
+        attr_protected :status
 
         validates_format_of :email, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/
         validates_presence_of :email
