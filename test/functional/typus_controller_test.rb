@@ -89,7 +89,8 @@ class TypusControllerTest < ActionController::TestCase
 
     # Disable user ...
 
-    admin.update_attributes :status => false
+    admin.status = false
+    admin.save
 
     get :dashboard
     assert_response :redirect

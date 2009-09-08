@@ -83,6 +83,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   def test_previous_and_next
 
+    @resource = { :class => TypusUser }
+
     params = { :controller => 'admin/typus_users', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
 
