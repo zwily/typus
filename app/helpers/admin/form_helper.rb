@@ -297,16 +297,24 @@ module Admin::FormHelper
       reflection = @resource[:class].reflect_on_association(field.to_sym)
       association = reflection.macro
 
+      condition = !(@resource[:class].typus_user_id? && @current_user.id == @item.send(Typus.user_fk))
+
+      unless condition
+        add_new = <<-HTML
+  <small>#{link_to _("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
+        HTML
+      end
+
       html << <<-HTML
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
   #{link_to model_to_relate.typus_human_name.pluralize, :controller => "admin/#{model_to_relate_as_resource}"}
-  <small>#{link_to _("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  #{add_new}
   </h2>
       HTML
       items_to_relate = (model_to_relate.find(:all) - @item.send(field))
-      unless items_to_relate.empty?
+      unless condition || items_to_relate.empty?
         html << <<-HTML
   #{form_tag :action => 'relate', :id => @item.id}
   #{hidden_field :related, :model, :value => model_to_relate}
