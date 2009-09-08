@@ -67,6 +67,8 @@ class Admin::MasterController < ApplicationController
 
   def new
 
+    check_ownership_of_referal_item
+
     item_params = params.dup
     %w( controller action resource resource_id back_to selected ).each do |param|
       item_params.delete(param)
@@ -276,6 +278,13 @@ private
       @conditions = @resource[:class].merge_conditions(@conditions, condition)
     end
 
+  end
+
+  def check_ownership_of_referal_item
+    return unless params[:resource] && params[:resource_id]
+    klass = params[:resource].classify.constantize
+    condition = (klass.find(params[:resource_id]).send(Typus.user_fk) == @current_user.id)
+    raise "You're not owner of this record." unless condition
   end
 
   def set_fields
