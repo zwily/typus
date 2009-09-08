@@ -47,30 +47,26 @@ module Admin::TableHelper
 <td width="10px">#{content}</td>
         HTML
 
-      ##
-      # This controls the action to perform. If we are on a model list we 
-      # will remove the entry, but if we inside a model we will remove the 
-      # relationship between the models.
-      #
-      # Only shown is the user can destroy items.
-      #
-      if @current_user.can_perform?(model, 'delete')
+        ##
+        # This controls the action to perform. If we are on a model list we 
+        # will remove the entry, but if we inside a model we will remove the 
+        # relationship between the models.
+        #
+        # Only shown is the user can destroy/unrelate items.
+        #
 
         trash = "<div class=\"sprite trash\">Trash</div>"
 
         case params[:action]
         when 'index'
-          perform = link_to trash, { :action => 'destroy', 
-                                     :id => item.id }, 
+          conditions = @current_user.can_perform?(model, 'destroy') && item.owned_by?(@current_user)
+          perform = link_to trash, { :action => 'destroy', :id => item.id }, 
                                      :title => _("Remove"), 
                                      :confirm => _("Remove entry?"), 
-                                     :method => :delete
+                                     :method => :delete if conditions
+
         else
-          perform = link_to trash, { :action => 'unrelate', 
-                                     :id => params[:id], 
-                                     :association => association, 
-                                     :resource => model, 
-                                     :resource_id => item.id }, 
+          perform = link_to trash, { :action => 'unrelate', :id => params[:id], :association => association, :resource => model, :resource_id => item.id }, 
                                      :title => _("Unrelate"), 
                                      :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
                                      :unrelate_model => model.typus_human_name, 
@@ -79,15 +75,10 @@ module Admin::TableHelper
 
         html << <<-HTML
 <td width="10px">#{perform}</td>
+</tr>
         HTML
 
       end
-
-      html << <<-HTML
-</tr>
-      HTML
-
-    end
 
       html << "</table>"
 
