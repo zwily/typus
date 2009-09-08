@@ -132,7 +132,13 @@ class Admin::MasterController < ApplicationController
   end
 
   def update
+
     if @item.update_attributes(params[:item])
+
+      if @item.attributes.include?(Typus.user_fk)
+        @item.update_attributes Typus.user_fk => @current_user.id
+      end
+
       flash[:success] = _("{{model}} successfully updated.", :model => @resource[:class].typus_human_name)
       path = if @resource[:class].typus_options_for(:index_after_save)
                params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
@@ -140,10 +146,14 @@ class Admin::MasterController < ApplicationController
                { :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id, :back_to => params[:back_to] }
              end
       redirect_to path
+
     else
+
       @previous, @next = @item.previous_and_next
       select_template :edit
+
     end
+
   end
 
   def destroy
