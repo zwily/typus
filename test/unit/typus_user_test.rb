@@ -164,8 +164,8 @@ this_is_chelm@example.com
 
   def test_should_verify_generate
     assert TypusUser.respond_to?(:generate)
-    assert TypusUser.generate('demo@example.com', 'XXXXXXXX').valid?
-    assert TypusUser.generate('demo@example.com', 'XXXX').invalid?
+    assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX').invalid?
+    assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX', :role => 'admin').valid?
   end
 
   def test_should_verify_can_perform?
