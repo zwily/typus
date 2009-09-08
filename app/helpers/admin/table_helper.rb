@@ -62,6 +62,7 @@ module Admin::TableHelper
         when 'index'
           perform = link_to trash, { :action => 'destroy', 
                                      :id => item.id }, 
+                                     :title => _("Remove"), 
                                      :confirm => _("Remove entry?"), 
                                      :method => :delete
         else
@@ -70,6 +71,7 @@ module Admin::TableHelper
                                      :association => association, 
                                      :resource => model, 
                                      :resource_id => item.id }, 
+                                     :title => _("Unrelate"), 
                                      :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
                                      :unrelate_model => model.typus_human_name, 
                                      :unrelate_model_from => @resource[:class].typus_human_name)
