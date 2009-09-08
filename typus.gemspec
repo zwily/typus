@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2009-09-04}
+  s.date = %q{2009-09-08}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -48,6 +48,7 @@ Gem::Specification.new do |s|
      "app/views/typus_mailer/reset_password_link.erb",
      "config/locales/de.yml",
      "config/locales/es.yml",
+     "config/locales/fr.yml",
      "config/locales/language.yml.template",
      "config/locales/pt-BR.yml",
      "config/locales/ru.yml",
