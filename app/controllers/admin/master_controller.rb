@@ -295,8 +295,8 @@ private
   def check_ownership_of_referal_item
     return unless params[:resource] && params[:resource_id]
     klass = params[:resource].classify.constantize
-    condition = (klass.find(params[:resource_id]).send(Typus.user_fk) == @current_user.id)
-    raise "You're not owner of this record." unless condition
+    item = klass.find(params[:resource_id])
+    raise "You're not owner of this record." unless item.owned_by?(@current_user)
   end
 
   def set_fields
