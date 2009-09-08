@@ -89,7 +89,7 @@ class Admin::MasterController < ApplicationController
 
     @item = @resource[:class].new(params[:item])
 
-    if @item.attributes.include?(Typus.user_fk)
+    if @item.typus_user_id?
       @item.attributes = { Typus.user_fk => @current_user.id }
     end
 
@@ -135,7 +135,7 @@ class Admin::MasterController < ApplicationController
 
     if @item.update_attributes(params[:item])
 
-      if @item.attributes.include?(Typus.user_fk) && !@current_user.is_root?
+      if @item.typus_user_id? && !@current_user.is_root?
         @item.update_attributes Typus.user_fk => @current_user.id
       end
 

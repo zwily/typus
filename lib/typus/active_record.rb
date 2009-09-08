@@ -308,7 +308,7 @@ module Typus
     end
 
     def typus_user_id?
-      self.class.typus_user_id?
+      attributes.include?(Typus.user_fk)
     end
 
     def owned_by?(user)
