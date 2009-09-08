@@ -102,8 +102,12 @@ class TypusController < ApplicationController
 
     if request.post?
 
-      email, password = params[:user][:email], 'columbia'
-      user = Typus.user_class.generate(email, password)
+      password = 'columbia'
+
+      user = Typus.user_class.generate(:email => params[:user][:email], 
+                                       :password => 'columbia', 
+                                       :role => Typus::Configuration.options[:root])
+      user.status = true
 
       if user.save
         session[:typus_user_id] = user.id
