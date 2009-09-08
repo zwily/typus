@@ -287,13 +287,15 @@ module Typus
         next_conditions += " AND #{conditions}"
       end
 
+      select = !klass.typus_user_id? ? klass.primary_key : "#{klass.primary_key}, #{Typus.user_fk}"
+
       previous_ = klass.find :first, 
-                             :select => [klass.primary_key], 
+                             :select => select, 
                              :order => "#{klass.primary_key} DESC", 
                              :conditions => previous_conditions
 
       next_ = klass.find :first, 
-                         :select => [klass.primary_key], 
+                         :select => select, 
                          :order => "#{klass.primary_key} ASC", 
                          :conditions => next_conditions
 

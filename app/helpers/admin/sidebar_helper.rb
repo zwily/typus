@@ -90,11 +90,25 @@ module Admin::SidebarHelper
   end
 
   def previous_and_next
+
     return [] unless %w( edit show update ).include?(params[:action])
+
+    # Verify ownership of record to define the kind of action which can be 
+    # performed on the record.
+
     returning(Array.new) do |items|
-      items << (link_to _("Next"), params.merge(:id => @next.id)) if @next
-      items << (link_to _("Previous"), params.merge(:id => @previous.id)) if @previous
+      if @next
+        conditions = (@resource[:class].typus_user_id? && @current_user.id == @next.send(Typus.user_fk))
+        action = conditions ? 'edit' : 'show'
+        items << (link_to _("Next"), params.merge(:action => action, :id => @next.id)) if @next
+      end
+      if @previous
+        conditions = (@resource[:class].typus_user_id? && @current_user.id == @previous.send(Typus.user_fk))
+        action =  conditions ? 'edit' : 'show'
+        items << (link_to _("Previous"), params.merge(:action => action, :id => @previous.id))
+      end
     end
+
   end
 
   def search
