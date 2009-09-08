@@ -13,7 +13,8 @@ module Typus
     def locales
       [ [ "German", 'de' ],
         [ "English", 'en' ], 
-        [ "Español", 'es' ], 
+        [ "Español", 'es' ],
+        [ "Français", 'fr' ],
         [ "Portuguese", 'pt-BR' ], 
         [ "Russian", 'ru' ] ]
     end
