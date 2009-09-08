@@ -81,7 +81,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     assert_no_match /\/h2/, output
   end
 
-  def test_previous_and_next
+  def test_previous_and_next_when_edit
 
     @resource = { :class => TypusUser }
     @current_user = typus_users(:admin)
@@ -130,6 +130,24 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = previous_and_next
     expected = [ "<a href=\"http://test.host/admin/typus_users/edit/#{@next.id}\">Next</a>", 
                  "<a href=\"http://test.host/admin/typus_users/edit/#{@previous.id}\">Previous</a>" ]
+    assert_equal expected, output
+
+  end
+
+  def test_previous_and_next_when_show
+
+    @resource = { :class => TypusUser }
+    @current_user = typus_users(:admin)
+
+    typus_user = TypusUser.find(3)
+    params = { :controller => 'admin/typus_users', :action => 'show', :id => typus_user.id }
+    self.expects(:params).at_least_once.returns(params)
+
+    @previous, @next = typus_user.previous_and_next
+
+    output = previous_and_next
+    expected = [ "<a href=\"http://test.host/admin/typus_users/show/#{@next.id}\">Next</a>", 
+                 "<a href=\"http://test.host/admin/typus_users/show/#{@previous.id}\">Previous</a>" ]
     assert_equal expected, output
 
   end
