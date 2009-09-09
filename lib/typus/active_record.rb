@@ -307,10 +307,6 @@ module Typus
       respond_to?(:name) ? name : "#{self.class}##{id}"
     end
 
-    def typus_user_id?
-      attributes.include?(Typus.user_fk)
-    end
-
     def owned_by?(user)
       send(Typus.user_fk) == user.id
     end

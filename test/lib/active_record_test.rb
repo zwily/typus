@@ -379,4 +379,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
+  def test_should_verify_typus_user_id
+    assert Post.typus_user_id?
+    assert !TypusUser.typus_user_id?
+  end
+
 end
