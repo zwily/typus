@@ -57,26 +57,24 @@ module Admin::TableHelper
 
         trash = "<div class=\"sprite trash\">Trash</div>"
 
+        condition = if model.typus_user_id? && !@current_user.is_root?
+                      item.owned_by?(@current_user)
+                    else
+                      @current_user.can_perform?(model, params[:action] ? 'destroy' : 'unrelate')
+                    end
+
         case params[:action]
         when 'index'
-
-          condition = if model.typus_user_id? && !@current_user.is_root?
-                        item.owned_by?(@current_user)
-                      else
-                        @current_user.can_perform?(model, 'destroy')
-                      end
-
           perform = link_to trash, { :action => 'destroy', :id => item.id }, 
                                      :title => _("Remove"), 
                                      :confirm => _("Remove entry?"), 
                                      :method => :delete if condition
-
         else
           perform = link_to trash, { :action => 'unrelate', :id => params[:id], :association => association, :resource => model, :resource_id => item.id }, 
                                      :title => _("Unrelate"), 
                                      :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
                                      :unrelate_model => model.typus_human_name, 
-                                     :unrelate_model_from => @resource[:class].typus_human_name)
+                                     :unrelate_model_from => @resource[:class].typus_human_name) if condition
         end
 
         html << <<-HTML
