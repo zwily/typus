@@ -99,7 +99,6 @@ module Typus
                 when 'index', 'show'
                   _("{{current_user_role}} can't display items.", 
                     :current_user_role => @current_user.role.capitalize)
-                when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
                 when 'destroy'
                   _("{{current_user_role}} can't delete this item.", 
                     :current_user_role => @current_user.role.capitalize)
