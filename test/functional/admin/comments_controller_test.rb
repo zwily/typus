@@ -104,7 +104,7 @@ class Admin::CommentsControllerTest < ActionController::TestCase
 
   def test_should_generate_csv
 
-    require 'fastercsv' rescue LoadError
+    return if !defined?(FasterCSV)
 
     expected = <<-RAW
 Email,Post
