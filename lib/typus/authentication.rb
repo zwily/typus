@@ -110,9 +110,7 @@ module Typus
                 end
 
       unless @current_user.can_perform?(@resource[:class], params[:action])
-        flash[:notice] = message || _("{{current_user_role}} can't perform action. ({{action}}).", 
-                                      :current_user_role => @current_user.role.capitalize, 
-                                      :action => params[:action])
+        flash[:notice] = message
         redirect_to request.referer || admin_dashboard_path
       end
 
