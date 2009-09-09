@@ -27,7 +27,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to '/admin/posts/edit/1#assets'
     assert flash[:success]
-    assert_equal 'Asset successfully assigned to Post.', flash[:success]
+    assert_equal "Asset successfully assigned to Post.", flash[:success]
 
   end
 
@@ -50,7 +50,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to '/admin/posts/1/edit#assets'
     assert flash[:success]
-    assert_equal 'Asset successfully updated.', flash[:success]
+    assert_equal "Asset successfully updated.", flash[:success]
 
   end
 
