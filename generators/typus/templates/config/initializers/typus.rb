@@ -7,6 +7,7 @@ Typus::Configuration.options[:app_name] = '<%= application %>'
 # Typus::Configuration.options[:default_locale] = :en
 # Typus::Configuration.options[:email] = 'admin@example.com'
 # Typus::Configuration.options[:recover_password] = true
+# Typus::Configuration.options[:relationship] = 'typus_users'
 # Typus::Configuration.options[:root] = 'admin'
 # Typus::Configuration.options[:ssl] = false
 # Typus::Configuration.options[:templates_folder] = 'admin/templates'

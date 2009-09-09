@@ -60,6 +60,10 @@ module Typus
       Typus::Configuration.options[:user_fk]
     end
 
+    def relationship
+      Typus::Configuration.options[:relationship]
+    end
+
     def testing?
       Rails.env.test? && Dir.pwd == "#{Rails.root}/vendor/plugins/typus"
     end

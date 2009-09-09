@@ -68,4 +68,14 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal 'my_user_fk', Typus.user_fk
   end
 
+  def test_should_return_relationship
+    assert_equal 'typus_users', Typus.relationship
+  end
+
+  def test_should_return_overwritted_user_fk
+    options = { :relationship => 'my_typus_users' }
+    Typus::Configuration.stubs(:options).returns(options)
+    assert_equal 'my_typus_users', Typus.relationship
+  end
+
 end

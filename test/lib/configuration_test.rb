@@ -14,6 +14,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal :en, Typus::Configuration.options[:default_locale]
     assert_equal 'admin@example.com', Typus::Configuration.options[:email]
     assert_equal false, Typus::Configuration.options[:recover_password]
+    assert_equal 'typus_users', Typus::Configuration.options[:relationship]
     assert_equal 'admin', Typus::Configuration.options[:root]
     assert_equal false, Typus::Configuration.options[:ssl]
     assert_equal 'admin/templates', Typus::Configuration.options[:templates_folder]

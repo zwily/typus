@@ -268,8 +268,7 @@ private
     # By-pass if current_user is root.
     return if @current_user.is_root?
 
-    # OPTIMIZE: `typus_users` is currently hard-coded. We should find a good name for this option.
-    condition_typus_users = @item.respond_to?('typus_users') && !@item.send('typus_users').include?(@current_user)
+    condition_typus_users = @item.respond_to?(Typus.relationship) && !@item.send(Typus.relationship).include?(@current_user)
     condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(@current_user)
 
     if condition_typus_users || condition_typus_user_id

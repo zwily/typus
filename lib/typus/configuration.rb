@@ -9,6 +9,7 @@ module Typus
                       :email => 'admin@example.com', 
                       :image_preview_size => 'typus', 
                       :recover_password => false, 
+                      :relationship => 'typus_users', 
                       :root => 'admin', 
                       :ssl => false, 
                       :templates_folder => 'admin/templates',
