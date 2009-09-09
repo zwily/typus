@@ -58,14 +58,13 @@ module Admin::TableHelper
         trash = "<div class=\"sprite trash\">Trash</div>"
         unrelate = "<div class=\"sprite unrelate\">Unrelate</div>"
 
-        condition = if model.typus_user_id? && !@current_user.is_root?
-                      item.owned_by?(@current_user)
-                    else
-                      @current_user.can_perform?(model, 'destroy')
-                    end
-
         case params[:action]
         when 'index'
+          condition = if model.typus_user_id? && !@current_user.is_root?
+                        item.owned_by?(@current_user)
+                      else
+                        @current_user.can_perform?(model, 'destroy')
+                      end
           perform = link_to trash, { :action => 'destroy', :id => item.id }, 
                                      :title => _("Remove"), 
                                      :confirm => _("Remove entry?"), 
@@ -80,7 +79,13 @@ module Admin::TableHelper
         when 'show'
           # If we are showing content, we only can relate and unrelate if we are 
           # the owners of the owner record.
-          condition = @item.owned_by?(@current_user) || @current_user.is_root?
+          # If the owner record doesn't have a foreign key (Typus.user_fk) we look
+          # each item to verify the ownership.
+          condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
+                        @item.owned_by?(@current_user)
+                      else
+                        @current_user.can_perform?(model, 'unrelate')
+                      end
           perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :association => association, :resource => model, :resource_id => item.id }, 
                                         :title => _("Unrelate"), 
                                         :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
