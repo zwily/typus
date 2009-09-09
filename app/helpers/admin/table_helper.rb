@@ -83,8 +83,6 @@ module Admin::TableHelper
           # each item to verify the ownership.
           condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
                         @item.owned_by?(@current_user)
-                      else
-                        @current_user.can_perform?(model, 'unrelate')
                       end
           perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :association => association, :resource => model, :resource_id => item.id }, 
                                         :title => _("Unrelate"), 
