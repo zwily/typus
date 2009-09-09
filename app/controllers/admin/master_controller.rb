@@ -263,7 +263,7 @@ private
   #
   def check_ownership_of_item
 
-    # If current_user is a root user, by-pass.
+    # By-pass if current_user is root.
     return if @current_user.is_root?
 
     # OPTIMIZE: `typus_users` is currently hard-coded. We should find a good name for this option.
@@ -282,9 +282,8 @@ private
     # By-pass if current_user is root.
     return if @current_user.is_root?
 
-    # If current user is not root and @resource has a foreign_key which 
-    # is related to the logged user (Typus.user_fk) we only show the user 
-    # related items.
+    # Show only related items it @resource has a foreign_key (Typus.user_fk) 
+    # related to the logged user.
     if @resource[:class].typus_user_id?
       condition = { Typus.user_fk => @current_user }
       @conditions = @resource[:class].merge_conditions(@conditions, condition)
