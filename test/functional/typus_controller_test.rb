@@ -1,5 +1,11 @@
 require 'test/helper'
 
+# Test TypusController:
+#
+# - sign_up, sign_in & sign_out
+# - dashboard
+# - reset_password, recover_password
+
 class TypusControllerTest < ActionController::TestCase
 
   def setup

@@ -1,8 +1,7 @@
 require 'test/helper'
 
-##
 # Test template extensions rendering and things related to views.
-#
+
 class Admin::CommentsControllerTest < ActionController::TestCase
 
   def setup

@@ -1,8 +1,7 @@
 require 'test/helper'
 
-##
 # Test polimorphic relationships using the relate & unrelate actions.
-#
+
 class Admin::AssetsControllerTest < ActionController::TestCase
 
   def setup

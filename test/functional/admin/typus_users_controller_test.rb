@@ -1,8 +1,7 @@
 require 'test/helper'
 
-##
 # Test what TypusUsers can do.
-#
+
 class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def setup

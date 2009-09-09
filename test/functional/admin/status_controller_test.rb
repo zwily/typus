@@ -1,8 +1,7 @@
 require 'test/helper'
 
-##
 # Test resources which are not related to an ActiveRecord model.
-#
+
 class Admin::StatusControllerTest < ActionController::TestCase
 
   def setup

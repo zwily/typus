@@ -1,11 +1,10 @@
 require 'test/helper'
 
-##
 # Test CRUD actions and ...
 #
 #   - Relate comment which is a has_many relationship.
 #   - Unrelate comment which is a has_many relationship.
-#
+
 class Admin::PostsControllerTest < ActionController::TestCase
 
   def setup
