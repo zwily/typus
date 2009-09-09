@@ -28,18 +28,14 @@ module Admin::SidebarHelper
       end
     end
 
-    # OPTIMIZE
     case params[:action]
     when 'show'
-      if @current_user.can_perform?(@resource[:class], 'update')
-        if @item.typus_user_id?
-          if @item.owned_by?(@current_user)
-            items << (link_to _("Edit entry"), :action => 'edit', :id => @item.id)
-          end
-        else
-          items << (link_to _("Edit entry"), :action => 'edit', :id => @item.id)
-        end
-      end
+      condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
+                    @item.owned_by?(@current_user)
+                  else
+                    @current_user.can_perform?(@resource[:class], 'destroy')
+                  end
+      items << (link_to _("Edit entry"), :action => 'edit', :id => @item.id) if condition
     end
 
     @resource[:class].typus_actions_for(params[:action]).each do |action|
