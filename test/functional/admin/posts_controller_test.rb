@@ -276,15 +276,12 @@ class Admin::PostsControllerTest < ActionController::TestCase
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
 
-    post_ = posts(:owned_by_editor)
-    post :update, { :id => post_.id, :item => { :title => 'Updated', :typus_user_id => 108 } }
-    post_updated = Post.find(post_.id)
-    assert_equal typus_user.id, post_updated.typus_user_id
-
-    post_ = posts(:owned_by_editor)
-    post :update, { :id => post_.id, :item => { :title => 'Updated', :typus_user_id => nil } }
-    post_updated = Post.find(post_.id)
-    assert_equal typus_user.id, post_updated.typus_user_id
+    [ 108, nil ].each do |typus_user_id|
+      post_ = posts(:owned_by_editor)
+      post :update, { :id => post_.id, :item => { :title => 'Updated', :typus_user_id => typus_user_id } }
+      post_updated = Post.find(post_.id)
+      assert_equal typus_user.id, post_updated.typus_user_id
+    end
 
   end
 
