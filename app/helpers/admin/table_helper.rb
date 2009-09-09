@@ -59,11 +59,17 @@ module Admin::TableHelper
 
         case params[:action]
         when 'index'
-          conditions = @current_user.can_perform?(model, 'destroy') && item.owned_by?(@current_user)
+
+          condition = if item.typus_user_id? && !@current_user.is_root?
+                        item.owned_by?(@current_user)
+                      else
+                        @current_user.can_perform?(model, 'destroy')
+                      end
+
           perform = link_to trash, { :action => 'destroy', :id => item.id }, 
                                      :title => _("Remove"), 
                                      :confirm => _("Remove entry?"), 
-                                     :method => :delete if conditions
+                                     :method => :delete if condition
 
         else
           perform = link_to trash, { :action => 'unrelate', :id => params[:id], :association => association, :resource => model, :resource_id => item.id }, 
