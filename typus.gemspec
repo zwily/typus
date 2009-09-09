@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2009-09-08}
+  s.date = %q{2009-09-09}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -120,6 +120,7 @@ Gem::Specification.new do |s|
      "lib/typus/user.rb",
      "lib/vendor/active_record.rb",
      "lib/vendor/paginator.rb",
+     "lib/vendor/rss_parser.rb",
      "rails/init.rb",
      "tasks/typus_tasks.rake",
      "test/config/broken/application.yml",
