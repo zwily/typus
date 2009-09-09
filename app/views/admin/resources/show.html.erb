@@ -9,9 +9,21 @@
 <%= typus_block :location => @resource[:self], :partial => 'show' %>
 
 <dl>
-<%- @fields.map { |u| u.first }.each do |column| -%>
-  <dt><%=h @resource[:class].human_attribute_name(column) %></dt>
-  <dd><%=h (!@item.send(column).blank?) ? @item.send(column) : 'nil' %></dd>
+<%- @fields.each do |field| -%>
+  <dt><%=h @resource[:class].human_attribute_name(field.first) %></dt>
+  <%-
+    data = case field.last
+           when :boolean
+             boolean_hash = @resource[:class].typus_boolean(field.first)
+             status = @item.send(field.first)
+             !@item.send(field.first).nil? ? boolean_hash["#{status}".to_sym] : @resource[:class].typus_options_for(:nil)
+           when :belongs_to
+             @item.send(field.first).typus_name
+           else
+             @item.send(field.first)
+           end
+  -%>
+  <dd><%=h data %></dd>
 <%- end -%>
 </dl>
 
