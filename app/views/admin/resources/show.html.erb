@@ -19,11 +19,14 @@
              !@item.send(field.first).nil? ? boolean_hash["#{status}".to_sym] : @resource[:class].typus_options_for(:nil)
            when :belongs_to
              @item.send(field.first).typus_name
+           when :text
+             text = @item.send(field.first)
+             defined?(RDiscount) ? markdown(text) : text
            else
              @item.send(field.first)
            end
   -%>
-  <dd><%=h data %></dd>
+  <dd><%= data %></dd>
 <%- end -%>
 </dl>
 
