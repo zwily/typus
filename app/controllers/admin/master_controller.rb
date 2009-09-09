@@ -259,7 +259,9 @@ private
   # If item is owned by another user, we only can perform a 
   # show action on the item. Updated item is also blocked.
   #
-  #   before_filter :check_ownership_of_item, :only => [ :edit, :update, :destroy ]
+  #   before_filter :check_ownership_of_item, :only => [ :edit, :update, :destroy, 
+  #                                                      :toggle, :position, 
+  #                                                      :relate, :unrelate ]
   #
   def check_ownership_of_item
 
