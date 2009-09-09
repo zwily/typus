@@ -86,7 +86,7 @@ module Typus
 
       if message
         flash[:notice] = message
-        redirect_to :back rescue redirect_to admin_dashboard_path
+        redirect_to request.referer || admin_dashboard_path
       end
 
     end
@@ -113,7 +113,7 @@ module Typus
         flash[:notice] = message || _("{{current_user_role}} can't perform action. ({{action}}).", 
                                       :current_user_role => @current_user.role.capitalize, 
                                       :action => params[:action])
-        redirect_to :back rescue redirect_to admin_dashboard_path
+        redirect_to request.referer || admin_dashboard_path
       end
 
     end
@@ -129,7 +129,7 @@ module Typus
                            :current_user_role => @current_user.role.capitalize, 
                            :action => action, 
                            :controller => controller.humanize.downcase)
-        redirect_to :back rescue redirect_to admin_dashboard_path
+        redirect_to request.referer || admin_dashboard_path
       end
     end
 
