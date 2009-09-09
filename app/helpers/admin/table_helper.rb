@@ -56,11 +56,12 @@ module Admin::TableHelper
         #
 
         trash = "<div class=\"sprite trash\">Trash</div>"
+        unrelate = "<div class=\"sprite unrelate\">Unrelate</div>"
 
         condition = if model.typus_user_id? && !@current_user.is_root?
                       item.owned_by?(@current_user)
                     else
-                      @current_user.can_perform?(model, params[:action] ? 'destroy' : 'unrelate')
+                      @current_user.can_perform?(model, 'destroy')
                     end
 
         case params[:action]
@@ -69,12 +70,22 @@ module Admin::TableHelper
                                      :title => _("Remove"), 
                                      :confirm => _("Remove entry?"), 
                                      :method => :delete if condition
-        else
-          perform = link_to trash, { :action => 'unrelate', :id => params[:id], :association => association, :resource => model, :resource_id => item.id }, 
-                                     :title => _("Unrelate"), 
-                                     :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
-                                     :unrelate_model => model.typus_human_name, 
-                                     :unrelate_model_from => @resource[:class].typus_human_name) if condition
+        when 'edit'
+          # If we are editing content, we can relate and unrelate always!
+          perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :association => association, :resource => model, :resource_id => item.id }, 
+                                        :title => _("Unrelate"), 
+                                        :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+                                        :unrelate_model => model.typus_human_name, 
+                                        :unrelate_model_from => @resource[:class].typus_human_name)
+        when 'show'
+          # If we are showing content, we only can relate and unrelate if we are 
+          # the owners of the owner record.
+          condition = @item.owned_by?(@current_user) || @current_user.is_root?
+          perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :association => association, :resource => model, :resource_id => item.id }, 
+                                        :title => _("Unrelate"), 
+                                        :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+                                        :unrelate_model => model.typus_human_name, 
+                                        :unrelate_model_from => @resource[:class].typus_human_name) if condition
         end
 
         html << <<-HTML
