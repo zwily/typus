@@ -79,21 +79,19 @@ module Typus
 
         return false if !resources.include?(resource.to_s)
 
-        if options[:special]
-          _action = action
-        else
-          _action = case action
-                    when 'new', 'create' then       'create'
-                    when 'index', 'show' then       'read'
-                    when 'edit', 'update' then      'update'
-                    when 'position' then            'update'
-                    when 'toggle' then              'update'
-                    when 'relate', 'unrelate' then  'update'
-                    when 'destroy' then             'delete'
-                    else
-                      action
+        _action = if options[:special]
+                    action
+                  else
+                    case action
+                    when 'new', 'create'       then 'create'
+                    when 'index', 'show'       then 'read'
+                    when 'edit', 'update'      then 'update'
+                    when 'position', 'toggle'  then 'update'
+                    when 'relate', 'unrelate'  then 'update'
+                    when 'destroy'             then 'delete'
+                    else action
                     end
-        end
+                  end
 
         resources[resource.to_s].split(', ').include?(_action)
 
