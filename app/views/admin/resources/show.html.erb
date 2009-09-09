@@ -12,18 +12,17 @@
 <%- @fields.each do |field| -%>
   <dt><%=h @resource[:class].human_attribute_name(field.first) %></dt>
   <%-
+    raw_data = @item.send(field.first)
     data = case field.last
            when :boolean
              boolean_hash = @resource[:class].typus_boolean(field.first)
-             status = @item.send(field.first)
-             !@item.send(field.first).nil? ? boolean_hash["#{status}".to_sym] : @resource[:class].typus_options_for(:nil)
+             !raw_data.nil? ? boolean_hash["#{raw_data}".to_sym] : @resource[:class].typus_options_for(:nil)
            when :belongs_to
-             @item.send(field.first).typus_name
+             raw_data.typus_name
            when :text
-             text = @item.send(field.first)
-             defined?(RDiscount) ? markdown(text) : text
+             defined?(RDiscount) ? markdown(raw_data) : raw_data
            else
-             @item.send(field.first)
+             raw_data
            end
   -%>
   <dd><%= data %></dd>
