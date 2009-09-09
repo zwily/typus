@@ -18,7 +18,7 @@ Typus::Configuration.options[:app_name] = '<%= application %>'
 
 # Typus::Configuration.options[:default_action_on_item] = 'edit'
 # Typus::Configuration.options[:end_year] = Time.now.year + 1
-# Typus::Configuration.options[:form_rows] = 10
+# Typus::Configuration.options[:form_rows] = 15
 # Typus::Configuration.options[:index_after_save] = true
 # Typus::Configuration.options[:minute_step] = 5
 # Typus::Configuration.options[:nil] = 'nil'
