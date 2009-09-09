@@ -77,6 +77,8 @@ module Typus
 
       def can_perform?(resource, action, options = {})
 
+        return false if !resources.include?(resource.to_s)
+
         if options[:special]
           _action = action
         else
@@ -93,8 +95,7 @@ module Typus
                     end
         end
 
-        # OPTIMIZE: We should not use a rescue.
-        resources[resource.to_s].split(', ').include?(_action) rescue false
+        resources[resource.to_s].split(', ').include?(_action)
 
       end
 
