@@ -33,7 +33,7 @@ module Admin::TableHelper
           end
         end
 
-        action = if item.typus_user_id? && !@current_user.is_root?
+        action = if model.typus_user_id? && !@current_user.is_root?
                    # If there's a typus_user_id column on the table and logged user is not root ...
                    item.owned_by?(@current_user) ? 'edit' : 'show'
                  elsif !@current_user.can_perform?(model, 'edit')
@@ -60,7 +60,7 @@ module Admin::TableHelper
         case params[:action]
         when 'index'
 
-          condition = if item.typus_user_id? && !@current_user.is_root?
+          condition = if model.typus_user_id? && !@current_user.is_root?
                         item.owned_by?(@current_user)
                       else
                         @current_user.can_perform?(model, 'destroy')
