@@ -79,7 +79,7 @@ a.on { color: #333; font-weight: bold; text-decoration: underline; }
   #content ul { margin: 0 1.5em; }
   #content li { list-style: square; line-height: 20px; }
   #content ul li { list-style: square; }
-  #content p { margin: 1em 0; }
+  #content p { margin: 0 0 1em 0; }
   #content p a { text-decoration: underline; }
   #content p a:hover { color: #408BB6; }
 
