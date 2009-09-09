@@ -82,7 +82,6 @@ ru:
   "{{current_user_role}} can't perform action. ({{action}})": "{{current_user_role}} не может выполнить действие. ({{action}})"
   "{{current_user_role}} can't go to {{action}} on {{controller}}":  "{{current_user_role}} не может перейти к {{action}} в {{controller}}."
   "{{current_user_role}} can't delete this item": "{{current_user_role}} не может удалить эту запись"
-  "{{current_user_role}} can't perform action ({{action}})": "{{current_user_role}} не может выполнить действие ({{action}})"
   "{{current_user_role}} can't display items": "{{current_user_role}} не может отобразить записи"
   "You can update your password at": "Вы можете установить свой пароль на"
   "If you didn't request a password update, you can ignore this message": "Если Вы не запрашивали обновление пароля, Вы можете проигнорировать это сообщение."

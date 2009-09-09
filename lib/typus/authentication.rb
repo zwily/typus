@@ -103,7 +103,7 @@ module Typus
                   _("{{current_user_role}} can't delete this item.", 
                     :current_user_role => @current_user.role.capitalize)
                 else
-                  _("{{current_user_role}} can't perform action ({{action}}).", 
+                  _("{{current_user_role}} can't perform action. ({{action}})", 
                     :current_user_role => @current_user.role.capitalize, 
                     :action => params[:action])
                 end

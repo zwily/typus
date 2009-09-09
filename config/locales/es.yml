@@ -82,7 +82,6 @@ es:
   "{{current_user_role}} can't perform action. ({{action}})": "{{current_user_role}} no puede realizar la acción. ({{action}})"
   "{{current_user_role}} can't go to {{action}} on {{controller}}":  "{{current_user_role}} no pude ir a {{action}} en {{controller}}."
   "{{current_user_role}} can't delete this item": "{{current_user_role}} no puede borrar este elemento."
-  "{{current_user_role}} can't perform action ({{action}})": "{{current_user_role}} no puede relizar la accion ({{action}})"
   "{{current_user_role}} can't display items": "{{current_user_role}} no puede mostrar los elementos."
   "You can update your password at": "Puedes actualizar tu contraseña en"
   "If you didn't request a password update, you can ignore this message": "Si no pediste una actualización de tu contraseña, puedes ignorar este mensaje."
