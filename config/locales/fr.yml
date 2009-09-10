@@ -83,11 +83,8 @@ fr:
   "{{current_user_role}} can't perform action ({{action}})": "{{current_user_role}} ne peut effectuer l'action ({{action}})"
   "Record owned by another user": "Registro propiedad de otro usuario."
   "{{current_user_role}} can't display items": "Un utilisateur de rôle {{current_user_role}} ne peut pas afficher ces éléments."
-  "Submodules": "Sous-modules"
-  "Parent module": "Module parent"
   "You can update your password at": "Vous pouvez modifier votre mot-de-passe ici"
   "If you didn't request a password update, you can ignore this message": "Si no pediste una actualización de tu contraseña, puedes ignorar este mensaje."
-  "Have a nice day": "Bonne journée."
   "Reset password": "Renouveler le mot-de-passe"
   "Add new": "Ajouter nouveau"
   "Do you want to cancel it?": "Voulez-vous annuler?"
@@ -102,3 +99,5 @@ fr:
   "Last few days": "Ces derniers jours"
   "Last 7 days": "Depuis une semaine"
   "Last 30 days": "Depuis un mois"
+  "True": 
+  "False": 
