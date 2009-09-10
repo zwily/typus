@@ -1,9 +1,9 @@
 <div class="pagination">
 
   <% if @items.prev? %>
-    <%= link_to _("&larr; Previous"), params.merge(:page => @items.prev.number, :anchor => @options[:anchor]) %>
+    <%= link_to "&larr; " + _("Previous"), params.merge(:page => @items.prev.number, :anchor => @options[:anchor]) %>
   <% else %>
-    <span class="disabled"><%= _("&larr; Previous") %></span>
+    <span class="disabled"><%= "&larr; " + _("Previous") %></span>
   <% end %>
 
   <% last_page = 0 -%>
@@ -20,9 +20,9 @@
   <% end -%>
 
   <% if @items.next? %>
-    <%= link_to _("Next &rarr;"), params.merge(:page => @items.next.number, :anchor => @options[:anchor]) %>
+    <%= link_to _("Next") + " &rarr;", params.merge(:page => @items.next.number, :anchor => @options[:anchor]) %>
   <% else %>
-    <span class="disabled"><%= _("Next &rarr;") %></span>
+    <span class="disabled"><%= _("Next") + " &rarr;" %></span>
   <% end %>
 
 </div>
