@@ -141,7 +141,7 @@ This feature is a work in progress. Only previews images.
 - Komzák Nándor (Code, bugfixes & feedback) http://github.com/rubymood
 - Michael Grunewalder (German translation) http://michael.grunewalder.com
 - Tim Harvey (Code) http://www.timharvey.net/ 
-- Ned Baldessin (Code) http://github.com/nedbaldessin
+- Ned Baldessin (French translation and code) http://github.com/nedbaldessin
 - Robert Rouse (Code) - Ruby 1.9 compatibility fixes.
 
 == Acknowledgments
