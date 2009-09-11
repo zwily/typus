@@ -91,14 +91,4 @@ class TypusHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_message
-    output = typus_message('chunky bacon', 'yay')
-    expected = <<-HTML
-<div id="flash" class="yay">
-  <p>chunky bacon</p>
-</div>
-    HTML
-    assert_equal expected, output
-  end
-
 end

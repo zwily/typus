@@ -177,12 +177,4 @@ module TypusHelper
 
   end
 
-  def typus_message(message, html_class = 'notice')
-    <<-HTML
-<div id="flash" class="#{html_class}">
-  <p>#{message}</p>
-</div>
-    HTML
-  end
-
 end
