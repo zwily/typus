@@ -7,6 +7,7 @@ module Admin::FormHelper
                 :minute_step => @resource[:class].typus_options_for(:minute_step) }
 
     returning(String.new) do |html|
+
       html << (error_messages_for :item, :header_tag => 'h3')
       html << '<ul>'
 
@@ -15,24 +16,19 @@ module Admin::FormHelper
           html << typus_template_field(key, template, options)
           next
         end
-        case value
-        when :belongs_to then      html << typus_belongs_to_field(key)
-        when :boolean then         html << typus_boolean_field(key)
-        when :date then            html << typus_date_field(key, options)
-        when :datetime then        html << typus_datetime_field(key, options)
-        when :file then            html << typus_file_field(key)
-        when :password then        html << typus_password_field(key)
-        when :selector then        html << typus_selector_field(key)
-        when :text then            html << typus_text_field(key)
-        when :tiny_mce then        html << typus_tiny_mce_field(key)
-        when :time then            html << typus_time_field(key, options)
-        when :tree then            html << typus_tree_field(key)
-        else
-          html << typus_string_field(key)
-        end
+        html << case value
+                when :belongs_to  then typus_belongs_to_field(key)
+                when :selector    then typus_selector_field(key)
+                when :tree        then typus_tree_field(key)
+                when :boolean, :date, :datetime, :file, :password, :string, :text, :time, :tiny_mce
+                  typus_template_field(key, value.to_s, options)
+                end
       end
+
       html << '</ul>'
+
     end
+
   end
 
   def typus_belongs_to_field(attribute)
@@ -69,60 +65,6 @@ module Admin::FormHelper
 
   end
 
-  def typus_boolean_field(attribute)
-    attribute_name = attribute.gsub(/\?$/,'')
-    custom_true = @resource[:class].typus_boolean(attribute)[:true]
-    custom_true = custom_true != 'True' ? custom_true : "Checked if active"
-    <<-HTML
-<li><label>#{@resource[:class].human_attribute_name(attribute)}</label>
-#{check_box :item, attribute_name} <label class="inline_label" for="item_#{attribute_name}">#{_(custom_true)}</label></li>
-    HTML
-  end
-
-  def typus_date_field(attribute, options)
-    <<-HTML
-<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
-#{date_select :item, attribute, options, { :disabled => attribute_disabled?(attribute)} }</li>
-    HTML
-  end
-
-  def typus_datetime_field(attribute, options)
-    <<-HTML
-<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
-#{datetime_select :item, attribute, options, {:disabled => attribute_disabled?(attribute)}}</li>
-    HTML
-  end
-
-  # Optimize
-  def typus_file_field(attribute)
-
-    attachment = attribute.split('_file_name').first
-
-    unless @item.send(attribute).blank?
-      item = @item.send(attachment)
-      preview = if @item.send("#{attachment}_content_type") =~ /^image\/.+/ && item.styles.member?(:typus_thumbnail)
-                    image_tag item.url(:typus_thumbnail)
-                  else
-                    link_to @item.send(attribute), item.url
-                  end
-    end
-
-    <<-HTML
-<li><label for="item_#{attribute}">#{_(attachment.humanize)}</label>
-#{file_field :item, attachment, :disabled => attribute_disabled?(attribute)}
-#{preview}
-</li>
-    HTML
-
-  end
-
-  def typus_password_field(attribute)
-    <<-HTML
-<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
-#{password_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute)}</li>
-    HTML
-  end
-
   def typus_selector_field(attribute)
     returning(String.new) do |html|
       options = []
@@ -146,27 +88,6 @@ module Admin::FormHelper
     end
   end
 
-  def typus_text_field(attribute)
-    <<-HTML
-<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
-#{text_area :item, attribute, :class => 'text', :rows => @resource[:class].typus_options_for(:form_rows), :disabled => attribute_disabled?(attribute)}</li>
-    HTML
-  end
-
-  def typus_tiny_mce_field(attribute)
-    <<-HTML
-<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
-#{text_area :item, attribute, :class => 'mceEditor', :disabled => attribute_disabled?(attribute)}</li>
-    HTML
-  end
-
-  def typus_time_field(attribute, options)
-    <<-HTML
-<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
-#{time_select :item, attribute, options, {:disabled => attribute_disabled?(attribute)}}</li>
-    HTML
-  end
-
   def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
     <<-HTML
 <li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
@@ -175,30 +96,6 @@ module Admin::FormHelper
   #{expand_tree_into_select_field(items, attribute_virtual)}
 </select></li>
     HTML
-  end
-
-  def typus_string_field(attribute)
-
-    # Read only fields.
-    if @resource[:class].typus_field_options_for(:read_only).include?(attribute)
-      value = 'read_only' if %w( edit ).include?(params[:action])
-    end
-
-    # Auto generated fields.
-    if @resource[:class].typus_field_options_for(:auto_generated).include?(attribute)
-      value = 'auto_generated' if %w( new edit ).include?(params[:action])
-    end
-
-    comment = %w( read_only auto_generated ).include?(value) ? "<small>#{value} field</small>".humanize : ''
-
-    attribute_humanized = @resource[:class].human_attribute_name(attribute)
-    attribute_humanized += " (#{attribute})" if attribute.include?('_id')
-
-    <<-HTML
-<li><label for="item_#{attribute}">#{attribute_humanized}#{comment}</label>
-#{text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute) }</li>
-    HTML
-
   end
 
   def typus_relationships
