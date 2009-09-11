@@ -6,7 +6,7 @@ module Admin::MasterHelper
   include Admin::FormHelper
   include Admin::TableHelper
 
-  def display_link_to_previous # (_params = params)
+  def display_link_to_previous
 
     options = {}
     options[:resource_from] = @resource[:class].typus_human_name
