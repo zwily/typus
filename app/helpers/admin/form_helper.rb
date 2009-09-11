@@ -12,10 +12,7 @@ module Admin::FormHelper
       html << '<ul>'
 
       fields.each do |key, value|
-        if template = @resource[:class].typus_template(key)
-          html << typus_template_field(key, template, options)
-          next
-        end
+
         html << case value
                 when :belongs_to  then typus_belongs_to_field(key)
                 when :selector    then typus_selector_field(key)
@@ -277,7 +274,7 @@ module Admin::FormHelper
   end
 
   def typus_template_field(attribute, template, options = {})
-    template_name = File.join(Typus::Configuration.options[:templates_folder], template)
+    template_name = File.join('admin', 'templates', template)
     render :partial => template_name, 
            :locals => { :resource => @resource, :attribute => attribute, :options => options }
   end

@@ -10,7 +10,6 @@ Typus::Configuration.options[:app_name] = '<%= application %>'
 # Typus::Configuration.options[:relationship] = 'typus_users'
 # Typus::Configuration.options[:root] = 'admin'
 # Typus::Configuration.options[:ssl] = false
-# Typus::Configuration.options[:templates_folder] = 'admin/templates'
 # Typus::Configuration.options[:user_class_name] = 'TypusUser'
 # Typus::Configuration.options[:user_fk] = 'typus_user_id'
 

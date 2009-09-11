@@ -12,7 +12,6 @@ module Typus
                       :relationship => 'typus_users', 
                       :root => 'admin', 
                       :ssl => false, 
-                      :templates_folder => 'admin/templates',
                       :user_class_name => 'TypusUser', 
                       :user_fk => 'typus_user_id' }
 

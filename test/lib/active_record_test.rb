@@ -369,16 +369,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  def test_should_verify_typus_template_is_working_properly
-
-   assert_equal 'datepicker', Post.typus_template('published_at')
-   assert_equal 'datepicker', Post.typus_template(:published_at)
-
-   assert_nil Post.typus_template('created_at')
-   assert_nil Post.typus_template('unknown')
-
-  end
-
   def test_should_verify_typus_user_id
     assert Post.typus_user_id?
     assert !TypusUser.typus_user_id?
