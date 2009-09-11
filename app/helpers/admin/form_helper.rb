@@ -22,6 +22,8 @@ module Admin::FormHelper
                 when :tree        then typus_tree_field(key)
                 when :boolean, :date, :datetime, :file, :password, :string, :text, :time, :tiny_mce
                   typus_template_field(key, value.to_s, options)
+                else
+                  typus_template_field(key, 'string', options)
                 end
       end
 
