@@ -26,10 +26,10 @@
            when :text
              defined?(RDiscount) ? markdown(raw_data) : raw_data
            else
-             raw_data
+             h(raw_data)
            end
   -%>
-  <dd><%= !data.blank? ? (data_type.eql?(:text) ? markdown(data) : h(data)) : '&#151;' %></dd>
+  <dd><%= !data.blank? ? data : '&#151;' %></dd>
 <%- end -%>
 </dl>
 
