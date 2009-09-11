@@ -7,7 +7,6 @@ module Typus
                       :config_folder => 'config/typus', 
                       :default_locale => :en, 
                       :email => 'admin@example.com', 
-                      :image_preview_size => 'typus', 
                       :recover_password => false, 
                       :relationship => 'typus_users', 
                       :root => 'admin', 
