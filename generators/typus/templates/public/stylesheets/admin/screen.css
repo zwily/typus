@@ -51,18 +51,18 @@ a.on { color: #333; font-weight: bold; text-decoration: underline; }
   padding: 1em 0;
 }
 
-  #header h1 {
-    display: block;
-    float: left;
-    font-size: 2em;
-    margin-right: 0.25em;
-  }
+#header h1 {
+  display: block;
+  float: left;
+  font-size: 2em;
+  margin-right: 0.25em;
+}
 
-  #header a { color: #FFF; }
-  #header .left { float: left; }
-  #header .right { float: right; margin-top: 1em; }
-  #header .left ul { display: block; float: left; margin-top: 1em; }
-  #header .left li, #header .right li { display: inline; padding-left: 0.5em; }
+#header a { color: #FFF; }
+#header .left { float: left; }
+#header .right { float: right; margin-top: 1em; }
+#header .left ul { display: block; float: left; margin-top: 1em; }
+#header .left li, #header .right li { display: inline; padding-left: 0.5em; }
 
 /* @end */
 
@@ -70,39 +70,38 @@ a.on { color: #333; font-weight: bold; text-decoration: underline; }
 
 #content { float: left; padding: 1.5em 0; width: 700px; }
 
-  #content h2 { font-size: 1.5em; font-weight: bold; margin: 0 0 0.5em 0; }
-  #content h2 a { font-weight: bold; }
-  #content h2 small { font-size: 0.75em; }
-  #content h2 small a { color: #666; }
-  #content h3 { font-size: 1.25em; font-weight: bold; margin: 1em 0; }
-  #content h4 { margin: 1em 0; }
-  #content ol { margin: 1em 2em; }
-  #content ul { margin: 0 1.5em; }
-  #content li { list-style: square; line-height: 20px; }
-  #content ul li { list-style: square; }
-  #content p { margin: 0 0 1em 0; }
-  #content p a { text-decoration: underline; }
-  #content p a:hover { color: #408BB6; }
+#content h2 { font-size: 1.5em; font-weight: bold; margin: 0 0 0.5em 0; }
+#content h2 a { font-weight: bold; }
+#content h2 small { font-size: 0.75em; }
+#content h2 small a { color: #666; }
+#content h3 { font-size: 1.25em; font-weight: bold; margin: 1em 0; }
+#content h4 { margin: 1em 0; }
+#content ol { margin: 1em 2em; }
+#content ul { margin: 0 1.5em; }
+#content li { list-style: square; line-height: 20px; }
+#content ul li { list-style: square; }
+#content p { margin: 0 0 1em 0; }
+#content p a { text-decoration: underline; }
+#content p a:hover { color: #408BB6; }
+#content table.typus { background: #000; margin: 1em 0;  }
+#content h2+table.typus { margin: 0; }
 
-  #content pre {
-    background: #000;
-    color: #FFF;
-    font-size: 1.25em;
-    margin: 1em 0;
-    overflow: auto;
-    padding: 1em;
-  }
+#content pre {
+  background: #000;
+  color: #FFF;
+  font-size: 1.25em;
+  margin: 1em 0;
+  overflow: auto;
+  padding: 1em;
+}
 
-  #content blockquote {
-    border-left: 1px solid #999;
-    font-size: 1.25em;
-    font-family: georgia;
-    margin: 1em;
-    padding: 0 1em;
-  }
-
-  #content table.typus { background: #000; margin: 1em 0;  }
-  #content h2+table.typus { margin: 0; }
+#content blockquote {
+  border-left: 1px solid #999;
+  font-size: 1.25em;
+  font-family: georgia;
+  margin: 1em;
+  padding: 0 1em;
+}
 
 /* @end */
 
@@ -115,15 +114,15 @@ a.on { color: #333; font-weight: bold; text-decoration: underline; }
   width: 220px;
 }
 
-  #sidebar h2 { font-size: 1.5em; font-weight: bold; }
-  #sidebar h3 { margin: 1em 0; }
-  #sidebar p { margin: 1em 0; }
-  #sidebar p a { text-decoration: underline; }
-  #sidebar label { font-size: 15px; }
-  #sidebar form { margin-bottom: 1.25em; }
-  #sidebar ul { margin: 1em 0; }
-  #sidebar code { color: green; font-size: 1.25em; }
-  #sidebar small { font-size: 0.85em; }
+#sidebar h2 { font-size: 1.5em; font-weight: bold; }
+#sidebar h3 { margin: 1em 0; }
+#sidebar p { margin: 1em 0; }
+#sidebar p a { text-decoration: underline; }
+#sidebar label { font-size: 15px; }
+#sidebar form { margin-bottom: 1.25em; }
+#sidebar ul { margin: 1em 0; }
+#sidebar code { color: green; font-size: 1.25em; }
+#sidebar small { font-size: 0.85em; }
 
 /* @end */
 
@@ -179,37 +178,24 @@ input.button { margin: 10px 0 0 0; }
 
 #content table.typus { width: 100%; }
 
-  #content table.typus small { font-size: 0.8em; }
-  #content table.typus th { color: #FFF; font-weight: normal; padding: 4px; }
-  #content table.typus th a { color: #FFF!important; }
-  #content table.typus td.right { text-align: right; }
-  #content table.typus tr.even { background: #FFF!important; }
+#content table.typus small { font-size: 0.8em; }
+#content table.typus th { color: #FFF; font-weight: normal; padding: 4px; }
+#content table.typus th a { color: #FFF!important; }
+#content table.typus td.right { text-align: right; }
+#content table.typus tr.even { background: #FFF!important; }
+#content table.typus tr.even:hover,
+#content table.typus tr.odd:hover { background: #000!important; color: #FFF; }
+#content table.typus tr.even:hover a,
+#content table.typus tr.odd:hover a { color: #FFF!important; }
+#content table.typus tr.odd { background: #F5F5F5; }
+#content table.typus span.inactive { color: #888; }
 
-    #content table.typus tr.even:hover,
-    #content table.typus tr.odd:hover {
-      background: #000!important;
-      color: #FFF;
-    }
-
-    #content table.typus tr.even:hover a,
-    #content table.typus tr.odd:hover a {
-      color: #FFF!important;
-    }
-
-  #content table.typus tr.odd {
-    background: #F5F5F5;
-  }
-
-  #content table.typus td {
-    border: none;
-    font-weight: normal;
-    padding: 3px 4px;
-    vertical-align: top;
-  }
-
-  #content table.typus span.inactive {
-    color: #888;
-  }
+#content table.typus td {
+  border: none;
+  font-weight: normal;
+  padding: 3px 4px;
+  vertical-align: top;
+}
 
 /* @end */
 
@@ -224,10 +210,10 @@ input.button { margin: 10px 0 0 0; }
   padding: 0 10px;
 }
 
-  .errorExplanation h3 { display: none; }
-  .errorExplanation p { font-weight: bold; margin: 15px 0 10px 0!important; padding: 0 5px; }
-  .errorExplanation ul { margin: 0 0 10px 25px!important; }
-  .errorExplanation ul li { list-style: square!important; margin: 0!important; }
+.errorExplanation h3 { display: none; }
+.errorExplanation p { font-weight: bold; margin: 15px 0 10px 0!important; padding: 0 5px; }
+.errorExplanation ul { margin: 0 0 10px 25px!important; }
+.errorExplanation ul li { list-style: square!important; margin: 0!important; }
 
 /* @end */
 
