@@ -47,7 +47,7 @@ Notes on the application demo:
 
 == Installing
 
-Install from GitHub the latest version which it's compatible with Rails 2.3.2.
+Install from GitHub the latest version which it's compatible with Rails 2.3.4.
 
     $ script/plugin install git://github.com/fesplugas/typus.git
 
@@ -72,8 +72,8 @@ Hire us to work on your next project. We build large and small websites.
 Contribute your patches to the community & support people on the 
 mailing list.
 
-Tell everybody about Typus, tell your friends and colleagues about 
-Typus and blog about Typus.
+Tell everybody about *Typus*, tell your friends and colleagues about 
+*Typus* and blog about *Typus*.
 
 == Fancyzoom for assets
 
