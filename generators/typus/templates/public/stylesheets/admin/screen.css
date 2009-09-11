@@ -225,7 +225,7 @@ input.button { margin: 10px 0 0 0; }
 }
 
   .errorExplanation h3 { display: none; }
-  .errorExplanation p { font-weight: bold; padding: 0 5px; }
+  .errorExplanation p { font-weight: bold; margin: 15px 0 10px 0!important; padding: 0 5px; }
   .errorExplanation ul { margin: 0 0 10px 25px!important; }
   .errorExplanation ul li { list-style: square!important; margin: 0!important; }
 
