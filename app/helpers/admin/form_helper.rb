@@ -15,9 +15,8 @@ module Admin::FormHelper
 
         html << case value
                 when :belongs_to  then typus_belongs_to_field(key)
-                when :selector    then typus_selector_field(key)
                 when :tree        then typus_tree_field(key)
-                when :boolean, :date, :datetime, :file, :password, :string, :text, :time, :tiny_mce
+                when :boolean, :date, :datetime, :file, :password, :selector, :string, :text, :time, :tiny_mce
                   typus_template_field(key, value.to_s, options)
                 else
                   typus_template_field(key, 'string', options)
@@ -62,29 +61,6 @@ module Admin::FormHelper
 
     end
 
-  end
-
-  def typus_selector_field(attribute)
-    returning(String.new) do |html|
-      options = []
-      @resource[:class].send(attribute).each do |option|
-        case option.kind_of?(Array)
-        when true
-          selected = (@item.send(attribute).to_s == option.last.to_s) ? 'selected' : ''
-          options << "<option #{selected} value=\"#{option.last}\">#{option.first}</option>"
-        else
-          selected = (@item.send(attribute).to_s == option.to_s) ? 'selected' : ''
-          options << "<option #{selected} value=\"#{option}\">#{option}</option>"
-        end
-      end
-      html << <<-HTML
-<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
-<select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
-<option value=""></option>
-#{options.join("\n")}
-</select></li>
-      HTML
-    end
   end
 
   def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
