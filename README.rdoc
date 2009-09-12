@@ -101,7 +101,7 @@ This feature is a work in progress. Only previews images.
     # app/models/photo.rb
 
     class Photo < ActiveRecord::Base
-      has_attached_file :asset, :styles => { :typus => "692x461", :typus_preview => "100x100" }
+      has_attached_file :asset, :styles => { :typus => "692x461", :typus_thumbnail => "100x100" }
     end
 
     # app/views/admin/photos/_index.html.erb
