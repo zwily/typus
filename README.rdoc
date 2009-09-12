@@ -101,16 +101,15 @@ This feature is a work in progress. Only previews images.
     # app/models/photo.rb
 
     class Photo < ActiveRecord::Base
-      has_attached_file :asset, :styles => { :typus => "692x461" }
+      has_attached_file :asset, :styles => { :typus => "692x461", :typus_preview => "100x100" }
     end
 
     # app/views/admin/photos/_index.html.erb
 
     <%- content_for :javascripts do -%>
 
-      <%= javascript_include_tag 'admin/prototype' %>
-      <%= javascript_include_tag 'admin/scriptaculous' %>
-      <%= javascript_include_tag 'admin/fancyzoom' %>
+      <%= javascript_include_tag 'admin/jquery.min' %>
+      <%= javascript_include_tag 'admin/fancyzoom.min' %>
 
       <script type="text/javascript">
         FancyZoomBox.directory = '/images/admin/fancyzoom';
