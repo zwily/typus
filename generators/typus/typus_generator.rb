@@ -106,7 +106,7 @@ class TypusGenerator < Rails::Generator::Base
         'public/stylesheets/admin/reset.css', 
         'public/images/admin/ui-icons.png' ].each { |f| m.file f, f }
 
-      %w( application builder controls dragdrop effects fancyzoom prototype scriptaculous slider sound ).each do |f|
+      %w( application fancyzoom.min jquery.min ).each do |f|
         file = "public/javascripts/admin/#{f}.js"
         m.file file, file
       end
