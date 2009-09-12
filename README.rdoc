@@ -101,7 +101,7 @@ This feature is a work in progress. Only previews images.
     # app/models/photo.rb
 
     class Photo < ActiveRecord::Base
-      has_attached_file :asset, :styles => { :typus => "692x461", :typus_thumbnail => "100x100" }
+      has_attached_file :asset, :styles => { :typus_preview => "692x461", :typus_thumbnail => "100x100" }
     end
 
     # app/views/admin/photos/_index.html.erb
@@ -111,11 +111,10 @@ This feature is a work in progress. Only previews images.
       <%= javascript_include_tag 'admin/jquery.min' %>
       <%= javascript_include_tag 'admin/fancyzoom.min' %>
 
-      <script type="text/javascript">
-        FancyZoomBox.directory = '/images/admin/fancyzoom';
-        $(document).observe('dom:loaded', function() {
+      <script type="text/javascript" charset="utf-8">
+        $(document).ready(function() {
           <%- @items.each do |item| -%>
-            new FancyZoom('<%= item.to_dom %>');
+            $('#<%= item.to_dom %>').fancyZoom({directory:'/images/admin/fancyzoom'});
           <%- end -%>
         });
       </script>
