@@ -14,7 +14,7 @@
   <%= yield :stylesheets -%>
 
   <%= javascript_include_tag 'admin/application' %>
-  <%= include_tiny_mce_if_needed if defined?(TinyMCE) %>
+  <%= include_tiny_mce_if_needed if defined?(TinyMCE) -%>
   <%= yield :javascripts -%>
 
 </head>
