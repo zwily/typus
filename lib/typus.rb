@@ -68,10 +68,6 @@ module Typus
       Rails.env.test? && Dir.pwd == "#{Rails.root}/vendor/plugins/typus"
     end
 
-    def plugin?
-      File.exist?("#{Rails.root}/vendor/plugins/typus")
-    end
-
     def boot!
 
       # return unless File.exists?("#{Rails.root}/config/initializers/typus.rb") || testing?
@@ -89,11 +85,6 @@ module Typus
       # Load configuration and roles.
       Typus::Configuration.config!
       Typus::Configuration.roles!
-
-      # Load translation files from the plugin or the gem.
-      unless plugin?
-        Gem.path.each { |g| I18n.load_path += Dir[File.join("#{g}/gems/typus-#{version}/config/locales/*.{rb,yml}")] }
-      end
 
       # Require the test/models on when testing.
       require File.dirname(__FILE__) + '/../test/models' if testing?
