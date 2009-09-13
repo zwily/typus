@@ -117,12 +117,6 @@ module Typus
       require 'vendor/paginator'
       require 'vendor/rss_parser'
 
-      # Gems.
-      begin
-        require 'Rdiscount'
-      rescue LoadError
-      end
-
       # Run controllers generator ...
       generator unless testing? || Rails.env.production?
 
