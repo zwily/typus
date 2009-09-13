@@ -100,7 +100,7 @@ class TypusGenerator < Rails::Generator::Base
       [ 'public/stylesheets/admin', 
         'public/javascripts/admin', 
         'public/images/admin', 
-        'public/images/admin/fancyzoom' ].each { |f| Dir.mkdir(f) unless File.directory?(f) }
+        'public/images/admin/fancybox' ].each { |f| Dir.mkdir(f) unless File.directory?(f) }
 
       [ 'public/stylesheets/admin/screen.css', 
         'public/stylesheets/admin/reset.css', 
