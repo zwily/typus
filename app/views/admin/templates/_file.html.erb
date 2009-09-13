@@ -18,13 +18,15 @@
 <%
 
   attachment = attribute.split('_file_name').first
+  file_preview = Typus::Configuration.options[:file_preview]
+  file_thumbnail = Typus::Configuration.options[:file_thumbnail]
 
   unless @item.send(attribute).blank?
     item = @item.send(attachment)
-    preview = if @item.send("#{attachment}_content_type") =~ /^image\/.+/ && item.styles.member?(:typus_thumbnail)
+    preview = if @item.send("#{attachment}_content_type") =~ /^image\/.+/ && item.styles.member?(file_thumbnail)
                 <<-HTML
-<a id="#{@item.to_dom}" href="#{@item.send(attachment).url(:typus_preview)}" title="#{@item.typus_name}">
-#{image_tag item.url(:typus_thumbnail)}
+<a id="#{@item.to_dom}" href="#{@item.send(attachment).url(file_preview)}" title="#{@item.typus_name}">
+#{image_tag item.url(file_thumbnail)}
 </a>
                 HTML
               else

@@ -6,6 +6,8 @@ Typus::Configuration.options[:app_name] = '<%= application %>'
 # Typus::Configuration.options[:config_folder] = 'config/typus'
 # Typus::Configuration.options[:default_locale] = :en
 # Typus::Configuration.options[:email] = 'admin@example.com'
+# Typus::Configuration.options[:file_preview] = :typus_preview
+# Typus::Configuration.options[:file_thumbnail] = :typus_thumbnail
 # Typus::Configuration.options[:recover_password] = true
 # Typus::Configuration.options[:relationship] = 'typus_users'
 # Typus::Configuration.options[:root] = 'admin'

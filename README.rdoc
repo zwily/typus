@@ -100,6 +100,13 @@ You can preview assets using Fancybox[http://fancybox.net/example].
 
     # app/models/photo.rb
 
+    ##
+    # Styles are predefined but you can use your own by defining them
+    # on `config/initializers/typus.rb`.
+    #
+    #     Typus::Configuration.options[:file_preview] = :my_preview
+    #     Typus::Configuration.options[:file_thumbnail] = :my_thumbnail
+    ##
     class Photo < ActiveRecord::Base
       has_attached_file :asset, :styles => { :typus_preview => "692x461", :typus_thumbnail => "100x100" }
     end
