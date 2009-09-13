@@ -172,7 +172,7 @@ module Admin::TableHelper
 
     if item.send(attachment).styles.member?(:typus_preview) && item.send("#{attachment}_content_type") =~ /^image\/.+/
       <<-HTML
-<td><a id="#{item.to_dom}" href="#{item.send(attachment).url(:typus_preview)}" title="#{item.send(attribute)}">#{item.send(attribute)}</a></td>
+<td><a id="#{item.to_dom}" href="#{item.send(attachment).url(:typus_preview)}" title="#{item.typus_name}">#{item.send(attribute)}</a></td>
       HTML
     else
       <<-HTML

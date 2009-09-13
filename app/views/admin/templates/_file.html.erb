@@ -23,7 +23,7 @@
     item = @item.send(attachment)
     preview = if @item.send("#{attachment}_content_type") =~ /^image\/.+/ && item.styles.member?(:typus_thumbnail)
                 <<-HTML
-<a id="#{@item.to_dom}" href="#{@item.send(attachment).url(:typus_preview)}" title="#{@item.send(attribute)}">
+<a id="#{@item.to_dom}" href="#{@item.send(attachment).url(:typus_preview)}" title="#{@item.typus_name}">
 #{image_tag item.url(:typus_thumbnail)}
 </a>
                 HTML
