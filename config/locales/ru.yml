@@ -26,7 +26,7 @@ ru:
   "Update entry": "Изменить запись"
   "New": "Новый"
   "Show": "Показать"
-  "Edit": 
+  "Edit": "Изменить"
   "Login": "Редактировать"
   "Setup": "Установки"
   "Create": "Создать"
@@ -98,6 +98,6 @@ ru:
   "Last 7 days": "Последние 7 дней"
   "Last 30 days": "Последние 30 дней"
   "{{model}} filtered by {{filtered_by}}": 
-  "True": 
+  "True": "ВЕРНО"
   "False": 
   "Are you sure you want to sign out and end your session?": 
