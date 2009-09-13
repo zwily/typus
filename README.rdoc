@@ -75,9 +75,9 @@ mailing list.
 Tell everybody about *Typus*, tell your friends and colleagues about 
 *Typus* and blog about *Typus*.
 
-== Fancyzoom for assets
+== Fancybox for assets
 
-This feature is a work in progress. Only previews images.
+You can preview assets using Fancybox[http://fancybox.net/example].
 
     # db/migrate/create_photos.rb
 
