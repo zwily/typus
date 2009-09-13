@@ -106,14 +106,14 @@ class TypusGenerator < Rails::Generator::Base
         'public/stylesheets/admin/reset.css', 
         'public/images/admin/ui-icons.png' ].each { |f| m.file f, f }
 
-      %w( application fancyzoom.min jquery.min ).each do |f|
+      %w( application jquery-1.3.2.min jquery.fancybox-1.2.1.min ).each do |f|
         file = "public/javascripts/admin/#{f}.js"
         m.file file, file
       end
 
-      %w( bl bm br closebox ml mr tl tm tr ).each do |image|
-        file = "public/images/admin/fancyzoom/#{image}"
-        %w( gif png ).each { |e| m.file "#{file}.#{e}", "#{file}.#{e}" }
+      %w( closebox left progress right shadow_e shadow_n shadow_ne shadow_nw shadow_s shadow_se shadow_sw shadow_w title_left title_main title_right ).each do |image|
+        file = "public/images/admin/fancybox/fancy_#{image}.png"
+        m.file file, file
       end
 
       # Migration file
