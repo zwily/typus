@@ -104,6 +104,7 @@ class TypusGenerator < Rails::Generator::Base
 
       [ 'public/stylesheets/admin/screen.css', 
         'public/stylesheets/admin/reset.css', 
+        'public/stylesheets/admin/jquery.fancybox.css', 
         'public/images/admin/ui-icons.png' ].each { |f| m.file f, f }
 
       %w( application jquery-1.3.2.min jquery.fancybox-1.2.1.min ).each do |f|
