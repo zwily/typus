@@ -132,6 +132,13 @@ You can preview assets using Fancybox[http://fancybox.net/example].
 
     <%- end -%>
 
+== Using Typus as a Gem?
+
+If you are using **Typus** as a gem add the following line at the end of the 
+`Rakefile` on the root of your Rails application.
+
+    Dir["#{RAILS_ROOT}/vendor/gems/*/**/tasks/**/*.rake"].sort.each { |ext| load ext }
+
 == Contributors
 
 - Laia Gargallo (Lover and tea provider) http://azotacalles.net
