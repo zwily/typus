@@ -68,7 +68,7 @@ a.on { color: #333; font-weight: bold; text-decoration: underline; }
 
 /* @group Content */
 
-#content { float: left; padding: 1.5em 0; width: 700px; }
+#content { float: left; padding: 1.5em 0; width: 700px; overflow-x: auto; }
 
 #content h2 { font-size: 1.5em; font-weight: bold; margin: 0 0 0.5em 0; }
 #content h2 a { font-weight: bold; }
