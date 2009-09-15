@@ -124,6 +124,17 @@ module Admin::FormHelper
   </h2>
       HTML
 
+      items_to_relate = (model_to_relate.find(:all) - @item.send(field))
+      #TODO: access check
+      unless items_to_relate.empty?
+        html << <<-HTML
+  #{form_tag :action => 'relate', :id => @item.id}
+  #{hidden_field :related, :model, :value => model_to_relate}
+  <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
+  </form>
+        HTML
+      end
+
       conditions = if model_to_relate.typus_options_for(:only_user_items) && !@current_user.is_root?
                     { Typus.user_fk => @current_user }
                   end
