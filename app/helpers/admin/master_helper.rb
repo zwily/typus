@@ -101,4 +101,10 @@ module Admin::MasterHelper
 
   end
 
+  def asset_is_image?(item, asset)
+    item.respond_to?("#{asset}_content_type") && 
+    item.send("#{asset}_content_type") =~ /^image\/.+/ || 
+    %w(jpg gif png).include?(item.send("#{asset}_file_name")[-3,3])
+  end
+
 end

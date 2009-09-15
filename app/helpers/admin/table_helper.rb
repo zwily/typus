@@ -171,7 +171,7 @@ module Admin::TableHelper
     attachment = attribute.split('_file_name').first
     file_preview = Typus::Configuration.options[:file_preview]
 
-    if item.send(attachment).styles.member?(file_preview) && item.send("#{attachment}_content_type") =~ /^image\/.+/
+    if item.send(attachment).styles.member?(file_preview) && asset_is_image?(item, attachment)
       <<-HTML
 <td><a id="#{item.to_dom}" href="#{item.send(attachment).url(file_preview)}" title="#{item.typus_name}">#{item.send(attribute)}</a></td>
       HTML

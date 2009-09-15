@@ -23,9 +23,7 @@
 
   unless @item.send(attribute).blank?
     item = @item.send(attachment)
-    preview = if (@item.respond_to?("#{attachment}_content_type") && 
-                @item.send("#{attachment}_content_type") =~ /^image\/.+/) || 
-                %w(jpg gif png).include?(@item.send(attribute)[-3,3]) 
+    preview = if asset_is_image?(@item, attachment) 
                 <<-HTML
 <a id="#{@item.to_dom}" href="#{@item.send(attachment).url(file_preview)}" title="#{@item.typus_name}">
 #{image_tag item.url(file_thumbnail)}
