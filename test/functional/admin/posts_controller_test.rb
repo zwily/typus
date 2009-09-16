@@ -161,7 +161,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:success]
-    assert_match /Asset removed from/, flash[:success]
+    assert_equal "Asset unrelated from Post.", flash[:success]
 
   end
 
