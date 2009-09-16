@@ -109,17 +109,35 @@ class Admin::MasterController < ApplicationController
   end
 
   def edit
+
     item_params = params.dup
     %w( action controller model model_id back_to id resource resource_id page ).each { |p| item_params.delete(p) }
+
     # We assign the params passed trough the url
     @item.attributes = item_params
+
+    # If we want to display only user items, we don't want the links previous and 
+    # next linking to records from other users.
+    conditions = if @resource[:class].typus_options_for(:only_user_items)
+                   { Typus.user_fk => @current_user.id }
+                 end
+
+    item_params.merge!(conditions || {})
     @previous, @next = @item.previous_and_next(item_params)
+
     select_template :edit
+
   end
 
   def show
 
-    @previous, @next = @item.previous_and_next
+    # If we want to display only user items, we don't want the links previous and 
+    # next linking to records from other users.
+    conditions = if @resource[:class].typus_options_for(:only_user_items)
+                   { Typus.user_fk => @current_user.id }
+                 end
+
+    @previous, @next = @item.previous_and_next(conditions || {})
 
     respond_to do |format|
       format.html { select_template :show }
