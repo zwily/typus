@@ -193,7 +193,7 @@ class Admin::MasterController < ApplicationController
 
   ##
   # Relate a model object to another, this action is used only by the 
-  # has_and_belongs_to_many relationships.
+  # has_and_belongs_to_many and has_many relationships.
   #
   def relate
 
@@ -220,7 +220,16 @@ class Admin::MasterController < ApplicationController
     resource_class = params[:resource].classify.constantize
     resource = resource_class.find(params[:resource_id])
 
-    @item.send(resource_class.table_name).delete(resource)
+    if @resource[:class].
+       reflect_on_association(resource_class.table_name.singularize.to_sym).
+       try(:macro) == :has_one
+      attribute = resource_class.table_name.singularize
+      @item.update_attribute attribute, nil
+    else
+      attribute = resource_class.table_name
+      @item.send(attribute).delete(resource)
+    end
+
     message = "{{model_a}} unrelated from {{model_b}}."
 
     flash[:success] = _(message, :model_a => resource_class.typus_human_name, :model_b => @resource[:class].typus_human_name)
@@ -228,7 +237,7 @@ class Admin::MasterController < ApplicationController
     redirect_to :controller => @resource[:self], 
                 :action => @resource[:class].typus_options_for(:default_action_on_item), 
                 :id => @item.id, 
-                :anchor => resource_class.table_name
+                :anchor => attribute
 
   end
 
