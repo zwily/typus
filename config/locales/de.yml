@@ -55,7 +55,6 @@ de:
   "{{model_a}} related to {{model_b}}": "{{model_a}} ist verkn&uuml;pft mit {{model_b}}"
   "{{model_a}} successfully assigned to {{model_b}}": "{{model_a}} erfolgreich an {{model_b}} zugewiesen"
   "{{model_a}} unrelated from {{model_b}}": "{{model_a}} unverbunden mit {{model_b}}"
-  "{{model_a}} removed from {{model_b}}": "{{model_a}} erfolgreich von {{model_b}}entfernt"
   "Your new password is {{password}}": "Ihr neues Passwort ist {{password}}"
   "Add entry": "Eintrag erstellen"
   "Go to": "Gehe zu"

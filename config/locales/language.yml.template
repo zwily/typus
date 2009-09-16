@@ -98,6 +98,5 @@
   "{{model}} successfully updated": 
   "{{model}} {{attribute}} changed": 
   "{{model_a}} related to {{model_b}}": 
-  "{{model_a}} removed from {{model_b}}": 
   "{{model_a}} successfully assigned to {{model_b}}": 
   "{{model_a}} unrelated from {{model_b}}": 
