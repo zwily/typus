@@ -213,7 +213,7 @@ class Admin::MasterController < ApplicationController
   end
 
   ##
-  # Remove relationship between models.
+  # Remove relationship between models, this action never removes items!
   #
   def unrelate
 
