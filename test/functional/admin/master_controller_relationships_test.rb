@@ -62,7 +62,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # Post => has_many :comments
   ##
 
-  def test_should_relate_comments_to_post_and_then_unrelate
+  def test_should_relate_comment_with_post_and_then_unrelate
 
     comment = comments(:without_post_id)
     post_ = posts(:published)
@@ -92,7 +92,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # Post => has_and_belongs_to_many :categories
   ##
 
-  def test_should_relate_post_to_category_and_then_unrelate
+  def test_should_relate_category_with_post_and_then_unrelate
 
     category = categories(:first)
     post_ = posts(:published)
@@ -119,10 +119,10 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   ##
-  # Post => has_many :assets, :as => resource, :dependent => :destroy
+  # Post => has_many :assets, :as => resource (Polimorphic)
   ##
 
-  def test_should_unrelate_an_asset_from_a_post
+  def test_should_relate_asset_with_post_and_then_unrelate
 
     post_ = posts(:published)
 
