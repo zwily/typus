@@ -206,9 +206,7 @@ class Admin::MasterController < ApplicationController
                         :model_a => resource_class.typus_human_name, 
                         :model_b => @resource[:class].typus_human_name)
 
-    redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), 
-                :id => @item.id, 
-                :anchor => resource_tableized
+    redirect_to :back
 
   end
 
@@ -234,10 +232,7 @@ class Admin::MasterController < ApplicationController
 
     flash[:success] = _(message, :model_a => resource_class.typus_human_name, :model_b => @resource[:class].typus_human_name)
 
-    redirect_to :controller => @resource[:self], 
-                :action => @resource[:class].typus_options_for(:default_action_on_item), 
-                :id => @item.id, 
-                :anchor => attribute
+    redirect_to :back
 
   end
 
