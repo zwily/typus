@@ -131,6 +131,8 @@ class Admin::MasterController < ApplicationController
 
   def show
 
+    check_ownership_of_item and return if @resource[:class].typus_options_for(:only_user_items)
+
     # If we want to display only user items, we don't want the links previous and 
     # next linking to records from other users.
     conditions = if @resource[:class].typus_options_for(:only_user_items)
