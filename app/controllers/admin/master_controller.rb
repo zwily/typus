@@ -220,14 +220,8 @@ class Admin::MasterController < ApplicationController
     resource_class = params[:resource].classify.constantize
     resource = resource_class.find(params[:resource_id])
 
-    case params[:association]
-    when 'has_and_belongs_to_many'
-      @item.send(resource_class.table_name).delete(resource)
-      message = "{{model_a}} unrelated from {{model_b}}."
-    when 'has_many', 'has_one'
-      resource.destroy
-      message = "{{model_a}} removed from {{model_b}}."
-    end
+    @item.send(resource_class.table_name).delete(resource)
+    message = "{{model_a}} unrelated from {{model_b}}."
 
     flash[:success] = _(message, :model_a => resource_class.typus_human_name, :model_b => @resource[:class].typus_human_name)
 
