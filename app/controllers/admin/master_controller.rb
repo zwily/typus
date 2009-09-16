@@ -228,9 +228,9 @@ class Admin::MasterController < ApplicationController
       @item.send(attribute).delete(resource)
     end
 
-    message = "{{model_a}} unrelated from {{model_b}}."
-
-    flash[:success] = _(message, :model_a => resource_class.typus_human_name, :model_b => @resource[:class].typus_human_name)
+    flash[:success] = _("{{model_a}} unrelated from {{model_b}}.", 
+                        :model_a => resource_class.typus_human_name, 
+                        :model_b => @resource[:class].typus_human_name)
 
     redirect_to :back
 
