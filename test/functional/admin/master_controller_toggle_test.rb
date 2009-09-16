@@ -15,9 +15,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to :action => 'index'
-    assert flash[:success]
-    assert Post.find(post.id).status
     assert_equal "Post status changed.", flash[:success]
+    assert Post.find(post.id).status
 
   end
 
@@ -31,7 +30,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to :action => 'index'
-    assert flash[:notice]
     assert_equal "Toggle is disabled.", flash[:notice]
 
   end

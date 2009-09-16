@@ -11,7 +11,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # Actions related to index.
   ##
 
-  def test_should_render_index
+  def test_should_index_items
     get :index
     assert_response :success
     assert_template 'index'

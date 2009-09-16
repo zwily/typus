@@ -23,7 +23,6 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to '/admin/posts/edit/1#assets'
-    assert flash[:success]
     assert_equal "Asset successfully assigned to Post.", flash[:success]
 
   end
@@ -46,7 +45,6 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     post :update, { :back_to => "/admin/posts/#{post_.id}/edit", :resource => post_.class.name, :resource_id => post_.id, :id => asset_.id }
     assert_response :redirect
     assert_redirected_to '/admin/posts/1/edit#assets'
-    assert flash[:success]
     assert_equal "Asset successfully updated.", flash[:success]
 
   end
@@ -68,8 +66,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       post :unrelate, { :id => post_.id, :resource => 'Category', :resource_id => category.id, :association => 'has_and_belongs_to_many' }
     end
     assert_response :redirect
-    assert flash[:success]
-    assert_match /Category unrelated from/, flash[:success]
+    assert_equal "Category unrelated from Post.", flash[:success]
     assert_redirected_to @request.env['HTTP_REFERER']
   end
 
@@ -88,7 +85,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-    assert flash[:success]
     assert_equal "Asset unrelated from Post.", flash[:success]
 
   end
@@ -101,7 +97,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       post :relate, { :id => post_.id, :related => { :model => 'Category', :id => category.id } }
     end
     assert_response :redirect
-    assert flash[:success]
+    assert_equal "Category related to Post.", flash[:success]
     assert_redirected_to @request.env['HTTP_REFERER']
   end
 

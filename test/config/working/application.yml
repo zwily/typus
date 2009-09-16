@@ -44,6 +44,8 @@ Post:
     list: title, created_at, status
     form: title, body, created_at, status, published_at
     relationship: title, created_at
+    csv: title, status
+    xml: title, status
     options:
       selectors: status
       read_only: permalink
@@ -60,9 +62,8 @@ Post:
   search: title
   order_by: title, -created_at
   application: Blog
+  export: csv, xml
 
 CustomUser:
   fields:
     list: first_name, last_name, email
-    csv: first_name, last_name, email
-  export: csv

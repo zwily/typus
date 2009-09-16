@@ -34,7 +34,6 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     category = categories(:first)
     get :new
     assert_response :redirect
-    assert flash[:notice]
     assert_equal "Designer can't perform action. (new)", flash[:notice]
     assert_redirected_to :action => :index
   end
@@ -45,8 +44,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     category = categories(:first)
     get :destroy, { :id => category.id }
     assert_response :redirect
-    assert flash[:success]
-    assert_match /Category successfully removed./, flash[:success]
+    assert_equal "Category successfully removed.", flash[:success]
     assert_redirected_to :action => :index
   end
 
@@ -56,8 +54,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     category = categories(:first)
     get :destroy, { :id => category.id, :method => :delete }
     assert_response :redirect
-    assert flash[:notice]
-    assert_match /Designer can't delete this item/, flash[:notice]
+    assert_equal "Designer can't delete this item.", flash[:notice]
     assert_redirected_to :action => :index
   end
 
@@ -103,7 +100,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     get :edit, { :id => post.id }
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-    assert flash[:notice]
     assert_equal "You don't have permission to access this item.", flash[:notice]
 
   end
