@@ -115,7 +115,11 @@ module Admin::FormHelper
                        :resource_id => @item.id, 
                        foreign_key => @item.id }
 
-      condition = !(@resource[:class].typus_user_id? && !@item.owned_by?(@current_user))
+      condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
+                    @item.owned_by?(@current_user)
+                  else
+                    true
+                  end
 
       if condition
         add_new = <<-HTML
@@ -137,7 +141,7 @@ module Admin::FormHelper
       # entry are assigned to that entry.
       #
       items_to_relate = model_to_relate.find(:all, :conditions => ["#{foreign_key} is ?", nil])
-      unless items_to_relate.empty? || !condition
+      if condition && !items_to_relate.empty?
         html << <<-HTML
   #{form_tag :action => 'relate', :id => @item.id}
   #{hidden_field :related, :model, :value => model_to_relate}
@@ -190,7 +194,11 @@ module Admin::FormHelper
       reflection = @resource[:class].reflect_on_association(field.to_sym)
       association = reflection.macro
 
-      condition = !(@resource[:class].typus_user_id? && !@item.owned_by?(@current_user))
+      condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
+                    @item.owned_by?(@current_user)
+                  else
+                    true
+                  end
 
       if condition
         add_new = <<-HTML
@@ -209,7 +217,7 @@ module Admin::FormHelper
 
       items_to_relate = (model_to_relate.find(:all) - @item.send(field))
 
-      if condition || items_to_relate.empty?
+      if condition && !items_to_relate.empty?
         html << <<-HTML
   #{form_tag :action => 'relate', :id => @item.id}
   #{hidden_field :related, :model, :value => model_to_relate}
