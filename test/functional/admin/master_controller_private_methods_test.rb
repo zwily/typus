@@ -1,7 +1,5 @@
 require 'test/helper'
 
-# Test private methods.
-
 class Admin::MasterControllerTest < ActionController::TestCase
 
   def test_check_resource

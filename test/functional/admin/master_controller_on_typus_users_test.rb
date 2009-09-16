@@ -8,6 +8,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     Typus::Configuration.options[:root] = 'admin'
     @typus_user = typus_users(:admin)
     @request.session[:typus_user_id] = @typus_user.id
+    @request.env['HTTP_REFERER'] = '/admin/typus_users'
   end
 
   def test_should_allow_admin_to_create_typus_users
@@ -17,7 +18,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_admin_to_toggle_her_status
 
-    @request.env['HTTP_REFERER'] = '/admin/typus_users'
     get :toggle, { :id => @typus_user.id, :field => 'status' }
 
     assert_response :redirect
@@ -29,7 +29,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_allow_admin_to_toggle_other_users_status
 
-    @request.env['HTTP_REFERER'] = '/typus/typus_users'
     editor = typus_users(:editor)
     get :toggle, { :id => editor.id, :field => 'status' }
 
@@ -42,7 +41,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_non_root_typus_user_to_toggle_status
 
-    @request.env['HTTP_REFERER'] = '/admin/typus_users'
     @typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = @typus_user.id
     get :toggle, { :id => @typus_user.id, :field => 'status' }
@@ -55,8 +53,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
   end
 
   def test_should_verify_admin_cannot_destroy_herself
-
-    @request.env['HTTP_REFERER'] = '/admin/typus_users'
 
     assert_difference('TypusUser.count', 0) do
       delete :destroy, :id => @typus_user.id
@@ -71,8 +67,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_verify_admin_can_destroy_others
 
-    @request.env['HTTP_REFERER'] = '/admin/typus_users'
-
     assert_difference('TypusUser.count', -1) do
       delete :destroy, :id => typus_users(:editor).id
     end
@@ -86,7 +80,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_editor_to_create_typus_users
 
-    @request.env['HTTP_REFERER'] = '/typus/typus_users'
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
     get :new
@@ -143,7 +136,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_editor_to_edit_other_users_profiles
 
-    @request.env['HTTP_REFERER'] = '/admin/typus_users'
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
     get :edit, { :id => typus_user.id }
@@ -162,7 +154,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_editor_to_destroy_users
 
-    @request.env['HTTP_REFERER'] = '/admin/typus_users'
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
     delete :destroy, :id => typus_users(:admin).id
@@ -176,7 +167,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_editor_to_destroy_herself
 
-    @request.env['HTTP_REFERER'] = '/admin/typus_users'
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
     delete :destroy, :id => typus_user.id
@@ -206,14 +196,13 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
-    @request.env['HTTP_REFERER'] = '/admin/typus_users'
 
     assert_equal 'editor', typus_user.role
 
-    get :edit, :id => typus_user.id
+    get :edit, { :id => typus_user.id }
     assert_response :success
 
-    get :edit, :id => typus_users(:admin).id
+    get :edit, { :id => typus_users(:admin).id }
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
     assert flash[:notice]
@@ -227,10 +216,10 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     options = Typus::Configuration.options.merge(:root => 'editor')
     Typus::Configuration.stubs(:options).returns(options)
 
-    get :edit, :id => typus_user.id
+    get :edit, { :id => typus_user.id }
     assert_response :success
 
-    get :edit, :id => typus_users(:admin).id
+    get :edit, { :id => typus_users(:admin).id }
     assert_response :success
 
   end

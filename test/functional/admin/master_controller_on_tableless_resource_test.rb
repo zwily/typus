@@ -1,7 +1,5 @@
 require 'test/helper'
 
-# Test resources which are not related to an ActiveRecord model.
-
 class Admin::StatusControllerTest < ActionController::TestCase
 
   def setup
@@ -22,7 +20,7 @@ class Admin::StatusControllerTest < ActionController::TestCase
     assert_redirected_to admin_sign_in_path(:back_to => '/admin/status')
   end
 
-  def test_should_verify_admin_can_not_go_to_show
+  def test_should_verify_admin_cannot_go_to_show
     get :show
     assert_response :redirect
     assert_redirected_to admin_dashboard_path
