@@ -115,22 +115,33 @@ module Admin::FormHelper
                        :resource_id => @item.id, 
                        foreign_key => @item.id }
 
+      condition = !(@resource[:class].typus_user_id? && !@item.owned_by?(@current_user))
+
+      if condition
+        add_new = <<-HTML
+  <small>#{link_to _("Add new"), link_options if @current_user.can_perform?(model_to_relate, 'create')}</small>
+        HTML
+      end
+
       html << <<-HTML
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
   #{link_to model_to_relate.typus_human_name.pluralize, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _("{{model}} filtered by {{filtered_by}}", :model => model_to_relate.typus_human_name.pluralize, :filtered_by => @item.typus_name)}
-  <small>#{link_to _("Add new"), link_options if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  #{add_new}
   </h2>
       HTML
 
-      items_to_relate = (model_to_relate.find(:all) - @item.send(field))
-      #TODO: access check
-      unless items_to_relate.empty?
+      ##
+      # It's a has_many relationship, so items that are already assigned to another
+      # entry are assigned to that entry.
+      #
+      items_to_relate = model_to_relate.find(:all, :conditions => ["#{foreign_key} is ?", nil])
+      unless items_to_relate.empty? || !condition
         html << <<-HTML
   #{form_tag :action => 'relate', :id => @item.id}
   #{hidden_field :related, :model, :value => model_to_relate}
-  <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
+  <p>#{select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
   </form>
         HTML
       end
@@ -195,15 +206,18 @@ module Admin::FormHelper
   #{add_new}
   </h2>
       HTML
+
       items_to_relate = (model_to_relate.find(:all) - @item.send(field))
+
       if condition || items_to_relate.empty?
         html << <<-HTML
   #{form_tag :action => 'relate', :id => @item.id}
   #{hidden_field :related, :model, :value => model_to_relate}
-  <p>#{ select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
+  <p>#{select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
   </form>
         HTML
       end
+
       items = @resource[:class].find(params[:id]).send(field)
       unless items.empty?
         html << build_list(model_to_relate, 
