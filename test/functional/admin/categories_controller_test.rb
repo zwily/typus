@@ -76,7 +76,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     get :new
     assert_response :redirect
     assert flash[:notice]
-    assert_equal "Designer can't perform action (new).", flash[:notice]
+    assert_equal "Designer can't perform action. (new)", flash[:notice]
     assert_redirected_to :action => :index
   end
 

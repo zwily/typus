@@ -175,7 +175,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_redirected_to admin_dashboard_path
 
     assert flash[:notice]
-    assert_equal "Designer can't perform action (new).", flash[:notice]
+    assert_equal "Designer can't perform action. (new)", flash[:notice]
 
     @request.env['HTTP_REFERER'] = '/admin/posts'
 
@@ -187,7 +187,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_redirected_to '/admin/posts'
 
     assert flash[:notice]
-    assert_equal "Designer can't perform action (new).", flash[:notice]
+    assert_equal "Designer can't perform action. (new)", flash[:notice]
 
   end
 
@@ -206,12 +206,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert flash[:notice]
     assert_equal "Toggle is disabled.", flash[:notice]
 
-  end
-
-  def test_should_show_form_templates
-    get :new
-    assert_response :success
-    assert_match /datepicker_template_published_at/, @response.body
   end
 
   def test_should_verify_root_can_edit_any_record
