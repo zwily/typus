@@ -240,12 +240,14 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_render_sign_in
 
+    options = Typus::Configuration.options.merge(:app_name => 'Typus Test')
+    Typus::Configuration.stubs(:options).returns(options)
+
     get :sign_in
     assert_response :success
 
-    assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Sign in"
-    assert_select 'h1', 'Typus'
-    assert_match /Typus/, @response.body
+    assert_select 'title', "Typus Test - Sign in"
+    assert_select 'h1', 'Typus Test'
     assert_match /layouts\/typus/, @controller.active_layout.to_s
 
   end
