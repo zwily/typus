@@ -2,6 +2,10 @@ require 'test/helper'
 
 class Admin::CategoriesControllerTest < ActionController::TestCase
 
+  ##
+  # Roles testing.
+  ##
+
   def setup
     user = typus_users(:editor)
     @request.session[:typus_user_id] = user.id
@@ -61,6 +65,11 @@ end
 
 class Admin::PostsControllerTest < ActionController::TestCase
 
+  ##
+  # Tests around what happens with records with typus_user_id when editing 
+  # and showing.
+  ##
+
   def test_should_verify_root_can_edit_any_record
     Post.find(:all).each do |post|
       get :edit, { :id => post.id }
@@ -110,6 +119,26 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+  ##
+  # Tests around what happens with the typus_user_id when creating items.
+  ##
+
+  def test_should_verify_typus_user_id_of_item_when_creating_record
+
+    typus_user = typus_users(:editor)
+    @request.session[:typus_user_id] = typus_user.id
+
+    post :create, { :item => { :title => "Chunky Bacon", :body => "Lorem ipsum ..." } }
+    post_ = Post.find_by_title("Chunky Bacon")
+
+    assert_equal typus_user.id, post_.typus_user_id
+
+  end
+
+  ##
+  # Tests around what happens with the typus_user_id when updating items.
+  ##
+
   def test_should_verify_admin_updating_an_item_does_not_change_typus_user_id_if_not_defined
     post_ = posts(:owned_by_editor)
     post :update, { :id => post_.id, :item => { :title => 'Updated by admin' } }
@@ -135,18 +164,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
       post_updated = Post.find(post_.id)
       assert_equal typus_user.id, post_updated.typus_user_id
     end
-
-  end
-
-  def test_should_verify_typus_user_id_of_item_when_creating_record
-
-    typus_user = typus_users(:editor)
-    @request.session[:typus_user_id] = typus_user.id
-
-    post :create, { :item => { :title => "Chunky Bacon", :body => "Lorem ipsum ..." } }
-    post_ = Post.find_by_title("Chunky Bacon")
-
-    assert_equal typus_user.id, post_.typus_user_id
 
   end
 
