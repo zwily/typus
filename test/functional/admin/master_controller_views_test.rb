@@ -1,11 +1,10 @@
 require 'test/helper'
 
-class Admin::CommentsControllerTest < ActionController::TestCase
+class Admin::PostsControllerTest < ActionController::TestCase
 
   def setup
     @typus_user = typus_users(:admin)
     @request.session[:typus_user_id] = @typus_user.id
-    @comment = comments(:first)
   end
 
   ##
@@ -20,7 +19,7 @@ class Admin::CommentsControllerTest < ActionController::TestCase
 
   def test_should_render_index_and_verify_page_title
     get :index
-    assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Comments"
+    assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Posts"
   end
 
   def test_should_render_index_and_show_add_entry_link
@@ -62,7 +61,7 @@ class Admin::CommentsControllerTest < ActionController::TestCase
   # get :new
   ##
 
-  def test_should_render_comments_partials_on_new
+  def test_should_render_posts_partials_on_new
     get :new
     partials = %w( _new.html.erb _sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
@@ -70,7 +69,7 @@ class Admin::CommentsControllerTest < ActionController::TestCase
 
   def test_should_render_new_and_verify_page_title
     get :new
-    assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Comments &rsaquo; New"
+    assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Posts &rsaquo; New"
   end
 
   ##
@@ -78,14 +77,14 @@ class Admin::CommentsControllerTest < ActionController::TestCase
   ##
 
   def test_should_render_edit_and_verify_presence_of_custom_partials
-    get :edit, { :id => @comment.id }
+    get :edit, { :id => posts(:published).id }
     partials = %w( _edit.html.erb _sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
   def test_should_render_edit_and_verify_page_title
-    get :edit, { :id => @comment.id }
-    assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Comments &rsaquo; Edit"
+    get :edit, { :id => posts(:published).id }
+    assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Posts &rsaquo; Edit"
   end
 
   ##
@@ -93,14 +92,14 @@ class Admin::CommentsControllerTest < ActionController::TestCase
   ##
 
   def test_should_render_show_and_verify_presence_of_custom_partials
-    get :show, { :id => @comment.id }
+    get :show, { :id => posts(:published).id }
     partials = %w( _show.html.erb _sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
   def test_should_render_show_and_verify_page_title
-    get :show, { :id => @comment.id }
-    assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Comments &rsaquo; Show"
+    get :show, { :id => posts(:published).id }
+    assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Posts &rsaquo; Show"
   end
 
 =begin

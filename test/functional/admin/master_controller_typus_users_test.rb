@@ -26,8 +26,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_allow_admin_to_toggle_other_users_status
 
-    editor = typus_users(:editor)
-    get :toggle, { :id => editor.id, :field => 'status' }
+    get :toggle, { :id => typus_users(:editor).id, :field => 'status' }
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
@@ -37,9 +36,9 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_not_allow_non_root_typus_user_to_toggle_status
 
-    @typus_user = typus_users(:editor)
-    @request.session[:typus_user_id] = @typus_user.id
-    get :toggle, { :id => @typus_user.id, :field => 'status' }
+    typus_user = typus_users(:editor)
+    @request.session[:typus_user_id] = typus_user.id
+    get :toggle, { :id => typus_user.id, :field => 'status' }
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']

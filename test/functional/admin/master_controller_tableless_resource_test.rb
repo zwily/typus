@@ -3,8 +3,7 @@ require 'test/helper'
 class Admin::StatusControllerTest < ActionController::TestCase
 
   def setup
-    @typus_user = typus_users(:admin)
-    @request.session[:typus_user_id] = @typus_user.id
+    @request.session[:typus_user_id] = typus_users(:admin).id
   end
 
   def test_should_verify_admin_can_go_to_index
@@ -24,15 +23,14 @@ class Admin::StatusControllerTest < ActionController::TestCase
     get :show
     assert_response :redirect
     assert_redirected_to admin_dashboard_path
-    assert_equal "#{@typus_user.role.capitalize} can't go to show on status.", flash[:notice]
+    assert_equal "Admin can't go to show on status.", flash[:notice]
   end
 
   def test_should_verify_editor_can_not_go_to_index
-    @typus_user = typus_users(:editor)
-    @request.session[:typus_user_id] = @typus_user.id
+    @request.session[:typus_user_id] = typus_users(:editor).id
     get :index
     assert_response :redirect
-    assert_equal "#{@typus_user.role.capitalize} can't go to index on status.", flash[:notice]
+    assert_equal "Editor can't go to index on status.", flash[:notice]
   end
 
 end
