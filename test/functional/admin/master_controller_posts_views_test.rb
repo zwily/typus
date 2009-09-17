@@ -56,6 +56,37 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_render_index_and_render_edit_or_show_links
+
+    %w( edit show ).each do |action|
+
+      options = Typus::Configuration.options.merge(:default_action_on_item => action)
+      Typus::Configuration.stubs(:options).returns(options)
+
+      get :index
+
+      Post.find(:all).each do |post|
+        assert_match "/posts/#{action}/#{post.id}", @response.body
+      end
+
+    end
+
+  end
+
+  def test_should_render_index_and_render_edit__or_show_links_on_owned_records
+
+    typus_user = typus_users(:editor)
+    @request.session[:typus_user_id] = typus_user.id
+
+    get :index
+
+    Post.find(:all).each do |post|
+      action = post.owned_by?(typus_user) ? 'edit' : 'show'
+      assert_match "/posts/#{action}/#{post.id}", @response.body
+    end
+
+  end
+
   ##
   # get :new
   ##
