@@ -56,7 +56,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_render_index_and_render_edit_or_show_links
+  def test_should_get_index_and_render_edit_or_show_links
 
     %w( edit show ).each do |action|
 
@@ -73,7 +73,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_render_index_and_render_edit__or_show_links_on_owned_records
+  def test_should_get_index_and_render_edit_or_show_links_on_owned_records
 
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
