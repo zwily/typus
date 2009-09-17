@@ -49,19 +49,16 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     assert true
   end
 
-  # FIXME
   def test_export
 
-    return
+    @resource = { :class => Post }
 
-    @resource = { :class => CustomUser }
-
-    params = { :controller => 'admin/custom_users', :action => 'index' }
+    params = { :controller => 'admin/posts', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
 
     output = export
-
-    expected = ["<a href=\"http://test.host/admin/custom_users.csv\">CSV</a>"]
+    expected = [ %Q[<a href="http://test.host/admin/posts?format=csv">CSV</a>], 
+                 %Q[<a href="http://test.host/admin/posts?format=xml">XML</a>] ]
     assert_equal expected, output
 
   end
