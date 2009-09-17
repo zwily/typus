@@ -39,7 +39,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-  # OPTIMIZE: We can do it by <div id="...">Trash</div>
   def test_should_render_index_and_show_trash_item_image
     get :index
     assert_response :success
