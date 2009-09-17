@@ -2,12 +2,6 @@ require 'test/helper'
 
 class Admin::PostsControllerTest < ActionController::TestCase
 
-  def setup_for_root
-    @typus_user = typus_users(:admin)
-    @request.session[:typus_user_id] = @typus_user.id
-    assert @typus_user.is_root?
-  end
-
   def setup_for_no_root
     @typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = @typus_user.id
@@ -21,7 +15,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_verify_root_can_edit_any_record
 
-    setup_for_root
+    assert @typus_user.is_root?
 
     Post.find(:all).each do |post|
       get :edit, { :id => post.id }
@@ -40,6 +34,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_response :success
       assert_template 'show'
     end
+
   end
 
   def test_should_verify_editor_can_not_edit_all_records
@@ -96,7 +91,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_verify_admin_updating_an_item_does_not_change_typus_user_id_if_not_defined
 
-    setup_for_root
+    assert @typus_user.is_root?
 
     post_ = posts(:owned_by_editor)
     post :update, { :id => post_.id, :item => { :title => 'Updated by admin' } }
@@ -107,7 +102,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_verify_admin_updating_an_item_does_change_typus_user_id_to_whatever_admin_wants
 
-    setup_for_root
+    assert @typus_user.is_root?
 
     post_ = posts(:owned_by_editor)
     post :update, { :id => post_.id, :item => { :title => 'Updated', :typus_user_id => 108 } }
