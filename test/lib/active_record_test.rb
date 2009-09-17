@@ -218,8 +218,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_relationships_for_post
-    assert_equal %w( assets categories ), Post.typus_defaults_for('relationships')
-    assert_equal %w( assets categories ), Post.typus_defaults_for(:relationships)
+    assert_equal %w( assets categories comments views ), Post.typus_defaults_for('relationships')
+    assert_equal %w( assets categories comments views ), Post.typus_defaults_for(:relationships)
     assert !Post.typus_defaults_for('relationships').empty?
     assert !Post.typus_defaults_for(:relationships).empty?
   end

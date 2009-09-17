@@ -54,6 +54,12 @@ ActiveRecord::Schema.define do
     t.timestamps
   end
 
+  create_table :views, :force => true do |t|
+    t.string :ip, :default => '127.0.0.1'
+    t.integer :post_id
+    t.timestamps
+  end
+
   create_table :categories_posts, :force => true, :id => false do |t|
     t.column :category_id, :integer
     t.column :post_id, :integer

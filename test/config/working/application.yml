@@ -54,7 +54,7 @@ Post:
         created_at: post_short
       templates:
         published_at: datepicker
-  relationships: assets, categories
+  relationships: assets, categories, comments, views
   actions:
     index: cleanup
     edit: send_as_newsletter, preview
@@ -67,3 +67,8 @@ Post:
 CustomUser:
   fields:
     list: first_name, last_name, email
+
+View:
+  fields:
+    list: ip, post
+    form: ip, post

@@ -8,6 +8,7 @@ admin:
   Post: create, read, update, delete
   Status: index
   WatchDog: index, cleanup
+  View: create, read, update, delete
 
 editor:
   Category: create, read, update
@@ -15,6 +16,7 @@ editor:
   Git: index
   Post: create, read, update
   TypusUser: read, update
+  View: create, read, update, delete
 
 designer:
   Category: read, update

@@ -26,7 +26,7 @@ class TypusTest < ActiveSupport::TestCase
   def test_should_return_models_and_should_be_sorted
     assert Typus.respond_to?(:models)
     assert Typus.models.kind_of?(Array)
-    assert_equal %w( Asset Category Comment CustomUser Page Post TypusUser ), Typus.models
+    assert_equal %w( Asset Category Comment CustomUser Page Post TypusUser View ), Typus.models
   end
 
   def test_should_return_an_array_of_models_on_header

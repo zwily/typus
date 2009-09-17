@@ -157,6 +157,52 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Posts &rsaquo; Show"
   end
 
+  def test_should_render_show_and_verify_add_relationships_links
+
+    ##
+    # Admin
+    ##
+
+    [ posts(:owned_by_admin), posts(:owned_by_editor) ].each do |post|
+
+      get :show, { :id => post.id }
+
+      %w( assets categories comments views ).each do |model|
+        assert_select "div##{model} h2", "#{model.capitalize}\n    Add new"
+      end
+
+    end
+
+    ##
+    # Editor
+    ##
+
+    typus_user = typus_users(:editor)
+    @request.session[:typus_user_id] = typus_user.id
+
+    get :show, { :id => posts(:owned_by_admin).id }
+
+    # This is a has_many relationship, and record is owned by admin, so the 
+    # editor can only list. Assets it's not shown because the editor doesn't 
+    # have access to this resource.
+    assert_select 'div#assets h2', false
+    assert_select 'div#categories h2', "Categories"
+    assert_select 'div#comments h2', "Comments"
+    assert_select 'div#views h2', "Views"
+
+    get :show, { :id => posts(:owned_by_editor).id }
+
+    # This is a has_many (polimorphic) relationship, but editor can't add new items.
+    assert_select 'div#assets h2', false
+    # This is a has_and_belongs_to_many relationship and editor can add new items.
+    assert_select 'div#categories h2', "Categories\n    Add new"
+    # This is a has_many relationship, but editor can't add items.
+    assert_select 'div#comments h2', "Comments"
+    # This is a has_many relationship and editor can add items.
+    assert_select 'div#views h2', "Views\n    Add new"
+
+  end
+
 =begin
 
   # FIXME
