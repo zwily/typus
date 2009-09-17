@@ -6,6 +6,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   include Admin::MasterHelper
 
   include ActionView::Helpers::FormHelper
+  include ActionView::Helpers::FormTagHelper
   include ActionView::Helpers::FormOptionsHelper
   include ActionView::Helpers::DateHelper
   include ActionView::Helpers::UrlHelper
@@ -245,8 +246,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   def test_typus_form_has_many_with_items
 
     # FIXME
-
-=begin
+    return
 
     @current_user = typus_users(:admin)
     @resource = { :class => Post, :self => 'posts' }
@@ -270,15 +270,12 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
     assert_equal expected, output
 
-=end
-
   end
 
   def test_typus_form_has_many_without_items
 
     # FIXME
-
-=begin
+    return
 
     @current_user = typus_users(:admin)
     @resource = { :class => Post, :self => 'posts' }
@@ -301,8 +298,6 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     HTML
 
     assert_equal expected, output
-
-=end
 
   end
 
