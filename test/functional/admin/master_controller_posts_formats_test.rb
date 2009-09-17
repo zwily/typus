@@ -4,6 +4,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_generate_xml
 
+    assert @typus_user.is_root?
+
     expected = <<-RAW
 <?xml version="1.0" encoding="UTF-8"?>
 <posts type="array">
@@ -32,6 +34,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_generate_csv
+
+    assert @typus_user.is_root?
 
     begin
       require 'fastercsv'

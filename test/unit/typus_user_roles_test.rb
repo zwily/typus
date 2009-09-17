@@ -81,9 +81,9 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     %w( read ).each { |action| assert typus_user.can_perform?('Comment', action) }
     %w( create update delete ).each { |action| assert !typus_user.can_perform?('Comment', action) }
 
-    # Post: read
-    %w( read ).each { |action| assert typus_user.can_perform?('Post', action) }
-    %w( create update delete ).each { |action| assert !typus_user.can_perform?('Post', action) }
+    # Post: read, update
+    %w( read update ).each { |action| assert typus_user.can_perform?('Post', action) }
+    %w( create delete ).each { |action| assert !typus_user.can_perform?('Post', action) }
 
   end
 
