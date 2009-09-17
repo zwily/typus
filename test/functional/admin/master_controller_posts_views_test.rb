@@ -18,9 +18,13 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_render_index_and_show_add_entry_link
+
     get :index
-    assert_response :success
-    assert_match 'Add entry', @response.body
+
+    assert_select "#sidebar ul" do
+      assert_select "li", "Add entry"
+    end
+
   end
 
   def test_should_render_index_and_not_show_add_entry_link
@@ -30,6 +34,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     get :index
     assert_response :success
+
     assert_no_match /Add entry/, @response.body
 
   end
@@ -38,7 +43,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_should_render_index_and_show_trash_item_image
     get :index
     assert_response :success
-    assert_match "Trash", @response.body
+    assert_select '.trash', 'Trash'
   end
 
   def test_should_render_index_and_not_show_trash_image
@@ -48,7 +53,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     get :index
     assert_response :success
-    assert_no_match /Trash/, @response.body
+    assert_select '.trash', false
 
   end
 
