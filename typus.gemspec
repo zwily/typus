@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{typus}
-  s.version = "0.9.29"
+  s.version = "0.9.30"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2009-09-13}
+  s.date = %q{2009-09-17}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -152,13 +152,13 @@ Gem::Specification.new do |s|
      "test/fixtures/app/controllers/admin/status_controller.rb",
      "test/fixtures/app/controllers/admin/typus_users_controller.rb",
      "test/fixtures/app/controllers/admin/watch_dog_controller.rb",
-     "test/fixtures/app/views/admin/comments/_edit.html.erb",
-     "test/fixtures/app/views/admin/comments/_index.html.erb",
-     "test/fixtures/app/views/admin/comments/_new.html.erb",
-     "test/fixtures/app/views/admin/comments/_show.html.erb",
-     "test/fixtures/app/views/admin/comments/_sidebar.html.erb",
      "test/fixtures/app/views/admin/dashboard/_content.html.erb",
      "test/fixtures/app/views/admin/dashboard/_sidebar.html.erb",
+     "test/fixtures/app/views/admin/posts/_edit.html.erb",
+     "test/fixtures/app/views/admin/posts/_index.html.erb",
+     "test/fixtures/app/views/admin/posts/_new.html.erb",
+     "test/fixtures/app/views/admin/posts/_show.html.erb",
+     "test/fixtures/app/views/admin/posts/_sidebar.html.erb",
      "test/fixtures/app/views/admin/resources/_sidebar.html.erb",
      "test/fixtures/app/views/admin/shared/_footer.html.erb",
      "test/fixtures/app/views/admin/status/index.html.erb",
@@ -169,13 +169,18 @@ Gem::Specification.new do |s|
      "test/fixtures/pages.yml",
      "test/fixtures/posts.yml",
      "test/fixtures/typus_users.yml",
-     "test/functional/admin/assets_controller_test.rb",
-     "test/functional/admin/categories_controller_test.rb",
-     "test/functional/admin/comments_controller_test.rb",
-     "test/functional/admin/master_controller_test.rb",
-     "test/functional/admin/posts_controller_test.rb",
-     "test/functional/admin/status_controller_test.rb",
-     "test/functional/admin/typus_users_controller_test.rb",
+     "test/functional/admin/master_controller_assets_relationships.rb",
+     "test/functional/admin/master_controller_categories_lists_test.rb",
+     "test/functional/admin/master_controller_posts_before_test.rb",
+     "test/functional/admin/master_controller_posts_crud_test.rb",
+     "test/functional/admin/master_controller_posts_formats_test.rb",
+     "test/functional/admin/master_controller_posts_permissions_test.rb",
+     "test/functional/admin/master_controller_posts_relationships_test.rb",
+     "test/functional/admin/master_controller_posts_roles.rb",
+     "test/functional/admin/master_controller_posts_toggle_test.rb",
+     "test/functional/admin/master_controller_posts_views_test.rb",
+     "test/functional/admin/master_controller_tableless_resource_test.rb",
+     "test/functional/admin/master_controller_typus_users_test.rb",
      "test/functional/typus_controller_test.rb",
      "test/helper.rb",
      "test/helpers/admin/form_helper_test.rb",
@@ -214,13 +219,18 @@ Gem::Specification.new do |s|
      "test/fixtures/app/controllers/admin/status_controller.rb",
      "test/fixtures/app/controllers/admin/typus_users_controller.rb",
      "test/fixtures/app/controllers/admin/watch_dog_controller.rb",
-     "test/functional/admin/assets_controller_test.rb",
-     "test/functional/admin/categories_controller_test.rb",
-     "test/functional/admin/comments_controller_test.rb",
-     "test/functional/admin/master_controller_test.rb",
-     "test/functional/admin/posts_controller_test.rb",
-     "test/functional/admin/status_controller_test.rb",
-     "test/functional/admin/typus_users_controller_test.rb",
+     "test/functional/admin/master_controller_assets_relationships.rb",
+     "test/functional/admin/master_controller_categories_lists_test.rb",
+     "test/functional/admin/master_controller_posts_before_test.rb",
+     "test/functional/admin/master_controller_posts_crud_test.rb",
+     "test/functional/admin/master_controller_posts_formats_test.rb",
+     "test/functional/admin/master_controller_posts_permissions_test.rb",
+     "test/functional/admin/master_controller_posts_relationships_test.rb",
+     "test/functional/admin/master_controller_posts_roles.rb",
+     "test/functional/admin/master_controller_posts_toggle_test.rb",
+     "test/functional/admin/master_controller_posts_views_test.rb",
+     "test/functional/admin/master_controller_tableless_resource_test.rb",
+     "test/functional/admin/master_controller_typus_users_test.rb",
      "test/functional/typus_controller_test.rb",
      "test/helper.rb",
      "test/helpers/admin/form_helper_test.rb",
