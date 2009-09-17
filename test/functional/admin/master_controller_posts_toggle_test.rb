@@ -4,8 +4,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_toggle_an_item
 
-    assert @typus_user.is_root?
-
     @request.env['HTTP_REFERER'] = '/admin/posts'
 
     post = posts(:unpublished)
@@ -19,8 +17,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_not_toggle_an_item_when_disabled
-
-    assert @typus_user.is_root?
 
     @request.env['HTTP_REFERER'] = '/admin/posts'
 
