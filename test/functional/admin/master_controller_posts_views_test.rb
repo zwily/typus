@@ -201,25 +201,9 @@ class Admin::PostsControllerTest < ActionController::TestCase
     # This is a has_many relationship and editor can add items.
     assert_select 'div#views h2', "Views\n    Add new"
 
+    expected = "/admin/views/new?back_to=%2Fadmin%2Fposts%2Fshow%2F4%23views&amp;post_id=4&amp;resource=post&amp;resource_id=4"
+    assert_match expected, @response.body
+
   end
-
-=begin
-
-  # FIXME
-
-  def test_should_verify_new_comment_contains_a_link_to_add_a_new_post
-    get :new
-    match = '/admin/posts/new?back_to=%2Fadmin%2Fcomments%2Fnew&amp;selected=post_id'
-    assert_match match, @response.body
-  end
-
-  def test_should_verify_edit_comment_contains_a_link_to_add_a_new_post
-    comment = comments(:first)
-    get :edit, { :id => comment.id }
-    match = "/admin/posts/new?back_to=%2Fadmin%2Fcomments%2Fedit%2F#{comment.id}&amp;selected=post_id"
-    assert_match match, @response.body
-  end
-
-=end
 
 end
