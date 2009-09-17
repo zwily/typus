@@ -87,6 +87,31 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+  def test_should_get_index_and_render_edit_or_show_on_only_user_items
+
+    typus_user = typus_users(:editor)
+    @request.session[:typus_user_id] = typus_user.id
+
+    %w( edit show ).each do |action|
+
+      options = Typus::Configuration.options.merge(:only_user_items => true, 
+                                                   :default_action_on_item => action)
+      Typus::Configuration.stubs(:options).returns(options)
+
+      get :index
+
+      Post.find(:all).each do |post|
+        if post.owned_by?(typus_user)
+          assert_match "/posts/#{action}/#{post.id}", @response.body
+        else
+          assert_no_match /\/posts\/#{action}\/#{post.id}/, @response.body
+        end
+      end
+
+    end
+
+  end
+
   ##
   # get :new
   ##

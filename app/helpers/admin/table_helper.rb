@@ -35,7 +35,7 @@ module Admin::TableHelper
 
         action = if model.typus_user_id? && !@current_user.is_root?
                    # If there's a typus_user_id column on the table and logged user is not root ...
-                   item.owned_by?(@current_user) ? 'edit' : 'show'
+                   item.owned_by?(@current_user) ? item.class.typus_options_for(:default_action_on_item) : 'show'
                  elsif !@current_user.can_perform?(model, 'edit')
                    'show'
                  else
