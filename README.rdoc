@@ -75,63 +75,6 @@ mailing list.
 Tell everybody about *Typus*, tell your friends and colleagues about 
 *Typus* and blog about *Typus*.
 
-== Fancybox for assets
-
-You can preview assets using Fancybox[http://fancybox.net/example].
-
-    # db/migrate/create_photos.rb
-
-    class CreatePhotos < ActiveRecord::Migration
-
-      def self.up
-        create_table :photos do |t|
-          t.string :asset_file_name
-          t.string :asset_content_type
-          t.integer :asset_file_size
-          t.datetime :asset_updated_at
-        end
-      end
-
-      def self.down
-        drop_table :photos
-      end
-
-    end
-
-    # app/models/photo.rb
-
-    ##
-    # Styles are predefined but you can use your own by defining them
-    # on `config/initializers/typus.rb`.
-    #
-    #     Typus::Configuration.options[:file_preview] = :my_preview
-    #     Typus::Configuration.options[:file_thumbnail] = :my_thumbnail
-    ##
-    class Photo < ActiveRecord::Base
-      has_attached_file :asset, :styles => { :typus_preview => "692x461", :typus_thumbnail => "100x100" }
-    end
-
-    # app/views/admin/photos/_index.html.erb
-
-    <%- content_for :stylesheets do -%>
-      <%= stylesheet_link_tag 'admin/jquery.fancybox', :media => 'screen' %>
-    <%- end -%>
-
-    <%- content_for :javascripts do -%>
-
-      <%= javascript_include_tag 'admin/jquery-1.3.2.min' %>
-      <%= javascript_include_tag 'admin/jquery.fancybox-1.2.1.min' %>
-
-      <script type="text/javascript" charset="utf-8">
-        $(document).ready(function() {
-          <%- @items.each do |item| -%>
-            $("#<%= item.to_dom %>").fancybox();
-          <%- end -%>
-        });
-      </script>
-
-    <%- end -%>
-
 == Using Typus as a Gem?
 
 If you are using *Typus* as a gem add the following line at the end of the 

@@ -21,8 +21,7 @@
            when :belongs_to
              raw_data.typus_name
            when :file
-             attachment = field.first.split('_file_name').first
-             @item.typus_preview(attachment)
+             @item.typus_preview(field.first)
            when :text
              defined?(RDiscount) ? markdown(raw_data) : raw_data
            else

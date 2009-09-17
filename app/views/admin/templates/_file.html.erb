@@ -1,44 +1,6 @@
-<%- content_for :stylesheets do -%>
-  <%= stylesheet_link_tag 'admin/jquery.fancybox', :media => 'screen' %>
-<%- end -%>
-
-<%- content_for :javascripts do -%>
-
-  <%= javascript_include_tag 'admin/jquery-1.3.2.min' %>
-  <%= javascript_include_tag 'admin/jquery.fancybox-1.2.1.min' %>
-
-  <script type="text/javascript" charset="utf-8">
-    $(document).ready(function() {
-      $("#<%= @item.to_dom %>").fancybox();
-    });
-  </script>
-
-<%- end -%>
-
-<%
-
-  attachment = attribute.split('_file_name').first
-  file_preview = Typus::Configuration.options[:file_preview]
-  file_thumbnail = Typus::Configuration.options[:file_thumbnail]
-
-  unless @item.send(attribute).blank?
-    item = @item.send(attachment)
-    preview = if asset_is_image?(@item, attachment) 
-                <<-HTML
-<a id="#{@item.to_dom}" href="#{@item.send(attachment).url(file_preview)}" title="#{@item.typus_name}">
-#{image_tag item.url(file_thumbnail)}
-</a>
-                HTML
-              else
-                <<-HTML
-#{link_to @item.send(attribute), item.url}
-                HTML
-              end
-  end
-
-%>
+<% attachment = attribute.split('_file_name').first %>
 
 <li><label for="item_<%= attribute %>"><%= _(attachment.humanize) %></label>
 <%= file_field :item, attachment, :disabled => attribute_disabled?(attribute) %>
-<%= preview %>
+<%= @item.typus_preview(attribute) unless @item.send(attribute).blank? %>
 </li>
