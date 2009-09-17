@@ -2,30 +2,6 @@ require 'test/helper'
 
 class Admin::CategoriesControllerTest < ActionController::TestCase
 
-  ##
-  # Roles testing.
-  ##
-
-  def setup
-    user = typus_users(:editor)
-    @request.session[:typus_user_id] = user.id
-    @request.env['HTTP_REFERER'] = '/admin/categories'
-  end
-
-  def test_should_redirect_to_login
-
-    @request.session[:typus_user_id] = nil
-
-    get :index
-    assert_response :redirect
-    assert_redirected_to admin_sign_in_path(:back_to => '/admin/categories')
-
-    get :edit, { :id => 1 }
-    assert_response :redirect
-    assert_redirected_to admin_sign_in_path(:back_to => '/admin/categories')
-
-  end
-
   def test_should_allow_admin_to_add_a_category
     admin = typus_users(:admin)
     @request.session[:typus_user_id] = admin.id

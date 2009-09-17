@@ -3,7 +3,8 @@ require 'test/helper'
 class Admin::CategoriesControllerTest < ActionController::TestCase
 
   def setup
-    @request.session[:typus_user_id] = user.id
+    typus_user = typus_users(:admin)
+    @request.session[:typus_user_id] = typus_user.id
   end
 
   def test_should_verify_items_are_sorted_by_position_on_list
