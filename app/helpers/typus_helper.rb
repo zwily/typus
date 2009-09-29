@@ -8,7 +8,7 @@ module TypusHelper
     returning(String.new) do |html|
 
       Typus.applications.each do |app|
-  
+
         available = Typus.application(app).map do |resource|
                       resource if @current_user.resources.include?(resource)
                     end
@@ -75,7 +75,7 @@ module TypusHelper
 
         html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to _(resource.tableize.humanize), resource_path}</td>
+<td>#{link_to _(resource.titleize.capitalize), resource_path}</td>
 <td align="right" style="vertical-align: bottom;"></td>
 </tr>
         HTML
