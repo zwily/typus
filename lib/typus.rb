@@ -70,7 +70,10 @@ module Typus
 
     def boot!
 
-      return if %w( script/generate script/destroy ).include?($0)
+      commands = [ 'script/generate', 
+                   'script/destroy' ]
+
+      return if commands.include?($0)
 
       if testing?
         Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
