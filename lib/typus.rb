@@ -108,8 +108,10 @@ module Typus
       require 'vendor/paginator'
       require 'vendor/rss_parser'
 
-      # Run controllers generator ...
-      generator unless testing? || Rails.env.production?
+      commands = [ '/usr/local/bin/thin', 
+                   'script/server' ]
+
+      generator if commands.include?($0)
 
     end
 
