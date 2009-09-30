@@ -70,7 +70,6 @@ module Typus
 
     def boot!
 
-      # return unless File.exists?("#{Rails.root}/config/initializers/typus.rb") || testing?
       return if %w( script/generate script/destroy ).include?($0)
 
       if testing?
