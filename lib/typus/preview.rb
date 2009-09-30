@@ -16,7 +16,7 @@ module Typus
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() { $("##{to_dom}").fancybox(); });
 </script>
-<a id="#{to_dom}" href="#{send(attachment).url(file_preview)}">#{send(attribute)}</a>
+<a id="#{to_dom}" href="#{send(attachment).url(file_preview)}" title="#{typus_name}">#{send(attribute)}</a>
         HTML
       else
         <<-HTML
