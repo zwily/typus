@@ -31,7 +31,7 @@ module TypusHelper
 
           html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to klass.typus_human_name.pluralize, admin_items_path}<br /><small>#{klass.typus_description}</small></td>
+<td>#{link_to klass.typus_human_name.pluralize, admin_items_path}<br /><small>#{_(klass.typus_description)}</small></td>
 <td class="right"><small>
 #{link_to _("Add"), new_admin_item_path if @current_user.can_perform?(klass, 'create')}
 </small></td>
