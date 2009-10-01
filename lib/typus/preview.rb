@@ -45,18 +45,16 @@ module Typus
           HTML
         elsif send(attachment).styles.member?(file_thumbnail)
           <<-HTML
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() { $("##{to_dom}").fancybox(); });
+</script>
 <a href="#{send(attachment).url}" title="#{typus_name}">
 <img src="#{send(attachment).url(file_thumbnail)}" />
         </a>
           HTML
         elsif send(attachment).styles.member?(file_preview)
           <<-HTML
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function() { $("##{to_dom}").fancybox(); });
-</script>
-<a id="#{to_dom}" href="#{send(attachment).url(file_preview)}" title="#{typus_name}">
-#{send(attribute)}
-        </a>
+<img src="#{send(attachment).url(file_preview)}" />
           HTML
         else
           <<-HTML
