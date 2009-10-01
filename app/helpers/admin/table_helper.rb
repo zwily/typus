@@ -13,7 +13,7 @@ module Admin::TableHelper
       items.each do |item|
 
         html << <<-HTML
-<tr class="#{cycle('even', 'odd')}" id="item_#{item.id}">
+<tr class="#{cycle('even', 'odd')} #{item.class.name.underscore}" id="#{dom_id(item)}" name="item_#{item.id}">
         HTML
 
         fields.each do |key, value|
@@ -162,7 +162,7 @@ module Admin::TableHelper
 
   def typus_table_string_field(attribute, item, link_options = {})
     <<-HTML
-<td>#{item.send(attribute)}</td>
+<td class='#{attribute}'>#{item.send(attribute)}</td>
     HTML
   end
 
