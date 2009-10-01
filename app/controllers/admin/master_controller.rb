@@ -1,5 +1,7 @@
 class Admin::MasterController < ApplicationController
 
+  skip_filter filter_chain
+
   unloadable
 
   layout 'admin'

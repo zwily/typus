@@ -1,5 +1,7 @@
 class TypusController < ApplicationController
 
+  skip_filter filter_chain
+
   unloadable
 
   layout :select_layout
