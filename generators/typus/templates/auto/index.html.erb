@@ -6,6 +6,6 @@
 
 <!-- Content -->
 
-<h2>Resource#index</h2>
+<h2><%= params[:controller].split('/').last.titleize.capitalize %></h2>
 
 <p>Find me in app/views/<%= params[:controller] %>/index.html.erb</p>
