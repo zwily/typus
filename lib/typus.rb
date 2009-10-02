@@ -110,10 +110,7 @@ module Typus
       require 'vendor/paginator'
       require 'vendor/rss_parser'
 
-      commands = [ '/usr/local/bin/thin', 
-                   'script/server' ]
-
-      generator if commands.include?($0)
+      magic_generator
 
     end
 
