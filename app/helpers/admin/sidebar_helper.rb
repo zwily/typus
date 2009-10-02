@@ -140,8 +140,6 @@ module Admin::SidebarHelper
 
   def relationship_filter(request, filter, habtm = false)
 
-    model = (habtm) ? filter.classify.constantize : filter.capitalize.camelize.constantize
-    related_fk = (habtm) ? filter : @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
     att_assoc = @resource[:class].reflect_on_association(filter.to_sym)
     class_name = att_assoc.options[:class_name] || ((habtm) ? filter.classify : filter.capitalize.camelize)
     model = class_name.constantize
