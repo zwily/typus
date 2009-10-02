@@ -1,23 +1,29 @@
 module Admin::SidebarHelper
 
-  def actions
+  def build_typus_list(items, *args)
 
+    options = args.extract_options!
+
+    header = if options[:header]
+               _(options[:header].humanize)
+             elsif options[:attribute]
+               @resource[:class].human_attribute_name(options[:attribute])
+             end
+
+    return String.new if items.empty?
     returning(String.new) do |html|
-
-      html << <<-HTML
-#{build_typus_list(default_actions, :header => 'actions')}
-#{build_typus_list(previous_and_next, :header => 'go_to')}
-      HTML
-
-      html << <<-HTML
-#{build_typus_list(export, :header => 'export')}
-      HTML
-
+      html << "<h2>#{header}</h2>\n" unless header.nil?
+      next unless options[:selector].nil?
+      html << "<ul>\n"
+      items.each do |item|
+        html << "<li>#{item}</li>\n"
+      end
+      html << "</ul>\n"
     end
 
   end
 
-  def default_actions
+  def actions
 
     items = []
 
@@ -44,72 +50,44 @@ module Admin::SidebarHelper
       end
     end
 
-    case params[:action]
-    when 'new', 'create', 'edit', 'show', 'update'
+    if %w( new create edit show update ).include?(params[:action])
       items << (link_to _("Back to list"), :action => 'index')
     end
 
-    return items
+    build_typus_list(items, :header => 'actions')
 
   end
 
   def export
-    return [] unless params[:action] == 'index'
-    returning(Array.new) do |format|
-      @resource[:class].typus_export_formats.each do |f|
-        format << (link_to f.upcase, params.merge(:format => f))
-      end
+    formats = []
+    @resource[:class].typus_export_formats.each do |f|
+      formats << (link_to f.upcase, params.merge(:format => f))
     end
-  end
-
-  def build_typus_list(items, *args)
-
-    options = args.extract_options!
-
-    header = if options[:header]
-               _(options[:header].humanize)
-             elsif options[:attribute]
-               @resource[:class].human_attribute_name(options[:attribute])
-             end
-
-    return String.new if items.empty?
-    returning(String.new) do |html|
-      html << "<h2>#{header}</h2>\n" unless header.nil?
-      next unless options[:selector].nil?
-      html << "<ul>\n"
-      items.each do |item|
-        html << "<li>#{item}</li>\n"
-      end
-      html << "</ul>\n"
-    end
-
+    build_typus_list(formats, :header => 'export')
   end
 
   def previous_and_next(klass = @resource[:class])
 
-    return [] unless %w( edit show update ).include?(params[:action])
+    items = []
 
-    # Verify ownership of record to define the kind of action which can be 
-    # performed on the record.
-
-    returning(Array.new) do |items|
-      if @next
-        action = if klass.typus_user_id? && !@current_user.is_root?
-                   @next.owned_by?(@current_user) ? 'edit' : 'show'
-                 else
-                   !@current_user.can_perform?(klass, 'edit') ? 'show' : params[:action]
-                 end
-        items << (link_to _("Next"), params.merge(:action => action, :id => @next.id))
-      end
-      if @previous
-        action = if klass.typus_user_id? && !@current_user.is_root?
-                   @previous.owned_by?(@current_user) ? 'edit' : 'show'
-                 else
-                   !@current_user.can_perform?(klass, 'edit') ? 'show' : params[:action]
-                 end
-        items << (link_to _("Previous"), params.merge(:action => action, :id => @previous.id))
-      end
+    if @next
+      action = if klass.typus_user_id? && !@current_user.is_root?
+                 @next.owned_by?(@current_user) ? 'edit' : 'show'
+               else
+                 !@current_user.can_perform?(klass, 'edit') ? 'show' : params[:action]
+               end
+      items << (link_to _("Next"), params.merge(:action => action, :id => @next.id))
     end
+    if @previous
+      action = if klass.typus_user_id? && !@current_user.is_root?
+                 @previous.owned_by?(@current_user) ? 'edit' : 'show'
+               else
+                 !@current_user.can_perform?(klass, 'edit') ? 'show' : params[:action]
+               end
+      items << (link_to _("Previous"), params.merge(:action => action, :id => @previous.id))
+    end
+
+    build_typus_list(items, :header => 'go_to')
 
   end
 
@@ -121,13 +99,13 @@ module Admin::SidebarHelper
     search_by = typus_search.collect { |x| @resource[:class].human_attribute_name(x) }.to_sentence
 
     search_params = params.dup
-    %w( action controller search page ).each { |p| search_params.delete(p) }
+    %w( action controller search page id ).each { |p| search_params.delete(p) }
 
     hidden_params = search_params.map { |key, value| hidden_field_tag(key, value) }
 
     <<-HTML
 <h2>#{_("Search")}</h2>
-<form action="" method="get">
+<form action="/#{params[:controller]}" method="get">
 <p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
 #{hidden_params.sort.join("\n")}
 </form>

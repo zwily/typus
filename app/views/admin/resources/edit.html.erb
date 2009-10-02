@@ -1,6 +1,8 @@
 <% content_for :sidebar do %>
   <%= typus_block :location => @resource[:self], :partial => 'sidebar' %>
   <%= actions %>
+  <%= search %>
+  <%= previous_and_next %>
 <% end %>
 
 <%= display_link_to_previous if params[:back_to] %>

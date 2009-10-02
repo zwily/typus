@@ -1,6 +1,8 @@
 <% content_for :sidebar do %>
   <%= typus_block :location => @resource[:self], :partial => 'sidebar' %>
   <%= actions %>
+  <%= search %>
+  <%= previous_and_next %>
 <% end %>
 
 <h2><%= link_to @resource[:class].typus_human_name.pluralize, :action => 'index' %> &rsaquo; 

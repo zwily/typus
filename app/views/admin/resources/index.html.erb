@@ -1,6 +1,7 @@
 <% content_for :sidebar do %>
   <%= typus_block :location => @resource[:self], :partial => 'sidebar' %>
   <%= actions %>
+  <%= export %>
   <%= search %>
   <%= filters %>
 <% end %>
