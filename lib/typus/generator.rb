@@ -32,9 +32,9 @@ module Typus
 
     # Create needed folders if doesn't exist.
     @admin_controllers_folder = "#{Rails.root}/app/controllers/admin"
-    admin_views_folder = "#{Rails.root}/app/views/admin"
+    @admin_views_folder = "#{Rails.root}/app/views/admin"
 
-    [ @admin_controllers_folder, admin_views_folder ].each do |folder|
+    [ @admin_controllers_folder, @admin_views_folder ].each do |folder|
       Dir.mkdir(folder) unless File.directory?(folder)
     end
 
@@ -68,7 +68,7 @@ module Typus
       end
 
       # And now we create the view.
-      view_folder = "#{admin_views_folder}/#{resource.underscore}"
+      view_folder = "#{@admin_views_folder}/#{resource.underscore}"
       view_filename = "index.html.erb"
 
       if !File.exist?("#{view_folder}/#{view_filename}")
