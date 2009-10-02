@@ -25,7 +25,8 @@
            when :file
              @item.typus_preview(field.first)
            when :text
-             defined?(RDiscount) ? markdown(raw_data) : h(raw_data)
+             text = h(raw_data)
+             defined?(RDiscount) ? markdown(text) : text
            else
              h(raw_data)
            end
