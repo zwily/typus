@@ -144,9 +144,14 @@ module Admin::TableHelper
 
     action = item.send(attribute).class.typus_options_for(:default_action_on_item) rescue 'edit'
 
-    content = if !item.send(attribute).kind_of?(NilClass)
-                link_to item.send(attribute).typus_name, :controller => "admin/#{attribute.pluralize}", :action => action, :id => item.send(attribute).id
-              end
+    att_value = item.send(attribute)
+    content = if !att_value.nil?
+      if @current_user.can_perform?(att_value.class.name, action)
+        link_to item.send(attribute).typus_name, :controller => "admin/#{attribute.pluralize}", :action => action, :id => att_value.id
+      else
+        att_value.typus_name
+      end
+    end
 
     <<-HTML
 <td>#{content}</td>
