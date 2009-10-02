@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{typus}
-  s.version = "0.9.32"
+  s.version = "0.9.33"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
@@ -64,6 +64,10 @@ Gem::Specification.new do |s|
      "config/locales/pt-BR.yml",
      "config/locales/ru.yml",
      "config/routes.rb",
+     "generators/typus/templates/auto/index.html.erb",
+     "generators/typus/templates/auto/resource_controller.rb.erb",
+     "generators/typus/templates/auto/resource_controller_test.rb.erb",
+     "generators/typus/templates/auto/resources_controller.rb.erb",
      "generators/typus/templates/config/initializers/typus.rb",
      "generators/typus/templates/config/typus/README",
      "generators/typus/templates/config/typus/application.yml",
@@ -106,7 +110,6 @@ Gem::Specification.new do |s|
      "lib/typus/extensions/routes.rb",
      "lib/typus/extensions/routes_hack.rb",
      "lib/typus/format.rb",
-     "lib/typus/generator.rb",
      "lib/typus/hash.rb",
      "lib/typus/object.rb",
      "lib/typus/preferences.rb",
@@ -114,10 +117,6 @@ Gem::Specification.new do |s|
      "lib/typus/quick_edit.rb",
      "lib/typus/reloader.rb",
      "lib/typus/string.rb",
-     "lib/typus/templates/index.html.erb",
-     "lib/typus/templates/resource_controller.rb.erb",
-     "lib/typus/templates/resource_controller_test.rb.erb",
-     "lib/typus/templates/resources_controller.rb.erb",
      "lib/typus/user.rb",
      "lib/vendor/active_record.rb",
      "lib/vendor/paginator.rb",
