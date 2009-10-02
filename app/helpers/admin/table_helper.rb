@@ -123,7 +123,7 @@ module Admin::TableHelper
                          [nil, nil]
                        end
           order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
-          switch = (params[:order_by] == key) ? sort_order.last : ''
+          switch = (params[:order_by] == order_by) ? sort_order.last : ''
           options = { :order_by => order_by, :sort_order => sort_order.first }
           content = (link_to "#{content} #{switch}", params.merge(options))
         end
