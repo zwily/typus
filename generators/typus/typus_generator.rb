@@ -19,7 +19,8 @@ class TypusGenerator < Rails::Generator::Base
           active_record_model_with_sti = klass.superclass.superclass.equal?(ActiveRecord::Base)
           ar_models << klass if active_record_model || active_record_model_with_sti
         rescue Exception => error
-          puts "=> [typus] #{error.message} on '#{model.class_name}'."
+          puts "=> [typus] #{error.message} on '#{model.class.name}'."
+          exit
         end
       end
 
