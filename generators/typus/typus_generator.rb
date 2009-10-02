@@ -1,3 +1,5 @@
+require 'ftools'
+
 class TypusGenerator < Rails::Generator::Base
 
   def manifest
@@ -118,99 +120,46 @@ class TypusGenerator < Rails::Generator::Base
         m.file file, file
       end
 
+      %w( app/views/admin app/controllers/admin test/functional/admin ).each do |folder|
+        FileUtils.mkdir_p(folder) unless File.directory?(folder)
+      end
+
+      ##
+      # Generate:
+      #   `app/controllers/admin/#{resource}_controller.rb`
+      #   `test/functional/admin/#{resource}_controller_test.rb`
+      #
+      Typus.models.each do |model|
+
+        m.template "auto/resources_controller.rb.erb", 
+                   "app/controllers/admin/#{model.tableize}_controller.rb", 
+                   :assigns => { :model => model }
+
+        m.template "auto/resource_controller_test.rb.erb", 
+                   "test/functional/admin/#{model.tableize}_controller_test.rb", 
+                   :assigns => { :model => model }
+
+      end
+
+      ##
+      # Generate controllers for tableless models.
+      #
+      Typus.resources.each do |resource|
+
+        m.template "auto/resource_controller.rb.erb", 
+                   "app/controllers/admin/#{resource.underscore}_controller.rb", 
+                   :assigns => { :resource => resource }
+
+        views_folder = "app/views/admin/#{resource.underscore}"
+        FileUtils.mkdir_p(views_folder) unless File.directory?(views_folder)
+        m.file "auto/index.html.erb", "#{views_folder}/index.html.erb"
+
+      end
+
       # Migration file
 
       m.migration_template 'db/create_typus_users.rb', 'db/migrate', 
                             { :migration_file_name => 'create_typus_users' }
-
-      prepare_folders
-      generate_controllers
-      generate_controllers_for_resources
-
-    end
-
-  end
-
-  def prepare_folders
-
-    # Create needed folders if doesn't exist.
-    @admin_controllers_folder = "#{Rails.root}/app/controllers/admin"
-    @admin_views_folder = "#{Rails.root}/app/views/admin"
-
-    [ @admin_controllers_folder, @admin_views_folder ].each do |folder|
-      Dir.mkdir(folder) unless File.directory?(folder)
-    end
-
-    # Create test/functional/admin if doesn't exist.
-    @admin_controller_tests_folder = "#{Rails.root}/test/functional/admin"
-    if File.directory?("#{Rails.root}/test")
-      Dir.mkdir(@admin_controller_tests_folder) unless File.directory?(@admin_controller_tests_folder)
-    end
-
-    # Get a list of controllers under `app/controllers/admin`.
-    @admin_controllers = Dir["#{Rails.root}/vendor/plugins/*/app/controllers/admin/*.rb", 
-                             "#{@admin_controllers_folder}/*.rb"].map { |i| File.basename(i) }
-
-    # Get a list of functional tests under `test/functional/admin`.
-    @admin_controller_tests = Dir["#{@admin_controller_tests_folder}/*.rb"].map { |i| File.basename(i) }
-
-  end
-
-  ##
-  # Generate:
-  #   `app/controllers/admin/#{resource}_controller.rb`
-  #   `test/functional/admin/#{resource}_controller_test.rb`
-  #
-  def generate_controllers
-
-    Typus.models.each do |model|
-
-      controller_filename = "#{model.tableize}_controller.rb"
-      controller_location = "#{@admin_controllers_folder}/#{controller_filename}"
-
-      if !@admin_controllers.include?(controller_filename)
-        template = File.read("#{File.dirname(__FILE__)}/templates/auto/resources_controller.rb.erb")
-        content = ERB.new(template).result(binding)
-        File.open(controller_location, "w+") { |f| f << content }
-      end
-
-      test_filename = "#{model.tableize}_controller_test.rb"
-      test_location = "#{@admin_controller_tests_folder}/#{test_filename}"
-
-      if !@admin_controller_tests.include?(test_filename) && File.directory?("#{Rails.root}/test")
-        template = File.read("#{File.dirname(__FILE__)}/templates/auto/resource_controller_test.rb.erb")
-        content = ERB.new(template).result(binding)
-        File.open(test_location, "w+") { |f| f << content }
-      end
-
-    end
-
-  end
-
-  # Generate controllers for tableless models.
-  def generate_controllers_for_resources
-
-    Typus.resources.each do |resource|
-
-      controller_filename = "#{resource.underscore}_controller.rb"
-      controller_location = "#{@admin_controllers_folder}/#{controller_filename}"
-
-      if !@admin_controllers.include?(controller_filename)
-        template = File.read("#{File.dirname(__FILE__)}/templates/auto/resource_controller.rb.erb")
-        content = ERB.new(template).result(binding)
-        File.open(controller_location, "w+") { |f| f << content }
-      end
-
-      # And now we create the view.
-      view_folder = "#{@admin_views_folder}/#{resource.underscore}"
-      view_filename = "index.html.erb"
-
-      if !File.exist?("#{view_folder}/#{view_filename}")
-        Dir.mkdir(view_folder) unless File.directory?(view_folder)
-        origin = "#{File.dirname(__FILE__)}/templates/auto/index.html.erb"
-        destination = "#{view_folder}/#{view_filename}"
-        File.copy(origin, destination)
-      end
 
     end
 
