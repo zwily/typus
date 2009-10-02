@@ -93,7 +93,6 @@ module Typus
       # Mixins.
       require 'typus/authentication'
       require 'typus/format'
-      require 'typus/generator'
       require 'typus/preview'
       require 'typus/preferences'
       require 'typus/reloader'
