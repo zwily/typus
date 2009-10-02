@@ -67,8 +67,7 @@ module Admin::TableHelper
                       end
           perform = link_to trash, { :action => 'destroy', :id => item.id }, 
                                      :title => _("Remove"), 
-                                     :confirm => _("Remove entry?"), 
-                                     :method => :delete if condition
+                                     :confirm => _("Remove entry?") if condition
         when 'edit'
           # If we are editing content, we can relate and unrelate always!
           perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }, 
