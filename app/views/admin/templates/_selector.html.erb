@@ -15,7 +15,7 @@
 %>
 
 <li><label for="item_<%= attribute %>"><%= @resource[:class].human_attribute_name(attribute) %></label>
-<select id="item_<%= attribute %>" <%= attribute_disabled?(attribute) ? 'disabled="disabled"' : '' %> name="item[<%= attribute %>]">
+<select id="item_<%= attribute %>" <%= 'disabled="disabled"' if attribute_disabled?(attribute) %> name="item[<%= attribute %>]">
 <option value=""></option>
 <%= options.join("\n") %>
 </select></li>

@@ -153,7 +153,7 @@ module Admin::SidebarHelper
       related_items = model.find(:all, :order => model.typus_order_by)
       if related_items.size > model.typus_options_for(:sidebar_selector)
         related_items.each do |item|
-          switch = request.include?("#{related_fk}=#{item.id}") ? 'selected' : ''
+          switch = 'selected' if request.include?("#{related_fk}=#{item.id}")
           items << <<-HTML
 <option #{switch} value="#{url_for params.merge(related_fk => item.id, :page => nil)}">#{item.typus_name}</option>
           HTML
