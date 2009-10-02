@@ -13,6 +13,11 @@ module Admin::FormHelper
 
       fields.each do |key, value|
 
+        if template = @resource[:class].typus_template(key)
+          html << typus_template_field(key, template, options)
+          next
+        end
+
         html << case value
                 when :belongs_to  then typus_belongs_to_field(key)
                 when :tree        then typus_tree_field(key)

@@ -206,6 +206,12 @@ module Typus
       return !date_format.nil? ? date_format : :db
     end
 
+    # We are able to define which template to use to render the attribute 
+    # within the form
+    def typus_template(attribute)
+      Typus::Configuration.config[name]['fields']['options']['templates'][attribute.to_s] rescue nil
+    end
+
     def build_conditions(params)
 
       conditions, joins = merge_conditions, []
