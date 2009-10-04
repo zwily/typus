@@ -148,8 +148,6 @@ class TypusGenerator < Rails::Generator::Base
       #
       ar_models.each do |model|
 
-        next if Typus.models.include?(model.name)
-
         m.template "auto/resources_controller.rb.erb", 
                    "app/controllers/admin/#{model.table_name}_controller.rb", 
                    :assigns => { :model => model.name }
