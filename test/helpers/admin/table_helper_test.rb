@@ -134,14 +134,10 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-=begin
-
-  # FIXME
 
   def test_typus_table_belongs_to_field
 
-    @current_user = mock()
-    @current_user.expects(:can_perform?).with(Post, 'edit').returns(true)
+    @current_user = typus_users(:admin)
 
     comment = comments(:without_post_id)
     output = typus_table_belongs_to_field('post', comment)
@@ -161,8 +157,6 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
 
   end
-
-=end
 
   def test_typus_table_has_and_belongs_to_many_field
 
