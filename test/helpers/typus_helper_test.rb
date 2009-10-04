@@ -7,12 +7,14 @@ class TypusHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::TextHelper
   include ActionController::UrlWriter
 
+  # FIXME
   def test_applications
-    assert true
+    return
   end
 
+  # FIXME
   def test_resources
-    assert true
+    return
   end
 
   def test_typus_block_when_partial_does_not_exist

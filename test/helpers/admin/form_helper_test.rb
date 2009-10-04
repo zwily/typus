@@ -13,8 +13,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::TagHelper
   include ActionController::UrlWriter
 
+  # FIXME
   def test_build_form
-    assert true
+    return
   end
 
   def test_typus_belongs_to_field
@@ -66,57 +67,59 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
+  # FIXME
   def test_typus_template_field_for_boolean_fields
+
+    return
 
     @resource = { :class => Post }
 
-    # output = typus_template_field('test', 'boolean')
     expected = <<-HTML
 <li><label>Test</label>
 <input name="item[test]" type="hidden" value="0" /><input id="item_test" name="item[test]" type="checkbox" value="1" /> <label class=\"inline_label\" for=\"item_test\">Checked if active</label></li>
                HTML
 
-    assert true
-    # assert_equal expected, output
+    assert_equal expected, typus_template_field('test', 'boolean')
 
   end
 
+  # FIXME
   def test_typus_template_field_for_date_fields
 
-    @resource = { :class => Post }
+    return
 
-    # output = typus_template_field('test', 'date')
+    @resource = { :class => Post }
 
     expected = <<-HTML
 <li><label for="item_test">Test</label>
     HTML
 
-    assert true
-    # assert_match expected, output
+    assert_equal expected, typus_template_field('test', 'date')
 
   end
 
+  # FIXME
   def test_typus_template_field_for_datetime_fields
 
-    @resource = { :class => Post }
+    return
 
-    # output = typus_template_field('test', 'datetime')
+    @resource = { :class => Post }
 
     expected = <<-HTML
 <li><label for="item_test">Test</label>
     HTML
 
-    assert true
-    # assert_match expected, output
+    assert_equal expected, typus_template_field('test', 'datetime')
 
   end
 
+  # FIXME
   def test_typus_template_field_for_file_fields
+
+    return
 
     @resource = { :class => Post }
     @item = Post.new
-
-    # output = typus_template_field('asset_file_name', 'file')
 
     expected = <<-HTML
 <li><label for="item_asset_file_name">Asset</label>
@@ -125,33 +128,33 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 </li>
     HTML
 
-    assert true
-    # assert_equal expected, output
+    assert_equal expected, typus_template_field('asset_file_name', 'file')
 
   end
 
+  # FIXME
   def test_typus_template_field_for_password_fields
 
-    @resource = { :class => Post }
+    return
 
-    # output = typus_template_field('test', 'password')
+    @resource = { :class => Post }
 
     expected = <<-HTML
 <li><label for="item_test">Test</label>
 <input class="text" id="item_test" name="item[test]" size="30" type="password" /></li>
     HTML
 
-    assert true
-    # assert_equal expected, output
+    assert_equal expected, typus_template_field('test', 'password')
 
   end
 
+  # FIXME
   def test_typus_template_field_for_selector_fields
+
+    return
 
     @resource = { :class => Post }
     @item = posts(:published)
-
-    # output = typus_template_field('test', 'selector')
 
     expected = <<-HTML
 <li><label for="item_status">Status</label>
@@ -165,39 +168,38 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 </select></li>
     HTML
 
-    assert true
-    # assert_equal expected, output
+    assert_equal expected, typus_template_field('test', 'selector')
 
   end
 
+  # FIXME
   def test_typus_template_field_for_text_fields
 
-    @resource = { :class => Post }
+    return
 
-    # output = typus_template_field('test', 'text')
+    @resource = { :class => Post }
 
     expected = <<-HTML
 <li><label for="item_test">Test</label>
 <textarea class="text" cols="40" id="item_test" name="item[test]" rows="10"></textarea></li>
     HTML
 
-    assert true
-    # assert_equal expected, output
+    assert_equal expected, typus_template_field('test', 'text')
 
   end
 
+  # FIXME
   def test_typus_template_field_for_time_fields
 
-    @resource = { :class => Post }
+    return
 
-    # output = typus_template_field('test', 'time')
+    @resource = { :class => Post }
 
     expected = <<-HTML
 <li><label for="item_test">Test</label>
     HTML
 
-    assert true
-    # assert_match expected, output
+    assert_equal expected, typus_template_field('test', 'time')
 
   end
 
@@ -210,7 +212,6 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     @resource = { :class => Page }
     items = @resource[:class].roots
 
-    output = typus_tree_field('parent', items)
     expected = <<-HTML
 <li><label for="item_parent">Parent</label>
 <select id="item_parent"  name="item[parent]">
@@ -219,7 +220,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 </select></li>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected, typus_tree_field('parent', items)
 
   end
 
@@ -230,19 +231,18 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
     @resource = { :class => Post }
 
-    output = typus_template_field('test', 'string')
-
     expected = <<-HTML
 <li><label for="item_test">Test</label>
 <input class="text" id="item_test" name="item[test]" size="30" type="text" /></li>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected, typus_template_field('test', 'string')
 
   end
 
+  # FIXME
   def test_typus_relationships
-    assert true
+    return
   end
 
   # FIXME
@@ -303,12 +303,14 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
+  # FIXME
   def test_typus_form_has_and_belongs_to_many
-    assert true
+    return
   end
 
+  # FIXME
   def test_typus_template_field
-    assert true
+    return
   end
 
   def test_attribute_disabled

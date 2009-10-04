@@ -169,8 +169,9 @@ HTML
 
   end
 
+  # FIXME
   def test_previous_and_next_with_params
-    assert true
+    return
   end
 
   def test_search
@@ -210,12 +211,15 @@ HTML
   # 
   # Yes, I know, it's an ugly name for a test, but don't know how to 
   # name this test. Suggestions are welcome. ;)
+  #
+  # FIXME
   def test_filters_with_filters
-    assert true
+    return
   end
 
+  # FIXME
   def test_relationship_filter
-    assert true
+    return
   end
 
   def test_datetime_filter
