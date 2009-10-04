@@ -13,6 +13,7 @@ class TypusGenerator < Rails::Generator::Base
       # Create required folders.
       [ 'app/controllers/admin', 
         'app/views/admin', 
+        'config/typus', 
         'public/images/admin/fancybox', 
         'public/javascripts/admin', 
         'public/stylesheets/admin', 
@@ -34,9 +35,6 @@ class TypusGenerator < Rails::Generator::Base
           exit
         end
       end
-
-      # Configuration files
-      Dir.mkdir('config/typus') unless File.directory?('config/typus')
 
       configuration = { :base => '', :roles => '' }
 
