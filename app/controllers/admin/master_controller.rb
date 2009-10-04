@@ -327,7 +327,9 @@ private
   # If we want to display only user items, we don't want the links previous and 
   # next linking to records from other users.
   def set_conditions
-    condition = @current_user.is_root? || !@resource[:class].typus_options_for(:only_user_items)
+    condition = @current_user.is_root? || 
+                !@resource[:class].typus_options_for(:only_user_items) || 
+                !@resource[:class].columns.map(&:name).include?(Typus.user_fk)
     !condition ? { Typus.user_fk => @current_user.id } : { }
   end
 
