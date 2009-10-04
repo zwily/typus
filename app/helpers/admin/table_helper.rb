@@ -13,7 +13,7 @@ module Admin::TableHelper
       items.each do |item|
 
         html << <<-HTML
-<tr class="#{cycle('even', 'odd')} #{item.class.name.underscore}" id="#{dom_id(item)}" name="item_#{item.id}">
+<tr class="#{cycle('even', 'odd')} #{item.class.name.underscore}" id="#{item.to_dom}" name="item_#{item.id}">
         HTML
 
         fields.each do |key, value|
