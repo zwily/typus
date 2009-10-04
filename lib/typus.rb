@@ -68,6 +68,10 @@ module Typus
       Rails.env.test? && Dir.pwd == "#{Rails.root}/vendor/plugins/typus"
     end
 
+    def plugin?
+      File.directory?("#{Rails.root}/vendor/plugins/typus")
+    end
+
     def boot!
 
       if testing?

@@ -116,6 +116,12 @@ class TypusGenerator < Rails::Generator::Base
         m.template from, to, :assigns => { :application => application }
       end
 
+      # Tasks
+      if !Typus.plugin?
+        from = to = 'lib/tasks/typus.rake'
+        m.file from, to
+      end
+
       # Assets
 
       [ 'public/images/admin/ui-icons.png' ].each { |f| m.file f, f }
