@@ -87,53 +87,39 @@ HTML
     assert_no_match /\/h2/, output
   end
 
-=begin
-
-  # FIXME
-
   def test_previous_and_next_when_edit
 
     @resource = { :class => TypusUser }
     @current_user = typus_users(:admin)
 
-    params = { :controller => 'admin/typus_users', :action => 'index' }
-    self.expects(:params).at_least_once.returns(params)
-
-    output = previous_and_next
-    assert output.empty?
-
     # Test when there are no records.
 
     typus_user = TypusUser.first
-    @next = nil
-    @previous = nil
+    @previous, @next = nil, nil
 
     params = { :controller => 'admin/typus_users', :action => 'edit', :id => typus_user.id }
     self.expects(:params).at_least_once.returns(params)
 
-    output = previous_and_next
-    assert output.empty?
+    assert previous_and_next.empty?
 
     # Test when we are on the first item.
 
     typus_user = TypusUser.first
     @previous, @next = typus_user.previous_and_next
 
-    output = previous_and_next
     expected = <<-HTML
 <h2>Go to</h2>
 <ul>
-<li><a href=\"http://test.host/admin/typus_users/edit/2\">Next</a></li>
+<li><a href="http://test.host/admin/typus_users/edit/2">Next</a></li>
 </ul>
     HTML
-    assert_equal expected, output
+    assert_equal expected, previous_and_next
 
     # Test when we are on the last item.
 
     typus_user = TypusUser.last
     @previous, @next = typus_user.previous_and_next
 
-    output = previous_and_next
     expected = <<-HTML
 <h2>Go to</h2>
 <ul>
@@ -141,14 +127,13 @@ HTML
 </ul>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected, previous_and_next
 
     # Test when we are on the middle.
 
     typus_user = TypusUser.find(3)
     @previous, @next = typus_user.previous_and_next
 
-    output = previous_and_next
     expected = <<-HTML
 <h2>Go to</h2>
 <ul>
@@ -156,11 +141,9 @@ HTML
 <li><a href="http://test.host/admin/typus_users/edit/2">Previous</a></li>
 </ul>
     HTML
-    assert_equal expected, output
+    assert_equal expected, previous_and_next
 
   end
-
-=end
 
   def test_previous_and_next_when_show
 
