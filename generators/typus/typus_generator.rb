@@ -118,7 +118,7 @@ class TypusGenerator < Rails::Generator::Base
 
       # Tasks
       if !Typus.plugin?
-        from = to = 'lib/tasks/typus.rake'
+        from = to = 'lib/tasks/typus_tasks.rake'
         m.file from, to
       end
 
