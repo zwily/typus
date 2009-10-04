@@ -146,15 +146,17 @@ class TypusGenerator < Rails::Generator::Base
       #   `app/controllers/admin/#{resource}_controller.rb`
       #   `test/functional/admin/#{resource}_controller_test.rb`
       #
-      Typus.models.each do |model|
+      ar_models.each do |model|
+
+        next if Typus.models.include?(model.name)
 
         m.template "auto/resources_controller.rb.erb", 
-                   "app/controllers/admin/#{model.tableize}_controller.rb", 
-                   :assigns => { :model => model }
+                   "app/controllers/admin/#{model.table_name}_controller.rb", 
+                   :assigns => { :model => model.name }
 
         m.template "auto/resource_controller_test.rb.erb", 
-                   "test/functional/admin/#{model.tableize}_controller_test.rb", 
-                   :assigns => { :model => model }
+                   "test/functional/admin/#{model.table_name}_controller_test.rb", 
+                   :assigns => { :model => model.name }
 
       end
 
