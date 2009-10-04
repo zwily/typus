@@ -223,19 +223,21 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
+  # FIXME
   def test_typus_string_field
+
+    return
 
     @resource = { :class => Post }
 
-    # output = typus_template_field('test', 'string')
+    output = typus_template_field('test', 'string')
 
     expected = <<-HTML
 <li><label for="item_test">Test</label>
 <input class="text" id="item_test" name="item[test]" size="30" type="text" /></li>
     HTML
 
-    assert true
-    # assert_equal expected, output
+    assert_equal expected, output
 
   end
 
@@ -243,9 +245,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     assert true
   end
 
+  # FIXME
   def test_typus_form_has_many_with_items
 
-    # FIXME
     return
 
     @current_user = typus_users(:admin)
@@ -272,9 +274,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
+  # FIXME
   def test_typus_form_has_many_without_items
 
-    # FIXME
     return
 
     @current_user = typus_users(:admin)
