@@ -1,5 +1,3 @@
-require 'ftools'
-
 class TypusGenerator < Rails::Generator::Base
 
   def manifest

@@ -341,7 +341,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_previous_and_next
-    assert TypusUser.instance_methods.include?('previous_and_next')
+    assert TypusUser.instance_methods.map { |i| i.to_sym }.include?(:previous_and_next)
     assert typus_users(:admin).previous_and_next.kind_of?(Array)
   end
 
