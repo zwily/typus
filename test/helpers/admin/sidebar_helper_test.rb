@@ -13,9 +13,10 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     default_url_options[:host] = 'test.host'
   end
 
-=begin
-
+  # FIXME
   def test_actions
+
+    return
 
     self.expects(:default_actions).returns(['action1', 'action2'])
     self.expects(:previous_and_next).returns(['previous', 'next'])
@@ -46,8 +47,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
 
   end
-
-=end
 
   def test_export
 
