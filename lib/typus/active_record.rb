@@ -289,15 +289,19 @@ module Typus
 
       select = !klass.typus_user_id? ? klass.primary_key : "#{klass.primary_key}, #{Typus.user_fk}"
 
-      previous_ = klass.find :first, 
-                             :select => select, 
-                             :order => "#{klass.primary_key} DESC", 
-                             :conditions => previous_conditions
+      previous_ = klass.send(:with_exclusive_scope) do
+        klass.find :first,
+             :select => select,
+             :order => "#{klass.primary_key} DESC",
+             :conditions => previous_conditions
+      end
 
-      next_ = klass.find :first, 
-                         :select => select, 
-                         :order => "#{klass.primary_key} ASC", 
-                         :conditions => next_conditions
+      next_ = klass.send(:with_exclusive_scope) do
+        klass.find :first,
+             :select => select,
+             :order => "#{klass.primary_key} ASC",
+             :conditions => next_conditions
+      end
 
       return previous_, next_
 
