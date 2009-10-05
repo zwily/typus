@@ -144,6 +144,9 @@ class TypusGenerator < Rails::Generator::Base
       #   `app/controllers/admin/#{resource}_controller.rb`
       #   `test/functional/admin/#{resource}_controller_test.rb`
       #
+
+      ar_models << TypusUser
+
       ar_models.each do |model|
 
         m.template "auto/resources_controller.rb.erb", 
