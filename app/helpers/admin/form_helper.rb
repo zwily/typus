@@ -71,7 +71,7 @@ module Admin::FormHelper
   def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
     <<-HTML
 <li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
-<select id="item_#{attribute}" #{attribute_disabled?(attribute) ? 'disabled="disabled"' : ''} name="item[#{attribute}]">
+<select id="item_#{attribute}" #{'disabled="disabled"' if attribute_disabled?(attribute)} name="item[#{attribute}]">
   <option value=""></option>
   #{expand_tree_into_select_field(items, attribute_virtual)}
 </select></li>

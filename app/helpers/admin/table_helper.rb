@@ -13,7 +13,7 @@ module Admin::TableHelper
       items.each do |item|
 
         html << <<-HTML
-<tr class="#{cycle('even', 'odd')} #{item.class.name.underscore}" id="#{dom_id(item)}" name="item_#{item.id}">
+<tr class="#{cycle('even', 'odd')} #{item.class.name.underscore}" id="#{item.to_dom}" name="item_#{item.id}">
         HTML
 
         fields.each do |key, value|
@@ -122,7 +122,7 @@ module Admin::TableHelper
                          [nil, nil]
                        end
           order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
-          switch = (params[:order_by] == key) ? sort_order.last : ''
+          switch = sort_order.last if params[:order_by].eql?(order_by)
           options = { :order_by => order_by, :sort_order => sort_order.first }
           content = (link_to "#{content} #{switch}", params.merge(options))
         end
@@ -143,9 +143,14 @@ module Admin::TableHelper
 
     action = item.send(attribute).class.typus_options_for(:default_action_on_item) rescue 'edit'
 
-    content = if !item.send(attribute).kind_of?(NilClass)
-                link_to item.send(attribute).typus_name, :controller => "admin/#{attribute.pluralize}", :action => action, :id => item.send(attribute).id
-              end
+    att_value = item.send(attribute)
+    content = if !att_value.nil?
+      if @current_user.can_perform?(att_value.class.name, action)
+        link_to item.send(attribute).typus_name, :controller => "admin/#{attribute.pluralize}", :action => action, :id => att_value.id
+      else
+        att_value.typus_name
+      end
+    end
 
     <<-HTML
 <td>#{content}</td>
@@ -161,7 +166,7 @@ module Admin::TableHelper
 
   def typus_table_string_field(attribute, item, link_options = {})
     <<-HTML
-<td class='#{attribute}'>#{item.send(attribute)}</td>
+<td class="#{attribute}">#{item.send(attribute)}</td>
     HTML
   end
 

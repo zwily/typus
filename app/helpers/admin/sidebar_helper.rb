@@ -140,8 +140,10 @@ module Admin::SidebarHelper
 
   def relationship_filter(request, filter, habtm = false)
 
-    model = (habtm) ? filter.classify.constantize : filter.capitalize.camelize.constantize
-    related_fk = (habtm) ? filter : @resource[:class].reflect_on_association(filter.to_sym).primary_key_name
+    att_assoc = @resource[:class].reflect_on_association(filter.to_sym)
+    class_name = att_assoc.options[:class_name] || ((habtm) ? filter.classify : filter.capitalize.camelize)
+    model = class_name.constantize
+    related_fk = (habtm) ? filter : att_assoc.primary_key_name
 
     params_without_filter = params.dup
     %w( controller action page ).each { |p| params_without_filter.delete(p) }
@@ -153,7 +155,7 @@ module Admin::SidebarHelper
       related_items = model.find(:all, :order => model.typus_order_by)
       if related_items.size > model.typus_options_for(:sidebar_selector)
         related_items.each do |item|
-          switch = request.include?("#{related_fk}=#{item.id}") ? 'selected' : ''
+          switch = 'selected' if request.include?("#{related_fk}=#{item.id}")
           items << <<-HTML
 <option #{switch} value="#{url_for params.merge(related_fk => item.id, :page => nil)}">#{item.typus_name}</option>
           HTML

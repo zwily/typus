@@ -62,8 +62,9 @@ class Admin::MasterHelperTest < ActiveSupport::TestCase
 
   end
 
+  # FIXME
   def test_build_pagination
-    assert true
+    return
   end
 
 end

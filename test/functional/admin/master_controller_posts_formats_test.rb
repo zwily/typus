@@ -37,12 +37,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert @typus_user.is_root?
 
-    begin
-      require 'fastercsv'
-    rescue LoadError
-      return
-    end
-
     expected = <<-RAW
 Title,Status
 Owned by admin,false

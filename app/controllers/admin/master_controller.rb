@@ -118,13 +118,7 @@ class Admin::MasterController < ApplicationController
     # We assign the params passed trough the url
     @item.attributes = item_params
 
-    # If we want to display only user items, we don't want the links previous and 
-    # next linking to records from other users.
-    conditions = if @resource[:class].typus_options_for(:only_user_items)
-                   { Typus.user_fk => @current_user.id }
-                 end
-
-    item_params.merge!(conditions || {})
+    item_params.merge!(set_conditions)
     @previous, @next = @item.previous_and_next(item_params)
 
     select_template :edit
@@ -135,13 +129,7 @@ class Admin::MasterController < ApplicationController
 
     check_ownership_of_item and return if @resource[:class].typus_options_for(:only_user_items)
 
-    # If we want to display only user items, we don't want the links previous and 
-    # next linking to records from other users.
-    conditions = if @resource[:class].typus_options_for(:only_user_items)
-                   { Typus.user_fk => @current_user.id }
-                 end
-
-    @previous, @next = @item.previous_and_next(conditions || {})
+    @previous, @next = @item.previous_and_next(set_conditions)
 
     respond_to do |format|
       format.html { select_template :show }
@@ -334,6 +322,15 @@ private
   def set_order
     params[:sort_order] ||= 'desc'
     @order = params[:order_by] ? "#{@resource[:class].table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
+  end
+
+  # If we want to display only user items, we don't want the links previous and 
+  # next linking to records from other users.
+  def set_conditions
+    condition = @current_user.is_root? || 
+                !@resource[:class].typus_options_for(:only_user_items) || 
+                !@resource[:class].columns.map(&:name).include?(Typus.user_fk)
+    !condition ? { Typus.user_fk => @current_user.id } : { }
   end
 
   def set_tiny_mce

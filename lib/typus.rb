@@ -1,3 +1,5 @@
+# coding: utf-8
+
 module Typus
 
   class << self
@@ -66,6 +68,10 @@ module Typus
 
     def testing?
       Rails.env.test? && Dir.pwd == "#{Rails.root}/vendor/plugins/typus"
+    end
+
+    def plugin?
+      File.directory?("#{Rails.root}/vendor/plugins/typus")
     end
 
     def boot!

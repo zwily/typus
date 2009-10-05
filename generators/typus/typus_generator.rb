@@ -1,38 +1,44 @@
-require 'ftools'
-
 class TypusGenerator < Rails::Generator::Base
 
   def manifest
 
     record do |m|
 
-      # Default name for our application.
+      # Define variables.
       application = Rails.root.basename
+      timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
+
+      # Create required folders.
+      [ 'app/controllers/admin', 
+        'app/views/admin', 
+        'config/typus', 
+        'public/images/admin/fancybox', 
+        'public/javascripts/admin', 
+        'public/stylesheets/admin', 
+        'test/functional/admin' ].each { |f| FileUtils.mkdir_p(f) unless File.directory?(f) }
 
       # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> 
       # detect available AR models on the application.
       models = Dir['app/models/*.rb'].collect { |x| File.basename(x).sub(/\.rb$/,'').camelize }
-      @ar_models = []
+      ar_models = []
 
       models.each do |model|
         begin
           klass = model.constantize
           active_record_model = klass.superclass.equal?(ActiveRecord::Base) && !klass.abstract_class?
           active_record_model_with_sti = klass.superclass.superclass.equal?(ActiveRecord::Base)
-          @ar_models << klass if active_record_model || active_record_model_with_sti
+          ar_models << klass if active_record_model || active_record_model_with_sti
         rescue Exception => error
-          puts "=> [typus] #{error.message} on '#{model.class.name}'."
+          puts "=> [typus] #{error.message} on '#{model}'."
           exit
         end
       end
 
-      # Configuration files
-      config_folder = Typus::Configuration.options[:config_folder]
-      Dir.mkdir(config_folder) unless File.directory?(config_folder)
-
       configuration = { :base => '', :roles => '' }
 
-      @ar_models.sort{ |x,y| x.class_name <=> y.class_name }.each do |model|
+      ar_models.sort{ |x,y| x.class_name <=> y.class_name }.each do |model|
+
+        next if Typus.models.include?(model.name)
 
         # Detect all relationships except polymorphic belongs_to using reflection.
         relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many, :has_one ].map do |relationship|
@@ -86,42 +92,51 @@ class TypusGenerator < Rails::Generator::Base
 
       end
 
-      Dir["#{Typus.root}/generators/typus/templates/config/typus/*"].each do |f|
-        base = File.basename(f)
-        m.template "config/typus/#{base}", "#{config_folder}/#{base}", 
-                   :assigns => { :configuration => configuration }
+      if !configuration[:base].empty?
+
+        [ "application.yml", "application_roles.yml" ].each do |file|
+          from = to = "config/typus/#{file}"
+          if File.exists?(from) then to = "config/typus/#{timestamp}_#{file}" end
+          m.template from, to, :assigns => { :configuration => configuration }
+        end
+
+      end
+
+      [ "typus.yml", "typus_roles.yml", "README" ].each do |file|
+        from = to = "config/typus/#{file}"
+        m.template from, to, :assigns => { :configuration => configuration }
       end
 
       # Initializer
 
-      [ 'config/initializers/typus.rb' ].each do |initializer|
-        m.template initializer, initializer, :assigns => { :application => application }
+      [ 'config/initializers/typus.rb' ].each do |file|
+        from = to = file
+        m.template from, to, :assigns => { :application => application }
+      end
+
+      # Tasks
+      if !Typus.plugin?
+        from = to = 'lib/tasks/typus_tasks.rake'
+        m.file from, to
       end
 
       # Assets
 
-      [ 'public/stylesheets/admin', 
-        'public/javascripts/admin', 
-        'public/images/admin', 
-        'public/images/admin/fancybox' ].each { |f| Dir.mkdir(f) unless File.directory?(f) }
+      [ 'public/images/admin/ui-icons.png' ].each { |f| m.file f, f }
 
-      [ 'public/stylesheets/admin/screen.css', 
-        'public/stylesheets/admin/reset.css', 
-        'public/stylesheets/admin/jquery.fancybox.css', 
-        'public/images/admin/ui-icons.png' ].each { |f| m.file f, f }
-
-      %w( application jquery-1.3.2.min jquery.fancybox-1.2.1.min ).each do |f|
-        file = "public/javascripts/admin/#{f}.js"
-        m.file file, file
+      Dir["#{Typus.root}/generators/typus/templates/public/stylesheets/admin/*"].each do |file|
+        from = to = "public/stylesheets/admin/#{File.basename(file)}"
+        m.file from, to
       end
 
-      %w( closebox left progress right shadow_e shadow_n shadow_ne shadow_nw shadow_s shadow_se shadow_sw shadow_w title_left title_main title_right ).each do |image|
-        file = "public/images/admin/fancybox/fancy_#{image}.png"
-        m.file file, file
+      Dir["#{Typus.root}/generators/typus/templates/public/javascripts/admin/*"].each do |file|
+        from = to = "public/javascripts/admin/#{File.basename(file)}"
+        m.file from, to
       end
 
-      %w( app/views/admin app/controllers/admin test/functional/admin ).each do |folder|
-        FileUtils.mkdir_p(folder) unless File.directory?(folder)
+      Dir["#{Typus.root}/generators/typus/templates/public/images/admin/fancybox/*"].each do |file|
+        from = to = "public/images/admin/fancybox/#{File.basename(file)}"
+        m.file from, to
       end
 
       ##
@@ -129,15 +144,18 @@ class TypusGenerator < Rails::Generator::Base
       #   `app/controllers/admin/#{resource}_controller.rb`
       #   `test/functional/admin/#{resource}_controller_test.rb`
       #
-      Typus.models.each do |model|
+
+      ar_models << TypusUser
+
+      ar_models.each do |model|
 
         m.template "auto/resources_controller.rb.erb", 
-                   "app/controllers/admin/#{model.tableize}_controller.rb", 
-                   :assigns => { :model => model }
+                   "app/controllers/admin/#{model.table_name}_controller.rb", 
+                   :assigns => { :model => model.name }
 
         m.template "auto/resource_controller_test.rb.erb", 
-                   "test/functional/admin/#{model.tableize}_controller_test.rb", 
-                   :assigns => { :model => model }
+                   "test/functional/admin/#{model.table_name}_controller_test.rb", 
+                   :assigns => { :model => model.name }
 
       end
 

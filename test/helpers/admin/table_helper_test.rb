@@ -13,9 +13,9 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     default_url_options[:host] = 'test.host'
   end
 
+  # FIXME
   def test_build_typus_table
 
-    # FIXME
     return
 
     @current_user = typus_users(:admin)
@@ -134,7 +134,10 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
+
   def test_typus_table_belongs_to_field
+
+    @current_user = typus_users(:admin)
 
     comment = comments(:without_post_id)
     output = typus_table_belongs_to_field('post', comment)
@@ -173,7 +176,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     post = posts(:published)
     output = typus_table_string_field(:title, post, :created_at)
     expected = <<-HTML
-<td>#{post.title}</td>
+<td class="title">#{post.title}</td>
     HTML
 
     assert_equal expected, output
@@ -185,7 +188,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     post = posts(:published)
     output = typus_table_string_field(:title, post, :title)
     expected = <<-HTML
-<td>#{post.title}</td>
+<td class="title">#{post.title}</td>
     HTML
 
     assert_equal expected, output

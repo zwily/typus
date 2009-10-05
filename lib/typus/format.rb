@@ -21,12 +21,24 @@ module Typus
 
     def generate_csv
 
-      require 'fastercsv'
-
       fields = @resource[:class].typus_fields_for(:csv).collect { |i| i.first }
-      csv_string = FasterCSV.generate do |csv|
-        csv << fields.map { |f| _(f.humanize) }
-        data.each { |i| csv << fields.map { |f| i.send(f) } }
+
+      require 'csv'
+      if CSV.const_defined?(:Reader)
+        # Old CSV version so we enable faster CSV.
+        begin
+          require 'fastercsv'
+        rescue Exception => error
+          raise error.message
+        end
+        csv = FasterCSV
+      else
+        csv = CSV
+      end
+
+      csv_string = csv.generate do |c|
+        c << fields.map { |f| _(f.humanize) }
+        data.each { |i| c << fields.map { |f| i.send(f) } }
       end
 
       filename = "#{Time.now.strftime("%Y%m%d%H%M%S")}_#{@resource[:self]}.csv"
@@ -34,8 +46,6 @@ module Typus
                :type => 'text/csv; charset=utf-8; header=present',
                :filename => filename)
 
-    rescue LoadError
-      render :text => _("FasterCSV is not installed.")
     end
 
     def generate_xml

@@ -40,14 +40,6 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal %w( Git Order Status WatchDog ), Typus.resources(models)
   end
 
-  def test_should_verify_enable_exists
-    assert Typus.respond_to?(:enable)
-  end
-
-  def test_should_verify_enable_exists
-    assert Typus.respond_to?(:generator)
-  end
-
   def test_should_return_user_class
     assert_equal TypusUser, Typus.user_class
   end
