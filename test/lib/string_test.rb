@@ -2,6 +2,36 @@ require 'test/helper'
 
 class StringTest < ActiveSupport::TestCase
 
+  def test_extract_controller
+
+    assert_equal ['posts'], 'admin/posts'.extract_controller
+    assert_equal ['typus_users'], 'admin/typus_users'.extract_controller
+    assert_equal ['delayed', 'jobs'], 'admin/delayed/jobs'.extract_controller
+
+    assert_equal ['posts'], 'typus/posts'.extract_controller('typus')
+    assert_equal ['typus_users'], 'typus/typus_users'.extract_controller('typus')
+    assert_equal ['delayed', 'tasks'], 'typus/delayed/tasks'.extract_controller('typus')
+
+  end
+
+  def test_extract_resource
+    assert_equal 'posts', 'admin/posts'.extract_resource
+    assert_equal 'typus_users', 'admin/typus_users'.extract_resource
+    assert_equal 'delayed/tasks', 'admin/delayed/tasks'.extract_resource
+  end
+
+  def test_extract_class
+    assert_equal Post, 'admin/posts'.extract_class
+    assert_equal TypusUser, 'admin/typus_users'.extract_class
+    assert_equal Delayed::Task, 'admin/delayed/tasks'.extract_class
+  end
+
+  def test_extract_human_name
+    assert_equal 'Post', 'admin/posts'.extract_human_name
+    assert_equal 'Typus user', 'admin/typus_users'.extract_human_name
+    assert_equal 'Delayed task', 'admin/delayed/tasks'.extract_human_name
+  end
+
   def test_should_return_post_actions_for_index
     assert_equal %w( cleanup ), 'Post'.typus_actions_for('index')
     assert_equal %w( cleanup ), 'Post'.typus_actions_for(:index)

@@ -30,6 +30,9 @@ module Typus
       Typus::Configuration.config.collect { |i| i.first if i.last['application'] == name }.compact.uniq.sort
     end
 
+    ##
+    # Gets a list of all the models on the configuration file.
+    #
     def models
       Typus::Configuration.config.map { |i| i.first }.sort
     end
@@ -38,20 +41,28 @@ module Typus
       models.collect { |m| m if m.constantize.typus_options_for(:on_header) }.compact
     end
 
+    ##
     # List of resources, which are tableless models.
-    def resources(models = get_model_names)
-
-      all_resources = Typus::Configuration.roles.keys.map do |key|
-                        Typus::Configuration.roles[key].keys
-                      end.flatten.sort.uniq
-
-      all_resources.delete_if { |x| models.include?(x) || x == 'TypusUser' } rescue []
-
+    #
+    def resources
+      Typus::Configuration.roles.keys.map do |key|
+        Typus::Configuration.roles[key].keys
+      end.flatten.sort.uniq.delete_if { |x| models.include?(x) }
     end
 
-    def get_model_names
-      Dir[ "#{Rails.root}/app/models/**/*.rb", 
-           "#{Rails.root}/vendor/plugins/**/app/models/**/*.rb" ].collect { |m| File.basename(m).sub(/\.rb$/,'').camelize }
+    ##
+    # Gets a list of models under app/models
+    #
+    def discover_models
+      all_models = []
+      Dir.chdir(File.join(Rails.root, 'app/models')) do
+        Dir['**/*.rb'].each do |m|
+          class_name = m.sub(/\.rb$/,'').camelize
+          klass = class_name.split('::').inject(Object){ |klass,part| klass.const_get(part) }
+          all_models << "#{class_name}" if klass < ActiveRecord::Base && !klass.abstract_class?
+        end
+      end
+      return all_models
     end
 
     def user_class

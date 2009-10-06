@@ -19,7 +19,7 @@ class TypusGenerator < Rails::Generator::Base
 
       # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> 
       # detect available AR models on the application.
-      models = Dir['app/models/*.rb'].collect { |x| File.basename(x).sub(/\.rb$/,'').camelize }
+      models = (Typus.discover_models + Typus.models).uniq
       ar_models = []
 
       models.each do |model|
@@ -146,15 +146,20 @@ class TypusGenerator < Rails::Generator::Base
       #
 
       ar_models << TypusUser
-
       ar_models.each do |model|
 
+        folder = "admin/#{model.name.tableize}".split('/')[0...-1].join('/')
+
+        # Create needed folder.
+        [ "app/controllers/#{folder}", 
+          "test/functional/#{folder}"].each { |f| FileUtils.mkdir_p(f) unless File.directory?(f) }
+
         m.template "auto/resources_controller.rb.erb", 
-                   "app/controllers/admin/#{model.table_name}_controller.rb", 
+                   "app/controllers/admin/#{model.name.tableize}_controller.rb", 
                    :assigns => { :model => model.name }
 
         m.template "auto/resource_controller_test.rb.erb", 
-                   "test/functional/admin/#{model.table_name}_controller_test.rb", 
+                   "test/functional/admin/#{model.name.tableize}_controller_test.rb", 
                    :assigns => { :model => model.name }
 
       end

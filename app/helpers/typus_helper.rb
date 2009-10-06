@@ -25,13 +25,14 @@ module TypusHelper
 
           klass = model.constantize
           klass_resource = klass.name.tableize
+          klass_human_name = klass.typus_human_name.gsub('/', ' ').pluralize
 
           admin_items_path = { :controller => "admin/#{klass_resource}" }
           new_admin_item_path = { :controller => "admin/#{klass_resource}", :action => 'new'}
 
           html << <<-HTML
 <tr class="#{cycle('even', 'odd')}">
-<td>#{link_to klass.typus_human_name.pluralize, admin_items_path}<br /><small>#{_(klass.typus_description) if !klass.typus_description.nil?}</small></td>
+<td>#{link_to klass_human_name, admin_items_path}<br /><small>#{_(klass.typus_description) if !klass.typus_description.nil?}</small></td>
 <td class="right"><small>
 #{link_to _("Add"), new_admin_item_path if @current_user.can_perform?(klass, 'create')}
 </small></td>
@@ -114,7 +115,7 @@ module TypusHelper
 
   def page_title(action = params[:action])
     crumbs = [ ]
-    crumbs << @resource[:class].typus_human_name.pluralize if @resource
+    crumbs << @resource[:human_name].pluralize if @resource
     crumbs << _(action.humanize) unless %w( index ).include?(action)
     return "#{Typus::Configuration.options[:app_name]} - " + crumbs.compact.map { |x| x }.join(' &rsaquo; ')
   end
