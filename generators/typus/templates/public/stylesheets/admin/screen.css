@@ -354,7 +354,7 @@ input#search { border: 1px solid #999; font-size: 1.2em; padding: 3px; }
 
 /* @group Sprite */
 
-.sprite { background: url(/images/admin/ui-icons.png) no-repeat; text-indent: -1000px; }
+.sprite { background: url(/images/admin/ui-icons.png) no-repeat; text-indent: -10000px; }
 .trash { background-position: -177px -97px; height: 15px; width: 15px; }
 .unrelate { background-position: -145px -129px; height: 15px; width: 15px; }
 
