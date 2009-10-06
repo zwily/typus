@@ -24,6 +24,10 @@ ActiveRecord::Schema.define do
 
   add_index :comments, :post_id
 
+  create_table :delayed_tasks, :force => true do |t|
+    t.string :name
+  end
+
   create_table :pages, :force => true do |t|
     t.string :title
     t.text :body
