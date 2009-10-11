@@ -167,7 +167,7 @@ module Admin::TableHelper
 
   def typus_table_string_field(attribute, item, link_options = {})
     <<-HTML
-<td class="#{attribute}">#{item.send(attribute)}</td>
+<td class="#{attribute}">#{h(item.send(attribute))}</td>
     HTML
   end
 
