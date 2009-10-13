@@ -1,8 +1,8 @@
-Typus was designed and developed by Francesc Esplugas (fesplugas).
+Typus was designed & developed by Francesc Esplugas (fesplugas).
 
 Special thanks to the following individuals:
 
-* Laia Gargallo (Lover and tea provider) http://azotacalles.net
+* Laia Gargallo (Lover & tea provider) http://azotacalles.net
 * Isaac Feliu (Codereview on first public release) http://www.vesne.com
 * Lluis Folch (Icons, feedback & crazy ideas) http://wet*floor.com
 * Sergio Espeja (Code) http://github.com/spejman
@@ -10,13 +10,25 @@ Special thanks to the following individuals:
 * Anthony Underwood (Code) http://github.com/aunderwo
 * Felipe Talavera (Code) http://github.com/flype
 * Erik Tigerholm (Code) http://github.com/eriktigerholm
-* George Guimarães (Portuguese translation and code) http://github.com/georgeguimaraes
+* George Guimarães (Portuguese translation & code) http://github.com/georgeguimaraes
 * José Valim (Code) http://github.com/josevalim
 * Luqman Amjad (Code) http://github.com/luqman
-* Alexey Noskov (Russian translation and code) http://github.com/alno
+* Alexey Noskov (Russian translation & code) http://github.com/alno
 * Andres Gutierres (Bugfixes & feedback) http://github.com/andresgutgon
 * Komzák Nándor (Code, bugfixes & feedback) http://github.com/rubymood
 * Michael Grunewalder (German translation) http://michael.grunewalder.com
 * Tim Harvey (Code) http://www.timharvey.net/ 
-* Ned Baldessin (French translation and code) http://github.com/nedbaldessin
+* Ned Baldessin (French translation & code) http://github.com/nedbaldessin
 * Robert Rouse (Code) * Ruby 1.9 compatibility fixes.
+
+Somehow involved in the project
+
+* Yukihiro "matz" Matsumoto (http://www.rubyist.net/~matz/) creator of Ruby 
+  (http://ruby-lang.org/) the most beautiful programming language I've ever seen.
+* David Heinemeier Hansson (http://loudthinking.com/) for creating 
+  Ruby on Rails (http://rubyonrails.org/).
+* Django Admin (http://www.djangoproject.com) who inspired part of the 
+  development, in special the templates rendering & UI.
+* Paginator (http://github.com/bruce/paginator/tree/master) by 
+  Bruce Williams (http://codefluency.com) which is used by **Typus** to 
+  paginate records.
