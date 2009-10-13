@@ -13,11 +13,20 @@ extensible enough to match lots of use cases.
 - Bugs http://github.com/fesplugas/typus/issues
 - Gems: http://gemcutter.org/gems/typus
 
+== Features
+
+- Access control by users and roles.
+- CRUD and custom actions for your models on a clean interface.
+- Internationalized interface.
+- Extensible and overwritable templates.
+- Low memory footprint.
+- Released under the MIT License.
+
 == Impatients to see it working?
 
 Step 1: Create a Rails application using a template.
 
-    $ rails example.com -m http://gist.github.com/86613.txt
+    $ rails example.com -m http://tr.im/typus_example
 
 Step 2: Start the server:
 
@@ -37,14 +46,6 @@ Use the following credentials to log in.
 
     Email: userdemo@intraducibles.com
     Password: userdemo
-
-Notes on the application demo:
-
-- Runs under SSL.
-- Has an Assets model to show how assets can work.
-- User can only edit the posts they have generated.
-- User cannot edit Categories, just view them.
-- Shows how TinyMCE is integrated with Pages.
 
 == Installing
 
@@ -75,20 +76,6 @@ mailing list.
 
 Tell everybody about *Typus*, tell your friends and colleagues about 
 *Typus* and blog about *Typus*.
-
-== Using Typus as a Gem?
-
-If you are using *Typus* as a gem add the following line at the end of the 
-<tt>Rakefile</tt> on the root of your Rails application.
-
-    Dir["#{RAILS_ROOT}/vendor/gems/*/**/tasks/**/*.rake"].sort.each { |ext| load ext }
-
-== Acknowledgments
-
-- *Typus* uses "Paginator" by Bruce Williams http://codefluency.com.
-- *Typus* has been inspired by "Django Admin" http://djangoproject.com.
-- *Typus* uses http://fancybox.net.
-- *Typus* uses UI icons from http://jqueryui.com.
 
 Copyright (c) 2007-2009 Francesc Esplugas Marti, released under the 
 MIT license
