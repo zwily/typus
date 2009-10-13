@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2009-10-04}
+  s.date = %q{2009-10-13}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -17,6 +17,8 @@ Gem::Specification.new do |s|
   ]
   s.files = [
     ".gitignore",
+     "CONTRIBUTORS",
+     "HISTORY.md",
      "MIT-LICENSE",
      "README.rdoc",
      "Rakefile",
@@ -119,6 +121,7 @@ Gem::Specification.new do |s|
      "lib/typus/reloader.rb",
      "lib/typus/string.rb",
      "lib/typus/user.rb",
+     "lib/typus/version.rb",
      "lib/vendor/active_record.rb",
      "lib/vendor/paginator.rb",
      "lib/vendor/rss_parser.rb",
@@ -203,8 +206,7 @@ Gem::Specification.new do |s|
      "test/unit/typus_user_roles_test.rb",
      "test/unit/typus_user_test.rb",
      "test/vendor/active_record_test.rb",
-     "test/vendor/paginator_test.rb",
-     "typus.gemspec"
+     "test/vendor/paginator_test.rb"
   ]
   s.homepage = %q{http://intraducibles.com/projects/typus}
   s.rdoc_options = ["--charset=UTF-8"]

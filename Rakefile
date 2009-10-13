@@ -11,17 +11,6 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = true
 end
 
-desc 'Generate documentation for the typus plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_files.add ['README.rdoc', 'MIT-LICENSE', 'lib/**/*.rb']
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Typus documentation'
-  rdoc.main = 'README.rdoc'
-  rdoc.options << '--charset=UTF-8'
-  rdoc.options << '--inline-source'
-  rdoc.options << '--line-numbers'
-end
-
 desc 'Generate specdoc-style documentation from tests'
 task :specs do
 
@@ -52,9 +41,9 @@ begin
   Jeweler::Tasks.new do |gemspec|
     gemspec.name = "typus"
     gemspec.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
+    gemspec.description = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
     gemspec.email = "francesc@intraducibles.com"
     gemspec.homepage = "http://intraducibles.com/projects/typus"
-    gemspec.description = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
     gemspec.authors = ["Francesc Esplugas"]
     gemspec.version = Typus::Version
   end
@@ -83,9 +72,9 @@ task :install_edge => [ :dev_version, :gemspec, :build ] do
   exec "gem install pkg/typus-#{Typus::Version}.gem"
 end
 
-# Sets the current Mustache version to the current dev version
+# Sets the current Typus version to the current dev version
 task :dev_version do
-  $LOAD_PATH.unshift 'lib/typus'
+  $LOAD_PATH.unshift 'lib'
   require 'typus/version'
   version = Typus::Version + '.' + Time.now.to_i.to_s
   Typus.const_set(:Version, version)
