@@ -1,5 +1,9 @@
+require 'rubygems'
 require 'rake/testtask'
 require 'rake/rdoctask'
+
+$LOAD_PATH.unshift 'lib'
+require 'typus/version'
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -36,8 +40,6 @@ end
 
 begin
   require 'jeweler'
-  $LOAD_PATH.unshift 'lib'
-  require 'typus/version'
   Jeweler::Tasks.new do |gemspec|
     gemspec.name = "typus"
     gemspec.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
@@ -52,30 +54,17 @@ rescue LoadError
   puts "Install it with: gem install jeweler -s http://gemcutter.org"
 end
 
-begin
-  require 'sdoc_helpers'
-rescue LoadError
-  puts "sdoc support not enabled. Please gem install sdoc-helpers."
-end
+desc "Generate package."
+task :package => [ :write_version, :gemspec, :build ]
 
 desc "Push a new version to Gemcutter"
-task :publish => [ :gemspec, :build ] do
+task :publish do
   system "git tag v#{Typus::Version}"
   system "git push origin v#{Typus::Version}"
   system "gem push pkg/typus-#{Typus::Version}.gem"
   system "git clean -fd"
-  exec "rake pages"
 end
 
-desc "Install the edge gem"
-task :install_edge => [ :dev_version, :gemspec, :build ] do
-  exec "gem install pkg/typus-#{Typus::Version}.gem"
-end
-
-# Sets the current Typus version to the current dev version
-task :dev_version do
-  $LOAD_PATH.unshift 'lib'
-  require 'typus/version'
-  version = Typus::Version + '.' + Time.now.to_i.to_s
-  Typus.const_set(:Version, version)
+task :write_version do
+  File.open('VERSION', 'w') {|f| f.write(Typus::Version) }
 end
