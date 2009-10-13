@@ -5,4 +5,6 @@ _dashboard*
 rdoc/*
 *~
 *.gem
+typus.gemspec
+VERSION
 SPECDOC
