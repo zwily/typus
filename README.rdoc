@@ -70,8 +70,7 @@ encourage you to support this project by donating[http://intraducibles.com/proje
 time working and supporting the project. All contributions are much appreciated!
 
 * Hire us to work on your next project. We build large and small websites.
-* Contribute your patches to the community & support people on the 
-mailing list.
+* Contribute your patches to the community & support people on the mailing list.
 * Tell everybody about *Typus*, tell your friends and colleagues about 
 *Typus* and blog about *Typus*.
 
