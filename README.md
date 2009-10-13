@@ -21,7 +21,7 @@ extensible enough to match lots of use cases.
 - [Project site and documentation](http://intraducibles.com/projects/typus)
 - [Plugin source](http://github.com/fesplugas/typus)
 - [Mailing list](http://groups.google.com/group/typus)
-- [Bug reporting](http://github.com/fesplugas/typus/issues)
+- [Bug reports](http://github.com/fesplugas/typus/issues)
 - [Gems](http://gemcutter.org/gems/typus)
 
 ## Impatients to see it working?
