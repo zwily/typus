@@ -39,9 +39,7 @@ extensible enough to match lots of use cases.
 
 ## Want to see a demo working?
 
-There's an application running at Heroku.
-
-    http://typus.heroku.com/
+Demo application is hosted at Heroku (<http://typus.heroku.com/>).
 
 Use the following credentials to log in.
 
