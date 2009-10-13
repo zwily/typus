@@ -69,12 +69,10 @@ encourage you to support this project by donating[http://intraducibles.com/proje
 90 euros if you are a developer or studio. Donations do allow us to spend more 
 time working and supporting the project. All contributions are much appreciated!
 
-Hire us to work on your next project. We build large and small websites.
-
-Contribute your patches to the community & support people on the 
+* Hire us to work on your next project. We build large and small websites.
+* Contribute your patches to the community & support people on the 
 mailing list.
-
-Tell everybody about *Typus*, tell your friends and colleagues about 
+* Tell everybody about *Typus*, tell your friends and colleagues about 
 *Typus* and blog about *Typus*.
 
 Copyright (c) 2007-2009 Francesc Esplugas Marti, released under the 
