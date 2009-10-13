@@ -1,3 +1,3 @@
 class Typus
-  Version = '0.9.36'
+  Version = '0.9.37'
 end
