@@ -58,7 +58,7 @@ desc "Generate package."
 task :package => [ :write_version, :gemspec, :build ]
 
 desc "Push a new version to Gemcutter"
-task :publish do
+task :publish => [ :package ] do
   system "git tag v#{Typus::Version}"
   system "git push origin v#{Typus::Version}"
   system "gem push pkg/typus-#{Typus::Version}.gem"
