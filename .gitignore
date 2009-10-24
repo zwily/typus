@@ -1,10 +1,1 @@
-*.swp
-*.db
 *.log
-_dashboard*
-rdoc/*
-*~
-*.gem
-typus.gemspec
-VERSION
-SPECDOC
