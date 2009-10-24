@@ -81,6 +81,7 @@ module Typus
         resource = resource.to_s
 
         return false if !resources.include?(resource)
+        return true if resources[resource].include?('all')
 
         _action = if options[:special]
                     action

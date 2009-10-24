@@ -23,7 +23,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     models.delete_if { |m| resources.include?(m) }
 
     %w( create read update destroy ).each do |action|
-      models.each { |model| assert typus_user.can_perform?(model, action) }
+      models.each { |model| assert typus_user.can_perform?(model, action), "Error on #{model} #{action}" }
     end
 
     # Order resource doesn't have an index action, so we current user 
@@ -85,6 +85,13 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     %w( read update ).each { |action| assert typus_user.can_perform?('Post', action) }
     %w( create delete ).each { |action| assert !typus_user.can_perform?('Post', action) }
 
+  end
+
+  def test_admin_can_perform_any_action_on_delayed_task_model
+    typus_user = typus_users(:admin)
+    action = 'whatever_i_want_to'
+    klass = Delayed::Task
+    assert typus_user.can_perform?(klass, action), "Admin can't perform `#{action}` on `#{klass}`."
   end
 
 end
