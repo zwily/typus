@@ -100,9 +100,6 @@ module Typus
       Typus::Configuration.config!
       Typus::Configuration.roles!
 
-      # Require the test/models on when testing.
-      require File.dirname(__FILE__) + '/../test/models' if testing?
-
       # Rails Extensions.
       require 'typus/active_record'
       require 'typus/extensions/routes'
