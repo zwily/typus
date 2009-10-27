@@ -14,9 +14,9 @@ module Typus
       if send(attachment).styles.member?(file_preview) && send("#{attachment}_content_type") =~ /^image\/.+/
         <<-HTML
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function() { $("##{to_dom}").fancybox(); });
+  $(document).ready(function() { $("##{to_dom}_preview").fancybox(); });
 </script>
-<a id="#{to_dom}" href="#{send(attachment).url(file_preview)}" title="#{typus_name}">#{send(attribute)}</a>
+<a id="#{to_dom}_preview" href="#{send(attachment).url(file_preview)}" title="#{typus_name}">#{send(attribute)}</a>
         HTML
       else
         <<-HTML
@@ -37,24 +37,26 @@ module Typus
         if send(attachment).styles.member?(file_preview) && send(attachment).styles.member?(file_thumbnail)
           <<-HTML
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function() { $("##{to_dom}").fancybox(); });
+  $(document).ready(function() { $("##{to_dom}_preview").fancybox(); });
 </script>
-<a id="#{to_dom}" href="#{send(attachment).url(file_preview)}" title="#{typus_name}">
+<a id="#{to_dom}_preview" href="#{send(attachment).url(file_preview)}" title="#{typus_name}">
 <img src="#{send(attachment).url(file_thumbnail)}" />
         </a>
           HTML
         elsif send(attachment).styles.member?(file_thumbnail)
           <<-HTML
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function() { $("##{to_dom}").fancybox(); });
-</script>
 <a href="#{send(attachment).url}" title="#{typus_name}">
 <img src="#{send(attachment).url(file_thumbnail)}" />
         </a>
           HTML
         elsif send(attachment).styles.member?(file_preview)
           <<-HTML
-<img src="#{send(attachment).url(file_preview)}" />
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function() { $("##{to_dom}_preview").fancybox(); });
+</script>
+<a id="#{to_dom}_preview" href="#{send(attachment).url(file_preview)}" title="#{typus_name}">
+#{send(attribute)}
+        </a>
           HTML
         else
           <<-HTML
