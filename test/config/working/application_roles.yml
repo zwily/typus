@@ -2,7 +2,7 @@ admin:
   Asset: create, read, update, delete
   Category: create, read, update, delete
   Comment: create, read, update, delete
-  Delayed::Task: create, read, update, delete
+  Delayed::Task: all
   Git: index, commit
   Order:
   Page: create, read, update, delete, rebuild, rebuild_all

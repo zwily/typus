@@ -52,6 +52,7 @@
   "Record moved {{to}}": 
   "Recover password": 
   "Remove entry?": 
+  "Remove file": 
   "Remove filter": 
   "Reset password": 
   "Resources": 
@@ -92,6 +93,7 @@
   "You're updating a {{resource_from}} for {{resource_to}}": 
   "You're updating a {{resource_from}}": 
   "Your new password is {{password}}": 
+  "{{attachment}} removed": 
   "{{current_user_role}} can't delete this item": 
   "{{current_user_role}} can't display items": 
   "{{current_user_role}} can't go to {{action}} on {{controller}}": 

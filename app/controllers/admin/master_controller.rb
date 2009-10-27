@@ -26,7 +26,7 @@ class Admin::MasterController < ApplicationController
 
   before_filter :set_resource
   before_filter :find_item, 
-                :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
+                :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate, :detach ]
 
   before_filter :check_ownership_of_item, 
                 :only => [ :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
@@ -246,6 +246,17 @@ class Admin::MasterController < ApplicationController
 
   end
 
+  def detach
+
+    flash[:success] = _("{{attachment}} removed.", 
+                        :attachment => @resource[:class].human_attribute_name(params[:attachment]))
+
+    @item.update_attribute params[:attachment], nil
+
+    redirect_to :back
+
+  end
+
 private
 
   def set_resource
@@ -306,7 +317,7 @@ private
     klass = params[:resource].classify.constantize
     return if !klass.typus_user_id?
     item = klass.find(params[:resource_id])
-    raise "You're not owner of this record." unless item.owned_by?(@current_user)
+    raise "You're not owner of this record." unless item.owned_by?(@current_user) || @current_user.is_root?
   end
 
   def set_fields

@@ -1,8 +1,1 @@
-*.swp
-*.db
 *.log
-_dashboard*
-rdoc/*
-*~
-*.gem
-SPECDOC

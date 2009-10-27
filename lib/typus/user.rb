@@ -77,7 +77,11 @@ module Typus
 
       def can_perform?(resource, action, options = {})
 
-        return false if !resources.include?(resource.to_s)
+        # We are getting a Class, so we need to convert it to string.
+        resource = resource.to_s
+
+        return false if !resources.include?(resource)
+        return true if resources[resource].include?('all')
 
         _action = if options[:special]
                     action
@@ -88,12 +92,13 @@ module Typus
                     when 'edit', 'update'      then 'update'
                     when 'position', 'toggle'  then 'update'
                     when 'relate', 'unrelate'  then 'update'
+                    when 'detach'              then 'update'
                     when 'destroy'             then 'delete'
                     else action
                     end
                   end
 
-        resources[resource.to_s].split(', ').include?(_action)
+        resources[resource].split(', ').include?(_action)
 
       end
 

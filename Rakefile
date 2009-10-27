@@ -1,6 +1,9 @@
-require 'rake'
+require 'rubygems'
 require 'rake/testtask'
 require 'rake/rdoctask'
+
+$LOAD_PATH.unshift 'lib'
+require 'typus/version'
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -10,17 +13,6 @@ Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.pattern = 'test/**/*_test.rb'
   t.verbose = true
-end
-
-desc 'Generate documentation for the typus plugin.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
-  rdoc.rdoc_files.add ['README.rdoc', 'MIT-LICENSE', 'lib/**/*.rb']
-  rdoc.rdoc_dir = 'rdoc'
-  rdoc.title    = 'Typus documentation'
-  rdoc.main = 'README.rdoc'
-  rdoc.options << '--charset=UTF-8'
-  rdoc.options << '--inline-source'
-  rdoc.options << '--line-numbers'
 end
 
 desc 'Generate specdoc-style documentation from tests'
@@ -51,11 +43,28 @@ begin
   Jeweler::Tasks.new do |gemspec|
     gemspec.name = "typus"
     gemspec.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
+    gemspec.description = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
     gemspec.email = "francesc@intraducibles.com"
     gemspec.homepage = "http://intraducibles.com/projects/typus"
-    gemspec.description = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
     gemspec.authors = ["Francesc Esplugas"]
+    gemspec.version = Typus::Version
   end
 rescue LoadError
-  puts "Jeweler not available. Install it with: sudo gem install jeweler -s http://gemcutter.org"
+  puts "Jeweler not available."
+  puts "Install it with: gem install jeweler -s http://gemcutter.org"
+end
+
+desc "Generate package."
+task :package => [ :write_version, :gemspec, :build ]
+
+desc "Push a new version to Gemcutter"
+task :publish => [ :package ] do
+  system "git tag v#{Typus::Version}"
+  system "git push origin v#{Typus::Version}"
+  system "gem push pkg/typus-#{Typus::Version}.gem"
+  system "git clean -fd"
+end
+
+task :write_version do
+  File.open('VERSION', 'w') {|f| f.write(Typus::Version) }
 end

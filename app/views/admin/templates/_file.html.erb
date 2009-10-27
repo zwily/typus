@@ -1,6 +1,15 @@
-<% attachment = attribute.split('_file_name').first %>
+<%
 
-<li><label for="item_<%= attribute %>"><%= _(attachment.humanize) %></label>
+  attachment = attribute.split('_file_name').first
+  options = { :action => 'detach', :id => @item, :attachment => attachment }
+  remove_file = <<-HTML
+<small>#{link_to _("Remove file"), options}</small>
+                HTML
+  remove_file = nil if @item.send(attribute).blank?
+
+%>
+
+<li><label for="item_<%= attribute %>"><%= _(attachment.humanize) %> <%= remove_file %></label>
 <%= file_field :item, attachment, :disabled => attribute_disabled?(attribute) %>
 <%= @item.typus_preview(attribute) unless @item.send(attribute).blank? %>
 </li>

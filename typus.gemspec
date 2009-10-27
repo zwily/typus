@@ -5,20 +5,22 @@
 
 Gem::Specification.new do |s|
   s.name = %q{typus}
-  s.version = "0.9.36"
+  s.version = "0.9.39"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2009-10-04}
+  s.date = %q{2009-10-24}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
-    "README.rdoc"
+    "README.md"
   ]
   s.files = [
     ".gitignore",
+     "AUTHORS.md",
+     "CHANGES",
      "MIT-LICENSE",
-     "README.rdoc",
+     "README.md",
      "Rakefile",
      "VERSION",
      "app/controllers/admin/master_controller.rb",
@@ -153,6 +155,14 @@ Gem::Specification.new do |s|
      "test/fixtures/app/controllers/admin/status_controller.rb",
      "test/fixtures/app/controllers/admin/typus_users_controller.rb",
      "test/fixtures/app/controllers/admin/watch_dog_controller.rb",
+     "test/fixtures/app/models/asset.rb",
+     "test/fixtures/app/models/category.rb",
+     "test/fixtures/app/models/comment.rb",
+     "test/fixtures/app/models/custom_user.rb",
+     "test/fixtures/app/models/delayed/task.rb",
+     "test/fixtures/app/models/page.rb",
+     "test/fixtures/app/models/post.rb",
+     "test/fixtures/app/models/view.rb",
      "test/fixtures/app/views/admin/dashboard/_content.html.erb",
      "test/fixtures/app/views/admin/dashboard/_sidebar.html.erb",
      "test/fixtures/app/views/admin/posts/_edit.html.erb",
@@ -196,7 +206,6 @@ Gem::Specification.new do |s|
      "test/lib/routes_test.rb",
      "test/lib/string_test.rb",
      "test/lib/typus_test.rb",
-     "test/models.rb",
      "test/schema.rb",
      "test/unit/typus_mailer_test.rb",
      "test/unit/typus_test.rb",
@@ -220,6 +229,14 @@ Gem::Specification.new do |s|
      "test/fixtures/app/controllers/admin/status_controller.rb",
      "test/fixtures/app/controllers/admin/typus_users_controller.rb",
      "test/fixtures/app/controllers/admin/watch_dog_controller.rb",
+     "test/fixtures/app/models/asset.rb",
+     "test/fixtures/app/models/category.rb",
+     "test/fixtures/app/models/comment.rb",
+     "test/fixtures/app/models/custom_user.rb",
+     "test/fixtures/app/models/delayed/task.rb",
+     "test/fixtures/app/models/page.rb",
+     "test/fixtures/app/models/post.rb",
+     "test/fixtures/app/models/view.rb",
      "test/functional/admin/master_controller_assets_relationships.rb",
      "test/functional/admin/master_controller_categories_lists_test.rb",
      "test/functional/admin/master_controller_posts_before_test.rb",
@@ -246,7 +263,6 @@ Gem::Specification.new do |s|
      "test/lib/routes_test.rb",
      "test/lib/string_test.rb",
      "test/lib/typus_test.rb",
-     "test/models.rb",
      "test/schema.rb",
      "test/unit/typus_mailer_test.rb",
      "test/unit/typus_test.rb",
