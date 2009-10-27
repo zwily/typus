@@ -104,4 +104,5 @@ es:
   "Documentation": "Documentación"
   "Submit a bug report": "Reporta un error"
   "{{attachment}} removed": "{{attribute}} borrado."
+  "{{attachment}} can't be removed": "{{attribute}} no puede ser borrado."
   "Remove file": "Borrar archivo"

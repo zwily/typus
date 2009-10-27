@@ -94,6 +94,7 @@
   "You're updating a {{resource_from}}": 
   "Your new password is {{password}}": 
   "{{attachment}} removed": 
+  "{{attachment}} can't be removed": 
   "{{current_user_role}} can't delete this item": 
   "{{current_user_role}} can't display items": 
   "{{current_user_role}} can't go to {{action}} on {{controller}}": 
