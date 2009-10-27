@@ -41,19 +41,15 @@ ru:
   "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Если вы сделали какие-то изменения, не кликая на Обновить/Сохранить, то они будут утеряны."
   "Inactive": 
 
-  "Enter your email below to create the first user": "Введите E-Mail для создания первого пользователя"
-  "Error! Typus User or role doesn't exist": "Ошибка! Пользователь или роль не существует"
-
-  "False": 
-
   "Last few days": "Последние дней"
   "Last 7 days": "Последние 7 дней"
   "Last 30 days": "Последние 30 дней"
+  "License": 
   "Logged as": "Вы вошли как"
   "Login": "Редактировать"
 
-  "Next": "Следующий"
   "New": "Новый"
+  "Next": "Следующий"
 
   "Options": "Опции"
   "Overview": "Обзор"
