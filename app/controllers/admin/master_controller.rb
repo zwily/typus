@@ -248,10 +248,13 @@ class Admin::MasterController < ApplicationController
 
   def detach
 
-    flash[:success] = _("{{attachment}} removed.", 
-                        :attachment => @resource[:class].human_attribute_name(params[:attachment]))
+    attachment = @resource[:class].human_attribute_name(params[:attachment])
 
-    @item.update_attribute params[:attachment], nil
+    if @item.update_attributes(params[:attachment] => nil)
+      flash[:success] = _("{{attachment}} removed.", :attachment => attachment)
+    else
+      flash[:notice] = _("{{attachment}} can't be removed.", :attachment => attachment)
+    end
 
     redirect_to :back
 
