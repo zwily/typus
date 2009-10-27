@@ -14,7 +14,6 @@ es:
 
   "Back to list": "Volver al listado"
 
-  "Click here": "Pulsa aquí"
   "Click OK to continue, or click Cancel to stay on this page": "Pulse OK para continuar, o pulse Cancelar para permanecer en esta página."
   "Change password": "Cambiar contraseña"
   "Change {{attribute}}?": "Cambiar {{attribute}}?"
@@ -28,7 +27,6 @@ es:
   "Down": "Bajar"
 
   "Edit": "Editar"
-  "Email": "Correo"
   "Enter your email below to create the first user": "Introduce tu email para crear el primer usuario."
   "Error! Typus User or role doesn't exist": "Error! Typus User o el role no existen."
 
@@ -90,7 +88,6 @@ es:
 
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?"
   "Up": "Subir"
-  "Update": "Actualizado"
   "Update entry": "Actualizar entrada"
 
   "You're adding a new {{resource_from}}": "Estas añadiendo un nuevo {{resource_from}}."

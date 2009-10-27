@@ -4,7 +4,7 @@ de:
       typus_user: "Typus Benutzer"
     attributes:
       typus_user:
-        email: "Email"
+        email: 
         first_name: "Vorname"
         last_name: "Nachname"
         password: "Passwort"
