@@ -26,7 +26,7 @@ class Admin::MasterController < ApplicationController
 
   before_filter :set_resource
   before_filter :find_item, 
-                :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
+                :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate, :detach ]
 
   before_filter :check_ownership_of_item, 
                 :only => [ :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
@@ -241,6 +241,17 @@ class Admin::MasterController < ApplicationController
     flash[:success] = _("{{model_a}} unrelated from {{model_b}}.", 
                         :model_a => resource_class.typus_human_name, 
                         :model_b => @resource[:human_name])
+
+    redirect_to :back
+
+  end
+
+  def detach
+
+    flash[:success] = _("{{attachment}} removed.", 
+                        :attachment => @resource[:class].human_attribute_name(params[:attachment]))
+
+    @item.update_attribute params[:attachment], nil
 
     redirect_to :back
 

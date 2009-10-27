@@ -92,6 +92,7 @@ module Typus
                     when 'edit', 'update'      then 'update'
                     when 'position', 'toggle'  then 'update'
                     when 'relate', 'unrelate'  then 'update'
+                    when 'detach'              then 'update'
                     when 'destroy'             then 'delete'
                     else action
                     end
