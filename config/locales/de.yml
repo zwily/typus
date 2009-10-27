@@ -2,9 +2,6 @@
 # by Michael Grunewalder <http://michael.grunewalder.com>
 
 de:
-  "Email": "Email"
-  "Password": "Passwort"
-  "Password confirmation": "Passwort Best&auml;tigung"
   "Sign in": "Anmelden"
   "Recover password": "Passwort vergessen?"
   "Sign up": "Konto erstellen"
@@ -58,11 +55,7 @@ de:
   "Your new password is {{password}}": "Ihr neues Passwort ist {{password}}"
   "Add entry": "Eintrag erstellen"
   "Go to": "Gehe zu"
-  "First name": "Vorname"
-  "Last name": "Nachname"
-  "Roles": "Rollen"
   "Status": "Status"
-  "Typus User": "Typus Benutzer"
   "System Users Administration": "System Benutzer Verwaltung"
   "Resources": "Resourcen"
   "Up": "Hoch"

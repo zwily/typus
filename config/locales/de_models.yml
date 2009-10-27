@@ -1,0 +1,11 @@
+de:
+  activerecord:
+    models:
+      typus_user: "Typus Benutzer"
+    attributes:
+      typus_user:
+        email: "Email"
+        first_name: "Vorname"
+        last_name: "Nachname"
+        password: "Passwort"
+        password_confirmation: "Passwort Best&auml;tigung"

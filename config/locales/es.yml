@@ -33,8 +33,7 @@ es:
   "Error! Typus User or role doesn't exist": "Error! Typus User o el role no existen."
 
   "False": "Falso"
-  "Filter by": "filtrar por"
-  "First name": "Nombre"
+  "Filter by": "Filtrar por"
 
   "Go to": "Ir a"
 
@@ -43,7 +42,6 @@ es:
   "If you didn't request a password update, you can ignore this message": "Si no pediste una actualización de tu contraseña, puedes ignorar este mensaje."
 
   "Last few days": "Últimos dias"
-  "Last name": "Apellidos"
   "Last 7 days": "Últimos 7 dias"
   "Last 30 days": "Últimos 30 dias"
   "License": "Licencia"
@@ -56,9 +54,6 @@ es:
   "Options": "Opciones"
   "Overview": "Visión general"
 
-  "Password": "Contraseña"
-  "Password confirm": "Confirmación de contraseña"
-  "Password confirmation": "Confirmar contraseña"
   "Password recovery link sent to your email": "Enlace de recuperación de contraseña enviado a tu correo electrónico."
   "Previous": "Anterior"
 
@@ -69,8 +64,6 @@ es:
   "Remove filter": "Quitar filtro"
   "Reset password": "Cambiar contraseña"
   "Resources": "Recursos"
-
-  "Roles": "Roles"
 
   "Search": "Búsqueda"
   "Search by": "Buscar por"
