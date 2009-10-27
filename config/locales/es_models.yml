@@ -9,3 +9,5 @@ es:
         last_name: "Apellidos"
         password: "Contraseña"
         password_confirmation: "Confirmar contraseña"
+        status: "Estado"
+        role: "Rol"

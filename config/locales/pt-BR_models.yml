@@ -9,3 +9,5 @@ pt-BR:
         last_name: "Sobrenome"
         password: "Senha"
         password_confirmation: "Senha confirmação"
+        status: 
+        role: 

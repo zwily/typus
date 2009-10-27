@@ -5,6 +5,7 @@ ru:
 
   "A valid token is required": "Необходим корректный ключ"
   "Actions": "Действия"
+  "Active": 
   "Add": "Добавить"
   "Add entry": "Добавить запись"
   "Add new": "Добавить новый"
@@ -34,6 +35,7 @@ ru:
   "I remember my password": "Запомнить пароль"
   "If you didn't request a password update, you can ignore this message": "Если Вы не запрашивали обновление пароля, Вы можете проигнорировать это сообщение."
   "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Если вы сделали какие-то изменения, не кликая на Обновить/Сохранить, то они будут утеряны."
+  "Inactive": 
 
   "Enter your email below to create the first user": "Введите E-Mail для создания первого пользователя"
   "Error! Typus User or role doesn't exist": "Ошибка! Пользователь или роль не существует"
@@ -69,7 +71,6 @@ ru:
   "Sign in": "Войти"
   "Sign out": "Выйти"
   "Sign up": "Зарегистрироваться"
-  "Status": "Статус"
   "System Users Administration": "Администрирование системных пользователей"
 
   "That doesn't seem like a valid email address": "E-Mail некорректен"

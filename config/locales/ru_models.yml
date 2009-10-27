@@ -9,3 +9,5 @@ ru:
         last_name: "Фамлия"
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
+        status: "Статус"
+        role: 

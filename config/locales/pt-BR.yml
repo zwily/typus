@@ -5,6 +5,7 @@ pt-BR:
 
   "A valid token is required": "É necessário um token válido."
   "Actions": "Ações"
+  "Active": 
   "Add": "Adicionar"
   "Add entry": "Adicionar entrada"
   "Add new": "Adicionar novo"
@@ -37,6 +38,7 @@ pt-BR:
   "I remember my password": "Lembro minha senha"
   "If you didn't request a password update, you can ignore this message": "Se você não pediu uma renovação de senha, por favor ignore esta mensagem."
   "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Se você fez alterações nos campos e não clicou no botão de Salvar/Atualizar, suas alterações serão perdidas"
+  "Inactive": 
 
   "Last few days": "Últimos dias"
   "Last 30 days": "Últimos 30 dias"
@@ -67,7 +69,6 @@ pt-BR:
   "Sign in": "Entrar"
   "Sign out": "Sair"
   "Sign up": "Criar conta"
-  "Status": "Status"
   "System Users Administration": "Administrar usuários do sistema"
 
   "That doesn't seem like a valid email address": "Este não parece um email válido"
