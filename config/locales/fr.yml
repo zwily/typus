@@ -51,15 +51,9 @@ fr:
   "New": "Nouveau"
   "Next": "Suivant"
 
-  "Password recovery link sent to your email": "Un email vous a été envoyé pour la récupération de votre mot de passe"
-
-  "Recover password": "Récupérer le mot de passe"
-
-  "The email and/or password you entered is invalid": "L'adresse email et/ou le mot de passe sont incorrects"
-  "There are not defined applications in config/typus/*.yml": "Aucune application définie dans config/typus/*.yml"
-
   "Options": "Options"
 
+  "Password recovery link sent to your email": 
   "Previous": "Précédent"
 
   "Record moved {{to}}": "Entrées réordonnées"
