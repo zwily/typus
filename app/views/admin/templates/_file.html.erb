@@ -3,7 +3,7 @@
   attachment = attribute.split('_file_name').first
   options = { :action => 'detach', :id => @item, :attachment => attachment }
   remove_file = <<-HTML
-<small>#{link_to _("Remove file"), options}</small>
+<small>#{link_to _("Remove file"), options, :confirm => _("Are you sure?") }</small>
                 HTML
   remove_file = nil if @item.send(attribute).blank?
 
