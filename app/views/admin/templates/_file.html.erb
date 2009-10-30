@@ -9,7 +9,8 @@
 
 %>
 
-<li><label for="item_<%= attribute %>"><%= _(attachment.humanize) %> <%= remove_file %></label>
-<%= file_field :item, attachment, :disabled => attribute_disabled?(attribute) %>
-<%= @item.typus_preview(attribute) unless @item.send(attribute).blank? %>
+<li>
+  <%= f.label attribute, "#{_(attachment.humanize)} #{remove_file}" %>
+  <%= f.file_field attachment, :disabled => attribute_disabled?(attribute) %>
+  <%= @item.typus_preview(attribute) unless @item.send(attribute).blank? %>
 </li>
