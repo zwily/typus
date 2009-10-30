@@ -2,7 +2,7 @@
 
 html { background: #000; height: 100%; margin-bottom: 1px; }
 body { color: #000; font-family: "Lucida Grande", Helvetica, Arial, sans-serif; font-size: 75%; }
-label { display: block; font-weight: bold; margin-bottom: 5px; }
+label { display: block; font-weight: bold; margin-bottom: 5px; margin-top: 0px; }
 strong { font-weight: bold; }
 em { font-style: italic; }
 dl { margin: 14px 0 20px 0; }
@@ -144,43 +144,48 @@ a.on { color: #333; font-weight: bold; text-decoration: underline; }
 
 /* @end */
 
-/* @group Content Forms */
+/* @group Fieldsets */
 
-#content form { margin: 1em 0 2em 0; }
-#content form ol { margin: 0; }
-#content form ol li { list-style: none; margin: 1em 0; }
-#content form ol li p { margin: 0.5em 0; }
-#content form small { font-size: 0.9em; font-weight: normal; }
-input.button { margin: 10px 0 0 0; }
-#content input.text:focus { background: #FFFCE1; }
-#content textarea:focus { background: #FFFCE1; }
-#content select { border: 1px solid #999; font-size: 1.20em; }
-#content label.inline_label { display: inline; }
-
-#content textarea {
-  border: 1px solid #999;
-  font-family: "Courier";
-  font-size: 14px;
-  padding: 3px;
-  width: 691px;
-}
+fieldset { margin: 0; padding: 0; }
+fieldset ol { margin: 0!important; }
+fieldset ol li { list-style: none!important; margin: 1em 0!important; }
+fieldset small { font-size: 0.9em; font-weight: normal; }
 
 fieldset.inputs { }
 
-  fieldset.inputs input {
+  fieldset.inputs input[type='text'], 
+  fieldset.inputs input[type='password'] {
     border: 1px solid #999;
     font-size: 20px;
     padding: 5px;
+    width: 691px;
   }
 
-fieldset.buttons { margin-top: 30px; }
+  fieldset.inputs input[type='text']:focus, 
+  fieldset.inputs input[type='password']:focus, {
+    background: #FFFCE1;
+  }
+
+  fieldset.inputs textarea {
+    border: 1px solid #999;
+    font-family: "Courier";
+    font-size: 14px;
+    padding: 3px;
+    width: 691px;
+  }
+
+  fieldset.inputs select { border: 1px solid #999; font-size: 1.20em; }
+
+  fieldset.inputs textarea:focus { background: #FFFCE1; }
+  fieldset.inputs label.inline_label { display: inline; }
+
+fieldset.buttons { }
 
 /* @end */
 
 /* @group Content Tables */
 
 #content table.typus { width: 100%; }
-
 #content table.typus small { font-size: 0.8em; }
 #content table.typus th { color: #FFF; font-weight: normal; padding: 4px; }
 #content table.typus th a { color: #FFF!important; }
@@ -192,13 +197,7 @@ fieldset.buttons { margin-top: 30px; }
 #content table.typus tr.odd:hover a { color: #FFF!important; }
 #content table.typus tr.odd { background: #F5F5F5; }
 #content table.typus span.inactive { color: #888; }
-
-#content table.typus td {
-  border: none;
-  font-weight: normal;
-  padding: 3px 4px;
-  vertical-align: top;
-}
+#content table.typus td { border: none; font-weight: normal; padding: 3px 4px; vertical-align: top; }
 
 /* @end */
 
