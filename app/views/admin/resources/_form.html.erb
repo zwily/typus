@@ -1,4 +1,10 @@
 <% form_for @item, :url  => options, :html => { :multipart => true } do |f| %>
-  <%= build_form(@fields, f) %>
-  <p><%= submit_tag button , :class => 'button' %></p>
+  <fieldset class="inputs">
+    <%= build_form(@fields, f) %>
+  </fieldset>
+  <fieldset class="buttons">
+    <ol>
+      <li><%= submit_tag button , :class => 'commit' %></li>
+    </ol>
+  </fieldset>
 <% end %>
