@@ -147,22 +147,15 @@ a.on { color: #333; font-weight: bold; text-decoration: underline; }
 /* @group Content Forms */
 
 #content form { margin: 1em 0 2em 0; }
-#content form ul { margin: 0; }
-#content form ul li { list-style: none; margin: 1em 0; }
-#content form ul li p { margin: 0.5em 0; }
+#content form ol { margin: 0; }
+#content form ol li { list-style: none; margin: 1em 0; }
+#content form ol li p { margin: 0.5em 0; }
 #content form small { font-size: 0.9em; font-weight: normal; }
 input.button { margin: 10px 0 0 0; }
 #content input.text:focus { background: #FFFCE1; }
 #content textarea:focus { background: #FFFCE1; }
 #content select { border: 1px solid #999; font-size: 1.20em; }
 #content label.inline_label { display: inline; }
-
-#content input.text {
-  border: 1px solid #999;
-  font-size: 20px;
-  padding: 5px;
-  width: 688px;
-}
 
 #content textarea {
   border: 1px solid #999;
@@ -171,6 +164,16 @@ input.button { margin: 10px 0 0 0; }
   padding: 3px;
   width: 691px;
 }
+
+fieldset.inputs { }
+
+  fieldset.inputs input {
+    border: 1px solid #999;
+    font-size: 20px;
+    padding: 5px;
+  }
+
+fieldset.buttons { margin-top: 30px; }
 
 /* @end */
 
