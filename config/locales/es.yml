@@ -19,8 +19,7 @@ es:
   "Change {{attribute}}?": "Cambiar {{attribute}}?"
   "Checked if active": "Marca para activar"
   "Click OK to continue, or click Cancel to stay on this page": "Pulse OK para continuar, o pulse Cancelar para permanecer en esta página."
-  "Create": "Crear"
-  "Create entry": "Crear entrada"
+  "Create {{resource}}": "Create {{resource}}"
 
   "Dashboard": "Panel de control"
   "Do you want to cancel it?": "¿Quieres cancelarlo?"
@@ -65,11 +64,10 @@ es:
   "Reset password": "Cambiar contraseña"
   "Resources": "Recursos"
 
+  "Save {{resource}}": "Guardar {{resource}}"
   "Search": "Búsqueda"
   "Search by": "Buscar por"
-
   "Setup": "Configurar"
-
   "Send us feedback": "Envianos tu comentarios"
   "Show": "Mostrar"
   "Sign in": "Entrar"
@@ -90,7 +88,6 @@ es:
 
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?"
   "Up": "Subir"
-  "Update entry": "Actualizar entrada"
 
   "You're adding a new {{resource_from}}": "Estas añadiendo un nuevo {{resource_from}}."
   "You're adding a new {{resource_from}} to {{resource_to}}": "Estas añadiendo un nuevo {{resource_from}} a {{resource_to}}."

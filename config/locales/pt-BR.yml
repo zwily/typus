@@ -19,8 +19,7 @@ pt-BR:
   "Change {{attribute}}?": "Mudar {{attribute}}?"
   "Checked if active": "Marcar para ativar"
   "Click OK to continue, or click Cancel to stay on this page": "Clique OK para continuar, ou clique em Cancelar para ficar nesta página."
-  "Create": "Criar"
-  "Create entry": "Criar entrada"
+  "Create {{resource}}": "Criar {{resource}}"
 
   "Dashboard": "Painel"
   "Do you want to cancel it?": "Quer cancelar?"
@@ -63,6 +62,7 @@ pt-BR:
   "Remove entry?": "Remover entrada?"
   "Reset password": "Trocar senha"
 
+  "Save {{resource}}": 
   "Search": "Busca"
   "Search by": "Buscar por"
   "Setup": "Configurar"
@@ -83,7 +83,6 @@ pt-BR:
 
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Desvincular {{unrelate_model}} de {{unrelate_model_from}}?"
   "Up": "Subir"
-  "Update entry": "Atualizar entrada"
 
   "View site": "Ver site"
 

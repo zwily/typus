@@ -18,8 +18,7 @@
   "Change password": 
   "Checked if active": 
   "Click OK to continue, or click Cancel to stay on this page": 
-  "Create": 
-  "Create entry": 
+  "Create {{resource}}": 
 
   "Dashboard": 
   "Do you want to cancel it?": 
@@ -64,6 +63,7 @@
   "Reset password": 
   "Resources": 
 
+  "Save {{resource}}": 
   "Search": 
   "Search by": 
   "Send us feedback": 
@@ -86,7 +86,6 @@
 
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": 
   "Up": 
-  "Update entry": 
 
   "View site": 
 

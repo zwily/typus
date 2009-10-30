@@ -19,8 +19,7 @@ de:
   "Change {{attribute}}?": "{{attribute}}&auml;ndern?"
   "Checked if active": "Angekreuzt wenn activiert"
   "Click OK to continue, or click Cancel to stay on this page": "Klicken Sie OK zum Fortfahren oder Abbrechen um auf dieser Seite zu bleiben"
-  "Create": "Erstellen"
-  "Create entry": "Eintrag erstellen"
+  "Create {{resource}}": "Erstellen {{resource}}"
 
   "Dashboard": "Dashboard"
   "Do you want to cancel it?": "Wollen Sie abbrechen?"
@@ -63,6 +62,7 @@ de:
   "Reset password": "Passwort zur&uuml;cksetzen"
   "Remove entry?": "Eintrag entfernen?"
 
+  "Save {{resource}}": 
   "Setup": "Einrichten"
   "Sign in": "Anmelden"
   "Sign out": "Abmelden"
@@ -83,7 +83,6 @@ de:
   "True": "Richtig"
 
   "Up": "Hoch"
-  "Update entry": "Eintrag &auml;ndern"
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Verkn&uuml;pfung zwischen {{unrelate_model}} und {{unrelate_model_from}}entfernen?"
 
   "View site": "Site anzeigen"

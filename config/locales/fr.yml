@@ -19,8 +19,7 @@ fr:
   "Change {{attribute}}?": "Changer {{attribute}}?"
   "Checked if active": "Coché si actif"
   "Click OK to continue, or click Cancel to stay on this page": "Cliquez sur Ok pour continuer, ou Annuler pour rester sur cette page."
-  "Create": "Créer"
-  "Create entry": "Créer"
+  "Create {{resource}}": "Créer {{resource}}"
 
   "Dashboard": "Tableau de bord"
   "Do you want to cancel it?": "Voulez-vous annuler?"
@@ -63,6 +62,7 @@ fr:
   "Reset password": "Renouveler le mot de passe"
   "Resources": "Ressources"
 
+  "Save {{resource}}": 
   "Search": "Recherche"
   "Search by": "Rechercher par"
   "Setup": "Configurer"
@@ -80,7 +80,6 @@ fr:
 
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Dissocier {{unrelate_model}} de {{unrelate_model_from}}?"
   "Up": "Monter"
-  "Update entry": "Mettre-à-jour"
 
   "View site": "Voir le site"
 
