@@ -12,13 +12,13 @@
 
 <%= typus_block :location => @resource[:self], :partial => 'edit' %>
 
-<% form_for @item, 
-            :url  => { :action => 'update',
-                       :id => @item.id ,
-                       :back_to => params[:back_to],
-                       :resource => params[:resource],
-                       :resource_id => params[:resource_id]},
-            :html => { :multipart => true } do |f| %>
+<% options = { :action => 'update',
+               :id => @item.id ,
+               :back_to => params[:back_to],
+               :resource => params[:resource],
+               :resource_id => params[:resource_id]} %>
+
+<% form_for @item, :url  => options, :html => { :multipart => true } do |f| %>
   <%= build_form(@fields) %>
   <p><%= submit_tag _("Update entry"), :class => 'button' %></p>
 <% end %>
