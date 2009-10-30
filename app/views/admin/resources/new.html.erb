@@ -18,5 +18,5 @@
 
 <% form_for @item, :url  => options, :html => { :multipart => true } do |f| %>
   <%= build_form(@fields) %>
-  <p><%= submit_tag _("Create entry"), :class => 'button' %></p>
+  <p><%= submit_tag _("Create {{resource}}", :resource => @resource[:human_name]), :class => 'button' %></p>
 <% end %>

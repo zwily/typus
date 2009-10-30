@@ -20,7 +20,7 @@
 
 <% form_for @item, :url  => options, :html => { :multipart => true } do |f| %>
   <%= build_form(@fields) %>
-  <p><%= submit_tag _("Update entry"), :class => 'button' %></p>
+  <p><%= submit_tag _("Save {{resource}}", :resource => @resource[:human_name]), :class => 'button' %></p>
 <% end %>
 
 <%= typus_relationships %>
