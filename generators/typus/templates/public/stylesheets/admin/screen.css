@@ -155,7 +155,7 @@ input.button { margin: 10px 0 0 0; }
 #content input.text:focus { background: #FFFCE1; }
 #content textarea:focus { background: #FFFCE1; }
 #content select { border: 1px solid #999; font-size: 1.20em; }
-#content label.inline_label { display: inline; font-weight: normal; }
+#content label.inline_label { display: inline; }
 
 #content input.text {
   border: 1px solid #999;
