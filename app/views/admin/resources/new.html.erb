@@ -10,13 +10,13 @@
 
 <%= typus_block :location => @resource[:self], :partial => 'new' %>
 
-<% options = { :action => 'create', 
-               :back_to => params[:back_to], 
-               :selected => params[:selected], 
-               :resource => params[:resource], 
-               :resource_id => params[:resource_id] } %>
+<%
+  options = { :action => 'create', 
+              :back_to => params[:back_to], 
+              :selected => params[:selected], 
+              :resource => params[:resource], 
+              :resource_id => params[:resource_id] } 
+  button = _("Create {{resource}}", :resource => @resource[:human_name])
+%>
 
-<% form_for @item, :url  => options, :html => { :multipart => true } do |f| %>
-  <%= build_form(@fields) %>
-  <p><%= submit_tag _("Create {{resource}}", :resource => @resource[:human_name]), :class => 'button' %></p>
-<% end %>
+<%= render :partial => 'admin/resources/form', :locals => { :options => options, :button => button } %>
