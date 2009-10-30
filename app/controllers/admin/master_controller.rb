@@ -89,7 +89,7 @@ class Admin::MasterController < ApplicationController
   #
   def create
 
-    @item = @resource[:class].new(params[:item])
+    @item = @resource[:class].new(params[@resource[:symbol]])
 
     if @resource[:class].typus_user_id?
       @item.attributes = { Typus.user_fk => @current_user.id }
@@ -143,7 +143,7 @@ class Admin::MasterController < ApplicationController
 
   def update
 
-    if @item.update_attributes(params[:item])
+    if @item.update_attributes(params[@resource[:symbol]])
 
       if @resource[:class].typus_user_id? && !@current_user.is_root?
         @item.update_attributes Typus.user_fk => @current_user.id
@@ -265,7 +265,8 @@ private
   def set_resource
     @resource = { :self => params[:controller].extract_resource, 
                   :human_name => params[:controller].extract_human_name, 
-                  :class => params[:controller].extract_class }
+                  :class => params[:controller].extract_class, 
+                  :symbol => params[:controller].extract_resource.singularize.to_sym }
   rescue Exception => error
     error_handler(error)
   end
@@ -388,7 +389,7 @@ private
       message = _("{{model}} successfully created.", :model => @resource[:human_name])
       path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
     when :polymorphic
-      resource.send(@item.class.name.tableize).create(params[:item])
+      resource.send(@item.class.name.tableize).create(params[@resource[:symbol]])
       path = "#{params[:back_to]}##{@resource[:self]}"
     end
 
