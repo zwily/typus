@@ -293,9 +293,12 @@ module Admin::FormHelper
            :locals => { :resource => @resource, :attribute => attribute, :options => options }
   rescue Exception => error
     locale = @current_user.preferences[:locale]
-    raise "Missing translation file `#{locale}.yml`.
-Download it at `http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{locale}.yml` and place it on `config/locales`.
-Error message was #{error.message})"
+    message = <<-HTML
+Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{locale}.yml">here</a> and place it on `config/locales`.
+    HTML
+    flash[:error] = message
+    I18n.locale = :en
+    retry
   end
 
   def attribute_disabled?(attribute)
