@@ -4,18 +4,15 @@
   @resource[:class].send(attribute).each do |option|
     case option.kind_of?(Array)
     when true
-      selected = 'selected' if @item.send(attribute).eql?(option.last)
-      options << %Q[<option #{selected} value="#{option.last}">#{option.first}</option>]
+      options << [ option.first, option.last ]
     else
-      selected = 'selected' if @item.send(attribute).eql?(option)
-      options << %Q[<option #{selected} value="#{option}">#{option}</option>]
+      options << option
     end
   end
 
 %>
 
-<li><label for="item_<%= attribute %>"><%= @resource[:class].human_attribute_name(attribute) %></label>
-<select id="item_<%= attribute %>" <%= 'disabled="disabled"' if attribute_disabled?(attribute) %> name="item[<%= attribute %>]">
-<option value=""></option>
-<%= options.join("\n") %>
-</select></li>
+<li>
+  <%= f.label attribute %>
+  <%= f.select attribute, options, { :include_blank => true } %>
+</li>
