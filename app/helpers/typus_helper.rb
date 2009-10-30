@@ -91,6 +91,13 @@ module TypusHelper
 
   end
 
+  def form_partial
+    resource = @resource[:self]
+    template_file = "#{Rails.root}/app/views/admin/#{resource}/_form.html.erb"
+    partial = File.exists?(template_file) ? resource : 'resources'
+    return "admin/#{partial}/form"
+  end
+
   def typus_block(*args)
 
     options = args.extract_options!
