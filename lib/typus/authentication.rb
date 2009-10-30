@@ -60,7 +60,7 @@ module Typus
                 when 'update'
 
                   # current_user cannot change her role.
-                  if current_user && !(@item.role == params[:item][:role])
+                  if current_user && !(@item.role == params[@resource[:symbol]][:role])
                     _("You can't change your role.")
                   end
 
