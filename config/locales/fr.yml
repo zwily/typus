@@ -56,8 +56,10 @@ fr:
   "Previous": "Précédent"
 
   "Record moved {{to}}": "Entrées réordonnées"
-  "Record owned by another user": "Cette entrée est la propriété d'un autre utilisateur"
+  "Recover password": 
+  "Remove": 
   "Remove entry?": "Supprimer l'entrée?"
+  "Remove file": 
   "Remove filter": "Supprimer le filtre"
   "Reset password": "Renouveler le mot de passe"
   "Resources": "Ressources"
@@ -65,16 +67,21 @@ fr:
   "Save {{resource}}": 
   "Search": "Recherche"
   "Search by": "Rechercher par"
+  "Send us feedback": 
   "Setup": "Configurer"
   "Show": "Voir"
   "Sign in": "Entrer"
   "Sign out": "Déconnexion"
   "Sign up": "Ouvrir un compte"
+  "Submit a bug report": 
   "System Users Administration": "Modifier les utilisateurs de l'admin"
 
   "That doesn't seem like a valid email address": "L'adresse email ne semble pas valide"
+  "The email and/or password you entered is invalid": 
   "There are no {{records}}": "Il n'y aucun(e) {{records}}."
   "There are no {{records}} under this filter": "Il n'y a aucun(e) {{records}} avec ce filtre."
+  "There are not defined applications in config/typus/*.yml": 
+  "Today": 
   "Toggle is disabled": "Le basculement est désactivé"
   "True": 
 

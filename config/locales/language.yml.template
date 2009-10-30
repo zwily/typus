@@ -5,6 +5,7 @@
 
   "A valid token is required": 
   "Actions": 
+  "Active": 
   "Add": 
   "Add entry": 
   "Add new": 
@@ -89,16 +90,16 @@
 
   "View site": 
 
-  "You're adding a new {{resource_from}} to {{resource_to}}": 
   "You're adding a new {{resource_from}}": 
+  "You're adding a new {{resource_from}} to {{resource_to}}": 
   "You're not allowed to toggle status": 
   "You're not allowed to remove Typus Users": 
+  "You're updating a {{resource_from}}": 
+  "You're updating a {{resource_from}} for {{resource_to}}": 
   "You can update your password at": 
   "You can't change your role": 
   "You can't remove yourself": 
   "You can't toggle your status": 
-  "You're updating a {{resource_from}} for {{resource_to}}": 
-  "You're updating a {{resource_from}}": 
   "Your new password is {{password}}": 
 
   "{{attachment}} can't be removed": 

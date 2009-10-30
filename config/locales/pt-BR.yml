@@ -55,21 +55,25 @@ pt-BR:
   "Password recovery link sent to your email": "Link para recuperar senha enviado para seu email."
   "Previous": "Anterior"
 
-  "Recover password": "Recuperar senha"
-  "Remove filter": "Remover filtro"
   "Record moved {{to}}": "Registro movido {{to}}."
-  "Resources": "Recursos"
+  "Recover password": "Recuperar senha"
+  "Remove": 
   "Remove entry?": "Remover entrada?"
+  "Remove file": 
+  "Remove filter": "Remover filtro"
   "Reset password": "Trocar senha"
+  "Resources": "Recursos"
 
   "Save {{resource}}": 
   "Search": "Busca"
   "Search by": "Buscar por"
+  "Send us feedback": 
   "Setup": "Configurar"
   "Show": "Mostrar"
   "Sign in": "Entrar"
   "Sign out": "Sair"
   "Sign up": "Criar conta"
+  "Submit a bug report": 
   "System Users Administration": "Administrar usuários do sistema"
 
   "That doesn't seem like a valid email address": "Este não parece um email válido"
@@ -98,6 +102,8 @@ pt-BR:
   "Your new password is {{password}}": "Sua nova senha é {{password}}."
   "You can't change your role": "Você não pode mudar sua própria função no sistema."
 
+  "{{attachment}} can't be removed": 
+  "{{attachment}} removed": 
   "{{current_user_role}} can't delete this item": "{{current_user_role}} não pode apagar este item."
   "{{current_user_role}} can't display items": "{{current_user_role}} não pode mostrar os items."
   "{{current_user_role}} can't go to {{action}} on {{controller}}":  "{{current_user_role}} não pode ir a {{action}} no {{controller}}."

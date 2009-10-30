@@ -57,7 +57,9 @@ ru:
 
   "Record moved {{to}}": "Запись перемещена в {{to}}."
   "Recover password": "Восстановить пароль"
+  "Remove": "Удалить"
   "Remove entry?": "Удалить запись?"
+  "Remove file": 
   "Remove filter": "Удалить фильтр"
   "Reset password": "Сбросить пароль"
   "Resources": "Ресурсы"
@@ -65,11 +67,13 @@ ru:
   "Save {{resource}}": 
   "Search": "Поиск"
   "Search by": "Искать по"
+  "Send us feedback": 
   "Setup": "Установки"
   "Show": "Показать"
   "Sign in": "Войти"
   "Sign out": "Выйти"
   "Sign up": "Зарегистрироваться"
+  "Submit a bug report": 
   "System Users Administration": "Администрирование системных пользователей"
 
   "That doesn't seem like a valid email address": "E-Mail некорректен"
