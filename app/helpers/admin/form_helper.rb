@@ -1,10 +1,11 @@
 module Admin::FormHelper
 
-  def build_form(fields)
+  def build_form(fields, f)
 
     options = { :start_year => @resource[:class].typus_options_for(:start_year), 
                 :end_year => @resource[:class].typus_options_for(:end_year), 
-                :minute_step => @resource[:class].typus_options_for(:minute_step) }
+                :minute_step => @resource[:class].typus_options_for(:minute_step), 
+                :f => f }
 
     returning(String.new) do |html|
 
@@ -290,7 +291,7 @@ module Admin::FormHelper
   def typus_template_field(attribute, template, options = {})
     template_name = File.join('admin', 'templates', template)
     render :partial => template_name, 
-           :locals => { :resource => @resource, :attribute => attribute, :options => options }
+           :locals => { :resource => @resource, :attribute => attribute, :options => options, :f => options[:f] }
   rescue Exception => error
     locale = @current_user.preferences[:locale]
     message = <<-HTML
