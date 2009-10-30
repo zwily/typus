@@ -55,9 +55,9 @@ class TypusGenerator < Rails::Generator::Base
         model_columns = model.columns - reject_columns
 
         # Don't show `text` fields and timestamps in lists.
-        list = model_columns.reject { |c| c.sql_type == 'text' || %w( id created_at updated_at ).include?(c.name) }.map(&:name)
+        list = model_columns.reject { |c| c.sql_type == 'text' || %w( id created_at created_on updated_at updated_on ).include?(c.name) }.map(&:name)
         # Don't show timestamps in forms.
-        form = model_columns.reject { |c| %w( id created_at updated_at ).include?(c.name) }.map(&:name)
+        form = model_columns.reject { |c| %w( id created_at created_on updated_at updated_on position ).include?(c.name) }.map(&:name)
         # Show all model columns in the show action.
         show = model_columns.map(&:name)
 
