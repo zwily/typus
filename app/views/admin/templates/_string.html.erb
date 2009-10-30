@@ -17,5 +17,7 @@
 
 %>
 
-<li><label for="item_<%= attribute %>"><%= attribute_humanized %> <%= comment %></label>
-<%= text_field :item, attribute, :class => 'text', :disabled => attribute_disabled?(attribute) %></li>
+<li>
+  <%= f.label attribute %>
+  <%= f.text_field attribute, :class => 'text', :disabled => attribute_disabled?(attribute) %>
+</li>
