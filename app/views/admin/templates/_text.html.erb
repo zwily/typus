@@ -1,4 +1,6 @@
 <li>
   <%= f.label attribute %>
-  <%= f.text_area attribute, :class => 'text', :rows => @resource[:class].typus_options_for(:form_rows), :disabled => attribute_disabled?(attribute) %>
+  <%= f.text_area attribute, :class => 'text', 
+                             :rows => @resource[:class].typus_options_for(:form_rows), 
+                             :disabled => attribute_disabled?(attribute) %>
 </li>
