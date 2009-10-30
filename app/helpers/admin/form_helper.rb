@@ -10,7 +10,7 @@ module Admin::FormHelper
     returning(String.new) do |html|
 
       html << (error_messages_for :item, :header_tag => 'h3')
-      html << '<ul>'
+      html << '<ol>'
 
       fields.each do |key, value|
 
@@ -29,7 +29,7 @@ module Admin::FormHelper
                 end
       end
 
-      html << '</ul>'
+      html << '</ol>'
 
     end
 
