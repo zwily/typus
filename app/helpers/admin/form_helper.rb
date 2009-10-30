@@ -20,7 +20,7 @@ module Admin::FormHelper
         end
 
         html << case value
-                when :belongs_to  then typus_belongs_to_field(key)
+                when :belongs_to  then typus_belongs_to_field(key, options)
                 when :tree        then typus_tree_field(key)
                 when :boolean, :date, :datetime, :file, :password, :selector, :string, :text, :time, :tiny_mce
                   typus_template_field(key, value.to_s, options)
@@ -35,7 +35,7 @@ module Admin::FormHelper
 
   end
 
-  def typus_belongs_to_field(attribute)
+  def typus_belongs_to_field(attribute, options)
 
     ##
     # We only can pass parameters to 'new' and 'edit', so this hack makes
@@ -57,11 +57,12 @@ module Admin::FormHelper
       if related.respond_to?(:roots)
         html << typus_tree_field(related_fk, related.roots, related_fk)
       else
+        message = link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')
         html << <<-HTML
-<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}
-    <small>#{link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')}</small>
-    </label>
-#{select :item, related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }</li>
+<li>
+  #{options[:f].label attribute, "#{attribute.humanize} <small>#{message}</small>"}
+  #{options[:f].select related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }
+</li>
         HTML
       end
 
