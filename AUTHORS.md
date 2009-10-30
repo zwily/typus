@@ -32,3 +32,4 @@ Somehow involved in the project
 * [Django Admin](http://www.djangoproject.com) who inspired part of the 
   development, in special the templates rendering & UI.
 * [Paginator](http://github.com/bruce/paginator) by [Bruce Williams](http://codefluency.com).
+* [Formtastic](http://github.com/justinfrench/formtastic) by [Justin French](http://justinfrench.com).
