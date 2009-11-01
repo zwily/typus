@@ -57,18 +57,22 @@ module Admin::FormHelper
 
     returning(String.new) do |html|
 
+      message = link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", 
+                                    :action => 'new', 
+                                    :back_to => back_to, 
+                                    :selected => related_fk }, 
+                                    :confirm => confirm.join("\n\n") if @current_user.can_perform?(related, 'create')
+
       if related.respond_to?(:roots)
         html << typus_tree_field(related_fk, :items => related.roots, :attribute_virtual => related_fk)
       else
-        message = link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", 
-                                      :action => 'new', 
-                                      :back_to => back_to, 
-                                      :selected => related_fk }, 
-                                      :confirm => confirm.join("\n\n") if @current_user.can_perform?(related, 'create')
+        values = related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }
+        options = { :include_blank => true }
+        html_options = { :disabled => attribute_disabled?(attribute) }
         html << <<-HTML
 <li>
   #{form.label attribute, "#{attribute.humanize} <small>#{message}</small>"}
-  #{form.select related_fk, related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }, { :include_blank => true }, { :disabled => attribute_disabled?(attribute) } }
+  #{form.select related_fk, values, options, html_options }
 </li>
         HTML
       end
