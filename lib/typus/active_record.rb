@@ -57,14 +57,6 @@ module Typus
 
           attribute_type = model_fields[field]
 
-          # Custom field_type depending on the attribute name.
-          case field.to_s
-            when 'parent_id' then       attribute_type = :tree
-            when /file_name/ then       attribute_type = :file
-            when /password/ then        attribute_type = :password
-            when 'position' then        attribute_type = :position
-          end
-
           if reflect_on_association(field)
             attribute_type = reflect_on_association(field).macro
           end
@@ -75,6 +67,14 @@ module Typus
 
           if typus_tiny_mce_fields.include?(field.to_s)
             attribute_type = :tiny_mce
+          end
+
+          # Custom field_type depending on the attribute name.
+          case field.to_s
+            when 'parent', 'parent_id'  then attribute_type = :tree
+            when /file_name/            then attribute_type = :file
+            when /password/             then attribute_type = :password
+            when 'position'             then attribute_type = :position
           end
 
           # And finally insert the field and the attribute_type 
