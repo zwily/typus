@@ -21,7 +21,7 @@ module Admin::FormHelper
 
         html << case value
                 when :belongs_to  then typus_belongs_to_field(key, options)
-                when :tree        then typus_tree_field(key)
+                when :tree        then typus_tree_field(key, :form => options[:form])
                 when :boolean, :date, :datetime, :file, :password, :selector, :string, :text, :time, :tiny_mce
                   typus_template_field(key, value.to_s, options)
                 else
@@ -57,7 +57,7 @@ module Admin::FormHelper
     returning(String.new) do |html|
 
       if related.respond_to?(:roots)
-        html << typus_tree_field(related_fk, related.roots, related_fk)
+        html << typus_tree_field(related_fk, :items => related.roots, :attribute_virtual => related_fk)
       else
         message = link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')
         html << <<-HTML
@@ -72,14 +72,23 @@ module Admin::FormHelper
 
   end
 
-  def typus_tree_field(attribute, items = @resource[:class].roots, attribute_virtual = 'parent_id')
+  def typus_tree_field(attribute, *args)
+
+    options = args.extract_options!
+    options[:items] ||= @resource[:class].roots
+    options[:attribute_virtual] ||= 'parent_id'
+
+    form = options[:form]
+
+    values = expand_tree_into_select_field(options[:items], options[:attribute_virtual])
+
     <<-HTML
-<li><label for="item_#{attribute}">#{@resource[:class].human_attribute_name(attribute)}</label>
-<select id="item_#{attribute}" #{'disabled="disabled"' if attribute_disabled?(attribute)} name="item[#{attribute}]">
-  <option value=""></option>
-  #{expand_tree_into_select_field(items, attribute_virtual)}
-</select></li>
+<li>
+  #{form.label attribute}
+  #{form.select attribute, values, { :include_blank => true }}
+</li>
     HTML
+
   end
 
   def typus_relationships

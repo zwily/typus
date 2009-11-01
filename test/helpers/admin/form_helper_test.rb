@@ -23,10 +23,10 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     @resource = { :class => Comment }
 
     expected = <<-HTML
-<li><label for="item_post">Post
+<li><label for="comment_post">Post
     <small></small>
     </label>
-<select id="item_post_id" name="item[post_id]"><option value=""></option>
+<select id="comment_post_id" name="comment[post_id]"><option value=""></option>
 <option value="3">Post#3</option>
 <option value="4">Post#4</option>
 <option value="1">Post#1</option>
@@ -49,10 +49,10 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     @resource = { :class => Post }
 
     expected = <<-HTML
-<li><label for="item_favorite_comment">Favorite comment
+<li><label for="post_favorite_comment">Favorite comment
     <small><a href="http://test.host/admin/comments/new?back_to=%2Fadmin%2Fpost%2Fedit%2F1&selected=favorite_comment_id" onclick="return confirm('Are you sure you want to leave this page?\\n\\nIf you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost.\\n\\nClick OK to continue, or click Cancel to stay on this page.');">Add</a></small>
     </label>
-<select id="item_favorite_comment_id" name="item[favorite_comment_id]"><option value=""></option>
+<select id="post_favorite_comment_id" name="post[favorite_comment_id]"><option value=""></option>
 <option value="1">John</option>
 <option value="2">Me</option>
 <option value="3">John</option>
@@ -69,17 +69,16 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     self.stubs(:expand_tree_into_select_field).returns('expand_tree_into_select_field')
 
     @resource = { :class => Page }
-    items = @resource[:class].roots
 
     expected = <<-HTML
-<li><label for="item_parent">Parent</label>
-<select id="item_parent"  name="item[parent]">
+<li><label for="page_parent">Parent</label>
+<select id="page_parent"  name="page[parent]">
   <option value=""></option>
   expand_tree_into_select_field
 </select></li>
     HTML
 
-    assert_equal expected, typus_tree_field('parent', items)
+    assert_equal expected, typus_tree_field('parent')
 
   end
 
