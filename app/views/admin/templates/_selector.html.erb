@@ -1,16 +1,4 @@
-<%
-
-  options = []
-  @resource[:class].send(attribute).each do |option|
-    case option.kind_of?(Array)
-    when true
-      options << [ option.first, option.last ]
-    else
-      options << option
-    end
-  end
-
-%>
+<% options = @resource[:class].send(attribute).map { |o| (o.kind_of?(Array) ? [ o.first, o.last ] : o) } %>
 
 <li>
   <%= form.label attribute %>
