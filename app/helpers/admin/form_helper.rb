@@ -64,7 +64,7 @@ module Admin::FormHelper
                                     :confirm => confirm.join("\n\n") if @current_user.can_perform?(related, 'create')
 
       if related.respond_to?(:roots)
-        html << typus_tree_field(related_fk, :items => related.roots, :attribute_virtual => related_fk)
+        html << typus_tree_field(related_fk, :items => related.roots, :attribute_virtual => related_fk, :form => form)
       else
         values = related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }
         options = { :include_blank => true }
