@@ -10,3 +10,6 @@
 [ ] Fixed and tested trees.
 [ ] Fix all fixme tests.
 [ ] Test _form.html.erb can be overwrited by model.
+[ ] Pass attribute as symbol.
+[ ] Show auto_generated, read_only on string fields. (_string.html.erb)
+[ ] Pass options hash to form fields.
