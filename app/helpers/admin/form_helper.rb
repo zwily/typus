@@ -51,7 +51,7 @@ module Admin::FormHelper
     related = @resource[:class].reflect_on_association(attribute.to_sym).class_name.constantize
     related_fk = @resource[:class].reflect_on_association(attribute.to_sym).primary_key_name
 
-    message = [ _("Are you sure you want to leave this page?"),
+    confirm = [ _("Are you sure you want to leave this page?"),
                 _("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."), 
                 _("Click OK to continue, or click Cancel to stay on this page.") ]
 
@@ -64,7 +64,7 @@ module Admin::FormHelper
                                       :action => 'new', 
                                       :back_to => back_to, 
                                       :selected => related_fk }, 
-                                      :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')
+                                      :confirm => confirm.join("\n\n") if @current_user.can_perform?(related, 'create')
         html << <<-HTML
 <li>
   #{form.label attribute, "#{attribute.humanize} <small>#{message}</small>"}
