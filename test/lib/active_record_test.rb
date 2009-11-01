@@ -27,7 +27,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     expected_fields = [[:id, :integer],
                        [:title, :string],
                        [:body, :text],
-                       [:status, :boolean],
+                       [:status, :string],
                        [:favorite_comment_id, :integer],
                        [:created_at, :datetime],
                        [:updated_at, :datetime],
@@ -125,7 +125,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_post_typus_filters
-    expected = [['status', :boolean], 
+    expected = [['status', :string], 
                 ['created_at', :datetime], 
                 ['user', nil], 
                 ['user_id', nil]]

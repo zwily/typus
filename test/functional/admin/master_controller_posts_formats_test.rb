@@ -10,19 +10,19 @@ class Admin::PostsControllerTest < ActionController::TestCase
 <?xml version="1.0" encoding="UTF-8"?>
 <posts type="array">
   <post>
-    <status type="boolean">false</status>
+    <status>unpublished</status>
     <title>Owned by admin</title>
   </post>
   <post>
-    <status type="boolean">false</status>
+    <status>unpublished</status>
     <title>Owned by editor</title>
   </post>
   <post>
-    <status type="boolean">true</status>
+    <status>published</status>
     <title>Title One</title>
   </post>
   <post>
-    <status type="boolean">false</status>
+    <status>unpublished</status>
     <title>Title Two</title>
   </post>
 </posts>
@@ -39,10 +39,10 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     expected = <<-RAW
 Title,Status
-Owned by admin,false
-Owned by editor,false
-Title One,true
-Title Two,false
+Owned by admin,unpublished
+Owned by editor,unpublished
+Title One,published
+Title Two,unpublished
      RAW
 
     get :index, :format => 'csv'

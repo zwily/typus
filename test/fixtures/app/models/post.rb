@@ -8,7 +8,7 @@ class Post < ActiveRecord::Base
   belongs_to :favorite_comment, :class_name => 'Comment'
 
   def self.status
-    %w( true false pending published unpublished )
+    %w( pending published unpublished )
   end
 
   def self.typus

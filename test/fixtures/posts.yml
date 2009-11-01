@@ -5,7 +5,7 @@ published:
   body: This is the body.
   created_at: <%= 7.days.ago.to_s(:db) %>
   updated_at: <%= 7.days.ago.to_s(:db) %>
-  status: true
+  status: published
   typus_user_id: 1
 
 # Belongs to editor.
@@ -15,7 +15,7 @@ unpublished:
   body: This is the body.
   created_at: <%= 6.days.ago.to_s(:db) %>
   updated_at: <%= 6.days.ago.to_s(:db) %>
-  status: false
+  status: unpublished
   typus_user_id: 1
 
 owned_by_admin:
@@ -24,7 +24,7 @@ owned_by_admin:
   body: This is the body.
   created_at: <%= 5.days.ago.to_s(:db) %>
   updated_at: <%= 5.days.ago.to_s(:db) %>
-  status: false
+  status: unpublished
   typus_user_id: 1
 
 owned_by_editor:
@@ -33,5 +33,5 @@ owned_by_editor:
   body: This is the body.
   created_at: <%= 4.days.ago.to_s(:db) %>
   updated_at: <%= 4.days.ago.to_s(:db) %>
-  status: false
+  status: unpublished
   typus_user_id: 2

@@ -225,22 +225,6 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   end
 
   # FIXME
-  def test_typus_string_field
-
-    return
-
-    @resource = { :class => Post }
-
-    expected = <<-HTML
-<li><label for="item_test">Test</label>
-<input class="text" id="item_test" name="item[test]" size="30" type="text" /></li>
-    HTML
-
-    assert_equal expected, typus_template_field('test', 'string')
-
-  end
-
-  # FIXME
   def test_typus_relationships
     return
   end

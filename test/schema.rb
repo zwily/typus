@@ -38,7 +38,7 @@ ActiveRecord::Schema.define do
   create_table :posts, :force => true do |t|
     t.string :title
     t.text :body
-    t.boolean :status
+    t.string :status
     t.integer :favorite_comment_id
     t.timestamps
     t.datetime :published_at
