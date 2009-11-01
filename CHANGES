@@ -9,3 +9,4 @@
 [ ] Fixed and tested auto-generated fields.
 [ ] Fixed and tested trees.
 [ ] Fix all fixme tests.
+[ ] Test _form.html.erb can be overwrited by model.
