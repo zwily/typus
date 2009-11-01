@@ -1,20 +1,22 @@
 <%
 
+  options = { :disabled => attribute_disabled?(attribute) }
+
   # Read only fields.
-  if @resource[:class].typus_field_options_for(:read_only).include?(attribute)
-    value = 'read_only' if %w( edit ).include?(params[:action])
+  if @resource[:class].typus_field_options_for(:read_only).to_s.include?(attribute)
+    options[:readonly] = 'readonly'
   end
 
   # Auto generated fields.
   if @resource[:class].typus_field_options_for(:auto_generated).include?(attribute)
-    value = 'auto_generated' if %w( new edit ).include?(params[:action])
+    options[:auto_generated] = true
   end
 
-  comment = "<small>#{value} field</small>".humanize if %w( read_only auto_generated ).include?(value)
+  comment = "<small>#{value} field</small>".humanize if [ :readonly, :auto_generated ].include?(options.keys)
 
 %>
 
 <li>
-  <%= form.label attribute %>
-  <%= form.text_field attribute, :disabled => attribute_disabled?(attribute) %>
+  <%= form.label attribute, "#{_(attribute.humanize)} #{comment}" %>
+  <%= form.text_field attribute, options %>
 </li>
