@@ -325,7 +325,7 @@ Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="ht
   def expand_tree_into_select_field(items, attribute)
     returning(String.new) do |html|
       items.each do |item|
-        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 8} &#92;_ #{item.typus_name}</option>\n}
+        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 2} &#8627; #{item.typus_name}</option>\n}
         html << expand_tree_into_select_field(item.children, attribute) unless item.children.empty?
       end
     end
