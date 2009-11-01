@@ -1,6 +1,11 @@
-= 0.9.39 / 2009-??-??
+= 0.9.39 / 2009-11-??
 
 [ ] Refactor all forms to be able to use formtastic.
 [X] Cleanup translation files.
+[X] Removed FIXME tests.
 [ ] Add has_many through relationships.
 [ ] Test default typus forms and remove old tests.
+[ ] Fixed and tested read-only fields.
+[ ] Fixed and tested auto-generated fields.
+[ ] Fixed and tested trees.
+[ ] Fix all fixme tests.
