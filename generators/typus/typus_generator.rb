@@ -61,6 +61,9 @@ class TypusGenerator < Rails::Generator::Base
         # Show all model columns in the show action.
         show = model_columns.map(&:name)
 
+        # Set a default order ...
+        order_by = 'position' if list.include?('position')
+
         # We want attributes of belongs_to relationships to be shown in our 
         # field collections if those are not polymorphic.
         [ list, form, show ].each do |fields|
@@ -77,7 +80,7 @@ class TypusGenerator < Rails::Generator::Base
   actions:
     index:
     edit:
-  order_by:
+  order_by: #{order_by}
   relationships: #{relationships.join(', ')}
   filters:
   search:
