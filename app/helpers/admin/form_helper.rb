@@ -193,8 +193,10 @@ module Admin::FormHelper
                            association)
         html << pagination(:anchor => model_to_relate.name.tableize) unless pagination.nil?
       else
+        message = _("There are no {{records}}.", 
+                    :records => model_to_relate.typus_human_name.pluralize.downcase)
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{_("There are no {{records}}.", :records => model_to_relate.typus_human_name.pluralize.downcase)}</p></div>
+  <div id="flash" class="notice"><p>#{message}</p></div>
         HTML
       end
       html << <<-HTML
@@ -253,8 +255,10 @@ module Admin::FormHelper
                            {}, 
                            association)
       else
+        message = _("There are no {{records}}.", 
+                    :records => model_to_relate.typus_human_name.pluralize.downcase)
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{_("There are no {{records}}.", :records => model_to_relate.typus_human_name.pluralize.downcase)}</p></div>
+  <div id="flash" class="notice"><p>#{message}</p></div>
         HTML
       end
       html << <<-HTML
@@ -290,8 +294,10 @@ module Admin::FormHelper
                            options, 
                            association)
       else
+        message = _("There is no {{records}}.", 
+                    :records => model_to_relate.typus_human_name.downcase)
         html << <<-HTML
-  <div id="flash" class="notice"><p>#{_("There is no {{records}}.", :records => model_to_relate.typus_human_name.downcase)}</p></div>
+  <div id="flash" class="notice"><p>#{message}</p></div>
         HTML
       end
       html << <<-HTML
