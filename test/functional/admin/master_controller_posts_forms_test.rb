@@ -24,16 +24,16 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_select "form select", 6
 
     # title
-    assert_select 'label[for="item_title"]'
-    assert_select 'input#item_title[type="text"]'
+    assert_select 'label[for="post_title"]'
+    assert_select 'input#post_title[type="text"]'
 
     # body
-    assert_select 'label[for="item_body"]'
-    assert_select 'textarea#item_body'
+    assert_select 'label[for="post_body"]'
+    assert_select 'textarea#post_body'
 
     # status
-    assert_select 'label[for="item_status"]'
-    assert_select 'select#item_status'
+    assert_select 'label[for="post_status"]'
+    assert_select 'select#post_status'
 
   end
 
