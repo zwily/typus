@@ -22,10 +22,11 @@ module Admin::FormHelper
         html << case value
                 when :belongs_to  then typus_belongs_to_field(key, options)
                 when :tree        then typus_tree_field(key, :form => options[:form])
-                when :boolean, :date, :datetime, :file, :password, :selector, :string, :text, :time, :tiny_mce
-                  typus_template_field(key, value.to_s, options)
+                when :boolean, :date, :datetime, :file, :password, 
+                     :selector, :string, :text, :time, :tiny_mce
+                  typus_template_field(key, value, options)
                 else
-                  typus_template_field(key, 'string', options)
+                  typus_template_field(key, :string, options)
                 end
       end
 
@@ -307,9 +308,15 @@ module Admin::FormHelper
   end
 
   def typus_template_field(attribute, template, options = {})
-    template_name = File.join('admin', 'templates', template)
+
+    template_name = File.join('admin', 'templates', "#{template}")
+
     render :partial => template_name, 
-           :locals => { :resource => @resource, :attribute => attribute, :options => options, :form => options[:form] }
+           :locals => { :resource => @resource, 
+                        :attribute => attribute, 
+                        :options => options, 
+                        :form => options[:form] }
+
   rescue Exception => error
     locale = @current_user.preferences[:locale]
     message = <<-HTML
