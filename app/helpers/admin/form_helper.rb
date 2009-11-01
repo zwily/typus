@@ -60,7 +60,11 @@ module Admin::FormHelper
       if related.respond_to?(:roots)
         html << typus_tree_field(related_fk, :items => related.roots, :attribute_virtual => related_fk)
       else
-        message = link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", :action => 'new', :back_to => back_to, :selected => related_fk }, :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')
+        message = link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", 
+                                      :action => 'new', 
+                                      :back_to => back_to, 
+                                      :selected => related_fk }, 
+                                      :confirm => message.join("\n\n") if @current_user.can_perform?(related, 'create')
         html << <<-HTML
 <li>
   #{form.label attribute, "#{attribute.humanize} <small>#{message}</small>"}
@@ -140,9 +144,9 @@ module Admin::FormHelper
                     true
                   end
 
-      if condition
+      if condition && @current_user.can_perform?(model_to_relate, 'create')
         add_new = <<-HTML
-  <small>#{link_to _("Add new"), link_options if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  <small>#{link_to _("Add new"), link_options}</small>
         HTML
       end
 
@@ -221,9 +225,9 @@ module Admin::FormHelper
                     true
                   end
 
-      if condition
+      if condition && @current_user.can_perform?(model_to_relate, 'create')
         add_new = <<-HTML
-  <small>#{link_to _("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id if @current_user.can_perform?(model_to_relate, 'create')}</small>
+  <small>#{link_to _("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id}</small>
         HTML
       end
 
