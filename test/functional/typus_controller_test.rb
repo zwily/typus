@@ -18,14 +18,14 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_sign_in_with_post_and_redirect_to_dashboard
     typus_user = typus_users(:admin)
-    post :sign_in, { :user => { :email => typus_user.email, :password => '12345678' } }
+    post :sign_in, { :typus_user => { :email => typus_user.email, :password => '12345678' } }
     assert_equal typus_user.id, @request.session[:typus_user_id]
     assert_response :redirect
     assert_redirected_to admin_dashboard_path
   end
 
   def test_should_sign_in_with_post_and_redirect_to_sign_in_with_an_error
-    post :sign_in, { :user => { :email => 'john@example.com', :password => 'XXXXXXXX' } }
+    post :sign_in, { :typus_user => { :email => 'john@example.com', :password => 'XXXXXXXX' } }
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
     assert_equal "The email and/or password you entered is invalid.", flash[:error]
@@ -33,7 +33,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_not_sign_in_a_disabled_user
     typus_user = typus_users(:disabled_user)
-    post :sign_in, { :user => { :email => typus_user.email, :password => '12345678' } }
+    post :sign_in, { :typus_user => { :email => typus_user.email, :password => '12345678' } }
     assert_nil @request.session[:typus_user_id]
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
@@ -41,7 +41,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_not_sign_in_a_removed_role
     typus_user = typus_users(:removed_role)
-    post :sign_in, { :user => { :email => typus_user.email, :password => '12345678' } }
+    post :sign_in, { :typus_user => { :email => typus_user.email, :password => '12345678' } }
     assert_equal typus_user.id, @request.session[:typus_user_id]
     assert_response :redirect
     assert_redirected_to admin_dashboard_path
@@ -56,7 +56,7 @@ class TypusControllerTest < ActionController::TestCase
     options = Typus::Configuration.options.merge(:recover_password => true)
     Typus::Configuration.stubs(:options).returns(options)
 
-    post :recover_password, { :user => { :email => 'unexisting' } }
+    post :recover_password, { :typus_user => { :email => 'unexisting' } }
     assert_response :redirect
     assert_redirected_to admin_recover_password_path
     [ :notice, :error, :warning ].each { |f| assert !flash[f] }
@@ -69,7 +69,7 @@ class TypusControllerTest < ActionController::TestCase
     Typus::Configuration.stubs(:options).returns(options)
 
     admin = typus_users(:admin)
-    post :recover_password, { :user => { :email => admin.email } }
+    post :recover_password, { :typus_user => { :email => admin.email } }
 
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
@@ -139,7 +139,7 @@ class TypusControllerTest < ActionController::TestCase
     Typus::Configuration.stubs(:options).returns(options)
 
     typus_user = typus_users(:admin)
-    post :reset_password, { :token => typus_user.token, :user => { :password => '12345678', :password_confirmation => '12345678' } }
+    post :reset_password, { :token => typus_user.token, :typus_user => { :password => '12345678', :password_confirmation => '12345678' } }
 
     assert_response :redirect
     assert_redirected_to admin_dashboard_path
@@ -152,7 +152,7 @@ class TypusControllerTest < ActionController::TestCase
     Typus::Configuration.stubs(:options).returns(options)
 
     typus_user = typus_users(:admin)
-    post :reset_password, { :token => typus_user.token, :user => { :password => 'drowssap', :password_confirmation => 'drowssap2' } }
+    post :reset_password, { :token => typus_user.token, :typus_user => { :password => 'drowssap', :password_confirmation => 'drowssap2' } }
     assert_response :success
 
   end
@@ -163,7 +163,7 @@ class TypusControllerTest < ActionController::TestCase
     Typus::Configuration.stubs(:options).returns(options)
 
     typus_user = typus_users(:admin)
-    post :reset_password, { :token => typus_user.token, :user => { :password => 'drowssap', :password_confirmation => 'drowssap', :role => 'superadmin' } }
+    post :reset_password, { :token => typus_user.token, :typus_user => { :password => 'drowssap', :password_confirmation => 'drowssap', :role => 'superadmin' } }
     typus_user.reload
     assert_not_equal typus_user.role, 'superadmin'
 
@@ -212,7 +212,7 @@ class TypusControllerTest < ActionController::TestCase
 
     TypusUser.destroy_all
 
-    post :sign_up, :user => { :email => 'example.com' }
+    post :sign_up, :typus_user => { :email => 'example.com' }
 
     assert_response :success
     assert_equal "That doesn't seem like a valid email address.", flash[:error]
@@ -224,7 +224,7 @@ class TypusControllerTest < ActionController::TestCase
     TypusUser.destroy_all
 
     assert_difference 'TypusUser.count' do
-      post :sign_up, :user => { :email => 'john@example.com' }
+      post :sign_up, :typus_user => { :email => 'john@example.com' }
     end
 
     assert_response :redirect
