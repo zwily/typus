@@ -3,12 +3,12 @@
   <ul>
 
     <li>
-      <%= form.label :email, _("Email") %>
+      <%= form.label :email, Typus.user_class.human_attribute_name(:email) %>
       <%= form.text_field :email, :size => 20, :class => 'text' %>
     </li>
 
     <li>
-      <%= form.label :password, _("Password") %>
+      <%= form.label :password, Typus.user_class.human_attribute_name(:password) %>
       <%= form.password_field :password, :size => 20, :class => 'text' %>
     </li>
 
