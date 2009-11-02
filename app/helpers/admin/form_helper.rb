@@ -81,6 +81,7 @@ module Admin::FormHelper
 
   end
 
+  # OPTIMIZE
   def typus_tree_field(attribute, *args)
 
     options = args.extract_options!
@@ -94,7 +95,7 @@ module Admin::FormHelper
     <<-HTML
 <li>
   #{form.label attribute}
-  #{form.select attribute, values, { :include_blank => true }}
+  #{form.select options[:attribute_virtual], values, { :include_blank => true }}
 </li>
     HTML
 
