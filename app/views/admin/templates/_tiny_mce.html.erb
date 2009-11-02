@@ -1,5 +1,9 @@
+<%
+  custom = { :class => 'mceEditor' }
+  options.merge!(custom)
+%>
+
 <li>
-  <%= form.label attribute %>
-  <%= form.text_area attribute, :class => 'mceEditor', 
-                                :disabled => attribute_disabled?(attribute) %>
+  <%= form.label label_text %>
+  <%= form.text_area attribute, options %>
 </li>

@@ -2,10 +2,7 @@ module Admin::FormHelper
 
   def build_form(fields, form)
 
-    options = { :start_year => @resource[:class].typus_options_for(:start_year), 
-                :end_year => @resource[:class].typus_options_for(:end_year), 
-                :minute_step => @resource[:class].typus_options_for(:minute_step), 
-                :form => form }
+    options = { :form => form }
 
     returning(String.new) do |html|
 
@@ -64,14 +61,17 @@ module Admin::FormHelper
                                     :confirm => confirm.join("\n\n") if @current_user.can_perform?(related, 'create')
 
       if related.respond_to?(:roots)
-        html << typus_tree_field(related_fk, :items => related.roots, :attribute_virtual => related_fk, :form => form)
+        html << typus_tree_field(related_fk, :items => related.roots, 
+                                             :attribute_virtual => related_fk, 
+                                             :form => form)
       else
         values = related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }
         options = { :include_blank => true }
         html_options = { :disabled => attribute_disabled?(attribute) }
+        label_text = @resource[:class].human_attribute_name(attribute)
         html << <<-HTML
 <li>
-  #{form.label attribute, "#{attribute.humanize} <small>#{message}</small>"}
+  #{form.label label_text, "#{attribute.humanize} <small>#{message}</small>"}
   #{form.select related_fk, values, options, html_options }
 </li>
         HTML
@@ -92,9 +92,11 @@ module Admin::FormHelper
 
     values = expand_tree_into_select_field(options[:items], options[:attribute_virtual])
 
+    label_text = @resource[:class].human_attribute_name(attribute)
+
     <<-HTML
 <li>
-  #{form.label attribute}
+  #{form.label label_text}
   #{form.select options[:attribute_virtual], values, { :include_blank => true }}
 </li>
     HTML
@@ -320,11 +322,19 @@ module Admin::FormHelper
 
     template_name = File.join('admin', 'templates', "#{template}")
 
+    custom_options = { :start_year => @resource[:class].typus_options_for(:start_year), 
+                       :end_year => @resource[:class].typus_options_for(:end_year), 
+                       :minute_step => @resource[:class].typus_options_for(:minute_step), 
+                       :disabled => attribute_disabled?(attribute), 
+                       :include_blank => true }
+
     render :partial => template_name, 
            :locals => { :resource => @resource, 
                         :attribute => attribute, 
-                        :options => options, 
-                        :form => options[:form] }
+                        :options => custom_options, 
+                        :html_options => { }, 
+                        :form => options[:form], 
+                        :label_text => @resource[:class].human_attribute_name(attribute) }
 
   rescue Exception => error
     locale = @current_user.preferences[:locale]

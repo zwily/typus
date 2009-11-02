@@ -1,4 +1,9 @@
+<%
+  custom = { :include_blank => false }
+  options.merge!(custom)
+%>
+
 <li>
-  <%= form.label attribute %>
-  <%= form.date_select attribute, options, { :disabled => attribute_disabled?(attribute) } %>
+  <%= form.label label_text %>
+  <%= form.date_select attribute, options, html_options %>
 </li>
