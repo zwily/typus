@@ -170,7 +170,7 @@ HTML
 
   end
 
-  # FIXME
+  # TODO
   def test_previous_and_next_with_params
     return
   end
@@ -213,12 +213,12 @@ HTML
   # Yes, I know, it's an ugly name for a test, but don't know how to 
   # name this test. Suggestions are welcome. ;)
   #
-  # FIXME
+  # TODO
   def test_filters_with_filters
     return
   end
 
-  # FIXME
+  # TODO
   def test_relationship_filter
     return
   end

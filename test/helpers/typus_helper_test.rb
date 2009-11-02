@@ -7,12 +7,12 @@ class TypusHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::TextHelper
   include ActionController::UrlWriter
 
-  # FIXME
+  # TODO
   def test_applications
     return
   end
 
-  # FIXME
+  # TODO
   def test_resources
     return
   end

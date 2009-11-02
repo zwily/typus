@@ -13,7 +13,8 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::TagHelper
   include ActionController::UrlWriter
 
-  # FIXME
+  # FIXME: Problem withe the number of params. A form option has to be 
+  # sent.
   def test_typus_belongs_to_field
 
     return
@@ -40,7 +41,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
-  # FIXME
+  # FIXME: Problem with the number of attributes.
   def test_typus_belongs_to_field_with_different_attribute_name
 
     return
@@ -68,7 +69,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
-  # FIXME
+  # FIXME: Problem with the number of params.
   def test_typus_tree_field
 
     return
