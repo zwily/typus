@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2009-10-24}
+  s.date = %q{2009-11-02}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -34,6 +34,7 @@ Gem::Specification.new do |s|
      "app/models/typus_mailer.rb",
      "app/models/typus_user.rb",
      "app/views/admin/dashboard/_sidebar.html.erb",
+     "app/views/admin/resources/_form.html.erb",
      "app/views/admin/resources/edit.html.erb",
      "app/views/admin/resources/index.html.erb",
      "app/views/admin/resources/new.html.erb",
@@ -60,11 +61,16 @@ Gem::Specification.new do |s|
      "app/views/typus/sign_up.html.erb",
      "app/views/typus_mailer/reset_password_link.erb",
      "config/locales/de.yml",
+     "config/locales/de_models.yml",
      "config/locales/es.yml",
+     "config/locales/es_models.yml",
      "config/locales/fr.yml",
+     "config/locales/fr_models.yml",
      "config/locales/language.yml.template",
      "config/locales/pt-BR.yml",
+     "config/locales/pt-BR_models.yml",
      "config/locales/ru.yml",
+     "config/locales/ru_models.yml",
      "config/routes.rb",
      "generators/typus/templates/auto/index.html.erb",
      "generators/typus/templates/auto/resource_controller.rb.erb",
@@ -110,8 +116,6 @@ Gem::Specification.new do |s|
      "lib/typus/active_record.rb",
      "lib/typus/authentication.rb",
      "lib/typus/configuration.rb",
-     "lib/typus/extensions/routes.rb",
-     "lib/typus/extensions/routes_hack.rb",
      "lib/typus/format.rb",
      "lib/typus/hash.rb",
      "lib/typus/object.rb",
@@ -123,7 +127,6 @@ Gem::Specification.new do |s|
      "lib/typus/user.rb",
      "lib/vendor/active_record.rb",
      "lib/vendor/paginator.rb",
-     "lib/vendor/rss_parser.rb",
      "rails/init.rb",
      "tasks/typus_tasks.rake",
      "test/config/broken/application.yml",
@@ -185,6 +188,7 @@ Gem::Specification.new do |s|
      "test/functional/admin/master_controller_posts_before_test.rb",
      "test/functional/admin/master_controller_posts_crud_test.rb",
      "test/functional/admin/master_controller_posts_formats_test.rb",
+     "test/functional/admin/master_controller_posts_forms_test.rb",
      "test/functional/admin/master_controller_posts_permissions_test.rb",
      "test/functional/admin/master_controller_posts_relationships_test.rb",
      "test/functional/admin/master_controller_posts_roles.rb",
@@ -242,6 +246,7 @@ Gem::Specification.new do |s|
      "test/functional/admin/master_controller_posts_before_test.rb",
      "test/functional/admin/master_controller_posts_crud_test.rb",
      "test/functional/admin/master_controller_posts_formats_test.rb",
+     "test/functional/admin/master_controller_posts_forms_test.rb",
      "test/functional/admin/master_controller_posts_permissions_test.rb",
      "test/functional/admin/master_controller_posts_relationships_test.rb",
      "test/functional/admin/master_controller_posts_roles.rb",
