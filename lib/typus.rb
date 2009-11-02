@@ -115,7 +115,6 @@ module Typus
       # Vendor.
       require 'vendor/active_record'
       require 'vendor/paginator'
-      require 'vendor/rss_parser'
 
     end
 
