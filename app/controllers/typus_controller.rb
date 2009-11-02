@@ -52,7 +52,7 @@ class TypusController < ApplicationController
     redirect_to admin_sign_up_path and return if Typus.user_class.count.zero?
 
     if request.post?
-      if user = Typus.user_class.authenticate(params[:user][:email], params[:user][:password])
+      if user = Typus.user_class.authenticate(params[:typus_user][:email], params[:typus_user][:password])
         session[:typus_user_id] = user.id
         redirect_to params[:back_to] || admin_dashboard_path
       else
@@ -70,7 +70,7 @@ class TypusController < ApplicationController
 
   def recover_password
     if request.post?
-      if user = Typus.user_class.find_by_email(params[:user][:email])
+      if user = Typus.user_class.find_by_email(params[:typus_user][:email])
         ActionMailer::Base.default_url_options[:host] = request.host_with_port
         TypusMailer.deliver_reset_password_link(user)
         flash[:success] = _("Password recovery link sent to your email.")
@@ -85,12 +85,12 @@ class TypusController < ApplicationController
   # Available if Typus::Configuration.options[:recover_password] is enabled.
   #
   def reset_password
-    @user = Typus.user_class.find_by_token!(params[:token])
+    @typus_user = Typus.user_class.find_by_token!(params[:token])
     if request.post?
-      @user.password = params[:user][:password]
-      @user.password_confirmation = params[:user][:password_confirmation]
-      if @user.save
-        session[:typus_user_id] = @user.id
+      @typus_user.password = params[:typus_user][:password]
+      @typus_user.password_confirmation = params[:typus_user][:password_confirmation]
+      if !params[:typus_user][:password].blank? && @typus_user.save
+        session[:typus_user_id] = @typus_user.id
         redirect_to admin_dashboard_path
       else
         render :action => 'reset_password'
@@ -106,7 +106,7 @@ class TypusController < ApplicationController
 
       password = 'columbia'
 
-      user = Typus.user_class.generate(:email => params[:user][:email], 
+      user = Typus.user_class.generate(:email => params[:typus_user][:email], 
                                        :password => 'columbia', 
                                        :role => Typus::Configuration.options[:root])
       user.status = true

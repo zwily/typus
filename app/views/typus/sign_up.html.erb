@@ -1,7 +1,16 @@
-<% form_tag admin_sign_up_path do %>
+<% form_for :typus_user, :url => { :action => :sign_up } do |form| %>
+
   <ul>
-  <li><label for="email"><%= _("Email") %></label>
-  <%= text_field :user, :email, :size => 20, :class => 'text' %></li>
-  <li><%= submit_tag _("Sign up"), :class => 'button' %></li>
+
+    <li>
+      <%= form.label :email, _("Email") %>
+      <%= form.text_field :email, :size => 20, :class => 'text' %>
+    </li>
+
+    <li>
+      <%= submit_tag _("Sign up"), :class => 'button' %>
+    </li>
+
   </ul>
+
 <% end %>
