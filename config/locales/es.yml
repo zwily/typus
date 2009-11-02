@@ -102,8 +102,8 @@ es:
 
   "View site": "Ver web"
 
-  "{{attachment}} can't be removed": "{{attribute}} no puede ser borrado."
-  "{{attachment}} removed": "{{attribute}} borrado."
+  "{{attachment}} can't be removed": "{{attachment}} no puede ser borrado."
+  "{{attachment}} removed": "{{attachment}} borrado."
   "{{current_user_role}} can't delete this item": "{{current_user_role}} no puede borrar este elemento."
   "{{current_user_role}} can't display items": "{{current_user_role}} no puede mostrar los elementos."
   "{{current_user_role}} can't go to {{action}} on {{controller}}":  "{{current_user_role}} no pude ir a {{action}} en {{controller}}."
