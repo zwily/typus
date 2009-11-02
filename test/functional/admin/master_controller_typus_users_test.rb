@@ -96,9 +96,9 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_equal 'editor', typus_user.role
 
     post :update, { :id => typus_user.id, 
-                    :item => { :first_name => 'Richard', 
-                               :last_name => 'Ashcroft', 
-                               :role => 'editor' } }
+                    :typus_user => { :first_name => 'Richard', 
+                                     :last_name => 'Ashcroft', 
+                                     :role => 'editor' } }
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
@@ -115,7 +115,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_equal 'editor', typus_user.role
 
     post :update, { :id => typus_user.id, 
-                    :item => { :role => 'admin' } }
+                    :typus_user => { :role => 'admin' } }
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']

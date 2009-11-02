@@ -29,7 +29,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_should_create_an_item
 
     assert_difference 'Post.count' do
-      post :create, { :item => { :title => 'This is another title', :body => 'Body' } }
+      post :create, { :post => { :title => 'This is another title', :body => 'Body' } }
       assert_response :redirect
       assert_redirected_to :controller => 'admin/posts', :action => 'edit', :id => Post.last
     end
@@ -42,7 +42,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     Typus::Configuration.stubs(:options).returns(options)
 
     assert_difference 'Post.count' do
-      post :create, { :item => { :title => 'This is another title', :body => 'Body' } }
+      post :create, { :post => { :title => 'This is another title', :body => 'Body' } }
       assert_response :redirect
       assert_redirected_to :action => 'index'
     end

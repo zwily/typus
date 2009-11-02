@@ -78,7 +78,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     setup_for_no_root
 
-    post :create, { :item => { :title => "Chunky Bacon", :body => "Lorem ipsum ..." } }
+    post :create, { :post => { :title => "Chunky Bacon", :body => "Lorem ipsum ..." } }
     post_ = Post.find_by_title("Chunky Bacon")
 
     assert_equal @request.session[:typus_user_id], post_.typus_user_id
@@ -94,7 +94,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert @typus_user.is_root?
 
     post_ = posts(:owned_by_editor)
-    post :update, { :id => post_.id, :item => { :title => 'Updated by admin' } }
+    post :update, { :id => post_.id, :post => { :title => 'Updated by admin' } }
     post_updated = Post.find(post_.id)
     assert_equal post_.typus_user_id, post_updated.typus_user_id
 
@@ -105,7 +105,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert @typus_user.is_root?
 
     post_ = posts(:owned_by_editor)
-    post :update, { :id => post_.id, :item => { :title => 'Updated', :typus_user_id => 108 } }
+    post :update, { :id => post_.id, :post => { :title => 'Updated', :typus_user_id => 108 } }
     post_updated = Post.find(post_.id)
     assert_equal 108, post_updated.typus_user_id
 
@@ -117,7 +117,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     [ 108, nil ].each do |typus_user_id|
       post_ = posts(:owned_by_editor)
-      post :update, { :id => post_.id, :item => { :title => 'Updated', :typus_user_id => typus_user_id } }
+      post :update, { :id => post_.id, :post => { :title => 'Updated', :typus_user_id => typus_user_id } }
       post_updated = Post.find(post_.id)
       assert_equal  @request.session[:typus_user_id], post_updated.typus_user_id
     end
