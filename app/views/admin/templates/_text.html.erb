@@ -4,6 +4,6 @@
 %>
 
 <li>
-  <%= form.label @resource[:class].human_attribute_name(attribute) %>
+  <%= form.label attribute, label_text %>
   <%= form.text_area attribute, options %>
 </li>
