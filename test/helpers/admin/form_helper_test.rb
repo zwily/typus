@@ -5,14 +5,6 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   include Admin::FormHelper
   include Admin::MasterHelper
 
-  include ActionView::Helpers::FormHelper
-  include ActionView::Helpers::FormTagHelper
-  include ActionView::Helpers::FormOptionsHelper
-  include ActionView::Helpers::DateHelper
-  include ActionView::Helpers::UrlHelper
-  include ActionView::Helpers::TagHelper
-  include ActionController::UrlWriter
-
   # FIXME: Problem withe the number of params. A form option has to be 
   # sent.
   def test_typus_belongs_to_field
