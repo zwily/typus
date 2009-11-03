@@ -18,6 +18,7 @@ Note: To define namespace models use :: as a separator. (i.e. Delayed::Job)
             created_at: post_long
           selectors:
           read_only:
+          rich_text: body
           tiny_mce:
             fields: body
             options:
