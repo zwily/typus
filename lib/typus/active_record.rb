@@ -257,6 +257,19 @@ module Typus
                      end
           condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
           conditions = merge_conditions(conditions, condition)
+        when :date
+          interval = case value
+                     when 'today' then         nil
+                     when 'last_few_days' then 3.days.ago.to_date..Date.tomorrow
+                     when 'last_7_days' then   6.days.ago.midnight..Date.tomorrow
+                     when 'last_30_days' then  (Date.today << 1)..Date.tomorrow
+                     end
+          if interval
+            condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s, interval.last.to_s]
+          elsif value == 'today'
+            condition = ["#{key} = ?", Date.today.to_s]
+          end
+          conditions = merge_conditions(conditions, condition)
         when :integer, :string
           condition = { key => value }
           conditions = merge_conditions(conditions, condition)

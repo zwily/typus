@@ -127,6 +127,7 @@ module Admin::SidebarHelper
         when :boolean then      html << boolean_filter(current_request, key)
         when :string then       html << string_filter(current_request, key)
         when :datetime then     html << datetime_filter(current_request, key)
+        when :date then         html << date_filter(current_request, key)
         when :belongs_to then   html << relationship_filter(current_request, key)
         when :has_and_belongs_to_many then
           html << relationship_filter(current_request, key, true)
@@ -198,6 +199,16 @@ function surfto_#{model_pluralized}(form) {
   end
 
   def datetime_filter(request, filter)
+    items = []
+    %w( today last_few_days last_7_days last_30_days ).each do |timeline|
+      switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
+      options = { filter.to_sym => timeline, :page => nil }
+      items << (link_to _(timeline.humanize), params.merge(options), :class => switch)
+    end
+    build_typus_list(items, :attribute => filter)
+  end
+
+  def date_filter(request, filter)
     items = []
     %w( today last_few_days last_7_days last_30_days ).each do |timeline|
       switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
