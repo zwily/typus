@@ -20,7 +20,7 @@ module Admin::FormHelper
                 when :belongs_to  then typus_belongs_to_field(key, options)
                 when :tree        then typus_tree_field(key, :form => options[:form])
                 when :boolean, :date, :datetime, :file, :password, 
-                     :selector, :string, :text, :time, :tiny_mce
+                     :selector, :string, :text, :time, :tiny_mce, :rich_text
                   typus_template_field(key, value, options)
                 else
                   typus_template_field(key, :string, options)

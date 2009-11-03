@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2009-11-02}
+  s.date = %q{2009-11-03}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -47,6 +47,7 @@ Gem::Specification.new do |s|
      "app/views/admin/templates/_datetime.html.erb",
      "app/views/admin/templates/_file.html.erb",
      "app/views/admin/templates/_password.html.erb",
+     "app/views/admin/templates/_rich_text.html.erb",
      "app/views/admin/templates/_selector.html.erb",
      "app/views/admin/templates/_string.html.erb",
      "app/views/admin/templates/_text.html.erb",
@@ -267,16 +268,13 @@ Gem::Specification.new do |s|
      "test/helpers/typus_helper_test.rb",
      "test/lib/active_record_test.rb",
      "test/lib/configuration_test.rb",
-     "test/lib/hash_test.rb",
      "test/lib/routes_test.rb",
-     "test/lib/string_test.rb",
      "test/lib/typus_test.rb",
      "test/schema.rb",
      "test/unit/typus_mailer_test.rb",
      "test/unit/typus_test.rb",
      "test/unit/typus_user_roles_test.rb",
      "test/unit/typus_user_test.rb",
-     "test/vendor/active_record_test.rb",
      "test/vendor/paginator_test.rb"
   ]
 
