@@ -218,7 +218,7 @@ HTML
     return
   end
 
-  def test_datetime_filter
+  def test_date_filter
 
     @resource = { :class => TypusUser, :self => 'typus_users' }
     filter = 'created_at'
@@ -227,7 +227,7 @@ HTML
     self.expects(:params).at_least_once.returns(params)
 
     request = ''
-    output = datetime_filter(request, filter)
+    output = date_filter(request, filter)
     expected = <<-HTML
 <h2>Created at</h2>
 <ul>
@@ -240,7 +240,7 @@ HTML
     assert_equal expected, output
 
     request = 'created_at=today&page=1'
-    output = datetime_filter(request, filter)
+    output = date_filter(request, filter)
     expected = <<-HTML
 <h2>Created at</h2>
 <ul>
