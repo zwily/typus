@@ -22,6 +22,7 @@ Special thanks to the following individuals:
 * Robert Rouse: Ruby 1.9 compatibility fixes.
 * [Rytis Lukoseviciu](http://rytis.net): Code.
 * [WesEd Interactive](http://www.wested.org/): Code.
+* [Gaston Kleiman] (http://github.com/gkleiman): Code
 
 Somehow involved in the project
 
