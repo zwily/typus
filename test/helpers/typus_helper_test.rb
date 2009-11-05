@@ -95,7 +95,7 @@ class TypusHelperTest < ActiveSupport::TestCase
 
   def test_form_partial
     @resource = { :self => 'categories' }
-    expected = '_form.html.erb'
+    expected = 'admin/resources/form'
     assert_equal expected, form_partial
   end
 
