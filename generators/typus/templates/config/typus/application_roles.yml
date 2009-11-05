@@ -1,18 +1,21 @@
 # Typus Roles Configuration File
 #
-# In this file you can configure the actions available for each of your 
-# models on the application.
+# In this file you can configure the actions available for each of 
+# your models on the application. You can also use the 'all' shortcut 
+# to allow the user the access to all actions.
 #
 #     admin:
 #       Post: create, read, update, delete
 #       Category: create, read, update, delete
+#       TypusUser: all
 #
 #     editor:
 #       Post: create, read, update
 #       Category: read, update
 #
 # You can also define `resources` which are not related to a model, 
-# for example to control MemCached or see the Starling queue statistics.
+# for example to control MemCached or see the Starling queue 
+# statistics.
 #
 #     admin:
 #      Starling: index
