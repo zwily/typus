@@ -28,9 +28,6 @@ module Typus
                       :per_page => 15, 
                       :sidebar_selector => 5, 
                       :start_year => nil, 
-                      :tiny_mce => { :theme => 'advanced',
-                                     :theme_advanced_toolbar_location => 'top',
-                                     :theme_advanced_toolbar_align => 'left' }, 
                       :toggle => true }
 
     @@options = typus_options.merge(model_options)

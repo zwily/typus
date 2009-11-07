@@ -65,10 +65,6 @@ module Typus
             attribute_type = :selector
           end
 
-          if typus_tiny_mce_fields.include?(field.to_s)
-            attribute_type = :tiny_mce
-          end
-
           if typus_field_options_for(:rich_text).include?(field)
             attribute_type = :rich_text
           end
@@ -94,20 +90,6 @@ module Typus
 
       return fields_with_type
 
-    end
-
-    # Return tiny_mce options of the model merged into the default options
-    def typus_tiny_mce_options
-      typus_options_for(:tiny_mce).merge(Typus::Configuration.config[name]['fields']['options']['tiny_mce']['options'].symbolize_keys.delete_if { |key,value| value == nil})
-    rescue
-      typus_options_for(:tiny_mce)
-    end
-
-    # Tiny_mce fields of the model
-    def typus_tiny_mce_fields
-      Typus::Configuration.config[name]['fields']['options']['tiny_mce']['fields'].split(', ')
-    rescue
-      []
     end
 
     # Typus sidebar filters.

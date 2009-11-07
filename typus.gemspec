@@ -52,7 +52,6 @@ Gem::Specification.new do |s|
      "app/views/admin/templates/_string.html.erb",
      "app/views/admin/templates/_text.html.erb",
      "app/views/admin/templates/_time.html.erb",
-     "app/views/admin/templates/_tiny_mce.html.erb",
      "app/views/layouts/admin.html.erb",
      "app/views/layouts/typus.html.erb",
      "app/views/typus/dashboard.html.erb",

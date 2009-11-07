@@ -40,9 +40,6 @@ class Admin::MasterController < ApplicationController
   before_filter :set_fields, 
                 :only => [ :index, :new, :edit, :create, :update, :show ]
 
-  before_filter :set_tiny_mce, 
-                :only => [ :new, :edit, :create, :update ]
-
   ##
   # This is the main index of the model. With filters, conditions 
   # and more.
@@ -347,13 +344,6 @@ private
                 !@resource[:class].typus_options_for(:only_user_items) || 
                 !@resource[:class].columns.map(&:name).include?(Typus.user_fk)
     !condition ? { Typus.user_fk => @current_user.id } : { }
-  end
-
-  def set_tiny_mce
-    if !@resource[:class].typus_tiny_mce_fields.empty? && defined?(TinyMCE)
-      options = @resource[:class].typus_tiny_mce_options
-      self.class.class_eval { uses_tiny_mce :options => options }
-    end
   end
 
   def select_template(template, resource = @resource[:self])
