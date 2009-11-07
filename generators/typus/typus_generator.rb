@@ -58,8 +58,6 @@ class TypusGenerator < Rails::Generator::Base
         list = model_columns.reject { |c| c.sql_type == 'text' || %w( id created_at created_on updated_at updated_on ).include?(c.name) }.map(&:name)
         # Don't show timestamps in forms.
         form = model_columns.reject { |c| %w( id created_at created_on updated_at updated_on position ).include?(c.name) }.map(&:name)
-        # Show all model columns in the show action.
-        show = model_columns.map(&:name)
 
         # Set a default order ...
         order_by = 'position' if list.include?('position')
@@ -76,16 +74,11 @@ class TypusGenerator < Rails::Generator::Base
   fields:
     list: #{list.join(', ')}
     form: #{form.join(', ')}
-    show: #{show.join(', ')}
-  actions:
-    index:
-    edit:
   order_by: #{order_by}
   relationships: #{relationships.join(', ')}
   filters:
   search:
   application: #{application}
-  description:
 
         RAW
 

@@ -14,3 +14,4 @@
 [ ] Show auto_generated, read_only on string fields. (_string.html.erb)
 [ ] Pass options hash to form fields.
 [ ] Fix css to display correctly "select" fields in relationships.
+[X] Simplify configuration files.
