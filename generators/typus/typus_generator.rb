@@ -12,7 +12,7 @@ class TypusGenerator < Rails::Generator::Base
       [ 'app/controllers/admin', 
         'app/views/admin', 
         'config/typus', 
-        'public/images/admin', 
+        'public/images/admin/fancybox', 
         'public/javascripts/admin', 
         'public/stylesheets/admin', 
         'test/functional/admin' ].each { |f| FileUtils.mkdir_p(f) unless File.directory?(f) }
@@ -112,6 +112,8 @@ class TypusGenerator < Rails::Generator::Base
 
       # Assets
 
+      [ 'public/images/admin/ui-icons.png' ].each { |f| m.file f, f }
+
       Dir["#{Typus.root}/generators/typus/templates/public/stylesheets/admin/*"].each do |file|
         from = to = "public/stylesheets/admin/#{File.basename(file)}"
         m.file from, to
@@ -122,8 +124,8 @@ class TypusGenerator < Rails::Generator::Base
         m.file from, to
       end
 
-      Dir["#{Typus.root}/generators/typus/templates/public/images/admin/*"].each do |file|
-        from = to = "public/images/admin/#{File.basename(file)}"
+      Dir["#{Typus.root}/generators/typus/templates/public/images/admin/fancybox/*"].each do |file|
+        from = to = "public/images/admin/fancybox/#{File.basename(file)}"
         m.file from, to
       end
 
