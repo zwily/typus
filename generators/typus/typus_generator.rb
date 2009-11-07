@@ -110,12 +110,6 @@ class TypusGenerator < Rails::Generator::Base
         m.template from, to, :assigns => { :application => application }
       end
 
-      # Tasks
-      if !Typus.plugin?
-        from = to = 'lib/tasks/typus_tasks.rake'
-        m.file from, to
-      end
-
       # Assets
 
       Dir["#{Typus.root}/generators/typus/templates/public/stylesheets/admin/*"].each do |file|
