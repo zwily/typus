@@ -1,6 +1,6 @@
 = 0.9.39 / 2009-11-??
 
-[ ] Refactor all forms to be able to use formtastic.
+[X] Refactor all forms to be able to use formtastic.
 [X] Cleanup translation files.
 [X] Removed FIXME tests.
 [ ] Add has_many through relationships.
@@ -10,7 +10,7 @@
 [ ] Fixed and tested trees.
 [ ] Fix all fixme tests.
 [ ] Test _form.html.erb can be overwrited by model.
-[ ] Pass attribute as symbol.
+[X] Pass attribute as symbol.
 [ ] Show auto_generated, read_only on string fields. (_string.html.erb)
 [ ] Pass options hash to form fields.
 [ ] Fix css to display correctly "select" fields in relationships.
