@@ -15,3 +15,5 @@
 [ ] Pass options hash to form fields.
 [ ] Fix css to display correctly "select" fields in relationships.
 [X] Simplify configuration files.
+[X] Added '/' to admin_edit_typus_user_path because was not linking to 
+    the right path on the namespaced models.
