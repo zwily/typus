@@ -62,6 +62,9 @@ class TypusGenerator < Rails::Generator::Base
         # Set a default order.
         order_by = 'position' if list.include?('position')
 
+        # Set a default filter.
+        filters = 'created_at' if model_columns.include?('created_at')
+
         # Set a default search.
         search = 'name' if list.include?('name')
 
@@ -79,7 +82,7 @@ class TypusGenerator < Rails::Generator::Base
     form: #{form.join(', ')}
   order_by: #{order_by}
   relationships: #{relationships.join(', ')}
-  filters:
+  filters: #{filters}
   search: #{search}
   application: #{application}
 
