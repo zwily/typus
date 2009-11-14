@@ -4,11 +4,17 @@ class TypusGenerator < Rails::Generator::Base
 
     record do |m|
 
+      ##
       # Define variables.
+      #
+
       application = Rails.root.basename
       timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
 
+      ##
       # Create required folders.
+      #
+
       [ 'app/controllers/admin', 
         'app/views/admin', 
         'config/typus', 
@@ -54,18 +60,26 @@ class TypusGenerator < Rails::Generator::Base
 
         model_columns = model.columns - reject_columns
 
-        # Don't show `text` fields and timestamps in lists.
+        ##
+        # Model field defaults for:
+        #
+        # - List
+        # - Form
+        #
+
         list = model_columns.reject { |c| c.sql_type == 'text' || %w( id created_at created_on updated_at updated_on ).include?(c.name) }.map(&:name)
-        # Don't show timestamps in forms.
         form = model_columns.reject { |c| %w( id created_at created_on updated_at updated_on position ).include?(c.name) }.map(&:name)
 
-        # Set a default order.
+        ##
+        # Model defaults:
+        #
+        # - Order
+        # - Filters
+        # - Search
+        #
+
         order_by = 'position' if list.include?('position')
-
-        # Set a default filter.
         filters = 'created_at' if model_columns.include?('created_at')
-
-        # Set a default search.
         search = 'name' if list.include?('name')
 
         # We want attributes of belongs_to relationships to be shown in our 
@@ -109,14 +123,18 @@ class TypusGenerator < Rails::Generator::Base
         m.template from, to, :assigns => { :configuration => configuration }
       end
 
+      ##
       # Initializer
+      #
 
       [ 'config/initializers/typus.rb' ].each do |file|
         from = to = file
         m.template from, to, :assigns => { :application => application }
       end
 
+      ##
       # Assets
+      #
 
       [ 'public/images/admin/ui-icons.png' ].each { |f| m.file f, f }
 
@@ -163,6 +181,7 @@ class TypusGenerator < Rails::Generator::Base
       ##
       # Generate controllers for tableless models.
       #
+
       Typus.resources.each do |resource|
 
         m.template "auto/resource_controller.rb.erb", 
@@ -175,7 +194,9 @@ class TypusGenerator < Rails::Generator::Base
 
       end
 
+      ##
       # Migration file
+      #
 
       m.migration_template 'db/create_typus_users.rb', 'db/migrate', 
                             { :migration_file_name => 'create_typus_users' }
