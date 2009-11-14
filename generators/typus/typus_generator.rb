@@ -62,6 +62,9 @@ class TypusGenerator < Rails::Generator::Base
         # Set a default order ...
         order_by = 'position' if list.include?('position')
 
+        # Set a default search.
+        search = 'name' if list.include?('name')
+
         # We want attributes of belongs_to relationships to be shown in our 
         # field collections if those are not polymorphic.
         [ list, form, show ].each do |fields|
@@ -77,7 +80,7 @@ class TypusGenerator < Rails::Generator::Base
   order_by: #{order_by}
   relationships: #{relationships.join(', ')}
   filters:
-  search:
+  search: #{search}
   application: #{application}
 
         RAW
