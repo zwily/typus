@@ -131,13 +131,17 @@ private
 
   def verify_typus_users_table_schema
 
-    unless Typus.user_class.model_fields.keys.include?(:role)
-      raise "Run `script/generate typus_update_schema_to_01 -f && rake db:migrate` to update database schema."
+    attributes = Typus.user_class.model_fields.keys
+
+    if !attributes.include?(:role)
+      generator = 'typus_update_schema_to_01'
     end
 
-    unless Typus.user_class.model_fields.keys.include?(:preferences)
-      raise "Run `script/generate typus_update_schema_to_02 -f && rake db:migrate` to update database schema."
+    if !attributes.include?(:preferences)
+      generator = 'typus_update_schema_to_02'
     end
+
+    raise "Run `script/generate #{generator} -f && rake db:migrate` to update database schema."
 
   end
 
