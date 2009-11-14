@@ -59,7 +59,7 @@ class TypusGenerator < Rails::Generator::Base
         # Don't show timestamps in forms.
         form = model_columns.reject { |c| %w( id created_at created_on updated_at updated_on position ).include?(c.name) }.map(&:name)
 
-        # Set a default order ...
+        # Set a default order.
         order_by = 'position' if list.include?('position')
 
         # Set a default search.
