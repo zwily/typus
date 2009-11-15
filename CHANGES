@@ -17,3 +17,4 @@
 [X] Simplify configuration files.
 [X] Added '/' to admin_edit_typus_user_path because was not linking to 
     the right path on the namespaced models.
+[X] Updated generator defaults.
