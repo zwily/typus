@@ -224,8 +224,6 @@ module Typus
         # - Datetime: today, last_few_days, last_7_days, last_30_days
         # - Integer & String: *_id and "selectors" (p.ej. category_id)
         #
-        # today last_few_days last_7_days last_30_days
-        #
         case filter_type
         when :boolean
           condition = { key => (value == 'true') ? true : false }
