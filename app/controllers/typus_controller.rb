@@ -133,13 +133,9 @@ private
 
     attributes = Typus.user_class.model_fields.keys
 
-    if !attributes.include?(:role)
-      generator = 'typus_update_schema_to_01'
-    end
-
-    if !attributes.include?(:preferences)
-      generator = 'typus_update_schema_to_02'
-    end
+    generator = if !attributes.include?(:role) then 'typus_update_schema_to_01'
+                elsif !attributes.include?(:preferences) then 'typus_update_schema_to_02'
+                end
 
     if generator
       raise "Run `script/generate #{generator} -f && rake db:migrate` to update database schema."
