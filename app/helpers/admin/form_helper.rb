@@ -336,6 +336,8 @@ module Admin::FormHelper
                         :form => options[:form], 
                         :label_text => @resource[:class].human_attribute_name(attribute) }
 
+  rescue ActionView::TemplateError => error
+    raise error
   rescue Exception => error
     locale = @current_user.preferences[:locale]
     message = <<-HTML
