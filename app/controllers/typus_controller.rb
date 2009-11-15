@@ -141,7 +141,9 @@ private
       generator = 'typus_update_schema_to_02'
     end
 
-    raise "Run `script/generate #{generator} -f && rake db:migrate` to update database schema."
+    if generator
+      raise "Run `script/generate #{generator} -f && rake db:migrate` to update database schema."
+    end
 
   end
 
