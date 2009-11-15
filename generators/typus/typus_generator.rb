@@ -67,8 +67,11 @@ class TypusGenerator < Rails::Generator::Base
         # - Form
         #
 
-        list = model_columns.reject { |c| c.sql_type == 'text' || %w( id created_at created_on updated_at updated_on ).include?(c.name) }.map(&:name)
-        form = model_columns.reject { |c| %w( id created_at created_on updated_at updated_on position ).include?(c.name) }.map(&:name)
+        list_rejections = %w( id created_at created_on updated_at updated_on )
+        form_rejections = %w( id created_at created_on updated_at updated_on position )
+
+        list = model_columns.reject { |c| c.sql_type == 'text' || list_rejections.include?(c.name) }.map(&:name)
+        form = model_columns.reject { |c| form_rejections.include?(c.name) }.map(&:name)
 
         ##
         # Model defaults:
