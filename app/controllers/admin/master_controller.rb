@@ -228,10 +228,10 @@ class Admin::MasterController < ApplicationController
     if @resource[:class].
        reflect_on_association(resource_class.table_name.singularize.to_sym).
        try(:macro) == :has_one
-      attribute = resource_class.table_name.singularize
+      attribute = params[:resource].tableize.singularize
       @item.update_attribute attribute, nil
     else
-      attribute = resource_class.table_name
+      attribute = params[:resource].tableize
       @item.send(attribute).delete(resource)
     end
 
