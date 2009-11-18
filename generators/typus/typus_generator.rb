@@ -87,7 +87,7 @@ class TypusGenerator < Rails::Generator::Base
 
         # We want attributes of belongs_to relationships to be shown in our 
         # field collections if those are not polymorphic.
-        [ list, form, show ].each do |fields|
+        [ list, form ].each do |fields|
           fields << model.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
           fields.flatten!
         end
