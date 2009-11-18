@@ -223,15 +223,16 @@ class Admin::MasterController < ApplicationController
   def unrelate
 
     resource_class = params[:resource].classify.constantize
+    resource_tableized = params[:resource].tableize
     resource = resource_class.find(params[:resource_id])
 
     if @resource[:class].
        reflect_on_association(resource_class.table_name.singularize.to_sym).
        try(:macro) == :has_one
-      attribute = params[:resource].tableize.singularize
+      attribute = resource_tableized.singularize
       @item.update_attribute attribute, nil
     else
-      attribute = params[:resource].tableize
+      attribute = resource_tableized
       @item.send(attribute).delete(resource)
     end
 
