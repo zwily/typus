@@ -44,9 +44,7 @@ module Typus
       filename = "#{Rails.root}/tmp/export-#{@resource[:self]}-#{Time.now.strftime("%Y%m%d%H%M%S")}.csv"
       File.open(filename, 'w') { |f| f.write(csv_string) }
 
-      send_data(filename,
-               :type => 'text/csv; charset=utf-8; header=present',
-               :filename => File.basename(filename))
+      send_file filename
 
     end
 
