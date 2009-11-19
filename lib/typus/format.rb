@@ -36,7 +36,7 @@ module Typus
         csv = CSV
       end
 
-      csv_string = csv.generate do |c|
+      csv_string = csv.generate(:col_sep => ';') do |c|
         c << fields
         data.each { |i| c << fields.map { |f| i.send(f) } }
       end
