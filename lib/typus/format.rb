@@ -41,10 +41,12 @@ module Typus
         data.each { |i| c << fields.map { |f| i.send(f) } }
       end
 
-      filename = "#{Time.now.strftime("%Y%m%d%H%M%S")}_#{@resource[:self]}.csv"
-      send_data(csv_string,
+      filename = "#{Rails.root}/tmp/#{Time.now.strftime("%Y%m%d%H%M%S")}_#{@resource[:self]}.csv"
+      File.open(filename, 'w') { |f| f.write(csv_string) }
+
+      send_data(filename,
                :type => 'text/csv; charset=utf-8; header=present',
-               :filename => filename)
+               :filename => File.basename(filename))
 
     end
 
