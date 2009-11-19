@@ -36,13 +36,14 @@ module Typus
         csv = CSV
       end
 
-      csv_string = csv.generate(:col_sep => ';') do |c|
-        c << fields
-        data.each { |i| c << fields.map { |f| i.send(f) } }
-      end
-
       filename = "#{Rails.root}/tmp/export-#{@resource[:self]}-#{Time.now.strftime("%Y%m%d%H%M%S")}.csv"
-      File.open(filename, 'w') { |f| f.write(csv_string) }
+
+      csv.open(filename, 'w', :col_sep => ';') do |csv|
+        csv << fields
+        data.each do |i|
+          csv << fields.map { |f| i.send(f) }
+        end
+      end
 
       send_file filename
 
