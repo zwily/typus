@@ -37,7 +37,7 @@ module Typus
       end
 
       csv_string = csv.generate do |c|
-        c << fields.map { |f| _(f.humanize) }
+        c << fields
         data.each { |i| c << fields.map { |f| i.send(f) } }
       end
 
