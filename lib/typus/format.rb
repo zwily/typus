@@ -38,10 +38,14 @@ module Typus
 
       filename = "#{Rails.root}/tmp/export-#{@resource[:self]}-#{Time.now.strftime("%Y%m%d%H%M%S")}.csv"
 
+      options = { :conditions => @conditions, :batch_size => 100 }
+
       csv.open(filename, 'w', :col_sep => ';') do |csv|
         csv << fields
-        data.each do |i|
-          csv << fields.map { |f| i.send(f) }
+        @resource[:class].find_in_batches(options) do |records|
+          records.each do |record|
+            csv << fields.map { |f| record.send(f) }
+          end
         end
       end
 
