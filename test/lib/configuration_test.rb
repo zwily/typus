@@ -15,7 +15,6 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal 'admin@example.com', Typus::Configuration.options[:email]
     assert_equal :typus_preview, Typus::Configuration.options[:file_preview]
     assert_equal :typus_thumbnail, Typus::Configuration.options[:file_thumbnail]
-    assert_equal false, Typus::Configuration.options[:recover_password]
     assert_equal 'typus_users', Typus::Configuration.options[:relationship]
     assert_equal 'admin', Typus::Configuration.options[:root]
     assert_equal false, Typus::Configuration.options[:ssl]

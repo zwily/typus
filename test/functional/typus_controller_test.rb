@@ -2,10 +2,6 @@ require 'test/helper'
 
 class TypusControllerTest < ActionController::TestCase
 
-  def setup
-    # Typus::Configuration.options[:recover_password] = true
-  end
-
   ##
   # get :sign_in
   ##

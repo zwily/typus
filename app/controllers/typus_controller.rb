@@ -82,7 +82,7 @@ class TypusController < ApplicationController
   end
 
   ##
-  # Available if Typus::Configuration.options[:recover_password] is enabled.
+  # Available if Typus::Configuration.options[:email] is set.
   #
   def reset_password
     @typus_user = Typus.user_class.find_by_token!(params[:token])
@@ -144,7 +144,7 @@ private
   end
 
   def recover_password_disabled?
-    redirect_to admin_sign_in_path unless Typus::Configuration.options[:recover_password]
+    redirect_to admin_sign_in_path unless Typus::Configuration.options[:email]
   end
 
   def select_layout

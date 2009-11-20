@@ -26,4 +26,5 @@
     Rails default table names.
 [X] Do not humanize fields on the csv generator. We want to keep the 
     real field name.
+[X] Recover password functionality now only needs the email to be defined.
 
