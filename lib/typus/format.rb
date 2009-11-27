@@ -58,6 +58,11 @@ module Typus
       render :xml => data.to_xml(:only => fields)
     end
 
+    def generate_json
+      fields = @resource[:class].typus_fields_for(:json).collect { |i| i.first }
+      render :json => data.to_json(:only => fields)
+    end
+
     def data(*args)
       eager_loading = @resource[:class].reflect_on_all_associations(:belongs_to).map { |i| i.name }
       options = { :joins => @joins, :conditions => @conditions, :order => @order, :include => eager_loading }
