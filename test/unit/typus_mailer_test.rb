@@ -9,7 +9,7 @@ class TypusMailerTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_email_from_is_defined_by_typus_options
-    assert_equal [ Typus::Configuration.options[:email] ], @response.from
+    assert_equal Typus::Configuration.options[:email], @response.from
   end
 
   def test_should_verify_email_to_is_typus_user_email
