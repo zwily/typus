@@ -49,7 +49,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_not_send_recovery_password_link_to_unexisting_user
 
-    options = Typus::Configuration.options.merge(:recover_password => true)
+    options = Typus::Configuration.options.merge(:email => 'john@example.com')
     Typus::Configuration.stubs(:options).returns(options)
 
     post :recover_password, { :typus_user => { :email => 'unexisting' } }
@@ -61,7 +61,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_send_recovery_password_link_to_existing_user
 
-    options = Typus::Configuration.options.merge(:recover_password => true)
+    options = Typus::Configuration.options.merge(:email => 'john@example.com')
     Typus::Configuration.stubs(:options).returns(options)
 
     admin = typus_users(:admin)
@@ -118,7 +118,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_reset_password_when_recover_password_is_true
 
-    options = Typus::Configuration.options.merge(:recover_password => true)
+    options = Typus::Configuration.options.merge(:email => 'john@example.com')
     Typus::Configuration.stubs(:options).returns(options)
 
     typus_user = typus_users(:admin)
@@ -131,7 +131,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_redirect_to_sign_in_user_after_reset_password
 
-    options = Typus::Configuration.options.merge(:recover_password => true)
+    options = Typus::Configuration.options.merge(:email => 'john@example.com')
     Typus::Configuration.stubs(:options).returns(options)
 
     typus_user = typus_users(:admin)
@@ -144,7 +144,8 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_be_redirected_if_password_does_not_match_confirmation
 
-    options = Typus::Configuration.options.merge(:recover_password => true)
+    options = Typus::Configuration.options.merge(:email => 'john@example.com')
+    options = Typus::Configuration.options.merge(:email => 'john@example.com')
     Typus::Configuration.stubs(:options).returns(options)
 
     typus_user = typus_users(:admin)
@@ -155,7 +156,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_only_be_allowed_to_reset_password
 
-    options = Typus::Configuration.options.merge(:recover_password => true)
+    options = Typus::Configuration.options.merge(:email => 'john@example.com')
     Typus::Configuration.stubs(:options).returns(options)
 
     typus_user = typus_users(:admin)
@@ -167,7 +168,7 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_return_404_on_reset_passsword_if_token_is_not_valid
 
-    options = Typus::Configuration.options.merge(:recover_password => true)
+    options = Typus::Configuration.options.merge(:email => 'john@example.com')
     Typus::Configuration.stubs(:options).returns(options)
 
     assert_raise(ActiveRecord::RecordNotFound) { get :reset_password, { :token => 'INVALID' } }
@@ -176,7 +177,8 @@ class TypusControllerTest < ActionController::TestCase
 
   def test_should_reset_password_with_valid_token
 
-    options = Typus::Configuration.options.merge(:recover_password => true)
+
+    options = Typus::Configuration.options.merge(:email => true)
     Typus::Configuration.stubs(:options).returns(options)
 
     typus_user = typus_users(:admin)
@@ -256,14 +258,12 @@ class TypusControllerTest < ActionController::TestCase
   end
 
   def test_should_verify_typus_sign_in_layout_does_not_include_recover_password_link
-    options = Typus::Configuration.options.merge(:recover_password => false)
-    Typus::Configuration.stubs(:options).returns(options)
     get :sign_in
     assert !@response.body.include?('Recover password')
   end
 
   def test_should_verify_typus_sign_in_layout_includes_recover_password_link
-    options = Typus::Configuration.options.merge(:recover_password => true)
+    options = Typus::Configuration.options.merge(:email => 'john@example.com')
     Typus::Configuration.stubs(:options).returns(options)
     get :sign_in
     assert @response.body.include?('Recover password')
