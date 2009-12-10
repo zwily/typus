@@ -38,15 +38,22 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert @typus_user.is_root?
 
     expected = <<-RAW
-Title,Status
-Owned by admin,unpublished
-Owned by editor,unpublished
-Title One,published
-Title Two,unpublished
+title;status
+Title One;published
+Title Two;unpublished
+Owned by admin;unpublished
+Owned by editor;unpublished
      RAW
 
     get :index, :format => 'csv'
-    assert_equal expected, @response.body
+    assert_response :success
+
+    assert @response.body.is_a?(Proc)
+    require 'stringio'
+    output = StringIO.new
+    output.binmode
+    assert_nothing_raised { @response.body.call(@response, output) }
+    assert_equal(expected, output.string)
 
   end
 
