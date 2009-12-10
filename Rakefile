@@ -3,7 +3,7 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 $LOAD_PATH.unshift 'lib'
-require 'typus/version'
+require 'typus'
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -47,7 +47,7 @@ begin
     gemspec.email = "francesc@intraducibles.com"
     gemspec.homepage = "http://intraducibles.com/projects/typus"
     gemspec.authors = ["Francesc Esplugas"]
-    gemspec.version = Typus::Version
+    gemspec.version = Typus.version
   end
 rescue LoadError
   puts "Jeweler not available."
@@ -59,12 +59,12 @@ task :package => [ :write_version, :gemspec, :build ]
 
 desc "Push a new version to Gemcutter"
 task :publish => [ :package ] do
-  system "git tag v#{Typus::Version}"
-  system "git push origin v#{Typus::Version}"
-  system "gem push pkg/typus-#{Typus::Version}.gem"
+  system "git tag v#{Typus.version}"
+  system "git push origin v#{Typus.version}"
+  system "gem push pkg/typus-#{Typus.version}.gem"
   system "git clean -fd"
 end
 
 task :write_version do
-  File.open('VERSION', 'w') {|f| f.write(Typus::Version) }
+  File.open('VERSION', 'w') {|f| f.write(Typus.version) }
 end
