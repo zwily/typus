@@ -10,4 +10,5 @@ ActionController::Routing::Routes.draw do |map|
     i.admin_reset_password 'reset_password', :action => 'reset_password'
   end
 
+  map.connect ':controller/:action/:id', :conditions => {:controller => /admin\/\w+/}
 end
