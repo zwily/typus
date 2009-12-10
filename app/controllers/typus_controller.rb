@@ -107,7 +107,7 @@ class TypusController < ApplicationController
       password = 'columbia'
 
       user = Typus.user_class.generate(:email => params[:typus_user][:email], 
-                                       :password => 'columbia', 
+                                       :password => password, 
                                        :role => Typus::Configuration.options[:root])
       user.status = true
 
