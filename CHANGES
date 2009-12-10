@@ -28,4 +28,6 @@
     real field name.
 [X] Recover password functionality now only needs the email to be defined.
 [X] Added json export format.
-
+[X] Added default route with conditions. (Ben Scofield)
+[ ] We should be able to set preferences and store them on the database.
+[ ] 
