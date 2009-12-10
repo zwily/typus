@@ -104,7 +104,7 @@ module Typus
       # Active Record Extensions.
       require 'typus/active_record'
 
-      # Typus mixions.
+      # Typus mixins.
       require 'typus/authentication'
       require 'typus/format'
       require 'typus/preview'
