@@ -11,5 +11,5 @@ ActionController::Routing::Routes.draw do |map|
   end
 
   map.connect ':controller/:action/:id', :conditions => { :controller => /admin\/\w+/ }
-
+  map.connect ':controller/:action/:id.:format', :conditions => { :controller => /admin\/\w+/ }
 end
