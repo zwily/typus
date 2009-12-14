@@ -173,6 +173,7 @@ this_is_chelm@example.com
     @current_user = TypusUser.find(:first)
     assert @current_user.can?('delete', TypusUser)
     assert @current_user.can?('delete', 'TypusUser')
+    assert !@current_user.cannot?('delete', 'TypusUser')
   end
 
 end

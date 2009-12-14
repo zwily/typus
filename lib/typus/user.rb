@@ -102,6 +102,10 @@ module Typus
 
       end
 
+      def cannot?(*args)
+        !can?(*args)
+      end
+
       def is_root?
         role == Typus::Configuration.options[:root]
       end

@@ -28,13 +28,13 @@ class TypusUserRolesTest < ActiveSupport::TestCase
 
     # Order resource doesn't have an index action, so we current user 
     # cannot perform the action.
-    assert !typus_user.can?('index', 'Order')
+    assert typus_user.cannot?('index', 'Order')
 
     # Status resource has an index action, but not a show one.
     # We add the { :special => true } option to by-pass the action 
     # renaming performed in the TypusUser#can? method.
     assert typus_user.can?('index', 'Status', { :special => true })
-    assert !typus_user.can?('show', 'Status', { :special => true })
+    assert typus_user.cannot?('show', 'Status', { :special => true })
 
   end
 
@@ -49,19 +49,19 @@ class TypusUserRolesTest < ActiveSupport::TestCase
 
     # Category: create, read, update
     %w( create read update ).each { |action| assert typus_user.can?(action, 'Category') }
-    %w( delete ).each { |action| assert !typus_user.can?(action, 'Category') }
+    %w( delete ).each { |action| assert typus_user.cannot?(action, 'Category') }
 
     # Post: create, read, update
     %w( create read update ).each { |action| assert typus_user.can?(action, 'Post') }
-    %w( delete ).each { |action| assert !typus_user.can?(action, 'Post') }
+    %w( delete ).each { |action| assert typus_user.cannot?(action, 'Post') }
 
     # Comment: read, update, delete
     %w( read update delete ).each { |action| assert typus_user.can?(action, 'Comment') }
-    %w( create ).each { |action| assert !typus_user.can?(action, 'Comment') }
+    %w( create ).each { |action| assert typus_user.cannot?(action, 'Comment') }
 
     # TypusUser: read, update
     %w( read update ).each { |action| assert typus_user.can?(action, 'TypusUser') }
-    %w( create delete ).each { |action| assert !typus_user.can?(action, 'TypusUser') }
+    %w( create delete ).each { |action| assert typus_user.cannot?(action, 'TypusUser') }
 
   end
 
@@ -75,15 +75,15 @@ class TypusUserRolesTest < ActiveSupport::TestCase
 
     # Category: read, update
     %w( read update ).each { |action| assert typus_user.can?(action, 'Category') }
-    %w( create delete ).each { |action| assert !typus_user.can?(action, 'Category') }
+    %w( create delete ).each { |action| assert typus_user.cannot?(action, 'Category') }
 
     # Comment: read
     %w( read ).each { |action| assert typus_user.can?(action, 'Comment') }
-    %w( create update delete ).each { |action| assert !typus_user.can?(action, 'Comment') }
+    %w( create update delete ).each { |action| assert typus_user.cannot?(action, 'Comment') }
 
     # Post: read, update
     %w( read update ).each { |action| assert typus_user.can?(action, 'Post') }
-    %w( create delete ).each { |action| assert !typus_user.can?(action, 'Post') }
+    %w( create delete ).each { |action| assert typus_user.cannot?(action, 'Post') }
 
   end
 

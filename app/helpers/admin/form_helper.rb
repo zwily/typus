@@ -112,7 +112,7 @@ module Admin::FormHelper
 
         association = @resource[:class].reflect_on_association(relationship.to_sym)
 
-        next if !@current_user.can?('read', association.class_name.constantize)
+        next if @current_user.cannot?('read', association.class_name.constantize)
 
         case association.macro
         when :has_and_belongs_to_many
