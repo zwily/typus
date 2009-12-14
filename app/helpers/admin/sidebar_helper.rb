@@ -29,7 +29,7 @@ module Admin::SidebarHelper
 
     case params[:action]
     when 'index', 'edit', 'show', 'update'
-      if @current_user.can_perform?('create', @resource[:class])
+      if @current_user.can?('create', @resource[:class])
         items << (link_to _("Add entry"), :action => 'new')
       end
     end
@@ -39,13 +39,13 @@ module Admin::SidebarHelper
       condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
                     @item.owned_by?(@current_user)
                   else
-                    @current_user.can_perform?('destroy', @resource[:class])
+                    @current_user.can?('destroy', @resource[:class])
                   end
       items << (link_to _("Edit entry"), :action => 'edit', :id => @item.id) if condition
     end
 
     @resource[:class].typus_actions_for(params[:action]).each do |action|
-      if @current_user.can_perform?(action, @resource[:class])
+      if @current_user.can?(action, @resource[:class])
         items << (link_to _(action.humanize), params.merge(:action => action))
       end
     end
@@ -74,7 +74,7 @@ module Admin::SidebarHelper
       action = if klass.typus_user_id? && !@current_user.is_root?
                  @next.owned_by?(@current_user) ? 'edit' : 'show'
                else
-                 !@current_user.can_perform?('edit', klass) ? 'show' : params[:action]
+                 !@current_user.can?('edit', klass) ? 'show' : params[:action]
                end
       items << (link_to _("Next"), params.merge(:action => action, :id => @next.id))
     end
@@ -82,7 +82,7 @@ module Admin::SidebarHelper
       action = if klass.typus_user_id? && !@current_user.is_root?
                  @previous.owned_by?(@current_user) ? 'edit' : 'show'
                else
-                 !@current_user.can_perform?('edit', klass) ? 'show' : params[:action]
+                 !@current_user.can?('edit', klass) ? 'show' : params[:action]
                end
       items << (link_to _("Previous"), params.merge(:action => action, :id => @previous.id))
     end

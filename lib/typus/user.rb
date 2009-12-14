@@ -75,7 +75,7 @@ module Typus
         Typus::Configuration.roles[role].compact
       end
 
-      def can_perform?(action, resource, options = {})
+      def can?(action, resource, options = {})
 
         # We are getting a Class, so we need to convert it to string.
         resource = resource.to_s

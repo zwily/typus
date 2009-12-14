@@ -15,7 +15,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     self.expects(:params).at_least_once.returns(params)
 
     @current_user = mock()
-    @current_user.expects(:can_perform?).with('create', Post).returns(false)
+    @current_user.expects(:can?).with('create', Post).returns(false)
     @resource = { :class => Comment }
 
     expected = <<-HTML
@@ -44,7 +44,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     self.expects(:params).at_least_once.returns(params)
 
     @current_user = mock()
-    @current_user.expects(:can_perform?).with('create', Comment).returns(true)
+    @current_user.expects(:can?).with('create', Comment).returns(true)
     @resource = { :class => Post }
 
     expected = <<-HTML

@@ -36,7 +36,7 @@ module Admin::TableHelper
         action = if model.typus_user_id? && !@current_user.is_root?
                    # If there's a typus_user_id column on the table and logged user is not root ...
                    item.owned_by?(@current_user) ? item.class.typus_options_for(:default_action_on_item) : 'show'
-                 elsif !@current_user.can_perform?('edit', model)
+                 elsif !@current_user.can?('edit', model)
                    'show'
                  else
                    item.class.typus_options_for(:default_action_on_item)
@@ -63,7 +63,7 @@ module Admin::TableHelper
           condition = if model.typus_user_id? && !@current_user.is_root?
                         item.owned_by?(@current_user)
                       else
-                        @current_user.can_perform?('destroy', model)
+                        @current_user.can?('destroy', model)
                       end
           perform = link_to trash, { :action => 'destroy', :id => item.id }, 
                                      :title => _("Remove"), 
@@ -130,7 +130,7 @@ module Admin::TableHelper
         headers << "<th>#{content}</th>"
 
       end
-      headers << "<th>&nbsp;</th>" if @current_user.can_perform?('delete', model)
+      headers << "<th>&nbsp;</th>" if @current_user.can?('delete', model)
       html << <<-HTML
 <tr>
 #{headers.join("\n")}
@@ -145,7 +145,7 @@ module Admin::TableHelper
 
     att_value = item.send(attribute)
     content = if !att_value.nil?
-      if @current_user.can_perform?(action, att_value.class.name)
+      if @current_user.can?(action, att_value.class.name)
         link_to item.send(attribute).typus_name, :controller => "admin/#{attribute.pluralize}", :action => action, :id => att_value.id
       else
         att_value.typus_name
