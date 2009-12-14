@@ -58,7 +58,7 @@ module Admin::FormHelper
                                     :action => 'new', 
                                     :back_to => back_to, 
                                     :selected => related_fk }, 
-                                    :confirm => confirm.join("\n\n") if @current_user.can_perform?(related, 'create')
+                                    :confirm => confirm.join("\n\n") if @current_user.can_perform?('create', related)
 
       if related.respond_to?(:roots)
         html << typus_tree_field(related_fk, :items => related.roots, 
@@ -112,7 +112,7 @@ module Admin::FormHelper
 
         association = @resource[:class].reflect_on_association(relationship.to_sym)
 
-        next if !@current_user.can_perform?(association.class_name.constantize, 'read')
+        next if !@current_user.can_perform?('read', association.class_name.constantize)
 
         case association.macro
         when :has_and_belongs_to_many
@@ -151,7 +151,7 @@ module Admin::FormHelper
                     true
                   end
 
-      if condition && @current_user.can_perform?(model_to_relate, 'create')
+      if condition && @current_user.can_perform?('create', model_to_relate)
         add_new = <<-HTML
   <small>#{link_to _("Add new"), link_options}</small>
         HTML
@@ -232,7 +232,7 @@ module Admin::FormHelper
                     true
                   end
 
-      if condition && @current_user.can_perform?(model_to_relate, 'create')
+      if condition && @current_user.can_perform?('create', model_to_relate)
         add_new = <<-HTML
   <small>#{link_to _("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id}</small>
         HTML

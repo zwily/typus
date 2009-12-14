@@ -5,7 +5,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_should_allow_admin_to_add_a_category
     admin = typus_users(:admin)
     @request.session[:typus_user_id] = admin.id
-    assert admin.can_perform?('Post', 'create')
+    assert admin.can_perform?('create', 'Post')
   end
 
   def test_should_not_allow_designer_to_add_a_post

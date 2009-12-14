@@ -43,7 +43,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   def test_typus_table_header
 
     @current_user = mock()
-    @current_user.expects(:can_perform?).with(TypusUser, 'delete').returns(true)
+    @current_user.expects(:can_perform?).with('delete', TypusUser).returns(true)
 
     fields = TypusUser.typus_fields_for(:list)
 
@@ -67,7 +67,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   def test_typus_table_header_with_params
 
     @current_user = mock()
-    @current_user.expects(:can_perform?).with(TypusUser, 'delete').returns(true)
+    @current_user.expects(:can_perform?).with('delete', TypusUser).returns(true)
 
     fields = TypusUser.typus_fields_for(:list)
 
@@ -91,7 +91,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   def test_typus_table_header_when_user_cannot_delete_items
 
     @current_user = mock()
-    @current_user.expects(:can_perform?).with(TypusUser, 'delete').returns(false)
+    @current_user.expects(:can_perform?).with('delete', TypusUser).returns(false)
 
     fields = TypusUser.typus_fields_for(:list)
 
@@ -114,7 +114,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   def test_typus_table_header_when_user_cannot_delete_items_with_params
 
     @current_user = mock()
-    @current_user.expects(:can_perform?).with(TypusUser, 'delete').returns(false)
+    @current_user.expects(:can_perform?).with('delete', TypusUser).returns(false)
 
     fields = TypusUser.typus_fields_for(:list)
 

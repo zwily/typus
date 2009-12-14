@@ -108,7 +108,7 @@ module Typus
                     :action => params[:action])
                 end
 
-      unless @current_user.can_perform?(@resource[:class], params[:action])
+      unless @current_user.can_perform?(params[:action], @resource[:class])
         flash[:notice] = message
         redirect_to request.referer || admin_dashboard_path
       end
@@ -121,7 +121,7 @@ module Typus
     def check_if_user_can_perform_action_on_resource_without_model
       controller = params[:controller].split('/').last
       action = params[:action]
-      unless @current_user.can_perform?(controller.camelize, action, { :special => true })
+      unless @current_user.can_perform?(action, controller.camelize, { :special => true })
         flash[:notice] = _("{{current_user_role}} can't go to {{action}} on {{controller}}.", 
                            :current_user_role => @current_user.role.capitalize, 
                            :action => action, 

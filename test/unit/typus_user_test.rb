@@ -171,8 +171,8 @@ this_is_chelm@example.com
   def test_should_verify_can_perform?
     assert TypusUser.instance_methods.map {|i| i.to_sym }.include?(:can_perform?)
     @current_user = TypusUser.find(:first)
-    assert @current_user.can_perform?(TypusUser, 'delete')
-    assert @current_user.can_perform?('TypusUser', 'delete')
+    assert @current_user.can_perform?('delete', TypusUser)
+    assert @current_user.can_perform?('delete', 'TypusUser')
   end
 
 end
