@@ -13,7 +13,15 @@ class ActiveRecord::Base
   end
 
   ##
-  # respond_to?(:name) ? name : "#{self.class}##{id}"
+  # We had:
+  #
+  #   def typus_name
+  #     respond_to?(:name) ? name : "#{self.class}##{id}"
+  #   end
+  #
+  # ActiveScaffold uses `to_label`, which makes more sense. We want 
+  # to keep compatibility with old versions of Typus. The prefered method 
+  # is `to_label` and `typus_name` will be deprecated in the next months.
   #
   def to_label
     [ :typus_name, :name ].each do |attribute|
