@@ -356,19 +356,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal expected, typus_users(:designer).previous_and_next(conditions)
   end
 
-  def test_should_verify_typus_name_is_working_properly
-
-    assert Category.new.respond_to?(:name)
-    assert_equal 'First Category', categories(:first).typus_name
-
-    assert !Page.new.respond_to?(:name)
-    assert_equal 'Page#1', pages(:published).typus_name
-
-    assert Comment.new.respond_to?(:name)
-    assert_equal "John", comments(:first).typus_name
-
-  end
-
   def test_should_verify_typus_user_id
     assert Post.typus_user_id?
     assert !TypusUser.typus_user_id?

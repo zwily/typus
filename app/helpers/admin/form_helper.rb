@@ -65,7 +65,7 @@ module Admin::FormHelper
                                              :attribute_virtual => related_fk, 
                                              :form => form)
       else
-        values = related.find(:all, :order => related.typus_order_by).collect { |p| [p.typus_name, p.id] }
+        values = related.find(:all, :order => related.typus_order_by).collect { |p| [p.to_label, p.id] }
         options = { :include_blank => true }
         html_options = { :disabled => attribute_disabled?(attribute) }
         label_text = @resource[:class].human_attribute_name(attribute)
@@ -161,7 +161,7 @@ module Admin::FormHelper
 <a name="#{field}"></a>
 <div class="box_relationships" id="#{model_to_relate_as_resource}">
   <h2>
-  #{link_to model_to_relate.typus_human_name.pluralize, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _("{{model}} filtered by {{filtered_by}}", :model => model_to_relate.typus_human_name.pluralize, :filtered_by => @item.typus_name)}
+  #{link_to model_to_relate.typus_human_name.pluralize, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _("{{model}} filtered by {{filtered_by}}", :model => model_to_relate.typus_human_name.pluralize, :filtered_by => @item.to_label)}
   #{add_new}
   </h2>
       HTML
@@ -175,7 +175,7 @@ module Admin::FormHelper
         html << <<-HTML
   #{form_tag :action => 'relate', :id => @item.id}
   #{hidden_field :related, :model, :value => model_to_relate}
-  <p>#{select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
+  <p>#{select :related, :id, items_to_relate.collect { |f| [f.to_label, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
   </form>
         HTML
       end
@@ -255,7 +255,7 @@ module Admin::FormHelper
           html << <<-HTML
     #{form_tag :action => 'relate', :id => @item.id}
     #{hidden_field :related, :model, :value => model_to_relate}
-    <p>#{select :related, :id, items_to_relate.collect { |f| [f.typus_name, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
+    <p>#{select :related, :id, items_to_relate.collect { |f| [f.to_label, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
     </form>
           HTML
         end
@@ -378,7 +378,7 @@ Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="ht
   def expand_tree_into_select_field(items, attribute)
     returning(String.new) do |html|
       items.each do |item|
-        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 2} &#8627; #{item.typus_name}</option>\n}
+        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 2} &#8627; #{item.to_label}</option>\n}
         html << expand_tree_into_select_field(item.children, attribute) unless item.children.empty?
       end
     end

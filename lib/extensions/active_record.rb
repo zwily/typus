@@ -12,4 +12,14 @@ class ActiveRecord::Base
 
   end
 
+  ##
+  # respond_to?(:name) ? name : "#{self.class}##{id}"
+  #
+  def to_label
+    [ :typus_name, :name ].each do |attribute|
+      return send(attribute).to_s if respond_to?(attribute)
+    end
+    return "#{self.class}##{id}"
+  end
+
 end

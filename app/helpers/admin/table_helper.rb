@@ -146,9 +146,9 @@ module Admin::TableHelper
     att_value = item.send(attribute)
     content = if !att_value.nil?
       if @current_user.can?(action, att_value.class.name)
-        link_to item.send(attribute).typus_name, :controller => "admin/#{attribute.pluralize}", :action => action, :id => att_value.id
+        link_to item.send(attribute).to_label, :controller => "admin/#{attribute.pluralize}", :action => action, :id => att_value.id
       else
-        att_value.typus_name
+        att_value.to_label
       end
     end
 
@@ -160,7 +160,7 @@ module Admin::TableHelper
 
   def typus_table_has_and_belongs_to_many_field(attribute, item)
     <<-HTML
-<td>#{item.send(attribute).map { |i| i.typus_name }.join('<br />')}</td>
+<td>#{item.send(attribute).map { |i| i.to_label }.join('<br />')}</td>
     HTML
   end
 
@@ -178,7 +178,7 @@ module Admin::TableHelper
 
   def typus_table_tree_field(attribute, item)
     <<-HTML
-<td>#{item.parent.typus_name if item.parent}</td>
+<td>#{item.parent.to_label if item.parent}</td>
     HTML
   end
 

@@ -21,7 +21,7 @@
              boolean_hash = @resource[:class].typus_boolean(field.first)
              !raw_data.nil? ? boolean_hash["#{raw_data}".to_sym] : @resource[:class].typus_options_for(:nil)
            when :belongs_to
-             raw_data.typus_name if !raw_data.nil?
+             raw_data.to_label if !raw_data.nil?
            when :file
              @item.typus_preview(field.first)
            when :text

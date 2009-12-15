@@ -156,7 +156,7 @@ module Admin::SidebarHelper
         related_items.each do |item|
           switch = 'selected' if request.include?("#{related_fk}=#{item.id}")
           items << <<-HTML
-<option #{switch} value="#{url_for params.merge(related_fk => item.id, :page => nil)}">#{item.typus_name}</option>
+<option #{switch} value="#{url_for params.merge(related_fk => item.id, :page => nil)}">#{item.to_label}</option>
           HTML
         end
         model_pluralized = model.name.downcase.pluralize
@@ -181,7 +181,7 @@ function surfto_#{model_pluralized}(form) {
       else
         related_items.each do |item|
           switch = request.include?("#{related_fk}=#{item.id}") ? 'on' : 'off'
-          items << (link_to item.typus_name, params.merge(related_fk => item.id, :page => nil), :class => switch)
+          items << (link_to item.to_label, params.merge(related_fk => item.id, :page => nil), :class => switch)
         end
       end
 

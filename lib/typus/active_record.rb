@@ -304,10 +304,6 @@ module Typus
 
     end
 
-    def typus_name
-      respond_to?(:name) ? name : "#{self.class}##{id}"
-    end
-
     def owned_by?(user)
       send(Typus.user_fk) == user.id
     end
