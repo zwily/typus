@@ -20,10 +20,10 @@ module Typus
     end
 
     ##
-    # This method is used to change a Rails behavior.
+    # This method is used to fix a Rails behavior.
     #
     #   typus $ script/console
-    #   Loading development environment (Rails 2.3.2)
+    #   Loading development environment (Rails 2.3.5)
     #   >> TypusUser.human_name
     #   => "Typususer"
     #   >> TypusUser.typus_human_name
