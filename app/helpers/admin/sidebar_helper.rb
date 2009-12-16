@@ -103,14 +103,9 @@ module Admin::SidebarHelper
 
     hidden_params = search_params.map { |key, value| hidden_field_tag(key, value) }
 
-    <<-HTML
-<h2>#{_("Search")}</h2>
-<form action="/#{params[:controller]}" method="get">
-<p><input id="search" name="search" type="text" value="#{params[:search]}"/></p>
-#{hidden_params.sort.join("\n")}
-</form>
-<p class="tip">#{_("Search by")} #{search_by.downcase}.</p>
-    HTML
+    render :partial => 'admin/shared/search', 
+           :locals => { :hidden_params => hidden_params,
+                        :search_by => search_by }
 
   end
 
