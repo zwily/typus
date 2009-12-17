@@ -31,3 +31,4 @@
 [X] Added default route with conditions. (Ben Scofield)
 [ ] We should be able to set preferences and store them on the database.
 [ ] Make tests work again.
+[X] Fixed stylesheet and search to be able to use `relative_url_root`.
