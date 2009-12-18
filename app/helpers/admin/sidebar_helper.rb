@@ -12,7 +12,7 @@ module Admin::SidebarHelper
 
     return String.new if items.empty?
     returning(String.new) do |html|
-      html << "<h2>#{header}</h2>\n" unless header.nil?
+      html << "<h2>#{header}</h2>\n"
       next unless options[:selector].nil?
       html << "<ul>\n"
       items.each do |item|
