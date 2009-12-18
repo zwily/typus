@@ -129,14 +129,14 @@ module TypusHelper
 
   def header
 
-    links = [ "<li>#{link_to_unless_current _("Dashboard"), admin_dashboard_path}</li>" ]
+    links = [ (link_to_unless_current _("Dashboard"), admin_dashboard_path) ]
 
     Typus.models_on_header.each do |model|
-      links << "<li>#{link_to_unless_current model.constantize.typus_human_name.pluralize, :controller => "admin/#{model.tableize}"}</li>"
+      links << (link_to_unless_current model.constantize.typus_human_name.pluralize, :controller => "admin/#{model.tableize}")
     end
 
     if ActionController::Routing::Routes.named_routes.routes.keys.include?(:root)
-      links << "<li>#{link_to _("View site"), root_path, :target => 'blank'}</li>"
+      links << (link_to _("View site"), root_path, :target => 'blank')
     end
 
     render :partial => 'admin/shared/header', :locals => { :links => links }
