@@ -233,7 +233,7 @@ module Admin::TableHelper
               end
 
     <<-HTML
-<td align="center">#{content}</td>
+<td>#{content}</td>
     HTML
 
   end
