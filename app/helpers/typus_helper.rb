@@ -61,33 +61,8 @@ module TypusHelper
                 end.compact
     return if available.empty?
 
-    returning(String.new) do |html|
-
-      html << <<-HTML
-<table class="typus">
-<tr>
-<th colspan="2">#{_("Resources")}</th>
-</tr>
-      HTML
-
-      available.each do |resource|
-
-        resource_path = { :controller => "admin/#{resource.underscore}" }
-
-        html << <<-HTML
-<tr class="#{cycle('even', 'odd')}">
-<td>#{link_to _(resource.titleize.capitalize), resource_path}</td>
-<td align="right" style="vertical-align: bottom;"></td>
-</tr>
-        HTML
-
-      end
-
-      html << <<-HTML
-</table>
-      HTML
-
-    end
+    render :partial => 'admin/shared/resources', 
+           :locals => { :resources => available }
 
   end
 
