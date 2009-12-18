@@ -171,11 +171,9 @@ module TypusHelper
     return if message.empty?
     flash_type = message.keys.first
 
-    <<-HTML
-<div id="flash" class="#{flash_type}">
-  <p>#{message[flash_type]}</p>
-</div>
-    HTML
+    render :partial => 'admin/shared/flash_message', 
+                       :locals => { :message => message, 
+                                    :flash_type => flash_type }
 
   end
 
