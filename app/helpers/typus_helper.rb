@@ -139,7 +139,8 @@ module TypusHelper
       links << (link_to _("View site"), root_path, :target => 'blank')
     end
 
-    render :partial => 'admin/shared/header', :locals => { :links => links }
+    render :partial => 'admin/shared/header', 
+           :locals => { :links => links }
 
   end
 
@@ -158,8 +159,7 @@ module TypusHelper
                    end
 
     render :partial => 'admin/shared/login_info', 
-           :locals => { :message => message, 
-                        :user_details => user_details }
+           :locals => { :message => message, :user_details => user_details }
 
   end
 
@@ -169,8 +169,7 @@ module TypusHelper
     flash_type = message.keys.first
 
     render :partial => 'admin/shared/flash_message', 
-                       :locals => { :message => message, 
-                                    :flash_type => flash_type }
+           :locals => { :flash_type => flash_type, :message => message }
 
   end
 
