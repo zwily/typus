@@ -124,8 +124,6 @@ module Admin::SidebarHelper
         when :date, :datetime then html << date_filter(current_request, key)
         when :belongs_to then html << relationship_filter(current_request, key)
         when :has_and_belongs_to_many then html << relationship_filter(current_request, key, true)
-        else
-          html << "<p>#{_("Unknown")}</p>"
         end
       end
     end
