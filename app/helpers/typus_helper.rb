@@ -58,8 +58,8 @@ module TypusHelper
 
     available = Typus.resources.map do |resource|
                   resource if @current_user.resources.include?(resource)
-                end
-    return if available.compact.empty?
+                end.compact
+    return if available.empty?
 
     returning(String.new) do |html|
 
@@ -70,7 +70,7 @@ module TypusHelper
 </tr>
       HTML
 
-      available.compact.each do |resource|
+      available.each do |resource|
 
         resource_path = { :controller => "admin/#{resource.underscore}" }
 
