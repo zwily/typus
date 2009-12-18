@@ -132,7 +132,7 @@ module TypusHelper
     links = [ "<li>#{link_to_unless_current _("Dashboard"), admin_dashboard_path}</li>" ]
 
     Typus.models_on_header.each do |model|
-      links << "<li>#{link_to_unless_current model.constantize.typus_human_name.pluralize, :controller => "/admin/#{model.tableize}"}</li>"
+      links << "<li>#{link_to_unless_current model.constantize.typus_human_name.pluralize, :controller => "admin/#{model.tableize}"}</li>"
     end
 
     if ActionController::Routing::Routes.named_routes.routes.keys.include?(:root)
