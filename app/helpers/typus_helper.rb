@@ -157,12 +157,9 @@ module TypusHelper
                      user.name
                    end
 
-    <<-HTML
-<ul>
-  <li>#{_("Logged as")} #{user_details}</li>
-  <li>#{link_to _("Sign out"), admin_sign_out_path, { :confirm => message } }</li>
-</ul>
-    HTML
+    render :partial => 'admin/shared/login_info', 
+           :locals => { :message => message, 
+                        :user_details => user_details }
 
   end
 
