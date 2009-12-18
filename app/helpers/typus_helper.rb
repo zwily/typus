@@ -140,12 +140,7 @@ module TypusHelper
       links << "<li>#{link_to _("View site"), root_path, :target => 'blank'}</li>"
     end
 
-    <<-HTML
-<h1>#{Typus::Configuration.options[:app_name]}</h1>
-<ul>
-#{links.join("\n")}
-</ul>
-    HTML
+    render :partial => 'admin/shared/header', :locals => { :links => links }
 
   end
 
