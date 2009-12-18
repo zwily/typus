@@ -31,13 +31,8 @@ module Admin::MasterHelper
                   :resource_from => options[:resource_from] )
               end
 
-    returning(String.new) do |html|
-      html << <<-HTML
-<div id="flash" class="notice">
-  <p>#{message} #{link_to _("Do you want to cancel it?"), params[:back_to]}</p>
-</div>
-      HTML
-    end
+    render :partial => 'admin/shared/display_link_to_previous', 
+           :locals => { :message => message }
 
   end
 
