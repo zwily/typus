@@ -39,4 +39,4 @@
 [ ] Cleanup `applications` & `resources`.
 [X] Fix back_to when using `relative_url_root`.
 [ ] Remove toggle option. We always enable it so it's a good default.
-[ ]
+[ ] Removed from table fields which are the current filter. (Experiment)
