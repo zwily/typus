@@ -1,8 +1,5 @@
 module TypusHelper
 
-  ##
-  # Applications list on the dashboard
-  #
   def applications
 
     apps = {}
@@ -23,9 +20,6 @@ module TypusHelper
 
   end
 
-  ##
-  # Resources (wich are not models) on the dashboard.
-  #
   def resources
 
     available = Typus.resources.map do |resource|
