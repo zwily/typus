@@ -7,7 +7,6 @@ module Admin::FormHelper
     returning(String.new) do |html|
 
       html << (error_messages_for :item, :header_tag => 'h3')
-      html << '<ol>'
 
       fields.each do |key, value|
 
@@ -26,8 +25,6 @@ module Admin::FormHelper
                   typus_template_field(key, :string, options)
                 end
       end
-
-      html << '</ol>'
 
     end
 
