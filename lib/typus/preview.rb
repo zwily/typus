@@ -14,9 +14,9 @@ module Typus
       if send(attachment).styles.member?(file_preview) && send("#{attachment}_content_type") =~ /^image\/.+/
         <<-HTML
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function() { $("##{to_dom}_preview").fancybox(); });
+  $(document).ready(function() { $("##{to_dom}_#{attribute}_preview").fancybox(); });
 </script>
-<a id="#{to_dom}_preview" href="#{send(attachment).url(file_preview)}" title="#{to_label}">#{send(attribute)}</a>
+<a id="#{to_dom}_#{attribute}_preview" href="#{send(attachment).url(file_preview)}" title="#{to_label}">#{send(attribute)}</a>
         HTML
       else
         <<-HTML
@@ -37,9 +37,9 @@ module Typus
         if send(attachment).styles.member?(file_preview) && send(attachment).styles.member?(file_thumbnail)
           <<-HTML
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function() { $("##{to_dom}_preview").fancybox(); });
+  $(document).ready(function() { $("##{to_dom}_#{attribute}_preview").fancybox(); });
 </script>
-<a id="#{to_dom}_preview" href="#{send(attachment).url(file_preview)}" title="#{to_label}">
+<a id="#{to_dom}_#{attribute}_preview" href="#{send(attachment).url(file_preview)}" title="#{to_label}">
 <img src="#{send(attachment).url(file_thumbnail)}" />
         </a>
           HTML
@@ -52,9 +52,9 @@ module Typus
         elsif send(attachment).styles.member?(file_preview)
           <<-HTML
 <script type="text/javascript" charset="utf-8">
-  $(document).ready(function() { $("##{to_dom}_preview").fancybox(); });
+  $(document).ready(function() { $("##{to_dom}_#{attribute}_preview").fancybox(); });
 </script>
-<a id="#{to_dom}_preview" href="#{send(attachment).url(file_preview)}" title="#{to_label}">
+<a id="#{to_dom}_#{attribute}_preview" href="#{send(attachment).url(file_preview)}" title="#{to_label}">
 #{send(attribute)}
         </a>
           HTML
