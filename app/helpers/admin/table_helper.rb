@@ -191,7 +191,7 @@ module Admin::TableHelper
     end
 
     content = html_position.join(' / ')
-    return contact_tag(:td, content)
+    return content_tag(:td, content)
 
   end
 
