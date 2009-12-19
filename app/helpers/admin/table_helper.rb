@@ -111,8 +111,7 @@ module Admin::TableHelper
       headers = []
       fields.each do |key, value|
 
-        content = model.human_attribute_name(key)
-        content += " (#{key})" if key.include?('_id')
+        content = key.end_with?('_id') ? key : model.human_attribute_name(key)
 
         if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
           sort_order = case params[:sort_order]
