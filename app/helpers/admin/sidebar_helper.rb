@@ -12,15 +12,10 @@ module Admin::SidebarHelper
 
     return String.new if items.empty?
 
-    returning(String.new) do |html|
-      html << "<h2>#{header}</h2>\n"
-      next unless options[:selector].nil?
-      html << "<ul>\n"
-      items.each do |item|
-        html << "<li>#{item}</li>\n"
-      end
-      html << "</ul>\n"
-    end
+    render :partial => 'admin/shared/list', 
+           :locals => { :header => header, 
+                        :items => items, 
+                        :options => options }
 
   end
 
