@@ -103,9 +103,6 @@ module Admin::TableHelper
 
   end
 
-  ##
-  # Header of the table
-  #
   def typus_table_header(model, fields)
     returning(String.new) do |html|
       headers = []
