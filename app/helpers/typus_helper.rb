@@ -2,7 +2,7 @@ module TypusHelper
 
   def applications
 
-    apps = {}
+    apps = ActiveSupport::OrderedHash.new
 
     Typus.applications.each do |app|
 
