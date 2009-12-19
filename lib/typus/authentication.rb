@@ -15,7 +15,7 @@ module Typus
       if session[:typus_user_id]
         set_current_user
       else
-        back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
+        back_to = (request.env['REQUEST_URI'] == admin_dashboard_path) ? nil : request.env['REQUEST_URI']
         redirect_to admin_sign_in_path(:back_to => back_to)
       end
 
@@ -32,7 +32,7 @@ module Typus
       end
 
       unless @current_user.status
-        back_to = (request.env['REQUEST_URI'] == '/admin') ? nil : request.env['REQUEST_URI']
+        back_to = (request.env['REQUEST_URI'] == admin_dashboard_path) ? nil : request.env['REQUEST_URI']
         raise _("Typus user has been disabled.")
       end
 
