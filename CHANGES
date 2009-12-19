@@ -36,3 +36,7 @@
 [ ] Cleanup `display_link_to_previous` helper.
 [ ] Cleanup `build_typus_list` helper.
 [ ] Remove Typus "blue" color and use something more neutral.
+[ ] Cleanup `applications` & `resources`.
+[X] Fix back_to when using `relative_url_root`.
+[ ] Remove toggle option. We always enable it so it's a good default.
+[ ]
