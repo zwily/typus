@@ -158,9 +158,8 @@ module Admin::TableHelper
   end
 
   def typus_table_string_field(attribute, item, link_options = {})
-    <<-HTML
-<td class="#{attribute}">#{h(item.send(attribute))}</td>
-    HTML
+    content = h(item.send(attribute))
+    return content_tag(:td, content, :class => attribute)
   end
 
   def typus_table_file_field(attribute, item, link_options = {})
