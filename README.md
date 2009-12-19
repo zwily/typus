@@ -69,7 +69,7 @@ allow us to spend more time working and supporting the project.
 
 ## License
 
-Copyright &copy; 2007-2009 Francesc Esplugas Marti, released under the 
+Copyright &copy; 2007-2010 Francesc Esplugas Marti, released under the 
 MIT license
 
 [1]:http://intraducibles.com/projects/typus/donate
