@@ -172,14 +172,10 @@ class Admin::MasterController < ApplicationController
   end
 
   def toggle
-    if @resource[:class].typus_options_for(:toggle)
-      @item.toggle!(params[:field])
-      flash[:success] = _("{{model}} {{attribute}} changed.", 
-                          :model => @resource[:human_name], 
-                          :attribute => params[:field].humanize.downcase)
-    else
-      flash[:notice] = _("Toggle is disabled.")
-    end
+    @item.toggle!(params[:field])
+    flash[:success] = _("{{model}} {{attribute}} changed.", 
+                        :model => @resource[:human_name], 
+                        :attribute => params[:field].humanize.downcase)
     redirect_to request.referer || admin_dashboard_path
   end
 

@@ -213,7 +213,7 @@ module Admin::TableHelper
 
     options = { :controller => item.class.name.tableize, :action => 'toggle', :field => attribute.gsub(/\?$/,''), :id => item.id }
 
-    content = if item.class.typus_options_for(:toggle) && !item.send(attribute).nil?
+    content = if !item.send(attribute).nil?
                 link_to _(link_text), params.merge(options), 
                                    :confirm => _("Change {{attribute}}?", 
                                    :attribute => item.class.human_attribute_name(attribute).downcase)

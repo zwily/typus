@@ -36,7 +36,6 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal 15, Typus::Configuration.options[:per_page]
     assert_equal 5, Typus::Configuration.options[:sidebar_selector]
     assert_nil Typus::Configuration.options[:start_year]
-    assert_equal true, Typus::Configuration.options[:toggle]
   end
 
   def test_should_verify_typus_roles_is_loaded

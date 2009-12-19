@@ -26,8 +26,7 @@ module Typus
                       :only_user_items => false, 
                       :per_page => 15, 
                       :sidebar_selector => 5, 
-                      :start_year => nil, 
-                      :toggle => true }
+                      :start_year => nil }
 
     @@options = typus_options.merge(model_options)
 

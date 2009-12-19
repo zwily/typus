@@ -247,9 +247,6 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_typus_table_boolean_field
 
-    options = { :toggle => false }
-    Typus::Configuration.stubs(:options).returns(options)
-
     post = typus_users(:admin)
     output = typus_table_boolean_field('status', post)
     expected = <<-HTML

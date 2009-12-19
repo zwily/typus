@@ -26,4 +26,3 @@ Typus::Configuration.options[:app_name] = '<%= application %>'
 # Typus::Configuration.options[:per_page] = 15
 # Typus::Configuration.options[:sidebar_selector] = 5
 # Typus::Configuration.options[:start_year] = Time.now.year - 10
-# Typus::Configuration.options[:toggle] = true
