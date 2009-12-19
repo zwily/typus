@@ -37,7 +37,7 @@ module Admin::SidebarHelper
                   else
                     @current_user.can?('destroy', @resource[:class])
                   end
-      items << (link_to _("Edit entry"), :action => 'edit', :id => @item.id) if condition
+      items << (link_to_if condition, _("Edit entry"), :action => 'edit', :id => @item.id)
     end
 
     @resource[:class].typus_actions_for(params[:action]).each do |action|
