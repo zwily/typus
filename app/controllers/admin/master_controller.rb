@@ -323,14 +323,15 @@ private
   end
 
   def set_fields
-    @fields = case params[:action]
-              when 'index'
-                @resource[:class].typus_fields_for(:list)
-              when 'new', 'edit', 'create', 'update'
-                @resource[:class].typus_fields_for(:form)
-              else
-                @resource[:class].typus_fields_for(params[:action])
+
+    mapping = case params[:action]
+              when 'index' then :list
+              when 'new', 'edit', 'create', 'update' then :form
+              else params[:action]
               end
+
+    @fields = @resource[:class].typus_fields_for(mapping)
+
   end
 
   def set_order
