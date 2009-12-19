@@ -11,6 +11,7 @@ module Admin::SidebarHelper
              end
 
     return String.new if items.empty?
+
     returning(String.new) do |html|
       html << "<h2>#{header}</h2>\n"
       next unless options[:selector].nil?
