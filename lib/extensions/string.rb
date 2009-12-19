@@ -1,11 +1,5 @@
 class String
 
-  def to_html(*args)
-    options = args.extract_options!
-    options[:tag] ||= 'p'
-    return "<#{options[:tag]}>#{self}</#{options[:tag]}>"
-  end
-
   def extract_controller(admin = 'admin')
     split('/').delete_if { |i| i.eql?(admin) }
   end

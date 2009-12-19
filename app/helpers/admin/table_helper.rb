@@ -148,13 +148,13 @@ module Admin::TableHelper
       end
     end
 
-    return content.to_html(:tag => 'td')
+    return content_tag(:td, content)
 
   end
 
   def typus_table_has_and_belongs_to_many_field(attribute, item)
     content = item.send(attribute).map { |i| i.to_label }.join('<br />')
-    return content.to_html(:tag => 'td')
+    return content_tag(:td, content)
   end
 
   def typus_table_string_field(attribute, item, link_options = {})
@@ -165,7 +165,7 @@ module Admin::TableHelper
 
   def typus_table_file_field(attribute, item, link_options = {})
     content = item.typus_preview_on_table(attribute)
-    return content.to_html(:tag => 'td')
+    return content_tag(:td, content)
   end
 
   def typus_table_tree_field(attribute, item)
@@ -192,7 +192,7 @@ module Admin::TableHelper
     end
 
     content = html_position.join(' / ')
-    return content.to_html(:tag => 'td')
+    return contact_tag(:td, content)
 
   end
 
@@ -201,7 +201,7 @@ module Admin::TableHelper
     date_format = item.class.typus_date_format(attribute)
     content = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
 
-    return content.to_html(:tag => 'td')
+    return content_tag(:td, content)
 
   end
 
@@ -224,7 +224,7 @@ module Admin::TableHelper
                 _(link_text)
               end
 
-    return content.to_html(:tag => 'td')
+    return content_tag(:td, content)
 
   end
 

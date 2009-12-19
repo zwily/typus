@@ -2,11 +2,6 @@ require 'test/helper'
 
 class StringTest < ActiveSupport::TestCase
 
-  def test_to_html
-    assert_equal "<p>Chunky Bacon</p>", "Chunky Bacon".to_html
-    assert_equal "<td>Chunky Bacon</td>", "Chunky Bacon".to_html(:tag => 'td')
-  end
-
   def test_extract_controller
 
     assert_equal ['posts'], 'admin/posts'.extract_controller
