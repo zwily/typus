@@ -70,7 +70,7 @@ class PaginatorTest < ActiveSupport::TestCase
       page.each_with_index do |item, index|
         assert_equal page.items[index], item
       end
-      assert_equal page.items, page.inject([]) {|list, item| list << item }
+      assert_equal page.items, page.inject([]) { |list, item| list << item }
     end
   end
 

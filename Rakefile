@@ -66,5 +66,5 @@ task :publish => [ :package ] do
 end
 
 task :write_version do
-  File.open('VERSION', 'w') {|f| f.write(Typus.version) }
+  File.open('VERSION', 'w') { |f| f.write(Typus.version) }
 end

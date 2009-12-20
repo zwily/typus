@@ -169,7 +169,7 @@ this_is_chelm@example.com
   end
 
   def test_should_verify_can?
-    assert TypusUser.instance_methods.map {|i| i.to_sym }.include?(:can?)
+    assert TypusUser.instance_methods.map { |i| i.to_sym }.include?(:can?)
     @current_user = TypusUser.find(:first)
     assert @current_user.can?('delete', TypusUser)
     assert @current_user.can?('delete', 'TypusUser')

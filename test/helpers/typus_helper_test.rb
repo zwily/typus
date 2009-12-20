@@ -57,7 +57,7 @@ class TypusHelperTest < ActiveSupport::TestCase
   def test_header_without_root_path
 
     # Remove root route from list
-    ActionController::Routing::Routes.named_routes.routes.reject! {|key, route| key == :root }
+    ActionController::Routing::Routes.named_routes.routes.reject! { |key, route| key == :root }
 
     self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
 
