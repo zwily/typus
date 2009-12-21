@@ -46,3 +46,6 @@
     was not working properly because there where multiple items with the 
     same id.
 [ ] Ajax pagination. (?)
+[ ] See what's happening with the admin namespace controllers for namespaced 
+    models.
+
