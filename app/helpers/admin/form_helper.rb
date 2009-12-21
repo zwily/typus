@@ -40,7 +40,7 @@ module Admin::FormHelper
     #
     params[:action] = (params[:action] == 'create') ? 'new' : params[:action]
 
-    back_to = url_for(:controller => params[:controller], :action => 'edit', :id => params[:id])
+    back_to = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id])
 
     related = @resource[:class].reflect_on_association(attribute.to_sym).class_name.constantize
     related_fk = @resource[:class].reflect_on_association(attribute.to_sym).primary_key_name
