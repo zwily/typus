@@ -88,13 +88,12 @@ module Typus
                     action
                   else
                     case action
-                    when 'new', 'create'       then 'create'
-                    when 'index', 'show'       then 'read'
-                    when 'edit', 'update'      then 'update'
-                    when 'position', 'toggle'  then 'update'
-                    when 'relate', 'unrelate'  then 'update'
-                    when 'detach'              then 'update'
-                    when 'destroy'             then 'delete'
+                    when 'new', 'create' then 'create'
+                    when 'index', 'show' then 'read'
+                    when 'edit', 'update', 
+                         'position', 'toggle', 
+                         'relate', 'unrelate', 'detach' then 'update'
+                    when 'destroy' then 'delete'
                     else action
                     end
                   end
