@@ -341,7 +341,7 @@ private
     condition = @current_user.is_root? || 
                 !@resource[:class].typus_options_for(:only_user_items) || 
                 !@resource[:class].columns.map(&:name).include?(Typus.user_fk)
-    !condition ? { Typus.user_fk => @current_user.id } : { }
+    !condition ? { Typus.user_fk => @current_user.id } : {}
   end
 
   def select_template(template, resource = @resource[:self])

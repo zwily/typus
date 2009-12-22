@@ -348,7 +348,7 @@ module Admin::FormHelper
            :locals => { :resource => @resource, 
                         :attribute => attribute, 
                         :options => custom_options, 
-                        :html_options => { }, 
+                        :html_options => {}, 
                         :form => options[:form], 
                         :label_text => @resource[:class].human_attribute_name(attribute) }
 

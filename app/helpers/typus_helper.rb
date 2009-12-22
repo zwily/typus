@@ -62,7 +62,7 @@ module TypusHelper
   end
 
   def page_title(action = params[:action])
-    crumbs = [ ]
+    crumbs = []
     crumbs << @resource[:human_name].pluralize if @resource
     crumbs << _(action.humanize) unless %w( index ).include?(action)
     return "#{Typus::Configuration.options[:app_name]} - " + crumbs.compact.map { |x| x }.join(' &rsaquo; ')
