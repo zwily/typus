@@ -31,6 +31,11 @@ module Admin::SidebarHelper
     end
 
     case params[:action]
+    when 'edit'
+      items << (link_to _("Show entry"), :action => 'show', :id => @item.id)
+    end
+
+    case params[:action]
     when 'show'
       condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
                     @item.owned_by?(@current_user)
