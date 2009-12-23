@@ -50,4 +50,6 @@
     models.
 [ ] Generate views for custom actions on the controllers/models. This should 
     verify the view doesn't exist and create it.
-
+[ ] Support for XSS.
+[ ] Replace "render :partial => 'template', :locals => {}", by 
+    "render 'template', :local => 'local'".
