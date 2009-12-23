@@ -11,7 +11,7 @@
 <%= typus_block :location => @resource[:self], :partial => 'index' %>
 
 <% unless @items.count.zero? -%>
-  <%= build_list(@resource[:class], @fields, @items) %>
+  <%= raw build_list(@resource[:class], @fields, @items) %>
   <%= pagination %>
 <% else %>
   <div id="flash" class="notice">
