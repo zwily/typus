@@ -135,18 +135,18 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_actions_on_list_for_typus_user
-    assert TypusUser.typus_actions_for('list').empty?
-    assert TypusUser.typus_actions_for(:list).empty?
+    assert TypusUser.typus_actions_on('list').empty?
+    assert TypusUser.typus_actions_on(:list).empty?
   end
 
   def test_should_return_post_actions_on_index
-    assert_equal %w( cleanup ), Post.typus_actions_for('index')
-    assert_equal %w( cleanup ), Post.typus_actions_for(:index)
+    assert_equal %w( cleanup ), Post.typus_actions_on('index')
+    assert_equal %w( cleanup ), Post.typus_actions_on(:index)
   end
 
   def test_should_return_post_actions_on_edit
-    assert_equal %w( send_as_newsletter preview ), Post.typus_actions_for('edit')
-    assert_equal %w( send_as_newsletter preview ), Post.typus_actions_for(:edit)
+    assert_equal %w( send_as_newsletter preview ), Post.typus_actions_on('edit')
+    assert_equal %w( send_as_newsletter preview ), Post.typus_actions_on(:edit)
   end
 
   def test_should_return_field_options_for_post

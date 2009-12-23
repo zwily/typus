@@ -32,24 +32,24 @@ class StringTest < ActiveSupport::TestCase
     assert_equal 'Delayed task', 'admin/delayed/tasks'.extract_human_name
   end
 
-  def test_should_return_post_actions_for_index
-    assert_equal %w( cleanup ), 'Post'.typus_actions_for('index')
-    assert_equal %w( cleanup ), 'Post'.typus_actions_for(:index)
+  def test_should_return_post_actions_on_index
+    assert_equal %w( cleanup ), 'Post'.typus_actions_on('index')
+    assert_equal %w( cleanup ), 'Post'.typus_actions_on(:index)
   end
 
-  def test_should_return_post_actions_for_edit
-    assert_equal %w( send_as_newsletter preview ), 'Post'.typus_actions_for('edit')
-    assert_equal %w( send_as_newsletter preview ), 'Post'.typus_actions_for(:edit)
+  def test_should_return_post_actions_on_edit
+    assert_equal %w( send_as_newsletter preview ), 'Post'.typus_actions_on('edit')
+    assert_equal %w( send_as_newsletter preview ), 'Post'.typus_actions_on(:edit)
   end
 
-  def test_should_verify_typus_actions_for_unexisting_returns_is_empty
-    assert 'TypusUser'.typus_actions_for('unexisting').empty?
-    assert 'TypusUser'.typus_actions_for(:unexisting).empty?
+  def test_should_verify_typus_actions_on_unexisting_returns_is_empty
+    assert 'TypusUser'.typus_actions_on('unexisting').empty?
+    assert 'TypusUser'.typus_actions_on(:unexisting).empty?
   end
 
-  def test_should_verify_typus_actions_for_index_returns_an_array
-    assert 'Post'.typus_actions_for('index').kind_of?(Array)
-    assert 'Post'.typus_actions_for(:index).kind_of?(Array)
+  def test_should_verify_typus_actions_on_index_returns_an_array
+    assert 'Post'.typus_actions_on('index').kind_of?(Array)
+    assert 'Post'.typus_actions_on(:index).kind_of?(Array)
   end
 
 end

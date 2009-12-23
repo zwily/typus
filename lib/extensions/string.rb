@@ -16,7 +16,7 @@ class String
     extract_class.typus_human_name.gsub('/', ' ')
   end
 
-  def typus_actions_for(filter)
+  def typus_actions_on(filter)
     Typus::Configuration.config[self]['actions'][filter.to_s].split(', ') rescue []
   end
 

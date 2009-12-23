@@ -45,7 +45,7 @@ module Admin::SidebarHelper
       items << (link_to_if condition, _("Edit entry"), :action => 'edit', :id => @item.id)
     end
 
-    @resource[:class].typus_actions_for(params[:action]).each do |action|
+    @resource[:class].typus_actions_on(params[:action]).each do |action|
       if @current_user.can?(action, @resource[:class])
         items << (link_to _(action.humanize), params.merge(:action => action))
       end

@@ -114,7 +114,7 @@ module Typus
     end
 
     # Extended actions for this model on Typus.
-    def typus_actions_for(filter)
+    def typus_actions_on(filter)
       Typus::Configuration.config[name]['actions'][filter.to_s].split(', ')
     rescue
       []
