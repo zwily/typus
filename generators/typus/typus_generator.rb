@@ -171,13 +171,15 @@ class TypusGenerator < Rails::Generator::Base
         [ "app/controllers/#{folder}", 
           "test/functional/#{folder}"].each { |f| FileUtils.mkdir_p(f) unless File.directory?(f) }
 
+        assigns = { :model => model.name, :actions => model.typus_actions }
+
         m.template "auto/resources_controller.rb.erb", 
                    "app/controllers/admin/#{model.name.tableize}_controller.rb", 
-                   :assigns => { :model => model.name }
+                   :assigns => assigns
 
-        m.template "auto/resource_controller_test.rb.erb", 
+        m.template "auto/resources_controller_test.rb.erb", 
                    "test/functional/admin/#{model.name.tableize}_controller_test.rb", 
-                   :assigns => { :model => model.name }
+                   :assigns => assigns
 
       end
 

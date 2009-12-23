@@ -34,4 +34,9 @@ class Admin::<%= model.pluralize %>Controller < Admin::MasterController
 
 =end
 
+<% actions.each do |action| -%>
+  def <%= action %>
+  end
+<% end -%>
+
 end
