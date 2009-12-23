@@ -210,15 +210,14 @@ module Admin::TableHelper
     status = item.send(attribute)
     link_text = !item.send(attribute).nil? ? boolean_hash["#{status}".to_sym] : item.class.typus_options_for(:nil)
 
-    options = { :controller => item.class.name.tableize, 
+    options = { :controller => "admin/#{item.class.name.tableize}", 
                 :action => 'toggle', 
                 :id => item.id, 
                 :field => attribute.gsub(/\?$/,'') }
 
     content = if !item.send(attribute).nil?
-                link_to _(link_text), params.merge(options), 
-                                   :confirm => _("Change {{attribute}}?", 
-                                   :attribute => item.class.human_attribute_name(attribute).downcase)
+                link_to _(link_text), options, 
+                                      :confirm => _("Change {{attribute}}?", :attribute => item.class.human_attribute_name(attribute).downcase)
               else
                 _(link_text)
               end
