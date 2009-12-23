@@ -181,6 +181,11 @@ class TypusGenerator < Rails::Generator::Base
                    "test/functional/admin/#{model.name.tableize}_controller_test.rb", 
                    :assigns => assigns
 
+        model.typus_actions.each do |action|
+          m.file "auto/action.html.erb", 
+                 "app/views/admin/#{model.name.tableize}/#{action}.html.erb"
+        end
+
       end
 
       ##

@@ -1,0 +1,14 @@
+<!-- Sidebar -->
+
+<% content_for :sidebar do %>
+  <%= typus_block :location => @resource[:self], :partial => 'sidebar' %>
+  <%= actions %>
+  <%= search %>
+<% end %>
+
+<!-- Content -->
+
+<h2><%= link_to @resource[:human_name].pluralize, :action => 'index' %> &rsaquo;
+    <%= params[:action].humanize %></h2>
+
+<p>Find me in app/views/<%= params[:controller] %>/<%= params[:action]%>.html.erb</p>
