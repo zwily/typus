@@ -141,9 +141,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
     comment = comments(:without_post_id)
     output = typus_table_belongs_to_field('post', comment)
-    expected = <<-HTML
-<td></td>
-    HTML
+    expected = "<td></td>"
 
     assert_equal expected, output
     default_url_options[:host] = 'test.host'
@@ -154,7 +152,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 <td><a href="http://test.host/admin/posts/edit/1">Post#1</a></td>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected.strip, output
 
   end
 
@@ -167,7 +165,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 <td>John<br />Me<br />Me</td>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected.strip, output
 
   end
 
@@ -179,7 +177,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 <td class="title">#{post.title}</td>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected.strip, output
 
   end
 
@@ -191,7 +189,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 <td class="title">#{post.title}</td>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected.strip, output
 
   end
 
@@ -203,7 +201,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     output = typus_table_tree_field('test', page)
     expected = <<-HTML
 <td></td>
-    HTML
+HTML
 
     assert_equal expected, output
 
@@ -211,7 +209,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     output = typus_table_tree_field('test', page)
     expected = <<-HTML
 <td>Page#1</td>
-    HTML
+HTML
 
     assert_equal expected, output
 
@@ -227,7 +225,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 <td>#{post.created_at.strftime('%m/%y')}</td>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected.strip, output
 
   end
 
@@ -241,7 +239,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 <td>#{post.created_at.strftime('%m/%y')}</td>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected.strip, output
 
   end
 
@@ -253,7 +251,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 <td align="center">Active</td>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected.strip, output
 
     post = typus_users(:disabled_user)
     output = typus_table_boolean_field('status', post)
@@ -261,7 +259,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 <td align="center">Inactive</td>
     HTML
 
-    assert_equal expected, output
+    assert_equal expected.strip, output
 
   end
 
