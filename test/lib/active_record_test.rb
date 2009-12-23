@@ -150,7 +150,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_post_actions
-    assert_equal %w( cleanup send_as_newsletter preview ), Post.typus_actions
+    assert_equal %w( cleanup preview send_as_newsletter ), Post.typus_actions.sort
   end
 
   def test_should_return_field_options_for_post

@@ -113,8 +113,13 @@ module Typus
 
     end
 
+    # OPTIMIZE
     def typus_actions
-      Typus::Configuration.config[name]['actions'].values
+      actions = [ ]
+      Typus::Configuration.config[name]['actions'].keys.map do |key|
+        actions += Typus::Configuration.config[name]['actions'][key].split(', ')
+      end
+      return actions
     rescue
       []
     end
