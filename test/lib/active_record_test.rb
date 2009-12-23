@@ -149,6 +149,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal %w( send_as_newsletter preview ), Post.typus_actions_on(:edit)
   end
 
+  def test_should_return_post_actions
+    assert_equal %w( cleanup send_as_newsletter preview ), Post.typus_actions
+  end
+
   def test_should_return_field_options_for_post
     assert_equal [ :status ], Post.typus_field_options_for('selectors')
     assert_equal [ :status ], Post.typus_field_options_for(:selectors)
