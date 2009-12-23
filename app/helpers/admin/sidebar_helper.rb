@@ -40,7 +40,7 @@ module Admin::SidebarHelper
       condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
                     @item.owned_by?(@current_user)
                   else
-                    @current_user.can?('destroy', @resource[:class])
+                    @current_user.can?('update', @resource[:class])
                   end
       items << (link_to_if condition, _("Edit entry"), :action => 'edit', :id => @item.id)
     end
