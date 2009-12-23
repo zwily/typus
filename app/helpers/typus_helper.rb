@@ -15,8 +15,7 @@ module TypusHelper
 
     end
 
-    render :partial => 'admin/shared/applications', 
-           :locals => { :applications => apps }
+    render "admin/shared/applications", :applications => apps
 
   end
 
@@ -27,8 +26,7 @@ module TypusHelper
                 end.compact
     return if available.empty?
 
-    render :partial => 'admin/shared/resources', 
-           :locals => { :resources => available }
+    render "admin/shared/resources", :resources => available
 
   end
 
@@ -80,8 +78,7 @@ module TypusHelper
       links << (link_to _("View site"), root_path, :target => 'blank')
     end
 
-    render :partial => 'admin/shared/header', 
-           :locals => { :links => links }
+    render "admin/shared/header", :links => links
 
   end
 
@@ -105,13 +102,9 @@ module TypusHelper
   end
 
   def display_flash_message(message = flash)
-
     return if message.empty?
     flash_type = message.keys.first
-
-    render :partial => 'admin/shared/flash_message', 
-           :locals => { :flash_type => flash_type, :message => message }
-
+    render "admin/shared/flash_message", :flash_type => flash_type, :message => message
   end
 
 end

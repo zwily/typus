@@ -29,8 +29,7 @@ module Admin::MasterHelper
                 :resource_from => options[:resource_from], 
                 :resource_to => options[:resource_to])
 
-    render :partial => 'admin/shared/display_link_to_previous', 
-           :locals => { :message => message }
+    render "admin/shared/display_link_to_previous", :message => message
 
   end
 
@@ -58,7 +57,7 @@ module Admin::MasterHelper
 
   def pagination(*args)
     @options = args.extract_options!
-    render 'admin/shared/pagination' if @items.prev || @items.next
+    render "admin/shared/pagination" if @items.prev || @items.next
   end
 
   ##

@@ -11,12 +11,7 @@ module Admin
     # the pages where you insert this helper.
     #
     def quick_edit(*args)
-
-      options = args.extract_options!
-
-      render :partial => 'admin/shared/quick_edit', 
-             :locals => { :options => options }
-
+      render "admin/shared/quick_edit", :options => args.extract_options!
     end
 
   end
