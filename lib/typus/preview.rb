@@ -4,7 +4,7 @@ module Typus
 
     include ActionView::Helpers::UrlHelper
 
-    # OPTIMIZE
+    # OPTIMIZE: Move html code to helper.
     def typus_preview_on_table(attribute)
 
       attachment = attribute.split('_file_name').first
@@ -25,7 +25,7 @@ module Typus
       end
     end
 
-    # OPTIMIZE
+    # OPTIMIZE: Move html code to helper.
     def typus_preview(attribute)
 
       attachment = attribute.split('_file_name').first

@@ -75,6 +75,8 @@ module Typus
         Typus::Configuration.roles[role].compact
       end
 
+      # TODO: Rename action to mapping and refactor the _action case
+      #       statement.
       def can?(action, resource, options = {})
 
         # Sometimes we are getting a Class, so we need to convert it 
@@ -120,6 +122,7 @@ module Typus
         self.preferences = { :locale => locale }
       end
 
+      # OPTIMIZE: Cleanup ...
       def set_preferences
         if self.preferences.nil? || self.preferences[:locale].nil? || self.preferences[:locale].blank?
           self.preferences = { :locale => Typus::Configuration.options[:default_locale] }
