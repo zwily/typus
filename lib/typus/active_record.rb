@@ -115,7 +115,7 @@ module Typus
 
     # OPTIMIZE
     def typus_actions
-      actions = [ ]
+      actions = []
       Typus::Configuration.config[name]['actions'].keys.map do |key|
         actions += Typus::Configuration.config[name]['actions'][key].split(', ')
       end

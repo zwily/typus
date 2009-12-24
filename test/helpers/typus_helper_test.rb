@@ -34,7 +34,7 @@ class TypusHelperTest < ActiveSupport::TestCase
 
     output = resources
     partial = "admin/shared/resources"
-    options = { }
+    options = {}
 
     assert_equal partial, output.first
     # assert_equal options, output.last
