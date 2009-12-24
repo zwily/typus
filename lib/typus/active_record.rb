@@ -180,18 +180,17 @@ module Typus
     # We are able to define our own booleans.
     def typus_boolean(attribute = :default)
 
-      boolean = Typus::Configuration.config[name]['fields']['options']['booleans'][attribute.to_s] rescue nil
-      boolean = 'true, false' if boolean.nil?
+      begin
+        boolean = Typus::Configuration.config[name]['fields']['options']['booleans'][attribute.to_s]
+      rescue
+        boolean = 'true, false'
+      end
 
       hash = ActiveSupport::OrderedHash.new
 
-      if boolean.kind_of?(Array)
-        hash[:true] = boolean.first.humanize
-        hash[:false] = boolean.last.humanize
-      else
-        hash[:true] = boolean.split(', ').first.humanize
-        hash[:false] = boolean.split(', ').last.humanize
-      end
+      mapping = boolean.kind_of?(Array) ? boolean : boolean.split(', ')
+      hash[:true], hash[:false] = mapping.first, mapping.last
+      hash.map { |k, v| hash[k] = v.humanize }
 
       return hash
 
