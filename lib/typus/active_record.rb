@@ -198,8 +198,9 @@ module Typus
 
     # We are able to define how to display dates on Typus
     def typus_date_format(attribute = :default)
-      date_format = Typus::Configuration.config[name]['fields']['options']['date_formats'][attribute.to_s].to_sym rescue nil
-      return !date_format.nil? ? date_format : :db
+      Typus::Configuration.config[name]['fields']['options']['date_formats'][attribute.to_s].to_sym
+    rescue
+      :db
     end
 
     # We are able to define which template to use to render the attribute 
