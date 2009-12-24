@@ -129,6 +129,7 @@ class TypusController < ApplicationController
 
 private
 
+  # TODO: Try to move schema verification to Typus.boot!
   def verify_typus_users_table_schema
 
     attributes = Typus.user_class.model_fields.keys
