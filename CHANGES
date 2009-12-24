@@ -54,3 +54,5 @@
     "render 'template', :local => 'local'".
 [ ] Add support for custom typus_user on the generator.
 [ ] Allow users to download the demo hosted at heroku.com
+[ ] Move partial helpers to `app/views/admin/helpers`.
+[ ] Add API authentication.
