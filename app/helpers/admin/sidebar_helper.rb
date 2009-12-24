@@ -98,7 +98,7 @@ module Admin::SidebarHelper
     search_params = params.dup
     %w( action controller search page id ).each { |p| search_params.delete(p) }
 
-    hidden_params = search_params.map { |key, value| hidden_field_tag(key, value) }
+    hidden_params = search_params.map { |k, v| hidden_field_tag(k, v) }
 
     render "admin/shared/search", :hidden_params => hidden_params, :search_by => search_by
 
