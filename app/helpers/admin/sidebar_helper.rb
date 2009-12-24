@@ -16,6 +16,7 @@ module Admin::SidebarHelper
 
   end
 
+  # TODO: Test "Show entry" case.
   def actions
 
     items = []
@@ -125,6 +126,7 @@ module Admin::SidebarHelper
 
   end
 
+  # OPTIMIZE: Move html code to partial.
   def relationship_filter(request, filter, habtm = false)
 
     att_assoc = @resource[:class].reflect_on_association(filter.to_sym)

@@ -30,6 +30,7 @@ module Admin::FormHelper
 
   end
 
+  # OPTIMIZE: Remove returning(String.new) and return directly the html.
   def typus_belongs_to_field(attribute, options)
 
     form = options[:form]
@@ -78,7 +79,7 @@ module Admin::FormHelper
 
   end
 
-  # OPTIMIZE
+  # OPTIMIZE: Move html code to partial.
   def typus_tree_field(attribute, *args)
 
     options = args.extract_options!
@@ -100,6 +101,7 @@ module Admin::FormHelper
 
   end
 
+  # OPTIMIZE: Cleanup the case statement.
   def typus_relationships
 
     @back_to = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id])
@@ -125,6 +127,7 @@ module Admin::FormHelper
 
   end
 
+  # OPTIMIZE: Move html code to partial.
   def typus_form_has_many(field)
     returning(String.new) do |html|
 
@@ -214,6 +217,7 @@ module Admin::FormHelper
     end
   end
 
+  # OPTIMIZE: Move html code to partial.
   def typus_form_has_and_belongs_to_many(field)
     returning(String.new) do |html|
 
@@ -295,6 +299,7 @@ module Admin::FormHelper
     end
   end
 
+  # OPTIMIZE: Move html code to partial.
   def typus_form_has_one(field)
     returning(String.new) do |html|
 
@@ -334,6 +339,7 @@ module Admin::FormHelper
     end
   end
 
+  # OPTIMIZE: Cleanup the rescue ...
   def typus_template_field(attribute, template, options = {})
 
     template_name = File.join('admin', 'templates', "#{template}")

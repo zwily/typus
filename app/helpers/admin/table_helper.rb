@@ -1,5 +1,6 @@
 module Admin::TableHelper
 
+  # OPTIMIZE: Move html code to partial & refactor.
   def build_typus_table(model, fields, items, link_options = {}, association = nil)
 
     returning(String.new) do |html|
@@ -103,6 +104,7 @@ module Admin::TableHelper
 
   end
 
+  # OPTIMIZE: Move html code to partial.
   def typus_table_header(model, fields)
     returning(String.new) do |html|
       headers = []
@@ -135,6 +137,7 @@ module Admin::TableHelper
     end
   end
 
+  # OPTIMIZE: Refactor (Remove rescue)
   def typus_table_belongs_to_field(attribute, item)
 
     action = item.send(attribute).class.typus_options_for(:default_action_on_item) rescue 'edit'
@@ -167,12 +170,14 @@ module Admin::TableHelper
     return content_tag(:td, content)
   end
 
+  # OPTIMIZE: Move html code to partial.
   def typus_table_tree_field(attribute, item)
     <<-HTML
 <td>#{item.parent.to_label if item.parent}</td>
     HTML
   end
 
+  # OPTIMIZE: Move html code to partial.
   def typus_table_position_field(attribute, item)
 
     html_position = []
@@ -204,6 +209,7 @@ module Admin::TableHelper
 
   end
 
+  # TODO: Decide if to deal with bad values, nil when should be a boolean, on database.
   def typus_table_boolean_field(attribute, item)
 
     boolean_hash = item.class.typus_boolean(attribute)
