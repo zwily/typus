@@ -7,14 +7,38 @@ class TypusHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::TextHelper
   include ActionController::UrlWriter
 
-  # TODO
+  def render(*args); args; end
+
+  # FIXME: Pending to verify the applications included. Use the keys.
   def test_applications
-    return
+
+    @current_user = typus_users(:admin)
+
+    output = applications
+
+    partial = "admin/shared/applications"
+    options = { :applications => { [ "Blog", [ "Comment", "Post" ] ]=> nil, 
+                                   [ "Site", [ "Asset", "Page" ] ] => nil, 
+                                   [ "System", [ "Delayed::Task" ] ] => nil, 
+                                   [ "Typus", [ "TypusUser" ] ] => nil } }
+
+    assert_equal partial, output.first
+    # assert_equal options, output.last
+
   end
 
-  # TODO
+  # FIXME: Pending to add the options.
   def test_resources
-    return
+
+    @current_user = typus_users(:admin)
+
+    output = resources
+    partial = "admin/shared/resources"
+    options = { }
+
+    assert_equal partial, output.first
+    # assert_equal options, output.last
+
   end
 
   def test_typus_block_when_partial_does_not_exist
@@ -41,6 +65,8 @@ class TypusHelperTest < ActiveSupport::TestCase
     self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
 
     output = header
+
+=begin
     expected = <<-HTML
 <h1>#{Typus::Configuration.options[:app_name]}</h1>
 <ul>
@@ -49,11 +75,18 @@ class TypusHelperTest < ActiveSupport::TestCase
 <li><a href="/">View site</a></li>
 </ul>
     HTML
+=end
 
-    assert_equal expected, output
+    partial = "admin/shared/header"
+    options = { :links => [ "<a href=\"/admin/dashboard\">Dashboard</a>",
+                            "<a href=\"/admin/dashboard\">Dashboard</a>", 
+                            "<a href=\"/\">View site</a>" ] }
+
+    assert_equal [ partial, options ], output
 
   end
-  
+
+  # TODO: Clean
   def test_header_without_root_path
 
     # Remove root route from list
@@ -61,7 +94,7 @@ class TypusHelperTest < ActiveSupport::TestCase
 
     self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
 
-    output = header
+=begin
     expected = <<-HTML
 <h1>#{Typus::Configuration.options[:app_name]}</h1>
 <ul>
@@ -69,8 +102,14 @@ class TypusHelperTest < ActiveSupport::TestCase
 <li><a href="/admin/dashboard">Dashboard</a></li>
 </ul>
     HTML
+=end
 
-    assert_equal expected, output
+    output = header
+    partial = "admin/shared/header"
+    options = { :links => [ "<a href=\"/admin/dashboard\">Dashboard</a>",
+                            "<a href=\"/admin/dashboard\">Dashboard</a>" ] }
+
+    assert_equal [ partial, options ], output
 
   end
 
@@ -79,18 +118,27 @@ class TypusHelperTest < ActiveSupport::TestCase
     message = { :test => 'This is the message.' }
 
     output = display_flash_message(message)
+
+=begin
     expected = <<-HTML
 <div id="flash" class="test">
   <p>This is the message.</p>
 </div>
     HTML
+=end
 
-    assert_equal expected, output
+    partial = "admin/shared/flash_message"
+    options = { :flash_type => :test, 
+                :message => { :test => 'This is the message.' } }
 
+    assert_equal [ partial, options ], output
+
+  end
+
+  def test_display_flash_message_with_empty_message
     message = {}
     output = display_flash_message(message)
     assert output.nil?
-
   end
 
   def test_form_partial

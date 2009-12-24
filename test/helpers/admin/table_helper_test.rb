@@ -248,7 +248,7 @@ HTML
     post = typus_users(:admin)
     output = typus_table_boolean_field('status', post)
     expected = <<-HTML
-<td align="center">Active</td>
+<td><a href="http://test.host/admin/typus_users/toggle/1?field=status" onclick="return confirm('Change status?');">Active</a></td>
     HTML
 
     assert_equal expected.strip, output
@@ -256,7 +256,7 @@ HTML
     post = typus_users(:disabled_user)
     output = typus_table_boolean_field('status', post)
     expected = <<-HTML
-<td align="center">Inactive</td>
+<td><a href="http://test.host/admin/typus_users/toggle/3?field=status" onclick="return confirm('Change status?');">Inactive</a></td>
     HTML
 
     assert_equal expected.strip, output

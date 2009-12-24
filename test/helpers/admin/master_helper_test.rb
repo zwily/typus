@@ -7,6 +7,8 @@ class Admin::MasterHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TagHelper
 
+  def render(*args); args; end
+
   def test_display_link_to_previous
 
     @resource = { :class => Post, :human_name => 'Post' }
@@ -14,13 +16,19 @@ class Admin::MasterHelperTest < ActiveSupport::TestCase
     self.expects(:params).at_least_once.returns(params)
 
     output = display_link_to_previous
+
+=begin
     expected = <<-HTML
 <div id="flash" class="notice">
   <p>You're updating a Post. <a href="/back_to_param">Do you want to cancel it?</a></p>
 </div>
     HTML
+=end
 
-    assert_equal expected, output
+    partial = "admin/shared/display_link_to_previous"
+    options = { :message => "You're updating a Post." }
+
+    assert_equal [ partial, options ], output
 
   end
 
