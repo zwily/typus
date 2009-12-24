@@ -74,8 +74,8 @@ module Admin::TableHelper
           perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }, 
                                         :title => _("Unrelate"), 
                                         :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
-                                        :unrelate_model => model.typus_human_name, 
-                                        :unrelate_model_from => @resource[:human_name])
+                                                      :unrelate_model => model.typus_human_name, 
+                                                      :unrelate_model_from => @resource[:human_name])
         when 'show'
           # If we are showing content, we only can relate and unrelate if we are 
           # the owners of the owner record.
@@ -87,8 +87,8 @@ module Admin::TableHelper
           perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }, 
                                         :title => _("Unrelate"), 
                                         :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
-                                        :unrelate_model => model.typus_human_name, 
-                                        :unrelate_model_from => @resource[:human_name]) if condition
+                                                      :unrelate_model => model.typus_human_name, 
+                                                      :unrelate_model_from => @resource[:human_name]) if condition
         end
 
         html << <<-HTML
