@@ -11,10 +11,10 @@ extensible enough to match lots of use cases.
 
 - Access control by users and roles.
 - CRUD and custom actions for your models on a clean interface.
-- Internationalized.
+- I18n.
 - Extensible and overwritable templates.
 - Low memory footprint.
-- Released under the MIT License.
+- MIT License, the same as Rails.
 
 ## Links
 
