@@ -43,8 +43,8 @@ Demo application is hosted at Heroku (<http://typus.heroku.com/>).
 
 Use the following credentials to log in.
 
-    Email: userdemo@intraducibles.com
-    Password: userdemo
+    Email: user@intraducibles.com
+    Password: columbia
 
 ## Installing
 
