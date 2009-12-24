@@ -21,6 +21,6 @@
   button = _("Save {{resource}}", :resource => @resource[:human_name])
 %>
 
-<%= render :partial => form_partial, :locals => { :options => options, :button => button } %>
+<%= render form_partial, :options => options, :button => button %>
 
 <%= typus_relationships %>

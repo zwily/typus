@@ -56,7 +56,7 @@ module TypusHelper
            elsif resources_partials.include?(partial) then resources_partials_path
            end
 
-    render :partial => "#{path}/#{options[:partial]}" if path
+    render "#{path}/#{options[:partial]}" if path
 
   end
 
@@ -97,8 +97,7 @@ module TypusHelper
                      user.name
                    end
 
-    render :partial => 'admin/shared/login_info', 
-           :locals => { :message => message, :user_details => user_details }
+    render "admin/shared/login_info", :message => message, :user_details => user_details
 
   end
 

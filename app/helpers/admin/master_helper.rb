@@ -35,7 +35,7 @@ module Admin::MasterHelper
 
   def remove_filter_link(filter = request.env['QUERY_STRING'])
     return unless filter && !filter.blank?
-    render :partial => 'admin/shared/remove_filter_link'
+    render "admin/shared/remove_filter_link"
   end
 
   ##

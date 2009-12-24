@@ -344,13 +344,12 @@ module Admin::FormHelper
                        :disabled => attribute_disabled?(attribute), 
                        :include_blank => true }
 
-    render :partial => template_name, 
-           :locals => { :resource => @resource, 
-                        :attribute => attribute, 
-                        :options => custom_options, 
-                        :html_options => {}, 
-                        :form => options[:form], 
-                        :label_text => @resource[:class].human_attribute_name(attribute) }
+    render template_name, :resource => @resource, 
+                          :attribute => attribute, 
+                          :options => custom_options, 
+                          :html_options => {}, 
+                          :form => options[:form], 
+                          :label_text => @resource[:class].human_attribute_name(attribute)
 
   rescue ActionView::TemplateError => error
     raise error
