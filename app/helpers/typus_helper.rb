@@ -9,6 +9,7 @@ module TypusHelper
       available = Typus.application(app).map do |resource|
                     resource if @current_user.resources.include?(resource)
                   end.compact
+
       next if available.empty?
 
       apps[app] = available.sort_by { |x| x.constantize.typus_human_name }
@@ -24,6 +25,7 @@ module TypusHelper
     available = Typus.resources.map do |resource|
                   resource if @current_user.resources.include?(resource)
                 end.compact
+
     return if available.empty?
 
     render "admin/shared/resources", :resources => available
