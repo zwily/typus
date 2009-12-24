@@ -209,24 +209,21 @@ module Admin::TableHelper
 
   end
 
-  # TODO: Decide if to deal with bad values, nil when should be a boolean, on database.
   def typus_table_boolean_field(attribute, item)
 
     boolean_hash = item.class.typus_boolean(attribute)
     status = item.send(attribute)
-    link_text = !item.send(attribute).nil? ? boolean_hash["#{status}".to_sym] : item.class.typus_options_for(:nil)
+    link_text = boolean_hash["#{status}".to_sym]
 
     options = { :controller => "admin/#{item.class.name.tableize}", 
                 :action => 'toggle', 
                 :id => item.id, 
                 :field => attribute.gsub(/\?$/,'') }
 
-    content = if !item.send(attribute).nil?
-                link_to _(link_text), options, 
-                                      :confirm => _("Change {{attribute}}?", :attribute => item.class.human_attribute_name(attribute).downcase)
-              else
-                _(link_text)
-              end
+    confirm = _("Change {{attribute}}?", 
+                :attribute => item.class.human_attribute_name(attribute).downcase)
+
+    content = link_to _(link_text), options, :confirm => confirm
 
     return content_tag(:td, content)
 
