@@ -283,6 +283,7 @@ module Typus
 
   module InstanceMethods
 
+    # TODO: Cleanup previous_ and next_ variables using options.merge().
     def previous_and_next(condition = {}, klass = self.class)
 
       previous_conditions = "#{klass.primary_key} < #{quote_value(id)}"
@@ -297,18 +298,18 @@ module Typus
       select = !klass.typus_user_id? ? klass.primary_key : "#{klass.primary_key}, #{Typus.user_fk}"
 
       previous_ = klass.send(:with_exclusive_scope) do
-        klass.find :first,
-             :select => select,
-             :order => "#{klass.primary_key} DESC",
-             :conditions => previous_conditions
-      end
+                    klass.find :first,
+                               :select => select,
+                               :order => "#{klass.primary_key} DESC",
+                               :conditions => previous_conditions
+                  end
 
       next_ = klass.send(:with_exclusive_scope) do
-        klass.find :first,
-             :select => select,
-             :order => "#{klass.primary_key} ASC",
-             :conditions => next_conditions
-      end
+                klass.find :first,
+                           :select => select,
+                           :order => "#{klass.primary_key} ASC",
+                           :conditions => next_conditions
+              end
 
       return previous_, next_
 
