@@ -181,9 +181,10 @@ class TypusGenerator < Rails::Generator::Base
                    "test/functional/admin/#{model.name.tableize}_controller_test.rb", 
                    :assigns => assigns
 
+        views_folder = "app/views/admin/#{model.name.tableize}"
+        FileUtils.mkdir_p(views_folder) unless File.directory?(views_folder)
         model.typus_actions.each do |action|
-          m.file "auto/action.html.erb", 
-                 "app/views/admin/#{model.name.tableize}/#{action}.html.erb"
+          m.file "auto/action.html.erb", "#{views_folder}/#{action}.html.erb"
         end
 
       end
