@@ -28,8 +28,7 @@
            when :file
              @item.typus_preview(field.first)
            when :text
-             text = h(raw_data)
-             defined?(RDiscount) ? markdown(text) : text
+             defined?(RDiscount) ? markdown(raw_data) : simple_format(h(raw_data))
            else
              h(raw_data)
            end
