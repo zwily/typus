@@ -56,3 +56,4 @@
 [ ] Allow users to download the demo hosted at heroku.com
 [ ] Move partial helpers to `app/views/admin/helpers`.
 [ ] Add API authentication.
+[ ] Fix problems on routes.rb when using namespaced models.
