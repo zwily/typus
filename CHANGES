@@ -57,3 +57,4 @@
 [ ] Move partial helpers to `app/views/admin/helpers`.
 [ ] Add API authentication.
 [ ] Fix problems on routes.rb when using namespaced models.
+[ ] Show the right content on the selectors when listing records on tables.
