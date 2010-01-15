@@ -1,7 +1,7 @@
-class CreateTypusUsers < ActiveRecord::Migration
+class <%= migration_name %> < ActiveRecord::Migration
 
   def self.up
-    create_table :typus_users do |t|
+    create_table :<%= typus_users_table_name %> do |t|
       t.string :first_name, :default => "", :null => false
       t.string :last_name, :default => "", :null => false
       t.string :role, :null => false
@@ -16,7 +16,7 @@ class CreateTypusUsers < ActiveRecord::Migration
   end
 
   def self.down
-    drop_table :typus_users
+    drop_table :<%= typus_users_table_name %>
   end
 
 end

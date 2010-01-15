@@ -130,10 +130,8 @@ class TypusGenerator < Rails::Generator::Base
       # Initializer
       #
 
-      [ 'config/initializers/typus.rb' ].each do |file|
-        from = to = file
-        m.template from, to, :assigns => { :application => application }
-      end
+      from, to = 'initializer.rb', 'config/initializers/typus.rb'
+      m.template from, to, :assigns => { :application => application }
 
       ##
       # Assets
@@ -217,8 +215,11 @@ class TypusGenerator < Rails::Generator::Base
       # Migration file
       #
 
-      m.migration_template 'db/create_typus_users.rb', 'db/migrate', 
-                            { :migration_file_name => 'create_typus_users' }
+      m.migration_template 'migration.rb', 
+                           'db/migrate', 
+                            :assigns => { :migration_name => "CreateTypusUsers", 
+                                          :typus_users_table_name => "typus_users" }, 
+                            :migration_file_name => "create_typus_users"
 
     end
 
