@@ -21,7 +21,7 @@ class TypusGenerator < Rails::Generator::Base
         'public/images/admin/fancybox', 
         'public/javascripts/admin', 
         'public/stylesheets/admin', 
-        'test/functional/admin' ].each { |f| FileUtils.mkdir_p(f) unless File.directory?(f) }
+        'test/functional/admin' ].each { |folder| m.directory folder }
 
       # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> 
       # detect available AR models on the application.
@@ -167,7 +167,7 @@ class TypusGenerator < Rails::Generator::Base
 
         # Create needed folder.
         [ "app/controllers/#{folder}", 
-          "test/functional/#{folder}"].each { |f| FileUtils.mkdir_p(f) unless File.directory?(f) }
+          "test/functional/#{folder}"].each { |f| m.directory f }
 
         assigns = { :inherits_from => "Admin::MasterController", 
                     :resource => model.name.pluralize }
@@ -181,7 +181,7 @@ class TypusGenerator < Rails::Generator::Base
                    :assigns => assigns
 
         views_folder = "app/views/admin/#{model.name.tableize}"
-        FileUtils.mkdir_p(views_folder) unless File.directory?(views_folder)
+        m.directory views_folder
         model.typus_actions.each do |action|
           m.file "view.html.erb", "#{views_folder}/#{action}.html.erb"
         end
@@ -206,7 +206,7 @@ class TypusGenerator < Rails::Generator::Base
                    :assigns => assigns
 
         views_folder = "app/views/admin/#{resource.underscore}"
-        FileUtils.mkdir_p(views_folder) unless File.directory?(views_folder)
+        m.directory views_folder
         m.file "view.html.erb", "#{views_folder}/index.html.erb"
 
       end
