@@ -171,20 +171,21 @@ class TypusGenerator < Rails::Generator::Base
         [ "app/controllers/#{folder}", 
           "test/functional/#{folder}"].each { |f| FileUtils.mkdir_p(f) unless File.directory?(f) }
 
-        assigns = { :model => model.name, :actions => model.typus_actions }
+        assigns = { :inherits_from => "Admin::MasterController", 
+                    :resource => model.name.pluralize }
 
-        m.template "auto/resources_controller.rb.erb", 
+        m.template "controller.rb", 
                    "app/controllers/admin/#{model.name.tableize}_controller.rb", 
                    :assigns => assigns
 
-        m.template "auto/resources_controller_test.rb.erb", 
+        m.template "functional_test.rb", 
                    "test/functional/admin/#{model.name.tableize}_controller_test.rb", 
                    :assigns => assigns
 
         views_folder = "app/views/admin/#{model.name.tableize}"
         FileUtils.mkdir_p(views_folder) unless File.directory?(views_folder)
         model.typus_actions.each do |action|
-          m.file "auto/action.html.erb", "#{views_folder}/#{action}.html.erb"
+          m.file "view.html.erb", "#{views_folder}/#{action}.html.erb"
         end
 
       end
@@ -195,13 +196,20 @@ class TypusGenerator < Rails::Generator::Base
 
       Typus.resources.each do |resource|
 
-        m.template "auto/resource_controller.rb.erb", 
+        assigns = { :inherits_from => "TypusController", 
+                    :resource => resource }
+
+        m.template "controller.rb", 
                    "app/controllers/admin/#{resource.underscore}_controller.rb", 
-                   :assigns => { :resource => resource }
+                   :assigns => assigns
+
+        m.template "functional_test.rb", 
+                   "test/functional/admin/#{resource.underscore}_controller_test.rb", 
+                   :assigns => assigns
 
         views_folder = "app/views/admin/#{resource.underscore}"
         FileUtils.mkdir_p(views_folder) unless File.directory?(views_folder)
-        m.file "auto/index.html.erb", "#{views_folder}/index.html.erb"
+        m.file "view.html.erb", "#{views_folder}/index.html.erb"
 
       end
 
