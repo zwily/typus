@@ -29,13 +29,13 @@ module Admin::MasterHelper
                 :resource_from => options[:resource_from], 
                 :resource_to => options[:resource_to])
 
-    render "admin/shared/display_link_to_previous", :message => message
+    render "admin/helpers/display_link_to_previous", :message => message
 
   end
 
   def remove_filter_link(filter = request.env['QUERY_STRING'])
     return unless filter && !filter.blank?
-    render "admin/shared/remove_filter_link"
+    render "admin/helpers/remove_filter_link"
   end
 
   ##
@@ -57,7 +57,7 @@ module Admin::MasterHelper
 
   def pagination(*args)
     @options = args.extract_options!
-    render "admin/shared/pagination" if @items.prev || @items.next
+    render "admin/helpers/pagination" if @items.prev || @items.next
   end
 
   ##

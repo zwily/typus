@@ -12,7 +12,7 @@ module Admin::SidebarHelper
 
     return String.new if items.empty?
 
-    render "admin/shared/list", :header => header, :items => items, :options => options
+    render "admin/helpers/list", :header => header, :items => items, :options => options
 
   end
 
@@ -101,7 +101,7 @@ module Admin::SidebarHelper
 
     hidden_params = search_params.map { |k, v| hidden_field_tag(k, v) }
 
-    render "admin/shared/search", :hidden_params => hidden_params, :search_by => search_by
+    render "admin/helpers/search", :hidden_params => hidden_params, :search_by => search_by
 
   end
 

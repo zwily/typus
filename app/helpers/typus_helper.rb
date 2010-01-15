@@ -16,7 +16,7 @@ module TypusHelper
 
     end
 
-    render "admin/shared/applications", :applications => apps
+    render "admin/helpers/applications", :applications => apps
 
   end
 
@@ -28,7 +28,7 @@ module TypusHelper
 
     return if available.empty?
 
-    render "admin/shared/resources", :resources => available
+    render "admin/helpers/resources", :resources => available
 
   end
 
@@ -80,7 +80,7 @@ module TypusHelper
       links << (link_to _("View site"), root_path, :target => 'blank')
     end
 
-    render "admin/shared/header", :links => links
+    render "admin/helpers/header", :links => links
 
   end
 
@@ -98,14 +98,14 @@ module TypusHelper
                      user.name
                    end
 
-    render "admin/shared/login_info", :message => message, :user_details => user_details
+    render "admin/helpers/login_info", :message => message, :user_details => user_details
 
   end
 
   def display_flash_message(message = flash)
     return if message.empty?
     flash_type = message.keys.first
-    render "admin/shared/flash_message", :flash_type => flash_type, :message => message
+    render "admin/helpers/flash_message", :flash_type => flash_type, :message => message
   end
 
 end
