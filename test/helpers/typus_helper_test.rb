@@ -33,7 +33,7 @@ class TypusHelperTest < ActiveSupport::TestCase
     @current_user = typus_users(:admin)
 
     output = resources
-    partial = "admin/shared/resources"
+    partial = "admin/helpers/resources"
     options = {}
 
     assert_equal partial, output.first

@@ -19,7 +19,7 @@ class Admin::PublicHelperTest < ActiveSupport::TestCase
     HTML
 
 =end
-    partial = "admin/shared/quick_edit"
+    partial = "admin/helpers/quick_edit"
     options = { :options => { :path => "articles/edit/1", 
                               :message => "Edit this article" } }
 

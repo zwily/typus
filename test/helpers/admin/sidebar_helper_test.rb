@@ -249,7 +249,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/search"
+    partial = "admin/helpers/search"
     options = { :hidden_params => [ "<input id=\"action\" name=\"action\" type=\"hidden\" value=\"index\" />", 
                                     "<input id=\"controller\" name=\"controller\" type=\"hidden\" value=\"admin/typus_users\" />" ], 
                 :search_by => "First name, Last name, Email, and Role" }
