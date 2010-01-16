@@ -1,7 +1,7 @@
 class TypusGenerator < Rails::Generator::Base
 
   default_options :app_name => Rails.root.basename, 
-                  :typus_user => 'TypusUser'
+                  :typus_user => "TypusUser"
 
   def manifest
 
@@ -31,12 +31,12 @@ class TypusGenerator < Rails::Generator::Base
           active_record_model_with_sti = klass.superclass.superclass.equal?(ActiveRecord::Base)
           ar_models << klass if active_record_model || active_record_model_with_sti
         rescue Exception => error
-          puts "=> [typus] #{error.message} on '#{model}'."
+          puts "=> [typus] #{error.message} on `#{model}`."
           exit
         end
       end
 
-      configuration = { :base => '', :roles => '' }
+      configuration = { :base => "", :roles => "" }
 
       ar_models.sort{ |x,y| x.class_name <=> y.class_name }.each do |model|
 
@@ -50,8 +50,8 @@ class TypusGenerator < Rails::Generator::Base
         # Remove foreign key and polymorphic type attributes
         reject_columns = []
         model.reflect_on_all_associations(:belongs_to).each do |i|
-          reject_columns << model.columns_hash[i.name.to_s + '_id']
-          reject_columns << model.columns_hash[i.name.to_s + '_type'] if i.options[:polymorphic]
+          reject_columns << model.columns_hash[i.name.to_s + "_id"]
+          reject_columns << model.columns_hash[i.name.to_s + "_type"] if i.options[:polymorphic]
         end
 
         model_columns = model.columns - reject_columns
@@ -66,7 +66,7 @@ class TypusGenerator < Rails::Generator::Base
         list_rejections = %w( id created_at created_on updated_at updated_on )
         form_rejections = %w( id created_at created_on updated_at updated_on position )
 
-        list = model_columns.reject { |c| c.sql_type == 'text' || list_rejections.include?(c.name) }.map(&:name)
+        list = model_columns.reject { |c| c.sql_type == "text" || list_rejections.include?(c.name) }.map(&:name)
         form = model_columns.reject { |c| form_rejections.include?(c.name) }.map(&:name)
 
         ##
@@ -77,9 +77,9 @@ class TypusGenerator < Rails::Generator::Base
         # - Search
         #
 
-        order_by = 'position' if list.include?('position')
-        filters = 'created_at' if model_columns.include?('created_at')
-        search = 'name' if list.include?('name')
+        order_by = "position" if list.include?("position")
+        filters = "created_at" if model_columns.include?("created_at")
+        search = "name" if list.include?("name")
 
         # We want attributes of belongs_to relationships to be shown in our 
         # field collections if those are not polymorphic.
@@ -91,10 +91,10 @@ class TypusGenerator < Rails::Generator::Base
         configuration[:base] << <<-RAW
 #{model}:
   fields:
-    list: #{list.join(', ')}
-    form: #{form.join(', ')}
+    list: #{list.join(", ")}
+    form: #{form.join(", ")}
   order_by: #{order_by}
-  relationships: #{relationships.join(', ')}
+  relationships: #{relationships.join(", ")}
   filters: #{filters}
   search: #{search}
   application: #{options[:app_name]}
@@ -123,7 +123,7 @@ class TypusGenerator < Rails::Generator::Base
       end
 
       # Initializer
-      m.template 'initializer.rb', 'config/initializers/typus.rb'
+      m.template "initializer.rb", "config/initializers/typus.rb"
 
       ##
       # Assets
@@ -155,7 +155,7 @@ class TypusGenerator < Rails::Generator::Base
       ar_models << TypusUser
       ar_models.each do |model|
 
-        folder = "admin/#{model.name.tableize}".split('/')[0...-1].join('/')
+        folder = "admin/#{model.name.tableize}".split("/")[0...-1].join("/")
         views_folder = "app/views/admin/#{model.name.tableize}"
 
         [ "app/controllers/#{folder}", 
@@ -206,8 +206,8 @@ class TypusGenerator < Rails::Generator::Base
       # Migration file
       #
 
-      m.migration_template 'migration.rb', 
-                           'db/migrate', 
+      m.migration_template "migration.rb", 
+                           "db/migrate", 
                             :assigns => { :migration_name => "Create#{options[:typus_user]}s", 
                                           :typus_users_table_name => options[:typus_user].tableize }, 
                             :migration_file_name => "create_#{options[:typus_user].tableize}"
@@ -222,14 +222,14 @@ class TypusGenerator < Rails::Generator::Base
 
   def add_options!(opt)
 
-    opt.separator ''
-    opt.separator 'Options:'
+    opt.separator ""
+    opt.separator "Options:"
 
     opt.on("-u", "--typus_user=Class", String,
-          "Configure Typus User class name. Default is '#{options[:typus_user]}'.") { |v| options[:typus_user] = v }
+           "Configure Typus User class name. Default is `#{options[:typus_user]}`.") { |v| options[:typus_user] = v }
 
     opt.on("-a", "--app_name=ApplicationName", String,
-          "Set an application name. Default is '#{options[:app_name]}'.") { |v| options[:typus_user] = v }
+           "Set an application name. Default is `#{options[:app_name]}`.") { |v| options[:typus_user] = v }
 
   end
 
