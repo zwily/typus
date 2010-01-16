@@ -16,7 +16,7 @@ class TypusHelperTest < ActiveSupport::TestCase
 
     output = applications
 
-    partial = "admin/shared/applications"
+    partial = "admin/helpers/applications"
     options = { :applications => { [ "Blog", [ "Comment", "Post" ] ]=> nil, 
                                    [ "Site", [ "Asset", "Page" ] ] => nil, 
                                    [ "System", [ "Delayed::Task" ] ] => nil, 
@@ -77,7 +77,7 @@ class TypusHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/header"
+    partial = "admin/helpers/header"
     options = { :links => [ "<a href=\"/admin/dashboard\">Dashboard</a>",
                             "<a href=\"/admin/dashboard\">Dashboard</a>", 
                             "<a href=\"/\">View site</a>" ] }
@@ -105,7 +105,7 @@ class TypusHelperTest < ActiveSupport::TestCase
 =end
 
     output = header
-    partial = "admin/shared/header"
+    partial = "admin/helpers/header"
     options = { :links => [ "<a href=\"/admin/dashboard\">Dashboard</a>",
                             "<a href=\"/admin/dashboard\">Dashboard</a>" ] }
 
@@ -127,7 +127,7 @@ class TypusHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/flash_message"
+    partial = "admin/helpers/flash_message"
     options = { :flash_type => :test, 
                 :message => { :test => 'This is the message.' } }
 

@@ -71,7 +71,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/posts?format=csv\">CSV</a>", 
                             "<a href=\"http://test.host/admin/posts?format=xml\">XML</a>" ], 
                 :header => "Export", 
@@ -138,7 +138,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users/edit/2\">Next</a>" ],
                 :header => "Go to", 
                 :options => { :header => "go_to" } }
@@ -159,7 +159,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users/edit/4\">Previous</a>" ], 
                 :header => "Go to", 
                 :options => { :header => "go_to" } }
@@ -181,7 +181,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users/edit/4\">Next</a>", 
                             "<a href=\"http://test.host/admin/typus_users/edit/2\">Previous</a>" ], 
                 :header => "Go to", 
@@ -214,7 +214,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users/show/4\">Next</a>", 
                             "<a href=\"http://test.host/admin/typus_users/show/2\">Previous</a>" ], 
                 :header => "Go to", 
@@ -302,7 +302,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?created_at=today\" class=\"off\">Today</a>", 
                             "<a href=\"http://test.host/admin/typus_users?created_at=last_few_days\" class=\"off\">Last few days</a>", 
                             "<a href=\"http://test.host/admin/typus_users?created_at=last_7_days\" class=\"off\">Last 7 days</a>", 
@@ -327,7 +327,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?created_at=today\" class=\"on\">Today</a>", 
                             "<a href=\"http://test.host/admin/typus_users?created_at=last_few_days\" class=\"off\">Last few days</a>", 
                             "<a href=\"http://test.host/admin/typus_users?created_at=last_7_days\" class=\"off\">Last 7 days</a>", 
@@ -362,7 +362,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?status=true\" class=\"on\">Active</a>", 
                             "<a href=\"http://test.host/admin/typus_users?status=false\" class=\"off\">Inactive</a>" ], 
                 :header => "Status", 
@@ -385,7 +385,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?status=true\" class=\"off\">Active</a>", 
                             "<a href=\"http://test.host/admin/typus_users?status=false\" class=\"on\">Inactive</a>" ], 
                 :header => "Status", 
@@ -420,7 +420,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"on\">Admin</a>", 
                             "<a href=\"http://test.host/admin/typus_users?role=designer\" class=\"off\">Designer</a>", 
                             "<a href=\"http://test.host/admin/typus_users?role=editor\" class=\"off\">Editor</a>" ], 
@@ -446,7 +446,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"off\">Admin</a>", 
                             "<a href=\"http://test.host/admin/typus_users?role=designer\" class=\"off\">Designer</a>", 
                             "<a href=\"http://test.host/admin/typus_users?role=editor\" class=\"on\">Editor</a>" ], 
@@ -484,7 +484,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/list"
+    partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"on\">Administrador</a>",
                             "<a href=\"http://test.host/admin/typus_users?role=designer\" class=\"off\">Diseñador</a>",
                             "<a href=\"http://test.host/admin/typus_users?role=editor\" class=\"off\">Editor</a>" ], 
