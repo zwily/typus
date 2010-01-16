@@ -9,25 +9,25 @@ module Typus
     end
 
     def root
-      File.dirname(__FILE__) + '/../'
+      File.dirname(__FILE__) + "/../"
     end
 
     def locales
-      [ [ "German", 'de' ],
-        [ "English", 'en' ], 
-        [ "Español", 'es' ],
-        [ "Français", 'fr' ],
-        [ "Portuguese", 'pt-BR' ], 
-        [ "Russian", 'ru' ] ]
+      [ [ "German", "de" ],
+        [ "English", "en" ], 
+        [ "Español", "es" ],
+        [ "Français", "fr" ],
+        [ "Portuguese", "pt-BR" ], 
+        [ "Russian", "ru" ] ]
     end
 
     def applications
-      Typus::Configuration.config.collect { |i| i.last['application'] }.compact.uniq.sort
+      Typus::Configuration.config.collect { |i| i.last["application"] }.compact.uniq.sort
     end
 
     # List of the modules of an application.
     def application(name)
-      Typus::Configuration.config.collect { |i| i.first if i.last['application'] == name }.compact.uniq.sort
+      Typus::Configuration.config.collect { |i| i.first if i.last["application"] == name }.compact.uniq.sort
     end
 
     ##
@@ -55,10 +55,10 @@ module Typus
     #
     def discover_models
       all_models = []
-      Dir.chdir(File.join(Rails.root, 'app/models')) do
-        Dir['**/*.rb'].each do |m|
-          class_name = m.sub(/\.rb$/,'').camelize
-          klass = class_name.split('::').inject(Object){ |klass,part| klass.const_get(part) }
+      Dir.chdir(File.join(Rails.root, "app/models")) do
+        Dir["**/*.rb"].each do |m|
+          class_name = m.sub(/\.rb$/,"").camelize
+          klass = class_name.split("::").inject(Object){ |klass,part| klass.const_get(part) }
           all_models << "#{class_name}" if klass < ActiveRecord::Base && !klass.abstract_class?
         end
       end
@@ -88,33 +88,33 @@ module Typus
     def boot!
 
       if testing?
-        Typus::Configuration.options[:config_folder] = 'vendor/plugins/typus/test/config/working'
+        Typus::Configuration.options[:config_folder] = "vendor/plugins/typus/test/config/working"
       end
 
       # Ruby/Rails Extensions
-      require 'extensions/hash'
-      require 'extensions/object'
-      require 'extensions/string'
-      require 'extensions/active_record'
+      require "extensions/hash"
+      require "extensions/object"
+      require "extensions/string"
+      require "extensions/active_record"
 
       # Load configuration and roles.
       Typus::Configuration.config!
       Typus::Configuration.roles!
 
       # Active Record Extensions.
-      require 'typus/active_record'
+      require "typus/active_record"
 
       # Typus mixins.
-      require 'typus/authentication'
-      require 'typus/format'
-      require 'typus/preview'
-      require 'typus/preferences'
-      require 'typus/reloader'
-      require 'typus/quick_edit'
-      require 'typus/user'
+      require "typus/authentication"
+      require "typus/format"
+      require "typus/preview"
+      require "typus/preferences"
+      require "typus/reloader"
+      require "typus/quick_edit"
+      require "typus/user"
 
       # Vendor.
-      require 'vendor/paginator'
+      require "vendor/paginator"
 
     end
 
