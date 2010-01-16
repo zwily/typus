@@ -11,13 +11,13 @@ class TypusGenerator < Rails::Generator::Base
       timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
 
       # Create required folders.
-      [ 'app/controllers/admin', 
-        'app/views/admin', 
-        'config/typus', 
-        'public/images/admin/fancybox', 
-        'public/javascripts/admin', 
-        'public/stylesheets/admin', 
-        'test/functional/admin' ].each { |folder| m.directory folder }
+      %w( app/controllers/admin 
+          app/views/admin 
+          config/typus 
+          public/images/admin/fancybox 
+          public/javascripts/admin 
+          public/stylesheets/admin 
+          test/functional/admin ).each { |folder| m.directory folder }
 
       # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> 
       # detect available AR models on the application.
@@ -109,7 +109,7 @@ class TypusGenerator < Rails::Generator::Base
 
       if !configuration[:base].empty?
 
-        [ "application.yml", "application_roles.yml" ].each do |file|
+        %w( application.yml application_roles.yml ).each do |file|
           from = to = "config/typus/#{file}"
           if File.exists?(from) then to = "config/typus/#{timestamp}_#{file}" end
           m.template from, to, :assigns => { :configuration => configuration }
@@ -117,7 +117,7 @@ class TypusGenerator < Rails::Generator::Base
 
       end
 
-      [ "typus.yml", "typus_roles.yml", "README" ].each do |file|
+      %w( README typus.yml typus_roles.yml ).each do |file|
         from = to = "config/typus/#{file}"
         m.template from, to, :assigns => { :configuration => configuration }
       end
@@ -129,7 +129,7 @@ class TypusGenerator < Rails::Generator::Base
       # Assets
       #
 
-      [ 'public/images/admin/ui-icons.png' ].each { |f| m.file f, f }
+      %w( public/images/admin/ui-icons.png ).each { |f| m.file f, f }
 
       Dir["#{Typus.root}/generators/typus/templates/public/stylesheets/admin/*"].each do |file|
         from = to = "public/stylesheets/admin/#{File.basename(file)}"
