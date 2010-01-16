@@ -3,4 +3,4 @@
 # Use the README file as a reference to customize settings.
 
 admin:
-  <%= options[:typus_user] %>: all
+  <%= options[:user_class_name] %>: all

@@ -2,7 +2,7 @@
 #
 # Use the README file as a reference to customize settings.
 
-<%= options[:typus_user] %>:
+<%= options[:user_class_name] %>:
   fields:
     list: email, role, status
     form: first_name, last_name, role, email, password, password_confirmation, language

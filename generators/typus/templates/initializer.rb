@@ -10,7 +10,7 @@ Typus::Configuration.options[:app_name] = '<%= options[:app_name] %>'
 # Typus::Configuration.options[:relationship] = 'typus_users'
 # Typus::Configuration.options[:root] = 'admin'
 # Typus::Configuration.options[:ssl] = false
-Typus::Configuration.options[:user_class_name] = '<%= options[:typus_user] %>'
+Typus::Configuration.options[:user_class_name] = '<%= options[:user_class_name] %>'
 # Typus::Configuration.options[:user_fk] = 'typus_user_id'
 
 # Model options which can also be defined by model on the yaml files.

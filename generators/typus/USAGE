@@ -6,8 +6,8 @@ Description:
 Examples:
     `./script/generate typus`
 
-        creates needed files with TypusUser as the Typus user.
+        creates needed files with `TypusUser` as the Typus user.
 
-    `./script/generate typus --typus_user User
+    `./script/generate typus -u User
 
-        creates needed files with User as the Typus user.
+        creates needed files with `User` as the Typus user.

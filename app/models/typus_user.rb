@@ -1,5 +1,7 @@
-class TypusUser < ActiveRecord::Base
+if Typus::Configuration.options[:user_class_name] == 'TypusUser'
 
-  enable_as_typus_user
+  class TypusUser < ActiveRecord::Base
+    enable_as_typus_user
+  end
 
 end

@@ -1,7 +1,7 @@
 class TypusGenerator < Rails::Generator::Base
 
   default_options :app_name => Rails.root.basename, 
-                  :typus_user => "TypusUser"
+                  :user_class_name => "TypusUser"
 
   def manifest
 
@@ -202,15 +202,20 @@ class TypusGenerator < Rails::Generator::Base
 
       end
 
+      # Generate the model file if it's custom.
+      unless options[:user_class_name] == 'TypusUser'
+        m.file "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
+      end
+
       ##
       # Migration file
       #
 
       m.migration_template "migration.rb", 
                            "db/migrate", 
-                            :assigns => { :migration_name => "Create#{options[:typus_user]}s", 
-                                          :typus_users_table_name => options[:typus_user].tableize }, 
-                            :migration_file_name => "create_#{options[:typus_user].tableize}"
+                            :assigns => { :migration_name => "Create#{options[:user_class_name]}s", 
+                                          :typus_users_table_name => options[:user_class_name].tableize }, 
+                            :migration_file_name => "create_#{options[:user_class_name].tableize}"
 
     end
 
@@ -226,7 +231,7 @@ class TypusGenerator < Rails::Generator::Base
     opt.separator "Options:"
 
     opt.on("-u", "--typus_user=Class", String,
-           "Configure Typus User class name. Default is `#{options[:typus_user]}`.") { |v| options[:typus_user] = v }
+           "Configure Typus User class name. Default is `#{options[:user_class_name]}`.") { |v| options[:user_class_name] = v }
 
     opt.on("-a", "--app_name=ApplicationName", String,
            "Set an application name. Default is `#{options[:app_name]}`.") { |v| options[:app_name] = v }
