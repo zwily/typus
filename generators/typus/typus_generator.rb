@@ -1,20 +1,16 @@
 class TypusGenerator < Rails::Generator::Base
 
+  default_options :app_name => Rails.root.basename, 
+                  :typus_user => 'TypusUser'
+
   def manifest
 
     record do |m|
 
-      ##
       # Define variables.
-      #
-
-      application = Rails.root.basename
       timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
 
-      ##
       # Create required folders.
-      #
-
       [ 'app/controllers/admin', 
         'app/views/admin', 
         'config/typus', 
@@ -101,7 +97,7 @@ class TypusGenerator < Rails::Generator::Base
   relationships: #{relationships.join(', ')}
   filters: #{filters}
   search: #{search}
-  application: #{application}
+  application: #{options[:app_name]}
 
         RAW
 
@@ -126,12 +122,8 @@ class TypusGenerator < Rails::Generator::Base
         m.template from, to, :assigns => { :configuration => configuration }
       end
 
-      ##
       # Initializer
-      #
-
-      from, to = 'initializer.rb', 'config/initializers/typus.rb'
-      m.template from, to, :assigns => { :application => application }
+      m.template 'initializer.rb', 'config/initializers/typus.rb'
 
       ##
       # Assets
@@ -164,10 +156,11 @@ class TypusGenerator < Rails::Generator::Base
       ar_models.each do |model|
 
         folder = "admin/#{model.name.tableize}".split('/')[0...-1].join('/')
+        views_folder = "app/views/admin/#{model.name.tableize}"
 
-        # Create needed folder.
         [ "app/controllers/#{folder}", 
-          "test/functional/#{folder}"].each { |f| m.directory f }
+          "test/functional/#{folder}", 
+          views_folder ].each { |f| m.directory f }
 
         assigns = { :inherits_from => "Admin::MasterController", 
                     :resource => model.name.pluralize }
@@ -180,8 +173,6 @@ class TypusGenerator < Rails::Generator::Base
                    "test/functional/admin/#{model.name.tableize}_controller_test.rb", 
                    :assigns => assigns
 
-        views_folder = "app/views/admin/#{model.name.tableize}"
-        m.directory views_folder
         model.typus_actions.each do |action|
           m.file "view.html.erb", "#{views_folder}/#{action}.html.erb"
         end
@@ -217,11 +208,28 @@ class TypusGenerator < Rails::Generator::Base
 
       m.migration_template 'migration.rb', 
                            'db/migrate', 
-                            :assigns => { :migration_name => "CreateTypusUsers", 
-                                          :typus_users_table_name => "typus_users" }, 
-                            :migration_file_name => "create_typus_users"
+                            :assigns => { :migration_name => "Create#{options[:typus_user]}s", 
+                                          :typus_users_table_name => options[:typus_user].tableize }, 
+                            :migration_file_name => "create_#{options[:typus_user].tableize}"
 
     end
+
+  end
+
+  def banner
+    "Usage: #{$0} #{spec.name}"
+  end
+
+  def add_options!(opt)
+
+    opt.separator ''
+    opt.separator 'Options:'
+
+    opt.on("-u", "--typus_user=Class", String,
+          "Configure Typus User class name. Default is '#{options[:typus_user]}'.") { |v| options[:typus_user] = v }
+
+    opt.on("-a", "--app_name=ApplicationName", String,
+          "Set an application name. Default is '#{options[:app_name]}'.") { |v| options[:typus_user] = v }
 
   end
 
