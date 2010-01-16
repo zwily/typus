@@ -229,7 +229,7 @@ class TypusGenerator < Rails::Generator::Base
            "Configure Typus User class name. Default is `#{options[:typus_user]}`.") { |v| options[:typus_user] = v }
 
     opt.on("-a", "--app_name=ApplicationName", String,
-           "Set an application name. Default is `#{options[:app_name]}`.") { |v| options[:typus_user] = v }
+           "Set an application name. Default is `#{options[:app_name]}`.") { |v| options[:app_name] = v }
 
   end
 
