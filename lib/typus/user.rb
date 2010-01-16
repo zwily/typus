@@ -84,18 +84,18 @@ module Typus
         resource = resource.to_s
 
         return false if !resources.include?(resource)
-        return true if resources[resource].include?('all')
+        return true if resources[resource].include?("all")
 
         _action = if options[:special]
                     action
                   else
                     case action
-                    when 'new', 'create' then 'create'
-                    when 'index', 'show' then 'read'
-                    when 'edit', 'update', 
-                         'position', 'toggle', 
-                         'relate', 'unrelate', 'detach' then 'update'
-                    when 'destroy' then 'delete'
+                    when "new", "create" then "create"
+                    when "index", 'show" then "read"
+                    when "edit", "update", 
+                         "position', "toggle", 
+                         "relate", "unrelate", "detach" then "update"
+                    when "destroy" then "delete"
                     else action
                     end
                   end
