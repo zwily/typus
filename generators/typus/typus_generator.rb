@@ -27,9 +27,8 @@ class TypusGenerator < Rails::Generator::Base
       models.each do |model|
         begin
           klass = model.constantize
-          active_record_model = klass.superclass.equal?(ActiveRecord::Base) && !klass.abstract_class?
-          active_record_model_with_sti = klass.superclass.superclass.equal?(ActiveRecord::Base)
-          ar_models << klass if active_record_model || active_record_model_with_sti
+          active_record_model = klass < ActiveRecord::Base && !klass.abstract_class?
+          ar_models << klass if active_record_model
         rescue Exception => error
           puts "=> [typus] #{error.message} on `#{model}`."
           exit
