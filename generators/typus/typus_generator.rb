@@ -24,6 +24,8 @@ class TypusGenerator < Rails::Generator::Base
       models = (Typus.discover_models + Typus.models).uniq
       ar_models = []
 
+      # OPTIMIZE: I'm sure this can be cleaner.
+
       models.each do |model|
         begin
           klass = model.constantize
