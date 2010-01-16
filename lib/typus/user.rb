@@ -119,7 +119,8 @@ module Typus
       end
 
       def language=(locale)
-        self.preferences = { :locale => locale }
+        options = { :locale => locale }
+        self.preferences.merge!(options)
       end
 
       # OPTIMIZE: Cleanup ...
