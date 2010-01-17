@@ -29,6 +29,8 @@
     was not working properly because there where multiple items with the 
     same id.
 [X] Move partial helpers to `app/views/admin/helpers`.
+[X] Do not set ActionMailer::Base.default_url_options[:host] on the 
+    controller.
 [-] Allow users to download the demo hosted at heroku.com
 [-] Move html code from helpers to partials.
 [ ] Add API authentication.
