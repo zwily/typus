@@ -1,3 +1,9 @@
+class String
+
+  def name; self; end
+
+end
+
 class TypusGenerator < Rails::Generator::Base
 
   default_options :app_name => Rails.root.basename, 
@@ -153,7 +159,7 @@ class TypusGenerator < Rails::Generator::Base
       #   `test/functional/admin/#{resource}_controller_test.rb`
       #
 
-      ar_models << options[:user_class_name].constantize
+      ar_models << options[:user_class_name]
       ar_models.each do |model|
 
         folder = "admin/#{model.name.tableize}".split("/")[0...-1].join("/")
@@ -173,6 +179,8 @@ class TypusGenerator < Rails::Generator::Base
         m.template "functional_test.rb", 
                    "test/functional/admin/#{model.name.tableize}_controller_test.rb", 
                    :assigns => assigns
+
+        next if model.name == options[:user_class_name]
 
         model.typus_actions.each do |action|
           m.file "view.html.erb", "#{views_folder}/#{action}.html.erb"
