@@ -1,4 +1,4 @@
-= 0.9.40 / 2010-01-??
+= 0.9.40 / 2010-02-??
 
 [X] Refactor all forms to be able to use formtastic.
 [X] Cleanup translation files.
@@ -31,6 +31,7 @@
 [X] Move partial helpers to `app/views/admin/helpers`.
 [X] Do not set ActionMailer::Base.default_url_options[:host] on the 
     controller.
+[X] Cleanup `applications` & `resources`.
 [-] Allow users to download the demo hosted at heroku.com
 [-] Move html code from helpers to partials.
 [ ] Add API authentication.
@@ -50,13 +51,11 @@
 [ ] Fix css to display correctly "select" fields in relationships.
 [ ] Make tests work again.
 [ ] Remove Typus "blue" color and use something more neutral.
-[ ] Cleanup `applications` & `resources`.
 [ ] Ajax pagination. (?)
-[ ] See what's happening with the admin namespace controllers for namespaced 
-    models.
 [ ] Generate views for custom actions on the controllers/models. This should 
     verify the view doesn't exist and create it.
 [ ] Support for XSS.
 [ ] Replace "render :partial => 'template', :locals => {}", by 
     "render 'template', :local => 'local'".
 [ ] Add support for custom typus_user on the generator.
+[ ] Shorten sidebar selectors. (AFS)
