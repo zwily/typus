@@ -153,7 +153,7 @@ class TypusGenerator < Rails::Generator::Base
       #   `test/functional/admin/#{resource}_controller_test.rb`
       #
 
-      ar_models << TypusUser
+      ar_models << options[:user_class_name].constantize
       ar_models.each do |model|
 
         folder = "admin/#{model.name.tableize}".split("/")[0...-1].join("/")
