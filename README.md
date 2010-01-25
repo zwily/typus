@@ -34,8 +34,9 @@ extensible enough to match lots of use cases.
 
     $ cd example.com && script/server
 
-**Step 3:** Go to the admin area (<http://0.0.0.0:3000/admin>) and enjoy it!
+**Step 3:** Go to the admin area
 
+    $ open http://0.0.0.0:3000/admin
 
 ## Want to see a demo working?
 
@@ -52,8 +53,8 @@ Install from GitHub the latest version which it's compatible with Rails 2.3.5.
 
     $ script/plugin install git://github.com/fesplugas/typus.git
 
-Once `typus` is installed, run the generator to create required files and migrate your 
-database. (<tt>typus_users</tt> table is created)
+Once `typus` is installed, run the generator to create required files 
+and migrate your database.
 
     $ script/generate typus
     $ rake db:migrate
