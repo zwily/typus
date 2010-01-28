@@ -59,7 +59,7 @@ module Admin::SidebarHelper
 
   def export
     formats = @resource[:class].typus_export_formats.map do |format|
-                link_to format.upcase, params.merge(:format => format)
+                link_to _(format.upcase), params.merge(:format => format)
               end
     build_typus_list(formats, :header => 'export')
   end
