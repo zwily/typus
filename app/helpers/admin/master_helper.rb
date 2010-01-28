@@ -10,7 +10,7 @@ module Admin::MasterHelper
 
     options = {}
     options[:resource_from] = @resource[:human_name]
-    options[:resource_to] = params[:resource].classify.humanize if params[:resource]
+    options[:resource_to] = params[:resource].classify.constantize.human_name if params[:resource]
 
     editing = %w( edit update ).include?(params[:action])
 

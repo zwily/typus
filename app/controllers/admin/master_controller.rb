@@ -383,7 +383,7 @@ private
 
     flash[:success] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
                                  :model_a => @item.class.typus_human_name, 
-                                 :model_b => resource_class.name)
+                                 :model_b => resource_class.typus_human_name)
     redirect_to path || params[:back_to]
 
   end
