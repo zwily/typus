@@ -378,7 +378,6 @@ private
       path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
     when :polymorphic
       resource.send(@item.class.name.tableize).create(params[@resource[:symbol]])
-      path = "#{params[:back_to]}##{@resource[:self]}"
     end
 
     flash[:success] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
