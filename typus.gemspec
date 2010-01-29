@@ -60,6 +60,8 @@ Gem::Specification.new do |s|
      "app/views/typus/sign_in.html.erb",
      "app/views/typus/sign_up.html.erb",
      "app/views/typus_mailer/reset_password_link.erb",
+     "config/locales/ca.yml",
+     "config/locales/ca_models.yml",
      "config/locales/de.yml",
      "config/locales/de_models.yml",
      "config/locales/es.yml",
