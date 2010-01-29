@@ -91,9 +91,9 @@ module Typus
                   else
                     case action
                     when "new", "create" then "create"
-                    when "index", "show" then "read"
+                    when "index", 'show" then "read"
                     when "edit", "update", 
-                         "position", "toggle", 
+                         "position', "toggle", 
                          "relate", "unrelate", "detach" then "update"
                     when "destroy" then "delete"
                     else action

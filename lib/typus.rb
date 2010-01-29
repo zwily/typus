@@ -13,11 +13,12 @@ module Typus
     end
 
     def locales
-      [ [ "German", "de" ],
-        [ "English", "en" ], 
+      [ [ "Català", "ca" ],
+        [ "German", "de" ],
+        [ "English", "en" ],
         [ "Español", "es" ],
         [ "Français", "fr" ],
-        [ "Portuguese", "pt-BR" ], 
+        [ "Portuguese", "pt-BR" ],
         [ "Russian", "ru" ] ]
     end
 
