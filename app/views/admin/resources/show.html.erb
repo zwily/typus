@@ -33,7 +33,7 @@
              h(raw_data)
            end
   -%>
-  <dd><%= !data.blank? ? data : raw('&#151;') %></dd>
+  <dd><%= !data.blank? ? data : ('&#151;').html_safe! %></dd>
 <%- end -%>
 </dl>
 

@@ -50,12 +50,10 @@ module Admin::MasterHelper
     if File.exist?(template)
       render :partial => template.gsub('/_', '/'), :collection => items, :as => :item
     else
-      build_typus_table(model, fields, items, link_options, association)
+      build_typus_table(model, fields, items, link_options, association).html_safe!
     end
 
   end
-
-  safe_helper :build_list
 
   def pagination(*args)
     @options = args.extract_options!

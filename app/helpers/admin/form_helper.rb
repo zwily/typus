@@ -26,11 +26,9 @@ module Admin::FormHelper
                 end
       end
 
-    end
+    end.html_safe!
 
   end
-
-  safe_helper :build_form
 
   # OPTIMIZE: Remove returning(String.new) and return directly the html.
   def typus_belongs_to_field(attribute, options)
@@ -125,11 +123,9 @@ module Admin::FormHelper
         end
 
       end
-    end
+    end.html_safe!
 
   end
-
-  safe_helper :typus_relationships
 
   # OPTIMIZE: Move html code to partial.
   def typus_form_has_many(field)
