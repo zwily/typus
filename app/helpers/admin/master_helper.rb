@@ -55,6 +55,8 @@ module Admin::MasterHelper
 
   end
 
+  safe_helper :build_list
+
   def pagination(*args)
     @options = args.extract_options!
     render "admin/helpers/pagination" if @items.prev || @items.next
