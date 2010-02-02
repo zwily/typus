@@ -120,6 +120,7 @@ module Typus
 
       def language=(locale)
         options = { :locale => locale }
+        set_preferences if self.preferences.nil?
         self.preferences.merge!(options)
       end
 
