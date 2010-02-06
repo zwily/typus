@@ -23,6 +23,7 @@ Special thanks to the following individuals:
 * [Rytis Lukoseviciu](http://rytis.net): Code.
 * [WesEd Interactive](http://www.wested.org/): Code.
 * [Gaston Kleiman] (http://github.com/gkleiman): Code
+* [Tompa Gábor] (http://github.com/tompagabor): Maygar translation.
 
 Somehow involved in the project
 
