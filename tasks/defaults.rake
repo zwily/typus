@@ -7,7 +7,7 @@ namespace :typus do
                 "git://github.com/rails/acts_as_list.git", 
                 "git://github.com/rails/acts_as_tree.git" ]
 
-    plugins << "git://github.com/NZKoz/rails_xss.git" if Rails.version.eql?("2.3.5")
+    # plugins << "git://github.com/NZKoz/rails_xss.git" if Rails.version.eql?("2.3.5")
 
     system "script/plugin install #{plugins.join(" ")} --force"
 
