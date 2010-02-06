@@ -169,7 +169,7 @@ module Admin::TableHelper
   def typus_table_selector(attribute, item)
     mapping = item.class.send(attribute)
     value = item.send(attribute)
-    content = if mapping.kind_of?(Array) then mapping.select { |v| v.last == value }.flatten.first
+    content = if mapping.first.kind_of?(Array) then mapping.select { |v| v.last == value }.flatten.first
               else value end
     return content_tag(:td, h(content), :class => attribute)
   end
