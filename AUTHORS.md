@@ -24,6 +24,7 @@ Special thanks to the following individuals:
 * [WesEd Interactive](http://www.wested.org/): Code.
 * [Gaston Kleiman] (http://github.com/gkleiman): Code
 * [Tompa Gábor] (http://github.com/tompagabor): Maygar translation.
+* [Lleïr Borràs Metje](http://github.com/lleirborras): Català translation & code.
 
 Somehow involved in the project
 
