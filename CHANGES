@@ -55,7 +55,7 @@
 [ ] Generate views for custom actions on the controllers/models. This should 
     verify the view doesn't exist and create it.
 [ ] Support for XSS.
-[ ] Replace "render :partial => 'template', :locals => {}", by 
+[X] Replace "render :partial => 'template', :locals => {}", by 
     "render 'template', :local => 'local'".
-[ ] Add support for custom typus_user on the generator.
+[X] Add support for custom typus_user on the generator.
 [ ] Shorten sidebar selectors. (AFS)
