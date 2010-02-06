@@ -68,6 +68,8 @@ Gem::Specification.new do |s|
      "config/locales/es_models.yml",
      "config/locales/fr.yml",
      "config/locales/fr_models.yml",
+     "config/locales/hu.yml",
+     "config/locales/hu_models.yml",
      "config/locales/language.yml.template",
      "config/locales/pt-BR.yml",
      "config/locales/pt-BR_models.yml",
