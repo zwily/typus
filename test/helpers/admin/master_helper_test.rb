@@ -25,7 +25,7 @@ class Admin::MasterHelperTest < ActiveSupport::TestCase
     HTML
 =end
 
-    partial = "admin/shared/display_link_to_previous"
+    partial = "admin/helpers/display_link_to_previous"
     options = { :message => "You're updating a Post." }
 
     assert_equal [ partial, options ], output
