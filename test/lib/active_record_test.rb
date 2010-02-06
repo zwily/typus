@@ -184,7 +184,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_typus_boolean_is_an_instance_of_active_support_ordered_hash
-    assert TypusUser.typus_boolean.instance_of?(ActiveSupport::OrderedHash)
+    assert TypusUser.typus_boolean("status").instance_of?(ActiveSupport::OrderedHash)
   end
 
   def test_should_return_booleans_for_typus_users
@@ -192,11 +192,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal [ "Active", "Inactive" ], TypusUser.typus_boolean('status').values
     assert_equal [ :true, :false ], TypusUser.typus_boolean(:status).keys
     assert_equal [ "Active", "Inactive" ], TypusUser.typus_boolean(:status).values
-  end
-
-  def test_should_return_default_booleans_for_typus_users
-    assert_equal [ :true, :false ], TypusUser.typus_boolean.keys
-    assert_equal [ "True", "False" ], TypusUser.typus_boolean.values
   end
 
   def test_should_return_booleans_for_post

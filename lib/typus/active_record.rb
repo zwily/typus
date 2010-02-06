@@ -186,6 +186,8 @@ module Typus
         boolean = 'true, false'
       end
 
+      return nil if boolean.nil?
+
       hash = ActiveSupport::OrderedHash.new
 
       mapping = boolean.kind_of?(Array) ? boolean : boolean.split(', ')
