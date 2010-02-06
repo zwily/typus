@@ -29,6 +29,8 @@
              @item.typus_preview(field.first)
            when :text
              defined?(RDiscount) ? markdown(raw_data) : simple_format(h(raw_data))
+           when :selector
+             @item.mapping(field.first)
            else
              h(raw_data)
            end
