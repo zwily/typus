@@ -18,6 +18,7 @@ module Typus
         [ "English", "en" ],
         [ "Español", "es" ],
         [ "Français", "fr" ],
+        [ "Magyar", "hu" ],
         [ "Portuguese", "pt-BR" ],
         [ "Russian", "ru" ] ]
     end
