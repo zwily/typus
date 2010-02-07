@@ -120,6 +120,8 @@ module Admin::SidebarHelper
         when :date, :datetime then html << date_filter(current_request, key)
         when :belongs_to then html << relationship_filter(current_request, key)
         when :has_and_belongs_to_many then html << relationship_filter(current_request, key, true)
+        else
+          html << string_filter(current_request, key)
         end
       end
     end.html_safe!
@@ -207,7 +209,8 @@ function surfto_#{model_pluralized}(form) {
   end
 
   def string_filter(request, filter)
-    values = @resource[:class].send(filter)
+    values = @resource[:class]::const_get("#{filter.to_s.upcase}")
+    values = values.invert if values.kind_of?(Hash)
     items = []
     values.each do |item|
       link_name, link_filter = (values.first.kind_of?(Array)) ? [ item.first, item.last ] : [ item, item ]

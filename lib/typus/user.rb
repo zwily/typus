@@ -38,14 +38,6 @@ module Typus
 
     module ClassMethodsMixin
 
-      def role
-        Typus::Configuration.roles.keys.sort
-      end
-
-      def language
-        Typus.locales
-      end
-
       def authenticate(email, password)
         user = find_by_email_and_status(email, true)
         user && user.authenticated?(password) ? user : nil
@@ -112,8 +104,6 @@ module Typus
         role == Typus::Configuration.options[:root]
       end
 
-    protected
-
       def language
         preferences[:locale] rescue Typus::Configuration.options[:default_locale]
       end
@@ -123,6 +113,8 @@ module Typus
         set_preferences if self.preferences.nil?
         self.preferences.merge!(options)
       end
+
+      protected
 
       # OPTIMIZE: Cleanup ...
       def set_preferences

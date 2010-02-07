@@ -1,5 +1,6 @@
 <%
-  values = @resource[:class].send(attribute).map { |o| (o.kind_of?(Array) ? [ o.first, o.last ] : o) }
+  values = @resource[:class]::const_get("#{attribute.upcase}")
+  values = values.invert if values.kind_of?(Hash)
 %>
 
 <li>
