@@ -189,35 +189,32 @@ function surfto_#{model_pluralized}(form) {
   end
 
   def date_filter(request, filter)
-    items = []
-    %w( today last_few_days last_7_days last_30_days ).each do |timeline|
-      switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
-      options = { filter.to_sym => timeline, :page => nil }
-      items << (link_to _(timeline.humanize), params.merge(options), :class => switch)
-    end
+    items = %w( today last_few_days last_7_days last_30_days ).map do |timeline|
+              switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
+              options = { filter.to_sym => timeline, :page => nil }
+              link_to _(timeline.humanize), params.merge(options), :class => switch
+            end
     build_typus_list(items, :attribute => filter)
   end
 
   def boolean_filter(request, filter)
-    items = []
-    @resource[:class].typus_boolean(filter).each do |key, value|
-      switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
-      options = { filter.to_sym => key, :page => nil }
-      items << (link_to _(value), params.merge(options), :class => switch)
-    end
+    items = @resource[:class].typus_boolean(filter).map do |key, value|
+              switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
+              options = { filter.to_sym => key, :page => nil }
+              link_to _(value), params.merge(options), :class => switch
+            end
     build_typus_list(items, :attribute => filter)
   end
 
   def string_filter(request, filter)
     values = @resource[:class]::const_get("#{filter.to_s.upcase}")
     values = values.invert if values.kind_of?(Hash)
-    items = []
-    values.each do |item|
-      link_name, link_filter = (values.first.kind_of?(Array)) ? [ item.first, item.last ] : [ item, item ]
-      switch = request.include?("#{filter}=#{link_filter}") ? 'on' : 'off'
-      options = { filter.to_sym => link_filter, :page => nil }
-      items << (link_to link_name.capitalize, params.merge(options), :class => switch)
-    end
+    items = values.map do |item|
+              link_name, link_filter = (values.first.kind_of?(Array)) ? [ item.first, item.last ] : [ item, item ]
+              switch = request.include?("#{filter}=#{link_filter}") ? 'on' : 'off'
+              options = { filter.to_sym => link_filter, :page => nil }
+              link_to link_name.capitalize, params.merge(options), :class => switch
+            end
     build_typus_list(items, :attribute => filter)
   end
 
