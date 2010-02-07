@@ -113,15 +113,11 @@ module Typus
 
     end
 
-    # OPTIMIZE
     def typus_actions
-      actions = []
+      return [] if Typus::Configuration.config[name]['actions'].nil?
       Typus::Configuration.config[name]['actions'].keys.map do |key|
-        actions += Typus::Configuration.config[name]['actions'][key].split(', ')
-      end
-      return actions
-    rescue
-      []
+        Typus::Configuration.config[name]['actions'][key].split(', ')
+      end.flatten
     end
 
     # Extended actions for this model on Typus.
