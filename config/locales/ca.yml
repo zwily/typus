@@ -111,7 +111,7 @@ ca:
   "{{current_user_role}} can't go to {{action}} on {{controller}}":  "{{current_user_role}} no pot visitar {{action}} a {{controller}}."
   "{{current_user_role}} can't perform action. ({{action}})": "{{current_user_role}} no pot realitzar l'acció. ({{action}})"
   "{{model}} filtered by {{filtered_by}}": "{{model}} filtrats per {{filtered_by}}"
-  "{{model}} successfully created": "{{model}} satisfactòriament create."
+  "{{model}} successfully created": "{{model}} satisfactòriament creat."
   "{{model}} successfully updated": "{{model}} satisfactòriament actualitzat."
   "{{model}} successfully removed": "{{model}} satisfactòriament eliminat."
   "{{model}} {{attribute}} changed": "{{model}} {{attribute}} canviat."
