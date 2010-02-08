@@ -163,15 +163,13 @@ module Typus
 
       fields = typus_defaults_for(:order_by)
 
-      order = if fields.empty?
-                "#{table_name}.id ASC"
-              else
-                fields.map do |field|
-                  field.include?('-') ? "#{table_name}.#{field.delete('-')} DESC" : "#{table_name}.#{field} ASC"
-                end.join(', ')
-              end
-
-      return order
+      if fields.empty?
+        "#{table_name}.id ASC"
+      else
+        fields.map do |field|
+          field.include?('-') ? "#{table_name}.#{field.delete('-')} DESC" : "#{table_name}.#{field} ASC"
+        end.join(', ')
+      end
 
     end
 
