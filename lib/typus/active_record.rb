@@ -209,6 +209,13 @@ module Typus
       Typus::Configuration.config[name]['fields']['options']['templates'][attribute.to_s] rescue nil
     end
 
+    ##
+    # Sidebar filters:
+    #
+    # - Booleans: true, false
+    # - Datetime: today, last_few_days, last_7_days, last_30_days
+    # - Integer & String: *_id and "selectors" (p.ej. category_id)
+    #
     def build_conditions(params)
 
       conditions, joins = merge_conditions, []
@@ -228,32 +235,25 @@ module Typus
 
         filter_type = model_fields[key.to_sym] || model_relationships[key.to_sym]
 
-        ##
-        # Sidebar filters:
-        #
-        # - Booleans: true, false
-        # - Datetime: today, last_few_days, last_7_days, last_30_days
-        # - Integer & String: *_id and "selectors" (p.ej. category_id)
-        #
         case filter_type
         when :boolean
           condition = { key => (value == 'true') ? true : false }
           conditions = merge_conditions(conditions, condition)
         when :datetime
           interval = case value
-                     when 'today' then         Time.new.midnight..Time.new.midnight.tomorrow
+                     when 'today'         then Time.new.midnight..Time.new.midnight.tomorrow
                      when 'last_few_days' then 3.days.ago.midnight..Time.new.midnight.tomorrow
-                     when 'last_7_days' then   6.days.ago.midnight..Time.new.midnight.tomorrow
-                     when 'last_30_days' then  Time.new.midnight.last_month..Time.new.midnight.tomorrow
+                     when 'last_7_days'   then 6.days.ago.midnight..Time.new.midnight.tomorrow
+                     when 'last_30_days'  then Time.new.midnight.last_month..Time.new.midnight.tomorrow
                      end
           condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
           conditions = merge_conditions(conditions, condition)
         when :date
           interval = case value
-                     when 'today' then         nil
+                     when 'today'         then nil
                      when 'last_few_days' then 3.days.ago.to_date..Date.tomorrow
-                     when 'last_7_days' then   6.days.ago.midnight..Date.tomorrow
-                     when 'last_30_days' then  (Date.today << 1)..Date.tomorrow
+                     when 'last_7_days'   then 6.days.ago.midnight..Date.tomorrow
+                     when 'last_30_days'  then (Date.today << 1)..Date.tomorrow
                      end
           if interval
             condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s, interval.last.to_s]
