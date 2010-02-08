@@ -118,6 +118,8 @@ module Typus
       Typus::Configuration.config[name]['actions'].keys.map do |key|
         Typus::Configuration.config[name]['actions'][key].split(', ')
       end.flatten
+    rescue
+      []
     end
 
     # Extended actions for this model on Typus.
