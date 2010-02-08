@@ -204,7 +204,9 @@ module Typus
     # We are able to define which template to use to render the attribute 
     # within the form
     def typus_template(attribute)
-      Typus::Configuration.config[name]['fields']['options']['templates'][attribute.to_s] rescue nil
+      Typus::Configuration.config[name]['fields']['options']['templates'][attribute.to_s]
+    rescue
+      nil
     end
 
     ##
