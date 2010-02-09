@@ -117,7 +117,11 @@ module Admin::FormHelper
         when :has_and_belongs_to_many
           html << typus_form_has_and_belongs_to_many(relationship)
         when :has_many
-          html << typus_form_has_many(relationship)
+          if association.options[:through]
+            # Here we will shot the relationship. Better this than raising an error.
+          else
+            html << typus_form_has_many(relationship)
+          end
         when :has_one
           html << typus_form_has_one(relationship)
         end
