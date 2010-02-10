@@ -191,17 +191,29 @@ function surfto_#{model_pluralized}(form) {
   end
 
   def date_filter(request, filter)
-    items = %w( today last_few_days last_7_days last_30_days ).map do |timeline|
-              switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
-              if switch == 'on'
-                options = { :page => nil }
-                params.delete(filter)
-              else
-                options = { filter.to_sym => timeline, :page => nil }
+
+    if !@resource[:class].typus_field_options_for(:filter_by_date_range).include?(filter.to_sym)
+      items = %w( today last_few_days last_7_days last_30_days ).map do |timeline|
+                switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
+                if switch == 'on'
+                  options = { :page => nil }
+                  params.delete(filter)
+                else
+                  options = { filter.to_sym => timeline, :page => nil }
+                end
+                link_to _(timeline.humanize), params.merge(options), :class => switch
               end
-              link_to _(timeline.humanize), params.merge(options), :class => switch
-            end
-    build_typus_list(items, :attribute => filter)
+      build_typus_list(items, :attribute => filter)
+    else
+      date_params = params.dup
+
+      %w( action controller page id ).each { |p| date_params.delete(p) }
+      date_params.delete(filter)
+
+      hidden_params = date_params.map { |k, v| hidden_field_tag(k, v) }
+      render "admin/helpers/date", :hidden_params => hidden_params, :filter => filter, :resource => @resource
+    end
+
   end
 
   def boolean_filter(request, filter)

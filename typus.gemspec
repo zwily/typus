@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2010-02-06}
+  s.date = %q{2010-02-10}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -35,6 +35,7 @@ Gem::Specification.new do |s|
      "app/models/typus_user.rb",
      "app/views/admin/dashboard/_sidebar.html.erb",
      "app/views/admin/helpers/_applications.html.erb",
+     "app/views/admin/helpers/_date.html.erb",
      "app/views/admin/helpers/_display_link_to_previous.html.erb",
      "app/views/admin/helpers/_flash_message.html.erb",
      "app/views/admin/helpers/_header.html.erb",

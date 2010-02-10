@@ -225,6 +225,12 @@ input#search { border: 1px solid #999; font-size: 1.2em; padding: 3px; }
 
 /* @end */
 
+/* @group Date search boxes */
+
+input.date_input { border: 1px solid #999; margin-bottom: 1em;}
+
+/* @end */
+
 /* @group Login Page Dialog */
 
 #bottom_dialog {
