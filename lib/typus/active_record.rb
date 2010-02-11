@@ -250,9 +250,18 @@ module Typus
           conditions = merge_conditions(conditions, condition)
         when :date
           if value.is_a?(Hash)
+            date_format = Date::DATE_FORMATS[typus_date_format(key)]
+
             begin
-              conditions = merge_conditions(conditions, ["#{key} >= ?", Date.parse(value["from"])]) unless value["from"].blank?
-              conditions = merge_conditions(conditions, ["#{key} <= ?", Date.parse(value["to"])]) unless value["to"].blank?
+              unless value["from"].blank?
+                date_from = Date.strptime(value["from"], date_format)
+                conditions = merge_conditions(conditions, ["#{key} >= ?", date_from])
+              end
+
+              unless value["to"].blank?
+                date_to = Date.strptime(value["to"], date_format)
+                conditions = merge_conditions(conditions, ["#{key} <= ?", date_to])
+              end
             rescue
             end
           else
