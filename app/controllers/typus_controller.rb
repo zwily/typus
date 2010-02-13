@@ -90,7 +90,7 @@ class TypusController < ApplicationController
         session[:typus_user_id] = @typus_user.id
         redirect_to admin_dashboard_path
       else
-        render :action => 'reset_password'
+        render :action => "reset_password"
       end
     end
   end
@@ -101,7 +101,7 @@ class TypusController < ApplicationController
 
     if request.post?
 
-      password = 'columbia'
+      password = "columbia"
 
       user = Typus.user_class.generate(:email => params[:typus_user][:email], 
                                        :password => password, 
@@ -131,8 +131,8 @@ private
 
     attributes = Typus.user_class.model_fields.keys
 
-    generator = if !attributes.include?(:role) then 'typus_update_schema_to_01'
-                elsif !attributes.include?(:preferences) then 'typus_update_schema_to_02'
+    generator = if !attributes.include?(:role) then "typus_update_schema_to_01"
+                elsif !attributes.include?(:preferences) then "typus_update_schema_to_02"
                 end
 
     if generator
@@ -146,7 +146,8 @@ private
   end
 
   def select_layout
-    %w( sign_up sign_in sign_out recover_password reset_password ).include?(action_name) ? 'typus' : 'admin'
+    %w( sign_up sign_in sign_out 
+        recover_password reset_password ).include?(action_name) ? "typus" : "admin"
   end
 
 end
