@@ -156,6 +156,7 @@ class Admin::MasterController < ApplicationController
       # correct locale.
       if @resource[:class].eql?(Typus.user_class)
         I18n.locale = @current_user.reload.preferences[:locale]
+        @resource[:human_name] = params[:controller].extract_human_name
       end
 
       flash[:success] = _("{{model}} successfully updated.", :model => @resource[:human_name])
