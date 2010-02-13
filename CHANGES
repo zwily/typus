@@ -60,3 +60,6 @@
 [X] Add support for custom typus_user on the generator.
 [ ] Shorten sidebar selectors. (AFS)
 [ ] Add test for `typus_table_selector`.
+[X] Clicking on a filter removes is. (Gaston Kleiman)
+[X] Possibility to filter by date ranges. (Gaston Kleiman)
+[ ]
