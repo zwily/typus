@@ -32,9 +32,10 @@ hu:
   "Error! Typus User or role doesn't exist": "Hiba! Typus felhasználó vagy a jogosultság nem létezik"
 
   "False": "Hamis"
-  "Filter by": "Szűrés:"
+  "Filter": 
+  "Filter by": "Szűrés"
 
-  "Go to": "Ide:"
+  "Go to": "Ide"
 
   "I remember my password": "Emlékszem a jelszavamra"
   "If you didn't request a password update, you can ignore this message": "Hogyha nem kértél jelszó emlékesztetőt, nyugodtan töröld ki ezt a levelet."
@@ -67,7 +68,7 @@ hu:
 
   "Save {{resource}}": "{{resource}} mentése"
   "Search": "Keresés"
-  "Search by": "Keresés "
+  "Search by": "Keresés"
   "Send us feedback": "Visszajelzés küldése"
   "Setup": "Beállítás"
   "Show": "Mutatás"
@@ -128,6 +129,3 @@ hu:
   "Comment count": "Hozzászólások száma"
   "Has comment": "Hozzászólás engedélyezve"
   "Published at": "Publikálva"
-
-
-
