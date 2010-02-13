@@ -43,7 +43,6 @@ Gem::Specification.new do |s|
      "app/views/admin/helpers/_login_info.html.erb",
      "app/views/admin/helpers/_pagination.html.erb",
      "app/views/admin/helpers/_preview.html.erb",
-     "app/views/admin/helpers/_preview_on_table.html.erb",
      "app/views/admin/helpers/_quick_edit.html.erb",
      "app/views/admin/helpers/_remove_filter_link.html.erb",
      "app/views/admin/helpers/_resources.html.erb",
