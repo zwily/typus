@@ -3,25 +3,25 @@ module Typus
   module Configuration
 
     # Default options which can be overwritten from the initializer.
-    typus_options = { :app_name => 'Typus', 
-                      :config_folder => 'config/typus', 
+    typus_options = { :app_name => "Typus", 
+                      :config_folder => "config/typus", 
                       :default_password => "columbia", 
                       :email => nil, 
                       :file_preview => :typus_preview, 
                       :file_thumbnail => :typus_thumbnail, 
-                      :relationship => 'typus_users', 
-                      :root => 'admin', 
+                      :relationship => "typus_users", 
+                      :root => "admin", 
                       :ssl => false, 
-                      :user_class_name => 'TypusUser', 
-                      :user_fk => 'typus_user_id' }
+                      :user_class_name => "TypusUser", 
+                      :user_fk => "typus_user_id" }
 
     # Default options which can be overwritten from the initializer.
-    model_options = { :default_action_on_item => 'edit', 
+    model_options = { :default_action_on_item => "edit", 
                       :end_year => nil,
                       :form_rows => 15, 
                       :index_after_save => false, 
                       :minute_step => 5, 
-                      :nil => 'nil', 
+                      :nil => "nil", 
                       :on_header => false, 
                       :only_user_items => false, 
                       :per_page => 15, 
@@ -36,7 +36,7 @@ module Typus
     def self.config!
 
       files = Dir["#{Rails.root}/#{options[:config_folder]}/**/*.yml"].sort
-      files = files.delete_if { |x| x.include?('_roles.yml') }
+      files = files.delete_if { |x| x.include?("_roles.yml") }
 
       @@config = {}
       files.each do |file|
