@@ -19,6 +19,7 @@ only have set the most common settings.
           selectors:
           read_only:
           rich_text: body
+          filter_by_date_range: valid_until
       actions:
         index: cleanup
         edit: send_as_newsletter
