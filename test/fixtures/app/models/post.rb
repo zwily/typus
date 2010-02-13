@@ -7,9 +7,7 @@ class Post < ActiveRecord::Base
   has_many :views
   belongs_to :favorite_comment, :class_name => 'Comment'
 
-  def self.status
-    %w( pending published unpublished )
-  end
+  STATUS = %w( pending published unpublished )
 
   def self.typus
     'plugin'

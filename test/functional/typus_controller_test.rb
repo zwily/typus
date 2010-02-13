@@ -83,10 +83,7 @@ class TypusControllerTest < ActionController::TestCase
     [ :notice, :error, :warning ].each { |f| assert !flash[f] }
   end
 
-  # FIXME
   def test_should_verify_block_users_on_the_fly
-
-    return
 
     admin = typus_users(:admin)
     @request.session[:typus_user_id] = admin.id
