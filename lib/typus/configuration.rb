@@ -5,6 +5,7 @@ module Typus
     # Default options which can be overwritten from the initializer.
     typus_options = { :app_name => 'Typus', 
                       :config_folder => 'config/typus', 
+                      :default_password => "columbia", 
                       :email => nil, 
                       :file_preview => :typus_preview, 
                       :file_thumbnail => :typus_thumbnail, 

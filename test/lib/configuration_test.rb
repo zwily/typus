@@ -11,6 +11,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     return if File.exist?(initializer)
     assert_equal 'Typus', Typus::Configuration.options[:app_name]
     assert_equal 'vendor/plugins/typus/test/config/working', Typus::Configuration.options[:config_folder]
+    assert_equal "columbia", Typus::Configuration.options[:default_password]
     assert_equal nil, Typus::Configuration.options[:email]
     assert_equal :typus_preview, Typus::Configuration.options[:file_preview]
     assert_equal :typus_thumbnail, Typus::Configuration.options[:file_thumbnail]
