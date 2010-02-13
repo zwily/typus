@@ -16,5 +16,5 @@
 <li>
   <%= form.label attribute, label_text %>
   <%= form.file_field attachment, options %>
-  <%= @item.typus_preview(attribute).html_safe! unless @item.send(attribute).blank? %>
+  <%= typus_preview(@item, attribute) %>
 </li>

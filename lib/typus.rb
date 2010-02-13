@@ -109,7 +109,6 @@ module Typus
       # Typus mixins.
       require "typus/authentication"
       require "typus/format"
-      require "typus/preview"
       require "typus/preferences"
       require "typus/reloader"
       require "typus/quick_edit"
