@@ -25,8 +25,8 @@ class ActiveRecord::Base
   #     => "published"
   #     >> Post.find(:first).mapping(:status)
   #     => "Published"
-  #     >> I18n.locale = "es"
-  #     => "es"
+  #     >> I18n.locale = :es
+  #     => :es
   #     >> Post.find(:first).mapping(:status)
   #     => "Publicado"
   #
