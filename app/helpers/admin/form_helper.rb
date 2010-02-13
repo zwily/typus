@@ -346,7 +346,7 @@ module Admin::FormHelper
   # OPTIMIZE: Cleanup the rescue ...
   def typus_template_field(attribute, template, options = {})
 
-    template_name = File.join('admin', 'templates', "#{template}")
+    template_name = "admin/templates/#{template}"
 
     custom_options = { :start_year => @resource[:class].typus_options_for(:start_year), 
                        :end_year => @resource[:class].typus_options_for(:end_year), 
