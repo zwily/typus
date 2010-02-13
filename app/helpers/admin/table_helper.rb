@@ -181,10 +181,12 @@ module Admin::TableHelper
     file_preview_is_image = item.send("#{attachment}_content_type") =~ /^image\/.+/
 
     content = if has_file_preview && file_preview_is_image
-                render "admin/helpers/preview_on_table", 
+                render "admin/helpers/preview", 
                        :attribute => attribute, 
                        :attachment => attachment, 
-                       :file_preview => file_preview, 
+                       :content => item.send(attribute), 
+                       :has_file_preview => has_file_preview, 
+                       :href => item.send(attachment).url(file_preview), 
                        :item => item
               else
                 link_to item.send(attribute), item.send(attachment).url
