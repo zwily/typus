@@ -146,12 +146,19 @@ class Admin::MasterController < ApplicationController
         @item.update_attributes Typus.user_fk => @current_user.id
       end
 
-      flash[:success] = _("{{model}} successfully updated.", :model => @resource[:human_name])
       path = if @resource[:class].typus_options_for(:index_after_save)
                params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
              else
                { :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id, :back_to => params[:back_to] }
              end
+
+      # Reload @current_user when updating to see flash message in the 
+      # correct locale.
+      if @resource[:class].eql?(Typus.user_class)
+        I18n.locale = @current_user.reload.preferences[:locale]
+      end
+
+      flash[:success] = _("{{model}} successfully updated.", :model => @resource[:human_name])
       redirect_to path
 
     else
