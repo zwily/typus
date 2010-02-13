@@ -3,7 +3,6 @@
 # System wide options
 
 Typus::Configuration.options[:app_name] = '<%= options[:app_name] %>'
-# Typus::Configuration.options[:default_locale] = :en
 # Typus::Configuration.options[:email] = 'admin@example.com'
 # Typus::Configuration.options[:file_preview] = :typus_preview
 # Typus::Configuration.options[:file_thumbnail] = :typus_thumbnail

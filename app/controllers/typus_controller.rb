@@ -23,10 +23,13 @@ class TypusController < ApplicationController
   before_filter :verify_typus_users_table_schema
 
   before_filter :reload_config_et_roles
+
   before_filter :require_login, 
                 :except => [ :sign_up, :sign_in, :sign_out, 
                              :recover_password, :reset_password, 
                              :quick_edit ]
+
+  before_filter :set_typus_preferences, :only => [ :dashboard ]
 
   before_filter :check_if_user_can_perform_action_on_resource_without_model, 
                 :except => [ :sign_up, :sign_in, :sign_out, 
@@ -38,13 +41,7 @@ class TypusController < ApplicationController
                 :only => [ :recover_password, :reset_password ]
 
   def dashboard
-    begin
-      I18n.locale = @current_user.preferences[:locale]
-      flash[:notice] = _("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
-    rescue
-      @current_user.update_attributes :preferences => { :locale => Typus::Configuration.options[:default_locale] }
-      retry
-    end
+    flash[:notice] = _("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
   end
 
   def sign_in
