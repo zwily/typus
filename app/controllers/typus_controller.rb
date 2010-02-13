@@ -126,17 +126,17 @@ class TypusController < ApplicationController
 
 private
 
-  # TODO: Try to move schema verification to Typus.boot!
   def verify_typus_users_table_schema
 
     attributes = Typus.user_class.model_fields.keys
 
-    generator = if !attributes.include?(:role) then "typus_update_schema_to_01"
-                elsif !attributes.include?(:preferences) then "typus_update_schema_to_02"
-                end
+    upgrades = ActiveSupport::OrderedHash.new
+    upgrades[:role] = "typus_update_schema_to_01"
+    upgrades[:preferences] = "typus_update_schema_to_02"
 
-    if generator
-      raise "Run `script/generate #{generator} -f && rake db:migrate` to update database schema."
+    upgrades.each do |key, value|
+      message = "Run `script/generate #{value} -f && rake db:migrate` to update database schema."
+      raise message if !attributes.include?(key)
     end
 
   end
