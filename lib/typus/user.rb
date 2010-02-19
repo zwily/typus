@@ -106,11 +106,16 @@ module Typus
 
       def language
         preferences[:locale]
+      rescue
+        I18n.default_locale.to_s
       end
 
       def language=(locale)
         options = { :locale => locale }
         self.preferences.merge!(options)
+      rescue
+        self.preferences = { }
+        retry
       end
 
       protected
