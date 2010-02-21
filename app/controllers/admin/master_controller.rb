@@ -86,7 +86,7 @@ class Admin::MasterController < ApplicationController
   #
   def create
 
-    @item = @resource[:class].new(params[@resource[:symbol]])
+    @item = @resource[:class].new(params[@object_name])
 
     if @resource[:class].typus_user_id?
       @item.attributes = { Typus.user_fk => @current_user.id }
@@ -140,7 +140,7 @@ class Admin::MasterController < ApplicationController
 
   def update
 
-    if @item.update_attributes(params[@resource[:symbol]])
+    if @item.update_attributes(params[@object_name])
 
       if @resource[:class].typus_user_id? && !@current_user.is_root?
         @item.update_attributes Typus.user_fk => @current_user.id
@@ -271,8 +271,8 @@ private
   def set_resource
     @resource = { :self => params[:controller].extract_resource, 
                   :human_name => params[:controller].extract_human_name, 
-                  :class => params[:controller].extract_class, 
-                  :symbol => params[:controller].extract_resource.singularize.to_sym }
+                  :class => params[:controller].extract_class }
+    @object_name = ActionController::RecordIdentifier.singular_class_name(@resource[:class])
   rescue Exception => error
     error_handler(error)
   end
@@ -389,7 +389,7 @@ private
       message = _("{{model}} successfully created.", :model => @resource[:human_name])
       path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
     when :polymorphic
-      resource.send(@item.class.name.tableize).create(params[@resource[:symbol]])
+      resource.send(@item.class.name.tableize).create(params[@object_name])
     end
 
     flash[:success] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
