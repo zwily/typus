@@ -86,7 +86,7 @@ module TypusHelper
 
   def login_info(user = @current_user)
 
-    admin_edit_typus_user_path = { :controller => "admin/#{Typus::Configuration.options[:user_class_name].tableize}", 
+    admin_edit_typus_user_path = { :controller => "/admin/#{Typus::Configuration.options[:user_class_name].tableize}", 
                                    :action => 'edit', 
                                    :id => user.id }
 

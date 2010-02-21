@@ -62,6 +62,28 @@ and migrate your database.
 To create the first user, start the application server, go to 
 http://0.0.0.0:3000/admin and follow the instructions.
 
+## Namespaced Models?
+
+If you want to be able to use `delayed_job` you need to add the following 
+two lines to your `config/routes.rb` file.
+
+    map.connect "admin/delayed/jobs/:action/:id", :controller => "admin/delayed/jobs"
+    map.connect "admin/delayed/jobs/:action/:id.:format", :controller => "admin/delayed/jobs"
+
+And then create and configure `config/typus/delayed_job.yml` and 
+`config/typus/delayed_job_roles.yml` as you do with your other models.
+
+    # config/typus/delayed_job.yml
+    Delayed::Job:
+      fields:
+        list: ...
+        form: ...
+      search: ...
+
+    # config/typus/delayed_job_roles.yml
+    admin:
+      Delayed::Job: all
+
 ## Support
 
 As an experiment we encourage you to support this project by 

@@ -98,6 +98,7 @@ module Typus
       require "extensions/object"
       require "extensions/string"
       require "extensions/active_record"
+      require "extensions/routes"
 
       # Load configuration and roles.
       Typus::Configuration.config!
