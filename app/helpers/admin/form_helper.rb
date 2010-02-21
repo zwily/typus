@@ -393,7 +393,12 @@ Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="ht
     file_preview_is_image = item.send("#{attachment}_content_type") =~ /^image\/.+/
 
     href = if has_file_preview
-             item.send(attachment).url(file_preview)
+             url = item.send(attachment).url(file_preview)
+             if ActionController::Base.relative_url_root
+               ActionController::Base.relative_url_root + url
+             else
+               url
+             end
            else
              item.send(attachment).url
            end
