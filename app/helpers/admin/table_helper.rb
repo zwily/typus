@@ -146,7 +146,7 @@ module Admin::TableHelper
     att_value = item.send(attribute)
     content = if !att_value.nil?
       if @current_user.can?(action, att_value.class.name)
-        link_to item.send(attribute).to_label, :controller => "admin/#{attribute.pluralize}", :action => action, :id => att_value.id
+        link_to item.send(attribute).to_label, :controller => "admin/#{att_value.class.name.tableize}", :action => action, :id => att_value.id
       else
         att_value.to_label
       end
