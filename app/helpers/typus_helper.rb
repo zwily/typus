@@ -76,7 +76,7 @@ module TypusHelper
       links << (link_to_unless_current model.constantize.typus_human_name.pluralize, :controller => "admin/#{model.tableize}")
     end
 
-    if ActionController::Routing::Routes.named_routes.routes.keys.include?(:root)
+    if ActionController::Routing::Routes.named_routes.routes.has_key?(:root)
       links << (link_to _("View site"), root_path, :target => 'blank')
     end
 

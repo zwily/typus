@@ -27,7 +27,7 @@ module Typus
 
       @current_user = Typus.user_class.find(session[:typus_user_id])
 
-      unless Typus::Configuration.roles.keys.include?(@current_user.role)
+      unless Typus::Configuration.roles.has_key?(@current_user.role)
         raise _("Role does no longer exists.")
       end
 
