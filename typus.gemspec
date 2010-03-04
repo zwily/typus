@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2010-02-13}
+  s.date = %q{2010-03-04}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -22,7 +22,6 @@ Gem::Specification.new do |s|
      "MIT-LICENSE",
      "README.md",
      "Rakefile",
-     "VERSION",
      "app/controllers/admin/master_controller.rb",
      "app/controllers/typus_controller.rb",
      "app/helpers/admin/form_helper.rb",
@@ -87,7 +86,7 @@ Gem::Specification.new do |s|
      "config/locales/pt-BR_models.yml",
      "config/locales/ru.yml",
      "config/locales/ru_models.yml",
-     "config/routes.rb",
+     "config/typus_routes.rb",
      "generators/typus/USAGE",
      "generators/typus/templates/README",
      "generators/typus/templates/config/typus/README",
@@ -131,9 +130,11 @@ Gem::Specification.new do |s|
      "generators/typus_update_schema_to_01/typus_update_schema_to_01_generator.rb",
      "generators/typus_update_schema_to_02/templates/migration.rb",
      "generators/typus_update_schema_to_02/typus_update_schema_to_02_generator.rb",
+     "init.rb",
      "lib/extensions/active_record.rb",
      "lib/extensions/hash.rb",
      "lib/extensions/object.rb",
+     "lib/extensions/routes.rb",
      "lib/extensions/string.rb",
      "lib/typus.rb",
      "lib/typus/active_record.rb",
@@ -144,8 +145,8 @@ Gem::Specification.new do |s|
      "lib/typus/quick_edit.rb",
      "lib/typus/reloader.rb",
      "lib/typus/user.rb",
+     "lib/typus/version.rb",
      "lib/vendor/paginator.rb",
-     "rails/init.rb",
      "tasks/defaults.rake",
      "tasks/extras.rake",
      "test/config/broken/application.yml",
@@ -242,7 +243,7 @@ Gem::Specification.new do |s|
   s.homepage = %q{http://intraducibles.com/projects/typus}
   s.rdoc_options = ["--charset=UTF-8"]
   s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.5}
+  s.rubygems_version = %q{1.3.6}
   s.summary = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.test_files = [
     "test/extensions/active_record_test.rb",
