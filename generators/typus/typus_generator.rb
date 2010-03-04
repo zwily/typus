@@ -14,7 +14,7 @@ class TypusGenerator < Rails::Generator::Base
     record do |m|
 
       # Define variables.
-      timestamp = Time.now.utc.strftime("%Y%m%d%H%M%S")
+      timestamp = Time.now.utc.to_s(:number)
 
       # Create required folders.
       %w( app/controllers/admin 
