@@ -50,7 +50,7 @@ class ActiveRecord::Base
     [ :typus_name, :name ].each do |attribute|
       return send(attribute).to_s if respond_to?(attribute)
     end
-    return "#{self.class}##{id}"
+    return [ self.class, id ].join("#")
   end
 
 end
