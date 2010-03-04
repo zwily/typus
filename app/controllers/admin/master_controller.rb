@@ -180,7 +180,8 @@ class Admin::MasterController < ApplicationController
   end
 
   def toggle
-    @item.toggle!(params[:field])
+    @item.toggle(params[:field])
+    @item.save!
     flash[:success] = _("{{model}} {{attribute}} changed.", 
                         :model => @resource[:human_name], 
                         :attribute => params[:field].humanize.downcase)
