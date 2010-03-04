@@ -225,8 +225,9 @@ module Typus
 
       # If a search is performed.
       if query_params[:search]
+        query = ActiveRecord::Base.connection.quote_string(query_params[:search].downcase)
         search = typus_defaults_for(:search).map do |s|
-                   ["LOWER(#{s}) LIKE '%#{ActiveRecord::Base.connection.quote_string(query_params[:search].downcase)}%'"]
+                   ["LOWER(#{s}) LIKE '%#{query}%'"]
                  end
         conditions = merge_conditions(conditions, search.join(' OR '))
       end
