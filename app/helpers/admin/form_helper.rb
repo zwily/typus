@@ -149,7 +149,7 @@ module Admin::FormHelper
                        :resource_id => @item.id, 
                        foreign_key => @item.id }
 
-      condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
+      condition = if @resource[:class].typus_user_id? && @current_user.is_not_root?
                     @item.owned_by?(@current_user)
                   else
                     true
@@ -184,7 +184,7 @@ module Admin::FormHelper
         HTML
       end
 
-      conditions = if model_to_relate.typus_options_for(:only_user_items) && !@current_user.is_root?
+      conditions = if model_to_relate.typus_options_for(:only_user_items) && @current_user.is_not_root?
                     { Typus.user_fk => @current_user }
                   end
 
@@ -231,7 +231,7 @@ module Admin::FormHelper
       reflection = @resource[:class].reflect_on_association(field.to_sym)
       association = reflection.macro
 
-      condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
+      condition = if @resource[:class].typus_user_id? && @current_user.is_not_root?
                     @item.owned_by?(@current_user)
                   else
                     true
@@ -267,7 +267,7 @@ module Admin::FormHelper
 
       end
 
-      conditions = if model_to_relate.typus_options_for(:only_user_items) && !@current_user.is_root?
+      conditions = if model_to_relate.typus_options_for(:only_user_items) && @current_user.is_not_root?
                     { Typus.user_fk => @current_user }
                   end
 

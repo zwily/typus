@@ -135,7 +135,7 @@ this_is_chelm@example.com
   def test_should_return_verify_is_root
     assert @typus_user.is_root?
     editor = typus_users(:editor)
-    assert !editor.is_root?
+    assert editor.is_not_root?
   end
 
   def test_should_verify_authenticated

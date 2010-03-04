@@ -104,6 +104,10 @@ module Typus
         role == Typus::Configuration.options[:root]
       end
 
+      def is_not_root?
+        !is_root?
+      end
+
       def language
         preferences[:locale]
       rescue

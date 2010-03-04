@@ -35,7 +35,7 @@ module Admin::SidebarHelper
 
     case params[:action]
     when 'show'
-      condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
+      condition = if @resource[:class].typus_user_id? && @current_user.is_not_root?
                     @item.owned_by?(@current_user)
                   else
                     @current_user.can?('update', @resource[:class])
@@ -71,7 +71,7 @@ module Admin::SidebarHelper
     items = []
 
     if @next
-      action = if klass.typus_user_id? && !@current_user.is_root?
+      action = if klass.typus_user_id? && @current_user.is_not_root?
                  @next.owned_by?(@current_user) ? 'edit' : 'show'
                else
                  @current_user.cannot?('edit', klass) ? 'show' : params[:action]
@@ -79,7 +79,7 @@ module Admin::SidebarHelper
       items << (link_to _("Next"), params.merge(:action => action, :id => @next.id))
     end
     if @previous
-      action = if klass.typus_user_id? && !@current_user.is_root?
+      action = if klass.typus_user_id? && @current_user.is_not_root?
                  @previous.owned_by?(@current_user) ? 'edit' : 'show'
                else
                  @current_user.cannot?('edit', klass) ? 'show' : params[:action]

@@ -142,7 +142,7 @@ class Admin::MasterController < ApplicationController
 
     if @item.update_attributes(params[@object_name])
 
-      if @resource[:class].typus_user_id? && !@current_user.is_root?
+      if @resource[:class].typus_user_id? && @current_user.is_not_root?
         @item.update_attributes Typus.user_fk => @current_user.id
       end
 

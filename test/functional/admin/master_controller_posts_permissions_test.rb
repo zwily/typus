@@ -5,7 +5,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def setup_for_no_root
     @typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = @typus_user.id
-    assert !@typus_user.is_root?
+    assert @typus_user.is_not_root?
   end
 
   ##

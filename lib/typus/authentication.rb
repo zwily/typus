@@ -53,7 +53,7 @@ module Typus
                 when 'edit'
 
                   # Only admin and owner of Typus User can edit.
-                  if !@current_user.is_root? && !current_user
+                  if @current_user.is_not_root? && !current_user
                     _("As you're not the admin or the owner of this record you cannot edit it.")
                   end
 
@@ -69,7 +69,7 @@ module Typus
                   # Only admin can toggle typus user status, but not herself.
                   if @current_user.is_root? && current_user
                     _("You can't toggle your status.")
-                  elsif !@current_user.is_root?
+                  elsif @current_user.is_not_root?
                     _("You're not allowed to toggle status.")
                   end
 
@@ -78,7 +78,7 @@ module Typus
                   # Admin can remove anything except herself.
                   if @current_user.is_root? && current_user
                     _("You can't remove yourself.")
-                  elsif !@current_user.is_root?
+                  elsif @current_user.is_not_root?
                     _("You're not allowed to remove Typus Users.")
                   end
 
