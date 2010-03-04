@@ -2,6 +2,8 @@ require 'rubygems'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
+require File.expand_path('../lib/typus/version', __FILE__)
+
 $LOAD_PATH.unshift 'lib'
 require 'typus'
 
@@ -47,7 +49,7 @@ begin
     gemspec.email = "francesc@intraducibles.com"
     gemspec.homepage = "http://intraducibles.com/projects/typus"
     gemspec.authors = ["Francesc Esplugas"]
-    gemspec.version = Typus.version
+    gemspec.version = Typus::VERSION::STRING
   end
 rescue LoadError
   puts "Jeweler not available."
@@ -59,12 +61,9 @@ task :package => [ :write_version, :gemspec, :build ]
 
 desc "Push a new version to Gemcutter"
 task :publish => [ :package ] do
-  system "git tag v#{Typus.version}"
-  system "git push origin v#{Typus.version}"
-  system "gem push pkg/typus-#{Typus.version}.gem"
+  version = Typus::VERSION::STRING
+  system "git tag v#{version}"
+  system "git push origin v#{version}"
+  system "gem push pkg/typus-#{version}.gem"
   system "git clean -fd"
-end
-
-task :write_version do
-  File.open('VERSION', 'w') { |f| f.write(Typus.version) }
 end
