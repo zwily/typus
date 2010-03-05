@@ -95,7 +95,8 @@ class Admin::MasterController < ApplicationController
     if @item.valid?
       create_with_back_to and return if params[:back_to]
       @item.save
-      flash[:success] = _("{{model}} successfully created.", :model => @resource[:human_name])
+      flash[:success] = _("{{model}} successfully created.", 
+                          :model => @resource[:human_name])
       if @resource[:class].typus_options_for(:index_after_save)
         redirect_to :action => 'index'
       else
@@ -157,7 +158,8 @@ class Admin::MasterController < ApplicationController
         @resource[:human_name] = params[:controller].extract_human_name
       end
 
-      flash[:success] = _("{{model}} successfully updated.", :model => @resource[:human_name])
+      flash[:success] = _("{{model}} successfully updated.", 
+                          :model => @resource[:human_name])
       redirect_to path
 
     else
@@ -171,7 +173,8 @@ class Admin::MasterController < ApplicationController
 
   def destroy
     @item.destroy
-    flash[:success] = _("{{model}} successfully removed.", :model => @resource[:human_name])
+    flash[:success] = _("{{model}} successfully removed.", 
+                        :model => @resource[:human_name])
     redirect_to request.referer || admin_dashboard_path
   rescue Exception => error
     error_handler(error, params.merge(:action => 'index', :id => nil))
@@ -197,7 +200,8 @@ class Admin::MasterController < ApplicationController
   #
   def position
     @item.send(params[:go])
-    flash[:success] = _("Record moved {{to}}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
+    flash[:success] = _("Record moved {{to}}.", 
+                        :to => params[:go].gsub(/move_/, '').humanize.downcase)
     redirect_to request.referer || admin_dashboard_path
   end
 
@@ -252,9 +256,11 @@ class Admin::MasterController < ApplicationController
     attachment = @resource[:class].human_attribute_name(params[:attachment])
 
     if @item.update_attributes(params[:attachment] => nil)
-      flash[:success] = _("{{attachment}} removed.", :attachment => attachment)
+      flash[:success] = _("{{attachment}} removed.", 
+                          :attachment => attachment)
     else
-      flash[:notice] = _("{{attachment}} can't be removed.", :attachment => attachment)
+      flash[:notice] = _("{{attachment}} can't be removed.", 
+                         :attachment => attachment)
     end
 
     redirect_to :back
@@ -380,15 +386,16 @@ private
       @item.send(params[:resource]) << resource
     when :has_many
       @item.save
-      message = _("{{model}} successfully created.", :model => @resource[:human_name])
+      message = _("{{model}} successfully created.", 
+                  :model => @resource[:human_name])
       path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
     when :polymorphic
       resource.send(@item.class.name.tableize).create(params[@object_name])
     end
 
     flash[:success] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
-                                 :model_a => @item.class.typus_human_name, 
-                                 :model_b => resource_class.typus_human_name)
+                                   :model_a => @item.class.typus_human_name, 
+                                   :model_b => resource_class.typus_human_name)
     redirect_to path || params[:back_to]
 
   end
