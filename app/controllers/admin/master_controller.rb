@@ -163,6 +163,7 @@ class Admin::MasterController < ApplicationController
     else
 
       @previous, @next = @item.previous_and_next
+      render :action => 'edit'
 
     end
 
