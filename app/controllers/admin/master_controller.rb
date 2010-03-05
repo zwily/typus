@@ -4,6 +4,8 @@ class Admin::MasterController < ApplicationController
 
   unloadable
 
+  inherit_views 'admin/resources'
+
   layout 'admin'
 
   include Typus::Authentication
@@ -75,8 +77,6 @@ class Admin::MasterController < ApplicationController
 
     @item = @resource[:class].new(item_params.symbolize_keys)
 
-    select_template :new
-
   end
 
   ##
@@ -102,7 +102,7 @@ class Admin::MasterController < ApplicationController
         redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id
       end
     else
-      select_template :new
+      render :action => 'new'
     end
 
   end
@@ -118,8 +118,6 @@ class Admin::MasterController < ApplicationController
     item_params.merge!(set_conditions)
     @previous, @next = @item.previous_and_next(item_params)
 
-    select_template :edit
-
   end
 
   def show
@@ -129,7 +127,7 @@ class Admin::MasterController < ApplicationController
     @previous, @next = @item.previous_and_next(set_conditions)
 
     respond_to do |format|
-      format.html { select_template :show }
+      format.html
       format.xml do
         fields = @resource[:class].typus_fields_for(:xml).collect { |i| i.first }
         render :xml => @item.to_xml(:only => fields)
@@ -165,7 +163,6 @@ class Admin::MasterController < ApplicationController
     else
 
       @previous, @next = @item.previous_and_next
-      select_template :edit
 
     end
 
@@ -355,11 +352,6 @@ private
                 !@resource[:class].typus_options_for(:only_user_items) || 
                 !@resource[:class].columns.map(&:name).include?(Typus.user_fk)
     !condition ? { Typus.user_fk => @current_user.id } : {}
-  end
-
-  def select_template(template, resource = @resource[:self])
-    folder = (File.exist?("app/views/admin/#{resource}/#{template}.html.erb")) ? resource : 'resources'
-    render "admin/#{folder}/#{template}"
   end
 
   ##

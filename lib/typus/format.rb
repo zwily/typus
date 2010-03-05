@@ -15,8 +15,6 @@ module Typus
 
       @items = @pager.page(params[:page])
 
-      select_template :index
-
     end
 
     # TODO: Find in batches only works properly if it's used on

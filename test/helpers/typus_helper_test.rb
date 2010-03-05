@@ -141,10 +141,4 @@ class TypusHelperTest < ActiveSupport::TestCase
     assert output.nil?
   end
 
-  def test_form_partial
-    @resource = { :self => 'categories' }
-    expected = 'admin/resources/form'
-    assert_equal expected, form_partial
-  end
-
 end

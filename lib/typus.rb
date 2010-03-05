@@ -113,6 +113,7 @@ module Typus
 
       # Vendor.
       require "vendor/paginator"
+      require "vendor/inherit_views"
 
     end
 
