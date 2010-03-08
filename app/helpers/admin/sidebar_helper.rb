@@ -78,6 +78,7 @@ module Admin::SidebarHelper
                end
       items << (link_to _("Next"), params.merge(:action => action, :id => @next.id))
     end
+
     if @previous
       action = if klass.typus_user_id? && @current_user.is_not_root?
                  @previous.owned_by?(@current_user) ? 'edit' : 'show'
