@@ -46,6 +46,7 @@ Gem::Specification.new do |s|
      "app/views/admin/helpers/_remove_filter_link.html.erb",
      "app/views/admin/helpers/_resources.html.erb",
      "app/views/admin/helpers/_search.html.erb",
+     "app/views/admin/helpers/_table_header.html.erb",
      "app/views/admin/resources/_form.html.erb",
      "app/views/admin/resources/edit.html.erb",
      "app/views/admin/resources/index.html.erb",
