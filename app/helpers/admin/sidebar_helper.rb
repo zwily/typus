@@ -62,6 +62,7 @@ module Admin::SidebarHelper
     formats = @resource[:class].typus_export_formats.map do |format|
                 link_to _(format.upcase), params.merge(:format => format)
               end
+
     build_typus_list(formats, :header => 'export')
 
   end
@@ -232,6 +233,7 @@ function surfto_#{model_pluralized}(form) {
               end
               link_to _(value), params.merge(options), :class => switch
             end
+
     build_typus_list(items, :attribute => filter)
 
   end
@@ -251,6 +253,7 @@ function surfto_#{model_pluralized}(form) {
               end
               link_to link_name.capitalize, params.merge(options), :class => switch
             end
+
     build_typus_list(items, :attribute => filter)
 
   end
