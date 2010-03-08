@@ -121,7 +121,8 @@ module Admin::SidebarHelper
         when :string then html << string_filter(current_request, key)
         when :date, :datetime then html << date_filter(current_request, key)
         when :belongs_to then html << relationship_filter(current_request, key)
-        when :has_and_belongs_to_many then html << relationship_filter(current_request, key, true)
+        when :has_many || :has_and_belongs_to_many then
+          html << relationship_filter(current_request, key, true)
         when nil then
           # Do nothing. This is ugly but for now it's ok.
         else
