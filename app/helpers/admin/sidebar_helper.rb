@@ -2,6 +2,8 @@ module Admin::SidebarHelper
 
   def build_typus_list(items, *args)
 
+    return String.new if items.empty?
+
     options = args.extract_options!
 
     header = if options[:header]
@@ -9,8 +11,6 @@ module Admin::SidebarHelper
              elsif options[:attribute]
                @resource[:class].human_attribute_name(options[:attribute])
              end
-
-    return String.new if items.empty?
 
     render "admin/helpers/list", 
            :header => header, 
