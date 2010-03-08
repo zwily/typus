@@ -83,7 +83,7 @@ class TypusGenerator < Rails::Generator::Base
 
         order_by = "position" if list.include?("position")
         filters = "created_at" if model_columns.include?("created_at")
-        search = "name" if list.include?("name")
+        search = ( [ "name", "title" ] & list ).join(", ")
 
         # We want attributes of belongs_to relationships to be shown in our 
         # field collections if those are not polymorphic.
