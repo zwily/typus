@@ -1,3 +1,5 @@
+require File.expand_path(File.dirname(__FILE__) + "/lib/insert_commands.rb")
+
 class String
 
   def name; self; end
@@ -215,6 +217,12 @@ class TypusGenerator < Rails::Generator::Base
       unless options[:user_class_name] == 'TypusUser'
         m.template "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
       end
+
+      ##
+      # Typus Route
+      #
+
+      m.insert_into "config/routes.rb", "Typus::Routes.draw(map)"
 
       ##
       # Migration file

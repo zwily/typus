@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2010-03-05}
+  s.date = %q{2010-03-08}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -86,7 +86,6 @@ Gem::Specification.new do |s|
      "config/locales/pt-BR_models.yml",
      "config/locales/ru.yml",
      "config/locales/ru_models.yml",
-     "config/typus_routes.rb",
      "doc/README.markdown",
      "doc/configuration.markdown",
      "doc/contribute.markdown",
@@ -141,7 +140,6 @@ Gem::Specification.new do |s|
      "lib/extensions/active_record.rb",
      "lib/extensions/hash.rb",
      "lib/extensions/object.rb",
-     "lib/extensions/routes.rb",
      "lib/extensions/string.rb",
      "lib/typus.rb",
      "lib/typus/active_record.rb",
