@@ -57,7 +57,7 @@ rescue LoadError
 end
 
 desc "Generate package."
-task :package => [ :write_version, :gemspec, :build ]
+task :package => [ :gemspec, :build ]
 
 desc "Push a new version to Gemcutter"
 task :publish => [ :package ] do
