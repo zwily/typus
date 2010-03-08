@@ -216,13 +216,21 @@ class Admin::MasterController < ApplicationController
 
     @item.send(resource_tableized) << resource_class.find(params[:related][:id])
 
-    flash[:success] = _("{{model_a}} related to {{model_b}}.", 
+    if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
+      flash[:success] = _("{{model_a}} related to {{model_b}}.", 
                         :model_a => resource_class.typus_human_name, 
                         :model_b => @resource[:human_name])
+    else
+      # TODO: Show the reason why cannot be related showing model_a and model_b errors.
+      flash[:error] = _("{{model_a}} cannot be related to {{model_b}}.", 
+                        :model_a => resource_class.typus_human_name, 
+                        :model_b => @resource[:human_name])
+    end
 
     redirect_to :back
 
   end
+
 
   ##
   # Remove relationship between models, this action never removes items!
@@ -237,15 +245,22 @@ class Admin::MasterController < ApplicationController
        reflect_on_association(resource_class.table_name.singularize.to_sym).
        try(:macro) == :has_one
       attribute = resource_tableized.singularize
-      @item.update_attribute attribute, nil
+      saved_succesfully = @item.update_attribute attribute, nil
     else
       attribute = resource_tableized
-      @item.send(attribute).delete(resource)
+      saved_succesfully = @item.send(attribute).delete(resource)
     end
 
-    flash[:success] = _("{{model_a}} unrelated from {{model_b}}.", 
+    if saved_succesfully
+      flash[:success] = _("{{model_a}} unrelated from {{model_b}}.", 
+                          :model_a => resource_class.typus_human_name, 
+                          :model_b => @resource[:human_name])
+    else
+      # TODO: Show the reason why cannot be unrelated showing model_a and model_b errors.
+      flash[:error] = _("{{model_a}} cannot be unrelated to {{model_b}}.", 
                         :model_a => resource_class.typus_human_name, 
                         :model_b => @resource[:human_name])
+    end
 
     redirect_to :back
 
