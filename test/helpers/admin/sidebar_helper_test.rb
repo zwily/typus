@@ -159,8 +159,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = search
 
     partial = "admin/helpers/search"
-    options = { :hidden_params => [ %Q[<input id="controller" name="controller" type="hidden" value="admin/typus_users" />], 
-                                    %Q[<input id="action" name="action" type="hidden" value="index" />] ], 
+    options = { :hidden_params => [ %Q[<input id="action" name="action" type="hidden" value="index" />], 
+                                    %Q[<input id="controller" name="controller" type="hidden" value="admin/typus_users" />] ], 
                 :search_by => "First name, Last name, Email, and Role" }
 
     assert_equal [ partial, options ], output
@@ -217,7 +217,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = date_filter(request, filter)
 
     partial = "admin/helpers/list"
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users?created_at=today" class="on">Today</a>], 
+    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users" class="on">Today</a>], 
                             %Q[<a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a>], 
                             %Q[<a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a>], 
                             %Q[<a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a>] ], 
@@ -242,7 +242,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = boolean_filter(request, filter)
 
     partial = "admin/helpers/list"
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users?status=true" class="on">Active</a>], 
+    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users" class="on">Active</a>], 
                             %Q[<a href="http://test.host/admin/typus_users?status=false" class="off">Inactive</a>] ], 
                 :header => "Status", 
                 :options => { :attribute => "status" } }
@@ -256,7 +256,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
     partial = "admin/helpers/list"
     options = { :items => [ %Q[<a href="http://test.host/admin/typus_users?status=true" class="off">Active</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users?status=false" class="on">Inactive</a>] ], 
+                            %Q[<a href="http://test.host/admin/typus_users" class="on">Inactive</a>] ], 
                 :header => "Status", 
                 :options => { :attribute => "status" } }
 
