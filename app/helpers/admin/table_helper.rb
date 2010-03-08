@@ -105,37 +105,34 @@ module Admin::TableHelper
 
   end
 
-  # OPTIMIZE: Move html code to partial.
   def typus_table_header(model, fields)
-    returning(String.new) do |html|
-      headers = []
-      fields.each do |key, value|
 
-        content = key.end_with?('_id') ? key : model.human_attribute_name(key)
+    headers = fields.map do |key, value|
 
-        if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
-          sort_order = case params[:sort_order]
-                       when 'asc'   then ['desc', '&darr;']
-                       when 'desc'  then ['asc', '&uarr;']
-                       else
-                         [nil, nil]
-                       end
-          order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
-          switch = sort_order.last if params[:order_by].eql?(order_by)
-          options = { :order_by => order_by, :sort_order => sort_order.first }
-          content = link_to "#{content} #{switch}", params.merge(options)
-        end
+                content = key.end_with?('_id') ? key : model.human_attribute_name(key)
 
-        headers << "<th>#{content}</th>"
+                if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
+                  sort_order = case params[:sort_order]
+                               when 'asc'   then ['desc', '&darr;']
+                               when 'desc'  then ['asc', '&uarr;']
+                               else
+                                 [nil, nil]
+                               end
+                  order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
+                  switch = sort_order.last if params[:order_by].eql?(order_by)
+                  options = { :order_by => order_by, :sort_order => sort_order.first }
+                  content = link_to "#{content} #{switch}", params.merge(options)
+                end
 
-      end
-      headers << "<th>&nbsp;</th>" if @current_user.can?('delete', model)
-      html << <<-HTML
-<tr>
-#{headers.join("\n")}
-</tr>
-      HTML
-    end
+                content
+
+              end
+
+    headers << "&nbsp;" if @current_user.can?('delete', model)
+
+    render "admin/helpers/table_header", 
+           :headers => headers
+
   end
 
   # OPTIMIZE: Refactor (Remove rescue)
