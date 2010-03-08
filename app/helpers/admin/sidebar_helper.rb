@@ -160,7 +160,7 @@ module Admin::SidebarHelper
         related_items.each do |item|
           switch = 'selected' if request.include?("#{related_fk}=#{item.id}")
           items << <<-HTML
-<option #{switch} value="#{url_for params.merge(related_fk => item.id, :page => nil)}">#{truncate(item.to_label, :length => 50)}</option>
+<option #{switch} value="#{url_for params.merge(related_fk => item.id, :page => nil)}">#{truncate(item.to_label, :length => 25)}</option>
           HTML
         end
         model_pluralized = model.name.downcase.pluralize
