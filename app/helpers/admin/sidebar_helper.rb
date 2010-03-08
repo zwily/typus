@@ -27,7 +27,7 @@ module Admin::SidebarHelper
     case params[:action]
     when 'index', 'edit', 'show', 'update'
       if @current_user.can?('create', @resource[:class])
-        items << (link_to _("Add entry"), {:action => 'new'}, :class => 'new')
+        items << (link_to _("Add entry"), { :action => 'new' }, :class => 'new')
       end
     end
 
