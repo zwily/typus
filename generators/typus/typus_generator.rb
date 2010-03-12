@@ -4,7 +4,8 @@ require File.expand_path(File.dirname(__FILE__) + "/lib/string")
 class TypusGenerator < Rails::Generator::Base
 
   default_options :app_name => Rails.root.basename, 
-                  :user_class_name => "TypusUser"
+                  :user_class_name => "TypusUser",
+                  :user_fk => "typus_user_id"
 
   def manifest
 
@@ -247,6 +248,9 @@ class TypusGenerator < Rails::Generator::Base
 
     opt.on("-a", "--app_name=ApplicationName", String,
            "Set an application name. Default is `#{options[:app_name]}`.") { |v| options[:app_name] = v }
+
+    opt.on("-k", "--user_fk=UserFK", String,
+           "Configure Typus User foreign key field. Default is `#{options[:user_fk]}`.") { |v| options[:user_fk] = v }
 
   end
 
