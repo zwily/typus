@@ -214,8 +214,6 @@ class Admin::MasterController < ApplicationController
     resource_class = params[:related][:model].constantize
     resource_tableized = params[:related][:model].tableize
 
-    @item.send(resource_tableized) << resource_class.find(params[:related][:id])
-
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
       flash[:success] = _("{{model_a}} related to {{model_b}}.", 
                         :model_a => resource_class.typus_human_name, 
