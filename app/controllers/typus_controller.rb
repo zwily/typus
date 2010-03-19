@@ -13,9 +13,7 @@ class TypusController < ApplicationController
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
-    ssl_required :sign_in, :sign_out, 
-                 :dashboard, 
-                 :recover_password, :reset_password
+    ssl_required :all
   end
 
   filter_parameter_logging :password

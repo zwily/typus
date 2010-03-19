@@ -15,7 +15,7 @@ class Admin::MasterController < ApplicationController
 
   if Typus::Configuration.options[:ssl]
     include SslRequirement
-    ssl_required :index, :new, :create, :edit, :show, :update, :destroy, :toggle, :position, :relate, :unrelate
+    ssl_required :all
   end
 
   filter_parameter_logging :password
