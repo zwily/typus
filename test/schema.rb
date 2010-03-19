@@ -44,6 +44,17 @@ ActiveRecord::Schema.define do
     t.datetime :published_at
     t.integer :typus_user_id
   end
+  
+  create_table :pictures, :force => true do |t|
+    t.string :title
+    t.string :picture_file_name
+    t.string :picture_content_type
+    t.integer :picture_file_size
+    t.datetime :picture_updated_at
+    t.datetime :created_at
+    t.datetime :updated_at
+    t.integer :typus_user_id
+  end
 
   create_table :typus_users, :force => true do |t|
     t.string :first_name, :default => "", :null => false

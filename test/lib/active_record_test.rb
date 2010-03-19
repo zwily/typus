@@ -89,6 +89,15 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
   end
 
+  def test_should_return_typus_fields_for_form_for_picture
+    expected_fields = [["title", :string], 
+                       ["picture", :file]]
+    assert_equal expected_fields.map { |i| i.first }, Picture.typus_fields_for("form").keys
+    assert_equal expected_fields.map { |i| i.last }, Picture.typus_fields_for("form").values
+    assert_equal expected_fields.map { |i| i.first }, Picture.typus_fields_for(:form).keys
+    assert_equal expected_fields.map { |i| i.last }, Picture.typus_fields_for(:form).values
+  end
+
   def test_should_return_typus_fields_for_a_model_without_configuration
     expected_fields = []
     klass = Class.new(ActiveRecord::Base)
