@@ -248,13 +248,13 @@ class TypusGenerator < Rails::Generator::Base
     opt.separator "Options:"
 
     opt.on("-u", "--typus_user=Class", String,
-           "Configure Typus User class name. Default is `#{options[:user_class_name]}`.") { |v| options[:user_class_name] = v }
+           "Configure Typus User class name. Default is `#{default_options[:user_class_name]}`.") { |v| options[:user_class_name] = v }
 
     opt.on("-a", "--app_name=ApplicationName", String,
-           "Set an application name. Default is `#{options[:app_name]}`.") { |v| options[:app_name] = v }
+           "Set an application name. Default is `#{default_options[:app_name]}`.") { |v| options[:app_name] = v }
 
     opt.on("-k", "--user_fk=UserFK", String,
-           "Configure Typus User foreign key field. Default is `#{options[:user_fk]}`.") { |v| options[:user_fk] = v }
+           "Configure Typus User foreign key field. Default is `#{default_options[:user_fk]}`.") { |v| options[:user_fk] = v }
 
   end
 
