@@ -7,7 +7,6 @@ class TypusMailer < ActionMailer::Base
     body        :user => user, :url => url
     recipients  user.email
     from        Typus::Configuration.options[:email]
-    sent_on     Time.now
   end
 
 end
