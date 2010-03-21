@@ -20,7 +20,7 @@ class Admin::MasterController < ApplicationController
 
   filter_parameter_logging :password
 
-  before_filter :reload_config_et_roles
+  before_filter :reload_config_and_roles
 
   before_filter :require_login
 
