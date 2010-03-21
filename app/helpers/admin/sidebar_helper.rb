@@ -205,11 +205,11 @@ function surfto_#{model_pluralized}(form) {
     if !@resource[:class].typus_field_options_for(:filter_by_date_range).include?(filter.to_sym)
       items = %w( today last_few_days last_7_days last_30_days ).map do |timeline|
                 switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
+                options = { :page => nil }
                 if switch == 'on'
-                  options = { :page => nil }
                   params.delete(filter)
                 else
-                  options = { filter.to_sym => timeline, :page => nil }
+                  options.merge!(filter.to_sym => timeline)
                 end
                 link_to _(timeline.humanize), params.merge(options), :class => switch
               end
@@ -230,11 +230,11 @@ function surfto_#{model_pluralized}(form) {
 
     items = @resource[:class].typus_boolean(filter).map do |key, value|
               switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
+              options = { :page => nil }
               if switch == 'on'
-                options = { :page => nil }
                 params.delete(filter)
               else
-                options = { filter.to_sym => key, :page => nil }
+                options.merge!(filter.to_sym => key)
               end
               link_to _(value), params.merge(options), :class => switch
             end
@@ -250,11 +250,11 @@ function surfto_#{model_pluralized}(form) {
     items = values.map do |item|
               link_name, link_filter = (values.first.kind_of?(Array)) ? [ item.first, item.last ] : [ item, item ]
               switch = (params[filter.to_s] == link_filter) ? 'on' : 'off'
+              options = { :page => nil }
               if switch == 'on'
-                options = { :page => nil }
                 params.delete(filter)
               else
-                options = { filter.to_sym => link_filter, :page => nil }
+                options.merge(filter.to_sym => link_filter)
               end
               link_to link_name.capitalize, params.merge(options), :class => switch
             end
