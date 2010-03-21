@@ -64,18 +64,14 @@ module Typus
 
     end
 
-    def generate_xml
-      fields = @resource[:class].typus_fields_for(:xml).collect { |i| i.first }
-      methods = fields - @resource[:class].column_names
-      except = @resource[:class].column_names - fields
-      render :xml => data.to_xml(:methods => methods, :except => except)
-    end
+    def generate_json; export(:json); end
+    def generate_xml; export(:xml); end
 
-    def generate_json
-      fields = @resource[:class].typus_fields_for(:json).collect { |i| i.first }
+    def export(format)
+      fields = @resource[:class].typus_fields_for(format).collect { |i| i.first }
       methods = fields - @resource[:class].column_names
       except = @resource[:class].column_names - fields
-      render :json => data.to_json(:methods => methods, :except => except)
+      render format => data.send("to_#{format}", :methods => methods, :except => except)
     end
 
     def data(*args)
