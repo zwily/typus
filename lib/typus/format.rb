@@ -22,7 +22,7 @@ module Typus
     #       We should find a way to be able to process data.
     def generate_csv
 
-      fields = @resource[:class].typus_fields_for(:csv).collect { |i| i.first }
+      fields = @resource[:class].typus_fields_for(:csv)
 
       require 'csv'
       if CSV.const_defined?(:Reader)
@@ -42,10 +42,20 @@ module Typus
       options = { :conditions => @conditions, :batch_size => 1000 }
 
       csv.open(filename, 'w', :col_sep => ';') do |csv|
-        csv << fields
+        csv << fields.keys
         @resource[:class].find_in_batches(options) do |records|
           records.each do |record|
-            csv << fields.map { |f| record.send(f) }
+            csv << fields.map do |key, value|
+                     case value
+                     when :transversal
+                       a, b = key.split(".")
+                       record.send(a).send(b)
+                     when :belongs_to
+                       record.send(key).to_label
+                     else
+                       record.send(key)
+                     end
+                   end
           end
         end
       end
