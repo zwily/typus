@@ -35,8 +35,10 @@ task :specs do
     end
   end
 
-  puts "\nFinished in #{Time.now - timer} seconds.\n"
-  puts "#{count} specifications documented"
+  puts <<-MSG
+\nFinished in #{Time.now - timer} seconds.
+#{count} specifications documented.
+  MSG
 
 end
 
