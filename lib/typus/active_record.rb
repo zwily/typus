@@ -75,6 +75,7 @@ module Typus
             when /file_name/            then attribute_type = :file
             when /password/             then attribute_type = :password
             when 'position'             then attribute_type = :position
+            when /\./                   then attribute_type = :transversal
           end
 
           # Set attribute type to file if accompanied by standard

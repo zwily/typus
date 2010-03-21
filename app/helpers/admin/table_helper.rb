@@ -28,6 +28,7 @@ module Admin::TableHelper
           when :tree then              html << typus_table_tree_field(key, item)
           when :position then          html << typus_table_position_field(key, item)
           when :selector then          html << typus_table_selector(key, item)
+          when :transversal then       html << typus_table_transversal(key, item)
           when :has_and_belongs_to_many then
             html << typus_table_has_and_belongs_to_many_field(key, item)
           else
@@ -109,6 +110,7 @@ module Admin::TableHelper
 
     headers = fields.map do |key, value|
 
+                key = key.gsub(".", " ") if key.match(/\./)
                 content = key.end_with?('_id') ? key : model.human_attribute_name(key)
 
                 if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
@@ -250,6 +252,11 @@ module Admin::TableHelper
 
     return content_tag(:td, content)
 
+  end
+
+  def typus_table_transversal(attribute, item)
+    _attribute, virtual = attribute.split(".")
+    return content_tag(:td, "#{item.send(_attribute).send(virtual)}")
   end
 
 end
