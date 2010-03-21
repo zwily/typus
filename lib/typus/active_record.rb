@@ -79,10 +79,10 @@ module Typus
 
           # Set attribute type to file if accompanied by standard
           # paperclip attachment fields with its name
-          paperclip_fields = ["#{field.to_s}_file_name".to_sym,
-                              "#{field.to_s}_content_type".to_sym,
-                              "#{field.to_s}_file_size".to_sym,
-                              "#{field.to_s}_updated_at".to_sym]
+          paperclip_fields = ["#{field}_file_name".to_sym,
+                              "#{field}_content_type".to_sym,
+                              "#{field}_file_size".to_sym,
+                              "#{field}_updated_at".to_sym]
 
           if (model_fields.keys & paperclip_fields).size == paperclip_fields.size
             attribute_type = :file
