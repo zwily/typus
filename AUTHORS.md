@@ -25,6 +25,11 @@ Special thanks to the following individuals:
 * [Gaston Kleiman] (http://github.com/gkleiman): Code
 * [Tompa Gábor] (http://github.com/tompagabor): Maygar translation.
 * [Lleïr Borràs Metje](http://github.com/lleirborras): Català translation & code.
+* [John Grimes](http://github.com/smallspark): Code
+
+You can get a list of the authors, with the number of commits running:
+
+    $ git shortlog -ns
 
 Somehow involved in the project
 
