@@ -132,6 +132,11 @@ class TypusGenerator < Rails::Generator::Base
       end
 
       # Initializer
+
+      if !options[:user_class_name].eql?("TypusUser")
+        options[:user_fk] = options[:user_class_name].foreign_key if options[:user_fk].eql?("typus_user_id")
+      end
+
       m.template "initializer.rb", "config/initializers/typus.rb"
 
       ##
