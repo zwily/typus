@@ -1,10 +1,8 @@
-class TypusController < ApplicationController
-
-  skip_filter filter_chain
+class TypusController < ActionController::Base
 
   unloadable
-
   layout :select_layout
+  filter_parameter_logging :password
 
   include Typus::Authentication
   include Typus::QuickEdit
@@ -15,8 +13,6 @@ class TypusController < ApplicationController
     include SslRequirement
     ssl_required :all
   end
-
-  filter_parameter_logging :password
 
   before_filter :verify_typus_users_table_schema
 

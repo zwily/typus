@@ -1,12 +1,9 @@
-class Admin::MasterController < ApplicationController
-
-  skip_filter filter_chain
+class Admin::MasterController < ActionController::Base
 
   unloadable
-
-  inherit_views 'admin/resources'
-
   layout 'admin'
+  inherit_views 'admin/resources'
+  filter_parameter_logging :password
 
   include Typus::Authentication
   include Typus::Format
@@ -17,8 +14,6 @@ class Admin::MasterController < ApplicationController
     include SslRequirement
     ssl_required :all
   end
-
-  filter_parameter_logging :password
 
   before_filter :reload_config_and_roles
 
