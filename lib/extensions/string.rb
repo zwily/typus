@@ -21,11 +21,19 @@ class String
   end
 
   def typus_actions_on(filter)
-    Typus::Configuration.config[self]['actions'][filter.to_s].extract_settings rescue []
+    if settings = Typus::Configuration.config[self]['actions'][filter.to_s]
+      settings.extract_settings
+    else
+      []
+    end
   end
 
   def typus_defaults_for(filter)
-    Typus::Configuration.config[self][filter.to_s].extract_settings rescue []
+    if settings = Typus::Configuration.config[self][filter.to_s]
+      settings.extract_settings
+    else
+      []
+    end
   end
 
 end
