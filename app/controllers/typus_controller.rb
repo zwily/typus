@@ -1,22 +1,10 @@
-class TypusController < ActionController::Base
+class TypusController < TypusDriverController
 
-  unloadable
   layout :select_layout
-  filter_parameter_logging :password
 
-  include Typus::Authentication
   include Typus::QuickEdit
-  include Typus::Preferences
-  include Typus::Reloader
-
-  if Typus::Configuration.options[:ssl]
-    include SslRequirement
-    ssl_required :all
-  end
 
   before_filter :verify_typus_users_table_schema
-
-  before_filter :reload_config_and_roles
 
   before_filter :require_login, 
                 :except => [ :sign_up, :sign_in, :sign_out, 

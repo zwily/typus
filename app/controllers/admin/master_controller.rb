@@ -1,21 +1,9 @@
-class Admin::MasterController < ActionController::Base
+class Admin::MasterController < TypusDriverController
 
-  unloadable
   layout 'admin'
   inherit_views 'admin/resources'
-  filter_parameter_logging :password
 
-  include Typus::Authentication
   include Typus::Format
-  include Typus::Preferences
-  include Typus::Reloader
-
-  if Typus::Configuration.options[:ssl]
-    include SslRequirement
-    ssl_required :all
-  end
-
-  before_filter :reload_config_and_roles
 
   before_filter :require_login
 
