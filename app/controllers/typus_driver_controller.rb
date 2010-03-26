@@ -14,5 +14,12 @@ class TypusDriverController < ActionController::Base
 
   before_filter :reload_config_and_roles
 
+  protected
+
+  def error_handler(error, path = admin_dashboard_path)
+    raise error unless Rails.env.production?
+    flash[:error] = "#{error.message} (#{@resource[:class]})"
+    redirect_to path
+  end
 
 end
