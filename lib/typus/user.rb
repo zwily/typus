@@ -92,7 +92,7 @@ module Typus
                     end
                   end
 
-        resources[resource].split(', ').include?(_action)
+        resources[resource].extract_settings.include?(_action)
 
       end
 

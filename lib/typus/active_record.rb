@@ -44,7 +44,7 @@ module Typus
 
       begin
         fields = Typus::Configuration.config[name]['fields'][filter.to_s]
-        fields = fields.split(', ').collect { |f| f.to_sym }
+        fields = fields.extract_settings.collect { |f| f.to_sym }
       rescue
         return [] if filter == 'list'
         filter = 'list'
@@ -96,7 +96,7 @@ module Typus
         end
 
       rescue
-        fields = Typus::Configuration.config[name]['fields']['list'].split(', ')
+        fields = Typus::Configuration.config[name]['fields']['list'].extract_settings
         retry
       end
 
@@ -111,7 +111,7 @@ module Typus
 
       data = Typus::Configuration.config[name]['filters']
       return [] unless data
-      fields = data.split(', ').collect { |i| i.to_sym }
+      fields = data.extract_settings.collect { |i| i.to_sym }
 
       fields.each do |field|
         attribute_type = model_fields[field.to_sym]
@@ -128,7 +128,7 @@ module Typus
     def typus_actions
       return [] if Typus::Configuration.config[name]['actions'].nil?
       Typus::Configuration.config[name]['actions'].keys.map do |key|
-        Typus::Configuration.config[name]['actions'][key].split(', ')
+        Typus::Configuration.config[name]['actions'][key].extract_settings
       end.flatten
     rescue
       []
@@ -136,7 +136,7 @@ module Typus
 
     # Extended actions for this model on Typus.
     def typus_actions_on(filter)
-      Typus::Configuration.config[name]['actions'][filter.to_s].split(', ')
+      Typus::Configuration.config[name]['actions'][filter.to_s].extract_settings
     rescue
       []
     end
@@ -144,11 +144,11 @@ module Typus
     # Used for +search+, +relationships+
     def typus_defaults_for(filter)
       data = Typus::Configuration.config[name][filter.to_s]
-      return (!data.nil?) ? data.split(', ') : []
+      return (!data.nil?) ? data.extract_settings : []
     end
 
     def typus_field_options_for(filter)
-      Typus::Configuration.config[name]['fields']['options'][filter.to_s].split(', ').collect { |i| i.to_sym }
+      Typus::Configuration.config[name]['fields']['options'][filter.to_s].extract_settings.collect { |i| i.to_sym }
     rescue
       []
     end
@@ -167,7 +167,7 @@ module Typus
 
     def typus_export_formats
       data = Typus::Configuration.config[name]
-      !data['export'].nil? ? data['export'].split(', ') : []
+      !data['export'].nil? ? data['export'].extract_settings : []
     end
 
     # Used for `order_by`.
@@ -198,7 +198,7 @@ module Typus
 
       hash = ActiveSupport::OrderedHash.new
 
-      mapping = boolean.kind_of?(Array) ? boolean : boolean.split(', ')
+      mapping = boolean.kind_of?(Array) ? boolean : boolean.extract_settings
       hash[:true], hash[:false] = mapping.first, mapping.last
       hash.map { |k, v| hash[k] = v.humanize }
 

@@ -1,5 +1,9 @@
 class String
 
+  def extract_settings
+    gsub(/ /, '').split(',')
+  end
+
   def extract_controller(admin = 'admin')
     split('/').delete_if { |i| i.eql?(admin) }
   end
@@ -17,11 +21,11 @@ class String
   end
 
   def typus_actions_on(filter)
-    Typus::Configuration.config[self]['actions'][filter.to_s].split(', ') rescue []
+    Typus::Configuration.config[self]['actions'][filter.to_s].extract_settings rescue []
   end
 
   def typus_defaults_for(filter)
-    Typus::Configuration.config[self][filter.to_s].split(', ') rescue []
+    Typus::Configuration.config[self][filter.to_s].extract_settings rescue []
   end
 
 end
