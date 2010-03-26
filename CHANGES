@@ -66,3 +66,5 @@
 [ ] Forever loop when schema has not been migrated.
 [ ] Pagination doesn't work properly when having multiple paginators on edit page
 [ ] Add support for 'has_one' relationships.
+[ ] Remove all crappy rescues.
+[ ] Remove the order_by setting as we will use `default_scope`.
