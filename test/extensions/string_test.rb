@@ -2,6 +2,11 @@ require 'test/helper'
 
 class StringTest < ActiveSupport::TestCase
 
+  def test_extract_settings
+    assert_equal ['a', 'b', 'c'], "a, b, c".extract_settings
+    assert_equal ['a', 'b', 'c'], " a  , b,  c ".extract_settings
+  end
+
   def test_extract_controller
 
     assert_equal ['posts'], 'admin/posts'.extract_controller
