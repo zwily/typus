@@ -1,7 +1,5 @@
 class TypusController < TypusDriverController
 
-  layout :select_layout
-
   include Typus::QuickEdit
 
   before_filter :verify_typus_users_table_schema
@@ -124,11 +122,6 @@ private
 
   def recover_password_disabled?
     redirect_to admin_sign_in_path unless Typus::Configuration.options[:email]
-  end
-
-  def select_layout
-    %w( sign_up sign_in sign_out 
-        recover_password reset_password ).include?(action_name) ? "typus" : "admin"
   end
 
 end

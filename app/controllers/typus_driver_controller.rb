@@ -1,5 +1,7 @@
 class TypusDriverController < ActionController::Base
 
+  layout :select_layout
+
   unloadable
   filter_parameter_logging :password
 
@@ -20,6 +22,11 @@ class TypusDriverController < ActionController::Base
     raise error unless Rails.env.production?
     flash[:error] = "#{error.message} (#{@resource[:class]})"
     redirect_to path
+  end
+
+  def select_layout
+    %w( sign_up sign_in sign_out 
+        recover_password reset_password ).include?(action_name) ? "login" : "admin"
   end
 
 end

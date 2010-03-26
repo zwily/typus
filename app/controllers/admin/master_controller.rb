@@ -1,6 +1,5 @@
 class Admin::MasterController < TypusDriverController
 
-  layout 'admin'
   inherit_views 'admin/resources'
 
   include Typus::Format
