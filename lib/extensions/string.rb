@@ -20,6 +20,7 @@ class String
     extract_class.typus_human_name.gsub('/', ' ')
   end
 
+  # OPTIMIZE
   def typus_actions_on(filter)
     if settings = Typus::Configuration.config[self]['actions'][filter.to_s]
       settings.extract_settings
@@ -30,6 +31,7 @@ class String
     []
   end
 
+  # OPTIMIZE
   def typus_defaults_for(filter)
     if settings = Typus::Configuration.config[self][filter.to_s]
       settings.extract_settings
