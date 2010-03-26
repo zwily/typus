@@ -9,6 +9,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
 
+  def render(*args); args; end
+
   def setup
     default_url_options[:host] = 'test.host'
   end
@@ -51,14 +53,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     self.expects(:params).at_least_once.returns(params)
 
     output = typus_table_header(TypusUser, fields)
-    expected = <<-HTML
-<tr>
-<th><a href="http://test.host/admin/typus_users?order_by=email">Email </a></th>
-<th><a href="http://test.host/admin/typus_users?order_by=role">Role </a></th>
-<th><a href="http://test.host/admin/typus_users?order_by=status">Status </a></th>
-<th>&nbsp;</th>
-</tr>
-    HTML
+    expected = [ "admin/helpers/table_header",
+                 { :headers=> [ %Q[<a href="http://test.host/admin/typus_users?order_by=email">Email </a>],
+                                %Q[<a href="http://test.host/admin/typus_users?order_by=role">Role </a>],
+                                %Q[<a href="http://test.host/admin/typus_users?order_by=status\">Status </a>], 
+                                "&nbsp;"] } ]
 
     assert_equal expected, output
 
@@ -75,14 +74,12 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     self.expects(:params).at_least_once.returns(params)
 
     output = typus_table_header(TypusUser, fields)
-    expected = <<-HTML
-<tr>
-<th><a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email </a></th>
-<th><a href="http://test.host/admin/typus_users?order_by=role&search=admin">Role </a></th>
-<th><a href="http://test.host/admin/typus_users?order_by=status&search=admin">Status </a></th>
-<th>&nbsp;</th>
-</tr>
-    HTML
+
+    expected = [ "admin/helpers/table_header",
+                 { :headers => [ %Q[<a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email </a>],
+                                 %Q[<a href="http://test.host/admin/typus_users?order_by=role&search=admin">Role </a>],
+                                 %Q[<a href="http://test.host/admin/typus_users?order_by=status&search=admin">Status </a>],
+                                 %Q[&nbsp;] ] } ]
 
     assert_equal expected, output
 
@@ -99,13 +96,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     self.expects(:params).at_least_once.returns(params)
 
     output = typus_table_header(TypusUser, fields)
-    expected = <<-HTML
-<tr>
-<th><a href="http://test.host/admin/typus_users?order_by=email">Email </a></th>
-<th><a href="http://test.host/admin/typus_users?order_by=role">Role </a></th>
-<th><a href="http://test.host/admin/typus_users?order_by=status">Status </a></th>
-</tr>
-    HTML
+
+    expected = [ "admin/helpers/table_header",
+                 { :headers => [ %Q[<a href="http://test.host/admin/typus_users?order_by=email">Email </a>],
+                                 %Q[<a href="http://test.host/admin/typus_users?order_by=role">Role </a>],
+                                 %Q[<a href="http://test.host/admin/typus_users?order_by=status">Status </a>] ] } ]
 
     assert_equal expected, output
 
@@ -122,14 +117,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     self.expects(:params).at_least_once.returns(params)
 
     output = typus_table_header(TypusUser, fields)
-    expected = <<-HTML
-<tr>
-<th><a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email </a></th>
-<th><a href="http://test.host/admin/typus_users?order_by=role&search=admin">Role </a></th>
-<th><a href="http://test.host/admin/typus_users?order_by=status&search=admin">Status </a></th>
-</tr>
-    HTML
 
+    expected = [ "admin/helpers/table_header",
+                 { :headers => [ %Q[<a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email </a>],
+                                 %Q[<a href="http://test.host/admin/typus_users?order_by=role&search=admin">Role </a>],
+                                 %Q[<a href="http://test.host/admin/typus_users?order_by=status&search=admin">Status </a>] ] } ]
     assert_equal expected, output
 
   end

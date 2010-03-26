@@ -26,6 +26,8 @@ class String
     else
       []
     end
+  rescue
+    []
   end
 
   def typus_defaults_for(filter)
