@@ -9,20 +9,13 @@ class TypusController < TypusDriverController
                              :recover_password, :reset_password, 
                              :quick_edit ]
 
-  before_filter :set_typus_preferences, :only => [ :dashboard ]
-
   before_filter :check_if_user_can_perform_action_on_resource_without_model, 
                 :except => [ :sign_up, :sign_in, :sign_out, 
-                             :dashboard, 
                              :recover_password, :reset_password, 
                              :quick_edit ]
 
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
-
-  def dashboard
-    flash[:notice] = _("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
-  end
 
   def sign_in
 
