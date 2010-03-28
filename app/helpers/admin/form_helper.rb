@@ -383,6 +383,8 @@ Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="ht
   def typus_preview(item, attribute)
 
     # typus_preview(attribute).html_safe! unless @item.send(attribute).blank?
+    #
+    return unless item.attachment_present?(attribute)
 
     attachment = attribute.split("_file_name").first
     file_preview = Typus::Configuration.options[:file_preview]
