@@ -56,7 +56,15 @@ module Typus
     module InstanceMethods
 
       def name
-        (!first_name.empty? && !last_name.empty?) ? "#{first_name} #{last_name}" : email
+        if !first_name.blank? and !last_name.blank?
+          "#{first_name} #{last_name}"
+        elsif !first_name.blank? and last_name.blank?
+          first_name
+        elsif first_name.blank? and !last_name.blank?
+          last_name
+        else
+          email
+        end
       end
 
      def authenticated?(password)
