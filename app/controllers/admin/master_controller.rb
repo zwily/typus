@@ -1,7 +1,7 @@
 class Admin::MasterController < AdminController
 
   layout 'admin'
-  inherit_views 'admin/resources'
+  inherit_views 'admin/models'
 
   include Typus::Format
 
