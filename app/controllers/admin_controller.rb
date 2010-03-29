@@ -1,7 +1,5 @@
 class AdminController < ActionController::Base
 
-  # layout :select_layout
-
   unloadable
   filter_parameter_logging :password
 
@@ -23,14 +21,5 @@ class AdminController < ActionController::Base
     flash[:error] = "#{error.message} (#{@resource[:class]})"
     redirect_to path
   end
-
-=begin
-
-  def select_layout
-    %w( sign_up sign_in sign_out 
-        recover_password reset_password ).include?(action_name) ? "login" : "admin"
-  end
-
-=end
 
 end
