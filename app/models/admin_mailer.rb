@@ -1,4 +1,4 @@
-class TypusMailer < ActionMailer::Base
+class AdminMailer < ActionMailer::Base
 
   self.template_root = "#{File.dirname(__FILE__)}/../views"
 
