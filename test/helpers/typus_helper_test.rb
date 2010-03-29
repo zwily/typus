@@ -41,11 +41,6 @@ class TypusHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_block_when_partial_does_not_exist
-    output = typus_block(:resource => 'posts', :location => 'sidebar', :partial => 'pum')
-    assert output.nil?
-  end
-
   def test_page_title
     params = {}
     options = { :app_name => 'whatistypus.com' }

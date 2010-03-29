@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <%= typus_block :location => @resource[:self], :partial => 'sidebar' %>
+  <%= render "sidebar" %>
   <%= actions %>
   <%= search %>
   <%= previous_and_next %>
@@ -10,7 +10,7 @@
 <h2><%= link_to @resource[:human_name].pluralize, :action => 'index' %> &rsaquo;
     <%= _("Edit") %></h2>
 
-<%= typus_block :location => @resource[:self], :partial => 'edit' %>
+<%= render :partial => "edit" %>
 
 <%
   options = { :action => 'update',

@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <%= typus_block :location => @resource[:self], :partial => 'sidebar' %>
+  <%= render "sidebar" %>
   <%= actions %>
   <%= export %>
   <%= search %>
@@ -8,7 +8,7 @@
 
 <h2><%= @resource[:human_name].pluralize %> <%= remove_filter_link %></h2>
 
-<%= typus_block :location => @resource[:self], :partial => 'index' %>
+<%= render "index" %>
 
 <% unless @items.count.zero? -%>
   <%= build_list(@resource[:class], @fields, @items) %>
