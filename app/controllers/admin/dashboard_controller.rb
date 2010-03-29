@@ -1,4 +1,6 @@
-class Admin::DashboardController < TypusDriverController
+class Admin::DashboardController < AdminController
+
+  layout 'admin'
 
   before_filter :require_login
   before_filter :set_typus_preferences

@@ -1,4 +1,6 @@
-class TypusController < TypusDriverController
+class Admin::AccountController < AdminController
+
+  layout 'account'
 
   include Typus::QuickEdit
 

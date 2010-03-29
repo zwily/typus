@@ -17,13 +17,13 @@ module Typus
     #   Typus::Routes.draw(map)
     def self.draw(map)
 
-      map.with_options :controller => 'typus', :path_prefix => 'admin' do |i|
-        i.admin_quick_edit 'quick_edit', :action => 'quick_edit'
-        i.admin_sign_in 'sign_in', :action => 'sign_in'
-        i.admin_sign_out 'sign_out', :action => 'sign_out'
-        i.admin_sign_up 'sign_up', :action => 'sign_up'
-        i.admin_recover_password 'recover_password', :action => 'recover_password'
-        i.admin_reset_password 'reset_password', :action => 'reset_password'
+      map.with_options :controller => 'admin/account' do |i|
+        # i.admin_quick_edit 'quick_edit', :action => 'quick_edit'
+        i.admin_sign_in 'admin/sign_in', :action => 'sign_in'
+        i.admin_sign_out 'admin/sign_out', :action => 'sign_out'
+        i.admin_sign_up 'admin/sign_up', :action => 'sign_up'
+        i.admin_recover_password 'admin/recover_password', :action => 'recover_password'
+        i.admin_reset_password 'admin/reset_password', :action => 'reset_password'
       end
 
       map.with_options :controller => 'admin/dashboard' do |i|

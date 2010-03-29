@@ -1,6 +1,6 @@
-class TypusDriverController < ActionController::Base
+class AdminController < ActionController::Base
 
-  layout :select_layout
+  # layout :select_layout
 
   unloadable
   filter_parameter_logging :password
@@ -24,9 +24,13 @@ class TypusDriverController < ActionController::Base
     redirect_to path
   end
 
+=begin
+
   def select_layout
     %w( sign_up sign_in sign_out 
         recover_password reset_password ).include?(action_name) ? "login" : "admin"
   end
+
+=end
 
 end

@@ -1,6 +1,4 @@
-module Admin
-
-  module PublicHelper
+module Admin::PublicHelper
 
     ##
     # Quick edit usage:

@@ -1,7 +1,5 @@
 module Admin::DashboardHelper
 
-  include TypusHelper
-
   def applications
 
     apps = ActiveSupport::OrderedHash.new

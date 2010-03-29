@@ -1,4 +1,4 @@
-module TypusHelper
+module AdminHelper
 
   def typus_block(*args)
 

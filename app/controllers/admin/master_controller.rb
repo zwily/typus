@@ -1,11 +1,11 @@
-class Admin::MasterController < TypusDriverController
+class Admin::MasterController < AdminController
 
+  layout 'admin'
   inherit_views 'admin/resources'
 
   include Typus::Format
 
   before_filter :require_login
-
   before_filter :set_typus_preferences
 
   before_filter :set_resource
