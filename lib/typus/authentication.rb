@@ -119,7 +119,7 @@ module Typus
     # It works on resources, which are not models, so its available on 
     # the typus_controller.
     def check_if_user_can_perform_action_on_resource_without_model
-      controller = params[:controller].split('/').last
+      controller = params[:controller].extract_resource
       action = params[:action]
       unless @current_user.can?(action, controller.camelize, { :special => true })
         flash[:notice] = _("{{current_user_role}} can't go to {{action}} on {{controller}}.", 
