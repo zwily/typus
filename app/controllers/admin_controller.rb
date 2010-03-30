@@ -13,6 +13,8 @@ class AdminController < ActionController::Base
   end
 
   before_filter :reload_config_and_roles
+  before_filter :require_login
+  before_filter :set_typus_preferences
 
   protected
 

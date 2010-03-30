@@ -201,7 +201,7 @@ class TypusGenerator < Rails::Generator::Base
 
       Typus.resources.each do |resource|
 
-        assigns = { :inherits_from => "TypusController", 
+        assigns = { :inherits_from => "Admin::ServiceController", 
                     :resource => resource }
 
         m.template "controller.rb", 

@@ -4,18 +4,10 @@ class Admin::AccountController < AdminController
 
   include Typus::QuickEdit
 
+  skip_filter filter_chain
+
   before_filter :verify_typus_users_table_schema
-
-  before_filter :require_login, 
-                :except => [ :sign_up, :sign_in, :sign_out, 
-                             :recover_password, :reset_password, 
-                             :quick_edit ]
-
-  before_filter :check_if_user_can_perform_action_on_resource_without_model, 
-                :except => [ :sign_up, :sign_in, :sign_out, 
-                             :recover_password, :reset_password, 
-                             :quick_edit ]
-
+  before_filter :require_login, :only => [ :quick_edit ]
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
 
