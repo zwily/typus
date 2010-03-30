@@ -116,9 +116,8 @@ module Typus
     end
 
     # This method checks if the user can perform the requested action.
-    # It works on resources, which are not models, so its available on 
-    # the typus_controller.
-    def check_if_user_can_perform_action_on_resource_without_model
+    # It works on services.
+    def check_if_user_can_perform_action_on_service
       controller = params[:controller].extract_resource
       action = params[:action]
       unless @current_user.can?(action, controller.camelize, { :special => true })
