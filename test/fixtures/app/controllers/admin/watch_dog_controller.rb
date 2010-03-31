@@ -1,4 +1,4 @@
-class Admin::WatchDogController < TypusController
+class Admin::WatchDogController < Admin::ServiceController
 
   def index
   end

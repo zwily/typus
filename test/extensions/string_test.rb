@@ -14,9 +14,9 @@ class StringTest < ActiveSupport::TestCase
   end
 
   def test_remove_prefix_with_params
-    assert_equal 'posts', 'typus/posts'.extract_controller('typus')
-    assert_equal 'typus_users', 'typus/typus_users'.extract_controller('typus')
-    assert_equal 'delayed/tasks', 'typus/delayed/tasks'.extract_controller('typus')
+    assert_equal 'posts', 'typus/posts'.remove_prefix('typus/')
+    assert_equal 'typus_users', 'typus/typus_users'.remove_prefix('typus/')
+    assert_equal 'delayed/tasks', 'typus/delayed/tasks'.remove_prefix('typus/')
   end
 
   def test_extract_resource

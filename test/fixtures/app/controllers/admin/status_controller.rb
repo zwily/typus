@@ -1,4 +1,4 @@
-class Admin::StatusController < TypusController
+class Admin::StatusController < Admin::ServiceController
 
   def index
   end
