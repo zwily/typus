@@ -40,8 +40,6 @@ class Admin::MasterController < AdminController
       end
     end
 
-  rescue Exception => error
-    error_handler(error)
   end
 
   def new
@@ -154,8 +152,6 @@ class Admin::MasterController < AdminController
     flash[:success] = _("{{model}} successfully removed.", 
                         :model => @resource[:human_name])
     redirect_to request.referer || admin_dashboard_path
-  rescue Exception => error
-    error_handler(error, params.merge(:action => 'index', :id => nil))
   end
 
   def toggle
@@ -269,8 +265,6 @@ private
                   :human_name => params[:controller].extract_human_name, 
                   :class => params[:controller].extract_class }
     @object_name = ActionController::RecordIdentifier.singular_class_name(@resource[:class])
-  rescue Exception => error
-    error_handler(error)
   end
 
   ##

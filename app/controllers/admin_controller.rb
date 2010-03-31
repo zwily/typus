@@ -7,6 +7,10 @@ class AdminController < ActionController::Base
   include Typus::Preferences
   include Typus::Reloader
 
+  unless ActionController::Base.consider_all_requests_local
+    rescue_from Exception, :with => :render_error
+  end
+
   if Typus::Configuration.options[:ssl]
     include SslRequirement
     ssl_required :all
@@ -22,10 +26,10 @@ class AdminController < ActionController::Base
 
   protected
 
-  def error_handler(error, path = admin_dashboard_path)
-    raise error unless Rails.env.production?
-    flash[:error] = "#{error.message} (#{@resource[:class]})"
-    redirect_to path
+  def render_error(exception)
+    log_error(exception)
+    flash[:error] = exception.message
+    redirect_to admin_path
   end
 
 end
