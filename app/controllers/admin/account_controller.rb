@@ -21,7 +21,7 @@ class Admin::AccountController < AdminController
         redirect_to params[:back_to] || admin_dashboard_path
       else
         flash[:error] = _("The email and/or password you entered is invalid.")
-        redirect_to admin_sign_in_path
+        redirect_to admin_sign_in_path(:back_to => params[:back_to])
       end
     end
 

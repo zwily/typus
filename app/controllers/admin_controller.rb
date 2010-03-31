@@ -16,6 +16,10 @@ class AdminController < ActionController::Base
   before_filter :require_login
   before_filter :set_typus_preferences
 
+  def index
+    redirect_to admin_dashboard_path
+  end
+
   protected
 
   def error_handler(error, path = admin_dashboard_path)
