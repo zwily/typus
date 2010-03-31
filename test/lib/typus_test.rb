@@ -3,7 +3,7 @@ require 'test/helper'
 class TypusTest < ActiveSupport::TestCase
 
   def test_should_return_path
-    expected = Dir.pwd + '/lib/../'
+    expected = Dir.pwd
     assert_equal expected, Typus.root
   end
 
