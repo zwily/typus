@@ -1,11 +1,9 @@
 <!-- Sidebar -->
 
-<% content_for :sidebar do %>
-  <%= render "admin/dashboard/sidebar" %>
-<% end %>
+<%= sidebar -%>
 
 <!-- Content -->
 
-<h2><%= params[:controller].split('/').last.titleize.capitalize %></h2>
+<h2><%= resource.titleize %></h2>
 
-<p>Find me in app/views/<%= params[:controller] %>/index.html.erb</p>
+<p>Find me in app/views/<%= resource.underscore %>/index.html.erb</p>

@@ -201,8 +201,15 @@ class TypusGenerator < Rails::Generator::Base
 
       Typus.resources.each do |resource|
 
+        sidebar = <<-HTML
+<% content_for :sidebar do %>
+  <%= render "admin/dashboard/sidebar" %>
+<% end %>
+        HTML
+
         assigns = { :inherits_from => "Admin::ServiceController", 
-                    :resource => resource }
+                    :resource => resource, 
+                    :sidebar => sidebar }
 
         m.template "controller.rb", 
                    "app/controllers/admin/#{resource.underscore}_controller.rb", 
@@ -214,7 +221,9 @@ class TypusGenerator < Rails::Generator::Base
 
         views_folder = "app/views/admin/#{resource.underscore}"
         m.directory views_folder
-        m.file "view.html.erb", "#{views_folder}/index.html.erb"
+        m.template "view.html.erb", 
+                   "#{views_folder}/index.html.erb", 
+                   :assigns => assigns
 
       end
 
