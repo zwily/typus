@@ -7,16 +7,16 @@ class StringTest < ActiveSupport::TestCase
     assert_equal ['a', 'b', 'c'], " a  , b,  c ".extract_settings
   end
 
-  def test_extract_controller
+  def test_remove_prefix
+    assert_equal 'posts', 'admin/posts'.remove_prefix
+    assert_equal 'typus_users', 'admin/typus_users'.remove_prefix
+    assert_equal 'delayed/jobs', 'admin/delayed/jobs'.remove_prefix
+  end
 
-    assert_equal ['posts'], 'admin/posts'.extract_controller
-    assert_equal ['typus_users'], 'admin/typus_users'.extract_controller
-    assert_equal ['delayed', 'jobs'], 'admin/delayed/jobs'.extract_controller
-
-    assert_equal ['posts'], 'typus/posts'.extract_controller('typus')
-    assert_equal ['typus_users'], 'typus/typus_users'.extract_controller('typus')
-    assert_equal ['delayed', 'tasks'], 'typus/delayed/tasks'.extract_controller('typus')
-
+  def test_remove_prefix_with_params
+    assert_equal 'posts', 'typus/posts'.extract_controller('typus')
+    assert_equal 'typus_users', 'typus/typus_users'.extract_controller('typus')
+    assert_equal 'delayed/tasks', 'typus/delayed/tasks'.extract_controller('typus')
   end
 
   def test_extract_resource

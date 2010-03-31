@@ -4,16 +4,16 @@ class String
     gsub(/ /, '').split(',')
   end
 
-  def extract_controller(admin = 'admin')
-    split('/').delete_if { |i| i.eql?(admin) }
+  def remove_prefix(prefix = 'admin/')
+    partition(prefix).last
   end
 
   def extract_resource
-    extract_controller.join('/')
+    remove_prefix
   end
 
   def extract_class
-    extract_controller.map { |i| i.capitalize }.join('::').classify.constantize
+    remove_prefix.camelize.classify.constantize
   end
 
   def extract_human_name
