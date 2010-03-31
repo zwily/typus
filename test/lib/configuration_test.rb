@@ -7,7 +7,7 @@ class ConfigurationTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_application_wide_configuration_options
-    initializer = "#{Rails.root}/config/initializers/typus.rb"
+    initializer = Rails.root.join("config", "initializers", "typus.rb")
     return if File.exist?(initializer)
     assert_equal "Typus", Typus::Configuration.options[:app_name]
     assert_equal "vendor/plugins/typus/test/config/working", Typus::Configuration.options[:config_folder]
@@ -23,7 +23,7 @@ class ConfigurationTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_model_configuration_options
-    initializer = "#{Rails.root}/config/initializers/typus.rb"
+    initializer = Rails.root.join("config", "initializers", "typus.rb")
     return if File.exist?(initializer)
     assert_equal "edit", Typus::Configuration.options[:default_action_on_item]
     assert_nil Typus::Configuration.options[:end_year]
@@ -65,7 +65,7 @@ class ConfigurationTest < ActiveSupport::TestCase
   def test_should_load_configuration_files_from_config_ordered
     options = { :config_folder => "vendor/plugins/typus/test/config/ordered" }
     Typus::Configuration.stubs(:options).returns(options)
-    files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
+    files = Dir[Rails.root.join(Typus::Configuration.options[:config_folder], "*_roles.yml")]
     expected = files.collect { |file| File.basename(file) }.sort
     assert_equal expected, ["001_roles.yml", "002_roles.yml"]
     expected = { "admin" => { "categories" => "read" } }
@@ -75,7 +75,7 @@ class ConfigurationTest < ActiveSupport::TestCase
   def test_should_load_configuration_files_from_config_unordered
     options = { :config_folder => "vendor/plugins/typus/test/config/unordered" }
     Typus::Configuration.stubs(:options).returns(options)
-    files = Dir["#{Rails.root}/#{Typus::Configuration.options[:config_folder]}/*_roles.yml"]
+    files = Dir[Rails.root.join(Typus::Configuration.options[:config_folder], "*_roles.yml")]
     expected = files.collect { |file| File.basename(file) }
     assert_equal expected, ["app_one_roles.yml", "app_two_roles.yml"]
     expected = { "admin" => { "categories" => "read, update" } }

@@ -47,7 +47,7 @@ module Typus
     # Gets a list of models under app/models
     def discover_models
       all_models = []
-      Dir.chdir(File.join(Rails.root, "app/models")) do
+      Dir.chdir(Rails.root.join("app/models")) do
         Dir["**/*.rb"].each do |m|
           class_name = m.sub(/\.rb$/,"").camelize
           klass = class_name.split("::").inject(Object){ |klass,part| klass.const_get(part) }
@@ -70,11 +70,15 @@ module Typus
     end
 
     def testing?
-      Rails.env.test? && Dir.pwd == "#{Rails.root}/vendor/plugins/typus"
+      Rails.env.test? && Dir.pwd == plugin_path
     end
 
     def plugin?
-      File.directory?("#{Rails.root}/vendor/plugins/typus")
+      File.directory?(plugin_path)
+    end
+
+    def plugin_path
+      Rails.root.join("vendor", "plugins", "typus")
     end
 
     def boot!
