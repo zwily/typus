@@ -1,8 +1,9 @@
 require 'test/helper'
 
-class TypusHelperTest < ActiveSupport::TestCase
+class AdminHelperTest < ActiveSupport::TestCase
 
-  include TypusHelper
+  include AdminHelper
+
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
   include ActionController::UrlWriter
