@@ -18,7 +18,7 @@ class AdminController < ActionController::Base
 
   before_filter :reload_config_and_roles
   before_filter :authenticate
-  before_filter :set_typus_preferences
+  before_filter :set_preferences
 
   def index
     redirect_to admin_dashboard_path
