@@ -7,7 +7,7 @@ module Typus
     # Require login checks if the user is logged on Typus, otherwise 
     # is sent to the sign in page with a :back_to param to return where 
     # she tried to go.
-    def require_login
+    def authenticate
 
       # Uncomment the following line for demo purpouses.
       # session[:typus_user_id] = Typus.user_class.find(:first)

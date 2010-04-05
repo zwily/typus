@@ -7,7 +7,7 @@ class Admin::AccountController < AdminController
   skip_filter filter_chain
 
   before_filter :verify_typus_users_table_schema
-  before_filter :require_login, :only => [ :quick_edit ]
+  before_filter :authenticate, :only => [ :quick_edit ]
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
 
