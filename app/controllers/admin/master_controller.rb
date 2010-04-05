@@ -254,10 +254,6 @@ class Admin::MasterController < AdminController
 
   end
 
-  def current_user
-    @current_user
-  end
-
 private
 
   def set_resource

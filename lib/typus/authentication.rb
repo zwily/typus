@@ -13,7 +13,7 @@ module Typus
       # session[:typus_user_id] = Typus.user_class.find(:first)
 
       if session[:typus_user_id]
-        set_current_user
+        current_user
       else
         back_to = request.env['REQUEST_URI'] unless [admin_dashboard_path, admin_path].include?(request.env['REQUEST_URI'])
         redirect_to admin_sign_in_path(:back_to => back_to)
@@ -23,7 +23,7 @@ module Typus
 
     # Return the current user. If role does not longer exist on the 
     # system @current_user will be signed out from Typus.
-    def set_current_user
+    def current_user
 
       @current_user = Typus.user_class.find(session[:typus_user_id])
 
