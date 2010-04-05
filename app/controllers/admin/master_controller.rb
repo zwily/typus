@@ -238,6 +238,9 @@ class Admin::MasterController < AdminController
 
   end
 
+  ##
+  # Remove file attachments.
+  #
   def detach
 
     attachment = @resource[:class].human_attribute_name(params[:attachment])
