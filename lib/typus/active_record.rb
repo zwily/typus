@@ -278,6 +278,7 @@ module Typus
             rescue
             end
           else
+            # TODO: Improve and test filters.
             interval = case value
                        when 'today'         then nil
                        when 'last_few_days' then 3.days.ago.to_date..Date.tomorrow
