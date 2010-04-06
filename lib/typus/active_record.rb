@@ -285,9 +285,9 @@ module Typus
                        when 'last_30_days'  then (Date.today << 1)..Date.tomorrow
                        end
             if interval
-              condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s, interval.last.to_s]
+              condition = ["#{key} BETWEEN ? AND ?", interval.first, interval.last]
             elsif value == 'today'
-              condition = ["#{key} = ?", Date.today.to_s]
+              condition = ["#{key} = ?", Date.today]
             end
             conditions = merge_conditions(conditions, condition)
           end
