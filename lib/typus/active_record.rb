@@ -259,7 +259,7 @@ module Typus
                      when 'last_7_days'   then 6.days.ago.midnight..Time.new.midnight.tomorrow
                      when 'last_30_days'  then Time.new.midnight.last_month..Time.new.midnight.tomorrow
                      end
-          condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
+          condition = ["#{key} BETWEEN ? AND ?", interval.first, interval.last]
           conditions = merge_conditions(conditions, condition)
         when :date
           if value.is_a?(Hash)
