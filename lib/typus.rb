@@ -44,17 +44,24 @@ module Typus
       end.flatten.sort.uniq.delete_if { |x| models.include?(x) }
     end
 
-    # Gets a list of models under app/models
-    def discover_models
-      all_models = []
-      Dir.chdir(Rails.root.join("app/models")) do
-        Dir["**/*.rb"].each do |m|
-          class_name = m.sub(/\.rb$/,"").camelize
-          klass = class_name.split("::").inject(Object){ |klass,part| klass.const_get(part) }
-          all_models << class_name if klass < ActiveRecord::Base && !klass.abstract_class?
-        end
+    def get_model_names
+      model_dir = Rails.root.join("app/models")
+      Dir.chdir(model_dir) do
+        models = Dir["**/*.rb"]
       end
+    end
+
+    # Gets a list of models under app/models
+    def application_models
+
+      all_models = get_model_names.map do |m|
+                     class_name = m.sub(/\.rb$/,'').camelize
+                     klass = class_name.split('::').inject(Object){ |klass,part| klass.const_get(part) }
+                     class_name if klass < ActiveRecord::Base && !klass.abstract_class?
+                   end.compact
+
       return all_models
+
     end
 
     def user_class

@@ -23,43 +23,22 @@ class TypusGenerator < Rails::Generator::Base
           public/stylesheets/admin 
           test/functional/admin ).each { |folder| m.directory folder }
 
+      ##
       # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> 
       # detect available AR models on the application.
-      models = (Typus.discover_models + Typus.models).uniq
-      ar_models = []
-
-      # OPTIMIZE: I'm sure this can be cleaner.
-
-      models.each do |model|
-        begin
-          klass = model.constantize
-          active_record_model = klass < ActiveRecord::Base && !klass.abstract_class?
-          ar_models << klass if active_record_model
-        rescue Exception => error
-          puts "=> [typus] #{error.message} on `#{model}`."
-          exit
-        end
-      end
 
       configuration = { :base => "", :roles => "" }
 
-      ar_models.sort{ |x,y| x.class_name <=> y.class_name }.each do |model|
+      Typus.application_models.sort { |x,y| x <=> y }.each do |model|
 
         next if Typus.models.include?(model.name)
 
+        klass = model.constantize
+
         # Detect all relationships except polymorphic belongs_to using reflection.
         relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many, :has_one ].map do |relationship|
-                          model.reflect_on_all_associations(relationship).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
+                          klass.reflect_on_all_associations(relationship).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
                         end.flatten.sort
-
-        # Remove foreign key and polymorphic type attributes
-        reject_columns = []
-        model.reflect_on_all_associations(:belongs_to).each do |i|
-          reject_columns << model.columns_hash[i.name.to_s + "_id"]
-          reject_columns << model.columns_hash[i.name.to_s + "_type"] if i.options[:polymorphic]
-        end
-
-        model_columns = model.columns - reject_columns
 
         ##
         # Model field defaults for:
@@ -67,6 +46,15 @@ class TypusGenerator < Rails::Generator::Base
         # - List
         # - Form
         #
+
+        reject_columns = []
+
+        klass.reflect_on_all_associations(:belongs_to).each do |i|
+          reject_columns << klass.columns_hash[i.name.to_s + "_id"]
+          reject_columns << klass.columns_hash[i.name.to_s + "_type"] if i.options[:polymorphic]
+        end
+
+        model_columns = klass.columns - reject_columns
 
         rejections = %w( id created_at created_on updated_at updated_on 
                          salt crypted_password 
@@ -93,12 +81,12 @@ class TypusGenerator < Rails::Generator::Base
         # We want attributes of belongs_to relationships to be shown in our 
         # field collections if those are not polymorphic.
         [ list, form ].each do |fields|
-          fields << model.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
+          fields << klass.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
           fields.flatten!
         end
 
         configuration[:base] << <<-RAW
-#{model}:
+#{klass}:
   fields:
     list: #{list.join(", ")}
     form: #{form.join(", ")}
@@ -111,7 +99,7 @@ class TypusGenerator < Rails::Generator::Base
         RAW
 
         configuration[:roles] << <<-RAW
-  #{model}: create, read, update, delete
+  #{klass}: create, read, update, delete
         RAW
 
       end
@@ -166,30 +154,31 @@ class TypusGenerator < Rails::Generator::Base
       #   `test/functional/admin/#{resource}_controller_test.rb`
       #
 
-      ar_models << options[:user_class_name]
-      ar_models.each do |model|
+      (Typus.application_models + [options[:user_class_name]]).each do |model|
 
-        folder = "admin/#{model.name.tableize}".split("/")[0...-1].join("/")
-        views_folder = "app/views/admin/#{model.name.tableize}"
+        klass = model.constantize
+
+        folder = "admin/#{klass.name.tableize}".split("/")[0...-1].join("/")
+        views_folder = "app/views/admin/#{klass.name.tableize}"
 
         [ "app/controllers/#{folder}", 
           "test/functional/#{folder}", 
           views_folder ].each { |f| m.directory f }
 
         assigns = { :inherits_from => "Admin::MasterController", 
-                    :resource => model.name.pluralize }
+                    :resource => klass.name.pluralize }
 
         m.template "controller.rb", 
-                   "app/controllers/admin/#{model.name.tableize}_controller.rb", 
+                   "app/controllers/admin/#{klass.name.tableize}_controller.rb", 
                    :assigns => assigns
 
         m.template "functional_test.rb", 
-                   "test/functional/admin/#{model.name.tableize}_controller_test.rb", 
+                   "test/functional/admin/#{klass.name.tableize}_controller_test.rb", 
                    :assigns => assigns
 
-        next if model.name == options[:user_class_name]
+        next if klass.name == options[:user_class_name]
 
-        model.typus_actions.each do |action|
+        klass.typus_actions.each do |action|
           m.file "view.html.erb", "#{views_folder}/#{action}.html.erb"
         end
 
