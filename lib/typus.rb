@@ -53,15 +53,11 @@ module Typus
 
     # Gets a list of models under app/models
     def application_models
-
-      all_models = get_model_names.map do |m|
-                     class_name = m.sub(/\.rb$/,'').camelize
-                     klass = class_name.split('::').inject(Object){ |klass,part| klass.const_get(part) }
-                     class_name if klass < ActiveRecord::Base && !klass.abstract_class?
-                   end.compact
-
-      return all_models
-
+      get_model_names.map do |model|
+        class_name = model.sub(/\.rb$/,'').camelize
+        klass = class_name.split('::').inject(Object) { |klass,part| klass.const_get(part) }
+        class_name if klass < ActiveRecord::Base && !klass.abstract_class?
+      end.compact
     end
 
     def user_class
