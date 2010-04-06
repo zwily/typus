@@ -105,6 +105,7 @@ class Admin::MasterController < AdminController
 
     respond_to do |format|
       format.html
+      # TODO: Responders for multiple file formats. For example PDF ...
       format.xml do
         fields = @resource[:class].typus_fields_for(:xml).collect { |i| i.first }
         render :xml => @item.to_xml(:only => fields)
