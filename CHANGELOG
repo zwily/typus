@@ -68,3 +68,5 @@
 [ ] Add support for 'has_one' relationships.
 [ ] Remove all crappy rescues.
 [ ] Remove the order_by setting as we will use `default_scope`.
+[ ] Method to get string namespace.
+[ ] Merge generator methods to create resource/service controllers.
