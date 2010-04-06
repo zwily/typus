@@ -179,7 +179,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
   def test_should_verify_sign_up_works
 
     TypusUser.destroy_all
-    assert TypusUser.find(:all).empty?
+    assert TypusUser.all.empty?
 
     get :sign_up
 

@@ -65,7 +65,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
       get :index
 
-      Post.find(:all).each do |post|
+      Post.all.each do |post|
         assert_match "/posts/#{action}/#{post.id}", @response.body
       end
 
@@ -80,7 +80,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     get :index
 
-    Post.find(:all).each do |post|
+    Post.all.each do |post|
       action = post.owned_by?(typus_user) ? 'edit' : 'show'
       assert_match "/posts/#{action}/#{post.id}", @response.body
     end
@@ -100,7 +100,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
       get :index
 
-      Post.find(:all).each do |post|
+      Post.all.each do |post|
         if post.owned_by?(typus_user)
           assert_match "/posts/#{action}/#{post.id}", @response.body
         else

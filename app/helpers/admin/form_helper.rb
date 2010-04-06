@@ -63,7 +63,7 @@ module Admin::FormHelper
                                              :attribute_virtual => related_fk, 
                                              :form => form)
       else
-        values = related.find(:all, :order => related.typus_order_by).collect { |p| [p.to_label, p.id] }
+        values = related.all(:order => related.typus_order_by).collect { |p| [p.to_label, p.id] }
         options = { :include_blank => true }
         html_options = { :disabled => attribute_disabled?(attribute) }
         label_text = @resource[:class].human_attribute_name(attribute)
@@ -174,7 +174,7 @@ module Admin::FormHelper
       # It's a has_many relationship, so items that are already assigned to another
       # entry are assigned to that entry.
       #
-      items_to_relate = model_to_relate.find(:all, :conditions => ["#{foreign_key} is ?", nil])
+      items_to_relate = model_to_relate.all(:conditions => ["#{foreign_key} is ?", nil])
       if condition && !items_to_relate.empty?
         html << <<-HTML
   #{form_tag :action => 'relate', :id => @item.id}
@@ -194,7 +194,7 @@ module Admin::FormHelper
 
       @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
         options.merge!({:limit => per_page, :offset => offset})
-        items = @resource[:class].find(params[:id]).send(field).find(:all, options)
+        items = @resource[:class].find(params[:id]).send(field).all(options)
       end
 
       @items = @pager.page(params[:page])
@@ -254,7 +254,7 @@ module Admin::FormHelper
 
       if model_to_relate.count < 500
 
-        items_to_relate = (model_to_relate.find(:all) - @item.send(field))
+        items_to_relate = (model_to_relate.all - @item.send(field))
 
         if condition && !items_to_relate.empty?
           html << <<-HTML
@@ -277,7 +277,7 @@ module Admin::FormHelper
 
       @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
         options.merge!({:limit => per_page, :offset => offset})
-        items = @resource[:class].find(params[:id]).send(field).find(:all, options)
+        items = @resource[:class].find(params[:id]).send(field).all(options)
       end
 
       @items = @pager.page(params[:page])

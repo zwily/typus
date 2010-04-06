@@ -41,7 +41,7 @@ class Admin::MasterHelperTest < ActiveSupport::TestCase
 
     model = TypusUser
     fields = [ 'email', 'role', 'status' ]
-    items = TypusUser.find(:all)
+    items = TypusUser.all
     resource = 'typus_users'
 
     self.stubs(:build_typus_table).returns('a_list_with_items')
@@ -57,7 +57,7 @@ class Admin::MasterHelperTest < ActiveSupport::TestCase
 
     model = TypusUser
     fields = [ 'email', 'role', 'status' ]
-    items = TypusUser.find(:all)
+    items = TypusUser.all
     resource = 'typus_users'
 
     self.stubs(:render).returns('a_template')

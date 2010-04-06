@@ -21,13 +21,13 @@ class ActiveRecord::Base
   #                  "draft" => t("Draft") }
   #     end
   #
-  #     >> Post.find(:first).status
+  #     >> Post.first.status
   #     => "published"
-  #     >> Post.find(:first).mapping(:status)
+  #     >> Post.first.mapping(:status)
   #     => "Published"
   #     >> I18n.locale = :es
   #     => :es
-  #     >> Post.find(:first).mapping(:status)
+  #     >> Post.first.mapping(:status)
   #     => "Publicado"
   #
   def mapping(attribute)

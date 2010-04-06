@@ -155,7 +155,7 @@ module Admin::SidebarHelper
     items = []
 
     returning(String.new) do |html|
-      related_items = model.find(:all, :order => model.typus_order_by)
+      related_items = model.all(:order => model.typus_order_by)
       if related_items.size > model.typus_options_for(:sidebar_selector)
         related_items.each do |item|
           switch = 'selected' if request.include?("#{related_fk}=#{item.id}")

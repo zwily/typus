@@ -26,7 +26,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     self.expects(:params).at_least_once.returns(params)
 
     fields = TypusUser.typus_fields_for(:list)
-    items = TypusUser.find(:all)
+    items = TypusUser.all
 
     output = build_typus_table(TypusUser, fields, items)
     expected = <<-HTML

@@ -17,7 +17,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert @typus_user.is_root?
 
-    Post.find(:all).each do |post|
+    Post.all.each do |post|
       get :edit, { :id => post.id }
       assert_response :success
       assert_template 'edit'
@@ -29,7 +29,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     setup_for_no_root
 
-    Post.find(:all).each do |post|
+    Post.all.each do |post|
       get :show, { :id => post.id }
       assert_response :success
       assert_template 'show'

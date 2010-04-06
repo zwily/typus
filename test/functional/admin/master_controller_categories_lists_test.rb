@@ -10,7 +10,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     get :index
     assert_response :success
     assert_equal [ 1, 2, 3 ], assigns['items'].items.map(&:position)
-    assert_equal [ 2, 3, 1 ], Category.find(:all, :order => "id ASC").map(&:position)
+    assert_equal [ 2, 3, 1 ], Category.all(:order => "id ASC").map(&:position)
   end
 
   if defined?(ActiveRecord::Acts::List)

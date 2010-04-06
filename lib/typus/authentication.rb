@@ -10,7 +10,7 @@ module Typus
     def authenticate
 
       # Uncomment the following line for demo purpouses.
-      # session[:typus_user_id] = Typus.user_class.find(:first)
+      # session[:typus_user_id] = Typus.user_class.first
 
       if session[:typus_user_id]
         current_user
