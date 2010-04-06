@@ -41,7 +41,7 @@ module Typus
       @@config = {}
       files.each do |file|
         data = YAML.load_file(file)
-        @@config = @@config.merge(data) if data
+        @@config.merge!(data) if data
       end
 
       return @@config
@@ -63,7 +63,7 @@ module Typus
         data.each do |key, value|
           next unless value
           begin
-            @@roles[key] = @@roles[key].merge(value)
+            @@roles[key].merge!(value)
           rescue
             @@roles[key] = value
           end
