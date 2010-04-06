@@ -194,7 +194,7 @@ class TypusGenerator < Rails::Generator::Base
 
       Typus.resources.each do |resource|
 
-        namespace = resource.underscore.split("/")[0...-1].join("/")
+        namespace = resource.namespace
 
         sidebar = <<-HTML
 <% content_for :sidebar do %>
