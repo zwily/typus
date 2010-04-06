@@ -30,6 +30,7 @@ class ActiveRecord::Base
   #     >> Post.first.mapping(:status)
   #     => "Publicado"
   #
+  # TODO: Test AR#mapping method.
   def mapping(attribute)
     values = self.class::const_get(attribute.to_s.upcase)
     values.kind_of?(Hash) ? values[send(attribute)] : send(attribute)
