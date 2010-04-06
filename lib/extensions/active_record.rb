@@ -31,7 +31,7 @@ class ActiveRecord::Base
   #     => "Publicado"
   #
   def mapping(attribute)
-    values = self.class::const_get("#{attribute.to_s.upcase}")
+    values = self.class::const_get(attribute.to_s.upcase)
     values.kind_of?(Hash) ? values[send(attribute)] : send(attribute)
   end
 
