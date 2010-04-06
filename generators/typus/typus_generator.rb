@@ -9,19 +9,23 @@ class TypusGenerator < Rails::Generator::Base
 
   def manifest
 
+    controllers_path = "app/controllers/admin"
+    tests_path = "test/functional/admin"
+    views_path = "app/views/admin"
+
     record do |m|
 
       # Define variables.
       timestamp = Time.now.utc.to_s(:number)
 
       # Create required folders.
-      %w( app/controllers/admin 
-          app/views/admin 
-          config/typus 
-          public/images/admin/fancybox 
-          public/javascripts/admin 
-          public/stylesheets/admin 
-          test/functional/admin ).each { |folder| m.directory folder }
+      [ controllers_path, 
+        views_path, 
+        "config/typus", 
+        "public/images/admin/fancybox", 
+        "public/javascripts/admin", 
+        "public/stylesheets/admin", 
+        tests_path ].each { |folder| m.directory folder }
 
       ##
       # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> 
@@ -150,8 +154,8 @@ class TypusGenerator < Rails::Generator::Base
 
       ##
       # Generate:
-      #   `app/controllers/admin/#{resource}_controller.rb`
-      #   `test/functional/admin/#{resource}_controller_test.rb`
+      #   `#{controllers_path}/#{resource}_controller.rb`
+      #   `#{tests_path}/#{resource}_controller_test.rb`
       #
 
       (Typus.application_models + [options[:user_class_name]]).each do |model|
@@ -159,7 +163,7 @@ class TypusGenerator < Rails::Generator::Base
         klass = model.constantize
 
         folder = "admin/#{klass.name.tableize}".split("/")[0...-1].join("/")
-        views_folder = "app/views/admin/#{klass.name.tableize}"
+        views_folder = "#{views_path}/#{klass.name.tableize}"
 
         [ "app/controllers/#{folder}", 
           "test/functional/#{folder}", 
@@ -169,11 +173,11 @@ class TypusGenerator < Rails::Generator::Base
                     :resource => klass.name.pluralize }
 
         m.template "controller.rb", 
-                   "app/controllers/admin/#{klass.name.tableize}_controller.rb", 
+                   "#{controllers_path}/#{klass.name.tableize}_controller.rb", 
                    :assigns => assigns
 
         m.template "functional_test.rb", 
-                   "test/functional/admin/#{klass.name.tableize}_controller_test.rb", 
+                   "#{tests_path}/#{klass.name.tableize}_controller_test.rb", 
                    :assigns => assigns
 
         next if klass.name == options[:user_class_name]
@@ -201,14 +205,14 @@ class TypusGenerator < Rails::Generator::Base
                     :sidebar => sidebar }
 
         m.template "controller.rb", 
-                   "app/controllers/admin/#{resource.underscore}_controller.rb", 
+                   "#{controllers_path}/#{resource.underscore}_controller.rb", 
                    :assigns => assigns
 
         m.template "functional_test.rb", 
-                   "test/functional/admin/#{resource.underscore}_controller_test.rb", 
+                   "#{tests_path}/#{resource.underscore}_controller_test.rb", 
                    :assigns => assigns
 
-        views_folder = "app/views/admin/#{resource.underscore}"
+        views_folder = "#{views_path}/#{resource.underscore}"
         m.directory views_folder
         m.template "view.html.erb", 
                    "#{views_folder}/index.html.erb", 
