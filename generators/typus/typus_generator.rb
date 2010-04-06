@@ -194,6 +194,8 @@ class TypusGenerator < Rails::Generator::Base
 
       Typus.resources.each do |resource|
 
+        namespace = resource.underscore.split("/")[0...-1].join("/")
+
         sidebar = <<-HTML
 <% content_for :sidebar do %>
   <%= render "admin/dashboard/sidebar" %>
@@ -204,18 +206,19 @@ class TypusGenerator < Rails::Generator::Base
                     :resource => resource, 
                     :sidebar => sidebar }
 
+        m.directory "#{controllers_path}/#{namespace}"
         m.template "controller.rb", 
                    "#{controllers_path}/#{resource.underscore}_controller.rb", 
                    :assigns => assigns
 
+        m.directory "#{tests_path}/#{namespace}"
         m.template "functional_test.rb", 
                    "#{tests_path}/#{resource.underscore}_controller_test.rb", 
                    :assigns => assigns
 
-        views_folder = "#{views_path}/#{resource.underscore}"
-        m.directory views_folder
+        m.directory "#{views_path}/#{resource.underscore}"
         m.template "view.html.erb", 
-                   "#{views_folder}/index.html.erb", 
+                   "#{views_path}/#{resource.underscore}/index.html.erb", 
                    :assigns => assigns
 
       end
