@@ -28,7 +28,7 @@ module Typus
       Typus::Configuration.config.collect { |i| i.first if i.last["application"] == name }.compact.uniq.sort
     end
 
-    # Gets a list of all the models on the configuration file.
+    # Gets a list of all the models from the configuration file.
     def models
       Typus::Configuration.config.map { |i| i.first }.sort
     end
