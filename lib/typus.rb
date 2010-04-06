@@ -51,7 +51,7 @@ module Typus
         Dir["**/*.rb"].each do |m|
           class_name = m.sub(/\.rb$/,"").camelize
           klass = class_name.split("::").inject(Object){ |klass,part| klass.const_get(part) }
-          all_models << "#{class_name}" if klass < ActiveRecord::Base && !klass.abstract_class?
+          all_models << class_name if klass < ActiveRecord::Base && !klass.abstract_class?
         end
       end
       return all_models
