@@ -5,7 +5,7 @@ class String
   end
 
   def extract_settings
-    gsub(/ /, '').split(',')
+    split(",").map { |x| x.strip }
   end
 
   def remove_prefix(prefix = 'admin/')
