@@ -9,16 +9,21 @@ class TypusGenerator < Rails::Generator::Base
 
   def manifest
 
+    ##
+    # Define variables.
+    #
+
+    timestamp = Time.now.utc.to_s(:number)
     controllers_path = "app/controllers/admin"
     tests_path = "test/functional/admin"
     views_path = "app/views/admin"
 
     record do |m|
 
-      # Define variables.
-      timestamp = Time.now.utc.to_s(:number)
-
+      ##
       # Create required folders.
+      #
+
       [ controllers_path, 
         views_path, 
         "config/typus", 
@@ -30,6 +35,7 @@ class TypusGenerator < Rails::Generator::Base
       ##
       # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> 
       # detect available AR models on the application.
+      #
 
       configuration = { :base => "", :roles => "" }
 
@@ -123,7 +129,9 @@ class TypusGenerator < Rails::Generator::Base
         m.template from, to, :assigns => { :configuration => configuration }
       end
 
+      ##
       # Initializer
+      #
 
       if !options[:user_class_name].eql?("TypusUser")
         options[:user_fk] = options[:user_class_name].foreign_key if options[:user_fk].eql?("typus_user_id")
@@ -132,7 +140,7 @@ class TypusGenerator < Rails::Generator::Base
       m.template "initializer.rb", "config/initializers/typus.rb"
 
       ##
-      # Assets
+      # Assets: images, javascripts & stylesheets
       #
 
       %w( public/images/admin/ui-icons.png ).each { |f| m.file f, f }
@@ -156,40 +164,41 @@ class TypusGenerator < Rails::Generator::Base
       # Generate:
       #   `#{controllers_path}/#{resource}_controller.rb`
       #   `#{tests_path}/#{resource}_controller_test.rb`
+      #   `#{views_path}/#{resource}/<action>.html.erb`
       #
 
       (Typus.application_models + [options[:user_class_name]]).each do |model|
 
         klass = model.constantize
-
-        folder = "admin/#{klass.name.tableize}".split("/")[0...-1].join("/")
-        views_folder = "#{views_path}/#{klass.name.tableize}"
-
-        [ "app/controllers/#{folder}", 
-          "test/functional/#{folder}", 
-          views_folder ].each { |f| m.directory f }
+        namespace = model.namespace
 
         assigns = { :inherits_from => "Admin::MasterController", 
                     :resource => klass.name.pluralize }
 
+        m.directory "#{controllers_path}/#{namespace}"
         m.template "controller.rb", 
                    "#{controllers_path}/#{klass.name.tableize}_controller.rb", 
                    :assigns => assigns
 
+        m.directory "#{tests_path}/#{namespace}"
         m.template "functional_test.rb", 
                    "#{tests_path}/#{klass.name.tableize}_controller_test.rb", 
                    :assigns => assigns
 
         next if klass.name == options[:user_class_name]
 
+        m.directory "#{views_path}/#{klass.name.tableize}"
         klass.typus_actions.each do |action|
-          m.file "view.html.erb", "#{views_folder}/#{action}.html.erb"
+          m.file "view.html.erb", "#{views_path}/#{klass.name.tableize}/#{action}.html.erb"
         end
 
       end
 
       ##
-      # Generate controllers for tableless models.
+      # Generate files for tableless models:
+      #   `#{controllers_path}/#{resource}_controller.rb`
+      #   `#{tests_path}/#{resource}_controller_test.rb`
+      #   `#{views_path}/#{resource}/<action>.html.erb`
       #
 
       Typus.resources.each do |resource|
@@ -223,7 +232,10 @@ class TypusGenerator < Rails::Generator::Base
 
       end
 
+      ##
       # Generate the model file if it's custom.
+      #
+
       unless options[:user_class_name] == 'TypusUser'
         m.template "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
       end
