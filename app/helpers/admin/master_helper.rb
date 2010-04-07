@@ -1,8 +1,8 @@
 module Admin::MasterHelper
 
-  include FormHelper
-  include SidebarHelper
-  include TableHelper
+  include Admin::FormHelper
+  include Admin::SidebarHelper
+  include Admin::TableHelper
 
   def display_link_to_previous
 
