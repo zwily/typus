@@ -53,28 +53,26 @@ class TypusGenerator < Rails::Generator::Base
         # - Form
         #
 
-        reject_columns = []
-
-        klass.reflect_on_all_associations(:belongs_to).each do |i|
-          reject_columns << klass.columns_hash[i.name.to_s + "_id"]
-          reject_columns << klass.columns_hash[i.name.to_s + "_type"] if i.options[:polymorphic]
-        end
-
-        model_columns = klass.columns - reject_columns
-
-        rejections = %w( id created_at created_on updated_at updated_on 
+        rejections = %w( ^id$ 
+                         created_at created_on updated_at updated_on 
                          salt crypted_password 
-                         password_salt persistence_token single_access_token perishable_token )
+                         password_salt persistence_token single_access_token perishable_token 
+                         _type$ )
 
         list_rejections = rejections + %w( password password_confirmation )
         form_rejections = rejections + %w( position )
 
-        list = model_columns.reject { |c| c.sql_type == "text" || list_rejections.include?(c.name) }.map(&:name)
-        form = model_columns.reject { |c| form_rejections.include?(c.name) }.map(&:name)
+        list = klass.columns.reject do |column|
+                 column.name.match(list_rejections.join("|")) || column.sql_type == "text"
+               end.map(&:name)
+
+        form = klass.columns.reject do |column|
+                 column.name.match(form_rejections.join("|"))
+               end.map(&:name)
 
         # Model defaults.
         order_by = "position" if list.include?("position")
-        filters = "created_at" if model_columns.include?("created_at")
+        filters = "created_at" if klass.columns.include?("created_at")
         search = ( [ "name", "title" ] & list ).join(", ")
 
         # We want attributes of belongs_to relationships to be shown in our 
