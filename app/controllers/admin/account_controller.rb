@@ -6,6 +6,7 @@ class Admin::AccountController < AdminController
 
   skip_filter filter_chain
 
+  before_filter :set_page_title
   before_filter :verify_typus_users_table_schema
   before_filter :authenticate, :only => [ :quick_edit ]
   before_filter :recover_password_disabled?, 

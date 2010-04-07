@@ -11,11 +11,10 @@ class AdminHelperTest < ActiveSupport::TestCase
   def render(*args); args; end
 
   def test_page_title
-    params = {}
+    @page_title = ["a", "b"]
     options = { :app_name => 'whatistypus.com' }
     Typus::Configuration.stubs(:options).returns(options)
-    output = page_title('custom_action')
-    assert_equal 'whatistypus.com - Custom action', output
+    assert_equal 'whatistypus.com - a &rsaquo; b', page_title
   end
 
   def test_header_with_root_path

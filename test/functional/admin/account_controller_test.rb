@@ -211,7 +211,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
     get :sign_in
     assert_response :success
 
-    assert_select 'title', "Typus Test - Sign in"
+    assert_select 'title', "Typus Test - Account &rsaquo; Sign in"
     assert_select 'h1', 'Typus Test'
     assert_match "layouts/account", @controller.active_layout.to_s
 

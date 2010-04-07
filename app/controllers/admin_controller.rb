@@ -19,6 +19,7 @@ class AdminController < ActionController::Base
   before_filter :reload_config_and_roles
   before_filter :authenticate
   before_filter :set_preferences
+  before_filter :set_page_title
 
   def index
     redirect_to admin_dashboard_path
@@ -30,6 +31,12 @@ class AdminController < ActionController::Base
     log_error(exception)
     flash[:error] = exception.message
     redirect_to admin_path
+  end
+
+  def set_page_title
+    @page_title = []
+    @page_title << _(params[:controller].sub("admin/", "").humanize)
+    @page_title << _(params[:action].humanize) unless params[:action].eql?("index")
   end
 
 end

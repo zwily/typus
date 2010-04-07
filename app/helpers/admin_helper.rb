@@ -1,10 +1,7 @@
 module AdminHelper
 
-  def page_title(action = params[:action])
-    crumbs = []
-    crumbs << @resource[:human_name].pluralize if @resource
-    crumbs << _(action.humanize) unless %w( index ).include?(action)
-    return "#{Typus::Configuration.options[:app_name]} - " + crumbs.compact.map { |x| x }.join(' &rsaquo; ')
+  def page_title
+    Typus::Configuration.options[:app_name] + " - " + @page_title.join(" &rsaquo; ")
   end
 
   def header
