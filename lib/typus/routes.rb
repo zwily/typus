@@ -17,6 +17,11 @@ module Typus
     #   Typus::Routes.draw(map)
     def self.draw(map, prefix = "admin")
 
+      map.with_options :controller => "admin/docs", :path_prefix => prefix do |i|
+        i.connect "docs", :action => "index"
+        i.connect "docs/:id", :action => "show"
+      end
+
       map.with_options :controller => "admin/account", :path_prefix => prefix do |i|
         i.admin_quick_edit "quick_edit", :action => "quick_edit"
         i.admin_sign_in "sign_in", :action => "sign_in"
