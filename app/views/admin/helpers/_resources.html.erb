@@ -5,7 +5,7 @@
   </tr>
 
   <% resources.each do |resource| %>
-    <tr class="<%= cycle('even', 'odd') %>">
+    <tr class="<%= cycle("even", "odd") %>">
     <td><%= link_to _(resource.titleize.capitalize), :controller => "admin/#{resource.underscore}" %></td>
     <td align="right" style="vertical-align: bottom;"></td>
     </tr>

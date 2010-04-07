@@ -12,15 +12,15 @@
 
         klass = model.constantize
         klass_resource = klass.name.tableize
-        klass_human_name = klass.typus_human_name.gsub('/', ' ').pluralize
+        klass_human_name = klass.typus_human_name.gsub("/", " ").pluralize
 
         options = { :controller => klass_resource }
         admin_items_path = options
-        new_admin_item_path = options.merge(:action => 'new')
+        new_admin_item_path = options.merge(:action => "new")
 
       %>
 
-      <tr class="<%= cycle('even', 'odd') %>">
+      <tr class="<%= cycle("even", "odd") %>">
 
         <td>
           <%= link_to klass_human_name, admin_items_path %><br />
@@ -28,7 +28,7 @@
         </td>
 
         <td class="right">
-          <small><%= link_to_if @current_user.can?('create', klass), _("Add"), new_admin_item_path %></small>
+          <small><%= link_to_if @current_user.can?("create", klass), _("Add"), new_admin_item_path %></small>
         </td>
 
       </tr>
