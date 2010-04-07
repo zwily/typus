@@ -50,7 +50,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     assert !output.empty?
 
     expected = [ "admin/helpers/list", { :header=>"Chunky bacon", 
-                                         :options => { :header=>"Chunky Bacon" }, 
+                                         :options => { :header => "Chunky Bacon" }, 
                                          :items => [ "item1", "item2" ] } ]
 
     assert_equal expected, output
