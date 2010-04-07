@@ -5,6 +5,7 @@ This is a collection of tips and tricks which you might find useful to integrate
 - [Splitting configuration files](#splitting_configuration_files)
 - [Testing the plugin](#testing_the_plugin)
 - [Single Table Inheritance](#single_table_inheritance)
+- [Namespaced Models](#namespaced_models)
 
 <h3 id="splitting_configuration_files">Splitting configuration files</h3>
 
@@ -83,5 +84,29 @@ In addition to this the controller class files also need to be created in the ap
 (e.g. `sale_property_controller.rb`, which is class `class Admin::SalePropertiesController < Admin::MasterController`)
 
 Once this is done, restart your Rails application and visit the admin route - the new STI tables should now be available.
+
+[&uarr; Back to top](#toc)
+
+<h3 id="namespaced_models">Namespaced Models</h3>
+
+If you want to be able to use `delayed_job` you need to add the following 
+two lines to your `config/routes.rb` file before `Typus::Routes.draw(map)`.
+
+    map.connect "admin/delayed/jobs/:action/:id", :controller => "admin/delayed/jobs"
+    map.connect "admin/delayed/jobs/:action/:id.:format", :controller => "admin/delayed/jobs"
+
+And then create and configure `config/typus/delayed_job.yml` and 
+`config/typus/delayed_job_roles.yml` as you do with your other models.
+
+    # config/typus/delayed_job.yml
+    Delayed::Job:
+      fields:
+        list: ...
+        form: ...
+      search: ...
+
+    # config/typus/delayed_job_roles.yml
+    admin:
+      Delayed::Job: all
 
 [&uarr; Back to top](#toc)
