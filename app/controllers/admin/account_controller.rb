@@ -1,6 +1,6 @@
 class Admin::AccountController < AdminController
 
-  layout 'account'
+  layout "account"
 
   include Typus::QuickEdit
 
