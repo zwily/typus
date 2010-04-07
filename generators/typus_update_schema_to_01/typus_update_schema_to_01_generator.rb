@@ -10,7 +10,9 @@ class TypusUpdateSchemaTo01Generator < Rails::Generator::Base
         m.template "config/#{base}", "#{config_folder}/#{base}"
       end
 
-      m.migration_template 'migration.rb', 'db/migrate', { :migration_file_name => 'update_typus_schema_to_01' }
+      m.migration_template "migration.rb", 
+                           "db/migrate", 
+                           { :migration_file_name => "update_typus_schema_to_01" }
 
     end
 
