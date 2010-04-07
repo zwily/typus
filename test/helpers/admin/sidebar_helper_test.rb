@@ -71,6 +71,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
     @resource = { :class => TypusUser }
     @current_user = typus_users(:admin)
+    partial = "admin/helpers/list"
+    options_defaults = { :header => "Go to", :options => { :header => "go_to" } }
 
     # Test when there are no records.
 
@@ -87,37 +89,27 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     typus_user = TypusUser.first
     @previous, @next = typus_user.previous_and_next
 
-    partial = "admin/helpers/list"
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users/edit/2">Next</a>] ],
-                :header => "Go to", 
-                :options => { :header => "go_to" } }
+    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users/edit/2">Next</a>] ] }
 
-    assert_equal [ partial, options ], previous_and_next
+    assert_equal [ partial, options.merge(options_defaults) ], previous_and_next
 
     # Test when we are on the last item.
 
     typus_user = TypusUser.last
     @previous, @next = typus_user.previous_and_next
 
-    partial = "admin/helpers/list"
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users/edit/4">Previous</a>] ], 
-                :header => "Go to", 
-                :options => { :header => "go_to" } }
-
-    assert_equal [ partial, options ], previous_and_next
+    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users/edit/4">Previous</a>] ] }
+    assert_equal [ partial, options.merge(options_defaults) ], previous_and_next
 
     # Test when we are on the middle.
 
     typus_user = TypusUser.find(3)
     @previous, @next = typus_user.previous_and_next
 
-    partial = "admin/helpers/list"
     options = { :items => [ %Q[<a href="http://test.host/admin/typus_users/edit/4">Next</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users/edit/2">Previous</a>] ], 
-                :header => "Go to", 
-                :options => { :header => "go_to" } }
+                            %Q[<a href="http://test.host/admin/typus_users/edit/2">Previous</a>] ] }
 
-    assert_equal [ partial, options ], previous_and_next
+    assert_equal [ partial, options.merge(options_defaults) ], previous_and_next
 
   end
 
