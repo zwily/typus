@@ -32,16 +32,12 @@ Delayed::Task:
 Page:
   fields:
     # Body field is overwrited from a Page class method.
-    list: title, is_published?
-    form: title, body, is_published?
-    options:
-      booleans:
-        is_published: ["Yes, it is", "No, it isn't"]
+    list: title
+    form: title, body
   actions:
     index: rebuild_all
     edit: rebuild
   application: Site
-  filters: is_published?
   options:
     form_rows: 25
     on_header: true
