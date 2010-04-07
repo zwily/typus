@@ -16,7 +16,8 @@ module AdminHelper
       links << (link_to _("View site"), root_path, :target => 'blank')
     end
 
-    render "admin/helpers/header", :links => links
+    render "admin/helpers/header", 
+           :links => links
 
   end
 
@@ -34,14 +35,21 @@ module AdminHelper
                      user.name
                    end
 
-    render "admin/helpers/login_info", :message => message, :user_details => user_details
+    render "admin/helpers/login_info", 
+           :message => message, 
+           :user_details => user_details
 
   end
 
   def display_flash_message(message = flash)
+
     return if message.empty?
     flash_type = message.keys.first
-    render "admin/helpers/flash_message", :flash_type => flash_type, :message => message
+
+    render "admin/helpers/flash_message", 
+           :flash_type => flash_type, 
+           :message => message
+
   end
 
 end
