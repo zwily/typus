@@ -143,20 +143,10 @@ class TypusGenerator < Rails::Generator::Base
       # Assets: images, javascripts & stylesheets
       #
 
-      %w( public/images/admin/ui-icons.png ).each { |f| m.file f, f }
+      templates_path = "#{Typus.root}/generators/typus/templates"
 
-      Dir["#{Typus.root}/generators/typus/templates/public/stylesheets/admin/*"].each do |file|
-        from = to = "public/stylesheets/admin/#{File.basename(file)}"
-        m.file from, to
-      end
-
-      Dir["#{Typus.root}/generators/typus/templates/public/javascripts/admin/*"].each do |file|
-        from = to = "public/javascripts/admin/#{File.basename(file)}"
-        m.file from, to
-      end
-
-      Dir["#{Typus.root}/generators/typus/templates/public/images/admin/fancybox/*"].each do |file|
-        from = to = "public/images/admin/fancybox/#{File.basename(file)}"
+      Dir["#{templates_path}/public/**/*.*"].each do |file|
+        from = to = file.split("#{templates_path}/").last
         m.file from, to
       end
 
