@@ -4,13 +4,13 @@ module Typus
 
     def quick_edit
 
-      render :text => '' and return unless session[:typus_user_id]
+      render :text => "" and return unless session[:typus_user_id]
 
       links = [[ "Dashboard", admin_dashboard_path ]]
       links << [ params[:message], "/admin/#{params[:path]}" ] if params[:message] && params[:path]
 
       options = links.reverse.map do |link|
-                  "<li><a href=\"#{link.last}\">#{link.first}</a></li>"
+                  %(<li><a href="#{link.last}">#{link.first}</a></li>)
                 end
 
       content = <<-HTML

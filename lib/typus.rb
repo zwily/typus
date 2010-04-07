@@ -54,8 +54,8 @@ module Typus
 
     def application_models
       get_models.map do |model|
-        class_name = model.sub(/\.rb$/,'').camelize
-        klass = class_name.split('::').inject(Object) { |klass,part| klass.const_get(part) }
+        class_name = model.sub(/\.rb$/,"").camelize
+        klass = class_name.split("::").inject(Object) { |klass,part| klass.const_get(part) }
         class_name if klass < ActiveRecord::Base && !klass.abstract_class?
       end.compact
     end

@@ -1,3 +1,3 @@
-require 'typus'
+require "typus"
 
 Typus.boot!

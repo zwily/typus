@@ -2,7 +2,7 @@ module Typus
 
   module Reloader
 
-    # Reload config and roles when app is running in development.
+    # Reload config and roles always but in production.
     def reload_config_and_roles
       return if Rails.env.production?
       Typus::Configuration.roles!
