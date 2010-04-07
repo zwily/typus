@@ -73,16 +73,7 @@ module Typus
     end
 
     def testing?
-      # FIXME
-      Rails.env.test? # && Dir.pwd == plugin_path
-    end
-
-    def plugin?
-      File.directory?(plugin_path)
-    end
-
-    def plugin_path
-      Rails.root.join("vendor", "plugins", "typus")
+      Rails.env.test? && Dir.pwd.match("vendor/plugins/typus")
     end
 
     def boot!
