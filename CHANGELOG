@@ -1,4 +1,4 @@
-= 0.9.40 / 2010-02-??
+= 0.9.40 / 2010-04-??
 
 [X] Refactor all forms to be able to use formtastic.
 [X] Cleanup translation files.
@@ -35,9 +35,9 @@
 [-] Allow users to download the demo hosted at heroku.com
 [-] Move html code from helpers to partials.
 [ ] Add API authentication.
-[ ] Fix problems on routes.rb when using namespaced models.
-[ ] Show the right content on the selectors when listing records on tables.
-[ ] Update fancybox to the latest version. Fix paths to make it work when
+[X] Fix problems on routes.rb when using namespaced models.
+[X] Show the right content on the selectors when listing records on tables.
+[X] Update fancybox to the latest version. Fix paths to make it work when
     `relative_url_root` is active. (and make a donation)
 [ ] Add `has_many` through relationships.
 [ ] Test default typus forms and remove old tests.
@@ -65,9 +65,8 @@
 [X] Use `inherit_views` code to `inherit_views`.
 [ ] Forever loop when schema has not been migrated.
 [ ] Pagination doesn't work properly when having multiple paginators on edit page
-[ ] Add support for 'has_one' relationships.
+[ ] Add support for `has_one` relationships.
 [ ] Remove all crappy rescues.
-[ ] Remove the order_by setting as we will use `default_scope`.
 [ ] Method to get string namespace.
 [ ] Merge generator methods to create resource/service controllers.
 [ ] Decide what to do with the QuickEdit.
