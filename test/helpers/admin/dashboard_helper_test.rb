@@ -10,7 +10,6 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 
   def render(*args); args; end
 
-  # FIXME: Pending to verify the applications included. Use the keys.
   def test_applications
 
     @current_user = typus_users(:admin)
@@ -24,6 +23,7 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
                                    [ "Typus", [ "TypusUser" ] ] => nil } }
 
     assert_equal partial, output.first
+    # FIXME: Pending to verify the applications included. Use the keys.
     # assert_equal options, output.last
 
   end
