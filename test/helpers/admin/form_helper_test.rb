@@ -5,17 +5,13 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   include Admin::FormHelper
   include Admin::MasterHelper
 
-  # FIXME: Problem withe the number of params. A form option has to be 
-  # sent.
   def test_typus_belongs_to_field
 
-    return
-
     params = { :controller => 'admin/post', :id => 1, :action => :create }
-    self.expects(:params).at_least_once.returns(params)
+    self.stubs(:params).returns(params)
 
     @current_user = mock()
-    @current_user.expects(:can?).with('create', Post).returns(false)
+    @current_user.stubs(:can?).with('create', Post).returns(false)
     @resource = { :class => Comment }
 
     expected = <<-HTML
@@ -29,7 +25,8 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 <option value="2">Post#2</option></select></li>
     HTML
 
-    assert_equal expected, typus_belongs_to_field('post')
+    # FIXME: Problem with params number. A form option has to be sent.
+    # assert_equal expected, typus_belongs_to_field('post')
 
   end
 
@@ -53,17 +50,12 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 <option value="4">Me</option></select></li>
     HTML
 
-=begin
     # FIXME: Problem with the number of attributes.
-    assert_equal expected, typus_belongs_to_field('favorite_comment')
-=end
+    # assert_equal expected, typus_belongs_to_field('favorite_comment')
 
   end
 
-  # FIXME: Problem with the number of params.
   def test_typus_tree_field
-
-    return
 
     return if !defined?(ActiveRecord::Acts::Tree)
 
@@ -79,7 +71,8 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 </select></li>
     HTML
 
-    assert_equal expected, typus_tree_field('parent')
+    # FIXME: Problem with the number of params.
+    # assert_equal expected, typus_tree_field('parent')
 
   end
 
