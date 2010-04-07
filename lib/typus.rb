@@ -73,7 +73,8 @@ module Typus
     end
 
     def testing?
-      Rails.env.test? && Dir.pwd == plugin_path
+      # FIXME
+      Rails.env.test? # && Dir.pwd == plugin_path
     end
 
     def plugin?
