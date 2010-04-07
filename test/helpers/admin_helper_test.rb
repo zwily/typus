@@ -38,7 +38,6 @@ class AdminHelperTest < ActiveSupport::TestCase
 
   end
 
-  # TODO: Clean
   def test_header_without_root_path
 
     # Remove root route from list
