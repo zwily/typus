@@ -50,7 +50,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_template "index"
-    assert_match /layouts\/admin/, @controller.active_layout.to_s
+    assert_match "layouts/admin", @controller.active_layout.to_s
 
     # FIXME: Page title is not returning the right value.
     assert_select "title", "#{Typus::Configuration.options[:app_name]} - Dashboard"

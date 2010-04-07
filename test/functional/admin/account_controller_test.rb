@@ -168,7 +168,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_template "sign_up"
-    assert_match "layouts/account.html.erb", @controller.active_layout.to_s
+    assert_match "layouts/account", @controller.active_layout.to_s
     assert_equal "Enter your email below to create the first user.", flash[:notice]
 
   end
