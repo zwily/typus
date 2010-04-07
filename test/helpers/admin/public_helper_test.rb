@@ -11,14 +11,6 @@ class Admin::PublicHelperTest < ActiveSupport::TestCase
     options = { :path => 'articles/edit/1', :message => 'Edit this article' }
     output = quick_edit(options)
 
-=begin
-    html = <<-HTML
-<script type="text/javascript">
-  document.write('<script type="text/javascript" src="quick_edit?message=Edit+this+article&path=articles%2Fedit%2F1" />');
-</script>
-    HTML
-
-=end
     partial = "admin/helpers/quick_edit"
     options = { :options => { :path => "articles/edit/1", 
                               :message => "Edit this article" } }

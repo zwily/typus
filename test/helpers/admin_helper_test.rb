@@ -29,17 +29,6 @@ class AdminHelperTest < ActiveSupport::TestCase
 
     output = header
 
-=begin
-    expected = <<-HTML
-<h1>#{Typus::Configuration.options[:app_name]}</h1>
-<ul>
-<li><a href="/admin/dashboard">Dashboard</a></li>
-<li><a href="/admin/dashboard">Dashboard</a></li>
-<li><a href="/">View site</a></li>
-</ul>
-    HTML
-=end
-
     partial = "admin/helpers/header"
     options = { :links => [ "<a href=\"/admin/dashboard\">Dashboard</a>",
                             "<a href=\"/admin/dashboard\">Dashboard</a>", 
@@ -57,16 +46,6 @@ class AdminHelperTest < ActiveSupport::TestCase
 
     self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
 
-=begin
-    expected = <<-HTML
-<h1>#{Typus::Configuration.options[:app_name]}</h1>
-<ul>
-<li><a href="/admin/dashboard">Dashboard</a></li>
-<li><a href="/admin/dashboard">Dashboard</a></li>
-</ul>
-    HTML
-=end
-
     output = header
     partial = "admin/helpers/header"
     options = { :links => [ "<a href=\"/admin/dashboard\">Dashboard</a>",
@@ -81,14 +60,6 @@ class AdminHelperTest < ActiveSupport::TestCase
     message = { :test => 'This is the message.' }
 
     output = display_flash_message(message)
-
-=begin
-    expected = <<-HTML
-<div id="flash" class="test">
-  <p>This is the message.</p>
-</div>
-    HTML
-=end
 
     partial = "admin/helpers/flash_message"
     options = { :flash_type => :test, 

@@ -15,9 +15,9 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     default_url_options[:host] = 'test.host'
   end
 
-  # FIXME
   def test_build_typus_table
 
+    # FIXME
     return
 
     @current_user = typus_users(:admin)

@@ -17,14 +17,6 @@ class Admin::MasterHelperTest < ActiveSupport::TestCase
 
     output = display_link_to_previous
 
-=begin
-    expected = <<-HTML
-<div id="flash" class="notice">
-  <p>You're updating a Post. <a href="/back_to_param">Do you want to cancel it?</a></p>
-</div>
-    HTML
-=end
-
     partial = "admin/helpers/display_link_to_previous"
     options = { :message => "You're updating a Post." }
 
