@@ -30,8 +30,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
     output = export
 
-    expected = [ "admin/helpers/list", { :items => [ %Q[<a href="http://test.host/admin/posts?format=csv">CSV</a>], 
-                                                     %Q[<a href="http://test.host/admin/posts?format=xml">XML</a>] ], 
+    expected = [ "admin/helpers/list", { :items => [ %(<a href="http://test.host/admin/posts?format=csv">CSV</a>), 
+                                                     %(<a href="http://test.host/admin/posts?format=xml">XML</a>) ], 
                                          :header => "Export", 
                                          :options => { :header => "export" } } ]
 
@@ -89,7 +89,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     typus_user = TypusUser.first
     @previous, @next = typus_user.previous_and_next
 
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users/edit/2">Next</a>] ] }
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users/edit/2">Next</a>) ] }
 
     assert_equal [ partial, options.merge(options_defaults) ], previous_and_next
 
@@ -98,7 +98,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     typus_user = TypusUser.last
     @previous, @next = typus_user.previous_and_next
 
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users/edit/4">Previous</a>] ] }
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users/edit/4">Previous</a>) ] }
     assert_equal [ partial, options.merge(options_defaults) ], previous_and_next
 
     # Test when we are on the middle.
@@ -106,8 +106,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     typus_user = TypusUser.find(3)
     @previous, @next = typus_user.previous_and_next
 
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users/edit/4">Next</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users/edit/2">Previous</a>] ] }
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users/edit/4">Next</a>), 
+                            %(<a href="http://test.host/admin/typus_users/edit/2">Previous</a>) ] }
 
     assert_equal [ partial, options.merge(options_defaults) ], previous_and_next
 
@@ -127,8 +127,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = previous_and_next
 
     partial = "admin/helpers/list"
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users/show/4">Next</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users/show/2">Previous</a>] ], 
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users/show/4">Next</a>), 
+                            %(<a href="http://test.host/admin/typus_users/show/2">Previous</a>) ], 
                 :header => "Go to", 
                 :options => { :header => "go_to" } }
 
@@ -151,8 +151,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = search
 
     partial = "admin/helpers/search"
-    options = { :hidden_params => [ %Q[<input id="action" name="action" type="hidden" value="index" />], 
-                                    %Q[<input id="controller" name="controller" type="hidden" value="admin/typus_users" />] ], 
+    options = { :hidden_params => [ %(<input id="controller" name="controller" type="hidden" value="admin/typus_users" />), 
+                                    %(<input id="action" name="action" type="hidden" value="index" />) ], 
                 :search_by => "First name, Last name, Email, and Role" }
 
     assert_equal [ partial, options ], output
@@ -194,10 +194,10 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = date_filter(request, filter)
 
     partial = "admin/helpers/list"
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users?created_at=today" class="off">Today</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a>] ], 
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users?created_at=today" class="off">Today</a>), 
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a>), 
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a>), 
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a>) ], 
                 :header => "Created at", 
                 :options => { :attribute => "created_at" } }
 
@@ -209,10 +209,10 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = date_filter(request, filter)
 
     partial = "admin/helpers/list"
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users" class="on">Today</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a>] ], 
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users" class="on">Today</a>), 
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a>), 
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a>), 
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a>) ], 
                 :header => "Created at", 
                 :options => { :attribute => "created_at" } }
 
@@ -234,8 +234,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = boolean_filter(request, filter)
 
     partial = "admin/helpers/list"
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users" class="on">Active</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users?status=false" class="off">Inactive</a>] ], 
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users" class="on">Active</a>), 
+                            %(<a href="http://test.host/admin/typus_users?status=false" class="off">Inactive</a>) ], 
                 :header => "Status", 
                 :options => { :attribute => "status" } }
 
@@ -247,8 +247,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = boolean_filter(request, filter)
 
     partial = "admin/helpers/list"
-    options = { :items => [ %Q[<a href="http://test.host/admin/typus_users?status=true" class="off">Active</a>], 
-                            %Q[<a href="http://test.host/admin/typus_users" class="on">Inactive</a>] ], 
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users?status=true" class="off">Active</a>), 
+                            %(<a href="http://test.host/admin/typus_users" class="on">Inactive</a>) ], 
                 :header => "Status", 
                 :options => { :attribute => "status" } }
 

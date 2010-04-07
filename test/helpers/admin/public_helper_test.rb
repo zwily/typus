@@ -1,4 +1,4 @@
-require 'test/helper'
+require "test/helper"
 
 class Admin::PublicHelperTest < ActiveSupport::TestCase
 
@@ -8,7 +8,7 @@ class Admin::PublicHelperTest < ActiveSupport::TestCase
 
   def test_quick_edit
 
-    options = { :path => 'articles/edit/1', :message => 'Edit this article' }
+    options = { :path => "articles/edit/1", :message => "Edit this article" }
     output = quick_edit(options)
 
     partial = "admin/helpers/quick_edit"

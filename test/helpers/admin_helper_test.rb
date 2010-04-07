@@ -12,9 +12,9 @@ class AdminHelperTest < ActiveSupport::TestCase
 
   def test_page_title
     @page_title = ["a", "b"]
-    options = { :app_name => 'whatistypus.com' }
+    options = { :app_name => "whatistypus.com" }
     Typus::Configuration.stubs(:options).returns(options)
-    assert_equal 'whatistypus.com - a &rsaquo; b', page_title
+    assert_equal "whatistypus.com - a &rsaquo; b", page_title
   end
 
   def test_header_with_root_path
@@ -30,9 +30,9 @@ class AdminHelperTest < ActiveSupport::TestCase
     output = header
 
     partial = "admin/helpers/header"
-    options = { :links => [ "<a href=\"/admin/dashboard\">Dashboard</a>",
-                            "<a href=\"/admin/dashboard\">Dashboard</a>", 
-                            "<a href=\"/\">View site</a>" ] }
+    options = { :links => [ %(<a href="/admin/dashboard">Dashboard</a>),
+                            %(<a href="/admin/dashboard">Dashboard</a>), 
+                            %(<a href="/">View site</a>) ] }
 
     assert_equal [ partial, options ], output
 
@@ -48,8 +48,8 @@ class AdminHelperTest < ActiveSupport::TestCase
 
     output = header
     partial = "admin/helpers/header"
-    options = { :links => [ "<a href=\"/admin/dashboard\">Dashboard</a>",
-                            "<a href=\"/admin/dashboard\">Dashboard</a>" ] }
+    options = { :links => [ %(<a href="/admin/dashboard">Dashboard</a>),
+                            %(<a href="/admin/dashboard">Dashboard</a>) ] }
 
     assert_equal [ partial, options ], output
 
@@ -57,13 +57,13 @@ class AdminHelperTest < ActiveSupport::TestCase
 
   def test_display_flash_message
 
-    message = { :test => 'This is the message.' }
+    message = { :test => "This is the message." }
 
     output = display_flash_message(message)
 
     partial = "admin/helpers/flash_message"
     options = { :flash_type => :test, 
-                :message => { :test => 'This is the message.' } }
+                :message => { :test => "This is the message." } }
 
     assert_equal [ partial, options ], output
 

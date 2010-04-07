@@ -32,6 +32,7 @@ ActiveRecord::Schema.define do
     t.string :title
     t.text :body
     t.boolean :is_published
+    t.string :status
     t.integer :parent_id
   end
 

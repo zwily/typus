@@ -1,4 +1,4 @@
-require 'test/helper'
+require "test/helper"
 
 class Admin::DashboardControllerTest < ActionController::TestCase
 
@@ -49,24 +49,24 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     get :index
 
     assert_response :success
-    assert_template 'index'
+    assert_template "index"
     assert_match /layouts\/admin/, @controller.active_layout.to_s
 
     # FIXME: Page title is not returning the right value.
-    assert_select 'title', "#{Typus::Configuration.options[:app_name]} - Dashboard"
+    assert_select "title", "#{Typus::Configuration.options[:app_name]} - Dashboard"
 
-    [ 'Typus', 
-      %Q[href="/admin/sign_out"], 
-      %Q[href="/admin/typus_users/edit/#{@request.session[:typus_user_id]}] ].each do |string|
+    [ "Typus", 
+      %(href="/admin/sign_out"), 
+      %(href="/admin/typus_users/edit/#{@request.session[:typus_user_id]}) ].each do |string|
       assert_match string, @response.body
     end
 
     %w( typus_users posts pages assets ).each { |r| assert_match "/admin/#{r}/new", @response.body }
     %w( statuses orders ).each { |r| assert_no_match /\/admin\/#{r}\n/, @response.body }
 
-    assert_select 'body div#header' do
-      assert_select 'a', 'Admin Example'
-      assert_select 'a', 'Sign out'
+    assert_select "body div#header" do
+      assert_select "a", "Admin Example"
+      assert_select "a", "Sign out"
     end
 
     partials = %w( _sidebar.html.erb )
@@ -77,7 +77,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   def test_should_show_add_links_in_resources_list_for_editor
     @request.session[:typus_user_id] = typus_users(:editor).id
     get :index
-    assert_match '/admin/posts/new', @response.body
+    assert_match "/admin/posts/new", @response.body
     assert_no_match /\/admin\/typus_users\/new/, @response.body
     assert_no_match /\/admin\/categories\/new/, @response.body
   end

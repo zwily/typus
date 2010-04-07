@@ -1,4 +1,4 @@
-require 'test/helper'
+require "test/helper"
 
 class Admin::PostsControllerTest < ActionController::TestCase
 
@@ -28,7 +28,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 </posts>
     RAW
 
-    get :index, :format => 'xml'
+    get :index, :format => "xml"
     assert_equal expected, @response.body
 
   end
@@ -45,11 +45,11 @@ Owned by admin;unpublished
 Owned by editor;unpublished
      RAW
 
-    get :index, :format => 'csv'
+    get :index, :format => "csv"
     assert_response :success
 
     assert @response.body.is_a?(Proc)
-    require 'stringio'
+    require "stringio"
     output = StringIO.new
     output.binmode
     assert_nothing_raised { @response.body.call(@response, output) }
