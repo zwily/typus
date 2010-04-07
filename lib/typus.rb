@@ -45,7 +45,7 @@ module Typus
     end
 
     # Gets a list of models under app/models
-    def get_models
+    def detect_application_models
       model_dir = Rails.root.join("app/models")
       Dir.chdir(model_dir) do
         models = Dir["**/*.rb"]
@@ -53,7 +53,7 @@ module Typus
     end
 
     def application_models
-      get_models.map do |model|
+      detect_application_models.map do |model|
         class_name = model.sub(/\.rb$/,"").camelize
         klass = class_name.split("::").inject(Object) { |klass,part| klass.const_get(part) }
         class_name if klass < ActiveRecord::Base && !klass.abstract_class?
