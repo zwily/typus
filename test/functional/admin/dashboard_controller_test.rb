@@ -2,6 +2,19 @@ require 'test/helper'
 
 class Admin::DashboardControllerTest < ActionController::TestCase
 
+  def test_should_verify_a_removed_role_cannot_sign_in
+
+    typus_user = typus_users(:removed_role)
+    @request.session[:typus_user_id] = typus_user.id
+
+    get :index
+    assert_response :redirect
+    assert_redirected_to admin_sign_in_path
+    assert_nil @request.session[:typus_user_id]
+    assert_equal "Role does no longer exists.", flash[:notice]
+
+  end
+
 =begin
 
   # FIXME

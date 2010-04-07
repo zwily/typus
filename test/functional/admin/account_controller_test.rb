@@ -35,23 +35,6 @@ class Admin::AccountControllerTest < ActionController::TestCase
     assert_redirected_to admin_sign_in_path
   end
 
-=begin
-
-  # FIXME
-  def test_should_not_sign_in_a_removed_role
-    typus_user = typus_users(:removed_role)
-    post :sign_in, { :typus_user => { :email => typus_user.email, :password => '12345678' } }
-    assert_equal typus_user.id, @request.session[:typus_user_id]
-    assert_response :redirect
-    assert_redirected_to admin_dashboard_path
-    get :dashboard
-    assert_redirected_to admin_sign_in_path
-    assert_nil @request.session[:typus_user_id]
-    assert_equal "Role does no longer exists.", flash[:notice]
-  end
-
-=end
-
   def test_should_not_send_recovery_password_link_to_unexisting_user
 
     options = Typus::Configuration.options.merge(:email => 'john@example.com')
