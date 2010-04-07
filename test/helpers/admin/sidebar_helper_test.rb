@@ -80,7 +80,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     @previous, @next = nil, nil
 
     params = { :controller => 'admin/typus_users', :action => 'edit', :id => typus_user.id }
-    self.expects(:params).at_least_once.returns(params)
+    self.stubs(:params).returns(params)
 
     assert previous_and_next.empty?
 
