@@ -24,13 +24,9 @@ class TypusGenerator < Rails::Generator::Base
       # Create required folders.
       #
 
-      [ controllers_path, 
-        views_path, 
-        "config/typus", 
-        "public/images/admin/fancybox", 
-        "public/javascripts/admin", 
-        "public/stylesheets/admin", 
-        tests_path ].each { |folder| m.directory folder }
+      [ controllers_path, tests_path, views_path, 
+        "public/images/admin/fancybox", "public/javascripts/admin", "public/stylesheets/admin",
+        "config/typus" ].each { |f| m.directory f }
 
       ##
       # To create <tt>application.yml</tt> and <tt>application_roles.yml</tt> 
@@ -76,14 +72,7 @@ class TypusGenerator < Rails::Generator::Base
         list = model_columns.reject { |c| c.sql_type == "text" || list_rejections.include?(c.name) }.map(&:name)
         form = model_columns.reject { |c| form_rejections.include?(c.name) }.map(&:name)
 
-        ##
-        # Model defaults:
-        #
-        # - Order
-        # - Filters
-        # - Search
-        #
-
+        # Model defaults.
         order_by = "position" if list.include?("position")
         filters = "created_at" if model_columns.include?("created_at")
         search = ( [ "name", "title" ] & list ).join(", ")
@@ -151,7 +140,7 @@ class TypusGenerator < Rails::Generator::Base
       end
 
       ##
-      # Generate:
+      # Generate files for models:
       #   `#{controllers_path}/#{resource}_controller.rb`
       #   `#{tests_path}/#{resource}_controller_test.rb`
       #   `#{views_path}/#{resource}/<action>.html.erb`
