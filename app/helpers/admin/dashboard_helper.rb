@@ -16,7 +16,8 @@ module Admin::DashboardHelper
 
     end
 
-    render "admin/helpers/applications", :applications => apps
+    render "admin/helpers/applications", 
+           :applications => apps
 
   end
 
@@ -28,7 +29,8 @@ module Admin::DashboardHelper
 
     return if available.empty?
 
-    render "admin/helpers/resources", :resources => available
+    render "admin/helpers/resources", 
+           :resources => available
 
   end
 

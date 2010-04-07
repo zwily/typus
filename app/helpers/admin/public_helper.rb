@@ -11,7 +11,8 @@ module Admin
     # the pages where you insert this helper.
     #
     def quick_edit(*args)
-      render "admin/helpers/quick_edit", :options => args.extract_options!
+      render "admin/helpers/quick_edit", 
+             :options => args.extract_options!
     end
 
   end

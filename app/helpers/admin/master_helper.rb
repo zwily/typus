@@ -27,7 +27,8 @@ module Admin::MasterHelper
                 :resource_from => options[:resource_from], 
                 :resource_to => options[:resource_to])
 
-    render "admin/helpers/display_link_to_previous", :message => message
+    render "admin/helpers/display_link_to_previous", 
+           :message => message
 
   end
 
