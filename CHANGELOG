@@ -39,7 +39,7 @@
 [ ] Show the right content on the selectors when listing records on tables.
 [ ] Update fancybox to the latest version. Fix paths to make it work when
     `relative_url_root` is active. (and make a donation)
-[ ] Add has_many through relationships.
+[ ] Add `has_many` through relationships.
 [ ] Test default typus forms and remove old tests.
 [ ] Fixed and tested read-only fields.
 [ ] Fixed and tested auto-generated fields.
@@ -49,7 +49,7 @@
 [ ] Show auto_generated, read_only on string fields. (_string.html.erb)
 [ ] Pass options hash to form fields.
 [ ] Fix css to display correctly "select" fields in relationships.
-[ ] Make tests work again.
+[X] Make tests work again.
 [ ] Remove Typus "blue" color and use something more neutral.
 [ ] Ajax pagination. (?)
 [ ] Generate views for custom actions on the controllers/models. This should 
@@ -58,11 +58,11 @@
 [X] Replace "render :partial => 'template', :locals => {}", by 
     "render 'template', :local => 'local'".
 [X] Add support for custom typus_user on the generator.
-[ ] Shorten sidebar selectors. (AFS)
+[X] Shorten sidebar selectors. (AFS)
 [ ] Add test for `typus_table_selector`.
 [X] Clicking on a filter removes is. (Gaston Kleiman)
 [X] Possibility to filter by date ranges. (Gaston Kleiman)
-[ ] Use `inherit_views` code to `inherit_views`.
+[X] Use `inherit_views` code to `inherit_views`.
 [ ] Forever loop when schema has not been migrated.
 [ ] Pagination doesn't work properly when having multiple paginators on edit page
 [ ] Add support for 'has_one' relationships.
