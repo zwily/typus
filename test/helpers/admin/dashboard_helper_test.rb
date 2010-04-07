@@ -28,17 +28,16 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 
   end
 
-  # FIXME: Pending to add the options.
   def test_resources
 
     @current_user = typus_users(:admin)
 
     output = resources
     partial = "admin/helpers/resources"
-    options = {}
+    options = { :resources => ["Git", "Status", "WatchDog"] }
 
     assert_equal partial, output.first
-    # assert_equal options, output.last
+    assert_equal options, output.last
 
   end
 
