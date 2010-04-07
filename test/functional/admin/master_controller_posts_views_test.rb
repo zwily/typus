@@ -8,7 +8,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_index_and_verify_presence_of_custom_partials
     get :index
-    partials = %w( _index.html.erb _sidebar.html.erb )
+    partials = %w( posts#_index.html.erb posts#_sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
@@ -118,7 +118,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_posts_partials_on_new
     get :new
-    partials = %w( _new.html.erb _sidebar.html.erb )
+    partials = %w( posts#_new.html.erb posts#_sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
@@ -133,7 +133,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_edit_and_verify_presence_of_custom_partials
     get :edit, { :id => posts(:published).id }
-    partials = %w( _edit.html.erb _sidebar.html.erb )
+    partials = %w( posts#_edit.html.erb posts#_sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 
@@ -148,7 +148,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_show_and_verify_presence_of_custom_partials
     get :show, { :id => posts(:published).id }
-    partials = %w( _show.html.erb _sidebar.html.erb )
+    partials = %w( posts#_show.html.erb posts#_sidebar.html.erb )
     partials.each { |p| assert_match p, @response.body }
   end
 

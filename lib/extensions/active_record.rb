@@ -3,12 +3,12 @@ class ActiveRecord::Base
   def to_dom(*args)
 
     options = args.extract_options!
-    display_id = new_record? ? 'new' : id
+    display_id = new_record? ? "new" : id
 
     [ options[:prefix], 
       self.class.name.underscore, 
       display_id, 
-      options[:suffix] ].compact.join('_')
+      options[:suffix] ].compact.join("_")
 
   end
 
@@ -30,7 +30,6 @@ class ActiveRecord::Base
   #     >> Post.first.mapping(:status)
   #     => "Publicado"
   #
-  # TODO: Test AR#mapping method.
   def mapping(attribute)
     values = self.class::const_get(attribute.to_s.upcase)
     values.kind_of?(Hash) ? values[send(attribute)] : send(attribute)
