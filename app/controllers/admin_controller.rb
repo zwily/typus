@@ -30,7 +30,7 @@ class AdminController < ActionController::Base
   def render_error(exception)
     log_error(exception)
     flash[:error] = exception.message
-    redirect_to admin_path
+    redirect_to admin_dashboard_path
   end
 
   def set_page_title
