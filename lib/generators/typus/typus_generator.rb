@@ -34,15 +34,7 @@ class TypusGenerator < Rails::Generators::Base
   end
 
   def copy_migration_template
-<<<<<<< HEAD
-<<<<<<< HEAD
     migration_template "migration.rb", "db/migrate/create_#{admin_users_table_name}"
-=======
-    migration_template "migration.rb", "db/migrate/create_#{table_name}"
->>>>>>> Initial work on the Rails 3 generator.
-=======
-    migration_template "migration.rb", "db/migrate/create_#{admin_users_table_name}"
->>>>>>> Fixed generator to use the same variables as the Rails 2.3 version.
   end
 
   def add_typus_routes
@@ -55,15 +47,7 @@ class TypusGenerator < Rails::Generators::Base
     File.join(Typus.root, "generators", "typus", "templates")
   end
 
-<<<<<<< HEAD
-<<<<<<< HEAD
   def admin_users_table_name
-=======
-  def table_name
->>>>>>> Initial work on the Rails 3 generator.
-=======
-  def admin_users_table_name
->>>>>>> Fixed generator to use the same variables as the Rails 2.3 version.
     options[:user_class_name].tableize
   end
 
