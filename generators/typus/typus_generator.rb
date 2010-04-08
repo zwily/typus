@@ -230,7 +230,7 @@ class TypusGenerator < Rails::Generator::Base
       m.migration_template "migration.rb", 
                            "db/migrate", 
                             :assigns => { :migration_name => "Create#{options[:user_class_name]}s", 
-                                          :typus_users_table_name => options[:user_class_name].tableize }, 
+                                          :admin_users_table_name => options[:user_class_name].tableize }, 
                             :migration_file_name => "create_#{options[:user_class_name].tableize}"
 
     end
