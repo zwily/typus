@@ -1,5 +1,3 @@
-require 'bluecloth'
-
 class Admin::DocsController < AdminController
 
   def index
