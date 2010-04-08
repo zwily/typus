@@ -4,7 +4,8 @@ class Admin::AccountController < AdminController
 
   include Typus::QuickEdit
 
-  skip_filter filter_chain
+  skip_before_filter :reload_config_and_roles
+  skip_before_filter :set_preferences
 
   before_filter :set_page_title
   before_filter :verify_typus_users_table_schema
