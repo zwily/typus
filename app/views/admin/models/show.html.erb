@@ -26,7 +26,7 @@
              options = { :controller => controller, :action => action, :id => raw_data }
              link_to raw_data.to_label, options if !raw_data.nil?
            when :file
-             @item.typus_preview(field.first)
+             typus_preview(@item, field.first)
            when :text
              defined?(RDiscount) ? markdown(raw_data) : simple_format(h(raw_data))
            when :selector
