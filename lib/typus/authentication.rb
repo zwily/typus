@@ -15,7 +15,7 @@ module Typus
       if session[:typus_user_id]
         current_user
       else
-        back_to = request.env['REQUEST_URI'] unless [admin_dashboard_path, "admin"].include?(request.env['REQUEST_URI'])
+        back_to = request.env['REQUEST_URI'] unless [admin_dashboard_path, admin_path].include?(request.env['REQUEST_URI'])
         redirect_to admin_sign_in_path(:back_to => back_to)
       end
 
