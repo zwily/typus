@@ -34,7 +34,7 @@ class TypusGenerator < Rails::Generators::Base
   end
 
   def copy_migration_template
-    migration_template "migration.rb", "db/migrate/create_#{table_name}"
+    migration_template "migration.rb", "db/migrate/create_#{admin_users_table_name}"
   end
 
   def add_typus_routes
@@ -47,7 +47,7 @@ class TypusGenerator < Rails::Generators::Base
     File.join(Typus.root, "generators", "typus", "templates")
   end
 
-  def table_name
+  def admin_users_table_name
     options[:user_class_name].tableize
   end
 
