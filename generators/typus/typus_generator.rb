@@ -113,7 +113,7 @@ class TypusGenerator < Rails::Generator::Base
 
       %w( README typus.yml typus_roles.yml ).each do |file|
         from = to = "config/typus/#{file}"
-        m.template from, to, :assigns => { :configuration => configuration }
+        m.template from, to
       end
 
       ##
