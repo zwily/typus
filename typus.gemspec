@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2010-04-07}
+  s.date = %q{2010-04-08}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -24,6 +24,7 @@ Gem::Specification.new do |s|
      "Rakefile",
      "app/controllers/admin/account_controller.rb",
      "app/controllers/admin/dashboard_controller.rb",
+     "app/controllers/admin/docs_controller.rb",
      "app/controllers/admin/master_controller.rb",
      "app/controllers/admin/service_controller.rb",
      "app/controllers/admin_controller.rb",
@@ -42,6 +43,8 @@ Gem::Specification.new do |s|
      "app/views/admin/account/sign_up.html.erb",
      "app/views/admin/dashboard/_sidebar.html.erb",
      "app/views/admin/dashboard/index.html.erb",
+     "app/views/admin/docs/_sidebar.html.erb",
+     "app/views/admin/docs/index.html.erb",
      "app/views/admin/helpers/_applications.html.erb",
      "app/views/admin/helpers/_date.html.erb",
      "app/views/admin/helpers/_display_link_to_previous.html.erb",
@@ -101,6 +104,7 @@ Gem::Specification.new do |s|
      "doc/contribute.markdown",
      "doc/donate.markdown",
      "doc/install.markdown",
+     "doc/mit_license.markdown",
      "doc/services.markdown",
      "doc/tips.markdown",
      "generators/typus/USAGE",
@@ -232,6 +236,7 @@ Gem::Specification.new do |s|
      "test/functional/admin/dashboard_controller_test.rb",
      "test/functional/admin/master_controller_assets_relationships.rb",
      "test/functional/admin/master_controller_categories_lists_test.rb",
+     "test/functional/admin/master_controller_categories_views_test.rb",
      "test/functional/admin/master_controller_posts_before_test.rb",
      "test/functional/admin/master_controller_posts_crud_test.rb",
      "test/functional/admin/master_controller_posts_formats_test.rb",
@@ -294,6 +299,7 @@ Gem::Specification.new do |s|
      "test/functional/admin/dashboard_controller_test.rb",
      "test/functional/admin/master_controller_assets_relationships.rb",
      "test/functional/admin/master_controller_categories_lists_test.rb",
+     "test/functional/admin/master_controller_categories_views_test.rb",
      "test/functional/admin/master_controller_posts_before_test.rb",
      "test/functional/admin/master_controller_posts_crud_test.rb",
      "test/functional/admin/master_controller_posts_formats_test.rb",
