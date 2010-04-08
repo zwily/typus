@@ -1,8 +1,8 @@
 <% content_for :sidebar do %>
   <%= render "sidebar" %>
-  <%= actions %>
-  <%= search %>
-  <%= previous_and_next %>
+  <%= raw actions %>
+  <%= raw search %>
+  <%= raw previous_and_next %>
 <% end %>
 
 <%= display_link_to_previous if params[:back_to] %>

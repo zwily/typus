@@ -26,7 +26,7 @@ module Admin::FormHelper
                 end
       end
 
-    end.html_safe!
+    end
 
   end
 
@@ -127,7 +127,7 @@ module Admin::FormHelper
         end
 
       end
-    end.html_safe!
+    end
 
   end
 
@@ -382,7 +382,7 @@ Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="ht
 
   def typus_preview(item, attribute)
 
-    # typus_preview(attribute).html_safe! unless @item.send(attribute).blank?
+    # typus_preview(attribute) unless @item.send(attribute).blank?
     #
     return unless item.attachment_present?(attribute)
 

@@ -1,8 +1,8 @@
 <% content_for :sidebar do %>
   <%= render "sidebar" %>
-  <%= actions %>
-  <%= search %>
-  <%= previous_and_next %>
+  <%= raw actions %>
+  <%= raw search %>
+  <%= raw previous_and_next %>
 <% end %>
 
 <h2><%= link_to @resource[:human_name].pluralize, :action => 'index' %> &rsaquo; 
@@ -35,7 +35,7 @@
              h(raw_data)
            end
   -%>
-  <dd><%= !data.blank? ? data : ('&#151;').html_safe! %></dd>
+  <dd><%= !data.blank? ? data : ('&#151;') %></dd>
 <%- end -%>
 </dl>
 

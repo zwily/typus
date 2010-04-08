@@ -1,9 +1,9 @@
 <% content_for :sidebar do %>
   <%= render "sidebar" %>
-  <%= actions %>
-  <%= export %>
-  <%= search %>
-  <%= filters %>
+  <%= raw actions %>
+  <%= raw export %>
+  <%= raw search %>
+  <%= raw filters %>
 <% end %>
 
 <h2><%= @resource[:human_name].pluralize %> <%= remove_filter_link %></h2>
@@ -11,7 +11,7 @@
 <%= render "index" %>
 
 <% unless @items.count.zero? -%>
-  <%= build_list(@resource[:class], @fields, @items) %>
+  <%= raw build_list(@resource[:class], @fields, @items) %>
   <%= pagination %>
 <% else %>
   <div id="flash" class="notice">

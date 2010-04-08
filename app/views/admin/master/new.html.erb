@@ -1,6 +1,6 @@
 <% content_for :sidebar do %>
   <%= render "sidebar" %>
-  <%= actions %>
+  <%= raw actions %>
 <% end %>
 
 <%= display_link_to_previous if params[:back_to] %>

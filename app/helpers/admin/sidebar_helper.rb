@@ -136,7 +136,7 @@ module Admin::SidebarHelper
           html << string_filter(current_request, key)
         end
       end
-    end.html_safe!
+    end
 
   end
 
