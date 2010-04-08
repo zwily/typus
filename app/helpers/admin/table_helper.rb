@@ -130,7 +130,7 @@ module Admin::TableHelper
 
               end
 
-    headers << "&nbsp;" if @current_user.can?('delete', model)
+    headers << "" if @current_user.can?('delete', model)
 
     render "admin/helpers/table_header", 
            :headers => headers
