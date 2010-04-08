@@ -1,7 +1,5 @@
 class Admin::MasterController < AdminController
 
-  inherit_views "admin/models"
-
   include Typus::Format
 
   before_filter :set_resource
