@@ -1,7 +1,10 @@
 class Admin::MasterController < AdminController
 
+<<<<<<< HEAD
   inherit_views
 
+=======
+>>>>>>> Do not require and use inherit_views because seems to be broken.
   include Typus::Format
 
   before_filter :set_resource
