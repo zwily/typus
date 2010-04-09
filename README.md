@@ -15,6 +15,7 @@ extensible enough to match lots of use cases.
 - Extensible and overwritable templates.
 - Low memory footprint.
 - MIT License, the same as Rails.
+- Rails 3 compatible.
 
 ## Links
 
