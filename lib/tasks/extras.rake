@@ -2,7 +2,7 @@ namespace :typus do
 
   desc "Install ckeditor."
   task :ckeditor do
-    system "script/plugin install git://github.com/galetahub/rails-ckeditor.git --force"
+    system "script/rails plugin install git://github.com/galetahub/rails-ckeditor.git --force"
     load File.join Rails.root, 'vendor', 'plugins', 'rails-ckeditor', 'tasks', 'ckeditor_tasks.rake'
     Rake::Task["ckeditor:install"].invoke
     Rake::Task["ckeditor:config"].invoke
@@ -15,7 +15,7 @@ namespace :typus do
                 "git://github.com/rails/acts_as_list.git", 
                 "git://github.com/rails/acts_as_tree.git" ]
 
-    system "script/plugin install #{plugins.join(" ")} --force"
+    system "script/rails plugin install #{plugins.join(" ")} --force"
 
   end
 
