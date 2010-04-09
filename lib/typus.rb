@@ -96,11 +96,6 @@ module Typus
       require "typus/active_record"
 
       # Typus mixins.
-      require "typus/authentication"
-      require "typus/format"
-      require "typus/preferences"
-      require "typus/reloader"
-      require "typus/quick_edit"
       require "typus/user"
 
       # Vendor.
