@@ -70,7 +70,7 @@
 [ ] Remove all crappy rescues.
 [ ] Method to get string namespace.
 [ ] Merge generator methods to create resource/service controllers.
-[ ] Decide what to do with the QuickEdit.
+[X] Decide what to do with the QuickEdit. (Removed on 20100409)
 [ ] Search in multiple models.
 [ ] Nested models.
 [ ] Contextual content depending on the logged user.

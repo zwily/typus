@@ -27,7 +27,6 @@ module Typus
       end
 
       map.with_options :controller => "admin/account", :path_prefix => prefix do |i|
-        i.admin_quick_edit "quick_edit", :action => "quick_edit"
         i.admin_sign_in "sign_in", :action => "sign_in"
         i.admin_sign_out "sign_out", :action => "sign_out"
         i.admin_sign_up "sign_up", :action => "sign_up"

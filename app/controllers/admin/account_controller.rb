@@ -2,12 +2,9 @@ class Admin::AccountController < AdminController
 
   layout "account"
 
-  include Typus::QuickEdit
-
   skip_before_filter :reload_config_and_roles
   skip_before_filter :set_preferences
 
-  before_filter :authenticate, :only => [ :quick_edit ]
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
 

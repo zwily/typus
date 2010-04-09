@@ -20,7 +20,6 @@
   - [Blocks on views](#blocks_on_views)
   - [Attribute templates](#attribute_templates)
 - [Exporting data](#exporting)
-- [Quick edit](#quick_edit)
 - [Applications](#application)
 
 <h2 id="initializer">Initializer: Understanding what <code>typus.rb</code> can do for you.</h2>
@@ -428,21 +427,6 @@ With this you'll be available to get for example `xml` listings and for individu
 
     http://0.0.0.0:3000/admin/articles.xml
     http://0.0.0.0:3000/admin/articles/42.xml
-
-[&uarr; Back to top](#toc)
-
-<h2 id="quick_edit">Quick edit</h2>
-
-To enable quick edit include the `Admin::PublicHelper` on your `application_helper.rb`.
-
-    module ApplicationHelper
-      include Admin::PublicHelper
-    end
-
-And you can start using the helper on your views.
-
-    <%= quick_edit :message => 'Edit this page', 
-                   :path => "pages/edit/#{@page.id}" %>
 
 [&uarr; Back to top](#toc)
 

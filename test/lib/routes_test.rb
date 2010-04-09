@@ -20,13 +20,11 @@ class RoutesTest < ActiveSupport::TestCase
   def test_should_verify_admin_account_named_routes
 
     expected = [ :admin_sign_up, :admin_sign_in, :admin_sign_out, 
-                 :admin_recover_password, :admin_reset_password, 
-                 :admin_quick_edit ]
+                 :admin_recover_password, :admin_reset_password ]
     expected.each { |route| assert @routes.include?(route) }
 
     actions = [ 'sign_up', 'sign_in', 'sign_out', 
-                'recover_password', 'reset_password', 
-                'quick_edit' ]
+                'recover_password', 'reset_password' ]
 
     actions.each { |a| assert_routing "admin/#{a}", :controller => 'admin/account', :action => a }
 
