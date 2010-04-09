@@ -1,15 +1,20 @@
 <div class="pagination">
 
+  <%
+    previous_text = "&larr; " + _("Previous")
+    next_text = _("Next") + " &rarr;"
+  %>
+
   <% if @items.prev? %>
-    <%= link_to "&larr; " + _("Previous"), params.merge(:page => @items.prev.number, :anchor => @options[:anchor]) %>
+    <%= link_to raw(previous_text), params.merge(:page => @items.prev.number, :anchor => @options[:anchor]) %>
   <% else %>
-    <span class="disabled"><%= "&larr; " + _("Previous") %></span>
+    <span class="disabled"><%= raw(previous_text) %></span>
   <% end %>
 
   <% if @items.next? %>
-    <%= link_to _("Next") + " &rarr;", params.merge(:page => @items.next.number, :anchor => @options[:anchor]) %>
+    <%= link_to raw(next_text), params.merge(:page => @items.next.number, :anchor => @options[:anchor]) %>
   <% else %>
-    <span class="disabled"><%= _("Next") + " &rarr;" %></span>
+    <span class="disabled"><%= raw(next_text) %></span>
   <% end %>
 
 </div>
