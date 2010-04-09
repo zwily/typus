@@ -1,13 +1,9 @@
-# Typus Models Configuration File
-#
-# Use the README file as a reference to customize settings.
-
 TypusUser:
   fields:
     list: email, role, status
-    form: first_name, last_name, role, email, password, password_confirmation, language
+    form: first_name, last_name, role, email, password, password_confirmation
     options:
-      selectors: role, language
+      selectors: role
       booleans:
         status: Active, Inactive
   filters: status, role
