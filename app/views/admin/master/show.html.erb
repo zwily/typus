@@ -5,10 +5,10 @@
   <%= raw previous_and_next %>
 <% end %>
 
-<h2><%= link_to @resource[:human_name].pluralize, :action => 'index' %> &rsaquo; 
+<h2><%= link_to @resource[:human_name].pluralize, :action => "index" %> &rsaquo; 
     <%= _("Show") %></h2>
 
-<%= render 'show' %>
+<%= render "show" %>
 
 <dl>
 <%- @fields.each do |field| -%>
@@ -35,7 +35,7 @@
              h(raw_data)
            end
   -%>
-  <dd><%= !data.blank? ? data : ('&#151;') %></dd>
+  <dd><%= !data.blank? ? data : ("&#151;") %></dd>
 <%- end -%>
 </dl>
 
