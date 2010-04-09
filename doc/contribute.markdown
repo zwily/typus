@@ -6,14 +6,6 @@
 - **Fork the project** - Fork the project <http://github.com/fesplugas/typus> and make it better.
 - **Tell everybody about Typus** - Blog about **Typus**, give talks about **Typus**. Let us know and we'll link back to you as well.
 
-### Upcoming features (ToDo List)
-
-There's no a date for this new features, but are things which I'd like to see in **Typus** in the near future.
-
-- Search in multiple models.
-- Nested models.
-- Contextual content depending on the logged user.
-
 ## Contributors
 
 - Laia Gargallo (Lover and tea provider) <http://azotacalles.net/>
