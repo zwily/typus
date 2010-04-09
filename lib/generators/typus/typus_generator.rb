@@ -138,7 +138,7 @@ class TypusGenerator < Rails::Generators::Base
   private
 
   def templates_path
-    File.join(Typus.root, "generators", "typus", "templates")
+    Typus.root.join("generators", "typus", "templates")
   end
 
   def admin_users_table_name

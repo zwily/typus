@@ -4,6 +4,7 @@ class TypusTest < ActiveSupport::TestCase
 
   def test_should_return_path
     expected = Dir.pwd
+    assert Typus.root.kind_of?(Pathname)
     assert_equal expected, Typus.root
   end
 

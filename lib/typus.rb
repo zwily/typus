@@ -5,7 +5,8 @@ module Typus
   class << self
 
     def root
-      (File.dirname(__FILE__) + "/../").chomp("/lib/../")
+      path = (File.dirname(__FILE__) + "/../").chomp("/lib/../")
+      Pathname.new(path)
     end
 
     def locales
