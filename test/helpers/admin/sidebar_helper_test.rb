@@ -1,13 +1,12 @@
 # coding: utf-8
 
-require 'test/helper'
+require "test/helper"
 
 class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   include Admin::SidebarHelper
 
   include ActionView::Helpers::UrlHelper
-  # include ActionController::UrlWriter
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::FormTagHelper
 
