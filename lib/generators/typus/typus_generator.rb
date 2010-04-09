@@ -48,7 +48,6 @@ class TypusGenerator < Rails::Generators::Base
     (Typus.application_models + [options[:user_class_name]]).each do |model|
 
       klass = model.constantize
-      namespace = model.namespace
 
       @inherits_from = "Admin::MasterController"
       @resource = klass.name.pluralize

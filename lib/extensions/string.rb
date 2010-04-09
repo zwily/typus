@@ -1,9 +1,5 @@
 class String
 
-  def namespace
-    underscore.split("/")[0...-1].join("/")
-  end
-
   def extract_settings
     split(",").map { |x| x.strip }
   end
