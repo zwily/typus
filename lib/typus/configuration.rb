@@ -38,7 +38,7 @@ module Typus
 
       @@config = {}
       files.each do |file|
-        data = YAML.load_file(file)
+        data = YAML::load_file(file)
         @@config.merge!(data) if data
       end
 
@@ -56,7 +56,7 @@ module Typus
       @@roles = { options[:root] => {} }
 
       files.each do |file|
-        data = YAML.load_file(file)
+        data = YAML::load_file(file)
         next unless data
         data.each do |key, value|
           next unless value
