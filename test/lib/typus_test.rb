@@ -2,10 +2,10 @@ require 'test/helper'
 
 class TypusTest < ActiveSupport::TestCase
 
-  def test_should_return_path
+  def test_should_return_root
     expected = Dir.pwd
-    assert Typus.root.kind_of?(Pathname)
-    assert_equal expected, Typus.root.to_s
+    assert Typus.root.kind_of?(String)
+    assert_equal expected, Typus.root
   end
 
   def test_should_return_applications_and_should_be_sorted
