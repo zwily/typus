@@ -20,6 +20,8 @@
   <%= javascript_include_tag :ckeditor if defined?(Ckeditor)%>
   <%= yield :javascripts -%>
 
+  <%= csrf_meta_tag %>
+
 </head>
 
 <body>
