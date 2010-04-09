@@ -1,4 +1,4 @@
-require 'test/helper'
+require "test/helper"
 require 'app/mailers/admin/mailer'
 
 class Admin::MailerTest < ActiveSupport::TestCase

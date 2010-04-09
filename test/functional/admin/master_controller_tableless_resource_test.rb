@@ -1,4 +1,4 @@
-require 'test/helper'
+require "test/helper"
 require 'test/rails_app/app/controllers/admin/status_controller'
 
 class Admin::StatusControllerTest < ActionController::TestCase
