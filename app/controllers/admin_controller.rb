@@ -1,7 +1,6 @@
 class AdminController < ActionController::Base
 
   unloadable
-  filter_parameter_logging :password
 
   include Typus::Authentication
   include Typus::Preferences
