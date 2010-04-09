@@ -1,13 +1,11 @@
-<%
-  dom = item.to_dom(:suffix => "#{attribute}_preview" )
-%>
-
 <% if has_file_preview %>
 <script type="text/javascript" charset="utf-8">
   $(document).ready(function() { 
-    $("#<%= dom %>").fancybox(); 
+    $("#<%= dom_id(item, "#{attribute}_preview") %>").fancybox(); 
   });
 </script>
 <% end %>
 
-<a id="<%= dom %>" href="<%= href %>" title="<%= item.to_label %>"><%= content %></a>
+<a id="<%= dom_id(item, "#{attribute}_preview") %>" 
+   href="<%= href %>" 
+   title="<%= item.to_label %>"><%= content %></a>

@@ -16,18 +16,6 @@ class ActiveRecord::Base
 
   end
 
-  def to_dom(*args)
-
-    options = args.extract_options!
-    display_id = new_record? ? "new" : id
-
-    [ options[:prefix], 
-      self.class.name.underscore, 
-      display_id, 
-      options[:suffix] ].compact.join("_")
-
-  end
-
   ##
   # On a model:
   #
@@ -51,16 +39,8 @@ class ActiveRecord::Base
     values.kind_of?(Hash) ? values[send(attribute)] : send(attribute)
   end
 
-  ##
-  # ActiveScaffold uses `to_label`, which makes more sense. We want 
-  # to keep compatibility with old versions of Typus. The prefered method 
-  # is `to_label` and `typus_name` will be deprecated in the next months.
-  #
   def to_label
-    [ :typus_name, :name ].each do |attribute|
-      return send(attribute) if respond_to?(attribute)
-    end
-    return [ self.class, id ].join("#")
+    respond_to?(:name) ? send(:name) : [ self.class, id ].join("#")
   end
 
 end
