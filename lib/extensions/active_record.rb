@@ -1,6 +1,7 @@
 class ActiveRecord::Base
 
-  # Merges conditions so that the result is a valid +condition+
+  # TODO: This should be removed to make Typus compatible 
+  #       with Rails 3 new interface.
   def self.merge_conditions(*conditions)
 
     segments = []
