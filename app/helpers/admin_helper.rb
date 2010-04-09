@@ -52,7 +52,7 @@ module AdminHelper
     message = _("Are you sure you want to sign out and end your session?")
 
     user_details = if user.can?('edit', Typus::Configuration.options[:user_class_name])
-                     link_to user.name, admin_edit_typus_user_path, :title => "#{user.email} (#{user.role})"
+                     link_to user.name, admin_edit_typus_user_path
                    else
                      user.name
                    end
