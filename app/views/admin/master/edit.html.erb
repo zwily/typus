@@ -14,10 +14,10 @@
 
 <%
   options = { :action => "update",
-             :id => @item.id ,
-             :back_to => params[:back_to],
-             :resource => params[:resource],
-             :resource_id => params[:resource_id]}
+              :id => @item.id ,
+              :back_to => params[:back_to],
+              :resource => params[:resource],
+              :resource_id => params[:resource_id] }
   button = _("Save {{resource}}", :resource => @resource[:human_name])
 %>
 
