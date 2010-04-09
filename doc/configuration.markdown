@@ -29,7 +29,6 @@ The initializer has two groups of options.
 
     Typus::Configuration.options[:app_name]
     Typus::Configuration.options[:email]
-    Typus::Configuration.options[:locales]
     Typus::Configuration.options[:recover_password]
     Typus::Configuration.options[:root]
     Typus::Configuration.options[:user_class_name]
