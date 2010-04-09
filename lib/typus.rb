@@ -5,8 +5,7 @@ module Typus
   class << self
 
     def root
-      path = (File.dirname(__FILE__) + "/../").chomp("/lib/../")
-      Pathname.new(path)
+      (File.dirname(__FILE__) + "/../").chomp("/lib/../")
     end
 
     def locales
@@ -85,6 +84,8 @@ module Typus
       require "typus/authentication"
       require "typus/preferences"
       require "typus/reloader"
+      require "typus/format"
+      require "typus/templates"
 
       # Ruby/Rails Extensions
       require "extensions/hash"

@@ -35,13 +35,13 @@ require File.dirname(__FILE__) + '/schema'
 
 ActiveSupport::Dependencies.load_paths = []
 %w( models controllers helpers ).each do |folder|
-  ActiveSupport::Dependencies.load_paths << Typus.root.join('app', folder)
-  ActiveSupport::Dependencies.load_paths << Typus.root.join('test', 'fixtures', 'app', folder)
+  ActiveSupport::Dependencies.load_paths << File.join(Typus.root, 'app', folder)
+  ActiveSupport::Dependencies.load_paths << File.join(Typus.root, 'test', 'fixtures', 'app', folder)
 end
 
 ActionController::Base.view_paths = []
 %w( app/views test/fixtures/app/views ).each do |folder|
-  ActionController::Base.append_view_path(Typus.root.join(folder))
+  ActionController::Base.append_view_path(File.join(Typus.root, folder))
 end
 
 class ActiveSupport::TestCase

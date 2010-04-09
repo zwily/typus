@@ -1,4 +1,5 @@
 require "test/helper"
+require "test/rails_app/app/controllers/admin/posts_controller"
 
 class Admin::PostsControllerTest < ActionController::TestCase
 

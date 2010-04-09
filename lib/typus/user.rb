@@ -142,7 +142,7 @@ module Typus
       end
 
       def encrypt(string)
-        generate_hash("--#{salt}--#{string}--")
+        generate_hash("--#{salt}--#{string}")
       end
 
       def initialize_salt
