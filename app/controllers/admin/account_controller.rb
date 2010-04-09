@@ -42,9 +42,7 @@ class Admin::AccountController < AdminController
     end
   end
 
-  ##
-  # Available if Typus::Configuration.options[:email] is set.
-  #
+  # Only available when Typus::Configuration.options[:email] is present.
   def reset_password
     @typus_user = Typus.user_class.find_by_token!(params[:token])
     if request.post?
