@@ -1,5 +1,5 @@
 <% content_for :sidebar do %>
-  <%= render "sidebar" %>
+  <%= typus_block :location => @resource[:self], :partial => "sidebar" %>
   <%= raw actions %>
   <%= raw search %>
   <%= raw previous_and_next %>
@@ -8,7 +8,7 @@
 <h2><%= link_to @resource[:human_name].pluralize, :action => "index" %> &rsaquo; 
     <%= _("Show") %></h2>
 
-<%= render "show" %>
+<%= typus_block :location => @resource[:self], :partial => "show" %>
 
 <dl>
 <%- @fields.each do |field| -%>

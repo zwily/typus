@@ -1,6 +1,7 @@
 class Admin::MasterController < AdminController
 
   include Typus::Format
+  include Typus::Templates
 
   before_filter :set_resource
   before_filter :find_item, 
@@ -32,7 +33,10 @@ class Admin::MasterController < AdminController
     check_ownership_of_items if @resource[:class].typus_options_for(:only_user_items)
 
     respond_to do |format|
-      format.html { generate_html }
+      format.html do
+        generate_html
+        select_template :index
+      end
       @resource[:class].typus_export_formats.each do |f|
         format.send(f) { send("generate_#{f}") }
       end
@@ -50,6 +54,8 @@ class Admin::MasterController < AdminController
     end
 
     @item = @resource[:class].new(item_params.symbolize_keys)
+
+    select_template :new
 
   end
 
@@ -77,7 +83,7 @@ class Admin::MasterController < AdminController
         redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id
       end
     else
-      render :action => 'new'
+      select_template :new
     end
 
   end
@@ -93,6 +99,8 @@ class Admin::MasterController < AdminController
     item_params.merge!(set_conditions)
     @previous, @next = @item.previous_and_next(item_params)
 
+    select_template :edit
+
   end
 
   def show
@@ -102,7 +110,7 @@ class Admin::MasterController < AdminController
     @previous, @next = @item.previous_and_next(set_conditions)
 
     respond_to do |format|
-      format.html
+      format.html { select_template :show }
       # TODO: Responders for multiple file formats. For example PDF ...
       format.xml do
         fields = @resource[:class].typus_fields_for(:xml).collect { |i| i.first }
@@ -140,7 +148,7 @@ class Admin::MasterController < AdminController
     else
 
       @previous, @next = @item.previous_and_next
-      render :action => 'edit'
+      select_template :edit
 
     end
 

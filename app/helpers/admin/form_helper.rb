@@ -1,5 +1,12 @@
 module Admin::FormHelper
 
+  def form_partial
+    resource = @resource[:self]
+    template_file = "#{Rails.root}/app/views/admin/#{resource}/_form.html.erb"
+    partial = File.exists?(template_file) ? resource : "master"
+    return "admin/#{partial}/form"
+  end
+
   def build_form(fields, form)
 
     options = { :form => form }

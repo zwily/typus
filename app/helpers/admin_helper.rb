@@ -1,5 +1,27 @@
 module AdminHelper
 
+  def typus_block(*args)
+
+    options = args.extract_options!
+
+    partials_path = "admin/#{options[:location]}"
+    resources_partials_path = 'admin/models'
+
+    partials = ActionController::Base.view_paths.map do |view_path|
+      Dir["#{view_path}/#{partials_path}/*"].map { |f| File.basename(f, '.html.erb') }
+    end.flatten
+    resources_partials = Dir["#{Rails.root}/app/views/#{resources_partials_path}/*"].map { |f| File.basename(f, '.html.erb') }
+
+    partial = "_#{options[:partial]}"
+
+    path = if partials.include?(partial) then partials_path
+           elsif resources_partials.include?(partial) then resources_partials_path
+           end
+
+    render "#{path}/#{options[:partial]}" if path
+
+  end
+
   def page_title
     Typus::Configuration.options[:app_name] + " - " + @page_title.join(" &rsaquo; ")
   end
