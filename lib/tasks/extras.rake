@@ -24,9 +24,4 @@ namespace :typus do
     system "script/plugin install git://github.com/rails/rails_xss.git --force"
   end
 
-  desc "Install ssl_requirement."
-  task :ssl do
-    system "script/plugin install git://github.com/fesplugas/ssl_requirement.git --force"
-  end
-
 end

@@ -10,11 +10,6 @@ class AdminController < ActionController::Base
     rescue_from Exception, :with => :render_error
   end
 
-  if Typus::Configuration.options[:ssl]
-    include SslRequirement
-    ssl_required :all
-  end
-
   before_filter :reload_config_and_roles
   before_filter :authenticate
   before_filter :set_preferences
