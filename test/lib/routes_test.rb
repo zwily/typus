@@ -2,7 +2,7 @@ require 'test/helper'
 
 class RoutesTest < ActiveSupport::TestCase
 
-  include ActionController::TestCase::Assertions
+  # include ActionController::TestCase::Assertions
 
   def setup
     @routes = Rails.application.routes.routes.map(&:name)

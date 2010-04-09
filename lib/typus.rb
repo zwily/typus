@@ -79,9 +79,9 @@ module Typus
 
     def boot!
 
-      if testing?
-        Typus::Configuration.options[:config_folder] = "vendor/plugins/typus/test/config/working"
-      end
+      # Some Typus requirements ...
+      require "typus/configuration"
+      require "typus/routes"
 
       # Ruby/Rails Extensions
       require "extensions/hash"

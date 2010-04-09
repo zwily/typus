@@ -2,7 +2,7 @@
 ENV['RAILS_ENV'] = 'test'
 
 require 'rails_app/config/environment'
-require 'test_help'
+require 'rails/test_help'
 require 'mocha'
 
 begin

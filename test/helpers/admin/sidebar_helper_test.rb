@@ -7,7 +7,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
   include Admin::SidebarHelper
 
   include ActionView::Helpers::UrlHelper
-  include ActionController::UrlWriter
+  # include ActionController::UrlWriter
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::FormTagHelper
 
