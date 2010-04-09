@@ -8,7 +8,6 @@ class Admin::AccountController < AdminController
   skip_before_filter :set_preferences
 
   before_filter :set_page_title
-  before_filter :verify_typus_users_table_schema
   before_filter :authenticate, :only => [ :quick_edit ]
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
@@ -93,21 +92,6 @@ class Admin::AccountController < AdminController
   end
 
 private
-
-  def verify_typus_users_table_schema
-
-    attributes = Typus.user_class.model_fields.keys
-
-    upgrades = ActiveSupport::OrderedHash.new
-    upgrades[:role] = "typus_update_schema_to_01"
-    upgrades[:preferences] = "typus_update_schema_to_02"
-
-    upgrades.each do |key, value|
-      message = "Run `script/generate #{value} -f && rake db:migrate` to update database schema."
-      raise message if !attributes.include?(key)
-    end
-
-  end
 
   def recover_password_disabled?
     redirect_to admin_sign_in_path unless Typus::Configuration.options[:email]
