@@ -9,7 +9,7 @@ Gem::Specification.new do |s|
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Francesc Esplugas"]
-  s.date = %q{2010-04-08}
+  s.date = %q{2010-04-09}
   s.description = %q{Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)}
   s.email = %q{francesc@intraducibles.com}
   s.extra_rdoc_files = [
@@ -59,16 +59,16 @@ Gem::Specification.new do |s|
      "app/views/admin/helpers/_resources.html.erb",
      "app/views/admin/helpers/_search.html.erb",
      "app/views/admin/helpers/_table_header.html.erb",
-     "app/views/admin/models/_edit.html.erb",
-     "app/views/admin/models/_form.html.erb",
-     "app/views/admin/models/_index.html.erb",
-     "app/views/admin/models/_new.html.erb",
-     "app/views/admin/models/_show.html.erb",
-     "app/views/admin/models/_sidebar.html.erb",
-     "app/views/admin/models/edit.html.erb",
-     "app/views/admin/models/index.html.erb",
-     "app/views/admin/models/new.html.erb",
-     "app/views/admin/models/show.html.erb",
+     "app/views/admin/master/_edit.html.erb",
+     "app/views/admin/master/_form.html.erb",
+     "app/views/admin/master/_index.html.erb",
+     "app/views/admin/master/_new.html.erb",
+     "app/views/admin/master/_show.html.erb",
+     "app/views/admin/master/_sidebar.html.erb",
+     "app/views/admin/master/edit.html.erb",
+     "app/views/admin/master/index.html.erb",
+     "app/views/admin/master/new.html.erb",
+     "app/views/admin/master/show.html.erb",
      "app/views/admin/shared/_feedback.html.erb",
      "app/views/admin/shared/_footer.html.erb",
      "app/views/admin/templates/_boolean.html.erb",
@@ -157,6 +157,10 @@ Gem::Specification.new do |s|
      "lib/extensions/hash.rb",
      "lib/extensions/object.rb",
      "lib/extensions/string.rb",
+     "lib/generators/typus/USAGE",
+     "lib/generators/typus/typus_generator.rb",
+     "lib/tasks/defaults.rake",
+     "lib/tasks/extras.rake",
      "lib/typus.rb",
      "lib/typus/active_record.rb",
      "lib/typus/authentication.rb",
@@ -166,12 +170,10 @@ Gem::Specification.new do |s|
      "lib/typus/quick_edit.rb",
      "lib/typus/reloader.rb",
      "lib/typus/routes.rb",
+     "lib/typus/templates.rb",
      "lib/typus/user.rb",
      "lib/typus/version.rb",
-     "lib/vendor/inherit_views.rb",
      "lib/vendor/paginator.rb",
-     "tasks/defaults.rake",
-     "tasks/extras.rake",
      "test/config/broken/application.yml",
      "test/config/broken/application_roles.yml",
      "test/config/broken/empty.yml",
