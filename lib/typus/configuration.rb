@@ -38,8 +38,9 @@ module Typus
 
       @@config = {}
       files.each do |file|
-        data = YAML::load_file(file)
-        @@config.merge!(data) if data
+        if data = YAML::load_file(file)
+          @@config.merge!(data)
+        end
       end
 
       return @@config
