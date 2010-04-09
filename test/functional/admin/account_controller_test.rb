@@ -168,10 +168,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     assert_response :success
     assert_template "sign_up"
-=begin
-    # FIXME
-    assert_match "layouts/account", @controller.active_layout.to_s
-=end
+    assert_match "layouts/account", @controller.inspect
     assert_equal "Enter your email below to create the first user.", flash[:notice]
 
   end
@@ -216,10 +213,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     assert_select "title", "Typus Test - Account &rsaquo; Sign in"
     assert_select "h1", "Typus Test"
-=begin
-    # FIXME
-    assert_match "layouts/account", @controller.active_layout.to_s
-=end
+    assert_match "layouts/account", @controller.inspect
 
   end
 
