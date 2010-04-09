@@ -6,6 +6,9 @@ require 'rails/all'
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
+require "typus"
+Typus.boot!
+
 module RailsApp
   class Application < Rails::Application
     # Settings in config/environments/* take precedence over those specified here.
@@ -36,6 +39,8 @@ module RailsApp
     #   g.template_engine :erb
     #   g.test_framework  :test_unit, :fixture => true
     # end
+
+    config.cookie_secret = "some secret phrase of at least 30 characters"
 
     # Configure the default encoding used in templates for Ruby 1.9.
     config.encoding = "utf-8"

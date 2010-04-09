@@ -1,0 +1,14 @@
+# Typus Models Configuration File
+#
+# Use the README file as a reference to customize settings.
+
+Post:
+  fields:
+    list: title
+    form: title, status
+  order_by: 
+  relationships: 
+  filters: 
+  search: title
+  application: rails3_typus
+

@@ -12,3 +12,5 @@ rescue LoadError
     Bundler.setup
   end
 end
+
+$:.unshift File.expand_path('../../../../lib', __FILE__)
