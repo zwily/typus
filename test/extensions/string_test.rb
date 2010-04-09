@@ -34,7 +34,7 @@ class StringTest < ActiveSupport::TestCase
   def test_extract_human_name
     assert_equal "Post", "admin/posts".extract_human_name
     assert_equal "Typus user", "admin/typus_users".extract_human_name
-    assert_equal "Delayed task", "admin/delayed/tasks".extract_human_name
+    assert_equal "Task", "admin/delayed/tasks".extract_human_name
   end
 
   def test_should_return_post_actions_on_index
