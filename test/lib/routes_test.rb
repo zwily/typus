@@ -5,7 +5,7 @@ class RoutesTest < ActiveSupport::TestCase
   include ActionController::TestCase::Assertions
 
   def setup
-    @routes = ActionController::Routing::Routes.named_routes.routes.keys
+    @routes = Rails.application.routes.routes.map(&:name)
   end
 
   def test_should_verify_admin_dashboard_routes
