@@ -165,7 +165,7 @@ module Admin::FormHelper
 <a name="#{field}"></a>
 <div class="box_relationships" id="#{model_to_relate_as_resource}">
   <h2>
-  #{link_to model_to_relate.typus_human_name.pluralize, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _("{{model}} filtered by {{filtered_by}}", :model => model_to_relate.typus_human_name.pluralize, :filtered_by => @item.to_label)}
+  #{link_to model_to_relate.model_name.human.pluralize, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _("{{model}} filtered by {{filtered_by}}", :model => model_to_relate.model_name.human.pluralize, :filtered_by => @item.to_label)}
   #{add_new}
   </h2>
       HTML
@@ -210,7 +210,7 @@ module Admin::FormHelper
         html << pagination(:anchor => model_to_relate.name.tableize) unless pagination.nil?
       else
         message = _("There are no {{records}}.", 
-                    :records => model_to_relate.typus_human_name.pluralize.downcase)
+                    :records => model_to_relate.model_name.human.pluralize.downcase)
         html << <<-HTML
   <div id="flash" class="notice"><p>#{message}</p></div>
         HTML
@@ -247,7 +247,7 @@ module Admin::FormHelper
 <a name="#{field}"></a>
 <div class="box_relationships" id="#{model_to_relate_as_resource}">
   <h2>
-  #{link_to model_to_relate.typus_human_name.pluralize, :controller => "admin/#{model_to_relate_as_resource}"}
+  #{link_to model_to_relate.model_name.human.pluralize, :controller => "admin/#{model_to_relate_as_resource}"}
   #{add_new}
   </h2>
       HTML
@@ -292,7 +292,7 @@ module Admin::FormHelper
         html << pagination(:anchor => model_to_relate.name.tableize) unless pagination.nil?
       else
         message = _("There are no {{records}}.", 
-                    :records => model_to_relate.typus_human_name.pluralize.downcase)
+                    :records => model_to_relate.model_name.human.pluralize.downcase)
         html << <<-HTML
   <div id="flash" class="notice"><p>#{message}</p></div>
         HTML
@@ -317,7 +317,7 @@ module Admin::FormHelper
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
-  #{link_to model_to_relate.typus_human_name, :controller => "admin/#{model_to_relate_as_resource}"}
+  #{link_to model_to_relate.model_name.human, :controller => "admin/#{model_to_relate_as_resource}"}
   </h2>
       HTML
       items = Array.new
@@ -332,7 +332,7 @@ module Admin::FormHelper
                            association)
       else
         message = _("There is no {{records}}.", 
-                    :records => model_to_relate.typus_human_name.downcase)
+                    :records => model_to_relate.model_name.human.downcase)
         html << <<-HTML
   <div id="flash" class="notice"><p>#{message}</p></div>
         HTML

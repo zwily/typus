@@ -21,7 +21,7 @@ class String
   end
 
   def extract_human_name
-    extract_class.typus_human_name.gsub('/', ' ')
+    extract_class.model_name.human.gsub('/', ' ')
   end
 
   # OPTIMIZE: Find a way to remove the rescue.

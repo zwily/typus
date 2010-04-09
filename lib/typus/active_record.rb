@@ -19,20 +19,6 @@ module Typus
       return hash
     end
 
-    ##
-    # This method is used to fix a Rails behavior.
-    #
-    #   typus $ script/console
-    #   Loading development environment (Rails 2.3.5)
-    #   >> TypusUser.human_name
-    #   => "Typususer"
-    #   >> TypusUser.typus_human_name
-    #   => "Typus user"
-    #
-    def typus_human_name
-      human_name(:default => self.name.underscore.humanize)
-    end
-
     def typus_description
       Typus::Configuration.config[self.name]['description']
     end

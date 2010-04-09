@@ -189,12 +189,12 @@ class Admin::MasterController < AdminController
 
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
       flash[:success] = _("{{model_a}} related to {{model_b}}.", 
-                        :model_a => resource_class.typus_human_name, 
+                        :model_a => resource_class.model_name.human, 
                         :model_b => @resource[:human_name])
     else
       # TODO: Show the reason why cannot be related showing model_a and model_b errors.
       flash[:error] = _("{{model_a}} cannot be related to {{model_b}}.", 
-                        :model_a => resource_class.typus_human_name, 
+                        :model_a => resource_class.model_name.human, 
                         :model_b => @resource[:human_name])
     end
 
@@ -224,12 +224,12 @@ class Admin::MasterController < AdminController
 
     if saved_succesfully
       flash[:success] = _("{{model_a}} unrelated from {{model_b}}.", 
-                          :model_a => resource_class.typus_human_name, 
+                          :model_a => resource_class.model_name.human, 
                           :model_b => @resource[:human_name])
     else
       # TODO: Show the reason why cannot be unrelated showing model_a and model_b errors.
       flash[:error] = _("{{model_a}} cannot be unrelated to {{model_b}}.", 
-                        :model_a => resource_class.typus_human_name, 
+                        :model_a => resource_class.model_name.human, 
                         :model_b => @resource[:human_name])
     end
 
@@ -377,8 +377,8 @@ private
     end
 
     flash[:success] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
-                                   :model_a => @item.class.typus_human_name, 
-                                   :model_b => resource_class.typus_human_name)
+                                   :model_a => @item.class.model_name.human, 
+                                   :model_b => resource_class.model_name.human)
     redirect_to path || params[:back_to]
 
   end

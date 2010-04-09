@@ -12,7 +12,7 @@ module Admin::DashboardHelper
 
       next if available.empty?
 
-      apps[app] = available.sort_by { |x| x.constantize.typus_human_name }
+      apps[app] = available.sort_by { |x| x.constantize.model_name.human }
 
     end
 
