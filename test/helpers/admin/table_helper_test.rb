@@ -5,7 +5,6 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   include Admin::TableHelper
 
   include ActionView::Helpers::UrlHelper
-  # include ActionController::UrlWriter
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
 

@@ -6,7 +6,6 @@ class AdminHelperTest < ActiveSupport::TestCase
 
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
-  # include ActionController::UrlWriter
 
   def render(*args); args; end
 
