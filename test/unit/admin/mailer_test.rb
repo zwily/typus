@@ -1,11 +1,11 @@
 require 'test/helper'
 
-class AdminMailerTest < ActiveSupport::TestCase
+class Admin::MailerTest < ActiveSupport::TestCase
 
   def setup
     @user = typus_users(:admin)
     url = "http://test.host/admin/reset_password?token=#{@user.token}"
-    @response = AdminMailer.reset_password_link(@user, url).deliver
+    @response = Admin::Mailer.reset_password_link(@user, url).deliver
   end
 
   def test_should_verify_email_from_is_defined_by_typus_options
