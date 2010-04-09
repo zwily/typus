@@ -82,6 +82,9 @@ module Typus
       # Some Typus requirements ...
       require "typus/configuration"
       require "typus/routes"
+      require "typus/authentication"
+      require "typus/preferences"
+      require "typus/reloader"
 
       # Ruby/Rails Extensions
       require "extensions/hash"
