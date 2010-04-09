@@ -34,8 +34,7 @@ module Typus
     # Read Typus Configuration files placed on <tt>config/typus/**/*.yml</tt>.
     def self.config!
 
-      files = Dir[Rails.root.join(options[:config_folder], "**", "*.yml")].sort
-      files = files.delete_if { |x| x.include?("_roles.yml") }
+      files = Dir[Rails.root.join(options[:config_folder], "**", "*.yml")].reject { |f| f.include?("_roles.yml") }
 
       @@config = {}
       files.each do |file|
