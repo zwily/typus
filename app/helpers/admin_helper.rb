@@ -23,7 +23,7 @@ module AdminHelper
   end
 
   def page_title
-    Typus::Configuration.options[:app_name] + " - " + @page_title.join(" &rsaquo; ")
+    (Typus::Configuration.options[:app_name] + " - " + @page_title.join(" &rsaquo; ")).html_safe
   end
 
   def header

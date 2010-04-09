@@ -7,7 +7,6 @@ class Admin::AccountController < AdminController
   skip_before_filter :reload_config_and_roles
   skip_before_filter :set_preferences
 
-  before_filter :set_page_title
   before_filter :authenticate, :only => [ :quick_edit ]
   before_filter :recover_password_disabled?, 
                 :only => [ :recover_password, :reset_password ]
