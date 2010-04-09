@@ -59,35 +59,4 @@ module Admin::MasterHelper
     render "admin/helpers/pagination" if @items.prev || @items.next
   end
 
-  ##
-  # Simple and clean pagination links
-  #
-  def build_pagination(pager, options = {})
-
-    options[:link_to_current_page] ||= true
-    options[:always_show_anchors] ||= true
-
-    # Calculate the window start and end pages
-    options[:padding] ||= 2
-    options[:padding] = options[:padding] < 0 ? 0 : options[:padding]
-
-    page = params[:page].blank? ? 1 : params[:page].to_i
-    current_page = pager.page(page)
-
-    first = pager.first.number <= (current_page.number - options[:padding]) && pager.last.number >= (current_page.number - options[:padding]) ? current_page.number - options[:padding] : 1
-    last = pager.first.number <= (current_page.number + options[:padding]) && pager.last.number >= (current_page.number + options[:padding]) ? current_page.number + options[:padding] : pager.last.number
-
-    returning(String.new) do |html|
-      # Print start page if anchors are enabled
-      html << yield(1) if options[:always_show_anchors] and not first == 1
-      # Print window pages
-      first.upto(last) do |page|
-        (current_page.number == page && !options[:link_to_current_page]) ? html << page.to_s : html << (yield(page)).to_s
-      end
-      # Print end page if anchors are enabled
-      html << yield(pager.last.number).to_s if options[:always_show_anchors] and not last == pager.last.number
-    end
-
-  end
-
 end

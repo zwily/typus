@@ -6,19 +6,6 @@
     <span class="disabled"><%= "&larr; " + _("Previous") %></span>
   <% end %>
 
-  <% last_page = 0 -%>
-
-  <% build_pagination(@pager) do |n| -%>
-    <% if @items.number == n -%>
-      <span class="current"><%= n %></span>
-    <% else -%>
-      <%= "..." if last_page + 1 < n %>
-      <%= link_to n, params.merge(:page => n, :anchor => @options[:anchor]) %>
-    <% end -%>
-    <% last_page = n -%>
-
-  <% end -%>
-
   <% if @items.next? %>
     <%= link_to _("Next") + " &rarr;", params.merge(:page => @items.next.number, :anchor => @options[:anchor]) %>
   <% else %>
