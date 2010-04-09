@@ -10,7 +10,7 @@
 <h2><%= link_to @resource[:human_name].pluralize, :action => 'index' %> &rsaquo;
     <%= _("Edit") %></h2>
 
-<%= render :partial => "edit" %>
+<%= render "edit" %>
 
 <%
   options = { :action => 'update',
