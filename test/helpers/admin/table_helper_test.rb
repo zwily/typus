@@ -201,8 +201,6 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_typus_table_tree_field
 
-    return if !defined?(ActiveRecord::Acts::Tree)
-
     page = pages(:published)
     output = typus_table_tree_field("test", page)
     expected = <<-HTML
@@ -213,7 +211,9 @@ HTML
 
     page = pages(:unpublished)
     output = typus_table_tree_field("test", page)
-    expected = %(<td>Page#1</td>)
+    expected = <<-HTML
+<td>Page#1</td>
+    HTML
 
     assert_equal expected, output
 

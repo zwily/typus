@@ -57,8 +57,6 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   def test_typus_tree_field
 
-    return if !defined?(ActiveRecord::Acts::Tree)
-
     self.stubs(:expand_tree_into_select_field).returns('expand_tree_into_select_field')
 
     @resource = { :class => Page }
@@ -91,8 +89,6 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   end
 
   def test_expand_tree_into_select_field
-
-    return if !defined?(ActiveRecord::Acts::Tree)
 
     items = Page.roots
 
