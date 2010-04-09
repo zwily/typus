@@ -19,9 +19,4 @@ namespace :typus do
 
   end
 
-  desc "Install rails_xss."
-  task :rails_xss do
-    system "script/plugin install git://github.com/rails/rails_xss.git --force"
-  end
-
 end
