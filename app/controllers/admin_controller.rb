@@ -6,7 +6,7 @@ class AdminController < ActionController::Base
   include Typus::Preferences
   include Typus::Reloader
 
-  unless ActionController::Base.consider_all_requests_local
+  unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => :render_error
   end
 
