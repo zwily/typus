@@ -12,7 +12,7 @@ module AdminHelper
       links << (link_to_unless_current model.constantize.model_name.human.pluralize, :controller => "/admin/#{model.tableize}")
     end
 
-    if ActionController::Routing::Routes.named_routes.routes.has_key?(:root)
+    if Rails.application.routes.routes.map(&:name).include?(:root)
       links << (link_to _("View site"), root_path, :target => 'blank')
     end
 
