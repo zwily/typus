@@ -2,10 +2,6 @@ require "test/helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
-  def setup
-    @typus_user = typus_users(:admin)
-  end
-
   def test_mapping_with_an_array
     post = posts(:published)
     assert_equal "published", post.mapping(:status)
@@ -21,16 +17,15 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_to_label
-    assert @typus_user.respond_to?(:to_label)
+    assert typus_users(:admin).respond_to?(:to_label)
   end
 
   def test_to_label_when_model_has_name
-    @typus_user.stubs(:name).returns("name")
-    assert_equal "name", @typus_user.to_label
+    assert_equal "Admin Example", typus_users(:admin).to_label
   end
 
   def test_to_label_when_model_has_no_name_attribute
-    assert_equal "TypusUser#1", @typus_user.to_label
+    assert_equal "Post#1", posts(:published).to_label
   end
 
 end
