@@ -13,7 +13,7 @@
     </li>
 
     <li>
-      <%= submit_tag _("Sign in"), :class => "button" %> <%= link_to _("Recover password"), admin_recover_password_path if Typus::Configuration.options[:email] %>
+      <%= submit_tag _("Sign in"), :class => "button" %> <%= link_to _("Recover password"), admin_recover_password_path if Typus.email %>
     </li>
 
   </ul>

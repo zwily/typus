@@ -4,7 +4,7 @@ require "test/rails_app/app/controllers/admin/typus_users_controller"
 class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def setup
-    Typus::Configuration.options[:root] = 'admin'
+    Typus.master_role = 'admin'
     @typus_user = typus_users(:admin)
     @request.session[:typus_user_id] = @typus_user.id
     @request.env['HTTP_REFERER'] = '/admin/typus_users'
@@ -85,8 +85,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_allow_editor_to_update_himself
 
-    options = Typus::Configuration.options.merge(:index_after_save => false)
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus::Resource.stubs(:index_after_save).returns(false)
 
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
@@ -198,8 +197,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     # has access to all TypusUser records.
     #
 
-    options = Typus::Configuration.options.merge(:root => 'editor')
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:master_role).returns("editor")
 
     get :edit, { :id => typus_user.id }
     assert_response :success

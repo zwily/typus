@@ -12,7 +12,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
 =begin
 
   def test_should_verify_email_from_is_defined_by_typus_options
-    assert_equal Typus::Configuration.options[:email], @response.from
+    assert_equal Typus::Configuration.email, @response.from
   end
 
 =end
@@ -22,7 +22,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_email_subject
-    expected = "[#{Typus::Configuration.options[:app_name]}] Reset password"
+    expected = "[#{Typus::Configuration.app_name}] Reset password"
     assert_equal expected, @response.subject
   end
 

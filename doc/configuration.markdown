@@ -24,25 +24,28 @@
 
 <h2 id="initializer">Initializer: Understanding what <code>typus.rb</code> can do for you.</h2>
 
-The initializer has two groups of options.
+The initializer has two groups of options. One for system wide 
+settings and one for resource settings which can be overwriten by 
+resource.
 
-    Typus::Configuration.options[:app_name]
-    Typus::Configuration.options[:email]
-    Typus::Configuration.options[:recover_password]
-    Typus::Configuration.options[:root]
-    Typus::Configuration.options[:user_class_name]
-    Typus::Configuration.options[:user_fk]
+    Typus.setup do |config|
+      config.app_name = ...
+      config.email = ...
+      config.root = ...
+      config.user_class_name = ...
+      config.user_fk = ...
+    end
 
-Model options, which can be defined by model.
-
-    Typus::Configuration.options[:end_year]
-    Typus::Configuration.options[:form_rows]
-    Typus::Configuration.options[:index_after_save]
-    Typus::Configuration.options[:minute_step]
-    Typus::Configuration.options[:nil]
-    Typus::Configuration.options[:per_page]
-    Typus::Configuration.options[:sidebar_selector]
-    Typus::Configuration.options[:start_year]
+    Typus::Resource.setup do |config|
+      config.end_year = ...
+      config.form_rows = ...
+      config.index_after_save = ...
+      config.minute_step = ...
+      config.nil = ...
+      config.per_page = ...
+      config.sidebar_selector = ...
+      config.start_year = ...
+    end
 
 Model options can also be defined by model on the yaml files located on `config/typus`.
 
@@ -63,7 +66,7 @@ Model options can also be defined by model on the yaml files located on `config/
 
 Recover password is disabled by default. To enable it you should provide an email address which will be shown as the sender.
 
-    Typus::Configuration.options[:email] = 'typus@application.com'
+    Typus.email = 'typus@application.com'
 
 [&uarr; Back to top](#toc)
 
@@ -71,7 +74,7 @@ Recover password is disabled by default. To enable it you should provide an emai
 
 After creating a new record you'll be redirected to the record so you can continue editing it. If you prefer to be redirected to the main index you can owerwrite the setting. This setting can be defined globally or by model.
 
-    Typus::Configuration.options[:index_after_save] = false
+    Typus::Resource.index_after_save = false
 
 [&uarr; Back to top](#toc)
 

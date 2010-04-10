@@ -109,7 +109,7 @@ module Typus
       end
 
       def is_root?
-        role == Typus::Configuration.options[:root]
+        role == Typus.master_role
       end
 
       def is_not_root?

@@ -38,8 +38,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_create_an_item_and_redirect_to_index
 
-    options = Typus::Configuration.options.merge(:index_after_save => true)
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus::Resource.expects(:index_after_save).returns(true)
 
     assert_difference 'Post.count' do
       post :create, { :post => { :title => 'This is another title', :body => 'Body' } }
@@ -85,8 +84,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_update_an_item_and_redirect_to_index
 
-    options = Typus::Configuration.options.merge(:index_after_save => true)
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus::Resource.expects(:index_after_save).returns(true)
 
     post :update, { :id => posts(:published), :title => 'Updated' }
     assert_response :redirect

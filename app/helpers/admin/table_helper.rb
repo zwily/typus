@@ -173,8 +173,8 @@ module Admin::TableHelper
   def typus_table_file_field(attribute, item, link_options = {})
 
     attachment = attribute.split("_file_name").first
-    file_preview = Typus::Configuration.options[:file_preview]
-    file_thumbnail = Typus::Configuration.options[:file_thumbnail]
+    file_preview = Typus.file_preview
+    file_thumbnail = Typus.file_thumbnail
 
     has_file_preview = item.send(attachment).styles.member?(file_preview)
     file_preview_is_image = item.send("#{attachment}_content_type") =~ /^image\/.+/

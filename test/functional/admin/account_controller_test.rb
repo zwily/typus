@@ -37,8 +37,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_not_send_recovery_password_link_to_unexisting_user
 
-    options = Typus::Configuration.options.merge(:email => "john@example.com")
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:email).returns("john@example.com")
 
     post :recover_password, { :typus_user => { :email => "unexisting" } }
     assert_response :redirect
@@ -49,8 +48,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_send_recovery_password_link_to_existing_user
 
-    options = Typus::Configuration.options.merge(:email => "john@example.com")
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:email).returns("john@example.com")
 
     admin = typus_users(:admin)
     post :recover_password, { :typus_user => { :email => admin.email } }
@@ -85,8 +83,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_reset_password_when_recover_password_is_true
 
-    options = Typus::Configuration.options.merge(:email => "john@example.com")
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:email).returns("john@example.com")
 
     typus_user = typus_users(:admin)
     get :reset_password, { :token => typus_user.token }
@@ -98,8 +95,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_redirect_to_sign_in_user_after_reset_password
 
-    options = Typus::Configuration.options.merge(:email => "john@example.com")
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:email).returns("john@example.com")
 
     typus_user = typus_users(:admin)
     post :reset_password, { :token => typus_user.token, :typus_user => { :password => "12345678", :password_confirmation => "12345678" } }
@@ -111,9 +107,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_be_redirected_if_password_does_not_match_confirmation
 
-    options = Typus::Configuration.options.merge(:email => "john@example.com")
-    options = Typus::Configuration.options.merge(:email => "john@example.com")
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:email).returns("john@example.com")
 
     typus_user = typus_users(:admin)
     post :reset_password, { :token => typus_user.token, :typus_user => { :password => "drowssap", :password_confirmation => "drowssap2" } }
@@ -123,8 +117,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_only_be_allowed_to_reset_password
 
-    options = Typus::Configuration.options.merge(:email => "john@example.com")
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:email).returns("john@example.com")
 
     typus_user = typus_users(:admin)
     post :reset_password, { :token => typus_user.token, :typus_user => { :password => "drowssap", :password_confirmation => "drowssap", :role => "superadmin" } }
@@ -135,8 +128,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_return_404_on_reset_passsword_if_token_is_not_valid
 
-    options = Typus::Configuration.options.merge(:email => "john@example.com")
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:email).returns("john@example.com")
 
     assert_raise(ActiveRecord::RecordNotFound) { get :reset_password, { :token => "INVALID" } }
 
@@ -144,9 +136,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_reset_password_with_valid_token
 
-
-    options = Typus::Configuration.options.merge(:email => true)
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:email).returns("john@example.com")
 
     typus_user = typus_users(:admin)
     get :reset_password, { :token => typus_user.token }
@@ -205,8 +195,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_render_sign_in
 
-    options = Typus::Configuration.options.merge(:app_name => "Typus Test")
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:app_name).returns("Typus Test")
 
     get :sign_in
     assert_response :success
@@ -230,8 +219,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
   end
 
   def test_should_verify_typus_sign_in_layout_includes_recover_password_link
-    options = Typus::Configuration.options.merge(:email => "john@example.com")
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:email).returns("john@example.com")
     get :sign_in
     assert @response.body.include?("Recover password")
   end

@@ -147,7 +147,7 @@ module Typus
         value = data['options'][filter.to_s] unless data['options'][filter.to_s].nil?
       end
 
-      return (!value.nil?) ? value : Typus::Configuration.options[filter.to_sym]
+      return (!value.nil?) ? value : Typus::Resource.send(filter)
 
     end
 

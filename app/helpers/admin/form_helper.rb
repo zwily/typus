@@ -394,8 +394,8 @@ Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="ht
     return unless item.attachment_present?(attribute)
 
     attachment = attribute.split("_file_name").first
-    file_preview = Typus::Configuration.options[:file_preview]
-    file_thumbnail = Typus::Configuration.options[:file_thumbnail]
+    file_preview = Typus.file_preview
+    file_thumbnail = Typus.file_thumbnail
 
     has_file_preview = item.send(attachment).styles.member?(file_preview)
     has_file_thumbnail = item.send(attachment).styles.member?(file_thumbnail)

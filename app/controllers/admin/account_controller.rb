@@ -43,7 +43,7 @@ class Admin::AccountController < AdminController
     end
   end
 
-  # Only available when Typus::Configuration.options[:email] is present.
+  # Only available when Typus.email is present.
   def reset_password
     @typus_user = Typus.user_class.find_by_token!(params[:token])
     if request.post?
@@ -65,14 +65,14 @@ class Admin::AccountController < AdminController
     if request.post?
 
       user = Typus.user_class.generate(:email => params[:typus_user][:email], 
-                                       :password => Typus::Configuration.options[:default_password], 
-                                       :role => Typus::Configuration.options[:root])
+                                       :password => Typus.default_password, 
+                                       :role => Typus.master_role)
       user.status = true
 
       if user.save
         session[:typus_user_id] = user.id
         flash[:notice] = _("Password set to \"{{password}}\".", 
-                           :password => Typus::Configuration.options[:default_password])
+                           :password => Typus.default_password)
         redirect_to admin_dashboard_path
       else
         flash[:error] = _("That doesn't seem like a valid email address.")
@@ -89,7 +89,7 @@ class Admin::AccountController < AdminController
 private
 
   def recover_password_disabled?
-    redirect_to admin_sign_in_path unless Typus::Configuration.options[:email]
+    redirect_to admin_sign_in_path unless Typus.email
   end
 
 end

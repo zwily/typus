@@ -61,8 +61,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_template 'show'
 
     # Editor tries to show a post owned by the admin.
-    options = Typus::Configuration.options.merge(:only_user_items => true)
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus::Resource.expects(:only_user_items).returns(true)
     post = posts(:owned_by_admin)
     get :show, { :id => post.id }
     assert_response :redirect

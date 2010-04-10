@@ -50,8 +50,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   def test_should_return_to_back_to_url
 
-    options = Typus::Configuration.options.merge(:index_after_save => true)
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus::Resource.expects(:index_after_save).returns(true)
 
     post_ = posts(:published)
     asset_ = assets(:first)

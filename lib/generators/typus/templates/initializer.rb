@@ -1,26 +1,37 @@
-# Be sure to restart your server when you modify this file.
+Typus.setup do |config|
 
-# System wide options
+  # Application name.
+  config.app_name = "<%= options[:app_name] %>"
 
-Typus::Configuration.options[:app_name] = '<%= options[:app_name] %>'
-# Typus::Configuration.options[:email] = 'admin@example.com'
-# Typus::Configuration.options[:file_preview] = :typus_preview
-# Typus::Configuration.options[:file_thumbnail] = :typus_thumbnail
-# Typus::Configuration.options[:relationship] = 'typus_users'
-# Typus::Configuration.options[:root] = 'admin'
-Typus::Configuration.options[:user_class_name] = '<%= options[:user_class_name] %>'
-Typus::Configuration.options[:user_fk] = '<%= options[:user_fk] %>'
+  # Enabling this options will allow users to recover password.
+  # config.email = 'admin@example.com'
 
-# Model options which can also be defined by model on the yaml files.
+  # Paperclip settings.
+  # config.file_preview = :typus_preview
+  # config.file_thumbnail = :typus_thumbnail
 
-# Typus::Configuration.options[:default_action_on_item] = 'edit'
-# Typus::Configuration.options[:end_year] = Time.now.year + 1
-# Typus::Configuration.options[:form_rows] = 15
-# Typus::Configuration.options[:index_after_save] = true
-# Typus::Configuration.options[:minute_step] = 5
-# Typus::Configuration.options[:nil] = 'nil'
-# Typus::Configuration.options[:on_header] = false
-# Typus::Configuration.options[:only_user_items] = false
-# Typus::Configuration.options[:per_page] = 15
-# Typus::Configuration.options[:sidebar_selector] = 5
-# Typus::Configuration.options[:start_year] = Time.now.year - 10
+  # Define relationship table.
+  # config.relationship = "typus_users"
+
+  # Defines the default root.
+  # config.root = "admin"
+
+  # Defines user_class_name and user_fk.
+  config.user_class_name = "<%= options[:user_class_name] %>"
+  config.user_fk = "<%= options[:user_fk] %>"
+
+end
+
+Typus::Resource.setup do |config|
+  # config.default_action_on_item = "edit"
+  # config.end_year = nil
+  # config.form_rows = 15
+  # config.index_after_save = false
+  # config.minute_step = 5
+  # config.nil = "nil"
+  # config.on_header = false
+  # config.only_user_items = false
+  # config.per_page = 15
+  # config.sidebar_selector = 5
+  # config.start_year = nil
+end

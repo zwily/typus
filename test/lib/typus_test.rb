@@ -2,6 +2,19 @@ require "test/helper"
 
 class TypusTest < ActiveSupport::TestCase
 
+  def test_should_verify_configuration_options
+    assert_equal "Typus", Typus.app_name
+    assert_equal "vendor/plugins/typus/test/config/working", Typus.config_folder
+    assert_equal "columbia", Typus.default_password
+    assert_equal nil, Typus.email
+    assert_equal :typus_preview, Typus.file_preview
+    assert_equal :typus_thumbnail, Typus.file_thumbnail
+    assert_equal "typus_users", Typus.relationship
+    assert_equal "admin", Typus.master_role
+    assert_equal "TypusUser", Typus.user_class_name
+    assert_equal "typus_user_id", Typus.user_fk
+  end
+
   def test_should_return_root
     expected = Dir.pwd
     assert Typus.root.kind_of?(String)
@@ -46,23 +59,13 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   def test_should_return_user_fk
-    assert_equal 'typus_user_id', Typus.user_fk
+    assert_equal 'typus_user_id', Typus::Configuration.user_fk
   end
 
   def test_should_return_overwritted_user_fk
     options = { :user_fk => 'my_user_fk' }
     Typus::Configuration.stubs(:options).returns(options)
-    assert_equal 'my_user_fk', Typus.user_fk
-  end
-
-  def test_should_return_relationship
-    assert_equal 'typus_users', Typus.relationship
-  end
-
-  def test_should_return_overwritted_user_fk
-    options = { :relationship => 'my_typus_users' }
-    Typus::Configuration.stubs(:options).returns(options)
-    assert_equal 'my_typus_users', Typus.relationship
+    assert_equal 'my_user_fk', Typus::Configuration.user_fk
   end
 
 end

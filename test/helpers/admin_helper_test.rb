@@ -11,8 +11,7 @@ class AdminHelperTest < ActiveSupport::TestCase
 
   def test_page_title
     @page_title = ["a", "b"]
-    options = { :app_name => "whatistypus.com" }
-    Typus::Configuration.stubs(:options).returns(options)
+    Typus.expects(:app_name).returns("whatistypus.com")
     assert_equal "whatistypus.com - a &rsaquo; b", page_title
   end
 

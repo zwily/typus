@@ -8,7 +8,7 @@ class TypusUserTest < ActiveSupport::TestCase
               :email => 'test@example.com', 
               :password => '12345678', 
               :password_confirmation => '12345678', 
-              :role => Typus::Configuration.options[:root], 
+              :role => Typus.master_role, 
               :preferences => { :locale => :en } }
     @typus_user = TypusUser.new(@data)
   end

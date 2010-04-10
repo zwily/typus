@@ -10,7 +10,7 @@ module AdminHelper
     partials = ActionController::Base.view_paths.map do |view_path|
       Dir["#{view_path}/#{partials_path}/*"].map { |f| File.basename(f, '.html.erb') }
     end.flatten
-    resources_partials = Dir["#{Rails.root}/app/views/#{resources_partials_path}/*"].map { |f| File.basename(f, '.html.erb') }
+    resources_partials = Dir[Rails.root.join("app/views/#{resources_partials_path}/*")].map { |f| File.basename(f, '.html.erb') }
 
     partial = "_#{options[:partial]}"
 
@@ -23,7 +23,7 @@ module AdminHelper
   end
 
   def page_title
-    (Typus::Configuration.options[:app_name] + " - " + @page_title.join(" &rsaquo; ")).html_safe
+    (Typus.app_name + " - " + @page_title.join(" &rsaquo; ")).html_safe
   end
 
   def header
@@ -45,13 +45,13 @@ module AdminHelper
 
   def login_info(user = @current_user)
 
-    admin_edit_typus_user_path = { :controller => "/admin/#{Typus::Configuration.options[:user_class_name].tableize}", 
+    admin_edit_typus_user_path = { :controller => "/admin/#{Typus.user_class_name.tableize}", 
                                    :action => 'edit', 
                                    :id => user.id }
 
     message = _("Are you sure you want to sign out and end your session?")
 
-    user_details = if user.can?('edit', Typus::Configuration.options[:user_class_name])
+    user_details = if user.can?('edit', Typus.user_class_name)
                      link_to user.name, admin_edit_typus_user_path
                    else
                      user.name

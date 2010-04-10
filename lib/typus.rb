@@ -2,7 +2,53 @@
 
 module Typus
 
+  # Define the application name.
+  mattr_accessor :app_name
+  @@app_name = "Typus"
+
+  # Define the configuration folder.
+  mattr_accessor :config_folder
+  @@config_folder = "config/typus"
+
+  # Define the default password.
+  mattr_accessor :default_password
+  @@default_password = "columbia"
+
+  # Define the default email.
+  mattr_accessor :email
+  @@email = nil
+
+  # Define the file preview.
+  mattr_accessor :file_preview
+  @@file_preview = :typus_preview
+
+  # Define the file thumbnail.
+  mattr_accessor :file_thumbnail
+  @@file_thumbnail = :typus_thumbnail
+
+  # Defines the default relationship table.
+  mattr_accessor :relationship
+  @@relationship = "typus_users"
+
+  # Defines the default master role.
+  mattr_accessor :master_role
+  @@master_role = "admin"
+
+  # Defines the default user_class_name.
+  mattr_accessor :user_class_name
+  @@user_class_name = "TypusUser"
+
+  # Defines the default user_fk.
+  mattr_accessor :user_fk
+  @@user_fk = "typus_user_id"
+
   class << self
+
+    # Default way to setup typus. Run rails generate typus to create
+    # a fresh initializer with all configuration values.
+    def setup
+      yield self
+    end
 
     def root
       (File.dirname(__FILE__) + "/../").chomp("/lib/../")
@@ -61,19 +107,7 @@ module Typus
     end
 
     def user_class
-      Typus::Configuration.options[:user_class_name].constantize
-    end
-
-    def user_fk
-      Typus::Configuration.options[:user_fk]
-    end
-
-    def relationship
-      Typus::Configuration.options[:relationship]
-    end
-
-    def testing?
-      Rails.env.test? && Dir.pwd.match("vendor/plugins/typus")
+      Typus.user_class_name.constantize
     end
 
     def boot!
@@ -92,10 +126,6 @@ module Typus
       require "extensions/object"
       require "extensions/string"
       require "extensions/active_record"
-
-      # Load configuration and roles.
-      Typus::Configuration.config!
-      Typus::Configuration.roles!
 
       # Active Record Extensions.
       require "typus/active_record"

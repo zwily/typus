@@ -2,43 +2,10 @@ module Typus
 
   module Configuration
 
-    # Default options which can be overwritten from the initializer.
-    typus_options = { :app_name => "Typus", 
-                      :config_folder => "config/typus", 
-                      :default_password => "columbia", 
-                      :email => nil, 
-                      :file_preview => :typus_preview, 
-                      :file_thumbnail => :typus_thumbnail, 
-                      :relationship => "typus_users", 
-                      :root => "admin", 
-                      :user_class_name => "TypusUser", 
-                      :user_fk => "typus_user_id" }
-
-    # Default options which can be overwritten from the initializer.
-    model_options = { :default_action_on_item => "edit", 
-                      :end_year => nil,
-                      :form_rows => 15, 
-                      :index_after_save => false, 
-                      :minute_step => 5, 
-                      :nil => "nil", 
-                      :on_header => false, 
-                      :only_user_items => false, 
-                      :per_page => 15, 
-                      :sidebar_selector => 5, 
-                      :start_year => nil }
-
-    @@options = typus_options.merge(model_options)
-
-    mattr_accessor :options
-
     # Read Typus Configuration files placed on <tt>config/typus/**/*.yml</tt>.
     def self.config!
 
-      if ENV['RAILS_ENV'] == 'test'
-        options[:config_folder] = "test/config/working"
-      end
-
-      files = Dir[File.join(options[:config_folder], "**", "*.yml")].reject { |f| f.include?("_roles.yml") }
+      files = Dir[File.join(Typus.config_folder, "**", "*.yml")].reject { |f| f.include?("_roles.yml") }
 
       @@config = {}
       files.each do |file|
@@ -56,13 +23,9 @@ module Typus
     # Read Typus Roles from configuration files placed on <tt>config/typus/**/*_roles.yml</tt>.
     def self.roles!
 
-      if ENV['RAILS_ENV'] == 'test'
-        options[:config_folder] = "test/config/working"
-      end
+      files = Dir[File.join(Typus.config_folder, "**", "*_roles.yml")].sort
 
-      files = Dir[File.join(options[:config_folder], "**", "*_roles.yml")].sort
-
-      @@roles = { options[:root] => {} }
+      @@roles = { Typus.master_role => {} }
 
       files.each do |file|
         data = YAML::load_file(file)
