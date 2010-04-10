@@ -22,8 +22,8 @@ module Typus
       end
 
       map.with_options :controller => "admin/docs", :path_prefix => prefix do |i|
-        i.connect "docs", :action => "index"
-        i.connect "docs/:id", :action => "show"
+        i.admin_docs "docs", :action => "index"
+        i.admin_doc "docs/:id", :action => "show"
       end
 
       map.with_options :controller => "admin/account", :path_prefix => prefix do |i|
