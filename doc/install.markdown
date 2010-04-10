@@ -6,15 +6,15 @@ You can install Typus as a plugin or as a gem.
 
 Install from GitHub the latest version which is compatible with **Rails 2.3.4**.
 
-    $ script/plugin install git://github.com/fesplugas/typus.git
+    $ script/rails plugin install git://github.com/fesplugas/typus.git
 
 To re-install the plugin use the `--force` option.
 
 ### Gem Install
 
-Add **Typus** to your <tt>config/environment.rb</tt>.
+Add **Typus** to your `Gemfile`.
 
-    config.gem 'typus'
+    gem "typus", :git => "git://github.com/fesplugas/typus.git"
 
 Install the plugin.
 
@@ -25,7 +25,7 @@ Install the plugin.
 
 Once the plugin is installed generate **Typus** files and migrate your database. A `typus_users` table will be created, this is where **Typus** users are stored.
 
-    $ script/generate typus
+    $ script/rails generate typus
     $ rake db:migrate
 
 Start the application server, go to <http://0.0.0.0:3000/admin> and follow the instructions.

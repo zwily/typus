@@ -33,7 +33,7 @@ extensible enough to match lots of use cases.
 
 **Step 2:** Start the server.
 
-    $ cd example.com && script/server
+    $ cd example.com && script/rails server
 
 **Step 3:** Go to the admin area
 
@@ -50,14 +50,14 @@ Use the following credentials to log in.
 
 ## Installing
 
-Install from GitHub the latest version which it's compatible with Rails 2.3.5.
+Install from GitHub the latest version which it's compatible with `Rails 3.0.0.beta2`.
 
-    $ script/plugin install git://github.com/fesplugas/typus.git
+    $ script/rails plugin install git://github.com/fesplugas/typus.git
 
 Once `typus` is installed, run the generator to create required files 
 and migrate your database.
 
-    $ script/generate typus
+    $ script/rails generate typus
     $ rake db:migrate
 
 To create the first user, start the application server, go to 
