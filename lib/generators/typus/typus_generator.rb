@@ -15,7 +15,7 @@ class TypusGenerator < Rails::Generators::Base
   end
 
   def self.next_migration_number(path)
-    timestamp
+    Time.now.utc.to_s(:number)
   end
 
   def generate_configuration_files
@@ -136,6 +136,10 @@ class TypusGenerator < Rails::Generators::Base
     @sidebar
   end
 
+  def timestamp
+    Time.now.utc.to_s(:number)
+  end
+
   private
 
   def templates_path
@@ -160,10 +164,6 @@ class TypusGenerator < Rails::Generators::Base
 
   def views_path
     "app/views/admin"
-  end
-
-  def timestamp
-    Time.now.utc.to_s(:number)
   end
 
   def generate_yaml_files
