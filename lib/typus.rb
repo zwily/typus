@@ -142,8 +142,6 @@ module Typus
       # Vendor.
       require "vendor/paginator"
 
-      reload! if Rails.env.production?
-
     end
 
   end
