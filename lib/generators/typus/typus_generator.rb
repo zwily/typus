@@ -15,7 +15,7 @@ class TypusGenerator < Rails::Generators::Base
   end
 
   def self.next_migration_number(path)
-    Time.now.utc.strftime("%Y%m%d%H%M%S")
+    timestamp
   end
 
   def generate_configuration_files
@@ -163,7 +163,7 @@ class TypusGenerator < Rails::Generators::Base
   end
 
   def timestamp
-    timestamp = Time.now.utc.to_s(:number)
+    Time.now.utc.to_s(:number)
   end
 
   def generate_yaml_files
