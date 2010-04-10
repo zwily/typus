@@ -4,6 +4,9 @@ class TypusGenerator < Rails::Generators::Base
 
   include Rails::Generators::Migration
 
+  Typus::Configuration.roles!
+  Typus::Configuration.config!
+
   class_option :app_name, :default => Rails.root.basename
   class_option :user_class_name, :default => "TypusUser"
   class_option :user_fk, :default => "typus_user_id"
