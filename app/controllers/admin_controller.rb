@@ -22,7 +22,7 @@ class AdminController < ActionController::Base
   protected
 
   def render_error(exception)
-    log_error(exception)
+    # log_error(exception)
     flash[:error] = exception.message
     redirect_to admin_path
   end
