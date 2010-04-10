@@ -107,7 +107,7 @@ module Typus
     end
 
     def user_class
-      Typus.user_class_name.constantize
+      user_class_name.constantize
     end
 
     def boot!
@@ -120,6 +120,7 @@ module Typus
       require "typus/reloader"
       require "typus/format"
       require "typus/templates"
+      require "typus/resource"
 
       # Ruby/Rails Extensions
       require "extensions/hash"

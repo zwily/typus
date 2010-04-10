@@ -61,8 +61,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     %w( edit show ).each do |action|
 
-      options = Typus::Configuration.options.merge(:default_action_on_item => action)
-      Typus::Configuration.stubs(:options).returns(options)
+      Typus::Resource.expects(:default_action_on_item).at_least_once.returns(action)
 
       get :index
 
@@ -95,9 +94,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     %w( edit show ).each do |action|
 
-      options = Typus::Configuration.options.merge(:only_user_items => true, 
-                                                   :default_action_on_item => action)
-      Typus::Configuration.stubs(:options).returns(options)
+      Typus::Resource.stubs(:only_user_items).returns(true)
+      Typus::Resource.stubs(:default_action_on_item).returns(action)
 
       get :index
 

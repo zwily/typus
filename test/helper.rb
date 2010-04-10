@@ -1,32 +1,37 @@
 
-ENV['RAILS_ENV'] = 'test'
+ENV["RAILS_ENV"] = "test"
 
-require 'rails_app/config/environment'
-require 'rails/test_help'
-require 'mocha'
+require "rails_app/config/environment"
+require "rails/test_help"
+require "mocha"
 
 begin
-  require 'redgreen'
+  require "redgreen"
 rescue LoadError
 end
+
+# As we are simulating the application we need to reload the 
+# configurations to get the custom paths.
+Typus::Configuration.roles!
+Typus::Configuration.config!
 
 ##
 # Different DB settings and load our schema.
 #
 
-connection = case ENV['DB']
+connection = case ENV["DB"]
              when /mysql/
-               { :adapter => 'mysql', :username => 'root', :database => 'typus_test' }
+               { :adapter => "mysql", :username => "root", :database => "typus_test" }
              when /postgresql/
-               { :adapter => 'postgresql', :encoding => 'unicode', :database => 'typus_test' }
+               { :adapter => "postgresql", :encoding => "unicode", :database => "typus_test" }
              else
-               { :adapter => 'sqlite3', :database => ':memory:' }
+               { :adapter => "sqlite3", :database => ":memory:" }
              end
 
 ActiveRecord::Base.establish_connection(connection)
-ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + '/debug.log')
+ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
 
-require File.dirname(__FILE__) + '/schema'
+require File.dirname(__FILE__) + "/schema"
 
 ##
 # To test the plugin without touching the application we set our 
@@ -35,8 +40,8 @@ require File.dirname(__FILE__) + '/schema'
 
 ActiveSupport::Dependencies.load_paths = []
 %w( models controllers helpers ).each do |folder|
-  ActiveSupport::Dependencies.load_paths << File.join(Typus.root, 'app', folder)
-  ActiveSupport::Dependencies.load_paths << File.join(Typus.root, 'test', 'fixtures', 'app', folder)
+  ActiveSupport::Dependencies.load_paths << File.join(Typus.root, "app", folder)
+  ActiveSupport::Dependencies.load_paths << File.join(Typus.root, "test", "fixtures", "app", folder)
 end
 
 ActionController::Base.view_paths = []
@@ -45,7 +50,7 @@ ActionController::Base.view_paths = []
 end
 
 class ActiveSupport::TestCase
-  self.fixture_path = File.dirname(__FILE__) + '/fixtures'
+  self.fixture_path = File.dirname(__FILE__) + "/fixtures"
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
   fixtures :all

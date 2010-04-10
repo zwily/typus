@@ -197,7 +197,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     # has access to all TypusUser records.
     #
 
-    Typus.expects(:master_role).returns("editor")
+    Typus.expects(:master_role).at_least_once.returns("editor")
 
     get :edit, { :id => typus_user.id }
     assert_response :success

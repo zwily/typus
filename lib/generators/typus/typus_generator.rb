@@ -1,4 +1,4 @@
-require 'rails/generators/migration'
+require "rails/generators/migration"
 
 class TypusGenerator < Rails::Generators::Base
 

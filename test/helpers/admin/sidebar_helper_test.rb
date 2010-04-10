@@ -162,8 +162,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = search
 
     partial = "admin/helpers/search"
-    options = { :hidden_params => [ %(<input id="action" name="action" type="hidden" value="index" />), 
-                                    %(<input id="controller" name="controller" type="hidden" value="admin/typus_users" />) ], 
+    options = { :hidden_params => [ %(<input id="controller" name="controller" type="hidden" value="admin/typus_users" />), 
+                                    %(<input id="action" name="action" type="hidden" value="index" />) ], 
                 :search_by => "First name, Last name, Email, and Role" }
 
     assert_equal [ partial, options ], output

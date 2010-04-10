@@ -195,7 +195,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_render_sign_in
 
-    Typus.expects(:app_name).returns("Typus Test")
+    Typus.expects(:app_name).at_least_once.returns("Typus Test")
 
     get :sign_in
     assert_response :success

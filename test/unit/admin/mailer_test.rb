@@ -1,5 +1,5 @@
 require "test/helper"
-require 'app/mailers/admin/mailer'
+require "app/mailers/admin/mailer"
 
 class Admin::MailerTest < ActiveSupport::TestCase
 
@@ -22,7 +22,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_email_subject
-    expected = "[#{Typus::Configuration.app_name}] Reset password"
+    expected = "[#{Typus.app_name}] Reset password"
     assert_equal expected, @response.subject
   end
 
