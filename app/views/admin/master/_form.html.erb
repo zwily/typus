@@ -1,4 +1,16 @@
 <%= form_for @item, :url  => options, :html => { :multipart => true } do |form| %>
+
+  <% if @item.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@item.errors.count, "error") %> prohibited this page from being saved:</h2>
+    <ul>
+    <% @item.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
+
   <fieldset class="inputs">
     <ol>
       <%= raw build_form(@fields, form) %>
@@ -9,4 +21,5 @@
       <li><%= submit_tag button , :class => 'commit' %></li>
     </ol>
   </fieldset>
+
 <% end %>
