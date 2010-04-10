@@ -1,6 +1,6 @@
 # coding: utf-8
 
-require "test/helper"
+require "test/test_helper"
 
 class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
