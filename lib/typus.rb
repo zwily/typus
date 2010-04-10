@@ -66,17 +66,17 @@ module Typus
     end
 
     def applications
-      Configuration.config.collect { |i| i.last["application"] }.compact.uniq.sort
+      Typus::Configuration.config.collect { |i| i.last["application"] }.compact.uniq.sort
     end
 
     # List of the modules of an application.
     def application(name)
-      Configuration.config.collect { |i| i.first if i.last["application"] == name }.compact.uniq.sort
+      Typus::Configuration.config.collect { |i| i.first if i.last["application"] == name }.compact.uniq.sort
     end
 
     # Gets a list of all the models from the configuration file.
     def models
-      Configuration.config.map { |i| i.first }.sort
+      Typus::Configuration.config.map { |i| i.first }.sort
     end
 
     def models_on_header
@@ -85,8 +85,8 @@ module Typus
 
     # List of resources, which are tableless models.
     def resources
-      Configuration.roles.keys.map do |key|
-        Configuration.roles[key].keys
+      Typus::Configuration.roles.keys.map do |key|
+        Typus::Configuration.roles[key].keys
       end.flatten.sort.uniq.delete_if { |x| models.include?(x) }
     end
 
@@ -111,8 +111,8 @@ module Typus
     end
 
     def reload!
-      Configuration.roles!
-      Configuration.config!
+      Typus::Configuration.roles!
+      Typus::Configuration.config!
     end
 
     def boot!
