@@ -12,8 +12,7 @@ end
 
 # As we are simulating the application we need to reload the 
 # configurations to get the custom paths.
-Typus::Configuration.roles!
-Typus::Configuration.config!
+Typus::Configuration.reload!
 
 ##
 # Different DB settings and load our schema.
