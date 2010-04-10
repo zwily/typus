@@ -110,6 +110,11 @@ module Typus
       user_class_name.constantize
     end
 
+    def reload!
+      Typus::Configuration.roles!
+      Typus::Configuration.config!
+    end
+
     def boot!
 
       # Some Typus requirements ...

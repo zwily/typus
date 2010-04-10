@@ -4,7 +4,7 @@ class TypusGenerator < Rails::Generators::Base
 
   include Rails::Generators::Migration
 
-  Typus::Configuration.reload!
+  Typus.reload!
 
   class_option :app_name, :default => Rails.root.basename
   class_option :user_class_name, :default => "TypusUser"

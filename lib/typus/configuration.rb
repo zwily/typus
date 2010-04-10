@@ -2,11 +2,6 @@ module Typus
 
   module Configuration
 
-    def self.reload!
-      roles!
-      config!
-    end
-
     # Read Typus Configuration files placed on <tt>config/typus/**/*.yml</tt>.
     def self.config!
 
