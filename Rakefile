@@ -21,7 +21,7 @@ task :build do
 end
 
 task :release => :build do
-  version = Typus::VERSION::STRING
+  version = Typus::VERSION
   system "git tag v#{version}"
   system "git push origin v#{version}"
   system "gem push pkg/typus-#{version}.gem"

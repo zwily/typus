@@ -7,7 +7,7 @@ require "typus/version"
 Gem::Specification.new do |s|
 
   s.name = "typus"
-  s.version = Typus::VERSION::STRING
+  s.version = Typus::VERSION
   s.platform = Gem::Platform::RUBY
   s.authors = ["Francesc Esplugas"]
   s.email = ["francesc@intraducibles.com"]
