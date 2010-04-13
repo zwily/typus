@@ -26,12 +26,12 @@ Typus::Resource.setup do |config|
   # config.default_action_on_item = "edit"
   # config.end_year = nil
   # config.form_rows = 15
-  # config.action_after_save = :edit
+  # config.action_after_save = "show"
   # config.minute_step = 5
   # config.nil = "nil"
   # config.on_header = false
   # config.only_user_items = false
-  # config.per_page = 15
+  # config.per_page = 20
   # config.sidebar_selector = 5
   # config.start_year = nil
 end
