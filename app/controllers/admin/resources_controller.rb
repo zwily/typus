@@ -16,7 +16,7 @@ class Admin::ResourcesController < AdminController
 
   before_filter :check_if_user_can_perform_action_on_user, 
                 :only => [ :edit, :update, :toggle, :destroy ]
-  before_filter :check_if_user_can_perform_action_on_resource
+  before_filter :check_if_user_can_perform_action_on_resources
 
   before_filter :set_order, 
                 :only => [ :index ]
