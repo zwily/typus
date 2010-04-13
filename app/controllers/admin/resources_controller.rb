@@ -4,7 +4,7 @@ class Admin::ResourcesController < AdminController
   include Typus::Templates
 
   before_filter :detect_resource
-  before_filter :find_item, 
+  before_filter :get_resource, 
                 :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate, :detach ]
 
   before_filter :check_ownership_of_item, 
@@ -277,7 +277,7 @@ private
   # Find model when performing an edit, update, destroy, relate, 
   # unrelate ...
   #
-  def find_item
+  def get_resource
     @item = @resource[:class].find(params[:id])
   end
 
