@@ -81,7 +81,7 @@ In order to make the resources accessible you will need to add the following ent
       ShareRentalProperty: create, read, update, delete
 
 In addition to this the controller class files also need to be created in the app/controllers/admin directory 
-(e.g. `sale_property_controller.rb`, which is class `class Admin::SalePropertiesController < Admin::MasterController`)
+(e.g. `sale_property_controller.rb`, which is class `class Admin::SalePropertiesController < Admin::ResourcesController`)
 
 Once this is done, restart your Rails application and visit the admin route - the new STI tables should now be available.
 

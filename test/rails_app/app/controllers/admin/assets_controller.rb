@@ -1,2 +1,2 @@
-class Admin::AssetsController < Admin::MasterController
+class Admin::AssetsController < Admin::ResourcesController
 end

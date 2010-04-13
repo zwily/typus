@@ -51,7 +51,7 @@ class TypusGenerator < Rails::Generators::Base
 
       klass = model.constantize
 
-      @inherits_from = "Admin::MasterController"
+      @inherits_from = "Admin::ResourcesController"
       @resource = klass.name.pluralize
 
       template "controller.rb", 

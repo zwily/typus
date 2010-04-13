@@ -1,2 +1,2 @@
-class Admin::TypusUsersController < Admin::MasterController
+class Admin::TypusUsersController < Admin::ResourcesController
 end

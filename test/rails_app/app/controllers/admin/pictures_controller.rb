@@ -1,2 +1,2 @@
-class Admin::PicturesController < Admin::MasterController
+class Admin::PicturesController < Admin::ResourcesController
 end

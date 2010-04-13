@@ -3,7 +3,7 @@ module Admin::FormHelper
   def form_partial
     resource = @resource[:self]
     template_file = Rails.root.join("app/views/admin/#{resource}/_form.html.erb")
-    partial = File.exists?(template_file) ? resource : "master"
+    partial = File.exists?(template_file) ? resource : "resources"
     return "admin/#{partial}/form"
   end
 

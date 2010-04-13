@@ -1,6 +1,6 @@
 = Customizing Typus
 
-You can overwrite and extend Admin::MasterController with your methods.
+You can overwrite and extend Admin::ResourcesController with your methods.
 
 Actions have to be defined in <tt>config/typus/application.yml</tt>:
 
@@ -20,7 +20,7 @@ to have access to the new actions.
 
 Your controller will look like this ...
 
-    class Admin::PostsController < Admin::MasterController
+    class Admin::PostsController < Admin::ResourcesController
 
       def custom_action
         ...

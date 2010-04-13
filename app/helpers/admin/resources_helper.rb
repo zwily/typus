@@ -1,4 +1,4 @@
-module Admin::MasterHelper
+module Admin::ResourcesHelper
 
   include Admin::FormHelper
   include Admin::SidebarHelper

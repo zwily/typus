@@ -3,7 +3,7 @@ require "test/test_helper"
 class Admin::FormHelperTest < ActiveSupport::TestCase
 
   include Admin::FormHelper
-  include Admin::MasterHelper
+  include Admin::ResourcesHelper
 
   def test_typus_belongs_to_field
 

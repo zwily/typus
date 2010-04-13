@@ -1,4 +1,4 @@
-class Admin::MasterController < AdminController
+class Admin::ResourcesController < AdminController
 
   include Typus::Format
   include Typus::Templates
