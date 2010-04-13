@@ -27,14 +27,14 @@ module Admin::SidebarHelper
     case params[:action]
     when 'index', 'edit', 'show', 'update'
       if @current_user.can?('create', @resource[:class])
-        message = _("Add {{resource}}", :resource => @resource[:class])
+        message = _("Add {{resource}}", :resource => @resource[:human_name])
         items << (link_to message, { :action => 'new' }, :class => 'new')
       end
     end
 
     case params[:action]
     when 'edit'
-      message = _("Show {{resource}}", :resource => @resource[:class])
+      message = _("Show {{resource}}", :resource => @resource[:human_name])
       items << (link_to message, :action => 'show', :id => @item.id)
     end
 
@@ -45,7 +45,7 @@ module Admin::SidebarHelper
                   else
                     @current_user.can?('update', @resource[:class])
                   end
-      message = _("Edit {{resource}}", :resource => @resource[:class])
+      message = _("Edit {{resource}}", :resource => @resource[:human_name])
       items << (link_to_if condition, message, :action => 'edit', :id => @item.id)
     end
 
