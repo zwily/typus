@@ -22,7 +22,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
   end
 
   def test_should_verify_email_subject
-    expected = "[#{Typus.app_name}] Reset password"
+    expected = "[#{Typus.admin_title}] Reset password"
     assert_equal expected, @response.subject
   end
 

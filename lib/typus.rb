@@ -3,8 +3,8 @@
 module Typus
 
   # Define the application name.
-  mattr_accessor :app_name
-  @@app_name = "Typus"
+  mattr_accessor :admin_title
+  @@admin_title = "Typus"
 
   # Define the configuration folder.
   mattr_accessor :config_folder

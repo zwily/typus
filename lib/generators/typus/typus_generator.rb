@@ -6,7 +6,7 @@ class TypusGenerator < Rails::Generators::Base
 
   Typus.reload!
 
-  class_option :app_name, :default => Rails.root.basename
+  class_option :admin_title, :default => Rails.root.basename
   class_option :user_class_name, :default => "TypusUser"
   class_option :user_fk, :default => "typus_user_id"
 
@@ -226,7 +226,7 @@ class TypusGenerator < Rails::Generators::Base
   relationships: #{relationships.join(", ")}
   filters: #{filters}
   search: #{search}
-  application: #{options[:app_name]}
+  application: #{options[:admin_title]}
 
       RAW
 

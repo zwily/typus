@@ -11,7 +11,7 @@ class AdminHelperTest < ActiveSupport::TestCase
 
   def test_page_title
     @page_title = ["a", "b"]
-    Typus.expects(:app_name).returns("whatistypus.com")
+    Typus.expects(:admin_title).returns("whatistypus.com")
     assert_equal "whatistypus.com - a &rsaquo; b", page_title
   end
 

@@ -1,7 +1,7 @@
 Typus.setup do |config|
 
   # Application name.
-  config.app_name = "<%= options[:app_name] %>"
+  config.admin_title = "<%= options[:admin_title] %>"
 
   # Enabling this options will allow users to recover password.
   # config.email = 'admin@example.com'

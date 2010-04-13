@@ -23,7 +23,7 @@ module AdminHelper
   end
 
   def page_title
-    (Typus.app_name + " - " + @page_title.join(" &rsaquo; ")).html_safe
+    (Typus.admin_title + " - " + @page_title.join(" &rsaquo; ")).html_safe
   end
 
   def header

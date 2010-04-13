@@ -53,7 +53,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
     assert_match "layouts/admin", @controller.inspect
 
-    assert_select "title", "#{Typus.app_name} - Dashboard"
+    assert_select "title", "#{Typus.admin_title} - Dashboard"
 
     [ "Typus", 
       %(href="/admin/sign_out"), 

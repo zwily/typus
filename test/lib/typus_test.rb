@@ -3,7 +3,7 @@ require "test/test_helper"
 class TypusTest < ActiveSupport::TestCase
 
   def test_should_verify_configuration_options
-    assert_equal "Typus", Typus.app_name
+    assert_equal "Typus", Typus.admin_title
     assert Typus.config_folder.kind_of?(Pathname)
     assert_equal "columbia", Typus.default_password
     assert_equal nil, Typus.email
