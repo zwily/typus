@@ -72,7 +72,7 @@ hu:
   "Send us feedback": "Visszajelzés küldése"
   "Setup": "Beállítás"
   "Show": "Mutatás"
-  "Show entry": "Bejegyzés mutatása"
+  "Show {{resource}}": "{{resource}} mutatása"
   "Sign in": "Bejelentkezés"
   "Sign out": "Kijelentkezés"
   "Sign up": "Regisztráció"

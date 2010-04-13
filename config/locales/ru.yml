@@ -72,7 +72,7 @@ ru:
   "Send us feedback": 
   "Setup": "Установки"
   "Show": "Показать"
-  "Show entry": 
+  "Show {{resource}}": "Показать {{resource}}"
   "Sign in": "Войти"
   "Sign out": "Выйти"
   "Sign up": "Зарегистрироваться"

@@ -72,7 +72,7 @@ pt-BR:
   "Send us feedback": 
   "Setup": "Configurar"
   "Show": "Mostrar"
-  "Show entry": 
+  "Show {{resource}}": "Mostrar {{resource}}"
   "Sign in": "Entrar"
   "Sign out": "Sair"
   "Sign up": "Criar conta"
