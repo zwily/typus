@@ -298,8 +298,8 @@ private
   # show action on the item. Updated item is also blocked.
   #
   #   before_filter :check_resource_ownership, :only => [ :edit, :update, :destroy, 
-  #                                                      :toggle, :position, 
-  #                                                      :relate, :unrelate ]
+  #                                                       :toggle, :position, 
+  #                                                       :relate, :unrelate ]
   #
   def check_resource_ownership
 
