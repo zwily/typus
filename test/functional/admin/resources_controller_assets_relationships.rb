@@ -50,7 +50,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   def test_should_return_to_back_to_url
 
-    Typus::Resource.expects(:index_after_save).returns(true)
+    Typus::Resource.expects(:action_after_save).returns(:edit)
 
     post_ = posts(:published)
     asset_ = assets(:first)

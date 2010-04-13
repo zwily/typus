@@ -35,7 +35,7 @@ only have set the most common settings.
         default_action_on_item: show
         end_year: 2015
         form_rows: 25
-        index_after_save: false
+        action_after_save: :index
         minute_step: 15
         nil: 'nil'
         on_header: true

@@ -2,7 +2,7 @@
 
 - [Initializer: Understanding what `typus.rb` can do for you.](#initializer)
   - [Enable password recover.](#recover_password)
-  - [Redirect to index after creating a record.](#index_after_save)
+  - [Action to redirect after saving a resource.](#action_after_save)
 - [The `*.yaml` configuration file](#yaml)
   - [Fields](#fields)
   - [Filters](#filters)
@@ -39,7 +39,7 @@ resource.
     Typus::Resource.setup do |config|
       config.end_year = ...
       config.form_rows = ...
-      config.index_after_save = ...
+      config.action_after_save = ...
       config.minute_step = ...
       config.nil = ...
       config.per_page = ...
@@ -53,7 +53,7 @@ Model options can also be defined by model on the yaml files located on `config/
       options:
         end_year: 2015
         form_rows: 25
-        index_after_save: false
+        action_after_save: edit
         minute_step: 15
         nil: 'nil'
         per_page: 5
@@ -70,11 +70,11 @@ Recover password is disabled by default. To enable it you should provide an emai
 
 [&uarr; Back to top](#toc)
 
-<h3 id="index_after_save">Redirect to index after creating a record.</h3>
+<h3 id="action_after_save">Action to redirect after saving a resource.</h3>
 
 After creating a new record you'll be redirected to the record so you can continue editing it. If you prefer to be redirected to the main index you can owerwrite the setting. This setting can be defined globally or by model.
 
-    Typus::Resource.index_after_save = false
+    Typus::Resource.action_after_save = "index"
 
 [&uarr; Back to top](#toc)
 

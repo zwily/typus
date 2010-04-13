@@ -78,15 +78,18 @@ class Admin::ResourcesController < AdminController
     end
 
     if @item.valid?
+
       create_with_back_to and return if params[:back_to]
       @item.save
       flash[:success] = _("{{model}} successfully created.", 
                           :model => @resource[:human_name])
-      if @resource[:class].typus_options_for(:index_after_save)
-        redirect_to :action => 'index'
-      else
-        redirect_to :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id
-      end
+
+      action = @resource[:class].typus_options_for(:action_after_save)
+      path = { :action => action }
+      path.merge!(:id => @item.id) unless action.eql?("index")
+
+      redirect_to path
+
     else
       select_template :new
     end
@@ -133,10 +136,15 @@ class Admin::ResourcesController < AdminController
         @item.update_attributes Typus.user_fk => @current_user.id
       end
 
-      path = if @resource[:class].typus_options_for(:index_after_save)
-               params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => 'index' }
+      action = @resource[:class].typus_options_for(:action_after_save)
+
+      path = case action
+             when "index"
+               params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => action }
              else
-               { :action => @resource[:class].typus_options_for(:default_action_on_item), :id => @item.id, :back_to => params[:back_to] }
+               { :action => action, 
+                 :id => @item.id, 
+                 :back_to => params[:back_to] }
              end
 
       # Reload @current_user when updating to see flash message in the 

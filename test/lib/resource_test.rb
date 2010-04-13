@@ -6,7 +6,7 @@ class ResourceTest < ActiveSupport::TestCase
     assert_equal "edit", Typus::Resource.default_action_on_item
     assert_nil Typus::Resource.end_year
     assert_equal 15, Typus::Resource.form_rows
-    assert_equal false, Typus::Resource.index_after_save
+    assert_equal "show", Typus::Resource.action_after_save
     assert_equal 5, Typus::Resource.minute_step
     assert_equal "nil", Typus::Resource.nil
     assert_equal false, Typus::Resource.on_header

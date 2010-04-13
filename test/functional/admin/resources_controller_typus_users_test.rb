@@ -85,7 +85,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def test_should_allow_editor_to_update_himself
 
-    Typus::Resource.stubs(:index_after_save).returns(false)
+    Typus::Resource.stubs(:action_after_save).returns(:edit)
 
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id

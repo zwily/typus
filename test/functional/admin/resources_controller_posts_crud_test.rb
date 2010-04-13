@@ -31,14 +31,14 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_difference 'Post.count' do
       post :create, { :post => { :title => 'This is another title', :body => 'Body' } }
       assert_response :redirect
-      assert_redirected_to :controller => 'admin/posts', :action => 'edit', :id => Post.last
+      assert_redirected_to :controller => 'admin/posts', :action => 'show', :id => Post.last
     end
 
   end
 
   def test_should_create_an_item_and_redirect_to_index
 
-    Typus::Resource.expects(:index_after_save).returns(true)
+    Typus::Resource.expects(:action_after_save).returns("index")
 
     assert_difference 'Post.count' do
       post :create, { :post => { :title => 'This is another title', :body => 'Body' } }
@@ -78,13 +78,13 @@ class Admin::PostsControllerTest < ActionController::TestCase
     post_ = posts(:published)
     post :update, { :id => post_.id, :title => 'Updated' }
     assert_response :redirect
-    assert_redirected_to :controller => 'admin/posts', :action => 'edit', :id => post_.id
+    assert_redirected_to :controller => 'admin/posts', :action => 'show', :id => post_.id
 
   end
 
   def test_should_update_an_item_and_redirect_to_index
 
-    Typus::Resource.expects(:index_after_save).returns(true)
+    Typus::Resource.expects(:action_after_save).returns("index")
 
     post :update, { :id => posts(:published), :title => 'Updated' }
     assert_response :redirect

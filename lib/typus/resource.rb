@@ -20,9 +20,9 @@ module Typus
     mattr_accessor :form_rows
     @@form_rows = 15
 
-    # Defines the index_after_save.
-    mattr_accessor :index_after_save
-    @@index_after_save = false
+    # Defines the action_after_save.
+    mattr_accessor :action_after_save
+    @@action_after_save = "show"
 
     # Defines the minute step.
     mattr_accessor :minute_step

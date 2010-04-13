@@ -26,7 +26,7 @@ Typus::Resource.setup do |config|
   # config.default_action_on_item = "edit"
   # config.end_year = nil
   # config.form_rows = 15
-  # config.index_after_save = false
+  # config.action_after_save = :edit
   # config.minute_step = 5
   # config.nil = "nil"
   # config.on_header = false
