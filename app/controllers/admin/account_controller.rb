@@ -71,7 +71,7 @@ class Admin::AccountController < AdminController
 
       if user.save
         session[:typus_user_id] = user.id
-        flash[:notice] = _("Password set to \"{{password}}\".", 
+        flash[:notice] = _("Password set to '{{password}}'.", 
                            :password => Typus.default_password)
         redirect_to admin_dashboard_path
       else

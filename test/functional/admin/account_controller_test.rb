@@ -184,7 +184,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to admin_dashboard_path
-    assert_equal %(Password set to "columbia".), flash[:notice]
+    assert_equal %(Password set to 'columbia'.), flash[:notice]
     assert @request.session[:typus_user_id]
 
   end
