@@ -4,11 +4,16 @@ class Admin::ResourcesController < AdminController
   include Typus::Templates
 
   before_filter :detect_resource
+
   before_filter :get_resource, 
-                :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate, :detach ]
+                :only => [ :show, 
+                           :edit, :update, :destroy, :toggle, 
+                           :position, :relate, :unrelate, 
+                           :detach ]
 
   before_filter :check_resource_ownership, 
-                :only => [ :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
+                :only => [ :edit, :update, :destroy, :toggle, 
+                           :position, :relate, :unrelate ]
 
   before_filter :check_if_user_can_perform_action_on_user, 
                 :only => [ :edit, :update, :toggle, :destroy ]
