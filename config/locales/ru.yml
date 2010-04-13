@@ -84,7 +84,6 @@ ru:
   "The email and/or password you entered is invalid": "E-Mail или пароль введены неверно"
   "There are no {{records}}": "{{records}} не найдены"
   "There are no {{records}} under this filter": "{{records}} по такому фильтру не найдены"
-  "There are not defined applications in config/typus/*.yml": "Ни одного приложения не определено в config/typus/*.yml"
   "Today": "Сегодня"
   "Toggle is disabled": "Переключение отключено"
   "True": "ВЕРНО"

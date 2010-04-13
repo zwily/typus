@@ -1,7 +1,7 @@
 class Admin::DashboardController < AdminController
 
   def index
-    flash[:notice] = _("There are not defined applications in config/typus/*.yml.") if Typus.applications.empty?
+    raise "Run `script/rails generate typus` to create configuration files." if Typus.applications.empty?
   end
 
 end

@@ -84,7 +84,6 @@ pt-BR:
   "The email and/or password you entered is invalid": "O email e/ou a senha que você colocou são inválidos."
   "There are no {{records}}": "Não há {{records}}."
   "There are no {{records}} under this filter": "Não há {{records}} com este filtro."
-  "There are not defined applications in config/typus/*.yml": "Não há aplicativos definidos em config/typus/*.yml"
   "Toggle is disabled": "Toggle está desabilitado."
   "Today": "Hoje"
   "True": "Verdadeiro"

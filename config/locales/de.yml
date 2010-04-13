@@ -84,7 +84,6 @@ de:
   "The email and/or password you entered is invalid": "Die eingegebene Email Adresse und/oder das Passwort ist ung&uuml;ltig"
   "There are no {{records}}": "Keine {{records}}vorhanden"
   "There are no {{records}} under this filter": "Unter diesem Filter sind keine {{records}} vorhanden"
-  "There are not defined applications in config/typus/*.yml": "Es gibt keine definierten Anwendungen in config/typus/*.yml"
   "Today": "Heute"
   "Toggle is disabled": "Schalter ist deaktiviert"
   "True": "Richtig"

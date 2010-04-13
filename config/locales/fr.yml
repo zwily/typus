@@ -84,7 +84,6 @@ fr:
   "The email and/or password you entered is invalid": 
   "There are no {{records}}": "Il n'y aucun(e) {{records}}."
   "There are no {{records}} under this filter": "Il n'y a aucun(e) {{records}} avec ce filtre."
-  "There are not defined applications in config/typus/*.yml": 
   "Today": 
   "Toggle is disabled": "Le basculement est désactivé"
   "True": 

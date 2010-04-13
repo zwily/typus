@@ -84,7 +84,6 @@ hu:
   "The email and/or password you entered is invalid": "A megadott felhasználónév és/vagy jelszó nem megfelelő"
   "There are no {{records}}": "Nincsenek {{records}}"
   "There are no {{records}} under this filter": "Nincsenek {{records}} a szűrővel"
-  "There are not defined applications in config/typus/*.yml": "Nincsen definiált alkalmazás a config/typus/*.yml fájlban"
   "Today": "Ma"
   "Toggle is disabled": "Toggle letitlva"
   "True": "Igaz"
