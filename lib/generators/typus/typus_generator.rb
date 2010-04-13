@@ -81,7 +81,7 @@ class TypusGenerator < Rails::Generators::Base
 
     Typus.resources.each do |resource|
 
-      @inherits_from = "Admin::ServiceController"
+      @inherits_from = "Admin::ResourceController"
       @resource = resource
       @sidebar = <<-HTML
 <% content_for :sidebar do %>

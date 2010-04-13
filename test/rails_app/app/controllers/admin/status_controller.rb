@@ -1,2 +1,2 @@
-class Admin::StatusController < Admin::ServiceController
+class Admin::StatusController < Admin::ResourceController
 end

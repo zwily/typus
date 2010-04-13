@@ -1,2 +1,2 @@
-class Admin::WatchDogController < Admin::ServiceController
+class Admin::WatchDogController < Admin::ResourceController
 end
