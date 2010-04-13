@@ -23,7 +23,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     get :index
 
     assert_select "#sidebar ul" do
-      assert_select "li", "Add entry"
+      assert_select "li", "Add Post"
     end
 
   end
@@ -36,7 +36,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     get :index
     assert_response :success
 
-    assert_no_match /Add entry/, @response.body
+    assert_no_match /Add Post/, @response.body
 
   end
 

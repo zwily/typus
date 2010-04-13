@@ -7,7 +7,7 @@ ca:
   "Actions": "Accions"
   "Active": "Actiu"
   "Add": "Afegir"
-  "Add entry": "Afegir entrada"
+  "Add {{resource}}": "Afegir {{resource}}"
   "Add new": "Afegir nou"
   "Are you sure?": "Estàs segur?"
   "Are you sure you want to leave this page?": "Estàs segur que vols abandonar aquesta pàgina?"
