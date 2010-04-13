@@ -45,7 +45,8 @@ module Admin::SidebarHelper
                   else
                     @current_user.can?('update', @resource[:class])
                   end
-      items << (link_to_if condition, _("Edit entry"), :action => 'edit', :id => @item.id)
+      message = _("Edit {{resource}}", :resource => @resource[:class])
+      items << (link_to_if condition, message, :action => 'edit', :id => @item.id)
     end
 
     @resource[:class].typus_actions_on(params[:action]).each do |action|
