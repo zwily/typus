@@ -1,7 +1,6 @@
 class Admin::ResourcesController < AdminController
 
   include Typus::Format
-  include Typus::Templates
 
   before_filter :detect_resource
 
@@ -402,6 +401,11 @@ private
                                    :model_b => resource_class.model_name.human)
     redirect_to path || params[:back_to]
 
+  end
+
+  def select_template(template, resource = @resource[:self])
+    folder = (File.exist?("app/views/admin/#{resource}/#{template}.html.erb")) ? resource : 'resources'
+    render "admin/#{folder}/#{template}"
   end
 
 end
