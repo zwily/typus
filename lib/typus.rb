@@ -117,6 +117,12 @@ module Typus
 
     def boot!
 
+      # Ruby/Rails Extensions
+      require "support/active_record"
+      require "support/hash"
+      require "support/object"
+      require "support/string"
+
       # Some Typus requirements ...
       require "typus/configuration"
       require "typus/routes"
@@ -126,12 +132,6 @@ module Typus
       require "typus/format"
       require "typus/templates"
       require "typus/resource"
-
-      # Ruby/Rails Extensions
-      require "support/hash"
-      require "support/object"
-      require "support/string"
-      require "support/active_record"
 
       # Active Record Extensions.
       require "typus/active_record"
