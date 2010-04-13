@@ -3,7 +3,7 @@ class Admin::ResourcesController < AdminController
   include Typus::Format
   include Typus::Templates
 
-  before_filter :set_resource
+  before_filter :detect_resource
   before_filter :find_item, 
                 :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate, :detach ]
 
@@ -266,7 +266,7 @@ class Admin::ResourcesController < AdminController
 
 private
 
-  def set_resource
+  def detect_resource
     @resource = { :self => params[:controller].extract_resource, 
                   :human_name => params[:controller].extract_human_name, 
                   :class => params[:controller].extract_class }
