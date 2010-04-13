@@ -2,9 +2,6 @@ class AdminController < ActionController::Base
 
   unloadable
 
-  include Typus::Authentication
-  include Typus::Reloader
-
   unless Rails.application.config.consider_all_requests_local
     rescue_from Exception, :with => :render_error
   end
@@ -26,14 +23,20 @@ class AdminController < ActionController::Base
     redirect_to admin_path
   end
 
+  def reload_config_and_roles
+    Typus.reload! unless Rails.env.production?
+  end
+
+  include Typus::Authentication
+
+  def set_preferences
+    I18n.locale = @current_user.preferences[:locale]
+  end
+
   def set_page_title
     @page_title = []
     @page_title << _(params[:controller].sub("admin/", "").humanize)
     @page_title << _(params[:action].humanize) unless params[:action].eql?("index")
-  end
-
-  def set_preferences
-    I18n.locale = @current_user.preferences[:locale]
   end
 
 end

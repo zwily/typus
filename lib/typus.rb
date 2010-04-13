@@ -127,7 +127,6 @@ module Typus
       require "typus/configuration"
       require "typus/routes"
       require "typus/authentication"
-      require "typus/reloader"
       require "typus/format"
       require "typus/resource"
 
