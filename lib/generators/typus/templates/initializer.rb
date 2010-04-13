@@ -3,20 +3,20 @@ Typus.setup do |config|
   # Application name.
   config.admin_title = "<%= options[:admin_title] %>"
 
-  # Enabling this options will allow users to recover password.
+  # Define this option to allow admin users to recover lost passwords.
   # config.email = 'admin@example.com'
 
-  # Paperclip settings.
+  # Define file attachment settings.
   # config.file_preview = :typus_preview
   # config.file_thumbnail = :typus_thumbnail
 
   # Define relationship table.
   # config.relationship = "typus_users"
 
-  # Defines the default root.
-  # config.root = "admin"
+  # Define the default root.
+  # config.master_role = "admin"
 
-  # Defines user_class_name and user_fk.
+  # Define user_class_name and user_fk.
   config.user_class_name = "<%= options[:user_class_name] %>"
   config.user_fk = "<%= options[:user_fk] %>"
 
