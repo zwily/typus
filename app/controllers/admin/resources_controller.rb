@@ -7,7 +7,7 @@ class Admin::ResourcesController < AdminController
   before_filter :get_resource, 
                 :only => [ :show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate, :detach ]
 
-  before_filter :check_ownership_of_item, 
+  before_filter :check_resource_ownership, 
                 :only => [ :edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
 
   before_filter :check_if_user_can_perform_action_on_user, 
@@ -30,7 +30,7 @@ class Admin::ResourcesController < AdminController
 
     @conditions, @joins = @resource[:class].build_conditions(params)
 
-    check_ownership_of_items if @resource[:class].typus_options_for(:only_user_items)
+    check_resource_ownerships if @resource[:class].typus_options_for(:only_user_items)
 
     respond_to do |format|
       format.html do
@@ -105,7 +105,7 @@ class Admin::ResourcesController < AdminController
 
   def show
 
-    check_ownership_of_item and return if @resource[:class].typus_options_for(:only_user_items)
+    check_resource_ownership and return if @resource[:class].typus_options_for(:only_user_items)
 
     @previous, @next = @item.previous_and_next(set_conditions)
 
@@ -285,11 +285,11 @@ private
   # If item is owned by another user, we only can perform a 
   # show action on the item. Updated item is also blocked.
   #
-  #   before_filter :check_ownership_of_item, :only => [ :edit, :update, :destroy, 
+  #   before_filter :check_resource_ownership, :only => [ :edit, :update, :destroy, 
   #                                                      :toggle, :position, 
   #                                                      :relate, :unrelate ]
   #
-  def check_ownership_of_item
+  def check_resource_ownership
 
     # By-pass if current_user is root.
     return if @current_user.is_root?
@@ -304,7 +304,7 @@ private
 
   end
 
-  def check_ownership_of_items
+  def check_resource_ownerships
 
     # By-pass if current_user is root.
     return if @current_user.is_root?
