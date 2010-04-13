@@ -127,10 +127,8 @@ module Typus
       require "typus/configuration"
       require "typus/routes"
       require "typus/authentication"
-      require "typus/preferences"
       require "typus/reloader"
       require "typus/format"
-      require "typus/templates"
       require "typus/resource"
 
       # Active Record Extensions.
