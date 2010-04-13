@@ -116,7 +116,7 @@ module Typus
     end
 
     # This method checks if the user can perform the requested action.
-    # It works on services, for example: git, memcached, syslog ...
+    # It works on a resource: git, memcached, syslog ...
     def check_if_user_can_perform_action_on_resource
       controller = params[:controller].extract_resource
       action = params[:action]
