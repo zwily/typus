@@ -1,5 +1,13 @@
 <h2>Welcome to Typus!</h2>
 
-<p>If you need help don't hesitate in joining the <%= link_to "mailing list", "http://groups.google.com/group/typus" %>.</p>
+<p>Useful links:</p>
 
-<p>Replace this sidebar dropping a file named <code>_sidebar.html.erb</code> on the <code>app/views/admin/dashboard</code> folder.</p>
+<ul>
+  <li><%= link_to _("Mailing list"), "http://groups.google.com/group/typus" %></li>
+  <li><%= link_to _("Submit a bug report"), "http://github.com/fesplugas/typus/issues" %></li>
+  <li><%= link_to _("Documentation"), admin_docs_path %></li>
+  <li><%= link_to _("License"), admin_doc_path("mit_license") %></li>
+</ul>
+
+<p>Want to customize this sidebar?<br />
+<code>app/views/admin/dashboard/_sidebar.html.erb</code></p>
