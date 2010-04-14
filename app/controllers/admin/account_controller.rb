@@ -4,7 +4,8 @@ class Admin::AccountController < AdminController
   skip_before_filter :set_preferences
   skip_before_filter :authenticate
 
-  before_filter :sign_in?
+  before_filter :sign_in?, :except => [:forgot_password]
+  before_filter :new?, :only => [:forgot_password]
 
   def new
     flash[:notice] = _("Enter your email below to create the first user.")
@@ -53,6 +54,10 @@ class Admin::AccountController < AdminController
 
   def sign_in?
     redirect_to new_admin_session_path unless Typus.user_class.count.zero?
+  end
+
+  def new?
+    redirect_to new_admin_account_path if Typus.user_class.count.zero?
   end
 
 end

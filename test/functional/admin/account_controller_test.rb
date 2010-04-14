@@ -6,25 +6,44 @@ class Admin::AccountControllerTest < ActionController::TestCase
   # Sign up process
   ##
 
-  def test_should_render_new
+  def test_should_verify_new_redirect_to_new_admin_session_when_there_are_admin_users
     get :new
+    assert_response :redirect
+    assert_redirected_to new_admin_session_path
+  end
+
+  def test_should_verify_new_is_rendered_when_there_are_not_admin_users
+    TypusUser.expects(:count).at_least_once.returns(0)
+
+    get :new
+
     assert_response :success
-    assert_template "sign_in"
+    assert_template "new"
+    assert_match "layouts/admin/account", @controller.inspect
+    assert_equal "Enter your email below to create the first user.", flash[:notice]
   end
 
   ##
   # Recover password process
   ##
 
-=begin
+  def test_should_verify_forgot_password_redirects_to_new_when_there_are_no_admin_users
+    TypusUser.expects(:count).at_least_once.returns(0)
 
-  def test_should_sign_in_with_post_and_redirect_to_dashboard
-    typus_user = typus_users(:admin)
-    post :sign_in, { :typus_user => { :email => typus_user.email, :password => "12345678" } }
-    assert_equal typus_user.id, @request.session[:typus_user_id]
+    get :forgot_password
+
     assert_response :redirect
-    assert_redirected_to admin_dashboard_path
+    assert_redirected_to new_admin_account_path
   end
+
+  def test_should_verify_forgot_password_is_rendered_when_there_are_admin_users
+    get :forgot_password
+
+    assert_response :success
+    assert_template "forgot_password"
+  end
+
+=begin
 
   def test_should_sign_in_with_post_and_redirect_to_sign_in_with_an_error
     post :sign_in, { :typus_user => { :email => "john@example.com", :password => "XXXXXXXX" } }
@@ -139,19 +158,6 @@ class Admin::AccountControllerTest < ActionController::TestCase
     get :reset_password, { :token => typus_user.token }
     assert_response :success
     assert_template "reset_password"
-
-  end
-
-  def test_should_verify_sign_up_works
-
-    TypusUser.expects(:count).at_least_once.returns(0)
-
-    get :new
-
-    assert_response :success
-    assert_template "new"
-    assert_match "layouts/admin/account", @controller.inspect
-    assert_equal "Enter your email below to create the first user.", flash[:notice]
 
   end
 
