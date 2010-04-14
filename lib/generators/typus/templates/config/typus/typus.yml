@@ -5,6 +5,7 @@
 <%= options[:user_class_name] %>:
   fields:
     list: email, role, status
+    show: first_name, last_name, role, email, language
     form: first_name, last_name, role, email, password, password_confirmation, language
     options:
       selectors: role, language
