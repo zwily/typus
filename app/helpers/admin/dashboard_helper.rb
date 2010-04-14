@@ -1,36 +1,40 @@
-module Admin::DashboardHelper
+module Admin
 
-  def applications
+  module DashboardHelper
 
-    apps = ActiveSupport::OrderedHash.new
+    def applications
 
-    Typus.applications.each do |app|
+      apps = ActiveSupport::OrderedHash.new
 
-      available = Typus.application(app).map do |resource|
-                    resource if @current_user.resources.include?(resource)
-                  end.compact
+      Typus.applications.each do |app|
 
-      next if available.empty?
+        available = Typus.application(app).map do |resource|
+                      resource if @current_user.resources.include?(resource)
+                    end.compact
 
-      apps[app] = available.sort_by { |x| x.constantize.model_name.human }
+        next if available.empty?
+
+        apps[app] = available.sort_by { |x| x.constantize.model_name.human }
+
+      end
+
+      render "admin/helpers/applications", 
+             :applications => apps
 
     end
 
-    render "admin/helpers/applications", 
-           :applications => apps
+    def resources
 
-  end
+      available = Typus.resources.map do |resource|
+                    resource if @current_user.resources.include?(resource)
+                  end.compact
 
-  def resources
+      return if available.empty?
 
-    available = Typus.resources.map do |resource|
-                  resource if @current_user.resources.include?(resource)
-                end.compact
+      render "admin/helpers/resources", 
+             :resources => available
 
-    return if available.empty?
-
-    render "admin/helpers/resources", 
-           :resources => available
+    end
 
   end
 
