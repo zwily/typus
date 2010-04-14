@@ -4,100 +4,55 @@ class Admin::AccountController < AdminController
   skip_before_filter :set_preferences
   skip_before_filter :authenticate
 
-  before_filter :sign_up?, :except => [:sign_up]
-  before_filter :sign_in?, :only => [:sign_up]
-  before_filter :recover_password?, :only => [:recover_password, :reset_password]
+  before_filter :sign_in?
 
-  def sign_in
-    return unless request.post?
+  def new
+    flash[:notice] = _("Enter your email below to create the first user.")
+  end
 
-    if user = Typus.user_class.authenticate(params[:typus_user][:email], params[:typus_user][:password])
+  def create
+    user = Typus.user_class.generate(:email => params[:typus_user][:email], 
+                                     :password => Typus.default_password, 
+                                     :role => Typus.master_role)
+    user.status = true
+
+    if user.save
       session[:typus_user_id] = user.id
-      path = params[:back_to] || admin_dashboard_path
+      notice = _("Password set to '{{password}}'.", :password => Typus.default_password)
+      path = admin_dashboard_path
     else
-      alert = _("The email and/or password you entered is invalid.")
-      path = admin_sign_in_path(:back_to => params[:back_to])
+      path = { :action => :new }
     end
 
-    redirect_to path, :alert => alert
+    redirect_to path, :notice => notice
+
   end
 
-  def sign_out
-    session[:typus_user_id] = nil
-    redirect_to admin_sign_in_path
-  end
-
-  def recover_password
+  def forgot_password
     return unless request.post?
 
     if user = Typus.user_class.find_by_email(params[:typus_user][:email])
-      url = admin_reset_password_url(:token => user.token)
+      url = admin_account_url(user.token)
       Admin::Mailer.reset_password_link(user, url).deliver
       notice = _("Password recovery link sent to your email.")
-      path = admin_sign_in_path
+      path = new_admin_session_path
     else
-      path = admin_recover_password_path
+      render :action => :forgot_password and return
     end
 
     redirect_to path, :notice => notice
   end
 
-  # Only available when Typus.email is present.
-  def reset_password
-    @typus_user = Typus.user_class.find_by_token!(params[:token])
-    return unless request.post?
-
-    @typus_user.password = params[:typus_user][:password]
-    @typus_user.password_confirmation = params[:typus_user][:password_confirmation]
-
-    path = if !params[:typus_user][:password].blank? && @typus_user.save
-             session[:typus_user_id] = @typus_user.id
-             admin_dashboard_path
-           else
-             admin_reset_password_path(:token => params[:token])
-           end
-
-    redirect_to path
+  def show
+    @typus_user = Typus.user_class.find_by_token!(params[:id])
+    session[:typus_user_id] = @typus_user.id
+    redirect_to :controller => "admin/#{Typus.user_class_name.tableize}", :action => "edit", :id => @typus_user.id
   end
 
-  def sign_up
-
-    if request.post?
-
-      user = Typus.user_class.generate(:email => params[:typus_user][:email], 
-                                       :password => Typus.default_password, 
-                                       :role => Typus.master_role)
-      user.status = true
-
-      if user.save
-        session[:typus_user_id] = user.id
-        flash[:notice] = _("Password set to '{{password}}'.", 
-                           :password => Typus.default_password)
-        redirect_to admin_dashboard_path
-      else
-        flash[:alert] = _("That doesn't seem like a valid email address.")
-      end
-
-    else
-
-      flash[:notice] = _("Enter your email below to create the first user.")
-
-    end
-
-  end
-
-private
-
-  def sign_up?
-    redirect_to admin_sign_up_path if Typus.user_class.count.zero?
-  end
+  private
 
   def sign_in?
-    redirect_to admin_sign_in_path unless Typus.user_class.count.zero?
-  end
-
-  def recover_password?
-    redirect_to admin_sign_in_path unless Typus.email
+    redirect_to new_admin_session_path unless Typus.user_class.count.zero?
   end
 
 end

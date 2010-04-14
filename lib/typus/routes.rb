@@ -17,25 +17,14 @@ module Typus
     #   Typus::Routes.draw(map)
     def self.draw(map, prefix = "admin")
 
-      map.with_options :controller => "admin", :path_prefix => prefix do |i|
-        i.admin ""
-      end
-
-      map.with_options :controller => "admin/docs", :path_prefix => prefix do |i|
-        i.admin_docs "docs", :action => "index"
-        i.admin_doc "docs/:id", :action => "show"
-      end
-
-      map.with_options :controller => "admin/account", :path_prefix => prefix do |i|
-        i.admin_sign_in "sign_in", :action => "sign_in"
-        i.admin_sign_out "sign_out", :action => "sign_out"
-        i.admin_sign_up "sign_up", :action => "sign_up"
-        i.admin_recover_password "recover_password", :action => "recover_password"
-        i.admin_reset_password "reset_password", :action => "reset_password"
-      end
-
-      map.with_options :controller => "admin/dashboard", :path_prefix => prefix do |i|
-        i.admin_dashboard "dashboard"
+      map.resource :admin, :only => [:show], :controller => "admin" do |m|
+        m.resources :account, :only => [:new, :create, :show], 
+                                :controller => "account", 
+                                :collection => { :forgot_password => :get }, 
+                                :controller => "admin/account"
+        m.resources :docs, :only => [:index, :show], :controller => "admin/docs"
+        m.resource :session, :only => [:new, :create, :destroy], :controller => "admin/session"
+        m.resource :dashboard, :only => [:show], :controller => "admin/dashboard"
       end
 
       map.connect ":controller/:action/:id", :controller => /admin\/\w+/

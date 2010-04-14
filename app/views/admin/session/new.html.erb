@@ -1,4 +1,4 @@
-<%= form_for :typus_user, :url => { :action => :sign_in, :back_to => params[:back_to] } do |form| %>
+<%= form_for :typus_user, :url => { :action => :create, :back_to => params[:back_to] } do |form| %>
 
   <ul>
 
@@ -13,7 +13,7 @@
     </li>
 
     <li>
-      <%= submit_tag _("Sign in"), :class => "button" %> <%= link_to _("Recover password"), admin_recover_password_path if Typus.email %>
+      <%= submit_tag _("Sign in"), :class => "button" %> <%= link_to _("Recover password"), forgot_password_admin_accounts_path if Typus.email %>
     </li>
 
   </ul>

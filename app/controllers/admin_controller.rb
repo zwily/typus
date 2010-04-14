@@ -11,7 +11,7 @@ class AdminController < ActionController::Base
   before_filter :set_preferences
   before_filter :set_page_title
 
-  def index
+  def show
     redirect_to admin_dashboard_path
   end
 

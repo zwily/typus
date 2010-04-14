@@ -1,6 +1,6 @@
 class Admin::DashboardController < AdminController
 
-  def index
+  def show
     raise "Run `script/rails generate typus` to create configuration files." if Typus.applications.empty?
   end
 
