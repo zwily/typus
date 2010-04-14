@@ -3,7 +3,7 @@ dependencies:
   rails: 
     group: 
     - :default
-    version: ">= 0"
+    version: = 3.0.0.beta2
   sqlite3-ruby: 
     group: 
     - :default
@@ -28,11 +28,9 @@ specs:
 - tzinfo: 
     version: 0.3.19
 - activesupport: 
-    version: 3.0.0.beta3
-    source: 0
+    version: 3.0.0.beta2
 - activemodel: 
-    version: 3.0.0.beta3
-    source: 0
+    version: 3.0.0.beta2
 - erubis: 
     version: 2.6.5
 - rack: 
@@ -42,8 +40,7 @@ specs:
 - rack-test: 
     version: 0.5.3
 - actionpack: 
-    version: 3.0.0.beta3
-    source: 0
+    version: 3.0.0.beta2
 - mime-types: 
     version: "1.16"
 - polyglot: 
@@ -51,22 +48,19 @@ specs:
 - treetop: 
     version: 1.4.5
 - mail: 
-    version: 2.2.0
+    version: 2.1.5.3
 - text-hyphen: 
     version: 1.0.0
 - text-format: 
     version: 1.0.0
 - actionmailer: 
-    version: 3.0.0.beta3
-    source: 0
+    version: 3.0.0.beta2
 - arel: 
     version: 0.3.3
 - activerecord: 
-    version: 3.0.0.beta3
-    source: 0
+    version: 3.0.0.beta2
 - activeresource: 
-    version: 3.0.0.beta3
-    source: 0
+    version: 3.0.0.beta2
 - bundler: 
     version: 0.9.19
 - mocha: 
@@ -74,18 +68,12 @@ specs:
 - thor: 
     version: 0.13.4
 - railties: 
-    version: 3.0.0.beta3
-    source: 0
+    version: 3.0.0.beta2
 - rails: 
-    version: 3.0.0.beta3
-    source: 0
+    version: 3.0.0.beta2
 - sqlite3-ruby: 
     version: 1.2.5
-hash: 7aa430847fc4be97d2258ad8a9e6221ef3aed001
+hash: 00167d261d1459afd0ab6c9ebe8a627c135dfa32
 sources: 
-- Git: 
-    uri: git://github.com/rails/rails.git
-    git: git://github.com/rails/rails.git
-    ref: 6be04c46316dae0abcdfc38f95f00315f418898f
 - Rubygems: 
     uri: http://rubygems.org
