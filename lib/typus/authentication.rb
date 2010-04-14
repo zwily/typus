@@ -39,7 +39,7 @@ module Typus
     rescue Exception => error
       flash[:notice] = error.message
       session[:typus_user_id] = nil
-      redirect_to admin_sign_in_path(:back_to => back_to)
+      redirect_to new_admin_session_path(:back_to => back_to)
     end
 
     # Action is available on: edit, update, toggle and destroy

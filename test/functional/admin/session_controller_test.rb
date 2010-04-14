@@ -9,7 +9,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
     get :new
     assert_response :success
 
-    assert_select "title", "Typus Test - Account &rsaquo; Sign in"
+    assert_select "title", "Typus Test - Session &rsaquo; New"
     assert_select "h1", "Typus Test"
     assert_match "layouts/admin/account", @controller.inspect
 

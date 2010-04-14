@@ -6,7 +6,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     @request.session[:typus_user_id] = nil
     get :show
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path
+    assert_redirected_to new_admin_session_path
   end
 
   def test_should_verify_a_removed_role_cannot_sign_in
@@ -16,7 +16,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
     get :show
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path
+    assert_redirected_to new_admin_session_path
     assert_nil @request.session[:typus_user_id]
     assert_equal "Role does no longer exists.", flash[:notice]
 
@@ -36,7 +36,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
     get :show
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path
+    assert_redirected_to new_admin_session_path
 
     assert_equal "Typus user has been disabled.", flash[:notice]
     assert_nil @request.session[:typus_user_id]
@@ -49,14 +49,14 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     get :show
 
     assert_response :success
-    assert_template "index"
+    assert_template "show"
 
     assert_match "layouts/admin", @controller.inspect
 
-    assert_select "title", "#{Typus.admin_title} - Dashboard"
+    assert_select "title", "#{Typus.admin_title} - Dashboard &rsaquo; Show"
 
     [ "Typus", 
-      %(href="/admin/sign_out"), 
+      %(href="/admin/session"), 
       %(href="/admin/typus_users/edit/#{@request.session[:typus_user_id]}) ].each do |string|
       assert_match string, @response.body
     end

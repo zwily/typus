@@ -5,36 +5,36 @@ class RoutesTest < ActiveSupport::TestCase
 =begin
   # FIXME
   include ActionController::TestCase::Assertions
+  assert_routing "admin/action", :controller => "admin/account", :action => action
 =end
 
   def setup
     @routes = Rails.application.routes.routes.map(&:name)
   end
 
+  def test_should_verify_admin_routes
+    expected = %w(admin)
+    expected.each { |r| assert @routes.include?(r) }
+  end
+
   def test_should_verify_admin_dashboard_routes
-
-    expected = %w( admin_dashboard )
-    expected.each { |r| assert @routes.include?(r.to_sym) }
-
-=begin
-    # FIXME
-    assert_routing "admin/dashboard", :controller => "admin/dashboard", :action => "index"
-=end
-
+    expected = %w(admin_dashboard)
+    expected.each { |r| assert @routes.include?(r) }
   end
 
   def test_should_verify_admin_account_named_routes
+    expected = %w(forgot_password_admin_account admin_account_index new_admin_account admin_account)
+    expected.each { |r| assert @routes.include?(r) }
+  end
 
-    expected = %w( admin_sign_up admin_sign_in admin_sign_out 
-                   admin_recover_password admin_reset_password )
-    expected.each { |r| assert @routes.include?(r.to_sym) }
+  def test_should_verify_admin_session_named_routes
+    expected = %w(new_admin_session admin_session)
+    expected.each { |r| assert @routes.include?(r) }
+  end
 
-=begin
-    # FIXME
-    actions = %w( sign_up sign_in sign_out recover_password reset_password )
-    actions.each { |a| assert_routing "admin/#{a}", :controller => "admin/account", :action => a }
-=end
-
+  def test_should_verift_admin_docs_named_routes
+    expected = %w(admin_docs admin_doc)
+    expected.each { |r| assert @routes.include?(r) }
   end
 
 end

@@ -48,7 +48,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
   def test_should_sign_in_with_post_and_redirect_to_sign_in_with_an_error
     post :sign_in, { :typus_user => { :email => "john@example.com", :password => "XXXXXXXX" } }
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path
+    assert_redirected_to new_admin_session_path
     assert_equal "The email and/or password you entered is invalid.", flash[:alert]
   end
 
@@ -57,7 +57,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
     post :sign_in, { :typus_user => { :email => typus_user.email, :password => "12345678" } }
     assert_nil @request.session[:typus_user_id]
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path
+    assert_redirected_to new_admin_session_path
   end
 
   def test_should_not_send_recovery_password_link_to_unexisting_user
@@ -79,7 +79,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
     post :recover_password, { :typus_user => { :email => admin.email } }
 
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path
+    assert_redirected_to new_admin_session_path
     assert_equal "Password recovery link sent to your email.", flash[:notice]
 
   end
@@ -92,7 +92,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     get :reset_password
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path
+    assert_redirected_to new_admin_session_path
 
   end
 

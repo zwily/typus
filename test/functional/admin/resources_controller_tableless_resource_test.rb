@@ -19,7 +19,7 @@ class Admin::StatusControllerTest < ActionController::TestCase
     @request.session[:typus_user_id] = nil
     get :index
     assert_response :redirect
-    assert_redirected_to admin_sign_in_path(:back_to => '/admin/status')
+    assert_redirected_to new_admin_session_path(:back_to => '/admin/status')
   end
 =end
 

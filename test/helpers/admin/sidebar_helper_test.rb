@@ -166,7 +166,12 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
                                     %(<input id="controller" name="controller" type="hidden" value="admin/typus_users" />) ], 
                 :search_by => "First name, Last name, Email, and Role" }
 
-    assert_equal [partial, options], output
+    assert_equal partial, output.first
+
+    output.last[:hidden_params].each do |o|
+      assert options[:hidden_params].include?(o)
+    end
+    assert options[:search_by].eql?(output.last[:search_by])
 
   end
 
