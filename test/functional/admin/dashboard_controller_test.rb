@@ -4,7 +4,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
   def test_should_redirect_to_sign_in_when_not_signed_in
     @request.session[:typus_user_id] = nil
-    get :index
+    get :show
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
   end
@@ -14,7 +14,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     typus_user = typus_users(:removed_role)
     @request.session[:typus_user_id] = typus_user.id
 
-    get :index
+    get :show
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
     assert_nil @request.session[:typus_user_id]
@@ -26,7 +26,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
     admin = typus_users(:admin)
     @request.session[:typus_user_id] = admin.id
-    get :index
+    get :show
     assert_response :success
 
     # Disable user ...
@@ -34,7 +34,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     admin.status = false
     admin.save
 
-    get :index
+    get :show
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
 
@@ -46,7 +46,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   def test_should_render_dashboard
 
     @request.session[:typus_user_id] = typus_users(:admin).id
-    get :index
+    get :show
 
     assert_response :success
     assert_template "index"
@@ -76,7 +76,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
   def test_should_show_add_links_in_resources_list_for_editor
     @request.session[:typus_user_id] = typus_users(:editor).id
-    get :index
+    get :show
     assert_match "/admin/posts/new", @response.body
     assert_no_match /\/admin\/typus_users\/new/, @response.body
     assert_no_match /\/admin\/categories\/new/, @response.body
@@ -84,7 +84,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
   def test_should_show_add_links_in_resources_list_for_designer
     @request.session[:typus_user_id] = typus_users(:designer).id
-    get :index
+    get :show
     assert_no_match /\/admin\/posts\/new/, @response.body
     assert_no_match /\/admin\/typus_users\/new/, @response.body
   end

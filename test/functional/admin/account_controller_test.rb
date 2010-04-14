@@ -3,14 +3,20 @@ require "test/test_helper"
 class Admin::AccountControllerTest < ActionController::TestCase
 
   ##
-  # get :sign_in
+  # Sign up process
   ##
 
-  def test_should_sign_in
-    get :sign_in
+  def test_should_render_new
+    get :new
     assert_response :success
     assert_template "sign_in"
   end
+
+  ##
+  # Recover password process
+  ##
+
+=begin
 
   def test_should_sign_in_with_post_and_redirect_to_dashboard
     typus_user = typus_users(:admin)
@@ -57,16 +63,6 @@ class Admin::AccountControllerTest < ActionController::TestCase
     assert_redirected_to admin_sign_in_path
     assert_equal "Password recovery link sent to your email.", flash[:notice]
 
-  end
-
-  def test_should_sign_out
-    admin = typus_users(:admin)
-    @request.session[:typus_user_id] = admin.id
-    get :sign_out
-    assert_nil @request.session[:typus_user_id]
-    assert_response :redirect
-    assert_redirected_to admin_sign_in_path
-    [ :notice, :error, :warning ].each { |f| assert !flash[f] }
   end
 
   ##
@@ -146,18 +142,14 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   end
 
-  ##
-  # sign_up
-  ##
-
   def test_should_verify_sign_up_works
 
     TypusUser.expects(:count).at_least_once.returns(0)
 
-    get :sign_up
+    get :new
 
     assert_response :success
-    assert_template "sign_up"
+    assert_template "new"
     assert_match "layouts/admin/account", @controller.inspect
     assert_equal "Enter your email below to create the first user.", flash[:notice]
 
@@ -167,7 +159,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     TypusUser.expects(:count).at_least_once.returns(0)
 
-    post :sign_up, :typus_user => { :email => "example.com" }
+    post :create, :typus_user => { :email => "example.com" }
 
     assert_response :success
     assert_equal "That doesn't seem like a valid email address.", flash[:alert]
@@ -179,7 +171,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
     TypusUser.destroy_all
 
     assert_difference "TypusUser.count" do
-      post :sign_up, :typus_user => { :email => "john@example.com" }
+      post :create, :typus_user => { :email => "john@example.com" }
     end
 
     assert_response :redirect
@@ -189,50 +181,6 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   end
 
-  ##
-  # sign_in
-  ##
-
-  def test_should_render_sign_in
-
-    Typus.expects(:admin_title).at_least_once.returns("Typus Test")
-
-    get :sign_in
-    assert_response :success
-
-    assert_select "title", "Typus Test - Account &rsaquo; Sign in"
-    assert_select "h1", "Typus Test"
-    assert_match "layouts/admin/account", @controller.inspect
-
-  end
-
-  def test_should_redirect_to_sign_up_when_no_typus_users
-    TypusUser.expects(:count).at_least_once.returns(0)
-    get :sign_in
-    assert_response :redirect
-    assert_redirected_to admin_sign_up_path
-  end
-
-  def test_should_verify_typus_sign_in_layout_does_not_include_recover_password_link
-    get :sign_in
-    assert !@response.body.include?("Recover password")
-  end
-
-  def test_should_verify_typus_sign_in_layout_includes_recover_password_link
-    Typus.expects(:email).returns("john@example.com")
-    get :sign_in
-    assert @response.body.include?("Recover password")
-  end
-
-  ##
-  # sign_out
-  ##
-
-  def test_should_verify_sign_out
-    @request.session[:typus_user_id] = typus_users(:admin).id
-    get :sign_out
-    assert_nil @request.session[:typus_user_id]
-    assert_redirected_to admin_sign_in_path
-  end
+=end
 
 end
