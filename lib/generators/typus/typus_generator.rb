@@ -221,6 +221,7 @@ class TypusGenerator < Rails::Generators::Base
 #{klass}:
   fields:
     list: #{list.join(", ")}
+    show: #{list.join(", ")}
     form: #{form.join(", ")}
   order_by: #{order_by}
   relationships: #{relationships.join(", ")}
