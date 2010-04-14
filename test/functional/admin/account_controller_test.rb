@@ -111,7 +111,8 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     typus_user = typus_users(:admin)
     post :reset_password, { :token => typus_user.token, :typus_user => { :password => "drowssap", :password_confirmation => "drowssap2" } }
-    assert_response :success
+    assert_response :redirect
+    assert_redirected_to admin_reset_password_path(:token => typus_user.token)
 
   end
 
@@ -151,8 +152,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_verify_sign_up_works
 
-    TypusUser.destroy_all
-    assert TypusUser.all.empty?
+    TypusUser.expects(:count).at_least_once.returns(0)
 
     get :sign_up
 
@@ -165,7 +165,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   def test_should_should_not_sign_up_invalid_email
 
-    TypusUser.destroy_all
+    TypusUser.expects(:count).at_least_once.returns(0)
 
     post :sign_up, :typus_user => { :email => "example.com" }
 
@@ -207,7 +207,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
   end
 
   def test_should_redirect_to_sign_up_when_no_typus_users
-    TypusUser.destroy_all
+    TypusUser.expects(:count).at_least_once.returns(0)
     get :sign_in
     assert_response :redirect
     assert_redirected_to admin_sign_up_path
