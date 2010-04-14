@@ -80,14 +80,13 @@ class Admin::ResourcesController < AdminController
 
       create_with_back_to and return if params[:back_to]
       @item.save
-      flash[:success] = _("{{model}} successfully created.", 
-                          :model => @resource[:human_name])
 
       action = @resource[:class].typus_options_for(:action_after_save)
       path = { :action => action }
       path.merge!(:id => @item.id) unless action.eql?("index")
+      notice = _("{{model}} successfully created.", :model => @resource[:human_name])
 
-      redirect_to path
+      redirect_to path, :notice => notice
 
     else
       select_template :new
@@ -145,6 +144,7 @@ class Admin::ResourcesController < AdminController
                  :id => @item.id, 
                  :back_to => params[:back_to] }
              end
+      notice = _("{{model}} successfully updated.", :model => @resource[:human_name])
 
       # Reload @current_user when updating to see flash message in the 
       # correct locale.
@@ -153,9 +153,7 @@ class Admin::ResourcesController < AdminController
         @resource[:human_name] = params[:controller].extract_human_name
       end
 
-      flash[:success] = _("{{model}} successfully updated.", 
-                          :model => @resource[:human_name])
-      redirect_to path
+      redirect_to path, :notice => notice
 
     else
 
@@ -168,18 +166,23 @@ class Admin::ResourcesController < AdminController
 
   def destroy
     @item.destroy
-    flash[:success] = _("{{model}} successfully removed.", 
-                        :model => @resource[:human_name])
-    redirect_to request.referer || admin_dashboard_path
+
+    path = request.referer || admin_dashboard_path
+    notice = _("{{model}} successfully removed.", :model => @resource[:human_name])
+
+    redirect_to path, :notice => notice
   end
 
   def toggle
     @item.toggle(params[:field])
     @item.save!
-    flash[:success] = _("{{model}} {{attribute}} changed.", 
-                        :model => @resource[:human_name], 
-                        :attribute => params[:field].humanize.downcase)
-    redirect_to request.referer || admin_dashboard_path
+
+    path = request.referer || admin_dashboard_path
+    notice = _("{{model}} {{attribute}} changed.", 
+               :model => @resource[:human_name], 
+               :attribute => params[:field].humanize.downcase)
+
+    redirect_to path, :notice => notice
   end
 
   ##
@@ -193,9 +196,11 @@ class Admin::ResourcesController < AdminController
   #
   def position
     @item.send(params[:go])
-    flash[:success] = _("Record moved {{to}}.", 
-                        :to => params[:go].gsub(/move_/, '').humanize.downcase)
-    redirect_to request.referer || admin_dashboard_path
+
+    path = request.referer || admin_dashboard_path
+    notice = _("Record moved {{to}}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
+
+    redirect_to path, :notice => notice
   end
 
   ##
@@ -208,20 +213,19 @@ class Admin::ResourcesController < AdminController
     resource_tableized = params[:related][:model].tableize
 
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
-      flash[:success] = _("{{model_a}} related to {{model_b}}.", 
-                        :model_a => resource_class.model_name.human, 
-                        :model_b => @resource[:human_name])
+      flash[:notice] = _("{{model_a}} related to {{model_b}}.", 
+                         :model_a => resource_class.model_name.human, 
+                         :model_b => @resource[:human_name])
     else
       # TODO: Show the reason why cannot be related showing model_a and model_b errors.
-      flash[:error] = _("{{model_a}} cannot be related to {{model_b}}.", 
-                        :model_a => resource_class.model_name.human, 
-                        :model_b => @resource[:human_name])
+      flash[:alert] = _("{{model_a}} cannot be related to {{model_b}}.", 
+                         :model_a => resource_class.model_name.human, 
+                         :model_b => @resource[:human_name])
     end
 
     redirect_to :back
 
   end
-
 
   ##
   # Remove relationship between models, this action never removes items!
@@ -243,12 +247,12 @@ class Admin::ResourcesController < AdminController
     end
 
     if saved_succesfully
-      flash[:success] = _("{{model_a}} unrelated from {{model_b}}.", 
-                          :model_a => resource_class.model_name.human, 
-                          :model_b => @resource[:human_name])
+      flash[:notice] = _("{{model_a}} unrelated from {{model_b}}.", 
+                         :model_a => resource_class.model_name.human, 
+                         :model_b => @resource[:human_name])
     else
       # TODO: Show the reason why cannot be unrelated showing model_a and model_b errors.
-      flash[:error] = _("{{model_a}} cannot be unrelated to {{model_b}}.", 
+      flash[:alert] = _("{{model_a}} cannot be unrelated to {{model_b}}.", 
                         :model_a => resource_class.model_name.human, 
                         :model_b => @resource[:human_name])
     end
@@ -261,19 +265,16 @@ class Admin::ResourcesController < AdminController
   # Remove file attachments.
   #
   def detach
-
     attachment = @resource[:class].human_attribute_name(params[:attachment])
 
-    if @item.update_attributes(params[:attachment] => nil)
-      flash[:success] = _("{{attachment}} removed.", 
-                          :attachment => attachment)
-    else
-      flash[:notice] = _("{{attachment}} can't be removed.", 
-                         :attachment => attachment)
-    end
+    message = if @item.update_attributes(params[:attachment] => nil)
+                "{{attachment}} removed."
+              else
+                "{{attachment}} can't be removed."
+              end
+    notice = _(message, :attachment => attachment)
 
-    redirect_to :back
-
+    redirect_to :back, :notice => notice
   end
 
 private
@@ -310,8 +311,10 @@ private
     condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(@current_user)
 
     if condition_typus_users || condition_typus_user_id
-       flash[:notice] = _("You don't have permission to access this item.")
-       redirect_to request.referer || admin_dashboard_path
+       path = request.referer || admin_dashboard_path
+       alert = _("You don't have permission to access this item.")
+
+       redirect_to path, :alert => alert
     end
 
   end
@@ -396,9 +399,10 @@ private
       resource.send(@item.class.name.tableize).create(params[@object_name])
     end
 
-    flash[:success] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
-                                   :model_a => @item.class.model_name.human, 
-                                   :model_b => resource_class.model_name.human)
+    flash[:notice] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
+                                  :model_a => @item.class.model_name.human, 
+                                  :model_b => resource_class.model_name.human)
+
     redirect_to path || params[:back_to]
 
   end

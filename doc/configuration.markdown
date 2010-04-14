@@ -304,9 +304,8 @@ Add those actions to your admin controllers.
 
 For feedback you can use the following flash methods.
 
-- `flash[:notice]` just some feedback.
-- `flash[:error]` when there's something wrong.
-- `flash[:success]` when the action successfully finished.
+- `flash[:notice]` to deliver feedback.
+- `flash[:alert]` when there's something wrong.
 
 [&uarr; Back to top](#toc)
 

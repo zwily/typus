@@ -11,7 +11,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to @request.env["HTTP_REFERER"]
-    assert_equal "Post status changed.", flash[:success]
+    assert_equal "Post status changed.", flash[:notice]
     assert Post.find(post.id).status
 
   end

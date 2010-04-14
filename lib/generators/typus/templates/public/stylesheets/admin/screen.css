@@ -306,18 +306,14 @@ input.date_input { border: 1px solid #999; margin-bottom: 1em;}
 
 /* @group Success, notice and error boxes */
 
-.error,
-.notice, 
-.success { border: 1px solid #CCC; font-weight: bold; margin: 0 0 1em 0; }
-.error p,
-.notice p, 
-.success p { font-weight: bold; margin: 0!important; padding: 1em; }
-.error { background: #FBE3E4; border-color: #FBC2C4; color: #8A1F11; }
-.error a { color: #8A1F11; }
+.alert, 
+.notice { border: 1px solid #CCC; font-weight: bold; margin: 0 0 1em 0; }
+.alert p, 
+.notice p { font-weight: bold; margin: 0!important; padding: 1em; }
+.alert { background: #FBE3E4; border-color: #FBC2C4; color: #8A1F11; }
+.alert a { color: #8A1F11; }
 .notice { background: #FFF6BF; border-color: #FFD324; color: #514721; }
 .notice a { color: #514721; }
-.success { background: #E6EFC2; border-color: #C6D880; color: #264409; }
-.success a { color: #264409; }
 
 /* @end */
 

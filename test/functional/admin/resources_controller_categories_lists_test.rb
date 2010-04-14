@@ -27,7 +27,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
 
-    assert_equal "Record moved lower.", flash[:success]
+    assert_equal "Record moved lower.", flash[:notice]
     assert_equal 2, first_category.reload.position
     assert_equal 1, second_category.reload.position
 
@@ -39,7 +39,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     second_category = categories(:second)
     assert_equal 2, second_category.position
     get :position, { :id => second_category.id, :go => 'move_higher' }
-    assert_equal "Record moved higher.", flash[:success]
+    assert_equal "Record moved higher.", flash[:notice]
     assert_equal 2, first_category.reload.position
     assert_equal 1, second_category.reload.position
   end
@@ -48,7 +48,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     first_category = categories(:first)
     assert_equal 1, first_category.position
     get :position, { :id => first_category.id, :go => 'move_to_bottom' }
-    assert_equal "Record moved to bottom.", flash[:success]
+    assert_equal "Record moved to bottom.", flash[:notice]
     assert_equal 3, first_category.reload.position
   end
 
@@ -56,7 +56,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     third_category = categories(:third)
     assert_equal 3, third_category.position
     get :position, { :id => third_category.id, :go => 'move_to_top' }
-    assert_equal "Record moved to top.", flash[:success]
+    assert_equal "Record moved to top.", flash[:notice]
     assert_equal 1, third_category.reload.position
   end
 

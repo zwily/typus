@@ -374,7 +374,7 @@ module Admin::FormHelper
     message = <<-HTML
 Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{locale}.yml">here</a> and place it on `config/locales`.
     HTML
-    flash[:error] = message
+    flash[:alert] = message
     # We set a locale only for the current template.
     I18n.locale = :en
     retry

@@ -29,7 +29,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     get :destroy, { :id => posts(:published).id, :method => :delete }
 
     assert_response :redirect
-    assert_equal "Post successfully removed.", flash[:success]
+    assert_equal "Post successfully removed.", flash[:notice]
     assert_redirected_to :action => :index
 
   end

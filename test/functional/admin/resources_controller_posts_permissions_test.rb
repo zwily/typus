@@ -52,7 +52,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     get :edit, { :id => post.id }
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-    assert_equal "You don't have permission to access this item.", flash[:notice]
+    assert_equal "You don't have permission to access this item.", flash[:alert]
 
     # Editor tries to show a post owned by the admin.
     post = posts(:owned_by_admin)

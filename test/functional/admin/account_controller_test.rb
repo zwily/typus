@@ -24,7 +24,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
     post :sign_in, { :typus_user => { :email => "john@example.com", :password => "XXXXXXXX" } }
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
-    assert_equal "The email and/or password you entered is invalid.", flash[:error]
+    assert_equal "The email and/or password you entered is invalid.", flash[:alert]
   end
 
   def test_should_not_sign_in_a_disabled_user
@@ -55,7 +55,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to admin_sign_in_path
-    assert_equal "Password recovery link sent to your email.", flash[:success]
+    assert_equal "Password recovery link sent to your email.", flash[:notice]
 
   end
 
@@ -170,7 +170,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
     post :sign_up, :typus_user => { :email => "example.com" }
 
     assert_response :success
-    assert_equal "That doesn't seem like a valid email address.", flash[:error]
+    assert_equal "That doesn't seem like a valid email address.", flash[:alert]
 
   end
 

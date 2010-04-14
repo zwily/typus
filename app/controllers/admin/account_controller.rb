@@ -14,11 +14,12 @@ class Admin::AccountController < AdminController
     if request.post?
       if user = Typus.user_class.authenticate(params[:typus_user][:email], params[:typus_user][:password])
         session[:typus_user_id] = user.id
-        redirect_to params[:back_to] || admin_dashboard_path
+        path = params[:back_to] || admin_dashboard_path
       else
-        flash[:error] = _("The email and/or password you entered is invalid.")
-        redirect_to admin_sign_in_path(:back_to => params[:back_to])
+        alert = _("The email and/or password you entered is invalid.")
+        path = admin_sign_in_path(:back_to => params[:back_to])
       end
+      redirect_to path, :alert => alert
     end
 
   end
@@ -33,8 +34,8 @@ class Admin::AccountController < AdminController
       if user = Typus.user_class.find_by_email(params[:typus_user][:email])
         url = admin_reset_password_url(:token => user.token)
         Admin::Mailer.reset_password_link(user, url).deliver
-        flash[:success] = _("Password recovery link sent to your email.")
-        redirect_to admin_sign_in_path
+        notice = _("Password recovery link sent to your email.")
+        redirect_to admin_sign_in_path, :notice => notice
       else
         redirect_to admin_recover_password_path
       end
@@ -73,7 +74,7 @@ class Admin::AccountController < AdminController
                            :password => Typus.default_password)
         redirect_to admin_dashboard_path
       else
-        flash[:error] = _("That doesn't seem like a valid email address.")
+        flash[:alert] = _("That doesn't seem like a valid email address.")
       end
 
     else

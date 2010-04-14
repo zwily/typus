@@ -19,8 +19,7 @@ class AdminController < ActionController::Base
 
   def render_error(exception)
     # log_error(exception)
-    flash[:error] = exception.message
-    redirect_to admin_path
+    redirect_to admin_path, :alert => exception.message
   end
 
   def reload_config_and_roles
