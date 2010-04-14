@@ -1,5 +1,9 @@
 --- 
 dependencies: 
+  test-unit: 
+    group: 
+    - :default
+    version: ">= 0"
   rails: 
     group: 
     - :default
@@ -14,6 +18,8 @@ dependencies:
     group: 
     - :default
     version: ">= 0"
+    require: []
+
 specs: 
 - rake: 
     version: 0.8.7
@@ -73,7 +79,9 @@ specs:
     version: 3.0.0.beta2
 - sqlite3-ruby: 
     version: 1.2.5
-hash: 00167d261d1459afd0ab6c9ebe8a627c135dfa32
+- test-unit: 
+    version: 2.0.7
+hash: 6be97cfba97b9d67f306ca7c6767d2a959d9e026
 sources: 
 - Rubygems: 
     uri: http://rubygems.org
