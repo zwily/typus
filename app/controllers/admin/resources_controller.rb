@@ -1,3 +1,5 @@
+require "typus/format"
+
 class Admin::ResourcesController < AdminController
 
   include Typus::Format
