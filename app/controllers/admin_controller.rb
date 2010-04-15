@@ -27,7 +27,7 @@ class AdminController < ActionController::Base
     Typus.reload! unless Rails.env.production?
   end
 
-  include Typus::Authentication
+  include Typus::Authentication::Advanced
 
   def set_page_title
     @page_title = []

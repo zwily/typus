@@ -296,53 +296,6 @@ private
     @item = @resource[:class].find(params[:id])
   end
 
-  ##
-  # If item is owned by another user, we only can perform a 
-  # show action on the item. Updated item is also blocked.
-  #
-  #   before_filter :check_resource_ownership, :only => [ :edit, :update, :destroy, 
-  #                                                       :toggle, :position, 
-  #                                                       :relate, :unrelate ]
-  #
-  def check_resource_ownership
-
-    # By-pass if current_user is root.
-    return if @current_user.is_root?
-
-    condition_typus_users = @item.respond_to?(Typus.relationship) && !@item.send(Typus.relationship).include?(@current_user)
-    condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(@current_user)
-
-    if condition_typus_users || condition_typus_user_id
-       path = request.referer || admin_dashboard_path
-       alert = _("You don't have permission to access this item.")
-
-       redirect_to path, :alert => alert
-    end
-
-  end
-
-  def check_resource_ownerships
-
-    # By-pass if current_user is root.
-    return if @current_user.is_root?
-
-    # Show only related items it @resource has a foreign_key (Typus.user_fk) 
-    # related to the logged user.
-    if @resource[:class].typus_user_id?
-      condition = { Typus.user_fk => @current_user }
-      @conditions = @resource[:class].merge_conditions(@conditions, condition)
-    end
-
-  end
-
-  def check_ownership_of_referal_item
-    return unless params[:resource] && params[:resource_id]
-    klass = params[:resource].classify.constantize
-    return if !klass.typus_user_id?
-    item = klass.find(params[:resource_id])
-    raise "You're not owner of this record." unless item.owned_by?(@current_user) || @current_user.is_root?
-  end
-
   def set_fields
 
     mapping = case params[:action]
@@ -358,15 +311,6 @@ private
   def set_order
     params[:sort_order] ||= 'desc'
     @order = params[:order_by] ? "#{@resource[:class].table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
-  end
-
-  # If we want to display only user items, we don't want the links previous and 
-  # next linking to records from other users.
-  def set_conditions
-    condition = @current_user.is_root? || 
-                !@resource[:class].typus_options_for(:only_user_items) || 
-                !@resource[:class].columns.map(&:name).include?(Typus.user_fk)
-    !condition ? { Typus.user_fk => @current_user.id } : {}
   end
 
   ##

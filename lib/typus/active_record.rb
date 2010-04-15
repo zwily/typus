@@ -304,6 +304,8 @@ module Typus
     # TODO: Cleanup previous_ and next_ variables using options.merge().
     def previous_and_next(condition = {}, klass = self.class)
 
+      condition ||= {}
+
       previous_conditions = "#{klass.primary_key} < #{quote_value(id)}"
       next_conditions = "#{klass.primary_key} > #{quote_value(id)}"
 
