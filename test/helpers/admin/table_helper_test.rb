@@ -199,24 +199,22 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_table_tree_field
-
+  def test_typus_table_tree_field_when_displays_a_parent
     page = pages(:published)
+
     output = typus_table_tree_field("test", page)
-    expected = <<-HTML
-<td></td>
-HTML
+    expected = "<td>&amp;#151;</td>"
 
     assert_equal expected, output
+  end
 
+  def test_typus_table_tree_field_when_displays_a_chidren
     page = pages(:unpublished)
+
     output = typus_table_tree_field("test", page)
-    expected = <<-HTML
-<td>Page#1</td>
-    HTML
+    expected = "<td>Page#1</td>"
 
     assert_equal expected, output
-
   end
 
   def test_typus_table_datetime_field
