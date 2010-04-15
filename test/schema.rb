@@ -9,6 +9,8 @@ ActiveRecord::Schema.define do
     t.integer :position
   end
 
+  add_index :assets, :resource_id
+
   create_table :categories, :force => true do |t|
     t.string :name
     t.string :permalink
@@ -35,6 +37,8 @@ ActiveRecord::Schema.define do
     t.integer :parent_id
   end
 
+  add_index :pages, :parent_id
+
   create_table :posts, :force => true do |t|
     t.string :title
     t.text :body
@@ -44,7 +48,10 @@ ActiveRecord::Schema.define do
     t.datetime :published_at
     t.integer :typus_user_id
   end
-  
+
+  add_index :posts, :favorite_comment_id
+  add_index :posts, :typus_user_id
+
   create_table :pictures, :force => true do |t|
     t.string :title
     t.string :picture_file_name
@@ -55,6 +62,8 @@ ActiveRecord::Schema.define do
     t.datetime :updated_at
     t.integer :typus_user_id
   end
+
+  add_index :pictures, :typus_user_id
 
   create_table :typus_users, :force => true do |t|
     t.string :first_name, :default => "", :null => false
@@ -69,11 +78,15 @@ ActiveRecord::Schema.define do
     t.timestamps
   end
 
+  add_index :typus_users, :token
+
   create_table :views, :force => true do |t|
     t.string :ip, :default => '127.0.0.1'
     t.integer :post_id
     t.timestamps
   end
+
+  add_index :views, :post_id
 
   create_table :categories_posts, :force => true, :id => false do |t|
     t.column :category_id, :integer
