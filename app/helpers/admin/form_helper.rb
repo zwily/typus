@@ -403,11 +403,7 @@ module Admin
 
       href = if has_file_preview
                url = item.send(attachment).url(file_preview)
-               if ActionController::Base.relative_url_root
-                 ActionController::Base.relative_url_root + url
-               else
-                 url
-               end
+               # ActionController::Base.relative_url_root + url
              else
                item.send(attachment).url
              end
