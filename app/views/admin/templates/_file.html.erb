@@ -14,7 +14,7 @@
 %>
 
 <li>
-  <%= form.label attribute, label_text %>
+  <%= form.label attribute, raw(label_text) %>
   <%= form.file_field attachment, options %>
   <%= typus_preview(@item, attribute) %>
 </li>
