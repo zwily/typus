@@ -194,7 +194,8 @@ module Admin
     end
 
     def typus_table_tree_field(attribute, item)
-      return content_tag(:td, item.parent.to_label if item.parent)
+      content = item.parent ? item.parent.to_label : "&#151;"
+      return content_tag(:td, content)
     end
 
     # OPTIMIZE: Move html code to partial.
