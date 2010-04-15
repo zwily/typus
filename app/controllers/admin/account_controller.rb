@@ -4,7 +4,7 @@ class Admin::AccountController < AdminController
   skip_before_filter :set_preferences
   skip_before_filter :authenticate
 
-  before_filter :sign_in?, :except => [:forgot_password]
+  before_filter :sign_in?, :except => [:forgot_password, :show]
   before_filter :new?, :only => [:forgot_password]
 
   def new
