@@ -136,10 +136,9 @@ module Admin
 
     end
 
-    # OPTIMIZE: Refactor (Remove rescue)
     def typus_table_belongs_to_field(attribute, item)
 
-      action = item.send(attribute).class.typus_options_for(:default_action_on_item) rescue 'edit'
+      action = item.send(attribute).class.typus_options_for(:default_action_on_item)
 
       att_value = item.send(attribute)
       content = if !att_value.nil?
