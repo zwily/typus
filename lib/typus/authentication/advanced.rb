@@ -189,6 +189,27 @@ module Typus
         !condition ? { Typus.user_fk => @current_user.id } : {}
       end
 
+      def set_attributes_on_create
+        if @resource[:class].typus_user_id?
+          @item.attributes = { Typus.user_fk => @current_user.id }
+        end
+      end
+
+      def set_attributes_on_update
+        if @resource[:class].typus_user_id? && @current_user.is_not_root?
+          @item.update_attributes(Typus.user_fk => @current_user.id)
+        end
+      end
+
+      # Reload @current_user when updating to see flash message in the 
+      # correct locale.
+      def reload_locales
+        if @resource[:class].eql?(Typus.user_class)
+          I18n.locale = @current_user.reload.preferences[:locale]
+          @resource[:human_name] = params[:controller].extract_human_name
+        end
+      end
+
     end
 
   end
