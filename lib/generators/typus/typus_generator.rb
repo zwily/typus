@@ -114,6 +114,10 @@ class TypusGenerator < Rails::Generators::Base
     end
   end
 
+  def generate_model
+    template "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
+  end
+
   def copy_migration_template
     migration_template "migration.rb", "db/migrate/create_#{admin_users_table_name}"
   end
