@@ -4,7 +4,9 @@ module Typus
 
     module None
 
-      def authenticate; end
+      def authenticate
+        @current_user = AdminUserFake.new
+      end
 
       def check_if_user_can_perform_action_on_user; end
       def check_if_user_can_perform_action_on_resources; end

@@ -5,6 +5,7 @@ module Typus
     module Basic
 
       def authenticate
+        @current_user = AdminUserFake.new
         authenticate_or_request_with_http_basic do |user_name, password|
           user_name == 'admin' && password == 'columbia'
         end
