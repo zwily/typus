@@ -186,7 +186,8 @@ class TypusGenerator < Rails::Generators::Base
                        created_at created_on updated_at updated_on 
                        salt crypted_password 
                        password_salt persistence_token single_access_token perishable_token 
-                       _type$ )
+                       _type$ 
+                       _file_size$ )
 
       default_rejections = rejections + %w( password password_confirmation )
       form_rejections = rejections + %w( position )
