@@ -65,8 +65,6 @@
 [ ] Fix css to display correctly "select" fields in relationships.
 [ ] Remove Typus "blue" color and use something more neutral.
 [ ] Ajax pagination. (?)
-[ ] Generate views for custom actions on the controllers/models. This should 
-    verify the view doesn't exist and create it.
 [ ] Add test for `typus_table_selector`.
 [ ] Forever loop when schema has not been migrated.
 [ ] Pagination doesn't work properly when having multiple paginators on edit page
