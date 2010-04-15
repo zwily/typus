@@ -142,11 +142,11 @@ module Typus
       end
 
       def encrypt(string)
-        generate_hash("--#{salt}--#{string}")
+        generate_hash("--#{salt}--#{string}--")
       end
 
       def initialize_salt
-        self.salt = generate_hash("--#{Time.now.utc.to_s}--#{email}--") if new_record?
+        self.salt = generate_hash("--#{Time.now.utc.to_s(:number)}--#{email}--") if new_record?
       end
 
       def initialize_token
@@ -154,7 +154,7 @@ module Typus
       end
 
       def generate_token
-        self.token = encrypt("--#{Time.now.utc.to_s}--#{password}--").first(12)
+        self.token = encrypt("--#{Time.now.utc.to_s(:number)}--#{password}--").first(12)
       end
 
       def password_required?
