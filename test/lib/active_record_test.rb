@@ -82,7 +82,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
                        ["role", :selector], 
                        ["email", :string], 
                        ["password", :password], 
-                       ["password_confirmation", :password]]
+                       ["password_confirmation", :password], 
+                       ["language", :selector]]
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for("form").keys
     assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for("form").values
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:form).keys
@@ -106,9 +107,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_typus_fields_for_relationship_for_typus_user
-    expected_fields = [["email", :string], 
+    expected_fields = [["first_name", :string], 
+                       ["last_name", :string], 
                        ["role", :selector], 
-                       ["status", :boolean]]
+                       ["email", :string], 
+                       ["language", :selector]]
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for("relationship").keys
     assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for("relationship").values
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:relationship).keys
@@ -116,9 +119,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   def test_should_return_all_fields_for_undefined_field_type_on_typus_user
-    expected_fields = [["email", :string], 
+    expected_fields = [["first_name", :string], 
+                       ["last_name", :string], 
                        ["role", :selector], 
-                       ["status", :boolean]]
+                       ["email", :string], 
+                       ["language", :selector]]
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for("undefined").keys
     assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for("undefined").values
     assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:undefined).keys
