@@ -3,33 +3,11 @@ module Admin
   module TableHelper
 
     def build_typus_table(model, fields, items, link_options = {}, association = nil)
-      content = String.new
-
-      items.each do |item|
-        fields.each do |key, value|
-          content << case value
-                     when :boolean then typus_table_boolean_field(key, item)
-                     when :datetime then typus_table_datetime_field(key, item, link_options)
-                     when :date then typus_table_datetime_field(key, item, link_options)
-                     when :file then typus_table_file_field(key, item, link_options)
-                     when :time then typus_table_datetime_field(key, item, link_options)
-                     when :belongs_to then typus_table_belongs_to_field(key, item)
-                     when :tree then typus_table_tree_field(key, item)
-                     when :position then typus_table_position_field(key, item)
-                     when :selector then typus_table_selector(key, item)
-                     when :transversal then typus_table_transversal(key, item)
-                     when :has_and_belongs_to_many then typus_table_has_and_belongs_to_many_field(key, item)
-                     else
-                       typus_table_string_field(key, item, link_options)
-                     end
-        end
-      end
-
       render "admin/helpers/table", 
              :model => model, 
              :fields => fields, 
              :items => items, 
-             :content => raw(content)
+             :link_options => link_options
     end
 
     def typus_table_header(model, fields)
@@ -63,6 +41,30 @@ module Admin
 
     end
 
+    def typus_table_fields_for_item(item, fields, link_options)
+      content = String.new
+
+      fields.each do |key, value|
+        content << case value
+                   when :boolean then typus_table_boolean_field(key, item)
+                   when :datetime then typus_table_datetime_field(key, item, link_options)
+                   when :date then typus_table_datetime_field(key, item, link_options)
+                   when :file then typus_table_file_field(key, item, link_options)
+                   when :time then typus_table_datetime_field(key, item, link_options)
+                   when :belongs_to then typus_table_belongs_to_field(key, item)
+                   when :tree then typus_table_tree_field(key, item)
+                   when :position then typus_table_position_field(key, item)
+                   when :selector then typus_table_selector(key, item)
+                   when :transversal then typus_table_transversal(key, item)
+                   when :has_and_belongs_to_many then typus_table_has_and_belongs_to_many_field(key, item)
+                   else
+                     typus_table_string_field(key, item, link_options)
+                   end
+      end
+
+      return raw(content)
+    end
+
     def typus_table_default_action(model, item)
       action = if model.typus_user_id? && @current_user.is_not_root?
                  # If there's a typus_user_id column on the table and logged user is not root ...
@@ -89,6 +91,8 @@ module Admin
     #
     def typus_table_action(model, item)
 
+      condition = true
+
       case params[:action]
       when "index"
         action = "trash"
@@ -105,7 +109,7 @@ module Admin
                     else
                       @current_user.can?('destroy', model)
                     end
-        confirm = _("Remove entry?") if condition
+        confirm = _("Remove entry?")
       when 'edit'
         # If we are editing content, we can relate and unrelate always!
         confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
@@ -121,12 +125,14 @@ module Admin
                     end
         confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
                     :unrelate_model => model.model_name.human, 
-                    :unrelate_model_from => @resource[:human_name]) if condition
+                    :unrelate_model_from => @resource[:human_name])
       end
 
       message = %(<div class="sprite #{action}">#{action.titleize}</div>)
 
-      link_to raw(message), options, :title => _(action.titleize), :confirm => confirm
+      if condition
+        link_to raw(message), options, :title => _(action.titleize), :confirm => confirm
+      end
 
     end
 
