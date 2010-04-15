@@ -193,11 +193,8 @@ module Admin
 
     end
 
-    # OPTIMIZE: Move html code to partial.
     def typus_table_tree_field(attribute, item)
-      <<-HTML
-<td>#{item.parent.to_label if item.parent}</td>
-      HTML
+      return content_tag(:td, item.parent.to_label if item.parent)
     end
 
     # OPTIMIZE: Move html code to partial.
