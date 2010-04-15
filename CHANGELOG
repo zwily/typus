@@ -49,6 +49,7 @@
 [X] Refactored all sessions/account handling.
 [X] Improved usability on password recovery based on how Github works.
 [X] Removed footer links and added them to dashboard#sidebar.
+[X] Add defaults options for the fields and do not fallback into list.
 
 [-] Allow users to download the demo hosted at heroku.com
 [-] Move html code from helpers to partials.
@@ -80,4 +81,3 @@
 [ ] Fix problem on entries with attachment when using to_label.
 [ ] Include dashboard#sidebar in the generator so use can easily overwrite it.
 [ ] Enable mechanism to skip Typus authentication so we can use other engines.
-[ ] Add defaults options for the fields and do not fallback into list.
