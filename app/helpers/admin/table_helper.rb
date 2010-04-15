@@ -2,110 +2,34 @@ module Admin
 
   module TableHelper
 
-    # OPTIMIZE: Move html code to partial & refactor.
     def build_typus_table(model, fields, items, link_options = {}, association = nil)
+      content = String.new
 
-      returning(String.new) do |html|
-
-        html << <<-HTML
-  <table class="typus">
-        HTML
-
-        html << typus_table_header(model, fields)
-
-        items.each do |item|
-
-          html << <<-HTML
-  <tr class="#{cycle('even', 'odd')} #{item.class.name.underscore}" id="#{dom_id(item)}" name="item_#{item.id}">
-          HTML
-
-          fields.each do |key, value|
-            case value
-            when :boolean then           html << typus_table_boolean_field(key, item)
-            when :datetime then          html << typus_table_datetime_field(key, item, link_options)
-            when :date then              html << typus_table_datetime_field(key, item, link_options)
-            when :file then              html << typus_table_file_field(key, item, link_options)
-            when :time then              html << typus_table_datetime_field(key, item, link_options)
-            when :belongs_to then        html << typus_table_belongs_to_field(key, item)
-            when :tree then              html << typus_table_tree_field(key, item)
-            when :position then          html << typus_table_position_field(key, item)
-            when :selector then          html << typus_table_selector(key, item)
-            when :transversal then       html << typus_table_transversal(key, item)
-            when :has_and_belongs_to_many then
-              html << typus_table_has_and_belongs_to_many_field(key, item)
-            else
-              html << typus_table_string_field(key, item, link_options)
-            end
-          end
-
-          action = if model.typus_user_id? && @current_user.is_not_root?
-                     # If there's a typus_user_id column on the table and logged user is not root ...
-                     item.owned_by?(@current_user) ? item.class.typus_options_for(:default_action_on_item) : 'show'
-                   elsif @current_user.cannot?('edit', model)
-                     'show'
-                   else
-                     item.class.typus_options_for(:default_action_on_item)
-                   end
-
-          content = link_to _(action.capitalize), :controller => "admin/#{item.class.name.tableize}", :action => action, :id => item.id
-          html << <<-HTML
-  <td width="10px">#{content}</td>
-          HTML
-
-          ##
-          # This controls the action to perform. If we are on a model list we 
-          # will remove the entry, but if we inside a model we will remove the 
-          # relationship between the models.
-          #
-          # Only shown is the user can destroy/unrelate items.
-          #
-
-          trash = %(<div class="sprite trash">Trash</div>).html_safe
-          unrelate = %(<div class="sprite unrelate">Unrelate</div>).html_safe
-
-          case params[:action]
-          when 'index'
-            condition = if model.typus_user_id? && @current_user.is_not_root?
-                          item.owned_by?(@current_user)
-                        else
-                          @current_user.can?('destroy', model)
-                        end
-            perform = link_to trash, { :action => 'destroy', :id => item.id }, 
-                                       :title => _("Remove"), 
-                                       :confirm => _("Remove entry?") if condition
-          when 'edit'
-            # If we are editing content, we can relate and unrelate always!
-            perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }, 
-                                          :title => _("Unrelate"), 
-                                          :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
-                                                        :unrelate_model => model.model_name.human, 
-                                                        :unrelate_model_from => @resource[:human_name])
-          when 'show'
-            # If we are showing content, we only can relate and unrelate if we are 
-            # the owners of the owner record.
-            # If the owner record doesn't have a foreign key (Typus.user_fk) we look
-            # each item to verify the ownership.
-            condition = if @resource[:class].typus_user_id? && @current_user.is_not_root?
-                          @item.owned_by?(@current_user)
-                        end
-            perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }, 
-                                          :title => _("Unrelate"), 
-                                          :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
-                                                        :unrelate_model => model.model_name.human, 
-                                                        :unrelate_model_from => @resource[:human_name]) if condition
-          end
-
-          html << <<-HTML
-  <td width="10px">#{perform}</td>
-  </tr>
-          HTML
-
+      items.each do |item|
+        fields.each do |key, value|
+          content << case value
+                     when :boolean then typus_table_boolean_field(key, item)
+                     when :datetime then typus_table_datetime_field(key, item, link_options)
+                     when :date then typus_table_datetime_field(key, item, link_options)
+                     when :file then typus_table_file_field(key, item, link_options)
+                     when :time then typus_table_datetime_field(key, item, link_options)
+                     when :belongs_to then typus_table_belongs_to_field(key, item)
+                     when :tree then typus_table_tree_field(key, item)
+                     when :position then typus_table_position_field(key, item)
+                     when :selector then typus_table_selector(key, item)
+                     when :transversal then typus_table_transversal(key, item)
+                     when :has_and_belongs_to_many then typus_table_has_and_belongs_to_many_field(key, item)
+                     else
+                       typus_table_string_field(key, item, link_options)
+                     end
         end
-
-        html << "</table>"
-
       end
 
+      render "admin/helpers/table", 
+             :model => model, 
+             :fields => fields, 
+             :items => items, 
+             :content => raw(content)
     end
 
     def typus_table_header(model, fields)
@@ -136,6 +60,73 @@ module Admin
 
       render "admin/helpers/table_header", 
              :headers => headers
+
+    end
+
+    def typus_table_default_action(model, item)
+      action = if model.typus_user_id? && @current_user.is_not_root?
+                 # If there's a typus_user_id column on the table and logged user is not root ...
+                 item.owned_by?(@current_user) ? item.class.typus_options_for(:default_action_on_item) : 'show'
+               elsif @current_user.cannot?('edit', model)
+                 'show'
+               else
+                 item.class.typus_options_for(:default_action_on_item)
+               end
+
+      options = { :controller => "admin/#{item.class.name.tableize}", 
+                  :action => action, 
+                  :id => item.id }
+
+      link_to _(action.capitalize), options
+    end
+
+    ##
+    # This controls the action to perform. If we are on a model list we 
+    # will remove the entry, but if we inside a model we will remove the 
+    # relationship between the models.
+    #
+    # Only shown is the user can destroy/unrelate items.
+    #
+    def typus_table_action(model, item)
+
+      case params[:action]
+      when "index"
+        action = "trash"
+        options = { :action => 'destroy', :id => item.id }
+      when "edit", "show"
+        action = "unrelate"
+        options = { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }
+      end
+
+      case params[:action]
+      when 'index'
+        condition = if model.typus_user_id? && @current_user.is_not_root?
+                      item.owned_by?(@current_user)
+                    else
+                      @current_user.can?('destroy', model)
+                    end
+        confirm = _("Remove entry?") if condition
+      when 'edit'
+        # If we are editing content, we can relate and unrelate always!
+        confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+                    :unrelate_model => model.model_name.human, 
+                    :unrelate_model_from => @resource[:human_name])
+      when 'show'
+        # If we are showing content, we only can relate and unrelate if we are 
+        # the owners of the owner record.
+        # If the owner record doesn't have a foreign key (Typus.user_fk) we look
+        # each item to verify the ownership.
+        condition = if @resource[:class].typus_user_id? && @current_user.is_not_root?
+                      @item.owned_by?(@current_user)
+                    end
+        confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+                    :unrelate_model => model.model_name.human, 
+                    :unrelate_model_from => @resource[:human_name]) if condition
+      end
+
+      message = %(<div class="sprite #{action}">#{action.titleize}</div>)
+
+      link_to raw(message), options, :title => _(action.titleize), :confirm => confirm
 
     end
 
