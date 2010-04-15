@@ -20,8 +20,7 @@ class TypusGenerator < Rails::Generators::Base
 
   def generate_configuration_files
     %w( README typus.yml typus_roles.yml ).each do |file|
-      from = to = "config/typus/#{file}"
-      template from, to
+      template "config/typus/#{file}", "config/typus/#{file}"
     end
   end
 
@@ -54,12 +53,8 @@ class TypusGenerator < Rails::Generators::Base
       @inherits_from = "Admin::ResourcesController"
       @resource = klass.name.pluralize
 
-      template "controller.rb", 
-               "#{controllers_path}/#{klass.name.tableize}_controller.rb"
-
-
-      template "functional_test.rb", 
-               "#{tests_path}/#{klass.name.tableize}_controller_test.rb"
+      template "controller.rb", "#{controllers_path}/#{klass.name.tableize}_controller.rb"
+      template "functional_test.rb",  "#{tests_path}/#{klass.name.tableize}_controller_test.rb"
 
       next if klass.name == options[:user_class_name]
 
@@ -89,14 +84,9 @@ class TypusGenerator < Rails::Generators::Base
 <% end %>
       HTML
 
-      template "controller.rb", 
-               "#{controllers_path}/#{resource.underscore}_controller.rb"
-
-      template "functional_test.rb", 
-               "#{tests_path}/#{resource.underscore}_controller_test.rb"
-
-      template "view.html.erb", 
-               "#{views_path}/#{resource.underscore}/index.html.erb"
+      template "controller.rb", "#{controllers_path}/#{resource.underscore}_controller.rb"
+      template "functional_test.rb", "#{tests_path}/#{resource.underscore}_controller_test.rb"
+      template "view.html.erb", "#{views_path}/#{resource.underscore}/index.html.erb"
 
     end
 
