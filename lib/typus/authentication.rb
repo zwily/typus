@@ -36,6 +36,8 @@ module Typus
         raise _("Typus user has been disabled.")
       end
 
+      I18n.locale = @current_user.preferences[:locale]
+
     rescue Exception => error
       flash[:notice] = error.message
       session[:typus_user_id] = nil

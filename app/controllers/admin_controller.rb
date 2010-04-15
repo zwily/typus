@@ -10,7 +10,6 @@ class AdminController < ActionController::Base
 
   before_filter :reload_config_and_roles
   before_filter :authenticate
-  before_filter :set_preferences
   before_filter :set_page_title
 
   def show
@@ -29,10 +28,6 @@ class AdminController < ActionController::Base
   end
 
   include Typus::Authentication
-
-  def set_preferences
-    I18n.locale = @current_user.preferences[:locale]
-  end
 
   def set_page_title
     @page_title = []
