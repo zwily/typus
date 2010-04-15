@@ -72,7 +72,6 @@
 [ ] Pagination doesn't work properly when having multiple paginators on edit page
 [ ] Add support for `has_one` relationships.
 [ ] Remove all crappy rescues.
-[ ] Method to get string namespace.
 [ ] Merge generator methods to create resource/service controllers.
 [ ] Search in multiple models.
 [ ] Nested models.
