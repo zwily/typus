@@ -168,8 +168,6 @@ this_is_chelm@example.com
     assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX', :role => 'admin').valid?
   end
 
-=begin
-
   def test_should_verify_can?
     assert TypusUser.instance_methods.map { |i| i.to_sym }.include?(:can?)
     @current_user = TypusUser.first
@@ -177,7 +175,5 @@ this_is_chelm@example.com
     assert @current_user.can?('delete', 'TypusUser')
     assert !@current_user.cannot?('delete', 'TypusUser')
   end
-
-=end
 
 end
