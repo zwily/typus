@@ -1,23 +1,17 @@
 
 ENV["RAILS_ENV"] = "test"
 
+# Boot rails application!
 require "rails_app/config/environment"
-require "rails/test_help"
-require "mocha"
 
-begin
-  require "redgreen"
-rescue LoadError
-end
+# Require testing parts ...
+require "rails/test_help"
 
 # As we are simulating the application we need to reload the 
 # configurations to get the custom paths.
 Typus.reload!
 
-##
 # Different DB settings and load our schema.
-#
-
 connection = case ENV["DB"]
              when /mysql/
                { :adapter => "mysql", :username => "root", :database => "typus_test" }
@@ -32,18 +26,14 @@ ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
 
 require File.dirname(__FILE__) + "/schema"
 
-##
 # To test the plugin without touching the application we set our 
 # load_paths and view_paths.
-#
 
-ActiveSupport::Dependencies.load_paths = []
 %w( models controllers helpers ).each do |folder|
   ActiveSupport::Dependencies.load_paths << File.join(Typus.root, "app", folder)
   ActiveSupport::Dependencies.load_paths << File.join(Typus.root, "test", "fixtures", "app", folder)
 end
 
-ActionController::Base.view_paths = []
 %w( app/views test/fixtures/app/views ).each do |folder|
   ActionController::Base.append_view_path(File.join(Typus.root, folder))
 end
