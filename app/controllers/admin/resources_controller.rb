@@ -130,7 +130,7 @@ class Admin::ResourcesController < AdminController
 
     if @item.update_attributes(params[@object_name])
 
-      set_attribues_on_update
+      set_attributes_on_update
 
       action = @resource[:class].typus_options_for(:action_after_save)
 
