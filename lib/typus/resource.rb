@@ -52,6 +52,10 @@ module Typus
     mattr_accessor :start_year
     @@start_year = nil
 
+    def self.method_missing(*args)
+      nil
+    end
+
   end
 
 end

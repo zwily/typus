@@ -193,10 +193,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert Page.typus_options_for(:on_header)
     assert !TypusUser.typus_options_for(:on_header)
 
-=begin
-    # FIXME
     assert_nil TypusUser.typus_options_for(:unexisting)
-=end
 
   end
 
