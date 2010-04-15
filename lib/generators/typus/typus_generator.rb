@@ -182,9 +182,9 @@ class TypusGenerator < Rails::Generators::Base
                       end.flatten.sort
 
       ##
-      # Model field defaults for:
+      # Model fields for:
       #
-      # - List
+      # - Default
       # - Form
       #
 
@@ -194,11 +194,11 @@ class TypusGenerator < Rails::Generators::Base
                        password_salt persistence_token single_access_token perishable_token 
                        _type$ )
 
-      list_rejections = rejections + %w( password password_confirmation )
+      default_rejections = rejections + %w( password password_confirmation )
       form_rejections = rejections + %w( position )
 
-      list = klass.columns.reject do |column|
-               column.name.match(list_rejections.join("|")) || column.sql_type == "text"
+      default = klass.columns.reject do |column|
+               column.name.match(default_rejections.join("|")) || column.sql_type == "text"
              end.map(&:name)
 
       form = klass.columns.reject do |column|
@@ -206,13 +206,13 @@ class TypusGenerator < Rails::Generators::Base
              end.map(&:name)
 
       # Model defaults.
-      order_by = "position" if list.include?("position")
+      order_by = "position" if default.include?("position")
       filters = "created_at" if klass.columns.include?("created_at")
-      search = ( [ "name", "title" ] & list ).join(", ")
+      search = ( [ "name", "title" ] & default ).join(", ")
 
       # We want attributes of belongs_to relationships to be shown in our 
       # field collections if those are not polymorphic.
-      [ list, form ].each do |fields|
+      [ default, form ].each do |fields|
         fields << klass.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
         fields.flatten!
       end
@@ -220,8 +220,7 @@ class TypusGenerator < Rails::Generators::Base
       configuration[:base] << <<-RAW
 #{klass}:
   fields:
-    list: #{list.join(", ")}
-    show: #{list.join(", ")}
+    default: #{default.join(", ")}
     form: #{form.join(", ")}
   order_by: #{order_by}
   relationships: #{relationships.join(", ")}

@@ -82,7 +82,7 @@ module Typus
         end
 
       rescue
-        fields = Typus::Configuration.config[name]['fields']['list'].extract_settings
+        fields = Typus::Configuration.config[name]['fields']['default'].extract_settings
         retry
       end
 
