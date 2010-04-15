@@ -50,10 +50,10 @@
 [X] Improved usability on password recovery based on how Github works.
 [X] Removed footer links and added them to dashboard#sidebar.
 [X] Add defaults options for the fields and do not fallback into list.
+[X] Support for XSS.
 
 [-] Allow users to download the demo hosted at heroku.com
 [-] Move html code from helpers to partials.
-[ ] Add API authentication.
 [ ] Add `has_many` through relationships.
 [ ] Test default typus forms and remove old tests.
 [ ] Fixed and tested read-only fields.
@@ -67,7 +67,6 @@
 [ ] Ajax pagination. (?)
 [ ] Generate views for custom actions on the controllers/models. This should 
     verify the view doesn't exist and create it.
-[ ] Support for XSS.
 [ ] Add test for `typus_table_selector`.
 [ ] Forever loop when schema has not been migrated.
 [ ] Pagination doesn't work properly when having multiple paginators on edit page
