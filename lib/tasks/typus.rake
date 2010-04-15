@@ -18,13 +18,10 @@ namespace :typus do
 
   desc "Install acts_as_list, acts_as_tree and paperclip."
   task :misc do
-
     plugins = [ "git://github.com/thoughtbot/paperclip.git", 
                 "git://github.com/rails/acts_as_list.git", 
                 "git://github.com/rails/acts_as_tree.git" ]
-
     system "script/rails plugin install #{plugins.join(" ")} --force"
-
   end
 
 end
