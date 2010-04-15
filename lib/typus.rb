@@ -126,7 +126,6 @@ module Typus
       # Some Typus requirements ...
       require "typus/configuration"
       require "typus/routes"
-      require "typus/authentication"
       require "typus/resource"
 
       # Active Record Extensions.

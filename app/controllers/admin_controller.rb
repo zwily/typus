@@ -1,3 +1,5 @@
+require "typus/authentication"
+
 class AdminController < ActionController::Base
 
   unloadable
