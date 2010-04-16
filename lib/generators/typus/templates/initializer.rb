@@ -2,6 +2,7 @@ Typus.setup do |config|
 
   # Application name.
   config.admin_title = "<%= options[:admin_title] %>"
+  # config.admin_sub_title = ""
 
   # Define this option to allow admin users to recover lost passwords.
   # config.email = 'admin@example.com'
