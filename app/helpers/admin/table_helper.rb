@@ -231,23 +231,23 @@ module Admin
     end
 
     def typus_table_boolean_field(attribute, item)
-
       boolean_hash = item.class.typus_boolean(attribute)
       status = item.send(attribute)
-      link_text = !status.nil? ? boolean_hash["#{status}".to_sym] : Typus::Resource.nil
 
-      options = { :controller => "admin/#{item.class.name.tableize}", 
-                  :action => 'toggle', 
-                  :id => item.id, 
-                  :field => attribute.gsub(/\?$/,'') }
-
-      confirm = _("Change {{attribute}}?", 
-                  :attribute => item.class.human_attribute_name(attribute).downcase)
-
-      content = link_to _(link_text), options, :confirm => confirm
+      content = if status.nil?
+                  Typus::Resource.nil
+                else
+                  message = _(boolean_hash["#{status}".to_sym])
+                  options = { :controller => "admin/#{item.class.name.tableize}", 
+                              :action => 'toggle', 
+                              :id => item.id, 
+                              :field => attribute.gsub(/\?$/,'') }
+                  confirm = _("Change {{attribute}}?", 
+                              :attribute => item.class.human_attribute_name(attribute).downcase)
+                  link_to message, options, :confirm => confirm
+                end
 
       return content_tag(:td, content)
-
     end
 
     def typus_table_transversal(attribute, item)
