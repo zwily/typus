@@ -234,7 +234,7 @@ module Admin
 
       boolean_hash = item.class.typus_boolean(attribute)
       status = item.send(attribute)
-      link_text = boolean_hash["#{status}".to_sym]
+      link_text = !status.nil? ? boolean_hash["#{status}".to_sym] : Typus::Resource.nil
 
       options = { :controller => "admin/#{item.class.name.tableize}", 
                   :action => 'toggle', 
