@@ -16,7 +16,7 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   def test_should_return_root
-    expected = Dir.pwd
+    expected = "."
     assert Typus.root.kind_of?(String)
     assert_equal expected, Typus.root
   end
