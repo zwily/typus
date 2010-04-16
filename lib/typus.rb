@@ -18,8 +18,8 @@ Developed by <a href="http://intraducibles.com" rel="external">intraducibles.com
   @@config_folder = "config/typus"
 
   # Define the default password.
-  mattr_accessor :default_password
-  @@default_password = "columbia"
+  mattr_accessor :password
+  @@password = "columbia"
 
   # Define the default email.
   mattr_accessor :email
