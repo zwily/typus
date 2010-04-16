@@ -85,7 +85,7 @@ module Admin
                  else
                    @current_user.cannot?('edit', klass) ? 'show' : params[:action]
                  end
-        items << (link_to _("Next"), params.merge(:action => action, :id => @next.id))
+        items << (link_to _("Next"), params.merge(:action => action, :id => @next.id).to_hash.symbolize_keys)
       end
 
       if @previous
@@ -94,7 +94,7 @@ module Admin
                  else
                    @current_user.cannot?('edit', klass) ? 'show' : params[:action]
                  end
-        items << (link_to _("Previous"), params.merge(:action => action, :id => @previous.id))
+        items << (link_to _("Previous"), params.merge(:action => action, :id => @previous.id).to_hash.symbolize_keys)
       end
 
       build_typus_list(items, :header => 'go_to')
