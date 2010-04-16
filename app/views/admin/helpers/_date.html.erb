@@ -1,12 +1,9 @@
 <%
-  if params[filter.to_s].is_a?(Hash)
-    date_from = params[filter.to_s]["from"]
-    date_to = params[filter.to_s]["to"]
-  else
-    date_from = ""
-    date_to = ""
-  end
-
+  date_from, date_to = if params[filter.to_s].is_a?(Hash)
+                         params[filter.to_s]["from"], params[filter.to_s]["to"]
+                       else
+                         "", ""
+                       end
   date_format = Date::DATE_FORMATS[@resource[:class].typus_date_format(filter)]
 %>
 
