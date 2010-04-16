@@ -1,9 +1,11 @@
 <% if has_file_preview %>
-<script type="text/javascript" charset="utf-8">
-  $(document).ready(function() { 
-    $("#<%= dom_id(item, "#{attribute}_preview") %>").fancybox(); 
-  });
-</script>
+  <% content_for :javascripts do %>
+    <script type="text/javascript" charset="utf-8">
+      $(document).ready(function() { 
+        $("#<%= dom_id(item, "#{attribute}_preview") %>").fancybox(); 
+      });
+    </script>
+  <% end %>
 <% end %>
 
 <a id="<%= dom_id(item, "#{attribute}_preview") %>" 
