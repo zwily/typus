@@ -162,7 +162,7 @@ module Admin
 
     def typus_table_string_field(attribute, item, link_options = {})
       content = h(item.send(attribute))
-      return content_tag(:td, content, :class => attribute)
+      return content_tag(:td, raw(!content.empty? ? content : "&#151;"), :class => attribute)
     end
 
     def typus_table_selector(attribute, item)
