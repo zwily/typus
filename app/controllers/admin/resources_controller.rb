@@ -134,7 +134,6 @@ class Admin::ResourcesController < AdminController
       reload_locales
 
       action = @resource[:class].typus_options_for(:action_after_save)
-
       path = case action
              when "index"
                params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => action }
@@ -144,7 +143,6 @@ class Admin::ResourcesController < AdminController
                  :back_to => params[:back_to] }
              end
       notice = _("{{model}} successfully updated.", :model => @resource[:human_name])
-
       redirect_to path, :notice => notice
 
     else
