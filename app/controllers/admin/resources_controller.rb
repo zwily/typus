@@ -131,6 +131,7 @@ class Admin::ResourcesController < AdminController
     if @item.update_attributes(params[@object_name])
 
       set_attributes_on_update
+      reload_locales
 
       action = @resource[:class].typus_options_for(:action_after_save)
 
@@ -143,8 +144,6 @@ class Admin::ResourcesController < AdminController
                  :back_to => params[:back_to] }
              end
       notice = _("{{model}} successfully updated.", :model => @resource[:human_name])
-
-      reload_locales
 
       redirect_to path, :notice => notice
 
