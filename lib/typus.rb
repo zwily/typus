@@ -13,6 +13,10 @@ module Typus
 Developed by <a href="http://intraducibles.com" rel="external">intraducibles.com</a>.</p>
   CODE
 
+  # Authentication mechanism: none, basic, advanced
+  mattr_accessor :authentication
+  @@authentication = :advanced
+
   # Define the configuration folder.
   mattr_accessor :config_folder
   @@config_folder = "config/typus"

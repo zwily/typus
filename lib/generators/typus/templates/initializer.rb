@@ -4,6 +4,9 @@ Typus.setup do |config|
   config.admin_title = "<%= options[:admin_title] %>"
   # config.admin_sub_title = ""
 
+  # Authentication: none, basic, advanced
+  # config.authentication = :advanced
+
   # Define this option to allow admin users to recover lost passwords.
   # config.email = 'admin@example.com'
 

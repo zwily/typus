@@ -27,7 +27,7 @@ class AdminController < ActionController::Base
     Typus.reload! unless Rails.env.production?
   end
 
-  include Typus::Authentication::Advanced
+  include Typus::Authentication::const_get(Typus.authentication.to_s.capitalize)
 
   def set_page_title
     @page_title = []
