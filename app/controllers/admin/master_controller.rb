@@ -289,7 +289,8 @@ private
   def set_resource
     @resource = { :self => params[:controller].extract_resource, 
                   :human_name => params[:controller].extract_human_name, 
-                  :class => params[:controller].extract_class }
+                  :class => params[:controller].extract_class,
+                  :pluralized => params[:controller].extract_class.pluralized_human_name }
     @object_name = ActionController::RecordIdentifier.singular_class_name(@resource[:class])
   rescue Exception => error
     error_handler(error)

@@ -6,7 +6,7 @@
   <%= filters %>
 <% end %>
 
-<h2><%= @resource[:human_name].pluralize %> <%= remove_filter_link %></h2>
+<h2><%= @resource[:pluralized] %> <%= remove_filter_link %></h2>
 
 <%= typus_block :location => @resource[:self], :partial => 'index' %>
 

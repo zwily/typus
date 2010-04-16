@@ -56,7 +56,7 @@ module TypusHelper
 
   def page_title(action = params[:action])
     crumbs = []
-    crumbs << @resource[:human_name].pluralize if @resource
+    crumbs << @resource[:pluralized] if @resource
     crumbs << _(action.humanize) unless %w( index ).include?(action)
     return "#{Typus::Configuration.options[:app_name]} - " + crumbs.compact.map { |x| x }.join(' &rsaquo; ')
   end
@@ -66,7 +66,7 @@ module TypusHelper
     links = [ (link_to_unless_current _("Dashboard"), admin_dashboard_path) ]
 
     Typus.models_on_header.each do |model|
-      links << (link_to_unless_current model.constantize.typus_human_name.pluralize, :controller => "/admin/#{model.tableize}")
+      links << (link_to_unless_current model.constantize.pluralized_human_name, :controller => "/admin/#{model.tableize}")
     end
 
     if ActionController::Routing::Routes.named_routes.routes.has_key?(:root)

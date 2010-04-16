@@ -53,4 +53,11 @@ class ActiveRecord::Base
     return [ self.class, id ].join("#")
   end
 
+  ##
+  # Returns pluralized model name from locale or typus_human_name.pluralized
+  #
+  def self.pluralized_human_name
+    I18n.t "#{self.to_s.downcase}.many", :scope => [:activerecord, :models], :default => self.typus_human_name.gsub('/', ' ').pluralize
+  end
+
 end
