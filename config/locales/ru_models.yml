@@ -1,7 +1,10 @@
 ru:
   activerecord:
     models:
-      typus_user: "Системный пользователь"
+      typus_user:
+        one: "Системный пользователь"
+        few: "Системных пользователей"
+        many: "Системные пользователи"
     attributes:
       typus_user:
         email: 
@@ -10,4 +13,5 @@ ru:
         password: "Пароль"
         password_confirmation: "Подтверждение пароля"
         status: "Статус"
-        role: 
+        role:  "Роль"
+        language: "Язык"
