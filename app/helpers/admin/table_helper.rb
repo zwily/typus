@@ -102,6 +102,8 @@ module Admin
         options = { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }
       end
 
+      title = _(action.titleize)
+
       case params[:action]
       when 'index'
         condition = if model.typus_user_id? && @current_user.is_not_root?
@@ -131,7 +133,7 @@ module Admin
       message = %(<div class="sprite #{action}">#{action.titleize}</div>)
 
       if condition
-        link_to raw(message), options, :title => _(action.titleize), :confirm => confirm
+        link_to raw(message), options, :title => title, :confirm => confirm
       end
 
     end
