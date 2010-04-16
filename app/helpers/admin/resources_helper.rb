@@ -7,13 +7,11 @@ module Admin
     include TableHelper
 
     def display_link_to_previous
-
       options = {}
       options[:resource_from] = @resource[:human_name]
       options[:resource_to] = params[:resource].classify.constantize.human_name if params[:resource]
 
       editing = %w( edit update ).include?(params[:action])
-
       message = case
                 when params[:resource] && editing
                   "You're updating a {{resource_from}} for {{resource_to}}."
@@ -24,14 +22,11 @@ module Admin
                 else
                   "You're adding a new {{resource_from}}."
                 end
-
       message = _(message, 
                   :resource_from => options[:resource_from], 
                   :resource_to => options[:resource_to])
 
-      render "admin/helpers/display_link_to_previous", 
-             :message => message
-
+      render "admin/helpers/display_link_to_previous", :message => message
     end
 
     def remove_filter_link(filter = request.env['QUERY_STRING'])
@@ -45,7 +40,6 @@ module Admin
     # it's build from the options defined on the yaml configuration file.
     #
     def build_list(model, fields, items, resource = @resource[:self], link_options = {}, association = nil)
-
       template = "app/views/admin/#{resource}/_#{resource.singularize}.html.erb"
 
       if File.exist?(template)
@@ -53,7 +47,6 @@ module Admin
       else
         build_typus_table(model, fields, items, link_options, association)
       end
-
     end
 
     def pagination(*args)
