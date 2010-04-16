@@ -51,6 +51,7 @@
 [X] Removed footer links and added them to dashboard#sidebar.
 [X] Add defaults options for the fields and do not fallback into list.
 [X] Support for XSS.
+[X] Fix problem on entries with attachment when using to_label.
 
 [-] Allow users to download the demo hosted at heroku.com
 [-] Move html code from helpers to partials.
@@ -74,6 +75,5 @@
 [ ] Search in multiple models.
 [ ] Nested models.
 [ ] Contextual content depending on the logged user.
-[ ] Fix problem on entries with attachment when using to_label.
 [ ] Include dashboard#sidebar in the generator so use can easily overwrite it.
 [ ] Enable mechanism to skip Typus authentication so we can use other engines.
