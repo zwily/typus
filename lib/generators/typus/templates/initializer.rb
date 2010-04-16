@@ -14,6 +14,10 @@ Typus.setup do |config|
   # Define relationship table.
   # config.relationship = "typus_users"
 
+  # Define username and password for http authentication
+  # config.username = "admin"
+  # config.password = "columbia"
+
   # Define the default root.
   # config.master_role = "admin"
 

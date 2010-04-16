@@ -17,7 +17,12 @@ Developed by <a href="http://intraducibles.com" rel="external">intraducibles.com
   mattr_accessor :config_folder
   @@config_folder = "config/typus"
 
-  # Define the default password.
+  # Define the username
+  mattr_accessor :username
+  @@username = "admin"
+
+  # Define the password: Used as a default password and for the http 
+  # authentication.
   mattr_accessor :password
   @@password = "columbia"
 
