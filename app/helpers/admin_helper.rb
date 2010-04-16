@@ -47,7 +47,7 @@ module AdminHelper
 
     return if user.kind_of?(AdminUserFake)
 
-    admin_edit_typus_user_path = { :controller => "/admin/#{Typus.user_class_name.tableize}", 
+    admin_edit_typus_user_path = { :controller => "/admin/#{Typus.user_class.to_resource}", 
                                    :action => 'edit', 
                                    :id => user.id }
 

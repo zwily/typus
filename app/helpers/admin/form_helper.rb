@@ -59,7 +59,7 @@ module Admin
 
       returning(String.new) do |html|
 
-        message = link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", 
+        message = link_to _("Add"), { :controller => "admin/#{related.to_resource}", 
                                       :action => 'new', 
                                       :back_to => back_to, 
                                       :selected => related_fk }, 
@@ -143,7 +143,7 @@ module Admin
       returning(String.new) do |html|
 
         model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
-        model_to_relate_as_resource = model_to_relate.name.tableize
+        model_to_relate_as_resource = model_to_relate.to_resource
 
         reflection = @resource[:class].reflect_on_association(field.to_sym)
         association = reflection.macro
@@ -214,7 +214,7 @@ module Admin
                              model_to_relate_as_resource, 
                              options, 
                              association)
-          html << pagination(:anchor => model_to_relate.name.tableize) unless pagination.nil?
+          html << pagination(:anchor => model_to_relate.to_resource) unless pagination.nil?
         else
           message = _("There are no {{records}}.", 
                       :records => model_to_relate.model_name.human.pluralize.downcase)
@@ -233,7 +233,7 @@ module Admin
       returning(String.new) do |html|
 
         model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
-        model_to_relate_as_resource = model_to_relate.name.tableize
+        model_to_relate_as_resource = model_to_relate.to_resource
 
         reflection = @resource[:class].reflect_on_association(field.to_sym)
         association = reflection.macro
@@ -296,7 +296,7 @@ module Admin
                              model_to_relate_as_resource, 
                              {}, 
                              association)
-          html << pagination(:anchor => model_to_relate.name.tableize) unless pagination.nil?
+          html << pagination(:anchor => model_to_relate.to_resource) unless pagination.nil?
         else
           message = _("There are no {{records}}.", 
                       :records => model_to_relate.model_name.human.pluralize.downcase)
@@ -315,7 +315,7 @@ module Admin
       returning(String.new) do |html|
 
         model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
-        model_to_relate_as_resource = model_to_relate.name.tableize
+        model_to_relate_as_resource = model_to_relate.to_resource
 
         reflection = @resource[:class].reflect_on_association(field.to_sym)
         association = reflection.macro

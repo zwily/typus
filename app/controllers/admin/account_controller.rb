@@ -47,7 +47,7 @@ class Admin::AccountController < AdminController
   def show
     @typus_user = Typus.user_class.find_by_token!(params[:id])
     session[:typus_user_id] = @typus_user.id
-    redirect_to :controller => "admin/#{Typus.user_class_name.tableize}", :action => "edit", :id => @typus_user.id
+    redirect_to :controller => "admin/#{Typus.user_class.to_resource}", :action => "edit", :id => @typus_user.id
   end
 
   private

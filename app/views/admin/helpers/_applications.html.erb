@@ -11,7 +11,7 @@
       <%
 
         klass = model.constantize
-        klass_resource = klass.name.tableize
+        klass_resource = klass.to_resource
         klass_human_name = klass.model_name.human.gsub("/", " ").pluralize
 
         options = { :controller => "admin/#{klass_resource}" }

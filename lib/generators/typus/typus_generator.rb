@@ -53,13 +53,13 @@ class TypusGenerator < Rails::Generators::Base
       @inherits_from = "Admin::ResourcesController"
       @resource = klass.name.pluralize
 
-      template "controller.rb", "#{controllers_path}/#{klass.name.tableize}_controller.rb"
-      template "functional_test.rb",  "#{tests_path}/#{klass.name.tableize}_controller_test.rb"
+      template "controller.rb", "#{controllers_path}/#{klass.to_resource}_controller.rb"
+      template "functional_test.rb",  "#{tests_path}/#{klass.to_resource}_controller_test.rb"
 
       next if klass.name == options[:user_class_name]
 
       klass.typus_actions.each do |action|
-        file "view.html.erb", "#{views_path}/#{klass.name.tableize}/#{action}.html.erb"
+        file "view.html.erb", "#{views_path}/#{klass.to_resource}/#{action}.html.erb"
       end
 
     end

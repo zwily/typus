@@ -75,7 +75,7 @@ module Admin
                  item.class.typus_options_for(:default_action_on_item)
                end
 
-      options = { :controller => "admin/#{item.class.name.tableize}", 
+      options = { :controller => "admin/#{item.class.to_resource}", 
                   :action => action, 
                   :id => item.id }
 
@@ -145,7 +145,7 @@ module Admin
       att_value = item.send(attribute)
       content = if !att_value.nil?
         if @current_user.can?(action, att_value.class.name)
-          link_to item.send(attribute).to_label, :controller => "admin/#{att_value.class.name.tableize}", :action => action, :id => att_value.id
+          link_to item.send(attribute).to_label, :controller => "admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id
         else
           att_value.to_label
         end
@@ -207,7 +207,7 @@ module Admin
 
       [['Up', 'move_higher'], ['Down', 'move_lower']].each do |position|
 
-        options = { :controller => item.class.name.tableize, 
+        options = { :controller => item.class.to_resource, 
                     :action => 'position', 
                     :id => item.id, 
                     :go => position.last }
@@ -240,7 +240,7 @@ module Admin
                   Typus::Resource.nil
                 else
                   message = _(boolean_hash["#{status}".to_sym])
-                  options = { :controller => "admin/#{item.class.name.tableize}", 
+                  options = { :controller => "admin/#{item.class.to_resource}", 
                               :action => 'toggle', 
                               :id => item.id, 
                               :field => attribute.gsub(/\?$/,'') }
