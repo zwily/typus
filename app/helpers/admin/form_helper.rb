@@ -350,7 +350,6 @@ module Admin
       end
     end
 
-    # OPTIMIZE: Cleanup the rescue ...
     def typus_template_field(attribute, template, options = {})
 
       template_name = "admin/templates/#{template}"
@@ -369,15 +368,11 @@ module Admin
                             :label_text => @resource[:class].human_attribute_name(attribute)
 
     rescue ActionView::TemplateError => error
-      # This is the user locale, which is missing.
-      locale = @current_user.preferences[:locale]
-      message = <<-HTML
-  Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{locale}.yml">here</a> and place it on `config/locales`.
-      HTML
-      flash[:alert] = raw(message)
-      # We set a locale only for the current template.
-      I18n.locale = :en
-      retry
+      message = <<-MSG
+Missing translation file for `#{locale}.yml`.
+Get it from `http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{locale}.yml` and place it on `config/locales`.
+      MSG
+      raise message
     rescue Exception => error
       raise error
     end
