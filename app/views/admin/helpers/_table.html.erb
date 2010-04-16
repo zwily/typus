@@ -1,6 +1,10 @@
 <table class="typus">
 
-  <%= typus_table_header(model, fields) %>
+  <tr>
+    <% headers.each do |header| %>
+      <th><%= header %></th>
+    <% end %>
+  </tr>
 
   <% items.each do |item| %>
     <tr class="<%= cycle('even', 'odd') %> <%= item.class.name.underscore %>" id="<%= dom_id(item) %>" name="item_<%= item.id %>">

@@ -7,7 +7,8 @@ module Admin
              :model => model, 
              :fields => fields, 
              :items => items, 
-             :link_options => link_options
+             :link_options => link_options,
+             :headers => typus_table_header(model, fields)
     end
 
     def typus_table_header(model, fields)
@@ -36,8 +37,7 @@ module Admin
 
       headers << "" if @current_user.can?('delete', model)
 
-      render "admin/helpers/table_header", 
-             :headers => headers
+      return headers
 
     end
 
