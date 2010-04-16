@@ -28,4 +28,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal "Post#1", posts(:published).to_label
   end
 
+  def test_to_resource
+    assert_equal "typus_users", TypusUser.to_resource
+    assert_equal "delayed/tasks", Delayed::Task.to_resource
+  end
+
 end

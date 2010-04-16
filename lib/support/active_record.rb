@@ -1,5 +1,15 @@
 class ActiveRecord::Base
 
+  ##
+  #     >> Post.to_resource
+  #     => "posts"
+  #     >> Admin::Post.to_resource
+  #     => "admin/posts"
+  #
+  def self.to_resource
+    name.underscore.pluralize
+  end
+
   # TODO: This should be removed to make Typus compatible 
   #       with Rails 3 new interface.
   def self.merge_conditions(*conditions)
