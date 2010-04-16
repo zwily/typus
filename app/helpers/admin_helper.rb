@@ -45,6 +45,8 @@ module AdminHelper
 
   def login_info(user = @current_user)
 
+    return if user.kind_of?(AdminUserFake)
+
     admin_edit_typus_user_path = { :controller => "/admin/#{Typus.user_class_name.tableize}", 
                                    :action => 'edit', 
                                    :id => user.id }
