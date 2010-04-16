@@ -369,17 +369,17 @@ module Admin
                             :label_text => @resource[:class].human_attribute_name(attribute)
 
     rescue ActionView::TemplateError => error
-      raise error
-    rescue Exception => error
       # This is the user locale, which is missing.
       locale = @current_user.preferences[:locale]
       message = <<-HTML
   Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{locale}.yml">here</a> and place it on `config/locales`.
       HTML
-      flash[:alert] = message
+      flash[:alert] = raw(message)
       # We set a locale only for the current template.
       I18n.locale = :en
       retry
+    rescue Exception => error
+      raise error
     end
 
     def attribute_disabled?(attribute)
