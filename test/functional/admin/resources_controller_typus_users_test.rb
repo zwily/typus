@@ -1,5 +1,4 @@
 require "test/test_helper"
-require "test/rails_app/app/controllers/admin/typus_users_controller"
 
 class Admin::TypusUsersControllerTest < ActionController::TestCase
 

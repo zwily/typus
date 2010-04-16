@@ -1,5 +1,4 @@
 require "test/test_helper"
-require "test/rails_app/app/controllers/admin/categories_controller"
 
 class Admin::CategoriesControllerTest < ActionController::TestCase
 

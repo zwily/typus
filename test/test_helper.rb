@@ -2,7 +2,7 @@
 ENV["RAILS_ENV"] = "test"
 
 # Boot rails application!
-require "rails_app/config/environment"
+require "fixtures/rails_app/config/environment"
 
 # Require testing parts ...
 require "rails/test_help"
@@ -31,12 +31,9 @@ require File.dirname(__FILE__) + "/schema"
 
 %w( models controllers helpers ).each do |folder|
   ActiveSupport::Dependencies.load_paths << File.join(Typus.root, "app", folder)
-  ActiveSupport::Dependencies.load_paths << File.join(Typus.root, "test", "fixtures", "app", folder)
 end
 
-%w( app/views test/fixtures/app/views ).each do |folder|
-  ActionController::Base.append_view_path(File.join(Typus.root, folder))
-end
+ActionController::Base.append_view_path(File.join(Typus.root, "app/views"))
 
 class ActiveSupport::TestCase
   self.fixture_path = File.dirname(__FILE__) + "/fixtures"
