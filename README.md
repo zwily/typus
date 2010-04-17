@@ -11,11 +11,22 @@ extensible enough to match lots of use cases.
 
 - Access control by users and roles.
 - CRUD and custom actions for your models on a clean interface.
-- I18n.
+- Internationalized interface.
 - Extensible and overwritable templates.
 - Low memory footprint.
+- Show database tables.
+- Easily update data.
+- Create new data.
+- Automatic form validation.
+- Ruby 1.9 compatible.
+- Sortable columns.
+- Supports SQLite, MySQL, and PostgreSQL.
+- Boolean filtering.
+- Supports ActiveRecord.
+- Search for records.
+- Pagination.
+- Supports Rails 3.
 - MIT License, the same as Rails.
-- Rails 3 compatible.
 
 ## Links
 
