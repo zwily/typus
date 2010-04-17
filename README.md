@@ -25,7 +25,7 @@ extensible enough to match lots of use cases.
 - Supports ActiveRecord.
 - Search for records.
 - Pagination.
-- Supports Rails 3.
+- Supports Rails 2.3.
 - MIT License, the same as Rails.
 
 ## Links
