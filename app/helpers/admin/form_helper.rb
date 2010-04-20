@@ -76,7 +76,7 @@ module Admin
           label_text = @resource[:class].human_attribute_name(attribute)
           html << <<-HTML
   <li>
-    #{form.label related_fk, "#{label_text} <small>#{message}</small>"}
+    #{form.label related_fk, raw("#{label_text} <small>#{message}</small>")}
     #{form.select related_fk, values, options, html_options }
   </li>
           HTML
