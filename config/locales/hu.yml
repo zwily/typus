@@ -34,7 +34,7 @@ hu:
 
   "False": "Hamis"
   "Filter": 
-  "Filter by": "Szűrés"
+  "Filter by {{attribute}}": "Szűrés {{attribute}}"
 
   "Go to": "Ide"
 

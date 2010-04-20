@@ -1,0 +1,21 @@
+<% content_for :javascripts do %>
+  <script>
+  function surfto_<%= attribute %>(form) {
+    var myindex = form.<%= attribute %>.selectedIndex
+    if (form.<%= attribute %>.options[myindex].value != "0") {
+      top.location.href = form.<%= attribute %>.options[myindex].value;
+    }
+  }
+  </script>
+<% end %>
+
+<li>
+  <form class="form" action="#">
+  <select name="<%= attribute %>" onChange="surfto_<%= attribute %>(this.form)">
+    <option value="<%= url_for '/' %>"><%= _("Filter by {{attribute}}", :attribute => attribute) %></option>
+    <% items.each do |key, value| %>
+    <option value="<%= key %>"><%= value %></option>
+    <% end %>
+  </select>
+  </form>
+</li>

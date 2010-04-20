@@ -1,10 +1,24 @@
 <table class="typus">
 
-  <tr>
-    <% headers.each do |header| %>
-      <th><%= header %></th>
-    <% end %>
-  </tr>
+  <thead>
+    <tr>
+      <% headers.each do |header| %>
+        <th><%= header %></th>
+      <% end %>
+    </tr>
+  </thead>
+
+<!--
+
+  <tfoot>
+    <tr>
+      <% headers.each do |header| %>
+        <th><%= header %></th>
+      <% end %>
+    </tr>
+  </tfoot>
+
+-->
 
   <% items.each do |item| %>
     <tr class="<%= cycle('even', 'odd') %> <%= item.class.name.underscore %>" id="<%= dom_id(item) %>" name="item_<%= item.id %>">

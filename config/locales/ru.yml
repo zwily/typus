@@ -34,7 +34,7 @@ ru:
 
   "False": 
   "Filter": "фильтр"
-  "Filter by": "фильтр по"
+  "Filter by {{attribute}}": "фильтр по {{attribute}}"
 
   "Go to": "Перейти к"
 

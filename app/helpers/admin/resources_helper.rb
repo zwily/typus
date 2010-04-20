@@ -2,7 +2,9 @@ module Admin
 
   module ResourcesHelper
 
+    include FiltersHelper
     include FormHelper
+    include SearchHelper
     include SidebarHelper
     include TableHelper
 
