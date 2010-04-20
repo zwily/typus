@@ -1,12 +1,10 @@
 <% content_for :sidebar do %>
-  <%= typus_block :location => @resource[:self], :partial => "sidebar" %>
-  <%= raw actions %>
+  <%= raw build_sidebar %>
 <% end %>
 
 <%= display_link_to_previous if params[:back_to] %>
 
-<h2><%= link_to @resource[:human_name].pluralize, :action => "index" %> &rsaquo; 
-    <%= _("New") %></h2>
+<h2><%= _("New {{resource}}", :resource => @resource[:human_name]) %></h2>
 
 <%= typus_block :location => @resource[:self], :partial => "new" %>
 

@@ -34,7 +34,7 @@ fr:
 
   "False": 
   "Filter": "Filtrer"
-  "Filter by": "Filtrer par"
+  "Filter by {{attribute}}": "Filtrer par {{attribute}}"
 
   "Go to": "Aller"
 

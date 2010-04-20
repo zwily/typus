@@ -1,12 +1,12 @@
 <% content_for :sidebar do %>
-  <%= typus_block :location => @resource[:self], :partial => "sidebar" %>
-  <%= raw actions %>
-  <%= raw export %>
-  <%= raw search %>
-  <%= raw filters %>
+  <%= raw build_sidebar %>
 <% end %>
 
-<h2><%= @resource[:human_name].pluralize %> <%= remove_filter_link %></h2>
+<h2><%= _("Edit {{resources}}", :resources => @resource[:human_name].pluralize) %> <%= remove_filter_link %></h2>
+
+<%= raw search %>
+
+<%= raw filters %>
 
 <%= typus_block :location => @resource[:self], :partial => "index" %>
 

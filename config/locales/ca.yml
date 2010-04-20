@@ -34,7 +34,7 @@ ca:
 
   "False": "Fals"
   "Filter": "Filtrar"
-  "Filter by": "Filtrar per"
+  "Filter by {{attribute}}": "Filtrar per {{attribute}}"
 
   "Go to": "Anar a"
 
