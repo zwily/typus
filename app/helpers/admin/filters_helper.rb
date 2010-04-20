@@ -2,10 +2,6 @@ module Admin
 
   module FiltersHelper
 
-    def build_typus_selector(filter, items)
-      render "admin/helpers/selector", :items => items, :attribute => filter
-    end
-
     def filters
 
       typus_filters = @resource[:class].typus_filters
@@ -13,7 +9,7 @@ module Admin
 
       current_request = request.env['QUERY_STRING'] || []
 
-      html = "<ul id=\"filters\">"
+      html = %(<ul id="filters">)
 
       typus_filters.each do |key, value|
         case value
@@ -30,10 +26,14 @@ module Admin
         end
       end
 
-      html << "</ul>"
+      html << %(</ul>)
 
       return html
 
+    end
+
+    def build_typus_selector(filter, items)
+      render "admin/helpers/selector", :items => items, :attribute => filter
     end
 
     def relationship_filter(request, filter, habtm = false)
@@ -46,7 +46,10 @@ module Admin
       %w( controller action page ).each { |p| params_without_filter.delete(p) }
       params_without_filter.delete(related_fk)
 
-      items = model.all(:order => model.typus_order_by)
+      items = {}
+      model.all(:order => model.typus_order_by).each do |m|
+        items[m.id] = m.to_label
+      end
 
       build_typus_selector(filter, items)
     end
@@ -57,13 +60,13 @@ module Admin
 
       # if !@resource[:class].typus_field_options_for(:filter_by_date_range).include?(filter.to_sym)
       %w( today last_few_days last_7_days last_30_days ).map do |timeline|
-        switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
-        options = { :page => nil }
-        if switch == 'on'
-          params.delete(filter)
-        else
-          options.merge!(filter.to_sym => timeline)
-        end
+        # switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
+        # options = { :page => nil }
+        #if switch == 'on'
+        #  params.delete(filter)
+        #else
+        #  options.merge!(filter.to_sym => timeline)
+        #end
         items[timeline] = _(timeline.humanize)
         # link_to _(timeline.humanize), params.merge(options), :class => switch
       end
