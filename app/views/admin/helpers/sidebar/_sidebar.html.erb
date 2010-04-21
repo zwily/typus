@@ -1,13 +1,3 @@
-<% content_for :javascripts do %>
-  <script type="text/javascript" charset="utf-8">
-  $(document).ready(function() {
-  <% resources.each do |key, value| %>
-    $("#<%= key %>").click(function() { $('#<%= key %> ul.hidden').toggle(); });
-  <% end %>
-  });
-  </script>
-<% end %>
-
 <% resources.each do |key, value| %>
 
   <% resource = "/admin/#{key.constantize.to_resource}" %>
@@ -18,11 +8,13 @@
       <%= link_to _(key.pluralize), :controller => resource, :action => "index" %>
     </h2>
 
-    <ul class="<%= "hidden" unless @resource[:class].name.eql?(key) %>">
-      <% value.each do |v| %>
-        <li><%= v %></li>
-      <% end %>
-    </ul>
+    <% if @resource[:class].name.eql?(key) %>
+      <ul>
+        <% value.each do |v| %>
+          <li><%= v %></li>
+        <% end %>
+      </ul>
+    <% end %>
 
   </div>
 
