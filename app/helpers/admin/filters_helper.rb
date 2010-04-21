@@ -32,7 +32,7 @@ module Admin
 </div>
       HTML
 
-      return html
+      return raw(html)
 
     end
 
