@@ -9,31 +9,35 @@ module Admin
 
       current_request = request.env['QUERY_STRING'] || []
 
-      html = %(<ul id="filters">)
-
-      typus_filters.each do |key, value|
+      filters = typus_filters.map do |key, value|
         case value
-        when :boolean then html << boolean_filter(current_request, key)
-        when :string then html << string_filter(current_request, key)
-        when :date, :datetime then html << date_filter(current_request, key)
-        when :belongs_to then html << relationship_filter(current_request, key)
+        when :boolean then boolean_filter(current_request, key)
+        when :string then string_filter(current_request, key)
+        when :date, :datetime then date_filter(current_request, key)
+        when :belongs_to then relationship_filter(current_request, key)
         when :has_many || :has_and_belongs_to_many then
-          html << relationship_filter(current_request, key, true)
+          relationship_filter(current_request, key, true)
         when nil then
           # Do nothing. This is ugly but for now it's ok.
         else
-          html << string_filter(current_request, key)
+          string_filter(current_request, key)
         end
       end
 
-      html << %(</ul>)
+      html = <<-HTML
+<div id="filters">
+  <ul>
+    #{filters}
+  </ul>
+</div>
+      HTML
 
       return html
 
     end
 
-    def build_typus_selector(filter, items)
-      render "admin/helpers/selector", :items => items, :attribute => filter
+    def build_filters(filter, items)
+      render "admin/helpers/filters", :items => items, :attribute => filter
     end
 
     def relationship_filter(request, filter, habtm = false)
@@ -51,7 +55,7 @@ module Admin
         items[m.id] = m.to_label
       end
 
-      build_typus_selector(filter, items)
+      build_filters(filter, items)
     end
 
     def date_filter(request, filter)
@@ -70,7 +74,7 @@ module Admin
         items[timeline] = _(timeline.humanize)
         # link_to _(timeline.humanize), params.merge(options), :class => switch
       end
-      build_typus_selector(filter, items)
+      build_filters(filter, items)
         #, :attribute => filter)
       # else
       #  date_params = params.dup
@@ -86,7 +90,7 @@ module Admin
 
     def boolean_filter(request, filter)
       items = @resource[:class].typus_boolean(filter)
-      build_typus_selector(filter, items)
+      build_filters(filter, items)
     end
 
     def string_filter(request, filter)
@@ -101,7 +105,7 @@ module Admin
         end
       end
 
-      build_typus_selector(filter, items)
+      build_filters(filter, items)
     end
 
   end
