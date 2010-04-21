@@ -1,10 +1,22 @@
+<% content_for :javascripts do %>
+  <script type="text/javascript" charset="utf-8">
+  $(document).ready(function() {
+  <% resources.each do |key, value| %>
+    $("#<%= key %>").click(function() { $('#<%= key %> ul.hidden').toggle(); });
+  <% end %>
+  });
+  </script>
+<% end %>
+
 <% resources.each do |key, value| %>
 
   <% resource = "/admin/#{key.constantize.to_resource}" %>
 
-  <div class="resource">
+  <div class="resource" id="<%= key %>">
 
-    <%= link_to content_tag("h2", _(key.pluralize)), :controller => resource, :action => "index" %>
+    <h2>
+      <%= link_to _(key.pluralize), :controller => resource, :action => "index" %>
+    </h2>
 
     <ul class="<%= "hidden" unless @resource[:class].name.eql?(key) %>">
       <% value.each do |v| %>

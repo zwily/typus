@@ -56,6 +56,33 @@ module Admin
       render "admin/helpers/pagination" if @items.prev || @items.next
     end
 
+    def link_to_edit(klass = @resource[:class])
+      condition = if klass.typus_user_id? && @current_user.is_not_root?
+                    @item.owned_by?(@current_user)
+                  else
+                    @current_user.can?('update', klass)
+                  end
+      link_to_if condition, _("Edit"), :action => "edit", :id => @item.id
+    end
+
+    def link_to_show
+      link_to _("Show"), :action => 'show', :id => @item.id
+    end
+
+=begin
+
+    # This method should show a list of actions for the actual record.
+    def custom_actions(klass)
+      options = { :controller => klass.to_resource }
+      items = klass.typus_actions_on("index").map do |action|
+        if @current_user.can?(action, klass)
+          (link_to _(action.humanize), options.merge(:action => action).to_hash.symbolize_keys)
+        end
+      end
+    end
+
+=end
+
   end
 
 end

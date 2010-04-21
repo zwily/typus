@@ -2,7 +2,10 @@
   <%= raw build_sidebar %>
 <% end %>
 
-<h2><%= _("Show {{resource}}", :resource => @resource[:human_name]) %></h2>
+<h2>
+  <%= _("Show {{resource}}", :resource => @resource[:human_name]) %>
+  <small><%= link_to_edit %></small>
+</h2>
 
 <%= raw search %>
 
