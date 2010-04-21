@@ -2,12 +2,14 @@
   <%= build_sidebar %>
 <% end %>
 
+<% content_for :search do %>
+  <%= search %>
+<% end %>
+
 <h2>
   <%= _("Show {{resource}}", :resource => @resource[:human_name]) %>
   <small><%= link_to_edit %></small>
 </h2>
-
-<%= search %>
 
 <%= typus_block %>
 
