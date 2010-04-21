@@ -2,7 +2,10 @@
   <%= build_sidebar %>
 <% end %>
 
-<h2><%= _("Edit {{resources}}", :resources => @resource[:human_name].pluralize) %> <%= remove_filter_link %></h2>
+<h2>
+  <%= _("Edit {{resources}}", :resources => @resource[:human_name].pluralize) %>
+  <small><%= remove_filter_link %></small>
+</h2>
 
 <%= search %>
 
