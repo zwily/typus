@@ -228,15 +228,17 @@ function surfto_#{model_pluralized}(form) {
 
   def boolean_filter(request, filter)
 
+    item_params = params.dup
+
     items = @resource[:class].typus_boolean(filter).map do |key, value|
               switch = request.include?("#{filter}=#{key}") ? 'on' : 'off'
               options = { :page => nil }
               if switch == 'on'
-                params.delete(filter)
+                item_params.delete(filter)
               else
                 options.merge!(filter.to_sym => key)
               end
-              link_to _(value), params.merge(options), :class => switch
+              link_to _(value), item_params.merge(options), :class => switch
             end
 
     build_typus_list(items, :attribute => filter)
@@ -245,6 +247,8 @@ function surfto_#{model_pluralized}(form) {
 
   def string_filter(request, filter)
 
+    item_params = params.dup
+
     values = @resource[:class]::const_get("#{filter.to_s.upcase}")
     values = values.invert if values.kind_of?(Hash)
     items = values.map do |item|
@@ -252,11 +256,11 @@ function surfto_#{model_pluralized}(form) {
               switch = (params[filter.to_s] == link_filter) ? 'on' : 'off'
               options = { :page => nil }
               if switch == 'on'
-                params.delete(filter)
+                item_params.delete(filter)
               else
-                options.merge(filter.to_sym => link_filter)
+                options.merge!(filter.to_sym => link_filter)
               end
-              link_to link_name.capitalize, params.merge(options), :class => switch
+              link_to link_name, item_params.merge(options), :class => switch
             end
 
     build_typus_list(items, :attribute => filter)
