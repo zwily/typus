@@ -6,7 +6,7 @@
 
 <h2><%= _("New {{resource}}", :resource => @resource[:human_name]) %></h2>
 
-<%= typus_block :location => @resource[:self], :partial => "new" %>
+<%= typus_block %>
 
 <%
   options = { :action => 'create', 
