@@ -9,6 +9,8 @@ module Admin
     include TableHelper
 
     def display_link_to_previous
+      return unless params[:back_to]
+
       options = {}
       options[:resource_from] = @resource[:human_name]
       options[:resource_to] = params[:resource].classify.constantize.human_name if params[:resource]
