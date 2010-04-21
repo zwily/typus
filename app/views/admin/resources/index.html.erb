@@ -8,7 +8,7 @@
 
 <%= raw filters %>
 
-<%= typus_block :location => @resource[:self], :partial => "index" %>
+<%= typus_block %>
 
 <% unless @items.count.zero? -%>
   <%= raw build_list(@resource[:class], @fields, @items) %>
