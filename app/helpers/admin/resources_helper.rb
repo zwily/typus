@@ -55,7 +55,7 @@ module Admin
 
     def pagination(*args)
       @options = args.extract_options!
-      render File.joim(path, "pagination") if @items.prev || @items.next
+      render File.join(path, "pagination") if @items.prev || @items.next
     end
 
     def link_to_edit(klass = @resource[:class])
