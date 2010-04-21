@@ -28,7 +28,7 @@
         </td>
 
         <td class="right">
-          <small><%= link_to_if @current_user.can?("create", klass), _("Add"), new_admin_item_path %></small>
+          <%= link_to_if @current_user.can?("create", klass), _("Add"), new_admin_item_path %>
         </td>
 
       </tr>

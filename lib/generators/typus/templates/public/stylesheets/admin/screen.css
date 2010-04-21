@@ -1,8 +1,6 @@
-/* @override http://localhost:3000/stylesheets/admin/screen.css?1271829775 */
-
 /* @group Defaults */
 
-html { background: #F3F3F3; height: 100%; margin-bottom: 1px; }
+html { height: 100%; margin-bottom: 1px; }
 
 body {
   font-family: "Lucida Grande", Helvetica, Arial, Sans-serif;
@@ -79,7 +77,6 @@ a:hover { color: #333; text-decoration: underline; }
 #content p a { text-decoration: underline; }
 #content p a:hover { color: #408BB6; }
 
-#content table.typus { background: #000; margin: 1em 0; }
 #content h2+table.typus { margin: 0; }
 
 #content pre {
@@ -163,10 +160,7 @@ a:hover { color: #333; text-decoration: underline; }
 
 #footer_wrapper { padding: 0.5em 0; position: relative; }
 
-#footer {
-  margin: 0 auto;
-  width: 940px;
-}
+#footer { margin: 0 auto; width: 940px; }
 
 #footer a { color: #000; font-weight: normal; }
 #footer a:hover { text-decoration: underline; }
@@ -219,43 +213,23 @@ fieldset.buttons { }
   -moz-border-radius-topright: 3px;
   -webkit-border-top-left-radius: 3px;
   -webkit-border-top-right-radius: 3px;
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
+  border-left: 1px solid #D3D3D3;
+  border-right: 1px solid #D3D3D3;
+  margin-bottom: 2em!important;
   width: 100%;
 }
 
-#content table.typus small { font-size: 0.8em; }
-
-#content table.typus th { color: #FFF; font-weight: normal; padding: 6px; }
+#content table.typus th { background: #000; color: #FFF; padding: 6px; }
 #content table.typus th a { color: #FFF!important; }
-
+#content table.typus td { border-bottom: 1px solid #D3D3D3!important; }
 #content table.typus td.right { text-align: right; }
-
 #content table.typus tr.even { background: #FFF!important; }
 #content table.typus tr.even:hover,
-#content table.typus tr.odd:hover { background: #000!important; color: #FFF; }
-#content table.typus tr.even:hover a,
-#content table.typus tr.odd:hover a { color: #FFF!important; }
+#content table.typus tr.odd:hover { background: #E4E4E4!important; }
 #content table.typus tr.odd { background: #F3F3F3; }
-
-/* #content table.typus span.inactive { color: #888; } */
 #content table.typus td { border: none; padding: 5px; vertical-align: top; }
-
-/* @end */
-
-/* @group Rails Errors */
-
-.fieldWithErrors input { background: #FBE3E4; border: 1px solid #8A1F11!important; }
-
-.errorExplanation {
-  background: #FBE3E4;
-  border: 2px solid #FBC2C4;
-  color: #8a1f11;
-  padding: 0 10px;
-}
-
-.errorExplanation h3 { display: none; }
-.errorExplanation p { font-weight: bold; margin: 15px 0 10px 0!important; padding: 0 5px; }
-.errorExplanation ul { margin: 0 0 10px 25px!important; }
-.errorExplanation ul li { list-style: square!important; margin: 0!important; }
 
 /* @end */
 
@@ -267,24 +241,25 @@ input.date_input { border: 1px solid #999; margin-bottom: 1em;}
 
 /* @group Login Page Dialog */
 
-#dialog_wrapper {
-  margin: 0 auto;
-  width: 40em;
+body#account {
+  background: #F3F3F3;
 }
 
+#dialog_wrapper { margin: 0 auto; padding: 7.5em 0; width: 40em; }
+
 #dialog {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   background: #FFF;
   border: 0.1em solid #D3D3D3;
   padding: 1em 2em;
-  margin-top: 10em;
   margin-bottom: 1em;
 }
 
 #dialog h1 a { font-weight: bold; }
 #dialog h1 a:hover { color: #000; text-decoration: underline; }
 
+#dialog ul { margin: 0 0 -1em 0; }
 #dialog li { margin: 1em 0; }
 #dialog li a { display: inline; font-size: 11px; margin: 0.5em; }
 
@@ -297,28 +272,56 @@ input.date_input { border: 1px solid #999; margin-bottom: 1em;}
 
 /* @group Pagination */
 
-.pagination { margin: 2.5em auto; padding: 0.75em; text-align: center; }
-.pagination a { margin: 5em; padding: 3px 5px; text-decoration: none; }
-.pagination a:hover { background: #000; color: #FFF; }
-.pagination span.disabled { color: #D3D3D3; margin: 2px; padding: 2px 3px; }
+#pagination { margin: 1.5em auto; text-align: center; }
+#pagination a { padding: 3px 5px; text-decoration: none; }
+#pagination a:hover { background: #000; color: #FFF; }
+#pagination span.disabled { color: #D3D3D3; margin: 2px; padding: 2px 3px; }
+#pagination .left { float: left; }
+#pagination .right { float: right; }
 
 /* @end */
 
 /* @group Success, notice and error boxes */
 
+#errorExplanation, 
 .alert, 
 .notice {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
-  margin: 0.25em 0;
+  margin: 1em 0;
   padding: 0.5em 1em ;
 }
 
-.alert p, 
+#errorExplanation p, 
+#errorExplanation ul, 
+#errorExplanation h3, 
+.alert p { color: #CD0A0A!important; }
 .notice p { color: #000; }
 
-.alert { background: #FBE3E4; border: 1px solid #FBC2C4; }
-.notice { background: #FFF6BF; border: 1px solid #FFD324; }
+#errorExplanation, 
+.alert { background: #FEF8F6; border: 1px solid #CD0A0A; }
+.notice { background: #FCFAF3; border: 1px solid #FCEFA1; }
+
+/* @end */
+
+/* @group Rails Errors */
+
+.fieldWithErrors label { color: #CD0A0A;}
+.fieldWithErrors input { background: #FEF8F6; }
+
+/* 
+#errorExplanation {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background: #FBE3E4;
+  border: 2px solid #FBC2C4;
+  color: #8a1f11;
+  padding: 0.5em 1em;
+}
+*/
+
+#errorExplanation ul { margin: 1em 1.5em; }
+#errorExplanation ul li { list-style: square!important; margin: 0!important; }
 
 /* @end */
 
@@ -342,8 +345,10 @@ input.date_input { border: 1px solid #999; margin-bottom: 1em;}
 /* @group Resource */
 
 .resource {
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
+  -moz-border-radius-topleft: 3px;
+  -moz-border-radius-topright: 3px;
+  -webkit-border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
   border: 1px solid #D3D3D3;
   margin-bottom: 1em;
 }
@@ -362,7 +367,13 @@ input.date_input { border: 1px solid #999; margin-bottom: 1em;}
 .resource h2 a:hover { text-decoration: none; }
 .resource ul { margin: 0; }
 .resource ul.hidden { display: none; }
-.resource ul li { border-top: 1px solid #D3D3D3; font-weight: bold; padding: 5px 10px; }
+
+.resource ul li {
+  background: #FFF;
+  border-top: 1px solid #D3D3D3;
+  font-weight: bold;
+  padding: 5px 10px;
+}
 
 /* @end */
 
