@@ -35,8 +35,6 @@ module Admin
 
                 end
 
-      headers << "" if @current_user.can?('delete', model)
-
       return headers
 
     end
