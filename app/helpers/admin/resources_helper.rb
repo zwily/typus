@@ -35,7 +35,7 @@ module Admin
 
     def remove_filter_link(filter = request.env['QUERY_STRING'])
       return unless filter && !filter.blank?
-      render "admin/helpers/remove_filter_link"
+      link_to _("Remove filter")
     end
 
     ##
