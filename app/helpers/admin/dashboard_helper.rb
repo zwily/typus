@@ -13,7 +13,7 @@ module Admin
         apps[app] = available.sort_by { |x| x.constantize.model_name.human }
       end
 
-      render "admin/helpers/applications", :applications => apps
+      render File.join(path, "applications"), :applications => apps
     end
 
     def resources
@@ -23,7 +23,13 @@ module Admin
 
       return if available.empty?
 
-      render "admin/helpers/resources", :resources => available
+      render File.join(path, "resources"), :resources => available
+    end
+
+    private
+
+    def path
+      "admin/helpers/dashboard"
     end
 
   end

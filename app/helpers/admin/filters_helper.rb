@@ -37,7 +37,7 @@ module Admin
     end
 
     def build_filters(filter, items)
-      render "admin/helpers/filters", :items => items, :attribute => filter
+      render "admin/helpers/filters/filters", :items => items, :attribute => filter
     end
 
     def relationship_filter(request, filter, habtm = false)

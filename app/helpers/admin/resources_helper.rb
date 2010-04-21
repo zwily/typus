@@ -30,7 +30,7 @@ module Admin
                   :resource_from => options[:resource_from], 
                   :resource_to => options[:resource_to])
 
-      render "admin/helpers/display_link_to_previous", :message => message
+      render File.join(path, display_link_to_previous), :message => message
     end
 
     def remove_filter_link(filter = request.env['QUERY_STRING'])
@@ -55,7 +55,7 @@ module Admin
 
     def pagination(*args)
       @options = args.extract_options!
-      render "admin/helpers/pagination" if @items.prev || @items.next
+      render File.joim(path, "pagination") if @items.prev || @items.next
     end
 
     def link_to_edit(klass = @resource[:class])
@@ -84,6 +84,12 @@ module Admin
     end
 
 =end
+
+    private
+
+    def path
+      "admin/helpers/resources"
+    end
 
   end
 
