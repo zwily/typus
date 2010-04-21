@@ -2,12 +2,14 @@
   <%= build_sidebar %>
 <% end %>
 
+<% content_for :search do %>
+  <%= search %>
+<% end %>
+
 <h2>
   <%= _("Edit {{resources}}", :resources => @resource[:human_name].pluralize) %>
   <small><%= remove_filter_link %></small>
 </h2>
-
-<%= search %>
 
 <%= filters %>
 
