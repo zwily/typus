@@ -11,7 +11,7 @@ module Admin
         resources[resource] = [ default_actions(klass) ] + export(klass) + custom_actions(klass)
       end
 
-      render "admin/helpers/sidebar", :resources => resources
+      render "admin/helpers/sidebar/sidebar", :resources => resources
     end
 
     def default_actions(klass)

@@ -409,7 +409,7 @@ Get it from `http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{l
                   item.send(attribute)
                 end
 
-      render "admin/helpers/preview", 
+      render "admin/helpers/form/preview", 
              :attribute => attribute, 
              :content => content, 
              :has_file_preview => has_file_preview, 

@@ -14,7 +14,7 @@ module Admin
 
       hidden_params = search_params.map { |k, v| hidden_field_tag(k, v) }
 
-      render "admin/helpers/search", 
+      render "admin/helpers/search/search", 
              :hidden_params => hidden_params, 
              :search_by => search_by
 
