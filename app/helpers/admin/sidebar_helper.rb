@@ -18,7 +18,7 @@ module Admin
       return unless @current_user.can?('create', klass)
       options = { :controller => klass.to_resource }
       message = _("Add New")
-      link_to message, options.merge(:action => "new"), :class => 'new'
+      link_to_unless_current message, options.merge(:action => "new"), :class => 'new'
     end
 
     def custom_actions(klass)
