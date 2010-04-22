@@ -9,6 +9,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::TextHelper
 
   def render(*args); args; end
+  def raw(*args); args; end
 
   def setup
     default_url_options[:host] = "test.host"
@@ -43,9 +44,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_header
 
-    return
-
     # FIXME
+    return
 
     @current_user = mock()
     @current_user.expects(:can?).with("delete", TypusUser).returns(true)
@@ -69,7 +69,6 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   def test_table_header_with_params
 
     # FIXME
-
     return
 
     @current_user = mock()
@@ -94,9 +93,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_header_when_user_cannot_delete_items
 
-    return
-
     # FIXME
+    return
 
     @current_user = mock()
     @current_user.expects(:can?).with("delete", TypusUser).returns(false)
@@ -119,9 +117,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_header_when_user_cannot_delete_items_with_params
 
-    return
-
     # FIXME
+    return
 
     @current_user = mock()
     @current_user.expects(:can?).with("delete", TypusUser).returns(false)
@@ -143,9 +140,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_belongs_to_field
 
-    return
-
     # FIXME
+    return
 
     @current_user = typus_users(:admin)
 
@@ -166,9 +162,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_has_and_belongs_to_many_field
 
-    return
-
     # FIXME
+    return
 
     post = Post.find(1)
 
@@ -243,9 +238,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_boolean_field
 
-    return
-
     # FIXME
+    return
 
     post = typus_users(:admin)
     output = table_boolean_field("status", post)
