@@ -3,8 +3,8 @@ class ActiveRecord::Base
   ##
   #     >> Post.to_resource
   #     => "posts"
-  #     >> Admin::Post.to_resource
-  #     => "admin/posts"
+  #     >> Admin::User.to_resource
+  #     => "admin/users"
   #
   def self.to_resource
     name.underscore.pluralize
