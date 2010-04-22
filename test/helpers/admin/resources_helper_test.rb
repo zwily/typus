@@ -29,7 +29,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
     assert output.nil?
   end
 
-  def test_build_list_when_returns_a_typus_table
+  def test_build_list_when_returns_a_table
 
     model = TypusUser
     fields = %w( email role status )

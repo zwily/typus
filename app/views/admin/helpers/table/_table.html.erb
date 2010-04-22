@@ -13,8 +13,8 @@
   <% items.each do |item| %>
     <tr class="<%= cycle('even', 'odd') %> <%= item.class.name.underscore %>" id="<%= dom_id(item) %>" name="item_<%= item.id %>">
       <%= table_fields_for_item(item, fields, link_options) %>
-      <td width="10px"><%= typus_table_default_action(model, item) %></td>
-      <td width="10px"><%= typus_table_action(model, item) %></td>
+      <td width="10px"><%= table_default_action(model, item) %></td>
+      <td width="10px"><%= table_action(model, item) %></td>
     </tr>
   <% end %>
 

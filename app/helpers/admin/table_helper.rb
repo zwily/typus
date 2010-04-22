@@ -44,26 +44,26 @@ module Admin
 
       fields.each do |key, value|
         content << case value
-                   when :boolean then typus_table_boolean_field(key, item)
-                   when :datetime then typus_table_datetime_field(key, item, link_options)
-                   when :date then typus_table_datetime_field(key, item, link_options)
-                   when :file then typus_table_file_field(key, item, link_options)
-                   when :time then typus_table_datetime_field(key, item, link_options)
-                   when :belongs_to then typus_table_belongs_to_field(key, item)
-                   when :tree then typus_table_tree_field(key, item)
-                   when :position then typus_table_position_field(key, item)
-                   when :selector then typus_table_selector(key, item)
-                   when :transversal then typus_table_transversal(key, item)
-                   when :has_and_belongs_to_many then typus_table_has_and_belongs_to_many_field(key, item)
+                   when :boolean then table_boolean_field(key, item)
+                   when :datetime then table_datetime_field(key, item, link_options)
+                   when :date then table_datetime_field(key, item, link_options)
+                   when :file then table_file_field(key, item, link_options)
+                   when :time then table_datetime_field(key, item, link_options)
+                   when :belongs_to then table_belongs_to_field(key, item)
+                   when :tree then table_tree_field(key, item)
+                   when :position then table_position_field(key, item)
+                   when :selector then table_selector(key, item)
+                   when :transversal then table_transversal(key, item)
+                   when :has_and_belongs_to_many then table_has_and_belongs_to_many_field(key, item)
                    else
-                     typus_table_string_field(key, item, link_options)
+                     table_string_field(key, item, link_options)
                    end
       end
 
       return raw(content)
     end
 
-    def typus_table_default_action(model, item)
+    def table_default_action(model, item)
       action = if model.typus_user_id? && @current_user.is_not_root?
                  # If there's a typus_user_id column on the table and logged user is not root ...
                  item.owned_by?(@current_user) ? item.class.typus_options_for(:default_action_on_item) : 'show'
@@ -87,7 +87,7 @@ module Admin
     #
     # Only shown is the user can destroy/unrelate items.
     #
-    def typus_table_action(model, item)
+    def table_action(model, item)
 
       condition = true
 
@@ -136,7 +136,7 @@ module Admin
 
     end
 
-    def typus_table_belongs_to_field(attribute, item)
+    def table_belongs_to_field(attribute, item)
 
       action = item.send(attribute).class.typus_options_for(:default_action_on_item)
 
@@ -153,22 +153,22 @@ module Admin
 
     end
 
-    def typus_table_has_and_belongs_to_many_field(attribute, item)
+    def table_has_and_belongs_to_many_field(attribute, item)
       content = item.send(attribute).map { |i| i.to_label }.join('<br />')
       return content_tag(:td, content)
     end
 
-    def typus_table_string_field(attribute, item, link_options = {})
+    def table_string_field(attribute, item, link_options = {})
       content = h(item.send(attribute))
       return content_tag(:td, raw(!content.empty? ? content : "&#151;"), :class => attribute)
     end
 
-    def typus_table_selector(attribute, item)
+    def table_selector(attribute, item)
       content = h(item.mapping(attribute))
       return content_tag(:td, content, :class => attribute)
     end
 
-    def typus_table_file_field(attribute, item, link_options = {})
+    def table_file_field(attribute, item, link_options = {})
 
       attachment = attribute.split("_file_name").first
       file_preview = Typus.file_preview
@@ -193,13 +193,13 @@ module Admin
 
     end
 
-    def typus_table_tree_field(attribute, item)
+    def table_tree_field(attribute, item)
       content = item.parent ? item.parent.to_label : "&#151;"
       return content_tag(:td, content)
     end
 
     # OPTIMIZE: Move html code to partial.
-    def typus_table_position_field(attribute, item)
+    def table_position_field(attribute, item)
 
       html_position = []
 
@@ -221,7 +221,7 @@ module Admin
 
     end
 
-    def typus_table_datetime_field(attribute, item, link_options = {} )
+    def table_datetime_field(attribute, item, link_options = {} )
 
       date_format = item.class.typus_date_format(attribute)
       content = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
@@ -230,7 +230,7 @@ module Admin
 
     end
 
-    def typus_table_boolean_field(attribute, item)
+    def table_boolean_field(attribute, item)
       boolean_hash = item.class.typus_boolean(attribute)
       status = item.send(attribute)
 
@@ -250,7 +250,7 @@ module Admin
       return content_tag(:td, content)
     end
 
-    def typus_table_transversal(attribute, item)
+    def table_transversal(attribute, item)
       _attribute, virtual = attribute.split(".")
       return content_tag(:td, "#{item.send(_attribute).send(virtual)}")
     end
