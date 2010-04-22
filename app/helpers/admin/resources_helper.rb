@@ -50,7 +50,7 @@ module Admin
       if File.exist?(template)
         render :partial => template.gsub('/_', '/'), :collection => items, :as => :item
       else
-        build_typus_table(model, fields, items, link_options, association)
+        build_table(model, fields, items, link_options, association)
       end
     end
 

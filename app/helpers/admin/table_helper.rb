@@ -2,7 +2,7 @@ module Admin
 
   module TableHelper
 
-    def build_typus_table(model, fields, items, link_options = {}, association = nil)
+    def build_table(model, fields, items, link_options = {}, association = nil)
       render "admin/helpers/table/table", 
              :model => model, 
              :fields => fields, 

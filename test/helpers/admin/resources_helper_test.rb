@@ -36,7 +36,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
     items = TypusUser.all
     resource = "typus_users"
 
-    self.stubs(:build_typus_table).returns("a_list_with_items")
+    self.stubs(:build_table).returns("a_list_with_items")
 
     output = build_list(model, fields, items, resource)
     expected = "a_list_with_items"

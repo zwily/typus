@@ -14,7 +14,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     default_url_options[:host] = "test.host"
   end
 
-  def test_build_typus_table
+  def test_build_table
 
     # FIXME
     return
@@ -27,7 +27,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     fields = TypusUser.typus_fields_for(:list)
     items = TypusUser.all
 
-    output = build_typus_table(TypusUser, fields, items)
+    output = build_table(TypusUser, fields, items)
     expected = <<-HTML
 <tr>
 <th><a href="http://test.host/admin/typus_users?order_by=email">Email </a></th>
