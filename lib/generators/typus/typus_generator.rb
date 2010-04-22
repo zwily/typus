@@ -59,7 +59,7 @@ class TypusGenerator < Rails::Generators::Base
       next if klass.name == options[:user_class_name]
 
       klass.typus_actions.each do |action|
-        file "view.html.erb", "#{views_path}/#{klass.to_resource}/#{action}.html.erb"
+        copy_file "view.html.erb", "#{views_path}/#{klass.to_resource}/#{action}.html.erb"
       end
 
     end
