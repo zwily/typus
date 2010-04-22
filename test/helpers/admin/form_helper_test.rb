@@ -75,6 +75,8 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   end
 
   def test_attribute_disabled
+
+    # FIXME
     return
 
     @resource = { :class => Post }
