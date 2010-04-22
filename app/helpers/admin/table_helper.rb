@@ -8,10 +8,10 @@ module Admin
              :fields => fields, 
              :items => items, 
              :link_options => link_options,
-             :headers => typus_table_header(model, fields)
+             :headers => table_header(model, fields)
     end
 
-    def typus_table_header(model, fields)
+    def table_header(model, fields)
 
       headers = fields.map do |key, value|
 

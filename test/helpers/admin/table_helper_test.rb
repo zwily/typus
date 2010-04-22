@@ -41,7 +41,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_table_header
+  def test_table_header
 
     return
 
@@ -55,7 +55,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     params = { :controller => "admin/typus_users", :action => "index" }
     self.expects(:params).at_least_once.returns(params)
 
-    output = typus_table_header(TypusUser, fields)
+    output = table_header(TypusUser, fields)
     expected = [ "admin/helpers/table_header",
                  { :headers=> [ %(<a href="http://test.host/admin/typus_users?order_by=email">Email </a>),
                                 %(<a href="http://test.host/admin/typus_users?order_by=role">Role </a>),
@@ -66,7 +66,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_table_header_with_params
+  def test_table_header_with_params
 
     # FIXME
 
@@ -80,7 +80,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     params = { :controller => "admin/typus_users", :action => "index", :search => "admin" }
     self.expects(:params).at_least_once.returns(params)
 
-    output = typus_table_header(TypusUser, fields)
+    output = table_header(TypusUser, fields)
 
     expected = [ "admin/helpers/table_header",
                  { :headers => [ %(<a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email </a>), 
@@ -92,7 +92,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_table_header_when_user_cannot_delete_items
+  def test_table_header_when_user_cannot_delete_items
 
     return
 
@@ -106,7 +106,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     params = { :controller => "admin/typus_users", :action => "index" }
     self.expects(:params).at_least_once.returns(params)
 
-    output = typus_table_header(TypusUser, fields)
+    output = table_header(TypusUser, fields)
 
     expected = [ "admin/helpers/table_header",
                  { :headers => [ %(<a href="http://test.host/admin/typus_users?order_by=email">Email </a>), 
@@ -117,7 +117,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_typus_table_header_when_user_cannot_delete_items_with_params
+  def test_table_header_when_user_cannot_delete_items_with_params
 
     return
 
@@ -131,7 +131,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     params = { :controller => "admin/typus_users", :action => "index", :search => "admin" }
     self.expects(:params).at_least_once.returns(params)
 
-    output = typus_table_header(TypusUser, fields)
+    output = table_header(TypusUser, fields)
 
     expected = [ "admin/helpers/table_header",
                  { :headers => [ %(<a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email </a>), 
