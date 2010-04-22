@@ -11,9 +11,9 @@ Typus.reload!
 
 # Different DB settings and load our schema.
 connection = case ENV["DB"]
-             when /mysql/
+             when "mysql"
                { :adapter => "mysql", :database => "typus_test" }
-             when /postgresql/
+             when "postgresql", "psql"
                { :adapter => "postgresql", :database => "typus_test", :encoding => "unicode" }
              else
                { :adapter => "sqlite3", :database => ":memory:" }
