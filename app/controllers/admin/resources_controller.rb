@@ -4,7 +4,7 @@ class Admin::ResourcesController < AdminController
 
   include Typus::Format
 
-  before_filter :detect_resource
+  before_filter :get_model
 
   before_filter :get_resource, 
                 :only => [ :show, 
@@ -250,7 +250,7 @@ class Admin::ResourcesController < AdminController
 
 private
 
-  def detect_resource
+  def get_model
     @resource = { :self => params[:controller].extract_resource, 
                   :human_name => params[:controller].extract_human_name, 
                   :class => params[:controller].extract_class }
