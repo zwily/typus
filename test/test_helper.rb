@@ -14,7 +14,7 @@ connection = case ENV["DB"]
              when /mysql/
                { :adapter => "mysql", :database => "typus_test" }
              when /postgresql/
-               { :adapter => "postgresql", :encoding => "unicode", :database => "typus_test" }
+               { :adapter => "postgresql", :database => "typus_test", :encoding => "unicode" }
              else
                { :adapter => "sqlite3", :database => ":memory:" }
              end
