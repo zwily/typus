@@ -59,33 +59,13 @@ module Admin
     end
 
     def date_filter(request, filter)
-
       items = {}
 
-      # if !@resource.typus_field_options_for(:filter_by_date_range).include?(filter.to_sym)
       %w( today last_few_days last_7_days last_30_days ).map do |timeline|
-        # switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
-        # options = { :page => nil }
-        #if switch == 'on'
-        #  params.delete(filter)
-        #else
-        #  options.merge!(filter.to_sym => timeline)
-        #end
         items[timeline] = _(timeline.humanize)
-        # link_to _(timeline.humanize), params.merge(options), :class => switch
       end
+
       build_filters(filter, items)
-        #, :attribute => filter)
-      # else
-      #  date_params = params.dup
-
-      #  %w( action controller page id ).each { |p| date_params.delete(p) }
-      #  date_params.delete(filter)
-
-      #  hidden_params = date_params.map { |k, v| hidden_field_tag(k, v) }
-      #  render "admin/helpers/date", :hidden_params => hidden_params, :filter => filter, :resource => @resource
-      # end
-
     end
 
     def boolean_filter(request, filter)
