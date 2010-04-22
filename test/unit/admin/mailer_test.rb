@@ -9,12 +9,10 @@ class Admin::MailerTest < ActiveSupport::TestCase
     @response = Admin::Mailer.reset_password_link(@user, url)
   end
 
-=begin
   # FIXME: For some reason we cannot stub Typus.email
   def test_should_verify_email_from_is_defined_by_typus_options
-    assert_equal [Typus.email], @response.from
+    assert Admin::Mailer.default[:from].nil?
   end
-=end
 
   def test_should_verify_email_to_is_typus_user_email
     assert_equal [@user.email], @response.to
