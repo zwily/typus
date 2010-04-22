@@ -9,6 +9,21 @@ module Admin
     include SidebarHelper
     include TableHelper
 
+    ##
+    # If there's a partial with a "microformat" of the data we want to 
+    # display, this will be used, otherwise we use a default table which 
+    # it's build from the options defined on the yaml configuration file.
+    #
+    def build_list(model, fields, items, resource = @resource.to_resource, link_options = {}, association = nil)
+      template = "app/views/admin/#{resource}/_#{resource.singularize}.html.erb"
+
+      if File.exist?(template)
+        render :partial => template.gsub('/_', '/'), :collection => items, :as => :item
+      else
+        build_table(model, fields, items, link_options, association)
+      end
+    end
+
     def display_link_to_previous
       return unless params[:back_to]
 
@@ -37,21 +52,6 @@ module Admin
     def remove_filter_link(filter = request.env['QUERY_STRING'])
       return unless filter && !filter.blank?
       link_to _("Remove filter")
-    end
-
-    ##
-    # If there's a partial with a "microformat" of the data we want to 
-    # display, this will be used, otherwise we use a default table which 
-    # it's build from the options defined on the yaml configuration file.
-    #
-    def build_list(model, fields, items, resource = @resource.to_resource, link_options = {}, association = nil)
-      template = "app/views/admin/#{resource}/_#{resource.singularize}.html.erb"
-
-      if File.exist?(template)
-        render :partial => template.gsub('/_', '/'), :collection => items, :as => :item
-      else
-        build_table(model, fields, items, link_options, association)
-      end
     end
 
     def pagination(*args)
