@@ -39,33 +39,3 @@ module Admin
  end
 
 end
-
-=begin
-
-    def previous_and_next(klass = @resource)
-
-      items = []
-
-      if @next
-        action = if klass.typus_user_id? && @current_user.is_not_root?
-                   @next.owned_by?(@current_user) ? 'edit' : 'show'
-                 else
-                   @current_user.cannot?('edit', klass) ? 'show' : params[:action]
-                 end
-        items << (link_to _("Next"), params.merge(:action => action, :id => @next.id).to_hash.symbolize_keys)
-      end
-
-      if @previous
-        action = if klass.typus_user_id? && @current_user.is_not_root?
-                   @previous.owned_by?(@current_user) ? 'edit' : 'show'
-                 else
-                   @current_user.cannot?('edit', klass) ? 'show' : params[:action]
-                 end
-        items << (link_to _("Previous"), params.merge(:action => action, :id => @previous.id).to_hash.symbolize_keys)
-      end
-
-      return items
-
-    end
-
-=end

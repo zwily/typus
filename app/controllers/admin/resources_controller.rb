@@ -87,7 +87,6 @@ class Admin::ResourcesController < AdminController
   end
 
   def edit
-
     item_params = params.dup
     %w( action controller model model_id back_to id resource resource_id page ).each { |p| item_params.delete(p) }
 
@@ -95,17 +94,13 @@ class Admin::ResourcesController < AdminController
     @item.attributes = item_params
 
     item_params.merge!(set_conditions)
-    @previous, @next = @item.previous_and_next(item_params)
-
+    # @previous, @next = @item.previous_and_next(item_params)
     select_template :edit
 
   end
 
   def show
-
     check_resource_ownership and return if @resource.typus_options_for(:only_user_items)
-
-    @previous, @next = @item.previous_and_next(set_conditions)
 
     respond_to do |format|
       format.html { select_template :show }
@@ -115,24 +110,16 @@ class Admin::ResourcesController < AdminController
         render :xml => @item.to_xml(:only => fields)
       end
     end
-
   end
 
   def update
-
     if @item.update_attributes(params[@object_name])
-
       set_attributes_on_update
       reload_locales
       redirect_on_success
-
     else
-
-      @previous, @next = @item.previous_and_next
       select_template :edit
-
     end
-
   end
 
   def destroy
