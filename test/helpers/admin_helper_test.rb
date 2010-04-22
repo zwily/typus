@@ -15,10 +15,10 @@ class AdminHelperTest < ActiveSupport::TestCase
     assert_equal "whatistypus.com - a &rsaquo; b", page_title
   end
 
-  def test_header_with_root_path
+=begin
 
-    # FIXME
-    return
+  # FIXME
+  def test_header_with_root_path
 
     # ActionView::Helpers::UrlHelper does not support strings, which are returned by named routes
     # link root_path
@@ -36,11 +36,12 @@ class AdminHelperTest < ActiveSupport::TestCase
 
   end
 
+=end
+
+=begin
+
+  # FIXME
   def test_header_without_root_path
-
-    return
-
-    # FIXME
 
     Rails.application.routes.named_routes.routes.reject! { |key, route| key == :root }
 
@@ -54,6 +55,8 @@ class AdminHelperTest < ActiveSupport::TestCase
     assert_equal [ partial, options ], output
 
   end
+
+=end
 
   def test_display_flash_message
 

@@ -21,11 +21,14 @@ class PaginatorTest < ActiveSupport::TestCase
     assert_equal @pager.last, @pager.page(2).last
   end
 
+=begin
+
   # FIXME: Problem with paginator.rb.
   def test_can_get_first_page_from_page_object
-    return
     assert_equal @pager.first, @pager.page(2).first
   end
+
+=end
 
   def test_does_not_exceed_per_page
     @pager.each do |page|

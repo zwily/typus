@@ -5,6 +5,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   include Admin::FormHelper
   include Admin::ResourcesHelper
 
+=begin
+
+  # FIXME: Problem with params number. A form option has to be sent.
   def test_typus_belongs_to_field
 
     params = { :controller => 'admin/post', :id => 1, :action => :create }
@@ -25,11 +28,15 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 <option value="2">Post#2</option></select></li>
     HTML
 
-    # FIXME: Problem with params number. A form option has to be sent.
-    # assert_equal expected, typus_belongs_to_field('post')
+    assert_equal expected, typus_belongs_to_field('post')
 
   end
 
+=end
+
+=begin
+
+  # FIXME: Problem with the number of attributes.
   def test_typus_belongs_to_field_with_different_attribute_name
 
     params = { :controller => 'admin/post', :id => 1, :action => :edit }
@@ -50,11 +57,15 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 <option value="4">Me</option></select></li>
     HTML
 
-    # FIXME: Problem with the number of attributes.
-    # assert_equal expected, typus_belongs_to_field('favorite_comment')
+    assert_equal expected, typus_belongs_to_field('favorite_comment')
 
   end
 
+=end
+
+=begin
+
+  # FIXME: Problem with the number of params.
   def test_typus_tree_field
 
     self.stubs(:expand_tree_into_select_field).returns('expand_tree_into_select_field')
@@ -69,22 +80,19 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 </select></li>
     HTML
 
-    # FIXME: Problem with the number of params.
-    # assert_equal expected, typus_tree_field('parent')
+    assert_equal expected, typus_tree_field('parent')
 
   end
 
+=end
+
   def test_attribute_disabled
     @resource = Post
-
     assert !attribute_disabled?('test')
-
     Post.expects(:accessible_attributes).returns(['test'])
     assert !attribute_disabled?('test')
-
     Post.expects(:accessible_attributes).returns(['no_test'])
     assert attribute_disabled?('test')
-
   end
 
   def test_expand_tree_into_select_field

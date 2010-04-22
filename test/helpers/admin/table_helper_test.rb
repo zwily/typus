@@ -16,6 +16,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   end
 
 =begin
+
   # FIXME
   def test_build_table
 
@@ -39,6 +40,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     build_table(TypusUser, fields, items)
 
   end
+
 =end
 
   def test_table_header

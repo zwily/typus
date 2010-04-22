@@ -16,37 +16,42 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     default_url_options[:host] = 'test.host'
   end
 
-  # TODO
+=begin
+
+  # FIXME
   def test_actions
   end
 
+=end
+
+=begin
+
+  # FIXME: 
   def test_export
-
-    # FIXME
-    return
-
     @resource = Post
 
     params = { :controller => 'admin/posts', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
-
     output = export
-
     expected = [ "admin/helpers/list", { :items => [ %(<a href="http://test.host/admin/posts?format=csv">CSV</a>), 
                                                      %(<a href="http://test.host/admin/posts?format=xml">XML</a>) ], 
                                          :header => "Export", 
                                          :options => { :header => "export" } } ]
 
     assert_equal expected, output
-
   end
 
+=end
+
+=begin
+
+  # FIXME: 
   def test_build_typus_list_with_empty_content_and_empty_header
-    # FIXME
-    return
     output = build_typus_list([], :header => nil)
     assert output.empty?
   end
+
+=end
 
   def test_build_typus_list_with_content_and_header
     # FIXME
@@ -62,21 +67,23 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_build_typus_list_with_content_without_header
-    # FIXME
-    return
+=begin
 
+  # FIXME:
+  def test_build_typus_list_with_content_without_header
     output = build_typus_list(['item1', 'item2'])
     expected = [ "admin/helpers/list", { :header => nil, 
                                          :options => {}, 
                                          :items=>["item1", "item2"] } ]
     assert_equal expected, output
-
   end
 
+=end
+
+=begin
+
+  # FIXME: 
   def test_search
-    # FIXME
-    return
 
     @resource = TypusUser
 
@@ -99,27 +106,35 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   end
 
+=end
+
+=begin
+
+  # FIXME
   def test_filters
-    # FIXME
-    return
     @resource = TypusUser
-
     @resource.expects(:typus_filters).returns(Array.new)
-
     output = filters
     assert output.nil?
-
   end
 
+=end
+
+=begin
+
+  # FIXME
   def test_filters_with_filters
-    # FIXME
-    return
   end
 
+=end
+
+=begin
+
+  # FIXME
   def test_relationship_filter
-    # FIXME
-    return
   end
+
+=end
 
   def test_date_filter
 
@@ -323,17 +338,14 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 =begin
 
   # FIXME
-
   def test_string_filter_when_empty_values
-
     @resource = TypusUser
     filter = 'role'
-
     request = 'role=admin&page=1'
     @resource.expects('role').returns([])
     output = string_filter(request, filter)
-    assert output.empty?
 
+    assert output.empty?
   end
 
 =end
