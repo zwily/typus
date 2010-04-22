@@ -15,7 +15,7 @@ module Admin
         when :string then string_filter(current_request, key)
         when :date, :datetime then date_filter(current_request, key)
         when :belongs_to then relationship_filter(current_request, key)
-        when :has_many || :has_and_belongs_to_many then
+        when :has_many, :has_and_belongs_to_many then
           relationship_filter(current_request, key, true)
         when nil then
           # Do nothing. This is ugly but for now it's ok.
