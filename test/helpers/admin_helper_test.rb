@@ -59,23 +59,19 @@ class AdminHelperTest < ActiveSupport::TestCase
 =end
 
   def test_display_flash_message
-
     message = { :test => "This is the message." }
-
     output = display_flash_message(message)
 
     partial = "admin/helpers/flash_message"
     options = { :flash_type => :test, 
                 :message => { :test => "This is the message." } }
 
-    assert_equal [ partial, options ], output
-
+    assert_equal partial, output.first
+    assert_equal options, output.last
   end
 
   def test_display_flash_message_with_empty_message
-    message = {}
-    output = display_flash_message(message)
-    assert output.nil?
+    assert display_flash_message(Hash.new).nil?
   end
 
 end
