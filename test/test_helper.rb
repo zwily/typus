@@ -1,10 +1,8 @@
 
 ENV["RAILS_ENV"] = "test"
 
-# Boot rails application!
+# Boot rails application and testing parts ...
 require "fixtures/rails_app/config/environment"
-
-# Require testing parts ...
 require "rails/test_help"
 
 # As we are simulating the application we need to reload the 
