@@ -1,5 +1,5 @@
 <%
-  values = @resource[:class]::const_get(attribute.upcase)
+  values = @resource::const_get(attribute.upcase)
   values = values.invert if values.kind_of?(Hash)
 %>
 

@@ -179,14 +179,14 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
     @resource = { :class => TypusUser, :self => 'typus_users' }
 
-    @resource[:class].expects(:typus_filters).returns(Array.new)
+    @resource.expects(:typus_filters).returns(Array.new)
 
     output = filters
     assert output.nil?
 
   end
 
-  # TODO: Test filters when @resource[:class].typus_filters returns filters.
+  # TODO: Test filters when @resource.typus_filters returns filters.
   def test_filters_with_filters
     return
   end
@@ -295,7 +295,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     # Roles is admin
 
     request = 'role=admin&page=1'
-    # @resource[:class].expects('role').returns(['admin', 'designer', 'editor'])
+    # @resource.expects('role').returns(['admin', 'designer', 'editor'])
     output = string_filter(request, filter)
 
  =begin
@@ -321,7 +321,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     # Roles is editor
 
     request = 'role=editor&page=1'
-    @resource[:class].expects('role').returns(['admin', 'designer', 'editor'])
+    @resource.expects('role').returns(['admin', 'designer', 'editor'])
     output = string_filter(request, filter)
 
  =begin
@@ -367,7 +367,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     array = [['Administrador', 'admin'], 
              ['Diseñador', 'designer'], 
              ['Editor', 'editor']]
-    @resource[:class].expects('role').returns(array)
+    @resource.expects('role').returns(array)
 
  =end
 
@@ -407,7 +407,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     filter = 'role'
 
     request = 'role=admin&page=1'
-    @resource[:class].expects('role').returns([])
+    @resource.expects('role').returns([])
     output = string_filter(request, filter)
     assert output.empty?
 

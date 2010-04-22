@@ -12,7 +12,7 @@ module Admin
       return unless params[:back_to]
 
       options = {}
-      options[:resource_from] = @resource[:human_name]
+      options[:resource_from] = @resource.human_name
       options[:resource_to] = params[:resource].classify.constantize.human_name if params[:resource]
 
       editing = %w( edit update ).include?(params[:action])
@@ -43,7 +43,7 @@ module Admin
     # display, this will be used, otherwise we use a default table which 
     # it's build from the options defined on the yaml configuration file.
     #
-    def build_list(model, fields, items, resource = @resource[:self], link_options = {}, association = nil)
+    def build_list(model, fields, items, resource = @resource.to_resource, link_options = {}, association = nil)
       template = "app/views/admin/#{resource}/_#{resource.singularize}.html.erb"
 
       if File.exist?(template)
@@ -58,7 +58,7 @@ module Admin
       render File.join(path, "pagination") if @items.prev || @items.next
     end
 
-    def link_to_edit(klass = @resource[:class])
+    def link_to_edit(klass = @resource)
       condition = if klass.typus_user_id? && @current_user.is_not_root?
                     @item.owned_by?(@current_user)
                   else

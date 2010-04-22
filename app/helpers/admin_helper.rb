@@ -1,6 +1,6 @@
 module AdminHelper
 
-  def typus_block(resource = @resource[:self], partial = params[:action])
+  def typus_block(resource = @resource.to_resource, partial = params[:action])
 
     partials_path = "admin/#{resource}"
     resources_partials_path = "admin/resources"

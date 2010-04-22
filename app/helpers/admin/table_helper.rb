@@ -114,18 +114,18 @@ module Admin
         # If we are editing content, we can relate and unrelate always!
         confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
                     :unrelate_model => model.model_name.human, 
-                    :unrelate_model_from => @resource[:human_name])
+                    :unrelate_model_from => @resource.human_name)
       when 'show'
         # If we are showing content, we only can relate and unrelate if we are 
         # the owners of the owner record.
         # If the owner record doesn't have a foreign key (Typus.user_fk) we look
         # each item to verify the ownership.
-        condition = if @resource[:class].typus_user_id? && @current_user.is_not_root?
+        condition = if @resource.typus_user_id? && @current_user.is_not_root?
                       @item.owned_by?(@current_user)
                     end
         confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
                     :unrelate_model => model.model_name.human, 
-                    :unrelate_model_from => @resource[:human_name])
+                    :unrelate_model_from => @resource.human_name)
       end
 
       message = %(<div class="sprite #{action}">#{action.titleize}</div>)

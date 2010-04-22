@@ -109,7 +109,7 @@ module Typus
                     :current_user_role => @current_user.role.capitalize, 
                     :action => params[:action])
 
-        unless @current_user.can?(params[:action], @resource[:class])
+        unless @current_user.can?(params[:action], @resource)
           flash[:notice] = message
           redirect_to request.referer || admin_dashboard_path
         end
@@ -162,9 +162,9 @@ module Typus
 
         # Show only related items it @resource has a foreign_key (Typus.user_fk) 
         # related to the logged user.
-        if @resource[:class].typus_user_id?
+        if @resource.typus_user_id?
           condition = { Typus.user_fk => @current_user }
-          @conditions = @resource[:class].merge_conditions(@conditions, condition)
+          @conditions = @resource.merge_conditions(@conditions, condition)
         end
 
       end
@@ -181,19 +181,19 @@ module Typus
       # next linking to records from other users.
       def set_conditions
         condition = @current_user.is_root? || 
-                    !@resource[:class].typus_options_for(:only_user_items) || 
-                    !@resource[:class].columns.map(&:name).include?(Typus.user_fk)
+                    !@resource.typus_options_for(:only_user_items) || 
+                    !@resource.columns.map(&:name).include?(Typus.user_fk)
         !condition ? { Typus.user_fk => @current_user.id } : {}
       end
 
       def set_attributes_on_create
-        if @resource[:class].typus_user_id?
+        if @resource.typus_user_id?
           @item.attributes = { Typus.user_fk => @current_user.id }
         end
       end
 
       def set_attributes_on_update
-        if @resource[:class].typus_user_id? && @current_user.is_not_root?
+        if @resource.typus_user_id? && @current_user.is_not_root?
           @item.update_attributes(Typus.user_fk => @current_user.id)
         end
       end
@@ -201,9 +201,9 @@ module Typus
       # Reload @current_user when updating to see flash message in the 
       # correct locale.
       def reload_locales
-        if @resource[:class].eql?(Typus.user_class)
+        if @resource.eql?(Typus.user_class)
           I18n.locale = @current_user.reload.preferences[:locale]
-          @resource[:human_name] = params[:controller].extract_human_name
+          @resource.human_name = params[:controller].extract_human_name
         end
       end
 

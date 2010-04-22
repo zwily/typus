@@ -4,7 +4,7 @@ module Admin
 
     def filters
 
-      typus_filters = @resource[:class].typus_filters
+      typus_filters = @resource.typus_filters
       return if typus_filters.empty?
 
       current_request = request.env['QUERY_STRING'] || []
@@ -41,7 +41,7 @@ module Admin
     end
 
     def relationship_filter(request, filter, habtm = false)
-      att_assoc = @resource[:class].reflect_on_association(filter.to_sym)
+      att_assoc = @resource.reflect_on_association(filter.to_sym)
       class_name = att_assoc.options[:class_name] || ((habtm) ? filter.classify : filter.capitalize.camelize)
       model = class_name.constantize
       related_fk = (habtm) ? filter : att_assoc.primary_key_name
@@ -62,7 +62,7 @@ module Admin
 
       items = {}
 
-      # if !@resource[:class].typus_field_options_for(:filter_by_date_range).include?(filter.to_sym)
+      # if !@resource.typus_field_options_for(:filter_by_date_range).include?(filter.to_sym)
       %w( today last_few_days last_7_days last_30_days ).map do |timeline|
         # switch = request.include?("#{filter}=#{timeline}") ? 'on' : 'off'
         # options = { :page => nil }
@@ -89,12 +89,12 @@ module Admin
     end
 
     def boolean_filter(request, filter)
-      items = @resource[:class].typus_boolean(filter)
+      items = @resource.typus_boolean(filter)
       build_filters(filter, items)
     end
 
     def string_filter(request, filter)
-      values = @resource[:class]::const_get("#{filter.to_s.upcase}")
+      values = @resource::const_get("#{filter.to_s.upcase}")
 
       if values.kind_of?(Hash)
         items = values.invert

@@ -11,7 +11,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
 
   def test_display_link_to_previous
 
-    @resource = { :class => Post, :human_name => "Post" }
+    @resource = { :class => Post }
     params = { :action => "edit", :back_to => "/back_to_param" }
     self.expects(:params).at_least_once.returns(params)
 

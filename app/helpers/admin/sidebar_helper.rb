@@ -4,7 +4,7 @@ module Admin
 
     def build_sidebar
       resources = ActiveSupport::OrderedHash.new
-      app_name = @resource[:class].typus_defaults_for("application").to_s
+      app_name = @resource.typus_defaults_for("application").to_s
 
       Typus.application(app_name).each do |resource|
         klass = resource.constantize
@@ -42,7 +42,7 @@ end
 
 =begin
 
-    def previous_and_next(klass = @resource[:class])
+    def previous_and_next(klass = @resource)
 
       items = []
 

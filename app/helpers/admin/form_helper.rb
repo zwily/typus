@@ -3,7 +3,7 @@ module Admin
   module FormHelper
 
     def form_partial
-      resource = @resource[:self]
+      resource = @resource.to_resource
       template_file = Rails.root.join("app/views/admin/#{resource}/_form.html.erb")
       partial = File.exists?(template_file) ? resource : "resources"
       return "admin/#{partial}/form"
@@ -17,7 +17,7 @@ module Admin
 
         fields.each do |key, value|
 
-          if template = @resource[:class].typus_template(key)
+          if template = @resource.typus_template(key)
             html << typus_template_field(key, template, options)
             next
           end
@@ -50,8 +50,8 @@ module Admin
 
       back_to = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id])
 
-      related = @resource[:class].reflect_on_association(attribute.to_sym).class_name.constantize
-      related_fk = @resource[:class].reflect_on_association(attribute.to_sym).primary_key_name
+      related = @resource.reflect_on_association(attribute.to_sym).class_name.constantize
+      related_fk = @resource.reflect_on_association(attribute.to_sym).primary_key_name
 
       confirm = [ _("Are you sure you want to leave this page?"),
                   _("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."), 
@@ -73,7 +73,7 @@ module Admin
           values = related.all(:order => related.typus_order_by).collect { |p| [p.to_label, p.id] }
           options = { :include_blank => true }
           html_options = { :disabled => attribute_disabled?(attribute) }
-          label_text = @resource[:class].human_attribute_name(attribute)
+          label_text = @resource.human_attribute_name(attribute)
           html << <<-HTML
   <li>
     #{form.label related_fk, raw("#{label_text} <small>#{message}</small>")}
@@ -90,14 +90,14 @@ module Admin
     def typus_tree_field(attribute, *args)
 
       options = args.extract_options!
-      options[:items] ||= @resource[:class].roots
+      options[:items] ||= @resource.roots
       options[:attribute_virtual] ||= 'parent_id'
 
       form = options[:form]
 
       values = expand_tree_into_select_field(options[:items], options[:attribute_virtual])
 
-      label_text = @resource[:class].human_attribute_name(attribute)
+      label_text = @resource.human_attribute_name(attribute)
 
       <<-HTML
   <li>
@@ -114,9 +114,9 @@ module Admin
       @back_to = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id])
 
       returning(String.new) do |html|
-        @resource[:class].typus_defaults_for(:relationships).each do |relationship|
+        @resource.typus_defaults_for(:relationships).each do |relationship|
 
-          association = @resource[:class].reflect_on_association(relationship.to_sym)
+          association = @resource.reflect_on_association(relationship.to_sym)
 
           next if @current_user.cannot?('read', association.class_name.constantize)
 
@@ -142,21 +142,21 @@ module Admin
     def typus_form_has_many(field)
       returning(String.new) do |html|
 
-        model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
+        model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.constantize
         model_to_relate_as_resource = model_to_relate.to_resource
 
-        reflection = @resource[:class].reflect_on_association(field.to_sym)
+        reflection = @resource.reflect_on_association(field.to_sym)
         association = reflection.macro
         foreign_key = reflection.through_reflection ? reflection.primary_key_name.pluralize : reflection.primary_key_name
 
         link_options = { :controller => "admin/#{model_to_relate_as_resource.pluralize}", 
                          :action => 'new', 
                          :back_to => "#{@back_to}##{field}", 
-                         :resource => @resource[:self].singularize, 
+                         :resource => @resource.to_resource.singularize, 
                          :resource_id => @item.id, 
                          foreign_key => @item.id }
 
-        condition = if @resource[:class].typus_user_id? && @current_user.is_not_root?
+        condition = if @resource.typus_user_id? && @current_user.is_not_root?
                       @item.owned_by?(@current_user)
                     else
                       true
@@ -196,18 +196,18 @@ module Admin
                     end
 
         options = { :order => model_to_relate.typus_order_by, :conditions => conditions }
-        items_count = @resource[:class].find(params[:id]).send(field).count(:conditions => conditions)
+        items_count = @resource.find(params[:id]).send(field).count(:conditions => conditions)
         items_per_page = model_to_relate.typus_options_for(:per_page).to_i
 
         @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
           options.merge!({:limit => per_page, :offset => offset})
-          items = @resource[:class].find(params[:id]).send(field).all(options)
+          items = @resource.find(params[:id]).send(field).all(options)
         end
 
         @items = @pager.page(params[:page])
 
         unless @items.empty?
-          options = { :back_to => "#{@back_to}##{field}", :resource => @resource[:self], :resource_id => @item.id }
+          options = { :back_to => "#{@back_to}##{field}", :resource => @resource.to_resource, :resource_id => @item.id }
           html << build_list(model_to_relate, 
                              model_to_relate.typus_fields_for(:relationship), 
                              @items, 
@@ -232,13 +232,13 @@ module Admin
     def typus_form_has_and_belongs_to_many(field)
       returning(String.new) do |html|
 
-        model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
+        model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.constantize
         model_to_relate_as_resource = model_to_relate.to_resource
 
-        reflection = @resource[:class].reflect_on_association(field.to_sym)
+        reflection = @resource.reflect_on_association(field.to_sym)
         association = reflection.macro
 
-        condition = if @resource[:class].typus_user_id? && @current_user.is_not_root?
+        condition = if @resource.typus_user_id? && @current_user.is_not_root?
                       @item.owned_by?(@current_user)
                     else
                       true
@@ -246,7 +246,7 @@ module Admin
 
         if condition && @current_user.can?('create', model_to_relate)
           add_new = <<-HTML
-    <small>#{link_to _("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id}</small>
+    <small>#{link_to _("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource.to_resource, :resource_id => @item.id}</small>
           HTML
         end
 
@@ -279,12 +279,12 @@ module Admin
                     end
 
         options = { :order => model_to_relate.typus_order_by, :conditions => conditions }
-        items_count = @resource[:class].find(params[:id]).send(field).count(:conditions => conditions)
+        items_count = @resource.find(params[:id]).send(field).count(:conditions => conditions)
         items_per_page = model_to_relate.typus_options_for(:per_page).to_i
 
         @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
           options.merge!({:limit => per_page, :offset => offset})
-          items = @resource[:class].find(params[:id]).send(field).all(options)
+          items = @resource.find(params[:id]).send(field).all(options)
         end
 
         @items = @pager.page(params[:page])
@@ -314,10 +314,10 @@ module Admin
     def typus_form_has_one(field)
       returning(String.new) do |html|
 
-        model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
+        model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.constantize
         model_to_relate_as_resource = model_to_relate.to_resource
 
-        reflection = @resource[:class].reflect_on_association(field.to_sym)
+        reflection = @resource.reflect_on_association(field.to_sym)
         association = reflection.macro
 
         html << <<-HTML
@@ -328,9 +328,9 @@ module Admin
     </h2>
         HTML
         items = Array.new
-        items << @resource[:class].find(params[:id]).send(field) unless @resource[:class].find(params[:id]).send(field).nil?
+        items << @resource.find(params[:id]).send(field) unless @resource.find(params[:id]).send(field).nil?
         unless items.empty?
-          options = { :back_to => @back_to, :resource => @resource[:self], :resource_id => @item.id }
+          options = { :back_to => @back_to, :resource => @resource.to_resource, :resource_id => @item.id }
           html << build_list(model_to_relate, 
                              model_to_relate.typus_fields_for(:relationship), 
                              items, 
@@ -354,9 +354,9 @@ module Admin
 
       template_name = "admin/templates/#{template}"
 
-      custom_options = { :start_year => @resource[:class].typus_options_for(:start_year), 
-                         :end_year => @resource[:class].typus_options_for(:end_year), 
-                         :minute_step => @resource[:class].typus_options_for(:minute_step), 
+      custom_options = { :start_year => @resource.typus_options_for(:start_year), 
+                         :end_year => @resource.typus_options_for(:end_year), 
+                         :minute_step => @resource.typus_options_for(:minute_step), 
                          :disabled => attribute_disabled?(attribute), 
                          :include_blank => true }
 
@@ -365,7 +365,7 @@ module Admin
                             :options => custom_options, 
                             :html_options => {}, 
                             :form => options[:form], 
-                            :label_text => @resource[:class].human_attribute_name(attribute)
+                            :label_text => @resource.human_attribute_name(attribute)
 
     rescue ActionView::TemplateError => error
       message = <<-MSG
@@ -378,7 +378,7 @@ Get it from `http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{l
     end
 
     def attribute_disabled?(attribute)
-      accessible = @resource[:class].accessible_attributes
+      accessible = @resource.accessible_attributes
       return accessible.nil? ? false : !accessible.include?(attribute)
     end
 
