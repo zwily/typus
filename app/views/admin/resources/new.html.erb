@@ -5,7 +5,7 @@
 <%= display_link_to_previous %>
 
 <h2>
-  <%= _("New {{resource}}", :resource => @resource.human_name) %>
+  <%= _("New {{resource}}", :resource => @resource.model_name.human) %>
 </h2>
 
 <%= typus_block %>
@@ -16,7 +16,7 @@
               :selected => params[:selected], 
               :resource => params[:resource], 
               :resource_id => params[:resource_id] } 
-  button = _("Create {{resource}}", :resource => @resource.human_name)
+  button = _("Create {{resource}}", :resource => @resource.model_name.human)
 %>
 
 <%= render form_partial, :options => options, :button => button %>

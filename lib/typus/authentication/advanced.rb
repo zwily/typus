@@ -87,7 +87,7 @@ module Typus
 
         if message
           flash[:notice] = message
-          redirect_to request.referer || admin_dashboard_path
+          redirect_to set_path
         end
 
       end
@@ -111,7 +111,7 @@ module Typus
 
         unless @current_user.can?(params[:action], @resource)
           flash[:notice] = message
-          redirect_to request.referer || admin_dashboard_path
+          redirect_to set_path
         end
 
       end
@@ -126,7 +126,7 @@ module Typus
                              :current_user_role => @current_user.role.capitalize, 
                              :action => action, 
                              :controller => controller.humanize.downcase)
-          redirect_to request.referer || admin_dashboard_path
+          redirect_to set_path
         end
       end
 
@@ -147,7 +147,7 @@ module Typus
         condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(@current_user)
 
         if condition_typus_users || condition_typus_user_id
-           path = request.referer || admin_dashboard_path
+           path = set_path
            alert = _("You don't have permission to access this item.")
 
            redirect_to path, :alert => alert
@@ -203,7 +203,7 @@ module Typus
       def reload_locales
         if @resource.eql?(Typus.user_class)
           I18n.locale = @current_user.reload.preferences[:locale]
-          @resource.human_name = params[:controller].extract_human_name
+          # FIXME: @resource.human_name = params[:controller].extract_human_name
         end
       end
 

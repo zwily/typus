@@ -11,9 +11,8 @@ module AdminHelper
     resources_partials = Dir[Rails.root.join("app/views/#{resources_partials_path}/*")].map do |file|
                            File.basename(file, ".html.erb")
                          end
-    partial = "_#{partial}"
 
-    path = if partials.include?(partial) then partials_path
+    path = if partials.include?("_#{partial}") then partials_path
            elsif resources_partials.include?(partial) then resources_partials_path
            end
 

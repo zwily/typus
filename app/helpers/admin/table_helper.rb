@@ -114,7 +114,7 @@ module Admin
         # If we are editing content, we can relate and unrelate always!
         confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
                     :unrelate_model => model.model_name.human, 
-                    :unrelate_model_from => @resource.human_name)
+                    :unrelate_model_from => @resource.model_name.human)
       when 'show'
         # If we are showing content, we only can relate and unrelate if we are 
         # the owners of the owner record.
@@ -125,7 +125,7 @@ module Admin
                     end
         confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
                     :unrelate_model => model.model_name.human, 
-                    :unrelate_model_from => @resource.human_name)
+                    :unrelate_model_from => @resource.model_name.human)
       end
 
       message = %(<div class="sprite #{action}">#{action.titleize}</div>)

@@ -41,7 +41,7 @@ class Admin::ResourcesController < AdminController
     respond_to do |format|
       format.html do
         generate_html
-        select_template :index
+        select_template
       end
       @resource.typus_export_formats.each do |f|
         format.send(f) { send("generate_#{f}") }
@@ -51,18 +51,15 @@ class Admin::ResourcesController < AdminController
   end
 
   def new
-
     check_ownership_of_referal_item
 
     item_params = params.dup
-    %w( controller action resource resource_id back_to selected ).each do |param|
-      item_params.delete(param)
-    end
+    rejections = %w( controller action resource resource_id back_to selected )
+    item_params.delete_if { |k, v| rejections.include?(k) }
 
-    @item = @resource.new(item_params.symbolize_keys)
+    @item = @resource.new(item_params)
 
-    select_template :new
-
+    select_template
   end
 
   ##
@@ -81,29 +78,31 @@ class Admin::ResourcesController < AdminController
       @item.save
       redirect_on_success
     else
-      select_template :new
+      select_template(:new)
     end
 
   end
 
   def edit
+=begin
     item_params = params.dup
-    %w( action controller model model_id back_to id resource resource_id page ).each { |p| item_params.delete(p) }
+    rejections = %w( controller action model model_id back_to id resource resource_id page )
+    item_params.delete_if { |k, v| rejections.include?(k) }
 
     # We assign the params passed trough the url
     @item.attributes = item_params
 
     item_params.merge!(set_conditions)
     # @previous, @next = @item.previous_and_next(item_params)
-    select_template :edit
-
+=end
+    select_template
   end
 
   def show
     check_resource_ownership and return if @resource.typus_options_for(:only_user_items)
 
     respond_to do |format|
-      format.html { select_template :show }
+      format.html { select_template }
       # TODO: Responders for multiple file formats. For example PDF ...
       format.xml do
         fields = @resource.typus_fields_for(:xml).collect { |i| i.first }
@@ -118,29 +117,25 @@ class Admin::ResourcesController < AdminController
       reload_locales
       redirect_on_success
     else
-      select_template :edit
+      select_template(:edit)
     end
   end
 
   def destroy
     @item.destroy
-
-    path = request.referer || admin_dashboard_path
-    notice = _("{{model}} successfully removed.", :model => @resource.human_name)
-
-    redirect_to path, :notice => notice
+    notice = _("{{model}} successfully removed.", :model => @resource.model_name.human)
+    redirect_to set_path, :notice => notice
   end
 
   def toggle
     @item.toggle(params[:field])
     @item.save!
 
-    path = request.referer || admin_dashboard_path
     notice = _("{{model}} {{attribute}} changed.", 
-               :model => @resource.human_name, 
+               :model => @resource.model_name.human, 
                :attribute => params[:field].humanize.downcase)
 
-    redirect_to path, :notice => notice
+    redirect_to set_path, :notice => notice
   end
 
   ##
@@ -154,11 +149,8 @@ class Admin::ResourcesController < AdminController
   #
   def position
     @item.send(params[:go])
-
-    path = request.referer || admin_dashboard_path
     notice = _("Record moved {{to}}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
-
-    redirect_to path, :notice => notice
+    redirect_to set_path, :notice => notice
   end
 
   ##
@@ -173,12 +165,12 @@ class Admin::ResourcesController < AdminController
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
       flash[:notice] = _("{{model_a}} related to {{model_b}}.", 
                          :model_a => resource_class.model_name.human, 
-                         :model_b => @resource.human_name)
+                         :model_b => @resource.model_name.human)
     else
       # TODO: Show the reason why cannot be related showing model_a and model_b errors.
       flash[:alert] = _("{{model_a}} cannot be related to {{model_b}}.", 
                          :model_a => resource_class.model_name.human, 
-                         :model_b => @resource.human_name)
+                         :model_b => @resource.model_name.human)
     end
 
     redirect_to :back
@@ -194,25 +186,38 @@ class Admin::ResourcesController < AdminController
     resource_tableized = params[:resource].tableize
     resource = resource_class.find(params[:resource_id])
 
-    if @resource.
-       reflect_on_association(resource_class.table_name.singularize.to_sym).
-       try(:macro) == :has_one
-      attribute = resource_tableized.singularize
-      saved_succesfully = @item.update_attribute attribute, nil
-    else
+    # We consider that we are unrelating a has_many or has_and_belongs_to_many
+
+    macro = @resource.reflect_on_association(resource_class.table_name.to_sym).try(:macro)
+
+    case macro
+    # when :has_one
+    #   attribute = resource_tableized.singularize
+    #   saved_succesfully = @item.update_attribute attribute, nil
+    when :has_many
+      ##
+      # We have to verify we can unrelate. For example: A Category which 
+      # has many posts and Post validates_presence_of Category should not 
+      # be removed.
+      #
+      attribute = @resource.table_name.singularize
+      saved_succesfully = resource.update_attributes(attribute => nil)
+    when :has_and_belongs_to_many
       attribute = resource_tableized
       saved_succesfully = @item.send(attribute).delete(resource)
+    else
+      saved_succesfully = false
     end
 
     if saved_succesfully
       flash[:notice] = _("{{model_a}} unrelated from {{model_b}}.", 
                          :model_a => resource_class.model_name.human, 
-                         :model_b => @resource.human_name)
+                         :model_b => @resource.model_name.human)
     else
       # TODO: Show the reason why cannot be unrelated showing model_a and model_b errors.
-      flash[:alert] = _("{{model_a}} cannot be unrelated to {{model_b}}.", 
+      flash[:alert] = _("{{model_a}} cannot be unrelated from {{model_b}}.", 
                         :model_a => resource_class.model_name.human, 
-                        :model_b => @resource.human_name)
+                        :model_b => @resource.model_name.human)
     end
 
     redirect_to :back
@@ -223,13 +228,13 @@ class Admin::ResourcesController < AdminController
   # Remove file attachments.
   #
   def detach
-    attachment = @resource.human_attribute_name(params[:attachment])
-
     message = if @item.update_attributes(params[:attachment] => nil)
                 "{{attachment}} removed."
               else
                 "{{attachment}} can't be removed."
               end
+
+    attachment = @resource.human_attribute_name(params[:attachment])
     notice = _(message, :attachment => attachment)
 
     redirect_to :back, :notice => notice
@@ -251,7 +256,6 @@ private
   end
 
   def set_fields
-
     mapping = case params[:action]
               when 'index' then :list
               when 'new', 'edit', 'create', 'update' then :form
@@ -259,12 +263,15 @@ private
               end
 
     @fields = @resource.typus_fields_for(mapping)
-
   end
 
   def set_order
     params[:sort_order] ||= 'desc'
     @order = params[:order_by] ? "#{@resource.table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource.typus_order_by
+  end
+
+  def set_path
+    request.referer || admin_dashboard_path
   end
 
   def redirect_on_success
@@ -274,7 +281,7 @@ private
     when "create"
       path = { :action => action }
       path.merge!(:id => @item.id) unless action.eql?("index")
-      notice = _("{{model}} successfully created.", :model => @resource.human_name)
+      notice = _("{{model}} successfully created.", :model => @resource.model_name.human)
     when "update"
       path = case action
              when "index"
@@ -284,7 +291,7 @@ private
                  :id => @item.id, 
                  :back_to => params[:back_to] }
              end
-      notice = _("{{model}} successfully updated.", :model => @resource.human_name)
+      notice = _("{{model}} successfully updated.", :model => @resource.model_name.human)
     end
 
     redirect_to path, :notice => notice
@@ -315,8 +322,7 @@ private
       @item.send(params[:resource]) << resource
     when :has_many
       @item.save
-      message = _("{{model}} successfully created.", 
-                  :model => @resource.human_name)
+      message = _("{{model}} successfully created.", :model => @resource.model_name.human)
       path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
     when :polymorphic
       resource.send(@item.class.to_resource).create(params[@object_name])
@@ -330,7 +336,7 @@ private
 
   end
 
-  def select_template(template, resource = @resource.to_resource)
+  def select_template(template = params[:action], resource = @resource.to_resource)
     folder = (File.exist?("app/views/admin/#{resource}/#{template}.html.erb")) ? resource : 'resources'
     render "admin/#{folder}/#{template}"
   end

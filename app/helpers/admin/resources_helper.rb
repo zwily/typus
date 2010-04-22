@@ -12,7 +12,7 @@ module Admin
       return unless params[:back_to]
 
       options = {}
-      options[:resource_from] = @resource.human_name
+      options[:resource_from] = @resource.model_name.human
       options[:resource_to] = params[:resource].classify.constantize.human_name if params[:resource]
 
       editing = %w( edit update ).include?(params[:action])
@@ -30,7 +30,7 @@ module Admin
                   :resource_from => options[:resource_from], 
                   :resource_to => options[:resource_to])
 
-      render File.join(path, display_link_to_previous), :message => message
+      render File.join(path, "display_link_to_previous"), :message => message
     end
 
     def remove_filter_link(filter = request.env['QUERY_STRING'])

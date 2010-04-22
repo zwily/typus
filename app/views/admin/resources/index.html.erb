@@ -7,7 +7,7 @@
 <% end %>
 
 <h2>
-  <%= _("Edit {{resources}}", :resources => @resource.human_name.pluralize) %>
+  <%= _("Edit {{resources}}", :resources => @resource.model_name.human.pluralize) %>
   <small><%= remove_filter_link %></small>
 </h2>
 
@@ -21,6 +21,6 @@
 <% else %>
   <div id="flash" class="notice">
     <% message = @resource.count.zero? ? "There are no {{records}}." : "There are no {{records}} under this filter." %>
-    <p><%= _(message, :records => @resource.human_name.pluralize.downcase) %></p>
+    <p><%= _(message, :records => @resource.model_name.human.pluralize.downcase) %></p>
   </div>
 <% end %>

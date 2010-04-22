@@ -7,7 +7,7 @@
 <% end %>
 
 <h2>
-  <%= _("Show {{resource}}", :resource => @resource.human_name) %>
+  <%= _("Show {{resource}}", :resource => @resource.model_name.human) %>
   <small><%= link_to_edit %></small>
 </h2>
 
