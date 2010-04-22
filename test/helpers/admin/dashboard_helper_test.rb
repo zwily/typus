@@ -12,15 +12,10 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 =begin
 
   # FIXME: Pending to verify the applications included. Use the keys.
-
   def test_applications
-
-    # return
-
     @current_user = typus_users(:admin)
 
     output = applications
-
     partial = "admin/helpers/dashboard/applications"
     options = { :applications => { [ "Site", [ "Asset", "Page" ] ] => nil, 
                                    [ "System", [ "Delayed::Task" ] ] => nil, 
@@ -29,13 +24,11 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 
     assert_equal partial, output.first
     assert_equal options, output.last
-
   end
 
 =end
 
   def test_resources
-
     @current_user = typus_users(:admin)
 
     output = resources
@@ -44,7 +37,6 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 
     assert_equal partial, output.first
     assert_equal options, output.last
-
   end
 
 end

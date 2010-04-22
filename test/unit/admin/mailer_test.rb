@@ -11,6 +11,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
 
 =begin
 
+  # FIXME: 
   def test_should_verify_email_from_is_defined_by_typus_options
     assert_equal Typus::Configuration.email, @response.from
   end
@@ -28,6 +29,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
 
 =begin
 
+  # FIXME: 
   def test_should_verify_email_contains_reset_password_link_with_token
     expected = "http://test.host/admin/reset_password?token=1A2B3C4D5E6F"
     assert_match expected, @response.body

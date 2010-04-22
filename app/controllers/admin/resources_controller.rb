@@ -85,6 +85,7 @@ class Admin::ResourcesController < AdminController
 
   def edit
 =begin
+    # TODO: Remove this code or take it back.
     item_params = params.dup
     rejections = %w( controller action model model_id back_to id resource resource_id page )
     item_params.delete_if { |k, v| rejections.include?(k) }
@@ -238,7 +239,7 @@ class Admin::ResourcesController < AdminController
     redirect_to set_path, :notice => notice
   end
 
-private
+  private
 
   def get_model
     @resource = params[:controller].extract_class
