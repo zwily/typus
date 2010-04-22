@@ -25,7 +25,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     # FIXME
     return
 
-    @resource = { :class => Post }
+    @resource = Post
 
     params = { :controller => 'admin/posts', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
@@ -78,7 +78,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     # FIXME
     return
 
-    @resource = { :class => TypusUser, :self => 'typus_users' }
+    @resource = TypusUser
 
     params = { :controller => 'admin/typus_users', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
@@ -102,7 +102,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
   def test_filters
     # FIXME
     return
-    @resource = { :class => TypusUser, :self => 'typus_users' }
+    @resource = TypusUser
 
     @resource.expects(:typus_filters).returns(Array.new)
 
@@ -126,7 +126,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     # FIXME
     return
 
-    @resource = { :class => TypusUser, :self => 'typus_users' }
+    @resource = TypusUser
     filter = 'created_at'
 
     params = { :controller => 'admin/typus_users', :action => 'index' }
@@ -169,7 +169,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     # FIXME
     return
 
-    @resource = { :class => TypusUser, :self => 'typus_users' }
+    @resource = TypusUser
     filter = 'status'
 
     params = { :controller => 'admin/typus_users', :action => 'index' }
@@ -209,7 +209,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   def test_string_filter_when_values_are_strings
 
-    @resource = { :class => TypusUser, :self => 'typus_users' }
+    @resource = TypusUser
     filter = 'role'
 
     params = { :controller => 'admin/typus_users', :action => 'index' }
@@ -277,7 +277,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   def test_string_filter_when_values_are_arrays_of_strings
 
-    @resource = { :class => TypusUser, :self => 'typus_users' }
+    @resource = TypusUser
     filter = 'role'
 
     params = { :controller => 'admin/typus_users', :action => 'index' }
@@ -326,7 +326,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   def test_string_filter_when_empty_values
 
-    @resource = { :class => TypusUser }
+    @resource = TypusUser
     filter = 'role'
 
     request = 'role=admin&page=1'

@@ -12,7 +12,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
     @current_user = mock()
     @current_user.stubs(:can?).with('create', Post).returns(false)
-    @resource = { :class => Comment }
+    @resource = Comment
 
     expected = <<-HTML
 <li><label for="comment_post">Post
@@ -37,7 +37,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
     @current_user = mock()
     @current_user.stubs(:can?).with('create', Comment).returns(true)
-    @resource = { :class => Post }
+    @resource = Post
 
     expected = <<-HTML
 <li><label for="post_favorite_comment">Favorite comment
@@ -59,7 +59,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
     self.stubs(:expand_tree_into_select_field).returns('expand_tree_into_select_field')
 
-    @resource = { :class => Page }
+    @resource = Page
 
     expected = <<-HTML
 <li><label for="page_parent">Parent</label>
@@ -75,11 +75,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   end
 
   def test_attribute_disabled
-
-    # FIXME
-    return
-
-    @resource = { :class => Post }
+    @resource = Post
 
     assert !attribute_disabled?('test')
 

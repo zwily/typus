@@ -33,11 +33,10 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+=begin
+
+  # FIXME: RuntimeError: no such file to load -- fastercsv
   def test_should_generate_csv
-
-    return
-
-    # FIXME
 
     assert @typus_user.is_root?
 
@@ -60,5 +59,7 @@ Owned by editor;unpublished
     assert_equal(expected, output.string)
 
   end
+
+=end
 
 end

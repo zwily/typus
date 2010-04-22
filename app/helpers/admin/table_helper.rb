@@ -154,7 +154,7 @@ module Admin
     end
 
     def table_has_and_belongs_to_many_field(attribute, item)
-      content = item.send(attribute).map { |i| i.to_label }.join('<br />')
+      content = item.send(attribute).map { |i| i.to_label }.join(", ")
       return content_tag(:td, content)
     end
 

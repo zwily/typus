@@ -12,29 +12,26 @@ class Admin::StatusControllerTest < ActionController::TestCase
     assert_template 'index'
   end
 
-=begin
-  # FIXME
   def test_should_verify_status_is_not_available_if_user_not_logged
     @request.session[:typus_user_id] = nil
     get :index
     assert_response :redirect
     assert_redirected_to new_admin_session_path(:back_to => '/admin/status')
   end
-=end
 
 =begin
-  # FIXME
+
+  # FIXME: Expected response to be a redirect to <http://test.host/admin/dashboard> but was a redirect to <http://test.host/>.
   def test_should_verify_admin_cannot_go_to_show
     get :show
     assert_response :redirect
     assert_redirected_to admin_dashboard_path
     assert_equal "Admin can't go to show on status.", flash[:notice]
   end
+
 =end
 
   def test_should_verify_editor_can_not_go_to_index
-    # FIXME
-    return
     @request.session[:typus_user_id] = typus_users(:editor).id
     get :index
     assert_response :redirect

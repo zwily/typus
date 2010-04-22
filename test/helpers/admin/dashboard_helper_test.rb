@@ -9,36 +9,37 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 
   def render(*args); args; end
 
+=begin
+
+  # FIXME: Pending to verify the applications included. Use the keys.
+
   def test_applications
 
-    # FIXME
-    return
+    # return
 
     @current_user = typus_users(:admin)
 
     output = applications
 
-    partial = "admin/helpers/applications"
-    options = { :applications => { [ "Blog", [ "Comment", "Post" ] ]=> nil, 
-                                   [ "Site", [ "Asset", "Page" ] ] => nil, 
+    partial = "admin/helpers/dashboard/applications"
+    options = { :applications => { [ "Site", [ "Asset", "Page" ] ] => nil, 
                                    [ "System", [ "Delayed::Task" ] ] => nil, 
+                                   [ "Blog", [ "Comment", "Post" ] ] => nil, 
                                    [ "Typus", [ "TypusUser" ] ] => nil } }
 
     assert_equal partial, output.first
-    # FIXME: Pending to verify the applications included. Use the keys.
-    # assert_equal options, output.last
+    assert_equal options, output.last
 
   end
 
-  def test_resources
+=end
 
-    # FIXME
-    return
+  def test_resources
 
     @current_user = typus_users(:admin)
 
     output = resources
-    partial = "admin/helpers/resources"
+    partial = "admin/helpers/dashboard/resources"
     options = { :resources => ["Git", "Status", "WatchDog"] }
 
     assert_equal partial, output.first

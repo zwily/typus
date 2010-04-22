@@ -15,32 +15,31 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     default_url_options[:host] = "test.host"
   end
 
+=begin
+  # FIXME
   def test_build_table
-
-    # FIXME
-    return
 
     @current_user = typus_users(:admin)
 
-    params = { :controller => "admin/typus_users", :action => "index" }
+    params = { :controller => 'admin/typus_users', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
 
     fields = TypusUser.typus_fields_for(:list)
-    items = TypusUser.all
+    items = TypusUser.find(:all)
 
-    output = build_table(TypusUser, fields, items)
-    expected = <<-HTML
-<tr>
-<th><a href="http://test.host/admin/typus_users?order_by=email">Email </a></th>
-<th><a href="http://test.host/admin/typus_users?order_by=role">Role </a></th>
-<th><a href="http://test.host/admin/typus_users?order_by=status">Status </a></th>
-<th>&nbsp;</th>
-</tr>
-    HTML
+    expects(:render).once.with('admin/helpers/table_header', 
+      { :headers => [
+        '<a href="http://test.host/admin/typus_users?order_by=email">Email </a>', 
+        '<a href="http://test.host/admin/typus_users?order_by=role">Role </a>', 
+        '<a href="http://test.host/admin/typus_users?order_by=status">Status </a>', 
+        '&nbsp;', 
+        '&nbsp;'
+    ]})
 
-    assert_equal expected, output
+    build_table(TypusUser, fields, items)
 
   end
+=end
 
   def test_table_header
 
@@ -161,37 +160,30 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   end
 
   def test_table_has_and_belongs_to_many_field
-
-    # FIXME
-    return
-
-    post = Post.find(1)
+    post = posts(:published)
 
     output = table_has_and_belongs_to_many_field("comments", post)
-    expected = %(<td>John<br />Me<br />Me</td>)
+    expected = %(<td>John, Me, Me</td>)
 
     assert_equal expected.strip, output
-
   end
 
   def test_table_string_field
-
     post = posts(:published)
+
     output = table_string_field(:title, post, :created_at)
     expected = %(<td class="title">#{post.title}</td>)
 
     assert_equal expected.strip, output
-
   end
 
   def test_table_string_field_with_link
-
     post = posts(:published)
+
     output = table_string_field(:title, post, :title)
     expected = %(<td class="title">#{post.title}</td>)
 
     assert_equal expected.strip, output
-
   end
 
   def test_table_tree_field_when_displays_a_parent
@@ -213,7 +205,6 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   end
 
   def test_table_datetime_field
-
     post = posts(:published)
     Time::DATE_FORMATS[:post_short] = "%m/%y"
 
@@ -221,11 +212,9 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     expected = %(<td>#{post.created_at.strftime("%m/%y")}</td>)
 
     assert_equal expected.strip, output
-
   end
 
   def test_table_datetime_field_with_link
-
     post = posts(:published)
     Time::DATE_FORMATS[:post_short] = "%m/%y"
 
@@ -233,13 +222,12 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     expected = %(<td>#{post.created_at.strftime("%m/%y")}</td>)
 
     assert_equal expected.strip, output
-
   end
 
-  def test_table_boolean_field
+=begin
 
-    # FIXME
-    return
+  # FIXME: NameError: undefined local variable or method `controller' for 
+  def test_table_boolean_field
 
     post = typus_users(:admin)
     output = table_boolean_field("status", post)
@@ -258,5 +246,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected.strip, output
 
   end
+
+=end
 
 end

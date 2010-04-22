@@ -17,9 +17,8 @@ class AdminHelperTest < ActiveSupport::TestCase
 
   def test_header_with_root_path
 
-    return
-
     # FIXME
+    return
 
     # ActionView::Helpers::UrlHelper does not support strings, which are returned by named routes
     # link root_path

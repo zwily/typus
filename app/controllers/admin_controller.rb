@@ -35,4 +35,8 @@ class AdminController < ActionController::Base
     @page_title << _(params[:action].humanize) unless params[:action].eql?("index")
   end
 
+  def set_path
+    @back_to || request.referer || admin_dashboard_path
+  end
+
 end

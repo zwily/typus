@@ -115,6 +115,8 @@ fr:
   "{{model_a}} successfully assigned to {{model_b}}": "{{model_a}} associé à {{model_b}}."
   "{{model_a}} unrelated from {{model_b}}": "{{model_a}} dissocié de {{model_b}}."
   "{{current_user_role}} can't display items": "Un utilisateur de rôle {{current_user_role}} ne peut pas afficher ces éléments."
+  "{{model_a}} cannot be related to {{model_b}}": 
+  "{{model_a}} cannot be unrelated from {{model_b}}": 
   "{{current_user_role}} can't delete this item": "{{current_user_role}} ne peut supprimer cette entrée"
   "{{current_user_role}} can't go to {{action}} on {{controller}}":  "{{current_user_role}} ne peut effectuer {{action}} sur {{controller}}"
   "{{current_user_role}} can't perform action. ({{action}})": "{{current_user_role}} ne peut effectuer l'action ({{action}})"

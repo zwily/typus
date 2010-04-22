@@ -147,10 +147,8 @@ module Typus
         condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(@current_user)
 
         if condition_typus_users || condition_typus_user_id
-           path = set_path
            alert = _("You don't have permission to access this item.")
-
-           redirect_to path, :alert => alert
+           redirect_to set_path, :alert => alert
         end
 
       end
@@ -203,7 +201,6 @@ module Typus
       def reload_locales
         if @resource.eql?(Typus.user_class)
           I18n.locale = @current_user.reload.preferences[:locale]
-          # FIXME: @resource.human_name = params[:controller].extract_human_name
         end
       end
 

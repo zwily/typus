@@ -10,21 +10,14 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
   def render(*args); args; end
 
   def test_display_link_to_previous
-
-    # FIXME
-    return
-
-    @resource = { :class => Post }
+    @resource = Post
     params = { :action => "edit", :back_to => "/back_to_param" }
     self.expects(:params).at_least_once.returns(params)
 
-    output = display_link_to_previous
-
-    partial = "admin/helpers/display_link_to_previous"
+    partial = "admin/helpers/resources/display_link_to_previous"
     options = { :message => "You're updating a Post." }
 
-    assert_equal [ partial, options ], output
-
+    assert_equal [ partial, options ], display_link_to_previous
   end
 
   def test_remove_filter_link

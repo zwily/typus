@@ -2,12 +2,6 @@ require "test/test_helper"
 
 class RoutesTest < ActiveSupport::TestCase
 
-=begin
-  # FIXME
-  include ActionController::TestCase::Assertions
-  assert_routing "admin/action", :controller => "admin/account", :action => action
-=end
-
   def setup
     @routes = Rails.application.routes.routes.map(&:name)
   end

@@ -19,7 +19,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-    assert_equal "Comment related to Post.", flash[:notice]
+    assert_equal "Comment related to Post", flash[:notice]
 
     assert_difference('post_.comments.count', -1) do
       post :unrelate, { :id => post_.id, 
@@ -28,7 +28,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-    assert_equal "Comment unrelated from Post.", flash[:notice]
+    assert_equal "Comment unrelated from Post", flash[:notice]
 
   end
 
@@ -49,7 +49,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-    assert_equal "Category related to Post.", flash[:notice]
+    assert_equal "Category related to Post", flash[:notice]
 
     assert_difference('category.posts.count', -1) do
       post :unrelate, { :id => post_.id, 
@@ -58,7 +58,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-    assert_equal "Category unrelated from Post.", flash[:notice]
+    assert_equal "Category unrelated from Post", flash[:notice]
 
   end
 
@@ -66,9 +66,11 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # Post => has_many :assets, :as => resource (Polimorphic)
   ##
 
+=begin
+
+  # FIXME: ActiveRecord::UnknownAttributeError: unknown attribute: post
   def test_should_relate_asset_with_post_and_then_unrelate
-    # FIXME
-    return
+
 
     post_ = posts(:published)
 
@@ -84,5 +86,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_equal "Asset unrelated from Post.", flash[:notice]
 
   end
+
+=end
 
 end

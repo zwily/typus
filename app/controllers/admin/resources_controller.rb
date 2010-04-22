@@ -163,12 +163,11 @@ class Admin::ResourcesController < AdminController
     resource_tableized = params[:related][:model].tableize
 
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
-      flash[:notice] = _("{{model_a}} related to {{model_b}}.", 
+      flash[:notice] = _("{{model_a}} related to {{model_b}}", 
                          :model_a => resource_class.model_name.human, 
                          :model_b => @resource.model_name.human)
     else
-      # TODO: Show the reason why cannot be related showing model_a and model_b errors.
-      flash[:alert] = _("{{model_a}} cannot be related to {{model_b}}.", 
+      flash[:alert] = _("{{model_a}} cannot be related to {{model_b}}", 
                          :model_a => resource_class.model_name.human, 
                          :model_b => @resource.model_name.human)
     end
@@ -210,12 +209,11 @@ class Admin::ResourcesController < AdminController
     end
 
     if saved_succesfully
-      flash[:notice] = _("{{model_a}} unrelated from {{model_b}}.", 
+      flash[:notice] = _("{{model_a}} unrelated from {{model_b}}", 
                          :model_a => resource_class.model_name.human, 
                          :model_b => @resource.model_name.human)
     else
-      # TODO: Show the reason why cannot be unrelated showing model_a and model_b errors.
-      flash[:alert] = _("{{model_a}} cannot be unrelated from {{model_b}}.", 
+      flash[:alert] = _("{{model_a}} cannot be unrelated from {{model_b}}", 
                         :model_a => resource_class.model_name.human, 
                         :model_b => @resource.model_name.human)
     end
@@ -268,10 +266,6 @@ private
   def set_order
     params[:sort_order] ||= 'desc'
     @order = params[:order_by] ? "#{@resource.table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource.typus_order_by
-  end
-
-  def set_path
-    @back_to || request.referer || admin_dashboard_path
   end
 
   def redirect_on_success
