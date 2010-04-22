@@ -11,7 +11,7 @@ class ResourceTest < ActiveSupport::TestCase
     assert_equal "nil", Typus::Resource.nil
     assert_equal false, Typus::Resource.on_header
     assert_equal false, Typus::Resource.only_user_items
-    assert_equal 20, Typus::Resource.per_page
+    assert_equal 15, Typus::Resource.per_page
     assert_equal 5, Typus::Resource.sidebar_selector
     assert_nil Typus::Resource.start_year
   end
