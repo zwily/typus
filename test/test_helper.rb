@@ -20,8 +20,7 @@ connection = case ENV["DB"]
              end
 
 ActiveRecord::Base.establish_connection(connection)
-
-require File.dirname(__FILE__) + "/schema"
+load File.join(File.dirname(__FILE__), "schema.rb")
 
 # To test the plugin without touching the application we set our 
 # load_paths and view_paths.
