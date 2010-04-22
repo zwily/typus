@@ -22,7 +22,6 @@ connection = case ENV["DB"]
              end
 
 ActiveRecord::Base.establish_connection(connection)
-# ActiveRecord::Base.logger = Logger.new(File.dirname(__FILE__) + "/debug.log")
 
 require File.dirname(__FILE__) + "/schema"
 
