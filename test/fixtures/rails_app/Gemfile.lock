@@ -4,6 +4,10 @@ dependencies:
     group: 
     - :default
     version: = 3.0.0.beta2
+  mysql: 
+    group: 
+    - :default
+    version: ">= 0"
   sqlite3-ruby: 
     group: 
     - :default
@@ -71,6 +75,8 @@ specs:
     version: 0.9.19
 - mocha: 
     version: 0.9.8
+- mysql: 
+    version: 2.8.1
 - thor: 
     version: 0.13.4
 - railties: 
@@ -81,7 +87,7 @@ specs:
     version: 1.2.2
 - sqlite3-ruby: 
     version: 1.2.5
-hash: fb2a89db3032d17a90e1811b31a90ff6b11c85cf
+hash: 87f97fab6ca4ce94ccfbf9147843d48fcb9bcd65
 sources: 
 - Rubygems: 
     uri: http://rubygems.org
