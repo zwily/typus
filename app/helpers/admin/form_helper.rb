@@ -2,13 +2,6 @@ module Admin
 
   module FormHelper
 
-    def form_partial
-      resource = @resource.to_resource
-      template_file = Rails.root.join("app/views/admin/#{resource}/_form.html.erb")
-      partial = File.exists?(template_file) ? resource : "resources"
-      return "admin/#{partial}/form"
-    end
-
     def build_form(fields, form)
 
       options = { :form => form }
@@ -35,6 +28,13 @@ module Admin
 
       end
 
+    end
+
+    def form_partial
+      resource = @resource.to_resource
+      template_file = Rails.root.join("app/views/admin/#{resource}/_form.html.erb")
+      partial = File.exists?(template_file) ? resource : "resources"
+      return "admin/#{partial}/form"
     end
 
     # OPTIMIZE: Remove returning(String.new) and return directly the html.
