@@ -214,10 +214,7 @@ module Admin
       end
     end
 
-    # OPTIMIZE: Remove returning(String.new) and return directly the html.
     def typus_belongs_to_field(attribute, options)
-
-      form = options[:form]
 
       ##
       # We only can pass parameters to 'new' and 'edit', so this hack makes
