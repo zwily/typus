@@ -27,7 +27,6 @@ h1 { font-size: 2em; font-weight: bold; margin: 0.25em 0; }
 a, 
 a:visited,
 a:link { color: #000; font-weight: normal; text-decoration: none; }
-
 a:hover { color: #333; text-decoration: underline; }
 
 /* @end */
@@ -74,9 +73,6 @@ a:hover { color: #333; text-decoration: underline; }
 #content li { list-style: square; line-height: 20px; }
 #content ul li { list-style: square; }
 
-#content p a { text-decoration: underline; }
-#content p a:hover { color: #408BB6; }
-
 #content h2+table.typus { margin: 0; }
 
 #content pre {
@@ -98,64 +94,6 @@ a:hover { color: #333; text-decoration: underline; }
 
 /* @end */
 
-/* @group Sidebar */
-
-#sidebar {
-  float: left;
-  margin-left: 20px;
-  padding-top: 0.5em;
-  width: 220px;
-}
-
-#sidebar h2 { font-size: 1.5em; font-weight: bold; }
-
-/* #sidebar p { margin: 1em 0; }
-#sidebar p a { text-decoration: underline; } 
-#sidebar label { font-size: 15px; }
-#sidebar form { margin-bottom: 1.25em; } */
-/* 
-#sidebar ul { margin: 1em 0; }
-#sidebar code { color: green; font-size: 1.25em; }
-#sidebar small { font-size: 0.85em; }
-
-*/
-
-/*
-#sidebar a:hover {
-  border: 1px solid #999;
-}
-*/
-
-/*
-
-#sidebar a, 
-#sidebar a:visited,
-#sidebar a:link {
-  color: #000; font-weight: normal;
-  -moz-border-radius: 10px;
-  -webkit-border-radius: 10px;
-  border: 1px solid #bcd9d7;
-  background-color: #d6ecea;
-  padding: 1px 7px;
-  text-decoration: none;
-}
-*/
-
-/*
-
-#sidebar a.on {
-  color: #333;
-  font-weight: bold;
-  line-height: 13px;
-  display: -moz-inline-box;
-  display: inline-block;
-}
-*/
-
-/* #sidebar a:hover { background-color: #bcd9d7; color: #333; } */
-
-/* @end */
-
 /* @group Footer */
 
 #footer_wrapper { padding: 0.5em 0; position: relative; }
@@ -165,6 +103,19 @@ a:hover { color: #333; text-decoration: underline; }
 #footer a { color: #000; font-weight: normal; }
 #footer a:hover { text-decoration: underline; }
 #footer p { font-size: 0.9em; line-height: 1.8em; }
+
+/* @end */
+
+/* @group Sidebar */
+
+#sidebar {
+  float: left;
+  margin-left: 20px;
+  padding-top: 0.75em;
+  width: 220px;
+}
+
+#sidebar h2 { font-size: 1.5em; font-weight: bold; }
 
 /* @end */
 
@@ -208,7 +159,7 @@ fieldset.buttons { }
 
 /* @group Content Tables */
 
-#content table.typus {
+#content table {
   -moz-border-radius-topleft: 3px;
   -moz-border-radius-topright: 3px;
   -webkit-border-top-left-radius: 3px;
@@ -221,21 +172,15 @@ fieldset.buttons { }
   width: 100%;
 }
 
-#content table.typus th { background: #000; color: #FFF; padding: 6px; }
-#content table.typus th a { color: #FFF!important; }
-#content table.typus td { border-bottom: 1px solid #D3D3D3!important; }
-#content table.typus td.right { text-align: right; }
-#content table.typus tr.even { background: #FFF!important; }
-#content table.typus tr.even:hover,
-#content table.typus tr.odd:hover { background: #E4E4E4!important; }
-#content table.typus tr.odd { background: #F3F3F3; }
-#content table.typus td { border: none; padding: 5px; vertical-align: top; }
-
-/* @end */
-
-/* @group Date search boxes */
-
-input.date_input { border: 1px solid #999; margin-bottom: 1em;}
+#content table th { background: #000; color: #FFF; padding: 6px; }
+#content table th a { color: #FFF!important; }
+#content table td { border-bottom: 1px solid #D3D3D3!important; }
+#content table td.right { text-align: right; }
+#content table tr.even { background: #FFF!important; }
+#content table tr.even:hover,
+#content table tr.odd:hover { background: #E4E4E4!important; }
+#content table tr.odd { background: #F3F3F3; }
+#content table td { border: none; padding: 5px; vertical-align: top; }
 
 /* @end */
 
@@ -281,7 +226,7 @@ body#account {
 
 /* @end */
 
-/* @group Success, notice and error boxes */
+/* @group Rails errors and flashes */
 
 #errorExplanation, 
 .alert, 
@@ -296,29 +241,13 @@ body#account {
 #errorExplanation ul, 
 #errorExplanation h3, 
 .alert p { color: #CD0A0A!important; }
-.notice p { color: #000; }
 
 #errorExplanation, 
 .alert { background: #FEF8F6; border: 1px solid #CD0A0A; }
 .notice { background: #FCFAF3; border: 1px solid #FCEFA1; }
 
-/* @end */
-
-/* @group Rails Errors */
-
 .fieldWithErrors label { color: #CD0A0A;}
 .fieldWithErrors input { background: #FEF8F6; }
-
-/* 
-#errorExplanation {
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  background: #FBE3E4;
-  border: 2px solid #FBC2C4;
-  color: #8a1f11;
-  padding: 0.5em 1em;
-}
-*/
 
 #errorExplanation ul { margin: 1em 1.5em; }
 #errorExplanation ul li { list-style: square!important; margin: 0!important; }
@@ -329,7 +258,7 @@ body#account {
 
 .clear { clear: both; }
 .tip { font-size: 0.9em; }
-.box_relationships { border-top: 1px dotted #D3D3D3; padding: 1.5em 0; }
+.box_relationships { margin-top: 2.5em; }
 
 /* @end */
 
@@ -362,12 +291,6 @@ body#account {
   padding: 5px 10px;
 }
 
-.resource h2:hover { border: 0!important; color: #000; text-decoration: underline; }
-.resource h2 a { border: 0; }
-.resource h2 a:hover { text-decoration: none; }
-.resource ul { margin: 0; }
-.resource ul.hidden { display: none; }
-
 .resource ul li {
   background: #FFF;
   border-top: 1px solid #D3D3D3;
@@ -377,18 +300,18 @@ body#account {
 
 /* @end */
 
-/* @begin Filters */
+/* @group Filters */
 
-div#filters { height: 2em; margin: 0 0 1em 0; }
-div#filters ul { margin: 0; }
-div#filters ul li { float: left; list-style: none; margin: 0 1em 0 0; }
+#filters { height: 2em; margin: 0 0 1em 0; }
+#filters ul { margin: 0; }
+#filters ul li { float: left; list-style: none; margin: 0 1em 0 0; }
 
 /* @end */
 
-/* @begin Search */
+/* @group Search */
 
-div#search { }
-div#search h2 { display: none; }
+#search { }
+#search h2 { display: none; }
 input#search { border: 1px solid #999; font-size: 1.2em; padding: 3px; }
 
 /* @end */
