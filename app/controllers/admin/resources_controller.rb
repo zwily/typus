@@ -77,17 +77,9 @@ class Admin::ResourcesController < AdminController
     set_attributes_on_create
 
     if @item.valid?
-
       create_with_back_to and return if params[:back_to]
       @item.save
-
-      action = @resource[:class].typus_options_for(:action_after_save)
-      path = { :action => action }
-      path.merge!(:id => @item.id) unless action.eql?("index")
-      notice = _("{{model}} successfully created.", :model => @resource[:human_name])
-
-      redirect_to path, :notice => notice
-
+      redirect_on_success
     else
       select_template :new
     end
@@ -132,18 +124,7 @@ class Admin::ResourcesController < AdminController
 
       set_attributes_on_update
       reload_locales
-
-      action = @resource[:class].typus_options_for(:action_after_save)
-      path = case action
-             when "index"
-               params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => action }
-             else
-               { :action => action, 
-                 :id => @item.id, 
-                 :back_to => params[:back_to] }
-             end
-      notice = _("{{model}} successfully updated.", :model => @resource[:human_name])
-      redirect_to path, :notice => notice
+      redirect_on_success
 
     else
 
@@ -299,6 +280,29 @@ private
   def set_order
     params[:sort_order] ||= 'desc'
     @order = params[:order_by] ? "#{@resource[:class].table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource[:class].typus_order_by
+  end
+
+  def redirect_on_success
+    action = @resource[:class].typus_options_for(:action_after_save)
+
+    case params[:action]
+    when "create"
+      path = { :action => action }
+      path.merge!(:id => @item.id) unless action.eql?("index")
+      notice = _("{{model}} successfully created.", :model => @resource[:human_name])
+    when "update"
+      path = case action
+             when "index"
+               params[:back_to] ? "#{params[:back_to]}##{@resource[:self]}" : { :action => action }
+             else
+               { :action => action, 
+                 :id => @item.id, 
+                 :back_to => params[:back_to] }
+             end
+      notice = _("{{model}} successfully updated.", :model => @resource[:human_name])
+    end
+
+    redirect_to path, :notice => notice
   end
 
   ##
