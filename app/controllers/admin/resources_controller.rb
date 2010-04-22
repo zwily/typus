@@ -173,7 +173,7 @@ class Admin::ResourcesController < AdminController
                          :model_b => @resource.model_name.human)
     end
 
-    redirect_to :back
+    redirect_to set_path
 
   end
 
@@ -220,7 +220,7 @@ class Admin::ResourcesController < AdminController
                         :model_b => @resource.model_name.human)
     end
 
-    redirect_to :back
+    redirect_to set_path
 
   end
 
@@ -237,7 +237,7 @@ class Admin::ResourcesController < AdminController
     attachment = @resource.human_attribute_name(params[:attachment])
     notice = _(message, :attachment => attachment)
 
-    redirect_to :back, :notice => notice
+    redirect_to set_path, :notice => notice
   end
 
 private
@@ -271,7 +271,7 @@ private
   end
 
   def set_path
-    request.referer || admin_dashboard_path
+    @back_to || request.referer || admin_dashboard_path
   end
 
   def redirect_on_success

@@ -42,7 +42,7 @@ module Typus
 
     # Defines per_page
     mattr_accessor :per_page
-    @@per_page = 15
+    @@per_page = 5
 
     # Defines sidebar_selector
     mattr_accessor :sidebar_selector

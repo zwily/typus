@@ -2,175 +2,112 @@ module Admin
 
   module RelationshipsHelper
 
-    # OPTIMIZE: Move html code to partial.
+    def setup_relationship(field)
+      @field = field
+      @model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.constantize
+      @model_to_relate_as_resource = @model_to_relate.to_resource
+      @reflection = @resource.reflect_on_association(field.to_sym)
+      @association = @reflection.macro
+    end
+
     def typus_form_has_many(field)
-      returning(String.new) do |html|
 
-        model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.constantize
-        model_to_relate_as_resource = model_to_relate.to_resource
+      setup_relationship(field)
 
-        reflection = @resource.reflect_on_association(field.to_sym)
-        association = reflection.macro
-        foreign_key = reflection.through_reflection ? reflection.primary_key_name.pluralize : reflection.primary_key_name
+      foreign_key = @reflection.through_reflection ? @reflection.primary_key_name.pluralize : @reflection.primary_key_name
 
-        link_options = { :controller => "admin/#{model_to_relate_as_resource.pluralize}", 
-                         :action => 'new', 
-                         :back_to => "#{@back_to}##{field}", 
-                         :resource => @resource.to_resource.singularize, 
-                         :resource_id => @item.id, 
-                         foreign_key => @item.id }
+      @items_to_relate = @model_to_relate.send("find_all_by_#{foreign_key}", nil)
+      if set_condition && !@items_to_relate.empty?
+        form = build_relate_form
+      end
 
-        condition = if @resource.typus_user_id? && @current_user.is_not_root?
-                      @item.owned_by?(@current_user)
-                    else
-                      true
-                    end
+      build_pagination
 
-        if condition && @current_user.can?('create', model_to_relate)
-          add_new = <<-HTML
-    <small>#{link_to _("Add new"), link_options}</small>
-          HTML
+      options = { foreign_key => @item.id }
+
+      render "admin/templates/has_n", 
+             :model_to_relate => @model_to_relate, 
+             :model_to_relate_as_resource => @model_to_relate_as_resource, 
+             :foreign_key => foreign_key, 
+             :add_new => raw(build_add_new(options)), 
+             :form => form, 
+             :table => build_relationship_table
+
+    end
+
+    def typus_form_has_and_belongs_to_many(field)
+
+      setup_relationship(field)
+
+      if @model_to_relate.count < 500
+        @items_to_relate = (@model_to_relate.all - @item.send(field))
+        if set_condition && !@items_to_relate.empty?
+          form = build_relate_form
         end
+      end
 
-        html << <<-HTML
-  <a name="#{field}"></a>
-  <div class="box_relationships" id="#{model_to_relate_as_resource}">
-    <h2>
-    #{link_to model_to_relate.model_name.human.pluralize, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _("{{model}} filtered by {{filtered_by}}", :model => model_to_relate.model_name.human.pluralize, :filtered_by => @item.to_label)}
-    #{add_new}
-    </h2>
-        HTML
+      build_pagination
 
-        ##
-        # It's a has_many relationship, so items that are already assigned to another
-        # entry are assigned to that entry.
-        #
-        items_to_relate = model_to_relate.all(:conditions => ["#{foreign_key} is ?", nil])
-        if condition && !items_to_relate.empty?
-          html << <<-HTML
-    #{form_tag :action => 'relate', :id => @item.id}
-    #{hidden_field :related, :model, :value => model_to_relate}
-    <p>#{select :related, :id, items_to_relate.collect { |f| [f.to_label, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
-    </form>
-          HTML
-        end
+      render "admin/templates/has_n", 
+             :model_to_relate => @model_to_relate, 
+             :model_to_relate_as_resource => @model_to_relate_as_resource, 
+             :add_new => raw(build_add_new), 
+             :form => form, 
+             :table => build_relationship_table
 
-        conditions = if model_to_relate.typus_options_for(:only_user_items) && @current_user.is_not_root?
-                      { Typus.user_fk => @current_user }
-                    end
+    end
 
-        options = { :order => model_to_relate.typus_order_by, :conditions => conditions }
-        items_count = @resource.find(params[:id]).send(field).count(:conditions => conditions)
-        items_per_page = model_to_relate.typus_options_for(:per_page).to_i
+    def build_pagination
+      options = { :order => @model_to_relate.typus_order_by, :conditions => set_conditions }
+      items_count = @resource.find(params[:id]).send(@field).count(:conditions => set_conditions)
+      items_per_page = @model_to_relate.typus_options_for(:per_page)
 
-        @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
-          options.merge!({:limit => per_page, :offset => offset})
-          items = @resource.find(params[:id]).send(field).all(options)
-        end
+      @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
+        options.merge!({:limit => per_page, :offset => offset})
+        items = @resource.find(params[:id]).send(@field).all(options)
+      end
 
-        @items = @pager.page(params[:page])
+      @items = @pager.page(params[:page])
+    end
 
-        unless @items.empty?
-          options = { :back_to => "#{@back_to}##{field}", :resource => @resource.to_resource, :resource_id => @item.id }
-          html << build_list(model_to_relate, 
-                             model_to_relate.typus_fields_for(:relationship), 
-                             @items, 
-                             model_to_relate_as_resource, 
-                             options, 
-                             association)
-          html << pagination(:anchor => model_to_relate.to_resource) unless pagination.nil?
-        else
-          message = _("There are no {{records}}.", 
-                      :records => model_to_relate.model_name.human.pluralize.downcase)
-          html << <<-HTML
-    <div id="flash" class="notice"><p>#{message}</p></div>
-          HTML
-        end
-        html << <<-HTML
-  </div>
+    def build_relate_form
+      render "admin/templates/relate_form", 
+             :model_to_relate => @model_to_relate, 
+             :items_to_relate => @items_to_relate
+    end
+
+    def build_relationship_table
+      build_list(@model_to_relate, 
+                 @model_to_relate.typus_fields_for(:relationship), 
+                 @items, 
+                 @model_to_relate_as_resource, 
+                 {}, 
+                 @association)
+    end
+
+    def build_add_new(options = {})
+      default_options = { :controller => @field, :action => "new", 
+                          :resource => @resource.class_name, :resource_id => @item.id, 
+                          :back_to => @back_to }
+
+      if set_condition && @current_user.can?("create", @model_to_relate)
+        <<-HTML
+  <small>#{link_to _("Add new"), default_options.merge(options)}</small>
         HTML
       end
     end
 
-    # OPTIMIZE: Move html code to partial.
-    def typus_form_has_and_belongs_to_many(field)
-      returning(String.new) do |html|
+    def set_condition
+      if @resource.typus_user_id? && @current_user.is_not_root?
+        @item.owned_by?(@current_user)
+      else
+        true
+      end
+    end
 
-        model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.constantize
-        model_to_relate_as_resource = model_to_relate.to_resource
-
-        reflection = @resource.reflect_on_association(field.to_sym)
-        association = reflection.macro
-
-        condition = if @resource.typus_user_id? && @current_user.is_not_root?
-                      @item.owned_by?(@current_user)
-                    else
-                      true
-                    end
-
-        if condition && @current_user.can?('create', model_to_relate)
-          add_new = <<-HTML
-    <small>#{link_to _("Add new"), :controller => field, :action => 'new', :back_to => @back_to, :resource => @resource.to_resource, :resource_id => @item.id}</small>
-          HTML
-        end
-
-        html << <<-HTML
-  <a name="#{field}"></a>
-  <div class="box_relationships" id="#{model_to_relate_as_resource}">
-    <h2>
-    #{link_to model_to_relate.model_name.human.pluralize, :controller => "admin/#{model_to_relate_as_resource}"}
-    #{add_new}
-    </h2>
-        HTML
-
-        if model_to_relate.count < 500
-
-          items_to_relate = (model_to_relate.all - @item.send(field))
-
-          if condition && !items_to_relate.empty?
-            html << <<-HTML
-      #{form_tag :action => 'relate', :id => @item.id}
-      #{hidden_field :related, :model, :value => model_to_relate}
-      <p>#{select :related, :id, items_to_relate.collect { |f| [f.to_label, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
-      </form>
-            HTML
-          end
-
-        end
-
-        conditions = if model_to_relate.typus_options_for(:only_user_items) && @current_user.is_not_root?
-                      { Typus.user_fk => @current_user }
-                    end
-
-        options = { :order => model_to_relate.typus_order_by, :conditions => conditions }
-        items_count = @resource.find(params[:id]).send(field).count(:conditions => conditions)
-        items_per_page = model_to_relate.typus_options_for(:per_page).to_i
-
-        @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
-          options.merge!({:limit => per_page, :offset => offset})
-          items = @resource.find(params[:id]).send(field).all(options)
-        end
-
-        @items = @pager.page(params[:page])
-
-        unless @items.empty?
-          html << build_list(model_to_relate, 
-                             model_to_relate.typus_fields_for(:relationship), 
-                             @items, 
-                             model_to_relate_as_resource, 
-                             {}, 
-                             association)
-          html << pagination(:anchor => model_to_relate.to_resource) unless pagination.nil?
-        else
-          message = _("There are no {{records}}.", 
-                      :records => model_to_relate.model_name.human.pluralize.downcase)
-          html << <<-HTML
-    <div id="flash" class="notice"><p>#{message}</p></div>
-          HTML
-        end
-        html << <<-HTML
-  </div>
-        HTML
+    def set_conditions
+      if @model_to_relate.typus_options_for(:only_user_items) && @current_user.is_not_root?
+        { Typus.user_fk => @current_user }
       end
     end
 
