@@ -39,7 +39,7 @@ module Admin
 
     end
 
-    def typus_table_fields_for_item(item, fields, link_options)
+    def table_fields_for_item(item, fields, link_options)
       content = String.new
 
       fields.each do |key, value|
