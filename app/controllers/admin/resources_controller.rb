@@ -6,7 +6,7 @@ class Admin::ResourcesController < AdminController
 
   before_filter :get_model
 
-  before_filter :get_resource, 
+  before_filter :get_object, 
                 :only => [ :show, 
                            :edit, :update, :destroy, :toggle, 
                            :position, :relate, :unrelate, 
@@ -261,7 +261,7 @@ private
   # Find model when performing an edit, update, destroy, relate, 
   # unrelate ...
   #
-  def get_resource
+  def get_object
     @item = @resource[:class].find(params[:id])
   end
 
