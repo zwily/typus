@@ -77,3 +77,9 @@
 [ ] Contextual content depending on the logged user.
 [ ] Include dashboard#sidebar in the generator so use can easily overwrite it.
 [ ] Enable mechanism to skip Typus authentication so we can use other engines.
+[ ] Verify generator is working properly.
+[ ] Test generator?
+[ ] Make sure TypusUser model is created in the application.
+[ ] Added comment on all FIXME tests. Try to fix them first.
+[ ] Remove all raw calls.
+[ ] Refactor typus_form_has_one.

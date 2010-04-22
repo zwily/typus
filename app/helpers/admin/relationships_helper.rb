@@ -22,7 +22,6 @@ module Admin
       end
 
       build_pagination
-
       options = { foreign_key => @item.id }
 
       render "admin/templates/has_n", 
