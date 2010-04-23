@@ -3,9 +3,6 @@ require "test/test_helper"
 class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_generate_xml
-
-    assert @typus_user.is_root?
-
     expected = <<-RAW
 <?xml version="1.0" encoding="UTF-8"?>
 <posts type="array">
@@ -29,17 +26,12 @@ class Admin::PostsControllerTest < ActionController::TestCase
     RAW
 
     get :index, :format => "xml"
-    assert_equal expected, @response.body
 
+    assert_response :success
+    assert_equal expected, @response.body
   end
 
-=begin
-
-  # FIXME: RuntimeError: no such file to load -- fastercsv
   def test_should_generate_csv
-
-    assert @typus_user.is_root?
-
     expected = <<-RAW
 title;status
 Title One;published
@@ -49,17 +41,9 @@ Owned by editor;unpublished
      RAW
 
     get :index, :format => "csv"
+
     assert_response :success
-
-    assert @response.body.is_a?(Proc)
-    require "stringio"
-    output = StringIO.new
-    output.binmode
-    assert_nothing_raised { @response.body.call(@response, output) }
-    assert_equal(expected, output.string)
-
+    assert_equal expected, @response.body
   end
-
-=end
 
 end
