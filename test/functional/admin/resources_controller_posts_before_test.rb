@@ -7,4 +7,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
     @request.session[:typus_user_id] = @typus_user.id
   end
 
+  def test_should_verify_we_are_root
+    assert @typus_user.is_root?
+  end
+
 end

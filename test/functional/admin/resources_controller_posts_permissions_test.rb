@@ -14,15 +14,11 @@ class Admin::PostsControllerTest < ActionController::TestCase
   ##
 
   def test_should_verify_root_can_edit_any_record
-
-    assert @typus_user.is_root?
-
     Post.all.each do |post|
       get :edit, { :id => post.id }
       assert_response :success
       assert_template 'edit'
     end
-
   end
 
   def test_should_verify_editor_can_show_any_record
@@ -74,14 +70,12 @@ class Admin::PostsControllerTest < ActionController::TestCase
   ##
 
   def test_should_verify_typus_user_id_of_item_when_creating_record
-
     setup_for_no_root
 
     post :create, { :post => { :title => "Chunky Bacon", :body => "Lorem ipsum ..." } }
     post_ = Post.find_by_title("Chunky Bacon")
 
     assert_equal @request.session[:typus_user_id], post_.typus_user_id
-
   end
 
   ##
@@ -89,25 +83,19 @@ class Admin::PostsControllerTest < ActionController::TestCase
   ##
 
   def test_should_verify_admin_updating_an_item_does_not_change_typus_user_id_if_not_defined
-
-    assert @typus_user.is_root?
-
     post_ = posts(:owned_by_editor)
     post :update, { :id => post_.id, :post => { :title => 'Updated by admin' } }
     post_updated = Post.find(post_.id)
-    assert_equal post_.typus_user_id, post_updated.typus_user_id
 
+    assert_equal post_.typus_user_id, post_updated.typus_user_id
   end
 
   def test_should_verify_admin_updating_an_item_does_change_typus_user_id_to_whatever_admin_wants
-
-    assert @typus_user.is_root?
-
     post_ = posts(:owned_by_editor)
     post :update, { :id => post_.id, :post => { :title => 'Updated', :typus_user_id => 108 } }
     post_updated = Post.find(post_.id)
-    assert_equal 108, post_updated.typus_user_id
 
+    assert_equal 108, post_updated.typus_user_id
   end
 
   def test_should_verify_editor_updating_an_item_does_not_change_typus_user_id
