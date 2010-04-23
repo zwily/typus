@@ -92,6 +92,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_verify_admin_updating_an_item_does_not_change_typus_user_id_if_not_defined
     post_ = posts(:owned_by_editor)
+
     post :update, { :id => post_.id, :post => { :title => 'Updated by admin' } }
     post_updated = Post.find(post_.id)
 
@@ -100,6 +101,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_verify_admin_updating_an_item_does_change_typus_user_id_to_whatever_admin_wants
     post_ = posts(:owned_by_editor)
+
     post :update, { :id => post_.id, :post => { :title => 'Updated', :typus_user_id => 108 } }
     post_updated = Post.find(post_.id)
 
