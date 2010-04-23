@@ -1,9 +1,5 @@
 module Typus
 
-  def self.included(base)
-    base.extend ClassMethods
-  end
-
   module ClassMethods
 
     # Return model fields as a OrderedHash
@@ -322,5 +318,5 @@ module Typus
 
 end
 
-ActiveRecord::Base.send :include, Typus
+ActiveRecord::Base.extend Typus::ClassMethods
 ActiveRecord::Base.send :include, Typus::InstanceMethods
