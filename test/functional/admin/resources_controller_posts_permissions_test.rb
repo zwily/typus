@@ -33,7 +33,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-  def test_should_verify_editor_can_not_edit_all_records
+  def test_should_verify_editor_cannot_edit_all_records
 
     setup_for_no_root
 
