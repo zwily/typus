@@ -6,6 +6,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     @typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = @typus_user.id
     assert @typus_user.is_not_root?
+    @request.env['HTTP_REFERER'] = '/admin/posts'
   end
 
   ##
@@ -22,7 +23,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_verify_editor_can_show_any_record
-
     setup_for_no_root
 
     Post.all.each do |post|
@@ -30,39 +30,47 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_response :success
       assert_template 'show'
     end
-
   end
 
   def test_should_verify_editor_cannot_edit_all_records
-
     setup_for_no_root
 
     # Editor tries to edit a post owned by hiself.
     post = posts(:owned_by_editor)
     get :edit, { :id => post.id }
-    assert_response :success
 
-    # Editor tries to edit a post owned by the admin.
-    @request.env['HTTP_REFERER'] = '/admin/posts'
+    assert_response :success
+  end
+
+  def test_shoould_verify_editor_tries_to_edit_a_post_owned_by_the_admin
+    setup_for_no_root
     post = posts(:owned_by_admin)
     get :edit, { :id => post.id }
+
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
     assert_equal "You don't have permission to access this item.", flash[:alert]
+  end
 
-    # Editor tries to show a post owned by the admin.
+  def test_should_verify_editor_tries_to_show_a_post_owned_by_the_admin
+    setup_for_no_root
+
     post = posts(:owned_by_admin)
     get :show, { :id => post.id }
+
     assert_response :success
     assert_template 'show'
+  end
 
-    # Editor tries to show a post owned by the admin.
+  def test_should_verify_editor_tries_to_show_a_post_owned_by_the_admin
+    setup_for_no_root
+
     Typus::Resource.expects(:only_user_items).returns(true)
     post = posts(:owned_by_admin)
     get :show, { :id => post.id }
+
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-
   end
 
   ##
