@@ -122,11 +122,7 @@ module Typus
         controller = params[:controller].extract_resource
         action = params[:action]
         unless @current_user.can?(action, controller.camelize, { :special => true })
-          flash[:notice] = _("{{current_user_role}} can't go to {{action}} on {{controller}}.", 
-                             :current_user_role => @current_user.role.capitalize, 
-                             :action => action, 
-                             :controller => controller.humanize.downcase)
-          redirect_to set_path
+          render :text => "Not allowed!", :status => :unprocessable_entity
         end
       end
 

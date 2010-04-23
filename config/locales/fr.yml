@@ -118,6 +118,5 @@ fr:
   "{{model_a}} cannot be related to {{model_b}}": 
   "{{model_a}} cannot be unrelated from {{model_b}}": 
   "{{current_user_role}} can't delete this item": "{{current_user_role}} ne peut supprimer cette entrée"
-  "{{current_user_role}} can't go to {{action}} on {{controller}}":  "{{current_user_role}} ne peut effectuer {{action}} sur {{controller}}"
   "{{current_user_role}} can't perform action. ({{action}})": "{{current_user_role}} ne peut effectuer l'action ({{action}})"
   "{{current_user_role}} can't perform action ({{action}})": "{{current_user_role}} ne peut effectuer l'action ({{action}})"

@@ -108,7 +108,6 @@
   "{{attachment}} removed": 
   "{{current_user_role}} can't delete this item": 
   "{{current_user_role}} can't display items": 
-  "{{current_user_role}} can't go to {{action}} on {{controller}}": 
   "{{current_user_role}} can't perform action. ({{action}})": 
   "{{model}} filtered by {{filtered_by}}": 
   "{{model}} successfully created": 

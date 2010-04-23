@@ -109,7 +109,6 @@ es:
   "{{attachment}} removed": "{{attachment}} borrado."
   "{{current_user_role}} can't delete this item": "{{current_user_role}} no puede borrar este elemento."
   "{{current_user_role}} can't display items": "{{current_user_role}} no puede mostrar los elementos."
-  "{{current_user_role}} can't go to {{action}} on {{controller}}":  "{{current_user_role}} no pude ir a {{action}} en {{controller}}."
   "{{current_user_role}} can't perform action. ({{action}})": "{{current_user_role}} no puede realizar la acción. ({{action}})"
   "{{model}} filtered by {{filtered_by}}": "{{model}} filtrados por {{filtered_by}}"
   "{{model}} successfully created": "{{model}} satisfactoriamente creado."

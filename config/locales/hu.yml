@@ -109,7 +109,6 @@ hu:
   "{{attachment}} removed": "{{attachment}} törölve"
   "{{current_user_role}} can't delete this item": "{{current_user_role}} nem lehet törölni az elemet"
   "{{current_user_role}} can't display items": "{{current_user_role}} nem nézheti meg az elemeket"
-  "{{current_user_role}} can't go to {{action}} on {{controller}}": "{{current_user_role}} nem hívhatja meg ezt a műveletet"
   "{{current_user_role}} can't perform action. ({{action}})": "{{current_user_role}} nem futtathatja ez a műveletet ({{action}})"
   "{{model}} filtered by {{filtered_by}}": "{{model}} szűrve {{filtered_by}}"
   "{{model}} successfully created": "{{model}} sikeresen létrehozva"
