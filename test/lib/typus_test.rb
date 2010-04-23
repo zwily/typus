@@ -2,17 +2,29 @@ require "test/test_helper"
 
 class TypusTest < ActiveSupport::TestCase
 
-  def test_should_verify_configuration_options
+  def test_should_verify_default_config
     assert_equal "Typus", Typus.admin_title
-    assert Typus.config_folder.kind_of?(Pathname)
-    assert_equal "columbia", Typus.password
+    assert Typus.admin_sub_title.kind_of?(String)
+
+    assert_equal :advanced, Typus.authentication
+
     assert_equal nil, Typus.email
+
+    assert_equal "admin", Typus.username
+    assert_equal "columbia", Typus.password
+
     assert_equal :typus_preview, Typus.file_preview
     assert_equal :typus_thumbnail, Typus.file_thumbnail
+
     assert_equal "typus_users", Typus.relationship
     assert_equal "admin", Typus.master_role
+
     assert_equal "TypusUser", Typus.user_class_name
     assert_equal "typus_user_id", Typus.user_fk
+  end
+
+  def test_should_verify_config_folder_class
+    assert Typus.config_folder.kind_of?(Pathname)
   end
 
   def test_should_return_root
