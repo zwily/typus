@@ -32,10 +32,9 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
   end
 
-  def test_should_verify_editor_cannot_edit_all_records
+  def test_should_verify_editor_tried_to_edit_a_post_owned_by_himself
     setup_for_no_root
 
-    # Editor tries to edit a post owned by hiself.
     post = posts(:owned_by_editor)
     get :edit, { :id => post.id }
 
@@ -107,7 +106,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
   end
 
   def test_should_verify_editor_updating_an_item_does_not_change_typus_user_id
-
     setup_for_no_root
 
     [ 108, nil ].each do |typus_user_id|
@@ -116,7 +114,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
       post_updated = Post.find(post_.id)
       assert_equal  @request.session[:typus_user_id], post_updated.typus_user_id
     end
-
   end
 
 end
