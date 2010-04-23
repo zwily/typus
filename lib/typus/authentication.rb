@@ -25,6 +25,7 @@ class AdminUserFake
   end
 
   def role
+    Typus.master_role
   end
 
   def name
