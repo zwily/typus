@@ -318,5 +318,7 @@ module Typus
 
 end
 
-ActiveRecord::Base.extend Typus::ClassMethods
-ActiveRecord::Base.send :include, Typus::InstanceMethods
+if defined?(ActiveRecord)
+  ActiveRecord::Base.extend Typus::ClassMethods
+  ActiveRecord::Base.send :include, Typus::InstanceMethods
+end
