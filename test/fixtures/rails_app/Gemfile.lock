@@ -1,5 +1,9 @@
 --- 
 dependencies: 
+  fastercsv: 
+    group: 
+    - :default
+    version: ">= 0"
   pg: 
     group: 
     - :default
@@ -77,6 +81,8 @@ specs:
     version: 3.0.0.beta2
 - bundler: 
     version: 0.9.19
+- fastercsv: 
+    version: 1.5.3
 - mocha: 
     version: 0.9.8
 - mysql: 
@@ -93,7 +99,7 @@ specs:
     version: 1.2.2
 - sqlite3-ruby: 
     version: 1.2.5
-hash: 2c33c38df779fc47829e8d689fc12beb53fa9932
+hash: 2cff97362126429987f772b70117df0f31f15167
 sources: 
 - Rubygems: 
     uri: http://rubygems.org
