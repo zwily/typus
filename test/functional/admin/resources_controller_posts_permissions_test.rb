@@ -70,6 +70,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
+    assert_equal "You don't have permission to access this item.", flash[:alert]
   end
 
   ##
