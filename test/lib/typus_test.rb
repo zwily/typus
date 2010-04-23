@@ -8,7 +8,7 @@ class TypusTest < ActiveSupport::TestCase
 
     assert_equal :advanced, Typus.authentication
 
-    assert_equal nil, Typus.email
+    assert_equal nil, Typus.mailer_sender
 
     assert_equal "admin", Typus.username
     assert_equal "columbia", Typus.password

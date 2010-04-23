@@ -32,7 +32,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
   end
 
   def test_should_verify_typus_sign_in_layout_includes_recover_password_link
-    Typus.expects(:email).returns("john@example.com")
+    Typus.expects(:mailer_sender).returns("john@example.com")
 
     get :new
 

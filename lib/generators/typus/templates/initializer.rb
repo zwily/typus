@@ -7,8 +7,10 @@ Typus.setup do |config|
   # Authentication: none, basic, advanced
   # config.authentication = :advanced
 
-  # Define this option to allow admin users to recover lost passwords.
-  # config.email = 'admin@example.com'
+  # Configure the e-mail address which will be shown in Admin::Mailer.
+  # When this option is define Typus will allow admin users to recover 
+  # lost passwords.
+  # config.mailer_sender = "admin@example.com"
 
   # Define file attachment settings.
   # config.file_preview = :typus_preview

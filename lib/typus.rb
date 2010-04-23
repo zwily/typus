@@ -30,9 +30,9 @@ Developed by <a href="http://intraducibles.com" rel="external">intraducibles.com
   mattr_accessor :password
   @@password = "columbia"
 
-  # Define the default email.
-  mattr_accessor :email
-  @@email = nil
+  # Configure the e-mail address which will be shown in Admin::Mailer.
+  mattr_accessor :mailer_sender
+  @@mailer_sender = nil
 
   # Define the file preview.
   mattr_accessor :file_preview
