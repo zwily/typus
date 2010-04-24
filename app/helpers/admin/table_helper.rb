@@ -12,62 +12,54 @@ module Admin
     end
 
     def table_header(model, fields)
+      fields.map do |key, value|
 
-      headers = fields.map do |key, value|
+        key = key.gsub(".", " ") if key.match(/\./)
+        content = key.end_with?('_id') ? key : model.human_attribute_name(key)
 
-                  key = key.gsub(".", " ") if key.match(/\./)
-                  content = key.end_with?('_id') ? key : model.human_attribute_name(key)
+        if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
+          sort_order = case params[:sort_order]
+                       when 'asc'   then ['desc', '&darr;']
+                       when 'desc'  then ['asc', '&uarr;']
+                       else
+                         [nil, nil]
+                       end
+          order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
+          switch = sort_order.last if params[:order_by].eql?(order_by)
+          options = { :order_by => order_by, :sort_order => sort_order.first }
+          content = link_to raw("#{content} #{switch}"), params.merge(options)
+        end
 
-                  if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
-                    sort_order = case params[:sort_order]
-                                 when 'asc'   then ['desc', '&darr;']
-                                 when 'desc'  then ['asc', '&uarr;']
-                                 else
-                                   [nil, nil]
-                                 end
-                    order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
-                    switch = sort_order.last if params[:order_by].eql?(order_by)
-                    options = { :order_by => order_by, :sort_order => sort_order.first }
-                    content = link_to raw("#{content} #{switch}"), params.merge(options)
-                  end
+        content
 
-                  content
-
-                end
-
-      return headers
-
+      end
     end
 
     def table_fields_for_item(item, fields, link_options)
-      content = String.new
-
-      fields.each do |key, value|
-        content << case value
-                   when :boolean then table_boolean_field(key, item)
-                   when :datetime then table_datetime_field(key, item, link_options)
-                   when :date then table_datetime_field(key, item, link_options)
-                   when :file then table_file_field(key, item, link_options)
-                   when :time then table_datetime_field(key, item, link_options)
-                   when :belongs_to then table_belongs_to_field(key, item)
-                   when :tree then table_tree_field(key, item)
-                   when :position then table_position_field(key, item)
-                   when :selector then table_selector(key, item)
-                   when :transversal then table_transversal(key, item)
-                   when :has_and_belongs_to_many then table_has_and_belongs_to_many_field(key, item)
-                   else
-                     table_string_field(key, item, link_options)
-                   end
-      end
-
-      return raw(content)
+      fields.map do |key, value|
+        case value
+        when :boolean then table_boolean_field(key, item)
+        when :datetime then table_datetime_field(key, item, link_options)
+        when :date then table_datetime_field(key, item, link_options)
+        when :file then table_file_field(key, item, link_options)
+        when :time then table_datetime_field(key, item, link_options)
+        when :belongs_to then table_belongs_to_field(key, item)
+        when :tree then table_tree_field(key, item)
+        when :position then table_position_field(key, item)
+        when :selector then table_selector(key, item)
+        when :transversal then table_transversal(key, item)
+        when :has_and_belongs_to_many then table_has_and_belongs_to_many_field(key, item)
+        else
+          table_string_field(key, item, link_options)
+        end
+      end.to_s.html_safe
     end
 
     def table_default_action(model, item)
       action = if model.typus_user_id? && @current_user.is_not_root?
                  # If there's a typus_user_id column on the table and logged user is not root ...
-                 item.owned_by?(@current_user) ? item.class.typus_options_for(:default_action_on_item) : 'show'
-               elsif @current_user.cannot?('edit', model)
+                 item.owned_by?(@current_user) ? item.class.typus_options_for(:default_action_on_item) : "show"
+               elsif @current_user.cannot?("edit", model)
                  'show'
                else
                  item.class.typus_options_for(:default_action_on_item)
@@ -137,7 +129,6 @@ module Admin
     end
 
     def table_belongs_to_field(attribute, item)
-
       action = item.send(attribute).class.typus_options_for(:default_action_on_item)
 
       att_value = item.send(attribute)
@@ -150,7 +141,6 @@ module Admin
       end
 
       return content_tag(:td, content)
-
     end
 
     def table_has_and_belongs_to_many_field(attribute, item)
@@ -169,7 +159,6 @@ module Admin
     end
 
     def table_file_field(attribute, item, link_options = {})
-
       attachment = attribute.split("_file_name").first
       file_preview = Typus.file_preview
       file_thumbnail = Typus.file_thumbnail
@@ -190,7 +179,6 @@ module Admin
                 end
 
       return content_tag(:td, content)
-
     end
 
     def table_tree_field(attribute, item)
@@ -222,12 +210,10 @@ module Admin
     end
 
     def table_datetime_field(attribute, item, link_options = {} )
-
       date_format = item.class.typus_date_format(attribute)
       content = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
 
       return content_tag(:td, content)
-
     end
 
     def table_boolean_field(attribute, item)

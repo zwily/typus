@@ -11,7 +11,7 @@
   </thead>
 
   <% items.each do |item| %>
-    <tr class="<%= cycle('even', 'odd') %> <%= item.class.name.underscore %>" id="<%= dom_id(item) %>" name="item_<%= item.id %>">
+    <tr class="<%= cycle('even', 'odd') %>" id="<%= dom_id(item) %>">
       <%= table_fields_for_item(item, fields, link_options) %>
       <td width="10px"><%= table_default_action(model, item) %></td>
       <td width="10px"><%= table_action(model, item) %></td>
