@@ -74,7 +74,7 @@ module Admin
     end
 
     def string_filter(request, filter)
-      values = @resource::const_get("#{filter.to_s.upcase}")
+      values = @resource::const_get(filter.to_s.upcase)
 
       if values.kind_of?(Hash)
         items = values.invert
