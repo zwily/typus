@@ -59,13 +59,10 @@ module Admin
     end
 
     def date_filter(request, filter)
-      items = {}
+      filters = %w(today last_few_days last_7_days last_30_days)
+      filters_humanized = filters.map { |i| _(i.humanize) }
 
-      %w( today last_few_days last_7_days last_30_days ).map do |timeline|
-        items[timeline] = _(timeline.humanize)
-      end
-
-      build_filters(filter, items)
+      build_filters(filter, filters.to_hash(filters_humanized))
     end
 
     def boolean_filter(request, filter)
