@@ -22,7 +22,6 @@ module Typus
                                 :controller => "account", 
                                 :collection => { :forgot_password => :get }, 
                                 :controller => "admin/account"
-        m.resources :docs, :only => [:index, :show], :controller => "admin/docs"
         m.resource :session, :only => [:new, :create, :destroy], :controller => "admin/session"
         m.resource :dashboard, :only => [:show], :controller => "admin/dashboard"
       end

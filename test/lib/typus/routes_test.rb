@@ -26,9 +26,4 @@ class RoutesTest < ActiveSupport::TestCase
     expected.each { |r| assert @routes.include?(r) }
   end
 
-  def test_should_verift_admin_docs_named_routes
-    expected = %w(admin_docs admin_doc)
-    expected.each { |r| assert @routes.include?(r) }
-  end
-
 end
