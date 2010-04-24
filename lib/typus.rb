@@ -135,6 +135,7 @@ Developed by <a href="http://intraducibles.com" rel="external">intraducibles.com
 
       # Support extensions
       require "support/active_record"
+      require "support/array"
       require "support/hash"
       require "support/object"
       require "support/string"
