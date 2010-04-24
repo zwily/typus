@@ -19,8 +19,6 @@
   <%= raw build_list(@resource, @fields, @items) %>
   <%= pagination %>
 <% else %>
-  <div id="flash" class="notice">
-    <% message = @resource.count.zero? ? "There are no {{records}}." : "There are no {{records}} under this filter." %>
-    <p><%= _(message, :records => @resource.model_name.human.pluralize.downcase) %></p>
-  </div>
+  <% message = @resource.count.zero? ? "There are no {{records}}." : "There are no {{records}} under this filter." %>
+  <p><%= _(message, :records => @resource.model_name.human.pluralize.downcase) %></p>
 <% end %>
