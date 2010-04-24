@@ -62,7 +62,9 @@ module Admin
       values = %w(today last_few_days last_7_days last_30_days)
       values_humanized = values.map { |v| _(v.humanize) }
 
-      build_filters(filter, values.to_hash(values_humanized))
+      items = values.to_hash(values_humanized)
+
+      build_filters(filter, items)
     end
 
     def boolean_filter(request, filter)
