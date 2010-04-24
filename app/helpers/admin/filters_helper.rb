@@ -61,9 +61,7 @@ module Admin
     def date_filter(request, filter)
       values = %w(today last_few_days last_7_days last_30_days)
       values_humanized = values.map { |v| _(v.humanize) }
-
       items = values.to_hash(values_humanized)
-
       build_filters(filter, items)
     end
 
