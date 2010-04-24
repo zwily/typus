@@ -2,6 +2,10 @@ module Admin
 
   module FiltersHelper
 
+    def build_filters(filter, items)
+      render "admin/helpers/filters/filters", :items => items, :attribute => filter
+    end
+
     def filters
 
       typus_filters = @resource.typus_filters
@@ -36,10 +40,6 @@ module Admin
 
     end
 
-    def build_filters(filter, items)
-      render "admin/helpers/filters/filters", :items => items, :attribute => filter
-    end
-
     def relationship_filter(request, filter, habtm = false)
       att_assoc = @resource.reflect_on_association(filter.to_sym)
       class_name = att_assoc.options[:class_name] || ((habtm) ? filter.classify : filter.capitalize.camelize)
@@ -50,10 +50,9 @@ module Admin
       %w( controller action page ).each { |p| params_without_filter.delete(p) }
       params_without_filter.delete(related_fk)
 
-      items = {}
-      model.all(:order => model.typus_order_by).each do |m|
-        items[m.id] = m.to_label
-      end
+      values = model.all(:order => model.typus_order_by)
+      values_labelized = values.map { |v| v.to_label }
+      items = values.to_hash(values_labelized)
 
       build_filters(filter, items)
     end
