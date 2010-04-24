@@ -18,13 +18,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   def test_to_label
     assert typus_users(:admin).respond_to?(:to_label)
-  end
-
-  def test_to_label_when_model_has_name
     assert_equal "Admin Example", typus_users(:admin).to_label
-  end
-
-  def test_to_label_when_model_has_no_name_attribute
     assert_equal "Post#1", posts(:published).to_label
   end
 
