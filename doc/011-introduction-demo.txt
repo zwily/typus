@@ -1,0 +1,23 @@
+== Demo Application ==
+
+A demo is running at http://typus.heroku.com/[Heroku]. Use the 
+following credentials to log in.
+
+----
+Email: user@intraducibles.com
+Password: columbia
+----
+
+You can replicate the demo application hosted at http://www.heroku.com/ 
+using the +typus_demo+ template:
+
+----
+$ rails example.com -m http://gist.github.com/86613.txt
+----
+
+Start the application and log in into the admin panel.
+
+----
+$ cd example.com && script/server
+$ open http://0.0.0.0:3000/admin
+----

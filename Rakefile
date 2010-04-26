@@ -30,6 +30,31 @@ task :release => :build do
 end
 
 ##
+# Docs
+##
+
+namespace :site do
+
+  desc "Regenerate the documentation"
+  task :build do
+    command = `which asciidoc`.strip
+    unless command.empty?
+      system "cd doc && #{command.strip} -a icons -a toc -o site/index.html 000-index.txt"
+    else
+      puts "AsciiDoc is not installed."
+    end
+  end
+
+  desc "Update the website"
+  task :deploy => :build do
+    site_files = FileList["doc/*.html"]
+    site_files.delete_if { |f| File.directory?(f)}
+    sh %(scp #{site_files.join ' '} fesplugas@santiago.dreamhost.com:~/public_html/www.railsadmin.org/typus/documentation)
+  end
+
+end
+
+##
 # Extras
 ##
 
