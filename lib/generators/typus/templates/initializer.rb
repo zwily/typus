@@ -31,16 +31,3 @@ Typus.setup do |config|
   config.user_fk = "<%= options[:user_fk] %>"
 
 end
-
-Typus::Resource.setup do |config|
-  # config.default_action_on_item = "edit"
-  # config.end_year = nil
-  # config.form_rows = 15
-  # config.action_after_save = "show"
-  # config.minute_step = 5
-  # config.nil = "nil"
-  # config.on_header = false
-  # config.only_user_items = false
-  # config.per_page = 20
-  # config.start_year = nil
-end
