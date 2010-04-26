@@ -11,7 +11,7 @@ class TypusGenerator < Rails::Generators::Base
   class_option :user_fk, :default => "typus_user_id"
 
   def self.source_root
-    @source_root ||= File.expand_path('../templates', __FILE__)
+    @source_root ||= File.expand_path("../templates", __FILE__)
   end
 
   def self.next_migration_number(path)
