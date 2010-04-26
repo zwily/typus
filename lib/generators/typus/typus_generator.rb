@@ -7,8 +7,6 @@ class TypusGenerator < Rails::Generators::Base
   Typus.reload!
 
   class_option :admin_title, :default => Rails.root.basename
-  class_option :user_class_name, :default => "TypusUser"
-  class_option :user_fk, :default => "typus_user_id"
 
   def self.source_root
     @source_root ||= File.expand_path("../../templates", __FILE__)
@@ -23,7 +21,7 @@ class TypusGenerator < Rails::Generators::Base
   end
 
   def generate_initializer
-    template "initializer.rb", "config/initializers/typus.rb"
+    template "config/initializers/typus.rb", "config/initializers/typus.rb"
   end
 
   def copy_assets
@@ -36,19 +34,13 @@ class TypusGenerator < Rails::Generators::Base
     route "Typus::Routes.draw(map)"
   end
 
-  def generate_models
-    template "config/typus/typus.yml", "config/typus/typus.yml"
-    template "config/typus/typus_roles.yml", "config/typus/typus_roles.yml"
-    template "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
-  end
-
   ##
   # Generate files for models:
   #   `#{controllers_path}/#{resource}_controller.rb`
   #   `#{tests_path}/#{resource}_controller_test.rb`
   #
   def generate_controllers
-    (Typus.application_models + [options[:user_class_name]]).each do |model|
+    Typus.application_models.each do |model|
       klass = model.constantize
       @resource = klass.name.pluralize
       template "controller.rb", "#{controllers_path}/#{klass.to_resource}_controller.rb"
@@ -66,10 +58,6 @@ class TypusGenerator < Rails::Generators::Base
         template from, to
       end
     end
-  end
-
-  def generate_migration
-    migration_template "migration.rb", "db/migrate/create_#{admin_users_table_name}"
   end
 
   protected
@@ -98,14 +86,6 @@ class TypusGenerator < Rails::Generators::Base
 
   def templates_path
     File.join(Typus.root, "lib", "generators", "typus", "templates")
-  end
-
-  def admin_users_table_name
-    options[:user_class_name].tableize
-  end
-
-  def migration_name
-    "Create#{options[:user_class_name]}s"
   end
 
   def controllers_path
