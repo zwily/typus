@@ -18,14 +18,11 @@ class TypusGenerator < Rails::Generators::Base
     Time.now.utc.to_s(:number)
   end
 
-  def generate_configuration_files
+  def generate_config_files
     copy_file "config/typus/README"
-    %w( typus.yml typus_roles.yml ).each do |file|
-      template "config/typus/#{file}", "config/typus/#{file}"
-    end
   end
 
-  def copy_initializer_file
+  def generate_initializer
     template "initializer.rb", "config/initializers/typus.rb"
   end
 
@@ -35,69 +32,31 @@ class TypusGenerator < Rails::Generators::Base
     end
   end
 
-  def generate_model
-    template "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
+  def append_routes
+    route "Typus::Routes.draw(map)"
   end
 
-  def add_typus_routes
-    route "Typus::Routes.draw(map)"
+  def generate_models
+    template "config/typus/typus.yml", "config/typus/typus.yml"
+    template "config/typus/typus_roles.yml", "config/typus/typus_roles.yml"
+    template "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
   end
 
   ##
   # Generate files for models:
   #   `#{controllers_path}/#{resource}_controller.rb`
   #   `#{tests_path}/#{resource}_controller_test.rb`
-  #   `#{views_path}/#{resource}/<action>.html.erb`
   #
-  def generate_controllers_for_models
-
+  def generate_controllers
     (Typus.application_models + [options[:user_class_name]]).each do |model|
-
       klass = model.constantize
-
-      @inherits_from = "Admin::ResourcesController"
       @resource = klass.name.pluralize
-
       template "controller.rb", "#{controllers_path}/#{klass.to_resource}_controller.rb"
       template "functional_test.rb",  "#{tests_path}/#{klass.to_resource}_controller_test.rb"
-
-      next if klass.name == options[:user_class_name]
-
-      klass.typus_actions.each do |action|
-        copy_file "view.html.erb", "#{views_path}/#{klass.to_resource}/#{action}.html.erb"
-      end
-
     end
-
   end
 
-  ##
-  # Generate files for tableless models:
-  #   `#{controllers_path}/#{resource}_controller.rb`
-  #   `#{tests_path}/#{resource}_controller_test.rb`
-  #   `#{views_path}/#{resource}/<action>.html.erb`
-  #
-  def generate_controllers_for_services
-
-    Typus.resources.each do |resource|
-
-      @inherits_from = "Admin::ResourceController"
-      @resource = resource
-      @sidebar = <<-HTML
-<% content_for :sidebar do %>
-<%= render "admin/dashboard/sidebar" %>
-<% end %>
-      HTML
-
-      template "controller.rb", "#{controllers_path}/#{resource.underscore}_controller.rb"
-      template "functional_test.rb", "#{tests_path}/#{resource.underscore}_controller_test.rb"
-      template "view.html.erb", "#{views_path}/#{resource.underscore}/index.html.erb"
-
-    end
-
-  end
-
-  def generate_config_files
+  def generate_config
     configuration = generate_yaml_files
     unless configuration[:base].empty?
       %w( application.yml application_roles.yml ).each do |file|
@@ -109,7 +68,7 @@ class TypusGenerator < Rails::Generators::Base
     end
   end
 
-  def copy_migration_template
+  def generate_migration
     migration_template "migration.rb", "db/migrate/create_#{admin_users_table_name}"
   end
 
@@ -120,7 +79,7 @@ class TypusGenerator < Rails::Generators::Base
   end
 
   def inherits_from
-    @inherits_from
+    "Admin::ResourcesController"
   end
 
   def resource
