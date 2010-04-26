@@ -4,10 +4,10 @@ Description:
     users edit structured content. (Admin scaffold generator)
 
 Examples:
-    `./script/rails generate typus`
+    `rails generate typus`
 
         creates needed files with `TypusUser` as the Typus user.
 
-    `./script/rails generate typus -u User
+    `rails generate typus -u User
 
         creates needed files with `User` as the Typus user.
