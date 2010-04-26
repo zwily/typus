@@ -95,7 +95,7 @@ class TypusGenerator < Rails::Generators::Base
 
   def generate_config_files
     configuration = generate_yaml_files
-    if !configuration[:base].empty?
+    unless configuration[:base].empty?
       %w( application.yml application_roles.yml ).each do |file|
         from = to = "config/typus/#{file}"
         if File.exists?(from) then to = "config/typus/#{timestamp}_#{file}" end
