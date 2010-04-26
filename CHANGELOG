@@ -83,3 +83,15 @@
 [ ] Added comment on all FIXME tests. Try to fix them first.
 [ ] Remove all raw calls.
 [ ] Refactor typus_form_has_one.
+[ ] Convert plugin to engine.
+[ ] Review documentation and decide where to publish it.
+[ ] Verify lightbox is working as expected.
+[ ] Fix sidebar texts.
+[ ] Fix footer to the bottom.
+[ ] Show sort arrow on hover.
+[ ] Clicking on h1 should open website (root_path) when available.
+[ ] "Remove entry" should become "Remove {{resource}}"
+[ ] `Typus.applications` should become `Typus.groups`.
+[ ] Decide where to put the search box.
+[ ] Split typus generator in two: typus and typus_migration
+[ ] Removing an item should redirect to back without the page params.
