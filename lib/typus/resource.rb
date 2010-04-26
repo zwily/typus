@@ -44,10 +44,6 @@ module Typus
     mattr_accessor :per_page
     @@per_page = 15
 
-    # Defines sidebar_selector
-    mattr_accessor :sidebar_selector
-    @@sidebar_selector = 5
-
     # Defines start year
     mattr_accessor :start_year
     @@start_year = nil

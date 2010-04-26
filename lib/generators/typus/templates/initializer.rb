@@ -42,6 +42,5 @@ Typus::Resource.setup do |config|
   # config.on_header = false
   # config.only_user_items = false
   # config.per_page = 20
-  # config.sidebar_selector = 5
   # config.start_year = nil
 end
