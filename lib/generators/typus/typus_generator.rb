@@ -19,7 +19,8 @@ class TypusGenerator < Rails::Generators::Base
   end
 
   def generate_configuration_files
-    %w( README typus.yml typus_roles.yml ).each do |file|
+    copy_file "config/typus/README"
+    %w( typus.yml typus_roles.yml ).each do |file|
       template "config/typus/#{file}", "config/typus/#{file}"
     end
   end
