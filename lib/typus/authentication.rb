@@ -11,9 +11,9 @@ module Typus
       case Typus.authentication
       when :none
         authenticate_via_none
-      when :basic
+      when :http_basic
         authenticate_via_http_basic
-      when :advanced
+      when :session
         authenticate_via_session
       end
     end
@@ -235,7 +235,7 @@ module Typus
     end
 
     def skip_method?
-      return unless Typus.authentication.eql?(:advanced)
+      return unless Typus.authentication.eql?(:session)
     end
 
   end

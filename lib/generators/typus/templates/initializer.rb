@@ -4,8 +4,8 @@ Typus.setup do |config|
   config.admin_title = "<%= options[:admin_title] %>"
   # config.admin_sub_title = ""
 
-  # Authentication: none, basic, advanced
-  # config.authentication = :advanced
+  # Authentication: none, http_basic, session
+  # config.authentication = :session
 
   # Configure the e-mail address which will be shown in Admin::Mailer.
   # When this option is define Typus will allow admin users to recover 

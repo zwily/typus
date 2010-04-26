@@ -6,7 +6,7 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal "Typus", Typus.admin_title
     assert Typus.admin_sub_title.kind_of?(String)
 
-    assert_equal :advanced, Typus.authentication
+    assert_equal :session, Typus.authentication
 
     assert_equal nil, Typus.mailer_sender
 

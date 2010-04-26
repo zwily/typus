@@ -15,7 +15,7 @@ Developed by <a href="http://intraducibles.com" rel="external">intraducibles.com
 
   # Authentication mechanism: none, basic, advanced
   mattr_accessor :authentication
-  @@authentication = :advanced
+  @@authentication = :session
 
   # Define the configuration folder.
   mattr_accessor :config_folder

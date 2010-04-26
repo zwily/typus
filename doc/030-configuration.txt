@@ -35,7 +35,7 @@ authentication. To use the *advanced* method, you'll need to run the
 
 ----
 Typus.config.setup do |config|
-  config.authentication = :none|:basic|:advanced
+  config.authentication = :none|:http_basic|:session
 end
 ----
 
