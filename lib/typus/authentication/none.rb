@@ -5,7 +5,7 @@ module Typus
     module None
 
       def authenticate
-        @current_user = AdminUserFake.new
+        @current_user = Admin::FakeUser.new
       end
 
       def check_if_user_can_perform_action_on_user; end

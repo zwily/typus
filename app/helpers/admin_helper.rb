@@ -47,7 +47,7 @@ module AdminHelper
 
   def login_info(user = @current_user)
 
-    return if user.kind_of?(AdminUserFake)
+    return if user.kind_of?(Admin::FakeUser)
 
     admin_edit_typus_user_path = { :controller => "/admin/#{Typus.user_class.to_resource}", 
                                    :action => 'edit', 
