@@ -35,6 +35,10 @@ class TypusGenerator < Rails::Generators::Base
     end
   end
 
+  def generate_model
+    template "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
+  end
+
   def add_typus_routes
     route "Typus::Routes.draw(map)"
   end
@@ -103,10 +107,6 @@ class TypusGenerator < Rails::Generators::Base
         template from, to
       end
     end
-  end
-
-  def generate_model
-    template "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
   end
 
   def copy_migration_template
