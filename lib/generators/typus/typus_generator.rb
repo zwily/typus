@@ -18,7 +18,7 @@ class TypusGenerator < Rails::Generators::Base
     Time.now.utc.to_s(:number)
   end
 
-  def generate_config_files
+  def copy_config_readme
     copy_file "config/typus/README"
   end
 
