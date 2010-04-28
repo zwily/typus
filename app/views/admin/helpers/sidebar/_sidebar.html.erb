@@ -5,7 +5,7 @@
   <div class="resource" id="<%= key %>">
 
     <h2>
-      <%= link_to_unless_current _(key.pluralize), :controller => resource, :action => "index" %>
+      <%= link_to_unless_current _(key.constantize.model_name.human.pluralize), :controller => resource, :action => "index" %>
     </h2>
 
     <% if @resource.name.eql?(key) %>
