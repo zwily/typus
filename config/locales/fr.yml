@@ -61,7 +61,7 @@ fr:
   "Record moved {{to}}": "Entrées réordonnées"
   "Recover password": 
   "Remove": 
-  "Remove entry?": "Supprimer l'entrée?"
+  "Remove {{resource}}?": "Supprimer {{resource}}?"
   "Remove file": 
   "Remove filter": "Supprimer le filtre"
   "Reset password": "Renouveler le mot de passe"

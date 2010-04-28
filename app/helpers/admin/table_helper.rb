@@ -101,7 +101,7 @@ module Admin
                     else
                       @current_user.can?('destroy', model)
                     end
-        confirm = _("Remove entry?")
+        confirm = _("Remove {{resource}}?", :resource => item.class.model_name.human)
       when 'edit'
         # If we are editing content, we can relate and unrelate always!
         confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 

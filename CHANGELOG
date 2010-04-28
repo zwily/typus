@@ -90,7 +90,7 @@
 [ ] Fix footer to the bottom.
 [ ] Show sort arrow on hover.
 [ ] Clicking on h1 should open website (root_path) when available.
-[ ] "Remove entry" should become "Remove {{resource}}"
+[X] "Remove entry" should become "Remove {{resource}}"
 [ ] `Typus.applications` should become `Typus.groups`.
 [ ] Decide where to put the search box.
 [ ] Split typus generator in two: typus and typus_migration
