@@ -71,7 +71,7 @@ module Admin
 
     def string_filter(request, filter)
       values = @resource::const_get(filter.to_s.upcase)
-      items = values.kind_of?(Hash) ? values.invert : values.to_hash(values)
+      items = values.kind_of?(Hash) ? values : values.to_hash(values)
       build_filters(filter, items)
     end
 
