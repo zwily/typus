@@ -85,7 +85,7 @@ class TypusGenerator < Rails::Generators::Base
   private
 
   def templates_path
-    File.join(Typus.root, "lib", "generators", "typus", "templates")
+    File.join(Typus.root, "lib", "generators", "templates")
   end
 
   def controllers_path
