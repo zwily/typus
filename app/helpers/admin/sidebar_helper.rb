@@ -25,14 +25,14 @@ module Admin
       options = { :controller => klass.to_resource }
       items = klass.typus_actions_on("index").map do |action|
         if @current_user.can?(action, klass)
-          (link_to _(action.humanize), options.merge(:action => action).to_hash.symbolize_keys)
+          (link_to _(action.humanize), options.merge(:action => action))
         end
       end
     end
 
     def export(klass)
       klass.typus_export_formats.map do |format|
-        link_to _("Export as {{format}}", :format => format.upcase), params.merge(:action => "index", :format => format).to_hash.symbolize_keys
+        link_to _("Export as {{format}}", :format => format.upcase), params.merge(:action => "index", :format => format)
       end
     end
 

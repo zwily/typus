@@ -12,10 +12,10 @@
 <li>
   <form class="form" action="#">
   <select name="<%= attribute %>" onChange="surfto_<%= attribute %>(this.form)">
-    <option value="<%= url_for params.merge(attribute => nil).to_hash.symbolize_keys %>"><%= _("Filter by {{attribute}}", :attribute => attribute.humanize) %></option>
+    <option value="<%= url_for params.merge(attribute => nil) %>"><%= _("Filter by {{attribute}}", :attribute => attribute.humanize) %></option>
     <% items.each do |key, value| %>
     <% selected = "selected" if params[attribute].eql?(key.to_s) %>
-    <option <%= selected %> value="<%= url_for params.merge(attribute => key).to_hash.symbolize_keys %>"><%= value %></option>
+    <option <%= selected %> value="<%= url_for params.merge(attribute => key) %>"><%= value %></option>
     <% end %>
   </select>
   </form>
