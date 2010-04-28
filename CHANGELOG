@@ -52,6 +52,9 @@
 [X] Add defaults options for the fields and do not fallback into list.
 [X] Support for XSS.
 [X] Fix problem on entries with attachment when using to_label.
+[X] "Remove entry" should become "Remove {{resource}}"
+[X] Merge generator methods to create resource/service controllers.
+[X] Remove Typus "blue" color and use something more neutral.
 
 [-] Allow users to download the demo hosted at heroku.com
 [-] Move html code from helpers to partials.
@@ -64,14 +67,12 @@
 [ ] Show auto_generated, read_only on string fields. (_string.html.erb)
 [ ] Pass options hash to form fields.
 [ ] Fix css to display correctly "select" fields in relationships.
-[ ] Remove Typus "blue" color and use something more neutral.
 [ ] Ajax pagination. (?)
 [ ] Add test for `typus_table_selector`.
 [ ] Forever loop when schema has not been migrated.
 [ ] Pagination doesn't work properly when having multiple paginators on edit page
 [ ] Add support for `has_one` relationships.
 [ ] Remove all crappy rescues.
-[ ] Merge generator methods to create resource/service controllers.
 [ ] Search in multiple models.
 [ ] Nested models.
 [ ] Contextual content depending on the logged user.
@@ -90,7 +91,6 @@
 [ ] Fix footer to the bottom.
 [ ] Show sort arrow on hover.
 [ ] Clicking on h1 should open website (root_path) when available.
-[X] "Remove entry" should become "Remove {{resource}}"
 [ ] `Typus.applications` should become `Typus.groups`.
 [ ] Decide where to put the search box.
 [ ] Split typus generator in two: typus and typus_migration
