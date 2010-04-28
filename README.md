@@ -30,8 +30,9 @@ extensible enough to match lots of use cases.
 
 ## Links
 
-- [Project site and documentation](http://intraducibles.com/projects/typus)
-- [Plugin source](http://github.com/fesplugas/typus)
+- [Project page](http://intraducibles.com/projects/typus)
+- [Documentation](http://intraducibles.com/projects/typus/documentation)
+- [Plugin source code](http://github.com/fesplugas/typus)
 - [Mailing list](http://groups.google.com/group/typus)
 - [Bug reports](http://github.com/fesplugas/typus/issues)
 - [Gems](http://gemcutter.org/gems/typus)
@@ -58,6 +59,16 @@ Use the following credentials to log in.
 
     Email: user@intraducibles.com
     Password: columbia
+
+The demo application is available at GitHub.
+
+    $ git clone git://github.com/fesplugas/typus_demo.git
+    $ cd typus_demo
+    $ git submodule init
+    $ git submodule update
+    $ bundle install
+    $ rake db:setup
+    $ rails server
 
 ## Installing
 

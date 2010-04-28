@@ -47,7 +47,7 @@
 [X] Use `inherit_views` code to `inherit_views`.
 [X] Decide what to do with the QuickEdit. (Removed on 20100409)
 [X] Refactored all sessions/account handling.
-[X] Improved usability on password recovery based on how Github works.
+[X] Improved usability on password recovery based on how GitHub works.
 [X] Removed footer links and added them to dashboard#sidebar.
 [X] Add defaults options for the fields and do not fallback into list.
 [X] Support for XSS.
@@ -55,6 +55,10 @@
 [X] "Remove entry" should become "Remove {{resource}}"
 [X] Merge generator methods to create resource/service controllers.
 [X] Remove Typus "blue" color and use something more neutral.
+[X] Split typus generator in two: typus and typus_migration
+[X] Enable mechanism to skip Typus authentication so we can use other engines.
+[X] Make sure TypusUser model is created in the application.
+[X] Review documentation and decide where to publish it.
 
 [-] Allow users to download the demo hosted at heroku.com
 [-] Move html code from helpers to partials.
@@ -77,15 +81,12 @@
 [ ] Nested models.
 [ ] Contextual content depending on the logged user.
 [ ] Include dashboard#sidebar in the generator so use can easily overwrite it.
-[ ] Enable mechanism to skip Typus authentication so we can use other engines.
 [ ] Verify generator is working properly.
 [ ] Test generator?
-[ ] Make sure TypusUser model is created in the application.
 [ ] Added comment on all FIXME tests. Try to fix them first.
 [ ] Remove all raw calls.
 [ ] Refactor typus_form_has_one.
 [ ] Convert plugin to engine.
-[ ] Review documentation and decide where to publish it.
 [ ] Verify lightbox is working as expected.
 [ ] Fix sidebar texts.
 [ ] Fix footer to the bottom.
@@ -93,5 +94,4 @@
 [ ] Clicking on h1 should open website (root_path) when available.
 [ ] `Typus.applications` should become `Typus.groups`.
 [ ] Decide where to put the search box.
-[ ] Split typus generator in two: typus and typus_migration
 [ ] Removing an item should redirect to back without the page params.
