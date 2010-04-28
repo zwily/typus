@@ -205,7 +205,7 @@ module Admin
       end
 
       content = html_position.join(' / ')
-      return content_tag(:td, content)
+      return content_tag(:td, content.html_safe)
 
     end
 
