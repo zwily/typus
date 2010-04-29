@@ -28,10 +28,6 @@ module AdminHelper
 
     links = []
 
-    unless params[:controller] == 'admin/dashboard'
-      links << (link_to_unless_current _("Dashboard"), admin_dashboard_path)
-    end
-
     Typus.models_on_header.each do |model|
       links << (link_to_unless_current model.constantize.model_name.human.pluralize, :controller => "/admin/#{model.tableize}")
     end
