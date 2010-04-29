@@ -190,9 +190,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal 15, TypusUser.typus_options_for(:form_rows)
     assert_equal 15, TypusUser.typus_options_for("form_rows")
 
-    assert Page.typus_options_for(:on_header)
-    assert !TypusUser.typus_options_for(:on_header)
-
     assert_nil TypusUser.typus_options_for(:unexisting)
 
   end

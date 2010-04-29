@@ -50,11 +50,6 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal %w(Asset Category Comment CustomUser Delayed::Task Page Picture Post TypusUser View), Typus.models
   end
 
-  def test_should_return_an_array_of_models_on_header
-    assert Typus.models_on_header.kind_of?(Array)
-    assert_equal %w(Page), Typus.models_on_header
-  end
-
   def test_should_verify_resources_class_method
     assert Typus.respond_to?(:resources)
     assert_equal %w(Git Order Status WatchDog), Typus.resources

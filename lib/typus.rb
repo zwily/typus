@@ -95,10 +95,6 @@ Developed by <a href="http://intraducibles.com" rel="external">intraducibles.com
       Typus::Configuration.config.map { |i| i.first }.sort
     end
 
-    def models_on_header
-      models.collect { |m| m if m.constantize.typus_options_for(:on_header) }.compact
-    end
-
     # List of resources, which are tableless models.
     def resources
       Typus::Configuration.roles.keys.map do |key|

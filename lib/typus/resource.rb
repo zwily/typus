@@ -32,10 +32,6 @@ module Typus
     mattr_accessor :nil
     @@nil = "nil"
 
-    # Defines on_header.
-    mattr_accessor :on_header
-    @@on_header = false
-
     # Defines only_user_items.
     mattr_accessor :only_user_items
     @@only_user_items = false
