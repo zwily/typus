@@ -3,10 +3,9 @@
   <h2><%= _("Search") %></h2>
 
   <%= form_tag url_for(:controller => params[:controller]), :method => :get do %>
+    <!-- <%= _("Search by") %> <%= search_by.downcase %> -->
     <p><input id="search" name="search" type="text" value="<%= params[:search] %>"/></p>
     <%= raw hidden_params %>
   <% end %>
-
-  <p class="tip"><%= _("Search by") %> <%= search_by.downcase %>.</p>
 
 </div>
