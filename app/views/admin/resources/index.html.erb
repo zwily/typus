@@ -7,7 +7,7 @@
   <small><%= remove_filter_link %></small>
 </h2>
 
-<% if build_filters || search %>
+<% if build_filters || search && !@resource.count.zero? %>
   <div class="filters">
     <%= build_filters %>
     <%= search %>
