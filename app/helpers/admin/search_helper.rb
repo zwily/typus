@@ -2,12 +2,12 @@ module Admin
 
   module SearchHelper
 
-    def search
+    def search(resource = @resource)
 
-      typus_search = @resource.typus_defaults_for(:search)
+      typus_search = resource.typus_defaults_for(:search)
       return if typus_search.empty?
 
-      search_by = typus_search.collect { |x| @resource.human_attribute_name(x) }.to_sentence
+      search_by = typus_search.collect { |x| resource.human_attribute_name(x) }.to_sentence
 
       search_params = params.dup
       %w( action controller search page id ).each { |p| search_params.delete(p) }
