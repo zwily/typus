@@ -59,8 +59,11 @@
 [X] Enable mechanism to skip Typus authentication so we can use other engines.
 [X] Make sure TypusUser model is created in the application.
 [X] Review documentation and decide where to publish it.
+[X] Fix sidebar texts.
+[X] Allow users to download the demo hosted at heroku.com
+[ ] Removed javascript from filters. Now there's a form to submit the 
+    search. This is how Wordpress works.
 
-[-] Allow users to download the demo hosted at heroku.com
 [-] Move html code from helpers to partials.
 [ ] Add `has_many` through relationships.
 [ ] Test default typus forms and remove old tests.
@@ -88,7 +91,6 @@
 [ ] Refactor typus_form_has_one.
 [ ] Convert plugin to engine.
 [ ] Verify lightbox is working as expected.
-[ ] Fix sidebar texts.
 [ ] Fix footer to the bottom.
 [ ] Show sort arrow on hover.
 [ ] Clicking on h1 should open website (root_path) when available.
