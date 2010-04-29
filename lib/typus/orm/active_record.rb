@@ -217,7 +217,10 @@ module Typus
         conditions, joins = merge_conditions, []
 
         query_params = params.dup
-        %w( action controller ).each { |param| query_params.delete(param) }
+        %w(action controller).each { |param| query_params.delete(param) }
+
+        # Remove from params those with empty string.
+        query_params.delete_if { |k, v| v.empty? }
 
         # If a search is performed.
         if query_params[:search]
