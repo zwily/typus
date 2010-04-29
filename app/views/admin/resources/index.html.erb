@@ -2,16 +2,17 @@
   <%= build_sidebar %>
 <% end %>
 
-<% content_for :search do %>
-  <%= search %>
-<% end %>
-
 <h2>
   <%= _("Edit {{resources}}", :resources => @resource.model_name.human.pluralize) %>
   <small><%= remove_filter_link %></small>
 </h2>
 
-<%= build_filters %>
+<% if build_filters || search %>
+  <div class="filters">
+    <%= build_filters %>
+    <%= search %>
+  </div>
+<% end %>
 
 <%= typus_block %>
 
