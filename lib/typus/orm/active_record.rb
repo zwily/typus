@@ -160,7 +160,7 @@ module Typus
         fields = typus_defaults_for(:order_by)
 
         if fields.empty?
-          "#{table_name}.id ASC"
+          "#{table_name}.#{primary_key} ASC"
         else
           fields.map do |field|
             field.include?('-') ? "#{table_name}.#{field.delete('-')} DESC" : "#{table_name}.#{field} ASC"
