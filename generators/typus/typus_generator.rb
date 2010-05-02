@@ -220,7 +220,9 @@ class TypusGenerator < Rails::Generator::Base
 
       # Generate the model file if it's custom.
       unless options[:user_class_name] == 'TypusUser'
-        m.template "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
+        m.template "model.rb", 
+                   "app/models/#{options[:user_class_name].underscore}.rb", 
+                   :typus_users_table_name => options[:user_class_name].tableize
       end
 
       ##
