@@ -3,7 +3,7 @@ module Admin
   module DashboardHelper
 
     def applications
-      apps = ActiveSupport::OrderedHash.new
+      apps = {}
 
       Typus.models.each do |model|
         # Get the application name.
