@@ -4,7 +4,7 @@ module Admin
 
     def build_sidebar
       resources = ActiveSupport::OrderedHash.new
-      app_name = @resource.typus_defaults_for("application").to_s
+      app_name = @resource.typus_application
 
       Typus.application(app_name).each do |resource|
         next unless @current_user.resources.include?(resource)
