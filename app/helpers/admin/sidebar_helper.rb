@@ -7,6 +7,7 @@ module Admin
       app_name = @resource.typus_defaults_for("application").to_s
 
       Typus.application(app_name).each do |resource|
+        next unless @current_user.resources.include?(resource)
         klass = resource.constantize
         resources[resource] = [ default_actions(klass) ] + export(klass) + custom_actions(klass)
       end
