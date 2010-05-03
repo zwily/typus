@@ -63,6 +63,10 @@
 [X] Allow users to download the demo hosted at heroku.com
 [ ] Removed javascript from filters. Now there's a form to submit the 
     search. This is how Wordpress works.
+[X] Applications without application name defined will appear as 
+    unknown on the dashboard.
+[X] Search fields now support exact match, beginning of the field and 
+    full-text match which is the default.
 
 [-] Move html code from helpers to partials.
 [ ] Add `has_many` through relationships.
