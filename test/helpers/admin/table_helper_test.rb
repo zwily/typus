@@ -58,9 +58,9 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
     output = table_header(TypusUser, fields)
     expected = [ "admin/helpers/table_header",
-                 { :headers=> [ %(<a href="http://test.host/admin/typus_users?order_by=email">Email </a>),
-                                %(<a href="http://test.host/admin/typus_users?order_by=role">Role </a>),
-                                %(<a href="http://test.host/admin/typus_users?order_by=status\">Status </a>), 
+                 { :headers=> [ %(<a href="http://test.host/admin/typus_users?order_by=email">Email</a>),
+                                %(<a href="http://test.host/admin/typus_users?order_by=role">Role</a>),
+                                %(<a href="http://test.host/admin/typus_users?order_by=status">Status</a>), 
                                 "&nbsp;"] } ]
 
     assert_equal expected, output
@@ -83,9 +83,9 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     output = table_header(TypusUser, fields)
 
     expected = [ "admin/helpers/table_header",
-                 { :headers => [ %(<a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email </a>), 
-                                 %(<a href="http://test.host/admin/typus_users?order_by=role&search=admin">Role </a>), 
-                                 %(<a href="http://test.host/admin/typus_users?order_by=status&search=admin">Status </a>), 
+                 { :headers => [ %(<a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email</a>), 
+                                 %(<a href="http://test.host/admin/typus_users?order_by=role&search=admin">Role</a>), 
+                                 %(<a href="http://test.host/admin/typus_users?order_by=status&search=admin">Status</a>), 
                                  %(&nbsp;) ] } ]
 
     assert_equal expected, output
@@ -108,9 +108,9 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     output = table_header(TypusUser, fields)
 
     expected = [ "admin/helpers/table_header",
-                 { :headers => [ %(<a href="http://test.host/admin/typus_users?order_by=email">Email </a>), 
-                                 %(<a href="http://test.host/admin/typus_users?order_by=role">Role </a>), 
-                                 %(<a href="http://test.host/admin/typus_users?order_by=status">Status </a>) ] } ]
+                 { :headers => [ %(<a href="http://test.host/admin/typus_users?order_by=email">Email</a>), 
+                                 %(<a href="http://test.host/admin/typus_users?order_by=role">Role</a>), 
+                                 %(<a href="http://test.host/admin/typus_users?order_by=status">Status</a>) ] } ]
 
     assert_equal expected, output
 
@@ -132,9 +132,9 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     output = table_header(TypusUser, fields)
 
     expected = [ "admin/helpers/table_header",
-                 { :headers => [ %(<a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email </a>), 
-                                 %(<a href="http://test.host/admin/typus_users?order_by=role&search=admin">Role </a>), 
-                                 %(<a href="http://test.host/admin/typus_users?order_by=status&search=admin">Status </a>) ] } ]
+                 { :headers => [ %(<a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email</a>), 
+                                 %(<a href="http://test.host/admin/typus_users?order_by=role&search=admin">Role</a>), 
+                                 %(<a href="http://test.host/admin/typus_users?order_by=status&search=admin">Status</a>) ] } ]
     assert_equal expected, output
 
   end
