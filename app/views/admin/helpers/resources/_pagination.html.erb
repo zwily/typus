@@ -8,7 +8,7 @@
   <div class="left">
 
     <% if @items.prev? %>
-      <%= link_to raw(previous_text), params.merge(:page => @items.prev.number, :anchor => @options[:anchor]).to_hash.symbolize_keys %>
+      <%= link_to raw(previous_text), params.merge(:page => @items.prev.number, :anchor => @options[:anchor]) %>
     <% else %>
       <span class="disabled"><%= raw(previous_text) %></span>
     <% end %>
@@ -18,7 +18,7 @@
   <div class="right">
 
     <% if @items.next? %>
-      <%= link_to raw(next_text), params.merge(:page => @items.next.number, :anchor => @options[:anchor]).to_hash.symbolize_keys %>
+      <%= link_to raw(next_text), params.merge(:page => @items.next.number, :anchor => @options[:anchor]) %>
     <% else %>
       <span class="disabled"><%= raw(next_text) %></span>
     <% end %>

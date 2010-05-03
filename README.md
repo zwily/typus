@@ -9,7 +9,8 @@ extensible enough to match lots of use cases.
 
 ## Key Features
 
-- Access control by users and roles.
+- Authentication by session or by http.
+- Access control by users and roles (only on session authentication).
 - CRUD and custom actions for your models on a clean interface.
 - Internationalized interface.
 - Extensible and overwritable templates.
@@ -30,49 +31,47 @@ extensible enough to match lots of use cases.
 
 ## Links
 
-- [Project site and documentation](http://intraducibles.com/projects/typus)
-- [Plugin source](http://github.com/fesplugas/typus)
+- [Project page](http://intraducibles.com/projects/typus)
+- [Documentation](http://intraducibles.com/projects/typus/documentation)
+- [Plugin source code](http://github.com/fesplugas/typus)
 - [Mailing list](http://groups.google.com/group/typus)
 - [Bug reports](http://github.com/fesplugas/typus/issues)
 - [Gems](http://gemcutter.org/gems/typus)
 
-## Impatients to see it working?
+## Demo application
 
-**Step 1:** Create a Rails application using a template.
-
-    $ rails example.com -m http://tr.im/typus_example
-
-**Step 2:** Start the server.
-
-    $ cd example.com && script/rails server
-
-**Step 3:** Go to the admin area
-
-    $ open http://0.0.0.0:3000/admin
-
-## Want to see a demo working?
-
-Demo application is hosted at Heroku (<http://typus.heroku.com/>).
-
-Use the following credentials to log in.
+Go to http://typus.heroku.com/ and use the following credentials to log in:
 
     Email: user@intraducibles.com
     Password: columbia
 
+The demo application is available at GitHub:
+
+    $ git clone git://github.com/fesplugas/typus_demo.git
+    $ cd typus_demo
+    $ git submodule init
+    $ git submodule update
+    $ bundle install
+    $ rake db:setup
+    $ rails server
+
+You can also use a template to create the demo application:
+
+    $ rails typus_demo -m http://tr.im/typus_example
+
 ## Installing
 
-Install from GitHub the latest version which it's compatible with `Rails 3.0.0.beta2`.
+Install from GitHub the latest version which it's compatible with `Rails 3.0.0 edge`.
 
-    $ script/rails plugin install git://github.com/fesplugas/typus.git
+    $ rails plugin install git://github.com/fesplugas/typus.git
 
 Once `typus` is installed, run the generator to create required files 
 and migrate your database.
 
-    $ script/rails generate typus
+    $ rails generate typus
     $ rake db:migrate
 
-To create the first user, start the application server, go to 
-http://0.0.0.0:3000/admin and follow the instructions.
+Start the application server and go to http://0.0.0.0:3000/admin.
 
 ## Support
 

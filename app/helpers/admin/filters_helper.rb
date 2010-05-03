@@ -2,42 +2,32 @@ module Admin
 
   module FiltersHelper
 
-    def build_filters(filter, items)
-      render "admin/helpers/filters/filters", :items => items, :attribute => filter
-    end
+    def build_filters(resource = @resource)
 
-    def filters
-
-      typus_filters = @resource.typus_filters
+      typus_filters = resource.typus_filters
       return if typus_filters.empty?
 
       current_request = request.env['QUERY_STRING'] || []
 
       filters = typus_filters.map do |key, value|
-        case value
-        when :boolean then boolean_filter(current_request, key)
-        when :string then string_filter(current_request, key)
-        when :date, :datetime then date_filter(current_request, key)
-        when :belongs_to then relationship_filter(current_request, key)
-        when :has_many, :has_and_belongs_to_many then
-          relationship_filter(current_request, key, true)
-        when nil then
-          # Do nothing. This is ugly but for now it's ok.
-        else
-          string_filter(current_request, key)
-        end
+        filter, items, message = case value
+                                 when :boolean then boolean_filter(current_request, key)
+                                 when :string then string_filter(current_request, key)
+                                 when :date, :datetime then date_filter(current_request, key)
+                                 when :belongs_to then relationship_filter(current_request, key)
+                                 when :has_many, :has_and_belongs_to_many then
+                                   relationship_filter(current_request, key, true)
+                                 # when nil then
+                                     # Do nothing. This is ugly but for now it's ok.
+                                 else
+                                   string_filter(current_request, key)
+                                 end
+
+        { :filter => filter, :items => items, :message => message } 
+
       end
 
-      html = <<-HTML
-<div id="filters">
-  <ul>
-    #{filters}
-  </ul>
-</div>
-      HTML
-
-      return raw(html)
-
+      render "admin/helpers/filters/filters", :filters => filters
     end
 
     def relationship_filter(request, filter, habtm = false)
@@ -47,32 +37,40 @@ module Admin
       related_fk = (habtm) ? filter : att_assoc.primary_key_name
 
       params_without_filter = params.dup
-      %w( controller action page ).each { |p| params_without_filter.delete(p) }
+      %w(controller action page).each { |p| params_without_filter.delete(p) }
       params_without_filter.delete(related_fk)
 
       values = model.all(:order => model.typus_order_by)
       values_labelized = values.map { |v| v.to_label }
-      items = values.to_hash(values_labelized)
+      items = values.map(&:id).to_hash(values_labelized)
 
-      build_filters(filter, items)
+      message = _("View all {{attribute}}", :attribute => filter.pluralize)
+
+      return filter, items, message
     end
 
     def date_filter(request, filter)
       values = %w(today last_few_days last_7_days last_30_days)
       values_humanized = values.map { |v| _(v.humanize) }
       items = values.to_hash(values_humanized)
-      build_filters(filter, items)
+      message = _("Show all dates")
+
+      return filter, items, message
     end
 
     def boolean_filter(request, filter)
       items = @resource.typus_boolean(filter)
-      build_filters(filter, items)
+      message = _("Show by {{attribute}}", :attribute => filter)
+
+      return filter, items, message
     end
 
     def string_filter(request, filter)
       values = @resource::const_get(filter.to_s.upcase)
-      items = values.kind_of?(Hash) ? values.invert : values.to_hash(values)
-      build_filters(filter, items)
+      items = values.kind_of?(Hash) ? values : values.to_hash(values)
+      message = _("Show by {{attribute}}", :attribute => filter)
+
+      return filter, items, message
     end
 
   end

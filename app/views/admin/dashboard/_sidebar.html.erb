@@ -1,12 +1,16 @@
-<h2>Welcome to Typus!</h2>
+<div class="resource">
 
-<p>Useful links:</p>
+  <h2><%= link_to_unless_current "Dashboard", admin_dashboard_path %></h2>
 
-<ul>
-  <li><%= link_to _("Mailing list"), "http://groups.google.com/group/typus" %></li>
-  <li><%= link_to _("Submit a bug report"), "http://github.com/fesplugas/typus/issues" %></li>
-  <li><%= link_to _("Documentation"), "http://typus.github.com/" %></li>
-  <li><%= link_to _("License"), "http://typus.github.com/mit-license" %></li>
-</ul>
+  <% if params[:controller] == "admin/dashboard" %>
 
-<p>Want to customize this sidebar?</p>
+    <ul>
+      <li><%= link_to _("Mailing list"), "http://groups.google.com/group/typus" %></li>
+      <li><%= link_to _("Submit a bug report"), "http://github.com/fesplugas/typus/issues" %></li>
+      <li><%= link_to _("Documentation"), "http://intraducibles.com/projects/typus/documentation/" %></li>
+      <li><%= link_to _("License"), "http://intraducibles.com/projects/typus/documentation/#mit-license" %></li>
+    </ul>
+
+  <% end %>
+
+</div>

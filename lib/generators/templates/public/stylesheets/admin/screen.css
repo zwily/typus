@@ -15,6 +15,7 @@ em { font-style: italic; }
 dl { margin: 14px 0 20px 0; }
 dt { font-weight: bold; }
 dd { font-size: 18px; margin: 0.25em 0 1em 0; }
+dd p { color: #000; }
 
 p { color: #777; margin: 0.5em 0; }
 
@@ -147,9 +148,7 @@ fieldset.inputs { }
   }
 
   fieldset.inputs textarea {
-    border: 1px solid #999;
-    font-family: "Courier";
-    font-size: 14px;
+    font-size: 1.2em;
     padding: 3px;
     width: 691px;
   }
@@ -263,7 +262,6 @@ body#account {
 /* @group Hacks */
 
 .clear { clear: both; }
-.tip { font-size: 0.9em; }
 .box_relationships { margin-top: 2.5em; }
 
 /* @end */
@@ -308,16 +306,23 @@ body#account {
 
 /* @group Filters */
 
-#filters { height: 2em; margin: 0 0 1em 0; }
-#filters ul { margin: 0; }
-#filters ul li { float: left; list-style: none; margin: 0 1em 0 0; }
+#content .filters {
+  border-top: 1px solid #D3D3D3;
+  border-bottom: 1px solid #D3D3D3;
+  height: 2em;
+  margin: 0 0 1em 0;
+  padding: 1em 0;
+}
+
+#content .filters ul { margin: 0; }
+#content .filters ul li { float: left; list-style: none; margin: 0 1em 0 0; }
 
 /* @end */
 
 /* @group Search */
 
-#search { }
+#search { float: right; margin: 0px 0 0 0; }
 #search h2 { display: none; }
-input#search { border: 1px solid #999; font-size: 1.2em; padding: 3px; }
+#search input { font-size: 1em; padding: 3px; margin: -5px 0 0 0; }
 
 /* @end */

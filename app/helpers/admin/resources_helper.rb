@@ -80,7 +80,7 @@ module Admin
       options = { :controller => klass.to_resource }
       items = klass.typus_actions_on("index").map do |action|
         if @current_user.can?(action, klass)
-          (link_to _(action.humanize), options.merge(:action => action).to_hash.symbolize_keys)
+          (link_to _(action.humanize), options.merge(:action => action))
         end
       end
     end

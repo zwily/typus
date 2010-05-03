@@ -2,16 +2,17 @@
   <%= build_sidebar %>
 <% end %>
 
-<% content_for :search do %>
-  <%= search %>
-<% end %>
-
 <h2>
   <%= _("Edit {{resources}}", :resources => @resource.model_name.human.pluralize) %>
   <small><%= remove_filter_link %></small>
 </h2>
 
-<%= filters %>
+<% if build_filters || search && !@resource.count.zero? %>
+  <div class="filters">
+    <%= build_filters %>
+    <%= search %>
+  </div>
+<% end %>
 
 <%= typus_block %>
 
@@ -19,6 +20,9 @@
   <%= raw build_list(@resource, @fields, @items) %>
   <%= pagination %>
 <% else %>
-  <% message = @resource.count.zero? ? "There are no {{records}}." : "There are no {{records}} under this filter." %>
-  <p><%= _(message, :records => @resource.model_name.human.pluralize.downcase) %></p>
+  <% if @resource.count.zero? %>
+    <p><%= _("There are no {{records}}.", :records => @resource.model_name.human.pluralize.downcase) %> <%= link_to _("Create one now."), :action => "new" %></p>
+  <% else %>
+    <p><%= _("There are no {{records}} under this filter.", :records => @resource.model_name.human.pluralize.downcase) %></p>
+  <% end %>
 <% end %>

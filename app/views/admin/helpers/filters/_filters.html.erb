@@ -1,22 +1,31 @@
-<% content_for :javascripts do %>
-  <script>
-  function surfto_<%= attribute %>(form) {
-    var myindex = form.<%= attribute %>.selectedIndex
-    if (form.<%= attribute %>.options[myindex].value != "0") {
-      top.location.href = form.<%= attribute %>.options[myindex].value;
-    }
-  }
-  </script>
-<% end %>
+<div id="filters">
 
-<li>
-  <form class="form" action="#">
-  <select name="<%= attribute %>" onChange="surfto_<%= attribute %>(this.form)">
-    <option value="<%= url_for params.merge(attribute => nil).to_hash.symbolize_keys %>"><%= _("Filter by {{attribute}}", :attribute => attribute.humanize) %></option>
-    <% items.each do |key, value| %>
-    <% selected = "selected" if params[attribute].eql?(key.to_s) %>
-    <option <%= selected %> value="<%= url_for params.merge(attribute => key).to_hash.symbolize_keys %>"><%= value %></option>
+  <ul>
+
+    <%= form_tag "", :method => :get do %>
+
+      <% filters.each do |filter| %>
+
+        <li>
+          <select name="<%= filter[:filter] %>">
+            <option value=""><%= filter[:message] %></option>
+            <% filter[:items].each do |key, value| %>
+            <% selected = "selected" if params[filter[:filter]].eql?(key.to_s) %>
+            <option <%= selected %> value="<%= key %>"><%= value %></option>
+            <% end %>
+          </select>
+        </li>
+
+      <% end %>
+
+    <%= hidden_field_tag :search, params[:search] %>
+
+    <li>
+      <%= submit_tag _("Filter"), :name => nil %>
+    </li>
+
     <% end %>
-  </select>
-  </form>
-</li>
+
+  </ul>
+
+</div>

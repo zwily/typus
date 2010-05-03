@@ -16,11 +16,13 @@ hu:
 
   "Back to list": "Vissza a listához"
 
+  "Cancel and go back": 
   "Change {{attribute}}?": "Megváltoztatod ezt: {{attribute}}?"
   "Change password": "Jelszó megváltoztatása"
   "Checked if active": "Bejelölve aktív"
   "Click OK to continue, or click Cancel to stay on this page": "Kattints az OK gombra a továbblépéshez, vagy a mégse gombbal maradhatsz a mostani oldalon"
   "Create {{resource}}": "{{resource}} létrehozása"
+  "Create one now": 
 
   "Dashboard": "Admin nyitólap"
   "Do you want to cancel it?": "Szeretnéd visszavonni?"
