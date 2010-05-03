@@ -131,6 +131,28 @@ module Typus
         return (!data.nil?) ? data.extract_settings : []
       end
 
+      def typus_search_fields
+        data = Typus::Configuration.config[name]["search"]
+        return [] if data.nil?
+
+        search = {}
+
+        data.extract_settings.each do |field|
+          if field.starts_with?("=")
+            field.slice!(0)
+            search[field] = "="
+          elsif field.starts_with?("^")
+            field.slice!(0)
+            search[field] = "^"
+          else
+            search[field] = "@"
+          end
+        end
+
+        return search
+
+      end
+
       # TODO: Test method.
       def typus_application
         Typus::Configuration.config[name]["application"] || "Unknown"
@@ -230,10 +252,16 @@ module Typus
         # If a search is performed.
         if query_params[:search]
           query = ActiveRecord::Base.connection.quote_string(query_params[:search].downcase)
-          search = typus_defaults_for(:search).map do |s|
-                     ["LOWER(#{s}) LIKE '%#{query}%'"]
-                   end
-          conditions = merge_conditions(conditions, search.join(' OR '))
+          search = []
+          typus_search_fields.each do |key, value|
+            _query = case value
+                     when "=" then query
+                     when "^" then "#{query}%"
+                     when "@" then "%#{query}%"
+                     end
+            search << "#{key} LIKE '#{_query}'"
+          end
+          conditions = merge_conditions(conditions, search.join(" OR "))
         end
 
         query_params.each do |key, value|
