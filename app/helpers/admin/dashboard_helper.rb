@@ -14,7 +14,7 @@ module Admin
         apps[app_name] << model if @current_user.resources.include?(model)
       end
 
-      render File.join(path, "applications"), :applications => apps.compact
+      render File.join(path, "applications"), :applications => apps.compact.sort
     end
 
     def resources
