@@ -5,15 +5,16 @@ module Admin
     def applications
       apps = ActiveSupport::OrderedHash.new
 
-      Typus.applications.each do |app|
-        available = Typus.application(app).map do |resource|
-                      resource if @current_user.resources.include?(resource)
-                    end.compact
-        next if available.empty?
-        apps[app] = available.sort_by { |x| x.constantize.model_name.human }
+      Typus.models.each do |model|
+        # Get the application name.
+        app_name = model.constantize.typus_application
+        # Initialize the application if needed.
+        apps[app_name] = [] unless apps.keys.include?(app_name)
+        # Add model to the application only if the @current_user has permission.
+        apps[app_name] << model if @current_user.resources.include?(model)
       end
 
-      render File.join(path, "applications"), :applications => apps
+      render File.join(path, "applications"), :applications => apps.compact
     end
 
     def resources

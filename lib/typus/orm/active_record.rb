@@ -131,6 +131,11 @@ module Typus
         return (!data.nil?) ? data.extract_settings : []
       end
 
+      # TODO: Test method.
+      def typus_application
+        Typus::Configuration.config[name]["application"] || "Unknown"
+      end
+
       def typus_field_options_for(filter)
         Typus::Configuration.config[name]['fields']['options'][filter.to_s].extract_settings.collect { |i| i.to_sym }
       rescue
