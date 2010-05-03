@@ -99,7 +99,7 @@ specs:
     version: 1.2.2
 - sqlite3-ruby: 
     version: 1.2.5
-hash: 315f765277df4a8c07b1840c503884a1c75accfb
+hash: d0d92e1b03902f20bbe82a70bf5622fd6ac572c3
 sources: 
 - Rubygems: 
     uri: http://rubygems.org
