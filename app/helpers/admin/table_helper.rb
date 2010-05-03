@@ -17,14 +17,15 @@ module Admin
         key = key.gsub(".", " ") if key.match(/\./)
         content = key.end_with?('_id') ? key : model.human_attribute_name(key)
 
+        association = model.reflect_on_association(key.to_sym)
+        order_by = association ? association.primary_key_name : key
+
         if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym)) && params[:action] == 'index'
           sort_order = case params[:sort_order]
-                       when 'asc'   then ['desc', '&darr;']
-                       when 'desc'  then ['asc', '&uarr;']
-                       else
-                         [nil, nil]
+                       when 'asc' then ['desc', '&darr;']
+                       when 'desc' then ['asc', '&uarr;']
+                       else [nil, nil]
                        end
-          order_by = model.reflect_on_association(key.to_sym).primary_key_name rescue key
           switch = sort_order.last if params[:order_by].eql?(order_by)
           options = { :order_by => order_by, :sort_order => sort_order.first }
           content = link_to raw("#{content} #{switch}"), params.merge(options)
