@@ -4,8 +4,6 @@ module Admin
 
     def typus_preview(item, attribute)
 
-      # typus_preview(attribute) unless @item.send(attribute).blank?
-      #
       return unless item.attachment_present?(attribute)
 
       attachment = attribute.split("_file_name").first
@@ -18,6 +16,7 @@ module Admin
 
       href = if has_file_preview
                url = item.send(attachment).url(file_preview)
+               # FIXME: This has changed on Rails3.
                # ActionController::Base.relative_url_root + url
              else
                item.send(attachment).url
