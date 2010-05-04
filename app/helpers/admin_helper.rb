@@ -25,16 +25,7 @@ module AdminHelper
   end
 
   def header
-
-    links = []
-
-    if Rails.application.routes.routes.map(&:name).include?(:root)
-      links << (link_to _("View site"), root_path, :target => 'blank')
-    end
-
-    render "admin/helpers/header", 
-           :links => links
-
+    render "admin/helpers/header"
   end
 
   def login_info(user = @current_user)

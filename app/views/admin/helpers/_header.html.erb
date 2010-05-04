@@ -1,7 +1,7 @@
-<h1><%= Typus.admin_title %></h1>
-
-<ul>
-<% links.each do |link| -%>
-  <li><%= link %></li>
-<% end -%>
-</ul>
+<h1>
+  <% if Rails.application.routes.routes.map(&:name).include?(:root) %>
+    <%= link_to Typus.admin_title, root_path %>
+  <% else %>
+    <%= Typus.admin_title %>
+  <% end %>
+</h1>
