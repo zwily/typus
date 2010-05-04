@@ -233,7 +233,7 @@ class Admin::ResourcesController < AdminController
   end
 
   def set_order
-    params[:sort_order] ||= 'desc'
+    params[:sort_order] ||= "desc"
     @order = params[:order_by] ? "#{@resource.table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource.typus_order_by
   end
 
