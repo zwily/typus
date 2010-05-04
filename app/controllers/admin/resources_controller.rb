@@ -89,15 +89,7 @@ class Admin::ResourcesController < AdminController
 
   def show
     check_resource_ownership and return if @resource.typus_options_for(:only_user_items)
-
-    respond_to do |format|
-      format.html { select_template }
-      # TODO: Responders for multiple file formats. For example PDF ...
-      format.xml do
-        fields = @resource.typus_fields_for(:xml).collect { |i| i.first }
-        render :xml => @item.to_xml(:only => fields)
-      end
-    end
+    select_template
   end
 
   def update
