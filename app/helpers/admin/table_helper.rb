@@ -191,7 +191,6 @@ module Admin
       return content_tag(:td, content)
     end
 
-    # OPTIMIZE: Move html code to partial.
     def table_position_field(attribute, item)
       html_position = []
 
