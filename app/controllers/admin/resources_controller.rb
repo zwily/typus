@@ -33,21 +33,13 @@ class Admin::ResourcesController < AdminController
   # can add your formats.
   #
   def index
-
     @conditions, @joins = @resource.build_conditions(params)
-
     check_resource_ownerships if @resource.typus_options_for(:only_user_items)
 
     respond_to do |format|
-      format.html do
-        generate_html
-        select_template
-      end
-      @resource.typus_export_formats.each do |f|
-        format.send(f) { send("generate_#{f}") }
-      end
+      format.html { generate_html and select_template }
+      @resource.typus_export_formats.each { |f| format.send(f) { send("generate_#{f}") } }
     end
-
   end
 
   def new
