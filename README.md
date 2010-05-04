@@ -37,6 +37,8 @@ extensible enough to match lots of use cases.
 - [Mailing list](http://groups.google.com/group/typus)
 - [Bug reports](http://github.com/fesplugas/typus/issues)
 - [Gems](http://gemcutter.org/gems/typus)
+- [Contributors](http://github.com/fesplugas/typus/contributors)
+
 
 ## Demo application
 
