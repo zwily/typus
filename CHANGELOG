@@ -67,6 +67,7 @@
     unknown on the dashboard.
 [X] Search fields now support exact match, beginning of the field and 
     full-text match which is the default.
+[X] Do not depend on Rdiscount when rendering content on resources#show.
 
 [-] Move html code from helpers to partials.
 [ ] Add `has_many` through relationships.
