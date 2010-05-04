@@ -159,7 +159,6 @@ class Admin::ResourcesController < AdminController
   # has_and_belongs_to_many and has_many relationships.
   #
   def relate
-
     resource_class = params[:related][:model].constantize
     resource_tableized = params[:related][:model].tableize
 
@@ -174,7 +173,6 @@ class Admin::ResourcesController < AdminController
     end
 
     redirect_to set_path
-
   end
 
   ##
