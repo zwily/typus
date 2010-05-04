@@ -223,7 +223,7 @@ module Admin
                 else
                   message = _(boolean_hash["#{status}".to_sym])
                   options = { :controller => "admin/#{item.class.to_resource}", 
-                              :action => 'toggle', 
+                              :action => "toggle", 
                               :id => item.id, 
                               :field => attribute.gsub(/\?$/,'') }
                   confirm = _("Change {{attribute}}?", 
