@@ -36,7 +36,7 @@
              h(raw_data)
            end
   -%>
-  <dd><%= raw !data.blank? ? data : ("&#151;") %></dd>
+  <dd><%= raw data.blank? ? ("&#151;") : data %></dd>
 <%- end -%>
 </dl>
 
