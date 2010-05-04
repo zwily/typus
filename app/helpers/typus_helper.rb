@@ -63,14 +63,11 @@ module TypusHelper
 
   def header
 
-    links = [ (link_to_unless_current _("Dashboard"), admin_dashboard_path) ]
+    links = []
+    links << (link_to _("Dashboard"), admin_dashboard_path) unless params[:action] == "dashboard"
 
     Typus.models_on_header.each do |model|
       links << (link_to_unless_current model.constantize.pluralized_human_name, :controller => "/admin/#{model.tableize}")
-    end
-
-    if ActionController::Routing::Routes.named_routes.routes.has_key?(:root)
-      links << (link_to _("View site"), root_path, :target => 'blank')
     end
 
     render "admin/helpers/header", :links => links
