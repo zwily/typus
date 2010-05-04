@@ -29,7 +29,6 @@ module AdminHelper
   end
 
   def login_info(user = @current_user)
-
     return if user.kind_of?(Admin::FakeUser)
 
     admin_edit_typus_user_path = { :controller => "/admin/#{Typus.user_class.to_resource}", 
@@ -44,21 +43,14 @@ module AdminHelper
                      user.name
                    end
 
-    render "admin/helpers/login_info", 
-           :message => message, 
-           :user_details => user_details
-
+    render "admin/helpers/login_info", :message => message,  :user_details => user_details
   end
 
   def display_flash_message(message = flash)
-
     return if message.empty?
     flash_type = message.keys.first
 
-    render "admin/helpers/flash_message", 
-           :flash_type => flash_type, 
-           :message => message
-
+    render "admin/helpers/flash_message", :flash_type => flash_type, :message => message
   end
 
 end
