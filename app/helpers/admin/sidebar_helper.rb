@@ -25,7 +25,7 @@ module Admin
 
     def custom_actions(klass)
       options = { :controller => klass.to_resource }
-      items = klass.typus_actions_on("index").map do |action|
+      klass.typus_actions_on("index").map do |action|
         if @current_user.can?(action, klass)
           (link_to _(action.humanize), options.merge(:action => action))
         end
