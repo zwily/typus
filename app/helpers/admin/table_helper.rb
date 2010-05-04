@@ -193,25 +193,18 @@ module Admin
 
     # OPTIMIZE: Move html code to partial.
     def table_position_field(attribute, item)
-
       html_position = []
 
-      [['Up', 'move_higher'], ['Down', 'move_lower']].each do |position|
-
-        options = { :controller => item.class.to_resource, 
-                    :action => 'position', 
-                    :id => item.id, 
-                    :go => position.last }
-
-        first_or_last = (item.respond_to?(:first?) && (position.last == 'move_higher' && item.first?)) || (item.respond_to?(:last?) && (position.last == 'move_lower' && item.last?))
-        html_position << link_to_unless(first_or_last, _(position.first), params.merge(options)) do |name|
+      { :move_higher => "Up", :move_lower => "Down" }.each do |key, value|
+        options = { :controller => item.class.to_resource, :action => "position", :id => item.id, :go => key }
+        first_or_last = (item.respond_to?(:first?) && (key == :move_higher && item.first?)) || (item.respond_to?(:last?) && (key == :move_lower && item.last?))
+        html_position << link_to_unless(first_or_last, _(value), params.merge(options)) do |name|
           %(<span class="inactive">#{name}</span>)
         end
       end
 
-      content = html_position.join(' / ')
-      return content_tag(:td, content.html_safe)
-
+      content = html_position.join(" / ").html_safe
+      return content_tag(:td, content)
     end
 
     def table_datetime_field(attribute, item, link_options = {} )
