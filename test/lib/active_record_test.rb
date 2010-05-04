@@ -348,22 +348,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal expected, TypusUser.build_conditions(params).first
   end
 
-  def test_should_verify_previous_and_next
-    assert TypusUser.instance_methods.map { |i| i.to_sym }.include?(:previous_and_next)
-    assert typus_users(:admin).previous_and_next.kind_of?(Array)
-  end
-
-  def test_should_verify_previous_and_next_works_without_conditions
-    expected = [ typus_users(:admin), typus_users(:disabled_user) ]
-    assert_equal expected, typus_users(:editor).previous_and_next
-  end
-
-  def test_should_verify_previous_and_next_works_with_conditions
-    expected = [ typus_users(:editor), typus_users(:removed_role) ]
-    conditions = { "status" => "true" }
-    assert_equal expected, typus_users(:designer).previous_and_next(conditions)
-  end
-
   def test_should_verify_typus_user_id
     assert Post.typus_user_id?
     assert !TypusUser.typus_user_id?

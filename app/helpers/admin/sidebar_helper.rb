@@ -70,32 +70,6 @@ module Admin::SidebarHelper
 
   end
 
-  def previous_and_next(klass = @resource[:class])
-
-    items = []
-
-    if @next
-      action = if klass.typus_user_id? && @current_user.is_not_root?
-                 @next.owned_by?(@current_user) ? 'edit' : 'show'
-               else
-                 @current_user.cannot?('edit', klass) ? 'show' : params[:action]
-               end
-      items << (link_to _("Next"), params.merge(:action => action, :id => @next.id))
-    end
-
-    if @previous
-      action = if klass.typus_user_id? && @current_user.is_not_root?
-                 @previous.owned_by?(@current_user) ? 'edit' : 'show'
-               else
-                 @current_user.cannot?('edit', klass) ? 'show' : params[:action]
-               end
-      items << (link_to _("Previous"), params.merge(:action => action, :id => @previous.id))
-    end
-
-    build_typus_list(items, :header => 'go_to')
-
-  end
-
   def search
 
     typus_search = @resource[:class].typus_defaults_for(:search)

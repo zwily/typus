@@ -313,38 +313,6 @@ module Typus
 
   module InstanceMethods
 
-    # TODO: Cleanup previous_ and next_ variables using options.merge().
-    def previous_and_next(condition = {}, klass = self.class)
-
-      previous_conditions = "#{klass.primary_key} < #{quote_value(id)}"
-      next_conditions = "#{klass.primary_key} > #{quote_value(id)}"
-
-      if !condition.empty?
-        conditions, joins = klass.build_conditions(condition)
-        previous_conditions += " AND #{conditions}"
-        next_conditions += " AND #{conditions}"
-      end
-
-      select = !klass.typus_user_id? ? klass.primary_key : "#{klass.primary_key}, #{Typus.user_fk}"
-
-      previous_ = klass.send(:with_exclusive_scope) do
-                    klass.find :first,
-                               :select => select,
-                               :order => "#{klass.primary_key} DESC",
-                               :conditions => previous_conditions
-                  end
-
-      next_ = klass.send(:with_exclusive_scope) do
-                klass.find :first,
-                           :select => select,
-                           :order => "#{klass.primary_key} ASC",
-                           :conditions => next_conditions
-              end
-
-      return previous_, next_
-
-    end
-
     def owned_by?(user)
       send(Typus.user_fk) == user.id
     end
