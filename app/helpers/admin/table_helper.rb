@@ -155,7 +155,7 @@ module Admin
 
     def table_string_field(attribute, item, link_options = {})
       content = h(item.send(attribute))
-      return content_tag(:td, raw(!content.empty? ? content : "&#151;"), :class => attribute)
+      return content_tag(:td, raw(content.empty? ? "&#151;" : content), :class => attribute)
     end
 
     def table_selector(attribute, item)
