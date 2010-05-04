@@ -91,7 +91,7 @@ module Admin
 
       if set_condition && @current_user.can?("create", @model_to_relate)
         <<-HTML
-  <small>#{link_to _("Add new"), default_options.merge(options)}</small>
+  <small>#{link_to _("Add New"), default_options.merge(options)}</small>
         HTML
       end
     end
