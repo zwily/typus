@@ -68,7 +68,6 @@ class Admin::ResourcesController < AdminController
   # created we also create the relationship between these items. 
   #
   def create
-
     @item = @resource.new(params[@object_name])
 
     set_attributes_on_create
@@ -80,7 +79,6 @@ class Admin::ResourcesController < AdminController
     else
       select_template(:new)
     end
-
   end
 
   def edit
