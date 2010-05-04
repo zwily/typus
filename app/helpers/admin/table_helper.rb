@@ -133,17 +133,18 @@ module Admin
 
     end
 
+    # OPTIMIZE: Removed nested conditionals.
     def table_belongs_to_field(attribute, item)
       action = item.send(attribute).class.typus_options_for(:default_action_on_item)
 
       att_value = item.send(attribute)
-      content = if !att_value.nil?
-        if @current_user.can?(action, att_value.class.name)
-          link_to item.send(attribute).to_label, :controller => "admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id
-        else
-          att_value.to_label
-        end
-      end
+      content = unless att_value.nil?
+                  if @current_user.can?(action, att_value.class.name)
+                    link_to item.send(attribute).to_label, :controller => "admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id
+                  else
+                    att_value.to_label
+                  end
+                end
 
       return content_tag(:td, content)
     end
