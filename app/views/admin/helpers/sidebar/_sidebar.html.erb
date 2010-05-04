@@ -4,20 +4,15 @@
 
   <% resource = "/admin/#{key.constantize.to_resource}" %>
 
-  <div class="resource" id="<%= key %>">
-
-    <h2>
-      <%= link_to_unless_current _(key.constantize.model_name.human.pluralize), :controller => resource, :action => "index" %>
-    </h2>
-
-    <% if @resource.name.eql?(key) %>
-      <ul>
-        <% value.each do |v| %>
-          <li><%= v %></li>
-        <% end %>
-      </ul>
-    <% end %>
-
-  </div>
+    <ul>
+      <li class="header"><%= link_to_unless_current _(key.constantize.model_name.human.pluralize), :controller => resource, :action => "index" %></li>
+      <% if @resource.name.eql?(key) %>
+        <ul>
+          <% value.each do |v| %>
+            <li><%= v %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </ul>
 
 <% end %>
