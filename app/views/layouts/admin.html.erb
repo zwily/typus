@@ -9,14 +9,14 @@
 
   <title><%= page_title %></title>
 
-  <%= stylesheet_link_tag 'admin/reset', :media => 'screen' %>
-  <%= stylesheet_link_tag 'admin/screen', :media => 'screen' %>
-  <%= stylesheet_link_tag 'admin/jquery.fancybox-1.3.0', :media => 'screen' %>
+  <%= stylesheet_link_tag 'admin/reset', 
+                          'admin/screen', 
+                          'admin/jquery.fancybox-1.3.0' %>
   <%= yield :stylesheets -%>
 
-  <%= javascript_include_tag 'admin/jquery-1.4.1.min' %>
-  <%= javascript_include_tag 'admin/jquery.fancybox-1.3.0.pack' %>
-  <%= javascript_include_tag 'admin/application' %>
+  <%= javascript_include_tag 'admin/jquery-1.4.1.min', 
+                             'admin/jquery.fancybox-1.3.0.pack', 
+                             'admin/application' %>
   <%= javascript_include_tag :ckeditor if defined?(Ckeditor)%>
   <%= yield :javascripts -%>
 
