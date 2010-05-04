@@ -10,6 +10,7 @@ module Admin
         next unless @current_user.resources.include?(resource)
         klass = resource.constantize
         resources[resource] = [ default_actions(klass) ] + export(klass) + custom_actions(klass)
+        resources[resource].compact!
       end
 
       render "admin/helpers/sidebar/sidebar", :resources => resources
