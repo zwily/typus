@@ -18,11 +18,19 @@ module Admin
 
     def default_actions(klass)
       actions = []
+
       if @current_user.can?("create", klass)
         options = { :controller => klass.to_resource }
         message = _("Add New")
         actions << (link_to_unless_current message, options.merge(:action => "new"))
       end
+
+      # Edit or Show
+      message = @current_user.can?("update", klass) ? _("Edit") : _("Show")
+      options = { :controller => klass.to_resource }
+      actions << (link_to_unless_current message, options)
+
+      return actions
     end
 
     def custom_actions(klass)
