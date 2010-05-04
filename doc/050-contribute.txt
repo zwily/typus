@@ -16,18 +16,7 @@ large and small.
 
 === Contributors ===
 
-- http://azotacalles.net/[Laia Gargallo] (Lover and tea provider)
-- http://www.vesne.com/[Isaac Feliu] (Codereview on first public release)
-- http://wet-floor.com/[Lluis Folch] (Initial icons & lots of feedback)
-- http://github.com/spejman[Sergio Espeja] (Code)
-- http://github.com/eadz[Eadz] (Code)
-- http://github.com/aunderwo[Anthony Underwood] (Code)
-- http://github.com/flype[Felipe Talavera] (Code)
-- http://github.com/eriktigerholm[Erik Tigerholm] (Code)
-- http://github.com/georgeguimaraes[George Guimarães] (Translation to Brazilian Portuguese and code)
-- http://github.com/josevalim[José Valim] (Code)
-- http://github.com/snake[Luqman Amjad] (Code)
-- http://github.com/alno[Alexey Noskov] (Russian translation and code)
+You can see a lits of contributors and their commits on http://github.com/fesplugas/typus/contributors[GitHub].
 
 === Somehow involved in the project ===
 
