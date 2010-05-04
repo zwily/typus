@@ -30,10 +30,6 @@
              end
            when :file
              typus_preview(@item, field.first)
-           when :text
-             unless raw_data.empty?
-               defined?(RDiscount) ? markdown(raw_data) : simple_format(h(raw_data))
-             end
            when :selector
              @item.mapping(field.first)
            else
