@@ -236,7 +236,7 @@ module Admin
 
     def table_transversal(attribute, item)
       _attribute, virtual = attribute.split(".")
-      return content_tag(:td, "#{item.send(_attribute).send(virtual)}")
+      return content_tag(:td, item.send(_attribute).send(virtual))
     end
 
   end
