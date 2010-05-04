@@ -9,7 +9,7 @@ module Admin
       Typus.application(app_name).each do |resource|
         next unless @current_user.resources.include?(resource)
         klass = resource.constantize
-        resources[resource] = [ default_actions(klass) ] + export(klass) + custom_actions(klass)
+        resources[resource] = default_actions(klass) + export(klass) + custom_actions(klass)
         resources[resource].compact!
       end
 
@@ -17,10 +17,12 @@ module Admin
     end
 
     def default_actions(klass)
-      return unless @current_user.can?('create', klass)
-      options = { :controller => klass.to_resource }
-      message = _("Add New")
-      link_to_unless_current message, options.merge(:action => "new"), :class => "new"
+      actions = []
+      if @current_user.can?("create", klass)
+        options = { :controller => klass.to_resource }
+        message = _("Add New")
+        actions << (link_to_unless_current message, options.merge(:action => "new"))
+      end
     end
 
     def custom_actions(klass)
