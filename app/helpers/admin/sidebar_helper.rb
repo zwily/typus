@@ -24,11 +24,8 @@ module Admin::SidebarHelper
 
     items = []
 
-    case params[:action]
-    when 'index', 'edit', 'show', 'update'
-      if @current_user.can?('create', @resource[:class])
-        items << (link_to _("Add entry"), { :action => 'new' }, :class => 'new')
-      end
+    if @current_user.can?('create', @resource[:class])
+      items << (link_to_unless_current _("Add entry"), { :action => 'new' }, :class => 'new')
     end
 
     case params[:action]
@@ -50,10 +47,6 @@ module Admin::SidebarHelper
       if @current_user.can?(action, @resource[:class])
         items << (link_to _(action.humanize), params.merge(:action => action))
       end
-    end
-
-    if %w( new create edit show update ).include?(params[:action])
-      items << (link_to _("Back to list"), :action => 'index')
     end
 
     build_typus_list(items, :header => 'actions')
