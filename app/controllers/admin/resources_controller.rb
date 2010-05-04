@@ -84,18 +84,6 @@ class Admin::ResourcesController < AdminController
   end
 
   def edit
-=begin
-    # TODO: Remove this code or take it back.
-    item_params = params.dup
-    rejections = %w( controller action model model_id back_to id resource resource_id page )
-    item_params.delete_if { |k, v| rejections.include?(k) }
-
-    # We assign the params passed trough the url
-    @item.attributes = item_params
-
-    item_params.merge!(set_conditions)
-    # @previous, @next = @item.previous_and_next(item_params)
-=end
     select_template
   end
 
