@@ -123,7 +123,7 @@ class TypusGenerator < Rails::Generators::Base
       #
 
       rejections = %w( ^id$ 
-                       created_at created_on updated_at updated_on 
+                       created_at created_on updated_at updated_on deleted_at 
                        salt crypted_password 
                        password_salt persistence_token single_access_token perishable_token 
                        _type$ 
