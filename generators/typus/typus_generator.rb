@@ -68,7 +68,7 @@ class TypusGenerator < Rails::Generator::Base
         # - Form
         #
 
-        rejections = %w( id created_at created_on updated_at updated_on 
+        rejections = %w( id created_at created_on updated_at updated_on deleted_at
                          salt crypted_password 
                          password_salt persistence_token single_access_token perishable_token )
 
