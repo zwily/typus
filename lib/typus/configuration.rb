@@ -35,8 +35,9 @@ module Typus
     # Read Typus Configuration files placed on <tt>config/typus/**/*.yml</tt>.
     def self.config!
 
-      files = Dir["#{Rails.root}/#{options[:config_folder]}/**/*.yml"].sort
-      files = files.delete_if { |x| x.include?("_roles.yml") }
+      application = Dir[Rails.root.join(options[:config_folder], "**", "*.yml")]
+      plugins = Dir[Rails.root.join("vendor", "plugins", "*", "config", "typus", "*.yml")]
+      files = (application + plugins).reject { |f| f.include?("_roles.yml") }
 
       @@config = {}
       files.each do |file|
@@ -53,7 +54,9 @@ module Typus
     # Read Typus Roles from configuration files placed on <tt>config/typus/**/*_roles.yml</tt>.
     def self.roles!
 
-      files = Dir["#{Rails.root}/#{options[:config_folder]}/**/*_roles.yml"].sort
+      application = Dir[Rails.root.join(options[:config_folder], "**", "*_roles.yml")]
+      plugins = Dir[Rails.root.join("vendor", "plugins", "*", "config", "typus", "*_roles.yml")]
+      files = (application + plugins).sort
 
       @@roles = { options[:root] => {} }
 
