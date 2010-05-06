@@ -65,10 +65,6 @@ module Typus
             attribute_type = :selector
           end
 
-          if typus_field_options_for(:rich_text).include?(field)
-            attribute_type = :rich_text
-          end
-
           # Custom field_type depending on the attribute name.
           case field.to_s
             when 'parent', 'parent_id'  then attribute_type = :tree

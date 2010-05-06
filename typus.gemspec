@@ -59,7 +59,6 @@ Gem::Specification.new do |s|
      "app/views/admin/templates/_datetime.html.erb",
      "app/views/admin/templates/_file.html.erb",
      "app/views/admin/templates/_password.html.erb",
-     "app/views/admin/templates/_rich_text.html.erb",
      "app/views/admin/templates/_selector.html.erb",
      "app/views/admin/templates/_string.html.erb",
      "app/views/admin/templates/_text.html.erb",

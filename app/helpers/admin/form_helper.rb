@@ -19,7 +19,7 @@ module Admin::FormHelper
                 when :belongs_to  then typus_belongs_to_field(key, options)
                 when :tree        then typus_tree_field(key, :form => options[:form])
                 when :boolean, :date, :datetime, :string, :text, :time,
-                     :file, :password, :selector, :rich_text
+                     :file, :password, :selector
                   typus_template_field(key, value, options)
                 else
                   typus_template_field(key, :string, options)
@@ -361,18 +361,6 @@ module Admin::FormHelper
                           :form => options[:form], 
                           :label_text => @resource[:class].human_attribute_name(attribute)
 
-  rescue ActionView::TemplateError => error
-    raise error
-  rescue Exception => error
-    # This is the user locale, which is missing.
-    locale = @current_user.preferences[:locale]
-    message = <<-HTML
-Missing translation file <strong>#{locale}.yml</strong>. Download it <a href="http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{locale}.yml">here</a> and place it on `config/locales`.
-    HTML
-    flash[:error] = message
-    # We set a locale only for the current template.
-    I18n.locale = :en
-    retry
   end
 
   def attribute_disabled?(attribute)
