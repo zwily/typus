@@ -78,7 +78,7 @@ ca:
   "System Users Administration": "Administrar usuaris del sistema"
 
   "That doesn't seem like a valid email address": "Això no sembla ser una adreça de correu electrònic vàlida."
-  "The email and/or password you entered is invalid": "El correu i/o la contressenya proporcionats no són vàlids."
+  "The email and/or password you entered is invalid": "El correu i/o la contrasenya proporcionats no són vàlids."
   "There are not defined applications in config/typus/*.yml": "No hi ha aplicacions definides a config/typus/*.yml"
   "There are no {{records}}": "No hi han {{records}}."
   "There are no {{records}} under this filter": "No hi han {{records}} amb aquest filtre."
