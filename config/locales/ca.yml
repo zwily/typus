@@ -57,9 +57,9 @@ ca:
 
   "Record moved {{to}}": "Registre desplaçat {{to}}."
   "Recover password": "Recuperar contrassenya"
-  "Remove": "Eliminar"
+  "Remove": "Esborrar"
+  "Remove {{attribute}}": "Esborrar {{attribute}}"
   "Remove entry?": "Esborrar entrada?"
-  "Remove file": "Esborrar arxiu"
   "Remove filter": "Treure filtre"
   "Reset password": "Canviar contrassenya"
   "Resources": "Recursos"

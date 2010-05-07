@@ -58,8 +58,8 @@ pt-BR:
   "Record moved {{to}}": "Registro movido {{to}}."
   "Recover password": "Recuperar senha"
   "Remove": 
+  "Remove {{attribute}}": "Remover {{attribute}}"
   "Remove entry?": "Remover entrada?"
-  "Remove file": 
   "Remove filter": "Remover filtro"
   "Reset password": "Trocar senha"
   "Resources": "Recursos"
