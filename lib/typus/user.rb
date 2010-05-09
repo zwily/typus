@@ -126,7 +126,7 @@ module Typus
         options = { :locale => locale }
         self.preferences.merge!(options)
       rescue
-        self.preferences = { }
+        self.preferences = {}
         retry
       end
 
