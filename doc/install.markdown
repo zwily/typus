@@ -4,7 +4,7 @@ You can install Typus as a plugin or as a gem.
 
 ### Plugin Install
 
-Install from GitHub the latest version which is compatible with **Rails 2.3.4**.
+Install from GitHub the latest version which is compatible with **Rails 2.3.5**.
 
     $ script/plugin install git://github.com/fesplugas/typus.git
 
