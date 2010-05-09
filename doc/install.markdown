@@ -39,8 +39,3 @@ Master branch is tested with **Rails 2.3.5** and **Ruby 1.8.7-p249**.
 If you installed **Typus** as a plugin you can view the available tasks running:
 
     $ rake -T typus
-    (in /Users/fesplugas/Development/typus_core)
-    rake doc:plugins:typus  # Generate documentation for the typus plugin
-    rake typus:ckeditor     # Install ckeditor.
-    rake typus:misc         # Install acts_as_list, acts_as_tree and paperclip.
-    rake typus:roles        # List current roles.
