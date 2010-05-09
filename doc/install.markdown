@@ -44,4 +44,3 @@ If you installed **Typus** as a plugin you can view the available tasks running:
     rake typus:ckeditor     # Install ckeditor.
     rake typus:misc         # Install acts_as_list, acts_as_tree and paperclip.
     rake typus:roles        # List current roles.
-    rake typus:ssl          # Install ssl_requirement.
