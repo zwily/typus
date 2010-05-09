@@ -2,10 +2,8 @@ require 'rubygems'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
-require File.expand_path('../lib/typus/version', __FILE__)
-
-$LOAD_PATH.unshift 'lib'
-require 'typus'
+$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
+require "typus/version"
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -13,11 +11,29 @@ task :default => :test
 desc 'Test the typus plugin.'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
+  t.libs << 'test'
   t.pattern = 'test/**/*_test.rb'
   t.verbose = true
 end
 
-desc 'Generate specdoc-style documentation from tests'
+task :build do
+  system "gem build typus.gemspec"
+end
+
+task :release => :build do
+  version = Typus::VERSION
+  system "git tag v#{version}"
+  system "git push origin v#{version}"
+  system "gem push pkg/typus-#{version}.gem"
+  system "git clean -fd"
+  system "gem push typus-#{version}"
+end
+
+##
+# Extras
+##
+
+desc "Generate specdoc-style documentation from tests"
 task :specs do
 
   puts 'Started'
@@ -40,32 +56,4 @@ task :specs do
 #{count} specifications documented.
   MSG
 
-end
-
-begin
-  require 'jeweler'
-  Jeweler::Tasks.new do |gemspec|
-    gemspec.name = "typus"
-    gemspec.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
-    gemspec.description = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
-    gemspec.email = "francesc@intraducibles.com"
-    gemspec.homepage = "http://intraducibles.com/projects/typus"
-    gemspec.authors = ["Francesc Esplugas"]
-    gemspec.version = Typus::VERSION::STRING
-  end
-rescue LoadError
-  puts "Jeweler not available."
-  puts "Install it with: gem install jeweler -s http://gemcutter.org"
-end
-
-desc "Generate package."
-task :package => [ :gemspec, :build ]
-
-desc "Push a new version to Gemcutter"
-task :publish => [ :package ] do
-  version = Typus::VERSION::STRING
-  system "git tag v#{version}"
-  system "git push origin v#{version}"
-  system "gem push pkg/typus-#{version}.gem"
-  system "git clean -fd"
 end
