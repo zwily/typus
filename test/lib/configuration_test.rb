@@ -17,7 +17,6 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal :typus_thumbnail, Typus::Configuration.options[:file_thumbnail]
     assert_equal "typus_users", Typus::Configuration.options[:relationship]
     assert_equal "admin", Typus::Configuration.options[:root]
-    assert_equal false, Typus::Configuration.options[:ssl]
     assert_equal "TypusUser", Typus::Configuration.options[:user_class_name]
     assert_equal "typus_user_id", Typus::Configuration.options[:user_fk]
   end

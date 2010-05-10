@@ -2,7 +2,6 @@
 
 - [Initializer: Understanding what `typus.rb` can do for you.](#initializer)
   - [Enable password recover.](#recover_password)
-  - [Enable SSL.](#ssl)
   - [Redirect to index after creating a record.](#index_after_save)
 - [The `*.yaml` configuration file](#yaml)
   - [Fields](#fields)
@@ -33,7 +32,6 @@ The initializer has two groups of options.
     Typus::Configuration.options[:locales]
     Typus::Configuration.options[:recover_password]
     Typus::Configuration.options[:root]
-    Typus::Configuration.options[:ssl]
     Typus::Configuration.options[:user_class_name]
     Typus::Configuration.options[:user_fk]
 
@@ -68,18 +66,6 @@ Model options can also be defined by model on the yaml files located on `config/
 Recover password is disabled by default. To enable it you should provide an email address which will be shown as the sender.
 
     Typus::Configuration.options[:email] = 'typus@application.com'
-
-[&uarr; Back to top](#toc)
-
-<h3 id="ssl">Enable SSL</h3>
-
-You can use SSL on Typus. To enable it update the initializer.
-
-    Typus::Configuration.options[:ssl] = true
-
-Remember to install the `ssl_requirement` plugin to be able to use this feature.
-
-    $ rake typus:ssl
 
 [&uarr; Back to top](#toc)
 

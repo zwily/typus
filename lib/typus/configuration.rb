@@ -11,7 +11,6 @@ module Typus
                       :file_thumbnail => :typus_thumbnail, 
                       :relationship => "typus_users", 
                       :root => "admin", 
-                      :ssl => false, 
                       :user_class_name => "TypusUser", 
                       :user_fk => "typus_user_id" }
 

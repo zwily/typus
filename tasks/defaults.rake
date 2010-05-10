@@ -13,11 +13,6 @@ namespace :typus do
 
   end
 
-  desc "Install ssl_requirement."
-  task :ssl do
-    system "script/plugin install git://github.com/fesplugas/ssl_requirement.git --force"
-  end
-
   desc "List current roles."
   task :roles => :environment do
     Typus::Configuration.roles.each do |role|
