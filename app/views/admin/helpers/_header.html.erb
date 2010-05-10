@@ -1,6 +1,6 @@
 <h1>
   <% if ActionController::Routing::Routes.named_routes.routes.has_key?(:root) %>
-    <%= link_to Typus::Configuration.options[:app_name], root_path %>
+    <%= link_to Typus::Configuration.options[:app_name], root_path, :title => _("View site") %>
   <% else %>
     <%= Typus::Configuration.options[:app_name] %>
   <% end %>
