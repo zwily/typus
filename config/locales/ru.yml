@@ -90,6 +90,7 @@ ru:
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Отсоединить {{unrelate_model}} от {{unrelate_model_from}}?"
   "Up": "Вверх"
 
+  "View {{attribute}}": 
   "View site": "Перейти к сайту"
 
   "You can update your password at": "Вы можете установить свой пароль на"

@@ -101,6 +101,7 @@ ca:
   "You're updating a {{resource_from}} for {{resource_to}}": "Estàs actualitzant un {{resource_from}} de {{resource_to}}."
   "Your new password is {{password}}": "La teva nova contrassenya és {{password}}."
 
+  "View {{attribute}}": "Veure {{attribute}}"
   "View site": "Veure la web"
 
   "{{attachment}} can't be removed": "{{attachment}} no es pot esborrar."

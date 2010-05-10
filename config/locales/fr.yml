@@ -89,6 +89,7 @@ fr:
   "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Dissocier {{unrelate_model}} de {{unrelate_model_from}}?"
   "Up": "Monter"
 
+  "View {{attribute}}": 
   "View site": "Voir le site"
 
   "You can update your password at": "Vous pouvez modifier votre mot de passe ici"

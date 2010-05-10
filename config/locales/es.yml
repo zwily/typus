@@ -101,6 +101,7 @@ es:
   "You're updating a {{resource_from}} for {{resource_to}}": "Estás actualizando un {{resource_from}} de {{resource_to}}."
   "Your new password is {{password}}": "Tu nueva contraseña es {{password}}."
 
+  "View {{attribute}}": 
   "View site": "Ver web"
 
   "{{attachment}} can't be removed": "{{attachment}} no puede ser borrado."
