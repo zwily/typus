@@ -39,7 +39,6 @@ extensible enough to match lots of use cases.
 - [Gems](http://gemcutter.org/gems/typus)
 - [Contributors](http://github.com/fesplugas/typus/contributors)
 
-
 ## Demo application
 
 Go to http://typus.heroku.com/ and use the following credentials to log in:
@@ -63,17 +62,15 @@ You can also use a template to create the demo application:
 
 ## Installing
 
-Install from GitHub the latest version which it's compatible with `Rails 3.0.0 edge`.
+Install from GitHub the latest version which it's compatible with `Rails 3.0.0.beta3`.
 
     $ rails plugin install git://github.com/fesplugas/typus.git
 
-Once `typus` is installed, run the generator to create required files 
-and migrate your database.
+Once `typus` is installed, run the generator to create required files.
 
     $ rails generate typus
-    $ rake db:migrate
 
-Start the application server and go to http://0.0.0.0:3000/admin.
+Start the application server and go to <http://0.0.0.0:3000/admin>.
 
 ## Support
 
