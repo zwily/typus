@@ -20,23 +20,16 @@ On December 2007, **Typus** was released under a xref:mit-license[MIT License].
 
 === Key Features ===
 
-- Access control by users and roles.
 - CRUD and custom actions for your models on a clean interface.
+- Access control by users and roles.
 - Internationalized interface.
 - Extensible and overwritable templates.
 - Low memory footprint.
-- Show database tables.
-- Easily update data.
-- Create new data.
-- Automatic form validation.
+- Easily manage your data, search, sort and filter.
 - Ruby 1.9 compatible.
-- Sortable columns.
-- Supports *SQLite*, *MySQL*, and *PostgreSQL*.
-- Boolean filtering.
 - Supports ActiveRecord.
-- Search for records.
-- Pagination.
-- Supports *Rails 3.0.0.beta2*.
+- Supports *Rails 3.0.0.beta3*.
+- Tested with *SQLite*, *MySQL* and *PostgreSQL*.
 - xref:mit-license[MIT License], the same as Rails.
 
-IMPORTANT: Master branch is only compatible with *Rails 3.0.0.beta2*.
+IMPORTANT: Master branch is only compatible with *Rails 3.0.0.beta3*.
