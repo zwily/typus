@@ -18,7 +18,7 @@ large and small.
 
 You can see a lits of contributors and their commits on http://github.com/fesplugas/typus/contributors[GitHub].
 
-=== Somehow involved in the project ===
+Somehow involved in the project:
 
 - http://www.rubyist.net/~matz/[Yukihiro "matz" Matsumoto] creator of 
 http://ruby-lang.org/[Ruby] the most beautiful programming ever kwnown.
