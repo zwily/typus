@@ -16,7 +16,7 @@ parts of the site. List is for lists, form is for forms.
 ----
 Photo:
   fields:
-    defaults: name
+    default: name
     list: name, created_at, category, status
     form: name, body, created_at, status
     csv: name, body
@@ -30,7 +30,7 @@ Upload files works if you follow `Paperclip` naming conventions.
 ----
 Photo:
   fields:
-    defaults: photo_file_name
+    default: photo_file_name
     list: photo_file_name
     form: photo_file_name
 ----
