@@ -117,6 +117,7 @@ and will appear on the listings.
 
 ----
 Post:
+  ...
   relationships: users, projects
 ----
 
@@ -127,6 +128,7 @@ status, author and created_at filters for posts)
 
 ----
 Post:
+  ...
   filters: status, author, created_at
 ----
 
@@ -136,6 +138,7 @@ Set the default display order of the items on a model.
 
 ----
 Post:
+  ...
   order_by: name, -created_at
 ----
 
@@ -147,6 +150,7 @@ Define which fields will be used when performing a search on the model.
 
 ----
 Post:
+  ...
   search: name, body
 ----
 
@@ -159,6 +163,7 @@ can use the following operators:
 
 ----
 Post:
+  ...
   search: =name, body
 ----
 
@@ -214,6 +219,7 @@ Date formats allows to define the format of the datetime field.
 # config/typus/application.yml
 Post:
   fields:
+    ...
     options:
       date_formats:
         published_at: post_short
@@ -231,6 +237,7 @@ Define more actions which will be shown on the requested action.
 
 ----
 Post:
+  ...
   actions:
     index: notify_all
     edit: notify
@@ -263,7 +270,8 @@ export links on the sidebar of your resource.
 
 ----
 Order:
-  export: csv, pdf, xml
+  ...
+  export: csv, xml
 ----
 
 And the actions for those export options are:
@@ -276,10 +284,6 @@ end
 def export_xml
   # Already implemented but you can overwrite it.
 end
-
-def export_pdf
-  # Not implemented, so you have to write it.
-end
 ----
 
 === Applications ===
@@ -288,6 +292,7 @@ To group resources into an application use +application+.
 
 ----
 Model:
+  ...
   application: CMS
 ----
 
@@ -314,13 +319,12 @@ You can also define this option by model.
 
 ----
 Post:
+  ...
   options:
     action_after_save: edit
 ----
 
 ==== End Year ====
-
-// Pending.
 
 ----
 Typus::Resource.setup do |config|
@@ -332,13 +336,12 @@ You can also define this option by model.
 
 ----
 Post:
+  ...
   options:
     end_year: 2015
 ----
 
 ==== Form Rows ====
-
-// Pending.
 
 ----
 Typus::Resource.setup do |config|
@@ -350,17 +353,16 @@ You can also define this option by model.
 
 ----
 Post:
+  ...
   options:
     form_rows: 25
 ----
 
 ==== Minute Step ====
 
-// Pending.
-
 ----
 Typus::Resource.setup do |config|
-  config.minute_step = ...
+  config.minute_step = 15
 end
 ----
 
@@ -368,17 +370,16 @@ You can also define this option by model.
 
 ----
 Post:
+  ...
   options:
     minute_step: 15
 ----
 
 ==== Nil ====
 
-// Pending.
-
 ----
 Typus::Resource.setup do |config|
-  config.nil = ...
+  config.nil = 'nil'
 end
 ----
 
@@ -386,17 +387,16 @@ You can also define this option by model.
 
 ----
 Post:
+  ...
   options:
     nil: 'nil'
 ----
 
 ==== Per Page ====
 
-// Pending.
-
 ----
 Typus::Resource.setup do |config|
-  config.per_page = ...
+  config.per_page = 15
 end
 ----
 
@@ -404,17 +404,16 @@ You can also define this option by model.
 
 ----
 Post:
+  ...
   options:
     per_page: 15
 ----
 
 ==== Start Year ====
 
-// Pending.
-
 ----
 Typus::Resource.setup do |config|
-  config.start_year = ...
+  config.start_year = 1990
 end
 ----
 
@@ -422,6 +421,7 @@ You can also define this option by model.
 
 ----
 Post:
+  ...
   options:
     start_year: 1990
 ----
