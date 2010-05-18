@@ -14,10 +14,6 @@ about **Typus**. Let us know and we'll link back to you as well.
 large and small.
 // - **Contribute a few bucks**
 
-=== Contributors ===
-
-You can see a lits of contributors and their commits on http://github.com/fesplugas/typus/contributors[GitHub].
-
 Somehow involved in the project:
 
 - http://www.rubyist.net/~matz/[Yukihiro "matz" Matsumoto] creator of 
@@ -29,3 +25,5 @@ development, in special the templates rendering and UI.
 - http://github.com/bruce/paginator/tree/master[Paginator] by 
 http://codefluency.com/[Bruce Williams] which is used to paginate 
 records.
+
+You can see a list of contributors and their commits on http://github.com/fesplugas/typus/contributors[GitHub].
