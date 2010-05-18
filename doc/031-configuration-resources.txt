@@ -105,7 +105,6 @@ Add +slug+ as field and it'll be shown on the listings.
 Post:
   fields:
     list: title, slug
-    form: title
 ----
 
 NOTE: When using a virtual attribute you won't be able to search, 
