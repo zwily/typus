@@ -57,7 +57,7 @@ module Admin
         else
           table_string_field(key, item, link_options)
         end
-      end.to_s.html_safe
+      end
     end
 
     def table_default_action(model, item)
