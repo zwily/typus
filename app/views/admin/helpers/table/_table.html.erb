@@ -11,7 +11,9 @@
 
   <% items.each do |item| %>
     <tr class="<%= cycle('even', 'odd') %>" id="<%= dom_id(item) %>">
-      <%= table_fields_for_item(item, fields, link_options) %>
+      <% table_fields_for_item(item, fields, link_options).each do |field| %>
+        <%= field %>
+      <% end %>
       <td width="10px"><%= table_default_action(model, item) %></td>
       <td width="10px"><%= table_action(model, item) %></td>
     </tr>
