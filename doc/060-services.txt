@@ -8,7 +8,7 @@ for a fee.
 A few examples of customizations:
 
 - Assets manager.
-- Ebook delivery system.
+- Ebook publishing and delivering platform.
 - Newsletter, blog and e-commerce modules.
 
 Send your inquiries to hello@intraducibles.com.

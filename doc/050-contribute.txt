@@ -21,11 +21,11 @@ You can see a lits of contributors and their commits on http://github.com/fesplu
 === Somehow involved in the project ===
 
 - http://www.rubyist.net/~matz/[Yukihiro "matz" Matsumoto] creator of 
-http://ruby-lang.org/[Ruby] the most beautiful programming language I've ever seen.
+http://ruby-lang.org/[Ruby] the most beautiful programming ever kwnown.
 - http://loudthinking.com/[David Heinemeier Hansson] for creating 
 http://rubyonrails.org/[Ruby on Rails].
 - http://www.djangoproject.com/[Django Admin] who inspired part of the 
-development, in special the templates rendering, and UI.
+development, in special the templates rendering and UI.
 - http://github.com/bruce/paginator/tree/master[Paginator] by 
-http://codefluency.com/[Bruce Williams] which is used by **Typus** to 
-paginate records.
+http://codefluency.com/[Bruce Williams] which is used to paginate 
+records.
