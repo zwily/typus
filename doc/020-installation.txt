@@ -5,7 +5,7 @@
 To install Typus as a plugin:
 
 ----
-$ script/rails plugin install git://github.com/fesplugas/typus.git
+$ rails plugin install git://github.com/fesplugas/typus.git
 ----
 
 NOTE: To re-install the plugin use the +--force+ option.
