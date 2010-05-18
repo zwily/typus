@@ -39,6 +39,7 @@ namespace :site do
   task :build do
     command = `which asciidoc`.strip
     unless command.empty?
+      puts "Building site using `asciidoc`."
       system "cd doc && #{command.strip} -a icons -a toc -o site/index.html 000-index.txt"
     else
       puts "AsciiDoc is not installed."
