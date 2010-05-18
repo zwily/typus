@@ -48,8 +48,8 @@ namespace :site do
 
   desc "Update the website"
   task :deploy => :build do
-    site_files = FileList["doc/*.html"]
-    site_files.delete_if { |f| File.directory?(f)}
+    site_files = FileList["doc/site/**/*"]
+    site_files.delete_if { |f| File.directory?(f) }
     sh %(scp #{site_files.join ' '} fesplugas@santiago.dreamhost.com:~/public_html/www.railsadmin.org/typus/documentation)
   end
 
