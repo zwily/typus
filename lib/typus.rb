@@ -58,6 +58,9 @@ Developed by <a href="http://intraducibles.com">intraducibles.com</a>.
   mattr_accessor :user_fk
   @@user_fk = "typus_user_id"
 
+  mattr_accessor :available_locales
+  @@available_locales = [:en]
+
   class << self
 
     # Default way to setup typus. Run rails generate typus to create
@@ -68,17 +71,6 @@ Developed by <a href="http://intraducibles.com">intraducibles.com</a>.
 
     def root
       (File.dirname(__FILE__) + "/../").chomp("/lib/../")
-    end
-
-    def locales
-      { "ca" => "Català", 
-        "de" => "German", 
-        "en" => "English", 
-        "es" => "Español", 
-        "fr" => "Français", 
-        "hu" => "Magyar", 
-        "pt-BR" => "Portuguese", 
-        "ru" => "Russian" }
     end
 
     def applications
@@ -110,6 +102,28 @@ Developed by <a href="http://intraducibles.com">intraducibles.com</a>.
       end
     end
 
+    def locales
+      human = available_locales.map { |i| locales_mapping[i.to_s] }
+      available_locales.map { |i| i.to_s }.to_hash(human)
+    end
+
+    def locales_mapping
+      { "ca" => "Català", 
+        "de" => "German", 
+        "en" => "English", 
+        "es" => "Español", 
+        "fr" => "Français", 
+        "hu" => "Magyar", 
+        "pt-BR" => "Portuguese", 
+        "ru" => "Russian" }
+    end
+
+    def detect_locales
+      available_locales.each do |locale|
+        I18n.load_path += Dir[File.join(Typus.root, "config", "available_locales", "#{locale}*")]
+      end
+    end
+
     def application_models
       detect_application_models.map do |model|
         class_name = model.sub(/\.rb$/,"").camelize
@@ -125,6 +139,7 @@ Developed by <a href="http://intraducibles.com">intraducibles.com</a>.
     def reload!
       Typus::Configuration.roles!
       Typus::Configuration.config!
+      detect_locales
     end
 
     def boot!

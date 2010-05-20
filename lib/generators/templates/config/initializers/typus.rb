@@ -20,4 +20,7 @@ Typus.setup do |config|
   # config.username = "admin"
   # config.password = "columbia"
 
+  # Define available languages on the admin interface.
+  # config.available_locales = [:en]
+
 end

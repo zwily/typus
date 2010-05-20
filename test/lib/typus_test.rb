@@ -21,6 +21,8 @@ class TypusTest < ActiveSupport::TestCase
 
     assert_equal "TypusUser", Typus.user_class_name
     assert_equal "typus_user_id", Typus.user_fk
+
+    assert_equal [:en], Typus.available_locales
   end
 
   def test_should_verify_config_folder_class
