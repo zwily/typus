@@ -37,7 +37,7 @@ module Admin
       options = { :controller => klass.to_resource }
       klass.typus_actions_on("index").map do |action|
         if @current_user.can?(action, klass)
-          (link_to _(action.humanize), options.merge(:action => action))
+          (link_to_unless_current _(action.humanize), options.merge(:action => action))
         end
       end
     end
