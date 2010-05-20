@@ -19,7 +19,6 @@
                              "admin/jquery.mousewheel-3.0.2.pack", 
                              "admin/jquery.rails", 
                              "admin/application" %>
-  <%= javascript_include_tag :ckeditor if defined?(Ckeditor) %>
   <%= yield :javascripts -%>
 
   <%= csrf_meta_tag %>
