@@ -25,15 +25,43 @@ Photo:
 
 ==== File fields ====
 
-Upload files works if you follow `Paperclip` naming conventions.
+Upload files works if you follow `Paperclip` naming conventions. Let's 
+say for example your application has a model `Photo` with an attachment 
+called `asset`.
+
+----
+class Photo < ActiveRecord::Base
+
+  ##
+  # On your database you'll have the following fields:
+  #
+  #     asset_file_name (string)
+  #     asset_content_type (string)
+  #     asset_file_size (integer)
+  #     asset_updated_at (datetime)
+  #
+
+  has_attached_file :asset
+
+end
+-----
+
+If you want to upload files to your application you only need to define 
+the attached file name which in this case is `asset`. Using `asset_file_name`, 
+`asset_content_type`, `asset_file_size` and `asset_updated_at` will display 
+data using the database field type.
 
 ----
 Photo:
   fields:
-    default: photo_file_name
-    list: photo_file_name
-    form: photo_file_name
+    default: asset
+    list: asset_file_name, asset
+    form: asset
 ----
+
+WARNING: Previously on **Typus** attachments were defined using the 
+`<attribute>_file_name`. If you are still using this fields you'll see 
+an string field and won't be able to upload files.
 
 ==== Read only fields ====
 

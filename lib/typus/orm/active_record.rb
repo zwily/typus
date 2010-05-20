@@ -52,7 +52,6 @@ module Typus
             # Custom field_type depending on the attribute name.
             case field.to_s
               when 'parent', 'parent_id'  then attribute_type = :tree
-              when /file_name/            then attribute_type = :file
               when /password/             then attribute_type = :password
               when 'position'             then attribute_type = :position
               when /\./                   then attribute_type = :transversal
@@ -335,6 +334,9 @@ module Typus
         send(Typus.user_fk) == user.id
       end
 
+=begin
+
+      # TODO: Remove me ...
       # Determine if file attachment is blank, taking into account that
       # user may be using a Paperclip attachment without a _file_name
       # suffix
@@ -347,6 +349,8 @@ module Typus
           !send("#{attribute}_file_name").blank?
         end
       end
+
+=end
 
     end
 

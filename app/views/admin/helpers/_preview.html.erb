@@ -1,8 +1,8 @@
-<% if has_file_preview %>
+<% if has_file_preview && file_preview_is_image %>
   <% content_for :javascripts do %>
     <script type="text/javascript" charset="utf-8">
-      $(document).ready(function() { 
-        $("#<%= dom_id(item, "#{attribute}_preview") %>").fancybox(); 
+      $(document).ready(function() {
+        $("#<%= dom_id(item, "#{attribute}_preview") %>").fancybox();
       });
     </script>
   <% end %>

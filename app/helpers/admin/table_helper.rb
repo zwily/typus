@@ -31,6 +31,8 @@ module Admin
             options = { :order_by => order_by, :sort_order => sort_order.first }
             message = [ content, switch ].compact
             link_to raw(message.join(" ")), params.merge(options)
+          else
+            content
           end
 
         else
@@ -165,23 +167,23 @@ module Admin
     end
 
     def table_file_field(attribute, item, link_options = {})
-      attachment = attribute.split("_file_name").first
       file_preview = Typus.file_preview
       file_thumbnail = Typus.file_thumbnail
 
-      has_file_preview = item.send(attachment).styles.member?(file_preview)
-      file_preview_is_image = item.send("#{attachment}_content_type") =~ /^image\/.+/
+      has_file_preview = item.send(attribute).styles.member?(file_preview)
+      file_preview_is_image = item.send("#{attribute}_content_type") =~ /^image\/.+/
 
       content = if has_file_preview && file_preview_is_image
                   render "admin/helpers/preview", 
                          :attribute => attribute, 
-                         :attachment => attachment, 
+                         :attachment => attribute, 
                          :content => item.send(attribute), 
+                         :file_preview_is_image => file_preview_is_image, 
                          :has_file_preview => has_file_preview, 
-                         :href => item.send(attachment).url(file_preview), 
+                         :href => item.send(attribute).url(file_preview), 
                          :item => item
                 else
-                  link_to item.send(attribute), item.send(attachment).url
+                  link_to item.send(attribute), item.send(attribute).url
                 end
 
       return content_tag(:td, content)
