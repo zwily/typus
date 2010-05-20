@@ -22,4 +22,4 @@ include::050-contribute.txt[]
 
 include::060-services.txt[]
 
-include::070-mit-license.txt[]
+include::100-mit-license.txt[]
