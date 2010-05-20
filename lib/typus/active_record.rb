@@ -46,8 +46,8 @@ module Typus
         fields = Typus::Configuration.config[name]['fields'][filter.to_s]
         fields = fields.split(', ').collect { |f| f.to_sym }
       rescue
-        return [] if filter == 'list'
-        filter = 'list'
+        return [] if filter == 'default'
+        filter = 'default'
         retry
       end
 

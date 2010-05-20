@@ -100,6 +100,7 @@ class TypusGenerator < Rails::Generator::Base
         configuration[:base] << <<-RAW
 #{model}:
   fields:
+    default: #{list.join(", ")}
     list: #{list.join(", ")}
     form: #{form.join(", ")}
   order_by: #{order_by}
