@@ -62,9 +62,9 @@ de:
 
   "Record moved {{to}}": "Datensatz verschoben nach {{to}}"
   "Recover password": "Passwort vergessen?"
-  "Remove": 
+  "Remove": "Eintrag"
+  "Remove {{attribute}}": "Eintrag {{attribute}}"
   "Remove {{resource}}?": "Eintrag {{resource}}?"
-  "Remove file": 
   "Remove filter": "Filter entfernen"
   "Reset password": "Passwort zur&uuml;cksetzen"
   "Resources": "Resourcen"
