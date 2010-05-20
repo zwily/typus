@@ -1,5 +1,5 @@
 ##
-# $ rails example.com -m http://intraducibles.com/projects/typus/template.txt
+# $ rails typus.demo -m http://typus.intraducibles.com/demo.rb
 ##
 
 # Install Typus and friends.
@@ -7,7 +7,6 @@
 plugin "typus", :git => "git://github.com/fesplugas/typus.git"
 
 rake "typus:misc"
-rake "typus:ckeditor"
 
 # Run generators.
 
@@ -95,8 +94,8 @@ file "config/typus/application.yml", <<-CODE
 
 Asset:
   fields:
-    list: asset_file_name
-    form: asset_file_name, asset_content_type, asset_file_size, asset_updated_at
+    list: asset_file_name, asset
+    form: asset
   order_by: 
   relationships: 
   filters: 

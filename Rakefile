@@ -50,7 +50,7 @@ namespace :site do
   task :deploy => :build do
     site_files = FileList["doc/site/**/*"]
     site_files.delete_if { |f| File.directory?(f) }
-    sh %(scp #{site_files.join ' '} fesplugas@santiago.dreamhost.com:~/public_html/www.railsadmin.org/typus/documentation)
+    sh %(scp #{site_files.join ' '} fesplugas@typus.intraducibles.com:~/public_html/typus.intraducibles.com/)
   end
 
 end

@@ -32,33 +32,12 @@ extensible enough to match lots of use cases.
 ## Links
 
 - [Project page](http://intraducibles.com/projects/typus)
-- [Documentation](http://intraducibles.com/projects/typus/documentation)
+- [Documentation](http://typus.intraducibles.com/)
 - [Plugin source code](http://github.com/fesplugas/typus)
 - [Mailing list](http://groups.google.com/group/typus)
 - [Bug reports](http://github.com/fesplugas/typus/issues)
 - [Gems](http://gemcutter.org/gems/typus)
 - [Contributors](http://github.com/fesplugas/typus/contributors)
-
-## Demo application
-
-Go to http://typus.heroku.com/ and use the following credentials to log in:
-
-    Email: user@intraducibles.com
-    Password: columbia
-
-The demo application is available at GitHub:
-
-    $ git clone git://github.com/fesplugas/typus_demo.git
-    $ cd typus_demo
-    $ git submodule init
-    $ git submodule update
-    $ bundle install
-    $ rake db:setup
-    $ rails server
-
-You can also use a template to create the demo application:
-
-    $ rails typus_demo -m http://tr.im/typus_example
 
 ## Installing
 
