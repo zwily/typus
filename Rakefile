@@ -48,9 +48,9 @@ namespace :site do
 
   desc "Update the website"
   task :deploy => :build do
-    site_files = FileList["doc/site/**/*"]
-    site_files.delete_if { |f| File.directory?(f) }
-    sh %(scp #{site_files.join ' '} fesplugas@typus.intraducibles.com:~/public_html/typus.intraducibles.com/)
+    Dir.chdir("doc/site") do
+      sh %(scp -r ./ fesplugas@typus.intraducibles.com:~/public_html/typus.intraducibles.com/)
+    end
   end
 
 end
