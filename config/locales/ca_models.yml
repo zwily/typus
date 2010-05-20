@@ -11,6 +11,6 @@ ca:
         first_name: "Nom"
         last_name: "Cognoms"
         password: "Contrassenya"
-        password_confirmation: "Confirmar contrassenya"
+        password_confirmation: "Confirmar contrasenya"
         status: "Estat"
         role: "Rol"

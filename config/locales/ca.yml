@@ -17,7 +17,7 @@ ca:
   "Back to list": "Tornar al llistat"
 
   "Cancel and go back": 
-  "Change password": "Canviar contrassenya"
+  "Change password": "Canviar contrasenya"
   "Change {{attribute}}?": "Canviar {{attribute}}?"
   "Checked if active": "Marca-ho per activar"
   "Click OK to continue, or click Cancel to stay on this page": "Prem OK per continuar, o prem Cancel·lar per romandre en aquesta página."
@@ -40,8 +40,8 @@ ca:
 
   "Go to": "Anar a"
 
-  "I remember my password": "Recordo la meva contrassenya"
-  "If you didn't request a password update, you can ignore this message": "Si no has demanat una actualització de la teva contrassenya, pots ignorar aquest missatge."
+  "I remember my password": "Recordo la meva contrasenya"
+  "If you didn't request a password update, you can ignore this message": "Si no has demanat una actualització de la teva contrasenya, pots ignorar aquest missatge."
   "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Si has realitzat algun canvi en els camps sense premer el botó Guardar/Actualitzar, els teus canvis es perdran."
   "Inactive": "Inactiu"
 
@@ -57,16 +57,16 @@ ca:
 
   "Options": "Opcions"
 
-  "Password recovery link sent to your email": "L'enllaç de recuperació de contrassenya enviat al teu correu electrònic."
+  "Password recovery link sent to your email": "L'enllaç de recuperació de contrasenya enviat al teu correu electrònic."
   "Previous": "Anterior"
 
   "Record moved {{to}}": "Registre desplaçat {{to}}."
-  "Recover password": "Recuperar contrassenya"
+  "Recover password": "Recuperar contrasenya"
   "Remove": "Eliminar"
   "Remove {{resource}}?": "Esborrar {{resource}}?"
   "Remove file": "Esborrar arxiu"
   "Remove filter": "Treure filtre"
-  "Reset password": "Canviar contrassenya"
+  "Reset password": "Canviar contrasenya"
   "Resources": "Recursos"
 
   "Save {{resource}}": "Guardar {{resource}}"
@@ -83,7 +83,7 @@ ca:
   "System Users Administration": "Administrar usuaris del sistema"
 
   "That doesn't seem like a valid email address": "Això no sembla ser una adreça de correu electrònic vàlida."
-  "The email and/or password you entered is invalid": "El correu i/o la contressenya proporcionats no són vàlids."
+  "The email and/or password you entered is invalid": "El correu i/o la contrasenya proporcionats no són vàlids."
   "There are no {{records}}": "No hi han {{records}}."
   "There are no {{records}} under this filter": "No hi han {{records}} amb aquest filtre."
   "Today": "Avui"
@@ -97,13 +97,13 @@ ca:
   "You're adding a new {{resource_from}} to {{resource_to}}": "Estàs afegint un nou {{resource_from}} a {{resource_to}}."
   "You're not allowed to remove Typus Users": "No pots esborrar usuaris de typus."
   "You're not allowed to toggle status": "No pots canviar el teu estat."
-  "You can update your password at": "Pots actualitzar la teva contrassenya a "
+  "You can update your password at": "Pots actualitzar la teva contrasenya a "
   "You can't change your role": "No pots canviar-te tu mateix el rol."
   "You can't remove yourself": "No et pots eliminar a tu mateix."
   "You can't toggle your status": "No pots canviar-te l'estat."
   "You're updating a {{resource_from}}": "Estàs actualitzant un {{resource_from}}."
   "You're updating a {{resource_from}} for {{resource_to}}": "Estàs actualitzant un {{resource_from}} de {{resource_to}}."
-  "Your new password is {{password}}": "La teva nova contrassenya és {{password}}."
+  "Your new password is {{password}}": "La teva nova contrasenya és {{password}}."
 
   "View site": "Veure la web"
 
