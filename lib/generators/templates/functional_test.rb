@@ -4,10 +4,9 @@ require "test_helper"
 class Admin::<%= resource %>ControllerTest < ActionController::TestCase
 
   # Replace this with your real tests.
-  test "render index" do
+  test "should redirect to sign in when user is not logged" do
     get :index
-    assert_response :success
-    assert_template "index"
+    assert_response :redirect
   end
 
 end
