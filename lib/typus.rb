@@ -108,14 +108,16 @@ Developed by <a href="http://intraducibles.com">intraducibles.com</a>.
     end
 
     def locales_mapping
-      { "ca" => "Català", 
-        "de" => "German", 
-        "en" => "English", 
-        "es" => "Español", 
-        "fr" => "Français", 
-        "hu" => "Magyar", 
-        "pt-BR" => "Portuguese", 
-        "ru" => "Russian" }
+      mapping = { "ca" => "Català", 
+                  "de" => "German", 
+                  "en" => "English", 
+                  "es" => "Español", 
+                  "fr" => "Français", 
+                  "hu" => "Magyar", 
+                  "pt-BR" => "Portuguese", 
+                  "ru" => "Russian" }
+      mapping.default = "Unknown"
+      return mapping
     end
 
     def detect_locales
