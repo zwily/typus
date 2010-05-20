@@ -29,6 +29,7 @@ class TypusMigrationGenerator < Rails::Generators::Base
     template "config/typus/typus.yml", "config/typus/typus.yml"
     template "config/typus/typus_roles.yml", "config/typus/typus_roles.yml"
     template "model.rb", "app/models/#{options[:user_class_name].underscore}.rb"
+    template "model.yml", "test/fixtures/#{options[:user_class_name].underscore.pluralize}.yml"
   end
 
   def generate_controllers
