@@ -68,7 +68,6 @@ module Typus
           # Custom field_type depending on the attribute name.
           case field.to_s
             when 'parent', 'parent_id'  then attribute_type = :tree
-            when /file_name/            then attribute_type = :file
             when /password/             then attribute_type = :password
             when 'position'             then attribute_type = :position
           end
