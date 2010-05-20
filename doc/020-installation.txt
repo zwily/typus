@@ -43,7 +43,7 @@ $ rails generate typus_migration
 $ rake db:migrate
 ----
 
-This generator will create a new model, `admin_user`, in your application, 
+This generator will create a new model, `AdminUser`, in your application, 
 some settings which will be stored under `config/typus` folder and will 
 also create a migration. You can see some options of this generator running 
 the following command.
