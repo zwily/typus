@@ -397,4 +397,5 @@ private
     redirect_to path
   end
 
+  include Typus::MasterControllerExtensions rescue nil
 end

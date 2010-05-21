@@ -252,4 +252,5 @@ module Admin::TableHelper
 
   end
 
+  include Typus::TableHelperExtensions rescue nil
 end
