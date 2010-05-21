@@ -113,7 +113,8 @@ module Admin::FormHelper
 
         next if @current_user.cannot?('read', association.class_name.constantize)
 
-        case association.macro
+        macro = association.through_reflection ? :has_and_belongs_to_many : association.macro
+        case macro
         when :has_and_belongs_to_many
           html << typus_form_has_and_belongs_to_many(relationship)
         when :has_many
@@ -231,7 +232,9 @@ module Admin::FormHelper
       reflection = @resource[:class].reflect_on_association(field.to_sym)
       association = reflection.macro
 
-      condition = if @resource[:class].typus_user_id? && @current_user.is_not_root?
+      through = !reflection.through_reflection.nil?
+
+      condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
                     @item.owned_by?(@current_user)
                   else
                     true
@@ -248,7 +251,7 @@ module Admin::FormHelper
 <div class="box_relationships" id="#{model_to_relate_as_resource}">
   <h2>
   #{link_to model_to_relate.typus_human_name.pluralize, :controller => "admin/#{model_to_relate_as_resource}"}
-  #{add_new}
+  #{add_new unless through}
   </h2>
       HTML
 
@@ -259,6 +262,7 @@ module Admin::FormHelper
         if condition && !items_to_relate.empty?
           html << <<-HTML
     #{form_tag :action => 'relate', :id => @item.id}
+    #{hidden_field(:related, :relation, :value => field) if through}
     #{hidden_field :related, :model, :value => model_to_relate}
     <p>#{select :related, :id, items_to_relate.collect { |f| [f.to_label, f.id] }.sort_by { |e| e.first } } &nbsp; #{submit_tag _("Add"), :class => 'button'}</p>
     </form>
@@ -312,12 +316,35 @@ module Admin::FormHelper
 
       reflection = @resource[:class].reflect_on_association(field.to_sym)
       association = reflection.macro
+      foreign_key = reflection.through_reflection ? reflection.primary_key_name.pluralize : reflection.primary_key_name
+
+      link_options = { :controller => "admin/#{model_to_relate_as_resource.pluralize}",
+                       :action => 'new',
+                       :back_to => "#{@back_to}##{field}",
+                       :resource => @resource[:self].singularize,
+                       :resource_id => @item.id,
+                       foreign_key => @item.id }
+
+      condition = if @resource[:class].typus_user_id? && !@current_user.is_root?
+        @item.owned_by?(@current_user)
+      else
+        true
+      end
+
+      existing_record = instance_eval("@item.#{field}")
+
+      if existing_record.nil? && condition && @current_user.can?('create', model_to_relate)
+        add_new = <<-HTML
+        <small>#{link_to _("Add new"), link_options}</small>
+        HTML
+      end
 
       html << <<-HTML
 <a name="#{field}"></a>
 <div class="box_relationships">
   <h2>
   #{link_to model_to_relate.typus_human_name, :controller => "admin/#{model_to_relate_as_resource}"}
+  #{add_new}
   </h2>
       HTML
       items = Array.new

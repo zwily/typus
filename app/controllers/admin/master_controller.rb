@@ -190,9 +190,8 @@ class Admin::MasterController < ApplicationController
   # has_and_belongs_to_many and has_many relationships.
   #
   def relate
-
-    resource_class = params[:related][:model].constantize
-    resource_tableized = params[:related][:model].tableize
+    resource_class = params[:related][:model].constantize    
+    resource_tableized = params[:related][:relation] || params[:related][:model].tableize
 
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
       flash[:success] = _("{{model_a}} related to {{model_b}}.", 
@@ -226,7 +225,14 @@ class Admin::MasterController < ApplicationController
       saved_succesfully = @item.update_attribute attribute, nil
     else
       attribute = resource_tableized
-      saved_succesfully = @item.send(attribute).delete(resource)
+      saved_successfully =  if @item.respond_to?(attribute)
+                              @item.send(attribute).delete(resource)
+                            elsif @item.respond_to?("related_#{attribute}")
+                              @item.relationships.detect {|rel| 
+                                rel.related_id == resource.id && 
+                                  rel.related_type == resource.class.name
+                              }.destroy
+                            end
     end
 
     if saved_succesfully
