@@ -341,7 +341,7 @@ module Admin::FormHelper
 
       html << <<-HTML
 <a name="#{field}"></a>
-<div class="box_relationships">
+<div class="box_relationships" id="#{model_to_relate_as_resource}">
   <h2>
   #{link_to model_to_relate.typus_human_name, :controller => "admin/#{model_to_relate_as_resource}"}
   #{add_new}
