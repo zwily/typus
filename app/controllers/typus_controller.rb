@@ -142,4 +142,5 @@ private
         recover_password reset_password ).include?(action_name) ? "typus" : "admin"
   end
 
+  include Typus::TypusControllerExtensions rescue nil
 end

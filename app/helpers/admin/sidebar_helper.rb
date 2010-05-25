@@ -234,4 +234,5 @@ function surfto_#{model_pluralized}(form) {
 
   end
 
+  include Typus::SidebarHelperExtensions rescue nil
 end
