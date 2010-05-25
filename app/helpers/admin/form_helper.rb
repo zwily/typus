@@ -26,7 +26,7 @@ module Admin::FormHelper
                 end
       end
 
-    end.html_safe!
+    end
 
   end
 
@@ -127,7 +127,7 @@ module Admin::FormHelper
         end
 
       end
-    end.html_safe!
+    end
 
   end
 
