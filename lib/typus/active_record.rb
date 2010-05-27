@@ -72,7 +72,7 @@ module Typus
             when 'position'             then attribute_type = :position
           end
 
-          if respond_to?(:attachment_definitions) && attachment_definitions.has_key?(field)
+          if respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
             attribute_type = :file
           end
 
