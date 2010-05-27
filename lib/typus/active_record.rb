@@ -72,18 +72,11 @@ module Typus
             when 'position'             then attribute_type = :position
           end
 
-          # Set attribute type to file if accompanied by standard
-          # paperclip attachment fields with its name
-          paperclip_fields = ["#{field}_file_name".to_sym,
-                              "#{field}_content_type".to_sym,
-                              "#{field}_file_size".to_sym,
-                              "#{field}_updated_at".to_sym]
-
-          if (model_fields.keys & paperclip_fields).size == paperclip_fields.size
+          if respond_to?(:attachment_definitions) && attachment_definitions.has_key?(field)
             attribute_type = :file
           end
 
-          # And finally insert the field and the attribute_type 
+          # And finally insert the field and the attribute_type
           # into the fields_with_type ordered hash.
           fields_with_type[field.to_s] = attribute_type
 
@@ -207,7 +200,7 @@ module Typus
       :db
     end
 
-    # We are able to define which template to use to render the attribute 
+    # We are able to define which template to use to render the attribute
     # within the form
     def typus_template(attribute)
       Typus::Configuration.config[name]['fields']['options']['templates'][attribute.to_s]
