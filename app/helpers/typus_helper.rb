@@ -64,7 +64,7 @@ module TypusHelper
   def header
 
     links = []
-    links << (link_to _("Dashboard"), admin_dashboard_path) unless params[:action] == "dashboard"
+    links << (link_to _("Dashboard"), admin_dashboard_path)
 
     Typus.models_on_header.each do |model|
       links << (link_to_unless_current model.constantize.pluralized_human_name, :controller => "/admin/#{model.tableize}")
