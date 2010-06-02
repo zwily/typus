@@ -171,6 +171,12 @@ module Admin::FormHelper
   </h2>
       HTML
 
+      partial = "form_for_#{model_to_relate_as_resource}_relationship"
+
+      html << <<-HTML
+#{render :partial => partial rescue nil}
+      HTML
+
       ##
       # It's a has_many relationship, so items that are already assigned to another
       # entry are assigned to that entry.
