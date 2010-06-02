@@ -65,11 +65,13 @@ module Typus
             attribute_type = :selector
           end
 
-          # Custom field_type depending on the attribute name.
-          case field.to_s
-            when 'parent', 'parent_id'  then attribute_type = :tree
-            when /password/             then attribute_type = :password
-            when 'position'             then attribute_type = :position
+          unless typus_field_options_for(:default_attribute).include?(field)
+            # Custom field_type depending on the attribute name.
+            case field.to_s
+              when 'parent', 'parent_id'  then attribute_type = :tree
+              when /password/             then attribute_type = :password
+              when 'position'             then attribute_type = :position
+            end
           end
 
           if respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
