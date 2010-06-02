@@ -30,7 +30,7 @@ module Admin::SidebarHelper
 
     case params[:action]
     when 'edit'
-      items << (link_to _("Show entry"), :action => 'show', :id => @item.id)
+      items << (link_to _("Show"), :action => 'show', :id => @item.id)
     end
 
     case params[:action]
