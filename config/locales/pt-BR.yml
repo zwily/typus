@@ -59,7 +59,6 @@ pt-BR:
   "Recover password": "Recuperar senha"
   "Remove": 
   "Remove {{attribute}}": "Remover {{attribute}}"
-  "Remove entry?": "Remover entrada?"
   "Remove filter": "Remover filtro"
   "Reset password": "Trocar senha"
   "Resources": "Recursos"
@@ -96,6 +95,7 @@ pt-BR:
   "You're adding a new {{resource_from}}": "Você está adicionando um novo {{resource_from}}."
   "You're updating a {{resource_from}} for {{resource_to}}": "Você está atualizando um {{resource_from}} de {{resource_to}}."
   "You're updating a {{resource_from}}": "Você está atualizando um {{resource_from}}."
+  "You are about to delete a {{model}}.\nAre you sure you want to continue?": 
   "You can't toggle your status": "Você não pode mudar seu status."
   "You're not allowed to toggle status": "Você não está autorizado a mudar o status."
   "You can't remove yourself": "Você não pode apagar a si mesmo."

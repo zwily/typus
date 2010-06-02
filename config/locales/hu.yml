@@ -59,7 +59,6 @@ hu:
   "Recover password": "Jelszó helyreállítás"
   "Remove": "Eltávolítás"
   "Remove {{attribute}}": "Szűrő {{attribute}}"
-  "Remove entry?": "Eltávolítod a bejegyzést?"
   "Remove filter": "Szűrő eltávolítása"
   "Reset password": "Jelszó módosítása"
   "Resources": "Források"
@@ -93,11 +92,12 @@ hu:
   "View site": "A weboldal megtekintése"
 
   "You're adding a new {{resource_from}}": "{{resource_from}} hozzáadása"
-  "You're adding a new {{resource_from}} to {{resource_to}}": "{{resource_from}} hozzáadása {{resource_to}} rekordhoz" 
+  "You're adding a new {{resource_from}} to {{resource_to}}": "{{resource_from}} hozzáadása {{resource_to}} rekordhoz"
   "You're not allowed to toggle status": "Nincsen jogod változtatni a státuszon"
   "You're not allowed to remove Typus Users": "Nincsen jogod törölni Typus felhasználókat"
   "You're updating a {{resource_from}}": "{{resource_from}} frissítése"
-  "You're updating a {{resource_from}} for {{resource_to}}": "{{resource_from}} frissítése {{resource_to}} rekordhoz" 
+  "You're updating a {{resource_from}} for {{resource_to}}": "{{resource_from}} frissítése {{resource_to}} rekordhoz"
+  "You are about to delete a {{model}}.\nAre you sure you want to continue?": 
   "You can update your password at": "Frissítheted a jelszavad"
   "You can't change your role": "Nincsen jogod megváltoztatni a jogosultsági szintedet"
   "You can't remove yourself": "Nem törölheted saját magad"

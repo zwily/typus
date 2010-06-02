@@ -60,7 +60,6 @@ ru:
   "Recover password": "Восстановить пароль"
   "Remove": "Удалить"
   "Remove {{attribute}}": "Удалить {{attribute}}"
-  "Remove entry?": "Удалить запись?"
   "Remove filter": "Удалить фильтр"
   "Reset password": "Сбросить пароль"
   "Resources": "Ресурсы"
@@ -104,6 +103,7 @@ ru:
   "You're updating a {{resource_from}} for {{resource_to}}": "Вы редактируете {{resource_from}} для {{resource_to}}."
   "You're not allowed to remove Typus Users": "Вам не позволено удалять системных пользователей"
   "You're not allowed to toggle status": "Вам не позволено менять статус"
+  "You are about to delete a {{model}}.\nAre you sure you want to continue?": 
 
   "{{attachment}} can't be removed": "{{attachment}} не может быть удалено"
   "{{attachment}} removed": "{{attachment}} удалено"

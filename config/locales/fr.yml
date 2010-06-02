@@ -59,7 +59,6 @@ fr:
   "Recover password": 
   "Remove": "Supprimer"
   "Remove {{attribute}}": "Supprimer {{attribute}}"
-  "Remove entry?": "Supprimer l'entrée?"
   "Remove filter": "Supprimer le filtre"
   "Reset password": "Renouveler le mot de passe"
   "Resources": "Ressources"
@@ -103,6 +102,7 @@ fr:
   "You're not allowed to toggle status": "Vous n'êtes pas autorisé à basculer votre statut"
   "You're updating a {{resource_from}}": "Vous mettez-à-jour un(e) {{resource_from}}."
   "You're updating a {{resource_from}} for {{resource_to}}": "Vous mettez-à-jour un(e) {{resource_from}} pour un(e) {{resource_to}}."
+  "You are about to delete a {{model}}.\nAre you sure you want to continue?": 
 
   "{{attachment}} removed": 
   "{{attachment}} can't be removed": 

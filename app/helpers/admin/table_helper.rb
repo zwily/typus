@@ -67,9 +67,12 @@ module Admin::TableHelper
                       else
                         @current_user.can?('destroy', model)
                       end
+
+          message = _("You are about to delete a {{model}}.\nAre you sure you want to continue?", :model => model.human_name.downcase)
+
           perform = link_to trash, { :action => 'destroy', :id => item.id }, 
                                      :title => _("Remove"), 
-                                     :confirm => _("Remove entry?") if condition
+                                     :confirm => _(message) if condition
         when 'edit'
           # If we are editing content, we can relate and unrelate always!
           perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }, 

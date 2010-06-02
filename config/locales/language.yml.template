@@ -59,7 +59,6 @@
   "Recover password": 
   "Remove": 
   "Remove {{attribute}}": 
-  "Remove entry?": 
   "Remove filter": 
   "Reset password": 
   "Resources": 
@@ -98,6 +97,7 @@
   "You're not allowed to remove Typus Users": 
   "You're updating a {{resource_from}}": 
   "You're updating a {{resource_from}} for {{resource_to}}": 
+  "You are about to delete a {{model}}.\nAre you sure you want to continue?": 
   "You can update your password at": 
   "You can't change your role": 
   "You can't remove yourself": 
