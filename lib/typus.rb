@@ -84,6 +84,7 @@ module Typus
       end
 
       # Ruby/Rails Extensions
+      require "extensions/array"
       require "extensions/hash"
       require "extensions/object"
       require "extensions/string"
