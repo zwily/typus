@@ -156,7 +156,15 @@ module Admin::FormHelper
                     true
                   end
 
-      if condition && @current_user.can?('create', model_to_relate)
+      # If the form_for_<model>_relationship partial exists we consider 
+      # we want to add only items from our form, and not going to the 
+      # new action. So we don't show the add new.
+
+      # Partial exists?
+      partial = "form_for_#{model_to_relate_as_resource}_relationship"
+      partial_path = Rails.root.join('app', 'views', 'admin', 'cars', "_#{partial}.html.erb").to_s
+
+      if condition && @current_user.can?('create', model_to_relate) && !File.exists?(partial_path)
         add_new = <<-HTML
   <small>#{link_to _("Add new"), link_options}</small>
         HTML
@@ -171,11 +179,11 @@ module Admin::FormHelper
   </h2>
       HTML
 
-      partial = "form_for_#{model_to_relate_as_resource}_relationship"
-
-      html << <<-HTML
-#{render :partial => partial rescue nil}
-      HTML
+      if File.exists?(partial_path)
+        html << <<-HTML
+  #{render :partial => partial}
+        HTML
+      end
 
       ##
       # It's a has_many relationship, so items that are already assigned to another
