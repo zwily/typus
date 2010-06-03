@@ -25,7 +25,7 @@ module Admin::SidebarHelper
     items = []
 
     if @current_user.can?('create', @resource[:class])
-      items << (link_to_unless_current _("Add New"), { :action => 'new' }, :class => 'new')
+      items << (link_to_unless_current _("Add new"), { :action => 'new' }, :class => 'new')
     end
 
     case params[:action]
