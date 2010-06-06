@@ -1,11 +1,3 @@
 <ul>
   <li class="header borderless"><%= link_to_unless_current "Dashboard", admin_dashboard_path %></li>
-  <% if params[:controller] == "admin/dashboard" %>
-    <ul>
-      <li><%= link_to _("Mailing list"), "http://groups.google.com/group/typus" %></li>
-      <li><%= link_to _("Submit a bug report"), "http://github.com/fesplugas/typus/issues" %></li>
-      <li><%= link_to _("Documentation"), "http://typus.intraducibles.com/" %></li>
-      <li><%= link_to _("License"), "http://typus.intraducibles.com/#mit-license" %></li>
-    </ul>
-  <% end %>
 </ul>
