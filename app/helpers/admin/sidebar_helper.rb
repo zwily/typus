@@ -26,7 +26,7 @@ module Admin
       end
 
       # Edit or Show
-      message = @current_user.can?("update", klass) ? _("Edit") : _("Show")
+      message = _("List")
       options = { :controller => klass.to_resource }
       actions << (link_to_unless_current message, options)
 
