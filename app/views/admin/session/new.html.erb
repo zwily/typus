@@ -1,5 +1,6 @@
 <%
-  @title = "Sign in"
+  page_title = _("Sign in")
+  title(page_title)
 %>
 
 <%= form_for :typus_user, :url => { :action => :create, :back_to => params[:back_to] } do |form| %>

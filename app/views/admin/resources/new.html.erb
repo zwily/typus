@@ -1,5 +1,6 @@
 <%
-  @title = _("New {{resource}}", :resource => @resource.model_name.human)
+  page_title = _("New {{resource}}", :resource => @resource.model_name.human)
+  title(page_title)
 %>
 
 <% content_for :sidebar do %>
@@ -9,7 +10,7 @@
 <%= display_link_to_previous %>
 
 <h2>
-  <%= @title %>
+  <%= page_title %>
 </h2>
 
 <%= typus_block %>
