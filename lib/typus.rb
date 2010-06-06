@@ -9,8 +9,7 @@ module Typus
   # Define a subtitle
   mattr_accessor :admin_sub_title
   @@admin_sub_title = <<-CODE
-<a href="http://intraducibles.com/projects/typus">Typus</a> is the effortless backend interface for <a href="http://rubyonrails.org/">Ruby on Rails</a> applications.<br />
-Developed by <a href="http://intraducibles.com">intraducibles.com</a>.
+<a href="http://intraducibles.com/projects/typus">Typus</a> by <a href="http://intraducibles.com">intraducibles.com</a>
   CODE
 
   # Authentication mechanism: none, basic, advanced
