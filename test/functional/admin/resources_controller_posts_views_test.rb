@@ -13,7 +13,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_index_and_verify_page_title
     get :index
-    assert_select "title", "#{Typus.admin_title} - Posts"
+    assert_select "title", "Edit Posts"
   end
 
   def test_should_render_index_and_show_add_entry_link
@@ -105,7 +105,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_new_and_verify_page_title
     get :new
-    assert_select 'title', "#{Typus.admin_title} - Posts &rsaquo; New"
+    assert_select "title", "New Post"
   end
 
   ##
@@ -119,7 +119,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_edit_and_verify_page_title
     get :edit, { :id => posts(:published).id }
-    assert_select "title", "#{Typus.admin_title} - Posts &rsaquo; Edit"
+    assert_select "title", "Edit Post"
   end
 
   ##
@@ -133,7 +133,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_show_and_verify_page_title
     get :show, { :id => posts(:published).id }
-    assert_select "title", "#{Typus.admin_title} - Posts &rsaquo; Show"
+    assert_select "title", "Show Posts"
   end
 
   def test_should_render_show_and_verify_add_relationships_links

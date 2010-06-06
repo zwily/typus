@@ -1,8 +1,12 @@
+<%
+  @title = _("Dashboard")
+%>
+
 <% content_for :sidebar do %>
   <%= render "sidebar" %>
 <% end %>
 
-<h2><%= _("Dashboard") %></h2>
+<h2><%= @title %></h2>
 
 <%= applications %>
 

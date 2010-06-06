@@ -1,9 +1,13 @@
+<%
+  @title = _("Edit {{resources}}", :resources => @resource.model_name.human.pluralize)
+%>
+
 <% content_for :sidebar do %>
   <%= build_sidebar %>
 <% end %>
 
 <h2>
-  <%= _("Edit {{resources}}", :resources => @resource.model_name.human.pluralize) %>
+  <%= @title %>
   <small><%= remove_filter_link %></small>
 </h2>
 

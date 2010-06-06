@@ -1,9 +1,13 @@
+<%
+  @title = _("Show {{resource}}", :resource => @resource.model_name.human)
+%>
+
 <% content_for :sidebar do %>
   <%= build_sidebar %>
 <% end %>
 
 <h2>
-  <%= _("Show {{resource}}", :resource => @resource.model_name.human) %>
+  <%= @title %>
   <small><%= link_to_edit %></small>
 </h2>
 

@@ -20,10 +20,6 @@ module AdminHelper
 
   end
 
-  def page_title
-    (Typus.admin_title + " - " + @page_title.join(" &rsaquo; ")).html_safe
-  end
-
   def header
     render "admin/helpers/header"
   end

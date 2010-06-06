@@ -10,7 +10,6 @@ class AdminController < ActionController::Base
 
   before_filter :reload_config_and_roles
   before_filter :authenticate
-  before_filter :set_page_title
 
   def show
     redirect_to admin_dashboard_path
@@ -28,12 +27,6 @@ class AdminController < ActionController::Base
   end
 
   include Typus::Authentication
-
-  def set_page_title
-    @page_title = []
-    @page_title << _(params[:controller].sub("admin/", "").humanize)
-    @page_title << _(params[:action].humanize) unless params[:action].eql?("index")
-  end
 
   def set_path
     @back_to || request.referer || admin_dashboard_path

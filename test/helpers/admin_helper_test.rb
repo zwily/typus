@@ -9,12 +9,6 @@ class AdminHelperTest < ActiveSupport::TestCase
 
   def render(*args); args; end
 
-  def test_page_title
-    @page_title = ["a", "b"]
-    Typus.expects(:admin_title).returns("whatistypus.com")
-    assert_equal "whatistypus.com - a &rsaquo; b", page_title
-  end
-
 =begin
 
   # FIXME
