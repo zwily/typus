@@ -21,7 +21,7 @@ module Admin
 
       if @current_user.can?("create", klass)
         options = { :controller => klass.to_resource }
-        message = _("Add New")
+        message = _("Add new")
         actions << (link_to_unless_current message, options.merge(:action => "new"))
       end
 

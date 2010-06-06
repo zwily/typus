@@ -19,7 +19,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   def test_should_render_index_and_show_add_entry_link
     get :index
     assert_select "#sidebar ul" do
-      assert_select "li", "Add New"
+      assert_select "li", "Add new"
     end
   end
 

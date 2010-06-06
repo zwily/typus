@@ -91,7 +91,7 @@ module Admin
 
       return unless set_condition && @current_user.can?("create", @model_to_relate)
 
-      link_to _("Add New"), default_options.merge(options)
+      link_to _("Add new"), default_options.merge(options)
     end
 
     def set_condition
