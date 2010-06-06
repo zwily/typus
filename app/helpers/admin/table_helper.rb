@@ -57,8 +57,8 @@ module Admin::TableHelper
         # Only shown is the user can destroy/unrelate items.
         #
 
-        trash = "<div class=\"sprite trash\">Trash</div>"
-        unrelate = "<div class=\"sprite unrelate\">Unrelate</div>"
+        trash = %Q(<div class="sprite trash">Trash</div>)
+        unrelate = %Q(<div class="sprite unrelate">Unrelate</div>)
 
         case params[:action]
         when 'index'
