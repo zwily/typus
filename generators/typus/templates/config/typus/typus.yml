@@ -13,5 +13,5 @@
         status: Active, Inactive
   filters: status, role
   search: first_name, last_name, email, role
-  application: Typus
-  description: System Users Administration
+  application: Admin Panel
+  description: Admin Panel Users Administration
