@@ -57,14 +57,7 @@ module Typus
               when /\./                   then attribute_type = :transversal
             end
 
-            # Set attribute type to file if accompanied by standard
-            # paperclip attachment fields with its name
-            paperclip_fields = ["#{field}_file_name".to_sym,
-                                "#{field}_content_type".to_sym,
-                                "#{field}_file_size".to_sym,
-                                "#{field}_updated_at".to_sym]
-
-            if (model_fields.keys & paperclip_fields).size == paperclip_fields.size
+            if respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
               attribute_type = :file
             end
 
