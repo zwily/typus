@@ -64,6 +64,8 @@ module Admin::TableHelper
         when 'index'
           condition = if model.typus_user_id? && @current_user.is_not_root?
                         item.owned_by?(@current_user)
+                      elsif (@current_user.id.eql?(item.id) && model.eql?(Typus.user_class))
+                        false
                       else
                         @current_user.can?('destroy', model)
                       end
