@@ -222,7 +222,7 @@ module Typus
       conditions, joins = merge_conditions, []
 
       query_params = params.dup
-      %w( action controller ).each { |param| query_params.delete(param) }
+      %w( action controller page ).each { |param| query_params.delete(param) }
 
       # If a search is performed.
       if query_params[:search]
