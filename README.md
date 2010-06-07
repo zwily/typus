@@ -61,7 +61,7 @@ Use the following credentials to log in.
 
 ## Installing
 
-Install from GitHub the latest version which it's compatible with Rails 2.3.6.
+Install from GitHub the latest version which is compatible with Rails 2.3.8.
 
     $ script/plugin install git://github.com/fesplugas/typus.git
 
