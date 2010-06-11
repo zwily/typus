@@ -338,9 +338,7 @@ index you can owerwrite the setting. This setting can be defined
 globally or by model.
 
 ----
-Typus::Resource.setup do |config|
-  config.action_after_save = :index
-end
+Typus::Configuration.options[:action_after_save] = :index
 ----
 
 You can also define this option by model.
@@ -349,15 +347,13 @@ You can also define this option by model.
 Post:
   ...
   options:
-    action_after_save: edit
+    action_after_save: index
 ----
 
 ==== End Year ====
 
 ----
-Typus::Resource.setup do |config|
-  config.end_year = 2015
-end
+Typus::Configuration.options[:end_year] = 2015
 ----
 
 You can also define this option by model.
@@ -372,9 +368,7 @@ Post:
 ==== Form Rows ====
 
 ----
-Typus::Resource.setup do |config|
-  config.form_rows = 25
-end
+Typus::Configuration.options[:form_rows] = 25
 ----
 
 You can also define this option by model.
@@ -389,9 +383,7 @@ Post:
 ==== Minute Step ====
 
 ----
-Typus::Resource.setup do |config|
-  config.minute_step = 15
-end
+Typus::Configuration.options[:minute_step] = 15
 ----
 
 You can also define this option by model.
@@ -406,9 +398,7 @@ Post:
 ==== Nil ====
 
 ----
-Typus::Resource.setup do |config|
-  config.nil = 'nil'
-end
+Typus::Configuration.options[:nil] = 'nil'
 ----
 
 You can also define this option by model.
@@ -423,9 +413,7 @@ Post:
 ==== Per Page ====
 
 ----
-Typus::Resource.setup do |config|
-  config.per_page = 15
-end
+Typus::Configuration.options[:per_page] = 15
 ----
 
 You can also define this option by model.
@@ -440,9 +428,7 @@ Post:
 ==== Start Year ====
 
 ----
-Typus::Resource.setup do |config|
-  config.start_year = 1990
-end
+Typus::Configuration.options[:start_year] = 1990
 ----
 
 You can also define this option by model.
