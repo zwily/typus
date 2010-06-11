@@ -30,7 +30,7 @@ extensible enough to match lots of use cases.
 
 ## Links
 
-- [Project site and documentation](http://intraducibles.com/projects/typus)
+- [Project site and documentation](http://labs.intraducibles.com/projects/typus)
 - [Plugin source](http://github.com/fesplugas/typus)
 - [Mailing list](http://groups.google.com/group/typus)
 - [Bug reports](http://github.com/fesplugas/typus/issues)
@@ -62,4 +62,4 @@ allow us to spend more time working and supporting the project.
 Copyright &copy; 2007-2010 Francesc Esplugas Marti, released under the 
 MIT license
 
-[1]:http://intraducibles.com/projects/typus/donate
+[1]:http://labs.intraducibles.com/projects/typus/donate
