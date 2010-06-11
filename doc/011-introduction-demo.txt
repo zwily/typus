@@ -1,4 +1,4 @@
-## What is Typus?
+== What is Typus? ==
 
 A few years ago I developed websites using [Movable Type](http://movabletype.org/), [Drupal](http://drupal.com), [TextPattern](http://textpattern.com/) and [b2](http://b2evolution.net/), which later became [Wordpress](http://wordpress.org/). I decided to stop using all those content management systems and started to develop web applications with [Ruby on Rails](http://rubyonrails.org/).
 
@@ -8,7 +8,7 @@ Inspired by the tools I used, and with a simple idea "Trusted users editing stru
 
 On December 2007, **Typus** was released under a [MIT License](/projects/typus/mit-license). A lot of feedback, ideas, contributions &amp; donations are making the plugin better everyday.
 
-### Typus Key Features
+=== Typus Key Features ===
 
 - Access control by users and roles.
 - CRUD and custom actions for your models on a clean interface.
@@ -16,14 +16,14 @@ On December 2007, **Typus** was released under a [MIT License](/projects/typus/m
 - Extensible and overwritable templates.
 - Low memory footprint.
 
-## Impatients to see it working?
+== Impatients to see it working? ==
 
 A demo is running at [Heroku](http://typus.heroku.com/). Use the following credentials to log in.
 
     Email: user@intraducibles.com
     Password: columbia
 
-## Want to quickly create an application on your development machine?
+== Want to quickly create an application on your development machine? ==
 
 Note that Git & Rails are required to make the application work.
 

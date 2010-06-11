@@ -1,27 +1,4 @@
-<h2 id="toc">Configuration</h2>
-
-- [Initializer: Understanding what `typus.rb` can do for you.](#initializer)
-  - [Enable password recover.](#recover_password)
-  - [Redirect to index after creating a record.](#index_after_save)
-- [The `*.yaml` configuration file](#yaml)
-  - [Fields](#fields)
-  - [Filters](#filters)
-  - [Order](#order)
-  - [Searches](#searches)
-  - [Selectors](#selectors)
-  - [Booleans](#booleans)
-  - [Date formats](#date_formats)
-  - [Actions](#actions)
-- [The `*_roles.yaml` configuration file](#roles_yaml)
-  - [Roles](#roles)
-  - [Resources which are not models](#resources)
-- [User interface customization](#interface)
-  - [Default views](#default_views)
-  - [Blocks on views](#blocks_on_views)
-  - [Attribute templates](#attribute_templates)
-- [Exporting data](#exporting)
-- [Quick edit](#quick_edit)
-- [Applications](#application)
+== Configuration ==
 
 <h2 id="initializer">Initializer: Understanding what <code>typus.rb</code> can do for you.</h2>
 
