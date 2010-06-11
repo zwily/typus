@@ -18,6 +18,8 @@ $ rails typus.demo -m http://typus.intraducibles.com/demo.rb
 Start the application and log in into the admin panel.
 
 ----
-$ cd example.com && script/server
-$ open http://0.0.0.0:3000/admin
+$ cd typus.demo
+$ script/server
 ----
+
+Go to http://0.0.0.0:3000/admin
