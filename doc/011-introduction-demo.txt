@@ -12,7 +12,7 @@ You can replicate the demo application hosted at http://www.heroku.com/
 using the +demo+ template:
 
 ----
-$ rails example.com -m http://typus.intraducibles.com/demo.rb
+$ rails typus.demo -m http://typus.intraducibles.com/demo.rb
 ----
 
 Start the application and log in into the admin panel.

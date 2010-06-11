@@ -5,7 +5,7 @@
 To install Typus as a plugin:
 
 ----
-$ rails plugin install git://github.com/fesplugas/typus.git
+$ script/plugin install git://github.com/fesplugas/typus.git
 ----
 
 NOTE: To re-install the plugin use the +--force+ option.
@@ -32,14 +32,14 @@ copy **Typus** stylesheets, images and other required files to your
 application.
 
 ----
-$ rails generate typus
+$ script/generate typus
 ----
 
 By default **Typus** will use an http authentication but if you want 
 to use a better authentication system you need to run a second generator.
 
 ----
-$ rails generate typus_migration
+$ script/generate typus_migration
 $ rake db:migrate
 ----
 
@@ -49,7 +49,7 @@ also create a migration. You can see some options of this generator running
 the following command.
 
 ----
-$ rails generate typus_migration -h
+$ script/generate typus_migration -h
 ----
 
 === Login into Typus ===
