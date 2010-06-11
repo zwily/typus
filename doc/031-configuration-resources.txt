@@ -339,7 +339,7 @@ globally or by model.
 
 ----
 Typus::Resource.setup do |config|
-  config.action_after_save = :index
+  config.action_after_save = :edit
 end
 ----
 
