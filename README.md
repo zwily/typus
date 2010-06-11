@@ -35,29 +35,7 @@ extensible enough to match lots of use cases.
 - [Mailing list](http://groups.google.com/group/typus)
 - [Bug reports](http://github.com/fesplugas/typus/issues)
 - [Gems](http://gemcutter.org/gems/typus)
-
-## Impatients to see it working?
-
-**Step 1:** Create a Rails application using a template.
-
-    $ rails example.com -m http://tr.im/typus_example
-
-**Step 2:** Start the server.
-
-    $ cd example.com && script/server
-
-**Step 3:** Go to the admin area
-
-    $ open http://0.0.0.0:3000/admin
-
-## Want to see a demo working?
-
-Demo application is hosted at Heroku (<http://typus.heroku.com/>).
-
-Use the following credentials to log in.
-
-    Email: user@intraducibles.com
-    Password: columbia
+- [Contributors](http://github.com/fesplugas/typus/contributors)
 
 ## Installing
 
@@ -71,30 +49,7 @@ and migrate your database.
     $ script/generate typus
     $ rake db:migrate
 
-To create the first user, start the application server, go to 
-http://0.0.0.0:3000/admin and follow the instructions.
-
-## Namespaced Models?
-
-If you want to be able to use `delayed_job` you need to add the following 
-two lines to your `config/routes.rb` file.
-
-    map.connect "admin/delayed/jobs/:action/:id", :controller => "admin/delayed/jobs"
-    map.connect "admin/delayed/jobs/:action/:id.:format", :controller => "admin/delayed/jobs"
-
-And then create and configure `config/typus/delayed_job.yml` and 
-`config/typus/delayed_job_roles.yml` as you do with your other models.
-
-    # config/typus/delayed_job.yml
-    Delayed::Job:
-      fields:
-        list: ...
-        form: ...
-      search: ...
-
-    # config/typus/delayed_job_roles.yml
-    admin:
-      Delayed::Job: all
+Start the application server and go to <http://0.0.0.0:3000/admin>.
 
 ## Support
 
