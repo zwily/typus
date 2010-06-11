@@ -30,6 +30,32 @@ task :release => :build do
 end
 
 ##
+# Docs
+##
+
+namespace :site do
+
+  desc "Regenerate the documentation"
+  task :build do
+    command = `which asciidoc`.strip
+    unless command.empty?
+      puts "Building site using `asciidoc`."
+      system "cd doc && #{command.strip} -a icons -a toc -o site/index.html 000-index.txt"
+    else
+      puts "AsciiDoc is not installed."
+    end
+  end
+
+  desc "Update the website"
+  task :deploy => :build do
+    Dir.chdir("doc/site") do
+      sh %(scp -r ./ fesplugas@typus.intraducibles.com:~/public_html/typus.intraducibles.com/)
+    end
+  end
+
+end
+
+##
 # Extras
 ##
 
