@@ -49,7 +49,7 @@ namespace :site do
   desc "Update the website"
   task :deploy => :build do
     Dir.chdir("doc/site") do
-      sh %(scp -r ./ fesplugas@labs.intraducibles.com:~/public_html/labs.intraducibles.com/current/public/typus/documentation)
+      sh %(scp -r ./ fesplugas@labs.intraducibles.com:~/public_html/labs.intraducibles.com/current/public/projects/typus/documentation)
     end
   end
 
