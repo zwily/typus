@@ -28,8 +28,5 @@ On December 2007, **Typus** was released under a xref:mit-license[MIT License].
 - Easily manage your data, search, sort and filter.
 - Ruby 1.9 compatible.
 - Supports ActiveRecord.
-- Supports *Rails 3.0.0.beta3*.
 - Tested with *SQLite*, *MySQL* and *PostgreSQL*.
 - xref:mit-license[MIT License], the same as Rails.
-
-IMPORTANT: Master branch is only compatible with *Rails 3.0.0.beta3*.
