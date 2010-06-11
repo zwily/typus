@@ -1,5 +1,54 @@
 === Adding a Rich Text Editor ===
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Download **CKEditor** and uncompress it under the `public/javascripts` 
+folder.
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+----
+$ cd public/javascripts
+$ curl -O http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.3.1/ckeditor_3.3.1.tar.gz
+$ tar xvzf ckeditor_3.3.1.tar.gz
+$ rm ckeditor_3.3.1.tar.gz
+----
+
+Create the file `app/views/admin/pages/_edit.html.erb` and copy the 
+following snippet. This will replace all `textarea` with **CKEditor**.
+
+----
+<% content_for :javascripts do %>
+  <%= javascript_include_tag "ckeditor/ckeditor" %>
+  <script type="text/javascript">
+    $(function() {
+      if ($('textarea').length > 0) {
+        var data = $('textarea');
+        $.each(data, function(i) { CKEDITOR.replace(data[i].id); });
+      }
+    });
+  </script>
+<% end %>
+-----
+
+Now you can configure **CKEditor** editing `public/javascripts/ckeditor/config.js`. 
+This is how mine looks like, but you can customize all the settings of 
+**CKEditor** to match your requirements.
+
+----
+CKEDITOR.editorConfig = function( config )
+{
+
+  config.height = '250px';
+  config.width = '690px';
+
+  config.toolbar = 'Easy';
+  config.toolbar_Easy =
+    [
+        ['Source','-','Templates', '-', 'Cut','Copy','Paste','PasteText','PasteFromWord',],
+        ['Maximize'],
+        ['Undo','Redo','-','SelectAll','RemoveFormat'],
+        ['Link','Unlink','Anchor', '-', 'Image','Embed'], 
+        ['Styles','Format', 'Bold','Italic','Underline','Strike','-', 'TextColor'],
+        ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+    ];
+
+};
+----
