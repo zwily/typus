@@ -5,7 +5,7 @@ ENV["RAILS_ENV"] = "test"
 require "fixtures/rails_app/config/environment"
 require "rails/test_help"
 
-# As we are simulating the application we need to reload the 
+# As we are simulating the application we need to reload the
 # configurations to get the custom paths.
 Typus.reload!
 
@@ -22,7 +22,7 @@ connection = case ENV["DB"]
 ActiveRecord::Base.establish_connection(connection)
 load File.join(File.dirname(__FILE__), "schema.rb")
 
-# To test the plugin without touching the application we set our 
+# To test the plugin without touching the application we set our
 # load_paths and view_paths.
 
 %w( models controllers helpers ).each do |folder|
@@ -35,5 +35,5 @@ class ActiveSupport::TestCase
   self.fixture_path = File.dirname(__FILE__) + "/fixtures"
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
-  fixtures :all
+  fixtures :assets, :categories, :comments, :pages, :pictures, :posts, :typus_users
 end
