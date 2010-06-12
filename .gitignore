@@ -5,3 +5,5 @@
 *.csv
 doc/site/*.html
 
+Gemfile.lock
+
