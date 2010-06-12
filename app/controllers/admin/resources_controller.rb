@@ -102,7 +102,7 @@ class Admin::ResourcesController < AdminController
     @item.toggle(params[:field])
     @item.save!
 
-    notice = _("{model} %{attribute} changed.",
+    notice = _("%{model} %{attribute} changed.",
                :model => @resource.model_name.human,
                :attribute => params[:field].humanize.downcase)
 
