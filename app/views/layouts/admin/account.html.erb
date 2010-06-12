@@ -20,7 +20,8 @@
   <title><%= yield :title %></title>
 
   <%= stylesheet_link_tag "admin/reset", 
-                          "admin/screen" %>
+                          "admin/screen", 
+                          "admin/application" %>
 
 </head>
 
@@ -29,7 +30,7 @@
   <div id="dialog_wrapper">
 
     <div id="dialog">
-      <h1><%= Typus.admin_title %></h1>
+      <h1 class="logo"><%= Typus.admin_title %></h1>
       <%= display_flash_message %>
       <%= yield %>
     </div>
