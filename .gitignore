@@ -1,5 +1,7 @@
 # Ignore generated files ...
+.bundle
 *.gem
 *.log
 *.csv
 doc/site/*.html
+
