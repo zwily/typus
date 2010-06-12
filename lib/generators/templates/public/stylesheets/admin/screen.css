@@ -1,3 +1,13 @@
+/* Colors
+
+Red: #ED2228
+White: #FFFFF
+Grey: #242527
+Black: #00000
+
+*/
+
+
 /* @group Defaults */
 
 html { height: 100%; }
@@ -19,7 +29,7 @@ dd p { color: #000; }
 
 p { color: #777; margin: 0.5em 0; }
 
-h1 { font-size: 2em; font-weight: bold; margin: 0.25em 0; }
+h1 { font-size: 2em; }
 
 /* @end */
 
@@ -34,34 +44,34 @@ a:hover { color: #333; text-decoration: underline; }
 
 /* @group Header */
 
-#header_wrapper { background: #000; }
-#header { color: #FFF; margin: 0 auto; padding: 0.5em 0; width: 940px; }
+#header_wrapper { background: #ED2228; }
+#header { color: #FFF; margin: 0 auto; padding: 0.25em 2em; }
 
-#header h1 { display: block; float: left; margin-right: 0.25em; }
+#header h1 { display: block; float: left; margin: 0.25em 0.25em 0.25em 0; }
 
 #header a { color: #FFF; }
 
 #header .left { float: left; }
-#header .left ul { float: left; }
-#header .right { float: right; }
+#header .left ul { display: block; }
+#header .right { float: right; margin: 41px 0 0 0; }
 
-#header ul { padding-top: 1.5em; }
 #header ul li { display: inline; padding-left: 0.5em; }
+
+#header .left ul { margin: 3.5em 0 1em 0; }
+#header .left ul li { display: inline; padding: 0 0.5em 0 0; }
+
+#header .left ul li a {
+  -webkit-border-radius: 5px;
+  background: #242527;
+  padding: 3px 5px;
+}
 
 /* @end */
 
 /* @group Content */
 
-#content_wrapper {
-  margin: 0 auto;
-  padding: 1em 0;
-  width: 940px;
-}
-
-#content {
-  float: left;
-  width: 700px;
-}
+#content_wrapper { padding: 1em 2em; }
+#content { margin: 0 0 0 19.5em; }
 
 #content h2 { font-size: 1.5em; font-weight: bold; margin: 0.5em 0; }
 #content h2 small { font-size: 0.70em; }
@@ -73,8 +83,6 @@ a:hover { color: #333; text-decoration: underline; }
 #content ul { margin: 0 1.5em; }
 #content li { list-style: square; line-height: 20px; }
 #content ul li { list-style: square; }
-
-#content h2+table.typus { margin: 0; }
 
 #content pre {
   background: #000;
@@ -98,16 +106,12 @@ a:hover { color: #333; text-decoration: underline; }
 /* @group Footer */
 
 #footer_wrapper {
-  bottom: 0 !important;
-  bottom: -1px; /* For Certain IE widths */
   color: #777;
-  padding: 0.5em 0;
-  position: absolute;
-  height: 50px;
-  width: 100%;
+  margin: 1em 1em;
+  padding: 1em;
 }
 
-#footer { font-size: 0.9em; line-height: 1.6em; margin: 0 auto; width: 940px; }
+#footer { font-size: 0.9em; line-height: 1.6em; margin: 0 auto; }
 #footer a { color: #000; font-weight: normal; }
 #footer a:hover { text-decoration: underline; }
 
@@ -115,14 +119,19 @@ a:hover { color: #333; text-decoration: underline; }
 
 /* @group Sidebar */
 
-#sidebar {
-  float: left;
-  margin-left: 20px;
-  padding-top: 0.75em;
-  width: 220px;
+#sidebar { float: left; margin: 1em 2em 0 0; width: 17.5em; }
+#sidebar h2 { font-size: 1.5em; font-weight: bold; margin: -5px 0 0 0; }
+
+#sidebar h3 {
+  -webkit-border-radius: 5px;
+  background: #242527;
+  padding: 5px 10px;
+  margin: 0 0 1em 0;
 }
 
-#sidebar h2 { font-size: 1.5em; font-weight: bold; }
+#sidebar h3 a { color: #FFF; }
+#sidebar ul { margin: 0.75em 0; }
+#sidebar ul li { font-weight: bold; padding: 5px 10px; margin: -5px 0 5px 0; }
 
 /* @end */
 
@@ -164,22 +173,9 @@ fieldset.buttons { }
 
 /* @group Content Tables */
 
-#content table {
-  -moz-border-radius-topleft: 3px;
-  -moz-border-radius-topright: 3px;
-  -webkit-border-top-left-radius: 3px;
-  -webkit-border-top-right-radius: 3px;
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
-  border-left: 1px solid #D3D3D3;
-  border-right: 1px solid #D3D3D3;
-  margin-bottom: 2em!important;
-  width: 100%;
-}
-
-#content table th { background: #000; color: #FFF; padding: 6px; }
+#content table { margin-bottom: 2em!important; width: 100%; }
+#content table th { background: #242527; color: #FFF; padding: 6px; }
 #content table th a { color: #FFF!important; }
-#content table td { border-bottom: 1px solid #D3D3D3!important; }
 #content table td.right { text-align: right; }
 #content table tr.even { background: #FFF!important; }
 #content table tr.even:hover,
@@ -191,9 +187,7 @@ fieldset.buttons { }
 
 /* @group Login Page Dialog */
 
-body#account {
-  background: #F3F3F3;
-}
+#account { background: #F3F3F3; }
 
 #dialog_wrapper { margin: 0 auto; padding: 7.5em 0; width: 40em; }
 
@@ -275,35 +269,6 @@ body#account {
 
 /* @end */
 
-/* @group Resource */
-
-.resource {
-  -moz-border-radius-topleft: 3px;
-  -moz-border-radius-topright: 3px;
-  -webkit-border-top-left-radius: 3px;
-  -webkit-border-top-right-radius: 3px;
-  border: 1px solid #D3D3D3;
-  margin-bottom: 1em;
-}
-
-.resource h2 {
-  -moz-border-radius-topleft: 3px;
-  -moz-border-radius-topright: 3px;
-  -webkit-border-top-left-radius: 3px;
-  -webkit-border-top-right-radius: 3px;
-  background: #E4E4E4;
-  padding: 5px 10px;
-}
-
-.resource ul li {
-  background: #FFF;
-  border-top: 1px solid #D3D3D3;
-  font-weight: bold;
-  padding: 5px 10px;
-}
-
-/* @end */
-
 /* @group Filters */
 
 #content .filters {
@@ -321,8 +286,7 @@ body#account {
 
 /* @group Search */
 
-#search { float: right; margin: 0px 0 0 0; }
-#search h2 { display: none; }
-#search input { font-size: 1em; padding: 3px; margin: -5px 0 0 0; }
+#search { float: right; }
+#search input { font-size: 1em; padding: 3px; }
 
 /* @end */
