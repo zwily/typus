@@ -42,7 +42,7 @@ module Admin
 
       values = model.all(:order => model.typus_order_by)
       values_labelized = values.map { |v| v.to_label }
-      items = values.map(&:id).to_hash(values_labelized)
+      items = values.map(&:id).to_hash_with(values_labelized)
 
       message = _("View all {{attribute}}", :attribute => filter.pluralize)
 
@@ -52,7 +52,7 @@ module Admin
     def date_filter(request, filter)
       values = %w(today last_few_days last_7_days last_30_days)
       values_humanized = values.map { |v| _(v.humanize) }
-      items = values.to_hash(values_humanized)
+      items = values.to_hash_with(values_humanized)
       message = _("Show all dates")
 
       return filter, items, message
@@ -67,7 +67,7 @@ module Admin
 
     def string_filter(request, filter)
       values = @resource::const_get(filter.to_s.upcase)
-      items = values.kind_of?(Hash) ? values : values.to_hash(values)
+      items = values.kind_of?(Hash) ? values : values.to_hash_with(values)
       message = _("Show by {{attribute}}", :attribute => filter)
 
       return filter, items, message
