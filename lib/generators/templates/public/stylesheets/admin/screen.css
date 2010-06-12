@@ -47,7 +47,7 @@ a:hover { color: #333; text-decoration: underline; }
 #header_wrapper { background: #ED2228; }
 #header { color: #FFF; margin: 0 auto; padding: 0.25em 2em; }
 
-#header h1 { display: block; float: left; margin: 0.25em 0.25em 0.25em 0; }
+#header h1 { margin: 0.25em 0.25em 0.5em 0; }
 
 #header a { color: #FFF; }
 
@@ -57,7 +57,7 @@ a:hover { color: #333; text-decoration: underline; }
 
 #header ul li { display: inline; padding-left: 0.5em; }
 
-#header .left ul { margin: 3.5em 0 1em 0; }
+#header .left ul { margin: 0em 0 1em 0; }
 #header .left ul li { display: inline; padding: 0 0.5em 0 0; }
 
 #header .left ul li a {
