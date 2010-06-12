@@ -45,22 +45,19 @@ a:hover { color: #333; text-decoration: underline; }
 /* @group Header */
 
 #header_wrapper { background: #ED2228; }
-#header { color: #FFF; margin: 0 auto; padding: 0.25em 2em; }
 
-#header h1 { margin: 0.25em 0.25em 0.5em 0; }
+#header_wrapper #header { color: #FFF; padding: 1em 2em 0em 2em; }
 
-#header a { color: #FFF; }
+#header_wrapper #links { color: #FFF; padding: 1em 2em; }
+#header_wrapper #links a { color: #FFF; }
+#header_wrapper #links .left { float: left; }
+#header_wrapper #links .left ul { display: block; }
+#header_wrapper #links .right { float: right; margin: 0 0 0 0; }
+#header_wrapper #links ul li { display: inline; padding-left: 0.5em; }
+#header_wrapper #links .left ul { margin: 0em 0 0em 0; }
+#header_wrapper #links .left ul li { display: inline; padding: 0 0.5em 0 0; }
 
-#header .left { float: left; }
-#header .left ul { display: block; }
-#header .right { float: right; margin: 41px 0 0 0; }
-
-#header ul li { display: inline; padding-left: 0.5em; }
-
-#header .left ul { margin: 0em 0 1em 0; }
-#header .left ul li { display: inline; padding: 0 0.5em 0 0; }
-
-#header .left ul li a {
+#header_wrapper #links .left ul li a {
   -webkit-border-radius: 5px;
   background: #242527;
   padding: 3px 5px;
