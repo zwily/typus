@@ -1,6 +1,8 @@
 # coding: utf-8
 
 module Typus
+  class TypusEngine < Rails::Engine
+  end
 
   # Define the application name.
   mattr_accessor :admin_title
@@ -24,7 +26,7 @@ module Typus
   mattr_accessor :username
   @@username = "admin"
 
-  # Define the password: Used as a default password and for the http 
+  # Define the password: Used as a default password and for the http
   # authentication.
   mattr_accessor :password
   @@password = "columbia"
@@ -107,13 +109,13 @@ module Typus
     end
 
     def locales_mapping
-      mapping = { "ca" => "Català", 
-                  "de" => "German", 
-                  "en" => "English", 
-                  "es" => "Español", 
-                  "fr" => "Français", 
-                  "hu" => "Magyar", 
-                  "pt-BR" => "Portuguese", 
+      mapping = { "ca" => "Català",
+                  "de" => "German",
+                  "en" => "English",
+                  "es" => "Español",
+                  "fr" => "Français",
+                  "hu" => "Magyar",
+                  "pt-BR" => "Portuguese",
                   "ru" => "Russian" }
       mapping.default = "Unknown"
       return mapping
