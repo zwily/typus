@@ -1,6 +1,5 @@
+# Ignore generated files ...
 *.gem
 *.log
 *.csv
-
-# Ignore generated site.
 doc/site/*.html
