@@ -7,20 +7,20 @@ class Admin::PostsControllerTest < ActionController::TestCase
 <?xml version="1.0" encoding="UTF-8"?>
 <posts type="array">
   <post>
-    <status>unpublished</status>
     <title>Owned by admin</title>
+    <status>unpublished</status>
   </post>
   <post>
-    <status>unpublished</status>
     <title>Owned by editor</title>
-  </post>
-  <post>
-    <status>published</status>
-    <title>Title One</title>
-  </post>
-  <post>
     <status>unpublished</status>
+  </post>
+  <post>
+    <title>Title One</title>
+    <status>published</status>
+  </post>
+  <post>
     <title>Title Two</title>
+    <status>unpublished</status>
   </post>
 </posts>
     RAW
