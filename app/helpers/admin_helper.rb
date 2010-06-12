@@ -28,6 +28,10 @@ module AdminHelper
     render "admin/helpers/header"
   end
 
+  def apps
+    render "admin/helpers/apps"
+  end
+
   def login_info(user = @current_user)
     return if user.kind_of?(Admin::FakeUser)
 

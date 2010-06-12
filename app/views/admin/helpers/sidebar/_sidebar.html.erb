@@ -1,11 +1,13 @@
-<%= render :partial => "admin/dashboard/sidebar" %>
-
 <% resources.each do |key, value| %>
 
   <% resource = "/admin/#{key.constantize.to_resource}" %>
 
+  <h3>
+    <%= link_to _(key.constantize.model_name.human.pluralize), 
+                :controller => resource, 
+                :action => "index" %></h3>
+
   <ul>
-    <li class="header"><%= link_to_unless_current _(key.constantize.model_name.human.pluralize), :controller => resource, :action => "index" %></li>
     <% if @resource.name.eql?(key) %>
       <ul>
         <% value.each do |v| %>
