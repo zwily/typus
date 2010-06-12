@@ -37,7 +37,6 @@ Page:
   application: Site
   options:
     form_rows: 25
-    on_header: true
 
 Post:
   fields:

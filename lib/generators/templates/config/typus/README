@@ -40,7 +40,6 @@ only have set the most common settings.
         action_after_save: :index
         minute_step: 15
         nil: 'nil'
-        on_header: true
         only_user_items: true
         per_page: 5
         start_year: 1990
