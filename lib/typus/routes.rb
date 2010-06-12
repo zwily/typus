@@ -15,7 +15,7 @@ module Typus
     # @example
     #   map.resources :users, :only => [:new, :create]
     #   Typus::Routes.draw(map)
-    def self.draw(map, prefix = "admin")
+    def self.draw(map)
 
       map.resource :admin, :only => [:show], :controller => "admin" do |m|
         m.resources :account, :only => [:new, :create, :show], 
