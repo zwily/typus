@@ -61,7 +61,7 @@ module Typus
               attribute_type = :file
             end
 
-            # And finally insert the field and the attribute_type 
+            # And finally insert the field and the attribute_type
             # into the fields_with_type ordered hash.
             fields_with_type[field.to_s] = attribute_type
 
@@ -212,7 +212,7 @@ module Typus
         :db
       end
 
-      # We are able to define which template to use to render the attribute 
+      # We are able to define which template to use to render the attribute
       # within the form
       def typus_template(attribute)
         Typus::Configuration.config[name]['fields']['options']['templates'][attribute.to_s]
@@ -265,7 +265,7 @@ module Typus
                        when 'today'         then Time.new.midnight..Time.new.midnight.tomorrow
                        when 'last_few_days' then 3.days.ago.midnight..Time.new.midnight.tomorrow
                        when 'last_7_days'   then 6.days.ago.midnight..Time.new.midnight.tomorrow
-                       when 'last_30_days'  then Time.new.midnight.last_month..Time.new.midnight.tomorrow
+                       when 'last_30_days'  then Time.new.midnight.prev_month..Time.new.midnight.tomorrow
                        end
             condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
             conditions = merge_conditions(conditions, condition)
