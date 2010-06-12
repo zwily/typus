@@ -23,7 +23,7 @@ module Admin
                                    string_filter(current_request, key)
                                  end
 
-        { :filter => filter, :items => items, :message => message } 
+        { :filter => filter, :items => items, :message => message }
 
       end
 
@@ -44,7 +44,7 @@ module Admin
       values_labelized = values.map { |v| v.to_label }
       items = values.map(&:id).to_hash_with(values_labelized)
 
-      message = _("View all {{attribute}}", :attribute => filter.pluralize)
+      message = _("View all %{attribute}", :attribute => filter.pluralize)
 
       return filter, items, message
     end
@@ -60,7 +60,7 @@ module Admin
 
     def boolean_filter(request, filter)
       items = @resource.typus_boolean(filter)
-      message = _("Show by {{attribute}}", :attribute => filter)
+      message = _("Show by %{attribute}", :attribute => filter)
 
       return filter, items, message
     end
@@ -68,7 +68,7 @@ module Admin
     def string_filter(request, filter)
       values = @resource::const_get(filter.to_s.upcase)
       items = values.kind_of?(Hash) ? values : values.to_hash_with(values)
-      message = _("Show by {{attribute}}", :attribute => filter)
+      message = _("Show by %{attribute}", :attribute => filter)
 
       return filter, items, message
     end

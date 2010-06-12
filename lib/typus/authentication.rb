@@ -120,11 +120,11 @@ module Typus
 
       message = case params[:action]
                 when 'index', 'show'
-                  "{{current_user_role}} can't display items."
+                  "%{current_user_role} can't display items."
                 when 'destroy'
-                  "{{current_user_role}} can't delete this item."
+                  "%{current_user_role} can't delete this item."
                 else
-                  "{{current_user_role}} can't perform action. ({{action}})"
+                  "%{current_user_role} can't perform action. (%{action})"
                 end
 
       message = _(message, 

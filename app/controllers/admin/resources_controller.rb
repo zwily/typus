@@ -6,30 +6,30 @@ class Admin::ResourcesController < AdminController
 
   before_filter :get_model
 
-  before_filter :get_object, 
-                :only => [ :show, 
-                           :edit, :update, :destroy, :toggle, 
-                           :position, :relate, :unrelate, 
+  before_filter :get_object,
+                :only => [ :show,
+                           :edit, :update, :destroy, :toggle,
+                           :position, :relate, :unrelate,
                            :detach ]
 
-  before_filter :check_resource_ownership, 
-                :only => [ :edit, :update, :destroy, :toggle, 
+  before_filter :check_resource_ownership,
+                :only => [ :edit, :update, :destroy, :toggle,
                            :position, :relate, :unrelate ]
 
-  before_filter :check_if_user_can_perform_action_on_user, 
+  before_filter :check_if_user_can_perform_action_on_user,
                 :only => [ :edit, :update, :toggle, :destroy ]
   before_filter :check_if_user_can_perform_action_on_resources
 
-  before_filter :set_order, 
+  before_filter :set_order,
                 :only => [ :index ]
-  before_filter :set_fields, 
+  before_filter :set_fields,
                 :only => [ :index, :new, :edit, :create, :update, :show ]
 
   ##
-  # This is the main index of the model. With filters, conditions 
+  # This is the main index of the model. With filters, conditions
   # and more.
   #
-  # By default application can respond_to html, csv and xml, but you 
+  # By default application can respond_to html, csv and xml, but you
   # can add your formats.
   #
   def index
@@ -55,9 +55,9 @@ class Admin::ResourcesController < AdminController
   end
 
   ##
-  # Create new items. There's an special case when we create an 
-  # item from another item. In this case, after the item is 
-  # created we also create the relationship between these items. 
+  # Create new items. There's an special case when we create an
+  # item from another item. In this case, after the item is
+  # created we also create the relationship between these items.
   #
   def create
     @item = @resource.new(params[@object_name])
@@ -94,7 +94,7 @@ class Admin::ResourcesController < AdminController
 
   def destroy
     @item.destroy
-    notice = _("{{model}} successfully removed.", :model => @resource.model_name.human)
+    notice = _("%{model} successfully removed.", :model => @resource.model_name.human)
     redirect_to set_path, :notice => notice
   end
 
@@ -102,30 +102,30 @@ class Admin::ResourcesController < AdminController
     @item.toggle(params[:field])
     @item.save!
 
-    notice = _("{{model}} {{attribute}} changed.", 
-               :model => @resource.model_name.human, 
+    notice = _("{model} %{attribute} changed.",
+               :model => @resource.model_name.human,
                :attribute => params[:field].humanize.downcase)
 
     redirect_to set_path, :notice => notice
   end
 
   ##
-  # Change item position. This only works if acts_as_list is 
+  # Change item position. This only works if acts_as_list is
   # installed. We can then move items:
   #
   #   params[:go] = 'move_to_top'
   #
-  # Available positions are move_to_top, move_higher, move_lower, 
+  # Available positions are move_to_top, move_higher, move_lower,
   # move_to_bottom.
   #
   def position
     @item.send(params[:go])
-    notice = _("Record moved {{to}}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
+    notice = _("Record moved %{to}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
     redirect_to set_path, :notice => notice
   end
 
   ##
-  # Relate a model object to another, this action is used only by the 
+  # Relate a model object to another, this action is used only by the
   # has_and_belongs_to_many and has_many relationships.
   #
   def relate
@@ -133,12 +133,12 @@ class Admin::ResourcesController < AdminController
     resource_tableized = params[:related][:model].tableize
 
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
-      flash[:notice] = _("{{model_a}} related to {{model_b}}", 
-                         :model_a => resource_class.model_name.human, 
+      flash[:notice] = _("%{model_a} related to %{model_b}",
+                         :model_a => resource_class.model_name.human,
                          :model_b => @resource.model_name.human)
     else
-      flash[:alert] = _("{{model_a}} cannot be related to {{model_b}}", 
-                         :model_a => resource_class.model_name.human, 
+      flash[:alert] = _("%{model_a} cannot be related to %{model_b}",
+                         :model_a => resource_class.model_name.human,
                          :model_b => @resource.model_name.human)
     end
 
@@ -164,8 +164,8 @@ class Admin::ResourcesController < AdminController
     #   saved_succesfully = @item.update_attribute attribute, nil
     when :has_many
       ##
-      # We have to verify we can unrelate. For example: A Category which 
-      # has many posts and Post validates_presence_of Category should not 
+      # We have to verify we can unrelate. For example: A Category which
+      # has many posts and Post validates_presence_of Category should not
       # be removed.
       #
       attribute = @resource.table_name.singularize
@@ -178,12 +178,12 @@ class Admin::ResourcesController < AdminController
     end
 
     if saved_succesfully
-      flash[:notice] = _("{{model_a}} unrelated from {{model_b}}", 
-                         :model_a => resource_class.model_name.human, 
+      flash[:notice] = _("%{model_a} unrelated from %{model_b}",
+                         :model_a => resource_class.model_name.human,
                          :model_b => @resource.model_name.human)
     else
-      flash[:alert] = _("{{model_a}} cannot be unrelated from {{model_b}}", 
-                        :model_a => resource_class.model_name.human, 
+      flash[:alert] = _("%{model_a} cannot be unrelated from %{model_b}",
+                        :model_a => resource_class.model_name.human,
                         :model_b => @resource.model_name.human)
     end
 
@@ -196,9 +196,9 @@ class Admin::ResourcesController < AdminController
   #
   def detach
     message = if @item.update_attributes(params[:attachment] => nil)
-                "{{attachment}} removed."
+                "%{attachment} removed."
               else
-                "{{attachment}} can't be removed."
+                "%{attachment} can't be removed."
               end
 
     attachment = @resource.human_attribute_name(params[:attachment])
@@ -215,7 +215,7 @@ class Admin::ResourcesController < AdminController
   end
 
   ##
-  # Find model when performing an edit, update, destroy, relate, 
+  # Find model when performing an edit, update, destroy, relate,
   # unrelate ...
   #
   def get_object
@@ -244,17 +244,17 @@ class Admin::ResourcesController < AdminController
     when "create"
       path = { :action => action }
       path.merge!(:id => @item.id) unless action.eql?("index")
-      notice = _("{{model}} successfully created.", :model => @resource.model_name.human)
+      notice = _("%{model} successfully created.", :model => @resource.model_name.human)
     when "update"
       path = case action
              when "index"
                params[:back_to] ? "#{params[:back_to]}##{@resource.to_resource}" : { :action => action }
              else
-               { :action => action, 
-                 :id => @item.id, 
+               { :action => action,
+                 :id => @item.id,
                  :back_to => params[:back_to] }
              end
-      notice = _("{{model}} successfully updated.", :model => @resource.model_name.human)
+      notice = _("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 
     redirect_to path, :notice => notice
@@ -285,14 +285,14 @@ class Admin::ResourcesController < AdminController
       @item.send(params[:resource]) << resource
     when :has_many
       @item.save
-      message = _("{{model}} successfully created.", :model => @resource.model_name.human)
+      message = _("%{model} successfully created.", :model => @resource.model_name.human)
       path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
     when :polymorphic
       resource.send(@item.class.to_resource).create(params[@object_name])
     end
 
-    flash[:notice] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
-                                  :model_a => @item.class.model_name.human, 
+    flash[:notice] = message || _("%{model_a} successfully assigned to %{model_b}.",
+                                  :model_a => @item.class.model_name.human,
                                   :model_b => resource_class.model_name.human)
 
     redirect_to path || params[:back_to]

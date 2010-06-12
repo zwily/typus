@@ -46,7 +46,7 @@ module Admin
       return [] unless params[:action] == "index"
 
       klass.typus_export_formats.map do |format|
-        link_to _("Export as {{format}}", :format => format.upcase), params.merge(:format => format)
+        link_to _("Export as %{format}", :format => format.upcase), params.merge(:format => format)
       end
     end
 

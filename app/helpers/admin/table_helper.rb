@@ -110,10 +110,10 @@ module Admin
                     else
                       @current_user.can?('destroy', model)
                     end
-        confirm = _("Remove {{resource}}?", :resource => item.class.model_name.human)
+        confirm = _("Remove %{resource}?", :resource => item.class.model_name.human)
       when 'edit'
         # If we are editing content, we can relate and unrelate always!
-        confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+        confirm = _("Unrelate %{unrelate_model} from %{unrelate_model_from}?", 
                     :unrelate_model => model.model_name.human, 
                     :unrelate_model_from => @resource.model_name.human)
       when 'show'
@@ -124,7 +124,7 @@ module Admin
         condition = if @resource.typus_user_id? && @current_user.is_not_root?
                       @item.owned_by?(@current_user)
                     end
-        confirm = _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+        confirm = _("Unrelate %{unrelate_model} from %{unrelate_model_from}?", 
                     :unrelate_model => model.model_name.human, 
                     :unrelate_model_from => @resource.model_name.human)
       end
@@ -230,7 +230,7 @@ module Admin
                               :action => "toggle", 
                               :id => item.id, 
                               :field => attribute.gsub(/\?$/,'') }
-                  confirm = _("Change {{attribute}}?", 
+                  confirm = _("Change %{attribute}?", 
                               :attribute => item.class.human_attribute_name(attribute).downcase)
                   link_to message, options, :confirm => confirm
                 end

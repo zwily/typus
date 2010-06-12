@@ -12,14 +12,14 @@ class Admin::AccountController < AdminController
   end
 
   def create
-    user = Typus.user_class.generate(:email => params[:typus_user][:email], 
-                                     :password => Typus.password, 
+    user = Typus.user_class.generate(:email => params[:typus_user][:email],
+                                     :password => Typus.password,
                                      :role => Typus.master_role)
     user.status = true
 
     if user.save
       session[:typus_user_id] = user.id
-      notice = _("Password set to '{{password}}'.", :password => Typus.password)
+      notice = _("Password set to '%{password}'.", :password => Typus.password)
       path = admin_dashboard_path
     else
       path = { :action => :new }

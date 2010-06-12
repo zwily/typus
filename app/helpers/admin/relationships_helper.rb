@@ -136,7 +136,7 @@ module Admin
                              options, 
                              association)
         else
-          message = _("There is no {{records}}.", 
+          message = _("There are no %{records}.", 
                       :records => model_to_relate.model_name.human.downcase)
           html << <<-HTML
     <div id="flash" class="notice"><p>#{message}</p></div>

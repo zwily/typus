@@ -7,7 +7,7 @@
   "Actions": 
   "Active": 
   "Add": 
-  "Add {{resource}}":
+  "Add %{resource}":
   "Add new": 
   "Are you sure?": 
   "Are you sure you want to leave this page?": 
@@ -16,11 +16,11 @@
 
   "Back to list": 
 
-  "Change {{attribute}}?": 
+  "Change %{attribute}?": 
   "Change password": 
   "Checked if active": 
   "Click OK to continue, or click Cancel to stay on this page": 
-  "Create {{resource}}": 
+  "Create %{resource}": 
   "Create one now": 
 
   "Dashboard": 
@@ -34,7 +34,7 @@
 
   "False": 
   "Filter": 
-  "Filter by {{attribute}}": 
+  "Filter by %{attribute}": 
 
   "Go to": 
 
@@ -58,22 +58,22 @@
   "Password recovery link sent to your email": 
   "Previous": 
 
-  "Record moved {{to}}": 
+  "Record moved %{to}": 
   "Recover password": 
   "Remove": 
-  "Remove {{attribute}}": 
-  "Remove {{resource}}?": 
+  "Remove %{attribute}": 
+  "Remove %{resource}?": 
   "Remove filter": 
   "Reset password": 
   "Resources": 
 
-  "Save {{resource}}": 
+  "Save %{resource}": 
   "Search": 
   "Search by": 
   "Send us feedback": 
   "Setup": 
   "Show": 
-  "Show {{resource}}": 
+  "Show %{resource}": 
   "Sign in": 
   "Sign out": 
   "Sign up": 
@@ -82,41 +82,41 @@
 
   "That doesn't seem like a valid email address": 
   "The email and/or password you entered is invalid": 
-  "There are no {{records}}": 
-  "There are no {{records}} under this filter": 
+  "There are no %{records}": 
+  "There are no %{records} under this filter": 
   "Today": 
   "Toggle is disabled": 
   "True": 
 
-  "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": 
+  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": 
   "Up": 
 
   "View site": 
 
-  "You're adding a new {{resource_from}}": 
-  "You're adding a new {{resource_from}} to {{resource_to}}": 
+  "You're adding a new %{resource_from}": 
+  "You're adding a new %{resource_from} to %{resource_to}": 
   "You're not allowed to toggle status": 
   "You're not allowed to remove Typus Users": 
-  "You're updating a {{resource_from}}": 
-  "You're updating a {{resource_from}} for {{resource_to}}": 
+  "You're updating a %{resource_from}": 
+  "You're updating a %{resource_from} for %{resource_to}": 
   "You can update your password at": 
   "You can't change your role": 
   "You can't remove yourself": 
   "You can't toggle your status": 
-  "Your new password is {{password}}": 
+  "Your new password is %{password}": 
 
-  "{{attachment}} can't be removed": 
-  "{{attachment}} removed": 
-  "{{current_user_role}} can't delete this item": 
-  "{{current_user_role}} can't display items": 
-  "{{current_user_role}} can't perform action. ({{action}})": 
-  "{{model}} filtered by {{filtered_by}}": 
-  "{{model}} successfully created": 
-  "{{model}} successfully removed": 
-  "{{model}} successfully updated": 
-  "{{model}} {{attribute}} changed": 
-  "{{model_a}} cannot be related to {{model_b}}": 
-  "{{model_a}} cannot be unrelated from {{model_b}}": 
-  "{{model_a}} related to {{model_b}}": 
-  "{{model_a}} successfully assigned to {{model_b}}": 
-  "{{model_a}} unrelated from {{model_b}}": 
+  "%{attachment} can't be removed": 
+  "%{attachment} removed": 
+  "%{current_user_role} can't delete this item": 
+  "%{current_user_role} can't display items": 
+  "%{current_user_role} can't perform action. (%{action})": 
+  "%{model} filtered by %{filtered_by}": 
+  "%{model} successfully created": 
+  "%{model} successfully removed": 
+  "%{model} successfully updated": 
+  "%{model} %{attribute} changed": 
+  "%{model_a} cannot be related to %{model_b}": 
+  "%{model_a} cannot be unrelated from %{model_b}": 
+  "%{model_a} related to %{model_b}": 
+  "%{model_a} successfully assigned to %{model_b}": 
+  "%{model_a} unrelated from %{model_b}": 

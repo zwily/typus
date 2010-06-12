@@ -35,13 +35,13 @@ module Admin
       editing = %w( edit update ).include?(params[:action])
       message = case
                 when params[:resource] && editing
-                  "You're updating a {{resource_from}} for {{resource_to}}."
+                  "You're updating a %{resource_from} for %{resource_to}."
                 when editing
-                  "You're updating a {{resource_from}}."
+                  "You're updating a %{resource_from}."
                 when params[:resource]
-                  "You're adding a new {{resource_from}} to {{resource_to}}."
+                  "You're adding a new %{resource_from} to %{resource_to}."
                 else
-                  "You're adding a new {{resource_from}}."
+                  "You're adding a new %{resource_from}."
                 end
       message = _(message, 
                   :resource_from => options[:resource_from], 

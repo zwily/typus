@@ -1,5 +1,5 @@
 <%
-  page_title = _("{{resources}}", :resources => @resource.model_name.human.pluralize)
+  page_title = _("%{resources}", :resources => @resource.model_name.human.pluralize)
   title(page_title)
 %>
 
@@ -27,10 +27,10 @@
 <% else %>
   <% if @resource.count.zero? %>
     <p>
-      <%= _("There are no {{records}}.", :records => @resource.model_name.human.pluralize.downcase) %>
+      <%= _("There are no %{records}.", :records => @resource.model_name.human.pluralize.downcase) %>
       <%= link_to _("Create one now."), { :action => "new" } if @current_user.can?('create', @resource) %>
     </p>
   <% else %>
-    <p><%= _("There are no {{records}} under this filter.", :records => @resource.model_name.human.pluralize.downcase) %></p>
+    <p><%= _("There are no %{records} under this filter.", :records => @resource.model_name.human.pluralize.downcase) %></p>
   <% end %>
 <% end %>
