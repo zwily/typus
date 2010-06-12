@@ -1,8 +1,11 @@
 # coding: utf-8
 
 module Typus
+
+=begin
   class TypusEngine < Rails::Engine
   end
+=end
 
   # Define the application name.
   mattr_accessor :admin_title
