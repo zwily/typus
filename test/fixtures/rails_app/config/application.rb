@@ -47,3 +47,5 @@ module RailsApp
     config.filter_parameters += [:password]
   end
 end
+
+Typus.reload!
