@@ -10,8 +10,11 @@ class ActiveRecord::Base
     name.underscore.pluralize
   end
 
-  # TODO: This should be removed to make Typus compatible 
-  #       with Rails 3 new interface.
+  ##
+  # TODO: This has been copied from Rails 2 because has been removed 
+  #       from Rails 3. Once the "build_conditions" has been refactored 
+  #       to use Arel this can be removed.
+  #
   def self.merge_conditions(*conditions)
 
     segments = []
