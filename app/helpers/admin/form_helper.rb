@@ -91,20 +91,19 @@ module Admin
 
     def typus_template_field(attribute, template, options = {})
 
-      template_name = "admin/templates/#{template}"
-
       custom_options = { :start_year => @resource.typus_options_for(:start_year), 
                          :end_year => @resource.typus_options_for(:end_year), 
                          :minute_step => @resource.typus_options_for(:minute_step), 
                          :disabled => attribute_disabled?(attribute), 
                          :include_blank => true }
 
-      render template_name, :resource => @resource, 
-                            :attribute => attribute, 
-                            :options => custom_options, 
-                            :html_options => {}, 
-                            :form => options[:form], 
-                            :label_text => @resource.human_attribute_name(attribute)
+      render "admin/templates/#{template}", 
+             :resource => @resource, 
+             :attribute => attribute, 
+             :options => custom_options, 
+             :html_options => {}, 
+             :form => options[:form], 
+             :label_text => @resource.human_attribute_name(attribute)
 
     rescue ActionView::TemplateError => error
       raise <<-MSG
