@@ -6,15 +6,15 @@ module Admin
 
       return unless item.send(attribute).exists?
 
-      file_preview = Typus.file_preview
-      file_thumbnail = Typus.file_thumbnail
+      file = { :preview => Typus.file_preview, :thumbnail => Typus.file_thumbnail }
 
-      has_file_preview = item.send(attribute).styles.member?(file_preview)
-      has_file_thumbnail = item.send(attribute).styles.member?(file_thumbnail)
+      has_file_preview = item.send(attribute).styles.member?(file[:preview])
+      has_file_thumbnail = item.send(attribute).styles.member?(file[:thumbnail])
+
       file_preview_is_image = (item.send("#{attribute}_content_type") =~ /^image\/.+/)
 
       href = if has_file_preview && file_preview_is_image
-               url = item.send(attribute).url(file_preview)
+               url = item.send(attribute).url(file[:preview])
                # FIXME: This has changed on Rails3.
                # ActionController::Base.relative_url_root + url
              else
@@ -22,7 +22,7 @@ module Admin
              end
 
       content = if has_file_thumbnail && file_preview_is_image
-                  image_tag item.send(attribute).url(file_thumbnail)
+                  image_tag item.send(attribute).url(file[:thumbnail])
                 else
                   item.send(attribute).url(:original)
                 end
