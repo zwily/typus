@@ -18,13 +18,13 @@ module Admin
                # FIXME: This has changed on Rails3.
                # ActionController::Base.relative_url_root + url
              else
-               item.send(attribute).url(:original)
+               item.send(attribute)
              end
 
       content = if has_file_thumbnail && file_preview_is_image
                   image_tag item.send(attribute).url(file[:thumbnail])
                 else
-                  item.send(attribute).url(:original)
+                  item.send(attribute)
                 end
 
       render "admin/helpers/preview", 
