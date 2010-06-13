@@ -105,13 +105,6 @@ module Admin
              :form => options[:form], 
              :label_text => @resource.human_attribute_name(attribute)
 
-    rescue ActionView::TemplateError => error
-      raise <<-MSG
-Missing translation file for `#{locale}.yml`.
-Get it from `http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{locale}.yml` and place it on `config/locales`.
-      MSG
-    rescue Exception => error
-      raise error
     end
 
     def attribute_disabled?(attribute)
