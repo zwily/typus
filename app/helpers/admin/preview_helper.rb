@@ -6,7 +6,6 @@ module Admin
 
       return unless item.send(attribute).exists?
 
-      # attachment = attribute.split("_file_name").first
       file_preview = Typus.file_preview
       file_thumbnail = Typus.file_thumbnail
 
