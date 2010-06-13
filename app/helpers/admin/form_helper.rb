@@ -14,8 +14,10 @@ module Admin
           end
 
           html << case value
-                  when :belongs_to  then typus_belongs_to_field(key, form)
-                  when :tree        then typus_tree_field(key, form)
+                  when :belongs_to
+                    typus_belongs_to_field(key, form)
+                  when :tree
+                    typus_tree_field(key, form)
                   when :boolean, :date, :datetime, :string, :text, :time,
                        :file, :password, :selector
                     typus_template_field(key, value, form)
