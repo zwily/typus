@@ -3,9 +3,7 @@
   title(page_title)
 %>
 
-<% content_for :sidebar do %>
-  <%= build_sidebar %>
-<% end %>
+<% content_for :sidebar, build_sidebar %>
 
 <%= display_link_to_previous %>
 
