@@ -4,25 +4,23 @@ module Admin
 
     def build_form(fields, form)
 
-      options = { :form => form }
-
       returning(String.new) do |html|
 
         fields.each do |key, value|
 
           if template = @resource.typus_template(key)
-            html << typus_template_field(key, template, options)
+            html << typus_template_field(key, template, form)
             next
           end
 
           html << case value
-                  when :belongs_to  then typus_belongs_to_field(key, options)
-                  when :tree        then typus_tree_field(key, options)
+                  when :belongs_to  then typus_belongs_to_field(key, form)
+                  when :tree        then typus_tree_field(key, form)
                   when :boolean, :date, :datetime, :string, :text, :time,
                        :file, :password, :selector
-                    typus_template_field(key, value, options)
+                    typus_template_field(key, value, form)
                   else
-                    typus_template_field(key, :string, options)
+                    typus_template_field(key, :string, form)
                   end
         end
 
@@ -37,12 +35,11 @@ module Admin
       return "admin/#{partial}/form"
     end
 
-    def typus_tree_field(attribute, options)
+    def typus_tree_field(attribute, form)
       render "admin/templates/tree", 
              :attribute => attribute, 
-             :form => options[:form], 
+             :form => form, 
              :label_text => @resource.human_attribute_name(attribute), 
-             :options => options, 
              :values => expand_tree_into_select_field(@resource.roots, "parent_id")
     end
 
@@ -76,20 +73,20 @@ module Admin
 
     end
 
-    def typus_template_field(attribute, template, options = {})
+    def typus_template_field(attribute, template, form)
 
-      custom_options = { :start_year => @resource.typus_options_for(:start_year), 
-                         :end_year => @resource.typus_options_for(:end_year), 
-                         :minute_step => @resource.typus_options_for(:minute_step), 
-                         :disabled => attribute_disabled?(attribute), 
-                         :include_blank => true }
+      options = { :start_year => @resource.typus_options_for(:start_year), 
+                  :end_year => @resource.typus_options_for(:end_year), 
+                  :minute_step => @resource.typus_options_for(:minute_step), 
+                  :disabled => attribute_disabled?(attribute), 
+                  :include_blank => true }
 
       render "admin/templates/#{template}", 
              :resource => @resource, 
              :attribute => attribute, 
-             :options => custom_options, 
+             :options => options, 
              :html_options => {}, 
-             :form => options[:form], 
+             :form => form, 
              :label_text => @resource.human_attribute_name(attribute)
 
     end
