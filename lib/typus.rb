@@ -2,9 +2,6 @@
 
 module Typus
 
-  class TypusEngine < Rails::Engine
-  end
-
   # Define the application name.
   mattr_accessor :admin_title
   @@admin_title = "Typus"
@@ -154,6 +151,9 @@ module Typus
       require "support/hash"
       require "support/object"
       require "support/string"
+
+      # Enable engine
+      require "typus/engine"
 
       # Typus configuration and resources configuration
       require "typus/configuration"
