@@ -17,7 +17,7 @@ module Admin
 
           html << case value
                   when :belongs_to  then typus_belongs_to_field(key, options)
-                  when :tree        then typus_tree_field(key, :form => options[:form])
+                  when :tree        then typus_tree_field(key, options)
                   when :boolean, :date, :datetime, :string, :text, :time,
                        :file, :password, :selector
                     typus_template_field(key, value, options)
@@ -37,26 +37,13 @@ module Admin
       return "admin/#{partial}/form"
     end
 
-    # OPTIMIZE: Move html code to partial.
-    def typus_tree_field(attribute, *args)
-
-      options = args.extract_options!
-      options[:items] ||= @resource.roots
-      options[:attribute_virtual] ||= 'parent_id'
-
-      form = options[:form]
-
-      values = expand_tree_into_select_field(options[:items], options[:attribute_virtual])
-
-      label_text = @resource.human_attribute_name(attribute)
-
-      <<-HTML
-  <li>
-    #{form.label label_text}
-    #{form.select options[:attribute_virtual], values, { :include_blank => true }}
-  </li>
-      HTML
-
+    def typus_tree_field(attribute, options)
+      render "admin/templates/tree", 
+             :attribute => attribute, 
+             :form => options[:form], 
+             :label_text => @resource.human_attribute_name(attribute), 
+             :options => options, 
+             :values => expand_tree_into_select_field(@resource.roots, "parent_id")
     end
 
     # OPTIMIZE: Cleanup the case statement.
