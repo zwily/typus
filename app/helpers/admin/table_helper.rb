@@ -15,7 +15,7 @@ module Admin
       fields.map do |key, value|
 
         key = key.gsub(".", " ") if key.match(/\./)
-        content = key.end_with?('_id') ? key : model.human_attribute_name(key)
+        content = model.human_attribute_name(key)
 
         if params[:action] == "index"
           association = model.reflect_on_association(key.to_sym)
