@@ -25,7 +25,6 @@ module Admin
         actions << (link_to_unless_current message, options.merge(:action => "new"))
       end
 
-      # Edit or Show
       message = _("List")
       options = { :controller => klass.to_resource }
       actions << (link_to_unless_current message, options)
