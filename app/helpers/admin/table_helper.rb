@@ -165,8 +165,8 @@ module Admin
     end
 
     def table_selector(attribute, item)
-      content = h(item.mapping(attribute))
-      return content_tag(:td, content, :class => attribute)
+      raw_content = item.mapping(attribute)
+      return content_tag(:td, raw_content, :class => attribute)
     end
 
     def table_file_field(attribute, item, link_options = {})
