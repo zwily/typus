@@ -52,9 +52,10 @@ module AdminHelper
 
   def display_flash_message(message = flash)
     return if message.empty?
-    flash_type = message.keys.first
 
-    render "admin/helpers/flash_message", :flash_type => flash_type, :message => message
+    render "admin/helpers/flash_message", 
+           :flash_type => message.keys.first, 
+           :message => message
   end
 
 end
