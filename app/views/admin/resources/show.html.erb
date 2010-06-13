@@ -41,7 +41,7 @@
              raw_data
            end
   -%>
-  <dd><%= raw data.blank? ? ("&#151;") : data %></dd>
+  <dd><%= data.blank? ? "&#151;".html_safe : data %></dd>
 <%- end -%>
 </dl>
 
