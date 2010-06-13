@@ -148,7 +148,7 @@ module Admin
       end
     end
 
-    def typus_belongs_to_field(attribute, options)
+    def typus_belongs_to_field(attribute, form)
 
       ##
       # We only can pass parameters to 'new' and 'edit', so this hack makes
@@ -173,7 +173,7 @@ module Admin
 
       render "admin/templates/belongs_to", 
              :resource => @resource, 
-             :form => options[:form], 
+             :form => form, 
              :related_fk => related_fk, 
              :message => message, 
              :label_text => @resource.human_attribute_name(attribute), 
