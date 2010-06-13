@@ -66,6 +66,7 @@ ru:
   "Remove %{attribute}": "Удалить %{attribute}"
   "Remove %{resource}?": "Удалить %{resource}?"
   "Remove filter": "Удалить фильтр"
+  "Remove search": 
   "Reset password": "Сбросить пароль"
   "Resources": "Ресурсы"
 

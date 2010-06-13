@@ -66,6 +66,7 @@ es:
   "Remove %{attribute}": "Borrar %{attribute}"
   "Remove %{resource}?": "¿Borrar %{resource}?"
   "Remove filter": "Quitar filtro"
+  "Remove search": 
   "Reset password": "Cambiar contraseña"
   "Resources": "Recursos"
 

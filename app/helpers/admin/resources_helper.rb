@@ -52,7 +52,8 @@ module Admin
 
     def remove_filter_link(filter = request.env['QUERY_STRING'])
       return unless filter && !filter.blank?
-      link_to _("Remove filter")
+      message = params.include?(:search) ? "search" : "filter"
+      link_to _("Remove #{message}")
     end
 
     def pagination(*args)

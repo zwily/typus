@@ -66,6 +66,7 @@ fr:
   "Remove %{attribute}": "Supprimer %{attribute}"
   "Remove %{resource}?": "Supprimer %{resource}?"
   "Remove filter": "Supprimer le filtre"
+  "Remove search": 
   "Reset password": "Renouveler le mot de passe"
   "Resources": "Ressources"
 
