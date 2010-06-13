@@ -193,8 +193,8 @@ module Admin
     end
 
     def table_tree_field(attribute, item)
-      content = item.parent ? item.parent.to_label : "&#151;"
-      return content_tag(:td, content.html_safe)
+      content = item.parent ? item.parent.to_label : "&#151;".html_safe
+      return content_tag(:td, content)
     end
 
     def table_position_field(attribute, item)
