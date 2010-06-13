@@ -107,11 +107,10 @@ module Admin
                             :label_text => @resource.human_attribute_name(attribute)
 
     rescue ActionView::TemplateError => error
-      message = <<-MSG
+      raise <<-MSG
 Missing translation file for `#{locale}.yml`.
 Get it from `http://github.com/svenfuchs/rails-i18n/blob/master/rails/locale/#{locale}.yml` and place it on `config/locales`.
       MSG
-      raise message
     rescue Exception => error
       raise error
     end
