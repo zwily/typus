@@ -193,9 +193,9 @@ fieldset.buttons { }
 
 #account { background: #F3F3F3; }
 
-#dialog_wrapper { margin: 0 auto; padding: 7.5em 0; width: 40em; }
+#account #wrapper { margin: 0 auto; padding: 7.5em 0; width: 40em; }
 
-#dialog {
+#account #box {
   -moz-border-radius: 3px;
   -webkit-border-radius: 3px;
   background: #FFF;
@@ -204,17 +204,18 @@ fieldset.buttons { }
   margin-bottom: 1em;
 }
 
-#dialog h1 a { font-weight: bold; }
-#dialog h1 a:hover { color: #000; text-decoration: underline; }
+#account #box h1 a { font-weight: bold; }
+#account #box h1 a:hover { color: #000; text-decoration: underline; }
 
-#dialog ul { margin: 0 0 -1em 0; }
-#dialog li { margin: 1em 0; }
-#dialog li a { display: inline; font-size: 11px; margin: 0.5em; }
+#account #box ul { margin: 0 0 -1em 0; }
+#account #box li { margin: 1em 0; }
+#account #box li a { display: inline; font-size: 11px; margin: 0.5em; }
 
-#dialog input.text { font-size: 2em; padding: 0.25em; width: 17.25em; }
-#dialog input.button { margin: 0.5em 0; }
+#account #box input.text { font-size: 2em; padding: 0.25em; width: 17.25em; }
+#account #box input.button { margin: 0.5em 0; }
 
-#bottom_dialog { font-size: 0.9em; line-height: 1.8em; text-align: center; }
+#account #footer { font-size: 0.9em; line-height: 1.8em; text-align: center; }
+#account #footer a { font-weight: bold; }
 
 /* @end */
 

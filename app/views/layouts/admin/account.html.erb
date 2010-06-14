@@ -27,15 +27,15 @@
 
 <body id="account">
 
-  <div id="dialog_wrapper">
+  <div id="wrapper">
 
-    <div id="dialog">
+    <div id="box">
       <h1 class="logo"><%= Typus.admin_title %></h1>
       <%= display_flash_message %>
       <%= yield %>
     </div>
 
-    <div id="bottom_dialog">
+    <div id="footer">
       <%= Typus.admin_sub_title.html_safe %>
     </div>
 
