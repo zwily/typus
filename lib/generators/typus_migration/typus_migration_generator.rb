@@ -9,6 +9,24 @@ class TypusMigrationGenerator < Rails::Generators::Base
   class_option :user_class_name, :default => "AdminUser"
   class_option :user_fk, :default => "admin_user_id"
 
+  desc <<-DESC
+Description:
+
+    This generator creates required configuration files and 
+    a migration to enable authentication on the admin panel.
+
+Examples:
+
+    `rails generate typus_migration`
+
+        creates needed files with `TypusUser` as the Typus user.
+
+    `rails generate typus_migration -u User`
+
+        creates needed files with `User` as the Typus user.
+
+  DESC
+
   def self.source_root
     @source_root ||= File.expand_path("../../templates", __FILE__)
   end

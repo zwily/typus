@@ -8,6 +8,14 @@ class TypusGenerator < Rails::Generators::Base
 
   class_option :admin_title, :default => Rails.root.basename
 
+  desc <<-DESC
+Description:
+
+    This generator creates required files to enable an admin panel 
+    which will allows users to edit structured content.
+
+  DESC
+
   def self.source_root
     @source_root ||= File.expand_path("../../templates", __FILE__)
   end
