@@ -35,11 +35,11 @@ module Typus
 
   # Define the file preview.
   mattr_accessor :file_preview
-  @@file_preview = :typus_preview
+  @@file_preview = :medium
 
   # Define the file thumbnail.
   mattr_accessor :file_thumbnail
-  @@file_thumbnail = :typus_thumbnail
+  @@file_thumbnail = :thumb
 
   # Defines the default relationship table.
   mattr_accessor :relationship
