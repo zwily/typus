@@ -17,6 +17,7 @@ class AdminController < ActionController::Base
 
   protected
 
+  # TODO: Log errors ... (this has changed in Rails3)
   def render_error(exception)
     # log_error(exception)
     redirect_to admin_path, :alert => exception.message
