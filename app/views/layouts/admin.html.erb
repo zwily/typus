@@ -11,14 +11,14 @@
   <%= stylesheet_link_tag "admin/reset", 
                           "admin/screen", 
                           "admin/application", 
-                          "admin/jquery.fancybox-1.3.1" %>
+                          "/vendor/fancybox/jquery.fancybox-1.3.1.css" %>
   <%= yield :stylesheets -%>
 
   <%= javascript_include_tag "admin/jquery-1.4.2.min", 
-                             "admin/jquery.fancybox-1.3.1.pack", 
-                             "admin/jquery.easing-1.3.pack.js", 
-                             "admin/jquery.mousewheel-3.0.2.pack", 
                              "admin/jquery.rails", 
+                             "/vendor/fancybox/jquery.fancybox-1.3.1.pack.js", 
+                             "/vendor/fancybox/jquery.easing-1.3.pack.js", 
+                             "/vendor/fancybox/jquery.mousewheel-3.0.2.pack.js", 
                              "admin/application" %>
   <%= yield :javascripts -%>
 
