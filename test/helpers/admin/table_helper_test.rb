@@ -192,7 +192,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     page = pages(:published)
 
     output = table_tree_field("test", page)
-    expected = "<td>&amp;#151;</td>"
+    expected = "<td>&#151;</td>"
 
     assert_equal expected, output
   end
