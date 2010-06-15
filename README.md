@@ -41,7 +41,7 @@ extensible enough to match lots of use cases.
 
 ## Installing
 
-Install from GitHub the latest version which it's compatible with `Rails 3.0.0.beta3`.
+Install from GitHub the latest version which it's compatible with `Rails 3.0.0.beta4`.
 
     $ rails plugin install git://github.com/fesplugas/typus.git
 
