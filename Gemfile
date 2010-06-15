@@ -11,5 +11,7 @@ gem "sqlite3-ruby", :require => "sqlite3"
 gem "mysql"
 gem "pg"
 
+gem "factory_girl"
+gem "shoulda"
 gem "mocha", :require => false
 gem "redgreen"
