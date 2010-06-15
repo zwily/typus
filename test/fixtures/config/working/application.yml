@@ -20,12 +20,6 @@ Comment:
   search: email, body
   application: Blog
 
-Delayed::Task:
-  fields:
-    default: name
-  search: name
-  application: System
-
 Page:
   fields:
     # Body field is overwrited from a Page class method.

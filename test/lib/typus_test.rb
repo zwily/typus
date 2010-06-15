@@ -38,7 +38,7 @@ class TypusTest < ActiveSupport::TestCase
   def test_should_return_applications_and_should_be_sorted
     assert Typus.respond_to?(:applications)
     assert Typus.applications.kind_of?(Array)
-    assert_equal %w(Blog Site System Typus), Typus.applications
+    assert_equal %w(Blog Site Typus), Typus.applications
   end
 
   def test_should_return_modules_of_an_application
@@ -49,7 +49,7 @@ class TypusTest < ActiveSupport::TestCase
   def test_should_return_models_and_should_be_sorted
     assert Typus.respond_to?(:models)
     assert Typus.models.kind_of?(Array)
-    assert_equal %w(Asset Category Comment CustomUser Delayed::Task Page Picture Post TypusUser View), Typus.models
+    assert_equal %w(Asset Category Comment CustomUser Page Picture Post TypusUser View), Typus.models
   end
 
   def test_should_verify_resources_class_method

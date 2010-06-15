@@ -12,7 +12,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     typus_user = typus_users(:admin)
     assert_equal 'admin', typus_user.role
 
-    models = %w( Asset Category Comment Delayed::Task Git Page Post Status TypusUser View WatchDog )
+    models = %w( Asset Category Comment Git Page Post Status TypusUser View WatchDog )
     assert_equal models, typus_user.resources.map(&:first).sort
 
     # Order exists on the roles, but, as we compact the hash, the
@@ -85,13 +85,6 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     %w( read update ).each { |action| assert typus_user.can?(action, 'Post') }
     %w( create delete ).each { |action| assert typus_user.cannot?(action, 'Post') }
 
-  end
-
-  def test_admin_can_perform_any_action_on_delayed_task_model
-    typus_user = typus_users(:admin)
-    action = 'whatever_i_want_to'
-    klass = Delayed::Task
-    assert typus_user.can?(action, klass), "Admin can't perform `#{action}` on `#{klass}`."
   end
 
 end
