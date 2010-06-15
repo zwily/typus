@@ -53,5 +53,4 @@ Start the application server and go to <http://0.0.0.0:3000/admin>.
 
 ## License
 
-Copyright &copy; 2007-2010 Francesc Esplugas Marti, released under the 
-MIT license
+Copyright &copy; 2007-2010 Francesc Esplugas, released under the MIT license
