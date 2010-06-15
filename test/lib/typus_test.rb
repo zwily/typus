@@ -13,8 +13,8 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal "admin", Typus.username
     assert_equal "columbia", Typus.password
 
-    assert_equal :typus_preview, Typus.file_preview
-    assert_equal :typus_thumbnail, Typus.file_thumbnail
+    assert_equal :medium, Typus.file_preview
+    assert_equal :thumb, Typus.file_thumbnail
 
     assert_equal "typus_users", Typus.relationship
     assert_equal "admin", Typus.master_role
