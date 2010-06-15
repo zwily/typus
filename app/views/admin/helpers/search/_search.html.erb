@@ -4,6 +4,7 @@
     <ul>
       <li><input id="search" name="search" type="text" value="<%= params[:search] %>"/></li>
       <li><%= submit_tag _("Search"), :name => nil %></li>
+    </ul>
     <% hidden_params.each do |field| %>
       <%= field %>
     <% end %>
