@@ -43,7 +43,7 @@ extensible enough to match lots of use cases.
 
 Install from GitHub the latest version which it's compatible with `Rails 3.0.0.beta4`.
 
-    $ rails plugin install git://github.com/fesplugas/typus.git
+    $ rails plugin install git://github.com/fesplugas/typus.git -r 3-0-unstable
 
 Once `typus` is installed, run the generator to create required files.
 
