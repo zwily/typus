@@ -7,7 +7,7 @@ admin:
   status: true
   token: 1A2B3C4D5E6F
   salt: admin
-  crypted_password: <%= Digest::SHA1.hexdigest("--admin--#{12345678}--") %>
+  crypted_password: <%= Digest::SHA1.hexdigest("--admin--12345678--") %>
   preferences: { :locale => :en }
 
 editor:
@@ -19,7 +19,7 @@ editor:
   status: true
   token: A2B3C4D5E6F1
   salt: editor
-  crypted_password: <%= Digest::SHA1.hexdigest("--editor--#{12345678}--") %>
+  crypted_password: <%= Digest::SHA1.hexdigest("--editor--12345678--") %>
   preferences: { :locale => :en }
 
 disabled_user:
@@ -31,7 +31,7 @@ disabled_user:
   status: false
   token: 2B3C4D5E6F1A
   salt: disabled_user
-  crypted_password: <%= Digest::SHA1.hexdigest("--disabled_user--#{12345678}--") %>
+  crypted_password: <%= Digest::SHA1.hexdigest("--disabled_user--12345678--") %>
   preferences: { :locale => :en }
 
 designer:
@@ -43,7 +43,7 @@ designer:
   status: true
   token: B3C4D5E6F1A2
   salt: designer
-  crypted_password: <%= Digest::SHA1.hexdigest("--designer--#{12345678}--") %>
+  crypted_password: <%= Digest::SHA1.hexdigest("--designer--12345678--") %>
   preferences: { :locale => :en }
 
 removed_role:
@@ -55,5 +55,5 @@ removed_role:
   status: true
   token: 3C4D5E6F1A2B
   salt: removed_role
-  crypted_password: <%= Digest::SHA1.hexdigest("--removed_role--#{12345678}--") %>
+  crypted_password: <%= Digest::SHA1.hexdigest("--removed_role--12345678--") %>
   preferences: { :locale => :en }
