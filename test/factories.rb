@@ -9,3 +9,7 @@ Factory.define :typus_user do |f|
   f.crypted_password Digest::SHA1.hexdigest("--admin--12345678--")
   f.preferences Hash.new({ :locale => :en })
 end
+
+Factory.define :category do |f|
+  name "Category"
+end
