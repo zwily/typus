@@ -13,7 +13,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_index_and_verify_page_title
     get :index
-    assert_select "title", "Edit Posts"
+    assert_select "title", "Posts"
   end
 
   def test_should_render_index_and_show_add_entry_link
@@ -133,7 +133,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   def test_should_render_show_and_verify_page_title
     get :show, { :id => posts(:published).id }
-    assert_select "title", "Show Posts"
+    assert_select "title", "Show Post"
   end
 
   def test_should_render_show_and_verify_add_relationships_links
