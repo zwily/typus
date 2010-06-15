@@ -2,7 +2,7 @@ require "test/test_helper"
 
 class Admin::PostsControllerTest < ActionController::TestCase
 
-  def test_should_toggle_an_item
+  should "toggle" do
 
     @request.env['HTTP_REFERER'] = "/admin/posts"
 

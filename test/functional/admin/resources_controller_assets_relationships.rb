@@ -2,13 +2,12 @@ require "test/test_helper"
 
 class Admin::AssetsControllerTest < ActionController::TestCase
 
-  def setup
+  setup do
     @request.session[:typus_user_id] = typus_users(:admin).id
     @post = posts(:published)
   end
 
-  def test_should_test_polymorphic_relationship_message
-
+  should "verify polymorphic relationship message" do
     get :new, { :back_to => "/admin/posts/#{@post.id}/edit", 
                 :resource => @post.class.name, :resource_id => @post.id }
 
@@ -16,25 +15,24 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       assert_select 'p', "You're adding a new Asset to Post. Do you want to cancel it?"
       assert_select 'a', "Do you want to cancel it?"
     end
-
   end
 
-  def test_should_create_a_polymorphic_relationship
-
+  should "create a polymorphic relationship" do
     assert_difference('post_.assets.count') do
       post :create, { :back_to => "/admin/posts/edit/#{@post.id}", 
-                      :resource => @post.class.name, :resource_id => @post.id }
+                      :resource => @post.class.name, 
+                      :resource_id => @post.id }
     end
 
     assert_response :redirect
     assert_redirected_to '/admin/posts/edit/1#assets'
     assert_equal "Asset successfully assigned to Post.", flash[:notice]
-
   end
 
-  def test_should_render_edit_and_verify_message_on_polymorphic_relationship
+  should "render edit and verify message on polymorphic relationship" do
+    asset = Factory(:asset)
 
-    get :edit, { :id => assets(:first).id, 
+    get :edit, { :id => asset.id, 
                  :back_to => "/admin/posts/#{@post.id}/edit", 
                  :resource => @post.class.name, :resource_id => @post.id }
 
@@ -42,14 +40,17 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       assert_select 'p', "You're updating a Asset for Post. Do you want to cancel it?"
       assert_select 'a', "Do you want to cancel it?"
     end
-
   end
 
-  def test_should_return_to_back_to_url
+  should "return to back_to url" do
     Typus::Resource.expects(:action_after_save).returns(:edit)
     asset = assets(:first)
 
-    post :update, { :back_to => "/admin/posts/#{@post.id}/edit", :resource => @post.class.name, :resource_id => @post.id, :id => asset.id }
+    post :update, { :back_to => "/admin/posts/#{@post.id}/edit", 
+                    :resource => @post.class.name, 
+                    :resource_id => @post.id, 
+                    :id => asset.id }
+
     assert_response :redirect
     assert_redirected_to '/admin/posts/1/edit#assets'
     assert_equal "Asset successfully updated.", flash[:notice]

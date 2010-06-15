@@ -2,32 +2,50 @@ require "test/test_helper"
 
 class Admin::StatusControllerTest < ActionController::TestCase
 
-  def setup
-    @request.session[:typus_user_id] = typus_users(:admin).id
+  context "Admin" do
+
+    setup do
+      @request.session[:typus_user_id] = typus_users(:admin).id
+    end
+
+    should "render index" do
+      get :index
+      assert_response :success
+      assert_template 'index'
+    end
+
+    should "not render show" do
+      get :show
+      assert_response :unprocessable_entity
+    end
+
   end
 
-  def test_should_verify_admin_can_go_to_index
-    get :index
-    assert_response :success
-    assert_template 'index'
+  context "Editor" do
+
+    setup do
+      @request.session[:typus_user_id] = typus_users(:editor).id
+    end
+
+    should "not render index" do
+      get :index
+      assert_response :unprocessable_entity
+    end
+
   end
 
-  def test_should_verify_editor_cannot_go_to_index
-    @request.session[:typus_user_id] = typus_users(:editor).id
-    get :index
-    assert_response :unprocessable_entity
-  end
+  context "Not logged user" do
 
-  def test_should_verify_status_is_not_available_if_user_not_logged
-    @request.session[:typus_user_id] = nil
-    get :index
-    assert_response :redirect
-    assert_redirected_to new_admin_session_path(:back_to => '/admin/status')
-  end
+    setup do
+      @request.session[:typus_user_id] = nil
+    end
 
-  def test_should_verify_admin_cannot_go_to_show
-    get :show
-    assert_response :unprocessable_entity
+    should "not render index and redirect to new_admin_session_path with back_to" do
+      get :index
+      assert_response :redirect
+      assert_redirected_to new_admin_session_path(:back_to => '/admin/status')
+    end
+
   end
 
 end

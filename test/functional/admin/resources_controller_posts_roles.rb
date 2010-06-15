@@ -2,48 +2,50 @@ require "test/test_helper"
 
 class Admin::PostsControllerTest < ActionController::TestCase
 
-  def test_should_allow_admin_to_add_a_category
-    admin = typus_users(:admin)
-    @request.session[:typus_user_id] = admin.id
-    assert admin.can?("create", "Post")
-  end
+  context "Admin" do
 
-  def test_should_not_allow_designer_to_add_a_post
+    setup do
+      @admin = typus_users(:admin)
+      @request.session[:typus_user_id] = @admin.id
+    end
 
-    designer = typus_users(:designer)
-    @request.session[:typus_user_id] = designer.id
+    should "add a category" do
+      assert @admin.can?("create", "Post")
+    end
 
-    get :new
+    should "destroy a post" do
+      get :destroy, { :id => posts(:published).id, :method => :delete }
 
-    assert_response :redirect
-    assert_equal "Designer can't perform action. (new)", flash[:notice]
-    assert_redirected_to :action => :index
-
-  end
-
-  def test_should_allow_admin_to_destroy_a_post
-
-    admin = typus_users(:admin)
-    @request.session[:typus_user_id] = admin.id
-
-    get :destroy, { :id => posts(:published).id, :method => :delete }
-
-    assert_response :redirect
-    assert_equal "Post successfully removed.", flash[:notice]
-    assert_redirected_to :action => :index
+      assert_response :redirect
+      assert_equal "Post successfully removed.", flash[:notice]
+      assert_redirected_to :action => :index
+    end
 
   end
 
-  def test_should_not_allow_designer_to_destroy_a_post
+  context "Designer" do
 
-    designer = typus_users(:designer)
-    @request.session[:typus_user_id] = designer.id
+    setup do
+      @designer = typus_users(:designer)
+      @request.session[:typus_user_id] = @designer.id
+    end
 
-    get :destroy, { :id => posts(:published).id, :method => :delete }
+    should "not_allow_designer_to_add_a_post" do
+      get :new
 
-    assert_response :redirect
-    assert_equal "Designer can't delete this item.", flash[:notice]
-    assert_redirected_to :action => :index
+      assert_response :redirect
+      assert_equal "Designer can't perform action. (new)", flash[:notice]
+      assert_redirected_to :action => :index
+    end
+
+    should "not_allow_designer_to_destroy_a_post" do
+      get :destroy, { :id => posts(:published).id, :method => :delete }
+
+      assert_response :redirect
+      assert_equal "Designer can't delete this item.", flash[:notice]
+      assert_redirected_to :action => :index
+
+    end
 
   end
 

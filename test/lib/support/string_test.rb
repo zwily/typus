@@ -2,42 +2,42 @@ require "test/test_helper"
 
 class StringTest < ActiveSupport::TestCase
 
-  def test_extract_settings
+  should "extract_settings" do
     assert_equal %w( a b c ), "a, b, c".extract_settings
     assert_equal %w( a b c ), " a  , b,  c ".extract_settings
   end
 
-  def test_remove_prefix
+  should "remove prefix" do
     assert_equal "posts", "admin/posts".remove_prefix
     assert_equal "typus_users", "admin/typus_users".remove_prefix
     assert_equal "delayed/jobs", "admin/delayed/jobs".remove_prefix
   end
 
-  def test_remove_prefix_with_params
+  should "remove prefix with params" do
     assert_equal "posts", "typus/posts".remove_prefix("typus/")
     assert_equal "typus_users", "typus/typus_users".remove_prefix("typus/")
     assert_equal "delayed/tasks", "typus/delayed/tasks".remove_prefix("typus/")
   end
 
-  def test_extract_resource
+  should "extract_resource" do
     assert_equal "posts", "admin/posts".extract_resource
     assert_equal "typus_users", "admin/typus_users".extract_resource
     assert_equal "delayed/tasks", "admin/delayed/tasks".extract_resource
   end
 
-  def test_extract_class
+  should "extract_class" do
     assert_equal Post, "admin/posts".extract_class
     assert_equal TypusUser, "admin/typus_users".extract_class
     assert_equal Delayed::Task, "admin/delayed/tasks".extract_class
   end
 
-  def test_extract_human_name
+  should "extract_human_name" do
     assert_equal "Post", "admin/posts".extract_human_name
     assert_equal "Typus user", "admin/typus_users".extract_human_name
     assert_equal "Task", "admin/delayed/tasks".extract_human_name
   end
 
-  def test_typus_actions_on
+  should "verify String#typus_actions_on" do
     assert_equal %w(cleanup), "Post".typus_actions_on("index")
     assert_equal %w(cleanup), "Post".typus_actions_on(:index)
     assert_equal %w(send_as_newsletter preview), "Post".typus_actions_on(:edit)

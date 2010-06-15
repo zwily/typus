@@ -224,7 +224,7 @@ module Admin
       status = item.send(attribute)
 
       content = if status.nil?
-                  Typus::Resource.nil
+                  Typus::Resource.human_nil
                 else
                   message = _(boolean_hash["#{status}".to_sym])
                   options = { :controller => "admin/#{item.class.to_resource}", 

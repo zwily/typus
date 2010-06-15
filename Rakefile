@@ -16,6 +16,10 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = true
 end
 
+##
+# Build and release.
+##
+
 task :build do
   system "gem build typus.gemspec"
 end
@@ -37,13 +41,10 @@ namespace :site do
 
   desc "Regenerate the documentation"
   task :build do
-    command = `which asciidoc`.strip
-    unless command.empty?
-      puts "Building site using `asciidoc`."
-      system "cd doc && #{command.strip} -a icons -a toc -o site/index.html 000-index.txt"
-    else
-      puts "AsciiDoc is not installed."
-    end
+    command = `which asciidoci`.strip
+    puts "AsciiDoc is not installed."; exit if command.empty?
+    puts "Building site using `asciidoc`."
+    system "cd doc && #{command.strip} -a icons -a toc -o site/index.html 000-index.txt"
   end
 
   desc "Update the website"
@@ -52,34 +53,5 @@ namespace :site do
       sh %(scp -r ./ fesplugas@labs.intraducibles.com:~/public_html/labs.intraducibles.com/current/public/projects/typus/documentation/3-0-unstable)
     end
   end
-
-end
-
-##
-# Extras
-##
-
-desc "Generate specdoc-style documentation from tests"
-task :specs do
-
-  puts 'Started'
-  timer, count = Time.now, 0
-
-  File.open('SPECDOC', 'w') do |file|
-    Dir.glob('test/**/*_test.rb').each do |test|
-      test =~ /.*\/([^\/].*)_test.rb$/
-      file.puts "#{$1.gsub('_', ' ').capitalize} should:" if $1
-      File.read(test).map { |line| /test_(.*)$/.match line }.compact.each do |spec|
-        file.puts "- #{spec[1].gsub('_', ' ')}"
-        sleep 0.001; print '.'; $stdout.flush; count += 1
-      end
-      file.puts
-    end
-  end
-
-  puts <<-MSG
-\nFinished in #{Time.now - timer} seconds.
-#{count} specifications documented.
-  MSG
 
 end

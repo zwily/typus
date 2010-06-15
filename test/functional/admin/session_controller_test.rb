@@ -2,11 +2,7 @@ require "test/test_helper"
 
 class Admin::SessionControllerTest < ActionController::TestCase
 
-  ##
-  # :new
-  ##
-
-  def test_should_render_new
+  should "render new" do
     Typus.expects(:admin_title).at_least_once.returns("Typus Test")
 
     get :new
@@ -17,7 +13,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
     assert_match "layouts/admin/account", @controller.inspect
   end
 
-  def test_should_redirect_to_new_admin_account_when_no_admin_users
+  should "redirect_to_new_admin_account_when_no_admin_users" do
     TypusUser.expects(:count).at_least_once.returns(0)
 
     get :new
@@ -26,24 +22,18 @@ class Admin::SessionControllerTest < ActionController::TestCase
     assert_redirected_to new_admin_account_path
   end
 
-  def test_should_verify_typus_sign_in_layout_does_not_include_recover_password_link
+  should "verify_typus_sign_in_layout_does_not_include_recover_password_link" do
     get :new
     assert !@response.body.include?("Recover password")
   end
 
-  def test_should_verify_typus_sign_in_layout_includes_recover_password_link
+  should "verify_typus_sign_in_layout_includes_recover_password_link" do
     Typus.expects(:mailer_sender).returns("john@example.com")
-
     get :new
-
     assert @response.body.include?("Recover password")
   end
 
-  ##
-  # :create
-  ##
-
-  def test_should_not_create_session_for_invalid_users
+  should "not_create_session_for_invalid_users" do
     post :create, { :typus_user => { :email => "john@example.com", :password => "XXXXXXXX" } }
 
     assert_response :redirect
@@ -51,17 +41,17 @@ class Admin::SessionControllerTest < ActionController::TestCase
     assert_equal "The email and/or password you entered is invalid.", flash[:alert]
   end
 
-  def test_should_not_create_session_for_a_disabled_user
+  should "not_create_session_for_a_disabled_user" do
     typus_user = typus_users(:disabled_user)
 
     post :create, { :typus_user => { :email => typus_user.email, :password => "12345678" } }
 
-    assert_nil @request.session[:typus_user_id]
+    assert @request.session[:typus_user_id].nil?
     assert_response :redirect
     assert_redirected_to new_admin_session_path
   end
 
-  def test_should_create_session_for_an_enabled_user
+  should "create_session_for_an_enabled_user" do
     typus_user = typus_users(:admin)
 
     post :create, { :typus_user => { :email => typus_user.email, :password => "12345678" } }
@@ -71,19 +61,22 @@ class Admin::SessionControllerTest < ActionController::TestCase
     assert_redirected_to admin_dashboard_path
   end
 
-  ##
-  # :destroy
-  ##
+  context "Logged user" do
 
-  def test_should_destroy
-    @request.session[:typus_user_id] = typus_users(:admin).id
+    setup do
+      @typus_user = typus_users(:admin)
+      @request.session[:typus_user_id] = @typus_user.id
+    end
 
-    delete :destroy
+    should "destroy" do
+      delete :destroy
 
-    assert_nil @request.session[:typus_user_id]
-    assert_response :redirect
-    assert_redirected_to new_admin_session_path
-    assert flash.empty?
+      assert @request.session[:typus_user_id].nil?
+      assert_response :redirect
+      assert_redirected_to new_admin_session_path
+      assert flash.empty?
+    end
+
   end
 
 end

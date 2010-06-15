@@ -9,7 +9,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
 
   def render(*args); args; end
 
-  def test_display_link_to_previous
+  should "verify display_link_to_previous" do
     @resource = Post
     params = { :action => "edit", :back_to => "/back_to_param" }
     self.expects(:params).at_least_once.returns(params)
@@ -20,41 +20,32 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
     assert_equal [ partial, options ], display_link_to_previous
   end
 
-  def test_remove_filter_link
+  should "remove_filter_link" do
     output = remove_filter_link("")
     assert output.nil?
   end
 
-  def test_build_list_when_returns_a_table
+  context "Build list" do
 
-    model = TypusUser
-    fields = %w( email role status )
-    items = TypusUser.all
-    resource = "typus_users"
+    setup do
+      @model = TypusUser
+      @fields = %w( email role status )
+      @items = TypusUser.all
+      @resource = "typus_users"
+    end
 
-    self.stubs(:build_table).returns("a_list_with_items")
+    should "verify build_list_when_returns_a_table" do
+      self.stubs(:build_table).returns("a_list_with_items")
+      output = build_list(@model, @fields, @items, @resource)
+      assert_equal "a_list_with_items", output
+    end
 
-    output = build_list(model, fields, items, resource)
-    expected = "a_list_with_items"
-
-    assert_equal expected, output
-
-  end
-
-  def test_build_list_when_returns_a_template
-
-    model = TypusUser
-    fields = %w( email role status )
-    items = TypusUser.all
-    resource = "typus_users"
-
-    self.stubs(:render).returns("a_template")
-    File.stubs(:exist?).returns(true)
-
-    output = build_list(model, fields, items, resource)
-    expected = "a_template"
-
-    assert_equal expected, output
+    should "verify build_list_when_returns_a_template" do
+      self.stubs(:render).returns("a_template")
+      File.stubs(:exist?).returns(true)
+      output = build_list(@model, @fields, @items, @resource)
+      assert_equal "a_template", output
+    end
 
   end
 

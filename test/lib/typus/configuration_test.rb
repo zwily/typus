@@ -2,29 +2,29 @@ require "test/test_helper"
 
 class ConfigurationTest < ActiveSupport::TestCase
 
-  def test_should_verify_typus_roles_is_loaded
+  should "verify typus roles is loaded" do
     assert Typus::Configuration.respond_to?(:roles!)
     assert Typus::Configuration.roles!.kind_of?(Hash)
   end
 
-  def test_should_verify_typus_config_file_is_loaded
+  should "verify typus config file is loaded" do
     assert Typus::Configuration.respond_to?(:config!)
     assert Typus::Configuration.config!.kind_of?(Hash)
   end
 
-  def test_should_load_configuration_files_from_config_broken
+  should "load configuration files from config broken" do
     Typus.expects(:config_folder).at_least_once.returns("../config/broken")
     assert_not_equal Hash.new, Typus::Configuration.roles!
     assert_not_equal Hash.new, Typus::Configuration.config!
   end
 
-  def test_should_load_configuration_files_from_config_empty
+  should "load configuration files from config empty" do
     Typus.expects(:config_folder).at_least_once.returns("../config/empty")
     assert_equal Hash.new, Typus::Configuration.roles!
     assert_equal Hash.new, Typus::Configuration.config!
   end
 
-  def test_should_load_configuration_files_from_config_ordered
+  should "load configuration files from config ordered" do
     Typus.expects(:config_folder).at_least_once.returns("../config/ordered")
     files = Dir[Rails.root.join(Typus.config_folder, "*_roles.yml")]
     expected = files.collect { |file| File.basename(file) }.sort
@@ -33,7 +33,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal expected, Typus::Configuration.roles!
   end
 
-  def test_should_load_configuration_files_from_config_unordered
+  should "load configuration files from config unordered" do
     Typus.expects(:config_folder).at_least_once.returns("../config/unordered")
     files = Dir[Rails.root.join(Typus.config_folder, "*_roles.yml")]
     expected = files.collect { |file| File.basename(file) }
@@ -42,7 +42,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal expected, Typus::Configuration.roles!
   end
 
-  def test_should_load_configuration_files_from_config_default
+  should "load configuration files from config default" do
     Typus.expects(:config_folder).at_least_once.returns("../config/default")
     assert_not_equal Hash.new, Typus::Configuration.roles!
     assert_not_equal Hash.new, Typus::Configuration.config!

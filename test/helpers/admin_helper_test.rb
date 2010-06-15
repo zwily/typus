@@ -52,7 +52,7 @@ class AdminHelperTest < ActiveSupport::TestCase
 
 =end
 
-  def test_display_flash_message
+  should "display_flash_message" do
     message = { :test => "This is the message." }
     output = display_flash_message(message)
 
@@ -64,7 +64,7 @@ class AdminHelperTest < ActiveSupport::TestCase
     assert_equal options, output.last
   end
 
-  def test_display_flash_message_with_empty_message
+  should "not display_flash_message with empty message" do
     assert display_flash_message(Hash.new).nil?
   end
 

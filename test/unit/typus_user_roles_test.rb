@@ -2,15 +2,21 @@ require "test/test_helper"
 
 class TypusUserRolesTest < ActiveSupport::TestCase
 
-  def test_should_get_list_of_roles
+  # Remove all fixtures ... this is to make it compatible with the old 
+  # tests. Will remove it once everything is refactored with Shoulda and 
+  # FactoryGirl.
+  setup do
+    TypusUser.delete_all
+  end
+
+  should "get a list of roles" do
     roles = %w( admin designer editor )
     assert_equal roles, Typus::Configuration.roles.map(&:first).sort
   end
 
-  def test_admin_role_settings
+  should "verify admin role settings" do
 
-    typus_user = typus_users(:admin)
-    assert_equal 'admin', typus_user.role
+    typus_user = Factory(:typus_user)
 
     models = %w( Asset Category Comment Git Page Post Status TypusUser View WatchDog )
     assert_equal models, typus_user.resources.map(&:first).sort
@@ -38,10 +44,9 @@ class TypusUserRolesTest < ActiveSupport::TestCase
 
   end
 
-  def test_editor_role_settings
+  should "verify editor role settings" do
 
-    typus_user = typus_users(:editor)
-    assert_equal 'editor', typus_user.role
+    typus_user = Factory(:typus_user, :role => "editor")
 
     %w( Category Comment Git Post TypusUser ).each do |model|
       assert typus_user.resources.map(&:first).include?(model)
@@ -65,10 +70,9 @@ class TypusUserRolesTest < ActiveSupport::TestCase
 
   end
 
-  def test_designer_role_settings
+  should "verify designer role setting" do
 
-    typus_user = typus_users(:designer)
-    assert_equal 'designer', typus_user.role
+    typus_user = Factory(:typus_user, :role => "designer")
 
     models = %w( Category Comment Post )
     assert_equal models, typus_user.resources.map(&:first).sort

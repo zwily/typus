@@ -2,28 +2,24 @@ require "test/test_helper"
 
 class Admin::PostsControllerTest < ActionController::TestCase
 
-  ##
-  # get :index
-  ##
-
-  def test_should_render_index_and_verify_presence_of_custom_partials
+  should "render index and validates_presence_of_custom_partials" do
     get :index
     assert_match "posts#_index.html.erb", @response.body
   end
 
-  def test_should_render_index_and_verify_page_title
+  should "render_index_and_verify_page_title" do
     get :index
     assert_select "title", "Posts"
   end
 
-  def test_should_render_index_and_show_add_entry_link
+  should "render index_and_show_add_entry_link" do
     get :index
     assert_select "#sidebar ul" do
       assert_select "li", "Add new"
     end
   end
 
-  def test_should_render_index_and_not_show_add_entry_link
+  should "render_index_and_not_show_add_entry_link" do
     typus_user = typus_users(:designer)
     @request.session[:typus_user_id] = typus_user.id
 
@@ -33,13 +29,13 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_no_match /Add Post/, @response.body
   end
 
-  def test_should_render_index_and_show_trash_item_image
+  should "render_index_and_show_trash_item_image" do
     get :index
     assert_response :success
     assert_select '.trash', 'Trash'
   end
 
-  def test_should_render_index_and_not_show_trash_image
+  should "render_index_and_not_show_trash_image" do
     typus_user = typus_users(:designer)
     @request.session[:typus_user_id] = typus_user.id
 
@@ -49,7 +45,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_select ".trash", false
   end
 
-  def test_should_get_index_and_render_edit_or_show_links
+  should "get_index_and_render_edit_or_show_links" do
     %w(edit show).each do |action|
       Typus::Resource.expects(:default_action_on_item).at_least_once.returns(action)
       get :index
@@ -59,7 +55,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
   end
 
-  def test_should_get_index_and_render_edit_or_show_links_on_owned_records
+  should "get_index_and_render_edit_or_show_links_on_owned_records" do
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
 
@@ -71,7 +67,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
   end
 
-  def test_should_get_index_and_render_edit_or_show_on_only_user_items
+  should "get_index_and_render_edit_or_show_on_only_user_items" do
     typus_user = typus_users(:editor)
     @request.session[:typus_user_id] = typus_user.id
 
@@ -98,12 +94,12 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # get :new
   ##
 
-  def test_should_render_posts_partials_on_new
+  should "render new and partials_on_new" do
     get :new
     assert_match "posts#_new.html.erb", @response.body
   end
 
-  def test_should_render_new_and_verify_page_title
+  should "render new and verify page title" do
     get :new
     assert_select "title", "New Post"
   end
@@ -112,12 +108,12 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # get :edit
   ##
 
-  def test_should_render_edit_and_verify_presence_of_custom_partials
+  should "render_edit_and_verify_presence_of_custom_partials" do
     get :edit, { :id => posts(:published).id }
     assert_match "posts#_edit.html.erb", @response.body
   end
 
-  def test_should_render_edit_and_verify_page_title
+  should "render_edit_and_verify_page_title" do
     get :edit, { :id => posts(:published).id }
     assert_select "title", "Edit Post"
   end
@@ -126,66 +122,14 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # get :show
   ##
 
-  def test_should_render_show_and_verify_presence_of_custom_partials
+  should "render_show_and_verify_presence_of_custom_partials" do
     get :show, { :id => posts(:published).id }
     assert_match "posts#_show.html.erb", @response.body
   end
 
-  def test_should_render_show_and_verify_page_title
+  should "render_show_and_verify_page_title" do
     get :show, { :id => posts(:published).id }
     assert_select "title", "Show Post"
-  end
-
-  def test_should_render_show_and_verify_add_relationships_links
-
-    # FIXME
-    return
-
-    ##
-    # Admin
-    ##
-
-    [ posts(:owned_by_admin), posts(:owned_by_editor) ].each do |post|
-
-      get :show, { :id => post.id }
-
-      %w( assets categories comments views ).each do |model|
-        assert_select "div##{model} h2", "#{model.capitalize}\n    Add new"
-      end
-
-    end
-
-    ##
-    # Editor
-    ##
-
-    typus_user = typus_users(:editor)
-    @request.session[:typus_user_id] = typus_user.id
-
-    get :show, { :id => posts(:owned_by_admin).id }
-
-    # This is a has_many relationship, and record is owned by admin, so the 
-    # editor can only list. Assets it's not shown because the editor doesn't 
-    # have access to this resource.
-    assert_select "div#assets h2", false
-    assert_select "div#categories h2", "Categories"
-    assert_select "div#comments h2", "Comments"
-    assert_select "div#views h2", "Views"
-
-    get :show, { :id => posts(:owned_by_editor).id }
-
-    # This is a has_many (polimorphic) relationship, but editor can't add new items.
-    assert_select "div#assets h2", false
-    # This is a has_and_belongs_to_many relationship and editor can add new items.
-    assert_select "div#categories h2", "Categories\n    Add new"
-    # This is a has_many relationship, but editor can't add items.
-    assert_select "div#comments h2", "Comments"
-    # This is a has_many relationship and editor can add items.
-    assert_select "div#views h2", "Views\n    Add new"
-
-    expected = "/admin/views/new?back_to=%2Fadmin%2Fposts%2Fshow%2F4%23views&amp;post_id=4&amp;resource=post&amp;resource_id=4"
-    assert_match expected, @response.body
-
   end
 
 end

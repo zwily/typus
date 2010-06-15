@@ -29,8 +29,8 @@ module Typus
     @@minute_step = 5
 
     # Defines nil.
-    mattr_accessor :nil
-    @@nil = "nil"
+    mattr_accessor :human_nil
+    @@human_nil = "nil"
 
     # Defines only_user_items.
     mattr_accessor :only_user_items

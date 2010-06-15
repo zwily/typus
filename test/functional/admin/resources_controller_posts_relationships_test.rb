@@ -6,9 +6,9 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # Post => has_many :comments
   ##
 
-  def test_should_relate_comment_with_post_and_then_unrelate
+  should "relate_comment_with_post_and_then_unrelate" do
 
-    comment = comments(:without_post_id)
+    comment = Factory(:comment, :post => nil)
     post_ = posts(:published)
     @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#comments"
 
@@ -36,9 +36,9 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # Post => has_and_belongs_to_many :categories
   ##
 
-  def test_should_relate_category_with_post_and_then_unrelate
+  should "relate_category_with_post_and_then_unrelate" do
 
-    category = categories(:first)
+    category = Factory(:category)
     post_ = posts(:published)
     @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#categories"
 
@@ -62,15 +62,14 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+=begin
+
   ##
   # Post => has_many :assets, :as => resource (Polimorphic)
   ##
 
-=begin
-
   # FIXME: ActiveRecord::UnknownAttributeError: unknown attribute: post
-  def test_should_relate_asset_with_post_and_then_unrelate
-
+  should "relate_asset_with_post_and_then_unrelate"
 
     post_ = posts(:published)
 

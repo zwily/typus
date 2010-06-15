@@ -2,7 +2,7 @@ require "test/test_helper"
 
 class Admin::PostsControllerTest < ActionController::TestCase
 
-  def test_should_generate_xml
+  should "render index and return xml" do
     expected = <<-RAW
 <?xml version="1.0" encoding="UTF-8"?>
 <posts type="array">
@@ -31,7 +31,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_equal expected, @response.body
   end
 
-  def test_should_generate_csv
+  should "render index and return csv" do
     expected = <<-RAW
 title;status
 Title One;published

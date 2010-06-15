@@ -2,27 +2,34 @@ require "test/test_helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
-  def test_mapping_with_an_array
+  # Remove all fixtures ... this is to make it compatible with the old 
+  # tests. Will remove it once everything is refactored with Shoulda and 
+  # FactoryGirl.
+  setup do
+    TypusUser.delete_all
+  end
+
+  should "verify mapping instace method with an array" do
     post = posts(:published)
     assert_equal "published", post.mapping(:status)
     post = posts(:unpublished)
     assert_equal "unpublished", post.mapping(:status)
   end
 
-  def test_mapping_with_a_hash
-    page = pages(:published)
+  should "verify mapping instace method with a hash" do
+    page = Factory(:page)
     assert_equal "Published", page.mapping(:status)
-    page = pages(:unpublished)
+    page = Factory(:page, :status => "unpublished")
     assert_equal "Not Published", page.mapping(:status)
   end
 
-  def test_to_label
-    assert typus_users(:admin).respond_to?(:to_label)
-    assert_equal "Admin Example", typus_users(:admin).to_label
+  should "verify to_label instace method" do
+    typus_user = Factory(:typus_user)
+    assert_equal "admin@example.com", typus_user.to_label
     assert_equal "Post#1", posts(:published).to_label
   end
 
-  def test_to_resource
+  should "verify to_resource instance method" do
     assert_equal "typus_users", TypusUser.to_resource
     assert_equal "delayed/tasks", Delayed::Task.to_resource
   end

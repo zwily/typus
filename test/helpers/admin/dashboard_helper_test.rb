@@ -12,7 +12,7 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 =begin
 
   # FIXME: Pending to verify the applications included. Use the keys.
-  def test_applications
+  should "render applications" do
     @current_user = typus_users(:admin)
 
     output = applications
@@ -28,7 +28,7 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 
 =end
 
-  def test_resources
+  should "render resources" do
     @current_user = typus_users(:admin)
 
     output = resources
