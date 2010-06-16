@@ -12,7 +12,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   def render(*args); args; end
 
-  def setup
+  setup do
     default_url_options[:host] = 'test.host'
   end
 

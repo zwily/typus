@@ -11,7 +11,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   def render(*args); args; end
   def raw(*args); args; end
 
-  def setup
+  setup do
     default_url_options[:host] = "test.host"
   end
 
@@ -179,7 +179,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
 =end
 
-  def test_table_string_field
+  should "test_table_string_field" do
     post = posts(:published)
 
     output = table_string_field(:title, post, :created_at)
@@ -188,7 +188,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected.strip, output
   end
 
-  def test_table_string_field_with_link
+  should "test_table_string_field_with_link" do
     post = posts(:published)
 
     output = table_string_field(:title, post, :title)
@@ -197,7 +197,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected.strip, output
   end
 
-  def test_table_tree_field_when_displays_a_parent
+  should "table_tree_field_when_displays_a_parent" do
     page = Factory(:page)
 
     output = table_tree_field("test", page)
@@ -206,7 +206,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
   end
 
-  def test_table_tree_field_when_displays_a_children
+  should "table_tree_field_when_displays_a_children" do
     page = Factory(:page, :status => "unpublished")
 
     output = table_tree_field("test", page)
@@ -215,7 +215,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
   end
 
-  def test_table_datetime_field
+  should "test_table_datetime_field" do
     post = posts(:published)
     Time::DATE_FORMATS[:post_short] = "%m/%y"
 
@@ -225,7 +225,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected.strip, output
   end
 
-  def test_table_datetime_field_with_link
+  should "test_table_datetime_field_with_link" do
     post = posts(:published)
     Time::DATE_FORMATS[:post_short] = "%m/%y"
 
