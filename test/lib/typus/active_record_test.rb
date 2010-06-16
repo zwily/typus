@@ -297,8 +297,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     end
 
-    should "return_sql_conditions_on_filtering_typus_users_by_created_at" do
-
+    should "return_sql_conditions_on_filtering_typus_users_by_created_at today" do
       expected = case ENV["DB"]
                  when /postgresql/
                    "(created_at BETWEEN E'#{Time.new.midnight.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
@@ -306,27 +305,35 @@ class ActiveRecordTest < ActiveSupport::TestCase
                    "(created_at BETWEEN '#{Time.new.midnight.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
                  end
       params = { :created_at => "today" }
-      assert_equal expected, TypusUser.build_conditions(params).first
 
+      assert_equal expected, TypusUser.build_conditions(params).first
+    end
+
+    should "return_sql_conditions_on_filtering_typus_users_by_created_at last_few_days" do
       expected = case ENV["DB"]
                  when /postgresql/
                    "(created_at BETWEEN E'#{3.days.ago.midnight.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
                  else
                    "(created_at BETWEEN '#{3.days.ago.midnight.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
                  end
+
       params = { :created_at => "last_few_days" }
       assert_equal expected, TypusUser.build_conditions(params).first
+    end
 
+    should "return_sql_conditions_on_filtering_typus_users_by_created_at last_7_days" do
       expected = case ENV["DB"]
                  when /postgresql/
                    "(created_at BETWEEN E'#{6.days.ago.midnight.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
                  else
                    "(created_at BETWEEN '#{6.days.ago.midnight.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
                  end
+
       params = { :created_at => "last_7_days" }
       assert_equal expected, TypusUser.build_conditions(params).first
+    end
 
-
+    should "return_sql_conditions_on_filtering_typus_users_by_created_at last_30_days" do
       expected = case ENV["DB"]
                  when /postgresql/
                    "(created_at BETWEEN E'#{Time.new.midnight.prev_month.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
@@ -335,10 +342,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
                  end
       params = { :created_at => "last_30_days" }
       assert_equal expected, TypusUser.build_conditions(params).first
-
     end
 
-    should "return_sql_conditions_on_filtering_posts_by_published_at" do
+    should "return_sql_conditions_on_filtering_posts_by_published_at today" do
       expected = case ENV["DB"]
                  when /postgresql/
                    "(published_at BETWEEN E'#{Time.new.midnight.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
