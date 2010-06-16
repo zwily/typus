@@ -13,13 +13,20 @@ Factory.define :comment do |f|
   f.email "john@example.com"
   f.body "Body of the comment"
   f.association :post
-
 end
 
 Factory.define :page do |f|
   f.title "Title"
   f.body "Content"
   f.status "published"
+end
+
+Factory.define :picture do |f|
+  f.title "Some picture"
+  f.picture_file_name "dog.jpg"
+  f.picture_content_type "image/jpeg"
+  f.picture_file_size "175938"
+  f.picture_updated_at 3.days.ago.to_s(:db)
 end
 
 Factory.define :typus_user do |f|
