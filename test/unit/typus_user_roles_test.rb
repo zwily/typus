@@ -14,80 +14,98 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     assert_equal roles, Typus::Configuration.roles.map(&:first).sort
   end
 
-  should "verify admin role settings" do
+  context "A TypusUser with role admin" do
 
-    typus_user = Factory(:typus_user)
-
-    models = %w( Asset Category Comment Git Page Post Status TypusUser View WatchDog )
-    assert_equal models, typus_user.resources.map(&:first).sort
-
-    # Order exists on the roles, but, as we compact the hash, the
-    # resource is removed.
-    assert !typus_user.resources.map(&:first).include?('Order')
-
-    resources = %w( Git Status WatchDog )
-    models.delete_if { |m| resources.include?(m) }
-
-    %w( create read update destroy ).each do |action|
-      models.each { |model| assert typus_user.can?(action, model), "Error on #{model} #{action}" }
+    setup do
+      @typus_user = Factory(:typus_user)
+      @models = %w( Asset Category Comment Git Page Post Status TypusUser View WatchDog )
     end
 
-    # Order resource doesn't have an index action, so we current user 
-    # cannot perform the action.
-    assert typus_user.cannot?('index', 'Order')
+    should "verify models access" do
+      assert_equal @models, @typus_user.resources.map(&:first).sort
+    end
 
-    # Status resource has an index action, but not a show one.
-    # We add the { :special => true } option to by-pass the action 
-    # renaming performed in the TypusUser#can? method.
-    assert typus_user.can?('index', 'Status', { :special => true })
-    assert typus_user.cannot?('show', 'Status', { :special => true })
+    should "verify resources without actions related are removed" do
+      assert !@typus_user.resources.map(&:first).include?('Order')
+    end
+
+    should "have access to all actions on models" do
+      models = %w( Asset Category Comment Page Post TypusUser View )
+      %w( create read update destroy ).each { |a| models.each { |m| assert @typus_user.can?(a, m) } }
+    end
+
+    should "verify we can perform action on resource" do
+      assert @typus_user.can?('index', 'Status', { :special => true })
+    end
+
+    should "verify we cannot perform action on resource" do
+      assert @typus_user.cannot?('show', 'Status', { :special => true })
+    end
+
+    should "verify we cannot perform actions on resources which don't have that action defined" do
+      assert @typus_user.cannot?('index', 'Order')
+    end
 
   end
 
-  should "verify editor role settings" do
+  context "A TypusUser with role editor" do
 
-    typus_user = Factory(:typus_user, :role => "editor")
-
-    %w( Category Comment Git Post TypusUser ).each do |model|
-      assert typus_user.resources.map(&:first).include?(model)
+    setup do
+      @typus_user = Factory(:typus_user, :role => "editor")
     end
 
-    # Category: create, read, update
-    %w( create read update ).each { |action| assert typus_user.can?(action, 'Category') }
-    %w( delete ).each { |action| assert typus_user.cannot?(action, 'Category') }
+    should "verify models access" do
+      models = %w( Category Comment Git Post TypusUser View )
+      assert_equal models, @typus_user.resources.map(&:first).sort
+    end
 
-    # Post: create, read, update
-    %w( create read update ).each { |action| assert typus_user.can?(action, 'Post') }
-    %w( delete ).each { |action| assert typus_user.cannot?(action, 'Post') }
+    should "only create, read and update categories" do
+      %w( create read update ).each { |a| assert @typus_user.can?(a, 'Category') }
+      %w( delete ).each { |a| assert @typus_user.cannot?(a, 'Category') }
+    end
 
-    # Comment: read, update, delete
-    %w( read update delete ).each { |action| assert typus_user.can?(action, 'Comment') }
-    %w( create ).each { |action| assert typus_user.cannot?(action, 'Comment') }
+    should "only create, read and update posts" do
+      %w( create read update ).each { |a| assert @typus_user.can?(a, 'Post') }
+      %w( delete ).each { |a| assert @typus_user.cannot?(a, 'Post') }
+    end
 
-    # TypusUser: read, update
-    %w( read update ).each { |action| assert typus_user.can?(action, 'TypusUser') }
-    %w( create delete ).each { |action| assert typus_user.cannot?(action, 'TypusUser') }
+    should "only read, update and delete comments" do
+      %w( read update delete ).each { |a| assert @typus_user.can?(a, 'Comment') }
+      %w( create ).each { |a| assert @typus_user.cannot?(a, 'Comment') }
+    end
+
+    should "only read and update typus_users" do
+      %w( read update ).each { |a| assert @typus_user.can?(a, 'TypusUser') }
+      %w( create delete ).each { |a| assert @typus_user.cannot?(a, 'TypusUser') }
+    end
 
   end
 
-  should "verify designer role setting" do
+  context "A TypusUser with role designer" do
 
-    typus_user = Factory(:typus_user, :role => "designer")
+    setup do
+      @typus_user = Factory(:typus_user, :role => "designer")
+    end
 
-    models = %w( Category Comment Post )
-    assert_equal models, typus_user.resources.map(&:first).sort
+    should "verify models access" do
+      models = %w( Category Comment Post )
+      assert_equal models, @typus_user.resources.map(&:first).sort
+    end
 
-    # Category: read, update
-    %w( read update ).each { |action| assert typus_user.can?(action, 'Category') }
-    %w( create delete ).each { |action| assert typus_user.cannot?(action, 'Category') }
+    should "only read and update categories" do
+      %w( read update ).each { |a| assert @typus_user.can?(a, 'Category') }
+      %w( create delete ).each { |a| assert @typus_user.cannot?(a, 'Category') }
+    end
 
-    # Comment: read
-    %w( read ).each { |action| assert typus_user.can?(action, 'Comment') }
-    %w( create update delete ).each { |action| assert typus_user.cannot?(action, 'Comment') }
+    should "only read comments" do
+      %w( read ).each { |a| assert @typus_user.can?(a, 'Comment') }
+      %w( create update delete ).each { |a| assert @typus_user.cannot?(a, 'Comment') }
+    end
 
-    # Post: read, update
-    %w( read update ).each { |action| assert typus_user.can?(action, 'Post') }
-    %w( create delete ).each { |action| assert typus_user.cannot?(action, 'Post') }
+    should "only read and update posts" do
+      %w( read update ).each { |a| assert @typus_user.can?(a, 'Post') }
+      %w( create delete ).each { |a| assert @typus_user.cannot?(a, 'Post') }
+    end
 
   end
 
