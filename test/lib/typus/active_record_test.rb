@@ -55,55 +55,53 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal "System Users Administration", TypusUser.typus_description
   end
 
-  should "verify typus_fields_for accepts strings and symbols" do
-    expected_fields = %w( email role status )
-    assert_equal expected_fields, TypusUser.typus_fields_for(:list).keys
-    assert_equal expected_fields, TypusUser.typus_fields_for("list").keys
-  end
-
-  should "return_typus_fields_for_list_for_typus_user" do
-    expected_fields = [["email", :string],
-                       ["role", :selector],
-                       ["status", :boolean]]
-    assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:list).keys
-    assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for(:list).values
-  end
-
-  should "return_typus_fields_for_form_for_typus_user" do
-    expected_fields = [["first_name", :string],
-                       ["last_name", :string],
-                       ["role", :selector],
-                       ["email", :string],
-                       ["password", :password],
-                       ["password_confirmation", :password],
-                       ["language", :selector]]
-    assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:form).keys
-    assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
-  end
-
-  should "return_typus_fields_for_form_for_picture" do
-    expected_fields = [["title", :string],
-                       ["picture", :file]]
-    assert_equal expected_fields.map { |i| i.first }, Picture.typus_fields_for(:form).keys
-    assert_equal expected_fields.map { |i| i.last }, Picture.typus_fields_for(:form).values
-  end
-
-  should "return_typus_fields_for_a_model_without_configuration" do
-    assert Class.new(ActiveRecord::Base).typus_fields_for(:form).empty?
-  end
-
   context "Typus fields for" do
 
-    setup do
-      @typus_fields_for = %w( first_name last_name role email language)
+    should "verify typus_fields_for accepts strings" do
+      assert_equal %w( email role status ), TypusUser.typus_fields_for("list").keys
+    end
+
+    should "verify typus_fields_for accepts symbols" do
+      assert_equal %w( email role status ), TypusUser.typus_fields_for(:list).keys
+    end
+
+    should "return_typus_fields_for_list_for_typus_user" do
+      expected_fields = [["email", :string],
+                         ["role", :selector],
+                         ["status", :boolean]]
+      assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:list).keys
+      assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for(:list).values
+    end
+
+    should "return_typus_fields_for_form_for_typus_user" do
+      expected_fields = [["first_name", :string],
+                         ["last_name", :string],
+                         ["role", :selector],
+                         ["email", :string],
+                         ["password", :password],
+                         ["password_confirmation", :password],
+                         ["language", :selector]]
+      assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:form).keys
+      assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
+    end
+
+    should "return_typus_fields_for_form_for_picture" do
+      expected_fields = [["title", :string],
+                         ["picture", :file]]
+      assert_equal expected_fields.map { |i| i.first }, Picture.typus_fields_for(:form).keys
+      assert_equal expected_fields.map { |i| i.last }, Picture.typus_fields_for(:form).values
+    end
+
+    should "return_typus_fields_for_a_model_without_configuration" do
+      assert Class.new(ActiveRecord::Base).typus_fields_for(:form).empty?
     end
 
     should "return_typus_fields_for_relationship_for_typus_user" do
-      assert_equal @typus_fields_for, TypusUser.typus_fields_for(:relationship).keys
+      assert_equal %w( first_name last_name role email language), TypusUser.typus_fields_for(:relationship).keys
     end
 
     should "return_all_fields_for_undefined_field_type_on_typus_user" do
-      assert_equal @typus_fields_for, TypusUser.typus_fields_for(:undefined).keys
+      assert_equal %w( first_name last_name role email language), TypusUser.typus_fields_for(:undefined).keys
     end
 
   end
