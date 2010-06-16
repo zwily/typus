@@ -8,7 +8,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
       @request.session[:typus_user_id] = nil
     end
 
-    should "redirect_to_sign_in_when_not_signed_in" do
+    should "redirect to sign in when not signed in" do
       get :show
       assert_response :redirect
       assert_redirected_to new_admin_session_path
@@ -28,60 +28,79 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     assert_equal "Role does no longer exists.", flash[:notice]
   end
 
-  should "verify_block_users_on_the_fly" do
-    admin = typus_users(:admin)
-    @request.session[:typus_user_id] = admin.id
+  context "Admin is logged and gets dashboard" do
 
-    get :show
-    assert_response :success
-
-    # Disable user ...
-
-    admin.status = false
-    admin.save
-
-    get :show
-
-    assert_response :redirect
-    assert_redirected_to new_admin_session_path
-    assert_equal "Typus user has been disabled.", flash[:notice]
-    assert @request.session[:typus_user_id].nil?
-  end
-
-  should "render_dashboard" do
-
-    @request.session[:typus_user_id] = typus_users(:admin).id
-
-    get :show
-
-    assert_response :success
-    assert_template "show"
-
-    assert_match "layouts/admin", @controller.inspect
-
-    assert_select "title", "Dashboard"
-
-    [ "Typus", 
-      %(href="/admin/session"), 
-      %(href="/admin/typus_users/edit/#{@request.session[:typus_user_id]}) ].each do |string|
-      assert_match string, @response.body
+    setup do
+      @typus_user = typus_users(:admin)
+      @request.session[:typus_user_id] = typus_users(:admin).id
+      get :show
     end
 
-    %w( typus_users posts pages assets ).each { |r| assert_match "/admin/#{r}/new", @response.body }
-    %w( statuses orders ).each { |r| assert_no_match /\/admin\/#{r}\n/, @response.body }
+    should "render dashboard" do
+      assert_response :success
+      assert_template "show"
+    end
 
-    partials = %w( _sidebar.html.erb )
-    partials.each { |p| assert_match p, @response.body }
+    should "render admin layout" do
+      assert_match "layouts/admin", @controller.inspect
+    end
+
+    should "verify title" do
+      assert_select "title", "Dashboard"
+    end
+
+    should "verify link to session sign out" do
+      link = %(href="/admin/session")
+      assert_match link, @response.body
+    end
+
+    should "verify link to edit user" do
+      link = %(href="/admin/typus_users/edit/#{@request.session[:typus_user_id]})
+      assert_match link, @response.body
+    end
+
+    should "verify resources have a link to new" do
+      %w( typus_users posts pages assets ).each { |r| assert_match "/admin/#{r}/new", @response.body }
+    end
+
+    should "verify tableless resources do have link to new" do
+      %w( statuses orders ).each { |r| assert_no_match /\/admin\/#{r}\n/, @response.body }
+    end
+
+    should "verify we can set our own partials" do
+      partials = %w( _sidebar.html.erb )
+      partials.each { |p| assert_match p, @response.body }
+    end
+
+    should "block users_on_the_fly" do
+      @typus_user.status = false
+      @typus_user.save
+
+      get :show
+
+      assert_response :redirect
+      assert_redirected_to new_admin_session_path
+      assert_equal "Typus user has been disabled.", flash[:notice]
+      assert @request.session[:typus_user_id].nil?
+    end
 
   end
 
-  should "show_add_links_in_resources_list_for_designer" do
-    @request.session[:typus_user_id] = typus_users(:designer).id
+  context "When designer is logged in" do
 
-    get :show
+    setup do
+      @request.session[:typus_user_id] = typus_users(:designer).id
+      get :show
+    end
 
-    assert_no_match /\/admin\/posts\/new/, @response.body
-    assert_no_match /\/admin\/typus_users\/new/, @response.body
+    should "not have links to new posts" do
+      assert_no_match /\/admin\/posts\/new/, @response.body
+    end
+
+    should "not have links to new typus_users" do
+      assert_no_match /\/admin\/typus_users\/new/, @response.body
+    end
+
   end
 
 end
