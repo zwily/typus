@@ -36,5 +36,5 @@ class ActiveSupport::TestCase
   self.fixture_path = File.dirname(__FILE__) + "/fixtures"
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
-  fixtures :assets, :categories, :comments, :pages, :pictures, :posts, :typus_users
+  fixtures :typus_users, :posts
 end
