@@ -11,7 +11,6 @@ class AdminHelperTest < ActiveSupport::TestCase
 
 =begin
 
-  # FIXME
   def test_header_with_root_path
 
     # ActionView::Helpers::UrlHelper does not support strings, which are returned by named routes
@@ -34,7 +33,6 @@ class AdminHelperTest < ActiveSupport::TestCase
 
 =begin
 
-  # FIXME
   def test_header_without_root_path
 
     Rails.application.routes.named_routes.routes.reject! { |key, route| key == :root }

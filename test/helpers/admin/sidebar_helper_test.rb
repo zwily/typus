@@ -18,15 +18,9 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
 =begin
 
-  # FIXME
   def test_actions
   end
 
-=end
-
-=begin
-
-  # FIXME: 
   def test_export
     @resource = Post
 
@@ -41,21 +35,12 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
   end
 
-=end
-
-=begin
-
-  # FIXME: 
   def test_build_typus_list_with_empty_content_and_empty_header
     output = build_typus_list([], :header => nil)
     assert output.empty?
   end
 
-=end
-
   def test_build_typus_list_with_content_and_header
-    # FIXME
-    return
     output = build_typus_list(['item1', 'item2'], :header => "Chunky Bacon")
     assert !output.empty?
 
@@ -64,12 +49,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
                                          :items => [ "item1", "item2" ] } ]
 
     assert_equal expected, output
-
   end
 
-=begin
-
-  # FIXME:
   def test_build_typus_list_with_content_without_header
     output = build_typus_list(['item1', 'item2'])
     expected = [ "admin/helpers/list", { :header => nil, 
@@ -78,11 +59,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
   end
 
-=end
-
-=begin
-
-  # FIXME: 
   def test_search
 
     @resource = TypusUser
@@ -106,11 +82,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   end
 
-=end
-
-=begin
-
-  # FIXME
   def test_filters
     @resource = TypusUser
     @resource.expects(:typus_filters).returns(Array.new)
@@ -118,23 +89,11 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     assert output.nil?
   end
 
-=end
-
-=begin
-
-  # FIXME
   def test_filters_with_filters
   end
 
-=end
-
-=begin
-
-  # FIXME
   def test_relationship_filter
   end
-
-=end
 
   def test_date_filter
 
@@ -218,10 +177,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   end
 
-=begin
-
-  # FIXME
-
   def test_string_filter_when_values_are_strings
 
     @resource = TypusUser
@@ -236,7 +191,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     # @resource.expects('role').returns(['admin', 'designer', 'editor'])
     output = string_filter(request, filter)
 
- =begin
     expected = <<-HTML
 <h2>Role</h2>
 <ul>
@@ -245,7 +199,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 <li><a href="http://test.host/admin/typus_users?role=editor" class="off">Editor</a></li>
 </ul>
     HTML
- =end
 
     partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"on\">Admin</a>", 
@@ -262,7 +215,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     @resource.expects('role').returns(['admin', 'designer', 'editor'])
     output = string_filter(request, filter)
 
- =begin
     expected = <<-HTML
 <h2>Role</h2>
 <ul>
@@ -271,7 +223,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 <li><a href="http://test.host/admin/typus_users?role=editor" class="on">Editor</a></li>
 </ul>
     HTML
- =end
 
     partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"off\">Admin</a>", 
@@ -284,12 +235,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   end
 
-=end
-
-=begin
-
-  # FIXME
-
   def test_string_filter_when_values_are_arrays_of_strings
 
     @resource = TypusUser
@@ -300,18 +245,13 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
     request = 'role=admin&page=1'
 
- =begin
-
     array = [['Administrador', 'admin'], 
              ['Diseñador', 'designer'], 
              ['Editor', 'editor']]
     @resource.expects('role').returns(array)
 
- =end
-
     output = string_filter(request, filter)
 
- =begin
     expected = <<-HTML
 <h2>Role</h2>
 <ul>
@@ -319,8 +259,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 <li><a href="http://test.host/admin/typus_users?role=designer" class="off">Diseñador</a></li>
 <li><a href="http://test.host/admin/typus_users?role=editor" class="off">Editor</a></li>
 </ul>
-    HTML
- =end
+  HTML
 
     partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"on\">Administrador</a>",
@@ -333,11 +272,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   end
 
-=end
-
-=begin
-
-  # FIXME
   def test_string_filter_when_empty_values
     @resource = TypusUser
     filter = 'role'

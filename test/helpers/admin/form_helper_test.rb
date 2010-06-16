@@ -86,7 +86,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
 =end
 
-  def test_attribute_disabled
+  should "verify attribute_disabled" do
     @resource = Post
     assert !attribute_disabled?('test')
     Post.expects(:accessible_attributes).returns(['test'])
@@ -95,10 +95,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     assert attribute_disabled?('test')
   end
 
-  def test_expand_tree_into_select_field
+=begin
 
-    # FIXME
-    return
+  def test_expand_tree_into_select_field
 
     items = Page.roots
 
@@ -131,5 +130,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
 
   end
+
+=end
 
 end

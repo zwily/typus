@@ -43,10 +43,9 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
 =end
 
-  def test_table_header
+=begin
 
-    # FIXME
-    return
+  def test_table_header
 
     @current_user = mock()
     @current_user.expects(:can?).with("delete", TypusUser).returns(true)
@@ -67,10 +66,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_table_header_with_params
+=end
 
-    # FIXME
-    return
+=begin
+
+  def test_table_header_with_params
 
     @current_user = mock()
     @current_user.expects(:can?).with("delete", TypusUser).returns(true)
@@ -92,10 +92,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_table_header_when_user_cannot_delete_items
+=end
 
-    # FIXME
-    return
+=begin
+
+  def test_table_header_when_user_cannot_delete_items
 
     @current_user = mock()
     @current_user.expects(:can?).with("delete", TypusUser).returns(false)
@@ -116,10 +117,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_table_header_when_user_cannot_delete_items_with_params
+=end
 
-    # FIXME
-    return
+=begin
+
+  def test_table_header_when_user_cannot_delete_items_with_params
 
     @current_user = mock()
     @current_user.expects(:can?).with("delete", TypusUser).returns(false)
@@ -139,10 +141,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_table_belongs_to_field
+=end
 
-    # FIXME
-    return
+=begin
+
+  def test_table_belongs_to_field
 
     @current_user = typus_users(:admin)
 
@@ -161,10 +164,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  def test_table_has_and_belongs_to_many_field
-    # FIXME
-    return
+=end
 
+=begin
+
+  def test_table_has_and_belongs_to_many_field
     post = Factory(:post)
 
     output = table_has_and_belongs_to_many_field("comments", post)
@@ -172,6 +176,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
     assert_equal expected.strip, output
   end
+
+=end
 
   def test_table_string_field
     post = posts(:published)
