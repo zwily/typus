@@ -29,75 +29,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-  should "render_index_and_not_show_add_entry_link" do
-    typus_user = typus_users(:designer)
-    @request.session[:typus_user_id] = typus_user.id
-
-    get :index
-    assert_response :success
-
-    assert_no_match /Add Post/, @response.body
-  end
-
-  should "render_index_and_not_show_trash_image" do
-    typus_user = typus_users(:designer)
-    @request.session[:typus_user_id] = typus_user.id
-
-    get :index
-
-    assert_response :success
-    assert_select ".trash", false
-  end
-
-  should "get_index_and_render_edit_or_show_links" do
-    %w(edit show).each do |action|
-      Typus::Resource.expects(:default_action_on_item).at_least_once.returns(action)
-      get :index
-      Post.all.each do |post|
-        assert_match "/posts/#{action}/#{post.id}", @response.body
-      end
-    end
-  end
-
-  should "get_index_and_render_edit_or_show_links_on_owned_records" do
-    typus_user = typus_users(:editor)
-    @request.session[:typus_user_id] = typus_user.id
-
-    get :index
-
-    Post.all.each do |post|
-      action = post.owned_by?(typus_user) ? "edit" : "show"
-      assert_match "/posts/#{action}/#{post.id}", @response.body
-    end
-  end
-
-  should "get_index_and_render_edit_or_show_on_only_user_items" do
-    typus_user = typus_users(:editor)
-    @request.session[:typus_user_id] = typus_user.id
-
-    %w(edit show).each do |action|
-
-      Typus::Resource.stubs(:only_user_items).returns(true)
-      Typus::Resource.stubs(:default_action_on_item).returns(action)
-
-      get :index
-
-      Post.all.each do |post|
-        if post.owned_by?(typus_user)
-          assert_match "/posts/#{action}/#{post.id}", @response.body
-        else
-          assert_no_match /\/posts\/#{action}\/#{post.id}/, @response.body
-        end
-      end
-
-    end
-
-  end
-
-  ##
-  # get :new
-  ##
-
   context "New" do
 
     setup do
@@ -113,10 +44,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
 
   end
-
-  ##
-  # get :edit
-  ##
 
   context "Edit" do
 
@@ -134,10 +61,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-  ##
-  # get :show
-  ##
-
   context "Show" do
 
     setup do
@@ -150,6 +73,69 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     should "render_show_and_verify_page_title" do
       assert_select "title", "Show Post"
+    end
+
+  end
+
+  should "get_index_and_render_edit_or_show_links" do
+    %w(edit show).each do |action|
+      Typus::Resource.expects(:default_action_on_item).at_least_once.returns(action)
+      get :index
+      Post.all.each do |post|
+        assert_match "/posts/#{action}/#{post.id}", @response.body
+      end
+    end
+  end
+
+  context "Designer" do
+
+    setup do
+      @typus_user = typus_users(:designer)
+      @request.session[:typus_user_id] = @typus_user.id
+    end
+
+    should "render_index_and_not_show_add_entry_link" do
+      get :index
+      assert_response :success
+      assert_no_match /Add Post/, @response.body
+    end
+
+    should "render_index_and_not_show_trash_image" do
+      get :index
+      assert_response :success
+      assert_select ".trash", false
+    end
+
+  end
+
+  context "Editor" do
+
+    setup do
+      @typus_user = typus_users(:editor)
+      @request.session[:typus_user_id] = @typus_user.id
+    end
+
+    should "get_index_and_render_edit_or_show_links_on_owned_records" do
+      get :index
+      Post.all.each do |post|
+        action = post.owned_by?(@typus_user) ? "edit" : "show"
+        assert_match "/posts/#{action}/#{post.id}", @response.body
+      end
+    end
+
+    should "get_index_and_render_edit_or_show_on_only_user_items" do
+      %w(edit show).each do |action|
+        Typus::Resource.stubs(:only_user_items).returns(true)
+        Typus::Resource.stubs(:default_action_on_item).returns(action)
+        get :index
+        Post.all.each do |post|
+          if post.owned_by?(@typus_user)
+            assert_match "/posts/#{action}/#{post.id}", @response.body
+          else
+            assert_no_match /\/posts\/#{action}\/#{post.id}/, @response.body
+          end
+        end
+      end
     end
 
   end
