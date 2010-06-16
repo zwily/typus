@@ -50,12 +50,6 @@ module Admin
       render File.join(path, "display_link_to_previous"), :message => message
     end
 
-    def remove_filter_link(filter = request.env['QUERY_STRING'])
-      return unless filter && !filter.blank?
-      message = params.include?(:search) ? "search" : "filter"
-      link_to _("Remove #{message}")
-    end
-
     def pagination(*args)
       @options = args.extract_options!
       render File.join(path, "pagination") if @items.prev || @items.next

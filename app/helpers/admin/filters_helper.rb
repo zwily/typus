@@ -61,7 +61,6 @@ module Admin
     def boolean_filter(request, filter)
       items = @resource.typus_boolean(filter)
       message = _("Show by %{attribute}", :attribute => filter)
-
       return filter, items, message
     end
 
@@ -71,6 +70,12 @@ module Admin
       message = _("Show by %{attribute}", :attribute => filter)
 
       return filter, items, message
+    end
+
+    def remove_filter_link(filter = request.env['QUERY_STRING'])
+      return unless filter && !filter.blank?
+      message = params.compact.include?(:search) ? "search" : "filter"
+      link_to _("Remove #{message}")
     end
 
   end
