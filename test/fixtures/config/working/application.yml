@@ -12,7 +12,7 @@ Category:
 
 Comment:
   fields:
-    list: email, post, post_id
+    list: email, post, post_id, spam
     form: email, post
     csv: email, post_id
   export: csv

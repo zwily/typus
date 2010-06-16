@@ -15,6 +15,13 @@ Factory.define :comment do |f|
   f.association :post
 end
 
+Factory.define :post do |f|
+  f.title "Post"
+  f.body "Body"
+  f.status "published"
+  # f.association :typus_user
+end
+
 Factory.define :page do |f|
   f.title "Title"
   f.body "Content"

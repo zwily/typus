@@ -22,6 +22,7 @@ ActiveRecord::Schema.define do
     t.string :email, :name
     t.text :body
     t.integer :post_id
+    t.boolean :spam, :default => false
   end
 
   add_index :comments, :post_id
