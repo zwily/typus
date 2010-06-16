@@ -8,18 +8,18 @@ class Admin::PostsControllerTest < ActionController::TestCase
       Typus::Resource.expects(:action_after_save).returns("index")
     end
 
-    should "update_an_item_and_redirect_to_index" do
-      post :update, { :id => posts(:published), :title => 'Updated' }
-      assert_response :redirect
-      assert_redirected_to :action => 'index'
-    end
-
-    should "create_an_item_and_redirect_to_index" do
+    should "create an item and redirect to index" do
       assert_difference 'Post.count' do
         post :create, { :post => { :title => 'This is another title', :body => 'Body' } }
         assert_response :redirect
         assert_redirected_to :action => 'index'
       end
+    end
+
+    should "update an item and redirect to index" do
+      post :update, { :id => posts(:published), :title => 'Updated' }
+      assert_response :redirect
+      assert_redirected_to :action => 'index'
     end
 
   end

@@ -2,21 +2,31 @@ require "test/test_helper"
 
 class Admin::PostsControllerTest < ActionController::TestCase
 
-  should "render index and validates_presence_of_custom_partials" do
-    get :index
-    assert_match "posts#_index.html.erb", @response.body
-  end
+  context "Index" do
 
-  should "render_index_and_verify_page_title" do
-    get :index
-    assert_select "title", "Posts"
-  end
-
-  should "render index_and_show_add_entry_link" do
-    get :index
-    assert_select "#sidebar ul" do
-      assert_select "li", "Add new"
+    setup do
+      get :index
     end
+
+    should "render index and validates_presence_of_custom_partials" do
+      assert_match "posts#_index.html.erb", @response.body
+    end
+
+    should "render_index_and_verify_page_title" do
+      assert_select "title", "Posts"
+    end
+
+    should "render index_and_show_add_entry_link" do
+      assert_select "#sidebar ul" do
+        assert_select "li", "Add new"
+      end
+    end
+
+    should "render_index_and_show_trash_item_image" do
+      assert_response :success
+      assert_select '.trash', 'Trash'
+    end
+
   end
 
   should "render_index_and_not_show_add_entry_link" do
@@ -27,12 +37,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_response :success
 
     assert_no_match /Add Post/, @response.body
-  end
-
-  should "render_index_and_show_trash_item_image" do
-    get :index
-    assert_response :success
-    assert_select '.trash', 'Trash'
   end
 
   should "render_index_and_not_show_trash_image" do
@@ -94,42 +98,60 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # get :new
   ##
 
-  should "render new and partials_on_new" do
-    get :new
-    assert_match "posts#_new.html.erb", @response.body
-  end
+  context "New" do
 
-  should "render new and verify page title" do
-    get :new
-    assert_select "title", "New Post"
+    setup do
+      get :new
+    end
+
+    should "render new and partials_on_new" do
+      assert_match "posts#_new.html.erb", @response.body
+    end
+
+    should "render new and verify page title" do
+      assert_select "title", "New Post"
+    end
+
   end
 
   ##
   # get :edit
   ##
 
-  should "render_edit_and_verify_presence_of_custom_partials" do
-    get :edit, { :id => posts(:published).id }
-    assert_match "posts#_edit.html.erb", @response.body
-  end
+  context "Edit" do
 
-  should "render_edit_and_verify_page_title" do
-    get :edit, { :id => posts(:published).id }
-    assert_select "title", "Edit Post"
+    setup do
+      get :edit, { :id => posts(:published).id }
+    end
+
+    should "render_edit_and_verify_presence_of_custom_partials" do
+      assert_match "posts#_edit.html.erb", @response.body
+    end
+
+    should "render_edit_and_verify_page_title" do
+      assert_select "title", "Edit Post"
+    end
+
   end
 
   ##
   # get :show
   ##
 
-  should "render_show_and_verify_presence_of_custom_partials" do
-    get :show, { :id => posts(:published).id }
-    assert_match "posts#_show.html.erb", @response.body
-  end
+  context "Show" do
 
-  should "render_show_and_verify_page_title" do
-    get :show, { :id => posts(:published).id }
-    assert_select "title", "Show Post"
+    setup do
+      get :show, { :id => posts(:published).id }
+    end
+
+    should "render_show_and_verify_presence_of_custom_partials" do
+      assert_match "posts#_show.html.erb", @response.body
+    end
+
+    should "render_show_and_verify_page_title" do
+      assert_select "title", "Show Post"
+    end
+
   end
 
 end

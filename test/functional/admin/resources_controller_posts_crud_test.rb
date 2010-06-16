@@ -4,14 +4,12 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   should "render index" do
     get :index
-
     assert_response :success
     assert_template 'index'
   end
 
   should "render new" do
     get :new
-
     assert_response :success
     assert_template 'new'
   end
@@ -26,25 +24,20 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   should "render show" do
     get :show, { :id => posts(:published).id }
-
     assert_response :success
     assert_template 'show'
   end
 
   should "render edit" do
     get :edit, { :id => posts(:published) }
-
     assert_response :success
     assert_template 'edit'
   end
 
   should "update" do
-    post_ = posts(:published)
-
-    post :update, { :id => post_.id, :title => 'Updated' }
-
+    post :update, { :id => posts(:published).id, :title => 'Updated' }
     assert_response :redirect
-    assert_redirected_to :controller => 'admin/posts', :action => 'show', :id => post_.id
+    assert_redirected_to :controller => 'admin/posts', :action => 'show', :id => posts(:published).id
   end
 
 end
