@@ -15,7 +15,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
   end
 
   should "verify email to is typus user email" do
-    assert_equal [@typus_user.email], @email.to
+    assert @email.to.include?(@typus_user.email)
   end
 
   should "verify email subject" do
