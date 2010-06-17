@@ -4,28 +4,11 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
   context "Setup" do
 
-=begin
-    # FIXME: 20100617
     should "redirect_to_new_admin_account_when_no_admin_users" do
       get :new
       assert_response :redirect
       assert_redirected_to new_admin_account_path
     end
-=end
-
-    should "verify_typus_sign_in_layout_does_not_include_recover_password_link" do
-      get :new
-      assert !@response.body.include?("Recover password")
-    end
-
-=begin
-    # FIXME: 20100617
-    should "verify_typus_sign_in_layout_includes_recover_password_link" do
-      Typus.expects(:mailer_sender).returns("john@example.com")
-      get :new
-      assert @response.body.include?("Recover password")
-    end
-=end
 
   end
 
@@ -36,14 +19,30 @@ class Admin::SessionControllerTest < ActionController::TestCase
     end
 
     should "render new" do
-      Typus.expects(:admin_title).at_least_once.returns("Typus Test")
-
       get :new
-
       assert_response :success
+    end
+
+    should "render new and verify title and header" do
+      get :new
       assert_select "title", "Sign in"
-      assert_select "h1", "Typus Test"
+      assert_select "h1", "Typus"
+    end
+
+    should "render new inside account layout" do
+      get :new
       assert_match "layouts/admin/account", @controller.inspect
+    end
+
+    should "verify_typus_sign_in_layout_does_not_include_recover_password_link" do
+      get :new
+      assert !@response.body.include?("Recover password")
+    end
+
+    should "verify new includes recover_password_link when mailer_sender is set" do
+      Typus.expects(:mailer_sender).returns("john@example.com")
+      get :new
+      assert @response.body.include?("Recover password")
     end
 
     should "not_create_session_for_invalid_users" do

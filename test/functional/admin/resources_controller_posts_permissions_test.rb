@@ -2,6 +2,35 @@ require "test/test_helper"
 
 class Admin::PostsControllerTest < ActionController::TestCase
 
+  context "Root" do
+
+    setup do
+      editor = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
+      @post = Factory(:post, :typus_user => editor)
+    end
+
+    should "verify_root_can_edit_any_record" do
+      Post.all.each do |post|
+        get :edit, { :id => post.id }
+        assert_response :success
+        assert_template 'edit'
+      end
+    end
+
+    should "verify_admin_updating_an_item_does_not_change_typus_user_id_if_not_defined" do
+      post :update, { :id => @post.id, :post => { :title => 'Updated by admin' } }
+      post_updated = Post.find(@post.id)
+      assert_equal @post.typus_user_id, post_updated.typus_user_id
+    end
+
+    should "verify_admin_updating_an_item_does_change_typus_user_id_to_whatever_admin_wants" do
+      post :update, { :id => @post.id, :post => { :title => 'Updated', :typus_user_id => 108 } }
+      post_updated = Post.find(@post.id)
+      assert_equal 108, post_updated.typus_user_id
+    end
+
+  end
+
   context "No root" do
 
     setup do
@@ -19,13 +48,11 @@ class Admin::PostsControllerTest < ActionController::TestCase
       end
     end
 
-=begin
-    # FIXME: 20100617
     should "verify_editor_tried_to_edit_a_post_owned_by_himself" do
-      get :edit, { :id => posts(:owned_by_editor).id }
+      _post = Factory(:post, :typus_user => @typus_user)
+      get :edit, { :id => _post.id }
       assert_response :success
     end
-=end
 
     should "verify_editor_tries_to_edit_a_post_owned_by_the_admin" do
       get :edit, { :id => Factory(:post).id }
@@ -58,50 +85,16 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_equal @request.session[:typus_user_id], post_.typus_user_id
     end
 
-=begin
     should "verify_editor_updating_an_item_does_not_change_typus_user_id" do
 
       [ 108, nil ].each do |typus_user_id|
-        post_ = posts(:owned_by_editor)
-        post :update, { :id => post_.id, :post => { :title => 'Updated', :typus_user_id => typus_user_id } }
-        post_updated = Post.find(post_.id)
+        _post = Factory(:post, :typus_user => @typus_user)
+        post :update, { :id => _post.id, :post => { :title => 'Updated', :typus_user_id => @typus_user.id } }
+        post_updated = Post.find(_post.id)
         assert_equal  @request.session[:typus_user_id], post_updated.typus_user_id
       end
     end
-=end
 
   end
-
-  should "verify_root_can_edit_any_record" do
-    Post.all.each do |post|
-      get :edit, { :id => post.id }
-      assert_response :success
-      assert_template 'edit'
-    end
-  end
-
-=begin
-  # FIXME: 20100617
-  should "verify_admin_updating_an_item_does_not_change_typus_user_id_if_not_defined" do
-    post_ = posts(:owned_by_editor)
-
-    post :update, { :id => post_.id, :post => { :title => 'Updated by admin' } }
-    post_updated = Post.find(post_.id)
-
-    assert_equal post_.typus_user_id, post_updated.typus_user_id
-  end
-=end
-
-=begin
-  # FIXME: 20100617
-  should "verify_admin_updating_an_item_does_change_typus_user_id_to_whatever_admin_wants" do
-    post_ = posts(:owned_by_editor)
-
-    post :update, { :id => post_.id, :post => { :title => 'Updated', :typus_user_id => 108 } }
-    post_updated = Post.find(post_.id)
-
-    assert_equal 108, post_updated.typus_user_id
-  end
-=end
 
 end

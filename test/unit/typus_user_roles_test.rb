@@ -2,13 +2,6 @@ require "test/test_helper"
 
 class TypusUserRolesTest < ActiveSupport::TestCase
 
-  # Remove all fixtures ... this is to make it compatible with the old 
-  # tests. Will remove it once everything is refactored with Shoulda and 
-  # FactoryGirl.
-  setup do
-    TypusUser.delete_all
-  end
-
   should "get a list of roles" do
     roles = %w( admin designer editor )
     assert_equal roles, Typus::Configuration.roles.map(&:first).sort

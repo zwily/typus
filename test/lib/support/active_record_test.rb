@@ -2,13 +2,6 @@ require "test/test_helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
-  # Remove all fixtures ... this is to make it compatible with the old 
-  # tests. Will remove it once everything is refactored with Shoulda and 
-  # FactoryGirl.
-  setup do
-    TypusUser.delete_all
-  end
-
   should "verify mapping instace method with an array" do
     post = Factory(:post)
     assert_equal "published", post.mapping(:status)

@@ -2,13 +2,6 @@ require "test/test_helper"
 
 class TypusUserTest < ActiveSupport::TestCase
 
-  # Remove all fixtures ... this is to make it compatible with the old 
-  # tests. Will remove it once everything is refactored with Shoulda and 
-  # FactoryGirl.
-  setup do
-    TypusUser.delete_all
-  end
-
   [ %Q(this_is_chelm@example.com\n<script>location.href="http://spammersite.com"</script>), 
     'admin', 'TEST@EXAMPLE.COM', 'test@example', 'test@example.c', 'testexample.com' ].each do |value|
     should_not allow_value(value).for(:email)

@@ -4,7 +4,6 @@ require "app/mailers/admin/mailer"
 class Admin::MailerTest < ActiveSupport::TestCase
 
   setup do
-    TypusUser.delete_all
     @typus_user = Factory(:typus_user)
     @url = "http://test.host/admin/account/#{@typus_user.token}"
     @email = Admin::Mailer.reset_password_link(@typus_user, @url)
