@@ -25,7 +25,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
 
     should "verify_editor_tries_to_edit_a_post_owned_by_the_admin" do
-      get :edit, { :id => posts(:owned_by_admin).id }
+      get :edit, { :id => Factory(:post).id }
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
@@ -33,14 +33,14 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
 
     should "verify_editor_tries_to_show_a_post_owned_by_the_admin" do
-      get :show, { :id => posts(:owned_by_admin).id }
+      get :show, { :id => Factory(:post).id }
       assert_response :success
     end
 
     should "verify_editor_tries_to_show_a_post_owned_by_the_admin whe only user items" do
 
       Typus::Resource.expects(:only_user_items).returns(true)
-      post = posts(:owned_by_admin)
+      post = Factory(:post)
       get :show, { :id => post.id }
 
       assert_response :redirect

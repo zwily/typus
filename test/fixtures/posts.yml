@@ -18,15 +18,6 @@ unpublished:
   status: unpublished
   typus_user_id: 1
 
-owned_by_admin:
-  id: 3
-  title: Owned by admin
-  body: This is the body.
-  created_at: <%= 5.days.ago.to_s(:db) %>
-  updated_at: <%= 5.days.ago.to_s(:db) %>
-  status: unpublished
-  typus_user_id: 1
-
 owned_by_editor:
   id: 4
   title: Owned by editor
