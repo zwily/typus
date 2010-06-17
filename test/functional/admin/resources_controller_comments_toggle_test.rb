@@ -3,7 +3,7 @@ require "test/test_helper"
 class Admin::CommentsControllerTest < ActionController::TestCase
 
   setup do
-    @typus_user = typus_users(:admin)
+    @typus_user = Factory(:typus_user)
     @request.session[:typus_user_id] = @typus_user.id
     @comment = Factory(:comment)
     @request.env['HTTP_REFERER'] = "/admin/comments"

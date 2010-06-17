@@ -9,7 +9,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   should "relate_comment_with_post_and_then_unrelate" do
 
     comment = Factory(:comment, :post => nil)
-    post_ = posts(:published)
+    post_ = Factory(:post)
     @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#comments"
 
     assert_difference('post_.comments.count') do
@@ -39,7 +39,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   should "relate_category_with_post_and_then_unrelate" do
 
     category = Factory(:category)
-    post_ = posts(:published)
+    post_ = Factory(:post)
     @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#categories"
 
     assert_difference('category.posts.count') do
@@ -71,7 +71,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   # FIXME: ActiveRecord::UnknownAttributeError: unknown attribute: post
   should "relate_asset_with_post_and_then_unrelate"
 
-    post_ = posts(:published)
+    post_ = Factory(:post)
 
     @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#assets"
 

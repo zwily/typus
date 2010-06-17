@@ -17,7 +17,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
 
     should "update an item and redirect to index" do
-      post :update, { :id => posts(:published), :title => 'Updated' }
+      post :update, { :id => Factory(:post).id, :title => 'Updated' }
       assert_response :redirect
       assert_redirected_to :action => 'index'
     end

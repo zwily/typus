@@ -17,7 +17,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   end
 
   should "verify_a_removed_role_cannot_sign_in" do
-    typus_user = typus_users(:removed_role)
+    typus_user = Factory(:typus_user, :role => "removed")
     @request.session[:typus_user_id] = typus_user.id
 
     get :show
@@ -31,8 +31,8 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   context "Admin is logged and gets dashboard" do
 
     setup do
-      @typus_user = typus_users(:admin)
-      @request.session[:typus_user_id] = typus_users(:admin).id
+      @typus_user = Factory(:typus_user)
+      @request.session[:typus_user_id] = @typus_user.id
       get :show
     end
 
@@ -89,7 +89,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   context "When designer is logged in" do
 
     setup do
-      @request.session[:typus_user_id] = typus_users(:designer).id
+      @request.session[:typus_user_id] = Factory(:typus_user, :role => "designer").id
       get :show
     end
 

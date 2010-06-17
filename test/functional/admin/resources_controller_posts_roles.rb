@@ -5,7 +5,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   context "Admin" do
 
     setup do
-      @admin = typus_users(:admin)
+      @admin = Factory(:typus_user)
       @request.session[:typus_user_id] = @admin.id
     end
 
@@ -14,7 +14,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
 
     should "destroy a post" do
-      get :destroy, { :id => posts(:published).id, :method => :delete }
+      get :destroy, { :id => Factory(:post).id, :method => :delete }
 
       assert_response :redirect
       assert_equal "Post successfully removed.", flash[:notice]
@@ -26,7 +26,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   context "Designer" do
 
     setup do
-      @designer = typus_users(:designer)
+      @designer = Factory(:typus_user, :role => "designer")
       @request.session[:typus_user_id] = @designer.id
     end
 
@@ -39,7 +39,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
 
     should "not_allow_designer_to_destroy_a_post" do
-      get :destroy, { :id => posts(:published).id, :method => :delete }
+      get :destroy, { :id => Factory(:post).id, :method => :delete }
 
       assert_response :redirect
       assert_equal "Designer can't delete this item.", flash[:notice]

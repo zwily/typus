@@ -20,7 +20,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   # FIXME
   def test_build_table
 
-    @current_user = typus_users(:admin)
+    @current_user = Factory(:typus_user)
 
     params = { :controller => 'admin/typus_users', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
@@ -147,7 +147,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_belongs_to_field
 
-    @current_user = typus_users(:admin)
+    @current_user = Factory(:typus_user)
 
     comment = comments(:without_post_id)
     output = table_belongs_to_field("post", comment)
@@ -180,7 +180,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 =end
 
   should "test_table_string_field" do
-    post = posts(:published)
+    post = Factory(:post)
 
     output = table_string_field(:title, post, :created_at)
     expected = %(<td class="title">#{post.title}</td>)
@@ -189,7 +189,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   end
 
   should "test_table_string_field_with_link" do
-    post = posts(:published)
+    post = Factory(:post)
 
     output = table_string_field(:title, post, :title)
     expected = %(<td class="title">#{post.title}</td>)
@@ -216,7 +216,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   end
 
   should "test_table_datetime_field" do
-    post = posts(:published)
+    post = Factory(:post)
     Time::DATE_FORMATS[:post_short] = "%m/%y"
 
     output = table_datetime_field(:created_at, post)
@@ -226,7 +226,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   end
 
   should "test_table_datetime_field_with_link" do
-    post = posts(:published)
+    post = Factory(:post)
     Time::DATE_FORMATS[:post_short] = "%m/%y"
 
     output = table_datetime_field(:created_at, post, :created_at)
@@ -240,7 +240,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   # FIXME: NameError: undefined local variable or method `controller' for 
   def test_table_boolean_field
 
-    post = typus_users(:admin)
+    post = Factory(:typus_user)
     output = table_boolean_field("status", post)
     expected = <<-HTML
 <td><a href="http://test.host/admin/typus_users/toggle/1?field=status" onclick="return confirm('Change status?');">Active</a></td>
@@ -248,7 +248,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
     assert_equal expected.strip, output
 
-    post = typus_users(:disabled_user)
+    post = Factory(:typus_user, :status => false)
     output = table_boolean_field("status", post)
     expected = <<-HTML
 <td><a href="http://test.host/admin/typus_users/toggle/3?field=status" onclick="return confirm('Change status?');">Inactive</a></td>

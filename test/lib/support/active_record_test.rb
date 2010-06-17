@@ -10,9 +10,12 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   should "verify mapping instace method with an array" do
-    post = posts(:published)
+    post = Factory(:post)
     assert_equal "published", post.mapping(:status)
-    post = posts(:unpublished)
+  end
+
+  should "verify mapping instace method with an array when status if unpublished" do
+    post = Factory(:post, :status => "unpublished")
     assert_equal "unpublished", post.mapping(:status)
   end
 
@@ -24,9 +27,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   should "verify to_label instace method" do
-    typus_user = Factory(:typus_user)
-    assert_equal "admin@example.com", typus_user.to_label
-    assert_equal "Post#1", posts(:published).to_label
+    assert_equal "admin@example.com", Factory(:typus_user).to_label
+  end
+
+  should "verify to_label instace method for post" do
+    assert_match /Post#/, Factory(:post).to_label
   end
 
   should "verify to_resource instance method" do

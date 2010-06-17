@@ -13,7 +13,7 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 
   # FIXME: Pending to verify the applications included. Use the keys.
   should "render applications" do
-    @current_user = typus_users(:admin)
+    @current_user = Factory(:typus_user)
 
     output = applications
     partial = "admin/helpers/dashboard/applications"
@@ -29,7 +29,7 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 =end
 
   should "render resources" do
-    @current_user = typus_users(:admin)
+    @current_user = Factory(:typus_user)
 
     output = resources
     partial = "admin/helpers/dashboard/resources"

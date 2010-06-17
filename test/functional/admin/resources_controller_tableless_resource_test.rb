@@ -5,7 +5,7 @@ class Admin::StatusControllerTest < ActionController::TestCase
   context "Admin" do
 
     setup do
-      @request.session[:typus_user_id] = typus_users(:admin).id
+      @request.session[:typus_user_id] = Factory(:typus_user).id
     end
 
     should "render index" do
@@ -24,7 +24,7 @@ class Admin::StatusControllerTest < ActionController::TestCase
   context "Editor" do
 
     setup do
-      @request.session[:typus_user_id] = typus_users(:editor).id
+      @request.session[:typus_user_id] = Factory(:typus_user, :role => "editor").id
     end
 
     should "not render index" do

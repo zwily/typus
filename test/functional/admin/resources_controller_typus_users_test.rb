@@ -6,7 +6,8 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     setup do
       Typus.master_role = 'admin'
-      @typus_user = typus_users(:admin)
+      @typus_user = Factory(:typus_user)
+      @typus_user_editor = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
       @request.session[:typus_user_id] = @typus_user.id
       @request.env['HTTP_REFERER'] = '/admin/typus_users'
     end
@@ -25,7 +26,8 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "allow_admin_to_toggle_other_users_status" do
-      get :toggle, { :id => typus_users(:editor).id, :field => 'status' }
+
+      get :toggle, { :id => @typus_user_editor.id, :field => 'status' }
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
@@ -44,7 +46,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     should "verify_admin_can_destroy_others" do
       assert_difference('TypusUser.count', -1) do
-        delete :destroy, :id => typus_users(:editor).id
+        delete :destroy, :id => @typus_user_editor.id
       end
 
       assert_response :redirect
@@ -57,7 +59,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
   context "No master role" do
 
     setup do
-      @typus_user = typus_users(:editor)
+      @typus_user = Factory(:typus_user, :role => "editor")
       @request.session[:typus_user_id] = @typus_user.id
       @request.env['HTTP_REFERER'] = '/admin/typus_users'
     end
@@ -84,7 +86,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     setup do
       @request.env['HTTP_REFERER'] = '/admin/typus_users'
-      @typus_user = typus_users(:editor)
+      @typus_user = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
       @request.session[:typus_user_id] = @typus_user.id
     end
 
@@ -105,7 +107,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "not_allow_editor_to_edit_other_users_profiles" do
-      get :edit, { :id => typus_users(:admin).id }
+      get :edit, { :id => Factory(:typus_user).id }
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
@@ -113,7 +115,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "not_allow_editor_to_destroy_users" do
-      delete :destroy, :id => typus_users(:admin).id
+      delete :destroy, :id => Factory(:typus_user).id
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
@@ -130,7 +132,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     should "change_root_to_editor_so_editor_can_edit_others_content" do
       Typus.expects(:master_role).at_least_once.returns("editor")
-      get :edit, { :id => typus_users(:admin).id }
+      get :edit, { :id => Factory(:typus_user).id }
       assert_response :success
     end
 
@@ -140,7 +142,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     setup do
       @request.env['HTTP_REFERER'] = '/admin'
-      @typus_user = typus_users(:designer)
+      @typus_user = Factory(:typus_user, :role => "designer")
       @request.session[:typus_user_id] = @typus_user.id
     end
 

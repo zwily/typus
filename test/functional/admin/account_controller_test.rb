@@ -4,10 +4,6 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   context "No users" do
 
-    setup do
-      TypusUser.delete_all
-    end
-
     should "render new when there are not admin users" do
       get :new
 
@@ -46,6 +42,10 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   context "There are users" do
 
+    setup do
+      @typus_user = Factory(:typus_user)
+    end
+
     should "new redirect new admin session when there are admin users" do
       get :new
       assert_response :redirect
@@ -67,9 +67,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
     end
 
     should "test_should_send_recovery_password_link_to_existing_user" do
-      admin = typus_users(:admin)
-
-      post :forgot_password, { :typus_user => { :email => admin.email } }
+      post :forgot_password, { :typus_user => { :email => @typus_user.email } }
 
       assert_response :redirect
       assert_redirected_to new_admin_session_path
@@ -77,12 +75,11 @@ class Admin::AccountControllerTest < ActionController::TestCase
     end
 
     should "test_should_create_admin_user_session_and_redirect_user_to_its_details" do
-      typus_user = typus_users(:admin)
-      get :show, { :id => typus_user.token }
+      get :show, { :id => @typus_user.token }
 
-      assert_equal typus_user.id, @request.session[:typus_user_id]
+      assert_equal @typus_user.id, @request.session[:typus_user_id]
       assert_response :redirect
-      assert_redirected_to :controller => "admin/typus_users", :action => "edit", :id => typus_user.id
+      assert_redirected_to :controller => "admin/typus_users", :action => "edit", :id => @typus_user.id
     end
 
     should "test_should_return_404_on_reset_passsword_if_token_is_not_valid" do

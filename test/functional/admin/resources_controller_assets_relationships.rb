@@ -3,8 +3,8 @@ require "test/test_helper"
 class Admin::AssetsControllerTest < ActionController::TestCase
 
   setup do
-    @request.session[:typus_user_id] = typus_users(:admin).id
-    @post = posts(:published)
+    @request.session[:typus_user_id] = Factory(:typus_user).id
+    @post = Factory(:post)
   end
 
   should "verify polymorphic relationship message" do
