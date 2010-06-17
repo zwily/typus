@@ -1,5 +1,5 @@
 ##
-# $ rails desmond -m http://github.com/fesplugas/typus/blob/3-0-unstable/doc/site/desmond.rb
+# $ rails new desmond -m http://github.com/fesplugas/typus/raw/3-0-unstable/doc/site/desmond.rb
 ##
 
 plugin "typus", :git => "git://github.com/fesplugas/typus.git"
