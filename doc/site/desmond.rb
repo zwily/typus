@@ -10,11 +10,8 @@ Enjoy!
 
 =end
 
-if yes?("Are you using Rails 3.0.0.beta4?")
-  branch = "3-0-unstable"
-else
-  branch = "2-3-stable"
-end
+answer = ask("Are you using Rails 3.0.0.beta4? (YES/no)").downcase
+branch = (answer == "no" || answer == "n") ? "2-3-stable" : "3-0-unstable"
 
 plugin "typus", :git => "git://github.com/fesplugas/typus.git -r #{branch}"
 plugin "typus_cms", :git => "git@trunksapp.com:fesplugas/typus_cms.git"
