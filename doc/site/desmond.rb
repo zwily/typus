@@ -2,7 +2,7 @@
 # $ rails new desmond -m http://github.com/fesplugas/typus/raw/3-0-unstable/doc/site/desmond.rb
 ##
 
-plugin "typus", :git => "git://github.com/fesplugas/typus.git"
+plugin "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "3-0-unstable"
 plugin "typus_cms", :git => "git@trunksapp.com:fesplugas/typus_cms.git"
 plugin "typus_settings", :git => "git@trunksapp.com:fesplugas/typus_settings.git"
 
