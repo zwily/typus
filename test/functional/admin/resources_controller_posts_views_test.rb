@@ -87,12 +87,10 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
   end
 
-=begin
-  # FIXME: 20100617
   context "Designer" do
 
     setup do
-      @typus_user = Factory(:typus_user, :role => "designer")
+      @typus_user = Factory(:typus_user, :email => "designer@example.com", :role => "designer")
       @request.session[:typus_user_id] = @typus_user.id
     end
 
@@ -109,7 +107,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
 
   end
-=end
 
   context "Editor" do
 
