@@ -10,11 +10,11 @@ module Admin
     include SidebarHelper
     include TableHelper
 
-    ##
+    #--
     # If there's a partial with a "microformat" of the data we want to 
     # display, this will be used, otherwise we use a default table which 
     # it's build from the options defined on the yaml configuration file.
-    #
+    #++
     def build_list(model, fields, items, resource = @resource.to_resource, link_options = {}, association = nil)
       template = "app/views/admin/#{resource}/_#{resource.singularize}.html.erb"
 

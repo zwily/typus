@@ -1,7 +1,6 @@
 module AdminHelper
 
   def typus_block(resource = @resource.to_resource, partial = params[:action])
-
     partials_path = "admin/#{resource}"
     resources_partials_path = "admin/resources"
 
@@ -17,7 +16,6 @@ module AdminHelper
            end
 
     render "#{path}/#{partial}" if path
-
   end
 
   def title(page_title)
@@ -47,15 +45,12 @@ module AdminHelper
                      user.name
                    end
 
-    render "admin/helpers/login_info", :message => message,  :user_details => user_details
+    render "admin/helpers/login_info", :message => message, :user_details => user_details
   end
 
   def display_flash_message(message = flash)
     return if message.empty?
-
-    render "admin/helpers/flash_message", 
-           :flash_type => message.keys.first, 
-           :message => message
+    render "admin/helpers/flash_message", :flash_type => message.keys.first, :message => message
   end
 
 end

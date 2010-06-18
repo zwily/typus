@@ -34,6 +34,7 @@ module Admin
       resource = @resource.to_resource
       template_file = Rails.root.join("app/views/admin/#{resource}/_form.html.erb")
       partial = File.exists?(template_file) ? resource : "resources"
+
       return "admin/#{partial}/form"
     end
 

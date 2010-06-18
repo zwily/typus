@@ -108,7 +108,9 @@ module Admin
       end
     end
 
+    #--
     # TODO: Move html code to partial.
+    #++
     def typus_form_has_one(field)
       returning(String.new) do |html|
 

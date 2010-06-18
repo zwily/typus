@@ -79,13 +79,13 @@ module Admin
       link_to _(action.capitalize), options
     end
 
-    ##
+    #--
     # This controls the action to perform. If we are on a model list we 
     # will remove the entry, but if we inside a model we will remove the 
     # relationship between the models.
     #
     # Only shown is the user can destroy/unrelate items.
-    #
+    #++
     def table_action(model, item)
 
       condition = true
@@ -137,7 +137,9 @@ module Admin
 
     end
 
+    #--
     # OPTIMIZE: Removed nested conditionals.
+    #++
     def table_belongs_to_field(attribute, item)
       action = item.send(attribute).class.typus_options_for(:default_action_on_item)
 
