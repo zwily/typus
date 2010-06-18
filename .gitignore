@@ -4,6 +4,7 @@
 *.log
 *.csv
 doc/site/*.html
+rdoc/
 
 Gemfile.lock
 
