@@ -26,7 +26,7 @@ module Typus
 
     # Defines the action_after_save.
     mattr_accessor :action_after_save
-    @@action_after_save = "show"
+    @@action_after_save = "edit"
 
     # Defines the minute step.
     mattr_accessor :minute_step
