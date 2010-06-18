@@ -94,7 +94,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
       post :update, { :id => @typus_user.id, :typus_user => { :role => 'editor' } }
 
       assert_response :redirect
-      assert_redirected_to "/admin/typus_users/show/#{@typus_user.id}"
+      assert_redirected_to "/admin/typus_users/edit/#{@typus_user.id}"
       assert_equal "Typus user successfully updated.", flash[:notice]
     end
 

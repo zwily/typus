@@ -18,7 +18,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_difference 'Post.count' do
       post :create, { :post => { :title => 'This is another title', :body => 'Body' } }
       assert_response :redirect
-      assert_redirected_to :controller => 'admin/posts', :action => 'show', :id => Post.last
+      assert_redirected_to :controller => 'admin/posts', :action => 'edit', :id => Post.last
     end
   end
 
@@ -38,7 +38,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     _post = Factory(:post)
     post :update, { :id => _post.id, :title => 'Updated' }
     assert_response :redirect
-    assert_redirected_to :controller => 'admin/posts', :action => 'show', :id => _post.id
+    assert_redirected_to :controller => 'admin/posts', :action => 'edit', :id => _post.id
   end
 
 end
