@@ -201,16 +201,6 @@ module Typus
       raise "You're not owner of this record." unless item.owned_by?(@current_user) || @current_user.is_root?
     end
 
-    # If we want to display only user items, we don't want the links previous and 
-    # next linking to records from other users.
-    def set_conditions
-      skip_method?
-      condition = @current_user.is_root? || 
-                  !@resource.typus_options_for(:only_user_items) || 
-                  !@resource.columns.map(&:name).include?(Typus.user_fk)
-      !condition ? { Typus.user_fk => @current_user.id } : {}
-    end
-
     def set_attributes_on_create
       skip_method?
       if @resource.typus_user_id?
