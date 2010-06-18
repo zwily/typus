@@ -7,7 +7,6 @@ Black: #00000
 
 */
 
-
 /* @group Defaults */
 
 html { height: 100%; }
@@ -44,7 +43,7 @@ a:hover { color: #333; text-decoration: underline; }
 
 /* @group Header */
 
-#header_wrapper { background: #ED2228; }
+#header_wrapper { background: #4A525A; }
 
 #header_wrapper #header { color: #FFF; padding: 1em 2em 0em 2em; }
 
@@ -99,11 +98,14 @@ a:hover { color: #333; text-decoration: underline; }
 }
 
 #content blockquote {
-  border-left: 1px solid #999;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   font-size: 1.25em;
   font-family: georgia;
-  margin: 1em;
+  line-height: 1.5em;
+  margin: 1em 0;
   padding: 0 1em;
+  border: 1px solid #AAA;
 }
 
 /* @end */
@@ -246,9 +248,11 @@ fieldset.buttons { }
 #errorExplanation h3, 
 .alert p { color: #CD0A0A!important; }
 
+.notice p { color: #363636; }
+
 #errorExplanation, 
 .alert { background: #FEF8F6; border: 1px solid #CD0A0A; }
-.notice { background: #FCFAF3; border: 1px solid #FCEFA1; }
+.notice { background: #FBF9EE; border: 1px solid #FCEFA1; }
 
 .fieldWithErrors label { color: #CD0A0A;}
 .fieldWithErrors input { background: #FEF8F6; }
@@ -257,6 +261,21 @@ fieldset.buttons { }
 #errorExplanation ul li { list-style: square!important; margin: 0!important; }
 
 /* @end */
+
+/* Boxes */
+
+.box {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  background: #FFF;
+  border: 1px solid #AAA;
+  margin: 1em 0;
+  padding: 0.5em 1em ;
+}
+
+.box h3 {
+  margin: 0.5em 0!important;
+}
 
 /* @group Hacks */
 
