@@ -2,7 +2,7 @@ module Typus
 
   module Configuration
 
-    # Read Typus Configuration files placed on <tt>config/typus/**/*.yml</tt>.
+    # Read configuration from <tt>config/typus/**/*.yml</tt>.
     def self.config!
       application = Dir[Rails.root.join(Typus.config_folder, "**", "*.yml").to_s]
       plugins = Dir[Rails.root.join("vendor", "plugins", "*", "config", "typus", "*.yml").to_s]
@@ -20,7 +20,7 @@ module Typus
 
     mattr_accessor :config
 
-    # Read Typus Roles from configuration files placed on <tt>config/typus/**/*_roles.yml</tt>.
+    # Read roles from files <tt>config/typus/**/*_roles.yml</tt>.
     def self.roles!
       application = Dir[Rails.root.join(Typus.config_folder, "**", "*_roles.yml").to_s]
       plugins = Dir[Rails.root.join("vendor", "plugins", "*", "config", "typus", "*_roles.yml").to_s]

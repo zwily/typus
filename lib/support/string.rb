@@ -20,7 +20,9 @@ class String
     extract_class.model_name.human.gsub('/', ' ')
   end
 
+  #--
   # OPTIMIZE: Find a way to remove the rescue.
+  #++
   def typus_actions_on(filter)
     if settings = Typus::Configuration.config[self]['actions'][filter.to_s]
       settings.extract_settings
@@ -31,7 +33,9 @@ class String
     []
   end
 
+  #--
   # OPTIMIZE: Find a way to remove the rescue.
+  #++
   def typus_defaults_for(filter)
     if settings = Typus::Configuration.config[self][filter.to_s]
       settings.extract_settings

@@ -2,8 +2,12 @@ module Typus
 
   module Resource
 
-    # Default way to setup typus. Run <tt>rails generate typus</tt> to 
-    # create a fresh initializer with all configuration values.
+    # Setup Typus::Resource. This should be run from an initializer.
+    #
+    #     Typus::Resource.setup do |config|
+    #       config.default_action_on_item = "index"
+    #     end
+    #
     def self.setup
       yield self
     end

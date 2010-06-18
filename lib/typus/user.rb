@@ -75,8 +75,10 @@ module Typus
         Typus::Configuration.roles[role].compact
       end
 
+      #--
       # TODO: Rename action to mapping and refactor the _action case
       #       statement.
+      #++
       def can?(action, resource, options = {})
 
         # Sometimes we are getting a Class, so we need to convert it 

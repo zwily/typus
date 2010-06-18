@@ -76,24 +76,24 @@ module Typus
       Typus::Configuration.config.collect { |i| i.last["application"] }.compact.uniq.sort
     end
 
-    # List of the modules of an application.
+    # Lists modules of an application.
     def application(name)
       Typus::Configuration.config.collect { |i| i.first if i.last["application"] == name }.compact.uniq.sort
     end
 
-    # Gets a list of all the models from the configuration file.
+    # Lists models from the configuration file.
     def models
       Typus::Configuration.config.map { |i| i.first }.sort
     end
 
-    # List of resources, which are tableless models.
+    # Lists resources, which are tableless models.
     def resources
       Typus::Configuration.roles.keys.map do |key|
         Typus::Configuration.roles[key].keys
       end.flatten.sort.uniq.delete_if { |x| models.include?(x) }
     end
 
-    # Gets a list of models under app/models
+    # Lists models under <tt>app/models</tt>.
     def detect_application_models
       model_dir = Rails.root.join("app/models")
       Dir.chdir(model_dir) do
