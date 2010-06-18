@@ -4,9 +4,11 @@ module Typus
 
     protected
 
+    #--
     # Require login checks if the user is logged on Typus, otherwise 
     # is sent to the sign in page with a :back_to param to return where 
     # she tried to go.
+    #++
     def authenticate
       case Typus.authentication
       when :none
@@ -38,8 +40,10 @@ module Typus
       end
     end
 
+    #--
     # Return the current user. If role does not longer exist on the 
     # system @current_user will be signed out from Typus.
+    #++
     def current_user
 
       @current_user = Typus.user_class.find(session[:typus_user_id])
@@ -61,7 +65,9 @@ module Typus
       redirect_to new_admin_session_path(:back_to => back_to)
     end
 
+    #--
     # Action is available on: edit, update, toggle and destroy
+    #++
     def check_if_user_can_perform_action_on_user
 
       skip_method?
@@ -112,8 +118,10 @@ module Typus
 
     end
 
+    #--
     # This method checks if the user can perform the requested action.
     # It works on models, so its available on the admin_controller.
+    #++
     def check_if_user_can_perform_action_on_resources
 
       skip_method?
@@ -138,8 +146,10 @@ module Typus
 
     end
 
+    #--
     # This method checks if the user can perform the requested action.
     # It works on a resource: git, memcached, syslog ...
+    #++
     def check_if_user_can_perform_action_on_resource
       skip_method?
 
@@ -150,14 +160,14 @@ module Typus
       end
     end
 
-    ##
+    #--
     # If item is owned by another user, we only can perform a 
     # show action on the item. Updated item is also blocked.
     #
     #   before_filter :check_resource_ownership, :only => [ :edit, :update, :destroy, 
     #                                                       :toggle, :position, 
     #                                                       :relate, :unrelate ]
-    #
+    #++
     def check_resource_ownership
 
       skip_method?
@@ -215,8 +225,10 @@ module Typus
       end
     end
 
+    #--
     # Reload @current_user when updating to see flash message in the 
     # correct locale.
+    #++
     def reload_locales
       skip_method?
       if @resource.eql?(Typus.user_class)
