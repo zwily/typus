@@ -1,20 +1,20 @@
 class ActiveRecord::Base
 
-  ##
+  #--
   #     >> Post.to_resource
   #     => "posts"
   #     >> Admin::User.to_resource
   #     => "admin/users"
-  #
+  #++
   def self.to_resource
     name.underscore.pluralize
   end
 
-  ##
+  #--
   # TODO: This has been copied from Rails 2 because has been removed 
   #       from Rails 3. Once the "build_conditions" has been refactored 
   #       to use Arel this can be removed.
-  #
+  #++
   def self.merge_conditions(*conditions)
 
     segments = []
@@ -30,7 +30,7 @@ class ActiveRecord::Base
 
   end
 
-  ##
+  #--
   # On a model:
   #
   #     class Post < ActiveRecord::Base
@@ -47,7 +47,7 @@ class ActiveRecord::Base
   #     => :es
   #     >> Post.first.mapping(:status)
   #     => "Publicado"
-  #
+  #++
   def mapping(attribute)
     values = self.class::const_get(attribute.to_s.upcase)
     values.kind_of?(Hash) ? values[send(attribute)] : send(attribute)

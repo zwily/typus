@@ -17,9 +17,11 @@ module Typus
 
     end
 
+    #--
     # TODO: Find in batches only works properly if it's used on
     #       models, not controllers, so in this action does nothing.
     #       We should find a way to be able to process data.
+    #++
     def generate_csv
 
       fields = @resource.typus_fields_for(:csv)

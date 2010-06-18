@@ -2,8 +2,8 @@ module Typus
 
   module Resource
 
-    # Default way to setup Devise. Run rails generate typus to create
-    # a fresh initializer with all configuration values.
+    # Default way to setup typus. Run <tt>rails generate typus</tt> to 
+    # create a fresh initializer with all configuration values.
     def self.setup
       yield self
     end
