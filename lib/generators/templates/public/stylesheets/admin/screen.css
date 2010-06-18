@@ -1,6 +1,27 @@
-/* @group Defaults */
+/*
+  Reset CSS (960.gs)
+*/
 
-/* html { height: 100%; } */
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;vertical-align:baseline;background:transparent}body{line-height:1}ol,ul{list-style:none}blockquote,q{quotes:none}blockquote:before,blockquote:after,q:before,q:after{content:'';content:none}:focus{outline:0}ins{text-decoration:none}del{text-decoration:line-through}table{border-collapse:collapse;border-spacing:0}
+
+/*
+  Copyright (c) 2010, Francesc Esplugas Marti
+  Code licensed under the MIT License
+  Updated: 20100618
+
+  Global Styles – (body, paragraphs, lists, etc)
+  Header
+  Page Structure
+  Headings
+  Text Styles
+  Navigation
+  Forms
+  Comments
+  Extras
+
+*/
+
+/* @group Defaults */
 
 body {
   font-family: "Lucida Grande", Sans-serif;
@@ -43,18 +64,21 @@ a:hover { color: #333; text-decoration: underline; }
 #header_wrapper #header { color: #FFF; padding: 1.25em 2em 0.25em 2em; }
 
 #header_wrapper #links { color: #FFF; padding: 1.25em 2em; }
+#header_wrapper #links ul li { display: inline; padding-left: 0.5em; color: #FFF; }
 #header_wrapper #links a { color: #FFF; }
+
 #header_wrapper #links .left { float: left; }
 #header_wrapper #links .left ul { display: block; }
-#header_wrapper #links .right { float: right; }
-#header_wrapper #links ul li { display: inline; padding-left: 0.5em; }
 #header_wrapper #links .left ul li { display: inline; padding: 0 0.5em 0 0; }
-
 #header_wrapper #links .left ul li a {
   -webkit-border-radius: 5px;
   background: #242527;
   padding: 3px 5px;
 }
+
+#header_wrapper #links .right { float: right; }
+#header_wrapper #links .right a { text-decoration: underline; }
+#header_wrapper #links .right a:hover { text-decoration: none; }
 
 /* @end */
 
@@ -67,10 +91,7 @@ a:hover { color: #333; text-decoration: underline; }
 
 /* @group Content Wrapper */
 
-#content_wrapper {
-  padding: 2em 2em;
-  margin: 0 0 2em 0;
-}
+#content_wrapper { margin: 0 0 2em 0; padding: 2em; }
 
 /* @end */
 
@@ -81,7 +102,6 @@ a:hover { color: #333; text-decoration: underline; }
 #content h2 { font-size: 1.5em; margin: 0.5em 0; }
 #content h2 small { font-size: 0.75em; }
 #content h2 small a { color: #666; }
-#content h4 { margin: 1em 0; }
 
 #content ol { margin: 1em 2em; }
 #content ul { margin: 0 1.5em; }
@@ -109,13 +129,6 @@ a:hover { color: #333; text-decoration: underline; }
 
 /* @end */
 
-/* @group Footer */
-
-#footer_wrapper { color: #777; padding: 0 1.5em; display: none; }
-#footer { font-size: 0.9em; line-height: 1.6em; margin: 0 auto; height: 2em; }
-
-/* @end */
-
 /* @group Sidebar */
 
 #sidebar { float: left; margin: 0 2em 0 0; width: 18em; }
@@ -133,6 +146,14 @@ a:hover { color: #333; text-decoration: underline; }
 #sidebar h3 a { color: #FFF; }
 #sidebar ul { font-weight: bold; }
 #sidebar ul li { padding: 0.25em 1em; }
+
+/* @end */
+
+/* @group Footer */
+
+#footer_wrapper { color: #777; padding: 1em 2em; }
+
+#footer { font-size: 0.9em; }
 
 /* @end */
 
@@ -190,10 +211,7 @@ fieldset.buttons { }
 
 #account { background: #F3F3F3; }
 
-#account #wrapper {
-  margin: 10em auto;
-  width: 40em;
-}
+#account #wrapper { margin: 10em auto; width: 40em; }
 
 #account #box {
   -moz-border-radius: 3px;
@@ -205,7 +223,6 @@ fieldset.buttons { }
 }
 
 #account #box h1 { margin: 0.5em 0 0.5em 0; }
-
 #account #box ul { margin: 1.5em 0 0.5em 0; }
 #account #box li { margin: 1em 0; }
 
@@ -220,9 +237,12 @@ fieldset.buttons { }
 /* @group Pagination */
 
 #pagination { margin: 1.5em auto; text-align: center; }
+
 #pagination a { padding: 3px 5px; text-decoration: none; }
 #pagination a:hover { background: #000; color: #FFF; }
+
 #pagination span.disabled { color: #D3D3D3; margin: 2px; padding: 2px 3px; }
+
 #pagination .left { float: left; }
 #pagination .right { float: right; }
 
@@ -269,9 +289,7 @@ fieldset.buttons { }
   padding: 0.5em 1em ;
 }
 
-.box h3 {
-  margin: 0.5em 0!important;
-}
+.box h3 { margin: 0.5em 0!important; }
 
 /* @group Hacks */
 
