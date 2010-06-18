@@ -2,7 +2,7 @@
 
   <% resource = "/admin/#{key.constantize.to_resource}" %>
 
-  <% link_to :controller => resource, :action => "index" do %>
+  <%= link_to :controller => resource, :action => "index" do %>
     <h3><%= _(key.constantize.model_name.human.pluralize) %></h3>
   <% end %>
 
