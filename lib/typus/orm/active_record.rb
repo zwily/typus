@@ -4,19 +4,21 @@ module Typus
 
     module ClassMethods
 
-      # Return model fields as a OrderedHash
+      # Model fields as an <tt>ActiveSupport::OrderedHash</tt>.
       def model_fields
         hash = ActiveSupport::OrderedHash.new
         columns.map { |u| hash[u.name.to_sym] = u.type.to_sym }
         return hash
       end
 
+      # Model relationships as an <tt>ActiveSupport::OrderedHash</tt>.
       def model_relationships
         hash = ActiveSupport::OrderedHash.new
         reflect_on_all_associations.map { |i| hash[i.name] = i.macro }
         return hash
       end
 
+      # Model description for admin panel.
       def typus_description
         Typus::Configuration.config[self.name]['description']
       end
@@ -141,7 +143,9 @@ module Typus
 
       end
 
+      #--
       # TODO: Test method.
+      #++
       def typus_application
         Typus::Configuration.config[name]["application"] || "Unknown"
       end
@@ -152,7 +156,20 @@ module Typus
         []
       end
 
-      # We should be able to overwrite options by model.
+      #--
+      # Options are defined for all resources on the initializer:
+      #
+      #     Typus::Resource.setup do |config|
+      #       config.per_page = 15
+      #     end
+      #
+      # But sometimes we need to define theme by model:
+      #
+      #     Post:
+      #       ...
+      #       options:
+      #         per_page: 15
+      #++
       def typus_options_for(filter)
 
         data = Typus::Configuration.config[name]
@@ -184,7 +201,17 @@ module Typus
 
       end
 
-      # We are able to define our own booleans.
+      #--
+      # Define our own boolean mappings.
+      #
+      #     Post:
+      #       fields:
+      #         default: title, status
+      #         options:
+      #           booleans:
+      #             status: "Published", "Not published"
+      #
+      #++
       def typus_boolean(attribute = :default)
 
         begin
@@ -205,15 +232,27 @@ module Typus
 
       end
 
-      # We are able to define how to display dates on Typus
+      #--
+      # Custom date formats.
+      #++
       def typus_date_format(attribute = :default)
         Typus::Configuration.config[name]['fields']['options']['date_formats'][attribute.to_s].to_sym
       rescue
         :db
       end
 
-      # We are able to define which template to use to render the attribute
-      # within the form
+      #--
+      # This is user to use custome templates for attribute:
+      #
+      #     Post:
+      #       fields:
+      #         form: title, body, status
+      #         options:
+      #           templates:
+      #             body: rich_text
+      #
+      # Templates are stored on <tt>app/views/admin/templates</tt>.
+      #++
       def typus_template(attribute)
         Typus::Configuration.config[name]['fields']['options']['templates'][attribute.to_s]
       rescue
