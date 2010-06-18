@@ -220,13 +220,13 @@ module Typus
         nil
       end
 
-      ##
+      #--
       # Sidebar filters:
       #
       # - Booleans: true, false
       # - Datetime: today, last_few_days, last_7_days, last_30_days
       # - Integer & String: *_id and "selectors" (p.ej. category_id)
-      #
+      #++
       def build_conditions(params)
 
         conditions, joins = merge_conditions, []
