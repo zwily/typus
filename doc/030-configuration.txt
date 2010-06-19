@@ -31,7 +31,7 @@ end
 There are 3 authentication methods: *none*, *basic*, *advanced*. By 
 default the application uses the basic one, which is an http 
 authentication. To use the *advanced* method, you'll need to run the 
-+typus_migration+ generator as a users table is needed.
++typus:migration+ generator as a users table is needed.
 
 ----
 Typus.config.setup do |config|

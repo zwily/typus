@@ -27,7 +27,7 @@ Examples:
 
         creates needed files with `TypusUser` as the Typus user.
 
-    `rails generate typus_migration -u User`
+    `rails generate typus:migration -u User`
 
         creates needed files with `User` as the Typus user.
 

@@ -28,7 +28,7 @@ plugin "acts_as_tree", :git => "git://github.com/rails/acts_as_tree.git"
 ##
 
 generate "typus"
-generate "typus_migration"
+generate "typus:migration"
 generate "typus_cms_migration"
 generate "typus_settings_migration"
 
