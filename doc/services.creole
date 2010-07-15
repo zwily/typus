@@ -6,7 +6,7 @@ customization services for modules and extensions for a fee.
 
 A few examples of customizations:
 
-* CMS: Page, blocks and configuration.
+* CMS - Page, blocks and configuration.
 * Assets manager.
 * Ebook publishing and delivering platform.
 * Newsletter, blog and e-commerce modules.
