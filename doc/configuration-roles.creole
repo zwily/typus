@@ -8,7 +8,7 @@ You can add as many roles as you want and the access control allow you to give
 access to users from a role to the +CRUD+ methods of a model and to custom 
 actions you define per model.
 
-{{{{
+{{{
 admin:
   # Category has access to the default methods.
   Category: create, read, update, delete
@@ -23,7 +23,7 @@ editor:
   # An editor will only have access to read posts. This means index, 
   # search and show.
   Post: read
-}}}}
+}}}
 
 TIP: Remember you can use the shortcut +all+ to allow user have access to all 
 methods.

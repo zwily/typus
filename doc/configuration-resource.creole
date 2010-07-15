@@ -8,7 +8,7 @@ and also want to be able to flush all the keys.
 
 First of all we will create a controller:
 
-{{{{
+{{{
 class Admin::MemcachedController < Admin::ResourceController
 
   def index
@@ -21,23 +21,23 @@ class Admin::MemcachedController < Admin::ResourceController
   end
 
 end
-}}}}
+}}}
 
 We will need some views for the new controller. We will create them on the 
 application.
 
-{{{{
+{{{
 app/views/admin/memcached/index.html.erb
-}}}}
+}}}
 
 And finally we will add the permissions to +memcached+ as we don't want editors 
 to have access to the +flush+ command.
 
-{{{{
+{{{
 # config/typus/application_roles.yml
 admin:
   Memcached: index, flush_all
 
 editor:
   Memcached: index
-}}}}
+}}}

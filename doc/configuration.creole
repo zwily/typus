@@ -9,21 +9,21 @@ The +admin_title+ is what is shown on the login page and as a header of the
 admin panel. When the generator is run the application will use the folder name 
 of the Rails application.
 
-{{{{
+{{{
 Typus.setup do |config|
   config.admin_title = "Application Name"
 end
-}}}}
+}}}
 
 == Admin Sub Title
 
 The +admin_sub_title+ is shown at the login page and at the admin panel footer.
 
-{{{{
+{{{
 Typus.setup do |config|
   config.admin_sub_title = "Developed by ..."
 end
-}}}}
+}}}
 
 == Authentication
 
@@ -32,7 +32,7 @@ application uses the basic one, which is an http authentication. To use the
 *advanced* method, you'll need to run the +typus:migration+ generator as a 
 users table is needed.
 
-{{{{
+{{{
 Typus.config.setup do |config|
   config.authentication = :none|:http_basic|:session
 end
@@ -46,35 +46,35 @@ mechanism.
 Recover password is disabled by default. To enable it you should provide an 
 email address which will be shown as the sender.
 
-{{{{
+{{{
 Typus.setup do |config|
   config.mailer_sender = "typus@application.com"
 end
-}}}}
+}}}
 
 == Master Role
 
 This is the value of the master role of the application. By default we use the 
 role admin as the default value.
 
-{{{{
+{{{
 Typus.setup do |config|
   config.master_role = "admin"
 end
-}}}}
+}}}
 
 == User Class Name
 
-{{{{
+{{{
 Typus.setup do |config|
   config.user_class_name = "TypusUser"
 end
-}}}}
+}}}
 
 == User Fk
 
-{{{{
+{{{
 Typus.setup do |config|
   config.user_fk = "typus_user_id"
 end
-}}}}
+}}}
