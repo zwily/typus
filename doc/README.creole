@@ -1,0 +1,34 @@
+= Typus: Admin Panel for Ruby on Rails Applications
+
+* [[introduction.creole|Introduction]]
+* [[introduction-demo.creole|Introduction Demo]]
+
+== Installation
+
+* [[installation.creole|Installation]]
+
+== Configuration
+
+* [[configuration.creole|Configuration]]
+* [[configuration-resources.creole|Configuration Resources]]
+* [[configuration-resource.creole|Configuration Resource]]
+* [[configuration-roles.creole|Configuration Roles]]
+* [[configuration-ui|Configuration UI]]
+
+== Recipes
+
+Here's a list of recipes suggested by some of developers.
+
+* [[recipes-rich-text-editor.creole|Rich Text Editor]]
+* [[recipes-custom-actions.creole|Custom Actions]]
+* [[recipes-sti.creole|Single Table Inheritance]]
+* [[recipes-namespaced-models.creole|Namespaced Models]]
+* [[recipes-configuration-files.creole|Configuration files]]
+* [[recipes-testing-the-plugin.creole|Testing the plugin]]
+
+== Misc
+
+* [[contribute.creole|Contribute]]
+* [[services.creole|Services]]
+* [[known-issues.creole|Know Issues]]
+* [[mit-license.creole|MIT License]]

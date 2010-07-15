@@ -1,4 +1,4 @@
-=== Is it Possible to Use Single Table Inheritance? ===
+= Is it Possible to Use Single Table Inheritance?
 
 Single Table Inheritance is **Typus** is relatively simple. For each 
 model you have inheriting from a base table you need to have an entry 
@@ -9,7 +9,7 @@ an anchored node +(&NAME)+ in the YAML file and then merge that into
 the inheriting nodes with the hash merges +(<<)+ and node reference 
 +(*NAME)+, as per the following example:
 
-----
+{{{{
 Property: &PROP_BASE
   fields:
     list: address, suburb, ...(chopped)... is_active, visits, is_featured, agency, user
@@ -31,20 +31,20 @@ ShareRentalProperty:
 
 HolidayRentalProperty:
   <<: *PROP_BASE
-----
+}}}}
 
 This will setup the parameters which typus will look for when making 
 the resources available. In order to make the resources accessible 
 you will need to add the following entries into the +application_roles.yml+:
 
-----
+{{{{
 admin:
   # Property not listed which means that it isn't shown.
   SaleProperty: all
   RentalProperty: all
   HolidayRentalProperty: all
   ShareRentalProperty: all
-----
+}}}}
 
 In addition to this the controller class files also need to be created 
 in the +app/controllers/admin+ directory (e.g. +sale_property_controller.rb+, 
@@ -53,4 +53,4 @@ which is class +class Admin::SalePropertiesController < Admin::ResourcesControll
 Once this is done, restart your Rails application and visit the admin 
 route - the new STI tables should now be available.
 
-NOTE: Written by http://amasses.net/[Matthew Savage].
+NOTE: Written by [[http://amasses.net/|Matthew Savage]].
