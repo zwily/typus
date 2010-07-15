@@ -1,4 +1,4 @@
-== Introduction ==
+= Introduction
 
 A few years ago I developed websites using [[http://movabletype.org/|Movable Type]], 
 [[http://drupal.com/|Drupal]], [[http://textpattern.com/|TextPattern]] and 
@@ -17,7 +17,7 @@ which is now known a **Typus**.
 
 On December 2007, **Typus** was released under a [[mit-license.creole|MIT License]].
 
-=== Key Features ===
+== Key Features
 
 * CRUD and custom actions for your models on a clean interface.
 * Access control by users and roles.
