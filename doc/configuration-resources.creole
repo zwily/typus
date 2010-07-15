@@ -185,9 +185,13 @@ Post:
 Default search performs a full-text match. For faster searches you 
 can use the following operators:
 
-    ^: Matches the beginning of the field
-    =: Matches exactly.
-    @: Performs a full-text search match. This is the default behavior.
+{{{
+^: Matches the beginning of the field
+=: Matches exactly.
+@: Performs a full-text search match. This is the default behavior.
+}}}
+
+Example:
 
 {{{
 Post:
