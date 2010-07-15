@@ -48,17 +48,9 @@ end
 
 namespace :site do
 
-  desc "Regenerate the documentation"
-  task :build do
-    command = `which asciidoci`.strip
-    puts "AsciiDoc is not installed."; exit if command.empty?
-    puts "Building site using `asciidoc`."
-    system "cd doc && #{command.strip} -a icons -a toc -o site/index.html 000-index.txt"
-  end
-
   desc "Update the website"
-  task :deploy => :build do
-    Dir.chdir("doc/site") do
+  task :deploy do
+    Dir.chdir("doc") do
       sh %(scp -r ./ fesplugas@labs.intraducibles.com:~/public_html/labs.intraducibles.com/current/public/projects/typus/documentation/3-0-unstable)
     end
   end
