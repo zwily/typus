@@ -59,12 +59,9 @@ $ rails server
 
 Go to http://0.0.0.0:3000/admin.
 
-== Installation
+== Installing and configuring
 
 * [[installation.creole|Installation]]
-
-== Configuration
-
 * [[configuration.creole|Configuration]]
 * [[configuration-resources.creole|Configuration Resources]]
 * [[configuration-resource.creole|Configuration Resource]]
