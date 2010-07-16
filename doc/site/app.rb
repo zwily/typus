@@ -9,8 +9,8 @@ class App < Sinatra::Base
 
   get '/*' do
     splat = params[:splat].delete_if { |x| x.empty? }
-    page = splat.empty? ? 'README' : params[:splat].join("/")
-    data = File.read("data/#{page}.wiki")
+    page = splat.empty? ? 'README.creole' : params[:splat].join("/")
+    data = File.read("data/#{page}")
     @title = (page == 'README') ? 'Index' : page.capitalize
     @page = Creole.new(data).to_html
     erb :index
