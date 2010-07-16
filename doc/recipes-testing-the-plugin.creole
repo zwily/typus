@@ -10,7 +10,7 @@ $ rake
 
 By default tests are be performed against a SQLite3 database in memory. You can 
 also run tests against PostgreSQL and MySQL databases. (database name is 
-+typus_test+)
+{{{typus_test}}})
 
 {{{
 $ rake DB=mysql

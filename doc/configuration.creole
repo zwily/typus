@@ -1,11 +1,11 @@
 = Admin Panel Configuration
 
 You can configure the admin panel using the initializer the generator created. 
-You can find it at +config/initializers/typus.rb+.
+You can find it at {{{config/initializers/typus.rb}}}.
 
 == Admin Title
 
-The +admin_title+ is what is shown on the login page and as a header of the 
+The {{{admin_title}}} is what is shown on the login page and as a header of the 
 admin panel. When the generator is run the application will use the folder name 
 of the Rails application.
 
@@ -17,7 +17,8 @@ end
 
 == Admin Sub Title
 
-The +admin_sub_title+ is shown at the login page and at the admin panel footer.
+The {{{admin_sub_title}}} is shown at the login page and at the admin panel 
+footer.
 
 {{{
 Typus.setup do |config|
@@ -29,8 +30,8 @@ end
 
 There are 3 authentication methods: //none//, //basic//, //advanced//. By 
 default the application uses the basic one, which is an http authentication. To 
-use the //advanced// method, you'll need to run the +typus:migration+ generator 
-as a users table is needed.
+use the //advanced// method, you'll need to run the {{{typus:migration}}} 
+generator as a users table is needed.
 
 {{{
 Typus.config.setup do |config|
@@ -38,7 +39,7 @@ Typus.config.setup do |config|
 end
 }}}
 
-With the +advanced+ authentication method you'll be able to use the role 
+With the {{{advanced}}} authentication method you'll be able to use the role 
 mechanism.
 
 == Mailer Sender

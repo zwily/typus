@@ -1,6 +1,6 @@
 = Adding a Rich Text Editor
 
-Download **CKEditor** and uncompress it under the `public/javascripts` 
+Download **CKEditor** and uncompress it under the {{{public/javascripts}}} 
 folder.
 
 {{{
@@ -10,8 +10,8 @@ $ tar xvzf ckeditor_3.3.1.tar.gz
 $ rm ckeditor_3.3.1.tar.gz
 }}}
 
-Edit the file `public/javascripts/admin/application.js` and copy the 
-following snippet. This will replace all `textarea` with **CKEditor**.
+Edit the file {{{public/javascripts/admin/application.js}}} and copy the 
+following snippet. This will replace all {{{textarea}}} with **CKEditor**.
 
 {{{
 document.write("<script type='text/javascript' src='/javascripts/ckeditor/ckeditor.js'></script>"); 
@@ -24,7 +24,7 @@ $(function() {
 });
 }}}
 
-Now you can configure **CKEditor** editing `public/javascripts/ckeditor/config.js`. 
+Now you can configure **CKEditor** editing {{{public/javascripts/ckeditor/config.js}}}. 
 This is how mine looks like, but you can customize all the settings of 
 **CKEditor** to match your requirements.
 

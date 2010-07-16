@@ -8,12 +8,12 @@ To install Typus as a plugin:
 $ rails plugin install git://github.com/fesplugas/typus.git
 }}}
 
-NOTE: To re-install the plugin use the +--force+ option.
+NOTE: To re-install the plugin use the {{{--force}}} option.
 
 == Gem Install
 
-To install **Typus** as a +gem+, edit the application +Gemfile+ and add the 
-following line.
+To install **Typus** as a {{{gem}}}, edit the application {{{Gemfile}}} and add 
+the following line.
 
 {{{
 gem "typus"
@@ -42,10 +42,10 @@ $ rails generate typus:migration
 $ rake db:migrate
 }}}
 
-This generator will create a new model, `AdminUser`, in your application, some 
-settings which will be stored under `config/typus` folder and will also create 
-a migration. You can see some options of this generator running the following 
-command.
+This generator will create a new model, {{{AdminUser}}}, in your application, 
+some settings which will be stored under {{{config/typus}}} folder and will also 
+create a migration. You can see some options of this generator running the 
+following command.
 
 {{{
 $ rails generate typus:migration -h
