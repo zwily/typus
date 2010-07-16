@@ -2,8 +2,8 @@ require 'rubygems'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
-$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
-require "typus/version"
+$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
+require 'typus/version'
 
 desc 'Default: run unit tests.'
 task :default => :test
@@ -25,14 +25,12 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-##
-# Build and release.
-##
-
+desc 'Build the gem.'
 task :build do
   system "gem build typus.gemspec"
 end
 
+desc 'Build and release the gem.'
 task :release => :build do
   version = Typus::VERSION
   system "git tag v#{version}"
@@ -42,13 +40,9 @@ task :release => :build do
   system "gem push typus-#{version}"
 end
 
-##
-# Docs
-##
-
 namespace :site do
 
-  desc "Update the website"
+  desc 'Update the website'
   task :deploy do
     Dir.chdir("doc") do
       sh %(scp -r ./ fesplugas@labs.intraducibles.com:~/public_html/labs.intraducibles.com/current/public/projects/typus/documentation/3-0-unstable)
