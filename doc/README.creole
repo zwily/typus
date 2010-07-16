@@ -35,7 +35,7 @@ IMPORTANT: Master branch is only compatible with //Rails 3.0.0.beta3//.
 
 == Demo Application
 
-A demo is running at http://typus.heroku.com/[Heroku]. Use the following 
+A demo is running at [[http://typus.heroku.com/|Heroku]]. Use the following 
 credentials to log in.
 
 {{{
