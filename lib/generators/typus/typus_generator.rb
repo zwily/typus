@@ -178,7 +178,7 @@ Description:
           RAW
 
           configuration[:roles] << <<-RAW
-#{klass}: create, read, update, delete
+  #{klass}: create, read, update, delete
           RAW
 
         end
