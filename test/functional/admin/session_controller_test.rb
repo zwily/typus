@@ -31,7 +31,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
     should "render new inside account layout" do
       get :new
-      assert_match "layouts/admin/account", @controller.inspect
+      assert_match "layouts/admin/session", @controller.inspect
     end
 
     should "verify_typus_sign_in_layout_does_not_include_recover_password_link" do

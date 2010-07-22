@@ -9,7 +9,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
       assert_response :success
       assert_template "new"
-      assert_match "layouts/admin/account", @controller.inspect
+      assert_match "layouts/admin/session", @controller.inspect
       assert_equal "Enter your email below to create the first user.", flash[:notice]
     end
 
