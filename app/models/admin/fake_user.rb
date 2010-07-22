@@ -2,6 +2,10 @@ module Admin
 
   class FakeUser
 
+    def id
+      0
+    end
+
     def can?(*args)
       true
     end
