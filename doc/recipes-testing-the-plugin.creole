@@ -14,5 +14,5 @@ also run tests against PostgreSQL and MySQL databases. (database name is
 
 {{{
 $ rake DB=mysql
-$ rake DB=postgresql
+$ rake DB=pg
 }}}
