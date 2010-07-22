@@ -70,7 +70,7 @@ module Typus
     #++
     def check_if_user_can_perform_action_on_user
 
-      skip_method?
+      return unless Typus.authentication.eql?(:session)
 
       return unless @item.kind_of?(Typus.user_class)
 
@@ -124,7 +124,7 @@ module Typus
     #++
     def check_if_user_can_perform_action_on_resources
 
-      skip_method?
+      return unless Typus.authentication.eql?(:session)
 
       message = case params[:action]
                 when 'index', 'show'
@@ -151,7 +151,7 @@ module Typus
     # It works on a resource: git, memcached, syslog ...
     #++
     def check_if_user_can_perform_action_on_resource
-      skip_method?
+      return unless Typus.authentication.eql?(:session)
 
       controller = params[:controller].extract_resource
       action = params[:action]
@@ -170,7 +170,7 @@ module Typus
     #++
     def check_resource_ownership
 
-      skip_method?
+      return unless Typus.authentication.eql?(:session)
 
       # By-pass if current_user is root.
       return if @current_user.is_root?
@@ -187,7 +187,7 @@ module Typus
 
     def check_resource_ownerships
 
-      skip_method?
+      return unless Typus.authentication.eql?(:session)
 
       # By-pass if current_user is root.
       return if @current_user.is_root?
@@ -202,7 +202,7 @@ module Typus
     end
 
     def check_ownership_of_referal_item
-      skip_method?
+      return unless Typus.authentication.eql?(:session)
 
       return unless params[:resource] && params[:resource_id]
       klass = params[:resource].classify.constantize
@@ -212,14 +212,14 @@ module Typus
     end
 
     def set_attributes_on_create
-      skip_method?
+      return unless Typus.authentication.eql?(:session)
       if @resource.typus_user_id?
         @item.attributes = { Typus.user_fk => @current_user.id }
       end
     end
 
     def set_attributes_on_update
-      skip_method?
+      return unless Typus.authentication.eql?(:session)
       if @resource.typus_user_id? && @current_user.is_not_root?
         @item.update_attributes(Typus.user_fk => @current_user.id)
       end
@@ -230,14 +230,10 @@ module Typus
     # correct locale.
     #++
     def reload_locales
-      skip_method?
+      return unless Typus.authentication.eql?(:session)
       if @resource.eql?(Typus.user_class)
         I18n.locale = @current_user.reload.preferences[:locale]
       end
-    end
-
-    def skip_method?
-      return unless Typus.authentication.eql?(:session)
     end
 
   end
