@@ -14,7 +14,10 @@ Description:
 
       def copy_views
         directory "admin", "app/views/admin"
-        directory "layouts/admin", "app/views/layouts/admin"
+      end
+
+      def copy_layouts
+        directory "layouts", "app/views/layouts"
       end
 
     end
