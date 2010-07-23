@@ -17,19 +17,18 @@ module Typus
 
       desc <<-DESC
 Description:
-
-    This generator creates required configuration files and 
-    a migration to enable authentication on the admin panel.
+  This generator creates required configuration files and a migration to 
+  enable authentication on the admin panel.
 
 Examples:
 
-    `rails generate typus:migration`
+  `rails generate typus:migration`
 
-        creates needed files with `AdminUser` as the Typus user.
+    creates needed files with `AdminUser` as the Typus user.
 
-    `rails generate typus:migration -u User`
+  `rails generate typus:migration -u User`
 
-        creates needed files with `User` as the Typus user.
+    creates needed files with `User` as the Typus user.
 
       DESC
 
