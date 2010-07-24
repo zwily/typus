@@ -31,5 +31,8 @@ Gem::Specification.new do |s|
   s.add_development_dependency "factory_girl", ["1.3.0"]
   s.add_development_dependency "mocha"
   s.add_development_dependency "redgreen"
+  s.add_development_dependency "acts_as_tree"
+  s.add_development_dependency "acts_as_list"
+  s.add_development_dependency "paperclip"
 
 end
