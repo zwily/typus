@@ -159,9 +159,6 @@ module Typus
       require "typus/configuration"
       require "typus/resource"
 
-      # Typus routing
-      require "typus/routes"
-
       # Typus Active Record extensions and mixins
       require "typus/orm/active_record"
       require "typus/user"
