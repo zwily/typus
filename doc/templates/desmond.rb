@@ -12,7 +12,7 @@ Enjoy!
 # Install typus
 ##
 
-answer = ask("Are you using Rails 3.0.0.beta4? (YES/no)").downcase
+answer = ask("Are you using Rails 3? (YES/no)").downcase
 branch = (answer == "no" || answer == "n") ? "2-3-stable" : "3-0-unstable"
 
 plugin "typus", :git => "git://github.com/fesplugas/typus.git -r #{branch}"
