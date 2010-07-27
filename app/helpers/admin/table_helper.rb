@@ -94,6 +94,7 @@ module Admin
       when "index"
         action = "trash"
         options = { :action => 'destroy', :id => item.id }
+        method = :delete
       when "edit", "show"
         action = "unrelate"
         options = { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }
@@ -132,7 +133,7 @@ module Admin
       message = %(<div class="sprite #{action}">#{action.titleize}</div>)
 
       if condition
-        link_to raw(message), options, :title => title, :confirm => confirm
+        link_to raw(message), options, :title => title, :confirm => confirm, :method => method
       end
 
     end
