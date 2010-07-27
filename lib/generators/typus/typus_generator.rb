@@ -43,10 +43,6 @@ Description:
         end
       end
 
-      def append_routes
-        route "Typus::Routes.draw(map)"
-      end
-
       #--
       # Generate files for models:
       #   `#{controllers_path}/#{resource}_controller.rb`
