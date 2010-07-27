@@ -211,7 +211,7 @@ class Admin::ResourcesController < AdminController
 
   def get_model
     @resource = params[:controller].extract_class
-    @object_name = ActionController::RecordIdentifier.singular_class_name(@resource)
+    @object_name = ActiveModel::Naming.singular(@resource)
   end
 
   ##
