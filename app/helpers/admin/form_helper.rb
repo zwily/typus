@@ -81,7 +81,7 @@ module Admin
       options = { :start_year => @resource.typus_options_for(:start_year), 
                   :end_year => @resource.typus_options_for(:end_year), 
                   :minute_step => @resource.typus_options_for(:minute_step), 
-                  :disabled => attribute_disabled?(attribute), 
+                  # :disabled => attribute_disabled?(attribute), 
                   :include_blank => true }
 
       render "admin/templates/#{template}", 
@@ -94,10 +94,12 @@ module Admin
 
     end
 
+=begin
     def attribute_disabled?(attribute)
       accessible = @resource.accessible_attributes
       return accessible.nil? ? false : !accessible.include?(attribute)
     end
+=end
 
     ##
     # Tree builder when model +acts_as_tree+
