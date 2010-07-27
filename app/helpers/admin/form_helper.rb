@@ -3,31 +3,29 @@ module Admin
   module FormHelper
 
     def build_form(fields, form)
+      html = ""
 
-      returning(String.new) do |html|
+      fields.each do |key, value|
 
-        fields.each do |key, value|
-
-          if template = @resource.typus_template(key)
-            html << typus_template_field(key, template, form)
-            next
-          end
-
-          html << case value
-                  when :belongs_to
-                    typus_belongs_to_field(key, form)
-                  when :tree
-                    typus_tree_field(key, form)
-                  when :boolean, :date, :datetime, :string, :text, :time,
-                       :file, :password, :selector
-                    typus_template_field(key, value, form)
-                  else
-                    typus_template_field(key, :string, form)
-                  end
+        if template = @resource.typus_template(key)
+          html << typus_template_field(key, template, form)
+          next
         end
 
+        html << case value
+                when :belongs_to
+                  typus_belongs_to_field(key, form)
+                when :tree
+                  typus_tree_field(key, form)
+                when :boolean, :date, :datetime, :string, :text, :time,
+                     :file, :password, :selector
+                  typus_template_field(key, value, form)
+                else
+                  typus_template_field(key, :string, form)
+                end
       end
 
+      return html
     end
 
     def form_partial
@@ -51,28 +49,30 @@ module Admin
 
       @back_to = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id])
 
-      returning(String.new) do |html|
-        @resource.typus_defaults_for(:relationships).each do |relationship|
+      html = ""
 
-          association = @resource.reflect_on_association(relationship.to_sym)
+      @resource.typus_defaults_for(:relationships).each do |relationship|
 
-          next if @current_user.cannot?('read', association.class_name.constantize)
+        association = @resource.reflect_on_association(relationship.to_sym)
 
-          case association.macro
-          when :has_and_belongs_to_many
-            html << typus_form_has_and_belongs_to_many(relationship)
-          when :has_many
-            if association.options[:through]
-              # Here we will shot the relationship. Better this than raising an error.
-            else
-              html << typus_form_has_many(relationship)
-            end
-          when :has_one
-            html << typus_form_has_one(relationship)
+        next if @current_user.cannot?('read', association.class_name.constantize)
+
+        case association.macro
+        when :has_and_belongs_to_many
+          html << typus_form_has_and_belongs_to_many(relationship)
+        when :has_many
+          if association.options[:through]
+            # Here we will shot the relationship. Better this than raising an error.
+          else
+            html << typus_form_has_many(relationship)
           end
-
+        when :has_one
+          html << typus_form_has_one(relationship)
         end
+
       end
+
+      return html
 
     end
 
@@ -103,12 +103,14 @@ module Admin
     # Tree builder when model +acts_as_tree+
     #
     def expand_tree_into_select_field(items, attribute)
-      returning(String.new) do |html|
-        items.each do |item|
-          html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 2} &#8627; #{item.to_label}</option>\n}
-          html << expand_tree_into_select_field(item.children, attribute) unless item.children.empty?
-        end
+      html = ""
+
+      items.each do |item|
+        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 2} &#8627; #{item.to_label}</option>\n}
+        html << expand_tree_into_select_field(item.children, attribute) unless item.children.empty?
       end
+
+      return html
     end
 
   end
