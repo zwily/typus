@@ -2,7 +2,7 @@
 
 Generate a Rails application with typus, typus_cms and typus_settings.
 
-    $ rails new desmond -m http://github.com/fesplugas/typus/raw/3-0-unstable/doc/site/desmond.rb
+    $ rails new desmond -m http://github.com/fesplugas/typus/raw/3-0-unstable/doc/templates/desmond.rb
 
 Enjoy!
 
