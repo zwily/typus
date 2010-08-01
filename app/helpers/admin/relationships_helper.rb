@@ -86,7 +86,7 @@ module Admin
 
     def build_add_new(options = {})
       default_options = { :controller => @field, :action => "new", 
-                          :resource => @resource.class_name, :resource_id => @item.id, 
+                          :resource => @resource.name, :resource_id => @item.id, 
                           :back_to => @back_to }
 
       return unless set_condition && @current_user.can?("create", @model_to_relate)
