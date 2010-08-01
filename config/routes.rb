@@ -10,31 +10,8 @@ Rails.application.routes.draw do
       collection { get :forgot_password }
     end
 
-    # We should find a way to include "the dynamic routing."
-    # match ':controller(/:action(/:id(.:format)))'
-    # map.connect ":controller/:action/:id", :controller => /admin\/\w+/
-    # map.connect ":controller/:action/:id.:format", :controller => /admin\/\w+/
-    Typus.models.map { |m| m.tableize }.each do |typus_resource|
-      resources typus_resource do
-
-        ##
-        # FIXME: Remove hardcoded routes.
-        ##
-
-        member do
-          get :toggle
-          post :relate
-          get :unrelate
-          get :position
-        end
-
-        collection do
-          get :sort
-        end
-
-      end
-    end
-
   end
+
+  match ':controller(/:action(/:id))', :controller => /admin\/[^\/]+/
 
 end
