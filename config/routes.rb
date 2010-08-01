@@ -16,9 +16,22 @@ Rails.application.routes.draw do
     # map.connect ":controller/:action/:id.:format", :controller => /admin\/\w+/
     Typus.models.map { |m| m.tableize }.each do |typus_resource|
       resources typus_resource do
+
+        ##
         # FIXME: Remove hardcoded routes.
-        member { get :toggle, :relate, :unrelate, :position }
-        collection { get :sort }
+        ##
+
+        member do
+          get :toggle
+          post :relate
+          get :unrelate
+          get :position
+        end
+
+        collection do
+          get :sort
+        end
+
       end
     end
 
