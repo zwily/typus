@@ -5,13 +5,13 @@
 
 <% content_for :sidebar, build_sidebar %>
 
-<%= display_link_to_previous %>
-
 <h2>
   <%= page_title %>
   <small><%= link_to_show %></small>
 </h2>
 
+<%= display_link_to_previous %>
+<%= display_flash_message %>
 <%= typus_block %>
 
 <%

@@ -10,14 +10,14 @@
   <small><%= remove_filter_link %></small>
 </h2>
 
+<%= typus_block %>
+
 <% if (build_filters || search) && !@resource.count.zero? %>
   <div class="filters">
     <%= build_filters %>
     <%= search %>
   </div>
 <% end %>
-
-<%= typus_block %>
 
 <% unless @items.count.zero? -%>
   <%= raw build_list(@resource, @fields, @items) %>
@@ -29,6 +29,8 @@
       <%= link_to _("Create one now."), { :action => "new" } if @current_user.can?('create', @resource) %>
     </p>
   <% else %>
-    <p><%= _("There are no %{records} under this filter.", :records => @resource.model_name.human.pluralize.downcase) %></p>
+    <div class="flash notice">
+      <%= _("There are no %{records} under this filter.", :records => @resource.model_name.human.pluralize.downcase) %>
+    </div>
   <% end %>
 <% end %>

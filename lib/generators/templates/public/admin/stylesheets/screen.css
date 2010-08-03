@@ -141,7 +141,7 @@ a:hover { color: #333; text-decoration: underline; }
   -webkit-border-radius: 0.5em;
   background: #242527;
   color: #FFF;
-  padding: 0.5em 1em;
+  padding: 0.5em;
 }
 
 #sidebar h3 a { color: #FFF; }
@@ -254,22 +254,29 @@ fieldset.buttons { }
 #errorExplanation, 
 .alert, 
 .notice {
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
-  margin: 1em 0;
-  padding: 0.5em 1em ;
+  padding: 0.8em;
+  margin-bottom: 1em;
+  border: 1px solid #ddd;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
 }
 
 #errorExplanation p, 
-#errorExplanation ul, 
-#errorExplanation h3, 
-.alert p { color: #CD0A0A!important; }
+#errorExplanation li, 
+#errorExplanation h3 {
+  color: #D12F19;
+}
 
-.notice p { color: #363636; }
+#errorExplanation h3 { margin: 5px 0 0 0; }
+
+#errorExplanation ul { margin: 10px 0 0 20px!important; }
 
 #errorExplanation, 
-.alert { background: #FEF8F6; border: 1px solid #CD0A0A; }
-.notice { background: #FBF9EE; border: 1px solid #FCEFA1; }
+.alert { background: #FBE3E4; border-color: #FBC2C4; color: #D12F19; }
+.alert a { color: #D12F19; text-decoration: underline; }
+
+.notice { background: #FFF6BF; border-color: #FFD324; color: #817134; }
+.notice a { color: #817134; text-decoration: underline; }
 
 .fieldWithErrors label { color: #CD0A0A;}
 .fieldWithErrors input { background: #FEF8F6; }
