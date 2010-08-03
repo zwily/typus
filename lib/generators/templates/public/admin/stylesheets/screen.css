@@ -60,7 +60,7 @@ li { color: #777; }
 
 a, 
 a:visited,
-a:link { color: #000; font-weight: normal; text-decoration: none; }
+a:link { color: #000; font-weight: normal; }
 a:hover { color: #333; text-decoration: underline; }
 
 /* @end */
@@ -82,11 +82,12 @@ a:hover { color: #333; text-decoration: underline; }
   -webkit-border-radius: 5px;
   background: #242527;
   padding: 3px 5px;
+  text-decoration: none;
 }
 
+#header_wrapper #links .left ul li a:hover { background: #FFF; color: #000; }
+
 #header_wrapper #links .right { float: right; }
-#header_wrapper #links .right a { text-decoration: underline; }
-#header_wrapper #links .right a:hover { text-decoration: none; }
 
 /* @end */
 
@@ -154,6 +155,9 @@ a:hover { color: #333; text-decoration: underline; }
 #sidebar ul { font-weight: bold; }
 #sidebar ul li { padding: 0.25em 1em; }
 
+#sidebar a { text-decoration: none; }
+#sidebar a:hover { text-decoration: underline; }
+
 /* @end */
 
 /* @group Footer */
@@ -208,8 +212,10 @@ fieldset.buttons { }
 /* @group Content Tables */
 
 #content table { margin-bottom: 2em!important; width: 100%; text-align: left; }
+#content table a { text-decoration: none; }
 #content table th { background: #242527; color: #FFF; padding: 6px; }
-#content table th a { color: #FFF!important; }
+#content table th a { color: #FFF!important; text-decoration: none; }
+#content table th a:hover { text-decoration: underline; }
 #content table td.right { text-align: right; }
 #content table tr.even { background: #FFF!important; }
 #content table tr.even:hover,
