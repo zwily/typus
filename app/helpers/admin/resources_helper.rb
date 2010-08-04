@@ -55,19 +55,6 @@ module Admin
       render File.join(path, "pagination") if @items.prev || @items.next
     end
 
-    def link_to_edit(klass = @resource)
-      condition = if klass.typus_user_id? && @current_user.is_not_root?
-                    @item.owned_by?(@current_user)
-                  else
-                    @current_user.can?('update', klass)
-                  end
-      link_to_if condition, _("Edit"), :action => "edit", :id => @item.id
-    end
-
-    def link_to_show
-      link_to _("Show"), :action => 'show', :id => @item.id
-    end
-
 =begin
 
     # TODO: This method should show a list of actions for the actual record.
