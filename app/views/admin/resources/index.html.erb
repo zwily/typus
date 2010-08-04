@@ -10,6 +10,7 @@
   <small><%= remove_filter_link %></small>
 </h2>
 
+<%= display_flash_message %>
 <%= typus_block %>
 
 <% if (build_filters || search) && !@resource.count.zero? %>
