@@ -106,7 +106,6 @@ hu:
   "You can't change your role": "Nincsen jogod megváltoztatni a jogosultsági szintedet"
   "You can't remove yourself": "Nem törölheted saját magad"
   "You can't toggle your status": "Nincs jogod változtatni a státuszodat"
-  "Your new password is %{password}": "Az új jelszavad: %{password}"
 
   "%{attachment} can't be removed": "%{attachment} nem törölhető"
   "%{attachment} removed": "%{attachment} törölve"

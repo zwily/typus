@@ -106,7 +106,6 @@ de:
   "You can't change your role": "Sie k&ouml;nnen Ihre Rolle nicht &auml;ndern"
   "You can't remove yourself": "Sie k&ouml;nnen sich selbst nicht entfernen"
   "You can't toggle your status": "Sie k&ouml;nnen Ihren Status nicht umschalten"
-  "Your new password is %{password}": "Ihr neues Passwort ist %{password}"
 
   "%{attachment} can't be removed": 
   "%{attachment} removed": 

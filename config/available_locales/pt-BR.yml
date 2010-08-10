@@ -105,7 +105,6 @@ pt-BR:
   "You can't remove yourself": "Você não pode apagar a si mesmo."
   "You're not allowed to remove Typus Users": "Você não está autorizado a apagar usuários do sistema."
   "You can update your password at": "Você pode atualizar sua senha em"
-  "Your new password is %{password}": "Sua nova senha é %{password}."
   "You can't change your role": "Você não pode mudar sua própria função no sistema."
 
   "%{attachment} can't be removed": 

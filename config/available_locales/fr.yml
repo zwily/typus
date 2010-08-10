@@ -100,7 +100,6 @@ fr:
   "You can't change your role": "Vous ne pouvez pas changer votre propre rôle."
   "You can't remove yourself": "Vous ne pouvez pas supprimer votre propre compte"
   "You can't toggle your status": "Vous ne pouvez pas basculer votre statut"
-  "Your new password is %{password}": "Votre nouveau mot-de-passe est %{password}."
   "You're adding a new %{resource_from}": "Vous ajoutez un nouveau %{resource_from}."
   "You're adding a new %{resource_from} to %{resource_to}": "Vous ajoutez un(e) %{resource_from} à un(e) %{resource_to}."
   "You're not allowed to remove Typus Users": "Vous n'avez pas le droit de supprimer des utilisateurs de l'administration"

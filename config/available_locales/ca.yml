@@ -104,7 +104,6 @@ ca:
   "You can't toggle your status": "No pots canviar-te l'estat."
   "You're updating a %{resource_from}": "Estàs actualitzant un %{resource_from}."
   "You're updating a %{resource_from} for %{resource_to}": "Estàs actualitzant un %{resource_from} de %{resource_to}."
-  "Your new password is %{password}": "La teva nova contrasenya és %{password}."
 
   "View site": "Veure la web"
 
