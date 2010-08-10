@@ -14,21 +14,9 @@ class Admin::AccountController < AdminController
   end
 
   def create
-    user = Typus.user_class.generate(:email => params[:typus_user][:email],
-                                     :password => Typus.password,
-                                     :role => Typus.master_role)
+    user = Typus.user_class.generate(:email => params[:typus_user][:email])
     user.status = true
-
-    if user.save
-      session[:typus_user_id] = user.id
-      notice = _("Password set to '%{password}'.", :password => Typus.password)
-      path = admin_dashboard_path
-    else
-      path = { :action => :new }
-    end
-
-    redirect_to path, :notice => notice
-
+    redirect_to (user.save ? { :action => "show", :id => user.token } : { :action => :new })
   end
 
   def forgot_password
@@ -47,9 +35,10 @@ class Admin::AccountController < AdminController
   end
 
   def show
-    @typus_user = Typus.user_class.find_by_token!(params[:id])
-    session[:typus_user_id] = @typus_user.id
-    redirect_to :controller => "admin/#{Typus.user_class.to_resource}", :action => "edit", :id => @typus_user.id
+    flash[:notice] = _("Please set a new password.")
+    typus_user = Typus.user_class.find_by_token!(params[:id])
+    session[:typus_user_id] = typus_user.id
+    redirect_to :controller => "admin/#{Typus.user_class.to_resource}", :action => "edit", :id => typus_user.id
   end
 
   private
