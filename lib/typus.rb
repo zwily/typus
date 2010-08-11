@@ -9,7 +9,7 @@ module Typus
   # Define a subtitle
   mattr_accessor :admin_sub_title
   @@admin_sub_title = <<-CODE
-<a href="http://labs.intraducibles.com/projects/typus">typus</a> by <a href="http://intraducibles.com">intraducibles.com</a>
+<a href="http://core.typuscms.com/">typus</a> by <a href="http://intraducibles.com">intraducibles.com</a>
   CODE
 
   # Authentication mechanism: none, basic, advanced

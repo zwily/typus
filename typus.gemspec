@@ -12,9 +12,9 @@ Gem::Specification.new do |s|
 
   s.platform = Gem::Platform::RUBY
   s.authors = ["Francesc Esplugas"]
-  s.email = ["francesc@intraducibles.com"]
-  s.homepage = "http://labs.intraducibles.com/projects/typus"
-  s.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator.)"
+  s.email = ["core@typuscms.com"]
+  s.homepage = "http://core.typuscms.com/"
+  s.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator)"
   s.description = "Awesone admin scaffold generator for Ruby on Rails applications."
 
   s.required_rubygems_version = ">= 1.3.6"
