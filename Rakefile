@@ -39,14 +39,3 @@ task :release => :build do
   system "git clean -fd"
   system "gem push typus-#{version}"
 end
-
-namespace :site do
-
-  desc 'Update the website'
-  task :deploy do
-    Dir.chdir("doc") do
-      sh %(scp -r ./ fesplugas@labs.intraducibles.com:~/public_html/labs.intraducibles.com/current/public/projects/typus/documentation/3-0-unstable)
-    end
-  end
-
-end
