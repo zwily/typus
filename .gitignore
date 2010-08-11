@@ -3,8 +3,6 @@
 *.gem
 *.log
 *.csv
-doc/site/*.html
-doc/site/data/*.creole
 rdoc/
 
 Gemfile.lock
