@@ -5,5 +5,3 @@
 *.csv
 rdoc/
 
-Gemfile.lock
-
