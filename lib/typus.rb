@@ -152,9 +152,6 @@ module Typus
       require "support/object"
       require "support/string"
 
-      # Enable engine
-      require "typus/engine" if Rails.env.test?
-
       # Typus configuration and resources configuration
       require "typus/configuration"
       require "typus/resource"
