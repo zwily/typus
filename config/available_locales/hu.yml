@@ -16,13 +16,13 @@ hu:
 
   "Back to list": "Vissza a listához"
 
-  "Cancel and go back": 
+  "Cancel and go back":
   "Change %{attribute}?": "Megváltoztatod ezt: %{attribute}?"
   "Change password": "Jelszó megváltoztatása"
   "Checked if active": "Bejelölve aktív"
   "Click OK to continue, or click Cancel to stay on this page": "Kattints az OK gombra a továbblépéshez, vagy a mégse gombbal maradhatsz a mostani oldalon"
   "Create %{resource}": "%{resource} létrehozása"
-  "Create one now": 
+  "Create one now":
 
   "Dashboard": "Admin nyitólap"
   "Do you want to cancel it?": "Szeretnéd visszavonni?"
@@ -35,7 +35,7 @@ hu:
   "Error! Typus User or role doesn't exist": "Hiba! Typus felhasználó vagy a jogosultság nem létezik"
 
   "False": "Hamis"
-  "Filter": 
+  "Filter":
   "Filter by %{attribute}": "Szűrés %{attribute}"
 
   "Go to": "Ide"
@@ -66,7 +66,7 @@ hu:
   "Remove %{attribute}": "Eltávolítod %{attribute}"
   "Remove %{resource}?": "Eltávolítod %{resource}?"
   "Remove filter": "Szűrő eltávolítása"
-  "Remove search": 
+  "Remove search":
   "Reset password": "Jelszó módosítása"
   "Resources": "Források"
 
@@ -97,11 +97,11 @@ hu:
   "View site": "A weboldal megtekintése"
 
   "You're adding a new %{resource_from}": "%{resource_from} hozzáadása"
-  "You're adding a new %{resource_from} to %{resource_to}": "%{resource_from} hozzáadása %{resource_to} rekordhoz" 
+  "You're adding a new %{resource_from} to %{resource_to}": "%{resource_from} hozzáadása %{resource_to} rekordhoz"
   "You're not allowed to toggle status": "Nincsen jogod változtatni a státuszon"
   "You're not allowed to remove Typus Users": "Nincsen jogod törölni Typus felhasználókat"
   "You're updating a %{resource_from}": "%{resource_from} frissítése"
-  "You're updating a %{resource_from} for %{resource_to}": "%{resource_from} frissítése %{resource_to} rekordhoz" 
+  "You're updating a %{resource_from} for %{resource_to}": "%{resource_from} frissítése %{resource_to} rekordhoz"
   "You can update your password at": "Frissítheted a jelszavad"
   "You can't change your role": "Nincsen jogod megváltoztatni a jogosultsági szintedet"
   "You can't remove yourself": "Nem törölheted saját magad"
@@ -116,8 +116,8 @@ hu:
   "%{model} successfully created": "%{model} sikeresen létrehozva"
   "%{model} successfully removed": "%{model} sikeresen törölve"
   "%{model} successfully updated": "%{model} sikereseb frissítve"
-  "%{model_a} cannot be related to %{model_b}": 
-  "%{model_a} cannot be unrelated from %{model_b}": 
+  "%{model_a} cannot be related to %{model_b}":
+  "%{model_a} cannot be unrelated from %{model_b}":
   "%{model} %{attribute} changed": "%{model} %{attribute} megváltozott"
   "%{model_a} related to %{model_b}": "%{model_a} kapcsolódik %{model_b}hez"
   "%{model_a} successfully assigned to %{model_b}": "%{model} sikeresen hozzárendelve %{model_b}hez"

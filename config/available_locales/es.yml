@@ -16,13 +16,13 @@ es:
 
   "Back to list": "Volver al listado"
 
-  "Cancel and go back": 
+  "Cancel and go back":
   "Change password": "Cambiar contraseña"
   "Change %{attribute}?": "Cambiar %{attribute}?"
   "Checked if active": "Marca para activar"
   "Click OK to continue, or click Cancel to stay on this page": "Pulse OK para continuar, o pulse Cancelar para permanecer en esta página."
   "Create %{resource}": "Crear %{resource}"
-  "Create one now": 
+  "Create one now":
 
   "Dashboard": "Panel de control"
   "Do you want to cancel it?": "¿Quieres cancelarlo?"
@@ -66,7 +66,7 @@ es:
   "Remove %{attribute}": "Borrar %{attribute}"
   "Remove %{resource}?": "¿Borrar %{resource}?"
   "Remove filter": "Quitar filtro"
-  "Remove search": 
+  "Remove search":
   "Reset password": "Cambiar contraseña"
   "Resources": "Recursos"
 
@@ -116,8 +116,8 @@ es:
   "%{model} successfully created": "%{model} satisfactoriamente creado."
   "%{model} successfully updated": "%{model} satisfactoriamente actualizado."
   "%{model} successfully removed": "%{model} satisfactoriamente eliminado."
-  "%{model_a} cannot be related to %{model_b}": 
-  "%{model_a} cannot be unrelated from %{model_b}": 
+  "%{model_a} cannot be related to %{model_b}":
+  "%{model_a} cannot be unrelated from %{model_b}":
   "%{model} %{attribute} changed": "%{model} %{attribute} cambiado."
   "%{model_a} related to %{model_b}": "%{model_a} relacionado con %{model_b}."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} asignado satisfactoriamente a %{model_b}."

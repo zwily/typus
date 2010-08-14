@@ -4,10 +4,10 @@ pt-BR:
       typus_user: "Usuário do sistema"
     attributes:
       typus_user:
-        email: 
+        email:
         first_name: "Primeiro nome"
         last_name: "Sobrenome"
         password: "Senha"
         password_confirmation: "Senha confirmação"
-        status: 
-        role: 
+        status:
+        role:

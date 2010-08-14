@@ -24,12 +24,12 @@ module Admin
       build_pagination
       options = { foreign_key => @item.id }
 
-      render "admin/templates/has_n", 
-             :model_to_relate => @model_to_relate, 
-             :model_to_relate_as_resource => @model_to_relate_as_resource, 
-             :foreign_key => foreign_key, 
-             :add_new => raw(build_add_new(options)), 
-             :form => form, 
+      render "admin/templates/has_n",
+             :model_to_relate => @model_to_relate,
+             :model_to_relate_as_resource => @model_to_relate_as_resource,
+             :foreign_key => foreign_key,
+             :add_new => raw(build_add_new(options)),
+             :form => form,
              :table => build_relationship_table
 
     end
@@ -47,11 +47,11 @@ module Admin
 
       build_pagination
 
-      render "admin/templates/has_n", 
-             :model_to_relate => @model_to_relate, 
-             :model_to_relate_as_resource => @model_to_relate_as_resource, 
-             :add_new => raw(build_add_new), 
-             :form => form, 
+      render "admin/templates/has_n",
+             :model_to_relate => @model_to_relate,
+             :model_to_relate_as_resource => @model_to_relate_as_resource,
+             :add_new => raw(build_add_new),
+             :form => form,
              :table => build_relationship_table
 
     end
@@ -70,23 +70,23 @@ module Admin
     end
 
     def build_relate_form
-      render "admin/templates/relate_form", 
-             :model_to_relate => @model_to_relate, 
+      render "admin/templates/relate_form",
+             :model_to_relate => @model_to_relate,
              :items_to_relate => @items_to_relate
     end
 
     def build_relationship_table
-      build_list(@model_to_relate, 
-                 @model_to_relate.typus_fields_for(:relationship), 
-                 @items, 
-                 @model_to_relate_as_resource, 
-                 {}, 
+      build_list(@model_to_relate,
+                 @model_to_relate.typus_fields_for(:relationship),
+                 @items,
+                 @model_to_relate_as_resource,
+                 {},
                  @association)
     end
 
     def build_add_new(options = {})
-      default_options = { :controller => @field, :action => "new", 
-                          :resource => @resource.name, :resource_id => @item.id, 
+      default_options = { :controller => @field, :action => "new",
+                          :resource => @resource.name, :resource_id => @item.id,
                           :back_to => @back_to }
 
       return unless set_condition && @current_user.can?("create", @model_to_relate)
@@ -131,14 +131,14 @@ module Admin
       items << @resource.find(params[:id]).send(field) unless @resource.find(params[:id]).send(field).nil?
       unless items.empty?
         options = { :back_to => @back_to, :resource => @resource.to_resource, :resource_id => @item.id }
-        html << build_list(model_to_relate, 
-                           model_to_relate.typus_fields_for(:relationship), 
-                           items, 
-                           model_to_relate_as_resource, 
-                           options, 
+        html << build_list(model_to_relate,
+                           model_to_relate.typus_fields_for(:relationship),
+                           items,
+                           model_to_relate_as_resource,
+                           options,
                            association)
       else
-        message = _("There are no %{records}.", 
+        message = _("There are no %{records}.",
                     :records => model_to_relate.model_name.human.downcase)
         html << <<-HTML
   <div id="flash" class="notice"><p>#{message}</p></div>
@@ -165,22 +165,22 @@ module Admin
       related_fk = @resource.reflect_on_association(attribute.to_sym).primary_key_name
 
       confirm = [ _("Are you sure you want to leave this page?"),
-                  _("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."), 
+                  _("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."),
                   _("Click OK to continue, or click Cancel to stay on this page.") ]
 
-      message = link_to _("Add"), { :controller => "admin/#{related.to_resource}", 
-                                    :action => 'new', 
-                                    :back_to => back_to, 
-                                    :selected => related_fk }, 
+      message = link_to _("Add"), { :controller => "admin/#{related.to_resource}",
+                                    :action => 'new',
+                                    :back_to => back_to,
+                                    :selected => related_fk },
                                     :confirm => confirm.join("\n\n") if @current_user.can?('create', related)
 
-      render "admin/templates/belongs_to", 
-             :resource => @resource, 
-             :form => form, 
-             :related_fk => related_fk, 
-             :message => message, 
-             :label_text => @resource.human_attribute_name(attribute), 
-             :values => related.all(:order => related.typus_order_by).collect { |p| [p.to_label, p.id] }, 
+      render "admin/templates/belongs_to",
+             :resource => @resource,
+             :form => form,
+             :related_fk => related_fk,
+             :message => message,
+             :label_text => @resource.human_attribute_name(attribute),
+             :values => related.all(:order => related.typus_order_by).collect { |p| [p.to_label, p.id] },
              # :html_options => { :disabled => attribute_disabled?(attribute) },
              :html_options => {},
              :options => { :include_blank => true }

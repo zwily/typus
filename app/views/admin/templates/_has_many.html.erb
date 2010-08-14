@@ -2,10 +2,10 @@
 <div class="box_relationships" id="<%= model_to_relate_as_resource %>">
 
   <h2>
-    <%= link_to model_to_relate.model_name.human.pluralize, 
-                { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, 
-                :title => _("%{model} filtered by %{filtered_by}", 
-                            :model => model_to_relate.model_name.human.pluralize, 
+    <%= link_to model_to_relate.model_name.human.pluralize,
+                { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id },
+                :title => _("%{model} filtered by %{filtered_by}",
+                            :model => model_to_relate.model_name.human.pluralize,
                             :filtered_by => @item.to_label) %>
     <%= add_new %>
   </h2>

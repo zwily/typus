@@ -17,7 +17,7 @@ module Typus
 
       desc <<-DESC
 Description:
-  This generator creates required configuration files and a migration to 
+  This generator creates required configuration files and a migration to
   enable authentication on the admin panel.
 
 Examples:

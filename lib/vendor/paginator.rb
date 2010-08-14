@@ -18,7 +18,7 @@ class Paginator
   # * A total count of the number of objects to paginate
   # * The number of objects in each page
   # * A block that returns the array of items
-  #   * The block is passed the item offset 
+  #   * The block is passed the item offset
   #     (and the number of items to show per page, for
   #     convenience, if the arity is 2)
   def initialize(count, per_page, &select)
@@ -53,7 +53,7 @@ class Paginator
   # Retrieve page object by number
   def page(number)
     number = (n = number.to_i) > 0 ? n : 1
-    Page.new(self, number, lambda { 
+    Page.new(self, number, lambda {
       offset = (number - 1) * @per_page
       args = [offset]
       args << @per_page if @select.arity == 2

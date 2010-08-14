@@ -5,24 +5,24 @@ de:
 
   "A valid token is required": "Ein g&uuml;ltiges Merkmal ist erforderlich"
   "Actions": "Aktionen"
-  "Active": 
+  "Active":
   "Add": "Zuf&uuml;gen"
   "Add %{resource}": "Eintrag %{resource}"
   "Add new": "Erstellen"
-  "Are you sure?": 
+  "Are you sure?":
   "Are you sure you want to leave this page?": "Sind Sie sicher, dass Sie diese Seite verlassen m&ouml;chten?"
   "Are you sure you want to sign out and end your session?": "Wollen Sie sich abmelden und die Sitzung beenden?"
   "As you're not the admin or the owner of this record you cannot edit it": "Nur der Administrator oder der Eigent7uuml;er des Datensates kann ihn bearbeiten"
 
   "Back to list": "Zur&uuml;ck zur Liste"
 
-  "Cancel and go back": 
+  "Cancel and go back":
   "Change password": "Passwort &auml;ndern"
   "Change %{attribute}?": "%{attribute}&auml;ndern?"
   "Checked if active": "Angekreuzt wenn activiert"
   "Click OK to continue, or click Cancel to stay on this page": "Klicken Sie OK zum Fortfahren oder Abbrechen um auf dieser Seite zu bleiben"
   "Create %{resource}": "Erstellen %{resource}"
-  "Create one now": 
+  "Create one now":
 
   "Dashboard": "Dashboard"
   "Do you want to cancel it?": "Wollen Sie abbrechen?"
@@ -43,7 +43,7 @@ de:
   "I remember my password": "Ich erinnere mein Passwort"
   "If you didn't request a password update, you can ignore this message": "Falls Sie keine Passwort &Auml;derung beantragt haben, k&ouml;nnen Sie diese nachricht ignorieren"
   "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Wenn Sie &Auml;nderungen an Feldern vorgenommen haben, ohne den Speichern/Bearbeiten Knopf gedr7uuml;ckt zu haben, gehen diese &Auml;nderungen verloren"
-  "Inactive": 
+  "Inactive":
 
   "Last few days": "Letzten Tage"
   "Last 30 days": "Letzten 30 Tage"
@@ -66,11 +66,11 @@ de:
   "Remove %{attribute}": "Eintrag %{attribute}"
   "Remove %{resource}?": "Eintrag %{resource}?"
   "Remove filter": "Filter entfernen"
-  "Remove search": 
+  "Remove search":
   "Reset password": "Passwort zur&uuml;cksetzen"
   "Resources": "Resourcen"
 
-  "Save %{resource}": 
+  "Save %{resource}":
   "Search": "Suchen"
   "Search by": "Suchen nach"
   "Send us feedback": "Senden Sie uns Ihr Feedback"
@@ -80,7 +80,7 @@ de:
   "Sign in": "Anmelden"
   "Sign out": "Abmelden"
   "Sign up": "Konto erstellen"
-  "Submit a bug report": 
+  "Submit a bug report":
   "System Users Administration": "System Benutzer Verwaltung"
 
   "That doesn't seem like a valid email address": "Das schein keine g&uuml;ltige Email Dresse zu sein"
@@ -107,8 +107,8 @@ de:
   "You can't remove yourself": "Sie k&ouml;nnen sich selbst nicht entfernen"
   "You can't toggle your status": "Sie k&ouml;nnen Ihren Status nicht umschalten"
 
-  "%{attachment} can't be removed": 
-  "%{attachment} removed": 
+  "%{attachment} can't be removed":
+  "%{attachment} removed":
   "%{current_user_role} can't delete this item": "%{current_user_role} kann diesen Eintrag nicht l&ouml;schen"
   "%{current_user_role} can't display items": "%{current_user_role} kann Eintr&auml;ge nicht anzeigen"
   "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} kann die Aktion nicht ausf&uuml;hren. (%{action})"
@@ -116,9 +116,9 @@ de:
   "%{model} successfully created": "%{model} erfolgreich erstellt"
   "%{model} successfully removed": "%{model} erfolgreich gel&ouml;scht"
   "%{model} successfully updated": "%{model} erfolgreich ge&auml;ndert"
-  "%{model_a} cannot be related to %{model_b}": 
-  "%{model_a} cannot be unrelated from %{model_b}": 
-  "%{model} %{attribute} changed": "%{model} %{attribute} ge&auml;ndert" 
+  "%{model_a} cannot be related to %{model_b}":
+  "%{model_a} cannot be unrelated from %{model_b}":
+  "%{model} %{attribute} changed": "%{model} %{attribute} ge&auml;ndert"
   "%{model_a} related to %{model_b}": "%{model_a} ist verkn&uuml;pft mit %{model_b}"
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} erfolgreich an %{model_b} zugewiesen"
   "%{model_a} unrelated from %{model_b}": "%{model_a} unverbunden mit %{model_b}"

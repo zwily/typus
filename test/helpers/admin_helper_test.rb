@@ -22,7 +22,7 @@ class AdminHelperTest < ActiveSupport::TestCase
 
     partial = "admin/helpers/header"
     options = { :links => [ %(<a href="/admin/dashboard">Dashboard</a>),
-                            %(<a href="/admin/dashboard">Dashboard</a>), 
+                            %(<a href="/admin/dashboard">Dashboard</a>),
                             %(<a href="/">View site</a>) ] }
 
     assert_equal [ partial, options ], output
@@ -55,7 +55,7 @@ class AdminHelperTest < ActiveSupport::TestCase
     output = display_flash_message(message)
 
     partial = "admin/helpers/flash_message"
-    options = { :flash_type => :test, 
+    options = { :flash_type => :test,
                 :message => { :test => "This is the message." } }
 
     assert_equal partial, output.first

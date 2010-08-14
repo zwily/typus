@@ -13,11 +13,11 @@
 <%= typus_block %>
 
 <%
-  options = { :action => 'create', 
-              :back_to => params[:back_to], 
-              :selected => params[:selected], 
-              :resource => params[:resource], 
-              :resource_id => params[:resource_id] } 
+  options = { :action => 'create',
+              :back_to => params[:back_to],
+              :selected => params[:selected],
+              :resource => params[:resource],
+              :resource_id => params[:resource_id] }
   button = _("Create %{resource}", :resource => @resource.model_name.human)
 %>
 

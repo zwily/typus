@@ -8,7 +8,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
   end
 
   should "verify polymorphic relationship message" do
-    get :new, { :back_to => "/admin/posts/#{@post.id}/edit", 
+    get :new, { :back_to => "/admin/posts/#{@post.id}/edit",
                 :resource => @post.class.name, :resource_id => @post.id }
 
     assert_select 'body div#flash' do
@@ -19,8 +19,8 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   should "create a polymorphic relationship" do
     assert_difference('post_.assets.count') do
-      post :create, { :back_to => "/admin/posts/edit/#{@post.id}", 
-                      :resource => @post.class.name, 
+      post :create, { :back_to => "/admin/posts/edit/#{@post.id}",
+                      :resource => @post.class.name,
                       :resource_id => @post.id }
     end
 
@@ -32,8 +32,8 @@ class Admin::AssetsControllerTest < ActionController::TestCase
   should "render edit and verify message on polymorphic relationship" do
     asset = Factory(:asset)
 
-    get :edit, { :id => asset.id, 
-                 :back_to => "/admin/posts/#{@post.id}/edit", 
+    get :edit, { :id => asset.id,
+                 :back_to => "/admin/posts/#{@post.id}/edit",
                  :resource => @post.class.name, :resource_id => @post.id }
 
     assert_select 'body div#flash' do
@@ -46,9 +46,9 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     Typus::Resource.expects(:action_after_save).returns(:edit)
     asset = assets(:first)
 
-    post :update, { :back_to => "/admin/posts/#{@post.id}/edit", 
-                    :resource => @post.class.name, 
-                    :resource_id => @post.id, 
+    post :update, { :back_to => "/admin/posts/#{@post.id}/edit",
+                    :resource => @post.class.name,
+                    :resource_id => @post.id,
                     :id => asset.id }
 
     assert_response :redirect

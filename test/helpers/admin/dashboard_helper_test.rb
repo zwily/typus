@@ -17,9 +17,9 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
 
     output = applications
     partial = "admin/helpers/dashboard/applications"
-    options = { :applications => { [ "Site", [ "Asset", "Page" ] ] => nil, 
-                                   [ "System", [ "Delayed::Task" ] ] => nil, 
-                                   [ "Blog", [ "Comment", "Post" ] ] => nil, 
+    options = { :applications => { [ "Site", [ "Asset", "Page" ] ] => nil,
+                                   [ "System", [ "Delayed::Task" ] ] => nil,
+                                   [ "Blog", [ "Comment", "Post" ] ] => nil,
                                    [ "Typus", [ "TypusUser" ] ] => nil } }
 
     assert_equal partial, output.first

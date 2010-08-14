@@ -3,10 +3,10 @@ module Admin
   module TableHelper
 
     def build_table(model, fields, items, link_options = {}, association = nil)
-      render "admin/helpers/table/table", 
-             :model => model, 
-             :fields => fields, 
-             :items => items, 
+      render "admin/helpers/table/table",
+             :model => model,
+             :fields => fields,
+             :items => items,
              :link_options => link_options,
              :headers => table_header(model, fields)
     end
@@ -72,16 +72,16 @@ module Admin
                  item.class.typus_options_for(:default_action_on_item)
                end
 
-      options = { :controller => "admin/#{item.class.to_resource}", 
-                  :action => action, 
+      options = { :controller => "admin/#{item.class.to_resource}",
+                  :action => action,
                   :id => item.id }
 
       link_to _(action.capitalize), options
     end
 
     #--
-    # This controls the action to perform. If we are on a model list we 
-    # will remove the entry, but if we inside a model we will remove the 
+    # This controls the action to perform. If we are on a model list we
+    # will remove the entry, but if we inside a model we will remove the
     # relationship between the models.
     #
     # Only shown is the user can destroy/unrelate items.
@@ -114,19 +114,19 @@ module Admin
         confirm = _("Remove %{resource}?", :resource => item.class.model_name.human)
       when 'edit'
         # If we are editing content, we can relate and unrelate always!
-        confirm = _("Unrelate %{unrelate_model} from %{unrelate_model_from}?", 
-                    :unrelate_model => model.model_name.human, 
+        confirm = _("Unrelate %{unrelate_model} from %{unrelate_model_from}?",
+                    :unrelate_model => model.model_name.human,
                     :unrelate_model_from => @resource.model_name.human)
       when 'show'
-        # If we are showing content, we only can relate and unrelate if we are 
+        # If we are showing content, we only can relate and unrelate if we are
         # the owners of the owner record.
         # If the owner record doesn't have a foreign key (Typus.user_fk) we look
         # each item to verify the ownership.
         condition = if @resource.typus_user_id? && @current_user.is_not_root?
                       @item.owned_by?(@current_user)
                     end
-        confirm = _("Unrelate %{unrelate_model} from %{unrelate_model_from}?", 
-                    :unrelate_model => model.model_name.human, 
+        confirm = _("Unrelate %{unrelate_model} from %{unrelate_model_from}?",
+                    :unrelate_model => model.model_name.human,
                     :unrelate_model_from => @resource.model_name.human)
       end
 
@@ -177,13 +177,13 @@ module Admin
       file_preview_is_image = item.send("#{attribute}_content_type") =~ /^image\/.+/
 
       content = if has_file_preview && file_preview_is_image
-                  render "admin/helpers/preview", 
-                         :attribute => attribute, 
-                         :attachment => attribute, 
-                         :content => item.send(attribute), 
-                         :file_preview_is_image => file_preview_is_image, 
-                         :has_file_preview => has_file_preview, 
-                         :href => item.send(attribute).url(file_preview), 
+                  render "admin/helpers/preview",
+                         :attribute => attribute,
+                         :attachment => attribute,
+                         :content => item.send(attribute),
+                         :file_preview_is_image => file_preview_is_image,
+                         :has_file_preview => has_file_preview,
+                         :href => item.send(attribute).url(file_preview),
                          :item => item
                 else
                   link_to item.send(attribute), item.send(attribute).url
@@ -227,11 +227,11 @@ module Admin
                   Typus::Resource.human_nil
                 else
                   message = _(boolean_hash["#{status}".to_sym])
-                  options = { :controller => "admin/#{item.class.to_resource}", 
-                              :action => "toggle", 
-                              :id => item.id, 
+                  options = { :controller => "admin/#{item.class.to_resource}",
+                              :action => "toggle",
+                              :id => item.id,
                               :field => attribute.gsub(/\?$/,'') }
-                  confirm = _("Change %{attribute}?", 
+                  confirm = _("Change %{attribute}?",
                               :attribute => item.class.human_attribute_name(attribute).downcase)
                   link_to message, options, :confirm => confirm
                 end

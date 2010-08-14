@@ -5,16 +5,16 @@
 [X] Removed FIXME tests.
 [X] Pass attribute as symbol.
 [X] Simplify configuration files.
-[X] Added '/' to admin_edit_typus_user_path because was not linking to 
+[X] Added '/' to admin_edit_typus_user_path because was not linking to
     the right path on the namespaced models.
 [X] Updated generator defaults.
 [X] Write CSV file to disk and then send_file.
 [X] Replaced CSV separator. Now uses ';' instead of ','.
 [X] Do not show selector on habtm if there are more than 500 records.
 [X] Paginate habtm relationships. Was implemented in the has_many.
-[X] Fixed unrelate action. Was not working properly when not using 
+[X] Fixed unrelate action. Was not working properly when not using
     Rails default table names.
-[X] Do not humanize fields on the csv generator. We want to keep the 
+[X] Do not humanize fields on the csv generator. We want to keep the
     real field name.
 [X] Recover password functionality now only needs the email to be defined.
 [X] Added json export format.
@@ -25,11 +25,11 @@
 [X] Cleanup `build_typus_list` helper.
 [X] Fix back_to when using `relative_url_root`.
 [X] Remove toggle option. We always enable it so it's a good default.
-[X] When displaying an item with multiple attachments fancybox preview 
-    was not working properly because there where multiple items with the 
+[X] When displaying an item with multiple attachments fancybox preview
+    was not working properly because there where multiple items with the
     same id.
 [X] Move partial helpers to `app/views/admin/helpers`.
-[X] Do not set ActionMailer::Base.default_url_options[:host] on the 
+[X] Do not set ActionMailer::Base.default_url_options[:host] on the
     controller.
 [X] Cleanup `applications` & `resources`.
 [X] Fix problems on routes.rb when using namespaced models.
@@ -38,7 +38,7 @@
     `relative_url_root` is active. (and make a donation)
 [X] Test _form.html.erb can be overwrited by model.
 [X] Make tests work again.
-[X] Replace "render :partial => 'template', :locals => {}", by 
+[X] Replace "render :partial => 'template', :locals => {}", by
     "render 'template', :local => 'local'".
 [X] Add support for custom typus_user on the generator.
 [X] Shorten sidebar selectors. (AFS)
@@ -61,11 +61,11 @@
 [X] Review documentation and decide where to publish it.
 [X] Fix sidebar texts.
 [X] Allow users to download the demo hosted at heroku.com
-[ ] Removed javascript from filters. Now there's a form to submit the 
+[ ] Removed javascript from filters. Now there's a form to submit the
     search. This is how Wordpress works.
-[X] Applications without application name defined will appear as 
+[X] Applications without application name defined will appear as
     unknown on the dashboard.
-[X] Search fields now support exact match, beginning of the field and 
+[X] Search fields now support exact match, beginning of the field and
     full-text match which is the default.
 [X] Do not depend on Rdiscount when rendering content on resources#show.
 

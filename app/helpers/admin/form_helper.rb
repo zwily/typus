@@ -37,10 +37,10 @@ module Admin
     end
 
     def typus_tree_field(attribute, form)
-      render "admin/templates/tree", 
-             :attribute => attribute, 
-             :form => form, 
-             :label_text => @resource.human_attribute_name(attribute), 
+      render "admin/templates/tree",
+             :attribute => attribute,
+             :form => form,
+             :label_text => @resource.human_attribute_name(attribute),
              :values => expand_tree_into_select_field(@resource.roots, "parent_id")
     end
 
@@ -78,18 +78,18 @@ module Admin
 
     def typus_template_field(attribute, template, form)
 
-      options = { :start_year => @resource.typus_options_for(:start_year), 
-                  :end_year => @resource.typus_options_for(:end_year), 
-                  :minute_step => @resource.typus_options_for(:minute_step), 
-                  # :disabled => attribute_disabled?(attribute), 
+      options = { :start_year => @resource.typus_options_for(:start_year),
+                  :end_year => @resource.typus_options_for(:end_year),
+                  :minute_step => @resource.typus_options_for(:minute_step),
+                  # :disabled => attribute_disabled?(attribute),
                   :include_blank => true }
 
-      render "admin/templates/#{template}", 
-             :resource => @resource, 
-             :attribute => attribute, 
-             :options => options, 
-             :html_options => {}, 
-             :form => form, 
+      render "admin/templates/#{template}",
+             :resource => @resource,
+             :attribute => attribute,
+             :options => options,
+             :html_options => {},
+             :form => form,
              :label_text => @resource.human_attribute_name(attribute)
 
     end

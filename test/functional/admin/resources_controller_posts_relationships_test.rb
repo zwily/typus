@@ -13,7 +13,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#comments"
 
     assert_difference('post_.comments.count') do
-      post :relate, { :id => post_.id, 
+      post :relate, { :id => post_.id,
                       :related => { :model => 'Comment', :id => comment.id } }
     end
 
@@ -22,7 +22,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_equal "Comment related to Post", flash[:notice]
 
     assert_difference('post_.comments.count', -1) do
-      post :unrelate, { :id => post_.id, 
+      post :unrelate, { :id => post_.id,
                         :resource => 'Comment', :resource_id => comment.id }
     end
 
@@ -43,7 +43,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#categories"
 
     assert_difference('category.posts.count') do
-      post :relate, { :id => post_.id, 
+      post :relate, { :id => post_.id,
                       :related => { :model => 'Category', :id => category.id } }
     end
 
@@ -52,7 +52,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_equal "Category related to Post", flash[:notice]
 
     assert_difference('category.posts.count', -1) do
-      post :unrelate, { :id => post_.id, 
+      post :unrelate, { :id => post_.id,
                         :resource => 'Category', :resource_id => category.id }
     end
 
@@ -76,7 +76,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#assets"
 
     assert_difference('post_.assets.count', -1) do
-      get :unrelate, { :id => post_.id,  
+      get :unrelate, { :id => post_.id,
                        :resource => 'Asset', :resource_id => post_.assets.first.id }
     end
 

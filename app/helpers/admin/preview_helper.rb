@@ -33,12 +33,12 @@ module Admin
                   item.send(attribute)
                 end
 
-      render "admin/helpers/preview", 
-             :attribute => attribute, 
-             :content => content, 
-             :file_preview_is_image => file_preview_is_image, 
-             :has_file_preview => has_file_preview, 
-             :href => href, 
+      render "admin/helpers/preview",
+             :attribute => attribute,
+             :content => content,
+             :file_preview_is_image => file_preview_is_image,
+             :has_file_preview => has_file_preview,
+             :href => href,
              :item => item
 
     end

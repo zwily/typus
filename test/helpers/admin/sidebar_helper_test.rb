@@ -27,9 +27,9 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     params = { :controller => 'admin/posts', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
     output = export
-    expected = [ "admin/helpers/list", { :items => [ %(<a href="http://test.host/admin/posts?format=csv">CSV</a>), 
-                                                     %(<a href="http://test.host/admin/posts?format=xml">XML</a>) ], 
-                                         :header => "Export", 
+    expected = [ "admin/helpers/list", { :items => [ %(<a href="http://test.host/admin/posts?format=csv">CSV</a>),
+                                                     %(<a href="http://test.host/admin/posts?format=xml">XML</a>) ],
+                                         :header => "Export",
                                          :options => { :header => "export" } } ]
 
     assert_equal expected, output
@@ -44,8 +44,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = build_typus_list(['item1', 'item2'], :header => "Chunky Bacon")
     assert !output.empty?
 
-    expected = [ "admin/helpers/list", { :header=>"Chunky bacon", 
-                                         :options => { :header => "Chunky Bacon" }, 
+    expected = [ "admin/helpers/list", { :header=>"Chunky bacon",
+                                         :options => { :header => "Chunky Bacon" },
                                          :items => [ "item1", "item2" ] } ]
 
     assert_equal expected, output
@@ -53,8 +53,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   def test_build_typus_list_with_content_without_header
     output = build_typus_list(['item1', 'item2'])
-    expected = [ "admin/helpers/list", { :header => nil, 
-                                         :options => {}, 
+    expected = [ "admin/helpers/list", { :header => nil,
+                                         :options => {},
                                          :items=>["item1", "item2"] } ]
     assert_equal expected, output
   end
@@ -69,8 +69,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = search
 
     partial = "admin/helpers/search"
-    options = { :hidden_params => [ %(<input id="action" name="action" type="hidden" value="index" />), 
-                                    %(<input id="controller" name="controller" type="hidden" value="admin/typus_users" />) ], 
+    options = { :hidden_params => [ %(<input id="action" name="action" type="hidden" value="index" />),
+                                    %(<input id="controller" name="controller" type="hidden" value="admin/typus_users" />) ],
                 :search_by => "First name, Last name, Email, and Role" }
 
     assert_equal partial, output.first
@@ -112,11 +112,11 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = date_filter(request, filter)
 
     partial = "admin/helpers/list"
-    options = { :items => [ %(<a href="http://test.host/admin/typus_users?created_at=today" class="off">Today</a>), 
-                            %(<a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a>), 
-                            %(<a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a>), 
-                            %(<a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a>) ], 
-                :header => "Created at", 
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users?created_at=today" class="off">Today</a>),
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a>),
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a>),
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a>) ],
+                :header => "Created at",
                 :options => { :attribute => "created_at" } }
 
     assert_equal [ partial, options ], output
@@ -127,11 +127,11 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = date_filter(request, filter)
 
     partial = "admin/helpers/list"
-    options = { :items => [ %(<a href="http://test.host/admin/typus_users" class="on">Today</a>), 
-                            %(<a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a>), 
-                            %(<a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a>), 
-                            %(<a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a>) ], 
-                :header => "Created at", 
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users" class="on">Today</a>),
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_few_days" class="off">Last few days</a>),
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_7_days" class="off">Last 7 days</a>),
+                            %(<a href="http://test.host/admin/typus_users?created_at=last_30_days" class="off">Last 30 days</a>) ],
+                :header => "Created at",
                 :options => { :attribute => "created_at" } }
 
     assert_equal [ partial, options ], output
@@ -155,9 +155,9 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = boolean_filter(request, filter)
 
     partial = "admin/helpers/list"
-    options = { :items => [ %(<a href="http://test.host/admin/typus_users" class="on">Active</a>), 
-                            %(<a href="http://test.host/admin/typus_users?status=false" class="off">Inactive</a>) ], 
-                :header => "Status", 
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users" class="on">Active</a>),
+                            %(<a href="http://test.host/admin/typus_users?status=false" class="off">Inactive</a>) ],
+                :header => "Status",
                 :options => { :attribute => "status" } }
 
     assert_equal [ partial, options ], output
@@ -168,9 +168,9 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     output = boolean_filter(request, filter)
 
     partial = "admin/helpers/list"
-    options = { :items => [ %(<a href="http://test.host/admin/typus_users?status=true" class="off">Active</a>), 
-                            %(<a href="http://test.host/admin/typus_users" class="on">Inactive</a>) ], 
-                :header => "Status", 
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users?status=true" class="off">Active</a>),
+                            %(<a href="http://test.host/admin/typus_users" class="on">Inactive</a>) ],
+                :header => "Status",
                 :options => { :attribute => "status" } }
 
     assert_equal [ partial, options ], output
@@ -201,10 +201,10 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 
     partial = "admin/helpers/list"
-    options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"on\">Admin</a>", 
-                            "<a href=\"http://test.host/admin/typus_users?role=designer\" class=\"off\">Designer</a>", 
-                            "<a href=\"http://test.host/admin/typus_users?role=editor\" class=\"off\">Editor</a>" ], 
-                :header => "Role", 
+    options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"on\">Admin</a>",
+                            "<a href=\"http://test.host/admin/typus_users?role=designer\" class=\"off\">Designer</a>",
+                            "<a href=\"http://test.host/admin/typus_users?role=editor\" class=\"off\">Editor</a>" ],
+                :header => "Role",
                 :options => { :attribute => "role" } }
 
     assert_equal [ partial, options ], output
@@ -225,10 +225,10 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     HTML
 
     partial = "admin/helpers/list"
-    options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"off\">Admin</a>", 
-                            "<a href=\"http://test.host/admin/typus_users?role=designer\" class=\"off\">Designer</a>", 
-                            "<a href=\"http://test.host/admin/typus_users?role=editor\" class=\"on\">Editor</a>" ], 
-                :header => "Role", 
+    options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"off\">Admin</a>",
+                            "<a href=\"http://test.host/admin/typus_users?role=designer\" class=\"off\">Designer</a>",
+                            "<a href=\"http://test.host/admin/typus_users?role=editor\" class=\"on\">Editor</a>" ],
+                :header => "Role",
                 :options => { :attribute => "role" } }
 
     assert_equal [ partial, options ], output
@@ -245,8 +245,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
     request = 'role=admin&page=1'
 
-    array = [['Administrador', 'admin'], 
-             ['Diseñador', 'designer'], 
+    array = [['Administrador', 'admin'],
+             ['Diseñador', 'designer'],
              ['Editor', 'editor']]
     @resource.expects('role').returns(array)
 
@@ -264,8 +264,8 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     partial = "admin/helpers/list"
     options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"on\">Administrador</a>",
                             "<a href=\"http://test.host/admin/typus_users?role=designer\" class=\"off\">Diseñador</a>",
-                            "<a href=\"http://test.host/admin/typus_users?role=editor\" class=\"off\">Editor</a>" ], 
-                :header => "Role", 
+                            "<a href=\"http://test.host/admin/typus_users?role=editor\" class=\"off\">Editor</a>" ],
+                :header => "Role",
                 :options => { :attribute => "role" } }
 
     assert_equal [ partial, options ], output

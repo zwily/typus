@@ -5,8 +5,8 @@ module Typus
     protected
 
     #--
-    # Require login checks if the user is logged on Typus, otherwise 
-    # is sent to the sign in page with a :back_to param to return where 
+    # Require login checks if the user is logged on Typus, otherwise
+    # is sent to the sign in page with a :back_to param to return where
     # she tried to go.
     #++
     def authenticate
@@ -41,7 +41,7 @@ module Typus
     end
 
     #--
-    # Return the current user. If role does not longer exist on the 
+    # Return the current user. If role does not longer exist on the
     # system @current_user will be signed out from Typus.
     #++
     def current_user
@@ -135,8 +135,8 @@ module Typus
                   "%{current_user_role} can't perform action. (%{action})"
                 end
 
-      message = _(message, 
-                  :current_user_role => @current_user.role.capitalize, 
+      message = _(message,
+                  :current_user_role => @current_user.role.capitalize,
                   :action => params[:action])
 
       unless @current_user.can?(params[:action], @resource)
@@ -161,11 +161,11 @@ module Typus
     end
 
     #--
-    # If item is owned by another user, we only can perform a 
+    # If item is owned by another user, we only can perform a
     # show action on the item. Updated item is also blocked.
     #
-    #   before_filter :check_resource_ownership, :only => [ :edit, :update, :destroy, 
-    #                                                       :toggle, :position, 
+    #   before_filter :check_resource_ownership, :only => [ :edit, :update, :destroy,
+    #                                                       :toggle, :position,
     #                                                       :relate, :unrelate ]
     #++
     def check_resource_ownership
@@ -192,7 +192,7 @@ module Typus
       # By-pass if current_user is root.
       return if @current_user.is_root?
 
-      # Show only related items it @resource has a foreign_key (Typus.user_fk) 
+      # Show only related items it @resource has a foreign_key (Typus.user_fk)
       # related to the logged user.
       if @resource.typus_user_id?
         condition = { Typus.user_fk => @current_user }
@@ -226,7 +226,7 @@ module Typus
     end
 
     #--
-    # Reload @current_user when updating to see flash message in the 
+    # Reload @current_user when updating to see flash message in the
     # correct locale.
     #++
     def reload_locales

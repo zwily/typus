@@ -11,8 +11,8 @@ class ActiveRecord::Base
   end
 
   #--
-  # TODO: This has been copied from Rails 2 because has been removed 
-  #       from Rails 3. Once the "build_conditions" has been refactored 
+  # TODO: This has been copied from Rails 2 because has been removed
+  #       from Rails 3. Once the "build_conditions" has been refactored
   #       to use Arel this can be removed.
   #++
   def self.merge_conditions(*conditions)
@@ -34,8 +34,8 @@ class ActiveRecord::Base
   # On a model:
   #
   #     class Post < ActiveRecord::Base
-  #       STATUS = { "published" => t("Published"), 
-  #                  "pending" => t("Pending"), 
+  #       STATUS = { "published" => t("Published"),
+  #                  "pending" => t("Pending"),
   #                  "draft" => t("Draft") }
   #     end
   #

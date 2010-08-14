@@ -2,7 +2,7 @@ require "test/test_helper"
 
 class TypusUserTest < ActiveSupport::TestCase
 
-  [ %Q(this_is_chelm@example.com\n<script>location.href="http://spammersite.com"</script>), 
+  [ %Q(this_is_chelm@example.com\n<script>location.href="http://spammersite.com"</script>),
     'admin', 'TEST@EXAMPLE.COM', 'test@example', 'test@example.c', 'testexample.com' ].each do |value|
     should_not allow_value(value).for(:email)
   end

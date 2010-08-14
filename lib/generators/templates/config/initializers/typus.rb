@@ -5,7 +5,7 @@ Typus.setup do |config|
   # config.admin_sub_title = ""
 
   # Configure the e-mail address which will be shown in Admin::Mailer.
-  # When this option is define Typus will allow admin users to recover 
+  # When this option is define Typus will allow admin users to recover
   # lost passwords.
   # config.mailer_sender = "admin@example.com"
 

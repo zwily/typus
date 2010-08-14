@@ -33,8 +33,8 @@ module AdminHelper
   def login_info(user = @current_user)
     return if user.kind_of?(Admin::FakeUser)
 
-    admin_edit_typus_user_path = { :controller => "/admin/#{Typus.user_class.to_resource}", 
-                                   :action => 'edit', 
+    admin_edit_typus_user_path = { :controller => "/admin/#{Typus.user_class.to_resource}",
+                                   :action => 'edit',
                                    :id => user.id }
 
     message = _("Are you sure you want to sign out and end your session?")

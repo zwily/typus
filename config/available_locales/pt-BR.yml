@@ -5,28 +5,28 @@ pt-BR:
 
   "A valid token is required": "É necessário um token válido."
   "Actions": "Ações"
-  "Active": 
+  "Active":
   "Add": "Adicionar"
   "Add %{resource}": "Adicionar %{resource}"
   "Add new": "Adicionar novo"
-  "Are you sure?": 
+  "Are you sure?":
   "Are you sure you want to leave this page?": "Tem certeza que quer sair desta página?"
   "Are you sure you want to sign out and end your session?": "Tem certeza que quer sair e encerrar sua sessão?"
   "As you're not the admin or the owner of this record you cannot edit it": "Como você não é o dono desse registro ou o admin, você não pode editá-lo."
 
   "Back to list": "Voltar à lista"
 
-  "Cancel and go back": 
+  "Cancel and go back":
   "Change password": "Trocar senha"
   "Change %{attribute}?": "Mudar %{attribute}?"
   "Checked if active": "Marcar para ativar"
   "Click OK to continue, or click Cancel to stay on this page": "Clique OK para continuar, ou clique em Cancelar para ficar nesta página."
   "Create %{resource}": "Criar %{resource}"
-  "Create one now": 
+  "Create one now":
 
   "Dashboard": "Painel"
   "Do you want to cancel it?": "Quer cancelar?"
-  "Documentation": 
+  "Documentation":
   "Down": "Descer"
 
   "Edit": "Editar"
@@ -43,12 +43,12 @@ pt-BR:
   "I remember my password": "Lembro minha senha"
   "If you didn't request a password update, you can ignore this message": "Se você não pediu uma renovação de senha, por favor ignore esta mensagem."
   "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Se você fez alterações nos campos e não clicou no botão de Salvar/Atualizar, suas alterações serão perdidas"
-  "Inactive": 
+  "Inactive":
 
   "Last few days": "Últimos dias"
   "Last 30 days": "Últimos 30 dias"
   "Last 7 days": "Últimos 7 dias"
-  "License": 
+  "License":
   "Logged as": "Logado como"
   "Login": "Login"
 
@@ -66,21 +66,21 @@ pt-BR:
   "Remove %{attribute}": "Remover %{attribute}"
   "Remove %{resource}?": "Remover %{resource}?"
   "Remove filter": "Remover filtro"
-  "Remove search": 
+  "Remove search":
   "Reset password": "Trocar senha"
   "Resources": "Recursos"
 
-  "Save %{resource}": 
+  "Save %{resource}":
   "Search": "Busca"
   "Search by": "Buscar por"
-  "Send us feedback": 
+  "Send us feedback":
   "Setup": "Configurar"
   "Show": "Mostrar"
   "Show %{resource}": "Mostrar %{resource}"
   "Sign in": "Entrar"
   "Sign out": "Sair"
   "Sign up": "Criar conta"
-  "Submit a bug report": 
+  "Submit a bug report":
   "System Users Administration": "Administrar usuários do sistema"
 
   "That doesn't seem like a valid email address": "Este não parece um email válido"
@@ -107,8 +107,8 @@ pt-BR:
   "You can update your password at": "Você pode atualizar sua senha em"
   "You can't change your role": "Você não pode mudar sua própria função no sistema."
 
-  "%{attachment} can't be removed": 
-  "%{attachment} removed": 
+  "%{attachment} can't be removed":
+  "%{attachment} removed":
   "%{current_user_role} can't delete this item": "%{current_user_role} não pode apagar este item."
   "%{current_user_role} can't display items": "%{current_user_role} não pode mostrar os items."
   "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} não pode realizar a ação. (%{action})"
@@ -116,8 +116,8 @@ pt-BR:
   "%{model} successfully updated": "%{model} atualizado com sucesso."
   "%{model} successfully created": "%{model} criado com sucesso."
   "%{model} successfully removed": "%{model} removido com sucesso."
-  "%{model_a} cannot be related to %{model_b}": 
-  "%{model_a} cannot be unrelated from %{model_b}": 
+  "%{model_a} cannot be related to %{model_b}":
+  "%{model_a} cannot be unrelated from %{model_b}":
   "%{model} %{attribute} changed": "%{model} %{attribute} atualizado."
   "%{model_a} related to %{model_b}": "%{model_a} relacionado com %{model_b}."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} atribuído com sucesso a %{model_b}."

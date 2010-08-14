@@ -131,11 +131,11 @@ Description:
           # - Form
           #
 
-          rejections = %w( ^id$ 
-                           created_at created_on updated_at updated_on deleted_at 
-                           salt crypted_password 
-                           password_salt persistence_token single_access_token perishable_token 
-                           _type$ 
+          rejections = %w( ^id$
+                           created_at created_on updated_at updated_on deleted_at
+                           salt crypted_password
+                           password_salt persistence_token single_access_token perishable_token
+                           _type$
                            _file_size$ )
 
           default_rejections = rejections + %w( password password_confirmation )
@@ -154,7 +154,7 @@ Description:
           filters = "created_at" if klass.columns.include?("created_at")
           search = ( [ "name", "title" ] & default ).join(", ")
 
-          # We want attributes of belongs_to relationships to be shown in our 
+          # We want attributes of belongs_to relationships to be shown in our
           # field collections if those are not polymorphic.
           [ default, form ].each do |fields|
             fields << klass.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }

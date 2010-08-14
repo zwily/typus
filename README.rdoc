@@ -4,7 +4,7 @@ Typus is designed for a single activity:
 
     Trusted users editing structured content.
 
-Typus doesn't try to be all the things to all the people but it's extensible 
+Typus doesn't try to be all the things to all the people but it's extensible
 enough to match lots of use cases.
 
 == Key Features
@@ -31,7 +31,7 @@ enough to match lots of use cases.
 
 == Installing
 
-Install from GitHub the latest version which it's compatible with 
+Install from GitHub the latest version which it's compatible with
 <tt>Rails 3.0.0.beta4</tt>.
 
     $ rails plugin install git://github.com/fesplugas/typus.git -r 3-0-unstable

@@ -11,8 +11,8 @@ module Admin
     include TableHelper
 
     #--
-    # If there's a partial with a "microformat" of the data we want to 
-    # display, this will be used, otherwise we use a default table which 
+    # If there's a partial with a "microformat" of the data we want to
+    # display, this will be used, otherwise we use a default table which
     # it's build from the options defined on the yaml configuration file.
     #++
     def build_list(model, fields, items, resource = @resource.to_resource, link_options = {}, association = nil)
@@ -43,8 +43,8 @@ module Admin
                 else
                   "You're adding a new %{resource_from}."
                 end
-      message = _(message, 
-                  :resource_from => options[:resource_from], 
+      message = _(message,
+                  :resource_from => options[:resource_from],
                   :resource_to => options[:resource_to])
 
       render File.join(path, "display_link_to_previous"), :message => message

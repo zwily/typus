@@ -48,10 +48,10 @@ module Typus
         options[:password] ||= ActiveSupport::SecureRandom.hex(4)
         options[:role] ||= Typus.master_role
 
-        new :email => options[:email], 
-            :password => options[:password], 
-            :password_confirmation => options[:password], 
-            :role => options[:role], 
+        new :email => options[:email],
+            :password => options[:password],
+            :password_confirmation => options[:password],
+            :role => options[:role],
             :preferences => { :locale => I18n.default_locale.to_s }
       end
 
@@ -85,7 +85,7 @@ module Typus
       #++
       def can?(action, resource, options = {})
 
-        # Sometimes we are getting a Class, so we need to convert it 
+        # Sometimes we are getting a Class, so we need to convert it
         # to string.
         resource = resource.to_s
 
@@ -98,8 +98,8 @@ module Typus
                     case action
                     when "new", "create" then "create"
                     when "index", "show" then "read"
-                    when "edit", "update", 
-                         "position", "toggle", 
+                    when "edit", "update",
+                         "position", "toggle",
                          "relate", "unrelate", "detach" then "update"
                     when "destroy" then "delete"
                     else action
