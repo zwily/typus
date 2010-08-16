@@ -208,9 +208,10 @@ module Admin::FormHelper
       items_per_page = model_to_relate.typus_options_for(:per_page).to_i
 
       @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
-        options.merge!({:limit => per_page, :offset => offset})
+        eager_loading = model_to_relate.reflect_on_all_associations(:belongs_to).map { |i| i.name } - [@resource[:class].name.downcase.to_sym]
+        options.merge!({:limit => per_page, :offset => offset, :include => eager_loading})
         items = @resource[:class].find(params[:id]).send(field).find(:all, options)
-      end
+      end 
 
       @items = @pager.page(params[:page])
 
