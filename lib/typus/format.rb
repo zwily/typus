@@ -69,11 +69,12 @@ module Typus
     end
 
     def data(*args)
-      eager_loading = @resource[:class].reflect_on_all_associations(:belongs_to).map { |i| i.name }
+      config_fields = @resource[:class].typus_fields_for(:list).keys.map { |f| f.to_sym }
+      eager_loading = @resource[:class].reflect_on_all_associations(:belongs_to).map { |i| i.name } & config_fields
       options = { :joins => @joins, :conditions => @conditions, :order => @order, :include => eager_loading }
       options.merge!(args.extract_options!)
       @resource[:class].find(:all, options)
-    end
+    end 
 
   end
 
