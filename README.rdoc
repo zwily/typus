@@ -32,7 +32,7 @@ enough to match lots of use cases.
 == Installing
 
 Install from GitHub the latest version which it's compatible with
-<tt>Rails 3.0.0.beta4</tt>.
+<tt>Rails 3.0.0</tt>.
 
     $ rails plugin install git://github.com/fesplugas/typus.git -r 3-0-unstable
 
