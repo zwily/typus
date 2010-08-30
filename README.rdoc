@@ -9,23 +9,21 @@ enough to match lots of use cases.
 
 == Key Features
 
-- Authentication by session or http.
-- Access control by users and roles (only on session authentication).
-- Create, edit, search and filter data.
+- User Authentication with registration and account activation
+- User Permissions by using Access Control Lists (stored in yaml files)
+- CRUD and custom actions for your models on a clean interface.
 - Internationalized interface.
 - Extensible and overwritable templates.
-- Supports ActiveRecord.
+- Low memory footprint.
 - Works with Rails 3.0.0 and is Ruby 1.9.2 compatible.
-- Tested with SQLite, MySQL, and PostgreSQL.
-- MIT License.
+- Tested with SQLite, MySQL and PostgreSQL.
+- MIT License, the same as Rails.
 
 == Links
 
-- {Project page}[http://core.typuscms.com/]
-- {Documentation}[http://core.typuscms.com/]
+- {Project page and documentation }[http://core.typuscms.com/]
 - {Plugin source code}[http://github.com/fesplugas/typus]
 - {Mailing list}[http://groups.google.com/group/typus]
-- {Bug reports}[http://github.com/fesplugas/typus/issues]
 - {Gems}[http://rubygems.org/gems/typus]
 - {Contributors}[http://github.com/fesplugas/typus/contributors]
 
