@@ -23,7 +23,7 @@ Gem::Specification.new do |s|
   s.files = Dir.glob("**/*")
   s.require_path = "lib"
 
-  s.add_development_dependency "rails", [">= 3.0.0.beta4"]
+  s.add_development_dependency "rails", [">= 3.0.0"]
   s.add_development_dependency "fastercsv", ["1.5.3"]
   s.add_development_dependency "sqlite3-ruby"
   s.add_development_dependency "mysql"
