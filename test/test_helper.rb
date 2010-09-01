@@ -35,7 +35,6 @@ end
 ActionController::Base.append_view_path(File.join(Typus.root, "app/views"))
 
 class ActiveSupport::TestCase
-  self.fixture_path = File.dirname(__FILE__) + "/fixtures"
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
 end
