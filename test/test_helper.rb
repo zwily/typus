@@ -23,17 +23,6 @@ ActiveRecord::Base.establish_connection(connection)
 load File.join(File.dirname(__FILE__), "schema.rb")
 Dir[File.join(File.dirname(__FILE__), "factories", "**","*.rb")].each { |factory| require factory }
 
-# To test the plugin without touching the application we set our
-# load_paths and view_paths.
-
-=begin
-%w( models controllers helpers ).each do |folder|
-  ActiveSupport::Dependencies.load_paths << File.join(Typus.root, "app", folder)
-end
-=end
-
-ActionController::Base.append_view_path(File.join(Typus.root, "app/views"))
-
 class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
