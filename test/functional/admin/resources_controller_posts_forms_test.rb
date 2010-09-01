@@ -1,4 +1,4 @@
-require "test/test_helper"
+require "test_helper"
 
 # Here we test everything related to forms.
 
