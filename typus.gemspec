@@ -23,16 +23,4 @@ Gem::Specification.new do |s|
   s.files = Dir.glob("**/*")
   s.require_path = "lib"
 
-  s.add_development_dependency "rails", [">= 3.0.0"]
-  s.add_development_dependency "fastercsv", ["1.5.3"]
-  s.add_development_dependency "sqlite3-ruby"
-  s.add_development_dependency "mysql"
-  s.add_development_dependency "pg"
-  s.add_development_dependency "factory_girl", ["1.3.0"]
-  s.add_development_dependency "mocha"
-  s.add_development_dependency "redgreen"
-  s.add_development_dependency "acts_as_tree"
-  s.add_development_dependency "acts_as_list"
-  s.add_development_dependency "paperclip"
-
 end
