@@ -1,4 +1,4 @@
-require "test/test_helper"
+require "test_helper"
 
 class TypusUserTest < ActiveSupport::TestCase
 
@@ -82,7 +82,7 @@ class TypusUserTest < ActiveSupport::TestCase
   context "Class methods" do
 
     should "verify generate requires the role" do
-      assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX').invalid?
+      assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX').valid?
       assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX', :role => 'admin').valid?
     end
 
