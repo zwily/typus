@@ -32,11 +32,9 @@ class Admin::AccountControllerTest < ActionController::TestCase
       assert_difference "TypusUser.count" do
         post :create, :typus_user => { :email => "john@example.com" }
       end
-      assert_response :redirect
 
-      typus_user = TypusUser.find_by_email("john@example.com")
-      url = { :action => "show", :id => typus_user.token }
-      assert_redirected_to url
+      assert_response :redirect
+      assert_redirected_to :action => "show", :id => TypusUser.find_by_email("john@example.com").token
     end
 
   end
