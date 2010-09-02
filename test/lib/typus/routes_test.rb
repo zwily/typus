@@ -17,7 +17,7 @@ class RoutesTest < ActiveSupport::TestCase
   end
 
   should "verify admin account named routes" do
-    expected = %w(forgot_password_admin_account admin_account_index new_admin_account admin_account)
+    expected = %w(forgot_password_admin_account_index admin_account_index new_admin_account admin_account)
     expected.each { |r| assert @routes.include?(r) }
   end
 
