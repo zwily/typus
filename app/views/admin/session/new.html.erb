@@ -18,7 +18,7 @@
     </li>
 
     <li>
-      <%= submit_tag _("Sign in"), :class => "button" %> <%= link_to _("Recover password"), forgot_password_admin_accounts_path if Rails.env.development? || Typus.mailer_sender %>
+      <%= submit_tag _("Sign in"), :class => "button" %> <%= link_to _("Recover password"), forgot_password_admin_account_index_path if Rails.env.development? || Typus.mailer_sender %>
     </li>
 
   </ul>
