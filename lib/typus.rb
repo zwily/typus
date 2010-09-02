@@ -158,7 +158,7 @@ module Typus
 
       # Typus configuration and resources configuration
       require "typus/configuration"
-      require "typus/resource"
+      require "typus/resources"
 
       # Typus Active Record extensions and mixins
       require "typus/orm/active_record"
