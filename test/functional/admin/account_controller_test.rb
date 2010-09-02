@@ -33,9 +33,10 @@ class Admin::AccountControllerTest < ActionController::TestCase
         post :create, :typus_user => { :email => "john@example.com" }
       end
       assert_response :redirect
-      assert_redirected_to admin_dashboard_path
-      assert_equal %(Password set to 'columbia'.), flash[:notice]
-      assert @request.session[:typus_user_id]
+
+      typus_user = TypusUser.find_by_email("john@example.com")
+      url = { :action => "show", :id => typus_user.token }
+      assert_redirected_to url
     end
 
   end
