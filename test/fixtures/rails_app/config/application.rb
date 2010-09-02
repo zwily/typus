@@ -7,7 +7,6 @@ require 'rails/all'
 Bundler.require(:default, Rails.env) if defined?(Bundler)
 
 require "typus"
-Typus.boot!
 
 module RailsApp
   class Application < Rails::Application

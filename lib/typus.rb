@@ -1,5 +1,17 @@
 # coding: utf-8
 
+require "support/active_record"
+require "support/array"
+require "support/hash"
+require "support/object"
+require "support/string"
+require "typus/engine"
+require "typus/configuration"
+require "typus/resources"
+require "typus/orm/active_record"
+require "typus/user"
+require "vendor/paginator"
+
 module Typus
 
   # Define the application name.
@@ -144,31 +156,8 @@ module Typus
       detect_locales
     end
 
-    def boot!
-
-      # Support extensions
-      require "support/active_record"
-      require "support/array"
-      require "support/hash"
-      require "support/object"
-      require "support/string"
-
-      # Enable engine
-      require "typus/engine" if Rails.env.test?
-
-      # Typus configuration and resources configuration
-      require "typus/configuration"
-      require "typus/resources"
-
-      # Typus Active Record extensions and mixins
-      require "typus/orm/active_record"
-      require "typus/user"
-
-      # Vendor
-      require "vendor/paginator"
-
-    end
-
   end
 
 end
+
+Typus.reload!
