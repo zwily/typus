@@ -2,9 +2,9 @@ module Typus
 
   module Resource
 
-    # Setup Typus::Resource. This should be run from an initializer.
+    # Setup Typus::Resources. This should be run from an initializer.
     #
-    #     Typus::Resource.setup do |config|
+    #     Typus::Resources.setup do |config|
     #       config.default_action_on_item = "index"
     #     end
     #

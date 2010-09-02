@@ -159,7 +159,7 @@ module Typus
       #--
       # Options are defined for all resources on the initializer:
       #
-      #     Typus::Resource.setup do |config|
+      #     Typus::Resources.setup do |config|
       #       config.per_page = 15
       #     end
       #
@@ -177,7 +177,7 @@ module Typus
           value = data['options'][filter.to_s] unless data['options'][filter.to_s].nil?
         end
 
-        return (!value.nil?) ? value : Typus::Resource.send(filter)
+        return (!value.nil?) ? value : Typus::Resources.send(filter)
 
       end
 

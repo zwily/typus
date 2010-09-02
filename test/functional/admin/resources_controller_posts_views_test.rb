@@ -84,7 +84,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   should "get_index_and_render_edit_or_show_links" do
     %w(edit show).each do |action|
-      Typus::Resource.expects(:default_action_on_item).at_least_once.returns(action)
+      Typus::Resources.expects(:default_action_on_item).at_least_once.returns(action)
       get :index
       Post.all.each do |post|
         assert_match "/posts/#{action}/#{post.id}", @response.body
@@ -130,8 +130,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     should "get_index_and_render_edit_or_show_on_only_user_items" do
       %w(edit show).each do |action|
-        Typus::Resource.stubs(:only_user_items).returns(true)
-        Typus::Resource.stubs(:default_action_on_item).returns(action)
+        Typus::Resources.stubs(:only_user_items).returns(true)
+        Typus::Resources.stubs(:default_action_on_item).returns(action)
         get :index
         Post.all.each do |post|
           if post.owned_by?(@typus_user)

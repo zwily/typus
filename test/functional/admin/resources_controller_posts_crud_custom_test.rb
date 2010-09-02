@@ -10,7 +10,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   context "Overwrite action_after_save" do
 
     setup do
-      Typus::Resource.expects(:action_after_save).returns("index")
+      Typus::Resources.expects(:action_after_save).returns("index")
     end
 
     should "create an item and redirect to index" do

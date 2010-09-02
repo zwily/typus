@@ -43,7 +43,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
   end
 
   should "return to back_to url" do
-    Typus::Resource.expects(:action_after_save).returns(:edit)
+    Typus::Resources.expects(:action_after_save).returns(:edit)
     asset = assets(:first)
 
     post :update, { :back_to => "/admin/posts/#{@post.id}/edit",

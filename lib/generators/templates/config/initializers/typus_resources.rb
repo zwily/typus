@@ -1,4 +1,4 @@
-Typus::Resource.setup do |config|
+Typus::Resources.setup do |config|
 
   # Defines the default_action_on_item.
   # config.default_action_on_item = "edit"

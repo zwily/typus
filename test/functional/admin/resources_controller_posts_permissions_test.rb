@@ -74,7 +74,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     should "verify_editor_tries_to_show_a_post_owned_by_the_admin whe only user items" do
 
-      Typus::Resource.expects(:only_user_items).returns(true)
+      Typus::Resources.expects(:only_user_items).returns(true)
       post = Factory(:post)
       get :show, { :id => post.id }
 
