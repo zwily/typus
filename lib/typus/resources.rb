@@ -1,6 +1,6 @@
 module Typus
 
-  module Resource
+  module Resources
 
     # Setup Typus::Resources. This should be run from an initializer.
     #
