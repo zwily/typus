@@ -10,8 +10,6 @@ module Typus
 
       source_root File.expand_path("../../templates", __FILE__)
 
-      Typus.reload!
-
       class_option :user_class_name, :default => "AdminUser"
       class_option :user_fk, :default => "admin_user_id"
 

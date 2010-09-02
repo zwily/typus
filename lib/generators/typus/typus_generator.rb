@@ -12,8 +12,6 @@ module Typus
 
       namespace "typus"
 
-      Typus.reload!
-
       class_option :admin_title, :default => Rails.root.basename
 
       desc <<-DESC
