@@ -122,12 +122,11 @@ module Typus
       end
 
       def typus_search_fields
-        data = Typus::Configuration.config[name]["search"]
-        return [] if data.nil?
+        data = typus_defaults_for(:search)
 
         search = {}
 
-        data.extract_settings.each do |field|
+        data.each do |field|
           if field.starts_with?("=")
             field.slice!(0)
             search[field] = "="
@@ -140,7 +139,6 @@ module Typus
         end
 
         return search
-
       end
 
       #--
