@@ -1,6 +1,6 @@
 require "typus/format"
 
-class Admin::ResourcesController < AdminController
+class Admin::ResourcesController < Admin::BaseController
 
   include Typus::Format
 

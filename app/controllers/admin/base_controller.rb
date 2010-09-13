@@ -1,6 +1,6 @@
 require "typus/authentication"
 
-class AdminController < ActionController::Base
+class Admin::BaseController < ActionController::Base
 
   unloadable
 

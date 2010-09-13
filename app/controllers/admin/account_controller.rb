@@ -1,4 +1,4 @@
-class Admin::AccountController < AdminController
+class Admin::AccountController < Admin::BaseController
 
   layout 'admin/session'
 
