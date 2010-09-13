@@ -35,7 +35,6 @@ task :release => :build do
   version = Typus::VERSION
   system "git tag v#{version}"
   system "git push origin v#{version}"
-  system "gem push pkg/typus-#{version}.gem"
-  system "git clean -fd"
   system "gem push typus-#{version}"
+  system "git clean -fd"
 end
