@@ -299,10 +299,10 @@ module Typus
             conditions = merge_conditions(conditions, condition)
           when :datetime
             interval = case value
-                       when 'today'         then Time.new.midnight..Time.new.midnight.tomorrow
-                       when 'last_few_days' then 3.days.ago.midnight..Time.new.midnight.tomorrow
-                       when 'last_7_days'   then 6.days.ago.midnight..Time.new.midnight.tomorrow
-                       when 'last_30_days'  then Time.new.midnight.prev_month..Time.new.midnight.tomorrow
+                       when 'today'         then Time.new.beginning_of_day..Time.new.beginning_of_day.tomorrow
+                       when 'last_few_days' then 3.days.ago.beginning_of_day..Time.new.beginning_of_day.tomorrow
+                       when 'last_7_days'   then 6.days.ago.beginning_of_day..Time.new.beginning_of_day.tomorrow
+                       when 'last_30_days'  then Time.new.beginning_of_day.prev_month..Time.new.beginning_of_day.tomorrow
                        end
             condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
             conditions = merge_conditions(conditions, condition)
@@ -327,7 +327,7 @@ module Typus
               interval = case value
                          when 'today'         then nil
                          when 'last_few_days' then 3.days.ago.to_date..Date.tomorrow
-                         when 'last_7_days'   then 6.days.ago.midnight..Date.tomorrow
+                         when 'last_7_days'   then 6.days.ago.beginning_of_day..Date.tomorrow
                          when 'last_30_days'  then (Date.today << 1)..Date.tomorrow
                          end
               if interval

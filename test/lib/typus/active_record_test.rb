@@ -328,9 +328,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "return_sql_conditions_on_filtering_typus_users_by_created_at today" do
       expected = case ENV["DB"]
                  when /postgresql/
-                   "(created_at BETWEEN E'#{Time.new.midnight.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
+                   "(created_at BETWEEN E'#{Time.zone.now.beginning_of_day.to_s(:db)}' AND E'#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
                  else
-                   "(created_at BETWEEN '#{Time.new.midnight.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
+                   "(created_at BETWEEN '#{Time.zone.now.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
                  end
 
       params = { :created_at => "today" }
@@ -340,9 +340,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "return_sql_conditions_on_filtering_typus_users_by_created_at last_few_days" do
       expected = case ENV["DB"]
                  when /postgresql/
-                   "(created_at BETWEEN E'#{3.days.ago.midnight.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
+                   "(created_at BETWEEN E'#{3.days.ago.beginning_of_day.to_s(:db)}' AND E'#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
                  else
-                   "(created_at BETWEEN '#{3.days.ago.midnight.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
+                   "(created_at BETWEEN '#{3.days.ago.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
                  end
 
       params = { :created_at => "last_few_days" }
@@ -352,9 +352,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "return_sql_conditions_on_filtering_typus_users_by_created_at last_7_days" do
       expected = case ENV["DB"]
                  when /postgresql/
-                   "(created_at BETWEEN E'#{6.days.ago.midnight.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
+                   "(created_at BETWEEN E'#{6.days.ago.beginning_of_day.to_s(:db)}' AND E'#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
                  else
-                   "(created_at BETWEEN '#{6.days.ago.midnight.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
+                   "(created_at BETWEEN '#{6.days.ago.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
                  end
 
       params = { :created_at => "last_7_days" }
@@ -364,9 +364,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "return_sql_conditions_on_filtering_typus_users_by_created_at last_30_days" do
       expected = case ENV["DB"]
                  when /postgresql/
-                   "(created_at BETWEEN E'#{Time.new.midnight.prev_month.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
+                   "(created_at BETWEEN E'#{Time.zone.now.beginning_of_day.prev_month.to_s(:db)}' AND E'#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
                  else
-                   "(created_at BETWEEN '#{Time.new.midnight.prev_month.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
+                   "(created_at BETWEEN '#{Time.zone.now.beginning_of_day.prev_month.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
                  end
 
       params = { :created_at => "last_30_days" }
@@ -376,9 +376,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "return_sql_conditions_on_filtering_posts_by_published_at today" do
       expected = case ENV["DB"]
                  when /postgresql/
-                   "(published_at BETWEEN E'#{Time.new.midnight.to_s(:db)}' AND E'#{Time.new.midnight.tomorrow.to_s(:db)}')"
+                   "(published_at BETWEEN E'#{Time.zone.now.beginning_of_day.to_s(:db)}' AND E'#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
                  else
-                   "(published_at BETWEEN '#{Time.new.midnight.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
+                   "(published_at BETWEEN '#{Time.zone.now.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
                  end
 
       params = { :published_at => "today" }
