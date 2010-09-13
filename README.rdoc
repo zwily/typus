@@ -29,15 +29,15 @@ enough to match lots of use cases.
 
 == Installing
 
-Add **Typus** to your <tt>Gemfile</tt>:
+Add *Typus* to your <tt>Gemfile</tt>.
 
     gem 'typus', :git => 'git://github.com/fesplugas/typus.git'
 
-Update your bundle:
+Update your bundle.
 
     $ bundle install
 
-Run the **Typus** generator:
+Run the *Typus* generator.
 
     $ rails generate typus
 
