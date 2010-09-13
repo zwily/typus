@@ -264,6 +264,24 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal expected, Post.build_conditions(params).first
     end
 
+    should "generate conditions for fields starting with equal" do
+      Post.stubs(:typus_defaults_for).with(:search).returns(["=id"])
+
+      params = { :search => '1' }
+      expected = "(id LIKE '1')"
+
+      assert_equal expected, Post.build_conditions(params).first
+    end
+
+    should "generate conditions for fields starting with ^" do
+      Post.stubs(:typus_defaults_for).with(:search).returns(["^id"])
+
+      params = { :search => '1' }
+      expected = "(id LIKE '1%')"
+
+      assert_equal expected, Post.build_conditions(params).first
+    end
+
     should "return_sql_conditions_on_search_for_typus_user" do
       expected = "(role LIKE '%francesc%' OR last_name LIKE '%francesc%' OR email LIKE '%francesc%' OR first_name LIKE '%francesc%')"
       params = { :search => "francesc" }
