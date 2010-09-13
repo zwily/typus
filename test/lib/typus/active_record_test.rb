@@ -208,8 +208,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   context "Typus date format" do
 
-    should "verify typus_date_format accepts strings and symbols" do
+    should "verify typus_date_format accepts strings" do
       assert_equal :db, Post.typus_date_format("unknown")
+    end
+
+    should "verify typus_date_format accepts symbols" do
       assert_equal :db, Post.typus_date_format(:unknown)
     end
 
@@ -223,8 +226,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   context "Typus defaults for" do
 
-    should "verify typus_defaults_for on Model accepts strings and symbols" do
+    should "verify typus_defaults_for on Model accepts strings" do
       assert_equal %w( title ), Post.typus_defaults_for("search")
+    end
+
+    should "verify typus_defaults_for on Model accepts symbols" do
       assert_equal %w( title ), Post.typus_defaults_for(:search)
     end
 
