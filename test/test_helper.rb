@@ -13,7 +13,7 @@ Typus.reload!
 connection = case ENV["DB"]
              when "mysql"
                { :adapter => "mysql", :database => "typus_test" }
-             when "pg"
+             when "postgresql"
                { :adapter => "postgresql", :database => "typus_test", :encoding => "unicode" }
              else
                { :adapter => "sqlite3", :database => ":memory:" }
