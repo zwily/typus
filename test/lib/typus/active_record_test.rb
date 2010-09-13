@@ -284,6 +284,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     should "return_sql_conditions_on_search_for_typus_user" do
       expected = "(role LIKE '%francesc%' OR last_name LIKE '%francesc%' OR email LIKE '%francesc%' OR first_name LIKE '%francesc%')"
+
       params = { :search => "francesc" }
       assert_equal expected, TypusUser.build_conditions(params).first
       params = { :search => "Francesc" }
@@ -291,7 +292,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_search_and_filter_for_typus_user" do
-
       case ENV["DB"]
       when /mysql/
         boolean_true = "(`typus_users`.`status` = 1)"
@@ -302,15 +302,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
       end
 
       expected = "((role LIKE '%francesc%' OR last_name LIKE '%francesc%' OR email LIKE '%francesc%' OR first_name LIKE '%francesc%')) AND #{boolean_true}"
+
       params = { :search => "francesc", :status => "true" }
       assert_equal expected, TypusUser.build_conditions(params).first
       params = { :search => "francesc", :status => "false" }
       assert_match /#{boolean_false}/, TypusUser.build_conditions(params).first
-
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_status" do
-
       case ENV["DB"]
       when /mysql/
         boolean_true = "(`typus_users`.`status` = 1)"
@@ -324,7 +323,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal boolean_true, TypusUser.build_conditions(params).first
       params = { :status => "false" }
       assert_equal boolean_false, TypusUser.build_conditions(params).first
-
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_created_at today" do
@@ -334,8 +332,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
                  else
                    "(created_at BETWEEN '#{Time.new.midnight.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
                  end
-      params = { :created_at => "today" }
 
+      params = { :created_at => "today" }
       assert_equal expected, TypusUser.build_conditions(params).first
     end
 
@@ -370,6 +368,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
                  else
                    "(created_at BETWEEN '#{Time.new.midnight.prev_month.to_s(:db)}' AND '#{Time.new.midnight.tomorrow.to_s(:db)}')"
                  end
+
       params = { :created_at => "last_30_days" }
       assert_equal expected, TypusUser.build_conditions(params).first
     end
