@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  resource :admin, :only => [:show], :controller => :admin
+  match "/admin" => redirect("/admin/dashboard")
 
   namespace :admin do
 

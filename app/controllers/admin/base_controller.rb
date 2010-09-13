@@ -7,10 +7,6 @@ class Admin::BaseController < ActionController::Base
   before_filter :reload_config_and_roles
   before_filter :authenticate
 
-  def show
-    redirect_to admin_dashboard_path
-  end
-
   protected
 
   def reload_config_and_roles
