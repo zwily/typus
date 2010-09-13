@@ -14,11 +14,6 @@ class Admin::StatusControllerTest < ActionController::TestCase
       assert_template 'index'
     end
 
-    should "not render show" do
-      get :show
-      assert_response :unprocessable_entity
-    end
-
   end
 
   context "Editor" do
