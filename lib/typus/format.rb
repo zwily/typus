@@ -39,7 +39,7 @@ module Typus
         csv = CSV
       end
 
-      filename = Rails.root.join("tmp", "export-#{@resource.to_resource}-#{Time.now.utc.to_s(:number)}.csv")
+      filename = Rails.root.join("tmp", "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv")
 
       options = { :conditions => @conditions, :batch_size => 1000 }
 

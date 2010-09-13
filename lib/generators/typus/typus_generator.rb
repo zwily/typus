@@ -24,7 +24,7 @@ Description:
       DESC
 
       def self.next_migration_number(path)
-        Time.now.utc.to_s(:number)
+        Time.zone.now.utc.to_s(:number)
       end
 
       def copy_config_readme
@@ -87,7 +87,7 @@ Description:
       end
 
       def timestamp
-        Time.now.utc.to_s(:number)
+        Time.zone.now.utc.to_s(:number)
       end
 
       private

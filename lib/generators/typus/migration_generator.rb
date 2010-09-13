@@ -31,7 +31,7 @@ Examples:
       DESC
 
       def self.next_migration_number(path)
-        Time.now.utc.to_s(:number)
+        Time.zone.now.utc.to_s(:number)
       end
 
       def generate_migration
