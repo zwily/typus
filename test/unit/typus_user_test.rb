@@ -19,15 +19,20 @@ class TypusUserTest < ActiveSupport::TestCase
 
   # should validate_uniqueness_of :email
 
+  should "verify columns" do
+    attributes = %w( id first_name last_name email role status salt crypted_password token preferences created_at updated_at )
+    TypusUser.columns.collect { |u| u.name }.each { |c| assert attributes.include?(c) }
+  end
+
+  should "verify generate requires the role" do
+    assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX').valid?
+    assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX', :role => 'admin').valid?
+  end
+
   context "TypusUser" do
 
     setup do
       @typus_user = Factory(:typus_user)
-    end
-
-    should "verify definition" do
-      attributes = %w( id first_name last_name email role status salt crypted_password token preferences created_at updated_at )
-      TypusUser.columns.collect { |u| u.name }.each { |c| assert attributes.include?(c) }
     end
 
     should "return email when first_name and last_name are not set" do
@@ -40,15 +45,16 @@ class TypusUserTest < ActiveSupport::TestCase
     end
 
     should "verify salt never changes" do
-      salt, crypted_password = @typus_user.salt, @typus_user.crypted_password
-
-      @typus_user.update_attributes :password => '11111111', :password_confirmation => '11111111'
-      assert_equal salt, @typus_user.salt
-      assert_not_equal crypted_password, @typus_user.crypted_password
+      expected = @typus_user.salt
+      @typus_user.update_attributes(:password => '11111111', :password_confirmation => '11111111')
+      assert_equal expected, @typus_user.salt
     end
 
-    should "verify authenticated?" do
+    should "verify authenticated? returns true when password is right" do
       assert @typus_user.authenticated?('12345678')
+    end
+
+    should "verify authenticated? returns false when password is wrong" do
       assert !@typus_user.authenticated?('87654321')
     end
 
@@ -66,24 +72,34 @@ class TypusUserTest < ActiveSupport::TestCase
 
   end
 
-  context "TypusUser which is not root" do
+  context "Root roles" do
+
+    setup do
+      @typus_user = Factory(:typus_user, :role => "admin")
+    end
+
+    should "respond true to is_root?" do
+      assert @typus_user.is_root?
+    end
+
+    should "respond false to is_not_root?" do
+      assert !@typus_user.is_not_root?
+    end
+
+  end
+
+  context "Non root roles" do
 
     setup do
       @typus_user = Factory(:typus_user, :role => "editor")
     end
 
-    should "verify is not root" do
+    should "respond true to is_no_root?" do
       assert @typus_user.is_not_root?
-      assert !@typus_user.is_root?
     end
 
-  end
-
-  context "Class methods" do
-
-    should "verify generate requires the role" do
-      assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX').valid?
-      assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX', :role => 'admin').valid?
+    should "respond false to is_root?" do
+      assert !@typus_user.is_root?
     end
 
   end
