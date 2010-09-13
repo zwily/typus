@@ -218,7 +218,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     should "return typus_date_formats for Post" do
       assert_equal :db, Post.typus_date_format
-      assert_equal :post_short, Post.typus_date_format("created_at")
       assert_equal :post_short, Post.typus_date_format(:created_at)
     end
 
