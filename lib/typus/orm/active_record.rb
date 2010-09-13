@@ -266,6 +266,8 @@ module Typus
       #++
       def build_conditions(params)
 
+        adapter = ActiveRecord::Base.configurations[Rails.env]['adapter']
+
         conditions, joins = merge_conditions, []
 
         query_params = params.dup
@@ -284,6 +286,7 @@ module Typus
                      when "^" then "#{query}%"
                      when "@" then "%#{query}%"
                      end
+            key = "TEXT(#{key})" if adapter == 'postgresql'
             search << "#{key} LIKE '#{_query}'"
           end
           conditions = merge_conditions(conditions, search.join(" OR "))

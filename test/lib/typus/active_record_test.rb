@@ -283,7 +283,12 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_search_for_typus_user" do
-      expected = "(role LIKE '%francesc%' OR last_name LIKE '%francesc%' OR email LIKE '%francesc%' OR first_name LIKE '%francesc%')"
+      expected = case ENV["DB"]
+                 when /postgresql/
+                   "(TEXT(role) LIKE '%francesc%' OR TEXT(last_name) LIKE '%francesc%' OR TEXT(email) LIKE '%francesc%' OR TEXT(first_name) LIKE '%francesc%')"
+                 else
+                   "(role LIKE '%francesc%' OR last_name LIKE '%francesc%' OR email LIKE '%francesc%' OR first_name LIKE '%francesc%')"
+                end
 
       params = { :search => "francesc" }
       assert_equal expected, TypusUser.build_conditions(params).first
