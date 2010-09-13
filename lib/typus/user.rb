@@ -20,7 +20,7 @@ module Typus
         validates_uniqueness_of :email
 
         validates_confirmation_of :password, :if => :password_required?
-        validates_length_of :password, :within => 8..40, :if => :password_required?
+        validates_length_of :password, :within => 6..40, :if => :password_required?
         validates_presence_of :password, :if => :password_required?
 
         validates_presence_of :role

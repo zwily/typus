@@ -15,7 +15,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
   should_not allow_mass_assignment_of :status
 
-  should ensure_length_of(:password).is_at_least(8).is_at_most(40)
+  should ensure_length_of(:password).is_at_least(6).is_at_most(40)
 
   # should validate_uniqueness_of :email
 
