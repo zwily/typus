@@ -6,13 +6,13 @@ class Object
   #
   # We define this method to define the value only once:
   #
-  #     _("Hello World!")
+  #     _t("Hello World!")
   #
   # Note that interpolation still works ...
   #
-  #     _("Hello %{world}!", :world => @world)
+  #     _t("Hello %{world}!", :world => @world)
   #
-  def _(msg, *args)
+  def _t(msg, *args)
     options = args.extract_options!
     options[:default] = msg
     I18n.t(msg, options)
