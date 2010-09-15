@@ -39,7 +39,7 @@ module Admin
                                      :action => 'edit',
                                      :id => user.id }
 
-      message = _("Are you sure you want to sign out and end your session?")
+      message = _t("Are you sure you want to sign out and end your session?")
 
       user_details = if user.can?('edit', Typus.user_class_name)
                        link_to user.name, admin_edit_typus_user_path

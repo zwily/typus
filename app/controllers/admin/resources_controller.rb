@@ -94,7 +94,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   def destroy
     @item.destroy
-    notice = _("%{model} successfully removed.", :model => @resource.model_name.human)
+    notice = _t("%{model} successfully removed.", :model => @resource.model_name.human)
     redirect_to set_path, :notice => notice
   end
 
@@ -102,7 +102,7 @@ class Admin::ResourcesController < Admin::BaseController
     @item.toggle(params[:field])
     @item.save!
 
-    notice = _("%{model} %{attribute} changed.",
+    notice = _t("%{model} %{attribute} changed.",
                :model => @resource.model_name.human,
                :attribute => params[:field].humanize.downcase)
 
@@ -120,7 +120,7 @@ class Admin::ResourcesController < Admin::BaseController
   #
   def position
     @item.send(params[:go])
-    notice = _("Record moved %{to}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
+    notice = _t("Record moved %{to}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
     redirect_to set_path, :notice => notice
   end
 
@@ -133,11 +133,11 @@ class Admin::ResourcesController < Admin::BaseController
     resource_tableized = params[:related][:model].tableize
 
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
-      flash[:notice] = _("%{model_a} related to %{model_b}",
+      flash[:notice] = _t("%{model_a} related to %{model_b}",
                          :model_a => resource_class.model_name.human,
                          :model_b => @resource.model_name.human)
     else
-      flash[:alert] = _("%{model_a} cannot be related to %{model_b}",
+      flash[:alert] = _t("%{model_a} cannot be related to %{model_b}",
                          :model_a => resource_class.model_name.human,
                          :model_b => @resource.model_name.human)
     end
@@ -178,11 +178,11 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     if saved_succesfully
-      flash[:notice] = _("%{model_a} unrelated from %{model_b}",
+      flash[:notice] = _t("%{model_a} unrelated from %{model_b}",
                          :model_a => resource_class.model_name.human,
                          :model_b => @resource.model_name.human)
     else
-      flash[:alert] = _("%{model_a} cannot be unrelated from %{model_b}",
+      flash[:alert] = _t("%{model_a} cannot be unrelated from %{model_b}",
                         :model_a => resource_class.model_name.human,
                         :model_b => @resource.model_name.human)
     end
@@ -202,7 +202,7 @@ class Admin::ResourcesController < Admin::BaseController
               end
 
     attachment = @resource.human_attribute_name(params[:attachment])
-    notice = _(message, :attachment => attachment)
+    notice = _t(message, :attachment => attachment)
 
     redirect_to set_path, :notice => notice
   end
@@ -244,7 +244,7 @@ class Admin::ResourcesController < Admin::BaseController
     when "create"
       path = { :action => action }
       path.merge!(:id => @item.id) unless action.eql?("index")
-      notice = _("%{model} successfully created.", :model => @resource.model_name.human)
+      notice = _t("%{model} successfully created.", :model => @resource.model_name.human)
     when "update"
       path = case action
              when "index"
@@ -254,7 +254,7 @@ class Admin::ResourcesController < Admin::BaseController
                  :id => @item.id,
                  :back_to => params[:back_to] }
              end
-      notice = _("%{model} successfully updated.", :model => @resource.model_name.human)
+      notice = _t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 
     redirect_to path, :notice => notice
@@ -285,13 +285,13 @@ class Admin::ResourcesController < Admin::BaseController
       @item.send(params[:resource]) << resource
     when :has_many
       @item.save
-      message = _("%{model} successfully created.", :model => @resource.model_name.human)
+      message = _t("%{model} successfully created.", :model => @resource.model_name.human)
       path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
     when :polymorphic
       resource.send(@item.class.to_resource).create(params[@object_name])
     end
 
-    flash[:notice] = message || _("%{model_a} successfully assigned to %{model_b}.",
+    flash[:notice] = message || _t("%{model_a} successfully assigned to %{model_b}.",
                                   :model_a => @item.class.model_name.human,
                                   :model_b => resource_class.model_name.human)
 

@@ -7,7 +7,7 @@ class Admin::Mailer < ActionMailer::Base
     @url = url
 
     mail :to => user.email,
-         :subject => "[#{Typus.admin_title}] #{_("Reset password")}"
+         :subject => "[#{Typus.admin_title}] #{_t("Reset password")}"
   end
 
 end

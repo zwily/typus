@@ -91,7 +91,7 @@ module Admin
 
       return unless set_condition && @current_user.can?("create", @model_to_relate)
 
-      link_to _("Add new"), default_options.merge(options)
+      link_to _t("Add new"), default_options.merge(options)
     end
 
     def set_condition
@@ -138,7 +138,7 @@ module Admin
                            options,
                            association)
       else
-        message = _("There are no %{records}.",
+        message = _t("There are no %{records}.",
                     :records => model_to_relate.model_name.human.downcase)
         html << <<-HTML
   <div id="flash" class="notice"><p>#{message}</p></div>
@@ -164,11 +164,11 @@ module Admin
       related = @resource.reflect_on_association(attribute.to_sym).class_name.constantize
       related_fk = @resource.reflect_on_association(attribute.to_sym).primary_key_name
 
-      confirm = [ _("Are you sure you want to leave this page?"),
-                  _("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."),
-                  _("Click OK to continue, or click Cancel to stay on this page.") ]
+      confirm = [ _t("Are you sure you want to leave this page?"),
+                  _t("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."),
+                  _t("Click OK to continue, or click Cancel to stay on this page.") ]
 
-      message = link_to _("Add"), { :controller => "admin/#{related.to_resource}",
+      message = link_to _t("Add"), { :controller => "admin/#{related.to_resource}",
                                     :action => 'new',
                                     :back_to => back_to,
                                     :selected => related_fk },

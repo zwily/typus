@@ -44,36 +44,36 @@ module Admin
       values_labelized = values.map { |v| v.to_label }
       items = values.map(&:id).to_hash_with(values_labelized)
 
-      message = _("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize)
+      message = _t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize)
 
       return filter, items, message
     end
 
     def date_filter(request, filter)
       values  = %w(today last_few_days last_7_days last_30_days)
-      values_humanized = values.map { |v| _(v.humanize) }
+      values_humanized = values.map { |v| _t(v.humanize) }
       items   = values.to_hash_with(values_humanized)
-      message = _("Show all dates")
+      message = _t("Show all dates")
       return filter, items, message
     end
 
     def boolean_filter(request, filter)
       items   = @resource.typus_boolean(filter)
-      message = _("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
+      message = _t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
       return filter, items, message
     end
 
     def string_filter(request, filter)
       values  = @resource::const_get(filter.to_s.upcase)
       items   = values.kind_of?(Hash) ? values : values.to_hash_with(values)
-      message = _("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
+      message = _t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
       return filter, items, message
     end
 
     def remove_filter_link(filter = request.env['QUERY_STRING'])
       return unless filter && !filter.blank?
       message = params.compact.include?(:search) ? "search" : "filter"
-      link_to _("Remove #{message}")
+      link_to _t("Remove #{message}")
     end
 
   end

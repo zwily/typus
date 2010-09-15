@@ -76,7 +76,7 @@ module Admin
                   :action => action,
                   :id => item.id }
 
-      link_to _(action.capitalize), options
+      link_to _t(action.capitalize), options
     end
 
     #--
@@ -100,7 +100,7 @@ module Admin
         options = { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }
       end
 
-      title = _(action.titleize)
+      title = _t(action.titleize)
 
       case params[:action]
       when 'index'
@@ -111,10 +111,10 @@ module Admin
                     else
                       @current_user.can?('destroy', model)
                     end
-        confirm = _("Remove %{resource}?", :resource => item.class.model_name.human)
+        confirm = _t("Remove %{resource}?", :resource => item.class.model_name.human)
       when 'edit'
         # If we are editing content, we can relate and unrelate always!
-        confirm = _("Unrelate %{unrelate_model} from %{unrelate_model_from}?",
+        confirm = _t("Unrelate %{unrelate_model} from %{unrelate_model_from}?",
                     :unrelate_model => model.model_name.human,
                     :unrelate_model_from => @resource.model_name.human)
       when 'show'
@@ -125,12 +125,12 @@ module Admin
         condition = if @resource.typus_user_id? && @current_user.is_not_root?
                       @item.owned_by?(@current_user)
                     end
-        confirm = _("Unrelate %{unrelate_model} from %{unrelate_model_from}?",
+        confirm = _t("Unrelate %{unrelate_model} from %{unrelate_model_from}?",
                     :unrelate_model => model.model_name.human,
                     :unrelate_model_from => @resource.model_name.human)
       end
 
-      message = %(<div class="sprite #{action}">#{_(action.titleize)}</div>)
+      message = %(<div class="sprite #{action}">#{_t(action.titleize)}</div>)
 
       if condition
         link_to raw(message), options, :title => title, :confirm => confirm, :method => method
@@ -203,7 +203,7 @@ module Admin
       { :move_higher => "Up", :move_lower => "Down" }.each do |key, value|
         options = { :controller => item.class.to_resource, :action => "position", :id => item.id, :go => key }
         first_or_last = (item.respond_to?(:first?) && (key == :move_higher && item.first?)) || (item.respond_to?(:last?) && (key == :move_lower && item.last?))
-        html_position << link_to_unless(first_or_last, _(value), params.merge(options)) do |name|
+        html_position << link_to_unless(first_or_last, _t(value), params.merge(options)) do |name|
           %(<span class="inactive">#{name}</span>)
         end
       end
@@ -226,12 +226,12 @@ module Admin
       content = if status.nil?
                   Typus::Resources.human_nil
                 else
-                  message = _(boolean_hash["#{status}".to_sym])
+                  message = _t(boolean_hash["#{status}".to_sym])
                   options = { :controller => "admin/#{item.class.to_resource}",
                               :action => "toggle",
                               :id => item.id,
                               :field => attribute.gsub(/\?$/,'') }
-                  confirm = _("Change %{attribute}?",
+                  confirm = _t("Change %{attribute}?",
                               :attribute => item.class.human_attribute_name(attribute).downcase)
                   link_to message, options, :confirm => confirm
                 end

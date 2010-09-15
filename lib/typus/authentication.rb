@@ -49,12 +49,12 @@ module Typus
       @current_user = Typus.user_class.find(session[:typus_user_id])
 
       unless Typus::Configuration.roles.has_key?(@current_user.role)
-        raise _("Role does no longer exists.")
+        raise _t("Role does no longer exists.")
       end
 
       unless @current_user.status
         back_to = (request.env['REQUEST_URI'] == admin_dashboard_path) ? nil : request.env['REQUEST_URI']
-        raise _("Typus user has been disabled.")
+        raise _t("Typus user has been disabled.")
       end
 
       I18n.locale = @current_user.preferences[:locale]
@@ -81,32 +81,32 @@ module Typus
 
                   # Only admin and owner of Typus User can edit.
                   if @current_user.is_not_root? && !current_user
-                    _("As you're not the admin or the owner of this record you cannot edit it.")
+                    _t("As you're not the admin or the owner of this record you cannot edit it.")
                   end
 
                 when 'update'
 
                   # current_user cannot change her role.
                   if current_user && !(@item.role == params[@object_name][:role])
-                    _("You can't change your role.")
+                    _t("You can't change your role.")
                   end
 
                 when 'toggle'
 
                   # Only admin can toggle typus user status, but not herself.
                   if @current_user.is_root? && current_user
-                    _("You can't toggle your status.")
+                    _t("You can't toggle your status.")
                   elsif @current_user.is_not_root?
-                    _("You're not allowed to toggle status.")
+                    _t("You're not allowed to toggle status.")
                   end
 
                 when 'destroy'
 
                   # Admin can remove anything except herself.
                   if @current_user.is_root? && current_user
-                    _("You can't remove yourself.")
+                    _t("You can't remove yourself.")
                   elsif @current_user.is_not_root?
-                    _("You're not allowed to remove Typus Users.")
+                    _t("You're not allowed to remove Typus Users.")
                   end
 
                 end
@@ -135,7 +135,7 @@ module Typus
                   "%{current_user_role} can't perform action. (%{action})"
                 end
 
-      message = _(message,
+      message = _t(message,
                   :current_user_role => @current_user.role.capitalize,
                   :action => params[:action])
 
@@ -179,7 +179,7 @@ module Typus
       condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(@current_user)
 
       if condition_typus_users || condition_typus_user_id
-         alert = _("You don't have permission to access this item.")
+         alert = _t("You don't have permission to access this item.")
          redirect_to set_path, :alert => alert
       end
 

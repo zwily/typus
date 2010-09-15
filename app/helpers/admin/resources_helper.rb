@@ -43,7 +43,7 @@ module Admin
                 else
                   "You're adding a new %{resource_from}."
                 end
-      message = _(message,
+      message = _t(message,
                   :resource_from => options[:resource_from],
                   :resource_to => options[:resource_to])
 
@@ -62,7 +62,7 @@ module Admin
       options = { :controller => klass.to_resource }
       items = klass.typus_actions_on("index").map do |action|
         if @current_user.can?(action, klass)
-          (link_to _(action.humanize), options.merge(:action => action))
+          (link_to _t(action.humanize), options.merge(:action => action))
         end
       end
     end

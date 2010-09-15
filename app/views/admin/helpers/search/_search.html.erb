@@ -2,7 +2,7 @@
 
   <%= form_tag url_for(:controller => params[:controller]), :method => :get do %>
     <ul>
-      <li><input id="quicksearch" name="search" type="text" title="<%= params[:search] || _("Search") %>"/></li>
+      <li><input id="quicksearch" name="search" type="text" title="<%= params[:search] || _t("Search") %>"/></li>
     </ul>
     <% hidden_params.each do |field| %>
       <%= field %>

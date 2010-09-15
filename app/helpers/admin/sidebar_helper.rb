@@ -21,11 +21,11 @@ module Admin
 
       if @current_user.can?("create", klass)
         options = { :controller => klass.to_resource }
-        message = _("Add new")
+        message = _t("Add new")
         actions << (link_to_unless_current message, options.merge(:action => "new"))
       end
 
-      message = _("List")
+      message = _t("List")
       options = { :controller => klass.to_resource }
       actions << (link_to_unless_current message, options)
 
@@ -36,7 +36,7 @@ module Admin
       options = { :controller => klass.to_resource }
       klass.typus_actions_on("index").map do |action|
         if @current_user.can?(action, klass)
-          (link_to_unless_current _(action.humanize), options.merge(:action => action))
+          (link_to_unless_current _t(action.humanize), options.merge(:action => action))
         end
       end
     end
@@ -45,7 +45,7 @@ module Admin
       return [] unless params[:action] == "index"
 
       klass.typus_export_formats.map do |format|
-        link_to _("Export as %{format}", :format => format.upcase), params.merge(:format => format)
+        link_to _t("Export as %{format}", :format => format.upcase), params.merge(:format => format)
       end
     end
 
