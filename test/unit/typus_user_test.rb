@@ -86,6 +86,10 @@ class TypusUserTest < ActiveSupport::TestCase
       assert !@typus_user.is_not_root?
     end
 
+    should "get a list of all applications" do
+      assert_equal Typus.applications, @typus_user.applications
+    end
+
   end
 
   context "Editor Role" do
@@ -100,6 +104,10 @@ class TypusUserTest < ActiveSupport::TestCase
 
     should "respond false to is_root?" do
       assert !@typus_user.is_root?
+    end
+
+    should "get a list of all applications" do
+      assert_equal ["Blog", "Typus"], @typus_user.applications
     end
 
   end
