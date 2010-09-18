@@ -26,6 +26,10 @@ module Admin
       Typus::Configuration.roles[role].compact
     end
 
+    def applications
+      Typus.applications
+    end
+
     def role
       Typus.master_role
     end

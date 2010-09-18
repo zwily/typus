@@ -79,6 +79,21 @@ module Typus
         Typus::Configuration.roles[role].compact
       end
 
+      def applications
+        apps = {}
+
+        resources.keys.sort {|a,b| a.constantize.model_name.human <=> b.constantize.model_name.human}.each do |model|
+          # Get the application name.
+          app_name = model.constantize.typus_application
+          # Initialize the application if needed.
+          apps[app_name] = [] unless apps.keys.include?(app_name)
+          # Add model to the application only if the @current_user has permission.
+          apps[app_name] << model if resources.include?(model)
+        end
+
+        return apps.keys
+      end
+
       #--
       # TODO: Rename action to mapping and refactor the _action case
       #       statement.
