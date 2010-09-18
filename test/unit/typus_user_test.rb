@@ -35,8 +35,18 @@ class TypusUserTest < ActiveSupport::TestCase
       @typus_user = Factory(:typus_user)
     end
 
-    should "return email when first_name and last_name are not set" do
+    should "return email" do
       assert_equal @typus_user.email, @typus_user.name
+    end
+
+    should "return first_name" do
+      @typus_user.last_name = "Lock"
+      assert_equal "Lock", @typus_user.name
+    end
+
+    should "return last_name" do
+      @typus_user.last_name = "Lock"
+      assert_equal "Lock", @typus_user.name
     end
 
     should "return name when first_name and last_name are set" do
