@@ -72,7 +72,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
   end
 
-  context "Root roles" do
+  context "Admin Role" do
 
     setup do
       @typus_user = Factory(:typus_user, :role => "admin")
@@ -88,7 +88,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
   end
 
-  context "Non root roles" do
+  context "Editor Role" do
 
     setup do
       @typus_user = Factory(:typus_user, :role => "editor")
