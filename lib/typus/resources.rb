@@ -50,7 +50,7 @@ module Typus
 
     # Sets a has and belongs to many limit for the dropdowns.
     mattr_accessor :habtm_limit
-    @habtm_limit = 500
+    @@habtm_limit = 500
 
     def self.method_missing(*args)
       nil
