@@ -60,15 +60,8 @@ module Typus
     module InstanceMethods
 
       def name
-        if !first_name.blank? and !last_name.blank?
-          "#{first_name} #{last_name}"
-        elsif !first_name.blank? and last_name.blank?
-          first_name
-        elsif first_name.blank? and !last_name.blank?
-          last_name
-        else
-          email
-        end
+        full_name = [first_name, last_name].compact.delete_if { |s| s.empty? }
+        full_name.any? ? full_name.join(" ") : email
       end
 
      def authenticated?(password)
