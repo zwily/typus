@@ -64,7 +64,7 @@ module Typus
         full_name.any? ? full_name.join(" ") : email
       end
 
-     def authenticated?(password)
+      def authenticated?(password)
         crypted_password == encrypt(password)
       end
 
