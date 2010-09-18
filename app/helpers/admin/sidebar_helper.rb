@@ -32,20 +32,20 @@ module Admin
       return actions
     end
 
+    def export(klass)
+      return [] unless params[:action] == "index"
+
+      klass.typus_export_formats.map do |format|
+        link_to _t("Export as %{format}", :format => format.upcase), params.merge(:format => format)
+      end
+    end
+
     def custom_actions(klass)
       options = { :controller => klass.to_resource }
       klass.typus_actions_on("index").map do |action|
         if @current_user.can?(action, klass)
           (link_to_unless_current _t(action.humanize), options.merge(:action => action))
         end
-      end
-    end
-
-    def export(klass)
-      return [] unless params[:action] == "index"
-
-      klass.typus_export_formats.map do |format|
-        link_to _t("Export as %{format}", :format => format.upcase), params.merge(:format => format)
       end
     end
 
