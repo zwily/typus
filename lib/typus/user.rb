@@ -94,6 +94,10 @@ module Typus
         return apps.keys
       end
 
+      def application(name)
+        Typus.application(name).delete_if { |r| !resources.keys.include?(r) }
+      end
+
       #--
       # TODO: Rename action to mapping and refactor the _action case
       #       statement.

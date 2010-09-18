@@ -3,18 +3,7 @@ module Admin
   module DashboardHelper
 
     def applications
-      apps = {}
-
-      Typus.models.sort {|a,b| a.constantize.model_name.human <=> b.constantize.model_name.human}.each do |model|
-        # Get the application name.
-        app_name = model.constantize.typus_application
-        # Initialize the application if needed.
-        apps[app_name] = [] unless apps.keys.include?(app_name)
-        # Add model to the application only if the @current_user has permission.
-        apps[app_name] << model if @current_user.resources.include?(model)
-      end
-
-      render File.join(path, "applications"), :applications => apps.compact.sort
+      render File.join(path, "applications")
     end
 
     def resources
