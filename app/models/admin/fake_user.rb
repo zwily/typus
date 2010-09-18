@@ -30,6 +30,10 @@ module Admin
       Typus.applications
     end
 
+    def application(name)
+      Typus.application(name)
+    end
+
     def role
       Typus.master_role
     end
