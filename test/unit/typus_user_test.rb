@@ -100,6 +100,12 @@ class TypusUserTest < ActiveSupport::TestCase
       assert_equal Typus.applications, @typus_user.applications
     end
 
+    should "get a list of application resources" do
+      assert_equal %w(Comment Post), @typus_user.application("Blog")
+      assert_equal %w(Asset Page), @typus_user.application("Site")
+      assert_equal %w(TypusUser), @typus_user.application("Typus")
+    end
+
   end
 
   context "Editor Role" do
@@ -117,7 +123,12 @@ class TypusUserTest < ActiveSupport::TestCase
     end
 
     should "get a list of all applications" do
-      assert_equal ["Blog", "Typus"], @typus_user.applications
+      assert_equal %w(Blog Typus), @typus_user.applications
+    end
+
+    should "get a list of application resources" do
+      assert_equal %w(Comment Post), @typus_user.application("Blog")
+      assert_equal %w(TypusUser), @typus_user.application("Typus")
     end
 
   end
