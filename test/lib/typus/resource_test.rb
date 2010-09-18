@@ -12,6 +12,7 @@ class ResourceTest < ActiveSupport::TestCase
     assert !Typus::Resources.only_user_items
     assert_equal 15, Typus::Resources.per_page
     assert Typus::Resources.start_year.nil?
+    assert_equal 500, Typus::Resources.habtm_limit
   end
 
 end
