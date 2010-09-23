@@ -1,7 +1,7 @@
 <%
 
   if @item.send(attribute).exists?
-    message = _("Remove {{attribute}}", :attribute => @item.class.human_attribute_name(attribute).downcase)
+    message = _("Remove %{attribute}", :attribute => @item.class.human_attribute_name(attribute).downcase)
     label_text << <<-HTML
  <small>#{link_to message, { :action => 'detach', 
                              :id => @item.id,

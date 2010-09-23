@@ -14,10 +14,10 @@ de:
   "As you're not the admin or the owner of this record you cannot edit it": "Nur der Administrator oder der Eigent7uuml;er des Datensates kann ihn bearbeiten"
 
   "Change password": "Passwort &auml;ndern"
-  "Change {{attribute}}?": "{{attribute}}&auml;ndern?"
+  "Change %{attribute}?": "%{attribute}&auml;ndern?"
   "Checked if active": "Angekreuzt wenn activiert"
   "Click OK to continue, or click Cancel to stay on this page": "Klicken Sie OK zum Fortfahren oder Abbrechen um auf dieser Seite zu bleiben"
-  "Create {{resource}}": "Erstellen {{resource}}"
+  "Create %{resource}": "Erstellen %{resource}"
 
   "Dashboard": "Dashboard"
   "Do you want to cancel it?": "Wollen Sie abbrechen?"
@@ -54,15 +54,15 @@ de:
   "Password recovery link sent to your email": "Der Link zur Wiederfindung des Passworts wurde an Ihre Email Adresse gechickt"
   "Previous": "Vorheriger"
 
-  "Record moved {{to}}": "Datensatz verschoben nach {{to}}"
+  "Record moved %{to}": "Datensatz verschoben nach %{to}"
   "Recover password": "Passwort vergessen?"
   "Remove": 
-  "Remove {{attribute}}": "{{attribute}} entfernen"
+  "Remove %{attribute}": "%{attribute} entfernen"
   "Remove filter": "Filter entfernen"
   "Reset password": "Passwort zur&uuml;cksetzen"
   "Resources": "Resourcen"
 
-  "Save {{resource}}": 
+  "Save %{resource}": 
   "Search": "Suchen"
   "Search by": "Suchen nach"
   "Send us feedback": "Senden Sie uns Ihr Feedback"
@@ -76,43 +76,43 @@ de:
 
   "That doesn't seem like a valid email address": "Das schein keine g&uuml;ltige Email Dresse zu sein"
   "The email and/or password you entered is invalid": "Die eingegebene Email Adresse und/oder das Passwort ist ung&uuml;ltig"
-  "There are no {{records}}": "Keine {{records}}vorhanden"
-  "There are no {{records}} under this filter": "Unter diesem Filter sind keine {{records}} vorhanden"
+  "There are no %{records}": "Keine %{records}vorhanden"
+  "There are no %{records} under this filter": "Unter diesem Filter sind keine %{records} vorhanden"
   "There are not defined applications in config/typus/*.yml": "Es gibt keine definierten Anwendungen in config/typus/*.yml"
   "Today": "Heute"
   "Toggle is disabled": "Schalter ist deaktiviert"
   "True": "Richtig"
 
-  "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Verkn&uuml;pfung zwischen {{unrelate_model}} und {{unrelate_model_from}}entfernen?"
+  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Verkn&uuml;pfung zwischen %{unrelate_model} und %{unrelate_model_from}entfernen?"
   "Up": "Hoch"
 
-  "View {{attribute}}": 
+  "View %{attribute}": 
   "View site": "Site anzeigen"
 
-  "You're adding a new {{resource_from}}": "Sie erstellen eine neue {{resource_from}}"
-  "You're adding a new {{resource_from}} to {{resource_to}}": "Sie f&uuml;gen eine neue {{resource_from}} an {{resource_to}}"
+  "You're adding a new %{resource_from}": "Sie erstellen eine neue %{resource_from}"
+  "You're adding a new %{resource_from} to %{resource_to}": "Sie f&uuml;gen eine neue %{resource_from} an %{resource_to}"
   "You're not allowed to remove Typus Users": "Sie sind nicht berechtigt den Typus Benutzer zu entfernen"
   "You're not allowed to toggle status": "Sie k&ouml;nnen den Status nicht umschalten"
-  "You're updating a {{resource_from}}": "Sie bearbeiten eine {{resource_from}}"
-  "You're updating a {{resource_from}} for {{resource_to}}": "Sie bearbeiten eine {{resource_from}} f&uuml; {{resource_to}}"
-  "You are about to delete a {{model}}.\nAre you sure you want to continue?": 
+  "You're updating a %{resource_from}": "Sie bearbeiten eine %{resource_from}"
+  "You're updating a %{resource_from} for %{resource_to}": "Sie bearbeiten eine %{resource_from} f&uuml; %{resource_to}"
+  "You are about to delete a %{model}.\nAre you sure you want to continue?": 
   "You can update your password at": "Sie k7ouml;nnen Ihr Passwort &auml;ndern unter"
   "You can't change your role": "Sie k&ouml;nnen Ihre Rolle nicht &auml;ndern"
   "You can't remove yourself": "Sie k&ouml;nnen sich selbst nicht entfernen"
   "You can't toggle your status": "Sie k&ouml;nnen Ihren Status nicht umschalten"
-  "Your new password is {{password}}": "Ihr neues Passwort ist {{password}}"
+  "Your new password is %{password}": "Ihr neues Passwort ist %{password}"
 
-  "{{attachment}} can't be removed": 
-  "{{attachment}} removed": 
-  "{{current_user_role}} can't delete this item": "{{current_user_role}} kann diesen Eintrag nicht l&ouml;schen"
-  "{{current_user_role}} can't display items": "{{current_user_role}} kann Eintr&auml;ge nicht anzeigen"
-  "{{current_user_role}} can't go to {{action}} on {{controller}}": "{{current_user_role}} kann {{action}} von {{controller}} nicht asuf&uuml;hren"
-  "{{current_user_role}} can't perform action. ({{action}})": "{{current_user_role}} kann die Aktion nicht ausf&uuml;hren. ({{action}})"
-  "{{model}} filtered by {{filtered_by}}": "{{model}} gefiltert nach {{filtered_by}}"
-  "{{model}} successfully created": "{{model}} erfolgreich erstellt"
-  "{{model}} successfully removed": "{{model}} erfolgreich gel&ouml;scht"
-  "{{model}} successfully updated": "{{model}} erfolgreich ge&auml;ndert"
-  "{{model}} {{attribute}} changed": "{{model}} {{attribute}} ge&auml;ndert" 
-  "{{model_a}} related to {{model_b}}": "{{model_a}} ist verkn&uuml;pft mit {{model_b}}"
-  "{{model_a}} successfully assigned to {{model_b}}": "{{model_a}} erfolgreich an {{model_b}} zugewiesen"
-  "{{model_a}} unrelated from {{model_b}}": "{{model_a}} unverbunden mit {{model_b}}"
+  "%{attachment} can't be removed": 
+  "%{attachment} removed": 
+  "%{current_user_role} can't delete this item": "%{current_user_role} kann diesen Eintrag nicht l&ouml;schen"
+  "%{current_user_role} can't display items": "%{current_user_role} kann Eintr&auml;ge nicht anzeigen"
+  "%{current_user_role} can't go to %{action} on %{controller}": "%{current_user_role} kann %{action} von %{controller} nicht asuf&uuml;hren"
+  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} kann die Aktion nicht ausf&uuml;hren. (%{action})"
+  "%{model} filtered by %{filtered_by}": "%{model} gefiltert nach %{filtered_by}"
+  "%{model} successfully created": "%{model} erfolgreich erstellt"
+  "%{model} successfully removed": "%{model} erfolgreich gel&ouml;scht"
+  "%{model} successfully updated": "%{model} erfolgreich ge&auml;ndert"
+  "%{model} %{attribute} changed": "%{model} %{attribute} ge&auml;ndert" 
+  "%{model_a} related to %{model_b}": "%{model_a} ist verkn&uuml;pft mit %{model_b}"
+  "%{model_a} successfully assigned to %{model_b}": "%{model_a} erfolgreich an %{model_b} zugewiesen"
+  "%{model_a} unrelated from %{model_b}": "%{model_a} unverbunden mit %{model_b}"

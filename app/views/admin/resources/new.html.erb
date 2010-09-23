@@ -16,7 +16,7 @@
               :selected => params[:selected], 
               :resource => params[:resource], 
               :resource_id => params[:resource_id] } 
-  button = _("Create {{resource}}", :resource => @resource[:human_name])
+  button = _("Create %{resource}", :resource => @resource[:human_name])
 %>
 
 <%= render "form", :options => options, :button => button %>

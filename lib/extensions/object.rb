@@ -10,7 +10,7 @@ class Object
   #
   # Note that interpolation still works ...
   #
-  #     _("Hello {{world}}!", :world => @world)
+  #     _("Hello %{world}!", :world => @world)
   #
   def _(msg, *args)
     options = args.extract_options!

@@ -97,11 +97,11 @@ module Typus
 
       message = case params[:action]
                 when 'index', 'show'
-                  "{{current_user_role}} can't display items."
+                  "%{current_user_role} can't display items."
                 when 'destroy'
-                  "{{current_user_role}} can't delete this item."
+                  "%{current_user_role} can't delete this item."
                 else
-                  "{{current_user_role}} can't perform action. ({{action}})"
+                  "%{current_user_role} can't perform action. (%{action})"
                 end
 
       message = _(message, 
@@ -122,7 +122,7 @@ module Typus
       controller = params[:controller].split('/').last
       action = params[:action]
       unless @current_user.can?(action, controller.camelize, { :special => true })
-        flash[:notice] = _("{{current_user_role}} can't go to {{action}} on {{controller}}.", 
+        flash[:notice] = _("%{current_user_role} can't go to %{action} on %{controller}.",
                            :current_user_role => @current_user.role.capitalize, 
                            :action => action, 
                            :controller => controller.humanize.downcase)

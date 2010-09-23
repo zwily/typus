@@ -173,9 +173,9 @@ module InheritViews
 
     # set the view_paths, and afterwards pass it my controller's inherit_view_paths
     def view_paths_with_inherit_views=(value)
-      returning self.view_paths_without_inherit_views=(value) do
-        @view_paths.inherit_view_paths = controller.inherit_view_paths if (controller.inherit_views? rescue false)
-      end
+      data = self.view_paths_without_inherit_views=(value)
+      @view_paths.inherit_view_paths = controller.inherit_view_paths if (controller.inherit_views? rescue false)
+      return data
     end
 
     # Extension for render which enables the following (in partials as well as top-level tenplates)

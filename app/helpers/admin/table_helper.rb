@@ -70,7 +70,7 @@ module Admin::TableHelper
                         @current_user.can?('destroy', model)
                       end
 
-          message = _("You are about to delete a {{model}}.\nAre you sure you want to continue?", :model => model.human_name.downcase)
+          message = _("You are about to delete a %{model}.\nAre you sure you want to continue?", :model => model.human_name.downcase)
 
           perform = link_to trash, { :action => 'destroy', :id => item.id }, 
                                      :title => _("Remove"), 
@@ -79,7 +79,7 @@ module Admin::TableHelper
           # If we are editing content, we can relate and unrelate always!
           perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }, 
                                         :title => _("Unrelate"), 
-                                        :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+                                        :confirm => _("Unrelate %{unrelate_model} from %{unrelate_model_from}?", 
                                                       :unrelate_model => model.typus_human_name, 
                                                       :unrelate_model_from => @resource[:human_name])
         when 'show'
@@ -92,7 +92,7 @@ module Admin::TableHelper
                       end
           perform = link_to unrelate, { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }, 
                                         :title => _("Unrelate"), 
-                                        :confirm => _("Unrelate {{unrelate_model}} from {{unrelate_model_from}}?", 
+                                        :confirm => _("Unrelate %{unrelate_model} from %{unrelate_model_from}?", 
                                                       :unrelate_model => model.typus_human_name, 
                                                       :unrelate_model_from => @resource[:human_name]) if condition
         end
@@ -248,7 +248,7 @@ module Admin::TableHelper
                 :id => item.id, 
                 :field => attribute.gsub(/\?$/,'') }
 
-    confirm = _("Change {{attribute}}?", 
+    confirm = _("Change %{attribute}?", 
                 :attribute => item.class.human_attribute_name(attribute).downcase)
 
     content = link_to _(link_text), options, :confirm => confirm

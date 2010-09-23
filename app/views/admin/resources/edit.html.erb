@@ -17,7 +17,7 @@
              :back_to => params[:back_to],
              :resource => params[:resource],
              :resource_id => params[:resource_id]}
-  button = _("Save {{resource}}", :resource => @resource[:human_name])
+  button = _("Save %{resource}", :resource => @resource[:human_name])
 %>
 
 <%= render "form", :options => options, :button => button %>

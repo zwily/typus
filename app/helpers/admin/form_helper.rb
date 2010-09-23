@@ -174,7 +174,7 @@ module Admin::FormHelper
 <a name="#{field}"></a>
 <div class="box_relationships" id="#{model_to_relate_as_resource}">
   <h2>
-  #{link_to model_to_relate.pluralized_human_name, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _("{{model}} filtered by {{filtered_by}}", :model => model_to_relate.typus_human_name.pluralize, :filtered_by => @item.to_label)}
+  #{link_to model_to_relate.pluralized_human_name, { :controller => "admin/#{model_to_relate_as_resource}", foreign_key => @item.id }, :title => _("%{model} filtered by %{filtered_by}", :model => model_to_relate.typus_human_name.pluralize, :filtered_by => @item.to_label)}
   #{add_new}
   </h2>
       HTML
@@ -225,7 +225,7 @@ module Admin::FormHelper
                            association)
         html << pagination(:anchor => model_to_relate.name.tableize) unless pagination.nil?
       else
-        message = _("There are no {{records}}.", 
+        message = _("There are no %{records}.", 
                     :records => model_to_relate.typus_human_name.pluralize.downcase)
         html << <<-HTML
   <div id="flash" class="notice"><p>#{message}</p></div>
@@ -310,7 +310,7 @@ module Admin::FormHelper
                            association)
         html << pagination(:anchor => model_to_relate.name.tableize) unless pagination.nil?
       else
-        message = _("There are no {{records}}.", 
+        message = _("There are no %{records}.", 
                     :records => model_to_relate.typus_human_name.pluralize.downcase)
         html << <<-HTML
   <div id="flash" class="notice"><p>#{message}</p></div>
@@ -373,7 +373,7 @@ module Admin::FormHelper
                            options, 
                            association)
       else
-        message = _("There is no {{records}}.", 
+        message = _("There is no %{records}.", 
                     :records => model_to_relate.typus_human_name.downcase)
         html << <<-HTML
   <div id="flash" class="notice"><p>#{message}</p></div>
@@ -436,7 +436,7 @@ module Admin::FormHelper
     content = if has_file_thumbnail
                 image_tag item.send(attachment).url(file_thumbnail)
               else
-                _("View {{attribute}}", :attribute => @item.class.human_attribute_name(attribute).downcase)
+                _("View %{attribute}", :attribute => @item.class.human_attribute_name(attribute).downcase)
               end
 
     render "admin/helpers/preview", 

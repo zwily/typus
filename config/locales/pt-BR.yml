@@ -14,10 +14,10 @@ pt-BR:
   "As you're not the admin or the owner of this record you cannot edit it": "Como você não é o dono desse registro ou o admin, você não pode editá-lo."
 
   "Change password": "Trocar senha"
-  "Change {{attribute}}?": "Mudar {{attribute}}?"
+  "Change %{attribute}?": "Mudar %{attribute}?"
   "Checked if active": "Marcar para ativar"
   "Click OK to continue, or click Cancel to stay on this page": "Clique OK para continuar, ou clique em Cancelar para ficar nesta página."
-  "Create {{resource}}": "Criar {{resource}}"
+  "Create %{resource}": "Criar %{resource}"
 
   "Dashboard": "Painel"
   "Do you want to cancel it?": "Quer cancelar?"
@@ -54,15 +54,15 @@ pt-BR:
   "Password recovery link sent to your email": "Link para recuperar senha enviado para seu email."
   "Previous": "Anterior"
 
-  "Record moved {{to}}": "Registro movido {{to}}."
+  "Record moved %{to}": "Registro movido %{to}."
   "Recover password": "Recuperar senha"
   "Remove": 
-  "Remove {{attribute}}": "Remover {{attribute}}"
+  "Remove %{attribute}": "Remover %{attribute}"
   "Remove filter": "Remover filtro"
   "Reset password": "Trocar senha"
   "Resources": "Recursos"
 
-  "Save {{resource}}": 
+  "Save %{resource}": 
   "Search": "Busca"
   "Search by": "Buscar por"
   "Send us feedback": 
@@ -76,43 +76,43 @@ pt-BR:
 
   "That doesn't seem like a valid email address": "Este não parece um email válido"
   "The email and/or password you entered is invalid": "O email e/ou a senha que você colocou são inválidos."
-  "There are no {{records}}": "Não há {{records}}."
-  "There are no {{records}} under this filter": "Não há {{records}} com este filtro."
+  "There are no %{records}": "Não há %{records}."
+  "There are no %{records} under this filter": "Não há %{records} com este filtro."
   "There are not defined applications in config/typus/*.yml": "Não há aplicativos definidos em config/typus/*.yml"
   "Toggle is disabled": "Toggle está desabilitado."
   "Today": "Hoje"
   "True": "Verdadeiro"
 
-  "Unrelate {{unrelate_model}} from {{unrelate_model_from}}?": "Desvincular {{unrelate_model}} de {{unrelate_model_from}}?"
+  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Desvincular %{unrelate_model} de %{unrelate_model_from}?"
   "Up": "Subir"
 
-  "View {{attribute}}": "Ver {{attribute}}"
+  "View %{attribute}": "Ver %{attribute}"
   "View site": "Ver site"
 
-  "You're adding a new {{resource_from}} to {{resource_to}}": "Você está adicionando um novo {{resource_from}} a {{resource_to}}."
-  "You're adding a new {{resource_from}}": "Você está adicionando um novo {{resource_from}}."
-  "You're updating a {{resource_from}} for {{resource_to}}": "Você está atualizando um {{resource_from}} de {{resource_to}}."
-  "You're updating a {{resource_from}}": "Você está atualizando um {{resource_from}}."
-  "You are about to delete a {{model}}.\nAre you sure you want to continue?": 
+  "You're adding a new %{resource_from} to %{resource_to}": "Você está adicionando um novo %{resource_from} a %{resource_to}."
+  "You're adding a new %{resource_from}": "Você está adicionando um novo %{resource_from}."
+  "You're updating a %{resource_from} for %{resource_to}": "Você está atualizando um %{resource_from} de %{resource_to}."
+  "You're updating a %{resource_from}": "Você está atualizando um %{resource_from}."
+  "You are about to delete a %{model}.\nAre you sure you want to continue?": 
   "You can't toggle your status": "Você não pode mudar seu status."
   "You're not allowed to toggle status": "Você não está autorizado a mudar o status."
   "You can't remove yourself": "Você não pode apagar a si mesmo."
   "You're not allowed to remove Typus Users": "Você não está autorizado a apagar usuários do sistema."
   "You can update your password at": "Você pode atualizar sua senha em"
-  "Your new password is {{password}}": "Sua nova senha é {{password}}."
+  "Your new password is %{password}": "Sua nova senha é %{password}."
   "You can't change your role": "Você não pode mudar sua própria função no sistema."
 
-  "{{attachment}} can't be removed": 
-  "{{attachment}} removed": 
-  "{{current_user_role}} can't delete this item": "{{current_user_role}} não pode apagar este item."
-  "{{current_user_role}} can't display items": "{{current_user_role}} não pode mostrar os items."
-  "{{current_user_role}} can't go to {{action}} on {{controller}}":  "{{current_user_role}} não pode ir a {{action}} no {{controller}}."
-  "{{current_user_role}} can't perform action. ({{action}})": "{{current_user_role}} não pode realizar a ação. ({{action}})"
-  "{{model}} filtered by {{filtered_by}}": "{{model}} filtrados por {{filtered_by}}"
-  "{{model}} successfully updated": "{{model}} atualizado com sucesso."
-  "{{model}} successfully created": "{{model}} criado com sucesso."
-  "{{model}} successfully removed": "{{model}} removido com sucesso."
-  "{{model}} {{attribute}} changed": "{{model}} {{attribute}} atualizado."
-  "{{model_a}} related to {{model_b}}": "{{model_a}} relacionado com {{model_b}}."
-  "{{model_a}} successfully assigned to {{model_b}}": "{{model_a}} atribuído com sucesso a {{model_b}}."
-  "{{model_a}} unrelated from {{model_b}}": "{{model_a}} não está relacionado com {{model_b}}."
+  "%{attachment} can't be removed": 
+  "%{attachment} removed": 
+  "%{current_user_role} can't delete this item": "%{current_user_role} não pode apagar este item."
+  "%{current_user_role} can't display items": "%{current_user_role} não pode mostrar os items."
+  "%{current_user_role} can't go to %{action} on %{controller}":  "%{current_user_role} não pode ir a %{action} no %{controller}."
+  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} não pode realizar a ação. (%{action})"
+  "%{model} filtered by %{filtered_by}": "%{model} filtrados por %{filtered_by}"
+  "%{model} successfully updated": "%{model} atualizado com sucesso."
+  "%{model} successfully created": "%{model} criado com sucesso."
+  "%{model} successfully removed": "%{model} removido com sucesso."
+  "%{model} %{attribute} changed": "%{model} %{attribute} atualizado."
+  "%{model_a} related to %{model_b}": "%{model_a} relacionado com %{model_b}."
+  "%{model_a} successfully assigned to %{model_b}": "%{model_a} atribuído com sucesso a %{model_b}."
+  "%{model_a} unrelated from %{model_b}": "%{model_a} não está relacionado com %{model_b}."

@@ -90,7 +90,7 @@ class Admin::MasterController < ApplicationController
     if @item.valid?
       create_with_back_to and return if params[:back_to]
       @item.save
-      flash[:success] = _("{{model}} successfully created.", 
+      flash[:success] = _("%{model} successfully created.", 
                           :model => @resource[:human_name])
       if @resource[:class].typus_options_for(:index_after_save)
         redirect_to :action => 'index'
@@ -141,7 +141,7 @@ class Admin::MasterController < ApplicationController
         @resource[:human_name] = params[:controller].extract_human_name
       end
 
-      flash[:success] = _("{{model}} successfully updated.", 
+      flash[:success] = _("%{model} successfully updated.", 
                           :model => @resource[:human_name])
       redirect_to path
 
@@ -153,7 +153,7 @@ class Admin::MasterController < ApplicationController
 
   def destroy
     @item.destroy
-    flash[:success] = _("{{model}} successfully removed.", 
+    flash[:success] = _("%{model} successfully removed.", 
                         :model => @resource[:human_name])
     redirect_to request.referer || admin_dashboard_path
   rescue Exception => error
@@ -163,7 +163,7 @@ class Admin::MasterController < ApplicationController
   def toggle
     @item.toggle(params[:field])
     @item.save!
-    flash[:success] = _("{{model}} {{attribute}} changed.", 
+    flash[:success] = _("%{model} %{attribute} changed.", 
                         :model => @resource[:human_name], 
                         :attribute => params[:field].humanize.downcase)
     redirect_to request.referer || admin_dashboard_path
@@ -180,7 +180,7 @@ class Admin::MasterController < ApplicationController
   #
   def position
     @item.send(params[:go])
-    flash[:success] = _("Record moved {{to}}.", 
+    flash[:success] = _("Record moved %{to}.", 
                         :to => params[:go].gsub(/move_/, '').humanize.downcase)
     redirect_to request.referer || admin_dashboard_path
   end
@@ -194,12 +194,12 @@ class Admin::MasterController < ApplicationController
     resource_tableized = params[:related][:relation] || params[:related][:model].tableize
 
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
-      flash[:success] = _("{{model_a}} related to {{model_b}}.", 
+      flash[:success] = _("%{model_a} related to %{model_b}.", 
                         :model_a => resource_class.typus_human_name, 
                         :model_b => @resource[:human_name])
     else
       # TODO: Show the reason why cannot be related showing model_a and model_b errors.
-      flash[:error] = _("{{model_a}} cannot be related to {{model_b}}.", 
+      flash[:error] = _("%{model_a} cannot be related to %{model_b}.", 
                         :model_a => resource_class.typus_human_name, 
                         :model_b => @resource[:human_name])
     end
@@ -236,12 +236,12 @@ class Admin::MasterController < ApplicationController
     end
 
     if saved_succesfully
-      flash[:success] = _("{{model_a}} unrelated from {{model_b}}.", 
+      flash[:success] = _("%{model_a} unrelated from %{model_b}.", 
                           :model_a => resource_class.typus_human_name, 
                           :model_b => @resource[:human_name])
     else
       # TODO: Show the reason why cannot be unrelated showing model_a and model_b errors.
-      flash[:error] = _("{{model_a}} cannot be unrelated to {{model_b}}.", 
+      flash[:error] = _("%{model_a} cannot be unrelated to %{model_b}.", 
                         :model_a => resource_class.typus_human_name, 
                         :model_b => @resource[:human_name])
     end
@@ -255,10 +255,10 @@ class Admin::MasterController < ApplicationController
     attachment = @resource[:class].human_attribute_name(params[:attachment])
 
     if @item.update_attributes(params[:attachment] => nil)
-      flash[:success] = _("{{attachment}} removed.", 
+      flash[:success] = _("%{attachment} removed.", 
                           :attachment => attachment)
     else
-      flash[:notice] = _("{{attachment}} can't be removed.", 
+      flash[:notice] = _("%{attachment} can't be removed.", 
                          :attachment => attachment)
     end
 
@@ -377,14 +377,14 @@ private
       @item.send(params[:resource]) << resource
     when :has_many
       @item.save
-      message = _("{{model}} successfully created.", 
+      message = _("%{model} successfully created.", 
                   :model => @resource[:human_name])
       path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
     when :polymorphic
       resource.send(@item.class.name.tableize).create(params[@object_name])
     end
 
-    flash[:success] = message || _("{{model_a}} successfully assigned to {{model_b}}.", 
+    flash[:success] = message || _("%{model_a} successfully assigned to %{model_b}.", 
                                    :model_a => @item.class.typus_human_name, 
                                    :model_b => resource_class.typus_human_name)
     redirect_to path || params[:back_to]
