@@ -46,7 +46,7 @@ module Admin
 
       message = _t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize)
 
-      return filter, items, message
+      return related_fk, items, message
     end
 
     def date_filter(request, filter)
