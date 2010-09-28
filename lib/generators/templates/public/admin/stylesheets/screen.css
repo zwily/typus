@@ -87,6 +87,7 @@ a:hover { color: #333; text-decoration: underline; }
   text-decoration: none;
 }
 
+#header_wrapper #links .left ul li a.active,
 #header_wrapper #links .left ul li a:hover { background: #FFF; color: #000; }
 
 #header_wrapper #links .right { float: right; }
