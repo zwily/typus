@@ -1,3 +1,3 @@
 module Typus
-  VERSION = "1.0.0.pre7"
+  VERSION = "1.0.0.pre8"
 end
