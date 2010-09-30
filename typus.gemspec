@@ -22,5 +22,4 @@ Gem::Specification.new do |s|
 
   s.files = Dir.glob("**/*")
   s.require_path = "lib"
-
 end
