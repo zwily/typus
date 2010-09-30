@@ -68,6 +68,10 @@
 [X] Search fields now support exact match, beginning of the field and
     full-text match which is the default.
 [X] Do not depend on Rdiscount when rendering content on resources#show.
+[X] Decide where to put the search box.
+[X] Pagination doesn't work properly when having multiple paginators on edit page
+[X] Generator to copy views to `app/views/admin`.
+[X] Clicking on h1 should open website (root_path) when available.
 
 [-] Move html code from helpers to partials.
 [ ] Add `has_many` through relationships.
@@ -79,16 +83,13 @@
 [ ] Show auto_generated, read_only on string fields. (_string.html.erb)
 [ ] Pass options hash to form fields.
 [ ] Fix css to display correctly "select" fields in relationships.
-[ ] Ajax pagination. (?)
 [ ] Add test for `typus_table_selector`.
 [ ] Forever loop when schema has not been migrated.
-[ ] Pagination doesn't work properly when having multiple paginators on edit page
 [ ] Add support for `has_one` relationships.
 [ ] Remove all crappy rescues.
 [ ] Search in multiple models.
 [ ] Nested models.
 [ ] Contextual content depending on the logged user.
-[ ] Include dashboard#sidebar in the generator so use can easily overwrite it.
 [ ] Verify generator is working properly.
 [ ] Test generator?
 [ ] Added comment on all FIXME tests. Try to fix them first.
@@ -97,8 +98,5 @@
 [ ] Convert plugin to engine.
 [ ] Verify lightbox is working as expected.
 [ ] Fix footer to the bottom.
-[ ] Show sort arrow on hover.
-[ ] Clicking on h1 should open website (root_path) when available.
 [ ] `Typus.applications` should become `Typus.groups`.
-[ ] Decide where to put the search box.
 [ ] Removing an item should redirect to back without the page params.
