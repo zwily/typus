@@ -233,10 +233,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal %w( title ), Post.typus_defaults_for(:search)
     end
 
-    should "return defaults_for search on Post" do
-      assert_equal %w( title ), Post.typus_defaults_for(:search)
-    end
-
     should "return default_for relationships on Post" do
       assert_equal %w( assets categories comments views ), Post.typus_defaults_for(:relationships)
       assert !Post.typus_defaults_for(:relationships).empty?
