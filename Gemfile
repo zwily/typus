@@ -1,7 +1,5 @@
 source 'http://rubygems.org'
 
-# gemspec
-
 gem "acts_as_list"
 gem "acts_as_tree"
 gem "capybara"
