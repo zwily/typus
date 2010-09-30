@@ -235,7 +235,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     should "return default_for relationships on Post" do
       assert_equal %w( assets categories comments views ), Post.typus_defaults_for(:relationships)
-      assert !Post.typus_defaults_for(:relationships).empty?
+      assert Post.typus_defaults_for(:relationships).any?
     end
 
   end
