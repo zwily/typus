@@ -80,7 +80,6 @@ module Typus
 
       # Typus sidebar filters.
       def typus_filters
-
         fields_with_type = ActiveSupport::OrderedHash.new
 
         data = Typus::Configuration.config[name]['filters']
@@ -96,7 +95,6 @@ module Typus
         end
 
         return fields_with_type
-
       end
 
       def typus_actions
@@ -169,14 +167,12 @@ module Typus
       #         per_page: 15
       #++
       def typus_options_for(filter)
-
         data = Typus::Configuration.config[name]
         unless data['options'].nil?
           value = data['options'][filter.to_s] unless data['options'][filter.to_s].nil?
         end
 
         return (!value.nil?) ? value : Typus::Resources.send(filter)
-
       end
 
       def typus_export_formats
@@ -186,7 +182,6 @@ module Typus
 
       # Used for `order_by`.
       def typus_order_by
-
         fields = typus_defaults_for(:order_by)
 
         if fields.empty?
@@ -196,7 +191,6 @@ module Typus
             field.include?('-') ? "#{table_name}.#{field.delete('-')} DESC" : "#{table_name}.#{field} ASC"
           end.join(', ')
         end
-
       end
 
       #--
