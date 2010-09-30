@@ -57,7 +57,9 @@ module Admin
 
 =begin
 
+    #--
     # TODO: This method should show a list of actions for the actual record.
+    #++
     def custom_actions(klass)
       options = { :controller => klass.to_resource }
       items = klass.typus_actions_on("index").map do |action|
