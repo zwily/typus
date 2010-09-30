@@ -16,7 +16,6 @@ class ActiveRecord::Base
   #       to use Arel this can be removed.
   #++
   def self.merge_conditions(*conditions)
-
     segments = []
 
     conditions.each do |condition|
@@ -27,7 +26,6 @@ class ActiveRecord::Base
     end
 
     "(#{segments.join(') AND (')})" unless segments.empty?
-
   end
 
   #--
