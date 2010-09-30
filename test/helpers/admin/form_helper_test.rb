@@ -5,10 +5,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   include Admin::FormHelper
   include Admin::ResourcesHelper
 
-=begin
-
-  # FIXME: Problem with params number. A form option has to be sent.
-  def test_typus_belongs_to_field
+  should_eventually "verify belongs_to_field" do
 
     params = { :controller => 'admin/post', :id => 1, :action => :create }
     self.stubs(:params).returns(params)
@@ -32,12 +29,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
-=end
-
-=begin
-
-  # FIXME: Problem with the number of attributes.
-  def test_typus_belongs_to_field_with_different_attribute_name
+  should_eventually "test_typus_belongs_to_field_with_different_attribute_name" do
 
     params = { :controller => 'admin/post', :id => 1, :action => :edit }
     self.stubs(:params).returns(params)
@@ -61,12 +53,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
-=end
-
-=begin
-
-  # FIXME: Problem with the number of params.
-  def test_typus_tree_field
+  should_eventually "test_typus_tree_field" do
 
     self.stubs(:expand_tree_into_select_field).returns('expand_tree_into_select_field')
 
@@ -84,13 +71,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
-=end
-
-=begin
-
-  # FIXME: Attribute disabled
-
-  should "verify attribute_disabled" do
+  should_eventually "verify attribute_disabled" do
     @resource = Post
     assert !attribute_disabled?('test')
     Post.expects(:accessible_attributes).returns(['test'])
@@ -99,11 +80,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     assert attribute_disabled?('test')
   end
 
-=end
-
-=begin
-
-  def test_expand_tree_into_select_field
+  should_eventually "test_expand_tree_into_select_field" do
 
     items = Page.roots
 
@@ -136,7 +113,5 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
 
   end
-
-=end
 
 end

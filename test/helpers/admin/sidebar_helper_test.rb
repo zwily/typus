@@ -17,7 +17,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
   end
 
 =begin
-
   def test_actions
   end
 

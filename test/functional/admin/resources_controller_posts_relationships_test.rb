@@ -62,14 +62,13 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-=begin
-
   ##
   # Post => has_many :assets, :as => resource (Polimorphic)
   ##
 
-  # FIXME: ActiveRecord::UnknownAttributeError: unknown attribute: post
-  should "relate_asset_with_post_and_then_unrelate"
+  should_eventually "relate_asset_with_post_and_then_unrelate" do
+
+    # ActiveRecord::UnknownAttributeError: unknown attribute: post
 
     post_ = Factory(:post)
 
@@ -85,7 +84,5 @@ class Admin::PostsControllerTest < ActionController::TestCase
     assert_equal "Asset unrelated from Post.", flash[:notice]
 
   end
-
-=end
 
 end
