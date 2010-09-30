@@ -3,8 +3,8 @@ module Admin
   module FiltersHelper
 
     def build_filters(resource = @resource)
-
       typus_filters = resource.typus_filters
+
       return if typus_filters.empty?
 
       current_request = request.env['QUERY_STRING'] || []
