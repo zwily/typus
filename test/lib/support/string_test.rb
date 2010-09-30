@@ -25,10 +25,4 @@ class StringTest < ActiveSupport::TestCase
     assert_equal Delayed::Task, "admin/delayed/tasks".extract_class
   end
 
-  should "verify String#typus_actions_on" do
-    assert_equal %w(cleanup), "Post".typus_actions_on("index")
-    assert_equal %w(send_as_newsletter preview), "Post".typus_actions_on(:edit)
-    assert "TypusUser".typus_actions_on(:unexisting).empty?
-  end
-
 end
