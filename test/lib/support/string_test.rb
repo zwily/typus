@@ -19,12 +19,6 @@ class StringTest < ActiveSupport::TestCase
     assert_equal "delayed/tasks", "typus/delayed/tasks".remove_prefix("typus/")
   end
 
-  should "extract_resource" do
-    assert_equal "posts", "admin/posts".extract_resource
-    assert_equal "typus_users", "admin/typus_users".extract_resource
-    assert_equal "delayed/tasks", "admin/delayed/tasks".extract_resource
-  end
-
   should "extract_class" do
     assert_equal Post, "admin/posts".extract_class
     assert_equal TypusUser, "admin/typus_users".extract_class

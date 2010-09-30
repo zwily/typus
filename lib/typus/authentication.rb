@@ -153,7 +153,7 @@ module Typus
     def check_if_user_can_perform_action_on_resource
       return unless Typus.authentication.eql?(:session)
 
-      controller = params[:controller].extract_resource
+      controller = params[:controller].remove_prefix
       action = params[:action]
       unless @current_user.can?(action, controller.camelize, { :special => true })
         render :text => "Not allowed!", :status => :unprocessable_entity

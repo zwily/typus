@@ -8,10 +8,6 @@ class String
     partition(prefix).last
   end
 
-  def extract_resource
-    remove_prefix
-  end
-
   def extract_class
     remove_prefix.camelize.classify.constantize
   end
