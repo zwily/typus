@@ -14,4 +14,4 @@ gem "acts_as_list"
 gem "paperclip"
 gem "shoulda"
 gem "mocha"
-gem 'leftright'
+gem "leftright"
