@@ -3,21 +3,8 @@ module Admin
   module BaseHelper
 
     def typus_block(resource = @resource.to_resource, partial = params[:action])
-      partials_path = "admin/#{resource}"
-      resources_partials_path = "admin/resources"
-
-      partials = ActionController::Base.view_paths.map do |view_path|
-        Dir["#{view_path}/#{partials_path}/*"].map { |f| File.basename(f, '.html.erb') }
-      end.flatten
-      resources_partials = Dir[Rails.root.join("app/views/#{resources_partials_path}/*").to_s].map do |file|
-                             File.basename(file, ".html.erb")
-                           end
-
-      path = if partials.include?("_#{partial}") then partials_path
-             elsif resources_partials.include?(partial) then resources_partials_path
-             end
-
-      render "#{path}/#{partial}" if path
+      render "admin/#{resource}/#{partial}"
+    rescue ActionView::MissingTemplate
     end
 
     def title(page_title)
