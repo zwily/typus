@@ -42,7 +42,6 @@ class StringTest < ActiveSupport::TestCase
     assert_equal %w(cleanup), "Post".typus_actions_on(:index)
     assert_equal %w(send_as_newsletter preview), "Post".typus_actions_on(:edit)
     assert "TypusUser".typus_actions_on(:unexisting).empty?
-    assert "Post".typus_actions_on(:index).kind_of?(Array)
   end
 
 end
