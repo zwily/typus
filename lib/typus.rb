@@ -5,14 +5,17 @@ require "support/array"
 require "support/hash"
 require "support/object"
 require "support/string"
+
 require "typus/engine"
-require "typus/configuration"
-require "typus/resources"
 require "typus/orm/active_record"
 require "typus/user"
-require "vendor/paginator"
+
+autoload :Paginator, "vendor/paginator"
 
 module Typus
+
+  autoload :Configuration, "typus/configuration"
+  autoload :Resources, "typus/resources"
 
   # Define the application name.
   mattr_accessor :admin_title
