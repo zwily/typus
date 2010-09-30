@@ -18,16 +18,15 @@ module Admin
 
     def default_actions(klass)
       actions = []
+      options = { :controller => klass.to_resource }
 
       if @current_user.can?("create", klass)
-        options = { :controller => klass.to_resource }
         message = _t("Add new")
-        actions << (link_to_unless_current message, options.merge(:action => "new"))
+        actions << link_to_unless_current(message, options.merge(:action => "new"))
       end
 
       message = _t("List")
-      options = { :controller => klass.to_resource }
-      actions << (link_to_unless_current message, options)
+      actions << link_to_unless_current(message, options)
 
       return actions
     end
