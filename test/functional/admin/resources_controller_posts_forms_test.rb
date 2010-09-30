@@ -10,48 +10,55 @@ class Admin::PostsControllerTest < ActionController::TestCase
   #     fields:
   #       form: title, body, created_at, status, published_at
   #
-  should "verify forms" do
 
-    get :new
-    assert_template :new
+  context "verify forms" do
 
-    assert_select "form"
+    setup do
+      get :new
+      assert_template :new
+    end
+
+    should "verify forms" do
+      assert_select "form"
+    end
 
     # We have 3 inputs: 1 hidden which is the UTF8 stuff, one which is the 
     # Post#title and finally the submit button.
+    should "have 3 inputs" do
+      assert_select "form input", 3
 
-    assert_select "form input", 3
+      # Post#title: Input
+      assert_select 'label[for="post_title"]'
+      assert_select 'input#post_title[type="text"]'
+    end
 
-    # Post#title: Input
-    assert_select 'label[for="post_title"]'
-    assert_select 'input#post_title[type="text"]'
+    should "have 1 textarea" do
+      assert_select "form textarea", 1
 
-    # We have 1 textarea
-    assert_select "form textarea", 1
+      # Post#body: Text Area
+      assert_select 'label[for="post_body"]'
+      assert_select 'textarea#post_body'
+    end
 
-    # Post#body: Text Area
-    assert_select 'label[for="post_body"]'
-    assert_select 'textarea#post_body'
+    should "have 6 selectors" do
+      assert_select "form select", 6
 
-    # We have 6 selectors
-    assert_select "form select", 6
+      # Post#created_at: Datetime
+      assert_select 'label[for="post_created_at"]'
+      assert_select 'select#post_created_at_1i'
+      assert_select 'select#post_created_at_2i'
+      assert_select 'select#post_created_at_3i'
+      assert_select 'select#post_created_at_4i'
+      assert_select 'select#post_created_at_5i'
 
-    # Post#created_at: Datetime
-    assert_select 'label[for="post_created_at"]'
-    assert_select 'select#post_created_at_1i'
-    assert_select 'select#post_created_at_2i'
-    assert_select 'select#post_created_at_3i'
-    assert_select 'select#post_created_at_4i'
-    assert_select 'select#post_created_at_5i'
+      # Post#status: Selector
+      assert_select 'label[for="post_status"]'
+      assert_select 'select#post_status'
+    end
 
-    # Post#status: Selector
-    assert_select 'label[for="post_status"]'
-    assert_select 'select#post_status'
-
-    # We have 1 template
-
-    # Post#published_at: Datetime
-    assert_match "templates#datepicker_template_published_at", @response.body
+    should "have 1 template" do
+      assert_match "templates#datepicker_template_published_at", @response.body
+    end
 
   end
 
