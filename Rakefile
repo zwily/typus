@@ -36,8 +36,7 @@ task :release => :build do
 
   system "git commit -m 'Bump version to #{Typus::VERSION}' lib/typus/version.rb"
   system "git tag v#{version}"
-  system "git push"
-  system "git push --tags"
+  system "git push && git push --tags"
 
   system "gem push typus-#{version}.gem"
 
