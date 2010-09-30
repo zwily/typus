@@ -41,5 +41,5 @@ task :release => :build do
 
   system "gem push typus-#{version}.gem"
 
-  system "git clean -fd"
+  system "git clean -fd && rm -f typus-#{version}.gem"
 end
