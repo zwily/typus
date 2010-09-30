@@ -22,7 +22,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
 
   should "remove_filter_link" do
     output = remove_filter_link("")
-    assert output.nil?
+    assert_nil output
   end
 
   context "Build list" do

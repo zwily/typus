@@ -9,7 +9,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
   end
 
   should "verify email from is nil by default" do
-    assert Admin::Mailer.default[:from].nil?
+    assert_nil Admin::Mailer.default[:from]
   end
 
   should "verify email to is typus user email" do

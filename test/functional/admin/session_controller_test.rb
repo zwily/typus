@@ -58,7 +58,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
       post :create, { :typus_user => { :email => typus_user.email, :password => "12345678" } }
 
-      assert @request.session[:typus_user_id].nil?
+      assert_nil @request.session[:typus_user_id]
       assert_response :redirect
       assert_redirected_to new_admin_session_path
     end
@@ -74,7 +74,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
     should "destroy" do
       delete :destroy
 
-      assert @request.session[:typus_user_id].nil?
+      assert_nil @request.session[:typus_user_id]
       assert_response :redirect
       assert_redirected_to new_admin_session_path
       assert flash.empty?

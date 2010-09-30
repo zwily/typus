@@ -160,7 +160,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "verify typus_options_for returns nil when options doesnt exist" do
-      assert TypusUser.typus_options_for(:unexisting).nil?
+      assert_nil TypusUser.typus_options_for(:unexisting)
     end
 
     should "return options for post and page" do

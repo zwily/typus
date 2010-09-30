@@ -12,7 +12,7 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "verify_default_config for mailer_sender" do
-    assert Typus.mailer_sender.nil?
+    assert_nil Typus.mailer_sender
   end
 
   should "verify_default_config for username" do

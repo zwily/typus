@@ -63,7 +63,7 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
   end
 
   should "not display_flash_message with empty message" do
-    assert display_flash_message(Hash.new).nil?
+    assert_nil display_flash_message(Hash.new)
   end
 
 end

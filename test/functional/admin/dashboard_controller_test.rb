@@ -24,7 +24,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to new_admin_session_path
-    assert @request.session[:typus_user_id].nil?
+    assert_nil @request.session[:typus_user_id]
     assert_equal "Role does no longer exists.", flash[:notice]
   end
 
@@ -81,7 +81,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
       assert_response :redirect
       assert_redirected_to new_admin_session_path
       assert_equal "Typus user has been disabled.", flash[:notice]
-      assert @request.session[:typus_user_id].nil?
+      assert_nil @request.session[:typus_user_id]
     end
 
   end
