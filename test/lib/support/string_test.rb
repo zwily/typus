@@ -39,7 +39,6 @@ class StringTest < ActiveSupport::TestCase
 
   should "verify String#typus_actions_on" do
     assert_equal %w(cleanup), "Post".typus_actions_on("index")
-    assert_equal %w(cleanup), "Post".typus_actions_on(:index)
     assert_equal %w(send_as_newsletter preview), "Post".typus_actions_on(:edit)
     assert "TypusUser".typus_actions_on(:unexisting).empty?
   end
