@@ -51,22 +51,6 @@ module Admin
       render File.join(path, "pagination") if @items.prev || @items.next
     end
 
-=begin
-
-    #--
-    # TODO: This method should show a list of actions for the actual record.
-    #++
-    def custom_actions(klass)
-      options = { :controller => klass.to_resource }
-      items = klass.typus_actions_on("index").map do |action|
-        if @current_user.can?(action, klass)
-          (link_to _t(action.humanize), options.merge(:action => action))
-        end
-      end
-    end
-
-=end
-
     private
 
     def path
