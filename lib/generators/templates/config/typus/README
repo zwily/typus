@@ -34,16 +34,16 @@ common settings.
       application: Application
       description: Some text to describe the model
       options:
+        action_after_save: :index
         default_action_on_item: show
         end_year: 2015
         form_rows: 25
-        action_after_save: :index
+        habtm_limit: 500
         minute_step: 15
         nil: 'nil'
         only_user_items: true
         per_page: 5
         start_year: 1990
-        habtm_limit: 500
 
 Note: To define namespace models use :: as a separator. (i.e. Delayed::Job)
 
