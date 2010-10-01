@@ -1,11 +1,8 @@
 <div id="pagination">
 
-  <%
-    previous_text = "&larr; " + _t("Previous")
-    next_text = _t("Next") + " &rarr;"
-  %>
-
   <div class="left">
+
+    <% previous_text = "&larr; " + _t("Previous") %>
 
     <% if @items.prev? %>
       <%= link_to raw(previous_text), params.merge(:page => @items.prev.number, :anchor => @options[:anchor]) %>
@@ -16,6 +13,8 @@
   </div>
 
   <div class="right">
+
+    <% next_text = _t("Next") + " &rarr;" %>
 
     <% if @items.next? %>
       <%= link_to raw(next_text), params.merge(:page => @items.next.number, :anchor => @options[:anchor]) %>
