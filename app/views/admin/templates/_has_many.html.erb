@@ -12,7 +12,7 @@
 
   <%= form %>
 
-  <% unless @items.count.zero? -%>
+  <% if @items.any? -%>
     <%= table %>
     <%= pagination(:anchor => model_to_relate.to_resource) %>
   <% else %>
