@@ -195,8 +195,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_booleans_for_typus_users" do
-      assert_equal [ :true, :false ], TypusUser.typus_boolean(:status).keys
-      assert_equal [ "Active", "Inactive" ], TypusUser.typus_boolean(:status).values
+      assert_equal [ "Active", "Inactive" ], TypusUser.typus_boolean(:status).keys
+      assert_equal [ true, false ], TypusUser.typus_boolean(:status).values
     end
 
     should "return_booleans_for_post" do
