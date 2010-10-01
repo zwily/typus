@@ -205,7 +205,6 @@ module Typus
       #
       #++
       def typus_boolean(attribute = :default)
-
         begin
           boolean = Typus::Configuration.config[name]['fields']['options']['booleans'][attribute.to_s]
         rescue
@@ -214,14 +213,12 @@ module Typus
 
         return nil if boolean.nil?
 
-        hash = ActiveSupport::OrderedHash.new
+        hash = {}
 
         mapping = boolean.kind_of?(Array) ? boolean : boolean.extract_settings
-        hash[:true], hash[:false] = mapping.first, mapping.last
-        hash.map { |k, v| hash[k] = v.humanize }
+        hash[mapping.first.humanize], hash[mapping.last.humanize] = true, false
 
         return hash
-
       end
 
       #--

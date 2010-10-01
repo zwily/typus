@@ -23,8 +23,10 @@ module Admin
                                    string_filter(current_request, key)
                                  end
 
-        { :filter => filter, :items => items, :message => message }
+        items = items.to_a
+        items.insert(0, [message, ""])
 
+        { :filter => filter, :items => items }
       end
 
       render "admin/helpers/filters/filters", :filters => filters

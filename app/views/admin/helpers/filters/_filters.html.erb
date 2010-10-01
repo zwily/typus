@@ -7,10 +7,7 @@
       <% filters.each do |filter| %>
 
         <li>
-          <select name="<%= filter[:filter] %>">
-            <option value=""><%= filter[:message] %></option>
-            <%= options_for_select(filter[:items], params[filter[:filter]]) %>
-          </select>
+          <%= select_tag filter[:filter], options_for_select(filter[:items], params[filter[:filter]]) %>
         </li>
 
       <% end %>
