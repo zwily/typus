@@ -32,9 +32,9 @@ class ActiveRecord::Base
   # On a model:
   #
   #     class Post < ActiveRecord::Base
-  #       STATUS = { "published" => t("Published"),
-  #                  "pending" => t("Pending"),
-  #                  "draft" => t("Draft") }
+  #       STATUS = {  t("Published") => "published",
+  #                  t("Pending") => "pending",
+  #                  t("Draft") => "draft" }
   #     end
   #
   #     >> Post.first.status
@@ -48,7 +48,7 @@ class ActiveRecord::Base
   #++
   def mapping(attribute)
     values = self.class::const_get(attribute.to_s.upcase)
-    values.kind_of?(Hash) ? values[send(attribute)] : send(attribute)
+    values.kind_of?(Hash) ? values.invert[send(attribute)] : send(attribute)
   end
 
   def to_label
