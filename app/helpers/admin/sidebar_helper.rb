@@ -22,15 +22,14 @@ module Admin
 
     def default_actions(klass)
       actions = []
-      options = { :controller => klass.to_resource }
 
       if @current_user.can?("create", klass)
         message = _t("Add new")
-        actions << link_to_unless_current(message, options.merge(:action => "new"))
+        actions << link_to_unless_current(message, :action => "new")
       end
 
       message = _t("List")
-      actions << link_to_unless_current(message, options)
+      actions << link_to_unless_current(message, :action => "index")
 
       return actions
     end
@@ -42,10 +41,9 @@ module Admin
     end
 
     def custom_actions(klass)
-      options = { :controller => klass.to_resource }
       klass.typus_actions_on(params[:action]).map do |action|
         if @current_user.can?(action, klass)
-          (link_to_unless_current _t(action.humanize), options.merge(:action => action))
+          link_to_unless_current (_t(action.humanize), params.merge(:action => action))
         end
       end
     end
