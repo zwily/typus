@@ -9,7 +9,11 @@ module Admin
       Typus.application(app_name).sort {|a,b| a.constantize.model_name.human <=> b.constantize.model_name.human}.each do |resource|
         next unless @current_user.resources.include?(resource)
         klass = resource.constantize
-        resources[resource] = default_actions(klass) + export(klass) + custom_actions(klass)
+
+        resources[resource] = default_actions(klass)
+        resources[resource] += export(klass) if params[:action] == 'index'
+        resources[resource] += custom_actions(klass)
+
         resources[resource].compact!
       end
 
@@ -32,8 +36,6 @@ module Admin
     end
 
     def export(klass)
-      return [] unless params[:action] == "index"
-
       klass.typus_export_formats.map do |format|
         link_to _t("Export as %{format}", :format => format.upcase), params.merge(:format => format)
       end
