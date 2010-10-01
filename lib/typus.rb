@@ -124,7 +124,7 @@ module Typus
 
     def locales
       human = available_locales.map { |i| locales_mapping[i.to_s] }
-      available_locales.map { |i| i.to_s }.to_hash_with(human)
+      available_locales.map { |i| i.to_s }.to_hash_with(human).invert
     end
 
     def locales_mapping
