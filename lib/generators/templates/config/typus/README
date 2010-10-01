@@ -43,6 +43,7 @@ common settings.
         only_user_items: true
         per_page: 5
         start_year: 1990
+        habtm_limit: 500
 
 Note: To define namespace models use :: as a separator. (i.e. Delayed::Job)
 
