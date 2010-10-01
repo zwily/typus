@@ -11,9 +11,9 @@ module Admin
     include TableHelper
 
     #--
-    # If there's a partial with a "microformat" of the data we want to
-    # display, this will be used, otherwise we use a default table which
-    # it's build from the options defined on the yaml configuration file.
+    # If partial `list` exists we will use it. This partial will have available
+    # the `@items` so we can do whatever we want there. Notice that pagination
+    # is still available.
     #++
     def build_list(model, fields, items, resource = @resource.to_resource, link_options = {}, association = nil)
       render "admin/#{resource}/list", :items => items
