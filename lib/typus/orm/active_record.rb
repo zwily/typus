@@ -209,7 +209,7 @@ module Typus
         boolean = boolean.extract_settings
         { boolean.first => "true", boolean.last => "false" }
       rescue
-        { "true" => "true", "false" => "false" }
+        { "True" => "true", "False" => "false" }
       end
 
       #--

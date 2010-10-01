@@ -182,26 +182,24 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   context "Typus boolean" do
 
-    should "verify_typus_boolean_is_an_instance_of_active_support_ordered_hash" do
-      assert TypusUser.typus_boolean("status").instance_of?(ActiveSupport::OrderedHash)
-    end
-
     should "verify typus_boolean accepts strings" do
-      assert_equal [ :true, :false ], TypusUser.typus_boolean("status").keys
+      expected = {"Inactive"=>"false", "Active"=>"true"}
+      assert_equal expected, TypusUser.typus_boolean("status")
     end
 
     should "verify typus_boolean accepts symbols" do
-      assert_equal [ :true, :false ], TypusUser.typus_boolean(:status).keys
+      expected = {"Inactive"=>"false", "Active"=>"true"}
+      assert_equal expected, TypusUser.typus_boolean(:status)
     end
 
     should "return_booleans_for_typus_users" do
-      assert_equal [ "Active", "Inactive" ], TypusUser.typus_boolean(:status).keys
-      assert_equal [ true, false ], TypusUser.typus_boolean(:status).values
+      expected = {"Active" => "true", "Inactive" => "false"}
+      assert_equal expected, TypusUser.typus_boolean(:status)
     end
 
     should "return_booleans_for_post" do
-      assert_equal [ "True", "False" ], Post.typus_boolean(:status).keys
-      assert_equal [ true, false ], Post.typus_boolean(:status).values
+      expected = {"True" => "true", "False" => "false"}
+      assert_equal expected, Post.typus_boolean(:status)
     end
 
   end
