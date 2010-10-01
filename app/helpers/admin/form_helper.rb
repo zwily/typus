@@ -95,6 +95,8 @@ module Admin
     end
 
 =begin
+
+    # TODO: Take `attribute_disabled?(attribute)` back.
     def attribute_disabled?(attribute)
       accessible = @resource.accessible_attributes
       return accessible.nil? ? false : !accessible.include?(attribute)
