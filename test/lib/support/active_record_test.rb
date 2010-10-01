@@ -7,6 +7,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal "published", post.mapping(:status)
   end
 
+  should "verify mapping instance method with a 2 dimension array" do
+    Post.send(:remove_const, :STATUS)
+    Post::STATUS = [["Published", "published"], ["Pending", "pending"]]
+    post = Factory(:post)
+    assert_equal "Published", post.mapping(:status)
+  end
+
   should "verify mapping instace method with an array when status if unpublished" do
     post = Factory(:post, :status => "unpublished")
     assert_equal "unpublished", post.mapping(:status)
