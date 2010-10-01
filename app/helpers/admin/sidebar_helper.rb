@@ -24,12 +24,10 @@ module Admin
       actions = []
 
       if @current_user.can?("create", klass)
-        message = _t("Add new")
-        actions << link_to_unless_current(message, :action => "new")
+        actions << link_to_unless_current(_t("Add new"), :action => "new")
       end
 
-      message = _t("List")
-      actions << link_to_unless_current(message, :action => "index")
+      actions << link_to_unless_current(_t("List"), :action => "index")
 
       return actions
     end
