@@ -9,10 +9,7 @@
         <li>
           <select name="<%= filter[:filter] %>">
             <option value=""><%= filter[:message] %></option>
-            <% filter[:items].each do |key, value| %>
-            <% selected = "selected" if params[filter[:filter]].eql?(key.to_s) %>
-            <option <%= selected %> value="<%= key %>"><%= value %></option>
-            <% end %>
+            <%= options_for_select(filter[:items], params[filter[:filter]]) %>
           </select>
         </li>
 
