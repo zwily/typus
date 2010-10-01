@@ -17,58 +17,64 @@ module Typus
   autoload :Configuration, "typus/configuration"
   autoload :Resources, "typus/resources"
 
-  # Define the application name.
   mattr_accessor :admin_title
   @@admin_title = "Typus"
 
-  # Define a subtitle
   mattr_accessor :admin_sub_title
   @@admin_sub_title = <<-CODE
 <a href="http://core.typuscms.com/">typus</a> by <a href="http://intraducibles.com">intraducibles.com</a>
   CODE
 
-  # Authentication mechanism: none, basic, advanced
+  ##
+  # Available Authentication Mechanisms are:
+  #
+  # - none
+  # - basic: Uses http authentication
+  # - session
+  #
   mattr_accessor :authentication
   @@authentication = :none
 
-  # Define the configuration folder.
   mattr_accessor :config_folder
   @@config_folder = "config/typus"
 
-  # Define the username
   mattr_accessor :username
   @@username = "admin"
 
-  # Define the password: Used as a default password and for the http
-  # authentication.
+  ##
+  # Define a password.
+  #
+  # Used as default password for http and advances authentication.
+  #
   mattr_accessor :password
   @@password = "columbia"
 
+  ##
   # Configure the e-mail address which will be shown in Admin::Mailer.
+  #
+  # When `nil`, the `forgot_password` will be disabled.
+  #
   mattr_accessor :mailer_sender
   @@mailer_sender = nil
 
-  # Define the file preview.
   mattr_accessor :file_preview
   @@file_preview = :medium
 
-  # Define the file thumbnail.
   mattr_accessor :file_thumbnail
   @@file_thumbnail = :thumb
 
+  ##
   # Defines the default relationship table.
+  #
   mattr_accessor :relationship
   @@relationship = "typus_users"
 
-  # Defines the default master role.
   mattr_accessor :master_role
   @@master_role = "admin"
 
-  # Defines the default user_class_name.
   mattr_accessor :user_class_name
   @@user_class_name = "TypusUser"
 
-  # Defines the default user_fk.
   mattr_accessor :user_fk
   @@user_fk = "typus_user_id"
 
@@ -77,8 +83,8 @@ module Typus
 
   class << self
 
-    # Default way to setup typus. Run rails generate typus to create
-    # a fresh initializer with all configuration values.
+    # Default way to setup typus. Run `rails generate typus` to create a fresh
+    # initializer with all configuration values.
     def setup
       yield self
     end
