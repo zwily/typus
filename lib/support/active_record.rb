@@ -33,8 +33,8 @@ class ActiveRecord::Base
   #
   #     class Post < ActiveRecord::Base
   #       STATUS = {  t("Published") => "published",
-  #                  t("Pending") => "pending",
-  #                  t("Draft") => "draft" }
+  #                   t("Pending") => "pending",
+  #                   t("Draft") => "draft" }
   #     end
   #
   #     >> Post.first.status
