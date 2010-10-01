@@ -26,7 +26,7 @@ common settings.
         index: cleanup
         edit: send_as_newsletter
         show: rebuild
-      export: csv, xml, pdf
+      export: csv, xml
       order_by: created_at
       relationships:
       filters: is_published?, created_at, category_id
