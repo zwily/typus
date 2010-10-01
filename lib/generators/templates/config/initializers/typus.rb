@@ -4,7 +4,7 @@ Typus.setup do |config|
   config.admin_title = "<%= options[:admin_title] %>"
   # config.admin_sub_title = ""
 
-  # When +mailer_sender+ is set, password recover is enabled. This email
+  # When mailer_sender is set, password recover is enabled. This email
   # address will be used in Admin::Mailer.
   # config.mailer_sender = "admin@example.com"
 

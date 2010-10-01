@@ -1,18 +1,18 @@
 Typus.setup do |config|
 
-  # Authentication: none, http_basic, session
+  # Define authentication: +:none+, +:http_basic+, +:session+
   config.authentication = :session
 
-  # Define the default root.
+  # Define master_role.
   # config.master_role = "admin"
 
-  # Define relationship table.
+  # Define relationship.
   # config.relationship = "typus_users"
 
-  # Define user_class_name and user_fk.
+  # Define user_class_name.
   config.user_class_name = "<%= options[:user_class_name] %>"
 
-  # Define the user_fk
+  # Define user_fk.
   config.user_fk = "<%= options[:user_fk] %>"
 
 end
