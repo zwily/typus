@@ -1,15 +1,10 @@
-require "test_helper"
+require 'test_helper'
 
 class Admin::<%= resource %>ControllerTest < ActionController::TestCase
 
-  test "should render index" do
-    get :index
-    assert_template :index
-  end
-
-  test "should render new" do
-    get :new
-    assert_template :new
+  # Replace this with your real tests.
+  test "the truth" do
+    assert true
   end
 
 end
