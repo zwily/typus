@@ -200,8 +200,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_booleans_for_post" do
-      assert_equal [ :true, :false ], Post.typus_boolean(:status).keys
-      assert_equal [ "True", "False" ], Post.typus_boolean(:status).values
+      assert_equal [ "True", "False" ], Post.typus_boolean(:status).keys
+      assert_equal [ :true, :false ], Post.typus_boolean(:status).vales
     end
 
   end
