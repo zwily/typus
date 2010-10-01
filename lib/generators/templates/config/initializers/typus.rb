@@ -4,19 +4,19 @@ Typus.setup do |config|
   config.admin_title = "<%= options[:admin_title] %>"
   # config.admin_sub_title = ""
 
-  # Configure the e-mail address which will be shown in Admin::Mailer.
-  # When this option is define Typus will allow admin users to recover
-  # lost passwords.
+  # When +mailer_sender+ is set, password recover is enabled. This email
+  # address will be used in Admin::Mailer.
   # config.mailer_sender = "admin@example.com"
 
   # Define file attachment settings.
   # config.file_preview = :typus_preview
   # config.file_thumbnail = :typus_thumbnail
 
-  # Authentication: :none, :http_basic
+  # Authentication: +:none+, +:http_basic+
+  # Run `rails g typus:migration` if you need an advanced authentication system.
   # config.authentication = :none
 
-  # Define username and password for http authentication
+  # Define username and password for +:http_basic+ authentication
   # config.username = "admin"
   # config.password = "columbia"
 
