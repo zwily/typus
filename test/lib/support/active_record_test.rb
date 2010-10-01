@@ -2,7 +2,7 @@ require "test_helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
-  should "verify mapping instace method with an array" do
+  should "verify mapping instance method with an array" do
     post = Factory(:post)
     assert_equal "published", post.mapping(:status)
   end
