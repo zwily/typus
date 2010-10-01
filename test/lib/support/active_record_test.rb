@@ -14,23 +14,23 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal "Published", post.mapping(:status)
   end
 
-  should "verify mapping instace method with an array when status if unpublished" do
+  should "verify mapping instance method with an array when status if unpublished" do
     post = Factory(:post, :status => "unpublished")
     assert_equal "unpublished", post.mapping(:status)
   end
 
-  should "verify mapping instace method with a hash" do
+  should "verify mapping instance method with a hash" do
     page = Factory(:page)
     assert_equal "Published", page.mapping(:status)
     page = Factory(:page, :status => "unpublished")
     assert_equal "Not Published", page.mapping(:status)
   end
 
-  should "verify to_label instace method" do
+  should "verify to_label instance method" do
     assert_equal "admin@example.com", Factory(:typus_user).to_label
   end
 
-  should "verify to_label instace method for post" do
+  should "verify to_label instance method for post" do
     assert_match /Post#/, Factory(:post).to_label
   end
 
