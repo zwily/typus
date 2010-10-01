@@ -41,7 +41,7 @@ module Admin
     def custom_actions(klass)
       klass.typus_actions_on(params[:action]).map do |action|
         if @current_user.can?(action, klass)
-          link_to_unless_current (_t(action.humanize), params.merge(:action => action))
+          link_to_unless_current(_t(action.humanize), params.merge(:action => action))
         end
       end
     end
