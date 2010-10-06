@@ -16,7 +16,7 @@ connection = case ENV["DB"]
              when "postgresql"
                { :adapter => "postgresql", :database => "typus_test", :encoding => "unicode" }
              else
-               { :adapter => "sqlite3", :database => ":memory:" }
+               { :adapter => "sqlite3", :database => "db/test.sqlite3" }
              end
 
 ActiveRecord::Base.establish_connection(connection)
