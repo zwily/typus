@@ -182,15 +182,9 @@ module Typus
 
       # Used for `order_by`.
       def typus_order_by
-        fields = typus_defaults_for(:order_by)
-
-        if fields.empty?
-          "#{table_name}.#{primary_key} ASC"
-        else
-          fields.map do |field|
-            field.include?('-') ? "#{table_name}.#{field.delete('-')} DESC" : "#{table_name}.#{field} ASC"
-          end.join(', ')
-        end
+        typus_defaults_for(:order_by).map do |field|
+          field.include?('-') ? "#{table_name}.#{field.delete('-')} DESC" : "#{table_name}.#{field} ASC"
+        end.join(', ')
       end
 
       #--
