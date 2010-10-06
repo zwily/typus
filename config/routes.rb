@@ -15,6 +15,7 @@ Rails.application.routes.draw do
 
   end
 
+  match ':controller(/:action(.:format))', :controller => /admin\/[^\/]+/
   match ':controller(/:action(/:id))', :controller => /admin\/[^\/]+/
 
 end
