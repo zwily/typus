@@ -11,9 +11,9 @@ class ActiveRecord::Base
   end
 
   #--
-  # TODO: This has been copied from Rails 2 because has been removed
-  #       from Rails 3. Once the "build_conditions" has been refactored
-  #       to use Arel this can be removed.
+  # TODO: This has been copied from Rails 2 because has been removed from
+  #       Rails 3. Once the "build_conditions" has been refactored to use Arel
+  #       this can be removed.
   #++
   def self.merge_conditions(*conditions)
     segments = []
