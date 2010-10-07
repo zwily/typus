@@ -26,11 +26,10 @@ class Admin::ResourcesController < Admin::BaseController
                 :only => [ :index, :new, :edit, :create, :update, :show ]
 
   ##
-  # This is the main index of the model. With filters, conditions
-  # and more.
+  # This is the main index of the model. With filters, conditions and more.
   #
-  # By default application can respond_to html, csv and xml, but you
-  # can add your formats.
+  # By default application can respond_to html, csv and xml, but you can add
+  # your formats.
   #
   def index
     @conditions, @joins = @resource.build_conditions(params)
@@ -55,9 +54,9 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   ##
-  # Create new items. There's an special case when we create an
-  # item from another item. In this case, after the item is
-  # created we also create the relationship between these items.
+  # Create new items. There's an special case when we create an item from
+  # another item. In this case, after the item is created we also create the
+  # relationship between these items.
   #
   def create
     @item = @resource.new(params[@object_name])
@@ -110,13 +109,12 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   ##
-  # Change item position. This only works if acts_as_list is
-  # installed. We can then move items:
+  # Change item position. This only works if acts_as_list is installed. We can
+  # then move items:
   #
   #   params[:go] = 'move_to_top'
   #
-  # Available positions are move_to_top, move_higher, move_lower,
-  # move_to_bottom.
+  # Available positions are move_to_top, move_higher, move_lower, move_to_bottom.
   #
   def position
     @item.send(params[:go])
@@ -164,9 +162,8 @@ class Admin::ResourcesController < Admin::BaseController
     #   saved_succesfully = @item.update_attribute attribute, nil
     when :has_many
       ##
-      # We have to verify we can unrelate. For example: A Category which
-      # has many posts and Post validates_presence_of Category should not
-      # be removed.
+      # We have to verify we can unrelate. For example: A Category which has
+      # many posts and Post validates_presence_of Category should not be removed.
       #
       attribute = @resource.table_name.singularize
       saved_succesfully = resource.update_attributes(attribute => nil)
@@ -215,8 +212,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   ##
-  # Find model when performing an edit, update, destroy, relate,
-  # unrelate ...
+  # Find model when performing an edit, update, destroy, relate, unrelate ...
   #
   def get_object
     @item = @resource.find(params[:id])
