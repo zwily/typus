@@ -4,8 +4,8 @@
   <div id="errorExplanation">
     <h3><%= pluralize(@item.errors.count, "error") %> prohibited this page from being saved:</h3>
     <ul>
-    <% @item.errors.full_messages.each do |msg| %>
-      <li><%= msg %></li>
+    <% @item.errors.full_messages.each do |full_message| %>
+      <li><%= full_message %></li>
     <% end %>
     </ul>
   </div>
