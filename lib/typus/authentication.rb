@@ -60,9 +60,8 @@ module Typus
       I18n.locale = @current_user.preferences[:locale]
 
     rescue Exception => error
-      flash[:notice] = error.message
       session[:typus_user_id] = nil
-      redirect_to new_admin_session_path(:back_to => back_to)
+      redirect_to new_admin_session_path(:back_to => back_to), :notice => error.message
     end
 
     #--
