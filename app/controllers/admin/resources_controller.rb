@@ -211,9 +211,6 @@ class Admin::ResourcesController < Admin::BaseController
     @object_name = ActiveModel::Naming.singular(@resource)
   end
 
-  ##
-  # Find model when performing an edit, update, destroy, relate, unrelate ...
-  #
   def get_object
     @item = @resource.find(params[:id])
   end
