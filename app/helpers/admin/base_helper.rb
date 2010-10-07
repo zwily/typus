@@ -3,8 +3,8 @@ module Admin
   module BaseHelper
 
     def typus_block(resource = @resource.to_resource, partial = params[:action])
-      render "admin/#{resource}/#{partial}"
-    rescue ActionView::MissingTemplate
+      template_file = Rails.root.join("app/views/admin/#{resource}/_#{partial}.html.erb")
+      render "admin/#{resource}/#{partial}" if File.exists?(template_file)
     end
 
     def title(page_title)
