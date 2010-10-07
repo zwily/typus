@@ -5,7 +5,6 @@ module Typus
     protected
 
     def generate_html
-
       items_count = @resource.count(:joins => @joins, :conditions => @conditions)
       items_per_page = @resource.typus_options_for(:per_page)
 
@@ -14,7 +13,6 @@ module Typus
       end
 
       @items = @pager.page(params[:page])
-
     end
 
     #--
@@ -23,7 +21,6 @@ module Typus
     #       We should find a way to be able to process data.
     #++
     def generate_csv
-
       fields = @resource.typus_fields_for(:csv)
 
       require 'csv'
@@ -63,7 +60,6 @@ module Typus
       end
 
       send_file filename
-
     end
 
     def generate_json
