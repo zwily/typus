@@ -28,14 +28,6 @@ module Admin
       return html
     end
 
-    def form_partial
-      resource = @resource.to_resource
-      template_file = Rails.root.join("app/views/admin/#{resource}/_form.html.erb")
-      partial = File.exists?(template_file) ? resource : "resources"
-
-      return "admin/#{partial}/form"
-    end
-
     def typus_tree_field(attribute, form)
       render "admin/templates/tree",
              :attribute => attribute,

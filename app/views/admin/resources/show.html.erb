@@ -11,7 +11,7 @@
 </h2>
 
 <%= display_flash_message %>
-<%= typus_block %>
+<%= typus_render :partial => 'show' %>
 
 <dl>
 <%- @fields.each do |field| -%>
