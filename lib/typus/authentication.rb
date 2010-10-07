@@ -112,8 +112,7 @@ module Typus
                 end
 
       if message
-        flash[:notice] = message
-        redirect_to set_path
+        redirect_to set_path, :notice => message
       end
 
     end
@@ -140,8 +139,7 @@ module Typus
                   :action => params[:action])
 
       unless @current_user.can?(params[:action], @resource)
-        flash[:notice] = message
-        redirect_to set_path
+        redirect_to set_path, :notice => message
       end
 
     end
