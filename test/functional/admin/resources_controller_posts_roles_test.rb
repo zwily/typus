@@ -43,7 +43,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       get :destroy, { :id => @post.id, :method => :delete }
 
       assert_response :redirect
-      # assert_equal "Designer can't delete this item.", flash[:notice]
+      assert_equal "Designer can't delete this item.", flash[:notice]
       assert_redirected_to :action => :index
     end
 
