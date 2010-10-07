@@ -1,3 +1,8 @@
+if RUBY_VERSION >= '1.9'
+  require 'csv'
+  FasterCSV = CSV
+end
+
 module Typus
 
   module Format
@@ -23,24 +28,11 @@ module Typus
     def generate_csv
       fields = @resource.typus_fields_for(:csv)
 
-      require 'csv'
-      if CSV.const_defined?(:Reader)
-        # Old CSV version so we enable faster CSV.
-        begin
-          require 'fastercsv'
-        rescue Exception => error
-          raise error.message
-        end
-        csv = FasterCSV
-      else
-        csv = CSV
-      end
-
       filename = Rails.root.join("tmp", "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv")
 
       options = { :conditions => @conditions, :batch_size => 1000 }
 
-      csv.open(filename, 'w', :col_sep => ';') do |csv|
+      FasterCSV.open(filename, 'w', :col_sep => ';') do |csv|
         csv << fields.keys
         @resource.find_in_batches(options) do |records|
           records.each do |record|
