@@ -66,8 +66,13 @@ module Typus
 
     end
 
-    def generate_json; export(:json); end
-    def generate_xml; export(:xml); end
+    def generate_json
+      export(:json)
+    end
+
+    def generate_xml
+      export(:xml)
+    end
 
     def export(format)
       fields = @resource.typus_fields_for(format).collect { |i| i.first }
