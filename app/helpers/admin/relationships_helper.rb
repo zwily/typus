@@ -38,11 +38,9 @@ module Admin
 
       setup_relationship(field)
 
-      if @model_to_relate.count < @model_to_relate.typus_options_for(:habtm_limit)
-        @items_to_relate = (@model_to_relate.all - @item.send(field))
-        if set_condition && !@items_to_relate.empty?
-          form = build_relate_form
-        end
+      @items_to_relate = (@model_to_relate.all - @item.send(field))
+      if set_condition && !@items_to_relate.empty?
+        form = build_relate_form
       end
 
       build_pagination
