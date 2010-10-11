@@ -42,10 +42,7 @@ module Admin
       %w(controller action page).each { |p| params_without_filter.delete(p) }
       params_without_filter.delete(related_fk)
 
-      values = model.all(:order => model.typus_order_by)
-      values_labelized = values.map { |v| v.to_label }
-      items = values.map(&:id).to_hash_with(values_labelized)
-
+      items = model.all(:order => model.typus_order_by).collect{|v| [v.to_label, v.id] }
       message = _t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize)
 
       return related_fk, items, message
