@@ -244,6 +244,22 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
+  context "typus_template" do
+
+    should "accept strings" do
+      assert_equal "datepicker", Post.typus_template("published_at")
+    end
+
+    should "accept symbols" do
+      assert_equal "datepicker", Post.typus_template(:published_at)
+    end
+
+    should "return nil if template does not exist" do
+      assert_nil Post.typus_template(:created_at)
+    end
+
+  end
+
   context "typus_defaults_for" do
 
     should "accept strings" do
