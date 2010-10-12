@@ -8,7 +8,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
       Typus.stubs(:authentication).returns(:none)
     end
 
-    should "render dashboard" do
+    should_eventually "render dashboard" do
       get :show
       assert_response :success
     end

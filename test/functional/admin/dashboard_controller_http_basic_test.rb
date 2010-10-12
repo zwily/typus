@@ -8,12 +8,12 @@ class Admin::DashboardControllerTest < ActionController::TestCase
       Typus.stubs(:authentication).returns(:http_basic)
     end
 
-    should "return a 401 message when no credentials sent" do
+    should_eventually "return a 401 message when no credentials sent" do
       get :show
       assert_response 401
     end
 
-    should "authenticate user" do
+    should_eventually "authenticate user" do
       @request.env['HTTP_AUTHORIZATION'] = 'Basic ' + Base64::encode64("admin:columbia")
       get :show
       assert_response :success
