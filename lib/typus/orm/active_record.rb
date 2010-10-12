@@ -272,7 +272,7 @@ module Typus
             condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
             conditions = merge_conditions(conditions, condition)
           when :date
-            if value.is_a?(Hash)
+            if value.kind_of?(Hash)
               date_format = Date::DATE_FORMATS[typus_date_format(key)]
 
               begin
