@@ -29,6 +29,10 @@ class TypusUserTest < ActiveSupport::TestCase
     assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX', :role => 'admin').valid?
   end
 
+  ##############################################################################
+  #
+  ##############################################################################
+
   context "TypusUser" do
 
     setup do
@@ -82,6 +86,10 @@ class TypusUserTest < ActiveSupport::TestCase
 
   end
 
+  ##############################################################################
+  #
+  ##############################################################################
+
   context "Admin Role" do
 
     setup do
@@ -107,6 +115,10 @@ class TypusUserTest < ActiveSupport::TestCase
     end
 
   end
+
+  ##############################################################################
+  #
+  ##############################################################################
 
   context "Editor Role" do
 
