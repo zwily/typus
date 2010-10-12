@@ -244,6 +244,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal ["csv", "xml"], Post.typus_export_formats
     end
 
+    should "return picture formats" do
+      assert_equal [], Picture.typus_export_formats
+    end
+
   end
 
   context "Typus order by" do
