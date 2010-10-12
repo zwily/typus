@@ -129,9 +129,6 @@ module Typus
         return search
       end
 
-      #--
-      # TODO: Test method.
-      #++
       def typus_application
         Typus::Configuration.config[name]["application"] || "Unknown"
       end

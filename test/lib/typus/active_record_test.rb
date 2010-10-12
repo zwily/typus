@@ -181,6 +181,18 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
+  context "typus_application" do
+
+    should "return application for Post" do
+      assert_equal "Blog", Post.typus_application
+    end
+
+    should "return application for View" do
+      assert_equal "Unknown", View.typus_application
+    end
+
+  end
+
   context "typus_field_options_for" do
 
     should "verify on models" do
