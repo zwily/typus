@@ -11,7 +11,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
         Post::STATUS = %w(pending published unpublished)
       end
 
-      should_eventually "verify mapping instance method" do
+      should "verify" do
         post = Factory(:post)
         assert_equal "published", post.mapping(:status)
         post = Factory(:post, :status => "unpublished")
