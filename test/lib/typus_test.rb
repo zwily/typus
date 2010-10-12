@@ -95,11 +95,11 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal CustomUser, Typus.user_class
   end
 
-  should "return user_fk" do
+  should "return_user_fk" do
     assert_equal "typus_user_id", Typus.user_fk
   end
 
-  should "return override user_fk" do
+  should "return overrided user_fk" do
     Typus.expects(:user_fk).returns("my_user_fk")
     assert_equal "my_user_fk", Typus.user_fk
   end

@@ -7,7 +7,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     @post = Factory(:post)
   end
 
-  should "verify polymorphic relationship message" do
+  should_eventually "verify polymorphic relationship message" do
     get :new, { :back_to => "/admin/posts/#{@post.id}/edit",
                 :resource => @post.class.name, :resource_id => @post.id }
 
@@ -17,7 +17,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     end
   end
 
-  should "create a polymorphic relationship" do
+  should_eventually "create a polymorphic relationship" do
     assert_difference('post_.assets.count') do
       post :create, { :back_to => "/admin/posts/edit/#{@post.id}",
                       :resource => @post.class.name,
@@ -29,7 +29,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_equal "Asset successfully assigned to Post.", flash[:notice]
   end
 
-  should "render edit and verify message on polymorphic relationship" do
+  should_eventually "render edit and verify message on polymorphic relationship" do
     asset = Factory(:asset)
 
     get :edit, { :id => asset.id,
@@ -42,7 +42,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     end
   end
 
-  should "return to back_to url" do
+  should_eventually "return to back_to url" do
     Typus::Resources.expects(:action_after_save).returns(:edit)
     asset = assets(:first)
 
