@@ -48,7 +48,18 @@ class ActiveRecord::Base
   #++
   def mapping(attribute)
     values = self.class::const_get(attribute.to_s.upcase)
-    values.kind_of?(Hash) ? values.invert[send(attribute)] : send(attribute)
+
+    if values.kind_of?(Array)
+      case values.first
+      when Array
+        array_keys, array_values = values.transpose
+      else
+        array_keys = array_values = values
+      end
+      values = array_keys.to_hash_with(array_values)
+    end
+
+    values.invert[send(attribute)]
   end
 
   def to_label

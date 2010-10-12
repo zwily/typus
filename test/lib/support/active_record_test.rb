@@ -2,28 +2,56 @@ require "test_helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
-  should "verify mapping instance method with an array" do
-    post = Factory(:post)
-    assert_equal "published", post.mapping(:status)
-  end
+  context "mapping" do
 
-  should_eventually "verify mapping instance method with a 2 dimension array" do
-    Post.send(:remove_const, :STATUS)
-    Post::STATUS = [["Published", "published"], ["Pending", "pending"]]
-    post = Factory(:post)
-    assert_equal "Published", post.mapping(:status)
-  end
+    context "with an array" do
 
-  should "verify mapping instance method with an array when status if unpublished" do
-    post = Factory(:post, :status => "unpublished")
-    assert_equal "unpublished", post.mapping(:status)
-  end
+      setup do
+        Post.send(:remove_const, :STATUS)
+        Post::STATUS = %w(pending published unpublished)
+      end
 
-  should "verify mapping instance method with a hash" do
-    page = Factory(:page)
-    assert_equal "Published", page.mapping(:status)
-    page = Factory(:page, :status => "unpublished")
-    assert_equal "Not Published", page.mapping(:status)
+      should_eventually "verify mapping instance method" do
+        post = Factory(:post)
+        assert_equal "published", post.mapping(:status)
+        post = Factory(:post, :status => "unpublished")
+        assert_equal "unpublished", post.mapping(:status)
+      end
+
+    end
+
+    context "with a two dimension array" do
+
+      setup do
+        Post.send(:remove_const, :STATUS)
+        Post::STATUS = [["Publicado", "published"], ["Pendiente", "pending"], ["No publicado", "unpublished"]]
+      end
+
+      should "verify" do
+        post = Factory(:post)
+        assert_equal "Publicado", post.mapping(:status)
+        post = Factory(:post, :status => "unpublished")
+        assert_equal "No publicado", post.mapping(:status)
+      end
+
+    end
+
+    context "with a hash" do
+
+      setup do
+        Post.send(:remove_const, :STATUS)
+        Post::STATUS = { "Pending - Hash" => "pending", "Published - Hash" => "published", "Not Published - Hash" => "unpublished" }
+      end
+
+      should "verify" do
+        page = Factory(:post)
+        assert_equal "Published - Hash", page.mapping(:status)
+        page = Factory(:post, :status => "unpublished")
+        assert_equal "Not Published - Hash", page.mapping(:status)
+      end
+
+    end
+
   end
 
   context "to_label" do
