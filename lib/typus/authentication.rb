@@ -1,14 +1,19 @@
+require 'typus/authentication/base'
+
 module Typus
 
   module Authentication
 
     case Typus.authentication
     when :none then
-      include Authentication::None
+      require 'typus/authentication/none'
+      include Typus::Authentication::None
     when :http_basic
-      include Authentication::HttpBasic
+      require 'typus/authentication/http_basic'
+      include Typus::Authentication::HttpBasic
     when :session
-      include Authentication::Session
+      require 'typus/authentication/session'
+      include Typus::Authentication::Session
     end
 
   end
