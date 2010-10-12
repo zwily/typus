@@ -1,6 +1,6 @@
 class Admin::BaseController < ActionController::Base
 
-  include Typus::Authentication::HttpBasic
+  include Typus::Authentication::const_get(Typus.authentication.to_s.classify)
 
   before_filter :reload_config_and_roles
   before_filter :authenticate
