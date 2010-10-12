@@ -3,11 +3,18 @@ require "test_helper"
 class TypusUserTest < ActiveSupport::TestCase
 
   [ %Q(this_is_chelm@example.com\n<script>location.href="http://spammersite.com"</script>),
-    'admin', 'TEST@EXAMPLE.COM', 'test@example', 'test@example.c', 'testexample.com' ].each do |value|
+    'admin',
+    'TEST@EXAMPLE.COM',
+    'test@example',
+    'test@example.c',
+    'testexample.com' ].each do |value|
     should_not allow_value(value).for(:email)
   end
 
-  [ 'test+filter@example.com', 'test.filter@example.com', 'test@example.co.uk', 'test@example.es' ].each do |value|
+  [ 'test+filter@example.com',
+    'test.filter@example.com',
+    'test@example.co.uk',
+    'test@example.es' ].each do |value|
     should allow_value(value).for(:email)
   end
 
@@ -20,7 +27,7 @@ class TypusUserTest < ActiveSupport::TestCase
   # should validate_uniqueness_of :email
 
   should "verify columns" do
-    attributes = %w( id first_name last_name email role status salt crypted_password token preferences created_at updated_at )
+    attributes = %w(id first_name last_name email role status salt crypted_password token preferences created_at updated_at)
     TypusUser.columns.collect { |u| u.name }.each { |c| assert attributes.include?(c) }
   end
 
@@ -44,8 +51,8 @@ class TypusUserTest < ActiveSupport::TestCase
     end
 
     should "return first_name" do
-      @typus_user.last_name = "Lock"
-      assert_equal "Lock", @typus_user.name
+      @typus_user.first_name = "John"
+      assert_equal "John", @typus_user.name
     end
 
     should "return last_name" do
@@ -64,23 +71,16 @@ class TypusUserTest < ActiveSupport::TestCase
       assert_equal expected, @typus_user.salt
     end
 
-    should "verify authenticated? returns true when password is right" do
+    should "verify authenticated? returns true or false" do
       assert @typus_user.authenticated?('12345678')
-    end
-
-    should "verify authenticated? returns false when password is wrong" do
       assert !@typus_user.authenticated?('87654321')
     end
 
-    should "verify can? (with a model as a param)" do
+    should "verify can? and cannot?" do
       assert @typus_user.can?('delete', TypusUser)
-    end
-
-    should "verify can? (with a string as a param)" do
       assert @typus_user.can?('delete', 'TypusUser')
-    end
 
-    should "verify cannot?" do
+      assert !@typus_user.cannot?('delete', TypusUser)
       assert !@typus_user.cannot?('delete', 'TypusUser')
     end
 
@@ -96,11 +96,8 @@ class TypusUserTest < ActiveSupport::TestCase
       @typus_user = Factory(:typus_user)
     end
 
-    should "respond true to is_root?" do
+    should "respond true and false to is_root? and is_not_root?" do
       assert @typus_user.is_root?
-    end
-
-    should "respond false to is_not_root?" do
       assert !@typus_user.is_not_root?
     end
 
@@ -126,11 +123,8 @@ class TypusUserTest < ActiveSupport::TestCase
       @typus_user = Factory(:typus_user, :role => "editor")
     end
 
-    should "respond true to is_no_root?" do
+    should "respond true and false to is_no_root? and is_root?" do
       assert @typus_user.is_not_root?
-    end
-
-    should "respond false to is_root?" do
       assert !@typus_user.is_root?
     end
 
