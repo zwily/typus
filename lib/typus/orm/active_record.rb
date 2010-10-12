@@ -78,7 +78,6 @@ module Typus
 
       end
 
-      # Typus sidebar filters.
       def typus_filters
         fields_with_type = ActiveSupport::OrderedHash.new
 
