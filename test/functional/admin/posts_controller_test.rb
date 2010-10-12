@@ -424,7 +424,7 @@ title;status
         end
       end
 
-      should_eventually "render_index_and_show_trash_item_image" do
+      should "render_index_and_show_trash_item_image" do
         assert_response :success
         assert_select '.trash', 'Trash'
       end
