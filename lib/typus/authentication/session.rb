@@ -4,6 +4,8 @@ module Typus
 
     module Session
 
+      protected
+
       include Base
 
       def authenticate
@@ -45,48 +47,36 @@ module Typus
       # Action is available on: edit, update, toggle and destroy
       #++
       def check_if_user_can_perform_action_on_user
-
         return unless @item.kind_of?(Typus.user_class)
 
         message = case params[:action]
                   when 'edit'
-
                     # Only admin and owner of Typus User can edit.
-                    if current_user.is_not_root? && !current_user
+                    if current_user.is_not_root? && (current_user != @item)
                       _t("As you're not the admin or the owner of this record you cannot edit it.")
                     end
-
                   when 'update'
-
                     # current_user cannot change her role.
                     if current_user && !(@item.role == params[@object_name][:role])
                       _t("You can't change your role.")
                     end
-
                   when 'toggle'
-
                     # Only admin can toggle typus user status, but not herself.
-                    if current_user.is_root? && current_user
+                    if current_user.is_root? && (current_user == @item)
                       _t("You can't toggle your status.")
                     elsif current_user.is_not_root?
                       _t("You're not allowed to toggle status.")
                     end
-
                   when 'destroy'
-
                     # Admin can remove anything except herself.
-                    if current_user.is_root? && current_user
+                    if current_user.is_root? && (current_user == @item)
                       _t("You can't remove yourself.")
                     elsif current_user.is_not_root?
                       _t("You're not allowed to remove Typus Users.")
                     end
-
                   end
 
-        if message
-          redirect_to set_path, :notice => message
-        end
-
+        redirect_to set_path, :notice => message if message
       end
 
       #--

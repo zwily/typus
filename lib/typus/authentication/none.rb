@@ -1,10 +1,10 @@
-require 'typus/authentication/fake_user'
-
 module Typus
 
   module Authentication
 
     module None
+
+      protected
 
       include Base
 
