@@ -34,10 +34,10 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
       @resource = "typus_users"
     end
 
-    should_eventually "verify_build_list_when_returns_a_table" do
-      self.stubs(:build_table).returns("a_list_with_items")
+    should "verify_build_list_when_returns_a_table" do
       output = build_list(@model, @fields, @items, @resource)
-      assert_equal "a_list_with_items", output
+      expected = [ "admin/typus_users/list", { :items => [] } ]
+      assert_equal expected, output
     end
 
     should "verify build_list_when_returns_a_template" do
