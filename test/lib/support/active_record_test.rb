@@ -26,12 +26,21 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal "Not Published", page.mapping(:status)
   end
 
-  should "verify to_label instance method" do
-    assert_equal "admin@example.com", Factory(:typus_user).to_label
-  end
+  context "to_label" do
 
-  should "verify to_label instance method for post" do
-    assert_match /Post#/, Factory(:post).to_label
+    should "return email as is an alias for to_label on TypusUser" do
+      assert_equal "admin@example.com", Factory(:typus_user).to_label
+    end
+
+    should "return name for Category" do
+      category = Factory(:category)
+      assert_match category.name, category.to_label
+    end
+
+    should "return default Model#id" do
+      assert_match /Post#/, Factory(:post).to_label
+    end
+
   end
 
   should "verify to_resource instance method" do
