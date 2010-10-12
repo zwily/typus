@@ -116,7 +116,7 @@ module Typus
       # Used for +search+, +relationships+
       def typus_defaults_for(filter)
         data = Typus::Configuration.config[name][filter.to_s]
-        return (!data.nil?) ? data.extract_settings : []
+        return data.try(:extract_settings) || []
       end
 
       def typus_search_fields
