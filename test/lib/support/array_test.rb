@@ -2,7 +2,7 @@ require "test_helper"
 
 class ArrayTest < ActiveSupport::TestCase
 
-  should "verify Array#to_hash_with" do
+  should "verify to_hash_with" do
     keys, values = %w(a b c), %w(1 2 3)
     expected = { "a" => "1", "b" => "2", "c" => "3" }
 
