@@ -43,16 +43,22 @@ class Admin::AssetsControllerTest < ActionController::TestCase
   end
 
   should_eventually "return to back_to url" do
-    Typus::Resources.expects(:action_after_save).returns(:edit)
-    asset = assets(:first)
+    asset = Factory(:asset)
 
-    post :update, { :back_to => "/admin/posts/#{@post.id}/edit",
+=begin
+Expected response to be a redirect to <http://test.host/admin/posts/1/edit> but
+was a redirect to <http://test.host/admin/assets/edit/1?back_to=%2Fadmin%2Fposts%2F1%2Fedit>.
+=end
+
+    back_to = "/admin/posts/#{@post.id}/edit"
+
+    post :update, { :id => asset.id,
+                    :back_to => back_to,
                     :resource => @post.class.name,
-                    :resource_id => @post.id,
-                    :id => asset.id }
+                    :resource_id => @post.id }
 
     assert_response :redirect
-    assert_redirected_to '/admin/posts/1/edit#assets'
+    assert_redirected_to back_to
     assert_equal "Asset successfully updated.", flash[:notice]
   end
 
