@@ -176,8 +176,7 @@ module Typus
       end
 
       def typus_export_formats
-        data = Typus::Configuration.config[name]
-        !data['export'].nil? ? data['export'].extract_settings : []
+        Typus::Configuration.config[name]['export'].try(:extract_settings) || []
       end
 
       def typus_order_by
