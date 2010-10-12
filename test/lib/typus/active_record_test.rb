@@ -246,6 +246,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal expected, Post.typus_search_fields
     end
 
+    should "return and empty hash" do
+      search = []
+      Post.stubs(:typus_defaults_for).with(:search).returns(search)
+      expected = {}
+      assert_equal expected, Post.typus_search_fields
+    end
+
   end
 
   context "typus_export_formats" do
