@@ -1,3 +1,5 @@
+require 'typus/authentication/fake_user'
+
 module Typus
 
   module Authentication
@@ -7,7 +9,7 @@ module Typus
       include Base
 
       def authenticate
-        @current_user = Admin::FakeUser.new
+        @current_user = FakeUser.new
       end
 
     end
