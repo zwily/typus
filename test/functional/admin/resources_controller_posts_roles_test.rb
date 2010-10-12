@@ -39,7 +39,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_redirected_to :action => :index
     end
 
-    should_eventually "not be able to destroy posts" do
+    should_eventually "not_be_able_to_destroy_posts" do
       get :destroy, { :id => @post.id, :method => :delete }
 
       assert_response :redirect

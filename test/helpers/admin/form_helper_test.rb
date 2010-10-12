@@ -5,7 +5,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   include Admin::FormHelper
   include Admin::ResourcesHelper
 
-  should_eventually "verify belongs_to_field" do
+  should_eventually "verify_belongs_to_field" do
 
     params = { :controller => 'admin/post', :id => 1, :action => :create }
     self.stubs(:params).returns(params)
@@ -71,7 +71,7 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
-  should_eventually "verify attribute_disabled" do
+  should_eventually "verify_attribute_disabled" do
     @resource = Post
     assert !attribute_disabled?('test')
     Post.expects(:accessible_attributes).returns(['test'])
