@@ -5,7 +5,17 @@ class Admin::PostsControllerTest < ActionController::TestCase
   setup do
     @typus_user = Factory(:typus_user)
     @request.session[:typus_user_id] = @typus_user.id
+    @post = Factory(:post)
   end
+
+  teardown do
+    Post.delete_all
+    TypusUser.delete_all
+  end
+
+  ##############################################################################
+  #
+  ##############################################################################
 
   context "CRUD" do
 
@@ -30,22 +40,21 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
 
     should "render show" do
-      get :show, { :id => Factory(:post).id }
+      get :show, { :id => @post.id }
       assert_response :success
       assert_template 'show'
     end
 
     should "render edit" do
-      get :edit, { :id => Factory(:post).id }
+      get :edit, { :id => @post.id }
       assert_response :success
       assert_template 'edit'
     end
 
     should "update" do
-      _post = Factory(:post)
-      post :update, { :id => _post.id, :title => 'Updated' }
+      post :update, { :id => @post.id, :title => 'Updated' }
       assert_response :redirect
-      assert_redirected_to :controller => 'admin/posts', :action => 'edit', :id => _post.id
+      assert_redirected_to :controller => 'admin/posts', :action => 'edit', :id => @post.id
     end
 
   end
@@ -54,7 +63,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     setup do
       get :new
-      assert_template :new
     end
 
     should "verify forms" do
@@ -125,11 +133,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   context "Formats" do
 
-    setup do
-      Post.delete_all
-      @post = Factory(:post)
-    end
-
     should "render index and return xml" do
       expected = <<-RAW
 <?xml version="1.0" encoding="UTF-8"?>
@@ -197,8 +200,11 @@ title;status
       setup do
         @typus_user = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
         @request.session[:typus_user_id] = @typus_user.id
-        assert @typus_user.is_not_root?
         @request.env['HTTP_REFERER'] = '/admin/posts'
+      end
+
+      should "not be root" do
+        assert @typus_user.is_not_root?
       end
 
       should "verify_editor_can_show_any_record" do
@@ -229,7 +235,6 @@ title;status
       end
 
       should "verify_editor_tries_to_show_a_post_owned_by_the_admin whe only user items" do
-
         Typus::Resources.expects(:only_user_items).returns(true)
         post = Factory(:post)
         get :show, { :id => post.id }
