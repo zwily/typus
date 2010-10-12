@@ -93,7 +93,7 @@ class TypusUserTest < ActiveSupport::TestCase
   context "Admin Role" do
 
     setup do
-      @typus_user = Factory(:typus_user, :role => "admin")
+      @typus_user = Factory(:typus_user)
     end
 
     should "respond true to is_root?" do
