@@ -168,11 +168,12 @@ module Typus
       #++
       def typus_options_for(filter)
         data = Typus::Configuration.config[name]
+
         unless data['options'].nil?
           value = data['options'][filter.to_s] unless data['options'][filter.to_s].nil?
         end
 
-        return (!value.nil?) ? value : Typus::Resources.send(filter)
+        value || Typus::Resources.send(filter)
       end
 
       def typus_export_formats
