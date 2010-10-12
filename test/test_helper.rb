@@ -9,7 +9,7 @@ require "rails/test_help"
 Typus.reload!
 
 load File.join(File.dirname(__FILE__), "schema.rb")
-Dir[File.join(File.dirname(__FILE__), "factories", "**","*.rb")].each { |factory| require factory }
+require 'factories'
 
 class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
