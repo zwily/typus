@@ -157,14 +157,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  context "typus_actions" do
-
-    should "return actions for Post" do
-      assert_equal %w( cleanup preview send_as_newsletter ), Post.typus_actions.sort
-    end
-
-  end
-
   context "typus_options_for" do
 
     should "accept strings" do

@@ -96,15 +96,6 @@ module Typus
         return fields_with_type
       end
 
-      def typus_actions
-        return [] if Typus::Configuration.config[name]['actions'].nil?
-        Typus::Configuration.config[name]['actions'].keys.map do |key|
-          Typus::Configuration.config[name]['actions'][key].extract_settings
-        end.flatten
-      rescue
-        []
-      end
-
       # Extended actions for this model on Typus.
       def typus_actions_on(filter)
         Typus::Configuration.config[name]['actions'][filter.to_s].extract_settings
