@@ -216,8 +216,8 @@ title;status
       end
 
       should "verify_editor_tried_to_edit_a_post_owned_by_himself" do
-        _post = Factory(:post, :typus_user => @typus_user)
-        get :edit, { :id => _post.id }
+        post_ = Factory(:post, :typus_user => @typus_user)
+        get :edit, { :id => post_.id }
         assert_response :success
       end
 
@@ -252,11 +252,10 @@ title;status
       end
 
       should "verify_editor_updating_an_item_does_not_change_typus_user_id" do
-
         [ 108, nil ].each do |typus_user_id|
-          _post = Factory(:post, :typus_user => @typus_user)
-          post :update, { :id => _post.id, :post => { :title => 'Updated', :typus_user_id => @typus_user.id } }
-          post_updated = Post.find(_post.id)
+          post_ = Factory(:post, :typus_user => @typus_user)
+          post :update, { :id => post_.id, :post => { :title => 'Updated', :typus_user_id => @typus_user.id } }
+          post_updated = Post.find(post_.id)
           assert_equal  @request.session[:typus_user_id], post_updated.typus_user_id
         end
       end
