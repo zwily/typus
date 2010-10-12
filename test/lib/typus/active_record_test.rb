@@ -306,7 +306,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  context "Typus order by" do
+  context "typus_order_by" do
 
     should "return defaults_for order_by on Post" do
       assert_equal "posts.title ASC, posts.created_at DESC", Post.typus_order_by
