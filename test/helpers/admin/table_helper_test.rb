@@ -20,7 +20,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   # FIXME
   def test_build_table
 
-    @current_user = Factory(:typus_user)
+    current_user = Factory(:typus_user)
 
     params = { :controller => 'admin/typus_users', :action => 'index' }
     self.expects(:params).at_least_once.returns(params)
@@ -47,8 +47,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_header
 
-    @current_user = mock()
-    @current_user.expects(:can?).with("delete", TypusUser).returns(true)
+    current_user = mock()
+    current_user.expects(:can?).with("delete", TypusUser).returns(true)
 
     fields = TypusUser.typus_fields_for(:list)
 
@@ -72,8 +72,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_header_with_params
 
-    @current_user = mock()
-    @current_user.expects(:can?).with("delete", TypusUser).returns(true)
+    current_user = mock()
+    current_user.expects(:can?).with("delete", TypusUser).returns(true)
 
     fields = TypusUser.typus_fields_for(:list)
 
@@ -98,8 +98,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_header_when_user_cannot_delete_items
 
-    @current_user = mock()
-    @current_user.expects(:can?).with("delete", TypusUser).returns(false)
+    current_user = mock()
+    current_user.expects(:can?).with("delete", TypusUser).returns(false)
 
     fields = TypusUser.typus_fields_for(:list)
 
@@ -123,8 +123,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_header_when_user_cannot_delete_items_with_params
 
-    @current_user = mock()
-    @current_user.expects(:can?).with("delete", TypusUser).returns(false)
+    current_user = mock()
+    current_user.expects(:can?).with("delete", TypusUser).returns(false)
 
     fields = TypusUser.typus_fields_for(:list)
 
@@ -147,7 +147,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def test_table_belongs_to_field
 
-    @current_user = Factory(:typus_user)
+    current_user = Factory(:typus_user)
 
     comment = comments(:without_post_id)
     output = table_belongs_to_field("post", comment)

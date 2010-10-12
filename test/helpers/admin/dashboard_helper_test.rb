@@ -10,7 +10,7 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
   def render(*args); args; end
 
   should "render resources" do
-    @current_user = Factory(:typus_user)
+    current_user = Factory(:typus_user)
 
     output = resources
     partial = "admin/helpers/dashboard/resources"

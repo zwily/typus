@@ -17,22 +17,24 @@ module Typus
 
       #--
       # Return the current user. If role does not longer exist on the
-      # system @current_user will be signed out from Typus.
+      # system current_user will be signed out from Typus.
       #++
       def current_user
 
-        @current_user = Typus.user_class.find(session[:typus_user_id])
+        user = Typus.user_class.find(session[:typus_user_id])
 
-        unless Typus::Configuration.roles.has_key?(@current_user.role)
+        unless Typus::Configuration.roles.has_key?(user.role)
           raise _t("Role does no longer exists.")
         end
 
-        unless @current_user.status
+        unless user.status
           back_to = (request.env['REQUEST_URI'] == admin_dashboard_path) ? nil : request.env['REQUEST_URI']
           raise _t("Typus user has been disabled.")
         end
 
-        I18n.locale = @current_user.preferences[:locale]
+        I18n.locale = user.preferences[:locale]
+
+        return user
 
       rescue Exception => error
         session[:typus_user_id] = nil
@@ -46,13 +48,11 @@ module Typus
 
         return unless @item.kind_of?(Typus.user_class)
 
-        current_user = (@current_user == @item)
-
         message = case params[:action]
                   when 'edit'
 
                     # Only admin and owner of Typus User can edit.
-                    if @current_user.is_not_root? && !current_user
+                    if current_user.is_not_root? && !current_user
                       _t("As you're not the admin or the owner of this record you cannot edit it.")
                     end
 
@@ -66,18 +66,18 @@ module Typus
                   when 'toggle'
 
                     # Only admin can toggle typus user status, but not herself.
-                    if @current_user.is_root? && current_user
+                    if current_user.is_root? && current_user
                       _t("You can't toggle your status.")
-                    elsif @current_user.is_not_root?
+                    elsif current_user.is_not_root?
                       _t("You're not allowed to toggle status.")
                     end
 
                   when 'destroy'
 
                     # Admin can remove anything except herself.
-                    if @current_user.is_root? && current_user
+                    if current_user.is_root? && current_user
                       _t("You can't remove yourself.")
-                    elsif @current_user.is_not_root?
+                    elsif current_user.is_not_root?
                       _t("You're not allowed to remove Typus Users.")
                     end
 
@@ -105,10 +105,10 @@ module Typus
                   end
 
         message = _t(message,
-                    :current_user_role => @current_user.role.capitalize,
+                    :current_user_role => current_user.role.capitalize,
                     :action => params[:action])
 
-        unless @current_user.can?(params[:action], @resource)
+        unless current_user.can?(params[:action], @resource)
           redirect_to set_path, :notice => message
         end
 
@@ -121,7 +121,7 @@ module Typus
       def check_if_user_can_perform_action_on_resource
         controller = params[:controller].remove_prefix
         action = params[:action]
-        unless @current_user.can?(action, controller.camelize, { :special => true })
+        unless current_user.can?(action, controller.camelize, { :special => true })
           render :text => "Not allowed!", :status => :unprocessable_entity
         end
       end
@@ -137,10 +137,10 @@ module Typus
       def check_resource_ownership
 
         # By-pass if current_user is root.
-        return if @current_user.is_root?
+        return if current_user.is_root?
 
-        condition_typus_users = @item.respond_to?(Typus.relationship) && !@item.send(Typus.relationship).include?(@current_user)
-        condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(@current_user)
+        condition_typus_users = @item.respond_to?(Typus.relationship) && !@item.send(Typus.relationship).include?(current_user)
+        condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(current_user)
 
         if condition_typus_users || condition_typus_user_id
            alert = _t("You don't have permission to access this item.")
@@ -152,12 +152,12 @@ module Typus
       def check_resource_ownerships
 
         # By-pass if current_user is root.
-        return if @current_user.is_root?
+        return if current_user.is_root?
 
         # Show only related items it @resource has a foreign_key (Typus.user_fk)
         # related to the logged user.
         if @resource.typus_user_id?
-          condition = { Typus.user_fk => @current_user }
+          condition = { Typus.user_fk => current_user }
           @conditions = @resource.merge_conditions(@conditions, condition)
         end
 
@@ -168,28 +168,28 @@ module Typus
         klass = params[:resource].classify.constantize
         return if !klass.typus_user_id?
         item = klass.find(params[:resource_id])
-        raise "You're not owner of this record." unless item.owned_by?(@current_user) || @current_user.is_root?
+        raise "You're not owner of this record." unless item.owned_by?(current_user) || current_user.is_root?
       end
 
       def set_attributes_on_create
         if @resource.typus_user_id?
-          @item.attributes = { Typus.user_fk => @current_user.id }
+          @item.attributes = { Typus.user_fk => current_user.id }
         end
       end
 
       def set_attributes_on_update
-        if @resource.typus_user_id? && @current_user.is_not_root?
-          @item.update_attributes(Typus.user_fk => @current_user.id)
+        if @resource.typus_user_id? && current_user.is_not_root?
+          @item.update_attributes(Typus.user_fk => current_user.id)
         end
       end
 
       #--
-      # Reload @current_user when updating to see flash message in the
+      # Reload current_user when updating to see flash message in the
       # correct locale.
       #++
       def reload_locales
         if @resource.eql?(Typus.user_class)
-          I18n.locale = @current_user.reload.preferences[:locale]
+          I18n.locale = current_user.reload.preferences[:locale]
         end
       end
 

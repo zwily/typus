@@ -14,6 +14,7 @@ class Admin::BaseController < ActionController::Base
   end
 
   include Typus::Authentication
+  helper_method :current_user
 
   def set_path
     @back_to || request.referer || admin_dashboard_path

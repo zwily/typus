@@ -4,6 +4,10 @@ module Typus
 
     module Base
 
+      def current_user
+        @current_user
+      end
+
       def authenticate; end
       def check_if_user_can_perform_action_on_user; end
       def check_if_user_can_perform_action_on_resources; end
