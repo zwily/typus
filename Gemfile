@@ -8,7 +8,6 @@ gem "fastercsv", "1.5.3" unless RUBY_VERSION >= '1.9'
 group :test do
   gem "capybara"
   gem "factory_girl"
-  gem "leftright"
   gem "mocha"
   gem "mysql"
   gem "paperclip"
