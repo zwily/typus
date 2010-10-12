@@ -237,6 +237,17 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
+  context "typus_search_fields" do
+
+    should "return a hash with the search modifiers" do
+      search = ["=id", "^title", "body"]
+      Post.stubs(:typus_defaults_for).with(:search).returns(search)
+      expected = {"body"=>"@", "title"=>"^", "id"=>"="}
+      assert_equal expected, Post.typus_search_fields
+    end
+
+  end
+
   context "typus_export_formats" do
 
     should "return post formats" do
