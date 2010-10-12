@@ -479,7 +479,7 @@ title;status
 
     end
 
-    should_eventually "get_index_and_render_edit_or_show_links" do
+    should "get_index_and_render_edit_or_show_links" do
       %w(edit show).each do |action|
         Typus::Resources.expects(:default_action_on_item).at_least_once.returns(action)
         get :index
