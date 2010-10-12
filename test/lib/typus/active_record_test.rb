@@ -221,19 +221,18 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  context "Typus defaults for" do
+  context "typus_defaults_for" do
 
-    should "verify typus_defaults_for on Model accepts strings" do
+    should "accept strings" do
       assert_equal %w( title ), Post.typus_defaults_for("search")
     end
 
-    should "verify typus_defaults_for on Model accepts symbols" do
+    should "accepts symbols" do
       assert_equal %w( title ), Post.typus_defaults_for(:search)
     end
 
     should "return default_for relationships on Post" do
       assert_equal %w( assets categories comments views ), Post.typus_defaults_for(:relationships)
-      assert Post.typus_defaults_for(:relationships).any?
     end
 
   end
