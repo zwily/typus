@@ -353,29 +353,33 @@ title;status
     ##
 
     should "relate_category_with_post_and_then_unrelate" do
-
       category = Factory(:category)
       post_ = Factory(:post)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#categories"
 
+      ##
+      # First Step: Relate
+      #
+
       assert_difference('category.posts.count') do
-        post :relate, { :id => post_.id,
-                        :related => { :model => 'Category', :id => category.id } }
+        post :relate, { :id => post_.id, :related => { :model => 'Category', :id => category.id } }
       end
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
       assert_equal "Category related to Post", flash[:notice]
 
+      ##
+      # Second Step: Unrelate
+      #
+
       assert_difference('category.posts.count', -1) do
-        post :unrelate, { :id => post_.id,
-                          :resource => 'Category', :resource_id => category.id }
+        post :unrelate, { :id => post_.id, :resource => 'Category', :resource_id => category.id }
       end
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
       assert_equal "Category unrelated from Post", flash[:notice]
-
     end
 
     ##
