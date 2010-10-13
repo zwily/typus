@@ -304,7 +304,9 @@ title;status
       end
 
       should "not_be_able_to_destroy_posts" do
-        get :destroy, { :id => @post.id, :method => :delete }
+        assert_no_difference 'Post.count' do
+          get :destroy, { :id => @post.id, :method => :delete }
+        end
         assert_response :redirect
         assert_equal "You don't have permission to access this item.", flash[:alert]
         assert_redirected_to :action => :index
