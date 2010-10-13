@@ -303,11 +303,10 @@ title;status
         assert_redirected_to :action => :index
       end
 
-      should_eventually "not_be_able_to_destroy_posts" do
+      should "not_be_able_to_destroy_posts" do
         get :destroy, { :id => @post.id, :method => :delete }
-
         assert_response :redirect
-        assert_equal "Designer can't delete this item.", flash[:notice]
+        assert_equal "You don't have permission to access this item.", flash[:alert]
         assert_redirected_to :action => :index
       end
 
