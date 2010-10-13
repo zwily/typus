@@ -38,15 +38,9 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_select 'body div#flash a', "Do you want to cancel it?"
   end
 
-  should_eventually "return to back_to url" do
+  should "return to back_to url" do
     asset = Factory(:asset)
-
-=begin
-Expected response to be a redirect to <http://test.host/admin/posts/1/edit> but
-was a redirect to <http://test.host/admin/assets/edit/1?back_to=%2Fadmin%2Fposts%2F1%2Fedit>.
-=end
-
-    back_to = "/admin/posts/#{@post.id}/edit"
+    back_to = "#assets"
 
     post :update, { :id => asset.id,
                     :back_to => back_to,
@@ -54,7 +48,7 @@ was a redirect to <http://test.host/admin/assets/edit/1?back_to=%2Fadmin%2Fposts
                     :resource_id => @post.id }
 
     assert_response :redirect
-    assert_redirected_to back_to
+    assert_redirected_to :action => "edit", :id => asset.id, :back_to => back_to
     assert_equal "Asset successfully updated.", flash[:notice]
   end
 
