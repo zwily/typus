@@ -7,14 +7,12 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     @post = Factory(:post)
   end
 
-  should_eventually "verify polymorphic relationship message" do
+  should "verify polymorphic relationship message" do
     get :new, { :back_to => "/admin/posts/#{@post.id}/edit",
                 :resource => @post.class.name, :resource_id => @post.id }
 
-    assert_select 'body div#flash' do
-      assert_select 'p', "You're adding a new Asset to Post. Do you want to cancel it?"
-      assert_select 'a', "Do you want to cancel it?"
-    end
+    assert_select 'body div#flash', "You're adding a new Asset to Post. Do you want to cancel it?"
+    assert_select 'body div#flash a', "Do you want to cancel it?"
   end
 
   should_eventually "create a polymorphic relationship" do
