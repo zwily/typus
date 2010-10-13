@@ -35,7 +35,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "not be able to destroy herself" do
-      assert_difference('TypusUser.count', 0) do
+      assert_no_difference('TypusUser.count') do
         delete :destroy, :id => @typus_user.id
       end
 
