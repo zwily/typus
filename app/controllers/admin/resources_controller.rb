@@ -154,19 +154,24 @@ class Admin::ResourcesController < Admin::BaseController
 
     # We consider that we are unrelating a has_many or has_and_belongs_to_many
 
-    macro = @resource.reflect_on_association(resource_class.table_name.to_sym).try(:macro)
+    reflection = @resource.reflect_on_association(resource_class.table_name.to_sym)
+    macro = reflection.try(:macro)
+    options = reflection.try(:options)
 
     case macro
     # when :has_one
     #   attribute = resource_tableized.singularize
     #   saved_succesfully = @item.update_attribute attribute, nil
     when :has_many
-      ##
-      # We have to verify we can unrelate. For example: A Category which has
-      # many posts and Post validates_presence_of Category should not be removed.
-      #
-      attribute = @resource.table_name.singularize
-      saved_succesfully = resource.update_attributes(attribute => nil)
+      if options.has_key?(:as) # We are in a polymorphic relationship
+        interface = options[:as]
+        saved_succesfully = resource.update_attributes("#{interface}_type" => nil, "#{interface}_id" => nil)
+      else
+        # We have to verify we can unrelate. For example: A Category which has
+        # many posts and Post validates_presence_of Category should not be removed.
+        attribute = @resource.table_name.singularize
+        saved_succesfully = resource.update_attributes(attribute => nil)
+      end
     when :has_and_belongs_to_many
       attribute = resource_tableized
       saved_succesfully = @item.send(attribute).delete(resource)

@@ -386,23 +386,19 @@ title;status
     # Post => has_many :assets, :as => resource (Polimorphic)
     ##
 
-    should_eventually "relate_asset_with_post_and_then_unrelate" do
-
-      # ActiveRecord::UnknownAttributeError: unknown attribute: post
-
+    should "relate_asset_with_post_and_then_unrelate" do
       post_ = Factory(:post)
+      asset = Factory(:asset)
+      post_.assets << asset
 
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#assets"
 
       assert_difference('post_.assets.count', -1) do
-        get :unrelate, { :id => post_.id,
-                         :resource => 'Asset', :resource_id => post_.assets.first.id }
+        get :unrelate, { :id => post_.id, :resource => 'Asset', :resource_id => asset.id }
       end
-
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Asset unrelated from Post.", flash[:notice]
-
+      assert_equal "Asset unrelated from Post", flash[:notice]
     end
 
   end
