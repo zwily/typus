@@ -81,7 +81,7 @@ module Typus
 
       #--
       # This method checks if the user can perform the requested action.
-      # It works on models, so its available on the admin_controller.
+      # It works on models, so its available on the `resources_controller`.
       #++
       def check_if_user_can_perform_action_on_resources
 
