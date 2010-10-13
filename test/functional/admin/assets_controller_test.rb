@@ -15,15 +15,15 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_select 'body div#flash a', "Do you want to cancel it?"
   end
 
-  should_eventually "create a polymorphic relationship" do
-    assert_difference('post_.assets.count') do
+  should "create a polymorphic relationship" do
+    assert_difference('@post.assets.count') do
       post :create, { :back_to => "/admin/posts/edit/#{@post.id}",
                       :resource => @post.class.name,
                       :resource_id => @post.id }
     end
 
     assert_response :redirect
-    assert_redirected_to '/admin/posts/edit/1#assets'
+    assert_redirected_to '/admin/posts/edit/1'
     assert_equal "Asset successfully assigned to Post.", flash[:notice]
   end
 
