@@ -32,13 +32,11 @@ end
 
 desc 'Build and release the gem.'
 task :release => :build do
-  version = Typus::VERSION
-
   system "git commit -m 'Bump version to #{Typus::VERSION}' lib/typus/version.rb"
-  system "git tag v#{version}"
+  system "git tag v#{Typus::VERSION}"
   system "git push && git push --tags"
 
-  system "gem push typus-#{version}.gem"
+  system "gem push typus-#{Typus::VERSION}.gem"
 
-  system "git clean -fd && rm -f typus-#{version}.gem"
+  system "git clean -fd && rm -f typus-#{Typus::VERSION}.gem"
 end
