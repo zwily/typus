@@ -15,6 +15,7 @@ autoload :FakeUser, "support/fake_user"
 module Typus
 
   autoload :Configuration, "typus/configuration"
+  autoload :Pagination, "typus/pagination"
   autoload :Resources, "typus/resources"
 
   module Authentication

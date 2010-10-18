@@ -21,7 +21,6 @@ module Admin
         form = build_relate_form
       end
 
-      build_pagination
       options = { foreign_key => @item.id }
 
       render "admin/templates/has_n",
@@ -43,8 +42,6 @@ module Admin
         form = build_relate_form
       end
 
-      build_pagination
-
       render "admin/templates/has_n",
              :model_to_relate => @model_to_relate,
              :model_to_relate_as_resource => @model_to_relate_as_resource,
@@ -52,19 +49,6 @@ module Admin
              :form => form,
              :table => build_relationship_table
 
-    end
-
-    def build_pagination
-      options = { :order => @model_to_relate.typus_order_by, :conditions => set_conditions }
-      items_count = @resource.find(params[:id]).send(@field).count(:conditions => set_conditions)
-      items_per_page = @model_to_relate.typus_options_for(:per_page)
-
-      @pager = ::Paginator.new(items_count, items_per_page) do |offset, per_page|
-        options.merge!({:limit => per_page, :offset => offset})
-        items = @resource.find(params[:id]).send(@field).all(options)
-      end
-
-      @items = @pager.page(params[:page])
     end
 
     def build_relate_form
