@@ -10,7 +10,7 @@ fr:
   "Add %{resource}": "Ajouter %{resource}"
   "Add new": "Ajouter nouveau"
   "Are you sure?": "Êtes-vous sûre ?"
-  "Are you sure you want to leave this page?": "Êtes-vous sûre de vouloir quitter cette page?"
+  "Are you sure you want to leave this page?": "Êtes-vous sûre de vouloir quitter cette page ?"
   "Are you sure you want to sign out and end your session?": "Etes-vous sûre de vouloir vous déconnecter et mettre fin à votre session ?"
   "As you're not the admin or the owner of this record you cannot edit it": "Vous n'êtes pas le propriétaire de cette entrée, ou un administrateur, par conséquent vous ne pouvez pas la modifier"
 
@@ -18,14 +18,14 @@ fr:
 
   "Cancel and go back": "Annuler et retourner en arrière"
   "Change password": "Modifier le mot de passe"
-  "Change %{attribute}?": "Changer %{attribute}?"
+  "Change %{attribute}?": "Changer %{attribute} ?"
   "Checked if active": "Coché si actif"
   "Click OK to continue, or click Cancel to stay on this page": "Cliquez sur Ok pour continuer, ou Annuler pour rester sur cette page."
   "Create %{resource}": "Créer %{resource}"
   "Create one now": "Ajouter une entrée"
 
   "Dashboard": "Tableau de bord"
-  "Do you want to cancel it?": "Voulez-vous annuler?"
+  "Do you want to cancel it?": "Voulez-vous annuler ?"
   "Documentation": "Documentation"
   "Down": "Descendre"
 
@@ -64,7 +64,7 @@ fr:
   "Recover password": "Retrouver mon mot de passe"
   "Remove": "Supprimer"
   "Remove %{attribute}": "Supprimer %{attribute}"
-  "Remove %{resource}?": "Supprimer %{resource}?"
+  "Remove %{resource}?": "Supprimer %{resource} ?"
   "Remove filter": "Supprimer le filtre"
   "Remove search": "Supprimer la recherche"
   "Reset password": "Renouveler le mot de passe"
@@ -91,7 +91,7 @@ fr:
   "Toggle is disabled": "Le basculement est désactivé"
   "True": "Vrai"
 
-  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Dissocier %{unrelate_model} de %{unrelate_model_from}?"
+  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Dissocier %{unrelate_model} de %{unrelate_model_from} ?"
   "Up": "Monter"
 
   "View site": "Voir le site"
