@@ -31,6 +31,7 @@ fr:
   "Edit %{resource}": "Éditer %{resource}"
   "Enter your email below to create the first user": "Entrez votre adresse email pour créer le premier utilisateur"
   "Error! Typus User or role doesn't exist": "Une erreur est survenue. L'utilisateur ou le rôle sont inconnus."
+  "Export as %{format}": "Exporter en %{format}"
 
   "False": "Faux"
   "Filter": "Filtrer"
@@ -75,6 +76,7 @@ fr:
   "Setup": "Configurer"
   "Show": "Voir"
   "Show %{resource}": "Voir %{resource}"
+  "Show by %{attribute}": "Afficher par %{attribute}"
   "Sign in": "Entrer"
   "Sign out": "Déconnexion"
   "Sign up": "Ouvrir un compte"
