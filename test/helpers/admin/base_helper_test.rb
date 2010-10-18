@@ -42,20 +42,24 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
 
   end
 
-  should "display_flash_message" do
-    message = { :test => "This is the message." }
-    output = display_flash_message(message)
+  context "display_flash_message" do
 
-    partial = "admin/helpers/flash_message"
-    options = { :flash_type => :test,
-                :message => { :test => "This is the message." } }
+    should "be displayed" do
+      message = { :test => "This is the message." }
+      output = display_flash_message(message)
 
-    assert_equal partial, output.first
-    assert_equal options, output.last
-  end
+      partial = "admin/helpers/flash_message"
+      options = { :flash_type => :test,
+                  :message => { :test => "This is the message." } }
 
-  should "not display_flash_message with empty message" do
-    assert_nil display_flash_message(Hash.new)
+      assert_equal partial, output.first
+      assert_equal options, output.last
+    end
+
+    should "not be displayed when message is empty" do
+      assert_nil display_flash_message(Hash.new)
+    end
+
   end
 
 end
