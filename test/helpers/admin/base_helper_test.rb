@@ -47,13 +47,9 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
     should "be displayed" do
       message = { :test => "This is the message." }
       output = display_flash_message(message)
-
-      partial = "admin/helpers/flash_message"
-      options = { :flash_type => :test,
-                  :message => { :test => "This is the message." } }
-
-      assert_equal partial, output.first
-      assert_equal options, output.last
+      expected = ["admin/helpers/flash_message",
+                  { :flash_type => :test, :message => { :test => "This is the message." } }]
+      assert_equal expected, output
     end
 
     should "not be displayed when message is empty" do
