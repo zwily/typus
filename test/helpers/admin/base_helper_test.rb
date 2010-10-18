@@ -7,8 +7,9 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
 
-  include ActionView::Rendering
-  include ActionView::Partials
+  def render(*args); args; end
+  # include ActionView::Rendering
+  # include ActionView::Partials
 
   context "header" do
 
