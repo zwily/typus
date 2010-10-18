@@ -102,6 +102,7 @@ ca:
   "You're updating a %{resource_from}": "Estàs actualitzant un %{resource_from}."
   "You're updating a %{resource_from} for %{resource_to}": "Estàs actualitzant un %{resource_from} de %{resource_to}."
 
+  "View all %{attribute}":
   "View site": "Veure la web"
 
   "%{attachment} can't be removed": "%{attachment} no es pot esborrar."

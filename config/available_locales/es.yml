@@ -102,6 +102,7 @@ es:
   "You're updating a %{resource_from}": "Estás actualizando un %{resource_from}."
   "You're updating a %{resource_from} for %{resource_to}": "Estás actualizando un %{resource_from} de %{resource_to}."
 
+  "View all %{attribute}":
   "View site": "Ver web"
 
   "%{attachment} can't be removed": "%{attachment} no puede ser borrado."

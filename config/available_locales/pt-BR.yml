@@ -91,6 +91,7 @@ pt-BR:
   "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Desvincular %{unrelate_model} de %{unrelate_model_from}?"
   "Up": "Subir"
 
+  "View all %{attribute}":
   "View site": "Ver site"
 
   "You're adding a new %{resource_from} to %{resource_to}": "Você está adicionando um novo %{resource_from} a %{resource_to}."

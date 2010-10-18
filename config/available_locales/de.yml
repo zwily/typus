@@ -91,6 +91,7 @@ de:
   "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Verkn&uuml;pfung zwischen %{unrelate_model} und %{unrelate_model_from}entfernen?"
   "Up": "Hoch"
 
+  "View all %{attribute}":
   "View site": "Site anzeigen"
 
   "You're adding a new %{resource_from}": "Sie erstellen eine neue %{resource_from}"

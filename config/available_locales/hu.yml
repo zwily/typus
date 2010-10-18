@@ -91,6 +91,7 @@ hu:
   "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Unrelate %{unrelate_model} from %{unrelate_model_from}?"
   "Up": "Fel"
 
+  "View all %{attribute}":
   "View site": "A weboldal megtekintése"
 
   "You're adding a new %{resource_from}": "%{resource_from} hozzáadása"
