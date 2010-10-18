@@ -7,38 +7,43 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TextHelper
 
-  def render(*args); args; end
+  include ActionView::Rendering
+  include ActionView::Partials
 
-  should_eventually "test_header_with_root_path" do
+  context "header" do
 
-    # ActionView::Helpers::UrlHelper does not support strings, which are returned by named routes
-    # link root_path
-    self.stubs(:link_to).returns(%(<a href="/">View site</a>))
-    self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
+    should_eventually "render with root_path" do
 
-    output = header
+      # ActionView::Helpers::UrlHelper does not support strings, which are 
+      # returned by named routes link root_path
+      self.stubs(:link_to).returns(%(<a href="/">View site</a>))
+      self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
 
-    partial = "admin/helpers/header"
-    options = { :links => [ %(<a href="/admin/dashboard">Dashboard</a>),
-                            %(<a href="/admin/dashboard">Dashboard</a>),
-                            %(<a href="/">View site</a>) ] }
+      output = header
 
-    assert_equal [ partial, options ], output
+      partial = "admin/helpers/header"
+      options = { :links => [ %(<a href="/admin/dashboard">Dashboard</a>),
+                              %(<a href="/admin/dashboard">Dashboard</a>),
+                              %(<a href="/">View site</a>) ] }
 
-  end
+      assert_equal [ partial, options ], output
 
-  should_eventually "test_header_without_root_path" do
+    end
 
-    Rails.application.routes.named_routes.routes.reject! { |key, route| key == :root }
+    should_eventually "render without root_path" do
 
-    self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
+      Rails.application.routes.named_routes.routes.reject! { |key, route| key == :root }
 
-    output = header
-    partial = "admin/helpers/header"
-    options = { :links => [ %(<a href="/admin/dashboard">Dashboard</a>),
-                            %(<a href="/admin/dashboard">Dashboard</a>) ] }
+      self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
 
-    assert_equal [ partial, options ], output
+      output = header
+      partial = "admin/helpers/header"
+      options = { :links => [ %(<a href="/admin/dashboard">Dashboard</a>),
+                              %(<a href="/admin/dashboard">Dashboard</a>) ] }
+
+      assert_equal [ partial, options ], output
+
+    end
 
   end
 
