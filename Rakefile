@@ -28,6 +28,7 @@ end
 desc 'Build the gem.'
 task :build do
   system "gem build typus.gemspec"
+  system "gem install typus-#{Typus::VERSION}.gem"
 end
 
 desc 'Build and release the gem.'
