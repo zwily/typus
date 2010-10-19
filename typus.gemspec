@@ -21,5 +21,5 @@ Gem::Specification.new do |s|
   s.files = Dir.glob("**/*")
   s.require_path = "lib"
 
-  s.add_dependency 'will_paginate', '3.0.pre2'
+  s.add_runtime_dependency 'will_paginate', '~> 3.0.pre2'
 end
