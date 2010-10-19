@@ -10,6 +10,8 @@ require "typus/engine"
 require "typus/orm/active_record"
 require "typus/user"
 
+require 'will_paginate'
+
 autoload :FakeUser, "support/fake_user"
 
 module Typus
