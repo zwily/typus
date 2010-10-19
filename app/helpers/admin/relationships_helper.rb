@@ -23,6 +23,8 @@ module Admin
 
       options = { foreign_key => @item.id }
 
+      build_pagination
+
       render "admin/templates/has_n",
              :model_to_relate => @model_to_relate,
              :model_to_relate_as_resource => @model_to_relate_as_resource,
@@ -42,6 +44,8 @@ module Admin
         form = build_relate_form
       end
 
+      build_pagination
+
       render "admin/templates/has_n",
              :model_to_relate => @model_to_relate,
              :model_to_relate_as_resource => @model_to_relate_as_resource,
@@ -49,6 +53,13 @@ module Admin
              :form => form,
              :table => build_relationship_table
 
+    end
+
+    def build_pagination
+      options = { :order => @model_to_relate.typus_order_by, :conditions => set_conditions }
+      items_per_page = @model_to_relate.typus_options_for(:per_page)
+      data = @resource.find(params[:id]).send(@field).all(options)
+      @items = data.paginate(:per_page => items_per_page, :page => params[:page])
     end
 
     def build_relate_form
