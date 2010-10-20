@@ -95,7 +95,7 @@ module Admin
         action = "trash"
         options = { :action => 'destroy', :id => item.id }
         method = :delete
-      when "edit", "show"
+      when "edit", "show", "update"
         action = "unrelate"
         options = { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }
       end
