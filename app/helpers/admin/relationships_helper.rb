@@ -14,9 +14,12 @@ module Admin
 
       setup_relationship(field)
 
-      foreign_key = @reflection.through_reflection ? @reflection.primary_key_name.pluralize : @reflection.primary_key_name
+      unless @reflection.through_reflection
+        foreign_key = @reflection.primary_key_name
+      end
 
-      @items_to_relate = @model_to_relate.send("find_all_by_#{foreign_key}", nil)
+      @items_to_relate = @model_to_relate.all
+
       if set_condition && !@items_to_relate.empty?
         form = build_relate_form
       end

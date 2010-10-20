@@ -54,7 +54,7 @@ module Admin
           html << typus_form_has_and_belongs_to_many(relationship)
         when :has_many
           if association.options[:through]
-            # Here we will shot the relationship. Better this than raising an error.
+            html << typus_form_has_many(relationship)
           else
             html << typus_form_has_many(relationship)
           end
