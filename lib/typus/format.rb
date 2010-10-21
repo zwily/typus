@@ -64,11 +64,9 @@ module Typus
       render format => data.send("to_#{format}", :methods => methods, :except => except)
     end
 
-    def data(*args)
+    def data
       eager_loading = @resource.reflect_on_all_associations(:belongs_to).map { |i| i.name }
-      options = { :joins => @joins, :conditions => @conditions, :order => @order, :include => eager_loading }
-      options.merge!(args.extract_options!)
-      @resource.all(options)
+      @resource.joins(@joins).where(@conditions).order(@order).includes(eager_loading)
     end
 
   end
