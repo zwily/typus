@@ -52,7 +52,7 @@ Description:
           klass = model.constantize
           @resource = klass.name.pluralize
           template "controller.rb", "#{controllers_path}/#{klass.to_resource}_controller.rb"
-          template "functional_test.rb",  "#{tests_path}/#{klass.to_resource}_controller_test.rb"
+          template "functional_test.rb", "#{tests_path}/#{klass.to_resource}_controller_test.rb"
         end
       end
 
