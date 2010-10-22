@@ -42,11 +42,6 @@ Description:
         end
       end
 
-      #--
-      # Generate files for models:
-      #   `#{controllers_path}/#{resource}_controller.rb`
-      #   `#{tests_path}/#{resource}_controller_test.rb`
-      #++
       def generate_controllers
         Typus.application_models.each do |model|
           klass = model.constantize
