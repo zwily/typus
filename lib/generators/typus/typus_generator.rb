@@ -106,10 +106,6 @@ Description:
         "test/functional/admin"
       end
 
-      def views_path
-        "app/views/admin"
-      end
-
       def generate_yaml_files
         configuration = {}
 
