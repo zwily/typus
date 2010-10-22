@@ -65,10 +65,6 @@ Examples:
         @configuration
       end
 
-      def inherits_from
-        "Admin::ResourcesController"
-      end
-
       def migration_name
         "Create#{options[:user_class_name]}s"
       end

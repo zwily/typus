@@ -80,10 +80,6 @@ Description:
 
       protected
 
-      def inherits_from
-        "Admin::ResourcesController"
-      end
-
       def resource
         @resource
       end
