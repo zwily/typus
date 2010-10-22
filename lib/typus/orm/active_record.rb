@@ -146,7 +146,7 @@ module Typus
       #       config.per_page = 15
       #     end
       #
-      # But sometimes we need to define theme by model:
+      # But sometimes we need to define them by model:
       #
       #     Post:
       #       ...
