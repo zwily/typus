@@ -140,13 +140,14 @@ module Typus
       end
 
       #--
-      # Options are defined for all resources on the initializer:
+      # With Typus::Resources we some application defaults.
       #
       #     Typus::Resources.setup do |config|
       #       config.per_page = 15
       #     end
       #
-      # But sometimes we need to define them by model:
+      # If for any reason we need a better default for an specific resource we
+      # we override it on `application.yaml`.
       #
       #     Post:
       #       ...
