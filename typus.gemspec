@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = "typus"
 
-  s.files = Dir.glob("**/*")
+  s.files = Dir.glob('**/*') - Dir.glob('test/**/*') - ['typus.gemspec']
   s.require_path = "lib"
 
   s.add_dependency 'will_paginate', '~> 3.0.pre2'
