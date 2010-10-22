@@ -47,29 +47,23 @@ Description:
         end
       end
 
-      def generate_application_yaml
+      def generate_config
         configuration = generate_yaml_files
-
-        return if configuration[:base].empty?
-
-        file = "config/typus/application.yml"
-        template file, file unless File.exists?(file)
-
-        append_file file, configuration[:base]
-      end
-
-      def generate_application_roles_yaml
-        configuration = generate_yaml_files
-
-        return if configuration[:roles].empty?
-
-        file = "config/typus/application_roles.yml"
-        template file, file unless File.exists?(file)
-
-        append_file file, configuration[:roles]
+        unless configuration[:base].empty?
+          %w( application.yml application_roles.yml ).each do |file|
+            from = to = "config/typus/#{file}"
+            if File.exists?(from) then to = "config/typus/#{timestamp}_#{file}" end
+            @configuration = configuration
+            template from, to
+          end
+        end
       end
 
       protected
+
+      def configuration
+        @configuration
+      end
 
       def resource
         @resource
@@ -79,6 +73,10 @@ Description:
         @sidebar
       end
 
+      def timestamp
+        Time.zone.now.utc.to_s(:number)
+      end
+
       private
 
       def templates_path
@@ -86,12 +84,8 @@ Description:
       end
 
       def generate_yaml_files
-        configuration = {}
 
-        configuration[:base] = ""
-        configuration[:roles] = <<-RAW
-admin:
-        RAW
+        configuration = { :base => "", :roles => "" }
 
         Typus.application_models.sort { |x,y| x <=> y }.each do |model|
 
