@@ -51,8 +51,8 @@ Description:
         Typus.application_models.each do |model|
           klass = model.constantize
           @resource = klass.name.pluralize
-          template "controller.rb", "#{controllers_path}/#{klass.to_resource}_controller.rb"
-          template "functional_test.rb", "#{tests_path}/#{klass.to_resource}_controller_test.rb"
+          template "controller.rb", "app/controllers/admin/#{klass.to_resource}_controller.rb"
+          template "functional_test.rb", "test/functional/admin/#{klass.to_resource}_controller_test.rb"
         end
       end
 
@@ -92,14 +92,6 @@ Description:
 
       def templates_path
         File.join(Typus.root, "lib", "generators", "templates")
-      end
-
-      def controllers_path
-        "app/controllers/admin"
-      end
-
-      def tests_path
-        "test/functional/admin"
       end
 
       def generate_yaml_files
