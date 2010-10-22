@@ -56,23 +56,29 @@ Description:
         end
       end
 
-      def generate_config
+      def generate_application_yaml
         configuration = generate_yaml_files
-        unless configuration[:base].empty?
-          %w( application.yml application_roles.yml ).each do |file|
-            from = to = "config/typus/#{file}"
-            if File.exists?(from) then to = "config/typus/#{timestamp}_#{file}" end
-            @configuration = configuration
-            template from, to
-          end
-        end
+
+        return if configuration[:base].empty?
+
+        file = "config/typus/application.yml"
+        template file, file unless File.exists?(file)
+
+        append_file file, configuration[:base]
+      end
+
+      def generate_application_roles_yaml
+        configuration = generate_yaml_files
+
+        return if configuration[:roles].empty?
+
+        file = "config/typus/application_roles.yml"
+        template file, file unless File.exists?(file)
+
+        append_file file, configuration[:roles]
       end
 
       protected
-
-      def configuration
-        @configuration
-      end
 
       def inherits_from
         "Admin::ResourcesController"
@@ -84,10 +90,6 @@ Description:
 
       def sidebar
         @sidebar
-      end
-
-      def timestamp
-        Time.zone.now.utc.to_s(:number)
       end
 
       private
@@ -109,8 +111,12 @@ Description:
       end
 
       def generate_yaml_files
+        configuration = {}
 
-        configuration = { :base => "", :roles => "" }
+        configuration[:base] = ""
+        configuration[:roles] = <<-RAW
+admin:
+        RAW
 
         Typus.application_models.sort { |x,y| x <=> y }.each do |model|
 
