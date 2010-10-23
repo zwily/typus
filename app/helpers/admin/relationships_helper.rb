@@ -81,7 +81,7 @@ module Admin
     end
 
     def build_add_new(options = {})
-      default_options = { :controller => @field, :action => "new",
+      default_options = { :controller => "/admin/#{@field}", :action => "new",
                           :resource => @resource.name, :resource_id => @item.id,
                           :back_to => @back_to }
 
@@ -120,7 +120,7 @@ module Admin
 <a name="#{field}"></a>
 <div class="box_relationships" id="#{model_to_relate_as_resource}">
   <h2>
-  #{link_to model_to_relate.model_name.human, :controller => "admin/#{model_to_relate_as_resource}"}
+  #{link_to model_to_relate.model_name.human, :controller => "/admin/#{model_to_relate_as_resource}"}
   </h2>
       HTML
       items = Array.new
@@ -164,7 +164,7 @@ module Admin
                   _t("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."),
                   _t("Click OK to continue, or click Cancel to stay on this page.") ]
 
-      message = link_to _t("Add"), { :controller => "admin/#{related.to_resource}",
+      message = link_to _t("Add"), { :controller => "/admin/#{related.to_resource}",
                                     :action => 'new',
                                     :back_to => back_to,
                                     :selected => related_fk },

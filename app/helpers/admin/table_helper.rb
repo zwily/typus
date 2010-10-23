@@ -72,7 +72,7 @@ module Admin
                  item.class.typus_options_for(:default_action_on_item)
                end
 
-      options = { :controller => "admin/#{item.class.to_resource}",
+      options = { :controller => "/admin/#{item.class.to_resource}",
                   :action => action,
                   :id => item.id }
 
@@ -146,7 +146,7 @@ module Admin
         content = att_value.to_label
         action = item.send(attribute).class.typus_options_for(:default_action_on_item)
         if current_user.can?(action, att_value.class.name)
-          content = link_to content, :controller => "admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id
+          content = link_to content, :controller => "/admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id
         end
       end
 
@@ -227,7 +227,7 @@ module Admin
                   Typus::Resources.human_nil
                 else
                   message = _t(boolean_hash[status.to_s])
-                  options = { :controller => "admin/#{item.class.to_resource}",
+                  options = { :controller => "/admin/#{item.class.to_resource}",
                               :action => "toggle",
                               :id => item.id,
                               :field => attribute.gsub(/\?$/,'') }
