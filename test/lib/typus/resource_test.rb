@@ -11,6 +11,7 @@ class ResourcesTest < ActiveSupport::TestCase
     assert_equal 5, Typus::Resources.minute_step
     assert !Typus::Resources.only_user_items
     assert_equal 15, Typus::Resources.per_page
+    assert Typus::Resources.sortable
     assert_nil Typus::Resources.start_year
   end
 

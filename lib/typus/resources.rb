@@ -36,6 +36,9 @@ module Typus
     mattr_accessor :per_page
     @@per_page = 15
 
+    mattr_accessor :sortable
+    @@sortable = true
+
     mattr_accessor :start_year
     @@start_year = nil
 
