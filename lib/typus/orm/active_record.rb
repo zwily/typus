@@ -157,11 +157,11 @@ module Typus
       def typus_options_for(filter)
         data = read_model_config(name)
 
-        unless data['options'].nil?
-          value = data['options'][filter.to_s] unless data['options'][filter.to_s].nil?
+        unless data['options'].nil? || data['options'][filter.to_s].nil?
+          value = data['options'][filter.to_s]
+        else
+          Typus::Resources.send(filter)
         end
-
-        value || Typus::Resources.send(filter)
       end
 
       def typus_export_formats
