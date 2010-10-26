@@ -17,7 +17,7 @@ module Admin
         key = key.gsub(".", " ") if key.match(/\./)
         content = model.human_attribute_name(key)
 
-        if params[:action] == "index"
+        if params[:action] == "index" && model.typus_options_for(:sortable)
           association = model.reflect_on_association(key.to_sym)
           order_by = association ? association.primary_key_name : key
 
