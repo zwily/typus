@@ -31,6 +31,7 @@ Page:
   application: Site
   options:
     form_rows: 25
+    sortable: false
 
 Post:
   fields:
