@@ -6,6 +6,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   before_filter :get_model
 
+  before_filter :get_objects, :only => [ :index ]
   before_filter :get_object,
                 :only => [ :show,
                            :edit, :update, :destroy, :toggle,
@@ -221,6 +222,11 @@ class Admin::ResourcesController < Admin::BaseController
 
   def get_object
     @item = @resource.find(params[:id])
+  end
+
+  def get_objects
+    eager_loading = @resource.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name }
+    @items = @resource.joins(@joins).where(@conditions).order(@order).includes(eager_loading)
   end
 
   def set_fields
