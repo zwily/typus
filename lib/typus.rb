@@ -17,7 +17,6 @@ autoload :FakeUser, "support/fake_user"
 module Typus
 
   autoload :Configuration, "typus/configuration"
-  autoload :Pagination, "typus/pagination"
   autoload :Resources, "typus/resources"
 
   module Authentication
@@ -50,6 +49,13 @@ module Typus
 
   mattr_accessor :username
   @@username = "admin"
+
+  ##
+  # Pagination options
+  #
+  mattr_accessor :pagination
+  @@pagination = { :previous_label => "&larr; " + _t("Previous"),
+                   :next_label => _t("Next") + " &rarr;" }
 
   ##
   # Define a password.
