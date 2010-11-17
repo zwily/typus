@@ -270,7 +270,7 @@ module Typus
                        when 'last_7_days'   then 6.days.ago.beginning_of_day..Time.zone.now.beginning_of_day.tomorrow
                        when 'last_30_days'  then Time.zone.now.beginning_of_day.prev_month..Time.zone.now.beginning_of_day.tomorrow
                        end
-            condition = ["#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
+            condition = ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
             conditions = merge_conditions(conditions, condition)
           when :date
             if value.kind_of?(Hash)
@@ -279,12 +279,12 @@ module Typus
               begin
                 unless value["from"].blank?
                   date_from = Date.strptime(value["from"], date_format)
-                  conditions = merge_conditions(conditions, ["#{key} >= ?", date_from])
+                  conditions = merge_conditions(conditions, ["`#{table_name}`.#{key} >= ?", date_from])
                 end
 
                 unless value["to"].blank?
                   date_to = Date.strptime(value["to"], date_format)
-                  conditions = merge_conditions(conditions, ["#{key} <= ?", date_to])
+                  conditions = merge_conditions(conditions, ["`#{table_name}`.#{key} <= ?", date_to])
                 end
               rescue
               end
@@ -297,9 +297,9 @@ module Typus
                          when 'last_30_days'  then (Date.today << 1)..Date.tomorrow
                          end
               if interval
-                condition = ["#{key} BETWEEN ? AND ?", interval.first, interval.last]
+                condition = ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first, interval.last]
               elsif value == 'today'
-                condition = ["#{key} = ?", Date.today]
+                condition = ["`#{table_name}`.#{key} = ?", Date.today]
               end
               conditions = merge_conditions(conditions, condition)
             end
