@@ -2,6 +2,22 @@
 
 * Support for has many through relationships. [jmeiss]
 
+* Removed typus pagination module and use `will_paginate` one. Pagination
+  options can be configure overriding `Typus.pagination` variable.
+
+* Queries are now using the table name. [tyx]
+
+* All queries are `unscoped` so we can separate completely the frontend from
+  the backend.
+
+* We can disable sortable tables.
+
+* Fixed url generation bug when using namespaced STI models. [masone]
+
+* Raise an exception if config for model cannot be found. [masone]
+
+* Minor bug fixes and re-styling ...
+
 = 3.0.2
 
 * FIX: Use Arel to get the data on lists. After moving to will_paginate I broke
