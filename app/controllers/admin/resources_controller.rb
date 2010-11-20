@@ -222,12 +222,16 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def get_object
-    @item = @resource.unscoped.find(params[:id])
+    @item = set_scope.find(params[:id])
   end
 
   def get_objects
     eager_loading = @resource.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name }
-    @items = @resource.unscoped.joins(@joins).where(@conditions).order(@order).includes(eager_loading)
+    @items = set_scope.joins(@joins).where(@conditions).order(@order).includes(eager_loading)
+  end
+
+  def set_scope
+    @resource.unscoped
   end
 
   def set_fields
