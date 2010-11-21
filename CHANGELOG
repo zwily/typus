@@ -18,6 +18,10 @@
 
 * Minor bug fixes and re-styling ...
 
+* Layouts contain metatag with generator information.
+
+* Added missing csrf_meta_tag in `session.html.erb` layout.
+
 = 3.0.2
 
 * FIX: Use Arel to get the data on lists. After moving to will_paginate I broke
