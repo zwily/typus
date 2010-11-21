@@ -9,7 +9,6 @@ group :test do
   gem "capybara"
   gem "factory_girl"
   gem "mysql"
-  gem "paperclip"
   gem "pg"
   gem "rails", "~> 3.0"
   gem "shoulda"
