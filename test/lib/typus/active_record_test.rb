@@ -70,11 +70,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "typus_fields_for" do
 
     should "accept strings" do
-      assert_equal %w( email role status ), TypusUser.typus_fields_for("list").keys
+      assert_equal %w(email role status), TypusUser.typus_fields_for("list").keys
     end
 
     should "accept symbols" do
-      assert_equal %w( email role status ), TypusUser.typus_fields_for(:list).keys
+      assert_equal %w(email role status), TypusUser.typus_fields_for(:list).keys
     end
 
     should "return list fields for TypusUser" do
@@ -98,8 +98,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return form fields for Picture" do
-      expected_fields = [["title", :string],
-                         ["picture", :file]]
+      expected_fields = [["title", :string], ["picture", :file]]
       assert_equal expected_fields.map { |i| i.first }, Picture.typus_fields_for(:form).keys
       assert_equal expected_fields.map { |i| i.last }, Picture.typus_fields_for(:form).values
     end
@@ -109,11 +108,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return relationship fields for TypusUser" do
-      assert_equal %w( first_name last_name role email language), TypusUser.typus_fields_for(:relationship).keys
+      assert_equal %w(first_name last_name role email language), TypusUser.typus_fields_for(:relationship).keys
     end
 
     should "return undefined fields for TypusUser" do
-      assert_equal %w( first_name last_name role email language), TypusUser.typus_fields_for(:undefined).keys
+      assert_equal %w(first_name last_name role email language), TypusUser.typus_fields_for(:undefined).keys
     end
 
   end
