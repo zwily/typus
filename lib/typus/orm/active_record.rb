@@ -20,7 +20,7 @@ module Typus
 
       # Model description for admin panel.
       def typus_description
-        read_model_config(name)['description']
+        read_model_config['description']
       end
 
       # Form and list fields
@@ -29,7 +29,7 @@ module Typus
         fields_with_type = ActiveSupport::OrderedHash.new
 
         begin
-          fields = read_model_config(name)['fields'][filter.to_s]
+          fields = read_model_config['fields'][filter.to_s]
           fields = fields.extract_settings.collect { |f| f.to_sym }
         rescue
           return [] if filter == 'default'
@@ -70,7 +70,7 @@ module Typus
           end
 
         rescue
-          fields = read_model_config(name)['fields']['default'].extract_settings
+          fields = read_model_config['fields']['default'].extract_settings
           retry
         end
 
@@ -80,7 +80,7 @@ module Typus
       def typus_filters
         fields_with_type = ActiveSupport::OrderedHash.new
 
-        data = read_model_config(name)['filters']
+        data = read_model_config['filters']
         return [] unless data
         fields = data.extract_settings.collect { |i| i.to_sym }
 
@@ -97,13 +97,13 @@ module Typus
 
       # Extended actions for this model on Typus.
       def typus_actions_on(filter)
-        actions = read_model_config(name)['actions']
+        actions = read_model_config['actions']
         actions && actions[filter.to_s] ? actions[filter.to_s].extract_settings : []
       end
 
       # Used for +search+, +relationships+
       def typus_defaults_for(filter)
-        read_model_config(name)[filter.to_s].try(:extract_settings) || []
+        read_model_config[filter.to_s].try(:extract_settings) || []
       end
 
       def typus_search_fields
@@ -127,11 +127,11 @@ module Typus
       end
 
       def typus_application
-        read_model_config(name)["application"] || "Unknown"
+        read_model_config["application"] || "Unknown"
       end
 
       def typus_field_options_for(filter)
-        options = read_model_config(name)['fields']['options']
+        options = read_model_config['fields']['options']
         options && options[filter.to_s] ? options[filter.to_s].extract_settings.collect { |i| i.to_sym } : []
       end
 
@@ -151,7 +151,7 @@ module Typus
       #         per_page: 15
       #++
       def typus_options_for(filter)
-        data = read_model_config(name)
+        data = read_model_config
 
         unless data['options'].nil? || data['options'][filter.to_s].nil?
           value = data['options'][filter.to_s]
@@ -161,7 +161,7 @@ module Typus
       end
 
       def typus_export_formats
-        read_model_config(name)['export'].try(:extract_settings) || []
+        read_model_config['export'].try(:extract_settings) || []
       end
 
       def typus_order_by
@@ -182,7 +182,7 @@ module Typus
       #
       #++
       def typus_boolean(attribute = :default)
-        boolean = read_model_config(name)['fields']['options']['booleans'][attribute.to_s]
+        boolean = read_model_config['fields']['options']['booleans'][attribute.to_s]
         boolean = boolean.extract_settings
         { boolean.first => "true", boolean.last => "false" }
       rescue
@@ -193,7 +193,7 @@ module Typus
       # Custom date formats.
       #++
       def typus_date_format(attribute = :default)
-        options = read_model_config(name)['fields']['options']
+        options = read_model_config['fields']['options']
         if options && options['date_formats'] && options['date_formats'][attribute.to_s]
           options['date_formats'][attribute.to_s].to_sym
         else
@@ -214,7 +214,7 @@ module Typus
       # Templates are stored on <tt>app/views/admin/templates</tt>.
       #++
       def typus_template(attribute)
-        options = read_model_config(name)['fields']['options']
+        options = read_model_config['fields']['options']
         if options && options['templates'] && options['templates'][attribute.to_s]
           options['templates'][attribute.to_s]
         else
@@ -324,7 +324,7 @@ module Typus
         columns.map { |u| u.name }.include?(Typus.user_fk)
       end
 
-      def read_model_config(name)
+      def read_model_config
         data = Typus::Configuration.config[name]
         raise "No typus configuration specified for #{name}" unless data
         return data
