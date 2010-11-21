@@ -51,12 +51,12 @@ class TypusUserTest < ActiveSupport::TestCase
     end
 
     should "return last_name" do
-      @typus_user.last_name = "Lock"
-      assert_equal "Lock", @typus_user.name
+      @typus_user.last_name = "Locke"
+      assert_equal "Locke", @typus_user.name
     end
 
     should "return name when first_name and last_name are set" do
-      @typus_user.first_name, @typus_user.last_name = "John", "Lock"
+      @typus_user.first_name, @typus_user.last_name = "John", "Locke"
       assert_equal "John Lock", @typus_user.name
     end
 
