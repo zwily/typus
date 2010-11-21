@@ -131,9 +131,8 @@ module Typus
       end
 
       def typus_field_options_for(filter)
-        read_model_config(name)['fields']['options'][filter.to_s].extract_settings.collect { |i| i.to_sym }
-      rescue
-        []
+        options = read_model_config(name)['fields']['options']
+        options && options[filter.to_s] ? options[filter.to_s].extract_settings.collect { |i| i.to_sym } : []
       end
 
       #--
