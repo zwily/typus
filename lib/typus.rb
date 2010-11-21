@@ -9,6 +9,7 @@ require "support/string"
 require "typus/engine"
 require "typus/orm/active_record"
 require "typus/user"
+require "typus/version"
 
 require 'will_paginate'
 
