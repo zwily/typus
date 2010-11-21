@@ -122,7 +122,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     should "return filters for TypusUser" do
       expected = [["status", :boolean], ["role", :string]]
-
       assert_equal expected.map { |i| i.first }.join(", "), Typus::Configuration.config["TypusUser"]["filters"]
       assert_equal expected.map { |i| i.first }, TypusUser.typus_filters.keys
       assert_equal expected.map { |i| i.last }, TypusUser.typus_filters.values
