@@ -57,7 +57,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
     should "return name when first_name and last_name are set" do
       @typus_user.first_name, @typus_user.last_name = "John", "Locke"
-      assert_equal "John Lock", @typus_user.name
+      assert_equal "John Locke", @typus_user.name
     end
 
     should "verify salt never changes" do
