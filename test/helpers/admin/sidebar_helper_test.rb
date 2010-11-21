@@ -251,9 +251,9 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
   HTML
 
     partial = "admin/helpers/list"
-    options = { :items => [ "<a href=\"http://test.host/admin/typus_users?role=admin\" class=\"on\">Administrador</a>",
-                            "<a href=\"http://test.host/admin/typus_users?role=designer\" class=\"off\">Diseñador</a>",
-                            "<a href=\"http://test.host/admin/typus_users?role=editor\" class=\"off\">Editor</a>" ],
+    options = { :items => [ %(<a href="http://test.host/admin/typus_users?role=admin" class="on">Administrador</a>),
+                            %(<a href="http://test.host/admin/typus_users?role=designer" class="off">Diseñador</a>),
+                            %(<a href="http://test.host/admin/typus_users?role=editor" class="off">Editor</a>) ],
                 :header => "Role",
                 :options => { :attribute => "role" } }
 
