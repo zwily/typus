@@ -30,8 +30,9 @@ class TypusUserTest < ActiveSupport::TestCase
   end
 
   should "verify generate requires the role" do
-    assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX').valid?
-    assert TypusUser.generate(:email => 'demo@example.com', :password => 'XXXXXXXX', :role => 'admin').valid?
+    options = { :email => 'demo@example.com', :password => 'XXXXXXXX' }
+    assert TypusUser.generate(options).valid?
+    assert TypusUser.generate(options.merge(:role => 'admin')).valid?
   end
 
   context "TypusUser" do
