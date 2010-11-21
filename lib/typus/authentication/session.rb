@@ -84,14 +84,13 @@ module Typus
       # It works on models, so its available on the `resources_controller`.
       #++
       def check_if_user_can_perform_action_on_resources
-        message = _t("%{current_user_role} is not able to perform this action. (%{action})",
-                    :current_user_role => current_user.role.capitalize,
-                    :action => params[:action])
-
         unless current_user.can?(params[:action], @resource)
+          message = _t("%{current_user_role} is not able to perform this action. (%{action})",
+                      :current_user_role => current_user.role.capitalize,
+                      :action => params[:action])
+
           redirect_to set_path, :notice => message
         end
-
       end
 
       #--
