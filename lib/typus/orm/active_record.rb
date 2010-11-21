@@ -93,7 +93,7 @@ module Typus
           fields_with_type[field.to_s] = attribute_type
         end
 
-        return fields_with_type
+        fields_with_type
       end
 
       # Extended actions for this model on Typus.
