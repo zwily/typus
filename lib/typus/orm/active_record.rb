@@ -214,9 +214,12 @@ module Typus
       # Templates are stored on <tt>app/views/admin/templates</tt>.
       #++
       def typus_template(attribute)
-        read_model_config(name)['fields']['options']['templates'][attribute.to_s]
-      rescue
-        nil
+        options = read_model_config(name)['fields']['options']
+        if options && options['templates'] && options['templates'][attribute.to_s]
+          options['templates'][attribute.to_s]
+        else
+          nil
+        end
       end
 
       #--
