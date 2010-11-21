@@ -77,7 +77,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Editor can't perform action. (new)", flash[:notice]
+      assert_equal "Editor is not able to perform this action. (new)", flash[:notice]
     end
 
   end
@@ -151,7 +151,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Designer can't display items.", flash[:notice]
+      assert_equal "Designer is not able to perform this action. (index)", flash[:notice]
     end
 
   end
