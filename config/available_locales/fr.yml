@@ -110,10 +110,7 @@ fr:
 
   "%{attachment} can't be removed": "%{attachment} ne peut pas être supprimé"
   "%{attachment} removed": "%{attachment} supprimé"
-  "%{current_user_role} can't delete this item": "%{current_user_role} ne peut supprimer cette entrée"
-  "%{current_user_role} can't display items": "Un utilisateur de rôle %{current_user_role} ne peut pas afficher ces éléments."
-  "%{current_user_role} can't perform action (%{action})": "%{current_user_role} ne peut effectuer l'action (%{action})"
-  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} ne peut effectuer l'action. (%{action})"
+  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} successfully created": "%{model} correctement créé(e)."
   "%{model} successfully removed": "%{model} correctement supprimé(e)."
   "%{model} successfully updated": "%{model} correctement mis(e)-à-jour."

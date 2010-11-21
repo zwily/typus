@@ -105,9 +105,7 @@
 
   "%{attachment} can't be removed":
   "%{attachment} removed":
-  "%{current_user_role} can't delete this item":
-  "%{current_user_role} can't display items":
-  "%{current_user_role} can't perform action. (%{action})":
+  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} filtered by %{filtered_by}":
   "%{model} successfully created":
   "%{model} successfully removed":

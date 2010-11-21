@@ -84,17 +84,7 @@ module Typus
       # It works on models, so its available on the `resources_controller`.
       #++
       def check_if_user_can_perform_action_on_resources
-
-        message = case params[:action]
-                  when 'index', 'show'
-                    "%{current_user_role} can't display items."
-                  when 'destroy'
-                    "%{current_user_role} can't delete this item."
-                  else
-                    "%{current_user_role} can't perform action. (%{action})"
-                  end
-
-        message = _t(message,
+        message = _t("%{current_user_role} is not able to perform this action. (%{action})",
                     :current_user_role => current_user.role.capitalize,
                     :action => params[:action])
 

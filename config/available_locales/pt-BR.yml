@@ -107,9 +107,7 @@ pt-BR:
 
   "%{attachment} can't be removed":
   "%{attachment} removed":
-  "%{current_user_role} can't delete this item": "%{current_user_role} não pode apagar este item."
-  "%{current_user_role} can't display items": "%{current_user_role} não pode mostrar os items."
-  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} não pode realizar a ação. (%{action})"
+  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} filtered by %{filtered_by}": "%{model} filtrados por %{filtered_by}"
   "%{model} successfully updated": "%{model} atualizado com sucesso."
   "%{model} successfully created": "%{model} criado com sucesso."

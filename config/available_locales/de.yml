@@ -107,9 +107,7 @@ de:
 
   "%{attachment} can't be removed":
   "%{attachment} removed":
-  "%{current_user_role} can't delete this item": "%{current_user_role} kann diesen Eintrag nicht l&ouml;schen"
-  "%{current_user_role} can't display items": "%{current_user_role} kann Eintr&auml;ge nicht anzeigen"
-  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} kann die Aktion nicht ausf&uuml;hren. (%{action})"
+  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} filtered by %{filtered_by}": "%{model} gefiltert nach %{filtered_by}"
   "%{model} successfully created": "%{model} erfolgreich erstellt"
   "%{model} successfully removed": "%{model} erfolgreich gel&ouml;scht"

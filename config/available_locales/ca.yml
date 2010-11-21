@@ -107,9 +107,7 @@ ca:
 
   "%{attachment} can't be removed": "%{attachment} no es pot esborrar."
   "%{attachment} removed": "%{attachment} esborrat."
-  "%{current_user_role} can't delete this item": "%{current_user_role} no pot esborrar aquest element."
-  "%{current_user_role} can't display items": "%{current_user_role} no pot mostrar els elements."
-  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} no pot realitzar l'acció. (%{action})"
+  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} filtered by %{filtered_by}": "%{model} filtrats per %{filtered_by}"
   "%{model} successfully created": "%{model} satisfactòriament creat."
   "%{model} successfully updated": "%{model} satisfactòriament actualitzat."

@@ -107,10 +107,8 @@ ru:
 
   "%{attachment} can't be removed":
   "%{attachment} removed":
+  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} filtered by %{filtered_by}":
-  "%{current_user_role} can't delete this item": "%{current_user_role} не может удалить эту запись"
-  "%{current_user_role} can't display items": "%{current_user_role} не может отобразить записи"
-  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} не может выполнить действие. (%{action})"
   "%{model} successfully created": "%{model} создан"
   "%{model} successfully removed": "%{model} удален"
   "%{model} successfully updated": "%{model} успешно обновлен"

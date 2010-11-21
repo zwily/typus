@@ -120,9 +120,7 @@ it:
 
   "%{attachment} can't be removed": "%{attachment} non può essere eliminato"
   "%{attachment} removed": "%{attachment} eliminato"
-  "%{current_user_role} can't delete this item.": "%{current_user_role} non può eliminare questo elemento"
-  "%{current_user_role} can't display items.": "%{current_user_role} non può visualizzare questi elementi"
-  "%{current_user_role} can't perform action. (%{action})": "%{current_user_role} non può fare questa azione. (%{action})"
+  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} filtered by %{filtered_by}": "%{model} filtrato per %{filtered_by}"
   "%{model} successfully created": "Creazione avvenuta con successo"
   "%{model} successfully removed": "Eliminazione avvenuta con successo"
