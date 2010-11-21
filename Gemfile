@@ -11,7 +11,7 @@ group :test do
   gem "mysql"
   gem "paperclip"
   gem "pg"
-  gem "rails", "3.0.0"
+  gem "rails", "~> 3.0"
   gem "shoulda"
   gem "sqlite3-ruby"
   gem "will_paginate", "~> 3.0.pre2"
