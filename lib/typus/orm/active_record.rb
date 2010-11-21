@@ -193,9 +193,12 @@ module Typus
       # Custom date formats.
       #++
       def typus_date_format(attribute = :default)
-        read_model_config(name)['fields']['options']['date_formats'][attribute.to_s].to_sym
-      rescue
-        :db
+        options = read_model_config(name)['fields']['options']
+        if options && options['date_formats'] && options['date_formats'][attribute.to_s]
+          options['date_formats'][attribute.to_s].to_sym
+        else
+          :db
+        end
       end
 
       #--
