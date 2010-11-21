@@ -320,12 +320,12 @@ module Typus
       def typus_user_id?
         columns.map { |u| u.name }.include?(Typus.user_fk)
       end
-      
+
       def read_model_config(name)
         data = Typus::Configuration.config[name]
         raise "No typus configuration specified for #{name}" unless data
         return data
-      end      
+      end
 
     end
 
