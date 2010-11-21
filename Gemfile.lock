@@ -1,3 +1,11 @@
+GIT
+  remote: https://github.com/fesplugas/rails-tartare.git
+  revision: 83c2190a6737b27a2d46cdbbd84be74bd6065d72
+  specs:
+    tartare (1.0.0)
+      capybara
+      rails (>= 3.0.0)
+
 GEM
   remote: http://rubygems.org/
   specs:
@@ -109,7 +117,6 @@ PLATFORMS
 DEPENDENCIES
   acts_as_list
   acts_as_tree
-  capybara
   factory_girl
   fastercsv (= 1.5.3)
   mocha
@@ -119,4 +126,5 @@ DEPENDENCIES
   rails (~> 3.0)
   shoulda
   sqlite3-ruby
+  tartare!
   will_paginate (~> 3.0.pre2)
