@@ -129,7 +129,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
       assert_response :redirect
       assert_redirected_to new_admin_session_path
-      assert_equal "Typus user has been disabled.", flash[:notice]
+      assert_equal "Admin user has been disabled.", flash[:notice]
       assert_nil @request.session[:typus_user_id]
     end
 

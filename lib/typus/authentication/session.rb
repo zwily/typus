@@ -31,7 +31,7 @@ module Typus
 
         unless @current_user.status
           back_to = (request.env['REQUEST_URI'] == admin_dashboard_path) ? nil : request.env['REQUEST_URI']
-          raise _t("Typus user has been disabled.")
+          raise _t("Admin user has been disabled.")
         end
 
         I18n.locale = @current_user.preferences[:locale]
