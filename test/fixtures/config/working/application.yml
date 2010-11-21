@@ -15,6 +15,9 @@ Comment:
     list: email, post, post_id, spam
     form: email, post
     csv: email, post_id
+    options:
+      booleans:
+        spam: ["Yes, its spam", "No, its not spam"]
   export: csv
   filters: post
   search: email, body

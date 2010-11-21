@@ -182,11 +182,15 @@ module Typus
       #
       #++
       def typus_boolean(attribute = :default)
-        boolean = read_model_config['fields']['options']['booleans'][attribute.to_s]
-        boolean = boolean.extract_settings
+        options = read_model_config['fields']['options']
+
+        boolean = if options && options['booleans'] && boolean = options['booleans'][attribute.to_s]
+                    boolean.is_a?(String) ? boolean.extract_settings : boolean
+                  else
+                    ["True", "False"]
+                  end
+
         { boolean.first => "true", boolean.last => "false" }
-      rescue
-        { "True" => "true", "False" => "false" }
       end
 
       #--

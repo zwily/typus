@@ -219,14 +219,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal expected, TypusUser.typus_boolean(:status)
     end
 
-    should "return booleans for TypusUser" do
-      expected = {"Active" => "true", "Inactive" => "false"}
-      assert_equal expected, TypusUser.typus_boolean(:status)
-    end
-
     should "return booleans for Post" do
       expected = {"True" => "true", "False" => "false"}
       assert_equal expected, Post.typus_boolean(:status)
+    end
+
+    should "return booleans for Comment" do
+      expected = {"No, its not spam" => "false", "Yes, its spam" => "true"}
+      assert_equal expected, Comment.typus_boolean(:spam)
     end
 
   end
