@@ -133,6 +133,18 @@ class Admin::DashboardControllerTest < ActionController::TestCase
       assert_nil @request.session[:typus_user_id]
     end
 
+    should "sign out user when role does not longer exist" do
+      @typus_user.role = 'unexisting'
+      @typus_user.save
+
+      get :show
+
+      assert_response :redirect
+      assert_redirected_to new_admin_session_path
+      assert_equal "Role does no longer exists.", flash[:notice]
+      assert_nil @request.session[:typus_user_id]
+    end
+
   end
 
   context "When designer is logged in" do
