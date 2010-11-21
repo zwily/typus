@@ -199,9 +199,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "typus_field_options_for" do
 
     should "verify on models" do
-      assert_equal [ :status ], Post.typus_field_options_for(:selectors)
-      assert_equal [ :permalink ], Post.typus_field_options_for(:read_only)
-      assert_equal [ :created_at ], Post.typus_field_options_for(:auto_generated)
+      assert_equal [:status], Post.typus_field_options_for(:selectors)
+      assert_equal [:permalink], Post.typus_field_options_for(:read_only)
+      assert_equal [:created_at], Post.typus_field_options_for(:auto_generated)
     end
 
   end
