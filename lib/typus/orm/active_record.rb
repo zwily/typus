@@ -97,9 +97,8 @@ module Typus
 
       # Extended actions for this model on Typus.
       def typus_actions_on(filter)
-        read_model_config(name)['actions'][filter.to_s].extract_settings
-      rescue
-        []
+        actions = read_model_config(name)['actions']
+        actions && actions[filter.to_s] ? actions[filter.to_s].extract_settings : []
       end
 
       # Used for +search+, +relationships+
