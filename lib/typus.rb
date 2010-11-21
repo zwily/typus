@@ -61,7 +61,7 @@ module Typus
   ##
   # Define a password.
   #
-  # Used as default password for http and advances authentication.
+  # Used as default password for http and advanced authentication.
   #
   mattr_accessor :password
   @@password = "columbia"
