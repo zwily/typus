@@ -154,7 +154,7 @@ module Typus
         data = read_model_config
 
         unless data['options'].nil? || data['options'][filter.to_s].nil?
-          value = data['options'][filter.to_s]
+          data['options'][filter.to_s]
         else
           Typus::Resources.send(filter)
         end
