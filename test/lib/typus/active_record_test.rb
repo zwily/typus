@@ -456,12 +456,12 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     should "return data for existing model" do
       expected = {"application"=>"Site", "fields"=>{"default"=>"caption"}}
-      assert_equal expected, Asset.read_model_config('Asset')
+      assert_equal expected, Asset.read_model_config
     end
 
     should "raise error when model does not exist on configuration" do
       assert_raises RuntimeError do
-        Article.read_model_config('Article')
+        Article.read_model_config
       end
     end
 
