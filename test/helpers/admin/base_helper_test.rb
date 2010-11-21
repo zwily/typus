@@ -44,6 +44,7 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
 
           assert_equal [@partial, options], output
         end
+
       end
 
       context "when the user can edit his informations" do
