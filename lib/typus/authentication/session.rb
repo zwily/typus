@@ -30,7 +30,6 @@ module Typus
         end
 
         unless @current_user.status
-          back_to = (request.env['REQUEST_URI'] == admin_dashboard_path) ? nil : request.env['REQUEST_URI']
           raise _t("Admin user has been disabled.")
         end
 
@@ -40,7 +39,7 @@ module Typus
 
       rescue Exception => error
         session[:typus_user_id] = nil
-        redirect_to new_admin_session_path(:back_to => back_to), :notice => error.message
+        redirect_to new_admin_session_path, :notice => error.message
       end
 
       #--
