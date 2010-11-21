@@ -440,13 +440,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  context "class_methods" do
+  context "typus_user_id?" do
 
-    should "verify typus_user_id exists on Post" do
+    should "exist on Post" do
       assert Post.typus_user_id?
     end
 
-    should "verify typus_user_id does not exist on Post" do
+    should "not exist on TypusUser" do
       assert !TypusUser.typus_user_id?
     end
 
