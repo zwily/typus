@@ -22,6 +22,8 @@
 
 * Added missing csrf_meta_tag in `session.html.erb` layout.
 
+* Added constrain to database to avoid duplicated emails.
+
 = 3.0.2
 
 * FIX: Use Arel to get the data on lists. After moving to will_paginate I broke
