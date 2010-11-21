@@ -57,7 +57,6 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to new_admin_session_path
     assert_nil @request.session[:typus_user_id]
-    assert_equal "Role does no longer exists.", flash[:notice]
   end
 
   context "Admin is logged and gets dashboard" do
@@ -129,7 +128,6 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
       assert_response :redirect
       assert_redirected_to new_admin_session_path
-      assert_equal "Admin user has been disabled.", flash[:notice]
       assert_nil @request.session[:typus_user_id]
     end
 
@@ -141,7 +139,6 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
       assert_response :redirect
       assert_redirected_to new_admin_session_path
-      assert_equal "Role does no longer exists.", flash[:notice]
       assert_nil @request.session[:typus_user_id]
     end
 

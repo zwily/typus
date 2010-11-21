@@ -25,21 +25,14 @@ module Typus
 
         @current_user ||= Typus.user_class.find(session[:typus_user_id])
 
-        unless Typus::Configuration.roles.has_key?(@current_user.role)
-          raise _t("Role does no longer exists.")
-        end
-
-        unless @current_user.status
-          raise _t("Admin user has been disabled.")
+        if !Typus::Configuration.roles.has_key?(@current_user.role) || !@current_user.status
+          session[:typus_user_id] = nil
+          redirect_to new_admin_session_path
         end
 
         I18n.locale = @current_user.preferences[:locale]
 
         return @current_user
-
-      rescue Exception => error
-        session[:typus_user_id] = nil
-        redirect_to new_admin_session_path, :notice => error.message
       end
 
       #--
