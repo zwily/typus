@@ -326,7 +326,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       Post.stubs(:typus_defaults_for).with(:search).returns(["id"])
 
       params = { :search => '1' }
-      expected = "(id LIKE '%1%')"
+      expected = "(`posts`.id LIKE '%1%')"
 
       assert_equal expected, Post.build_conditions(params).first
     end
@@ -335,7 +335,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       Post.stubs(:typus_defaults_for).with(:search).returns(["=id"])
 
       params = { :search => '1' }
-      expected = "(id LIKE '1')"
+      expected = "(`posts`.id LIKE '1')"
 
       assert_equal expected, Post.build_conditions(params).first
     end
@@ -344,7 +344,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       Post.stubs(:typus_defaults_for).with(:search).returns(["^id"])
 
       params = { :search => '1' }
-      expected = "(id LIKE '1%')"
+      expected = "(`posts`.id LIKE '1%')"
 
       assert_equal expected, Post.build_conditions(params).first
     end
@@ -354,7 +354,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
                  when /postgresql/
                    "(TEXT(role) LIKE '%francesc%' OR TEXT(last_name) LIKE '%francesc%' OR TEXT(email) LIKE '%francesc%' OR TEXT(first_name) LIKE '%francesc%')"
                  else
-                   "(role LIKE '%francesc%' OR last_name LIKE '%francesc%' OR email LIKE '%francesc%' OR first_name LIKE '%francesc%')"
+                   "(`typus_users`.role LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.first_name LIKE '%francesc%')"
                 end
 
       params = { :search => "francesc" }
@@ -373,7 +373,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
         boolean_false = "(\"typus_users\".\"status\" = 'f')"
       end
 
-      expected = "((role LIKE '%francesc%' OR last_name LIKE '%francesc%' OR email LIKE '%francesc%' OR first_name LIKE '%francesc%')) AND #{boolean_true}"
+      expected = "((`typus_users`.role LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.first_name LIKE '%francesc%')) AND #{boolean_true}"
 
       params = { :search => "francesc", :status => "true" }
       assert_equal expected, TypusUser.build_conditions(params).first
@@ -398,31 +398,31 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_created_at today" do
-      expected = "(created_at BETWEEN '#{Time.zone.now.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
+      expected = "(`typus_users`.created_at BETWEEN '#{Time.zone.now.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
       params = { :created_at => "today" }
       assert_equal expected, TypusUser.build_conditions(params).first
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_created_at last_few_days" do
-      expected = "(created_at BETWEEN '#{3.days.ago.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
+      expected = "(`typus_users`.created_at BETWEEN '#{3.days.ago.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
       params = { :created_at => "last_few_days" }
       assert_equal expected, TypusUser.build_conditions(params).first
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_created_at last_7_days" do
-      expected = "(created_at BETWEEN '#{6.days.ago.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
+      expected = "(`typus_users`.created_at BETWEEN '#{6.days.ago.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
       params = { :created_at => "last_7_days" }
       assert_equal expected, TypusUser.build_conditions(params).first
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_created_at last_30_days" do
-      expected = "(created_at BETWEEN '#{Time.zone.now.beginning_of_day.prev_month.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
+      expected = "(`typus_users`.created_at BETWEEN '#{Time.zone.now.beginning_of_day.prev_month.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
       params = { :created_at => "last_30_days" }
       assert_equal expected, TypusUser.build_conditions(params).first
     end
 
     should "return_sql_conditions_on_filtering_posts_by_published_at today" do
-      expected = "(published_at BETWEEN '#{Time.zone.now.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
+      expected = "(`posts`.published_at BETWEEN '#{Time.zone.now.beginning_of_day.to_s(:db)}' AND '#{Time.zone.now.beginning_of_day.tomorrow.to_s(:db)}')"
       params = { :published_at => "today" }
       assert_equal expected, Post.build_conditions(params).first
     end
