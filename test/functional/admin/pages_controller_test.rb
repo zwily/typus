@@ -20,7 +20,7 @@ class Admin::PagesControllerTest < ActionController::TestCase
 
     setup do
       5.times do
-        Factory(:page, :status => true)
+        Factory(:page)
         Factory(:page, :status => false)
       end
     end
