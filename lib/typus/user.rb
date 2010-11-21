@@ -81,8 +81,7 @@ module Typus
       end
 
       #--
-      # TODO: Rename action to mapping and refactor the _action case
-      #       statement.
+      # TODO: Rename action to mapping and refactor the _action case statement.
       #++
       def can?(action, resource, options = {})
 
