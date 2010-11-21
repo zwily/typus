@@ -99,8 +99,7 @@ module Typus
       #++
       def check_if_user_can_perform_action_on_resource
         controller = params[:controller].remove_prefix
-        action = params[:action]
-        unless current_user.can?(action, controller.camelize, { :special => true })
+        unless current_user.can?(params[:action], controller.camelize, { :special => true })
           render :text => "Not allowed!", :status => :unprocessable_entity
         end
       end
