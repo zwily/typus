@@ -25,7 +25,7 @@ module Admin
     end
 
     def login_info
-      return if current_user.is_a? FakeUser
+      return if current_user.is_a?(FakeUser)
 
       admin_edit_typus_user_path = { :controller => "/admin/#{Typus.user_class.to_resource}",
                                      :action => 'edit',
