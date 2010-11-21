@@ -22,5 +22,4 @@ Gem::Specification.new do |s|
   s.require_path = "lib"
 
   s.add_dependency 'will_paginate', '~> 3.0.pre2'
-  s.add_development_dependency 'will_paginate', '~> 3.0.pre2'
 end
