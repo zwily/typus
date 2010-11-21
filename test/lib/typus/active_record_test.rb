@@ -138,11 +138,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "typus_actions_on" do
 
     should "accept strings" do
-      assert_equal %w( cleanup ), Post.typus_actions_on("index")
+      assert_equal %w(cleanup), Post.typus_actions_on("index")
     end
 
     should "accept symbols" do
-      assert_equal %w( cleanup ), Post.typus_actions_on(:index)
+      assert_equal %w(cleanup), Post.typus_actions_on(:index)
     end
 
     should "return actions on list for TypusUser" do
@@ -150,7 +150,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return actions on edit for Post" do
-      assert_equal %w( send_as_newsletter preview ), Post.typus_actions_on(:edit)
+      assert_equal %w(send_as_newsletter preview), Post.typus_actions_on(:edit)
     end
 
   end
