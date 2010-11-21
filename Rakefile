@@ -3,7 +3,6 @@ require 'rake/testtask'
 require 'rake/rdoctask'
 
 $LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require 'typus/version'
 
 desc 'Default: run unit tests.'
 task :default => :test
