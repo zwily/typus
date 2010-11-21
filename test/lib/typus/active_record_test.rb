@@ -202,6 +202,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal [:status], Post.typus_field_options_for(:selectors)
       assert_equal [:permalink], Post.typus_field_options_for(:read_only)
       assert_equal [:created_at], Post.typus_field_options_for(:auto_generated)
+      assert_equal [], Post.typus_field_options_for(:unexisting)
     end
 
   end
