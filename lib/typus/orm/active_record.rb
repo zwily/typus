@@ -105,8 +105,7 @@ module Typus
 
       # Used for +search+, +relationships+
       def typus_defaults_for(filter)
-        data = read_model_config(name)[filter.to_s]
-        return data.try(:extract_settings) || []
+        read_model_config(name)[filter.to_s].try(:extract_settings) || []
       end
 
       def typus_search_fields

@@ -268,15 +268,15 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "typus_defaults_for" do
 
     should "accept strings" do
-      assert_equal %w( title ), Post.typus_defaults_for("search")
+      assert_equal %w(title), Post.typus_defaults_for("search")
     end
 
     should "accepts symbols" do
-      assert_equal %w( title ), Post.typus_defaults_for(:search)
+      assert_equal %w(title), Post.typus_defaults_for(:search)
     end
 
     should "return default_for relationships on Post" do
-      assert_equal %w( assets categories comments views ), Post.typus_defaults_for(:relationships)
+      assert_equal %w(assets categories comments views), Post.typus_defaults_for(:relationships)
     end
 
   end
