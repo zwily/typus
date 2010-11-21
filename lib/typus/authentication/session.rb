@@ -104,8 +104,6 @@ module Typus
       #                                                       :relate, :unrelate ]
       #++
       def check_resource_ownership
-
-        # By-pass if current_user is root.
         return if current_user.is_root?
 
         condition_typus_users = @item.respond_to?(Typus.relationship) && !@item.send(Typus.relationship).include?(current_user)
@@ -115,12 +113,9 @@ module Typus
            alert = _t("You don't have permission to access this item.")
            redirect_to set_path, :alert => alert
         end
-
       end
 
       def check_resource_ownerships
-
-        # By-pass if current_user is root.
         return if current_user.is_root?
 
         # Show only related items it @resource has a foreign_key (Typus.user_fk)
@@ -129,7 +124,6 @@ module Typus
           condition = { Typus.user_fk => current_user }
           @conditions = @resource.merge_conditions(@conditions, condition)
         end
-
       end
 
       def check_ownership_of_referal_item
