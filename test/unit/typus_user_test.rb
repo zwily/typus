@@ -24,8 +24,6 @@ class TypusUserTest < ActiveSupport::TestCase
 
   should ensure_length_of(:password).is_at_least(6).is_at_most(40)
 
-  # should validate_uniqueness_of :email
-
   should "verify columns" do
     attributes = %w(id first_name last_name email role status salt crypted_password token preferences created_at updated_at)
     TypusUser.columns.collect { |u| u.name }.each { |c| assert attributes.include?(c) }
