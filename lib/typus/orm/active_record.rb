@@ -20,7 +20,7 @@ module Typus
 
       # Model description for admin panel.
       def typus_description
-        read_model_config(self.name)['description']
+        read_model_config(name)['description']
       end
 
       # Form and list fields
