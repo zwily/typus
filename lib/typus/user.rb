@@ -85,9 +85,7 @@ module Typus
       #++
       def can?(action, resource, options = {})
 
-        # Sometimes we are getting a Class, so we need to convert it
-        # to string.
-        resource = resource.to_s
+        resource = resource.name if resource.is_a?(Class)
 
         return false if !resources.include?(resource)
         return true if resources[resource].include?("all")
