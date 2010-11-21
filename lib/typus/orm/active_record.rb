@@ -185,7 +185,7 @@ module Typus
         options = read_model_config['fields']['options']
 
         boolean = if options && options['booleans'] && boolean = options['booleans'][attribute.to_s]
-                    boolean.is_a?(String) ? boolean.extract_settings : boolean
+                    boolean.kind_of?(String) ? boolean.extract_settings : boolean
                   else
                     ["True", "False"]
                   end
