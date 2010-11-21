@@ -74,8 +74,7 @@ module Typus
           retry
         end
 
-        return fields_with_type
-
+        fields_with_type
       end
 
       def typus_filters
