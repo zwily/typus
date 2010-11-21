@@ -22,7 +22,6 @@ module Typus
       # system current_user will be signed out from Typus.
       #++
       def current_user
-
         @current_user ||= Typus.user_class.find(session[:typus_user_id])
 
         if !Typus::Configuration.roles.has_key?(@current_user.role) || !@current_user.status
