@@ -75,8 +75,8 @@ module Typus
       def check_if_user_can_perform_action_on_resources
         unless current_user.can?(params[:action], @resource)
           message = _t("%{current_user_role} is not able to perform this action. (%{action})",
-                      :current_user_role => current_user.role.capitalize,
-                      :action => params[:action])
+                       :current_user_role => current_user.role.capitalize,
+                       :action => params[:action])
 
           redirect_to set_path, :notice => message
         end
