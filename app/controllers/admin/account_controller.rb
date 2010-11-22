@@ -5,6 +5,7 @@ class Admin::AccountController < Admin::BaseController
   skip_before_filter :reload_config_and_roles
   skip_before_filter :set_preferences
   skip_before_filter :authenticate
+  skip_before_filter :set_locale
 
   before_filter :sign_in?, :except => [:forgot_password, :show]
   before_filter :new?, :only => [:forgot_password]

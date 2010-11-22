@@ -29,9 +29,7 @@ module Typus
           redirect_to new_admin_session_path
         end
 
-        I18n.locale = @current_user.preferences[:locale]
-
-        return @current_user
+        @current_user
       end
 
       #--

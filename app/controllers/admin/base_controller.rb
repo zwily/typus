@@ -4,6 +4,7 @@ class Admin::BaseController < ActionController::Base
 
   before_filter :reload_config_and_roles
   before_filter :authenticate
+  before_filter :set_locale
 
   helper_method :current_user
 
@@ -15,6 +16,10 @@ class Admin::BaseController < ActionController::Base
 
   def set_path
     @back_to || request.referer || admin_dashboard_path
+  end
+
+  def set_locale
+    I18n.locale = current_user.preferences[:locale]
   end
 
 end
