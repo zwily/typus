@@ -113,11 +113,13 @@ module Typus
         end
       end
 
+      #--
+      # Show only related items it @resource has a foreign_key (Typus.user_fk)
+      # related to the logged user.
+      #++
       def check_resource_ownerships
         return if current_user.is_root?
 
-        # Show only related items it @resource has a foreign_key (Typus.user_fk)
-        # related to the logged user.
         if @resource.typus_user_id?
           condition = { Typus.user_fk => current_user }
           @conditions = @resource.merge_conditions(@conditions, condition)
