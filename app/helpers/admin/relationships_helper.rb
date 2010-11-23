@@ -20,7 +20,7 @@ module Admin
 
       @items_to_relate = (@model_to_relate.all - @item.send(field))
 
-      if set_condition && !@items_to_relate.empty?
+      if set_condition && @items_to_relate.any?
         form = build_relate_form
       end
 
@@ -43,7 +43,7 @@ module Admin
       setup_relationship(field)
 
       @items_to_relate = (@model_to_relate.all - @item.send(field))
-      if set_condition && !@items_to_relate.empty?
+      if set_condition && @items_to_relate.any?
         form = build_relate_form
       end
 
