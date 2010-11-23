@@ -50,7 +50,7 @@ module Admin
 
     def date_filter(request, filter)
       values  = %w(today last_few_days last_7_days last_30_days)
-      items   = values.collect {|v| [_t(v.humanize), v ] }
+      items   = values.collect { |v| [_t(v.humanize), v] }
       message = _t("Show all dates")
       [filter, items, message]
     end
