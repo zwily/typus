@@ -201,7 +201,7 @@ module Typus
         if options && options['date_formats'] && options['date_formats'][attribute.to_s]
           options['date_formats'][attribute.to_s].to_sym
         else
-          :db
+          :default
         end
       end
 

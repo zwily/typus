@@ -178,7 +178,6 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   should_eventually "test_table_datetime_field" do
     post = Factory(:post)
-    Time::DATE_FORMATS[:post_short] = "%m/%y"
 
     output = table_datetime_field(:created_at, post)
     expected = %(<td>#{post.created_at.strftime("%m/%y")}</td>)
@@ -188,7 +187,6 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   should_eventually "test_table_datetime_field_with_link" do
     post = Factory(:post)
-    Time::DATE_FORMATS[:post_short] = "%m/%y"
 
     output = table_datetime_field(:created_at, post, :created_at)
     expected = %(<td>#{post.created_at.strftime("%m/%y")}</td>)

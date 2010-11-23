@@ -213,8 +213,11 @@ module Admin
     end
 
     def table_datetime_field(attribute, item, link_options = {})
-      date_format = item.class.typus_date_format(attribute)
-      content = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
+      content = if item.send(attribute).nil?
+                  item.class.typus_options_for(:nil)
+                else
+                  I18n.localize(item.send(attribute), :format => item.class.typus_date_format(attribute))
+                end
 
       content_tag(:td, content)
     end

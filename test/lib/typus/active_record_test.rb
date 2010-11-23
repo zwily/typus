@@ -234,16 +234,16 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "typus_date_format" do
 
     should "accept strings" do
-      assert_equal :db, Post.typus_date_format("unknown")
+      assert_equal :default, Post.typus_date_format("unknown")
     end
 
     should "accept symbols" do
-      assert_equal :db, Post.typus_date_format(:unknown)
+      assert_equal :default, Post.typus_date_format(:unknown)
     end
 
     should "return date_format for Post" do
-      assert_equal :db, Post.typus_date_format
-      assert_equal :post_short, Post.typus_date_format(:created_at)
+      assert_equal :default, Post.typus_date_format
+      assert_equal :short, Post.typus_date_format(:created_at)
     end
 
   end
