@@ -45,27 +45,27 @@ module Admin
       items = model.order(model.typus_order_by).collect{|v| [v.to_label, v.id] }
       message = _t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize)
 
-      return related_fk, items, message
+      [related_fk, items, message]
     end
 
     def date_filter(request, filter)
       values  = %w(today last_few_days last_7_days last_30_days)
       items   = values.collect {|v| [_t(v.humanize), v ] }
       message = _t("Show all dates")
-      return filter, items, message
+      [filter, items, message]
     end
 
     def boolean_filter(request, filter)
       items   = @resource.typus_boolean(filter)
       message = _t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
-      return filter, items, message
+      [filter, items, message]
     end
 
     def string_filter(request, filter)
       values  = @resource::const_get(filter.to_s.upcase)
       items   = values.kind_of?(Hash) ? values : values.to_hash_with(values)
       message = _t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
-      return filter, items, message
+      [filter, items, message]
     end
 
     def remove_filter_link(filter = request.env['QUERY_STRING'], params = params)
