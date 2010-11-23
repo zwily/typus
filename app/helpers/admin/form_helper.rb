@@ -38,7 +38,6 @@ module Admin
 
     # OPTIMIZE: Cleanup the case statement.
     def typus_relationships
-
       @back_to = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id])
 
       html = ""
@@ -65,11 +64,9 @@ module Admin
       end
 
       return html
-
     end
 
     def typus_template_field(attribute, template, form)
-
       options = { :start_year => @resource.typus_options_for(:start_year),
                   :end_year => @resource.typus_options_for(:end_year),
                   :minute_step => @resource.typus_options_for(:minute_step),
@@ -83,7 +80,6 @@ module Admin
              :html_options => {},
              :form => form,
              :label_text => @resource.human_attribute_name(attribute)
-
     end
 
 =begin
