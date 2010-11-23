@@ -54,8 +54,6 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
   end
 
-  def link_to(*args); args; end
-
   context "remove_filter_link" do
 
     should "return nil when blank" do
@@ -76,5 +74,7 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
     end
 
   end
+
+  def link_to(*args); args; end
 
 end
