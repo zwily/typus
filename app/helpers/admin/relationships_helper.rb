@@ -18,7 +18,7 @@ module Admin
         foreign_key = @reflection.primary_key_name
       end
 
-      @items_to_relate = @model_to_relate.all
+      @items_to_relate = (@model_to_relate.all - @item.send(field))
 
       if set_condition && !@items_to_relate.empty?
         form = build_relate_form
