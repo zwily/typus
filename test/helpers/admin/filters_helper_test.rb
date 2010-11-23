@@ -4,11 +4,9 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
   include Admin::FiltersHelper
 
-  context "build_filters" do
-  end
+  should "build_filters"
 
-  context "relationship_filter" do
-  end
+  should "relationship_filter"
 
   context "date_filter" do
 
