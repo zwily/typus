@@ -71,7 +71,7 @@ module Admin
     def remove_filter_link(filter = request.env['QUERY_STRING'])
       if filter.present?
         message = params.compact.include?(:search) ? "search" : "filter"
-        link_to _t("Removeo #{message}")
+        link_to _t("Remove #{message}")
       end
     end
 
