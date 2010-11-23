@@ -115,8 +115,8 @@ module Admin
       when 'edit', 'update'
         # If we are editing content, we can relate and unrelate always!
         confirm = _t("Unrelate %{unrelate_model} from %{unrelate_model_from}?",
-                    :unrelate_model => model.model_name.human,
-                    :unrelate_model_from => @resource.model_name.human)
+                     :unrelate_model => model.model_name.human,
+                     :unrelate_model_from => @resource.model_name.human)
       when 'show'
         # If we are showing content, we only can relate and unrelate if we are
         # the owners of the owner record.
@@ -126,8 +126,8 @@ module Admin
                       @item.owned_by?(current_user)
                     end
         confirm = _t("Unrelate %{unrelate_model} from %{unrelate_model_from}?",
-                    :unrelate_model => model.model_name.human,
-                    :unrelate_model_from => @resource.model_name.human)
+                     :unrelate_model => model.model_name.human,
+                     :unrelate_model_from => @resource.model_name.human)
       end
 
       message = %(<div class="sprite #{action}">#{_t(action.titleize)}</div>)
