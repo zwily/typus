@@ -150,23 +150,23 @@ module Admin
         end
       end
 
-      return content_tag(:td, content)
+      content_tag(:td, content)
     end
 
     def table_has_and_belongs_to_many_field(attribute, item)
       content = item.send(attribute).map { |i| i.to_label }.join(", ")
-      return content_tag(:td, content)
+      content_tag(:td, content)
     end
 
     def table_string_field(attribute, item, link_options = {})
       raw_content = item.send(attribute)
       content = raw_content.blank? ? "&#151;".html_safe : raw_content
-      return content_tag(:td, content, :class => attribute)
+      content_tag(:td, content, :class => attribute)
     end
 
     def table_selector(attribute, item)
       raw_content = item.mapping(attribute)
-      return content_tag(:td, raw_content, :class => attribute)
+      content_tag(:td, raw_content, :class => attribute)
     end
 
     def table_file_field(attribute, item, link_options = {})
@@ -189,12 +189,12 @@ module Admin
                   link_to item.send(attribute), item.send(attribute).url
                 end
 
-      return content_tag(:td, content)
+      content_tag(:td, content)
     end
 
     def table_tree_field(attribute, item)
       content = item.parent ? item.parent.to_label : "&#151;".html_safe
-      return content_tag(:td, content)
+      content_tag(:td, content)
     end
 
     def table_position_field(attribute, item)
@@ -209,14 +209,14 @@ module Admin
       end
 
       content = html_position.join(" / ").html_safe
-      return content_tag(:td, content)
+      content_tag(:td, content)
     end
 
     def table_datetime_field(attribute, item, link_options = {} )
       date_format = item.class.typus_date_format(attribute)
       content = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
 
-      return content_tag(:td, content)
+      content_tag(:td, content)
     end
 
     def table_boolean_field(attribute, item)
@@ -236,12 +236,12 @@ module Admin
                   link_to message, options, :confirm => confirm
                 end
 
-      return content_tag(:td, content)
+      content_tag(:td, content)
     end
 
     def table_transversal(attribute, item)
       _attribute, virtual = attribute.split(".")
-      return content_tag(:td, item.send(_attribute).send(virtual))
+      content_tag(:td, item.send(_attribute).send(virtual))
     end
 
   end
