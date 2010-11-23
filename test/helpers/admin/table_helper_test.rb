@@ -23,7 +23,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     self.expects(:params).at_least_once.returns(params)
 
     fields = TypusUser.typus_fields_for(:list)
-    items = TypusUser.find(:all)
+    items = TypusUser.all
 
     expects(:render).once.with('admin/helpers/table_header',
       { :headers => [
