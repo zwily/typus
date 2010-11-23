@@ -232,7 +232,7 @@ module Admin
                               :id => item.id,
                               :field => attribute.gsub(/\?$/,'') }
                   confirm = _t("Change %{attribute}?",
-                              :attribute => item.class.human_attribute_name(attribute).downcase)
+                               :attribute => item.class.human_attribute_name(attribute).downcase)
                   link_to message, options, :confirm => confirm
                 end
 
