@@ -11,17 +11,16 @@ module Admin
     end
 
     def typus_form_has_many(field)
-
       setup_relationship(field)
 
-      unless @reflection.through_reflection
-        foreign_key = @reflection.primary_key_name
-      end
-
-      @items_to_relate = (@model_to_relate.all - @item.send(field))
+      @items_to_relate = @model_to_relate.all - @item.send(field)
 
       if set_condition && @items_to_relate.any?
         form = build_relate_form
+      end
+
+      unless @reflection.through_reflection
+        foreign_key = @reflection.primary_key_name
       end
 
       options = { foreign_key => @item.id }
@@ -35,14 +34,13 @@ module Admin
              :add_new => raw(build_add_new(options)),
              :form => form,
              :table => build_relationship_table
-
     end
 
     def typus_form_has_and_belongs_to_many(field)
-
       setup_relationship(field)
 
-      @items_to_relate = (@model_to_relate.all - @item.send(field))
+      @items_to_relate = @model_to_relate.all - @item.send(field)
+
       if set_condition && @items_to_relate.any?
         form = build_relate_form
       end
@@ -55,7 +53,6 @@ module Admin
              :add_new => raw(build_add_new),
              :form => form,
              :table => build_relationship_table
-
     end
 
     def build_pagination
