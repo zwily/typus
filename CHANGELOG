@@ -24,6 +24,10 @@
 
 * Added constrain to database to avoid duplicated emails.
 
+* FIX: Dates on tables are localized.
+
+* FIX: `@resource.classify.constantize` becomes `@resource.constantize`.
+
 = 3.0.2
 
 * FIX: Use Arel to get the data on lists. After moving to will_paginate I broke
