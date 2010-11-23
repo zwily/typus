@@ -26,7 +26,6 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "allow_admin_to_toggle_other_users_status" do
-
       get :toggle, { :id => @typus_user_editor.id, :field => 'status' }
 
       assert_response :redirect
