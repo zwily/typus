@@ -21,7 +21,7 @@ module Admin
           association = model.reflect_on_association(key.to_sym)
           order_by = association ? association.primary_key_name : key
 
-          if (model.model_fields.map(&:first).collect { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym))
+          if (model.model_fields.map(&:first).map { |i| i.to_s }.include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym))
             sort_order = case params[:sort_order]
                          when 'asc' then ['desc', '&darr;']
                          when 'desc' then ['asc', '&uarr;']

@@ -111,12 +111,12 @@ module Typus
     end
 
     def applications
-      Typus::Configuration.config.collect { |i| i.last["application"] }.compact.uniq.sort
+      Typus::Configuration.config.map { |i| i.last["application"] }.compact.uniq.sort
     end
 
     # Lists modules of an application.
     def application(name)
-      Typus::Configuration.config.collect { |i| i.first if i.last["application"] == name }.compact.uniq.sort
+      Typus::Configuration.config.map { |i| i.first if i.last["application"] == name }.compact.uniq.sort
     end
 
     # Lists models from the configuration file.

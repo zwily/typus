@@ -6,7 +6,7 @@ module Admin
       typus_search = resource.typus_defaults_for(:search)
       return if typus_search.empty?
 
-      search_by = typus_search.collect { |x| resource.human_attribute_name(x) }.to_sentence
+      search_by = typus_search.map { |x| resource.human_attribute_name(x) }.to_sentence
       search_params = params.dup
       %w(action controller id search page utf8).each { |p| search_params.delete(p) }
       hidden_params = search_params.map { |k, v| hidden_field_tag(k, v) }

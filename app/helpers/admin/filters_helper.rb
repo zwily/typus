@@ -42,7 +42,7 @@ module Admin
       %w(controller action page).each { |p| params_without_filter.delete(p) }
       params_without_filter.delete(related_fk)
 
-      items = model.order(model.typus_order_by).collect { |v| [v.to_label, v.id] }
+      items = model.order(model.typus_order_by).map { |v| [v.to_label, v.id] }
       message = _t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize)
 
       [related_fk, items, message]
@@ -50,7 +50,7 @@ module Admin
 
     def date_filter(request, filter)
       values  = %w(today last_few_days last_7_days last_30_days)
-      items   = values.collect { |v| [_t(v.humanize), v] }
+      items   = values.map { |v| [_t(v.humanize), v] }
       message = _t("Show all dates")
       [filter, items, message]
     end

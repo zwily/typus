@@ -26,7 +26,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
   should "verify columns" do
     attributes = %w(id first_name last_name email role status salt crypted_password token preferences created_at updated_at)
-    TypusUser.columns.collect { |u| u.name }.each { |c| assert attributes.include?(c) }
+    TypusUser.columns.map { |u| u.name }.each { |c| assert attributes.include?(c) }
   end
 
   should "verify generate requires the role" do

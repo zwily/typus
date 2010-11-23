@@ -30,7 +30,7 @@ module Typus
 
         begin
           fields = read_model_config['fields'][filter.to_s]
-          fields = fields.extract_settings.collect { |f| f.to_sym }
+          fields = fields.extract_settings.map { |f| f.to_sym }
         rescue
           return [] if filter == 'default'
           filter = 'default'
@@ -82,7 +82,7 @@ module Typus
 
         data = read_model_config['filters']
         return [] unless data
-        fields = data.extract_settings.collect { |i| i.to_sym }
+        fields = data.extract_settings.map { |i| i.to_sym }
 
         fields.each do |field|
           attribute_type = model_fields[field.to_sym]
@@ -132,7 +132,7 @@ module Typus
 
       def typus_field_options_for(filter)
         options = read_model_config['fields']['options']
-        options && options[filter.to_s] ? options[filter.to_s].extract_settings.collect { |i| i.to_sym } : []
+        options && options[filter.to_s] ? options[filter.to_s].extract_settings.map { |i| i.to_sym } : []
       end
 
       #--
