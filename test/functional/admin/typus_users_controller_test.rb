@@ -53,6 +53,14 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
       assert_equal "Typus user successfully removed.", flash[:notice]
     end
 
+    should "allow admin to change other users role" do
+      post :update, { :id => @typus_user_editor.id, :typus_user => { :role => 'admin' } }
+
+      assert_response :redirect
+      assert_redirected_to "/admin/typus_users/edit/#{@typus_user_editor.id}"
+      assert_equal "Typus user successfully updated.", flash[:notice]
+    end
+
   end
 
   context "No master role" do

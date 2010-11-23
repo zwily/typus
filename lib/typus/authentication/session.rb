@@ -46,7 +46,7 @@ module Typus
                     end
                   when 'update'
                     # current_user cannot change her role.
-                    if current_user && !(@item.role == params[@object_name][:role])
+                    if current_user.is_not_root? && !(@item.role == params[@object_name][:role])
                       _t("You can't change your role.")
                     end
                   when 'toggle'
