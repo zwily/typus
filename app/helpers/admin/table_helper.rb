@@ -212,7 +212,7 @@ module Admin
       content_tag(:td, content)
     end
 
-    def table_datetime_field(attribute, item, link_options = {} )
+    def table_datetime_field(attribute, item, link_options = {})
       date_format = item.class.typus_date_format(attribute)
       content = !item.send(attribute).nil? ? item.send(attribute).to_s(date_format) : item.class.typus_options_for(:nil)
 
