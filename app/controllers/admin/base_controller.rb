@@ -2,6 +2,8 @@ class Admin::BaseController < ActionController::Base
 
   include Typus::Authentication::const_get(Typus.authentication.to_s.classify)
 
+  before_filter :set_models_constantized
+
   before_filter :reload_config_and_roles
   before_filter :authenticate
   before_filter :set_locale
@@ -20,6 +22,12 @@ class Admin::BaseController < ActionController::Base
 
   def set_locale
     I18n.locale = current_user.preferences[:locale]
+  end
+
+  def set_models_constantized
+    if Typus::Configuration.models_constantized.nil?
+      Typus::Configuration.models_constantized!
+    end
   end
 
 end

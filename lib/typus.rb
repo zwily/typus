@@ -187,4 +187,3 @@ module Typus
 end
 
 Typus.reload!
-Typus::Configuration.models_constantized!
