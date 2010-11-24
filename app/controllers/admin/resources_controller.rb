@@ -129,7 +129,7 @@ class Admin::ResourcesController < Admin::BaseController
   # has_and_belongs_to_many and has_many relationships.
   #
   def relate
-    resource_class = params[:related][:model].constantize
+    resource_class = params[:related][:model].typus_constantize
     resource_tableized = params[:related][:model].tableize
 
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
@@ -150,7 +150,7 @@ class Admin::ResourcesController < Admin::BaseController
   #
   def unrelate
 
-    resource_class = params[:resource].constantize
+    resource_class = params[:resource].typus_constantize
     resource_tableized = params[:resource].tableize
     resource = resource_class.find(params[:resource_id])
 
@@ -281,7 +281,7 @@ class Admin::ResourcesController < Admin::BaseController
   def create_with_back_to
 
     if params[:resource] && params[:resource_id]
-      resource_class = params[:resource].constantize
+      resource_class = params[:resource].typus_constantize
       resource_id = params[:resource_id]
       resource = resource_class.find(resource_id)
       association = @resource.reflect_on_association(params[:resource].to_sym).macro rescue :polymorphic

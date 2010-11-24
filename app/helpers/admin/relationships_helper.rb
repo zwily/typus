@@ -4,7 +4,7 @@ module Admin
 
     def setup_relationship(field)
       @field = field
-      @model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.constantize
+      @model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.typus_constantize
       @model_to_relate_as_resource = @model_to_relate.to_resource
       @reflection = @resource.reflect_on_association(field.to_sym)
       @association = @reflection.macro
@@ -107,7 +107,7 @@ module Admin
     def typus_form_has_one(field)
       html = ""
 
-      model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.constantize
+      model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.typus_constantize
       model_to_relate_as_resource = model_to_relate.to_resource
 
       reflection = @resource.reflect_on_association(field.to_sym)
@@ -154,7 +154,7 @@ module Admin
 
       back_to = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id])
 
-      related = @resource.reflect_on_association(attribute.to_sym).class_name.constantize
+      related = @resource.reflect_on_association(attribute.to_sym).class_name.typus_constantize
       related_fk = @resource.reflect_on_association(attribute.to_sym).primary_key_name
 
       confirm = [ _t("Are you sure you want to leave this page?"),

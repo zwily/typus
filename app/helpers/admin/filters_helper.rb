@@ -35,7 +35,7 @@ module Admin
     def relationship_filter(request, filter, habtm = false)
       att_assoc = @resource.reflect_on_association(filter.to_sym)
       class_name = att_assoc.options[:class_name] || ((habtm) ? filter.classify : filter.capitalize.camelize)
-      model = class_name.constantize
+      model = class_name.typus_constantize
       related_fk = (habtm) ? filter : att_assoc.primary_key_name
 
       params_without_filter = params.dup
