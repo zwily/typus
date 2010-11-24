@@ -11,7 +11,7 @@
     <% current_user.application(app).each do |model| %>
 
       <%
-        klass = model.constantize
+        klass = Typus::Configuration.models_constantized[model]
         klass_human_name = klass.model_name.human.gsub("/", " ").pluralize
         admin_items_path = { :controller => "/admin/#{klass.to_resource}" }
       %>

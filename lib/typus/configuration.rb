@@ -46,6 +46,14 @@ module Typus
 
     mattr_accessor :roles
 
+    def self.models_constantized!
+      @@models_constantized = {}
+      Typus.models.each { |m| @@models_constantized[m] = m.constantize }
+      return @@models_constantized
+    end
+
+    mattr_accessor :models_constantized
+
   end
 
 end
