@@ -21,13 +21,10 @@ module Admin
     end
 
     def default_actions(klass)
-      actions = []
-
-      if current_user.can?("create", klass)
-        actions << link_to_unless_current(_t("Add new"), :action => "new")
+      Array.new.tap do |tap|
+        tap << link_to_unless_current(_t("Add new"), :action => "new") if current_user.can?("create", klass)
+        tap << link_to_unless_current(_t("List"), :action => "index")
       end
-
-      actions << link_to_unless_current(_t("List"), :action => "index")
     end
 
     def export(klass)
