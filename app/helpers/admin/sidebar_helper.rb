@@ -28,8 +28,6 @@ module Admin
       end
 
       actions << link_to_unless_current(_t("List"), :action => "index")
-
-      return actions
     end
 
     def export(klass)
