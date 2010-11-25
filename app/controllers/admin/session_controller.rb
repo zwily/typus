@@ -13,12 +13,12 @@ class Admin::SessionController < Admin::BaseController
   def create
     user = Typus.user_class.authenticate(params[:typus_user][:email], params[:typus_user][:password])
 
-    if user
-      session[:typus_user_id] = user.id
-      path = params[:back_to] || admin_dashboard_path
-    else
-      path = new_admin_session_path(:back_to => params[:back_to])
-    end
+    path = if user
+             session[:typus_user_id] = user.id
+             params[:back_to] || admin_dashboard_path
+           else
+             new_admin_session_path(:back_to => params[:back_to])
+           end
 
     redirect_to path
   end
