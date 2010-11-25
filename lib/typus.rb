@@ -134,9 +134,7 @@ module Typus
     # Lists models under <tt>app/models</tt>.
     def detect_application_models
       model_dir = Rails.root.join("app/models")
-      Dir.chdir(model_dir) do
-        models = Dir["**/*.rb"]
-      end
+      Dir.chdir(model_dir) { Dir["**/*.rb"] }
     end
 
     def locales
