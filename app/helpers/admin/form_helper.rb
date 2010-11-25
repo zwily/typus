@@ -7,10 +7,7 @@ module Admin
 
         fields.each do |key, value|
 
-          if template = @resource.typus_template(key)
-            html << typus_template_field(key, template, form)
-            next
-          end
+          value = :template if (template = @resource.typus_template(key))
 
           html << case value
                   when :belongs_to
@@ -20,6 +17,8 @@ module Admin
                   when :boolean, :date, :datetime, :text, :time,
                        :file, :password, :selector
                     typus_template_field(key, value, form)
+                  when :template
+                    typus_template_field(key, template, form)
                   else
                     typus_template_field(key, :string, form)
                   end
