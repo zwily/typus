@@ -123,7 +123,7 @@ module Typus
       end
 
       def typus_application
-        read_model_config["application"] || "Unknown"
+        read_model_config['application'] || 'Unknown'
       end
 
       def typus_field_options_for(filter)
