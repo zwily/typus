@@ -81,7 +81,6 @@ pt-BR:
   "System Users Administration": "Administrar usuários do sistema"
 
   "That doesn't seem like a valid email address": "Este não parece um email válido"
-  "The email and/or password you entered is invalid": "O email e/ou a senha que você colocou são inválidos."
   "There are no %{records}": "Não há %{records}."
   "There are no %{records} under this filter": "Não há %{records} com este filtro."
   "Toggle is disabled": "Toggle está desabilitado."

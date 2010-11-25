@@ -81,7 +81,6 @@ es:
   "System Users Administration": "Administrar usuarios del sistema"
 
   "That doesn't seem like a valid email address": "Eso no parecia una dirección válida de correo electrónico."
-  "The email and/or password you entered is invalid": "El correo y/o la contraseña proporcionadas no son válidas."
   "There are no %{records}": "No hay %{records}."
   "There are no %{records} under this filter": "No hay %{records} con este filtro."
   "Today": "Hoy"

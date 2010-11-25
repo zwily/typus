@@ -84,7 +84,6 @@ fr:
   "System Users Administration": "Modifier les utilisateurs de l'admin"
 
   "That doesn't seem like a valid email address": "L'adresse email ne semble pas valide"
-  "The email and/or password you entered is invalid": "L'email ou le mot de passe que vous avez saisi n'est pas valide"
   "There are no %{records}": "Il n'y aucun(e) %{records}."
   "There are no %{records} under this filter": "Il n'y a aucun(e) %{records} avec ce filtre."
   "Today": "Ajourd'hui"

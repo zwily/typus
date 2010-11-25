@@ -17,11 +17,10 @@ class Admin::SessionController < Admin::BaseController
       session[:typus_user_id] = user.id
       path = params[:back_to] || admin_dashboard_path
     else
-      alert = _t("The email and/or password you entered is invalid.")
       path = new_admin_session_path(:back_to => params[:back_to])
     end
 
-    redirect_to path, :alert => alert
+    redirect_to path
   end
 
   def destroy

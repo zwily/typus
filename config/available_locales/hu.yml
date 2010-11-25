@@ -81,7 +81,6 @@ hu:
   "System Users Administration": "Rendszeradminisztrátorok kezelése"
 
   "That doesn't seem like a valid email address": "Ez nem tűnik valódi e-mail címnek"
-  "The email and/or password you entered is invalid": "A megadott felhasználónév és/vagy jelszó nem megfelelő"
   "There are no %{records}": "Nincsenek %{records}"
   "There are no %{records} under this filter": "Nincsenek %{records} a szűrővel"
   "Today": "Ma"

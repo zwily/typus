@@ -81,7 +81,6 @@ ru:
   "System Users Administration": "Администрирование системных пользователей"
 
   "That doesn't seem like a valid email address": "E-Mail некорректен"
-  "The email and/or password you entered is invalid": "E-Mail или пароль введены неверно"
   "There are no %{records}": "%{records} не найдены"
   "There are no %{records} under this filter": "%{records} по такому фильтру не найдены"
   "Today": "Сегодня"
