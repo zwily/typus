@@ -84,7 +84,6 @@ module Typus
       # TODO: Rename action to mapping and refactor the _action case statement.
       #++
       def can?(action, resource, options = {})
-
         resource = resource.name if resource.kind_of?(Class)
 
         return false if !resources.include?(resource)
@@ -105,7 +104,6 @@ module Typus
                   end
 
         resources[resource].extract_settings.include?(_action)
-
       end
 
       def cannot?(*args)
