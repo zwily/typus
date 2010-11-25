@@ -147,10 +147,10 @@ module Typus
       #         per_page: 15
       #++
       def typus_options_for(filter)
-        data = read_model_config
+        options = read_model_config['options']
 
-        unless data['options'].nil? || data['options'][filter.to_s].nil?
-          data['options'][filter.to_s]
+        unless options.nil? || options[filter.to_s].nil?
+          options[filter.to_s]
         else
           Typus::Resources.send(filter)
         end
