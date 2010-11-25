@@ -47,11 +47,7 @@ module Admin
         when :has_and_belongs_to_many
           html << typus_form_has_and_belongs_to_many(relationship)
         when :has_many
-          if association.options[:through]
-            html << typus_form_has_many(relationship)
-          else
-            html << typus_form_has_many(relationship)
-          end
+          html << typus_form_has_many(relationship)
         when :has_one
           html << typus_form_has_one(relationship)
         end
