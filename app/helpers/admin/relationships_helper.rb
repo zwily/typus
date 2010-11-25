@@ -45,12 +45,14 @@ module Admin
         form = build_relate_form
       end
 
+      options = {}
+
       build_pagination
 
       render "admin/templates/has_n",
              :model_to_relate => @model_to_relate,
              :model_to_relate_as_resource => @model_to_relate_as_resource,
-             :add_new => raw(build_add_new),
+             :add_new => raw(build_add_new(options)),
              :form => form,
              :table => build_relationship_table
     end
