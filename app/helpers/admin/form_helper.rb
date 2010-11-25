@@ -90,14 +90,12 @@ module Admin
     # Tree builder when model +acts_as_tree+
     #
     def expand_tree_into_select_field(items, attribute)
-      html = ""
-
-      items.each do |item|
-        html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 2} #{item.to_label}</option>\n}
-        html << expand_tree_into_select_field(item.children, attribute) unless item.children.empty?
+      String.new.tap do |html|
+        items.each do |item|
+          html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 2} #{item.to_label}</option>\n}
+          html << expand_tree_into_select_field(item.children, attribute) unless item.children.empty?
+        end
       end
-
-      return html
     end
 
   end
