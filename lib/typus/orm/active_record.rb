@@ -221,8 +221,6 @@ module Typus
         options = read_model_config['fields']['options']
         if options && options['templates'] && options['templates'][attribute.to_s]
           options['templates'][attribute.to_s]
-        else
-          nil
         end
       end
 
