@@ -231,7 +231,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   def get_objects
     eager_loading = @resource.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name }
-    @items = set_scope.joins(@joins).where(@conditions).order(@order).includes(eager_loading)
+    @items = set_scope.joins(@joins).where(@conditions).order(set_order).includes(eager_loading)
   end
 
   def set_fields
@@ -246,7 +246,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   def set_order
     params[:sort_order] ||= "desc"
-    @order = params[:order_by] ? "#{@resource.table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource.typus_order_by
+    params[:order_by] ? "#{@resource.table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource.typus_order_by
   end
 
   def redirect_on_success
