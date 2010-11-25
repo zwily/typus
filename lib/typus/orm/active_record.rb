@@ -313,7 +313,7 @@ module Typus
 
         end
 
-        return conditions, joins
+        [conditions, joins]
       end
 
       def typus_user_id?
