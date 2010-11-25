@@ -47,7 +47,7 @@ class Admin::ResourcesController < Admin::BaseController
     check_ownership_of_referal_item
 
     item_params = params.dup
-    rejections = %w( controller action resource resource_id back_to selected )
+    rejections = %w(controller action resource resource_id back_to selected)
     item_params.delete_if { |k, v| rejections.include?(k) }
 
     @item = @resource.new(item_params)
@@ -149,7 +149,6 @@ class Admin::ResourcesController < Admin::BaseController
   # Remove relationship between models, this action never removes items!
   #
   def unrelate
-
     resource_class = params[:resource].typus_constantize
     resource_tableized = params[:resource].tableize
     resource = resource_class.find(params[:resource_id])
@@ -195,7 +194,6 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     redirect_to set_path
-
   end
 
   ##
@@ -279,7 +277,6 @@ class Admin::ResourcesController < Admin::BaseController
   # - <tt>has_many</tt> relationships (polymorphic ones).
   #
   def create_with_back_to
-
     if params[:resource] && params[:resource_id]
       resource_class = params[:resource].typus_constantize
       resource_id = params[:resource_id]
@@ -308,7 +305,6 @@ class Admin::ResourcesController < Admin::BaseController
                                   :model_b => resource_class.model_name.human)
 
     redirect_to path || params[:back_to]
-
   end
 
   def select_template(action = params[:action], resource = @resource.to_resource)
