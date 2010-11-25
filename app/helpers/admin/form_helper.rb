@@ -3,29 +3,29 @@ module Admin
   module FormHelper
 
     def build_form(fields, form)
-      html = ""
+      String.new.tap do |html|
 
-      fields.each do |key, value|
+        fields.each do |key, value|
 
-        if template = @resource.typus_template(key)
-          html << typus_template_field(key, template, form)
-          next
+          if template = @resource.typus_template(key)
+            html << typus_template_field(key, template, form)
+            next
+          end
+
+          html << case value
+                  when :belongs_to
+                    typus_belongs_to_field(key, form)
+                  when :tree
+                    typus_tree_field(key, form)
+                  when :boolean, :date, :datetime, :string, :text, :time,
+                       :file, :password, :selector
+                    typus_template_field(key, value, form)
+                  else
+                    typus_template_field(key, :string, form)
+                  end
         end
 
-        html << case value
-                when :belongs_to
-                  typus_belongs_to_field(key, form)
-                when :tree
-                  typus_tree_field(key, form)
-                when :boolean, :date, :datetime, :string, :text, :time,
-                     :file, :password, :selector
-                  typus_template_field(key, value, form)
-                else
-                  typus_template_field(key, :string, form)
-                end
       end
-
-      return html
     end
 
     def typus_tree_field(attribute, form)
