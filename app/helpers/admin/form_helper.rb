@@ -4,11 +4,8 @@ module Admin
 
     def build_form(fields, form)
       String.new.tap do |html|
-
         fields.each do |key, value|
-
           value = :template if (template = @resource.typus_template(key))
-
           html << case value
                   when :belongs_to
                     typus_belongs_to_field(key, form)
@@ -23,7 +20,6 @@ module Admin
                     typus_template_field(key, :string, form)
                   end
         end
-
       end
     end
 
