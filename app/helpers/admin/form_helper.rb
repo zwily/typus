@@ -17,7 +17,7 @@ module Admin
                     typus_belongs_to_field(key, form)
                   when :tree
                     typus_tree_field(key, form)
-                  when :boolean, :date, :datetime, :string, :text, :time,
+                  when :boolean, :date, :datetime, :text, :time,
                        :file, :password, :selector
                     typus_template_field(key, value, form)
                   else
