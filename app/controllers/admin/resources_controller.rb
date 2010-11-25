@@ -206,8 +206,7 @@ class Admin::ResourcesController < Admin::BaseController
                 "%{attachment} can't be removed."
               end
 
-    attachment = @resource.human_attribute_name(params[:attachment])
-    notice = _t(message, :attachment => attachment)
+    notice = _t(message, :attachment => @resource.human_attribute_name(params[:attachment]))
 
     redirect_to set_path, :notice => notice
   end
