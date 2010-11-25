@@ -107,23 +107,19 @@ module Typus
       end
 
       def typus_search_fields
-        data = typus_defaults_for(:search)
-
-        search = {}
-
-        data.each do |field|
-          if field.starts_with?("=")
-            field.slice!(0)
-            search[field] = "="
-          elsif field.starts_with?("^")
-            field.slice!(0)
-            search[field] = "^"
-          else
-            search[field] = "@"
+        Hash.new.tap do |search|
+          typus_defaults_for(:search).each do |field|
+            if field.starts_with?("=")
+              field.slice!(0)
+              search[field] = "="
+            elsif field.starts_with?("^")
+              field.slice!(0)
+              search[field] = "^"
+            else
+              search[field] = "@"
+            end
           end
         end
-
-        return search
       end
 
       def typus_application
