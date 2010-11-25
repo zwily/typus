@@ -31,30 +31,24 @@ module Admin
              :values => expand_tree_into_select_field(@resource.roots, "parent_id")
     end
 
-    # OPTIMIZE: Cleanup the case statement.
+    # OPTIMIZE: Cleanup the case statement, using some meta-code.
     def typus_relationships
       @back_to = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id])
 
-      html = ""
-
-      @resource.typus_defaults_for(:relationships).each do |relationship|
-
-        association = @resource.reflect_on_association(relationship.to_sym)
-
-        next if current_user.cannot?('read', association.class_name.typus_constantize)
-
-        case association.macro
-        when :has_and_belongs_to_many
-          html << typus_form_has_and_belongs_to_many(relationship)
-        when :has_many
-          html << typus_form_has_many(relationship)
-        when :has_one
-          html << typus_form_has_one(relationship)
+      String.new.tap do |html|
+        @resource.typus_defaults_for(:relationships).each do |relationship|
+          association = @resource.reflect_on_association(relationship.to_sym)
+          next if current_user.cannot?('read', association.class_name.typus_constantize)
+          html << case association.macro
+                  when :has_and_belongs_to_many
+                    typus_form_has_and_belongs_to_many(relationship)
+                  when :has_many
+                    typus_form_has_many(relationship)
+                  when :has_one
+                    typus_form_has_one(relationship)
+                  end
         end
-
       end
-
-      return html
     end
 
     def typus_template_field(attribute, template, form)
