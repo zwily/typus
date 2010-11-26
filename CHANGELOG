@@ -28,6 +28,8 @@
 
 * FIX: `@resource.classify.constantize` becomes `@resource.constantize`.
 
+* CHANGED: Updated `typus_preview` to display original filaname when file is not an image.
+
 = 3.0.2
 
 * FIX: Use Arel to get the data on lists. After moving to will_paginate I broke
