@@ -244,12 +244,12 @@ fieldset.buttons { }
   margin: 0 0 1em 0;
 }
 
-#account #box h1 { margin: 0.5em 0 0.5em 0; }
+#account #box h1 { margin: 0.5em 0; }
 #account #box ul { margin: 1.5em 0 0.5em 0; }
 #account #box li { margin: 1em 0; }
 
 #account #box input.text { font-size: 2em; padding: 0.25em; width: 17.25em; }
-#account #box input.button { margin: 0.5em 0 0 0; }
+#account #box input.button { margin: 0.5em 1em 0 0; }
 
 #account #footer { font-size: 0.9em; line-height: 1.8em; text-align: center; }
 #account #footer a { font-weight: bold; }
