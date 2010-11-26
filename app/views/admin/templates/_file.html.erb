@@ -12,7 +12,7 @@
 
 %>
 
-<li>
+<li id="<%= attribute %>">
   <%= form.label attribute, raw(label_text) %>
   <%= form.file_field attribute, options %>
   <%= typus_preview(@item, attribute) %>
