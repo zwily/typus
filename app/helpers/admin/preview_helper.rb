@@ -25,8 +25,7 @@ module Admin
 
         render "admin/helpers/preview", options
       else
-        file = File.basename(item.send(attribute).path(:original))
-        link_to(file, :action => 'view', :id => item)
+        link_to item.send(attribute).original_filename, item.send(attribute).url
       end
     end
 
