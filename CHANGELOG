@@ -1,57 +1,58 @@
-= 3.0.3 (Unreleased)
+[3.0.3]
 
-* Support for has many through relationships. [jmeiss]
+[NEW] Support for has many through relationships. [jmeiss]
 
-* Removed typus pagination module and use `will_paginate` one. Pagination
-  options can be configure overriding `Typus.pagination` variable.
+[CHANGED] Removed typus pagination module and use `will_paginate` one.
+Pagination options can be configure overriding `Typus.pagination` variable.
 
-* Queries are now using the table name. [tyx]
+[FIXED] Queries are now using the table name. [tyx]
 
-* All queries are `unscoped` so we can separate completely the frontend from
-  the backend.
+[NEW] All queries are `unscoped` so we can separate completely the frontend
+from the backend.
 
-* We can disable sortable tables.
+[NEW] We can disable sortable tables.
 
-* Fixed url generation bug when using namespaced STI models. [masone]
+[FIXED] Url generation bug when using namespaced STI models. [masone]
 
-* Raise an exception if config for model cannot be found. [masone]
+[NEW] Raise an exception if config for model cannot be found. [masone]
 
-* Minor bug fixes and re-styling ...
+[FIXED] Minor bug fixes and re-styling ...
 
-* Layouts contain metatag with generator information.
+[NEW] Layouts contain metatag with generator information.
 
-* Added missing csrf_meta_tag in `session.html.erb` layout.
+[NEW] Added missing csrf_meta_tag in `session.html.erb` layout.
 
-* Added constrain to database to avoid duplicated emails.
+[NEW] Added constrain to database to avoid duplicated emails.
 
-* FIX: Dates on tables are localized.
+[FIXED] Dates on tables are localized.
 
-* FIX: `@resource.classify.constantize` becomes `@resource.constantize`.
+[FIXED] `@resource.classify.constantize` becomes `@resource.constantize`.
 
-* CHANGED: Updated `typus_preview` to display original filaname when file is not an image.
+[CHANGED] Updated `typus_preview` to display original filaname when file is
+not an image.
 
-= 3.0.2
+[3.0.2]
 
-* FIX: Use Arel to get the data on lists. After moving to will_paginate I broke
-  the data method, on each list we where "selecting ALL on the table of the
-  current model" (Really ugly bug) [Reported by NateW]
+[FIXED] Use Arel to get the data on lists. After moving to will_paginate I
+broke the data method, on each list we where "selecting ALL on the table of
+the current model" (Really ugly bug) [Reported by NateW]
 
-* FIX: If @current_user was being set many times on each request, thanks to
-  rails caching mechanism this was not affecting to the performance. Now we
-  only se the @current_user once. (As it should be.)
+[FIXED] If @current_user was being set many times on each request, thanks to
+rails caching mechanism this was not affecting to the performance. Now we only
+see the @current_user once. (As it should be.)
 
-= 3.0.1
+[3.0.1]
 
-* After moving from a vendored paginator to will_paginate I removed some stuff
-  which shouldn't be removed, so the 3.0.0 gem is totally broken.
+[FIXED] After moving from a vendored paginator to will_paginate I removed some
+stuff which shouldn't be removed, so the 3.0.0 gem is totally broken.
 
-* Force query with postgresql adapter to not be case sensitive [jmeiss]
+[FIXED] Force query with postgresql adapter to not be case sensitive [jmeiss]
 
-= 3.0.0
+[3.0.0]
 
-* New gem version compatible with Rails 3.
+[NEW] New gem version compatible with Rails 3.
 
-= Previously
+[Previously]
 
 Why a 3.0.0 version? After considering the work done for the Rails 3 transition
 I though it would be a good idea to keep versions syncronized with Rails.
