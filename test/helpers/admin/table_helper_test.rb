@@ -1,18 +1,36 @@
 require "test_helper"
 
+class FakeController
+  attr_accessor :request
+
+  def config
+    @config ||= ActiveSupport::InheritableOptions.new(ActionController::Base.config)
+  end
+end
+
+
+
 class Admin::TableHelperTest < ActiveSupport::TestCase
 
   include Admin::TableHelper
 
+
+  
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
+  include ActionView::Helpers::RawOutputHelper
+  
+  include ActionView::Context
+
+  include Rails.application.routes.url_helpers
 
   def render(*args); args; end
-  def raw(*args); args; end
+  def params; {} end
 
   setup do
     default_url_options[:host] = "test.host"
+    self.stubs(:controller).returns(FakeController.new)
   end
 
   should_eventually "test_build_table" do
@@ -212,6 +230,30 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
     assert_equal expected.strip, output
 
+  end
+
+  should "test_table_position_field" do
+    first_category = Factory(:category, :position => 0)
+    second_category = Factory(:category, :position => 1)
+    last_category = Factory(:category, :position => 2)
+
+    output = table_position_field(nil, first_category)
+    expected = <<-HTML
+<td><a href="/admin/categories/position/1?go=move_lower">Down</a> / <span class="inactive">Up</span></td>
+    HTML
+    assert_equal expected.strip, output
+
+    output = table_position_field(nil, second_category)
+    expected = <<-HTML
+<td><a href="/admin/categories/position/2?go=move_lower">Down</a> / <a href="/admin/categories/position/2?go=move_higher">Up</a></td>
+    HTML
+    assert_equal expected.strip, output
+
+    output = table_position_field(nil, last_category)
+    expected = <<-HTML
+<td><span class="inactive">Down</span> / <a href="/admin/categories/position/3?go=move_higher">Up</a></td>
+    HTML
+    assert_equal expected.strip, output
   end
 
 end
