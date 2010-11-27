@@ -171,6 +171,7 @@ module Admin
 
       render "admin/templates/belongs_to",
              :resource => @resource,
+             :attribute => attribute,
              :form => form,
              :related_fk => related_fk,
              :message => message,
