@@ -46,6 +46,8 @@ module Admin
                     typus_form_has_many(relationship)
                   when :has_one
                     typus_form_has_one(relationship)
+                  when :belongs_to
+                    ""
                   end
         end
       end
