@@ -15,7 +15,7 @@ enough to match lots of use cases.
 - Internationalized interface.
 - Extensible and overwritable templates.
 - Low memory footprint.
-- Works with Rails 3.0.0 and is Ruby 1.9.2 compatible.
+- Works with Rails 3.0 and is Ruby 1.9.2 compatible.
 - Tested with SQLite, MySQL and PostgreSQL.
 - MIT License, the same as Rails.
 
