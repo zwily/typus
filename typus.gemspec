@@ -21,9 +21,6 @@ Gem::Specification.new do |s|
   s.files = Dir.glob('**/*') - Dir.glob('test/**/*') - ['typus.gemspec']
   s.require_path = "lib"
 
-  s.add_dependency 'will_paginate', '~> 3.0.pre2'
-  s.add_dependency "acts_as_list"
-  s.add_dependency "acts_as_tree"
-  s.add_dependency "paperclip"
   s.add_dependency "fastercsv", "1.5.3" if RUBY_VERSION < '1.9'
+  s.add_dependency 'will_paginate', '~> 3.0.pre2'
 end
