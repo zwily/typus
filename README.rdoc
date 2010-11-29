@@ -21,11 +21,12 @@ enough to match lots of use cases.
 
 == Links
 
-- {Project page and documentation}[http://core.typuscms.com/]
-- {Plugin source code}[http://github.com/fesplugas/typus]
-- {Mailing list}[http://groups.google.com/group/typus]
+- {Documentation}[http://core.typuscms.com/]
+- {Demo}[http://demo.typuscms.com/]
+- {Source Code}[http://github.com/fesplugas/typus]
+- {Mailing List}[http://groups.google.com/group/typus]
 - {Gems}[http://rubygems.org/gems/typus]
-- {Contributors}[http://github.com/fesplugas/typus/contributors]
+- {Contributors List}[http://github.com/fesplugas/typus/contributors]
 
 == Installing
 
