@@ -13,7 +13,7 @@ enough to match lots of use cases.
 - User Permissions by using Access Control Lists (stored in yaml files)
 - CRUD and custom actions for your models on a clean interface.
 - Internationalized interface.
-- Extensible and overwritable templates.
+- Customizable and extensible templates.
 - Low memory footprint.
 - Works with Rails 3.0 and is Ruby 1.9.2 compatible.
 - Tested with SQLite, MySQL and PostgreSQL.
