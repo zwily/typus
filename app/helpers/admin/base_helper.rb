@@ -26,16 +26,7 @@ module Admin
 
     def login_info
       return if current_user.is_a?(FakeUser)
-
-      admin_edit_typus_user_path = { :controller => "/admin/#{Typus.user_class.to_resource}",
-                                     :action => 'edit',
-                                     :id => current_user.id }
-
-      message = _t("Are you sure you want to sign out and end your session?")
-
-      user_details = link_to current_user.name, admin_edit_typus_user_path
-
-      render "admin/helpers/login_info", :message => message, :user_details => user_details
+      render "admin/helpers/login_info"
     end
 
     def display_flash_message(message = flash)

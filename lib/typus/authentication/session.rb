@@ -38,34 +38,28 @@ module Typus
       def check_if_user_can_perform_action_on_user
         return unless @item.kind_of?(Typus.user_class)
 
-        message = case params[:action]
-                  when 'edit'
-                    # Only admin and owner of Typus User can edit.
-                    if current_user.is_not_root? && (current_user != @item)
-                      _t("As you're not the admin or the owner of this record you cannot edit it.")
-                    end
-                  when 'update'
-                    # current_user cannot change her role.
-                    if current_user.is_not_root? && !(@item.role == params[@object_name][:role])
-                      _t("You can't change your role.")
-                    end
-                  when 'toggle'
-                    # Only admin can toggle typus user status, but not herself.
-                    if current_user.is_root? && (current_user == @item)
-                      _t("You can't toggle your status.")
-                    elsif current_user.is_not_root?
-                      _t("You're not allowed to toggle status.")
-                    end
-                  when 'destroy'
-                    # Admin can remove anything except herself.
-                    if current_user.is_root? && (current_user == @item)
-                      _t("You can't remove yourself.")
-                    elsif current_user.is_not_root?
-                      _t("You're not allowed to remove Typus Users.")
-                    end
-                  end
-
-        redirect_to set_path, :notice => message if message
+        case params[:action]
+        when 'edit'
+          if current_user.is_not_root? && (current_user != @item)
+            raise "You don't have privileges to edit #{Typus.user_class}."
+          end
+        when 'update'
+          if current_user.is_not_root? && !(@item.role == params[@object_name][:role])
+            redirect_to set_path, :notice => _t("You can't change your role.")
+          end
+        when 'toggle'
+          if current_user.is_root? && (current_user == @item)
+            redirect_to set_path, :notice => _t("You can't toggle your status.")
+          elsif current_user.is_not_root?
+            raise "You don't have privileges to toogle #{Typus.user_class}#status."
+          end
+        when 'destroy'
+          if current_user.is_root? && (current_user == @item)
+            raise "You can't remove yourself."
+          elsif current_user.is_not_root?
+            raise "You don't have privileges to destroy #{Typus.user_class}."
+          end
+        end
       end
 
       #--
