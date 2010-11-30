@@ -48,6 +48,7 @@ ca:
   "Login": "Login"
 
   "New": "Nou"
+  "New %{resource}": "Nou %{resource}"
   "Next": "Següent"
   "No %{resources} found": "No s'han trobat %{resources}."
 

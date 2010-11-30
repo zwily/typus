@@ -48,6 +48,7 @@ ru:
   "Login": "Редактировать"
 
   "New": "Новый"
+  "New %{resource}": "Новый %{resource}"
   "Next": "Следующий"
   "No %{resources} found":
 

@@ -48,6 +48,7 @@ hu:
   "Login": "Belépés"
 
   "New": "Új"
+  "New %{resource}": "Új %{resource}"
   "Next": "Következő"
   "No %{resources} found":
 

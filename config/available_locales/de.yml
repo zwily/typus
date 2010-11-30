@@ -48,6 +48,7 @@ de:
   "Login": "Anmeldem"
 
   "New": "Neu"
+  "New %{resource}": "Neu %{resource}"
   "Next": "N&auml;chster"
   "No %{resources} found":
 

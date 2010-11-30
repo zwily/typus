@@ -48,6 +48,7 @@ es:
   "Login": "Login"
 
   "New": "Nuevo"
+  "New %{resource}": "Nuevo %{resource}"
   "Next": "Siguiente"
   "No %{resources} found": "No se han encontrado %{resources}."
 

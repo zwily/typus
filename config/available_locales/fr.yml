@@ -50,6 +50,7 @@ fr:
   "Login": "Identification"
 
   "New": "Nouveau"
+  "New %{resource}": "Nouveau %{resource}"
   "Next": "Suivant"
   "No %{resources} found":
 

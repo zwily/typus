@@ -51,7 +51,7 @@ it:
   "Login": "Login"
 
   "New": "Nuovo"
-  "New %{resource}": "Inserisci %{resource}"
+  "New %{resource}": "Nuovo %{resource}"
   "Next": "Successivo"
   "No %{resources} found":
 

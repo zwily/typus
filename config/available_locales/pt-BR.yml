@@ -48,6 +48,7 @@ pt-BR:
   "Login": "Login"
 
   "New": "Novo"
+  "New %{resource}": "Novo %{resource}"
   "Next": "Próximo"
   "No %{resources} found":
 
