@@ -147,10 +147,9 @@ module Admin
     end
 
     def typus_belongs_to_field(attribute, form)
-
       ##
-      # We only can pass parameters to 'new' and 'edit', so this hack makes
-      # the work to replace the current action.
+      # We can only pass parameters to 'new' and 'edit'. This hack replaces
+      # the current action.
       #
       params[:action] = (params[:action] == 'create') ? 'new' : params[:action]
 
@@ -180,7 +179,6 @@ module Admin
              # :html_options => { :disabled => attribute_disabled?(attribute) },
              :html_options => {},
              :options => { :include_blank => true }
-
     end
 
   end
