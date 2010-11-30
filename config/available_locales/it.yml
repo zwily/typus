@@ -13,7 +13,6 @@ it:
   "Are you sure you want to sign out and end your session?": "Sei sicuro che vuoi disconnetterti dal sistema?"
   "As you're not the admin or the owner of this record you cannot edit it": "Non puoi modificare questo elemento poichè non sei un amministratore o il proprietario dello stesso"
   
-  "Cancel and go back": "Annulla e torna indietro"
   "Change %{attribute}?": "Vuoi cambiare %{attribute}?"
   "Change password": "Cambia la password"
   "Checked if active": "È spuntato se attivo"

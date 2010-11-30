@@ -14,7 +14,6 @@ ru:
   "Are you sure you want to sign out and end your session?":
   "As you're not the admin or the owner of this record you cannot edit it": "Вы не администратор и не владелец записи и не можете ее редактировать"
 
-  "Cancel and go back":
   "Change password": "Сменить пароль"
   "Change %{attribute}?": "Изменить %{attribute}?"
   "Checked if active": "Отмечено, если активно"
