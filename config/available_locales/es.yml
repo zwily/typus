@@ -49,6 +49,7 @@ es:
 
   "New": "Nuevo"
   "Next": "Siguiente"
+  "No %{resources} found": "No se han encontrado %{resources}."
 
   "Options": "Opciones"
 
@@ -79,7 +80,6 @@ es:
   "System Users Administration": "Administrar usuarios del sistema"
 
   "That doesn't seem like a valid email address": "Eso no parecia una dirección válida de correo electrónico."
-  "There are no %{records}": "No hay %{records}."
   "There are no %{records} under this filter": "No hay %{records} con este filtro."
   "Today": "Hoy"
   "Toggle is disabled": "Alternat està desactivado."

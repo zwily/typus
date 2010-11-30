@@ -49,6 +49,7 @@ pt-BR:
 
   "New": "Novo"
   "Next": "Próximo"
+  "No %{resources} found":
 
   "Options": "Opções"
 
@@ -79,7 +80,6 @@ pt-BR:
   "System Users Administration": "Administrar usuários do sistema"
 
   "That doesn't seem like a valid email address": "Este não parece um email válido"
-  "There are no %{records}": "Não há %{records}."
   "There are no %{records} under this filter": "Não há %{records} com este filtro."
   "Toggle is disabled": "Toggle está desabilitado."
   "Today": "Hoje"

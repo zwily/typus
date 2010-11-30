@@ -49,6 +49,7 @@ ru:
 
   "New": "Новый"
   "Next": "Следующий"
+  "No %{resources} found":
 
   "Options": "Опции"
 
@@ -79,7 +80,6 @@ ru:
   "System Users Administration": "Администрирование системных пользователей"
 
   "That doesn't seem like a valid email address": "E-Mail некорректен"
-  "There are no %{records}": "%{records} не найдены"
   "There are no %{records} under this filter": "%{records} по такому фильтру не найдены"
   "Today": "Сегодня"
   "Toggle is disabled": "Переключение отключено"

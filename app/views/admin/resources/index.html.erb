@@ -22,7 +22,7 @@
 
 <% if @resource.count.zero? %>
   <p>
-    <%= _t("There are no %{records}.", :records => @resource.model_name.human.pluralize.downcase) %>
+    <%= _t("No %{resources} found.", :resources => @resource.model_name.human.pluralize.downcase) %>
   </p>
 <% end %>
 
