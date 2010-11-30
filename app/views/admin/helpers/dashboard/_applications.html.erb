@@ -4,7 +4,7 @@
 
     <thead>
       <tr>
-        <th colspan="2"><%= _t(app) %></th>
+        <th><%= _t(app) %></th>
       </tr>
     </thead>
 
@@ -19,9 +19,6 @@
       <tr class="<%= cycle("even", "odd") %>">
         <td>
           <%= link_to klass_human_name, admin_items_path %>
-        </td>
-        <td class="right">
-          <%= link_to_if current_user.can?("create", klass), _t("Add"), admin_items_path.merge(:action => "new") %>
         </td>
       </tr>
 
