@@ -33,11 +33,7 @@ module Admin
 
       message = _t("Are you sure you want to sign out and end your session?")
 
-      user_details = if current_user.can?('edit', Typus.user_class_name)
-                       link_to current_user.name, admin_edit_typus_user_path
-                     else
-                       current_user.name
-                     end
+      user_details = link_to current_user.name, admin_edit_typus_user_path
 
       render "admin/helpers/login_info", :message => message, :user_details => user_details
     end
