@@ -81,7 +81,6 @@ ca:
   "System Users Administration": "Administrar usuaris del sistema"
 
   "That doesn't seem like a valid email address": "Això no sembla ser una adreça de correu electrònic vàlida."
-  "There are no %{records} under this filter": "No hi han %{records} amb aquest filtre."
   "Today": "Avui"
   "Toggle is disabled": "Alternar està desactivat."
   "True": "Cert"

@@ -20,19 +20,9 @@
   </div>
 <% end %>
 
-<% if @resource.count.zero? %>
-  <p>
-    <%= _t("No %{resources} found.", :resources => @resource.model_name.human.pluralize.downcase) %>
-  </p>
-<% end %>
-
 <% if @items.any? -%>
   <%= raw build_list(@resource, @fields, @items) %>
   <%= will_paginate(@items, Typus.pagination) %>
-<% end %>
-
-<% if @items.empty? && !@resource.count.zero? %>
-  <div class="flash notice">
-    <%= _t("There are no %{records} under this filter.", :records => @resource.model_name.human.pluralize.downcase) %>
-  </div>
+<% else %>
+  <p><%= _t("No %{resources} found.", :resources => @resource.model_name.human.pluralize.downcase) %></p>
 <% end %>
