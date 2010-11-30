@@ -84,9 +84,9 @@ module Admin
                           :resource => @resource.name, :resource_id => @item.id,
                           :back_to => @back_to }
 
-      return unless set_condition && current_user.can?("create", @model_to_relate)
-
-      link_to _t("Add new"), default_options.merge(options)
+      if set_condition && current_user.can?("create", @model_to_relate)
+        link_to _t("Add new"), default_options.merge(options)
+      end
     end
 
     def set_condition
