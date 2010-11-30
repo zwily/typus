@@ -133,8 +133,8 @@ module Admin
                            options,
                            association)
       else
-        message = _t("There are no %{records}.",
-                    :records => model_to_relate.model_name.human.downcase)
+        message = _t("No %{resources} found.",
+                     :resources => model_to_relate.model_name.human.pluralize.downcase)
         html << <<-HTML
   <div id="flash" class="notice"><p>#{message}</p></div>
         HTML
