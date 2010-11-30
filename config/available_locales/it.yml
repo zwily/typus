@@ -12,13 +12,12 @@ it:
   "Are you sure you want to leave this page?": "Sei sicuro di volere lasciare questa pagina?"
   "Are you sure you want to sign out and end your session?": "Sei sicuro che vuoi disconnetterti dal sistema?"
   "As you're not the admin or the owner of this record you cannot edit it": "Non puoi modificare questo elemento poichè non sei un amministratore o il proprietario dello stesso"
-  
+
   "Change %{attribute}?": "Vuoi cambiare %{attribute}?"
   "Change password": "Cambia la password"
   "Checked if active": "È spuntato se attivo"
   "Click OK to continue, or click Cancel to stay on this page": "Clicca OK per continuare o Cancella per rimanere su questa pagina"
   "Create %{resource}": "Inserisci %{resource}"
-  "Create one now": "Creane una ora"
 
   "Dashboard": "Panoramica"
   "Developed by": "Realizzato da"
