@@ -19,7 +19,7 @@
 
   <fieldset class="buttons">
     <ol>
-      <li><%= submit_tag options[:button] , :class => "commit" %></li>
+      <li><%= submit_tag options[:button] , :class => "commit", :onclick => "setConfirmUnload(false);" %></li>
     </ol>
   </fieldset>
 
