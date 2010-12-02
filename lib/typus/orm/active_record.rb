@@ -59,6 +59,10 @@ module Typus
               when /\./                   then attribute_type = :transversal
             end
 
+            if respond_to?(:dragonfly_apps_for_attributes) && dragonfly_apps_for_attributes.try(:has_key?, field)
+              attribute_type = :dragonfly
+            end
+
             if respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
               attribute_type = :paperclip
             end
