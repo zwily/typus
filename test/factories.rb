@@ -8,7 +8,7 @@ end
 
 Factory.define :comment do |f|
   f.name "John"
-  f.email "john+#{f}@example.com"
+  f.sequence(:email) { |n| "john+#{n}@example.com" }
   f.body "Body of the comment"
   f.association :post
 end
