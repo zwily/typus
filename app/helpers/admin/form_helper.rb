@@ -12,7 +12,7 @@ module Admin
                   when :tree
                     typus_tree_field(key, form)
                   when :boolean, :date, :datetime, :text, :time,
-                       :file, :password, :selector
+                       :paperclip, :password, :selector
                     typus_template_field(key, value, form)
                   when :template
                     typus_template_field(key, template, form)

@@ -60,7 +60,7 @@ module Typus
             end
 
             if respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
-              attribute_type = :file
+              attribute_type = :paperclip
             end
 
             # And finally insert the field and the attribute_type

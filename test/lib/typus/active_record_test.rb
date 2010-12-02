@@ -98,7 +98,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return form fields for Picture" do
-      expected_fields = [["title", :string], ["picture", :file]]
+      expected_fields = [["title", :string], ["picture", :paperclip]]
       assert_equal expected_fields.map { |i| i.first }, Picture.typus_fields_for(:form).keys
       assert_equal expected_fields.map { |i| i.last }, Picture.typus_fields_for(:form).values
     end
