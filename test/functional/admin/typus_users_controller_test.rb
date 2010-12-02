@@ -34,13 +34,9 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "not be able to destroy herself" do
-      assert_no_difference('TypusUser.count') do
+      assert_raises RuntimeError do
         delete :destroy, :id => @typus_user.id
       end
-
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "You can't remove yourself.", flash[:notice]
     end
 
     should "verify_admin_can_destroy_others" do
@@ -72,11 +68,9 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "not_allow_non_root_typus_user_to_toggle_status" do
-      get :toggle, { :id => @typus_user.id, :field => 'status' }
-
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "You're not allowed to toggle status.", flash[:notice]
+      assert_raises RuntimeError do
+        get :toggle, { :id => @typus_user.id, :field => 'status' }
+      end
     end
 
     should "not_allow_editor_to_create_typus_users" do
@@ -114,27 +108,21 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "not_allow_editor_to_edit_other_users_profiles" do
-      get :edit, { :id => Factory(:typus_user).id }
-
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "As you're not the admin or the owner of this record you cannot edit it.", flash[:notice]
+      assert_raises RuntimeError do
+        get :edit, { :id => Factory(:typus_user).id }
+      end
     end
 
     should "not_allow_editor_to_destroy_users" do
-      delete :destroy, :id => Factory(:typus_user).id
-
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "You're not allowed to remove Typus Users.", flash[:notice]
+      assert_raises RuntimeError do
+        delete :destroy, :id => Factory(:typus_user).id
+      end
     end
 
     should "not_allow_editor_to_destroy_herself" do
-      delete :destroy, :id => @typus_user.id
-
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "You're not allowed to remove Typus Users.", flash[:notice]
+      assert_raises RuntimeError do
+        delete :destroy, :id => @typus_user.id
+      end
     end
 
     should "change_root_to_editor_so_editor_can_edit_others_content" do
