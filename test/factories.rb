@@ -1,6 +1,7 @@
 Factory.define :asset do |f|
   f.sequence(:caption) { |n| "Asset##{n}" }
   f.file File.new("#{Rails.root}/config/database.yml")
+  f.required_file File.new("#{Rails.root}/config/database.yml")
 end
 
 Factory.define :category do |f|

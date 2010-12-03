@@ -17,7 +17,9 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   should "create a polymorphic relationship" do
     assert_difference('@post.assets.count') do
-      post :create, { :asset => { :caption => "Caption", :file => File.new("#{Rails.root}/config/database.yml") },
+      post :create, { :asset => { :caption => "Caption",
+                      :file => File.new("#{Rails.root}/config/database.yml"),
+                      :required_file => File.new("#{Rails.root}/config/database.yml") },
                       :back_to => "/admin/posts/edit/#{@post.id}",
                       :resource => @post.class.name, :resource_id => @post.id }
     end
@@ -29,10 +31,29 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   context "edit" do
 
-    should "verify that remove file is present" do
-      asset = Factory(:asset)
-      get :edit, { :id => asset.id }
+    setup do
+      @asset = Factory(:asset)
+      @request.env['HTTP_REFERER'] = "/admin/assets/edit/#{@asset.id}"
+    end
+
+    should "verify file can be removed" do
+      get :edit, { :id => @asset.id }
       assert_match /Remove file/, @response.body
+
+      get :detach, { :id => @asset.id, :attachment => "file" }
+      assert_response :redirect
+      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_equal "File removed.", flash[:notice]
+    end
+
+    should "verify required_file can not removed" do
+      get :edit, { :id => @asset.id }
+      assert_no_match /Remove required file/, @response.body
+
+      get :detach, { :id => @asset.id, :attachment => "required_file" }
+      assert_response :redirect
+      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_equal "Required file can't be removed.", flash[:notice]
     end
 
     should "verify message on polymorphic relationship" do
