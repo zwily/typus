@@ -29,6 +29,12 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   context "edit" do
 
+    should "verify that remove file is present" do
+      asset = Factory(:asset)
+      get :edit, { :id => asset.id }
+      assert_match /Remove file/, @response.body
+    end
+
     should "verify message on polymorphic relationship" do
       asset = Factory(:asset)
 
