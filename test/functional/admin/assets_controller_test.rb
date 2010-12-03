@@ -19,8 +19,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_difference('@post.assets.count') do
       post :create, { :asset => { :caption => "Caption", :file => File.new("#{Rails.root}/config/database.yml") },
                       :back_to => "/admin/posts/edit/#{@post.id}",
-                      :resource => @post.class.name,
-                      :resource_id => @post.id }
+                      :resource => @post.class.name, :resource_id => @post.id }
     end
 
     assert_response :redirect
