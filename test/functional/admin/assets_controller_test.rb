@@ -45,20 +45,26 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       get :edit, { :id => @asset.id }
       assert_match /Remove file/, @response.body
 
-      get :detach, { :id => @asset.id, :attachment => "file" }
+      assert @asset.file_uid.present?
+
+      get :detach, { :id => @asset.id, :attribute => "file" }
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "File removed.", flash[:notice]
+      assert_equal "Asset successfully updated.", flash[:notice]
+
+      @asset.reload
+      assert @asset.file_uid.blank?
     end
 
     should "verify required_file can not removed" do
       get :edit, { :id => @asset.id }
       assert_no_match /Remove required file/, @response.body
 
-      get :detach, { :id => @asset.id, :attachment => "required_file" }
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Required file can't be removed.", flash[:notice]
+      get :detach, { :id => @asset.id, :attribute => "required_file" }
+      assert_response :success
+
+      @asset.reload
+      assert @asset.file.present?
     end
 
     should "verify message on polymorphic relationship" do
