@@ -4,4 +4,6 @@ class Asset < ActiveRecord::Base
 
   image_accessor :file
 
+  validates_presence_of :file
+
 end

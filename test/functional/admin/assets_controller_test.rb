@@ -17,7 +17,8 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   should "create a polymorphic relationship" do
     assert_difference('@post.assets.count') do
-      post :create, { :back_to => "/admin/posts/edit/#{@post.id}",
+      post :create, { :asset => { :caption => "Caption", :file => File.new("#{Rails.root}/config/database.yml") },
+                      :back_to => "/admin/posts/edit/#{@post.id}",
                       :resource => @post.class.name,
                       :resource_id => @post.id }
     end
