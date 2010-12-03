@@ -112,9 +112,7 @@ module Typus
       # related to the logged user.
       #++
       def check_resource_ownerships
-        return if current_user.is_root?
-
-        if @resource.typus_user_id?
+        if current_user.is_not_root? && @resource.typus_user_id?
           condition = { Typus.user_fk => current_user }
           @conditions = @resource.merge_conditions(@conditions, condition)
         end
