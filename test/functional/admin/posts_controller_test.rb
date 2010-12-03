@@ -234,6 +234,20 @@ title;status
         assert_response :success
       end
 
+      should "only list editor posts" do
+        Post.delete_all
+        admin = TypusUser.where(:role => 'admin').first
+        2.times { Factory(:post, :typus_user => admin) }
+        2.times { Factory(:post, :typus_user => @typus_user) }
+        Typus::Resources.expects(:only_user_items).returns(true)
+
+        get :index
+
+        assert_equal 4, Post.count
+        assert_equal 2, assigns(:items).size
+        assert_equal [@typus_user.id, @typus_user.id], assigns(:items).map(&:typus_user_id)
+      end
+
       should "verify_editor_tries_to_show_a_post_owned_by_the_admin whe only user items" do
         Typus::Resources.expects(:only_user_items).returns(true)
         post = Factory(:post)
