@@ -23,7 +23,7 @@ class Admin::ResourcesController < Admin::BaseController
   before_filter :set_order,
                 :only => [ :index ]
   before_filter :set_fields,
-                :only => [ :index, :new, :edit, :create, :update, :show ]
+                :only => [ :index, :new, :edit, :create, :update, :show, :detach ]
 
   ##
   # This is the main index of the model. With filters, conditions and more.
@@ -196,19 +196,15 @@ class Admin::ResourcesController < Admin::BaseController
     redirect_to set_path
   end
 
-  ##
-  # Remove file attachments.
-  #
   def detach
-    message = if @item.update_attributes(params[:attachment] => nil)
-                "%{attachment} removed."
-              else
-                "%{attachment} can't be removed."
-              end
+    @item.send("#{params[:attachment]}=", nil)
 
-    notice = _t(message, :attachment => @resource.human_attribute_name(params[:attachment]))
-
-    redirect_to set_path, :notice => notice
+    if @item.save
+      notice = _t("%{attachment} removed.", :attachment => @resource.human_attribute_name(params[:attachment]))
+      redirect_to :back, :notice => notice
+    else
+      select_template(:edit)
+    end
   end
 
   private
