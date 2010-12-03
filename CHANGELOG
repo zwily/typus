@@ -34,7 +34,7 @@ not an image.
 [NEW] Support for Dragonfly attachments. Template for this kind of attribute
 is `_dragonfly.html.erb`.
 
-[CHANGED] Paperclip attachments are detected at `:paperclip` thus the form
+[CHANGED] Paperclip attachments are detected as `:paperclip` thus the form
 template is not `_paperclip.html.erb`.
 
 [3.0.2]
