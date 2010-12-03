@@ -170,8 +170,22 @@ title;status
     context "Root" do
 
       setup do
-        editor = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
-        @post = Factory(:post, :typus_user => editor)
+        @editor = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
+        @post = Factory(:post, :typus_user => @editor)
+      end
+
+      should "should list all posts no matter who is the owner" do
+        Post.delete_all
+        admin = TypusUser.where(:role => 'admin').first
+        2.times { Factory(:post, :typus_user => @editor) }
+        2.times { Factory(:post, :typus_user => @typus_user) }
+        Typus::Resources.expects(:only_user_items).returns(true)
+
+        get :index
+
+        assert_equal 4, Post.count
+        assert_equal 4, assigns(:items).size
+        assert_equal [@editor.id, @editor.id, @typus_user.id, @typus_user.id], assigns(:items).map(&:typus_user_id)
       end
 
       should "be able to edit any record" do
