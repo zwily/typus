@@ -7,7 +7,7 @@
     label_text << <<-HTML
  <small>#{link_to message, { :action => 'detach',
                              :id => @item.id,
-                             :attachment => attribute },
+                             :attribute => attribute },
                              :confirm => _t("Are you sure?")}</small>
     HTML
   end

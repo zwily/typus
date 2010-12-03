@@ -93,6 +93,14 @@ class Admin::ResourcesController < Admin::BaseController
     end
   end
 
+  def detach
+    if @item.update_attributes(params[:attribute] => nil)
+      redirect_on_success
+    else
+      select_template(:edit)
+    end
+  end
+
   def destroy
     @item.destroy
     notice = _t("%{model} successfully removed.", :model => @resource.model_name.human)
@@ -194,16 +202,6 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     redirect_to set_path
-  end
-
-  def detach
-    @item.send("#{params[:attachment]}=", nil)
-
-    if @item.save
-      redirect_on_success
-    else
-      select_template(:edit)
-    end
   end
 
   private
