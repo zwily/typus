@@ -131,4 +131,31 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   end
 
+  ##
+  # Designer doesn't have TypusUser permissions BUT can update his profile.
+  #
+
+  context "Designer" do
+
+    setup do
+      @designer = Factory(:typus_user, :email => "designer@example.com", :role => "designer")
+      @request.session[:typus_user_id] = @designer.id
+      @request.env['HTTP_REFERER'] = "/admin/typus_users/edit/#{@designer.id}"
+    end
+
+    should "be able to edit his profile" do
+      get :edit, { :id => @designer.id }
+      assert_response :success
+    end
+
+    should "be able to update his profile" do
+      post :update, { :id => @designer.id, :typus_user => { :role => 'designer', :email => 'designer@withafancydomain.com' } }
+      assert_response :redirect
+      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_equal "Typus user successfully updated.", flash[:notice]
+      assert_equal "designer@withafancydomain.com", @designer.reload.email
+    end
+
+  end
+
 end
