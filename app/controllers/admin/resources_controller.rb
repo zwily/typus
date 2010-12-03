@@ -200,8 +200,7 @@ class Admin::ResourcesController < Admin::BaseController
     @item.send("#{params[:attachment]}=", nil)
 
     if @item.save
-      notice = _t("%{attachment} removed.", :attachment => @resource.human_attribute_name(params[:attachment]))
-      redirect_to :back, :notice => notice
+      redirect_on_success
     else
       select_template(:edit)
     end
@@ -250,7 +249,7 @@ class Admin::ResourcesController < Admin::BaseController
       path = { :action => action }
       path.merge!(:id => @item.id) unless action.eql?("index")
       notice = _t("%{model} successfully created.", :model => @resource.model_name.human)
-    when "update"
+    when "update", "detach"
       path = case action
              when "index"
                params[:back_to] ? "#{params[:back_to]}##{@resource.to_resource}" : { :action => action }
