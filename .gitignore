@@ -9,3 +9,4 @@ rdoc/
 *#
 .rvmrc
 
+test/fixtures/rails_app/public/system
