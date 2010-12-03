@@ -25,8 +25,9 @@ module Admin
     end
 
     def login_info
-      return if current_user.is_a?(FakeUser)
-      render "admin/helpers/login_info"
+      unless current_user.is_a?(FakeUser)
+        render "admin/helpers/login_info"
+      end
     end
 
     def display_flash_message(message = flash)
