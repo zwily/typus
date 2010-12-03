@@ -31,8 +31,9 @@ module Admin
     end
 
     def display_flash_message(message = flash)
-      return if message.empty?
-      render "admin/helpers/flash_message", :flash_type => message.keys.first, :message => message
+      unless message.empty?
+        render "admin/helpers/flash_message", :flash_type => message.keys.first, :message => message
+      end
     end
 
   end
