@@ -27,15 +27,19 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_equal "Asset successfully assigned to Post.", flash[:notice]
   end
 
-  should "render edit and verify message on polymorphic relationship" do
-    asset = Factory(:asset)
+  context "edit" do
 
-    get :edit, { :id => asset.id,
-                 :back_to => "/admin/posts/#{@post.id}/edit",
-                 :resource => @post.class.name, :resource_id => @post.id }
+    should "verify message on polymorphic relationship" do
+      asset = Factory(:asset)
 
-    assert_select 'body div#flash', "You're updating a Asset for Post. Do you want to cancel it?"
-    assert_select 'body div#flash a', "Do you want to cancel it?"
+      get :edit, { :id => asset.id,
+                   :back_to => "/admin/posts/#{@post.id}/edit",
+                   :resource => @post.class.name, :resource_id => @post.id }
+
+      assert_select 'body div#flash', "You're updating a Asset for Post. Do you want to cancel it?"
+      assert_select 'body div#flash a', "Do you want to cancel it?"
+    end
+
   end
 
   should "return to back_to url" do
