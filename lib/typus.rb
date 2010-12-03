@@ -6,6 +6,7 @@ require "support/hash"
 require "support/object"
 require "support/string"
 
+require "typus/engine"
 require "typus/orm/active_record"
 require "typus/user"
 require "typus/version"
