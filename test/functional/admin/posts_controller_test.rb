@@ -303,7 +303,7 @@ title;status
         assert_redirected_to :action => :index
       end
 
-      should "not_be_able_to_destroy_posts" do
+      should "not be able to destroy posts" do
         assert_no_difference('Post.count') do
           get :destroy, { :id => @post.id, :method => :delete }
         end
