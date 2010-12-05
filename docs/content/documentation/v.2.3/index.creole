@@ -1,0 +1,44 @@
+---
+title: Documentation (for Rails 2.3.X)
+
+parent_title: Documentation
+parent_link: /documentation/
+---
+
+= Documentation (for Rails 2.3.X)
+
+* [[/documentation/v.2.3/installation/|Installation]]
+* [[/documentation/v.2.3/configuration/|Configuration]]
+* [[/documentation/v.2.3/configuration-resources/|Configuration Resources]] (ActiveRecord Models)
+* [[/documentation/v.2.3/configuration-resource/|Configuration Resource]] (Memcached, Redis ...)
+* [[/documentation/v.2.3/configuration-roles/|Configuration Roles]]
+* [[/documentation/v.2.3/configuration-ui/|Configuration UI]]
+
+== For the impatients
+
+Install the plugin:
+
+{{{
+$ script/plugin install git://github.com/fesplugas/typus.git -r 2-3-stable
+}}}
+
+Run the generator:
+
+{{{
+$ script/generate typus
+$ rake db:migrate
+}}}
+
+Start the application server and go to http://0.0.0.0:3000/admin.
+
+== Want to replicate the demo application?
+
+Replicate the [[http://demo.typuscms.com/admin|demo]] application using the 
+{{{desmond}}} template.
+
+{{{
+$ rails desmond -m http://core.typuscms.com/desmond.rb
+$ cd desmond && script/server
+}}}
+
+Go to http://0.0.0.0:3000/admin.
