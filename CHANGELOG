@@ -37,6 +37,8 @@ is `_dragonfly.html.erb`.
 [CHANGED] Paperclip attachments are detected as `:paperclip` thus the form
 template is not `_paperclip.html.erb`.
 
+[NEW] 中文 (zh-CN) translation. [ZoOL]
+
 [3.0.2]
 
 [FIXED] Use Arel to get the data on lists. After moving to will_paginate I
