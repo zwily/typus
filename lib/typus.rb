@@ -151,7 +151,8 @@ module Typus
                   "hu"    => "Magyar",
                   "it"    => "Italiano",
                   "pt-BR" => "Portuguese",
-                  "ru"    => "Russian" }
+                  "ru"    => "Russian",
+                  "zh-CN" => "中文" }
       mapping.default = "Unknown"
       return mapping
     end
