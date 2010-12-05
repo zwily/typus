@@ -1,0 +1,13 @@
+ru:
+  activerecord:
+    models:
+      typus_user: 管理员
+    attributes:
+      typus_user:
+        email: 邮箱
+        first_name: 姓
+        last_name: 名
+        password: 密码
+        password_confirmation: 密码确认
+        status: 状态
+        role: 角色
