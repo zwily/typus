@@ -264,10 +264,6 @@ class Admin::ResourcesController < Admin::BaseController
     message = _t("%{model} successfully updated.", :model => resource_class.model_name.human)
 
     case association.macro
-    when :belongs_to
-      message = _t("%{model_a} successfully assigned to %{model_b}.",
-                   :model_a => @item.class.model_name.human,
-                   :model_b => resource_class.model_name.human)
     when :has_and_belongs_to_many
       @item.send(params[:resource]) << resource
     when :has_many
