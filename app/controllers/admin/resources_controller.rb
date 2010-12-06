@@ -108,11 +108,7 @@ class Admin::ResourcesController < Admin::BaseController
   def toggle
     @item.toggle(params[:field])
     @item.save!
-
-    notice = _t("%{model} %{attribute} changed.",
-               :model => @resource.model_name.human,
-               :attribute => params[:field].humanize.downcase)
-
+    notice = _t("%{model} successfully updated.", :model => @resource.model_name.human)
     redirect_to set_path, :notice => notice
   end
 

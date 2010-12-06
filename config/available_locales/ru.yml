@@ -107,5 +107,4 @@ ru:
   "%{model} successfully created": "%{model} создан"
   "%{model} successfully removed": "%{model} удален"
   "%{model} successfully updated": "%{model} успешно обновлен"
-  "%{model} %{attribute} changed": "%{model} %{attribute} изменен"
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} добавлен к %{model_b}."

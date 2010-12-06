@@ -107,5 +107,4 @@ hu:
   "%{model} successfully created": "%{model} sikeresen létrehozva"
   "%{model} successfully removed": "%{model} sikeresen törölve"
   "%{model} successfully updated": "%{model} sikereseb frissítve"
-  "%{model} %{attribute} changed": "%{model} %{attribute} megváltozott"
   "%{model_a} successfully assigned to %{model_b}": "%{model} sikeresen hozzárendelve %{model_b}hez"

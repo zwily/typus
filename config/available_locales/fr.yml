@@ -109,5 +109,4 @@ fr:
   "%{model} successfully created": "%{model} correctement créé(e)."
   "%{model} successfully removed": "%{model} correctement supprimé(e)."
   "%{model} successfully updated": "%{model} correctement mis(e)-à-jour."
-  "%{model} %{attribute} changed": "%{model} %{attribute} modifié."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} associé à %{model_b}."

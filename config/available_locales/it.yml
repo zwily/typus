@@ -119,5 +119,4 @@ it:
   "%{model} successfully created": "Creazione avvenuta con successo"
   "%{model} successfully removed": "Eliminazione avvenuta con successo"
   "%{model} successfully updated": "Aggiornamento avvenuto con successo"
-  "%{model} %{attribute} changed": "%{attribute} %{model} modificato"
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} assegnato a %{model_b} con successo"

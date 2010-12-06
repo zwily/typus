@@ -107,5 +107,4 @@ ca:
   "%{model} successfully created": "%{model} satisfactòriament creat."
   "%{model} successfully updated": "%{model} satisfactòriament actualitzat."
   "%{model} successfully removed": "%{model} satisfactòriament eliminat."
-  "%{model} %{attribute} changed": "%{model} %{attribute} canviat."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} assignat satisfactòriament a %{model_b}."

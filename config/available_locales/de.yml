@@ -107,5 +107,4 @@ de:
   "%{model} successfully created": "%{model} erfolgreich erstellt"
   "%{model} successfully removed": "%{model} erfolgreich gel&ouml;scht"
   "%{model} successfully updated": "%{model} erfolgreich ge&auml;ndert"
-  "%{model} %{attribute} changed": "%{model} %{attribute} ge&auml;ndert"
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} erfolgreich an %{model_b} zugewiesen"
