@@ -48,7 +48,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
       get :detach, { :id => @asset.id, :attribute => "file" }
       assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_redirected_to "/admin/assets"
       assert_equal "Asset successfully updated.", flash[:notice]
 
       @asset.reload
@@ -88,7 +88,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
                     :resource_id => @post.id }
 
     assert_response :redirect
-    assert_redirected_to :action => "edit", :id => asset.id, :back_to => back_to
+    assert_redirected_to "/admin/assets"
     assert_equal "Asset successfully updated.", flash[:notice]
   end
 
