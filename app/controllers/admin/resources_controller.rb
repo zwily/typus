@@ -272,7 +272,6 @@ class Admin::ResourcesController < Admin::BaseController
       @item.send(params[:resource]) << resource
     when :has_many
       if resource
-        # message = _t("%{model} successfully updated.", :model => resource_class.model_name.human)
         @item.send(params[:resource]) << resource
       else
         primary_key_name = association.primary_key_name
