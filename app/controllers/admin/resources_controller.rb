@@ -238,9 +238,7 @@ class Admin::ResourcesController < Admin::BaseController
              when "index"
                params[:back_to] ? "#{params[:back_to]}##{@resource.to_resource}" : { :action => action }
              else
-               { :action => action,
-                 :id => @item.id,
-                 :back_to => params[:back_to] }
+               { :action => action, :id => @item.id, :back_to => params[:back_to] }
              end
       notice = _t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
