@@ -105,6 +105,6 @@ es:
   "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} filtered by %{filtered_by}": "%{model} filtrados por %{filtered_by}"
   "%{model} successfully created": "%{model} satisfactoriamente creado."
-  "%{model} successfully updated": "%{model} satisfactoriamente actualizado."
   "%{model} successfully removed": "%{model} satisfactoriamente eliminado."
+  "%{model} successfully updated": "%{model} satisfactoriamente actualizado."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} asignado satisfactoriamente a %{model_b}."

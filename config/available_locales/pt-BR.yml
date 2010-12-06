@@ -104,7 +104,7 @@ pt-BR:
   "%{attachment} removed":
   "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} filtered by %{filtered_by}": "%{model} filtrados por %{filtered_by}"
-  "%{model} successfully updated": "%{model} atualizado com sucesso."
   "%{model} successfully created": "%{model} criado com sucesso."
   "%{model} successfully removed": "%{model} removido com sucesso."
+  "%{model} successfully updated": "%{model} atualizado com sucesso."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} atribuído com sucesso a %{model_b}."

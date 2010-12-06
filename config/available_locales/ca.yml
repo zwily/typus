@@ -105,6 +105,6 @@ ca:
   "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} filtered by %{filtered_by}": "%{model} filtrats per %{filtered_by}"
   "%{model} successfully created": "%{model} satisfactòriament creat."
-  "%{model} successfully updated": "%{model} satisfactòriament actualitzat."
   "%{model} successfully removed": "%{model} satisfactòriament eliminat."
+  "%{model} successfully updated": "%{model} satisfactòriament actualitzat."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} assignat satisfactòriament a %{model_b}."
