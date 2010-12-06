@@ -120,8 +120,4 @@ it:
   "%{model} successfully removed": "Eliminazione avvenuta con successo"
   "%{model} successfully updated": "Aggiornamento avvenuto con successo"
   "%{model} %{attribute} changed": "%{attribute} %{model} modificato"
-  "%{model_a} cannot be related to %{model_b}": "%{model_a} non può essere in relazione con %{model_b}"
-  "%{model_a} cannot be unrelated from %{model_b}": "%{model_a} deve essere in relazione con %{model_b}"
-  "%{model_a} related to %{model_b}": "%{model_a} è in relazione con %{model_b}"
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} assegnato a %{model_b} con successo"
-  "%{model_a} unrelated from %{model_b}": "%{model_a} non è più in relazione con %{model_b}"

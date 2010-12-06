@@ -107,8 +107,4 @@ zh-CN:
   "%{model} successfully removed": "%{model} 删除成功"
   "%{model} successfully updated": "%{model} 更新成功"
   "%{model} %{attribute} changed": "%{model} 修改了 %{attribute}"
-  "%{model_a} cannot be related to %{model_b}": "%{model_a} 不能关联到 %{model_b}"
-  "%{model_a} cannot be unrelated from %{model_b}": "%{model_a} 不能和 %{model_b} 取消关联"
-  "%{model_a} related to %{model_b}": "%{model_a} 关联到 %{model_b}"
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} 成功分配给 %{model_b}"
-  "%{model_a} unrelated from %{model_b}": "%{model_a} 和 %{model_b} 取消关联"

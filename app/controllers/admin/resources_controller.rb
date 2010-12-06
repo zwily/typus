@@ -65,10 +65,8 @@ class Admin::ResourcesController < Admin::BaseController
 
     set_attributes_on_create
 
-    if @item.valid?
-      create_with_back_to and return if params[:back_to]
-      @item.save
-      redirect_on_success
+    if @item.save
+      params[:back_to] ? create_with_back_to : redirect_on_success
     else
       select_template(:new)
     end
@@ -141,13 +139,7 @@ class Admin::ResourcesController < Admin::BaseController
     resource_tableized = params[:related][:model].tableize
 
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
-      flash[:notice] = _t("%{model_a} related to %{model_b}",
-                         :model_a => resource_class.model_name.human,
-                         :model_b => @resource.model_name.human)
-    else
-      flash[:alert] = _t("%{model_a} cannot be related to %{model_b}",
-                         :model_a => resource_class.model_name.human,
-                         :model_b => @resource.model_name.human)
+      flash[:notice] = _t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 
     redirect_to set_path
@@ -192,13 +184,7 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     if saved_succesfully
-      flash[:notice] = _t("%{model_a} unrelated from %{model_b}",
-                         :model_a => resource_class.model_name.human,
-                         :model_b => @resource.model_name.human)
-    else
-      flash[:alert] = _t("%{model_a} cannot be unrelated from %{model_b}",
-                        :model_a => resource_class.model_name.human,
-                        :model_b => @resource.model_name.human)
+      flash[:notice] = _t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 
     redirect_to set_path
@@ -269,34 +255,36 @@ class Admin::ResourcesController < Admin::BaseController
   # - <tt>has_many</tt> relationships (polymorphic ones).
   #
   def create_with_back_to
-    if params[:resource] && params[:resource_id]
-      resource_class = params[:resource].typus_constantize
+    association = @resource.reflect_on_association(params[:resource].to_sym)
+
+    if params[:resource_id]
+      resource_class = params[:resource].classify.typus_constantize
       resource_id = params[:resource_id]
       resource = resource_class.find(resource_id)
-      association = @resource.reflect_on_association(params[:resource].to_sym).macro rescue :polymorphic
-    else
-      association = :has_many
     end
 
-    case association
+    message = _t("%{model} successfully updated.", :model => resource_class.model_name.human)
+
+    case association.macro
     when :belongs_to
-      @item.save
+      message = _t("%{model_a} successfully assigned to %{model_b}.",
+                   :model_a => @item.class.model_name.human,
+                   :model_b => resource_class.model_name.human)
     when :has_and_belongs_to_many
-      @item.save
       @item.send(params[:resource]) << resource
     when :has_many
-      @item.save
-      message = _t("%{model} successfully created.", :model => @resource.model_name.human)
-      path = "#{params[:back_to]}?#{params[:selected]}=#{@item.id}"
+      if resource
+        # message = _t("%{model} successfully updated.", :model => resource_class.model_name.human)
+        @item.send(params[:resource]) << resource
+      else
+        primary_key_name = association.primary_key_name
+        path = "#{params[:back_to]}?#{primary_key_name}=#{@item.id}"
+      end
     when :polymorphic
       resource.send(@item.class.to_resource).create(params[@object_name])
     end
 
-    flash[:notice] = message || _t("%{model_a} successfully assigned to %{model_b}.",
-                                  :model_a => @item.class.model_name.human,
-                                  :model_b => resource_class.model_name.human)
-
-    redirect_to path || params[:back_to]
+    redirect_to (path || params[:back_to]), :notice => message
   end
 
   def select_template(action = params[:action], resource = @resource.to_resource)

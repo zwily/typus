@@ -107,9 +107,5 @@ pt-BR:
   "%{model} successfully updated": "%{model} atualizado com sucesso."
   "%{model} successfully created": "%{model} criado com sucesso."
   "%{model} successfully removed": "%{model} removido com sucesso."
-  "%{model_a} cannot be related to %{model_b}":
-  "%{model_a} cannot be unrelated from %{model_b}":
   "%{model} %{attribute} changed": "%{model} %{attribute} atualizado."
-  "%{model_a} related to %{model_b}": "%{model_a} relacionado com %{model_b}."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} atribuído com sucesso a %{model_b}."
-  "%{model_a} unrelated from %{model_b}": "%{model_a} não está relacionado com %{model_b}."

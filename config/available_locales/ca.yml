@@ -108,8 +108,4 @@ ca:
   "%{model} successfully updated": "%{model} satisfactòriament actualitzat."
   "%{model} successfully removed": "%{model} satisfactòriament eliminat."
   "%{model} %{attribute} changed": "%{model} %{attribute} canviat."
-  "%{model_a} cannot be unrelated from %{model_b}":
-  "%{model_a} cannot be related to %{model_b}":
-  "%{model_a} related to %{model_b}": "%{model_a} relacionat amb %{model_b}."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} assignat satisfactòriament a %{model_b}."
-  "%{model_a} unrelated from %{model_b}": "%{model_a} no està relacionat amb %{model_b}."

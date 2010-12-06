@@ -110,8 +110,4 @@ fr:
   "%{model} successfully removed": "%{model} correctement supprimé(e)."
   "%{model} successfully updated": "%{model} correctement mis(e)-à-jour."
   "%{model} %{attribute} changed": "%{model} %{attribute} modifié."
-  "%{model_a} cannot be related to %{model_b}": "%{model_a} ne peut pas être lié à %{model_b}"
-  "%{model_a} cannot be unrelated from %{model_b}": "%{model_a} ne peut pas être disjoint de %{model_b}"  
-  "%{model_a} related to %{model_b}": "%{model_a} associé à %{model_b}."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} associé à %{model_b}."
-  "%{model_a} unrelated from %{model_b}": "%{model_a} dissocié de %{model_b}."

@@ -107,9 +107,5 @@ ru:
   "%{model} successfully created": "%{model} создан"
   "%{model} successfully removed": "%{model} удален"
   "%{model} successfully updated": "%{model} успешно обновлен"
-  "%{model_a} cannot be related to %{model_b}":
-  "%{model_a} cannot be unrelated from %{model_b}":
   "%{model} %{attribute} changed": "%{model} %{attribute} изменен"
-  "%{model_a} related to %{model_b}": "%{model_a} присоединен с %{model_b}."
   "%{model_a} successfully assigned to %{model_b}": "%{model_a} добавлен к %{model_b}."
-  "%{model_a} unrelated from %{model_b}": "%{model_a} отсоединен от %{model_b}."
