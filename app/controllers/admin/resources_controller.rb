@@ -213,7 +213,7 @@ class Admin::ResourcesController < Admin::BaseController
   def set_fields
     mapping = case params[:action]
               when "index" then :list
-              when "new", "edit", "create", "update" then :form
+              when "new", "create", "edit", "update" then :form
               else params[:action]
               end
 
