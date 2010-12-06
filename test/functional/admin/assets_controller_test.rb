@@ -11,8 +11,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     get :new, { :back_to => "/admin/posts/#{@post.id}/edit",
                 :resource => @post.class.name, :resource_id => @post.id }
 
-    assert_select 'body div#flash', "You're adding a new Asset to Post. Do you want to cancel it?"
-    assert_select 'body div#flash a', "Do you want to cancel it?"
+    assert_select 'body div#flash', "Cancel adding a new Asset?"
   end
 
   should "create a polymorphic relationship" do
@@ -74,8 +73,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
                    :back_to => "/admin/posts/#{@post.id}/edit",
                    :resource => @post.class.name, :resource_id => @post.id }
 
-      assert_select 'body div#flash', "You're updating a Asset for Post. Do you want to cancel it?"
-      assert_select 'body div#flash a', "Do you want to cancel it?"
+      assert_select 'body div#flash', "Cancel adding a new Asset?"
     end
 
   end
