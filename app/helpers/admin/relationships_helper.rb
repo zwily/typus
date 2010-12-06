@@ -158,15 +158,10 @@ module Admin
       related = @resource.reflect_on_association(attribute.to_sym).class_name.typus_constantize
       related_fk = @resource.reflect_on_association(attribute.to_sym).primary_key_name
 
-      confirm = [ _t("Are you sure you want to leave this page?"),
-                  _t("If you have made any changes to the fields without clicking the Create/Save entry button, your changes will be lost."),
-                  _t("Click OK to continue, or click Cancel to stay on this page.") ]
-
       message = link_to _t("Add"), { :controller => "/admin/#{related.to_resource}",
                                     :action => 'new',
                                     :back_to => back_to,
-                                    :selected => related_fk },
-                                    :confirm => confirm.join("\n\n") if current_user.can?('create', related)
+                                    :selected => related_fk }
 
       render "admin/templates/belongs_to",
              :resource => @resource,
