@@ -51,7 +51,7 @@ fr:
   "New": "Nouveau"
   "New %{resource}": "Nouveau %{resource}"
   "Next": "Suivant"
-  "No %{resources} found":
+  "No %{resources} found": "Aucun %{resources} trouvé"
 
   "Options": "Options"
 
