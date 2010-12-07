@@ -77,8 +77,6 @@ ca:
   "Unrelate %{resource}?": "Deslligar %{resource}?"
   "Up": "Pujar"
 
-  "You're adding a new %{resource_from}": "Estàs afegint un nou %{resource_from}."
-  "You're adding a new %{resource_from} to %{resource_to}": "Estàs afegint un nou %{resource_from} a %{resource_to}."
   "You're not allowed to remove Typus Users": "No pots esborrar usuaris de typus."
   "You're not allowed to toggle status": "No pots canviar el teu estat."
   "You can update your password at": "Pots actualitzar la teva contrasenya a"

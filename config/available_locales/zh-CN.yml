@@ -79,8 +79,6 @@ zh-CN:
   "View all %{attribute}": "显示所有 %{attribute}"
   "View site": "访问网站"
 
-  "You're adding a new %{resource_from}": "你正在添加新 %{resource_from}"
-  "You're adding a new %{resource_from} to %{resource_to}": "你正在添加新 %{resource_from} 和 %{resource_to} 关联"
   "You're not allowed to toggle status": "你不被允许改变状态"
   "You're not allowed to remove Typus Users": "你不被允许删除Typus用户"
   "You're updating a %{resource_from}": "你正在更新 %{resource_from}"

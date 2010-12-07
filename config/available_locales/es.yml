@@ -77,8 +77,6 @@ es:
   "Unrelate %{resource}?": "Desvincular %{resource}?"
   "Up": "Subir"
 
-  "You're adding a new %{resource_from}": "Estás añadiendo un nuevo %{resource_from}."
-  "You're adding a new %{resource_from} to %{resource_to}": "Estás añadiendo un nuevo %{resource_from} a %{resource_to}."
   "You're not allowed to remove Typus Users": "No se te permite borrar usuarios de typus."
   "You're not allowed to toggle status": "No se te permite cambiar tu estado."
   "You can update your password at": "Puedes actualizar tu contraseña en"

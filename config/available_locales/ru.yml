@@ -84,8 +84,6 @@ ru:
   "You can't change your role": "Вы не можете менять свою собственную роль"
   "You can't remove yourself": "Вы не можете удалить себя"
   "You can't toggle your status": "Вы не можете менять свой статус"
-  "You're adding a new %{resource_from}": "Вы добавляете новый %{resource_from}."
-  "You're adding a new %{resource_from} to %{resource_to}": "Вы добавляете новый %{resource_from} для %{resource_to}."
   "You're updating a %{resource_from}": "Вы редактируете %{resource_from}."
   "You're updating a %{resource_from} for %{resource_to}": "Вы редактируете %{resource_from} для %{resource_to}."
   "You're not allowed to remove Typus Users": "Вам не позволено удалять системных пользователей"

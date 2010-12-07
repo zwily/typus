@@ -81,8 +81,6 @@ el:
   "View all %{attribute}": "Εμφάνιση όλων των χαρακτηριστικών τύπου %{attribute}"
   "View site": "Εμφάνιση ιστοσελίδας"
 
-  "You're adding a new %{resource_from}": "Προσθέτετε μια νέα %{resource_from}"
-  "You're adding a new %{resource_from} to %{resource_to}": "Προσθέτετε μια νέα %{resource_from}"
   "You're not allowed to toggle status": "Δεν σας επιτρέπεται αλλαγή της κατάστασης"
   "You're not allowed to remove Typus Users": "Δεν σας επιτρέπεται η διαγραφή χρηστών του Typus"
   "You're updating a %{resource_from}": "Ανανεώνετε έναν πόρο τύπου %{resource_from} "

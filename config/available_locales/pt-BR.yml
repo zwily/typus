@@ -80,8 +80,6 @@ pt-BR:
   "View all %{attribute}":
   "View site": "Ver site"
 
-  "You're adding a new %{resource_from} to %{resource_to}": "Você está adicionando um novo %{resource_from} a %{resource_to}."
-  "You're adding a new %{resource_from}": "Você está adicionando um novo %{resource_from}."
   "You're updating a %{resource_from} for %{resource_to}": "Você está atualizando um %{resource_from} de %{resource_to}."
   "You're updating a %{resource_from}": "Você está atualizando um %{resource_from}."
   "You can't toggle your status": "Você não pode mudar seu status."

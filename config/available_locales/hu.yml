@@ -80,8 +80,6 @@ hu:
   "View all %{attribute}":
   "View site": "A weboldal megtekintése"
 
-  "You're adding a new %{resource_from}": "%{resource_from} hozzáadása"
-  "You're adding a new %{resource_from} to %{resource_to}": "%{resource_from} hozzáadása %{resource_to} rekordhoz"
   "You're not allowed to toggle status": "Nincsen jogod változtatni a státuszon"
   "You're not allowed to remove Typus Users": "Nincsen jogod törölni Typus felhasználókat"
   "You're updating a %{resource_from}": "%{resource_from} frissítése"

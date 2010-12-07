@@ -79,8 +79,6 @@
   "View all %{attribute}":
   "View site":
 
-  "You're adding a new %{resource_from}":
-  "You're adding a new %{resource_from} to %{resource_to}":
   "You're not allowed to toggle status":
   "You're not allowed to remove Typus Users":
   "You're updating a %{resource_from}":
