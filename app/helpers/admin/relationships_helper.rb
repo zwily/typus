@@ -165,7 +165,10 @@ module Admin
       end
 
       default = { :controller => "/admin/#{related.to_resource}", :action => 'new', :back_to => back_to }
-      message = link_to _t("Add"), default.merge(options)
+
+      if current_user.can?('create', related)
+        message = link_to _t("Add"), default.merge(options)
+      end
 
       render "admin/templates/belongs_to",
              :resource => @resource,
