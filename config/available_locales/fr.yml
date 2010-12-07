@@ -81,6 +81,7 @@ fr:
   "You can't toggle your status": "Vous ne pouvez pas basculer votre statut"
 
   "%{current_user_role} is not able to perform this action. (%{action})":
+  "%{errors} prohibited this page from being saved:":
   "%{model} successfully created": "%{model} correctement créé(e)."
   "%{model} successfully removed": "%{model} correctement supprimé(e)."
   "%{model} successfully updated": "%{model} correctement mis(e)-à-jour."

@@ -78,6 +78,7 @@ de:
   "You can't toggle your status": "Sie k&ouml;nnen Ihren Status nicht umschalten"
 
   "%{current_user_role} is not able to perform this action. (%{action})":
+  "%{errors} prohibited this page from being saved:":
   "%{model} successfully created": "%{model} erfolgreich erstellt"
   "%{model} successfully removed": "%{model} erfolgreich gel&ouml;scht"
   "%{model} successfully updated": "%{model} erfolgreich ge&auml;ndert"

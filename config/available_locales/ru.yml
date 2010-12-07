@@ -78,6 +78,7 @@ ru:
   "You can't toggle your status": "Вы не можете менять свой статус"
 
   "%{current_user_role} is not able to perform this action. (%{action})":
+  "%{errors} prohibited this page from being saved:":
   "%{model} successfully created": "%{model} создан"
   "%{model} successfully removed": "%{model} удален"
   "%{model} successfully updated": "%{model} успешно обновлен"
