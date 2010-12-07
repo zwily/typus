@@ -20,7 +20,7 @@ fr:
   "Edit": "Éditer"
   "Edit %{resource}": "Éditer %{resource}"
   "Enter your email below to create the first user": "Entrez votre adresse email pour créer le premier utilisateur"
-  "Export as %{format}": "Exporter en %{format}"
+  "Export as %{mime}": "Exporter en %{mime}"
 
   "False": "Faux"
   "Filter": "Filtrer"
