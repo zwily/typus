@@ -27,7 +27,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
       get :toggle, { :id => @typus_user_editor.id, :field => 'status' }
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Typus user status changed.", flash[:notice]
+      assert_equal "Typus user successfully updated.", flash[:notice]
     end
 
     should "not be able to destroy himself" do
