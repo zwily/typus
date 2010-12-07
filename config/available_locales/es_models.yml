@@ -1,10 +1,10 @@
 es:
   activerecord:
     models:
-      typus_user: Usuario
+      admin_user:
     attributes:
-      typus_user:
-        email: "Correo electronico"
+      admin_user:
+        email: "Correo electrónico"
         first_name: "Nombre"
         last_name: "Apellidos"
         password: "Contraseña"

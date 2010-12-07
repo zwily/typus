@@ -1,9 +1,9 @@
 ru:
   activerecord:
     models:
-      typus_user:
+      admin_user:
     attributes:
-      typus_user:
+      admin_user:
         email:
         first_name:
         last_name:

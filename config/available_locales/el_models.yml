@@ -1,9 +1,9 @@
 el:
   activerecord:
     models:
-      typus_user: "Χρήστης Typus"
+      admin_user:
     attributes:
-      typus_user:
+      admin_user:
         email:
         first_name: "Όνομα"
         last_name: "Επώνυμο"

@@ -1,12 +1,12 @@
 it:
   activerecord:
     models:
-      typus_user: "Utente"
+      admin_user:
     attributes:
-      typus_user:
+      admin_user:
+        email:
         first_name: "Nome"
         last_name: "Cognome"
-        email: "E-mail"
         role: "Ruolo"
         status: "Stato"
         preferences: "Preferenze"
