@@ -44,7 +44,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def new
-    check_ownership_of_referal_item
+    check_ownership_of_referral_item
 
     item_params = params.dup
     rejections = %w(controller action resource resource_id back_to selected)

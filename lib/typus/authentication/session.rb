@@ -118,7 +118,7 @@ module Typus
         end
       end
 
-      def check_ownership_of_referal_item
+      def check_ownership_of_referral_item
         return unless params[:resource] && params[:resource_id]
         klass = params[:resource].typus_constantize
         return if !klass.typus_user_id?
