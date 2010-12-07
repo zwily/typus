@@ -79,7 +79,6 @@ ca:
 
   "You can update your password at": "Pots actualitzar la teva contrasenya a"
   "You can't change your role": "No pots canviar-te tu mateix el rol."
-  "You can't remove yourself": "No et pots eliminar a tu mateix."
   "You can't toggle your status": "No pots canviar-te l'estat."
 
   "View all %{attribute}":

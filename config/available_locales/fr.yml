@@ -85,7 +85,6 @@ fr:
 
   "You can update your password at": "Vous pouvez modifier votre mot de passe ici"
   "You can't change your role": "Vous ne pouvez pas changer votre propre rôle."
-  "You can't remove yourself": "Vous ne pouvez pas supprimer votre propre compte"
   "You can't toggle your status": "Vous ne pouvez pas basculer votre statut"
 
   "%{current_user_role} is not able to perform this action. (%{action})":

@@ -79,7 +79,6 @@ es:
 
   "You can update your password at": "Puedes actualizar tu contraseña en"
   "You can't change your role": "No puedes cambiar tu propio rol."
-  "You can't remove yourself": "No te puedes eliminar a ti mismo."
   "You can't toggle your status": "No puedes cambiar tu estado."
 
   "View all %{attribute}":

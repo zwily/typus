@@ -81,7 +81,6 @@
 
   "You can update your password at":
   "You can't change your role":
-  "You can't remove yourself":
   "You can't toggle your status":
 
   "%{current_user_role} is not able to perform this action. (%{action})":

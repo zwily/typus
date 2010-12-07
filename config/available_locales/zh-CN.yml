@@ -81,7 +81,6 @@ zh-CN:
 
   "You can update your password at": "你可以更新你的密码"
   "You can't change your role": "你不能修改你的角色"
-  "You can't remove yourself": "你不能删除自己"
   "You can't toggle your status": "你不能修改自己的状态"
 
   "%{current_user_role} is not able to perform this action. (%{action})": "%{current_user_role} 不能执行这个动作. (%{action})"

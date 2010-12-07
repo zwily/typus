@@ -82,7 +82,6 @@ ru:
 
   "You can update your password at": "Вы можете установить свой пароль на"
   "You can't change your role": "Вы не можете менять свою собственную роль"
-  "You can't remove yourself": "Вы не можете удалить себя"
   "You can't toggle your status": "Вы не можете менять свой статус"
 
   "%{current_user_role} is not able to perform this action. (%{action})":

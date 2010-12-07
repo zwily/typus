@@ -83,7 +83,6 @@ el:
 
   "You can update your password at": "Μπορείτε να ανανεώσετε τον κωδικό σας παρακάτω"
   "You can't change your role": "Δεν έχετε την δυνατότητα να αλλάξετε τον ρόλο σας"
-  "You can't remove yourself": "Δεν επιτρέπεται η διαγραφή του εαυτού σας"
   "You can't toggle your status": "Δεν επιτρέπεται η αλλαγή της κατάστασής σας"
 
   "%{current_user_role} is not able to perform this action. (%{action})": "Χρήστες τύπου %{current_user_role} δεν είναι δυνατόν να εκτελέσουν αυτή την ενέργεια. (%{action})"

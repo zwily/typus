@@ -93,7 +93,6 @@ it:
 
   "You can update your password at": "Puoi aggiornare la tua password qui"
   "You can't change your role": "Non puoi cambiare il tuo ruolo"
-  "You can't remove yourself": "Non puoi eliminare il tuo stesso account"
   "You can't toggle your status": "Non puoi modificare il tuo stato"
   "Your new password is %{password}": "La tua nuova password è %{password}"
 
