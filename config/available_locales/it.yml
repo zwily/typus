@@ -102,7 +102,6 @@ it:
   "Your new password is %{password}": "La tua nuova password è %{password}"
 
   "%{current_user_role} is not able to perform this action. (%{action})":
-  "%{model} filtered by %{filtered_by}": "%{model} filtrato per %{filtered_by}"
   "%{model} successfully created": "Creazione avvenuta con successo"
   "%{model} successfully removed": "Eliminazione avvenuta con successo"
   "%{model} successfully updated": "Aggiornamento avvenuto con successo"

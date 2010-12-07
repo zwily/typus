@@ -90,7 +90,6 @@ de:
   "You can't toggle your status": "Sie k&ouml;nnen Ihren Status nicht umschalten"
 
   "%{current_user_role} is not able to perform this action. (%{action})":
-  "%{model} filtered by %{filtered_by}": "%{model} gefiltert nach %{filtered_by}"
   "%{model} successfully created": "%{model} erfolgreich erstellt"
   "%{model} successfully removed": "%{model} erfolgreich gel&ouml;scht"
   "%{model} successfully updated": "%{model} erfolgreich ge&auml;ndert"

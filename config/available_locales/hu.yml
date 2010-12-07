@@ -90,7 +90,6 @@ hu:
   "You can't toggle your status": "Nincs jogod változtatni a státuszodat"
 
   "%{current_user_role} is not able to perform this action. (%{action})":
-  "%{model} filtered by %{filtered_by}": "%{model} szűrve %{filtered_by}"
   "%{model} successfully created": "%{model} sikeresen létrehozva"
   "%{model} successfully removed": "%{model} sikeresen törölve"
   "%{model} successfully updated": "%{model} sikereseb frissítve"

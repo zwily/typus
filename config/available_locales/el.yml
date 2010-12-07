@@ -91,7 +91,6 @@ el:
   "You can't toggle your status": "Δεν επιτρέπεται η αλλαγή της κατάστασής σας"
 
   "%{current_user_role} is not able to perform this action. (%{action})": "Χρήστες τύπου %{current_user_role} δεν είναι δυνατόν να εκτελέσουν αυτή την ενέργεια. (%{action})"
-  "%{model} filtered by %{filtered_by}": "Μοντέλα %{model} φιλτραρισμένα ως προς %{filtered_by}"
   "%{model} successfully created": "Το μοντέλο %{model} δημιουργήθηκε επιτυχώς"
   "%{model} successfully removed": "Το μοντέλο %{model} απομακρύνθηκε επιτυχώς"
   "%{model} successfully updated": "Το μοντέλο %{model} ανανεώθηκε επιτυχώς"

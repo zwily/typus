@@ -90,7 +90,6 @@ ru:
   "You're not allowed to toggle status": "Вам не позволено менять статус"
 
   "%{current_user_role} is not able to perform this action. (%{action})":
-  "%{model} filtered by %{filtered_by}":
   "%{model} successfully created": "%{model} создан"
   "%{model} successfully removed": "%{model} удален"
   "%{model} successfully updated": "%{model} успешно обновлен"

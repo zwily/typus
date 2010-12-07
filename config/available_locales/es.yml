@@ -90,7 +90,6 @@ es:
   "View site": "Ver web"
 
   "%{current_user_role} is not able to perform this action. (%{action})":
-  "%{model} filtered by %{filtered_by}": "%{model} filtrados por %{filtered_by}"
   "%{model} successfully created": "%{model} satisfactoriamente creado."
   "%{model} successfully removed": "%{model} satisfactoriamente eliminado."
   "%{model} successfully updated": "%{model} satisfactoriamente actualizado."
