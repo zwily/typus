@@ -12,12 +12,10 @@
   <% items.each do |item| %>
     <tr class="<%= cycle('even', 'odd') %>" id="<%= dom_id(item) %>">
       <% table_fields_for_item(item, fields, link_options).each do |field| %>
-        <%= field %>
+        <td><%= field %></td>
       <% end %>
       <td width="100px" align="right">
-        <%= table_default_action(model, item) %>
-        /
-        <%= table_action(model, item) %>
+        <%= table_actions(model, item) %>
       </td>
     </tr>
   <% end %>

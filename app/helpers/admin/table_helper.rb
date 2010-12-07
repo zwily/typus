@@ -62,14 +62,21 @@ module Admin
       end
     end
 
+    def table_actions(model, item, connector = " / ")
+      Array.new.tap do |data|
+        data << table_default_action(model, item)
+        data << table_action(model, item)
+      end.compact.join(connector).html_safe
+    end
+
     def table_default_action(model, item)
+      default_action = item.class.typus_options_for(:default_action_on_item)
       action = if model.typus_user_id? && current_user.is_not_root?
-                 # If there's a typus_user_id column on the table and logged user is not root ...
-                 item.owned_by?(current_user) ? item.class.typus_options_for(:default_action_on_item) : "show"
+                 item.owned_by?(current_user) ? default_action : "show"
                elsif current_user.cannot?("edit", model)
                  'show'
                else
-                 item.class.typus_options_for(:default_action_on_item)
+                 default_action
                end
 
       options = { :controller => "/admin/#{item.class.to_resource}",
@@ -79,17 +86,7 @@ module Admin
       link_to _t(action.capitalize), options
     end
 
-    #--
-    # This controls the action to perform. If we are on a model list we
-    # will remove the entry, but if we inside a model we will remove the
-    # relationship between the models.
-    #
-    # Only shown is the user can destroy/unrelate items.
-    #++
     def table_action(model, item)
-
-      condition = true
-
       case params[:action]
       when "index"
         action = "trash"
@@ -100,7 +97,7 @@ module Admin
         options = { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }
       end
 
-      title = _t(action.titleize)
+      condition = true
 
       case params[:action]
       when 'index'
@@ -111,55 +108,42 @@ module Admin
                     else
                       current_user.can?('destroy', model)
                     end
-        confirm = _t("Remove %{resource}?", :resource => model.model_name.human)
-      when 'edit', 'update'
-        confirm = _t("Unrelate %{resource}?", :resource => model.model_name.human)
       when 'show'
-        # If we are showing content, we only can relate and unrelate if we are
-        # the owners of the owner record.
-        # If the owner record doesn't have a foreign key (Typus.user_fk) we look
-        # each item to verify the ownership.
         condition = if @resource.typus_user_id? && current_user.is_not_root?
                       @item.owned_by?(current_user)
                     end
-        confirm = _t("Unrelate %{resource}?", :resource => model.model_name.human)
       end
+
+      confirm = _t("#{action.titleize} %{resource}?", :resource => model.model_name.human)
 
       if condition
-        link_to _t(action.titleize), options, :title => title, :confirm => confirm, :method => method
+        link_to _t(action.titleize), options, :title => _t(action.titleize), :confirm => confirm, :method => method
       end
-
     end
 
     def table_belongs_to_field(attribute, item)
-      att_value = item.send(attribute)
-      content = "&mdash;".html_safe
-
-      unless att_value.nil?
-        content = att_value.to_label
+      if att_value = item.send(attribute)
         action = item.send(attribute).class.typus_options_for(:default_action_on_item)
         if current_user.can?(action, att_value.class.name)
-          content = link_to content, :controller => "/admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id
+          link_to att_value.to_label, :controller => "/admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id
+        else
+          att_value.to_label
         end
+      else
+        "&mdash;".html_safe
       end
-
-      content_tag(:td, content)
     end
 
     def table_has_and_belongs_to_many_field(attribute, item)
-      content = item.send(attribute).map { |i| i.to_label }.join(", ")
-      content_tag(:td, content)
+      item.send(attribute).map { |i| i.to_label }.join(", ")
     end
 
     def table_string_field(attribute, item, link_options = {})
-      raw_content = item.send(attribute)
-      content = raw_content.blank? ? "&#151;".html_safe : raw_content
-      content_tag(:td, content, :class => attribute)
+      (raw_content = item.send(attribute)).present? ? raw_content : "&#151;".html_safe
     end
 
     def table_selector(attribute, item)
-      raw_content = item.mapping(attribute)
-      content_tag(:td, raw_content, :class => attribute)
+      item.mapping(attribute)
     end
 
     def table_file_field(attribute, item, link_options = {})
@@ -169,28 +153,25 @@ module Admin
       has_file_preview = item.send(attribute).styles.member?(file_preview)
       file_preview_is_image = item.send("#{attribute}_content_type") =~ /^image\/.+/
 
-      content = if has_file_preview && file_preview_is_image
-                  render "admin/helpers/preview",
-                         :attribute => attribute,
-                         :attachment => attribute,
-                         :content => item.to_label,
-                         :file_preview_is_image => file_preview_is_image,
-                         :has_file_preview => has_file_preview,
-                         :href => item.send(attribute).url(file_preview),
-                         :item => item
-                else
-                  link_to item.send(attribute), item.send(attribute).url
-                end
-
-      content_tag(:td, content)
+      if has_file_preview && file_preview_is_image
+        render "admin/helpers/preview",
+               :attribute => attribute,
+               :attachment => attribute,
+               :content => item.to_label,
+               :file_preview_is_image => file_preview_is_image,
+               :has_file_preview => has_file_preview,
+               :href => item.send(attribute).url(file_preview),
+               :item => item
+      else
+        link_to item.send(attribute), item.send(attribute).url
+      end
     end
 
     def table_tree_field(attribute, item)
-      content = item.parent ? item.parent.to_label : "&#151;".html_safe
-      content_tag(:td, content)
+      item.parent ? item.parent.to_label : "&#151;".html_safe
     end
 
-    def table_position_field(attribute, item)
+    def table_position_field(attribute, item, connector = " / ")
       html_position = []
 
       { :move_higher => "Up", :move_lower => "Down" }.each do |key, value|
@@ -201,43 +182,38 @@ module Admin
         end
       end
 
-      content = html_position.join(" / ").html_safe
-      content_tag(:td, content)
+      html_position.join(connector).html_safe
     end
 
     def table_datetime_field(attribute, item, link_options = {})
-      content = if item.send(attribute).nil?
-                  item.class.typus_options_for(:nil)
-                else
-                  I18n.localize(item.send(attribute), :format => item.class.typus_date_format(attribute))
-                end
-
-      content_tag(:td, content)
+      if item.send(attribute).nil?
+        item.class.typus_options_for(:nil)
+      else
+        I18n.localize(item.send(attribute), :format => item.class.typus_date_format(attribute))
+      end
     end
 
     def table_boolean_field(attribute, item)
       boolean_hash = item.class.typus_boolean(attribute).invert
       status = item.send(attribute)
 
-      content = if status.nil?
-                  Typus::Resources.human_nil
-                else
-                  message = _t(boolean_hash[status.to_s])
-                  options = { :controller => "/admin/#{item.class.to_resource}",
-                              :action => "toggle",
-                              :id => item.id,
-                              :field => attribute.gsub(/\?$/,'') }
-                  confirm = _t("Change %{attribute}?",
-                               :attribute => item.class.human_attribute_name(attribute).downcase)
-                  link_to message, options, :confirm => confirm
-                end
-
-      content_tag(:td, content)
+      if status.nil?
+        Typus::Resources.human_nil
+      else
+        message = _t(boolean_hash[status.to_s])
+        options = { :controller => "/admin/#{item.class.to_resource}",
+                    :action => "toggle",
+                    :id => item.id,
+                    :field => attribute.gsub(/\?$/, '') }
+        confirm = _t("Change %{attribute}?",
+                     :attribute => item.class.human_attribute_name(attribute).downcase)
+        link_to message, options, :confirm => confirm
+      end
     end
 
     def table_transversal(attribute, item)
       _attribute, virtual = attribute.split(".")
-      content_tag(:td, item.send(_attribute).send(virtual))
+      item.send(_attribute).send(virtual)
     end
 
   end
