@@ -1,3 +1,6 @@
+# Portuguese (pt-BR) translations for Typus by:
+# - George Guimarães <http://github.com/georgeguimaraes>
+
 pt-BR:
   activerecord:
     models:

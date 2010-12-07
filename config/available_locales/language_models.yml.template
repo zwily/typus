@@ -1,4 +1,7 @@
-ru:
+# <language> translations for Typus (template)
+# by <your_name> <contact_form>
+
+<language>:
   activerecord:
     models:
       admin_user:

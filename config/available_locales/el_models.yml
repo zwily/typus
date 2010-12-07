@@ -1,3 +1,6 @@
+# Greek (el) translation for Typus (template)
+# by Spyros Livathinos <livathinos.spyros@gmail.com>
+
 el:
   activerecord:
     models:
