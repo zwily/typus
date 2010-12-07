@@ -20,7 +20,6 @@ ca:
   "Edit": "Editar"
   "Edit %{resource}": "Edit %{resource}"
   "Enter your email below to create the first user": "Introdueix el teu email per crear el primer usuari."
-  "Error! Typus User or role doesn't exist": "Error! Typus User o el rol no existixen."
 
   "False": "Fals"
   "Filter": "Filtrar"

@@ -20,7 +20,6 @@ hu:
   "Edit": "Szerkesztés"
   "Edit %{resource}": "Szerkesztés %{resource}"
   "Enter your email below to create the first user": "Írd be az e-mail címed az első felhasználó létrehozásához"
-  "Error! Typus User or role doesn't exist": "Hiba! Typus felhasználó vagy a jogosultság nem létezik"
 
   "False": "Hamis"
   "Filter":

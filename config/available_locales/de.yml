@@ -20,7 +20,6 @@ de:
   "Edit": "Bearbeiten"
   "Edit %{resource}": "Bearbeiten %{resource}"
   "Enter your email below to create the first user": "Geben Sie Ihre Email Adresse unten ein, um den ersten Benutzer zu erstellen"
-  "Error! Typus User or role doesn't exist": "Fehler: Typus Benutzer oder Rolle existiert nicht"
 
   "False": "Falsch"
   "Filter": "Filter"
