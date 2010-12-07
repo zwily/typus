@@ -58,6 +58,7 @@ fr:
   "Save %{resource}": "Sauvegarder %{resource}"
   "Search": "Recherche"
   "Show": "Voir"
+  "Show all dates":
   "Show %{resource}": "Voir %{resource}"
   "Show by %{attribute}": "Afficher par %{attribute}"
   "Sign in": "Entrer"

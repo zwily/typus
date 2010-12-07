@@ -55,6 +55,7 @@ el:
   "Save %{resource}": "Αποθήκευση %{resource}"
   "Search": "Αναζήτηση"
   "Show": "Εμφάνιση"
+  "Show all dates":
   "Show %{resource}": "Εμφάνιση %{resource}"
   "Sign in": "Είσοδος"
   "Sign out": "Έξοδος"

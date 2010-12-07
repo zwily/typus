@@ -55,6 +55,7 @@ zh-CN:
   "Save %{resource}": "保存 %{resource}"
   "Search": "搜索"
   "Show": "显示"
+  "Show all dates":
   "Show %{resource}": "显示 %{resource}"
   "Sign in": "登录"
   "Sign out": "登出"

@@ -56,6 +56,7 @@ ca:
   "Save %{resource}": "Guardar %{resource}"
   "Search": "Cercar"
   "Show": "Mostrar"
+  "Show all dates":
   "Show %{resource}": "Mostrar %{resource}"
   "Sign in": "Entrar"
   "Sign out": "Sortir"
