@@ -57,6 +57,7 @@ ru:
   "Search": "Поиск"
   "Show": "Показать"
   "Show all dates":
+  "Show by %{attribute}":
   "Show %{resource}": "Показать %{resource}"
   "Sign in": "Войти"
   "Sign out": "Выйти"

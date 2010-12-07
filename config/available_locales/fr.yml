@@ -59,6 +59,7 @@ fr:
   "Search": "Recherche"
   "Show": "Voir"
   "Show all dates":
+  "Show by %{attribute}":
   "Show %{resource}": "Voir %{resource}"
   "Show by %{attribute}": "Afficher par %{attribute}"
   "Sign in": "Entrer"

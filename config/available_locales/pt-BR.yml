@@ -57,6 +57,7 @@ pt-BR:
   "Search": "Busca"
   "Show": "Mostrar"
   "Show all dates":
+  "Show by %{attribute}":
   "Show %{resource}": "Mostrar %{resource}"
   "Sign in": "Entrar"
   "Sign out": "Sair"

@@ -57,6 +57,7 @@ hu:
   "Search": "Keresés"
   "Show": "Mutatás"
   "Show all dates":
+  "Show by %{attribute}":
   "Show %{resource}": "%{resource} mutatása"
   "Sign in": "Bejelentkezés"
   "Sign out": "Kijelentkezés"

@@ -65,7 +65,7 @@ it:
   "Search": "Cerca"
   "Show": "Mostra"
   "Show all dates": "Filtra per data"
-  "Show by %{attribute}" : "Filtra per %{attribute}"
+  "Show by %{attribute}": "Filtra per %{attribute}"
   "Show %{resource}": "Mostra %{resource}"
   "Sign in": "Accedi"
   "Sign out": "Esci"

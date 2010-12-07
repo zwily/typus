@@ -57,6 +57,7 @@ de:
   "Search": "Suchen"
   "Show": "Anzeigen"
   "Show all dates":
+  "Show by %{attribute}":
   "Show %{resource}": "Anzeigen %{resource}"
   "Sign in": "Anmelden"
   "Sign out": "Abmelden"
