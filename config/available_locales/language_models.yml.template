@@ -1,5 +1,5 @@
-# <language> translations for Typus (template)
-# by <your_name> <contact_form>
+# <language> translations for Typus
+# - <your_name> <contact_form>
 
 <language>:
   activerecord:
