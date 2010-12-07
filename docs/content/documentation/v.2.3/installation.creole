@@ -5,7 +5,7 @@
 To install **Typus** as a {{{plugin}}}:
 
 {{{
-$ rails plugin install git://github.com/fesplugas/typus.git -b 2-3-unstable
+$ rails plugin install https://github.com/fesplugas/typus.git -b 2-3-unstable
 }}}
 
 <div class="important">

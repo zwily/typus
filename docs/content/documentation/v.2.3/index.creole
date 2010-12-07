@@ -19,7 +19,7 @@ parent_link: /documentation/
 Install the plugin:
 
 {{{
-$ script/plugin install git://github.com/fesplugas/typus.git -r 2-3-stable
+$ script/plugin install https://github.com/fesplugas/typus.git -r 2-3-stable
 }}}
 
 Run the generator:

@@ -41,7 +41,7 @@ Add **Typus** to your {{{Gemfile}}}.
 gem 'typus'
 
 # Bundle edge typus instead:
-# gem 'typus', :git => 'git://github.com/fesplugas/typus.git'
+# gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
 }}}
 
 Update your bundle.
