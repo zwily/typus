@@ -63,7 +63,6 @@ fr:
 
   "Save %{resource}": "Sauvegarder %{resource}"
   "Search": "Recherche"
-  "Setup": "Configurer"
   "Show": "Voir"
   "Show %{resource}": "Voir %{resource}"
   "Show by %{attribute}": "Afficher par %{attribute}"

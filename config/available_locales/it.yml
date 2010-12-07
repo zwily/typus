@@ -68,7 +68,6 @@ it:
 
   "Save %{resource}": "Salva %{resource}"
   "Search": "Cerca"
-  "Setup": "Setup"
   "Show": "Mostra"
   "Show all dates": "Filtra per data"
   "Show by %{attribute}" : "Filtra per %{attribute}"
