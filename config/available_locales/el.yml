@@ -69,7 +69,6 @@ el:
   "Sign up": "Εγγραφή"
   "System Users Administration": "Διαχείριση χρηστών συστήματος"
 
-  "That doesn't seem like a valid email address":
   "There are no %{records}": "Δεν υπάρχουν %{records}"
   "There are no %{records} under this filter": "Δεν υπάρχουν εγγραφές %{records} υπό το παρόν φίλτρο"
   "Today": "Σήμερα"
