@@ -11,7 +11,6 @@ hu:
   "Are you sure you want to sign out and end your session?": "Biztosan ki akarsz lépni?"
 
   "Change %{attribute}?": "Megváltoztatod ezt: %{attribute}?"
-  "Click OK to continue, or click Cancel to stay on this page": "Kattints az OK gombra a továbblépéshez, vagy a mégse gombbal maradhatsz a mostani oldalon"
   "Create %{resource}": "%{resource} létrehozása"
 
   "Dashboard": "Admin nyitólap"

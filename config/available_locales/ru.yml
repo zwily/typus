@@ -11,7 +11,6 @@ ru:
   "Are you sure you want to sign out and end your session?":
 
   "Change %{attribute}?": "Изменить %{attribute}?"
-  "Click OK to continue, or click Cancel to stay on this page": "нажмите Ок, чтобы продолжить или Отмена, чтобы остаться на этой странице."
   "Create %{resource}": "Создать %{resource}"
 
   "Dashboard": "Обзор"
