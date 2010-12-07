@@ -10,9 +10,7 @@ de:
   "Are you sure?":
   "Are you sure you want to sign out and end your session?": "Wollen Sie sich abmelden und die Sitzung beenden?"
 
-  "Change password": "Passwort &auml;ndern"
   "Change %{attribute}?": "%{attribute}&auml;ndern?"
-  "Checked if active": "Angekreuzt wenn activiert"
   "Click OK to continue, or click Cancel to stay on this page": "Klicken Sie OK zum Fortfahren oder Abbrechen um auf dieser Seite zu bleiben"
   "Create %{resource}": "Erstellen %{resource}"
 

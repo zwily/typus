@@ -11,8 +11,6 @@ zh-CN:
   "Are you sure you want to sign out and end your session?": "你是否确认登出并结束本次会话?"
 
   "Change %{attribute}?": "改变 %{attribute}"
-  "Change password": "修改密码"
-  "Checked if active": "检查是否已激活"
   "Click OK to continue, or click Cancel to stay on this page": "点击确定离开页面，或点击取消留在本页面"
   "Create %{resource}": "创建 %{resource}"
 

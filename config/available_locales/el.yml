@@ -11,8 +11,6 @@ el:
   "Are you sure you want to sign out and end your session?": "Είσαστε σίγουροι ότι επιθυμείτε να αποσυνδεθείτε και να τερματίσετε το session;"
 
   "Change %{attribute}?": "Τροποποίηση του χαρακτηριστικού %{attribute};"
-  "Change password": "Αλλαγή κωδικού"
-  "Checked if active": "Σημασμένο εάν είναι ενεργό"
   "Click OK to continue, or click Cancel to stay on this page": "Επιλέξτε ΟΚ για συνέχεια ή Cancel για να παραμείνετε στην παρούσα σελίδα"
   "Create %{resource}": "Δημιουργία %{resource}"
   "Create one now": "Δημιουργία τώρα"
