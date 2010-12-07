@@ -81,7 +81,6 @@ el:
   "View all %{attribute}": "Εμφάνιση όλων των χαρακτηριστικών τύπου %{attribute}"
   "View site": "Εμφάνιση ιστοσελίδας"
 
-  "You're not allowed to toggle status": "Δεν σας επιτρέπεται αλλαγή της κατάστασης"
   "You're updating a %{resource_from}": "Ανανεώνετε έναν πόρο τύπου %{resource_from} "
   "You're updating a %{resource_from} for %{resource_to}": "Ανανεώνετε έναν πόρο από %{resource_from} σε %{resource_to}"
   "You can update your password at": "Μπορείτε να ανανεώσετε τον κωδικό σας παρακάτω"

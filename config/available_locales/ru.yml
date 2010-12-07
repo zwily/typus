@@ -86,7 +86,6 @@ ru:
   "You can't toggle your status": "Вы не можете менять свой статус"
   "You're updating a %{resource_from}": "Вы редактируете %{resource_from}."
   "You're updating a %{resource_from} for %{resource_to}": "Вы редактируете %{resource_from} для %{resource_to}."
-  "You're not allowed to toggle status": "Вам не позволено менять статус"
 
   "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} successfully created": "%{model} создан"
