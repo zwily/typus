@@ -84,7 +84,7 @@ pt-BR:
   "Today": "Hoje"
   "True": "Verdadeiro"
 
-  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Desvincular %{unrelate_model} de %{unrelate_model_from}?"
+  "Unrelate %{resource}?": "Desvincular %{resource}?"
   "Up": "Subir"
 
   "View all %{attribute}":

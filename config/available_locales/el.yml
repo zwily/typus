@@ -85,7 +85,7 @@ el:
   "Toggle is disabled":"Το toggle είναι απενεργοποιημένο"
   "True":"Σωστό"
 
-  "Unrelate %{unrelate_model} from %{unrelate_model_from}?":"Αποσυντονισμός του %{unrelate_model} από %{unrelate_model_from}"
+  "Unrelate %{resource}?":
   "Up":"Επάνω"
 
   "View all %{attribute}":"Εμφάνιση όλων των χαρακτηριστικών τύπου %{attribute}"

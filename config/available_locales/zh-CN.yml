@@ -82,7 +82,7 @@ zh-CN:
   "Toggle is disabled": "触发器被禁用"
   "True":
 
-  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "从 %{unrelate_model_from} 取消 %{unrelate_model} 关联?"
+  "Unrelate %{resource}?":
   "Up": "向上"
 
   "View all %{attribute}": "显示所有 %{attribute}"

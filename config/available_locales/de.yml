@@ -84,7 +84,7 @@ de:
   "Toggle is disabled": "Schalter ist deaktiviert"
   "True": "Richtig"
 
-  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Verkn&uuml;pfung zwischen %{unrelate_model} und %{unrelate_model_from}entfernen?"
+  "Unrelate %{resource}?":
   "Up": "Hoch"
 
   "View all %{attribute}":

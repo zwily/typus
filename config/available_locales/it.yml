@@ -94,8 +94,7 @@ it:
   "Trash": "Elimina"
   "True": "Vero"
 
-  "Unrelate": "Rimuovi relazione"
-  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Vuoi rimuovere la relazione tra %{unrelate_model} e %{unrelate_model_from}?"
+  "Unrelate %{resource}?":
   "Up": "Su"
 
   "View all %{attribute}": "Filtra per %{attribute}"

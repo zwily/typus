@@ -87,7 +87,7 @@ fr:
   "Toggle is disabled": "Le basculement est désactivé"
   "True": "Vrai"
 
-  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Dissocier %{unrelate_model} de %{unrelate_model_from} ?"
+  "Unrelate %{resource}?": "Dissocier %{resource}?"
   "Up": "Monter"
 
   "View all %{attribute}": "Voir tou(s/tes) %{attribute}"

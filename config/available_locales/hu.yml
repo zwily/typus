@@ -84,7 +84,7 @@ hu:
   "Toggle is disabled": "Toggle letitlva"
   "True": "Igaz"
 
-  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Unrelate %{unrelate_model} from %{unrelate_model_from}?"
+  "Unrelate %{resource}?":
   "Up": "Fel"
 
   "View all %{attribute}":

@@ -114,9 +114,7 @@ module Admin
         confirm = _t("Remove %{resource}?", :resource => model.model_name.human)
       when 'edit', 'update'
         # If we are editing content, we can relate and unrelate always!
-        confirm = _t("Unrelate %{unrelate_model} from %{unrelate_model_from}?",
-                     :unrelate_model => model.model_name.human,
-                     :unrelate_model_from => @resource.model_name.human)
+        confirm = _t("Unrelate %{resource}?", :resource => model.model_name.human)
       when 'show'
         # If we are showing content, we only can relate and unrelate if we are
         # the owners of the owner record.
@@ -125,9 +123,7 @@ module Admin
         condition = if @resource.typus_user_id? && current_user.is_not_root?
                       @item.owned_by?(current_user)
                     end
-        confirm = _t("Unrelate %{unrelate_model} from %{unrelate_model_from}?",
-                     :unrelate_model => model.model_name.human,
-                     :unrelate_model_from => @resource.model_name.human)
+        confirm = _t("Unrelate %{resource}?", :resource => model.model_name.human)
       end
 
       if condition

@@ -84,7 +84,7 @@ ru:
   "Toggle is disabled": "Переключение отключено"
   "True": "ВЕРНО"
 
-  "Unrelate %{unrelate_model} from %{unrelate_model_from}?": "Отсоединить %{unrelate_model} от %{unrelate_model_from}?"
+  "Unrelate %{resource}?":
   "Up": "Вверх"
 
   "View all %{attribute}":

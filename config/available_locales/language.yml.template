@@ -83,7 +83,7 @@
   "Toggle is disabled":
   "True":
 
-  "Unrelate %{unrelate_model} from %{unrelate_model_from}?":
+  "Unrelate %{resource}?":
   "Up":
 
   "View all %{attribute}":
