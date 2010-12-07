@@ -73,7 +73,6 @@ el:
   "There are no %{records}": "Δεν υπάρχουν %{records}"
   "There are no %{records} under this filter": "Δεν υπάρχουν εγγραφές %{records} υπό το παρόν φίλτρο"
   "Today": "Σήμερα"
-  "Toggle is disabled": "Το toggle είναι απενεργοποιημένο"
   "True": "Σωστό"
 
   "Unrelate %{resource}?":
