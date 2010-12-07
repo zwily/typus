@@ -145,6 +145,7 @@ module Typus
     def locales_mapping
       mapping = { "ca"    => "Català",
                   "de"    => "German",
+                  "el"    => "Greek",
                   "en"    => "English",
                   "es"    => "Español",
                   "fr"    => "Français",

@@ -42,6 +42,8 @@ template is not `_paperclip.html.erb`.
 [CHANGED] `action_after_save` by default is `index`. This has been changed
 after a usability test with a client.
 
+[NEW] Greek (el) translation. [Spyros Livathinos]
+
 [3.0.2]
 
 [FIXED] Use Arel to get the data on lists. After moving to will_paginate I

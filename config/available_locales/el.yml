@@ -1,7 +1,7 @@
 # Greek (el) translation for Typus (template)
 # by Spyros Livathinos <livathinos.spyros@gmail.com>
 
-<language>:
+el:
 
   "A valid token is required": "Απαιτείται έγκυρο token"
   "Actions": "Ενέργειες"
