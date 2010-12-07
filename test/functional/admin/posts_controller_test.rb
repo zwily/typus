@@ -453,11 +453,6 @@ title;status
         end
       end
 
-      should "render_index_and_show_trash_item_image" do
-        assert_response :success
-        assert_select '.trash', 'Trash'
-      end
-
     end
 
     context "New" do
@@ -529,12 +524,6 @@ title;status
         get :index
         assert_response :success
         assert_no_match /Add Post/, @response.body
-      end
-
-      should "render_index_and_not_show_trash_image" do
-        get :index
-        assert_response :success
-        assert_select ".trash", false
       end
 
     end
