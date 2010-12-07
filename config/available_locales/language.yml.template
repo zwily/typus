@@ -79,8 +79,6 @@
   "View all %{attribute}":
   "View site":
 
-  "You're updating a %{resource_from}":
-  "You're updating a %{resource_from} for %{resource_to}":
   "You can update your password at":
   "You can't change your role":
   "You can't remove yourself":

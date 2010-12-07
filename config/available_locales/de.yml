@@ -80,8 +80,6 @@ de:
   "View all %{attribute}":
   "View site": "Site anzeigen"
 
-  "You're updating a %{resource_from}": "Sie bearbeiten eine %{resource_from}"
-  "You're updating a %{resource_from} for %{resource_to}": "Sie bearbeiten eine %{resource_from} f&uuml; %{resource_to}"
   "You can update your password at": "Sie k7ouml;nnen Ihr Passwort &auml;ndern unter"
   "You can't change your role": "Sie k&ouml;nnen Ihre Rolle nicht &auml;ndern"
   "You can't remove yourself": "Sie k&ouml;nnen sich selbst nicht entfernen"

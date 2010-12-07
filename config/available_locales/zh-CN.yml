@@ -79,8 +79,6 @@ zh-CN:
   "View all %{attribute}": "显示所有 %{attribute}"
   "View site": "访问网站"
 
-  "You're updating a %{resource_from}": "你正在更新 %{resource_from}"
-  "You're updating a %{resource_from} for %{resource_to}": "你正在更新与 %{resource_to} 关联的 %{resource_from}  "
   "You can update your password at": "你可以更新你的密码"
   "You can't change your role": "你不能修改你的角色"
   "You can't remove yourself": "你不能删除自己"

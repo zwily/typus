@@ -84,8 +84,6 @@ ru:
   "You can't change your role": "Вы не можете менять свою собственную роль"
   "You can't remove yourself": "Вы не можете удалить себя"
   "You can't toggle your status": "Вы не можете менять свой статус"
-  "You're updating a %{resource_from}": "Вы редактируете %{resource_from}."
-  "You're updating a %{resource_from} for %{resource_to}": "Вы редактируете %{resource_from} для %{resource_to}."
 
   "%{current_user_role} is not able to perform this action. (%{action})":
   "%{model} successfully created": "%{model} создан"

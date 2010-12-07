@@ -80,8 +80,6 @@ pt-BR:
   "View all %{attribute}":
   "View site": "Ver site"
 
-  "You're updating a %{resource_from} for %{resource_to}": "Você está atualizando um %{resource_from} de %{resource_to}."
-  "You're updating a %{resource_from}": "Você está atualizando um %{resource_from}."
   "You can't toggle your status": "Você não pode mudar seu status."
   "You can't remove yourself": "Você não pode apagar a si mesmo."
   "You can update your password at": "Você pode atualizar sua senha em"

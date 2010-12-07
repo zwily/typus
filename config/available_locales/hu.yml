@@ -80,8 +80,6 @@ hu:
   "View all %{attribute}":
   "View site": "A weboldal megtekintése"
 
-  "You're updating a %{resource_from}": "%{resource_from} frissítése"
-  "You're updating a %{resource_from} for %{resource_to}": "%{resource_from} frissítése %{resource_to} rekordhoz"
   "You can update your password at": "Frissítheted a jelszavad"
   "You can't change your role": "Nincsen jogod megváltoztatni a jogosultsági szintedet"
   "You can't remove yourself": "Nem törölheted saját magad"
