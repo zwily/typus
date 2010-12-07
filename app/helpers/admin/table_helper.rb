@@ -113,7 +113,6 @@ module Admin
                     end
         confirm = _t("Remove %{resource}?", :resource => model.model_name.human)
       when 'edit', 'update'
-        # If we are editing content, we can relate and unrelate always!
         confirm = _t("Unrelate %{resource}?", :resource => model.model_name.human)
       when 'show'
         # If we are showing content, we only can relate and unrelate if we are
