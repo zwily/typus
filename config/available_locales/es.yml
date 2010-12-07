@@ -88,4 +88,3 @@ es:
   "%{model} successfully created": "%{model} satisfactoriamente creado."
   "%{model} successfully removed": "%{model} satisfactoriamente eliminado."
   "%{model} successfully updated": "%{model} satisfactoriamente actualizado."
-  "%{model_a} successfully assigned to %{model_b}": "%{model_a} asignado satisfactoriamente a %{model_b}."

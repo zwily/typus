@@ -93,5 +93,4 @@ el:
   "%{model_a} cannot be related to %{model_b}": "Ένα μοντέλο %{model_a} δεν μπορεί να σχετίζεται με ένα μοντέλο %{model_b}"
   "%{model_a} cannot be unrelated from %{model_b}": "Ένα μοντέλο %{model_a} δεν επιτρέπεται να είναι ασυσχέτιστο με ένα μοντέλο %{model_b}"
   "%{model_a} related to %{model_b}": "Το μοντέλο %{model_a} σχετίζεται με το %{model_b}"
-  "%{model_a} successfully assigned to %{model_b}": "Το μοντέλο %{model_a} ανατέθηκε επιτυχώς στο %{model_b}"
   "%{model_a} unrelated from %{model_b}": "Το μοντέλο %{model_a} είναι ασυσχέτιστο με το μοντέλο %{model_b}"

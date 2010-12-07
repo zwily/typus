@@ -88,4 +88,3 @@ pt-BR:
   "%{model} successfully created": "%{model} criado com sucesso."
   "%{model} successfully removed": "%{model} removido com sucesso."
   "%{model} successfully updated": "%{model} atualizado com sucesso."
-  "%{model_a} successfully assigned to %{model_b}": "%{model_a} atribuído com sucesso a %{model_b}."

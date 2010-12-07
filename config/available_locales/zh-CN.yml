@@ -87,4 +87,3 @@ zh-CN:
   "%{model} successfully created": "%{model} 创建成功"
   "%{model} successfully removed": "%{model} 删除成功"
   "%{model} successfully updated": "%{model} 更新成功"
-  "%{model_a} successfully assigned to %{model_b}": "%{model_a} 成功分配给 %{model_b}"
