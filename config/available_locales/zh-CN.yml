@@ -88,7 +88,6 @@ zh-CN:
   "You can't remove yourself": "你不能删除自己"
   "You can't toggle your status": "你不能修改自己的状态"
 
-  "%{attachment} can't be removed": "%{attachment} 不能被删除"
   "%{attachment} removed": "%{attachment} 已经删除"
   "%{current_user_role} is not able to perform this action. (%{action})": "%{current_user_role} 不能执行这个动作. (%{action})"
   "%{model} filtered by %{filtered_by}": "%{model} 通过 %{filtered_by} 过滤"

@@ -90,7 +90,6 @@ el:
   "You can't remove yourself": "Δεν επιτρέπεται η διαγραφή του εαυτού σας"
   "You can't toggle your status": "Δεν επιτρέπεται η αλλαγή της κατάστασής σας"
 
-  "%{attachment} can't be removed": "Το συννημένο %{attachment} δεν μπορεί να απομακρυνθεί"
   "%{attachment} removed": "Το συννημένο %{attachment} απομακρύνθηκε"
   "%{current_user_role} is not able to perform this action. (%{action})": "Χρήστες τύπου %{current_user_role} δεν είναι δυνατόν να εκτελέσουν αυτή την ενέργεια. (%{action})"
   "%{model} filtered by %{filtered_by}": "Μοντέλα %{model} φιλτραρισμένα ως προς %{filtered_by}"
