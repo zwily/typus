@@ -77,7 +77,6 @@ es:
   "Unrelate %{resource}?": "Desvincular %{resource}?"
   "Up": "Subir"
 
-  "You're not allowed to remove Typus Users": "No se te permite borrar usuarios de typus."
   "You're not allowed to toggle status": "No se te permite cambiar tu estado."
   "You can update your password at": "Puedes actualizar tu contraseña en"
   "You can't change your role": "No puedes cambiar tu propio rol."

@@ -87,7 +87,6 @@ fr:
   "You can't change your role": "Vous ne pouvez pas changer votre propre rôle."
   "You can't remove yourself": "Vous ne pouvez pas supprimer votre propre compte"
   "You can't toggle your status": "Vous ne pouvez pas basculer votre statut"
-  "You're not allowed to remove Typus Users": "Vous n'avez pas le droit de supprimer des utilisateurs de l'administration"
   "You're not allowed to toggle status": "Vous n'êtes pas autorisé à basculer votre statut"
   "You're updating a %{resource_from}": "Vous mettez-à-jour un(e) %{resource_from}."
   "You're updating a %{resource_from} for %{resource_to}": "Vous mettez-à-jour un(e) %{resource_from} pour un(e) %{resource_to}."

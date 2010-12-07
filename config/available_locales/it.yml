@@ -92,7 +92,6 @@ it:
   "View site": "Visita il sito"
 
   "You're not allowed to toggle status": "Non hai i permessi per modificare lo stato"
-  "You're not allowed to remove Typus Users": "Non hai i permessi per eliminare un utente"
   "You're updating a %{resource_from}": "Stai aggiornando i dati di %{resource_from}"
   "You're updating a %{resource_from} for %{resource_to}": "Stai aggiornando i dati di %{resource_from} per %{resource_to}"
   "You can update your password at": "Puoi aggiornare la tua password qui"

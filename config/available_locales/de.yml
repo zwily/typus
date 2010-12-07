@@ -80,7 +80,6 @@ de:
   "View all %{attribute}":
   "View site": "Site anzeigen"
 
-  "You're not allowed to remove Typus Users": "Sie sind nicht berechtigt den Typus Benutzer zu entfernen"
   "You're not allowed to toggle status": "Sie k&ouml;nnen den Status nicht umschalten"
   "You're updating a %{resource_from}": "Sie bearbeiten eine %{resource_from}"
   "You're updating a %{resource_from} for %{resource_to}": "Sie bearbeiten eine %{resource_from} f&uuml; %{resource_to}"

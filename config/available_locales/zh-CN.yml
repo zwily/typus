@@ -80,7 +80,6 @@ zh-CN:
   "View site": "访问网站"
 
   "You're not allowed to toggle status": "你不被允许改变状态"
-  "You're not allowed to remove Typus Users": "你不被允许删除Typus用户"
   "You're updating a %{resource_from}": "你正在更新 %{resource_from}"
   "You're updating a %{resource_from} for %{resource_to}": "你正在更新与 %{resource_to} 关联的 %{resource_from}  "
   "You can update your password at": "你可以更新你的密码"

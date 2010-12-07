@@ -77,7 +77,6 @@ ca:
   "Unrelate %{resource}?": "Deslligar %{resource}?"
   "Up": "Pujar"
 
-  "You're not allowed to remove Typus Users": "No pots esborrar usuaris de typus."
   "You're not allowed to toggle status": "No pots canviar el teu estat."
   "You can update your password at": "Pots actualitzar la teva contrasenya a"
   "You can't change your role": "No pots canviar-te tu mateix el rol."
