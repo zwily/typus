@@ -11,8 +11,11 @@ module Admin
 
     def typus_form_has_many(field)
       setup_relationship(field)
-
-      @items_to_relate = @model_to_relate.where(@reflection.primary_key_name => nil) - @item.send(field)
+      if @reflection.through_reflection
+        @items_to_relate = @model_to_relate.all - @item.send(field)
+      else
+        @items_to_relate = @model_to_relate.where(@reflection.primary_key_name => nil) - @item.send(field)
+      end
 
       if set_condition && @items_to_relate.any?
         form = build_relate_form
