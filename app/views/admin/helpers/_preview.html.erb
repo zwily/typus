@@ -2,7 +2,7 @@
   <% content_for :javascripts do %>
     <script type="text/javascript" charset="utf-8">
       $(document).ready(function() {
-        $("#<%= dom_id(item, "#{attribute}_preview") %>").fancybox();
+        $("#<%= dom_id(item, "#{attribute}_preview") %>").fancybox({'type' : 'image'});
       });
     </script>
   <% end %>
