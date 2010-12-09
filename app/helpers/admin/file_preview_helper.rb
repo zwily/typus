@@ -2,17 +2,19 @@ module Admin
 
   module FilePreviewHelper
 
-    def link_to_detach_attribute(attribute, type)
+    def link_to_detach_attribute(attribute)
       validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map { |i| i.attributes.to_s }.flatten
 
-      required = case type
-                 when :dragonfly
-                   !validators.include?(attribute) && @item.send(attribute).present?
-                 when :paperclip
-                   !validators.include?("#{attribute}_file_name") && @item.send(attribute).exists?
+      attachment = @item.send(attribute)
+
+      field = case attachment
+                 when Dragonfly::ActiveModelExtensions::Attachment
+                   attribute # !validators.include?(attribute) && attachment # @item.send(attribute).present?
+                 when Paperclip::Attachment then
+                   "#{attribute}_file_name" # !validators.include?("#{attribute}_file_name") && attachment # @item.send(attribute).exists?
                  end
 
-      if required
+      if !validators.include?(field) && attachment
         attribute_i18n = @item.class.human_attribute_name(attribute)
         message = _t("Remove %{attribute}", :attribute => attribute_i18n)
         label_text = <<-HTML
@@ -23,15 +25,19 @@ module Admin
       end
     end
 
-    def typus_file_preview(item, attribute, type)
-      case type
-      when :paperclip then typus_file_preview_for_paperclip(item, attribute)
-      when :dragonfly then typus_file_preview_for_dragonfly(item, attribute)
+    def typus_file_preview(item, attribute)
+      if (attachment = item.send(attribute))
+        case attribute
+        when Dragonfly::ActiveModelExtensions::Attachment
+          typus_file_preview_for_dragonfly(item, attribute)
+        when Paperclip::Attachment
+          typus_file_preview_for_paperclip(item, attribute)
+        end
       end
     end
 
     def typus_file_preview_for_dragonfly(item, attribute)
-      if item.send(attribute).present?
+      # if item.send(attribute).present?
         options = { :item => item, :attribute => attribute }
 
         if item.send(attribute).mime_type =~ /^image\/.+/
@@ -39,11 +45,11 @@ module Admin
         else
           link_to item.send(attribute).name, item.send(attribute).url
         end
-      end
+      # end
     end
 
     def typus_file_preview_for_paperclip(item, attribute)
-      if item.send(attribute).exists?
+      # if item.send(attribute).exists?
         options = { :item => item, :attribute => attribute }
 
         if item.send(attribute).content_type =~ /^image\/.+/
@@ -51,7 +57,7 @@ module Admin
         else
           link_to item.send(attribute).original_filename, item.send(attribute).url
         end
-      end
+      # end
     end
 
   end
