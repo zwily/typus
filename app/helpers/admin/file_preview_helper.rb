@@ -35,26 +35,31 @@ module Admin
       if (attachment = item.send(attribute))
         case get_type_of_attachment(attachment)
         when :dragonfly
-          typus_file_preview_for_dragonfly(item, attribute)
+          typus_file_preview_for_dragonfly(attachment)
         when :paperclip
-          typus_file_preview_for_paperclip(item, attribute)
+          typus_file_preview_for_paperclip(attachment)
         end
       end
     end
 
-    def typus_file_preview_for_dragonfly(item, attribute)
-      if item.send(attribute).mime_type =~ /^image\/.+/
-        render "admin/helpers/preview/dragonfly", { :item => item, :attribute => attribute }
+    def typus_file_preview_for_dragonfly(attachment)
+      if attachment.mime_type =~ /^image\/.+/
+        render "admin/helpers/file_preview",
+               :preview => attachment.process(:thumb, 'x450').url,
+               :thumb => attachment.process(:thumb, '150x150#').url
       else
-        link_to item.send(attribute).name, item.send(attribute).url
+        link_to attachment.name, attachment.url
       end
     end
 
-    def typus_file_preview_for_paperclip(item, attribute)
-      if item.send(attribute).content_type =~ /^image\/.+/
-        render "admin/helpers/preview/paperclip", { :item => item, :attribute => attribute }
+    def typus_file_preview_for_paperclip(attachment)
+      return unless attachment.exists?
+      if attachment.content_type =~ /^image\/.+/
+        render "admin/helpers/file_preview",
+               :preview => attachment.url(Typus.file_preview),
+               :thumb => attachment.url(Typus.file_thumbnail)
       else
-        link_to item.send(attribute).original_filename, item.send(attribute).url
+        link_to attachment.original_filename, attachment.url
       end
     end
 

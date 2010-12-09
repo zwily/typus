@@ -1,7 +1,0 @@
-<%= link_to item.send(attribute).process(:thumb, 'x450').url,
-            :class => "fancybox",
-            :id => dom_id(item, "#{attribute}_preview"),
-            :title => item.to_label do %>
-  <%= image_tag item.send(attribute).process(:thumb, '150x150#').url,
-                :alt => item.send(attribute).process(:thumb, 'x450').url %>
-<% end %>
