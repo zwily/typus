@@ -148,16 +148,7 @@ module Admin
     end
 
     def table_file_field(attribute, item, link_options = {}, type = :paperclip)
-      case type
-      when :paperclip
-        if item.send("#{attribute}_content_type") =~ /^image\/.+/
-          render "admin/helpers/preview/paperclip", :attribute => attribute, :item => item
-        else
-          link_to item.send(attribute), item.send(attribute).url
-        end
-      when :dragonfly
-        "Not implemented!"
-      end
+      typus_preview(item, attribute, type)
     end
 
     def table_tree_field(attribute, item)

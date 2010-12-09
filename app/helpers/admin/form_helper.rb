@@ -13,8 +13,10 @@ module Admin
                     typus_tree_field(key, form)
                   when :boolean, :date, :datetime, :text, :time, :password, :selector
                     typus_template_field(key, value, form)
-                  when :paperclip, :dragonfly
-                    typus_template_field(key, :file, form)
+                  when :paperclip
+                    typus_template_field(key, :paperclip, form)
+                  when :dragonfly
+                    typus_template_field(key, :dragonfly, form)
                   when :template
                     typus_template_field(key, template, form)
                   else

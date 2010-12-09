@@ -1,0 +1,5 @@
+<li id="<%= attribute %>">
+  <%= form.label attribute, link_to_detach_attribute(attribute, :dragonfly) %>
+  <%= form.file_field attribute, options %>
+  <%= typus_preview(@item, attribute, :dragonfly) %>
+</li>

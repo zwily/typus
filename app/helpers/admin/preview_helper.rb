@@ -2,15 +2,17 @@ module Admin
 
   module PreviewHelper
 
-    def link_to_detach_attribute(attribute)
-      # This is the validator for `paperclip`:
+    def link_to_detach_attribute(attribute, type)
       validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map { |i| i.attributes.to_s }.flatten
 
-      # This is the validator for `dragonfly`:
-      # validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map { |i| i.attributes.to_s }.flatten
+      required = case type
+                 when :dragonfly
+                   !validators.include?(attribute) && @item.send(attribute).present?
+                 when :paperclip
+                   !validators.include?("#{attribute}_file_name") && @item.send(attribute).exists?
+                 end
 
-      if !validators.include?("#{attribute}_file_name") && @item.send(attribute).exists?
-      # if !validators.include?(attribute) && @item.send(attribute).present?
+      if required
         attribute_i18n = @item.class.human_attribute_name(attribute)
         message = _t("Remove %{attribute}", :attribute => attribute_i18n)
         label_text = <<-HTML
@@ -21,36 +23,34 @@ module Admin
       end
     end
 
-    def typus_preview(item, attribute, type = :paperclip)
+    def typus_preview(item, attribute, type)
       case type
-      when :paperclip
-        typus_preview_for_paperclip(item, attribute)
-      when :dragonfly
-        typus_preview_for_dragonfly(item, attribute)
+      when :paperclip then typus_preview_for_paperclip(item, attribute)
+      when :dragonfly then typus_preview_for_dragonfly(item, attribute)
       end
     end
 
     def typus_preview_for_dragonfly(item, attribute)
-      return unless item.send(attribute).present?
+      if item.send(attribute).present?
+        options = { :item => item, :attribute => attribute }
 
-      options = { :item => item, :attribute => attribute }
-
-      if item.send(attribute).mime_type =~ /^image\/.+/
-        render "admin/helpers/preview/dragonfly", options
-      else
-        link_to item.send(attribute).name, item.send(attribute).url
+        if item.send(attribute).mime_type =~ /^image\/.+/
+          render "admin/helpers/preview/dragonfly", options
+        else
+          link_to item.send(attribute).name, item.send(attribute).url
+        end
       end
     end
 
     def typus_preview_for_paperclip(item, attribute)
-      return unless item.send(attribute).exists?
+      if item.send(attribute).exists?
+        options = { :item => item, :attribute => attribute }
 
-      options = { :item => item, :attribute => attribute }
-
-      if item.send(attribute).content_type =~ /^image\/.+/
-        render "admin/helpers/preview/paperclip", options
-      else
-        link_to item.send(attribute).original_filename, item.send(attribute).url
+        if item.send(attribute).content_type =~ /^image\/.+/
+          render "admin/helpers/preview/paperclip", options
+        else
+          link_to item.send(attribute).original_filename, item.send(attribute).url
+        end
       end
     end
 
