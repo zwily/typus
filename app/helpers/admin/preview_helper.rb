@@ -8,7 +8,7 @@ module Admin
       options = { :item => item, :attribute => attribute }
 
       if item.send(attribute).mime_type =~ /^image\/.+/
-        render "admin/helpers/preview_for_dragonfly", options
+        render "admin/helpers/preview/dragonfly", options
       else
         link_to item.send(attribute).name, item.send(attribute).url
       end
@@ -35,7 +35,7 @@ module Admin
                               item.send(attribute)
                             end
 
-        render "admin/helpers/preview_for_paperclip", options
+        render "admin/helpers/preview/paperclip", options
       else
         link_to item.send(attribute).original_filename, item.send(attribute).url
       end
