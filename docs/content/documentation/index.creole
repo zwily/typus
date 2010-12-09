@@ -11,10 +11,6 @@ title: Documentation
 * [[/documentation/configuration-roles/|Roles Configuration]]
 * [[/documentation/configuration-ui/|User Interface Customization]]
 
-<div class="important">
-**Note:** Documentation for Rails 2.3 version can be found [[/documentation/v.2.3/|here]].
-</div>
-
 == Want to replicate the demo application?
 
 Replicate the [[http://demo.typuscms.com/admin|demo]] application using the
