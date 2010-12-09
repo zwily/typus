@@ -1,13 +1,6 @@
-<% if has_file_preview && file_preview_is_image %>
-  <% content_for :javascripts do %>
-    <script type="text/javascript" charset="utf-8">
-      $(document).ready(function() {
-        $("#<%= dom_id(item, "#{attribute}_preview") %>").fancybox({'type' : 'image'});
-      });
-    </script>
-  <% end %>
+<%= link_to item.send(attribute).url(Typus.file_preview),
+            :class => "fancybox",
+            :id => dom_id(item, "#{attribute}_preview"),
+            :title => item.to_label do %>
+  <%= image_tag item.send(attribute).url(Typus.file_thumbnail) %>
 <% end %>
-
-<a id="<%= dom_id(item, "#{attribute}_preview") %>"
-   href="<%= href %>"
-   title="<%= item.to_label %>"><%= content %></a>

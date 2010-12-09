@@ -48,11 +48,11 @@ module Admin
         when :boolean then table_boolean_field(key, item)
         when :datetime then table_datetime_field(key, item, link_options)
         when :date then table_datetime_field(key, item, link_options)
-        when :dragonfly then table_file_field(key, item, link_options)
+        when :dragonfly then table_dragonfly_field(key, item, link_options)
         when :time then table_datetime_field(key, item, link_options)
         when :belongs_to then table_belongs_to_field(key, item)
         when :tree then table_tree_field(key, item)
-        when :paperclip then table_file_field(key, item, link_options)
+        when :paperclip then table_paperclip_field(key, item, link_options)
         when :position then table_position_field(key, item)
         when :selector then table_selector(key, item)
         when :transversal then table_transversal(key, item)
@@ -147,22 +147,13 @@ module Admin
       item.mapping(attribute)
     end
 
-    def table_file_field(attribute, item, link_options = {})
-      file_preview = Typus.file_preview
-      file_thumbnail = Typus.file_thumbnail
+    def table_dragonfly_field(attribute, item, link_options = {})
+      item.send(attribute)
+    end
 
-      has_file_preview = item.send(attribute).styles.member?(file_preview)
-      file_preview_is_image = item.send("#{attribute}_content_type") =~ /^image\/.+/
-
-      if has_file_preview && file_preview_is_image
-        render "admin/helpers/preview/paperclip",
-               :attribute => attribute,
-               :attachment => attribute,
-               :content => item.to_label,
-               :file_preview_is_image => file_preview_is_image,
-               :has_file_preview => has_file_preview,
-               :href => item.send(attribute).url(file_preview),
-               :item => item
+    def table_paperclip_field(attribute, item, link_options = {})
+      if item.send("#{attribute}_content_type") =~ /^image\/.+/
+        render "admin/helpers/preview/paperclip", :attribute => attribute, :item => item
       else
         link_to item.send(attribute), item.send(attribute).url
       end
