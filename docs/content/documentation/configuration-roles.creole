@@ -9,14 +9,14 @@ parent_link: /documentation/
 
 **Typus** roles are stored on {{{yaml}}} files.
 
-On the {{{config/typus}}} folder you'll find {{{yaml}}} files which ending with
-{{{_roles.yml}}}, there is where the setup is done.
+On the {{{config/typus}}} folder you'll find {{{yaml}}} files which ending
+with {{{_roles.yml}}}, there is where the setup is done.
 
 == <a name="anatomy_of_a_role" href="#anatomy_of_a_role">Anatomy of a Role</a>
 
-You can add as many roles as you want and the access control allows you to give
-access to users from a role to the {{{CRUD}}} methods of a model and to custom
-actions you define per model.
+You can add as many roles as you want and the access control allows you to
+give access to users from a role to the {{{CRUD}}} methods of a model and to
+custom actions you define per model.
 
 {{{
 # Role

@@ -173,7 +173,7 @@ Post:
 }}}
 
 <div class="important">
-**Tip:** Adding minus (-) sign before the attribute will make the order DESC.
+**Note:** Adding minus (-) sign before the attribute will make the order DESC.
 </div>
 
 == Searches
@@ -312,11 +312,11 @@ And the actions for those export options are:
 
 {{{
 def export_csv
-  # Already implemented but you can overwrite it.
+  # Already implemented but you can override it.
 end
 
 def export_xml
-  # Already implemented but you can overwrite it.
+  # Already implemented but you can override it.
 end
 }}}
 
@@ -332,7 +332,7 @@ Model:
 
 Models will now appear in the dashboard grouped. When you're updating 
 data on a model, you'll see on the sidebar the models of the same 
-group. This will make navigation easier between theses grouped models.
+group. This will make navigation easier between these grouped models.
 
 == Options
 

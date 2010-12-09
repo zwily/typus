@@ -26,6 +26,6 @@ editor:
 }}}
 
 <div class="important">
-**Tip:** Remember you can use the shortcut {{{all}}} to allow user have access
+**Note:** Remember you can use the shortcut {{{all}}} to allow user have access
 to **all** methods.
 </div>

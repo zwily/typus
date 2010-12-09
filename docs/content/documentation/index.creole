@@ -17,7 +17,7 @@ title: Documentation
 
 == Want to replicate the demo application?
 
-Replicate the [[http://demo.typuscms.com/admin|demo]] application using the 
+Replicate the [[http://demo.typuscms.com/admin|demo]] application using the
 {{{desmond}}} template.
 
 {{{
