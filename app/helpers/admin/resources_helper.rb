@@ -5,7 +5,7 @@ module Admin
     include FiltersHelper
     include FormHelper
     include RelationshipsHelper
-    include PreviewHelper
+    include FilePreviewHelper
     include SearchHelper
     include SidebarHelper
     include TableHelper
