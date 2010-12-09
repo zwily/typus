@@ -48,11 +48,10 @@ module Admin
         when :boolean then table_boolean_field(key, item)
         when :datetime then table_datetime_field(key, item, link_options)
         when :date then table_datetime_field(key, item, link_options)
-        when :dragonfly then table_file_field(key, item, link_options, :dragonfly)
         when :time then table_datetime_field(key, item, link_options)
         when :belongs_to then table_belongs_to_field(key, item)
         when :tree then table_tree_field(key, item)
-        when :paperclip then table_file_field(key, item, link_options, :paperclip)
+        when :file then table_file_field(key, item, link_options)
         when :position then table_position_field(key, item)
         when :selector then table_selector(key, item)
         when :transversal then table_transversal(key, item)
@@ -147,7 +146,7 @@ module Admin
       item.mapping(attribute)
     end
 
-    def table_file_field(attribute, item, link_options = {}, type = :paperclip)
+    def table_file_field(attribute, item, link_options = {})
       typus_file_preview(item, attribute)
     end
 
