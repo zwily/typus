@@ -17,20 +17,22 @@ concentrate on your application instead of the bits to manage the system.
 A category of people or things having common characteristics.
 }}}
 
-You can try a demo [[http://demo.typuscms.com/admin|here]]. This demo has 
-enabled the **typus_cms** module which is not available for download (sorry, 
-only the core is open source), but it's a good example to show the things you 
-can do with **Typus**.
+You can try a demo [[http://demo.typuscms.com/admin|here]].
+
+<div class="important">
+**Note**: Demo site has enabled the **typus_cms** module which is not
+available for download (sorry, only the core is open source), but it's a good
+example to show the things you can do with **Typus**.
+</div>
 
 == <a name="key_features" href="#key_features">Key Features</a>
 
-* User Authentication with registration and account activation
-* User Permissions by using Access Control Lists (stored in yaml files)
+* Integrated authentication with Access Control Lists.
 * CRUD and custom actions for your models on a clean interface.
 * Internationalized interface.
-* Extensible and overwritable templates.
+* Overridable and extensible templates.
 * Low memory footprint.
-* Tested with **SQLite**, **MySQL** and **PostgreSQL**.
+* Tested with **SQLite3**, **MySQL** and **PostgreSQL**.
 * **MIT License**, the same as [[http://rubyonrails.org/|Rails]].
 
 == <a name="for_the_impatients" href="#for_the_impatients">For the impatients</a>
