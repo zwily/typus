@@ -1,6 +1,6 @@
 module Admin
 
-  module PreviewHelper
+  module FilePreviewHelper
 
     def link_to_detach_attribute(attribute, type)
       validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map { |i| i.attributes.to_s }.flatten
