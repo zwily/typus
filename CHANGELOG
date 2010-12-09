@@ -44,6 +44,10 @@ after a usability test with a client.
 
 [NEW] Greek (el) translation. [Spyros Livathinos]
 
+[CHANGED] Updated jQuery to v1.4.4
+
+[CHANGED] Updated fancybox to v1.3.4
+
 [3.0.2]
 
 [FIXED] Use Arel to get the data on lists. After moving to will_paginate I
