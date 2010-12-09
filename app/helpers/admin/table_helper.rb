@@ -48,11 +48,11 @@ module Admin
         when :boolean then table_boolean_field(key, item)
         when :datetime then table_datetime_field(key, item, link_options)
         when :date then table_datetime_field(key, item, link_options)
-        when :dragonfly then table_dragonfly_field(key, item, link_options)
+        when :dragonfly then table_file_field(key, item, link_options, :dragonfly)
         when :time then table_datetime_field(key, item, link_options)
         when :belongs_to then table_belongs_to_field(key, item)
         when :tree then table_tree_field(key, item)
-        when :paperclip then table_paperclip_field(key, item, link_options)
+        when :paperclip then table_file_field(key, item, link_options, :paperclip)
         when :position then table_position_field(key, item)
         when :selector then table_selector(key, item)
         when :transversal then table_transversal(key, item)
@@ -147,15 +147,16 @@ module Admin
       item.mapping(attribute)
     end
 
-    def table_dragonfly_field(attribute, item, link_options = {})
-      item.send(attribute)
-    end
-
-    def table_paperclip_field(attribute, item, link_options = {})
-      if item.send("#{attribute}_content_type") =~ /^image\/.+/
-        render "admin/helpers/preview/paperclip", :attribute => attribute, :item => item
-      else
-        link_to item.send(attribute), item.send(attribute).url
+    def table_file_field(attribute, item, link_options = {}, type = :paperclip)
+      case type
+      when :paperclip
+        if item.send("#{attribute}_content_type") =~ /^image\/.+/
+          render "admin/helpers/preview/paperclip", :attribute => attribute, :item => item
+        else
+          link_to item.send(attribute), item.send(attribute).url
+        end
+      when :dragonfly
+        "Not implemented!"
       end
     end
 
