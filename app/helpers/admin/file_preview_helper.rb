@@ -23,14 +23,14 @@ module Admin
       end
     end
 
-    def typus_preview(item, attribute, type)
+    def typus_file_preview(item, attribute, type)
       case type
-      when :paperclip then typus_preview_for_paperclip(item, attribute)
-      when :dragonfly then typus_preview_for_dragonfly(item, attribute)
+      when :paperclip then typus_file_preview_for_paperclip(item, attribute)
+      when :dragonfly then typus_file_preview_for_dragonfly(item, attribute)
       end
     end
 
-    def typus_preview_for_dragonfly(item, attribute)
+    def typus_file_preview_for_dragonfly(item, attribute)
       if item.send(attribute).present?
         options = { :item => item, :attribute => attribute }
 
@@ -42,7 +42,7 @@ module Admin
       end
     end
 
-    def typus_preview_for_paperclip(item, attribute)
+    def typus_file_preview_for_paperclip(item, attribute)
       if item.send(attribute).exists?
         options = { :item => item, :attribute => attribute }
 

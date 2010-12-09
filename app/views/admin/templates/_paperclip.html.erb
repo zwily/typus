@@ -1,5 +1,5 @@
 <li id="<%= attribute %>">
   <%= form.label attribute, link_to_detach_attribute(attribute, :paperclip) %>
   <%= form.file_field attribute, options %>
-  <%= typus_preview(@item, attribute, :paperclip) %>
+  <%= typus_file_preview(@item, attribute, :paperclip) %>
 </li>

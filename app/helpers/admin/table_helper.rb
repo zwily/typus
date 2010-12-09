@@ -148,7 +148,7 @@ module Admin
     end
 
     def table_file_field(attribute, item, link_options = {}, type = :paperclip)
-      typus_preview(item, attribute, type)
+      typus_file_preview(item, attribute, type)
     end
 
     def table_tree_field(attribute, item)
