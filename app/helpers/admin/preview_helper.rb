@@ -35,7 +35,7 @@ module Admin
                               item.send(attribute)
                             end
 
-        render "admin/helpers/preview", options
+        render "admin/helpers/preview_for_paperclip", options
       else
         link_to item.send(attribute).original_filename, item.send(attribute).url
       end

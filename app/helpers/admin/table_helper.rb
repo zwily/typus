@@ -155,7 +155,7 @@ module Admin
       file_preview_is_image = item.send("#{attribute}_content_type") =~ /^image\/.+/
 
       if has_file_preview && file_preview_is_image
-        render "admin/helpers/preview",
+        render "admin/helpers/preview_for_paperclip",
                :attribute => attribute,
                :attachment => attribute,
                :content => item.to_label,
