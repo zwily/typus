@@ -2,5 +2,6 @@
             :class => "fancybox",
             :id => dom_id(item, "#{attribute}_preview"),
             :title => item.to_label do %>
-  <%= image_tag item.send(attribute).url(Typus.file_thumbnail) %>
+  <%= image_tag item.send(attribute).url(Typus.file_thumbnail),
+      :alt => item.send(attribute).url(Typus.file_preview) %>
 <% end %>
