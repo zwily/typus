@@ -8,7 +8,7 @@ Typus.setup do |config|
   # address will be used in Admin::Mailer.
   # config.mailer_sender = "admin@example.com"
 
-  # Define paperclip attachments styles.
+  # Define paperclip attachment styles.
   # config.file_preview = :medium
   # config.file_thumbnail = :thumb
 

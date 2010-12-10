@@ -75,7 +75,7 @@ module Typus
   @@mailer_sender = nil
 
   ##
-  # Define `paperclip` attachments styles.
+  # Define `paperclip` attachment styles.
   #
 
   mattr_accessor :file_preview
@@ -85,7 +85,7 @@ module Typus
   @@file_thumbnail = :thumb
 
   ##
-  # Define `dragonfly` attachments styles.
+  # Define `dragonfly` attachment styles.
   #
 
   mattr_accessor :image_preview_size
