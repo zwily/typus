@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-  namespace :admin do
+  scope "admin", :module => :admin, :as => "admin" do
 
     match "/" => redirect("/admin/dashboard")
     match "help" => "base#help"
