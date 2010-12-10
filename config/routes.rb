@@ -1,9 +1,8 @@
 Rails.application.routes.draw do
 
-  match "/admin" => redirect("/admin/dashboard")
-
   namespace :admin do
 
+    match "/" => redirect("/admin/dashboard")
     match "help" => "base#help"
 
     resource :dashboard, :only => [:show], :controller => :dashboard
