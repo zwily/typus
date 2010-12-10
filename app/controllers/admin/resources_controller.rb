@@ -46,7 +46,7 @@ class Admin::ResourcesController < Admin::BaseController
   def new
     item_params = params.dup
     rejections = %w(controller action resource resource_id back_to selected)
-    item_params.delete_if { |k, v| rejections.include?(k) }
+    item_params.keys.delete_if { |k| rejections.include?(k) }
 
     @item = @resource.new(item_params)
 
