@@ -274,8 +274,9 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def select_template(action = params[:action], resource = @resource.to_resource)
-    folder = File.exist?("app/views/admin/#{resource}/#{action}.html.erb") ? resource : 'resources'
-    render "admin/#{folder}/#{action}"
+    render "admin/#{resource}/#{action}"
+  rescue ActionView::MissingTemplate
+    render "admin/resources/#{action}"
   end
 
 end
