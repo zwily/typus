@@ -38,7 +38,7 @@ class Admin::ResourcesController < Admin::BaseController
     get_objects
 
     respond_to do |format|
-      format.html { generate_html and select_template }
+      format.html { generate_html }
       @resource.typus_export_formats.each { |f| format.send(f) { send("generate_#{f}") } }
     end
   end
@@ -49,8 +49,6 @@ class Admin::ResourcesController < Admin::BaseController
     item_params.keys.delete_if { |k| rejections.include?(k) }
 
     @item = @resource.new(item_params)
-
-    select_template
   end
 
   ##
@@ -66,17 +64,15 @@ class Admin::ResourcesController < Admin::BaseController
     if @item.save
       params[:back_to] ? create_with_back_to : redirect_on_success
     else
-      select_template(:new)
+      render :new
     end
   end
 
   def edit
-    select_template
   end
 
   def show
     check_resource_ownership and return if @resource.typus_options_for(:only_user_items)
-    select_template
   end
 
   def update
@@ -85,7 +81,7 @@ class Admin::ResourcesController < Admin::BaseController
       reload_locales
       redirect_on_success
     else
-      select_template(:edit)
+      render :edit
     end
   end
 
@@ -93,7 +89,7 @@ class Admin::ResourcesController < Admin::BaseController
     if @item.update_attributes(params[:attribute] => nil)
       redirect_on_success
     else
-      select_template(:edit)
+      render :edit
     end
   end
 
@@ -271,12 +267,6 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     redirect_to (path || params[:back_to]), :notice => message
-  end
-
-  def select_template(action = params[:action], resource = @resource.to_resource)
-    render "admin/#{resource}/#{action}"
-  rescue ActionView::MissingTemplate
-    render "admin/resources/#{action}"
   end
 
 end
