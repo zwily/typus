@@ -11,7 +11,7 @@
 </h2>
 
 <%= display_flash_message %>
-<%= typus_render :partial => 'index' %>
+<%= render 'index' %>
 
 <% if (build_filters || search) && !@resource.count.zero? %>
   <div class="filters">

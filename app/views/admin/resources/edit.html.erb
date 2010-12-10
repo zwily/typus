@@ -13,7 +13,7 @@
 
 <%= display_link_to_previous %>
 <%= display_flash_message %>
-<%= typus_render :partial => 'edit' %>
+<%= render 'edit' %>
 
 <%
   options = { :action => "update",
@@ -24,6 +24,6 @@
   button = _t("Save %{resource}", :resource => @resource.model_name.human)
 %>
 
-<%= typus_render :partial => 'form', :options => options, :button => button %>
+<%= render :partial => 'form', :locals => { :options => options, :button => button } %>
 
 <%= raw typus_relationships %>
