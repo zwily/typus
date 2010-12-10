@@ -45,8 +45,8 @@ module Admin
     def typus_file_preview_for_dragonfly(attachment)
       if attachment.mime_type =~ /^image\/.+/
         render "admin/helpers/file_preview",
-               :preview => attachment.process(:thumb, 'x450').url,
-               :thumb => attachment.process(:thumb, '150x150#').url
+               :preview => attachment.process(:thumb, Typus.image_preview_size).url,
+               :thumb => attachment.process(:thumb, Typus.image_thumb_size).url
       else
         link_to attachment.name, attachment.url
       end

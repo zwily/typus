@@ -74,11 +74,25 @@ module Typus
   mattr_accessor :mailer_sender
   @@mailer_sender = nil
 
+  ##
+  # Define `paperclip` attachments styles.
+  #
+
   mattr_accessor :file_preview
   @@file_preview = :medium
 
   mattr_accessor :file_thumbnail
   @@file_thumbnail = :thumb
+
+  ##
+  # Define `dragonfly` attachments styles.
+  #
+
+  mattr_accessor :image_preview_size
+  @@image_preview_size = 'x450'
+
+  mattr_accessor :image_thumb_size
+  @@image_thumb_size = '75x75#'
 
   ##
   # Defines the default relationship table.
