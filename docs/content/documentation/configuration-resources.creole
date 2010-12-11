@@ -428,23 +428,6 @@ Post:
     minute_step: 15
 }}}
 
-=== <a name="nil" href="#nil">Nil</a>
-
-{{{
-Typus::Resources.setup do |config|
-  config.nil = 'nil'
-end
-}}}
-
-You can also define this option by model.
-
-{{{
-Post:
-  ...
-  options:
-    nil: 'nil'
-}}}
-
 === <a name="per_page" href="#per_page">Per Page</a>
 
 {{{
