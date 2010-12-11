@@ -42,7 +42,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
     should "verify file can be removed" do
       get :edit, { :id => @asset.id }
-      assert_match /Remove file/, @response.body
+      assert_match /Remove File/, @response.body
 
       assert @asset.file_uid.present?
 
