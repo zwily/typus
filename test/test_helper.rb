@@ -12,6 +12,3 @@ class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
 end
-
-# As we are mocking a Rails Application, we need to load configurations.
-Typus.reload!
