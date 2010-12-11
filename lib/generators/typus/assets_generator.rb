@@ -13,8 +13,8 @@ Description:
       MSG
 
       def copy_assets
-        Dir["#{source_root}/public/**/*.*"].each do |file|
-          copy_file file.split("#{source_root}/").last
+        Dir["#{self.source_root}/public/**/*.*"].each do |file|
+          copy_file file.split("#{self.source_root}/").last
         end
       end
 
