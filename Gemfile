@@ -3,9 +3,10 @@ source 'http://rubygems.org'
 gem "acts_as_list"
 gem "acts_as_tree"
 gem "dragonfly", "~>0.8.1"
-gem "rack-cache", :require => "rack/cache"
-gem "paperclip"
 gem "fastercsv", "1.5.3" if RUBY_VERSION < '1.9'
+gem "paperclip"
+gem "rack-cache", :require => "rack/cache"
+gem "render_inheritable"
 
 group :test do
   gem "factory_girl"
