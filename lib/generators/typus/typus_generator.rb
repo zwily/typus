@@ -142,8 +142,7 @@ Description:
 
         end
 
-        return configuration
-
+        configuration
       end
 
     end
