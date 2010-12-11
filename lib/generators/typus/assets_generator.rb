@@ -4,6 +4,8 @@ module Typus
 
     class AssetsGenerator < Rails::Generators::Base
 
+      source_root File.expand_path("../../templates", __FILE__)
+
       desc <<-MSG
 Description:
   Copies all Typus assets to your application.
@@ -11,10 +13,8 @@ Description:
       MSG
 
       def copy_assets
-        templates_path = File.join(Typus.root, "lib", "generators", "templates")
-
-        Dir["#{templates_path}/public/**/*.*"].each do |file|
-          copy_file file.split("#{templates_path}/").last
+        Dir["#{source_root}/public/**/*.*"].each do |file|
+          copy_file file.split("#{source_root}/").last
         end
       end
 
