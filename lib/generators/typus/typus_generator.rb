@@ -45,13 +45,9 @@ Description:
 
       def generate_config
         Typus.reload!
-        configuration = generate_yaml_files
-        unless configuration[:base].empty?
-          %w( application.yml application_roles.yml ).each do |file|
-            from = to = "config/typus/#{file}"
-            if File.exists?(from) then to = "config/typus/#{timestamp}_#{file}" end
-            @configuration = configuration
-            template from, to
+        if (@configuration = generate_yaml_files)[:base].present?
+          %w(application.yml application_roles.yml).each do |file|
+            template "config/typus/#{file}", "config/typus/#{timestamp}_#{file}"
           end
         end
       end
