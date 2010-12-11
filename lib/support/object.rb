@@ -9,7 +9,7 @@ class Object
   #
   #     _t("Hello World!")
   #
-  # Note that interpolation still works ...
+  # Note that interpolation still works:
   #
   #     _t("Hello %{world}!", :world => @world)
   #
