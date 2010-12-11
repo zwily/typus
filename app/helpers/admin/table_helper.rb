@@ -177,21 +177,16 @@ module Admin
     end
 
     def table_boolean_field(attribute, item)
-      boolean_hash = item.class.typus_boolean(attribute).invert
       status = item.send(attribute)
+      boolean_hash = item.class.typus_boolean(attribute).invert
+      human_boolean = status ? boolean_hash["true"] : boolean_hash["false"]
 
-      if status.nil?
-        Typus::Resources.human_nil
-      else
-        message = _t(boolean_hash[status.to_s])
-        options = { :controller => "/admin/#{item.class.to_resource}",
-                    :action => "toggle",
-                    :id => item.id,
-                    :field => attribute.gsub(/\?$/, '') }
-        confirm = _t("Change %{attribute}?",
-                     :attribute => item.class.human_attribute_name(attribute).downcase)
-        link_to message, options, :confirm => confirm
-      end
+      options = { :controller => "/admin/#{item.class.to_resource}",
+                  :action => "toggle",
+                  :id => item.id,
+                  :field => attribute.gsub(/\?$/, '') }
+      confirm = _t("Change %{attribute}?", :attribute => item.class.human_attribute_name(attribute).downcase)
+      link_to _t(human_boolean), options, :confirm => confirm
     end
 
     def table_transversal(attribute, item)
