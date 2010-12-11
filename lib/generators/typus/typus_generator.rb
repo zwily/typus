@@ -44,6 +44,7 @@ Description:
       end
 
       def generate_config
+        Typus.reload!
         configuration = generate_yaml_files
         unless configuration[:base].empty?
           %w( application.yml application_roles.yml ).each do |file|
