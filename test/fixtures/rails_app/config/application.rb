@@ -45,9 +45,4 @@ module RailsApp
   end
 end
 
-##
-# NOTE: This is here to fake the first request!
-##
-
 require "typus"
-Typus.reload!
