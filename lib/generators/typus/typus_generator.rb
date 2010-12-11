@@ -113,7 +113,7 @@ Description:
 
           # Model defaults.
           order_by = "position" if default.include?("position")
-          filters = "created_at" if klass.columns.include?("created_at")
+          filters = "created_at" if fields.include?("created_at")
           search = ( %w(name title) & default ).join(", ")
 
           # We want attributes of belongs_to relationships to be shown in our
