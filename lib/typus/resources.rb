@@ -24,9 +24,6 @@ module Typus
     mattr_accessor :form_rows
     @@form_rows = 15
 
-    mattr_accessor :human_nil
-    @@human_nil = "nil"
-
     mattr_accessor :minute_step
     @@minute_step = 5
 

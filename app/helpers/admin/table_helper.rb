@@ -171,8 +171,6 @@ module Admin
     def table_datetime_field(attribute, item, link_options = {})
       if field = item.send(attribute)
         I18n.localize(field, :format => item.class.typus_date_format(attribute))
-      else
-        Typus::Resources.human_nil
       end
     end
 
