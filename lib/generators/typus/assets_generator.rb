@@ -12,10 +12,8 @@ Description:
 
       MSG
 
-      def copy_assets
-        Dir["#{self.source_root}/public/**/*.*"].each do |file|
-          copy_file file.split("#{self.source_root}/").last
-        end
+      def demo
+        directory "public", "public"
       end
 
     end
