@@ -12,7 +12,7 @@ Description:
 
       MSG
 
-      def demo
+      def copy_assets
         directory "public", "public"
       end
 
