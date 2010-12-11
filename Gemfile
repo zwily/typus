@@ -15,7 +15,7 @@ group :test do
   gem "rails", "~> 3.0"
   gem "shoulda"
   gem "sqlite3-ruby"
-  gem 'tartare', :git => 'https://github.com/fesplugas/rails-tartare.git', :require => false
+  gem "tartare", :git => "https://github.com/fesplugas/rails-tartare.git", :require => false
   gem "will_paginate", "~> 3.0.pre2"
 
   gem "mocha"
