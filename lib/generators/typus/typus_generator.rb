@@ -101,15 +101,15 @@ Description:
                            _type$
                            _file_size$ )
 
-          default_rejections = rejections + %w( password password_confirmation )
-          form_rejections = rejections + %w( position )
+          default_rejections = (rejections + %w( password password_confirmation )).join("|")
+          form_rejections = (rejections + %w( position )).join("|")
 
           default = klass.columns.reject do |column|
-                      column.name.match(default_rejections.join("|")) || column.sql_type == "text"
+                      column.name.match(default_rejections) || column.sql_type == "text"
                     end.map(&:name)
 
           fields = klass.columns.map(&:name)
-          form = fields.reject { |f| f.match(form_rejections.join("|")) }
+          form = fields.reject { |f| f.match(form_rejections) }
 
           # Model defaults.
           order_by = "position" if default.include?("position")
