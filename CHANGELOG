@@ -48,6 +48,8 @@ after a usability test with a client.
 
 [CHANGED] Updated fancybox to v1.3.4
 
+[NEW] New generator: `rails generate typus:assets`.
+
 [3.0.2]
 
 [FIXED] Use Arel to get the data on lists. After moving to will_paginate I
