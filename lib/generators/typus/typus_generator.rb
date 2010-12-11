@@ -108,9 +108,8 @@ Description:
                    column.name.match(default_rejections.join("|")) || column.sql_type == "text"
                  end.map(&:name)
 
-          form = klass.columns.reject do |column|
-                   column.name.match(form_rejections.join("|"))
-                 end.map(&:name)
+          fields = klass.columns.map(&:name)
+          form = fields.reject { |f| f.match(form_rejections.join("|")) }
 
           # Model defaults.
           order_by = "position" if default.include?("position")
