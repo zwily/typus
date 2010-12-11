@@ -34,9 +34,7 @@ Description:
       end
 
       def copy_assets
-        Dir["#{templates_path}/public/**/*.*"].each do |file|
-          copy_file file.split("#{templates_path}/").last
-        end
+        directory "public", "public"
       end
 
       def generate_controllers
@@ -76,10 +74,6 @@ Description:
       end
 
       private
-
-      def templates_path
-        File.join(Typus.root, "lib", "generators", "templates")
-      end
 
       def generate_yaml_files
 
