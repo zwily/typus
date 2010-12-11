@@ -6,7 +6,7 @@ require "rails/test_help"
 require "tartare"
 
 load File.join(File.dirname(__FILE__), "schema.rb")
-require 'factories'
+require "factories"
 
 class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
