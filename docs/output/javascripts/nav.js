@@ -60,6 +60,11 @@ function create_menu(basepath)
 		'<li><a href="http://ruby-toolbox.com/categories/rails_admin_interfaces.html">Rails Admin Interfaces in the Ruby Toolbox</a></li>' +
 		'</ul>' +
 
+		'<h3>Rails Application Templates</h3>' +
+		'<ul>' +
+		'<li><a href="/desmond.rb">Desmond</a></li>' +
+		'</ul>' +
+
 		'</td><td class="td_sep" valign="top">' +
 
 		'<h3>Additional Resources</h3>' +
