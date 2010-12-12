@@ -13,5 +13,5 @@
         status: Active, Inactive
   filters: status, role
   search: first_name, last_name, email, role
-  application: Admin Panel
+  application: Admin
   description: Users Administration
