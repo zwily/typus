@@ -50,6 +50,10 @@ after a usability test with a client.
 
 [NEW] New generator: `rails generate typus:assets`.
 
+[NEW] Created UserVoice (http://typuscms.uservoice.com/)
+
+[CHANGED] Table of contents on documentation for easier access.
+
 [3.0.2]
 
 [FIXED] Use Arel to get the data on lists. After moving to will_paginate I
