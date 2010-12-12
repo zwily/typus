@@ -11,8 +11,10 @@
 
 gem 'acts_as_list'
 gem 'acts_as_tree'
-gem 'paperclip'
+gem 'acts_as_trashable'
+gem 'dragonfly', '~>0.8.1'
 gem 'typus', :git => "https://github.com/fesplugas/typus.git"
+gem 'rack-cache', :require => 'rack/cache'
 
 ##
 # Update the bundle
