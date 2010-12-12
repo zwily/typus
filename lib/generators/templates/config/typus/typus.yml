@@ -12,6 +12,6 @@
       booleans:
         status: Active, Inactive
   filters: status, role
-  search: first_name, last_name, email, role
+  search: first_name, last_name, email
   application: Admin
   description: Users Administration
