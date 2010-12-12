@@ -1,5 +1,6 @@
 require "rails/generators/migration"
 require "generators/typus/controller_generator"
+require "generators/typus/assets_generator"
 
 module Typus
 
@@ -34,7 +35,7 @@ Description:
       end
 
       def copy_assets
-        directory "public", "public"
+        Typus::Generators::AssetsGenerator.new.invoke_all
       end
 
       def generate_controllers
