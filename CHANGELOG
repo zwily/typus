@@ -54,6 +54,8 @@ after a usability test with a client.
 
 [CHANGED] Table of contents on documentation for easier access.
 
+[CHANGED] Display `&mdash;` where no content is available.
+
 [3.0.2]
 
 [FIXED] Use Arel to get the data on lists. After moving to will_paginate I
