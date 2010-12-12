@@ -1,4 +1,5 @@
 require "rails/generators/migration"
+require "generators/typus/controller_generator"
 
 module Typus
 
@@ -63,12 +64,8 @@ Examples:
         template "config/typus/typus_roles.yml", "config/typus/typus_roles.yml"
       end
 
-      def generate_controllers
-        invoke "controller", ["admin/#{admin_users_table_name}"]
-      end
-
-      def make_controllers_inherit_from_resources_controller
-        gsub_file "app/controllers/admin/#{admin_users_table_name}_controller.rb", /ApplicationController/, "Admin::ResourcesController"
+      def generate_controller
+        Typus::Generators::ControllerGenerator.new([options[:user_class_name].pluralize]).invoke_all
       end
 
       def generate_migration
