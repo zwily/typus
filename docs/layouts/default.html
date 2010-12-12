@@ -8,18 +8,24 @@
   <link rel="stylesheet" type="text/css" media="all" href="/stylesheets/screen.css" />
   <meta name="robots" content="all" />
   <meta name="generator" content="nanoc 3.1.4">
+
+  <script type="text/javascript" src="/javascripts/nav.js" />
+  <script type="text/javascript" src="/javascripts/prototype.lite.js" />
+  <script type="text/javascript" src="/javascripts/moo.fx.js" />
+  <script type="text/javascript" src="/javascripts/user_guide_menu.js" />
 </head>
 
 <body>
 
 <!-- START NAVIGATION -->
 
-  <div id="nav">
-    <div id="nav_inner"></div>
-  </div>
+  <div id="nav"><div id="nav_inner"><script type="text/javascript">create_menu('null');</script></div></div>
 
   <div id="nav2">
-    <a name="top">&nbsp;</a>
+    <a name="top"></a>
+    <a href="javascript:void(0);" onclick="myHeight.toggle();">
+      <img src="/images/nav_toggle_darker.jpg" width="154" height="43" border="0" title="Toggle Table of Contents" alt="Toggle Table of Contents" />
+    </a>
   </div>
 
   <div id="masthead">
