@@ -36,7 +36,9 @@ Examples:
       end
 
       def generate_model
-        invoke "active_record:model", [options[:user_class_name]], :migration => false unless model_exists?
+        unless model_exists?
+          invoke "active_record:model", [options[:user_class_name]], :migration => false
+        end
       end
 
       def inject_mixins_into_model
