@@ -57,7 +57,6 @@ function create_menu(basepath)
 		'<h3>Recipes Published Elsewhere</h3>' +
 		'<ul>' +
 		'<li><a href="http://www.joshcrews.com/2010/03/using-heroku-to-host-your-rails-cms/">Using Heroku to host your Rails CMS</a></li>' +
-		'<li><a href="http://ruby-toolbox.com/categories/rails_admin_interfaces.html">Rails Admin Interfaces in the Ruby Toolbox</a></li>' +
 		'</ul>' +
 
 		'<h3>Rails Application Templates</h3>' +
@@ -75,6 +74,7 @@ function create_menu(basepath)
 		'<li><a href="http://github.com/fesplugas/typus/issues">Bug reports</a></li>' +
 		'<li><a href="http://github.com/fesplugas/typus/contributors">Contributors List</a></li>' +
 		'<li><a href="http://pledgie.com/campaigns/11233">Donate</a></li>' +
+		'<li><a href="http://ruby-toolbox.com/categories/rails_admin_interfaces.html">Ruby Toolbox</a></li>' +
 		'</ul>' +	
 
 		'</td></tr></table>');
