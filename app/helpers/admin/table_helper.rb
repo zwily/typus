@@ -64,9 +64,19 @@ module Admin
 
     def table_actions(model, item, connector = " / ")
       Array.new.tap do |data|
-        data << table_default_action(model, item)
-        data << table_action(model, item)
+        if params[:resource_action]
+          data << table_custom_actions(model, item)
+        else
+          data << table_default_action(model, item)
+          data << table_action(model, item)
+        end
       end.compact.join(connector).html_safe
+    end
+
+    def table_custom_actions(model, item)
+      options = { :controller => params[:resource].tableize, :action => params[:resource_action], :id => params[:resource_id], :resource_id => item.id }
+      html_options = { :target => "_parent" }
+      link_to _t(params[:resource_action].humanize), options, html_options
     end
 
     def table_default_action(model, item)
