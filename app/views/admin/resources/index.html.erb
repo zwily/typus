@@ -26,7 +26,7 @@
 
 <% if @items.any? -%>
   <%= raw build_list(@resource, @fields, @items) %>
-  <%= will_paginate(@items, Typus.pagination) %>
+  <%= will_paginate(@items, Typus.pagination) rescue nil %>
 <% else %>
   <p><%= _t("No %{resources} found.", :resources => @resource.model_name.human.pluralize.downcase) %></p>
 <% end %>
