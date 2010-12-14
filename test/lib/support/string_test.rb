@@ -25,7 +25,7 @@ class StringTest < ActiveSupport::TestCase
 
   context "extract_class" do
 
-    should "work for models" do
+    should_eventually "work for models" do
       assert_equal Post, "admin/posts".extract_class
       assert_equal TypusUser, "admin/typus_users".extract_class
     end
