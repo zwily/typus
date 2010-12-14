@@ -358,3 +358,16 @@ fieldset.buttons { }
 #search input { font-size: 1em; padding: 3px; }
 
 /* @end */
+
+/* @group Misc */
+
+ul.predefined_filters {
+  margin: 1.5em 0 0.5em 0!important;
+}
+
+ul.predefined_filters li {
+  display: inline;
+  margin: 0 0.5em 0 0;
+}
+
+/* @end */
