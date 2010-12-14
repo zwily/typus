@@ -56,6 +56,14 @@ after a usability test with a client.
 
 [CHANGED] Display `&mdash;` where no content is available.
 
+[NEW] `Admin::ResourcesController` includes `Typus::Extensions` if available.
+
+[CHANGED] Removed `remove_filter_link` helper in favour of predefined links to
+filters.
+
+[NEW] Custom actions can be injected into table actions. This needs some
+refector to be more powerful (roles) but it works for now.
+
 [3.0.2]
 
 [FIXED] Use Arel to get the data on lists. After moving to will_paginate I
