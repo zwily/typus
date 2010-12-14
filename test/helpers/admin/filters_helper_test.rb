@@ -52,27 +52,6 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
   end
 
-  context "remove_filter_link" do
-
-    should "return nil when blank" do
-      output = remove_filter_link("", {})
-      assert_nil output
-    end
-
-    should "return link to remove search" do
-      output = remove_filter_link('test', {:search => 'test'})
-      expected = ["Remove search"]
-      assert_equal expected, output
-    end
-
-    should "return link to remove filter" do
-      output = remove_filter_link('test', {:filter => 'test'})
-      expected = ["Remove filter"]
-      assert_equal expected, output
-    end
-
-  end
-
   def link_to(*args); args; end
 
 end
