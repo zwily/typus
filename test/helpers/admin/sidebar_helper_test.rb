@@ -29,27 +29,4 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
   end
 
-  should_eventually "test_search" do
-
-    @resource = TypusUser
-
-    params = { :controller => '/admin/typus_users', :action => 'index' }
-    self.expects(:params).at_least_once.returns(params)
-
-    output = search
-
-    partial = "admin/helpers/search"
-    options = { :hidden_params => [ %(<input id="action" name="action" type="hidden" value="index" />),
-                                    %(<input id="controller" name="controller" type="hidden" value="admin/typus_users" />) ],
-                :search_by => "First name, Last name, Email, and Role" }
-
-    assert_equal partial, output.first
-
-    output.last[:hidden_params].each do |o|
-      assert options[:hidden_params].include?(o)
-    end
-    assert options[:search_by].eql?(output.last[:search_by])
-
-  end
-
 end
