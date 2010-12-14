@@ -29,8 +29,8 @@ module Admin
                          end
             switch = sort_order.last if params[:order_by].eql?(order_by)
             options = { :order_by => order_by, :sort_order => sort_order.first }
-            message = [ content, switch ].compact
-            link_to raw(message.join(" ")), params.merge(options)
+            message = [content, switch].compact.join(" ").html_safe
+            link_to message, params.merge(options)
           else
             content
           end
