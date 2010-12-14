@@ -8,19 +8,15 @@ class FakeController
   end
 end
 
-
-
 class Admin::TableHelperTest < ActiveSupport::TestCase
 
   include Admin::TableHelper
 
-
-  
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
   include ActionView::Helpers::RawOutputHelper
-  
+
   include ActionView::Context
 
   include Rails.application.routes.url_helpers
