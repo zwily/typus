@@ -46,18 +46,16 @@ module Admin
       fields.map do |key, value|
         case value
         when :boolean then table_boolean_field(key, item)
-        when :datetime then table_datetime_field(key, item, link_options)
-        when :date then table_datetime_field(key, item, link_options)
-        when :time then table_datetime_field(key, item, link_options)
+        when :date, :datetime, :time then table_datetime_field(key, item)
         when :belongs_to then table_belongs_to_field(key, item)
         when :tree then table_tree_field(key, item)
-        when :file then table_file_field(key, item, link_options)
+        when :file then table_file_field(key, item)
         when :position then table_position_field(key, item)
         when :selector then table_selector(key, item)
         when :transversal then table_transversal(key, item)
         when :has_and_belongs_to_many then table_has_and_belongs_to_many_field(key, item)
         else
-          table_string_field(key, item, link_options)
+          table_string_field(key, item)
         end
       end
     end
@@ -135,7 +133,7 @@ module Admin
       item.mapping(attribute)
     end
 
-    def table_file_field(attribute, item, link_options = {})
+    def table_file_field(attribute, item)
       typus_file_preview(item, attribute)
     end
 
