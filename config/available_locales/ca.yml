@@ -75,7 +75,6 @@ ca:
   "View all %{attribute}":
   "View site": "Veure la web"
 
-  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{errors} prohibited this page from being saved:":
   "%{model} successfully created": "%{model} satisfactòriament creat."
   "%{model} successfully removed": "%{model} satisfactòriament eliminat."

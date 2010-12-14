@@ -75,7 +75,6 @@ es:
   "View all %{attribute}":
   "View site": "Ver web"
 
-  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{errors} prohibited this page from being saved:":
   "%{model} successfully created": "%{model} satisfactoriamente creado."
   "%{model} successfully removed": "%{model} satisfactoriamente eliminado."

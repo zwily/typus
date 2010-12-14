@@ -82,7 +82,6 @@ fr:
   "You can't change your role": "Vous ne pouvez pas changer votre propre rôle."
   "You can't toggle your status": "Vous ne pouvez pas basculer votre statut"
 
-  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{errors} prohibited this page from being saved:":
   "%{model} successfully created": "%{model} correctement créé(e)."
   "%{model} successfully removed": "%{model} correctement supprimé(e)."

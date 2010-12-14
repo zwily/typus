@@ -75,7 +75,6 @@ de:
   "You can't change your role": "Sie k&ouml;nnen Ihre Rolle nicht &auml;ndern"
   "You can't toggle your status": "Sie k&ouml;nnen Ihren Status nicht umschalten"
 
-  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{errors} prohibited this page from being saved:":
   "%{model} successfully created": "%{model} erfolgreich erstellt"
   "%{model} successfully removed": "%{model} erfolgreich gel&ouml;scht"

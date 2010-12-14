@@ -75,7 +75,6 @@
   "You can't change your role":
   "You can't toggle your status":
 
-  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{errors} prohibited this page from being saved:":
   "%{model} successfully created":
   "%{model} successfully removed":

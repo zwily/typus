@@ -68,11 +68,7 @@ module Typus
       #++
       def check_if_user_can_perform_action_on_resources
         if !@item.is_a?(Typus.user_class) && current_user.cannot?(params[:action], @resource)
-          message = _t("%{current_user_role} is not able to perform this action. (%{action})",
-                       :current_user_role => current_user.role.capitalize,
-                       :action => params[:action])
-
-          redirect_to set_path, :notice => message
+          not_allowed
         end
       end
 
@@ -81,10 +77,14 @@ module Typus
       # It works on a resource: git, memcached, syslog ...
       #++
       def check_if_user_can_perform_action_on_resource
-        controller = params[:controller].remove_prefix
-        unless current_user.can?(params[:action], controller.camelize, { :special => true })
-          render :text => "Not allowed!", :status => :unprocessable_entity
+        resource = params[:controller].remove_prefix.camelize
+        unless current_user.can?(params[:action], resource, { :special => true })
+          not_allowed
         end
+      end
+
+      def not_allowed
+        render :text => "Not allowed!", :status => :unprocessable_entity
       end
 
       #--

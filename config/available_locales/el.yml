@@ -76,7 +76,6 @@ el:
   "You can't change your role": "Δεν έχετε την δυνατότητα να αλλάξετε τον ρόλο σας"
   "You can't toggle your status": "Δεν επιτρέπεται η αλλαγή της κατάστασής σας"
 
-  "%{current_user_role} is not able to perform this action. (%{action})": "Χρήστες τύπου %{current_user_role} δεν είναι δυνατόν να εκτελέσουν αυτή την ενέργεια. (%{action})"
   "%{errors} prohibited this page from being saved:":
   "%{model} successfully created": "Το μοντέλο %{model} δημιουργήθηκε επιτυχώς"
   "%{model} successfully removed": "Το μοντέλο %{model} απομακρύνθηκε επιτυχώς"

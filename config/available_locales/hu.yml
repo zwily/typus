@@ -75,7 +75,6 @@ hu:
   "You can't change your role": "Nincsen jogod megváltoztatni a jogosultsági szintedet"
   "You can't toggle your status": "Nincs jogod változtatni a státuszodat"
 
-  "%{current_user_role} is not able to perform this action. (%{action})":
   "%{errors} prohibited this page from being saved:":
   "%{model} successfully created": "%{model} sikeresen létrehozva"
   "%{model} successfully removed": "%{model} sikeresen törölve"
