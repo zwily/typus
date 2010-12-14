@@ -62,73 +62,52 @@ module Admin
       end
     end
 
-    def table_actions(model, item, connector = " / ")
-      Array.new.tap do |data|
-        if params[:resource_action]
-          data << table_custom_actions(model, item)
-        else
-          data << table_default_action(model, item)
-          data << table_action(model, item)
+    def table_actions(model, item)
+      @actions = []
+
+      custom_actions_for_index(model, item)
+
+      actions_for_index(model, item)
+      actions_for_trash(model, item)
+      actions_for_edit_show_or_update(model, item)
+
+      @actions.map do |name, action, confirm, method|
+        if current_user.can?(action, model)
+          link_to name, { :action => action, :id => item.id }, { :confirm => confirm, :method => method }
         end
-      end.compact.join(connector).html_safe
+      end.compact.join(" / ").html_safe
     end
 
-    def table_custom_actions(model, item)
-      options = { :controller => params[:resource].tableize, :action => params[:resource_action], :id => params[:resource_id], :resource_id => item.id }
-      html_options = { :target => "_parent" }
-      link_to _t(params[:resource_action].humanize), options, html_options
+    ##
+    # Pending Stuff:
+    #
+    # - Detect custom actions for current model.
+    #
+    def custom_actions_for_index(model, index)
     end
 
-    def table_default_action(model, item)
-      default_action = item.class.typus_options_for(:default_action_on_item)
-      action = if model.typus_user_id? && current_user.is_not_root?
-                 item.owned_by?(current_user) ? default_action : "show"
-               elsif current_user.cannot?("edit", model)
-                 'show'
-               else
-                 default_action
-               end
-
-      options = { :controller => "/admin/#{item.class.to_resource}",
-                  :action => action,
-                  :id => item.id }
-
-      link_to _t(action.capitalize), options
+    def actions_for_index(model, item)
+      if %w(index).include?(controller.action_name)
+        default_action = item.class.typus_options_for(:default_action_on_item)
+        @actions << [default_action.titleize, default_action]
+        @actions << ['Trash', 'destroy', set_confirm_message_for("Trash", model), 'delete']
+      end
     end
 
-    def table_action(model, item)
-      case params[:action]
-      when "index"
-        action = "trash"
-        options = { :action => 'destroy', :id => item.id }
-        method = :delete
-      when "edit", "show", "update"
-        action = "unrelate"
-        options = { :action => 'unrelate', :id => params[:id], :resource => model, :resource_id => item.id }
+    def actions_for_edit_show_or_update(model, item)
+      if %w(edit show update).include?(controller.action_name)
+       @actions << ['Unrelate', 'unrelate', set_confirm_message_for("Unrelate", model)]
       end
+    end
 
-      condition = true
-
-      case params[:action]
-      when 'index'
-        condition = if model.typus_user_id? && current_user.is_not_root?
-                      item.owned_by?(current_user)
-                    elsif (current_user.id.eql?(item.id) && model.eql?(Typus.user_class))
-                      false
-                    else
-                      current_user.can?('destroy', model)
-                    end
-      when 'show'
-        condition = if @resource.typus_user_id? && current_user.is_not_root?
-                      @item.owned_by?(current_user)
-                    end
+    def actions_for_trash(model, item)
+      if %w(trash).include?(controller.action_name)
+        @actions << ['Recover', 'untrash', set_confirm_message_for("Recover", model)]
       end
+    end
 
-      confirm = _t(action.titleize) + " " + model.model_name.human + "?"
-
-      if condition
-        link_to _t(action.titleize), options, :title => _t(action.titleize), :confirm => confirm, :method => method
-      end
+    def set_confirm_message_for(action, model)
+      _t(action) + " " + model.model_name.human + "?"
     end
 
     def table_belongs_to_field(attribute, item)
