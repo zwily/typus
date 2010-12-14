@@ -48,8 +48,6 @@ hu:
   "Remove": "Eltávolítás"
   "Remove %{attribute}": "Eltávolítod %{attribute}"
   "Remove %{resource}?": "Eltávolítod %{resource}?"
-  "Remove filter": "Szűrő eltávolítása"
-  "Remove search":
   "Reset password": "Jelszó módosítása"
   "Resources": "Források"
 

@@ -7,13 +7,13 @@
 
 <h2>
   <%= page_title %>
-  <small><%= remove_filter_link %></small>
 </h2>
 
 <%= display_flash_message %>
+
 <%= render 'index' %>
 
-<% if (build_filters || search) && !@resource.count.zero? %>
+<% if (build_filters || search) %>
   <div class="filters">
     <%= build_filters %>
     <%= search %>

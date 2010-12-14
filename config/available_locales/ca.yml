@@ -48,8 +48,6 @@ ca:
   "Remove": "Eliminar"
   "Remove %{attribute}": "Esborrar %{attribute}"
   "Remove %{resource}?": "Esborrar %{resource}?"
-  "Remove filter": "Treure filtre"
-  "Remove search": "Treure cerca"
   "Reset password": "Canviar contrasenya"
   "Resources": "Recursos"
 

@@ -55,8 +55,6 @@ it:
   "Remove": "Elimina"
   "Remove %{attribute}": "Elimina %{attribute}"
   "Remove %{resource}?": "Elimina %{resource}"
-  "Remove filter": "Rimuovi filtro"
-  "Remove search": "Rimuovi ricerca"
   "Reset password": "Resetta la password"
   "Resources": "Risorse"
 

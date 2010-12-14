@@ -47,8 +47,6 @@ el:
   "Remove": "Απομάκρυνση"
   "Remove %{attribute}": "Απομάκρυνση %{attribute}"
   "Remove %{resource}?": "Απομάκρυνση %{resource}"
-  "Remove filter": "Απομάκρυνση φίλτρου"
-  "Remove search": "Απομάκρυνση αναζήτησης"
   "Reset password": "Επαναφορά κωδικού"
   "Resources": "Πόροι"
 
