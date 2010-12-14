@@ -127,7 +127,7 @@ module Admin
       item.send(attribute).map { |i| i.to_label }.join(", ")
     end
 
-    def table_string_field(attribute, item, link_options = {})
+    def table_string_field(attribute, item)
       (raw_content = item.send(attribute)).present? ? raw_content : "&mdash;".html_safe
     end
 

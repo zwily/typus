@@ -166,18 +166,15 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected.strip, output
   end
 
-  should_eventually "test_table_string_field" do
+  should "test_table_string_field" do
     post = Factory(:post)
-    output = table_string_field(:title, post, :created_at)
-    expected = %(<td class="title">#{post.title}</td>)
-    assert_equal expected.strip, output
+    assert_equal post.title, table_string_field(:title, post)
   end
 
-  should_eventually "test_table_string_field_with_link" do
+  should "test_table_string_field when attribute is empty" do
     post = Factory(:post)
-    output = table_string_field(:title, post, :title)
-    expected = %(<td class="title">#{post.title}</td>)
-    assert_equal expected.strip, output
+    post.title = ""
+    assert_equal "&mdash;", table_string_field(:title, post)
   end
 
   should_eventually "table_tree_field_when_displays_a_parent" do
