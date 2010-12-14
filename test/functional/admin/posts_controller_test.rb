@@ -35,7 +35,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_difference('Post.count') do
         post :create, { :post => { :title => 'This is another title', :body => 'Body' } }
         assert_response :redirect
-        assert_redirected_to "/admin/posts"
+        assert_redirected_to "/admin/posts/edit/#{Post.last.id}"
       end
     end
 
@@ -54,7 +54,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     should "update" do
       post :update, { :id => @post.id, :title => 'Updated' }
       assert_response :redirect
-      assert_redirected_to "/admin/posts"
+      assert_redirected_to "/admin/posts/edit/#{@post.id}"
     end
 
   end
@@ -237,15 +237,12 @@ title;status
 
       should "verify_editor_tries_to_edit_a_post_owned_by_the_admin" do
         get :edit, { :id => Factory(:post).id }
-
-        assert_response :redirect
-        assert_redirected_to @request.env['HTTP_REFERER']
-        assert_equal "You don't have permission to access this item.", flash[:alert]
+        assert_response :unprocessable_entity
       end
 
       should "verify_editor_tries_to_show_a_post_owned_by_the_admin" do
         get :show, { :id => Factory(:post).id }
-        assert_response :success
+        assert_response :unprocessable_entity
       end
 
       should "only list editor posts" do
@@ -262,14 +259,11 @@ title;status
         assert_equal [@typus_user.id, @typus_user.id], assigns(:items).map(&:typus_user_id)
       end
 
-      should "verify_editor_tries_to_show_a_post_owned_by_the_admin whe only user items" do
+      should "verify_editor_tries_to_show_a_post_owned_by_the_admin when only user items" do
         Typus::Resources.expects(:only_user_items).returns(true)
         post = Factory(:post)
         get :show, { :id => post.id }
-
-        assert_response :redirect
-        assert_redirected_to @request.env['HTTP_REFERER']
-        assert_equal "You don't have permission to access this item.", flash[:alert]
+        assert_response :unprocessable_entity
       end
 
       should "verify_typus_user_id_of_item_when_creating_record" do
@@ -326,18 +320,14 @@ title;status
       should "not be able to add posts" do
         get :new
 
-        assert_response :redirect
-        assert_equal "Designer is not able to perform this action. (new)", flash[:notice]
-        assert_redirected_to :action => :index
+        assert_response :unprocessable_entity
       end
 
       should "not be able to destroy posts" do
         assert_no_difference('Post.count') do
           get :destroy, { :id => @post.id, :method => :delete }
         end
-        assert_response :redirect
-        assert_equal "You don't have permission to access this item.", flash[:alert]
-        assert_redirected_to :action => :index
+        assert_response :unprocessable_entity
       end
 
     end

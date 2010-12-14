@@ -17,10 +17,9 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "not be able to toogle his status" do
-      get :toggle, { :id => @typus_user.id, :field => 'status' }
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "You can't toggle your status.", flash[:notice]
+      assert_raises RuntimeError do
+        get :toggle, { :id => @typus_user.id, :field => 'status' }
+      end
     end
 
     should "be able to toggle other users status" do
@@ -49,7 +48,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     should "be able to update other users role" do
       post :update, { :id => @typus_user_editor.id, :typus_user => { :role => 'admin' } }
       assert_response :redirect
-      assert_redirected_to "/admin/typus_users"
+      assert_redirected_to "/admin/typus_users/edit/#{@typus_user_editor.id}"
       assert_equal "Typus user successfully updated.", flash[:notice]
     end
 
@@ -65,9 +64,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     should "not_allow_editor_to_create_typus_users" do
       get :new
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Editor is not able to perform this action. (new)", flash[:notice]
+      assert_response :unprocessable_entity
     end
 
     should "be able to edit his profile" do
@@ -78,7 +75,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     should "be able to update his profile" do
       post :update, { :id => @editor.id, :typus_user => { :role => 'editor' } }
       assert_response :redirect
-      assert_redirected_to "/admin/typus_users"
+      assert_redirected_to "/admin/typus_users/edit/#{@editor.id}"
       assert_equal "Typus user successfully updated.", flash[:notice]
     end
 
@@ -150,7 +147,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     should "be able to update his profile" do
       post :update, { :id => @designer.id, :typus_user => { :role => 'designer', :email => 'designer@withafancydomain.com' } }
       assert_response :redirect
-      assert_redirected_to "/admin/typus_users"
+      assert_redirected_to "/admin/typus_users/edit/#{@designer.id}"
       assert_equal "Typus user successfully updated.", flash[:notice]
       assert_equal "designer@withafancydomain.com", @designer.reload.email
     end

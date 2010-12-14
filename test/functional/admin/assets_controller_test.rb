@@ -48,7 +48,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
       get :detach, { :id => @asset.id, :attribute => "file" }
       assert_response :redirect
-      assert_redirected_to "/admin/assets"
+      assert_redirected_to "/admin/assets/edit/#{@asset.id}"
       assert_equal "Asset successfully updated.", flash[:notice]
 
       @asset.reload
