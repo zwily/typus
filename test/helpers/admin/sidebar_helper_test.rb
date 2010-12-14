@@ -52,13 +52,4 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   end
 
-  should_eventually "test_filters" do
-    @resource = TypusUser
-    @resource.expects(:typus_filters).returns(Array.new)
-    output = filters
-    assert output.nil?
-  end
-
-  should "test_filters_with_filters"
-
 end
