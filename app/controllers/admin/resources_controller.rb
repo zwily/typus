@@ -22,9 +22,9 @@ class Admin::ResourcesController < Admin::BaseController
   before_filter :check_if_user_can_perform_action_on_resources
 
   before_filter :set_order,
-                :only => [ :index ]
+                :only => [ :index, :trash ]
   before_filter :set_fields,
-                :only => [ :index, :new, :edit, :create, :update, :show, :detach ]
+                :only => [ :index, :new, :edit, :create, :update, :show, :detach, :trash ]
 
   ##
   # This is the main index of the model. With filters, conditions and more.
