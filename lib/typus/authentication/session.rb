@@ -49,7 +49,7 @@ module Typus
           end
         when 'toggle'
           if current_user.is_root? && (current_user == @item)
-            redirect_to set_path, :notice => _t("You can't toggle your status.")
+            raise "You can't toggle your status."
           elsif current_user.is_not_root?
             raise "You don't have privileges to toogle #{Typus.user_class}#status."
           end
