@@ -14,7 +14,9 @@
 <%= render 'index' %>
 
 <ul class="predefined_filters">
-  <li><%= link_to _t("All"), :action => 'index' %> (<%= @resource.count %>)</li>
+  <% predefined_filters.each do |filter, action, scope| %>
+    <li><%= link_to_unless_current _t(filter), :action => action %> (<%= @resource.send(scope).count %>)</li>
+  <% end %>
 </ul>
 
 <% if (build_filters || search) %>

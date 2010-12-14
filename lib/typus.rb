@@ -8,6 +8,7 @@ require "support/string"
 
 require "typus/engine"
 require "typus/orm/active_record"
+require "typus/filters"
 require "typus/user"
 require "typus/version"
 
