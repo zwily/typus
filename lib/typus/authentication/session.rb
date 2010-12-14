@@ -101,10 +101,7 @@ module Typus
         condition_typus_users = @item.respond_to?(Typus.relationship) && !@item.send(Typus.relationship).include?(current_user)
         condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(current_user)
 
-        if condition_typus_users || condition_typus_user_id
-           alert = _t("You don't have permission to access this item.")
-           redirect_to set_path, :alert => alert
-        end
+        not_allowed if (condition_typus_users || condition_typus_user_id)
       end
 
       #--
