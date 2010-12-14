@@ -155,11 +155,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  should_eventually "test_table_has_and_belongs_to_many_field" do
+  should "test_table_has_and_belongs_to_many_field" do
     post = Factory(:post)
-    output = table_has_and_belongs_to_many_field("comments", post)
-    expected = %(<td>John, Me, Me</td>)
-    assert_equal expected.strip, output
+    post.comments << Factory(:comment, :name => "John")
+    post.comments << Factory(:comment, :name => "Jack")
+    assert_equal "John, Jack", table_has_and_belongs_to_many_field("comments", post)
   end
 
   should "test_table_string_field" do
