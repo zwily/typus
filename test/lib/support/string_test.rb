@@ -9,16 +9,16 @@ class StringTest < ActiveSupport::TestCase
 
   context "remove_prefix" do
 
-    should "remove admin by default" do
+    should "return strings without default prefix" do
       assert_equal "posts", "admin/posts".remove_prefix
       assert_equal "typus_users", "admin/typus_users".remove_prefix
       assert_equal "delayed/jobs", "admin/delayed/jobs".remove_prefix
     end
 
-    should "remove what we want to" do
-      assert_equal "posts", "typus/posts".remove_prefix("typus/")
-      assert_equal "typus_users", "typus/typus_users".remove_prefix("typus/")
-      assert_equal "delayed/tasks", "typus/delayed/tasks".remove_prefix("typus/")
+    should "return strings without custom prefix" do
+      assert_equal "posts", "typus/posts".remove_prefix
+      assert_equal "typus_users", "typus/typus_users".remove_prefix
+      assert_equal "delayed/tasks", "typus/delayed/tasks".remove_prefix
     end
 
   end

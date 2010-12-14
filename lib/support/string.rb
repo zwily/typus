@@ -4,8 +4,8 @@ class String
     split(",").map { |x| x.strip }
   end
 
-  def remove_prefix(prefix = 'admin/')
-    partition(prefix).last
+  def remove_prefix
+    split("/")[1..-1].join("/")
   end
 
   def extract_class
