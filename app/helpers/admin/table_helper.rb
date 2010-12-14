@@ -162,7 +162,7 @@ module Admin
       "#{item.position}<br/><br/>#{html_position.join(connector)}".html_safe
     end
 
-    def table_datetime_field(attribute, item, link_options = {})
+    def table_datetime_field(attribute, item)
       if field = item.send(attribute)
         I18n.localize(field, :format => item.class.typus_date_format(attribute))
       end

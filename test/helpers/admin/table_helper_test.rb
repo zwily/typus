@@ -187,22 +187,9 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
   end
 
-  should_eventually "test_table_datetime_field" do
+  should "test_table_datetime_field" do
     post = Factory(:post)
-
-    output = table_datetime_field(:created_at, post)
-    expected = %(<td>#{post.created_at.strftime("%m/%y")}</td>)
-
-    assert_equal expected.strip, output
-  end
-
-  should_eventually "test_table_datetime_field_with_link" do
-    post = Factory(:post)
-
-    output = table_datetime_field(:created_at, post, :created_at)
-    expected = %(<td>#{post.created_at.strftime("%m/%y")}</td>)
-
-    assert_equal expected.strip, output
+    assert_equal post.created_at.strftime("%d %b %H:%M"), table_datetime_field(:created_at, post)
   end
 
   should_eventually "test_table_boolean_field" do
