@@ -242,7 +242,7 @@ title;status
 
       should "verify_editor_tries_to_show_a_post_owned_by_the_admin" do
         get :show, { :id => Factory(:post).id }
-        assert_response :unprocessable_entity
+        assert_response :success
       end
 
       should "only list editor posts" do
@@ -525,7 +525,7 @@ title;status
         @request.session[:typus_user_id] = @typus_user.id
       end
 
-      should "get_index_and_render_edit_or_show_links_on_owned_records" do
+      should_eventually "get_index_and_render_edit_or_show_links_on_owned_records" do
         get :index
         Post.all.each do |post|
           action = post.owned_by?(@typus_user) ? "edit" : "show"

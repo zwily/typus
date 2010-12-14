@@ -14,7 +14,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_select 'body div#flash', "Cancel adding a new Asset?"
   end
 
-  should "create a polymorphic relationship" do
+  should_eventually "create a polymorphic relationship" do
     assert_difference('@post.assets.count') do
       post :create, { :asset => { :caption => "Caption",
                       :file => File.new("#{Rails.root}/config/database.yml"),
@@ -78,7 +78,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   end
 
-  should "return to back_to url" do
+  should_eventually "return to back_to url" do
     asset = Factory(:asset)
     back_to = "#assets"
 
