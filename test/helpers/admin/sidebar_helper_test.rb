@@ -29,30 +29,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     assert_equal expected, output
   end
 
-  should_eventually "test_build_typus_list_with_empty_content_and_empty_header" do
-    output = build_typus_list([], :header => nil)
-    assert output.empty?
-  end
-
-  should_eventually "test_build_typus_list_with_content_and_header" do
-    output = build_typus_list(['item1', 'item2'], :header => "Chunky Bacon")
-    assert !output.empty?
-
-    expected = [ "admin/helpers/list", { :header=>"Chunky bacon",
-                                         :options => { :header => "Chunky Bacon" },
-                                         :items => [ "item1", "item2" ] } ]
-
-    assert_equal expected, output
-  end
-
-  should_eventually "test_build_typus_list_with_content_without_header" do
-    output = build_typus_list(['item1', 'item2'])
-    expected = [ "admin/helpers/list", { :header => nil,
-                                         :options => {},
-                                         :items=>["item1", "item2"] } ]
-    assert_equal expected, output
-  end
-
   should_eventually "test_search" do
 
     @resource = TypusUser
