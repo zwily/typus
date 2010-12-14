@@ -11,6 +11,7 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::FormTagHelper
 
   def render(*args); args; end
+  def link_to(*args); args; end
 
   setup do
     default_url_options[:host] = 'test.host'
@@ -18,16 +19,12 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   should "test_actions"
 
-  should_eventually "test_export" do
-    @resource = Post
-
+  should "test_export" do
     params = { :controller => '/admin/posts', :action => 'index' }
-    self.expects(:params).at_least_once.returns(params)
-    output = export
-    expected = [ "admin/helpers/list", { :items => [ %(<a href="http://test.host/admin/posts?format=csv">CSV</a>),
-                                                     %(<a href="http://test.host/admin/posts?format=xml">XML</a>) ],
-                                         :header => "Export",
-                                         :options => { :header => "export" } } ]
+
+    output = export(Post , params)
+    expected = [["Export as CSV", { :action => "index", :format => "csv", :controller => "/admin/posts" }],
+                ["Export as XML", { :action => "index", :format => "xml", :controller => "/admin/posts" }]]
 
     assert_equal expected, output
   end
