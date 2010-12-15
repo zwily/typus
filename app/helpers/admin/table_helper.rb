@@ -63,8 +63,6 @@ module Admin
     def table_actions(model, item)
       @actions = []
 
-      custom_actions_for_index(model, item)
-
       actions_for_index(model, item)
       actions_for_trash(model, item)
       actions_for_edit_show_or_update(model, item)
@@ -74,14 +72,6 @@ module Admin
           link_to name, { :action => action, :id => item.id }, { :confirm => confirm, :method => method }
         end
       end.compact.join(" / ").html_safe
-    end
-
-    ##
-    # Pending Stuff:
-    #
-    # - Detect custom actions for current model.
-    #
-    def custom_actions_for_index(model, index)
     end
 
     def actions_for_index(model, item)
