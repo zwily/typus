@@ -24,12 +24,7 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 
 /* @group Defaults */
 
-html,
-body {
-  margin: 0;
-  padding: 0;
-  height: 100%;
-}
+html, body {}
 
 body {
   font-family: "Lucida Grande", Sans-serif;
@@ -61,7 +56,7 @@ li { color: #777; }
 a,
 a:visited,
 a:link { color: #000; font-weight: normal; }
-a:hover { color: #333; text-decoration: underline; }
+a:hover { color: #333; text-decoration: underline!important; }
 
 /* @end */
 
@@ -109,8 +104,8 @@ a:hover { color: #333; text-decoration: underline; }
 /* @group Content */
 
 #content { margin: 0 0 0 20em; }
-
 #content.headless { margin: 1em; }
+
 #content h2 { font-size: 1.5em; margin: 0.5em 0; }
 #content h2 small { font-size: 0.75em; }
 #content h2 small a { color: #666; }
@@ -166,15 +161,7 @@ a:hover { color: #333; text-decoration: underline; }
 
 /* @group Footer */
 
-#footer_wrapper {
-  bottom: 0;
-  height: 50px;
-  position: absolute;
-  width: 100%;
-  z-index: -100;
-}
-
-#footer { font-size: 0.9em; padding: 20px; }
+#footer_wrapper { display: none; }
 
 /* @end */
 
@@ -362,12 +349,21 @@ fieldset.buttons { }
 /* @group Misc */
 
 ul.predefined_filters {
-  margin: 1.5em 0 0.5em 0!important;
+  margin: 1em 0 0.5em 0!important;
 }
 
 ul.predefined_filters li {
   display: inline;
   margin: 0 0.5em 0 0;
 }
+
+.actions {
+  font-size: 0.9em;
+  margin: 0.5em 0;
+  height: 1em;
+}
+
+tr .hidden { display: none; }
+tr:hover .hidden { display: block; }
 
 /* @end */
