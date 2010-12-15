@@ -122,18 +122,19 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  should_eventually "table_tree_field_when_displays_a_parent" do
-    page = Factory(:page)
-    output = table_tree_field("test", page)
-    expected = "<td>&mdash;</td>"
-    assert_equal expected, output
-  end
+  context "table_tree_field" do
 
-  should_eventually "table_tree_field_when_displays_a_children" do
-    page = Factory(:page, :status => "unpublished")
-    output = table_tree_field("test", page)
-    expected = "<td>&mdash;</td>"
-    assert_equal expected, output
+    should "work when no parent" do
+      page = Factory(:page)
+      assert_equal "&mdash;", table_tree_field(page)
+    end
+
+    should "work when parent" do
+      parent = Factory(:page)
+      page = Factory(:page, :parent => parent)
+      assert_equal parent.to_label, table_tree_field(page)
+    end
+
   end
 
   should "test_table_datetime_field" do

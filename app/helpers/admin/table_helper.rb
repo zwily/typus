@@ -48,7 +48,7 @@ module Admin
         when :boolean then table_boolean_field(key, item)
         when :date, :datetime, :time then table_datetime_field(key, item)
         when :belongs_to then table_belongs_to_field(key, item)
-        when :tree then table_tree_field(key, item)
+        when :tree then table_tree_field(item)
         when :file then table_file_field(key, item)
         when :position then table_position_field(key, item)
         when :selector then table_selector(key, item)
@@ -137,7 +137,7 @@ module Admin
       typus_file_preview(item, attribute)
     end
 
-    def table_tree_field(attribute, item)
+    def table_tree_field(item)
       item.parent ? item.parent.to_label : "&mdash;".html_safe
     end
 
