@@ -53,26 +53,30 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  should "test_table_header" do
-    params = { :controller => "/admin/typus_users", :action => "index" }
-    fields = TypusUser.typus_fields_for(:list)
+  context "table_header" do
 
-    expected = [ %(<a href="/admin/typus_users?order_by=email">Email</a>),
-                 %(<a href="/admin/typus_users?order_by=role">Role</a>),
-                 %(<a href="/admin/typus_users?order_by=status">Status</a>) ]
+    should "work" do
+      params = { :controller => "/admin/typus_users", :action => "index" }
+      fields = TypusUser.typus_fields_for(:list)
 
-    assert_equal expected, table_header(TypusUser, fields, params)
-  end
+      expected = [ %(<a href="/admin/typus_users?order_by=email">Email</a>),
+                   %(<a href="/admin/typus_users?order_by=role">Role</a>),
+                   %(<a href="/admin/typus_users?order_by=status">Status</a>) ]
 
-  should "test_table_header_with_params" do
-    params = { :controller => "/admin/typus_users", :action => "index", :search => "admin" }
-    fields = TypusUser.typus_fields_for(:list)
+      assert_equal expected, table_header(TypusUser, fields, params)
+    end
 
-    expected = [ %(<a href="/admin/typus_users?order_by=email&amp;search=admin">Email</a>),
-                 %(<a href="/admin/typus_users?order_by=role&amp;search=admin">Role</a>),
-                 %(<a href="/admin/typus_users?order_by=status&amp;search=admin">Status</a>) ]
+    should "work with params" do
+      params = { :controller => "/admin/typus_users", :action => "index", :search => "admin" }
+      fields = TypusUser.typus_fields_for(:list)
 
-    assert_equal expected, table_header(TypusUser, fields, params)
+      expected = [ %(<a href="/admin/typus_users?order_by=email&amp;search=admin">Email</a>),
+                   %(<a href="/admin/typus_users?order_by=role&amp;search=admin">Role</a>),
+                   %(<a href="/admin/typus_users?order_by=status&amp;search=admin">Status</a>) ]
+
+      assert_equal expected, table_header(TypusUser, fields, params)
+    end
+
   end
 
   context "table_belongs_to_field" do
