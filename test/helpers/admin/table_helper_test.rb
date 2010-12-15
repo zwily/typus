@@ -107,15 +107,19 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal "John, Jack", table_has_and_belongs_to_many_field("comments", post)
   end
 
-  should "test_table_string_field" do
-    post = Factory(:post)
-    assert_equal post.title, table_string_field(:title, post)
-  end
+  context "table_string_field" do
 
-  should "test_table_string_field when attribute is empty" do
-    post = Factory(:post)
-    post.title = ""
-    assert_equal "&mdash;", table_string_field(:title, post)
+    should "work" do
+      post = Factory(:post)
+      assert_equal post.title, table_string_field(:title, post)
+    end
+
+    should "work when attribute is empty" do
+      post = Factory(:post)
+      post.title = ""
+      assert_equal "&mdash;", table_string_field(:title, post)
+    end
+
   end
 
   should_eventually "table_tree_field_when_displays_a_parent" do
