@@ -30,29 +30,6 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     self.stubs(:controller).returns(FakeController.new)
   end
 
-  should_eventually "test_build_table" do
-
-    current_user = Factory(:typus_user)
-
-    params = { :controller => '/admin/typus_users', :action => 'index' }
-    self.expects(:params).at_least_once.returns(params)
-
-    fields = TypusUser.typus_fields_for(:list)
-    items = TypusUser.all
-
-    expects(:render).once.with('admin/helpers/table_header',
-      { :headers => [
-        '<a href="http://test.host/admin/typus_users?order_by=email">Email </a>',
-        '<a href="http://test.host/admin/typus_users?order_by=role">Role </a>',
-        '<a href="http://test.host/admin/typus_users?order_by=status">Status </a>',
-        '&nbsp;',
-        '&nbsp;'
-    ]})
-
-    build_table(TypusUser, fields, items)
-
-  end
-
   context "table_header" do
 
     should "work" do
