@@ -11,13 +11,13 @@ module Admin
              :headers => table_header(model, fields)
     end
 
-    def table_header(model, fields)
+    def table_header(model, fields, params = params)
       fields.map do |key, value|
 
         key = key.gsub(".", " ") if key.match(/\./)
         content = model.human_attribute_name(key)
 
-        if controller.action_name.eql?('index') && model.typus_options_for(:sortable)
+        if params[:action].eql?('index') && model.typus_options_for(:sortable)
           association = model.reflect_on_association(key.to_sym)
           order_by = association ? association.primary_key_name : key
 

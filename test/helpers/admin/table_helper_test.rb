@@ -73,26 +73,15 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  should_eventually "test_table_header_with_params" do
-
-    current_user = mock
-    current_user.expects(:can?).with("delete", TypusUser).returns(true)
-
+  should "test_table_header_with_params" do
+    params = { :controller => "/admin/typus_users", :action => "index", :search => "admin" }
     fields = TypusUser.typus_fields_for(:list)
 
-    params = { :controller => "/admin/typus_users", :action => "index", :search => "admin" }
-    self.expects(:params).at_least_once.returns(params)
+    expected = [ %(<a href="/admin/typus_users?order_by=email&amp;search=admin">Email</a>),
+                 %(<a href="/admin/typus_users?order_by=role&amp;search=admin">Role</a>),
+                 %(<a href="/admin/typus_users?order_by=status&amp;search=admin">Status</a>) ]
 
-    output = table_header(TypusUser, fields)
-
-    expected = [ "admin/helpers/table_header",
-                 { :headers => [ %(<a href="http://test.host/admin/typus_users?order_by=email&search=admin">Email</a>),
-                                 %(<a href="http://test.host/admin/typus_users?order_by=role&search=admin">Role</a>),
-                                 %(<a href="http://test.host/admin/typus_users?order_by=status&search=admin">Status</a>),
-                                 %(&nbsp;) ] } ]
-
-    assert_equal expected, output
-
+    assert_equal expected, table_header(TypusUser, fields, params)
   end
 
   should_eventually "test_table_header_when_user_cannot_delete_items" do
