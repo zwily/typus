@@ -23,6 +23,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   def render(*args); args; end
   def params; {} end
+  def current_user; end
 
   setup do
     default_url_options[:host] = "test.host"
@@ -74,22 +75,24 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal expected, table_header(TypusUser, fields, params)
   end
 
-  should_eventually "test_table_belongs_to_field" do
+  context "table_belongs_to_field" do
 
-    current_user = Factory(:typus_user)
+    should "work without associated model" do
+      comment = Factory(:comment, :post => nil)
+      assert_equal "&mdash;", table_belongs_to_field("post", comment)
+    end
 
-    comment = comments(:without_post_id)
-    output = table_belongs_to_field("post", comment)
-    expected = "<td></td>"
+    should "work with associated model when user has access" do
+      current_user.expects(:can?).returns(true)
+      comment = Factory(:comment)
+      assert_equal %(<a href="/admin/posts/edit/1">Post#1</a>), table_belongs_to_field("post", comment)
+    end
 
-    assert_equal expected, output
-    default_url_options[:host] = "test.host"
-
-    comment = comments(:with_post_id)
-    output = table_belongs_to_field("post", comment)
-    expected = %(<td><a href="http://test.host/admin/posts/edit/1">Post#1</a></td>)
-
-    assert_equal expected.strip, output
+    should "work with associated model when user does not have access" do
+      current_user.expects(:can?).returns(false)
+      comment = Factory(:comment)
+      assert_equal "Post#1", table_belongs_to_field("post", comment)
+    end
 
   end
 
