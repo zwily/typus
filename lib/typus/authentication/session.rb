@@ -40,25 +40,15 @@ module Typus
 
         case params[:action]
         when 'edit'
-          if current_user.is_not_root? && (current_user != @item)
-            raise "You don't have privileges to edit #{Typus.user_class}."
-          end
+          not_allowed if current_user.is_not_root? && (current_user != @item)
         when 'update'
-          if current_user.is_not_root? && !(@item.role == params[@object_name][:role])
-            redirect_to set_path, :notice => _t("You can't change your role.")
-          end
-        when 'toggle'
-          if current_user.is_root? && (current_user == @item)
-            raise "You can't toggle your status."
-          elsif current_user.is_not_root?
-            raise "You don't have privileges to toogle #{Typus.user_class}#status."
-          end
-        when 'destroy'
-          if current_user.is_root? && (current_user == @item)
-            raise "You can't remove yourself."
-          elsif current_user.is_not_root?
-            raise "You don't have privileges to destroy #{Typus.user_class}."
-          end
+          user_profile = (current_user.is_root? || current_user.is_not_root?) && (current_user == @item) && !(@item.role == params[@object_name][:role])
+          other_user   = current_user.is_not_root? && !(current_user == @item)
+          not_allowed if (user_profile || other_user)
+        when 'toggle', 'destroy'
+          root = current_user.is_root? && (current_user == @item)
+          user = current_user.is_not_root?
+          not_allowed if (root || user)
         end
       end
 
