@@ -141,23 +141,26 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     assert_equal post.created_at.strftime("%d %b %H:%M"), table_datetime_field(:created_at, post)
   end
 
-  should_eventually "test_table_boolean_field" do
+  context "table_boolean_field" do
 
-    post = Factory(:typus_user)
-    output = table_boolean_field("status", post)
-    expected = <<-HTML
-<td><a href="http://test.host/admin/typus_users/toggle/1?field=status" onclick="return confirm('Change status?');">Active</a></td>
-    HTML
+    should "work when default status is true" do
+      post = Factory(:typus_user)
+      expected = %(<a href="/admin/typus_users/toggle/1?field=status" data-confirm="Change status?">Active</a>)
+      assert_equal expected, table_boolean_field("status", post)
+    end
 
-    assert_equal expected.strip, output
+    should "work when default status is false" do
+      post = Factory(:typus_user, :status => false)
+      expected = %(<a href="/admin/typus_users/toggle/1?field=status" data-confirm="Change status?">Inactive</a>)
+      assert_equal expected, table_boolean_field("status", post)
+    end
 
-    post = Factory(:typus_user, :status => false)
-    output = table_boolean_field("status", post)
-    expected = <<-HTML
-<td><a href="http://test.host/admin/typus_users/toggle/3?field=status" onclick="return confirm('Change status?');">Inactive</a></td>
-    HTML
-
-    assert_equal expected.strip, output
+    should "work when default status is nil" do
+      post = Factory(:typus_user, :status => nil)
+      assert post.status.nil?
+      expected = %(<a href="/admin/typus_users/toggle/1?field=status" data-confirm="Change status?">Inactive</a>)
+      assert_equal expected, table_boolean_field("status", post)
+    end
 
   end
 
