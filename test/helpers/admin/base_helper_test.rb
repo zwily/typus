@@ -8,8 +8,6 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::TextHelper
 
   def render(*args); args; end
-  # include ActionView::Rendering
-  # include ActionView::Partials
 
   context "login info" do
 
