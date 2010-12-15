@@ -63,9 +63,11 @@ module Admin
     def table_actions(model, item)
       @actions = []
 
-      actions_for_index(model, item)
-      actions_for_trash(model, item)
-      actions_for_edit_show_or_update(model, item)
+      @default_action = item.class.typus_options_for(:default_action_on_item)
+
+      actions_for_index(model)
+      actions_for_trash(model)
+      actions_for_edit_show_or_update(model)
 
       @actions.map do |name, action, confirm, method|
         if current_user.can?(action, model)
@@ -74,21 +76,20 @@ module Admin
       end.compact.join(" / ").html_safe
     end
 
-    def actions_for_index(model, item)
+    def actions_for_index(model)
       if %w(index).include?(controller.action_name)
-        default_action = item.class.typus_options_for(:default_action_on_item)
-        @actions << [default_action.titleize, default_action]
+        @actions << [@default_action.titleize, @default_action]
         @actions << ['Trash', 'destroy', set_confirm_message_for("Trash", model), 'delete']
       end
     end
 
-    def actions_for_edit_show_or_update(model, item)
+    def actions_for_edit_show_or_update(model)
       if %w(edit show update).include?(controller.action_name)
        @actions << ['Unrelate', 'unrelate', set_confirm_message_for("Unrelate", model)]
       end
     end
 
-    def actions_for_trash(model, item)
+    def actions_for_trash(model)
       if %w(trash).include?(controller.action_name)
         @actions << ['Recover', 'untrash', set_confirm_message_for("Recover", model)]
       end
