@@ -105,7 +105,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
       end
     end
 
-    should_eventually "not be able to update other profiles" do
+    should "not be able to update other profiles" do
       user = Factory(:typus_user)
       assert_raises RuntimeError do
         post :update, { :id => user.id, :typus_user => { :role => 'admin' } }

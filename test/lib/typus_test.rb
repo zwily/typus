@@ -108,4 +108,6 @@ class TypusTest < ActiveSupport::TestCase
       assert Typus.respond_to?("user_fk=")
     end
 
+  end
+
 end
