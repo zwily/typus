@@ -3,7 +3,6 @@ require "typus/format"
 class Admin::ResourcesController < Admin::BaseController
 
   include Typus::Format
-  include Typus::Extensions rescue nil
 
   before_filter :get_model
 
