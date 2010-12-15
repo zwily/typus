@@ -81,7 +81,7 @@ module Admin
                   { :action => action[:action], :id => item.id, :resource => action[:resource], :resource_id => action[:resource_id] },
                   { :confirm => action[:confirm], :method => action[:method], :target => "_parent" }
         end
-      end.join(" / ").html_safe
+      end.compact.join(" / ").html_safe
     end
 
     def actions
@@ -112,6 +112,7 @@ module Admin
     def actions_for_trash(model)
       if %w(trash).include?(controller.action_name)
         @actions << { :action_name => 'Recover', :action => 'untrash', :confirm => set_confirm_message_for("Recover", model) }
+        @actions << { :action_name => 'Delete Permanently', :action => 'wipe', :confirm => set_confirm_message_for("Delete Permanently", model) }
       end
     end
 
