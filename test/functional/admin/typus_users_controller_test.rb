@@ -62,7 +62,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
       @request.session[:typus_user_id] = @editor.id
     end
 
-    should "not_allow_editor_to_create_typus_users" do
+    should "not be able  to create typus_users" do
       get :new
       assert_response :unprocessable_entity
     end
@@ -79,7 +79,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
       assert_equal "Typus user successfully updated.", flash[:notice]
     end
 
-    should "not be able to update his profile and become root" do
+    should "not be able to change his role" do
       post :update, { :id => @editor.id, :typus_user => { :role => 'admin' } }
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
@@ -92,7 +92,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
       end
     end
 
-    should "not be able to toggle other his status" do
+    should "not be able to toggle his status" do
       assert_raises RuntimeError do
         get :toggle, { :id => @editor.id, :field => 'status' }
       end
