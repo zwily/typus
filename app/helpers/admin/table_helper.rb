@@ -65,33 +65,53 @@ module Admin
 
       @default_action = item.class.typus_options_for(:default_action_on_item)
 
-      actions_for_index(model)
-      actions_for_trash(model)
-      actions_for_edit_show_or_update(model)
+      actions
 
-      @actions.map do |name, action, confirm, method|
-        if current_user.can?(action, model)
-          link_to name, { :action => action, :id => item.id }, { :confirm => confirm, :method => method }
+      if @actions.empty?
+        prepend_actions
+        actions_for_index(model)
+        actions_for_trash(model)
+        actions_for_edit_show_or_update(model)
+        append_actions
+      end
+
+      @actions.map do |action|
+        if current_user.can?(action[:action], model)
+          link_to action[:action_name],
+                  { :action => action[:action], :id => item.id, :resource => action[:resource], :resource_id => action[:resource_id] },
+                  { :confirm => action[:confirm], :method => action[:method], :target => "_parent" }
         end
-      end.compact.join(" / ").html_safe
+      end.join(" / ").html_safe
+    end
+
+    def actions
+      @actions += @my_actions if @my_actions
+    end
+
+    def prepend_actions
+      @actions += @prepend_actions if @prepend_actions
+    end
+
+    def append_actions
+      @actions += @append_actions if @append_actions
     end
 
     def actions_for_index(model)
       if %w(index).include?(controller.action_name)
-        @actions << [@default_action.titleize, @default_action]
-        @actions << ['Trash', 'destroy', set_confirm_message_for("Trash", model), 'delete']
+        @actions << { :action_name => @default_action.titleize, :action => @default_action }
+        @actions << { :action_name => 'Trash', :action => 'destroy', :confirm => set_confirm_message_for("Trash", model), :method => 'delete' }
       end
     end
 
     def actions_for_edit_show_or_update(model)
       if %w(edit show update).include?(controller.action_name)
-       @actions << ['Unrelate', 'unrelate', set_confirm_message_for("Unrelate", model)]
+       @actions << { :action_name => 'Unrelate', :action => 'unrelate', :confirm => set_confirm_message_for("Unrelate", model) }
       end
     end
 
     def actions_for_trash(model)
       if %w(trash).include?(controller.action_name)
-        @actions << ['Recover', 'untrash', set_confirm_message_for("Recover", model)]
+        @actions << { :action_name => 'Recover', :action => 'untrash', :confirm => set_confirm_message_for("Recover", model) }
       end
     end
 
