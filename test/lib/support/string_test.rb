@@ -25,16 +25,23 @@ class StringTest < ActiveSupport::TestCase
 
   context "extract_class" do
 
-    should_eventually "work for models" do
+    setup do
+      Typus::Configuration.models_constantized = { "Post" => Post,
+                                                   "TypusUser" => TypusUser,
+                                                   "Delayed::Task" => Delayed::Task,
+                                                   "SucursalBancaria" => SucursalBancaria }
+    end
+
+    should "work for models" do
       assert_equal Post, "admin/posts".extract_class
       assert_equal TypusUser, "admin/typus_users".extract_class
     end
 
-    should_eventually "work for namespaced models" do
+    should "work for namespaced models" do
       assert_equal Delayed::Task, "admin/delayed/tasks".extract_class
     end
 
-    should_eventually "work with inflections" do
+    should "work with inflections" do
       assert_equal SucursalBancaria, "admin/sucursales_bancarias".extract_class
     end
 
