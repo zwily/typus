@@ -60,37 +60,8 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
 
   context "header" do
 
-    should_eventually "render with root_path" do
-
-      # ActionView::Helpers::UrlHelper does not support strings, which are 
-      # returned by named routes link root_path
-      self.stubs(:link_to).returns(%(<a href="/">View site</a>))
-      self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
-
-      output = header
-
-      partial = "admin/helpers/header"
-      options = { :links => [ %(<a href="/admin/dashboard">Dashboard</a>),
-                              %(<a href="/admin/dashboard">Dashboard</a>),
-                              %(<a href="/">View site</a>) ] }
-
-      assert_equal [ partial, options ], output
-
-    end
-
-    should_eventually "render without root_path" do
-
-      Rails.application.routes.named_routes.routes.reject! { |key, route| key == :root }
-
-      self.stubs(:link_to_unless_current).returns(%(<a href="/admin/dashboard">Dashboard</a>))
-
-      output = header
-      partial = "admin/helpers/header"
-      options = { :links => [ %(<a href="/admin/dashboard">Dashboard</a>),
-                              %(<a href="/admin/dashboard">Dashboard</a>) ] }
-
-      assert_equal [ partial, options ], output
-
+    should "work returning a partial" do
+      assert_equal ["admin/helpers/header"], header
     end
 
   end
