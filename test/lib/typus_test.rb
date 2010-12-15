@@ -42,14 +42,6 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal "admin", Typus.master_role
   end
 
-  should "verify default_config for user_class_name" do
-    assert_equal "TypusUser", Typus.user_class_name
-  end
-
-  should "verify default_config for typus_user_id" do
-    assert_equal "typus_user_id", Typus.user_fk
-  end
-
   should "verify default_config for available_locales" do
     assert_equal [:en], Typus.available_locales
   end
@@ -86,22 +78,34 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal %w(Git Order Status WatchDog), Typus.resources
   end
 
-  should "return user_class" do
-    assert_equal TypusUser, Typus.user_class
+  context "user_class" do
+
+    should "return default value" do
+      assert_equal TypusUser, Typus.user_class
+    end
+
   end
 
-  should "return overrided user_class" do
-    Typus.expects(:user_class_name).returns("CustomUser")
-    assert_equal CustomUser, Typus.user_class
+  context "user_class_name" do
+
+    should "return default value" do
+      assert_equal "TypusUser", Typus.user_class_name
+    end
+
+    should "be overrided on demand" do
+      assert Typus.respond_to?("user_class_name=")
+    end
+
   end
 
-  should "return_user_fk" do
-    assert_equal "typus_user_id", Typus.user_fk
-  end
+  context "user_fk" do
 
-  should "return overrided user_fk" do
-    Typus.expects(:user_fk).returns("my_user_fk")
-    assert_equal "my_user_fk", Typus.user_fk
-  end
+    should "return default value" do
+      assert_equal "typus_user_id", Typus.user_fk
+    end
+
+    should "be overrided on demand" do
+      assert Typus.respond_to?("user_fk=")
+    end
 
 end
