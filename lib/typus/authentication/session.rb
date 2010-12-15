@@ -22,9 +22,9 @@ module Typus
       # system current_user will be signed out from Typus.
       #++
       def current_user
-        @current_user ||= Typus.user_class.find(session[:typus_user_id])
+        @current_user ||= Typus.user_class.find_by_id(session[:typus_user_id])
 
-        if !Typus::Configuration.roles.has_key?(@current_user.role) || !@current_user.status
+        if !@current_user || !Typus::Configuration.roles.has_key?(@current_user.role) || !@current_user.status
           session[:typus_user_id] = nil
           redirect_to new_admin_session_path
         end
