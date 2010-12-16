@@ -98,7 +98,7 @@ module Typus
       # Show only related items it @resource has a foreign_key (Typus.user_fk)
       # related to the logged user.
       #++
-      def check_resource_ownerships
+      def check_resources_ownership
         if admin_user.is_not_root? && @resource.typus_user_id?
           condition = { Typus.user_fk => admin_user }
           @conditions = @resource.merge_conditions(@conditions, condition)

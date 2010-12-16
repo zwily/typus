@@ -19,7 +19,7 @@ class Admin::ResourcesController < Admin::BaseController
   #
   def index
     @conditions, @joins = @resource.build_conditions(params)
-    check_resource_ownerships if @resource.typus_options_for(:only_user_items)
+    check_resources_ownership if @resource.typus_options_for(:only_user_items)
 
     default_action = @resource.typus_options_for(:default_action_on_item)
 
