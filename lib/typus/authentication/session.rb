@@ -33,11 +33,21 @@ module Typus
       end
 
       #--
+      # This method checks if the user can perform the requested action.
+      # It works on models, so its available on the `resources_controller`.
+      #++
+      def check_if_user_can_perform_action_on_resources
+        if @item.is_a?(Typus.user_class)
+          check_if_user_can_perform_action_on_user
+        elsif current_user.cannot?(params[:action], @resource)
+          not_allowed
+        end
+      end
+
+      #--
       # Action is available on: edit, update, toggle and destroy
       #++
       def check_if_user_can_perform_action_on_user
-        return unless @item.is_a?(Typus.user_class)
-
         case params[:action]
         when 'edit'
           not_allowed if current_user.is_not_root? && (current_user != @item)
@@ -49,16 +59,6 @@ module Typus
           root = current_user.is_root? && (current_user == @item)
           user = current_user.is_not_root?
           not_allowed if (root || user)
-        end
-      end
-
-      #--
-      # This method checks if the user can perform the requested action.
-      # It works on models, so its available on the `resources_controller`.
-      #++
-      def check_if_user_can_perform_action_on_resources
-        if !@item.is_a?(Typus.user_class) && current_user.cannot?(params[:action], @resource)
-          not_allowed
         end
       end
 
