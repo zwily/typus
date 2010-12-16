@@ -14,7 +14,7 @@ class Admin::ResourcesController < Admin::BaseController
   ##
   # This is the main index of the model. With filters, conditions and more.
   #
-  # By default application can respond_to html, csv and xml, but you can add
+  # By default application can respond to html, csv and xml, but you can add
   # your formats.
   #
   def index
@@ -98,12 +98,13 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   ##
-  # Change item position. This only works if acts_as_list is installed. We can
-  # then move items:
+  # Change item position:
   #
   #   params[:go] = 'move_to_top'
   #
   # Available positions are move_to_top, move_higher, move_lower, move_to_bottom.
+  #
+  # NOTE: Only works if `acts_as_list` is installed.
   #
   def position
     @item.send(params[:go])
@@ -113,7 +114,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   ##
   # Relate a model object to another, this action is used only by the
-  # has_and_belongs_to_many and has_many relationships.
+  # `has_and_belongs_to_many` and `has_many` relationships.
   #
   def relate
     resource_class = params[:related][:model].typus_constantize
@@ -228,10 +229,10 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   ##
-  # When <tt>params[:back_to]</tt> is defined this action is used.
+  # When `params[:back_to]` is defined this action is used.
   #
-  # - <tt>has_and_belongs_to_many</tt> relationships.
-  # - <tt>has_many</tt> relationships (polymorphic ones).
+  # - `has_and_belongs_to_many` relationships.
+  # - `has_many` relationships (polymorphic ones).
   #
   def create_with_back_to
     association = @resource.reflect_on_association(params[:resource].to_sym)
