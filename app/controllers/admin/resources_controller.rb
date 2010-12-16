@@ -24,7 +24,7 @@ class Admin::ResourcesController < Admin::BaseController
     default_action = @resource.typus_options_for(:default_action_on_item)
 
     add_action(:action_name => default_action.titleize, :action => default_action)
-    add_action(:action_name => "Trash", :action => "destroy", :confirm => _t("Trash %{resource}?", :resource => @resource.model_name.human), :method => 'delete')
+    add_action(:action_name => "Trash", :action => "destroy", :confirm => Typus::I18n.t("Trash %{resource}?", :resource => @resource.model_name.human), :method => 'delete')
 
     get_objects
 
@@ -59,7 +59,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def edit
-    add_action(:action_name => 'Unrelate', :action => 'unrelate', :confirm => _t("Unrelate %{resource}", @resource.model_name.human))
+    add_action(:action_name => 'Unrelate', :action => 'unrelate', :confirm => Typus::I18n.t("Unrelate %{resource}", @resource.model_name.human))
   end
 
   def show
@@ -86,14 +86,14 @@ class Admin::ResourcesController < Admin::BaseController
 
   def destroy
     @item.destroy
-    notice = _t("%{model} successfully removed.", :model => @resource.model_name.human)
+    notice = Typus::I18n.t("%{model} successfully removed.", :model => @resource.model_name.human)
     redirect_to set_path, :notice => notice
   end
 
   def toggle
     @item.toggle(params[:field])
     @item.save!
-    notice = _t("%{model} successfully updated.", :model => @resource.model_name.human)
+    notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
     redirect_to set_path, :notice => notice
   end
 
@@ -108,7 +108,7 @@ class Admin::ResourcesController < Admin::BaseController
   #
   def position
     @item.send(params[:go])
-    notice = _t("Record moved %{to}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
+    notice = Typus::I18n.t("Record moved %{to}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
     redirect_to set_path, :notice => notice
   end
 
@@ -121,7 +121,7 @@ class Admin::ResourcesController < Admin::BaseController
     resource_tableized = params[:related][:model].tableize
 
     if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
-      flash[:notice] = _t("%{model} successfully updated.", :model => @resource.model_name.human)
+      flash[:notice] = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 
     redirect_to set_path
@@ -166,7 +166,7 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     if saved_succesfully
-      flash[:notice] = _t("%{model} successfully updated.", :model => @resource.model_name.human)
+      flash[:notice] = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 
     redirect_to set_path
@@ -208,7 +208,7 @@ class Admin::ResourcesController < Admin::BaseController
     when "create"
       path = { :action => action }
       path.merge!(:id => @item.id) unless action.eql?("index")
-      notice = _t("%{model} successfully created.", :model => @resource.model_name.human)
+      notice = Typus::I18n.t("%{model} successfully created.", :model => @resource.model_name.human)
     when "update", "detach"
       path = case action
              when "index"
@@ -216,7 +216,7 @@ class Admin::ResourcesController < Admin::BaseController
              else
                { :action => action, :id => @item.id, :back_to => params[:back_to] }
              end
-      notice = _t("%{model} successfully updated.", :model => @resource.model_name.human)
+      notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 
     redirect_to path, :notice => notice
@@ -237,7 +237,7 @@ class Admin::ResourcesController < Admin::BaseController
       resource = resource_class.find(resource_id)
     end
 
-    message = _t("%{model} successfully updated.", :model => resource_class.model_name.human)
+    message = Typus::I18n.t("%{model} successfully updated.", :model => resource_class.model_name.human)
 
     case association.macro
     when :has_and_belongs_to_many

@@ -22,10 +22,10 @@ module Admin
 
       if !validators.include?(field) && attachment
         attribute_i18n = @item.class.human_attribute_name(attribute)
-        message = _t("Remove %{attribute}", :attribute => attribute_i18n)
+        message = Typus::I18n.t("Remove %{attribute}", :attribute => attribute_i18n)
         label_text = <<-HTML
 #{attribute_i18n}
-<small>#{link_to message, { :action => 'detach', :id => @item.id, :attribute => attribute }, :confirm => _t("Are you sure?")}</small>
+<small>#{link_to message, { :action => 'detach', :id => @item.id, :attribute => attribute }, :confirm => Typus::I18n.t("Are you sure?")}</small>
         HTML
         label_text.html_safe
       end

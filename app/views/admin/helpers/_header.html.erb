@@ -1,6 +1,6 @@
 <h1 class="logo">
   <% begin %>
-    <%= link_to Typus.admin_title, root_path, :title => _t("View site") %>
+    <%= link_to Typus.admin_title, root_path, :title => Typus::I18n.t("View site") %>
   <% rescue %>
     <%= Typus.admin_title %>
   <% end %>

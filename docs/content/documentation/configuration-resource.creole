@@ -30,7 +30,7 @@ class Admin::MemcachedController < Admin::ResourceController
   #
   def flush_all
     ...
-    redirect_to :back, :notice => _t("Memcached has been flushed.")
+    redirect_to :back, :notice => Typus::I18n.t("Memcached has been flushed.")
   end
 
 end

@@ -1,5 +1,5 @@
 <%
-  page_title = _t("Show %{resource}", :resource => @resource.model_name.human)
+  page_title = Typus::I18n.t("Show %{resource}", :resource => @resource.model_name.human)
   title(page_title)
 %>
 

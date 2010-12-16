@@ -1,5 +1,5 @@
 <%
-  page_title = _t("%{resources}", :resources => @resource.model_name.human.pluralize)
+  page_title = Typus::I18n.t("%{resources}", :resources => @resource.model_name.human.pluralize)
   title(page_title)
 %>
 
@@ -15,7 +15,7 @@
 
 <ul class="predefined_filters">
   <% predefined_filters.each do |filter, action, scope| %>
-    <li><%= link_to_unless_current _t(filter), :action => action %> (<%= @resource.send(scope).count %>)</li>
+    <li><%= link_to_unless_current Typus::I18n.t(filter), :action => action %> (<%= @resource.send(scope).count %>)</li>
   <% end %>
 </ul>
 
@@ -30,5 +30,5 @@
   <%= raw build_list(@resource, @fields, @items) %>
   <%= will_paginate(@items, Typus.pagination) rescue nil %>
 <% else %>
-  <p><%= _t("No %{resources} found.", :resources => @resource.model_name.human.pluralize.downcase) %></p>
+  <p><%= Typus::I18n.t("No %{resources} found.", :resources => @resource.model_name.human.pluralize.downcase) %></p>
 <% end %>

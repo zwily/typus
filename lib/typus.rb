@@ -7,6 +7,7 @@ require "support/object"
 require "support/string"
 
 require "typus/engine"
+require "typus/i18n"
 require "typus/orm/active_record"
 require "typus/user"
 require "typus/version"
@@ -60,8 +61,8 @@ module Typus
   # Pagination options
   #
   mattr_accessor :pagination
-  @@pagination = { :previous_label => "&larr; " + _t("Previous"),
-                   :next_label => _t("Next") + " &rarr;" }
+  @@pagination = { :previous_label => "&larr; " + Typus::I18n.t("Previous"),
+                   :next_label => Typus::I18n.t("Next") + " &rarr;" }
 
   ##
   # Define a password.

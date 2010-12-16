@@ -84,7 +84,7 @@ module Admin
                           :back_to => @back_to }
 
       if set_condition && admin_user.can?("create", @model_to_relate)
-        link_to _t("Add new"), default_options.merge(options)
+        link_to Typus::I18n.t("Add new"), default_options.merge(options)
       end
     end
 
@@ -132,7 +132,7 @@ module Admin
                            options,
                            association)
       else
-        message = _t("No %{resources} found.",
+        message = Typus::I18n.t("No %{resources} found.",
                      :resources => model_to_relate.model_name.human.pluralize.downcase)
         html << <<-HTML
   <div id="flash" class="notice"><p>#{message}</p></div>
@@ -167,7 +167,7 @@ module Admin
       default = { :controller => "/admin/#{related.to_resource}", :action => 'new', :back_to => back_to }
 
       if admin_user.can?('create', related)
-        message = link_to _t("Add"), default.merge(options)
+        message = link_to Typus::I18n.t("Add"), default.merge(options)
       end
 
       render "admin/templates/belongs_to",

@@ -43,28 +43,28 @@ module Admin
       params_without_filter.delete(related_fk)
 
       items = model.order(model.typus_order_by).map { |v| [v.to_label, v.id] }
-      message = _t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize)
+      message = Typus::I18n.t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize)
 
       [related_fk, items, message]
     end
 
     def date_filter(request, filter)
       values  = %w(today last_few_days last_7_days last_30_days)
-      items   = values.map { |v| [_t(v.humanize), v] }
-      message = _t("Show all dates")
+      items   = values.map { |v| [Typus::I18n.t(v.humanize), v] }
+      message = Typus::I18n.t("Show all dates")
       [filter, items, message]
     end
 
     def boolean_filter(request, filter)
       items   = @resource.typus_boolean(filter)
-      message = _t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
+      message = Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
       [filter, items, message]
     end
 
     def string_filter(request, filter)
       values  = @resource::const_get(filter.to_s.upcase)
       items   = values.is_a?(Hash) ? values : values.to_hash_with(values)
-      message = _t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
+      message = Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
       [filter, items, message]
     end
 

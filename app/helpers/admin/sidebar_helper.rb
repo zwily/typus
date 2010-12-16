@@ -22,21 +22,21 @@ module Admin
 
     def default_actions(klass)
       Array.new.tap do |tap|
-        tap << link_to_unless_current(_t("Add new"), :action => "new") if admin_user.can?("create", klass)
-        tap << link_to_unless_current(_t("List"), :action => "index")
+        tap << link_to_unless_current(Typus::I18n.t("Add new"), :action => "new") if admin_user.can?("create", klass)
+        tap << link_to_unless_current(Typus::I18n.t("List"), :action => "index")
       end
     end
 
     def export(klass, params = params)
       klass.typus_export_formats.map do |format|
-        link_to _t("Export as %{mime}", :mime => format.upcase), params.merge(:format => format)
+        link_to Typus::I18n.t("Export as %{mime}", :mime => format.upcase), params.merge(:format => format)
       end
     end
 
     def custom_actions(klass)
       klass.typus_actions_on(params[:action]).map do |action|
         if admin_user.can?(action, klass)
-          link_to_unless_current(_t(action.humanize), params.merge(:action => action))
+          link_to_unless_current(Typus::I18n.t(action.humanize), params.merge(:action => action))
         end
       end
     end
