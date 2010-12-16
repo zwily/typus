@@ -1,10 +1,12 @@
 require 'typus/actions'
 require 'typus/filters'
+require 'typus/format'
 
 class Admin::ResourcesController < Admin::BaseController
 
   include Typus::Actions
   include Typus::Filters
+  include Typus::Format
 
   before_filter :get_model
 

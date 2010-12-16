@@ -66,5 +66,3 @@ module Typus
   end
 
 end
-
-ActionController::Base.send(:include, Typus::Format)
