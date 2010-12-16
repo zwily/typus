@@ -16,4 +16,12 @@ class String
     Typus::Configuration.models_constantized[self]
   end
 
+  def action_mapper
+    case self
+    when "index" then :list
+    when "new", "create", "edit", "update" then :form
+    else self
+    end
+  end
+
 end

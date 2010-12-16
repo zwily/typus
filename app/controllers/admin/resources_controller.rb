@@ -193,13 +193,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def set_fields
-    mapping = case params[:action]
-              when "index" then :list
-              when "new", "create", "edit", "update" then :form
-              else params[:action]
-              end
-
-    @fields = @resource.typus_fields_for(mapping)
+    @fields = @resource.typus_fields_for(params[:action].action_mapper)
   end
 
   def set_order
