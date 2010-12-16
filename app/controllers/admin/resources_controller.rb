@@ -8,8 +8,8 @@ class Admin::ResourcesController < Admin::BaseController
   before_filter :get_object, :only => [:show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate, :detach]
   before_filter :check_resource_ownership, :only => [:edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
   before_filter :check_if_user_can_perform_action_on_resources
-  before_filter :set_order, :only => [:index, :trash]
-  before_filter :set_fields, :only => [:index, :new, :edit, :create, :update, :show, :detach, :trash]
+  before_filter :set_order, :only => [:index]
+  before_filter :set_fields, :only => [:index, :new, :edit, :create, :update, :show, :detach]
 
   ##
   # This is the main index of the model. With filters, conditions and more.
@@ -194,7 +194,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   def set_fields
     mapping = case params[:action]
-              when "index", "trash" then :list
+              when "index" then :list
               when "new", "create", "edit", "update" then :form
               else params[:action]
               end
