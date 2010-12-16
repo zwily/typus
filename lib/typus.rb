@@ -21,6 +21,12 @@ module Typus
   autoload :Configuration, "typus/configuration"
   autoload :Resources, "typus/resources"
 
+=begin
+  autoload :Actions, "typus/actions"
+  autoload :Filters, "typus/filters"
+  autoload :Format, "typus/format"
+=end
+
   module Authentication
     autoload :Base, "typus/authentication/base"
     autoload :None, "typus/authentication/none"

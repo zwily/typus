@@ -1,7 +1,3 @@
-require 'typus/actions'
-require 'typus/filters'
-require 'typus/format'
-
 class Admin::ResourcesController < Admin::BaseController
 
   include Typus::Actions
