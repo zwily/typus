@@ -1,8 +1,4 @@
-require "typus/format"
-
 class Admin::ResourcesController < Admin::BaseController
-
-  include Typus::Format
 
   before_filter :get_model
 
