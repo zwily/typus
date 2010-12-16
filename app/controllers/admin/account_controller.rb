@@ -3,7 +3,6 @@ class Admin::AccountController < Admin::BaseController
   layout 'admin/session'
 
   skip_before_filter :reload_config_and_roles
-  skip_before_filter :set_preferences
   skip_before_filter :authenticate
   skip_before_filter :set_locale
 
