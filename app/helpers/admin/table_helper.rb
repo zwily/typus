@@ -60,6 +60,10 @@ module Admin
       end
     end
 
+    def actions
+      @actions ||= []
+    end
+
     def table_actions(model, item)
       actions.map do |action|
         if current_user.can?(action[:action], model)

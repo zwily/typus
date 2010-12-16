@@ -1,4 +1,8 @@
+require 'typus/actions'
+
 class Admin::ResourcesController < Admin::BaseController
+
+  include Typus::Actions
 
   before_filter :get_model
 

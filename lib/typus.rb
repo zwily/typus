@@ -6,7 +6,6 @@ require "support/hash"
 require "support/object"
 require "support/string"
 
-require "typus/actions"
 require "typus/engine"
 require "typus/filters"
 require "typus/format"
