@@ -68,6 +68,10 @@ module Admin
       [filter, items, message]
     end
 
+    def predefined_filters
+      @predefined_filters ||= [["All", "index", "unscoped"]]
+    end
+
   end
 
 end

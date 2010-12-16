@@ -7,7 +7,6 @@ require "support/object"
 require "support/string"
 
 require "typus/engine"
-require "typus/filters"
 require "typus/format"
 require "typus/orm/active_record"
 require "typus/user"
