@@ -61,63 +61,13 @@ module Admin
     end
 
     def table_actions(model, item)
-      @actions = []
-
-      @default_action = item.class.typus_options_for(:default_action_on_item)
-
-      actions
-
-      if @actions.empty?
-        prepend_actions
-        actions_for_index(model)
-        actions_for_trash(model)
-        actions_for_edit_show_or_update(model)
-        append_actions
-      end
-
-      @actions.map do |action|
+      actions.map do |action|
         if current_user.can?(action[:action], model)
           link_to action[:action_name],
                   { :action => action[:action], :id => item.id, :resource => action[:resource], :resource_id => action[:resource_id] },
                   { :confirm => action[:confirm], :method => action[:method], :target => "_parent" }
         end
       end.compact.join(" / ").html_safe
-    end
-
-    def actions
-      @actions += @my_actions if @my_actions
-    end
-
-    def prepend_actions
-      @actions += @prepend_actions if @prepend_actions
-    end
-
-    def append_actions
-      @actions += @append_actions if @append_actions
-    end
-
-    def actions_for_index(model)
-      if %w(index).include?(controller.action_name)
-        @actions << { :action_name => @default_action.titleize, :action => @default_action }
-        @actions << { :action_name => 'Trash', :action => 'destroy', :confirm => set_confirm_message_for("Trash", model), :method => 'delete' }
-      end
-    end
-
-    def actions_for_edit_show_or_update(model)
-      if %w(edit show update).include?(controller.action_name)
-       @actions << { :action_name => 'Unrelate', :action => 'unrelate', :confirm => set_confirm_message_for("Unrelate", model) }
-      end
-    end
-
-    def actions_for_trash(model)
-      if %w(trash).include?(controller.action_name)
-        @actions << { :action_name => 'Recover', :action => 'untrash', :confirm => set_confirm_message_for("Recover", model) }
-        @actions << { :action_name => 'Delete Permanently', :action => 'wipe', :confirm => set_confirm_message_for("Delete Permanently", model) }
-      end
-    end
-
-    def set_confirm_message_for(action, model)
-      _t(action) + " " + model.model_name.human + "?"
     end
 
     def table_belongs_to_field(attribute, item)
