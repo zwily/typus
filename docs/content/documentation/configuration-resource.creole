@@ -24,7 +24,7 @@ class Admin::MemcachedController < Admin::ResourceController
 
   def flush_all
     # Here we flush all the keys and redirect to the index.
-    redirect_to :back, :notice => _("Memcached has been flushed.")
+    redirect_to :back, :notice => _t("Memcached has been flushed.")
   end
 
 end
