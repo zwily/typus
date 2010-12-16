@@ -15,7 +15,7 @@ module Admin
     end
 
     def login_info
-      unless current_user.is_a?(FakeUser)
+      unless admin_user.is_a?(FakeUser)
         render "admin/helpers/login_info"
       end
     end

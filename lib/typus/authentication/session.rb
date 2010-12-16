@@ -10,7 +10,7 @@ module Typus
 
       def authenticate
         if session[:typus_user_id]
-          current_user
+          admin_user
         else
           back_to = request.env['PATH_INFO'] unless [admin_dashboard_path, admin_path].include?(request.env['PATH_INFO'])
           redirect_to new_admin_session_path(:back_to => back_to)
@@ -19,17 +19,17 @@ module Typus
 
       #--
       # Return the current user. If role does not longer exist on the
-      # system current_user will be signed out from Typus.
+      # system admin_user will be signed out from Typus.
       #++
-      def current_user
-        @current_user ||= Typus.user_class.find_by_id(session[:typus_user_id])
+      def admin_user
+        @admin_user ||= Typus.user_class.find_by_id(session[:typus_user_id])
 
-        if !@current_user || !Typus::Configuration.roles.has_key?(@current_user.role) || !@current_user.status
+        if !@admin_user || !Typus::Configuration.roles.has_key?(@admin_user.role) || !@admin_user.status
           session[:typus_user_id] = nil
           redirect_to new_admin_session_path
         end
 
-        @current_user
+        @admin_user
       end
 
       #--
@@ -39,7 +39,7 @@ module Typus
       def check_if_user_can_perform_action_on_resources
         if @item.is_a?(Typus.user_class)
           check_if_user_can_perform_action_on_user
-        elsif current_user.cannot?(params[:action], @resource)
+        elsif admin_user.cannot?(params[:action], @resource)
           not_allowed
         end
       end
@@ -50,14 +50,14 @@ module Typus
       def check_if_user_can_perform_action_on_user
         case params[:action]
         when 'edit'
-          not_allowed if current_user.is_not_root? && (current_user != @item)
+          not_allowed if admin_user.is_not_root? && (admin_user != @item)
         when 'update'
-          user_profile = (current_user.is_root? || current_user.is_not_root?) && (current_user == @item) && !(@item.role == params[@object_name][:role])
-          other_user   = current_user.is_not_root? && !(current_user == @item)
+          user_profile = (admin_user.is_root? || admin_user.is_not_root?) && (admin_user == @item) && !(@item.role == params[@object_name][:role])
+          other_user   = admin_user.is_not_root? && !(admin_user == @item)
           not_allowed if (user_profile || other_user)
         when 'toggle', 'destroy'
-          root = current_user.is_root? && (current_user == @item)
-          user = current_user.is_not_root?
+          root = admin_user.is_root? && (admin_user == @item)
+          user = admin_user.is_not_root?
           not_allowed if (root || user)
         end
       end
@@ -68,7 +68,7 @@ module Typus
       #++
       def check_if_user_can_perform_action_on_resource
         resource = params[:controller].remove_prefix.camelize
-        unless current_user.can?(params[:action], resource, { :special => true })
+        unless admin_user.can?(params[:action], resource, { :special => true })
           not_allowed
         end
       end
@@ -86,10 +86,10 @@ module Typus
       #                                                       :relate, :unrelate ]
       #++
       def check_resource_ownership
-        return if current_user.is_root?
+        return if admin_user.is_root?
 
-        condition_typus_users = @item.respond_to?(Typus.relationship) && !@item.send(Typus.relationship).include?(current_user)
-        condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(current_user)
+        condition_typus_users = @item.respond_to?(Typus.relationship) && !@item.send(Typus.relationship).include?(admin_user)
+        condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(admin_user)
 
         not_allowed if (condition_typus_users || condition_typus_user_id)
       end
@@ -99,31 +99,31 @@ module Typus
       # related to the logged user.
       #++
       def check_resource_ownerships
-        if current_user.is_not_root? && @resource.typus_user_id?
-          condition = { Typus.user_fk => current_user }
+        if admin_user.is_not_root? && @resource.typus_user_id?
+          condition = { Typus.user_fk => admin_user }
           @conditions = @resource.merge_conditions(@conditions, condition)
         end
       end
 
       def set_attributes_on_create
         if @resource.typus_user_id?
-          @item.attributes = { Typus.user_fk => current_user.id }
+          @item.attributes = { Typus.user_fk => admin_user.id }
         end
       end
 
       def set_attributes_on_update
-        if @resource.typus_user_id? && current_user.is_not_root?
-          @item.update_attributes(Typus.user_fk => current_user.id)
+        if @resource.typus_user_id? && admin_user.is_not_root?
+          @item.update_attributes(Typus.user_fk => admin_user.id)
         end
       end
 
       #--
-      # Reload current_user when updating to see flash message in the
+      # Reload admin_user when updating to see flash message in the
       # correct locale.
       #++
       def reload_locales
         if @resource.eql?(Typus.user_class)
-          I18n.locale = current_user.reload.preferences[:locale]
+          I18n.locale = admin_user.reload.preferences[:locale]
         end
       end
 

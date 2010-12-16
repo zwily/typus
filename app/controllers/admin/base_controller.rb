@@ -9,7 +9,7 @@ class Admin::BaseController < ActionController::Base
   before_filter :authenticate
   before_filter :set_locale
 
-  helper_method :current_user
+  helper_method :admin_user
 
   def help
   end
@@ -25,7 +25,7 @@ class Admin::BaseController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = current_user.preferences[:locale]
+    I18n.locale = admin_user.preferences[:locale]
   end
 
   def set_models_constantized

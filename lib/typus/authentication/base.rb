@@ -4,8 +4,8 @@ module Typus
 
     module Base
 
-      def current_user
-        @current_user
+      def admin_user
+        @admin_user
       end
 
       def authenticate; end

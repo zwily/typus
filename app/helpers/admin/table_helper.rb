@@ -66,7 +66,7 @@ module Admin
 
     def table_actions(model, item)
       actions.map do |action|
-        if current_user.can?(action[:action], model)
+        if admin_user.can?(action[:action], model)
           link_to action[:action_name],
                   { :action => action[:action], :id => item.id, :resource => action[:resource], :resource_id => action[:resource_id] },
                   { :confirm => action[:confirm], :method => action[:method], :target => "_parent" }
@@ -77,7 +77,7 @@ module Admin
     def table_belongs_to_field(attribute, item)
       if att_value = item.send(attribute)
         action = item.send(attribute).class.typus_options_for(:default_action_on_item)
-        if current_user.can?(action, att_value.class.name)
+        if admin_user.can?(action, att_value.class.name)
           link_to att_value.to_label, :controller => "/admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id
         else
           att_value.to_label

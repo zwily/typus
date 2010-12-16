@@ -83,22 +83,22 @@ module Admin
                           :resource => @resource.to_resource.singularize, :resource_id => @item.id,
                           :back_to => @back_to }
 
-      if set_condition && current_user.can?("create", @model_to_relate)
+      if set_condition && admin_user.can?("create", @model_to_relate)
         link_to _t("Add new"), default_options.merge(options)
       end
     end
 
     def set_condition
-      if @resource.typus_user_id? && current_user.is_not_root?
-        @item.owned_by?(current_user)
+      if @resource.typus_user_id? && admin_user.is_not_root?
+        @item.owned_by?(admin_user)
       else
         true
       end
     end
 
     def set_conditions
-      if @model_to_relate.typus_options_for(:only_user_items) && current_user.is_not_root?
-        { Typus.user_fk => current_user }
+      if @model_to_relate.typus_options_for(:only_user_items) && admin_user.is_not_root?
+        { Typus.user_fk => admin_user }
       end
     end
 
@@ -166,7 +166,7 @@ module Admin
 
       default = { :controller => "/admin/#{related.to_resource}", :action => 'new', :back_to => back_to }
 
-      if current_user.can?('create', related)
+      if admin_user.can?('create', related)
         message = link_to _t("Add"), default.merge(options)
       end
 

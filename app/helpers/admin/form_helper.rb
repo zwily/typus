@@ -37,7 +37,7 @@ module Admin
       String.new.tap do |html|
         @resource.typus_defaults_for(:relationships).each do |relationship|
           association = @resource.reflect_on_association(relationship.to_sym)
-          next if current_user.cannot?('read', association.class_name.typus_constantize)
+          next if admin_user.cannot?('read', association.class_name.typus_constantize)
           html << case association.macro
                   when :has_and_belongs_to_many
                     typus_form_has_and_belongs_to_many(relationship)

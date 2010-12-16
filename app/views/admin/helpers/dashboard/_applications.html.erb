@@ -1,4 +1,4 @@
-<% current_user.applications.each do |app| %>
+<% admin_user.applications.each do |app| %>
 
   <table>
 
@@ -8,7 +8,7 @@
       </tr>
     </thead>
 
-    <% current_user.application(app).each do |model| %>
+    <% admin_user.application(app).each do |model| %>
 
       <%
         klass = model.typus_constantize
