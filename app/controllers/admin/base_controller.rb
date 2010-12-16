@@ -5,7 +5,6 @@ class Admin::BaseController < ActionController::Base
   include Typus::Authentication::const_get(Typus.authentication.to_s.classify)
 
   before_filter :set_models_constantized
-
   before_filter :reload_config_and_roles
   before_filter :authenticate
   before_filter :set_locale
