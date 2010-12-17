@@ -42,10 +42,6 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal "admin", Typus.master_role
   end
 
-  should "verify default_config for available_locales" do
-    assert_equal [:en], Typus.available_locales
-  end
-
   should "verify config_folder is a Pathname" do
     assert Typus.config_folder.is_a?(Pathname)
   end

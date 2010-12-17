@@ -26,7 +26,4 @@ Typus.setup do |config|
   # config.pagination = { :previous_label => "&larr; " + Typus::I18n.t("Previous"),
   #                       :next_label => Typus::I18n.t("Next") + " &rarr;" }
 
-  # Define available languages on the admin interface.
-  # config.available_locales = [:en]
-
 end

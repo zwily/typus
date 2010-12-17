@@ -115,9 +115,6 @@ module Typus
   mattr_accessor :user_fk
   @@user_fk = "typus_user_id"
 
-  mattr_accessor :available_locales
-  @@available_locales = [:en]
-
   class << self
 
     # Default way to setup typus. Run `rails generate typus` to create a fresh
@@ -159,30 +156,17 @@ module Typus
     end
 
     def locales
-      human = available_locales.map { |i| locales_mapping[i.to_s] }
-      available_locales.map { |i| i.to_s }.to_hash_with(human).invert
-    end
-
-    def locales_mapping
-      mapping = { "ca"    => "Català",
-                  "de"    => "German",
-                  "el"    => "Greek",
-                  "en"    => "English",
-                  "es"    => "Español",
-                  "fr"    => "Français",
-                  "hu"    => "Magyar",
-                  "it"    => "Italiano",
-                  "pt-BR" => "Portuguese",
-                  "ru"    => "Russian",
-                  "zh-CN" => "中文" }
-      mapping.default = "Unknown"
-      return mapping
-    end
-
-    def detect_locales
-      available_locales.each do |locale|
-        ::I18n.load_path += Dir[File.join(Typus.root, "config", "available_locales", "#{locale}*")]
-      end
+      { "Català" => "ca",
+        "German" => "de",
+        "Greek"  => "el",
+        "English" => "en",
+        "Español" => "es",
+        "Français" => "fr",
+        "Magyar" => "hu",
+        "Italiano" => "It",
+        "Portuguese" => "pt-BR",
+        "Russian" => "ru",
+        "中文" => "zh-CN" }
     end
 
     def application_models
@@ -200,7 +184,6 @@ module Typus
     def reload!
       Typus::Configuration.roles!
       Typus::Configuration.config!
-      detect_locales
     end
 
   end

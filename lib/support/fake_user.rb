@@ -21,7 +21,7 @@ class FakeUser
   end
 
   def preferences
-    { :locale => Typus.available_locales.first }
+    { :locale => I18n.locale }
   end
 
   def resources
