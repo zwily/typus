@@ -14,3 +14,4 @@ el:
         password_confirmation: "Επιβεβαίωση κωδικού"
         status: "Κατάσταση"
         role: "Ρόλος"
+        language:

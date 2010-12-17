@@ -16,3 +16,4 @@ it:
         language: "Lingua"
         password: "Password"
         password_confirmation: "Ripeti la password"
+        language:

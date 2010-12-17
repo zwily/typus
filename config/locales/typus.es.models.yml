@@ -15,3 +15,4 @@ es:
         password_confirmation: "Confirmar contraseña"
         role: "Rol"
         status: "Estado"
+        language:

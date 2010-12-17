@@ -14,3 +14,4 @@ ru:
         password_confirmation: "Подтверждение пароля"
         status: "Статус"
         role:
+        language:

@@ -14,3 +14,4 @@ ca:
         password_confirmation: "Confirmar contrasenya"
         status: "Estat"
         role: "Rol"
+        language: "Idioma"
