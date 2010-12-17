@@ -52,7 +52,7 @@ module Typus
             :password => options[:password],
             :password_confirmation => options[:password],
             :role => options[:role],
-            :preferences => { :locale => I18n.default_locale.to_s }
+            :preferences => { :locale => ::I18n.default_locale.to_s }
       end
 
     end
