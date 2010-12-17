@@ -66,6 +66,10 @@ refector to be more powerful (roles) but it works for now.
 
 [CHANGED] `current_user` is now `admin_user`.
 
+[CHANGED] All available locales are shown to the user.
+
+[CHANGED] All the I18n stuff of `typus` is now under Typus::I18n namespace.
+
 [3.0.2]
 
 [FIXED] Use Arel to get the data on lists. After moving to will_paginate I
