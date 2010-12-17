@@ -121,7 +121,7 @@ module Typus
       def language
         preferences[:locale]
       rescue
-        I18n.default_locale.to_s
+        ::I18n.default_locale.to_s
       end
 
       def language=(locale)
