@@ -56,7 +56,8 @@ module Admin
     end
 
     def boolean_filter(request, filter)
-      items   = @resource.typus_boolean(filter)
+      values  = @resource.typus_boolean(filter)
+      items   = values.map { |k, v| [Typus::I18n.t(k.humanize), k] }
       message = Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
       [filter, items, message]
     end

@@ -7,6 +7,7 @@ es:
   "Active": "Activo"
   "Add": "Añadir"
   "Add new": "Añadir nuevo"
+  "All": "Todos"
   "Are you sure?": "¿Estás seguro?"
   "Are you sure you want to sign out and end your session?": "¿Estás seguro que quieres salir y cerrar la sessión?"
 
@@ -52,10 +53,10 @@ es:
   "Resources": "Recursos"
 
   "Save %{resource}": "Guardar %{resource}"
-  "Search": "Búsqueda"
+  "Search": "Buscar"
   "Show": "Mostrar"
-  "Show all dates":
-  "Show by %{attribute}":
+  "Show all dates": "Mostrar todas las fechas"
+  "Show by %{attribute}": "Mostrar por %{attribute}"
   "Show %{resource}": "Mostrar %{resource}"
   "Sign in": "Entrar"
   "Sign out": "Salir"
@@ -63,6 +64,7 @@ es:
   "System Users Administration": "Administrar usuarios del sistema"
 
   "Today": "Hoy"
+  "Trash": "Eliminar"
   "True": "Verdadero"
 
   "Unrelate": "Desvincular"

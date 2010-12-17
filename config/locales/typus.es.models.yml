@@ -4,13 +4,14 @@
 es:
   activerecord:
     models:
-      admin_user:
+      admin_user: "Usuario Admin"
     attributes:
       admin_user:
         email: "Correo electrónico"
         first_name: "Nombre"
+        language: "Idioma"
         last_name: "Apellidos"
         password: "Contraseña"
         password_confirmation: "Confirmar contraseña"
-        status: "Estado"
         role: "Rol"
+        status: "Estado"

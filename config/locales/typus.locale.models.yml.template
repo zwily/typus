@@ -1,7 +1,7 @@
-# <language> translations for Typus
+# <locale> translations for Typus
 # - <your_name> <contact_form>
 
-<language>:
+<locale>:
   activerecord:
     models:
       admin_user:
@@ -9,8 +9,9 @@
       admin_user:
         email:
         first_name:
+        language:
         last_name:
         password:
         password_confirmation:
-        status:
         role:
+        status:
