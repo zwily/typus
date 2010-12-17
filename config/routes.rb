@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   scope "admin", :module => :admin, :as => "admin" do
 
     match "/" => redirect("/admin/dashboard")
-    match "help" => "base#help"
+    match "user_guide" => "base#user_guide"
 
     resource :dashboard, :only => [:show], :controller => :dashboard
 

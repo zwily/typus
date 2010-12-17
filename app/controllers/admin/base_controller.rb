@@ -11,7 +11,7 @@ class Admin::BaseController < ActionController::Base
 
   helper_method :admin_user
 
-  def help
+  def user_guide
   end
 
   protected
