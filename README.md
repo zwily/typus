@@ -23,7 +23,7 @@ extensible enough to match lots of use cases.
 ## Links
 
 - [Documentation](http://core.typuscms.com/)
-- [Demo](http://demo.typuscms.com/)
+- [Demo](http://demo.typuscms.com/) ([Code][3])
 - [Source Code](http://github.com/fesplugas/typus)
 - [Mailing List](http://groups.google.com/group/typus)
 - [Gems](http://rubygems.org/gems/typus)
@@ -51,3 +51,4 @@ Copyright © 2007-2010 Francesc Esplugas, released under the MIT license.
 
 [1]: http://rubygems.org/gems/paperclip
 [2]: http://rubygems.org/gems/dragonfly
+[3]: https://github.com/fesplugas/rails-typuscms-demo
