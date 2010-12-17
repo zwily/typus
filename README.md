@@ -12,8 +12,9 @@ extensible enough to match lots of use cases.
 - Built-in Authentication.
 - User Permissions by using Access Control Lists. (stored in yaml files)
 - CRUD and custom actions for your models on a clean interface.
-- Internationalized interface.
+- Internationalized interface (Català, German, Greek, English, Español, Français, Magyar, Italiano, Portuguese, Russian, 中文)
 - Customizable and extensible templates.
+- Integrated [paperclip][1] and [dragonfly][2] attachments viewer.
 - Low memory footprint.
 - Works with Rails 3.0 and is Ruby 1.9.2 compatible.
 - Tested with SQLite, MySQL and PostgreSQL.
@@ -47,3 +48,6 @@ Start the application server and go to <http://0.0.0.0:3000/admin>.
 ## License
 
 Copyright © 2007-2010 Francesc Esplugas, released under the MIT license.
+
+[1]: http://rubygems.org/gems/paperclip
+[2]: http://rubygems.org/gems/dragonfly
