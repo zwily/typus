@@ -70,6 +70,10 @@ refector to be more powerful (roles) but it works for now.
 
 [CHANGED] All the I18n stuff of `typus` is now under Typus::I18n namespace.
 
+[CHANGED] `/admin/help` is now `/admin/user_guide`.
+
+[NEW] Link to `/admin/user_guide` from the sidebar.
+
 [3.0.2]
 
 [FIXED] Use Arel to get the data on lists. After moving to will_paginate I
