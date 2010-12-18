@@ -93,7 +93,7 @@ module Admin
     end
 
     def table_string_field(attribute, item)
-      (raw_content = item.send(attribute)).present? ? raw_content : "&mdash;".html_safe
+      (raw_content = item.send(attribute)).present? ? truncate(raw_content) : "&mdash;".html_safe
     end
 
     def table_selector(attribute, item)
