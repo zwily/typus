@@ -152,7 +152,7 @@ module Admin
     end
 
     def table_text_field(*args)
-      truncate(table_string_field(*args))
+      table_string_field(*args)
     end
 
   end
