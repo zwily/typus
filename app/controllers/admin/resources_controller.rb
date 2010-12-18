@@ -94,7 +94,11 @@ class Admin::ResourcesController < Admin::BaseController
     @item.toggle(params[:field])
     @item.save!
     notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
-    redirect_to set_path, :notice => notice
+
+    respond_to do |format|
+      format.html { redirect_to set_path, :notice => notice }
+      format.json { render :json => @item }
+    end
   end
 
   ##
