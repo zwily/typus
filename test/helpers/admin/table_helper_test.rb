@@ -99,6 +99,21 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
+  context "table_integer_field" do
+
+    should "work" do
+      post = Factory(:post)
+      assert_equal post.id, table_integer_field(:id, post)
+    end
+
+    should "work when attribute is empty" do
+      post = Factory(:post)
+      post.id = nil
+      assert_equal "&mdash;", table_integer_field(:id, post)
+    end
+
+  end
+
   context "table_tree_field" do
 
     should "work when no parent" do
