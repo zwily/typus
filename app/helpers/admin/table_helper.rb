@@ -44,20 +44,7 @@ module Admin
 
     def table_fields_for_item(item, fields, link_options)
       fields.map do |key, value|
-        case value
-        when :boolean then table_boolean_field(key, item)
-        when :date, :datetime, :time then table_datetime_field(key, item)
-        when :belongs_to then table_belongs_to_field(key, item)
-        when :tree then table_tree_field(item)
-        when :file then table_file_field(key, item)
-        when :position then table_position_field(key, item)
-        when :selector then table_selector_field(key, item)
-        when :transversal then table_transversal_field(key, item)
-        when :has_and_belongs_to_many then table_has_and_belongs_to_many_field(key, item)
-        when :string, :text then table_string_field(key, item)
-        else
-          table_generic_field(key, item)
-        end
+        send("table_#{value}_field", key, item)
       end
     end
 
@@ -96,9 +83,14 @@ module Admin
       (raw_content = item.send(attribute)).present? ? truncate(raw_content) : "&mdash;".html_safe
     end
 
+    alias :table_text_field :table_string_field
+
     def table_generic_field(attribute, item)
       (raw_content = item.send(attribute)).present? ? raw_content : "&mdash;".html_safe
     end
+
+    alias :table_float_field :table_generic_field
+    alias :table_integer_field :table_generic_field
 
     def table_selector_field(attribute, item)
       item.mapping(attribute)
@@ -136,6 +128,9 @@ module Admin
         I18n.localize(field, :format => item.class.typus_date_format(attribute))
       end
     end
+
+    alias :table_date_field :table_datetime_field
+    alias :table_time_field :table_datetime_field
 
     def table_boolean_field(attribute, item)
       status = item.send(attribute)
