@@ -97,6 +97,7 @@ class Admin::ResourcesController < Admin::BaseController
   def toggle
     @item.toggle(params[:field])
     @item.save!
+
     notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
 
     respond_to do |format|
