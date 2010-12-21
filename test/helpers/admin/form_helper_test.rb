@@ -71,13 +71,21 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
-  should_eventually "verify_attribute_disabled" do
-    @resource = Post
-    assert !attribute_disabled?('test')
-    Post.expects(:accessible_attributes).returns(['test'])
-    assert !attribute_disabled?('test')
-    Post.expects(:accessible_attributes).returns(['no_test'])
-    assert attribute_disabled?('test')
+  context "attribute_disabled?" do
+
+    setup do
+      @resource = Post
+    end
+
+    should "work for non protected_attributes" do
+      assert !attribute_disabled?('test')
+    end
+
+    should "work for protected_attributes" do
+      Post.expects(:protected_attributes).returns(['test'])
+      assert attribute_disabled?('test')
+    end
+
   end
 
   should_eventually "test_expand_tree_into_select_field" do
