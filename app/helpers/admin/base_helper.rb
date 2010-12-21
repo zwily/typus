@@ -22,7 +22,9 @@ module Admin
 
     def display_flash_message(message = flash)
       if message.compact.any?
-        render "admin/helpers/flash_message", :flash_type => message.keys.first, :message => message
+        render "admin/helpers/flash_message",
+               :flash_type => message.keys.first,
+               :message => message
       end
     end
 
