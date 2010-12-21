@@ -56,6 +56,19 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
+  context "actions" do
+
+    should "return a default value" do
+      assert_equal [], actions
+    end
+
+    should "return a predefined value" do
+      @actions = "mock"
+      assert_equal "mock", actions
+    end
+
+  end
+
   context "table_belongs_to_field" do
 
     should "work without associated model" do
