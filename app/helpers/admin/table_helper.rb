@@ -54,7 +54,7 @@ module Admin
         when :selector then table_selector(key, item)
         when :transversal then table_transversal(key, item)
         when :has_and_belongs_to_many then table_has_and_belongs_to_many_field(key, item)
-        when :integer then table_number_field(key, item)
+        when :integer, :float then table_number_field(key, item)
         else
           table_string_field(key, item)
         end
