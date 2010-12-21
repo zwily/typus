@@ -3,7 +3,6 @@
 require "support/active_record"
 require "support/array"
 require "support/hash"
-require "support/object"
 require "support/string"
 
 require "typus/engine"
