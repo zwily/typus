@@ -51,8 +51,8 @@ module Admin
         when :tree then table_tree_field(item)
         when :file then table_file_field(key, item)
         when :position then table_position_field(key, item)
-        when :selector then table_selector(key, item)
-        when :transversal then table_transversal(key, item)
+        when :selector then table_selector_field(key, item)
+        when :transversal then table_transversal_field(key, item)
         when :has_and_belongs_to_many then table_has_and_belongs_to_many_field(key, item)
         when :string, :text then table_string_field(key, item)
         else
@@ -100,7 +100,7 @@ module Admin
       (raw_content = item.send(attribute)).present? ? raw_content : "&mdash;".html_safe
     end
 
-    def table_selector(attribute, item)
+    def table_selector_field(attribute, item)
       item.mapping(attribute)
     end
 
@@ -150,7 +150,7 @@ module Admin
       link_to Typus::I18n.t(human_boolean), options, :confirm => confirm
     end
 
-    def table_transversal(attribute, item)
+    def table_transversal_field(attribute, item)
       _attribute, virtual = attribute.split(".")
       item.send(_attribute).send(virtual)
     end
