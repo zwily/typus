@@ -54,7 +54,7 @@ module Admin
         when :selector then table_selector(key, item)
         when :transversal then table_transversal(key, item)
         when :has_and_belongs_to_many then table_has_and_belongs_to_many_field(key, item)
-        when :integer then table_integer_field(key, item)
+        when :integer then table_number_field(key, item)
         else
           table_string_field(key, item)
         end
@@ -96,7 +96,7 @@ module Admin
       (raw_content = item.send(attribute)).present? ? truncate(raw_content) : "&mdash;".html_safe
     end
 
-    def table_integer_field(attribute, item)
+    def table_number_field(attribute, item)
       (raw_content = item.send(attribute)).present? ? raw_content : "&mdash;".html_safe
     end
 
