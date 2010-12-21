@@ -52,6 +52,20 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
   end
 
+  context "predefined_filters" do
+
+    should "have a value" do
+      expected = [["All", "index", "unscoped"]]
+      assert_equal expected, predefined_filters
+    end
+
+    should "return my filter" do
+      @predefined_filters = "mock"
+      assert_equal "mock", predefined_filters
+    end
+
+  end
+
   def link_to(*args); args; end
 
 end
