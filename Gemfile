@@ -10,10 +10,12 @@ gem "paperclip"
 gem "pg"
 gem "rack-cache", :require => "rack/cache"
 gem "rails", "~> 3.0"
-gem "render_inheritable"
 gem "shoulda"
 gem "sqlite3-ruby"
 gem "tartare", :git => "https://github.com/fesplugas/rails-tartare.git", :require => false
+
+# Keep this here because I use it as reference for development.
+gem "render_inheritable"
 gem "will_paginate", "~> 3.0.pre2"
 
 gem "mocha"
