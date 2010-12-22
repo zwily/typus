@@ -60,7 +60,7 @@ module Typus
     module InstanceMethods
 
       def name
-        full_name = [first_name, last_name].compact.delete_if { |s| s.empty? }
+        full_name = [first_name, last_name].delete_if { |s| s.blank? }
         full_name.any? ? full_name.join(" ") : email
       end
 
