@@ -8,10 +8,13 @@ To install **Typus**, edit the application {{{Gemfile}}} and add the following
 line.
 
 {{{
-gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
+gem 'typus'
+
+# Bundle edge Typus instead:
+# gem 'typus', :git => 'git://github.com/fesplugas/typus.git'
 }}}
 
-Install the gem using the bundler:
+Install the gem using bundler:
 
 {{{
 $ bundle install

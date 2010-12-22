@@ -29,7 +29,7 @@ function create_menu(basepath)
 		'<li><a href="/installation/">Installation Instructions</a></li>' +
 		'<li><a href="/installation/generators/">Generators</a></li>' +
 		'<li><a href="/installation/rake-tasks/">Rake Tasks</a></li>' +
-		'<li><a href="/installation/upgrading/">Upgrading from a Previous Version</a></li>' +
+		'<li><a href="/installation/upgrading/">Upgrading</a></li>' +
 		'<li><a href="/installation/troubleshooting/">Troubleshooting</a></li>' +
 		'</ul>' +
 
