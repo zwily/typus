@@ -26,7 +26,7 @@ function create_menu(basepath)
 
 		'<h3>Installation</h3>' +
 		'<ul>' +
-		'<li><a href="/installation/">Installation Instructions</a></li>' +
+		'<li><a href="/installation/instructions/">Instructions</a></li>' +
 		'<li><a href="/installation/generators/">Generators</a></li>' +
 		'<li><a href="/installation/rake-tasks/">Rake Tasks</a></li>' +
 		'<li><a href="/installation/upgrading/">Upgrading</a></li>' +

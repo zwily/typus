@@ -2,7 +2,6 @@
 title: Resource
 
 parent_title: Configuration
-parent_link: /configuration/
 ---
 
 = Resource

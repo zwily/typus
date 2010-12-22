@@ -2,7 +2,6 @@
 title: Roles
 
 parent_title: Configuration
-parent_link: /configuration/
 ---
 
 = Roles

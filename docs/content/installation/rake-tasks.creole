@@ -2,7 +2,6 @@
 title: Rake Tasks
 
 parent_title: Installation
-parent_link: /installation/
 ---
 
 = Rake Tasks

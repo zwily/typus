@@ -47,8 +47,10 @@
     <tr>
       <td id="breadcrumb">
         <a href="/">Home</a> &nbsp;&#8250;&nbsp;
-        <% if @item[:parent_title] %>
+        <% if @item[:parent_title] && @item[:parent_link] %>
           <a href="<%= @item[:parent_link] %>"><%= @item[:parent_title] %></a> &nbsp;&#8250;&nbsp;
+        <% elsif @item[:parent_title] %>
+          <%= @item[:parent_title] %> &nbsp;&#8250;&nbsp;
         <% end %>
         <%= @item[:title] %>
       </td>

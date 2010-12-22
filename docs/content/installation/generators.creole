@@ -2,7 +2,6 @@
 title: Generators
 
 parent_title: Installation
-parent_link: /installation/
 ---
 
 = Generators
