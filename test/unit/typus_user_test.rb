@@ -78,6 +78,11 @@ class TypusUserTest < ActiveSupport::TestCase
       assert_equal "John Locke", @typus_user.name
     end
 
+    should "return name when first_name and last_name are set to nil" do
+      @typus_user.first_name, @typus_user.last_name = nil
+      assert_equal @typus_user.email, @typus_user.name
+    end
+
     should "verify salt never changes" do
       expected = @typus_user.salt
       @typus_user.update_attributes(:password => '11111111', :password_confirmation => '11111111')
