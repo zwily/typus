@@ -12,7 +12,7 @@ function create_menu(basepath)
 		'<li><a href="/overview/typus-at-a-glance/">Typus at a Glance</a></li>' +
 		'<li><a href="/overview/supported-features/">Supported Features</a></li>' +
 		'<li><a href="/overview/architectural-goals/">Architectural Goals</a></li>' +
-		'</ul>' +	
+		'</ul>' +
 
 		'<h3>Basic Info</h3>' +
 		'<ul>' +
@@ -20,33 +20,33 @@ function create_menu(basepath)
 		'<li><a href="/mit-license/">MIT License</a></li>' +
 		'<li><a href="/changelog/">Change Log</a></li>' +
 		'<li><a href="/credits/">Credits</a></li>' +
-		'</ul>' +	
+		'</ul>' +
 
 		'</td><td class="td_sep" valign="top">' +
 
 		'<h3>Installation</h3>' +
 		'<ul>' +
-		'<li><a href="#">Downloading Typus</a></li>' +
-		'<li><a href="#">Installation Instructions</a></li>' +
+		'<li><a href="/installation/">Installation Instructions</a></li>' +
+		'<li><a href="/installation/generators/">Generators</a></li>' +
+		'<li><a href="/installation/rake-tasks/">Rake Tasks</a></li>' +
 		'<li><a href="/installation/upgrading/">Upgrading from a Previous Version</a></li>' +
 		'<li><a href="/installation/troubleshooting/">Troubleshooting</a></li>' +
 		'</ul>' +
 
-		'<h3>Documentation</h3>' +
+		'<h3>Configuration</h3>' +
 		'<ul>' +
-		'<li><a href="/documentation/installation/">Installing Typus</a></li>' +
-		'<li><a href="/documentation/configuration/">Main Configuration</a></li>' +
-		'<li><a href="/documentation/configuration-resources/">Resources Configuration</a></li>' +
-		'<li><a href="/documentation/configuration-resource/">Resource Configuration</a></li>' +
-		'<li><a href="/documentation/configuration-roles/">Roles Configuration</a></li>' +
-		'<li><a href="/documentation/configuration-ui/">User Interface Customization</a></li>' +
+		'<li><a href="/configuration/initializers/">Initializers</a></li>' +
+		'<li><a href="/configuration/resources/">Resources</a></li>' +
+		'<li><a href="/configuration/resource/">Resource</a></li>' +
+		'<li><a href="/configuration/roles/">Roles</a></li>' +
 		'</ul>' +
 
 		'</td><td class="td_sep" valign="top">' +
 
 		'<h3>Customization</h3>' +
 		'<ul>' +
-		'<li><a href="/documentation/configuration-ui/">User Interface</a></li>' +
+		'<li><a href="/customization/user-interface/">User Interface</a></li>' +
+		'<li><a href="/customization/attribute-templates/">Attribute Templates</a></li>' +
 		'</ul>' +
 
 		'<h3>Recipes</h3>' +

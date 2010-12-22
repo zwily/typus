@@ -1,11 +1,11 @@
 ---
-title: Main Configuration
+title: Initializers
 
-parent_title: Documentation
-parent_link: /documentation/
+parent_title: Configuration
+parent_link: /configuration/
 ---
 
-= <a name="main_configuration" href="#main_configuration">Main Configuration</a>
+= Initializers
 
 You can configure the admin panel using the initializer the generator created.
 You can find it at {{{config/initializers/typus.rb}}}.

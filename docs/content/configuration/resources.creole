@@ -1,11 +1,11 @@
 ---
-title: Resources Configuration
+title: Resources
 
-parent_title: Documentation
-parent_link: /documentation/
+parent_title: Configuration
+parent_link: /configuration/
 ---
 
-= <a name="resources_configuration" href="#resources_configuration">Resources Configuration</a>
+= Resources
 
 All application models, including the ones on the engines/plugins, can be
 configured using the {{{yaml}}} files placed on {{{config/typus}}}. Files

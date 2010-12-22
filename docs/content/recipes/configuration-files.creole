@@ -27,5 +27,5 @@ config/typus/presentation_roles.yml
 
 <div class="important">
 **Note:** Remember files are loaded alphabetically and last loaded files
-overwrite previous settings.
+override previous settings.
 </div>

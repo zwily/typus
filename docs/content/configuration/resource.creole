@@ -1,11 +1,11 @@
 ---
-title: Resource Configuration
+title: Resource
 
-parent_title: Documentation
-parent_link: /documentation/
+parent_title: Configuration
+parent_link: /configuration/
 ---
 
-= <a name="resource_configuration" href="#resource_configuration">Resource Configuration</a>
+= Resource
 
 Sometimes your need to manage some services, view log files or do any other
 task which is not related to a model.
