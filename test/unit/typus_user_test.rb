@@ -105,6 +105,22 @@ class TypusUserTest < ActiveSupport::TestCase
       assert !@typus_user.cannot?('delete', 'TypusUser')
     end
 
+    should "verify preferences are nil by default" do
+      assert @typus_user.preferences.nil?
+    end
+
+    should "return default_locale when no preferences are set" do
+      assert_equal :en, @typus_user.language
+    end
+
+    should "be able to set a locale" do
+      @typus_user.language = :jp
+
+      expected = {:locale => :jp}
+      assert_equal expected, @typus_user.preferences
+      assert_equal :jp, @typus_user.language
+    end
+
   end
 
   context "Admin Role" do
