@@ -30,11 +30,27 @@ class TypusUserTest < ActiveSupport::TestCase
     assert_equal expected, output
   end
 
-  should "verify generate requires the role" do
-    options = { :email => 'demo@example.com' }
-    assert TypusUser.generate(options).valid?
-    assert TypusUser.generate(options.merge(:password => 'XXXXXXXX')).valid?
-    assert TypusUser.generate(options.merge(:role => 'admin')).valid?
+  context "generate" do
+
+    should "not be valid if email is not passed" do
+      assert TypusUser.generate.invalid?
+    end
+
+    should "be valid when email is passed" do
+      options = { :email => 'demo@example.com' }
+      assert TypusUser.generate(options).valid?
+    end
+
+    should "accept password" do
+      options = { :email => 'demo@example.com', :password => 'XXXXXXXX' }
+      assert TypusUser.generate(options).valid?
+    end
+
+    should "accept role" do
+      options = { :email => 'demo@example.com', :role => 'admin' }
+      assert TypusUser.generate(options).valid?
+    end
+
   end
 
   context "TypusUser" do
