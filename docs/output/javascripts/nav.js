@@ -18,7 +18,7 @@ function create_menu(basepath)
 		'<ul>' +
 		'<li><a href="/requirements/">Requirements</a></li>' +
 		'<li><a href="/mit-license/">MIT License</a></li>' +
-		'<li><a href="/changelog/">Change Log</a></li>' +
+		'<li><a href="/change-log/">Change Log</a></li>' +
 		'<li><a href="/credits/">Credits</a></li>' +
 		'</ul>' +
 

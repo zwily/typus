@@ -1,8 +1,8 @@
 ---
-title: Changelog
+title: Change Log
 ---
 
-= Changelog
+= Change Log
 
 == 3.0.3 (Unreleased)
 
