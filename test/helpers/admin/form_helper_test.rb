@@ -88,37 +88,38 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
 
   end
 
-  should_eventually "test_expand_tree_into_select_field" do
+  context "expand_tree_into_select_field" do
 
-    items = Page.roots
+    setup do
+      page = Factory(:page)
+      children = Factory(:page, :parent => page)
+      subchildren = Factory(:page, :parent => children)
+      @items = Page.roots
+    end
 
-    # Page#1 is a root.
+    should "verify it works" do
+      @item = Page.first
 
-    @item = Page.find(1)
-    output = expand_tree_into_select_field(items, 'parent_id')
-    expected = <<-HTML
-<option  value="1"> &#8627; Page#1</option>
-<option  value="2">&nbsp;&nbsp; &#8627; Page#2</option>
-<option  value="3"> &#8627; Page#3</option>
-<option  value="4">&nbsp;&nbsp; &#8627; Page#4</option>
-<option  value="5">&nbsp;&nbsp; &#8627; Page#5</option>
-<option  value="6">&nbsp;&nbsp;&nbsp;&nbsp; &#8627; Page#6</option>
-    HTML
-    assert_equal expected, output
+      expected = <<-HTML
+<option  value="1"> Page#1</option>
+<option  value="2">&nbsp;&nbsp; Page#2</option>
+<option  value="3">&nbsp;&nbsp;&nbsp;&nbsp; Page#3</option>
+      HTML
 
-    # Page#4 is a children.
+      assert_equal expected, expand_tree_into_select_field(@items, 'parent_id')
+    end
 
-    @item = Page.find(4)
-    output = expand_tree_into_select_field(items, 'parent_id')
-    expected = <<-HTML
-<option  value="1"> &#8627; Page#1</option>
-<option  value="2">&nbsp;&nbsp; &#8627; Page#2</option>
-<option selected value="3"> &#8627; Page#3</option>
-<option  value="4">&nbsp;&nbsp; &#8627; Page#4</option>
-<option  value="5">&nbsp;&nbsp; &#8627; Page#5</option>
-<option  value="6">&nbsp;&nbsp;&nbsp;&nbsp; &#8627; Page#6</option>
-    HTML
-    assert_equal expected, output
+    should "verify if selects an item" do
+      @item = Page.last
+
+      expected = <<-HTML
+<option  value="1"> Page#1</option>
+<option selected value="2">&nbsp;&nbsp; Page#2</option>
+<option  value="3">&nbsp;&nbsp;&nbsp;&nbsp; Page#3</option>
+      HTML
+
+      assert_equal expected, expand_tree_into_select_field(@items, 'parent_id')
+    end
 
   end
 
