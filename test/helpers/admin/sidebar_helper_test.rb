@@ -17,8 +17,6 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     default_url_options[:host] = 'test.host'
   end
 
-  should "test_actions"
-
   context "export" do
 
     should "return array with expected values" do
