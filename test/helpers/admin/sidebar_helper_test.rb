@@ -19,14 +19,18 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
 
   should "test_actions"
 
-  should "test_export" do
-    params = { :controller => '/admin/posts', :action => 'index' }
+  context "export" do
 
-    output = export(Post , params)
-    expected = [["Export as CSV", { :action => "index", :format => "csv", :controller => "/admin/posts" }],
-                ["Export as XML", { :action => "index", :format => "xml", :controller => "/admin/posts" }]]
+    should "return array with expected values" do
+      params = { :controller => '/admin/posts', :action => 'index' }
 
-    assert_equal expected, output
+      output = export(Post , params)
+      expected = [["Export as CSV", { :action => "index", :format => "csv", :controller => "/admin/posts" }],
+                  ["Export as XML", { :action => "index", :format => "xml", :controller => "/admin/posts" }]]
+
+      assert_equal expected, output
+    end
+
   end
 
 end
