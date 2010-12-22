@@ -14,4 +14,4 @@ hu:
         password_confirmation: "Jelszó megerősítés"
         status: "Státusz"
         role: "Jogosultsági szint"
-        language:
+        locale:

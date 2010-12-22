@@ -110,15 +110,28 @@ class TypusUserTest < ActiveSupport::TestCase
     end
 
     should "return default_locale when no preferences are set" do
-      assert_equal :en, @typus_user.language
+      assert_equal :en, @typus_user.locale
     end
 
     should "be able to set a locale" do
-      @typus_user.language = :jp
+      @typus_user.locale = :jp
 
       expected = {:locale => :jp}
       assert_equal expected, @typus_user.preferences
-      assert_equal :jp, @typus_user.language
+      assert_equal :jp, @typus_user.locale
+    end
+
+    should "be able to set preferences" do
+      @typus_user.preferences = {:chunky => "bacon"}
+      assert @typus_user.preferences.present?
+    end
+
+    should "set locale preference without overriding previously set preferences" do
+      @typus_user.preferences = {:chunky => "bacon"}
+      @typus_user.locale = :jp
+
+      expected = {:locale => :jp, :chunky => "bacon"}
+      assert_equal expected, @typus_user.preferences
     end
 
   end

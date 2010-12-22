@@ -20,8 +20,8 @@ class FakeUser
     !is_root?
   end
 
-  def preferences
-    { :locale => I18n.locale }
+  def locale
+    ::I18n.locale
   end
 
   def resources

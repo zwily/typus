@@ -92,7 +92,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
                          ["email", :string],
                          ["password", :password],
                          ["password_confirmation", :password],
-                         ["language", :selector]]
+                         ["locale", :selector]]
       assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:form).keys
       assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
     end
@@ -114,11 +114,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return relationship fields for TypusUser" do
-      assert_equal %w(first_name last_name role email language), TypusUser.typus_fields_for(:relationship).keys
+      assert_equal %w(first_name last_name role email locale), TypusUser.typus_fields_for(:relationship).keys
     end
 
     should "return undefined fields for TypusUser" do
-      assert_equal %w(first_name last_name role email language), TypusUser.typus_fields_for(:undefined).keys
+      assert_equal %w(first_name last_name role email locale), TypusUser.typus_fields_for(:undefined).keys
     end
 
   end

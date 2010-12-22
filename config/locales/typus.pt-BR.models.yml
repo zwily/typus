@@ -14,4 +14,4 @@ pt-BR:
         password_confirmation: "Senha confirmação"
         status:
         role:
-        language:
+        locale:

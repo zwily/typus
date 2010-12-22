@@ -9,10 +9,10 @@ es:
       admin_user:
         email: "Correo electrónico"
         first_name: "Nombre"
-        language: "Idioma"
+        locale: "Idioma"
         last_name: "Apellidos"
         password: "Contraseña"
         password_confirmation: "Confirmar contraseña"
         role: "Rol"
         status: "Estado"
-        language:
+        locale:

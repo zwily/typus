@@ -13,7 +13,6 @@ it:
         role: "Ruolo"
         status: "Stato"
         preferences: "Preferenze"
-        language: "Lingua"
+        locale: "Lingua"
         password: "Password"
         password_confirmation: "Ripeti la password"
-        language:

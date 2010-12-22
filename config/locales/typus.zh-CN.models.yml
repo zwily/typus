@@ -14,4 +14,4 @@ zh-CN:
         password_confirmation: " 密码确认"
         status: " 状态"
         role: " 角色"
-        language:
+        locale:

@@ -124,7 +124,7 @@ module Typus
       #++
       def reload_locales
         if @resource.eql?(Typus.user_class)
-          ::I18n.locale = admin_user.reload.preferences[:locale]
+          ::I18n.locale = admin_user.reload.locale
         end
       end
 

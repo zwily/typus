@@ -82,6 +82,7 @@ module Typus
 
       #--
       # TODO: Rename action to mapping and refactor the _action case statement.
+      # TODO: Move the mapper to String class ... (like the other action we have)
       #++
       def can?(action, resource, options = {})
         resource = resource.name if resource.is_a?(Class)
@@ -118,22 +119,19 @@ module Typus
         !is_root?
       end
 
-      def language
-        preferences[:locale]
-      rescue
-        ::I18n.default_locale.to_s
+      def locale
+        (preferences && preferences[:locale]) ? preferences[:locale] : ::I18n.default_locale
       end
 
-      def language=(locale)
+      def locale=(locale)
         options = { :locale => locale }
-        self.preferences.merge!(options)
-      rescue
-        self.preferences = {}
-        retry
+        self.preferences ||= {}
+        self.preferences[:locale] = locale
       end
 
       protected
 
+      # TODO: Update the hash generation by a harder one ...
       def generate_hash(string)
         Digest::SHA1.hexdigest(string)
       end

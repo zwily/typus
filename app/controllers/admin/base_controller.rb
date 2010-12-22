@@ -25,7 +25,7 @@ class Admin::BaseController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = admin_user.preferences[:locale]
+    I18n.locale = admin_user.locale
   end
 
   def set_models_constantized

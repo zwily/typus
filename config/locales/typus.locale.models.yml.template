@@ -9,8 +9,8 @@
       admin_user:
         email:
         first_name:
-        language:
         last_name:
+        locale:
         password:
         password_confirmation:
         role:
