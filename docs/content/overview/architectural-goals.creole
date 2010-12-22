@@ -1,0 +1,10 @@
+---
+title: Architectural Goals
+
+parent_title: Overview
+parent_link: /overview/
+---
+
+= Architectural Goals
+
+Pending.

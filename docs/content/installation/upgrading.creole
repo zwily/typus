@@ -1,0 +1,10 @@
+---
+title: Upgrading from a Previous Version
+
+parent_title: Installation
+parent_link: /installation/
+---
+
+= Upgrading from a Previous Version
+
+Pending.

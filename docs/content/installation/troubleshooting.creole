@@ -1,0 +1,10 @@
+---
+title: Troubleshooting
+
+parent_title: Installation
+parent_link: /installation/
+---
+
+= Troubleshooting
+
+Pending.
