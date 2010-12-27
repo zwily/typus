@@ -65,4 +65,16 @@ class StringTest < ActiveSupport::TestCase
 
   end
 
+  context "to_resource" do
+
+    should "convert String into resource" do
+      assert_equal "entries", "Entry".to_resource
+    end
+
+    should "convert namespaced String into resource" do
+      assert_equal "category/entries", "Category::Entry".to_resource
+    end
+
+  end
+
 end

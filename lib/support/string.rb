@@ -24,4 +24,8 @@ class String
     end
   end
 
+  def to_resource
+    self.underscore.pluralize
+  end
+
 end
