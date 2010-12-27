@@ -14,8 +14,10 @@ Rails.application.routes.draw do
       end
     end
 
-  end
+    Typus.models.map { |i| i.to_resource }.each do |resource|
+      match "#{resource}(/:action(/:id(.:format)))", :controller => resource
+    end
 
-  match ':controller(/:action(/:id(.:format)))', :controller => /admin\/[^\/]+/
+  end
 
 end
