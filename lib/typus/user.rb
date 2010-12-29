@@ -90,19 +90,7 @@ module Typus
         return false if !resources.include?(resource)
         return true if resources[resource].include?("all")
 
-        _action = if options[:special]
-                    action
-                  else
-                    case action
-                    when "new", "create" then "create"
-                    when "index", "show" then "read"
-                    when "edit", "update",
-                         "position", "toggle",
-                         "relate", "unrelate", "detach" then "update"
-                    when "destroy", "trash" then "delete"
-                    else action
-                    end
-                  end
+        _action = options[:special] ? action : action.acl_action_mapper
 
         resources[resource].extract_settings.include?(_action)
       end
