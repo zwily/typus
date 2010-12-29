@@ -90,9 +90,9 @@ module Typus
         return false if !resources.include?(resource)
         return true if resources[resource].include?("all")
 
-        _action = options[:special] ? action : action.acl_action_mapper
+        action = options[:special] ? action : action.acl_action_mapper
 
-        resources[resource].extract_settings.include?(_action)
+        resources[resource].extract_settings.include?(action)
       end
 
       def cannot?(*args)
