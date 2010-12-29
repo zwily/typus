@@ -105,11 +105,8 @@ Description:
           default_rejections = (rejections + %w( password password_confirmation )).join("|")
           form_rejections = (rejections + %w( position )).join("|")
 
-          default = klass.columns.reject do |column|
-                      column.name.match(default_rejections) || column.sql_type == "text"
-                    end.map(&:name)
-
           fields = klass.columns.map(&:name)
+          default = fields.reject { |f| f.match(default_rejections) }
           form = fields.reject { |f| f.match(form_rejections) }
 
           # Model defaults.
