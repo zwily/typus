@@ -72,9 +72,8 @@ module Typus
   @@password = "columbia"
 
   ##
-  # Configure the e-mail address which will be shown in Admin::Mailer.
-  #
-  # When `nil`, the `forgot_password` will be disabled.
+  # Configure the e-mail address which will be shown in Admin::Mailer. If not
+  # set `forgot_password` feature is disabled.
   #
   mattr_accessor :mailer_sender
   @@mailer_sender = nil
