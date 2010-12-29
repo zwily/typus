@@ -359,7 +359,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
                  when /postgresql/
                    "(TEXT(role) LIKE '%francesc%' OR TEXT(last_name) LIKE '%francesc%' OR TEXT(email) LIKE '%francesc%' OR TEXT(first_name) LIKE '%francesc%')"
                  else
-                   "(`typus_users`.role LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.first_name LIKE '%francesc%')"
+                   if RUBY_VERSION >= '1.9'
+                     "(`typus_users`.first_name LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.role LIKE '%francesc%')"
+                   else
+                     "(`typus_users`.role LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.first_name LIKE '%francesc%')"
+                   end
                 end
 
       params = { :search => "francesc" }
@@ -378,7 +382,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
         boolean_false = "(\"typus_users\".\"status\" = 'f')"
       end
 
-      expected = "((`typus_users`.role LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.first_name LIKE '%francesc%')) AND #{boolean_true}"
+      expected = if RUBY_VERSION >= '1.9'
+                   "((`typus_users`.first_name LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.role LIKE '%francesc%')) AND #{boolean_true}"
+                 else
+                   "((`typus_users`.role LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.first_name LIKE '%francesc%')) AND #{boolean_true}"
+                 end
 
       params = { :search => "francesc", :status => "true" }
       assert_equal expected, TypusUser.build_conditions(params).first
