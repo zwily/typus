@@ -372,7 +372,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal expected, TypusUser.build_conditions(params).first
     end
 
-    should "return_sql_conditions_on_search_and_filter_for_typus_user" do
+    should_eventually "return_sql_conditions_on_search_and_filter_for_typus_user" do
       case ENV["DB"]
       when /mysql/
         boolean_true = "(`typus_users`.`status` = 1)"
@@ -390,6 +390,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
       params = { :search => "francesc", :status => "true" }
       assert_equal expected, TypusUser.build_conditions(params).first
+      assert_match /#{boolean_true}/, TypusUser.build_conditions(params).first
       params = { :search => "francesc", :status => "false" }
       assert_match /#{boolean_false}/, TypusUser.build_conditions(params).first
     end
