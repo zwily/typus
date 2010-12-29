@@ -227,6 +227,86 @@ module Typus
         @adapter ||= ActiveRecord::Base.configurations[Rails.env]['adapter']
       end
 
+      def build_search_conditions(key, value, conditions)
+        query = ActiveRecord::Base.connection.quote_string(value.downcase)
+        search = []
+        typus_search_fields.each do |key, value|
+          _query = case value
+                   when "=" then query
+                   when "^" then "#{query}%"
+                   when "@" then "%#{query}%"
+                   end
+          table_key = (adapter == 'postgresql') ? "LOWER(TEXT(#{table_name}.#{key}))" : "`#{table_name}`.#{key}"
+          search << "#{table_key} LIKE '#{_query}'"
+        end
+
+        condition = search.join(" OR ")
+        merge_conditions(conditions, condition)
+      end
+
+      def build_boolean_conditions(key, value, conditions)
+        condition = { key => (value == 'true') ? true : false }
+        merge_conditions(conditions, condition)
+      end
+
+      def build_datetime_conditions(key, value, conditions)
+        tomorrow = Time.zone.now.beginning_of_day.tomorrow
+        interval = case value
+                   when 'today'         then Time.zone.now.beginning_of_day..tomorrow
+                   when 'last_few_days' then 3.days.ago.beginning_of_day..tomorrow
+                   when 'last_7_days'   then 6.days.ago.beginning_of_day..tomorrow
+                   when 'last_30_days'  then Time.zone.now.beginning_of_day.prev_month..tomorrow
+                   end
+        condition = ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
+        merge_conditions(conditions, condition)
+      end
+
+      def build_has_and_belongs_to_many_conditions(key, value, conditions)
+        condition = { key => { :id => value } }
+        conditions = merge_conditions(conditions, condition)
+        joins << key.to_sym
+      end
+
+      def build_date_conditions(key, value, conditions)
+        if value.is_a?(Hash)
+          date_format = Date::DATE_FORMATS[typus_date_format(key)]
+
+          begin
+            unless value["from"].blank?
+              date_from = Date.strptime(value["from"], date_format)
+              merge_conditions(conditions, ["`#{table_name}`.#{key} >= ?", date_from])
+            end
+
+            unless value["to"].blank?
+              date_to = Date.strptime(value["to"], date_format)
+              merge_conditions(conditions, ["`#{table_name}`.#{key} <= ?", date_to])
+            end
+          rescue
+          end
+        else
+          # TODO: Improve and test filters.
+          interval = case value
+                     when 'today'         then nil
+                     when 'last_few_days' then 3.days.ago.to_date..Date.tomorrow
+                     when 'last_7_days'   then 6.days.ago.beginning_of_day..Date.tomorrow
+                     when 'last_30_days'  then (Date.today << 1)..Date.tomorrow
+                     end
+          if interval
+            condition = ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first, interval.last]
+          elsif value == 'today'
+            condition = ["`#{table_name}`.#{key} = ?", Date.today]
+          end
+          merge_conditions(conditions, condition)
+        end
+      end
+
+      def build_string_conditions(key, value, conditions)
+        condition = { key => value }
+        merge_conditions(conditions)
+      end
+
+      alias :build_integer_conditions :build_string_conditions
+
       #--
       # Sidebar filters:
       #
@@ -238,84 +318,11 @@ module Typus
         conditions, joins = merge_conditions, []
 
         query_params = params.dup
-        %w(action controller).each { |p| query_params.delete(p) }
+        %w(action controller utf8 sort_order).each { |p| query_params.delete(p) }
 
-        # Remove from params those with empty string.
-        query_params.delete_if { |k, v| v.empty? }
-
-        # If a search is performed.
-        if query_params[:search]
-          query = ActiveRecord::Base.connection.quote_string(query_params[:search].downcase)
-          search = []
-          typus_search_fields.each do |key, value|
-            _query = case value
-                     when "=" then query
-                     when "^" then "#{query}%"
-                     when "@" then "%#{query}%"
-                     end
-            table_key = (adapter == 'postgresql') ? "LOWER(TEXT(#{table_name}.#{key}))" : "`#{table_name}`.#{key}"
-            search << "#{table_key} LIKE '#{_query}'"
-          end
-          conditions = merge_conditions(conditions, search.join(" OR "))
-        end
-
-        query_params.each do |key, value|
-
-          filter_type = model_fields[key.to_sym] || model_relationships[key.to_sym]
-
-          case filter_type
-          when :boolean
-            condition = { key => (value == 'true') ? true : false }
-            conditions = merge_conditions(conditions, condition)
-          when :datetime
-            interval = case value
-                       when 'today'         then Time.zone.now.beginning_of_day..Time.zone.now.beginning_of_day.tomorrow
-                       when 'last_few_days' then 3.days.ago.beginning_of_day..Time.zone.now.beginning_of_day.tomorrow
-                       when 'last_7_days'   then 6.days.ago.beginning_of_day..Time.zone.now.beginning_of_day.tomorrow
-                       when 'last_30_days'  then Time.zone.now.beginning_of_day.prev_month..Time.zone.now.beginning_of_day.tomorrow
-                       end
-            condition = ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
-            conditions = merge_conditions(conditions, condition)
-          when :date
-            if value.is_a?(Hash)
-              date_format = Date::DATE_FORMATS[typus_date_format(key)]
-
-              begin
-                unless value["from"].blank?
-                  date_from = Date.strptime(value["from"], date_format)
-                  conditions = merge_conditions(conditions, ["`#{table_name}`.#{key} >= ?", date_from])
-                end
-
-                unless value["to"].blank?
-                  date_to = Date.strptime(value["to"], date_format)
-                  conditions = merge_conditions(conditions, ["`#{table_name}`.#{key} <= ?", date_to])
-                end
-              rescue
-              end
-            else
-              # TODO: Improve and test filters.
-              interval = case value
-                         when 'today'         then nil
-                         when 'last_few_days' then 3.days.ago.to_date..Date.tomorrow
-                         when 'last_7_days'   then 6.days.ago.beginning_of_day..Date.tomorrow
-                         when 'last_30_days'  then (Date.today << 1)..Date.tomorrow
-                         end
-              if interval
-                condition = ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first, interval.last]
-              elsif value == 'today'
-                condition = ["`#{table_name}`.#{key} = ?", Date.today]
-              end
-              conditions = merge_conditions(conditions, condition)
-            end
-          when :integer, :string
-            condition = { key => value }
-            conditions = merge_conditions(conditions, condition)
-          when :has_and_belongs_to_many
-            condition = { key => { :id => value } }
-            conditions = merge_conditions(conditions, condition)
-            joins << key.to_sym
-          end
-
+        query_params.delete_if { |k, v| v.empty? }.each do |key, value|
+          filter_type = model_fields[key.to_sym] || model_relationships[key.to_sym] || key
+          conditions = send("build_#{filter_type}_conditions", key, value, conditions)
         end
 
         [conditions, joins]
