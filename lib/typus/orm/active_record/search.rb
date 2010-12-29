@@ -91,7 +91,7 @@ module Typus
         # - Integer & String: *_id and "selectors" (p.ej. category_id)
         #++
         def build_conditions(params)
-          conditions, joins = merge_conditions, []
+          conditions, joins = [], []
 
           query_params = params.dup
           %w(action controller utf8 sort_order page format).each { |p| query_params.delete(p) }
