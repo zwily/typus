@@ -135,7 +135,18 @@ class Admin::PostsControllerTest < ActionController::TestCase
   context "Formats" do
 
     should "render index and return xml" do
-      expected = <<-RAW
+      expected = if RUBY_VERSION >= '1.9'
+      <<-RAW
+<?xml version="1.0" encoding="UTF-8"?>
+<posts type="array">
+  <post>
+    <status>#{@post.status}</status>
+    <title>#{@post.title}</title>
+  </post>
+</posts>
+      RAW
+      else
+      <<-RAW
 <?xml version="1.0" encoding="UTF-8"?>
 <posts type="array">
   <post>
@@ -144,6 +155,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
   </post>
 </posts>
       RAW
+      end
 
       get :index, :format => "xml"
 
