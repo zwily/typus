@@ -223,6 +223,10 @@ module Typus
         end
       end
 
+      def adapter
+        @adapter ||= ActiveRecord::Base.configurations[Rails.env]['adapter']
+      end
+
       #--
       # Sidebar filters:
       #
@@ -231,8 +235,6 @@ module Typus
       # - Integer & String: *_id and "selectors" (p.ej. category_id)
       #++
       def build_conditions(params)
-        adapter = ActiveRecord::Base.configurations[Rails.env]['adapter']
-
         conditions, joins = merge_conditions, []
 
         query_params = params.dup
