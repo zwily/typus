@@ -24,6 +24,21 @@ class String
     end
   end
 
+  def acl_action_mapper
+    case self
+    when "new", "create"
+      "create"
+    when "index", "show"
+      "read"
+    when "edit", "update", "position", "toggle", "relate", "unrelate", "detach"
+      "update"
+    when "destroy", "trash"
+      "delete"
+    else
+      self
+    end
+  end
+
   def to_resource
     self.underscore.pluralize
   end

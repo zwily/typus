@@ -65,6 +65,40 @@ class StringTest < ActiveSupport::TestCase
 
   end
 
+  context "acl_action_mapper" do
+
+    should "return create" do
+      %w(new create).each do |action|
+        assert_equal "create", action.acl_action_mapper
+      end
+    end
+
+    should "return read" do
+      %w(index show).each do |action|
+        assert_equal "read", action.acl_action_mapper
+      end
+    end
+
+    should "return update" do
+      %w(edit update position toggle relate unrelate detach).each do |action|
+        assert_equal "update", action.acl_action_mapper
+      end
+    end
+
+    should "return delete" do
+      %w(destroy trash).each do |action|
+        assert_equal "delete", action.acl_action_mapper
+      end
+    end
+
+    should "return other" do
+      %w(other).each do |action|
+        assert_equal "other", action.acl_action_mapper
+      end
+    end
+
+  end
+
   context "to_resource" do
 
     should "convert String into resource" do
