@@ -15,7 +15,7 @@
 
 <ul class="predefined_filters">
   <% predefined_filters.each do |filter, action, scope| %>
-    <li><%= link_to_unless_current Typus::I18n.t(filter), :action => action %> (<%= @resource.send(scope).count %>)</li>
+    <li><%= link_to Typus::I18n.t(filter), :action => action %> (<%= @resource.send(scope).count %>)</li>
   <% end %>
 </ul>
 
