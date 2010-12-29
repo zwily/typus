@@ -5,18 +5,19 @@ module Typus
 
         def build_search_conditions(key, value, conditions)
           query = ActiveRecord::Base.connection.quote_string(value.downcase)
-          search = []
-          typus_search_fields.each do |key, value|
-            _query = case value
-                     when "=" then query
-                     when "^" then "#{query}%"
-                     when "@" then "%#{query}%"
-                     end
-            table_key = (adapter == 'postgresql') ? "LOWER(TEXT(#{table_name}.#{key}))" : "`#{table_name}`.#{key}"
-            search << "#{table_key} LIKE '#{_query}'"
-          end
 
-          condition = search.join(" OR ")
+          condition = Array.new.tap do |search|
+                        typus_search_fields.each do |key, value|
+                          _query = case value
+                                   when "=" then query
+                                   when "^" then "#{query}%"
+                                   when "@" then "%#{query}%"
+                                   end
+                          table_key = (adapter == 'postgresql') ? "LOWER(TEXT(#{table_name}.#{key}))" : "`#{table_name}`.#{key}"
+                          search << "#{table_key} LIKE '#{_query}'"
+                        end
+                      end.join(" OR ")
+
           merge_conditions(conditions, condition)
         end
 
