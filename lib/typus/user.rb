@@ -80,10 +80,6 @@ module Typus
         Typus.application(name).delete_if { |r| !resources.keys.include?(r) }
       end
 
-      #--
-      # TODO: Rename action to mapping and refactor the _action case statement.
-      # TODO: Move the mapper to String class ... (like the other action we have)
-      #++
       def can?(action, resource, options = {})
         resource = resource.name if resource.is_a?(Class)
 
