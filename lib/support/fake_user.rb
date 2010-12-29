@@ -40,7 +40,4 @@ class FakeUser
     Typus.master_role
   end
 
-  def name
-  end
-
 end
