@@ -29,7 +29,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
       assert_select "h1", "Typus"
     end
 
-    should "render new inside account layout" do
+    should_eventually "render session layout" do
       get :new
       assert_match "layouts/admin/session", @controller.inspect
     end

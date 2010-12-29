@@ -46,7 +46,7 @@ class TypusTest < ActiveSupport::TestCase
     assert Typus.config_folder.is_a?(Pathname)
   end
 
-  should "return root" do
+  should_eventually "return root" do
     expected = "."
     assert Typus.root.is_a?(String)
     assert_equal expected, Typus.root

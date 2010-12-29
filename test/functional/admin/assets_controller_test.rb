@@ -35,7 +35,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       @request.env['HTTP_REFERER'] = "/admin/assets/edit/#{@asset.id}"
     end
 
-    should "verify there is a file link" do
+    should_eventually "verify there is a file link" do
       get :edit, { :id => @asset.id }
       assert_match /#{@asset.file.url}/, @response.body
     end
