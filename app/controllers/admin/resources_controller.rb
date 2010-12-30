@@ -59,7 +59,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def edit
-    add_action(:action_name => 'Unrelate', :action => 'unrelate', :confirm => Typus::I18n.t("Unrelate %{resource}", @resource.model_name.human))
+    add_action(:action_name => 'Unrelate', :action => 'unrelate', :confirm => Typus::I18n.t("Unrelate %{resource}", :resource => @resource.model_name.human))
   end
 
   def show
