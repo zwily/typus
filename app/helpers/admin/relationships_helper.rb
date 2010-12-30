@@ -173,6 +173,10 @@ module Admin
         message = link_to Typus::I18n.t("Add"), default.merge(options)
       end
 
+      values = related.respond_to?(:roots) ?
+        expand_tree_into_select_field(related.roots, related_fk) :
+        related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
+
       render "admin/templates/belongs_to",
              :resource => @resource,
              :attribute => attribute,
@@ -180,7 +184,7 @@ module Admin
              :related_fk => related_fk,
              :message => message,
              :label_text => @resource.human_attribute_name(attribute),
-             :values => related.order(related.typus_order_by).map { |p| [p.to_label, p.id] },
+             :values => values,
              # :html_options => { :disabled => attribute_disabled?(attribute) },
              :html_options => {},
              :options => { :include_blank => true }
