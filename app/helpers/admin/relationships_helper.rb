@@ -82,7 +82,7 @@ module Admin
     end
 
     def build_add_new(options = {})
-      default_options = { :controller => "/admin/#{@field}", :action => "new",
+      default_options = { :controller => "/admin/#{@model_to_relate.to_resource}", :action => "new",
                           :resource => @resource.to_resource.singularize, :resource_id => @item.id,
                           :back_to => @back_to }
 
