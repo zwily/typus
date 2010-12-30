@@ -56,7 +56,7 @@ module Admin
       actions.map do |action|
         if admin_user.can?(action[:action], model)
           link_to Typus::I18n.t(action[:action_name]),
-                  { :action => action[:action], :id => item.id, :resource => action[:resource], :resource_id => action[:resource_id] },
+                  { :controller => model.to_resource, :action => action[:action], :id => item.id, :resource => action[:resource], :resource_id => action[:resource_id] },
                   { :confirm => action[:confirm], :method => action[:method], :target => "_parent" }
         end
       end.compact.join(" / ").html_safe

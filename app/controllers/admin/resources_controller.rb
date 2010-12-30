@@ -21,8 +21,6 @@ class Admin::ResourcesController < Admin::BaseController
     @conditions, @joins = @resource.build_conditions(params)
     check_resources_ownership if @resource.typus_options_for(:only_user_items)
 
-    default_action = @resource.typus_options_for(:default_action_on_item)
-
     add_action(:action_name => default_action.titleize, :action => default_action)
     add_action(:action_name => "Trash", :action => "destroy", :confirm => Typus::I18n.t("Trash %{resource}?", :resource => @resource.model_name.human), :method => 'delete')
 
@@ -59,7 +57,11 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def edit
-    add_action(:action_name => 'Unrelate', :action => 'unrelate', :confirm => Typus::I18n.t("Unrelate %{resource}", :resource => @resource.model_name.human))
+    add_action(:action_name => default_action.titleize, :action => default_action)
+    add_action(:action_name => "Unrelate",
+               :action => "unrelate",
+               :confirm => Typus::I18n.t("Unrelate"),
+               :resource => @resource, :resource_id => @item.id)
   end
 
   def show
@@ -263,6 +265,10 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     redirect_to (path || params[:back_to]), :notice => message
+  end
+
+  def default_action
+    @resource.typus_options_for(:default_action_on_item)
   end
 
 end
