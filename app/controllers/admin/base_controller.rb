@@ -16,6 +16,10 @@ class Admin::BaseController < ActionController::Base
 
   protected
 
+  def set_models_constantized
+    Typus::Configuration.models_constantized!
+  end
+
   def reload_config_and_roles
     Typus.reload! unless Rails.env.production?
   end
@@ -26,10 +30,6 @@ class Admin::BaseController < ActionController::Base
 
   def set_locale
     I18n.locale = admin_user.locale
-  end
-
-  def set_models_constantized
-    Typus::Configuration.models_constantized!
   end
 
 end
