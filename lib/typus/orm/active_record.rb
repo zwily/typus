@@ -8,14 +8,14 @@ module Typus
       def model_fields
         hash = ActiveSupport::OrderedHash.new
         columns.map { |u| hash[u.name.to_sym] = u.type.to_sym }
-        return hash
+        hash
       end
 
       # Model relationships as an <tt>ActiveSupport::OrderedHash</tt>.
       def model_relationships
         hash = ActiveSupport::OrderedHash.new
         reflect_on_all_associations.map { |i| hash[i.name] = i.macro }
-        return hash
+        hash
       end
 
       # Model description for admin panel.
