@@ -1,4 +1,4 @@
-# Typus: Admin interface for Rails applications
+# Typus: Admin Panel for Ruby on Rails applications
 
 **Typus** is designed for a single activity:
 
@@ -31,19 +31,23 @@ extensible enough to match lots of use cases.
 
 ## Installing
 
-Add **Typus** to your `Gemfile`:
+Add **Typus** to your `Gemfile`
 
     gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
 
-Update your bundle:
+Update your bundle
 
     $ bundle install
 
-Run the *Typus* generator:
+Run the generator
 
     $ rails generate typus
 
-Start the application server and go to <http://0.0.0.0:3000/admin>.
+Start the application server
+
+    $ rails server
+
+and go to <http://0.0.0.0:3000/admin>.
 
 ## License
 
