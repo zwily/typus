@@ -146,9 +146,13 @@ module Typus
 
     # Lists resources, which are tableless models.
     def resources
-      Typus::Configuration.roles.keys.map do |key|
-        Typus::Configuration.roles[key].keys
-      end.flatten.sort.uniq.delete_if { |x| models.include?(x) }
+      if roles = Typus::Configuration.roles
+        roles.keys.map do |key|
+          Typus::Configuration.roles[key].keys
+        end.flatten.sort.uniq.delete_if { |x| models.include?(x) }
+      else
+        []
+      end
     end
 
     # Lists models under <tt>app/models</tt>.
