@@ -91,6 +91,7 @@ module Admin
 
     alias :table_float_field :table_generic_field
     alias :table_integer_field :table_generic_field
+    alias :table_decimal_field :table_generic_field
 
     def table_selector_field(attribute, item)
       item.mapping(attribute)
