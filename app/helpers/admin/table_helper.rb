@@ -101,7 +101,7 @@ module Admin
       typus_file_preview(item, attribute)
     end
 
-    def table_tree_field(item)
+    def table_tree_field(attribute, item)
       item.parent ? item.parent.to_label : "&mdash;".html_safe
     end
 
@@ -114,7 +114,7 @@ module Admin
         [:move_to_bottom, "Bottom"] ].each do |key, value|
 
         options = { :controller => "/admin/#{item.class.to_resource}", :action => "position", :id => item.id, :go => key }
-        should_be_inactive = (item.respond_to?(:first?) && ([:move_higher, :move_to_top].include?(key) && item.first?)) || 
+        should_be_inactive = (item.respond_to?(:first?) && ([:move_higher, :move_to_top].include?(key) && item.first?)) ||
                              (item.respond_to?(:last?) &&  ([:move_lower, :move_to_bottom].include?(key) && item.last?))
         html_position << link_to_unless(should_be_inactive, Typus::I18n.t(value), params.merge(options)) do |name|
           raw %(<span class="inactive">#{name}</span>)
