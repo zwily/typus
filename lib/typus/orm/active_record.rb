@@ -83,16 +83,16 @@ module Typus
       def typus_filters
         fields_with_type = ActiveSupport::OrderedHash.new
 
-        data = read_model_config['filters']
-        return [] unless data
-        fields = data.extract_settings.map { |i| i.to_sym }
+        if data = read_model_config['filters']
+          fields = data.extract_settings.map { |i| i.to_sym }
 
-        fields.each do |field|
-          attribute_type = model_fields[field.to_sym]
-          if reflect_on_association(field.to_sym)
-            attribute_type = reflect_on_association(field.to_sym).macro
+          fields.each do |field|
+            attribute_type = model_fields[field.to_sym]
+            if reflect_on_association(field.to_sym)
+              attribute_type = reflect_on_association(field.to_sym).macro
+            end
+            fields_with_type[field.to_s] = attribute_type
           end
-          fields_with_type[field.to_s] = attribute_type
         end
 
         fields_with_type
