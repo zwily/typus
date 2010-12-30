@@ -84,9 +84,7 @@ module Typus
         fields_with_type = ActiveSupport::OrderedHash.new
 
         if data = read_model_config['filters']
-          fields = data.extract_settings.map { |i| i.to_sym }
-
-          fields.each do |field|
+          data.extract_settings.map { |i| i.to_sym }.each do |field|
             attribute_type = model_fields[field.to_sym]
             if reflect_on_association(field.to_sym)
               attribute_type = reflect_on_association(field.to_sym).macro
