@@ -81,19 +81,17 @@ module Typus
       end
 
       def typus_filters
-        fields_with_type = ActiveSupport::OrderedHash.new
-
-        if data = read_model_config['filters']
-          data.extract_settings.map { |i| i.to_sym }.each do |field|
-            attribute_type = model_fields[field.to_sym]
-            if reflect_on_association(field.to_sym)
-              attribute_type = reflect_on_association(field.to_sym).macro
+        ActiveSupport::OrderedHash.new.tap do |fields_with_type|
+          if data = read_model_config['filters']
+            data.extract_settings.map { |i| i.to_sym }.each do |field|
+              attribute_type = model_fields[field.to_sym]
+              if reflect_on_association(field.to_sym)
+                attribute_type = reflect_on_association(field.to_sym).macro
+              end
+              fields_with_type[field.to_s] = attribute_type
             end
-            fields_with_type[field.to_s] = attribute_type
           end
         end
-
-        fields_with_type
       end
 
       # Extended actions for this model on Typus.
