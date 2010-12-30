@@ -60,7 +60,7 @@ class Admin::ResourcesController < Admin::BaseController
     add_action(:action_name => default_action.titleize, :action => default_action)
     add_action(:action_name => "Unrelate",
                :action => "unrelate",
-               :confirm => Typus::I18n.t("Unrelate"),
+               :confirm => "#{Typus::I18n.t("Unrelate")}?",
                :resource => @resource, :resource_id => @item.id)
   end
 
