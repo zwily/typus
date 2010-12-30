@@ -5,18 +5,24 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   context "When authentication is http_basic" do
 
     setup do
-      Typus.stubs(:authentication).returns(:http_basic)
+      Admin::DashboardController.send :include, Typus::Authentication::HttpBasic
     end
 
-    should_eventually "return a 401 message when no credentials sent" do
+    should "return a 401 message when no credentials sent" do
       get :show
       assert_response 401
     end
 
-    should_eventually "authenticate user" do
+    should "authenticate user with valid password" do
       @request.env['HTTP_AUTHORIZATION'] = 'Basic ' + Base64::encode64("admin:columbia")
       get :show
       assert_response :success
+    end
+
+    should "not authenticate user with invalid password" do
+      @request.env['HTTP_AUTHORIZATION'] = 'Basic ' + Base64::encode64("admin:admin")
+      get :show
+      assert_response 401
     end
 
   end
@@ -24,10 +30,10 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   context "When authentication is none" do
 
     setup do
-      Typus.stubs(:authentication).returns(:none)
+      Admin::DashboardController.send :include, Typus::Authentication::None
     end
 
-    should_eventually "render dashboard" do
+    should "render dashboard" do
       get :show
       assert_response :success
     end

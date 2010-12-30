@@ -40,4 +40,8 @@ class FakeUser
     Typus.master_role
   end
 
+  def status
+    true
+  end
+
 end
