@@ -131,13 +131,13 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
     should "work when no parent" do
       page = Factory(:page)
-      assert_equal "&mdash;", table_tree_field(page)
+      assert_equal "&mdash;", table_tree_field("title", page)
     end
 
     should "work when parent" do
       parent = Factory(:page)
       page = Factory(:page, :parent => parent)
-      assert_equal parent.to_label, table_tree_field(page)
+      assert_equal parent.to_label, table_tree_field("title", page)
     end
 
   end
