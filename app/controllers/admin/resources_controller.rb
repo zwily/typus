@@ -248,7 +248,8 @@ class Admin::ResourcesController < Admin::BaseController
 
     message = Typus::I18n.t("%{model} successfully updated.", :model => resource_class.model_name.human)
 
-    case association.macro
+    macro = association.macro unless association.nil?
+    case macro
     when :has_and_belongs_to_many
       @item.send(params[:resource]) << resource
     when :has_many
