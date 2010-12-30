@@ -6,16 +6,16 @@ module Typus
 
       # Model fields as an <tt>ActiveSupport::OrderedHash</tt>.
       def model_fields
-        hash = ActiveSupport::OrderedHash.new
-        columns.map { |u| hash[u.name.to_sym] = u.type.to_sym }
-        hash
+        ActiveSupport::OrderedHash.new.tap do |hash|
+          columns.map { |u| hash[u.name.to_sym] = u.type.to_sym }
+        end
       end
 
       # Model relationships as an <tt>ActiveSupport::OrderedHash</tt>.
       def model_relationships
-        hash = ActiveSupport::OrderedHash.new
-        reflect_on_all_associations.map { |i| hash[i.name] = i.macro }
-        hash
+        ActiveSupport::OrderedHash.new.tap do |hash|
+          reflect_on_all_associations.map { |i| hash[i.name] = i.macro }
+        end
       end
 
       # Model description for admin panel.
