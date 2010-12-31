@@ -59,6 +59,28 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+  context "Actions" do
+
+    should "be edit and trash on index" do
+      get :index
+
+      expected = [ {"action_name"=>"Edit", "action"=>"edit"},
+                   {"confirm"=>"Trash Post?", "action_name"=>"Trash", "method"=>"delete", "action"=>"destroy"}]
+
+      assert_equal expected, assigns(:actions)
+    end
+
+    should "be edit and unrelate on edit" do
+      get :edit, { :id => @post.id }
+
+      expected = [ {"action_name"=>"Edit", "action"=>"edit"},
+                   {"confirm"=>"Unrelate?", "action_name"=>"Unrelate", "resource_id"=>1, "resource"=>"Post", "action" => "unrelate"}]
+
+      assert_equal expected, assigns(:actions)
+    end
+
+  end
+
   context "Forms" do
 
     setup do
