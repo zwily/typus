@@ -61,7 +61,7 @@ class Admin::ResourcesController < Admin::BaseController
     add_action(:action_name => "Unrelate",
                :action => "unrelate",
                :confirm => "#{Typus::I18n.t("Unrelate")}?",
-               :resource => @resource, :resource_id => @item.id)
+               :resource => @resource.name, :resource_id => @item.id)
   end
 
   def show
