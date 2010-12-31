@@ -88,7 +88,7 @@ module Typus
           conditions, joins = [], []
 
           query_params = params.dup
-          %w(action controller utf8 sort_order page format).each { |p| query_params.delete(p) }
+          %w(action controller utf8 sort_order order_by page format).each { |p| query_params.delete(p) }
 
           query_params.delete_if { |k, v| v.empty? }.each do |key, value|
             filter_type = model_fields[key.to_sym] || model_relationships[key.to_sym] || key
