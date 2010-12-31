@@ -79,6 +79,32 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_equal expected, assigns(:actions)
     end
 
+    context "with overriden default action on item" do
+
+      setup do
+        Typus::Resources.expects(:default_action_on_item).at_least_once.returns('show')
+      end
+
+      should "be show and trash on index" do
+        get :index
+
+        expected = [ {"action_name"=>"Show", "action"=>"show"},
+                     {"confirm"=>"Trash Post?", "action_name"=>"Trash", "method"=>"delete", "action"=>"destroy"}]
+
+        assert_equal expected, assigns(:actions)
+      end
+
+      should "be show and unrelate on edit" do
+        get :edit, { :id => @post.id }
+
+        expected = [ {"action_name"=>"Show", "action"=>"show"},
+                     {"confirm"=>"Unrelate?", "action_name"=>"Unrelate", "resource_id"=>1, "resource"=>"Post", "action" => "unrelate"}]
+
+        assert_equal expected, assigns(:actions)
+      end
+
+    end
+
   end
 
   context "Forms" do
