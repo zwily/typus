@@ -18,6 +18,7 @@ class TypusUserTest < ActiveSupport::TestCase
     should allow_value(value).for(:email)
   end
 
+  should validate_presence_of :email
   should validate_presence_of :role
 
   should_not allow_mass_assignment_of :status
