@@ -33,7 +33,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_equal expected, Typus::Configuration.roles!
   end
 
-  should "load configuration files from config unordered" do
+  should_eventually "load configuration files from config unordered" do
     Typus.expects(:config_folder).at_least_once.returns("test/fixtures/config/unordered")
     files = Dir["#{Typus.config_folder}/*_roles.yml"]
     expected = files.map { |file| File.basename(file) }

@@ -40,7 +40,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       assert_match /#{@asset.file.url}/, @response.body
     end
 
-    should "verify file can be removed" do
+    should_eventually "verify file can be removed" do
       get :edit, { :id => @asset.id }
       assert_match /Remove File/, @response.body
 
