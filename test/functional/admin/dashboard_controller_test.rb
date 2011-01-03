@@ -82,8 +82,8 @@ class Admin::DashboardControllerTest < ActionController::TestCase
       assert_template "show"
     end
 
-    should_eventually "render admin layout" do
-      assert_match "layouts/admin", @controller.inspect
+    should "render admin layout" do
+      assert_template "layouts/admin/base"
     end
 
     should "verify title" do
