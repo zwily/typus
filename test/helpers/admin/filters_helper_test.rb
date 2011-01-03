@@ -29,7 +29,7 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
     should "return an array" do
       output = boolean_filter("request", "filter")
       expected = "filter",
-                 [["True", "True"], ["False", "False"]],
+                 [["True", "true"], ["False", "false"]],
                  "Show by filter"
       assert_equal expected, output
     end
