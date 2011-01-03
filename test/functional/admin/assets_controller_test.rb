@@ -81,9 +81,9 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   end
 
-  should_eventually "return to back_to url" do
+  should "return to back_to url" do
     asset = Factory(:asset)
-    back_to = "#assets"
+    back_to = "/admin/posts/edit/1#assets"
 
     post :update, { :id => asset.id,
                     :back_to => back_to,
@@ -91,7 +91,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
                     :resource_id => @post.id }
 
     assert_response :redirect
-    assert_redirected_to "/admin/assets"
+    assert_redirected_to back_to
     assert_equal "Asset successfully updated.", flash[:notice]
   end
 
