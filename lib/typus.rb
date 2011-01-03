@@ -122,10 +122,6 @@ module Typus
       reload!
     end
 
-    def root
-      (File.dirname(__FILE__) + "/../").chomp("/lib/../")
-    end
-
     def applications
       Typus::Configuration.config.map { |i| i.last["application"] }.compact.uniq.sort
     end

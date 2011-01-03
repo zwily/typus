@@ -46,12 +46,6 @@ class TypusTest < ActiveSupport::TestCase
     assert Typus.config_folder.is_a?(Pathname)
   end
 
-  should_eventually "return root" do
-    expected = "."
-    assert Typus.root.is_a?(String)
-    assert_equal expected, Typus.root
-  end
-
   should "return applications sorted" do
     assert Typus.respond_to?(:applications)
     assert Typus.applications.is_a?(Array)
