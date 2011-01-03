@@ -31,8 +31,7 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
     end
 
     should "work for :dragonfly and return link when attribute is not required" do
-      expected = "Dragonfly\n<small>Remove Dragonflyactiondetachattributedragonflyid1confirmAre you sure?</small>\n"
-      assert_equal expected, link_to_detach_attribute('dragonfly')
+      assert_match /Remove Dragonfly/, link_to_detach_attribute('dragonfly')
     end
 
   end
