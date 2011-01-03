@@ -5,6 +5,7 @@ class Admin::ResourcesController < Admin::BaseController
   include Typus::Format
 
   before_filter :get_model
+  before_filter :set_scope
   before_filter :get_object, :only => [:show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate, :detach]
   before_filter :check_resource_ownership, :only => [:edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
   before_filter :check_if_user_can_perform_action_on_resources
@@ -18,11 +19,11 @@ class Admin::ResourcesController < Admin::BaseController
   # your formats.
   #
   def index
-    @conditions, @joins = @resource.build_conditions(params)
-    check_resources_ownership if @resource.typus_options_for(:only_user_items)
-
     add_action(:action_name => default_action.titleize, :action => default_action)
     add_action(:action_name => "Trash", :action => "destroy", :confirm => Typus::I18n.t("Trash %{resource}?", :resource => @resource.model_name.human), :method => 'delete')
+
+    # @resource.build_conditions(params)
+    # check_resources_ownership if @resource.typus_options_for(:only_user_items)
 
     get_objects
 
@@ -191,16 +192,16 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def set_scope
-    @resource.unscoped
+    @resource = @resource.unscoped
   end
 
   def get_object
-    @item = set_scope.find(params[:id])
+    @item = @resource.find(params[:id])
   end
 
   def get_objects
     eager_loading = @resource.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name }
-    @items = set_scope.joins(@joins).where(@conditions).order(set_order).includes(eager_loading)
+    @items = @resource.order(set_order).includes(eager_loading)
   end
 
   def set_fields
