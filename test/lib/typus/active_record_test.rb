@@ -376,7 +376,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       end
     end
 
-    should_eventually "return_sql_conditions_on_search_and_filter_for_typus_user" do
+    should "return_sql_conditions_on_search_and_filter_for_typus_user" do
       case ENV["DB"]
       when /mysql/
         boolean_true = "(`typus_users`.`status` = 1)"
@@ -386,17 +386,22 @@ class ActiveRecordTest < ActiveSupport::TestCase
         boolean_false = "(\"typus_users\".\"status\" = 'f')"
       end
 
-      expected = if RUBY_VERSION >= '1.9'
-                   "((`typus_users`.first_name LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.role LIKE '%francesc%')) AND #{boolean_true}"
-                 else
-                   "((`typus_users`.role LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.first_name LIKE '%francesc%')) AND #{boolean_true}"
-                 end
+      expected = ["`typus_users`.first_name LIKE '%francesc%'",
+                  "`typus_users`.last_name LIKE '%francesc%'",
+                  "`typus_users`.email LIKE '%francesc%'",
+                  "`typus_users`.role LIKE '%francesc%'",
+                  boolean_true]
 
       params = { :search => "francesc", :status => "true" }
-      assert_equal expected, TypusUser.build_conditions(params).first
-      assert_match /#{boolean_true}/, TypusUser.build_conditions(params).first
+      output = TypusUser.build_conditions(params).first
+      expected.each { |e| assert_match e, output }
+
+      assert_match /AND/, output
+      assert_match /OR/, output
+
       params = { :search => "francesc", :status => "false" }
-      assert_match /#{boolean_false}/, TypusUser.build_conditions(params).first
+      output = TypusUser.build_conditions(params).first
+      assert_match boolean_false, output
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_status" do
