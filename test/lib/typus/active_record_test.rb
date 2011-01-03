@@ -357,19 +357,22 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "return_sql_conditions_on_search_for_typus_user" do
       expected = case ENV["DB"]
                  when /postgresql/
-                   "(TEXT(role) LIKE '%francesc%' OR TEXT(last_name) LIKE '%francesc%' OR TEXT(email) LIKE '%francesc%' OR TEXT(first_name) LIKE '%francesc%')"
+                   ["TEXT(role) LIKE '%francesc%'",
+                    "TEXT(last_name) LIKE '%francesc%'",
+                    "TEXT(email) LIKE '%francesc%'",
+                    "TEXT(first_name) LIKE '%francesc%'"]
                  else
-                   if RUBY_VERSION >= '1.9'
-                     "(`typus_users`.first_name LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.role LIKE '%francesc%')"
-                   else
-                     "(`typus_users`.role LIKE '%francesc%' OR `typus_users`.last_name LIKE '%francesc%' OR `typus_users`.email LIKE '%francesc%' OR `typus_users`.first_name LIKE '%francesc%')"
-                   end
-                end
+                   ["`typus_users`.first_name LIKE '%francesc%'",
+                    "`typus_users`.last_name LIKE '%francesc%'",
+                    "`typus_users`.email LIKE '%francesc%'",
+                    "`typus_users`.role LIKE '%francesc%'"]
+                 end
 
-      params = { :search => "francesc" }
-      assert_equal expected, TypusUser.build_conditions(params).first
-      params = { :search => "Francesc" }
-      assert_equal expected, TypusUser.build_conditions(params).first
+      [{:search =>"francesc"}, {:search => "Francesc"}].each do |params|
+        expected.each do |expect|
+          assert_match expect, TypusUser.build_conditions(params).first
+        end
+      end
     end
 
     should_eventually "return_sql_conditions_on_search_and_filter_for_typus_user" do
