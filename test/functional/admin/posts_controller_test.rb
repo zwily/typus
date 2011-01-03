@@ -585,13 +585,21 @@ title;status
         @request.session[:typus_user_id] = @typus_user.id
       end
 
-      should_eventually "get_index_and_render_edit_or_show_links_on_owned_records" do
+=begin
+
+      ##
+      # This feature is no longer available. I've to decide if I want to take
+      # it back.
+      #
+      should "get_index_and_render_edit_or_show_links_on_owned_records" do
         get :index
         Post.all.each do |post|
           action = post.owned_by?(@typus_user) ? "edit" : "show"
           assert_match "/posts/#{action}/#{post.id}", @response.body
         end
       end
+
+=end
 
       should "get_index_and_render_edit_or_show_on_only_user_items" do
         %w(edit show).each do |action|
