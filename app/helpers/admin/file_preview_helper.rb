@@ -57,10 +57,10 @@ module Admin
       styles = attachment.styles.keys
       if styles.include?(Typus.file_preview) && styles.include?(Typus.file_thumbnail)
         render "admin/helpers/file_preview",
-               :preview => attachment.url(Typus.file_preview),
-               :thumb => attachment.url(Typus.file_thumbnail)
+               :preview => attachment.url(Typus.file_preview, false),
+               :thumb => attachment.url(Typus.file_thumbnail, false)
       else
-        link_to attachment.original_filename, attachment.url
+        link_to attachment.original_filename, attachment.url(:original, false)
       end
     end
 

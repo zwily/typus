@@ -7,4 +7,7 @@ class Asset < ActiveRecord::Base
 
   validates_presence_of :required_file
 
+  # Paperclip Attachment
+  has_attached_file :paperclip, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
 end
