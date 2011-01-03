@@ -15,12 +15,15 @@ class Admin::AssetsControllerTest < ActionController::TestCase
   end
 
   should_eventually "create a polymorphic relationship" do
+    asset = { :caption => "Caption",
+              :file_uid => File.new("#{Rails.root}/config/database.yml"),
+              :required_file_uid => File.new("#{Rails.root}/config/database.yml") }
+
     assert_difference('@post.assets.count') do
-      post :create, { :asset => { :caption => "Caption",
-                      :file => File.new("#{Rails.root}/config/database.yml"),
-                      :required_file => File.new("#{Rails.root}/config/database.yml") },
+      post :create, { :asset => asset,
                       :back_to => "/admin/posts/edit/#{@post.id}",
-                      :resource => @post.class.name, :resource_id => @post.id }
+                      :resource => @post.class.name,
+                      :resource_id => @post.id }
     end
 
     assert_response :redirect
