@@ -39,7 +39,7 @@ module Typus
       def check_if_user_can_perform_action_on_resources
         if @item.is_a?(Typus.user_class)
           check_if_user_can_perform_action_on_user
-        elsif admin_user.cannot?(params[:action], @resource)
+        elsif admin_user.cannot?(params[:action], @resource.name)
           not_allowed
         end
       end
