@@ -372,6 +372,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
         expected.each do |expect|
           assert_match expect, TypusUser.build_conditions(params).first
         end
+        assert_no_match /AND/, TypusUser.build_conditions(params).first
       end
     end
 
