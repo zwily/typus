@@ -28,13 +28,16 @@ module Typus
 
         def build_datetime_conditions(key, value, conditions)
           tomorrow = Time.zone.now.beginning_of_day.tomorrow
+
           interval = case value
                      when 'today'         then Time.zone.now.beginning_of_day..tomorrow
                      when 'last_few_days' then 3.days.ago.beginning_of_day..tomorrow
                      when 'last_7_days'   then 6.days.ago.beginning_of_day..tomorrow
                      when 'last_30_days'  then 30.days.ago.beginning_of_day..tomorrow
                      end
+
           condition = ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
+
           merge_conditions(conditions, condition)
         end
 
