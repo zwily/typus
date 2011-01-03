@@ -65,7 +65,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def show
-    check_resource_ownership and return if @resource.typus_options_for(:only_user_items)
+    check_resource_ownership if @resource.typus_options_for(:only_user_items)
   end
 
   def update
