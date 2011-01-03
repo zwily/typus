@@ -55,7 +55,7 @@ module Admin
     def typus_file_preview_for_paperclip(attachment)
       return unless attachment.exists?
       styles = attachment.styles.keys
-      if styles.include? Typus.file_preview and styles.include? Typus.file_thumbnail
+      if styles.include?(Typus.file_preview) && styles.include?(Typus.file_thumbnail)
         render "admin/helpers/file_preview",
                :preview => attachment.url(Typus.file_preview),
                :thumb => attachment.url(Typus.file_thumbnail)
