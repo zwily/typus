@@ -48,16 +48,16 @@ module Typus
         end
 
         def build_date_conditions(key, value, conditions)
-          field = "`#{table_name}`.#{key}"
+          tomorrow = Date.tomorrow
 
           interval = case value
                      when 'today'         then Date.today..Date.today
-                     when 'last_few_days' then 3.days.ago.to_date..Date.tomorrow
-                     when 'last_7_days'   then 6.days.ago.to_date..Date.tomorrow
-                     when 'last_30_days'  then 30.days.ago.to_date..Date.tomorrow
+                     when 'last_few_days' then 3.days.ago.to_date..tomorrow
+                     when 'last_7_days'   then 6.days.ago.to_date..tomorrow
+                     when 'last_30_days'  then 30.days.ago.to_date..tomorrow
                      end
 
-          condition = ["#{field} BETWEEN ? AND ?", interval.first, interval.last]
+          condition = ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first, interval.last]
 
           merge_conditions(conditions, condition)
         end
