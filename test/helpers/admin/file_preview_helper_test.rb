@@ -20,7 +20,22 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
 
   should_eventually "link_to_detach_attribute"
   should_eventually "typus_file_preview"
-  should_eventually "typus_file_preview_for_dragonfly"
+
+  context "typus_file_preview_for_dragonfly" do
+
+    should "return link for non image files" do
+      attachment = Factory(:asset).file
+      url = typus_file_preview_for_dragonfly(attachment).last
+      assert_equal attachment.name, typus_file_preview_for_dragonfly(attachment).first
+      assert_match /media/, typus_file_preview_for_dragonfly(attachment).last
+    end
+
+    should_eventually "return image and link for image files"
+
+  end
+
   should_eventually "typus_file_preview_for_paperclip"
+
+  def link_to(*args); args; end
 
 end
