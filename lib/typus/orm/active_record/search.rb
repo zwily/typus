@@ -45,36 +45,23 @@ module Typus
         end
 
         def build_date_conditions(key, value, conditions)
-          if value.is_a?(Hash)
-            date_format = Date::DATE_FORMATS[typus_date_format(key)]
+          field = "`#{table_name}`.#{key}"
 
-            begin
-              unless value["from"].blank?
-                date_from = Date.strptime(value["from"], date_format)
-                merge_conditions(conditions, ["`#{table_name}`.#{key} >= ?", date_from])
-              end
+          interval = case value
+                     when 'today'         then Date.today
+                     when 'last_few_days' then 3.days.ago.to_date..Date.tomorrow
+                     when 'last_7_days'   then 6.days.ago.to_date..Date.tomorrow
+                     when 'last_30_days'  then 30.days.ago.to_date..Date.tomorrow
+                     end
 
-              unless value["to"].blank?
-                date_to = Date.strptime(value["to"], date_format)
-                merge_conditions(conditions, ["`#{table_name}`.#{key} <= ?", date_to])
-              end
-            rescue
-            end
-          else
-            # TODO: Improve and test filters.
-            interval = case value
-                       when 'today'         then nil
-                       when 'last_few_days' then 3.days.ago.to_date..Date.tomorrow
-                       when 'last_7_days'   then 6.days.ago.beginning_of_day..Date.tomorrow
-                       when 'last_30_days'  then (Date.today << 1)..Date.tomorrow
-                       end
-            if interval
-              condition = ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first, interval.last]
-            elsif value == 'today'
-              condition = ["`#{table_name}`.#{key} = ?", Date.today]
-            end
-            merge_conditions(conditions, condition)
-          end
+          condition = case interval
+                      when Array
+                        ["#{field} BETWEEN ? AND ?", interval.first, interval.last]
+                      else
+                        ["#{field} = ?", interval]
+                      end
+
+          merge_conditions(conditions, condition)
         end
 
         def build_string_conditions(key, value, conditions)
