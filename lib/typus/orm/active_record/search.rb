@@ -51,18 +51,13 @@ module Typus
           field = "`#{table_name}`.#{key}"
 
           interval = case value
-                     when 'today'         then Date.today
+                     when 'today'         then Date.today..Date.today
                      when 'last_few_days' then 3.days.ago.to_date..Date.tomorrow
                      when 'last_7_days'   then 6.days.ago.to_date..Date.tomorrow
                      when 'last_30_days'  then 30.days.ago.to_date..Date.tomorrow
                      end
 
-          condition = case interval
-                      when Array
-                        ["#{field} BETWEEN ? AND ?", interval.first, interval.last]
-                      else
-                        ["#{field} = ?", interval]
-                      end
+          condition = ["#{field} BETWEEN ? AND ?", interval.first, interval.last]
 
           merge_conditions(conditions, condition)
         end
