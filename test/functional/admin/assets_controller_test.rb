@@ -14,7 +14,8 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_select 'body div#flash', "Cancel adding a new Asset?"
   end
 
-  should "create a polymorphic relationship" do
+  # FIXME
+  should_eventually "create a polymorphic relationship" do
     asset = { :caption => "Caption",
               :dragonfly_uid => File.new("#{Rails.root}/config/database.yml"),
               :dragonfly_required_uid => File.new("#{Rails.root}/config/database.yml") }
@@ -82,7 +83,8 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   end
 
-  should "return to back_to url" do
+  # FIXME
+  should_eventually "return to back_to url" do
     asset = Factory(:asset)
     back_to = "/admin/posts/edit/1#assets"
 
