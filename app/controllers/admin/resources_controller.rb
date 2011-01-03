@@ -203,7 +203,9 @@ class Admin::ResourcesController < Admin::BaseController
       @resource = @resource.where(condition)
     end
 
-    check_resources_ownership if @resource.typus_options_for(:only_user_items)
+    if @resource.typus_options_for(:only_user_items)
+      check_resources_ownership
+    end
 
     @items = @resource.order(set_order).includes(eager_loading)
   end
