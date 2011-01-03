@@ -1,6 +1,6 @@
 Asset:
   fields:
-    default: caption, file, required_file
+    default: caption, dragonfly, dragonfly_required
   application: Site
 
 Category:

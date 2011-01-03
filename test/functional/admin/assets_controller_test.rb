@@ -16,8 +16,8 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   should_eventually "create a polymorphic relationship" do
     asset = { :caption => "Caption",
-              :file_uid => File.new("#{Rails.root}/config/database.yml"),
-              :required_file_uid => File.new("#{Rails.root}/config/database.yml") }
+              :dragonfly_uid => File.new("#{Rails.root}/config/database.yml"),
+              :dragonfly_required_uid => File.new("#{Rails.root}/config/database.yml") }
 
     assert_difference('@post.assets.count') do
       post :create, { :asset => asset,
@@ -43,30 +43,30 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       assert_match /media/, @response.body
     end
 
-    should "verify file can be removed" do
+    should "verify dragonfly can be removed" do
       get :edit, { :id => @asset.id }
-      assert_match /Remove File/, @response.body
+      assert_match /Remove Dragonfly/, @response.body
 
-      assert @asset.file_uid.present?
+      assert @asset.dragonfly_uid.present?
 
-      get :detach, { :id => @asset.id, :attribute => "file" }
+      get :detach, { :id => @asset.id, :attribute => "dragonfly" }
       assert_response :redirect
       assert_redirected_to "/admin/assets/edit/#{@asset.id}"
       assert_equal "Asset successfully updated.", flash[:notice]
 
       @asset.reload
-      assert @asset.file_uid.blank?
+      assert @asset.dragonfly_uid.blank?
     end
 
-    should "verify required_file can not removed" do
+    should "verify dragonfly_required can not removed" do
       get :edit, { :id => @asset.id }
       assert_no_match /Remove required file/, @response.body
 
-      get :detach, { :id => @asset.id, :attribute => "required_file" }
+      get :detach, { :id => @asset.id, :attribute => "dragonfly_required" }
       assert_response :success
 
       @asset.reload
-      assert @asset.file.present?
+      assert @asset.dragonfly_required.present?
     end
 
     should "verify message on polymorphic relationship" do

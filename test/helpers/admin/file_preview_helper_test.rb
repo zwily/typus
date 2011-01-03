@@ -11,7 +11,7 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
     end
 
     should "return :dragonfly" do
-      assert_equal :dragonfly, get_type_of_attachment(@asset.file)
+      assert_equal :dragonfly, get_type_of_attachment(@asset.dragonfly)
     end
 
     should "return :paperclip" do
@@ -27,12 +27,12 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
     end
 
     should "work for :dragonfly and return nil when attribute is required" do
-      assert_nil link_to_detach_attribute('required_file')
+      assert_nil link_to_detach_attribute('dragonfly_required')
     end
 
     should "work for :dragonfly and return link when attribute is not required" do
-      expected = "File\n<small>Remove Fileactiondetachattributefileid1confirmAre you sure?</small>\n"
-      assert_equal expected, link_to_detach_attribute('file')
+      expected = "Dragonfly\n<small>Remove Dragonflyactiondetachattributedragonflyid1confirmAre you sure?</small>\n"
+      assert_equal expected, link_to_detach_attribute('dragonfly')
     end
 
   end
@@ -41,16 +41,16 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
 
     should "return link for non image files" do
       file = File.new("#{Rails.root}/config/database.yml")
-      @asset = Factory(:asset, :file => file)
-      assert_equal @asset.file.name, typus_file_preview_for_dragonfly(@asset.file).first
-      assert_match /media/, typus_file_preview_for_dragonfly(@asset.file).last
+      @asset = Factory(:asset, :dragonfly => file)
+      assert_equal @asset.dragonfly.name, typus_file_preview_for_dragonfly(@asset.dragonfly).first
+      assert_match /media/, typus_file_preview_for_dragonfly(@asset.dragonfly).last
     end
 
     should "return image and link for image files" do
       @asset = Factory(:asset)
-      assert_equal "admin/helpers/file_preview", typus_file_preview_for_dragonfly(@asset.file).first
-      assert_match /media/, typus_file_preview_for_dragonfly(@asset.file).last[:preview]
-      assert_match /media/, typus_file_preview_for_dragonfly(@asset.file).last[:thumb]
+      assert_equal "admin/helpers/file_preview", typus_file_preview_for_dragonfly(@asset.dragonfly).first
+      assert_match /media/, typus_file_preview_for_dragonfly(@asset.dragonfly).last[:preview]
+      assert_match /media/, typus_file_preview_for_dragonfly(@asset.dragonfly).last[:thumb]
     end
 
   end

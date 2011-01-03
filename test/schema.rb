@@ -13,8 +13,8 @@ ActiveRecord::Schema.define do
     t.string :resource_type
     t.integer :resource_id
     # Dragonfly Attachment
-    t.string :file_uid
-    t.string :required_file_uid
+    t.string :dragonfly_uid
+    t.string :dragonfly_required_uid
     # Paperclip Attachment
     t.string :paperclip_file_name
     t.string :paperclip_content_type

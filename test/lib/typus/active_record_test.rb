@@ -104,7 +104,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return form fields for Asset" do
-      expected_fields = [["caption", :string], ["file", :file], ["required_file", :file]]
+      expected_fields = [["caption", :string], ["dragonfly", :file], ["dragonfly_required", :file]]
       assert_equal expected_fields.map { |i| i.first }, Asset.typus_fields_for(:form).keys
       assert_equal expected_fields.map { |i| i.last }, Asset.typus_fields_for(:form).values
     end
@@ -479,7 +479,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "read_model_config" do
 
     should "return data for existing model" do
-      expected = {"application"=>"Site", "fields"=>{"default"=>"caption, file, required_file"}}
+      expected = {"application"=>"Site", "fields"=>{"default"=>"caption, dragonfly, dragonfly_required"}}
       assert_equal expected, Asset.read_model_config
     end
 
