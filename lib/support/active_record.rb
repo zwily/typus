@@ -11,24 +11,6 @@ class ActiveRecord::Base
   end
 
   #--
-  # TODO: This has been copied from Rails 2 because has been removed from
-  #       Rails 3. Once the "build_conditions" has been refactored to use Arel
-  #       this can be removed.
-  #++
-  def self.merge_conditions(*conditions)
-    segments = []
-
-    conditions.each do |condition|
-      unless condition.blank?
-        sql = sanitize_sql(condition)
-        segments << sql unless sql.blank?
-      end
-    end
-
-    "(#{segments.join(') AND (')})" unless segments.empty?
-  end
-
-  #--
   # On a model:
   #
   #     class Post < ActiveRecord::Base
