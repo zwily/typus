@@ -40,7 +40,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
     should "verify there is a file link" do
       get :edit, { :id => @asset.id }
-      assert_match /#{@asset.file.url}/, @response.body
+      assert_match /media/, @response.body
     end
 
     should "verify file can be removed" do

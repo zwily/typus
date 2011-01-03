@@ -4,11 +4,11 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
 
   include Admin::FilePreviewHelper
 
-  setup do
-    @asset = Factory(:asset)
-  end
-
   context "get_type_of_attachment" do
+
+    setup do
+      @asset = Factory(:asset)
+    end
 
     should "return :dragonfly" do
       assert_equal :dragonfly, get_type_of_attachment(@asset.file)
@@ -20,21 +20,46 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
 
   end
 
-  should_eventually "link_to_detach_attribute"
-  should_eventually "typus_file_preview"
+  context "link_to_detach_attribute" do
+
+    setup do
+      @asset = @item = Factory(:asset)
+    end
+
+    should "work for :dragonfly and return nil when attribute is required" do
+      assert_nil link_to_detach_attribute('required_file')
+    end
+
+    should "work for :dragonfly and return link when attribute is not required" do
+      expected = "File\n<small>Remove Fileactiondetachattributefileid1confirmAre you sure?</small>\n"
+      assert_equal expected, link_to_detach_attribute('file')
+    end
+
+  end
 
   context "typus_file_preview_for_dragonfly" do
 
     should "return link for non image files" do
+      file = File.new("#{Rails.root}/config/database.yml")
+      @asset = Factory(:asset, :file => file)
       assert_equal @asset.file.name, typus_file_preview_for_dragonfly(@asset.file).first
       assert_match /media/, typus_file_preview_for_dragonfly(@asset.file).last
     end
 
-    should_eventually "return image and link for image files"
+    should "return image and link for image files" do
+      @asset = Factory(:asset)
+      assert_equal "admin/helpers/file_preview", typus_file_preview_for_dragonfly(@asset.file).first
+      assert_match /media/, typus_file_preview_for_dragonfly(@asset.file).last[:preview]
+      assert_match /media/, typus_file_preview_for_dragonfly(@asset.file).last[:thumb]
+    end
 
   end
 
   context "typus_file_preview_for_paperclip" do
+
+    setup do
+      @asset = Factory(:asset)
+    end
 
     should "return link for non image files" do
       Typus.expects(:file_preview).at_least_once.returns(nil)

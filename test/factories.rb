@@ -1,7 +1,7 @@
 Factory.define :asset do |f|
   f.sequence(:caption) { |n| "Asset##{n}" }
-  f.file File.new("#{Rails.root}/config/database.yml")
-  f.required_file File.new("#{Rails.root}/config/database.yml")
+  f.file File.new("#{Rails.root}/public/images/rails.png")
+  f.required_file File.new("#{Rails.root}/public/images/rails.png")
   f.paperclip File.new("#{Rails.root}/public/images/rails.png")
 end
 
