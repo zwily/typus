@@ -52,9 +52,9 @@ ActiveRecord::Schema.define do
     t.text :body
     t.string :status
     t.integer :favorite_comment_id
-    t.timestamps
     t.datetime :published_at
     t.integer :typus_user_id
+    t.timestamps
   end
 
   add_index :posts, :favorite_comment_id
@@ -66,9 +66,8 @@ ActiveRecord::Schema.define do
     t.string :picture_content_type
     t.integer :picture_file_size
     t.datetime :picture_updated_at
-    t.datetime :created_at
-    t.datetime :updated_at
     t.integer :typus_user_id
+    t.timestamps
   end
 
   add_index :pictures, :typus_user_id
