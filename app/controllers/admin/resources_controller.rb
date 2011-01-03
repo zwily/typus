@@ -22,9 +22,6 @@ class Admin::ResourcesController < Admin::BaseController
     add_action(:action_name => default_action.titleize, :action => default_action)
     add_action(:action_name => "Trash", :action => "destroy", :confirm => Typus::I18n.t("Trash %{resource}?", :resource => @resource.model_name.human), :method => 'delete')
 
-    # @resource.build_conditions(params)
-    # check_resources_ownership if @resource.typus_options_for(:only_user_items)
-
     get_objects
 
     respond_to do |format|
@@ -201,6 +198,13 @@ class Admin::ResourcesController < Admin::BaseController
 
   def get_objects
     eager_loading = @resource.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name }
+
+    @resource.build_conditions(params).each do |condition|
+      @resource = @resource.where(condition)
+    end
+
+    check_resources_ownership if @resource.typus_options_for(:only_user_items)
+
     @items = @resource.order(set_order).includes(eager_loading)
   end
 

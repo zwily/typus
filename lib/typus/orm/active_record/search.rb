@@ -32,7 +32,7 @@ module Typus
                      when 'last_30_days'  then 30.days.ago.beginning_of_day..tomorrow
                      end
 
-          ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first, interval.last]
+          ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
         end
 
         def build_date_conditions(key, value)
@@ -45,7 +45,7 @@ module Typus
                      when 'last_30_days'  then 30.days.ago.to_date..tomorrow
                      end
 
-          ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first, interval.last]
+          ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
         end
 
         def build_string_conditions(key, value)
@@ -55,17 +55,15 @@ module Typus
         alias :build_integer_conditions :build_string_conditions
 
         def build_conditions(params)
-          # conditions = []
+          Array.new.tap do |conditions|
+            query_params = params.dup
+            %w(action controller utf8 sort_order order_by page format).each { |p| query_params.delete(p) }
 
-          query_params = params.dup
-          %w(action controller utf8 sort_order order_by page format).each { |p| query_params.delete(p) }
-
-          query_params.delete_if { |k, v| v.empty? }.each do |key, value|
-            filter_type = model_fields[key.to_sym] || model_relationships[key.to_sym] || key
-            conditions = send("build_#{filter_type}_conditions", key, value)
+            query_params.delete_if { |k, v| v.empty? }.each do |key, value|
+              filter_type = model_fields[key.to_sym] || model_relationships[key.to_sym] || key
+              conditions << send("build_#{filter_type}_conditions", key, value)
+            end
           end
-
-          conditions
         end
 
       end
