@@ -12,7 +12,8 @@ extensible enough to match lots of use cases.
 - Built-in Authentication.
 - User Permissions by using Access Control Lists. (stored in yaml files)
 - CRUD and custom actions for your models on a clean interface.
-- Internationalized interface (Català, German, Greek, English, Español, Français, Magyar, Italiano, Portuguese, Russian, 中文)
+- Internationalized interface (Català, German, Greek, English, Español,
+Français, Magyar, Italiano, Portuguese, Russian, 中文)
 - Customizable and extensible templates.
 - Integrated [paperclip][1] and [dragonfly][2] attachments viewer.
 - Low memory footprint.
