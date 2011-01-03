@@ -30,7 +30,7 @@ module Typus
           tomorrow = Time.zone.now.beginning_of_day.tomorrow
 
           interval = case value
-                     when 'today'         then Time.zone.now.beginning_of_day..tomorrow
+                     when 'today'         then 0.days.ago.beginning_of_day..tomorrow
                      when 'last_few_days' then 3.days.ago.beginning_of_day..tomorrow
                      when 'last_7_days'   then 6.days.ago.beginning_of_day..tomorrow
                      when 'last_30_days'  then 30.days.ago.beginning_of_day..tomorrow
