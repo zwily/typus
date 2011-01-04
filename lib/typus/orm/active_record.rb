@@ -30,33 +30,33 @@ module Typus
           fields = data[filter.to_s] || data['default'] || ""
 
           fields.extract_settings.map { |f| f.to_sym }.each do |field|
-
-            attribute_type = model_fields[field]
+            fields_with_type[field.to_s] = model_fields[field]
 
             if reflect_on_association(field)
-              attribute_type = reflect_on_association(field).macro
+              fields_with_type[field.to_s] = reflect_on_association(field).macro
+              next
             end
 
             if typus_field_options_for(:selectors).include?(field)
-              attribute_type = :selector
+              fields_with_type[field.to_s] = :selector
+              next
             end
 
             # Custom field_type depending on the attribute name.
             case field.to_s
-              when 'parent', 'parent_id'  then attribute_type = :tree
-              when /password/             then attribute_type = :password
-              when 'position'             then attribute_type = :position
-              when /\./                   then attribute_type = :transversal
+              when 'parent', 'parent_id'  then fields_with_type[field.to_s] = :tree
+              when /password/             then fields_with_type[field.to_s] = :password
+              when 'position'             then fields_with_type[field.to_s] = :position
+              when /\./                   then fields_with_type[field.to_s] = :transversal
             end
 
             dragonfly = respond_to?(:dragonfly_apps_for_attributes) && dragonfly_apps_for_attributes.try(:has_key?, field)
             paperclip = respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
 
             if dragonfly || paperclip
-              attribute_type = :file
+              fields_with_type[field.to_s] = :file
+              next
             end
-
-            fields_with_type[field.to_s] = attribute_type
           end
         end
       end
