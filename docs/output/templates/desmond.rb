@@ -3,41 +3,25 @@
 #
 #     $ rails new rails-app-desmond -m http://core.typuscms.com/templates/desmond.rb
 #
+# What will you get?
+#
+# - Typus with authentication.
+# - CMS module if you have access to the private repositories.
+# - CKEditor for all your textarea fields.
+#
 # Enjoy!
 
-##
-# Install typus & friends
-#
+# Add gems to Gemfile
+load_template "http://core.typuscms.com/templates/extras/gems.rb"
 
-gem 'acts_as_list'
-gem 'acts_as_tree'
-gem 'acts_as_trashable'
-gem 'dragonfly', '~>0.8.1'
-gem 'typus', :git => "https://github.com/fesplugas/typus.git"
-gem 'rack-cache', :require => 'rack/cache'
+# Run generators.
+load_template "http://core.typuscms.com/templates/extras/private.rb"
 
-##
-# Update the bundle
-#
-
-run 'bundle install'
-
-##
-# Create typus related files ...
-#
-
+# Run typus generators
+rake "db:migrate"
 generate "typus"
 generate "typus:migration"
-
-##
-# Load extra templates.
-#
-
-load_template "http://core.typuscms.com/templates/extras/private.rb"
-load_template "http://core.typuscms.com/templates/extras/ckeditor.rb"
-
-##
-# Migrate the database!
-#
-
 rake "db:migrate"
+
+# Load extra templates.
+load_template "http://core.typuscms.com/templates/extras/ckeditor.rb"
