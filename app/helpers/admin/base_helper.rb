@@ -10,6 +10,10 @@ module Admin
       render "admin/helpers/header"
     end
 
+    def has_root_path?
+      Rails.application.routes.routes.map(&:name).include?("root")
+    end
+
     def apps
       render "admin/helpers/apps"
     end
