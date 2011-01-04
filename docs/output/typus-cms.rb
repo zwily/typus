@@ -59,6 +59,7 @@ tar xvzf ckeditor_3.5.tar.gz
 rm ckeditor_3.5.tar.gz
 CMD
 
+run 'rm public/admin/javascripts/application.js'
 file 'public/admin/javascripts/application.js', <<-END
 document.write("<script type='text/javascript' src='/vendor/ckeditor/ckeditor.js'></script>"); 
 
@@ -70,6 +71,7 @@ $(function() {
 });
 END
 
+run 'rm public/vendor/ckeditor/config.js'
 file 'public/vendor/ckeditor/config.js', <<-END
 /*
 Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
