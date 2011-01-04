@@ -1,7 +1,7 @@
 ##
 # Generate a Rails application with typus, typus_cms and typus_settings.
 #
-#     $ rails new desmond -m http://core.typuscms.com/desmond.rb
+#     $ rails new desmond -m http://core.typuscms.com/templates/desmond.rb
 #
 # Enjoy!
 
