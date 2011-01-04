@@ -29,7 +29,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "generate the condition" do
       %w(today last_few_days last_7_days last_30_days).each do |interval|
         output = Article.build_datetime_conditions('created_at', 'today').first
-        assert_equal "`articles`.created_at BETWEEN ? AND ?", output
+        assert_equal "articles.created_at BETWEEN ? AND ?", output
       end
     end
 
@@ -77,7 +77,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       Post.stubs(:typus_defaults_for).with(:search).returns(["id"])
 
       params = { :search => '1' }
-      expected = "`posts`.id LIKE '%1%'"
+      expected = "posts.id LIKE '%1%'"
 
       assert_equal expected, Post.build_conditions(params).first
     end
@@ -86,7 +86,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       Post.stubs(:typus_defaults_for).with(:search).returns(["=id"])
 
       params = { :search => '1' }
-      expected = "`posts`.id LIKE '1'"
+      expected = "posts.id LIKE '1'"
 
       assert_equal expected, Post.build_conditions(params).first
     end
@@ -95,7 +95,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       Post.stubs(:typus_defaults_for).with(:search).returns(["^id"])
 
       params = { :search => '1' }
-      expected = "`posts`.id LIKE '1%'"
+      expected = "posts.id LIKE '1%'"
 
       assert_equal expected, Post.build_conditions(params).first
     end
@@ -108,10 +108,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
                     "TEXT(email) LIKE '%francesc%'",
                     "TEXT(first_name) LIKE '%francesc%'"]
                  else
-                   ["`typus_users`.first_name LIKE '%francesc%'",
-                    "`typus_users`.last_name LIKE '%francesc%'",
-                    "`typus_users`.email LIKE '%francesc%'",
-                    "`typus_users`.role LIKE '%francesc%'"]
+                   ["typus_users.first_name LIKE '%francesc%'",
+                    "typus_users.last_name LIKE '%francesc%'",
+                    "typus_users.email LIKE '%francesc%'",
+                    "typus_users.role LIKE '%francesc%'"]
                  end
 
       [{:search =>"francesc"}, {:search => "Francesc"}].each do |params|
@@ -125,17 +125,17 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should_eventually "return_sql_conditions_on_search_and_filter_for_typus_user" do
       case ENV["DB"]
       when /mysql/
-        boolean_true = "(`typus_users`.`status` = 1)"
-        boolean_false = "(`typus_users`.`status` = 0)"
+        boolean_true = "(typus_users.`status` = 1)"
+        boolean_false = "(typus_users.`status` = 0)"
       else
         boolean_true = "(\"typus_users\".\"status\" = 't')"
         boolean_false = "(\"typus_users\".\"status\" = 'f')"
       end
 
-      expected = ["`typus_users`.first_name LIKE '%francesc%'",
-                  "`typus_users`.last_name LIKE '%francesc%'",
-                  "`typus_users`.email LIKE '%francesc%'",
-                  "`typus_users`.role LIKE '%francesc%'",
+      expected = ["typus_users.first_name LIKE '%francesc%'",
+                  "typus_users.last_name LIKE '%francesc%'",
+                  "typus_users.email LIKE '%francesc%'",
+                  "typus_users.role LIKE '%francesc%'",
                   boolean_true]
 
       params = { :search => "francesc", :status => "true" }
@@ -163,7 +163,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_created_at today" do
-      expected = ["`typus_users`.created_at BETWEEN ? AND ?",
+      expected = ["typus_users.created_at BETWEEN ? AND ?",
                   Time.zone.now.beginning_of_day.to_s(:db),
                   Time.zone.now.beginning_of_day.tomorrow.to_s(:db)]
       params = { :created_at => "today" }
@@ -172,7 +172,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_created_at last_few_days" do
-      expected = ["`typus_users`.created_at BETWEEN ? AND ?",
+      expected = ["typus_users.created_at BETWEEN ? AND ?",
                   3.days.ago.beginning_of_day.to_s(:db),
                   Time.zone.now.beginning_of_day.tomorrow.to_s(:db)]
       params = { :created_at => "last_few_days" }
@@ -181,7 +181,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_created_at last_7_days" do
-      expected = ["`typus_users`.created_at BETWEEN ? AND ?",
+      expected = ["typus_users.created_at BETWEEN ? AND ?",
                   6.days.ago.beginning_of_day.to_s(:db),
                   Time.zone.now.beginning_of_day.tomorrow.to_s(:db)]
       params = { :created_at => "last_7_days" }
@@ -190,7 +190,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should_eventually "return_sql_conditions_on_filtering_typus_users_by_created_at last_30_days" do
-      expected = ["`typus_users`.created_at BETWEEN ? AND ?",
+      expected = ["typus_users.created_at BETWEEN ? AND ?",
                   Time.zone.now.beginning_of_day.prev_month.to_s(:db),
                   Time.zone.now.beginning_of_day.tomorrow.to_s(:db)]
       params = { :created_at => "last_30_days" }
@@ -199,7 +199,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_filtering_posts_by_published_at today" do
-      expected = ["`posts`.published_at BETWEEN ? AND ?",
+      expected = ["posts.published_at BETWEEN ? AND ?",
                   Time.zone.now.beginning_of_day.to_s(:db),
                   Time.zone.now.beginning_of_day.tomorrow.to_s(:db)]
       params = { :published_at => "today" }
