@@ -30,14 +30,14 @@ module Typus
       @@roles = { Typus.master_role => {} }
 
       files.each do |file|
-        data = YAML::load_file(file)
-        next unless data
-        data.each do |key, value|
-          next unless value
-          begin
-            @@roles[key].merge!(value)
-          rescue
-            @@roles[key] = value
+        if data = YAML::load_file(file)
+          data.each do |key, value|
+            next unless value
+            begin
+              @@roles[key].merge!(value)
+            rescue
+              @@roles[key] = value
+            end
           end
         end
       end
