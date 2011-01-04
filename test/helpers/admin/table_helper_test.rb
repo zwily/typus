@@ -58,8 +58,8 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   context "actions" do
 
-    should "return a default value" do
-      assert_equal [], actions
+    should "return a default value which is an empty array" do
+      assert actions.empty?
     end
 
     should "return a predefined value" do
