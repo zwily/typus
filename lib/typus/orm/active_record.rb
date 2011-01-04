@@ -30,8 +30,6 @@ module Typus
           fields = data[filter.to_s] || data['default'] || ""
 
           fields.extract_settings.map { |f| f.to_sym }.each do |field|
-            fields_with_type[field.to_s] = model_fields[field]
-
             if reflect_on_association(field)
               fields_with_type[field.to_s] = reflect_on_association(field).macro
               next
@@ -42,14 +40,6 @@ module Typus
               next
             end
 
-            # Custom field_type depending on the attribute name.
-            case field.to_s
-              when 'parent', 'parent_id'  then fields_with_type[field.to_s] = :tree
-              when /password/             then fields_with_type[field.to_s] = :password
-              when 'position'             then fields_with_type[field.to_s] = :position
-              when /\./                   then fields_with_type[field.to_s] = :transversal
-            end
-
             dragonfly = respond_to?(:dragonfly_apps_for_attributes) && dragonfly_apps_for_attributes.try(:has_key?, field)
             paperclip = respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
 
@@ -57,6 +47,14 @@ module Typus
               fields_with_type[field.to_s] = :file
               next
             end
+
+            fields_with_type[field.to_s] = case field.to_s
+                                           when 'parent', 'parent_id' then :tree
+                                           when /password/            then :password
+                                           when 'position'            then :position
+                                           when /\./                  then :transversal
+                                           else                       model_fields[field]
+                                           end
           end
         end
       end
