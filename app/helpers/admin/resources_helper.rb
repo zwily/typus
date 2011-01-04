@@ -2,13 +2,13 @@ module Admin
 
   module ResourcesHelper
 
-    include FiltersHelper
-    include FormHelper
-    include RelationshipsHelper
-    include FilePreviewHelper
-    include SearchHelper
-    include SidebarHelper
-    include TableHelper
+    include Admin::FiltersHelper
+    include Admin::FormHelper
+    include Admin::RelationshipsHelper
+    include Admin::FilePreviewHelper
+    include Admin::SearchHelper
+    include Admin::SidebarHelper
+    include Admin::TableHelper
 
     #--
     # If partial `list` exists we will use it. This partial will have available
