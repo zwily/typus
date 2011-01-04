@@ -12,10 +12,10 @@
 # Enjoy!
 
 # Add gems to Gemfile
-load_template "http://core.typuscms.com/templates/extras/gems.rb"
+apply "http://core.typuscms.com/templates/extras/gems.rb"
 
 # Run generators.
-load_template "http://core.typuscms.com/templates/extras/private.rb"
+apply "http://core.typuscms.com/templates/extras/private.rb"
 
 # Run typus generators
 rake "db:migrate"
@@ -24,4 +24,4 @@ generate "typus:migration"
 rake "db:migrate"
 
 # Load extra templates.
-load_template "http://core.typuscms.com/templates/extras/ckeditor.rb"
+apply "http://core.typuscms.com/templates/extras/ckeditor.rb"
