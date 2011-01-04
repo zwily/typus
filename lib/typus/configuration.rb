@@ -27,7 +27,7 @@ module Typus
       plugins = Dir[File.join("vendor", "plugins", "*", "config", "typus", "*_roles.yml").to_s]
       files = (application + plugins).sort
 
-      @@roles = { Typus.master_role => {} }
+      @@roles = {}
 
       files.each do |file|
         if data = YAML::load_file(file)
@@ -37,7 +37,7 @@ module Typus
         end
       end
 
-      @@roles.compact
+      @@roles
     end
 
     mattr_accessor :roles
