@@ -46,3 +46,48 @@ rake "db:migrate"
 
 run "rm public/index.html"
 route "match '/' => redirect('/admin')"
+
+##
+# Download CKEditor and enable it for typus
+#
+
+run <<-CMD
+mkdir -p public/vendor
+cd public/vendor
+curl -O http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.4/ckeditor_3.4.tar.gz
+tar xvzf ckeditor_3.4.tar.gz
+rm ckeditor_3.4.tar.gz
+CMD
+
+file 'public/admin/javascripts/application.js', <<-END
+document.write("<script type='text/javascript' src='/vendor/ckeditor/ckeditor.js'></script>"); 
+
+$(function() {
+  if ($('textarea').length > 0) {
+    var data = $('textarea');
+    $.each(data, function(i) { CKEDITOR.replace(data[i].id); });
+  }
+});
+END
+
+file 'public/javascripts/ckeditor/config.js', <<-END
+CKEDITOR.editorConfig = function( config )
+{
+
+  config.height = '250px';
+  config.width = '690px';
+
+  config.toolbar = 'Easy';
+  config.toolbar_Easy =
+    [
+        ['Source','-','Templates', '-', 'Cut','Copy','Paste','PasteText','PasteFromWord',],
+        ['Maximize'],
+        ['Undo','Redo','-','SelectAll','RemoveFormat'],
+        ['Link','Unlink','Anchor', '-', 'Image','Embed'],
+        ['Styles','Format', 'Bold','Italic','Underline','Strike','-', 'TextColor'],
+        ['NumberedList','BulletedList','-','Outdent','Indent','Blockquote'],
+        ['JustifyLeft','JustifyCenter','JustifyRight','JustifyBlock'],
+    ];
+
+};
+END
