@@ -150,15 +150,17 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_match boolean_false, output
     end
 
-=begin
-    # FIXME
-    should_eventually "return_sql_conditions_on_filtering_typus_users_by_status" do
+    should "return_sql_conditions_on_filtering_typus_users_by_status true" do
       params = { :status => "true" }
-      assert_equal { :status => true }, TypusUser.build_conditions(params).first
-      params = { :status => "false" }
-      assert_equal { :status => false }, TypusUser.build_conditions(params).first
+      expected = { :status => true }
+      assert_equal expected, TypusUser.build_conditions(params).first
     end
-=end
+
+    should "return_sql_conditions_on_filtering_typus_users_by_status false" do
+      params = { :status => "false" }
+      expected = { :status => false }
+      assert_equal expected, TypusUser.build_conditions(params).first
+    end
 
     should "return_sql_conditions_on_filtering_typus_users_by_created_at today" do
       expected = ["`typus_users`.created_at BETWEEN ? AND ?",
