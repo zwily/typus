@@ -31,13 +31,8 @@ module Typus
 
       files.each do |file|
         if data = YAML::load_file(file)
-          data.each do |key, value|
-            next unless value
-            begin
-              @@roles[key].merge!(value)
-            rescue
-              @@roles[key] = value
-            end
+          data.compact.each do |key, value|
+            @@roles[key] ? @@roles[key].merge!(value) : (@@roles[key] = value)
           end
         end
       end
