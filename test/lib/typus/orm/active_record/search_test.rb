@@ -47,28 +47,17 @@ class ActiveRecordTest < ActiveSupport::TestCase
       end
     end
 
-    should "work for today" do
-      expected = [0.days.ago.beginning_of_day.to_s(:db), @tomorrow]
-      output = Article.build_datetime_conditions('created_at', 'today')[1..-1]
-      assert_equal expected, output
-    end
+    [["today", 0.days.ago.beginning_of_day.to_s(:db)],
+     ["last_few_days", 3.days.ago.beginning_of_day.to_s(:db)],
+     ["last_7_days", 6.days.ago.beginning_of_day.to_s(:db)],
+     ["last_30_days", 30.days.ago.beginning_of_day.to_s(:db)]].each do |interval|
 
-    should "work for last_few_days" do
-      expected = [3.days.ago.beginning_of_day.to_s(:db), @tomorrow]
-      output = Article.build_datetime_conditions('created_at', 'last_few_days')[1..-1]
-      assert_equal expected, output
-    end
+      should "work for #{interval}" do
+        expected = [interval.last, @tomorrow]
+        output = Article.build_datetime_conditions('created_at', interval.first)[1..-1]
+        assert_equal expected, output
+      end
 
-    should "work for last_7_days" do
-      expected = [6.days.ago.beginning_of_day.to_s(:db), @tomorrow]
-      output = Article.build_datetime_conditions('created_at', 'last_7_days')[1..-1]
-      assert_equal expected, output
-    end
-
-    should "work for last_30_days" do
-      expected = [30.days.ago.beginning_of_day.to_s(:db), @tomorrow]
-      output = Article.build_datetime_conditions('created_at', 'last_30_days')[1..-1]
-      assert_equal expected, output
     end
 
   end
