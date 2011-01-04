@@ -46,8 +46,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  should_eventually "build_has_and_belongs_to_many_conditions"
-
   should_eventually "build_date_conditions"
 
   context "build_string_conditions" do
