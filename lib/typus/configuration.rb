@@ -15,7 +15,7 @@ module Typus
         end
       end
 
-      return @@config
+      @@config
     end
 
     mattr_accessor :config
@@ -41,7 +41,7 @@ module Typus
         end
       end
 
-      return @@roles.compact
+      @@roles.compact
     end
 
     mattr_accessor :roles
