@@ -9,6 +9,7 @@ module Typus
       files = (application + plugins).reject { |f| f.include?("_roles.yml") }
 
       @@config = {}
+
       files.each do |file|
         if data = YAML::load_file(file)
           @@config.merge!(data)
