@@ -27,7 +27,7 @@ module Typus
       def typus_fields_for(filter)
         ActiveSupport::OrderedHash.new.tap do |fields_with_type|
           data = read_model_config['fields']
-          fields = data[filter.to_s] || data['default']
+          fields = data[filter.to_s] || data['default'] || []
 
           fields.extract_settings.map { |f| f.to_sym }.each do |field|
 
