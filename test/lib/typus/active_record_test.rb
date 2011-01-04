@@ -313,7 +313,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return picture formats" do
-      assert_equal [], Picture.typus_export_formats
+      assert Picture.typus_export_formats.empty?
     end
 
   end
