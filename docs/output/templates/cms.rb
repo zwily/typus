@@ -51,4 +51,4 @@ route "match '/' => redirect('/admin')"
 # Load extra templates.
 #
 
-load_template "http://core.typuscms.com/templates/ckeditor.rb"
+load_template "http://core.typuscms.com/templates/extras/ckeditor.rb"
