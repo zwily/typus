@@ -12,7 +12,7 @@ module Typus
                        when "^" then "#{query}%"
                        when "@" then "%#{query}%"
                        end
-              table_key = (adapter == 'postgresql') ? "LOWER(TEXT(#{table_name}.#{key}))" : "`#{table_name}`.#{key}"
+              table_key = (adapter == 'postgresql') ? "LOWER(TEXT(#{table_name}.#{key}))" : "#{table_name}.#{key}"
               search << "#{table_key} LIKE '#{_query}'"
             end
           end.join(" OR ")
@@ -32,7 +32,7 @@ module Typus
                      when 'last_30_days'  then 30.days.ago.beginning_of_day..tomorrow
                      end
 
-          ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
+          ["#{table_name}.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
         end
 
         def build_date_conditions(key, value)
@@ -45,7 +45,7 @@ module Typus
                      when 'last_30_days'  then 30.days.ago.to_date..tomorrow
                      end
 
-          ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
+          ["#{table_name}.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
         end
 
         def build_string_conditions(key, value)
