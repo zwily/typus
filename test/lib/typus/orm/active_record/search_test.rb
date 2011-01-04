@@ -60,7 +60,41 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  should_eventually "build_date_conditions"
+  context "build_date_conditions" do
+
+    setup do
+      @tomorrow = Date.tomorrow.to_s(:db)
+    end
+
+    should "generate the condition for today (which is an special case)" do
+      output = Article.build_date_conditions('created_at', "today").first
+      assert_equal "articles.created_at BETWEEN ? AND ?", output
+    end
+
+    should "work for today (which is an special case)" do
+      expected = [Date.today.to_s(:db), Date.today.to_s(:db)]
+      output = Article.build_date_conditions('created_at', "today")[1..-1]
+      assert_equal expected, output
+    end
+
+    [["last_few_days", 3.days.ago.to_date.to_s(:db)],
+     ["last_7_days", 6.days.ago.to_date.to_s(:db)],
+     ["last_30_days", 30.days.ago.to_date.to_s(:db)]].each do |interval|
+
+      should "generate the condition for #{interval.first}" do
+        output = Article.build_date_conditions('created_at', interval.first).first
+        assert_equal "articles.created_at BETWEEN ? AND ?", output
+      end
+
+      should "work for #{interval.first}" do
+        expected = [interval.last, @tomorrow]
+        output = Article.build_date_conditions('created_at', interval.first)[1..-1]
+        assert_equal expected, output
+      end
+
+    end
+
+  end
 
   context "build_string_conditions" do
 
