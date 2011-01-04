@@ -70,9 +70,18 @@ $(function() {
 });
 END
 
-file 'public/javascripts/ckeditor/config.js', <<-END
+file 'public/vendor/ckeditor/config.js', <<-END
+/*
+Copyright (c) 2003-2010, CKSource - Frederico Knabben. All rights reserved.
+For licensing, see LICENSE.html or http://ckeditor.com/license
+*/
+
 CKEDITOR.editorConfig = function( config )
 {
+
+  // Define changes to default configuration here. For example:
+  // config.language = 'fr';
+  // config.uiColor = '#AADC6E';
 
   config.height = '250px';
   config.width = '690px';
