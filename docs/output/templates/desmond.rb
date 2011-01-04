@@ -1,7 +1,7 @@
 ##
-# Generate a Rails application with typus, typus_cms and typus_settings.
+# Generate a Rails application with typus and some extra stuff.
 #
-#     $ rails new desmond -m http://core.typuscms.com/templates/desmond.rb
+#     $ rails new rails-app-desmond -m http://core.typuscms.com/templates/desmond.rb
 #
 # Enjoy!
 
@@ -30,18 +30,11 @@ generate "typus"
 generate "typus:migration"
 
 ##
-# Install typus extras only if user has access to trunksapp.com
+# Load extra templates.
 #
 
-answer = ask("Do you have access to trunksapp.com? (yes/NO)").downcase
-extras = (answer == "yes" || answer == "y") ? true : false
-
-if extras
-  plugin "typus_cms", :git => "git@trunksapp.com:fesplugas/typus_cms.git"
-  plugin "typus_settings", :git => "git@trunksapp.com:fesplugas/typus_settings.git"
-  generate "typus_cms_migration"
-  generate "typus_settings_migration"
-end
+load_template "http://core.typuscms.com/templates/extras/private.rb"
+load_template "http://core.typuscms.com/templates/extras/ckeditor.rb"
 
 ##
 # Migrate the database!
