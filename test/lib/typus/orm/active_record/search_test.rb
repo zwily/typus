@@ -2,7 +2,21 @@ require "test_helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
-  should_eventually "build_search_conditions"
+  context "build_search_conditions" do
+
+    should "work for Post (title)" do
+      output = Post.build_search_conditions("search", "bacon")
+      expected = "posts.title LIKE '%bacon%'"
+      assert_equal expected, output
+    end
+
+    should "work for Comment (email, body)" do
+      output = Comment.build_search_conditions("search", "bacon")
+      expected = "comments.body LIKE '%bacon%' OR comments.email LIKE '%bacon%'"
+      assert_equal expected, output
+    end
+
+  end
 
   context "build_boolean_conditions" do
 
