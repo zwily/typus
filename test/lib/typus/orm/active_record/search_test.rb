@@ -20,27 +20,40 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-=begin
-
-  def build_datetime_conditions(key, value)
-    tomorrow = Time.zone.now.beginning_of_day.tomorrow
-
-    interval = case value
-               when 'today'         then 0.days.ago.beginning_of_day..tomorrow
-               when 'last_few_days' then 3.days.ago.beginning_of_day..tomorrow
-               when 'last_7_days'   then 6.days.ago.beginning_of_day..tomorrow
-               when 'last_30_days'  then 30.days.ago.beginning_of_day..tomorrow
-               end
-
-    ["`#{table_name}`.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
-  end
-
-=end
   context "build_datetime_conditions" do
 
+    setup do
+      @tomorrow = Time.zone.now.beginning_of_day.tomorrow.to_s(:db)
+    end
+
+    should "generate the condition" do
+      %w(today last_few_days last_7_days last_30_days).each do |interval|
+        output = Article.build_datetime_conditions('created_at', 'today').first
+        assert_equal "`articles`.created_at BETWEEN ? AND ?", output
+      end
+    end
+
     should "work for today" do
-      expected = ["`articles`.created_at BETWEEN ? AND ?", 0.day.ago.beginning_of_day.to_s(:db), Time.zone.now.beginning_of_day.tomorrow.to_s(:db)]
-      output = Article.build_datetime_conditions('created_at', 'today')
+      expected = [0.days.ago.beginning_of_day.to_s(:db), @tomorrow]
+      output = Article.build_datetime_conditions('created_at', 'today')[1..-1]
+      assert_equal expected, output
+    end
+
+    should "work for last_few_days" do
+      expected = [3.days.ago.beginning_of_day.to_s(:db), @tomorrow]
+      output = Article.build_datetime_conditions('created_at', 'last_few_days')[1..-1]
+      assert_equal expected, output
+    end
+
+    should "work for last_7_days" do
+      expected = [6.days.ago.beginning_of_day.to_s(:db), @tomorrow]
+      output = Article.build_datetime_conditions('created_at', 'last_7_days')[1..-1]
+      assert_equal expected, output
+    end
+
+    should "work for last_30_days" do
+      expected = [30.days.ago.beginning_of_day.to_s(:db), @tomorrow]
+      output = Article.build_datetime_conditions('created_at', 'last_30_days')[1..-1]
       assert_equal expected, output
     end
 
