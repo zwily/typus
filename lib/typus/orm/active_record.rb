@@ -25,21 +25,11 @@ module Typus
 
       # Form and list fields
       def typus_fields_for(filter)
+        ActiveSupport::OrderedHash.new.tap do |fields_with_type|
+          data = read_model_config['fields']
+          fields = data[filter.to_s] || data['default']
 
-        fields_with_type = ActiveSupport::OrderedHash.new
-
-        begin
-          fields = read_model_config['fields'][filter.to_s]
-          fields = fields.extract_settings.map { |f| f.to_sym }
-        rescue
-          return [] if filter == 'default'
-          filter = 'default'
-          retry
-        end
-
-        begin
-
-          fields.each do |field|
+          fields.extract_settings.map { |f| f.to_sym }.each do |field|
 
             attribute_type = model_fields[field]
 
@@ -66,18 +56,9 @@ module Typus
               attribute_type = :file
             end
 
-            # And finally insert the field and the attribute_type
-            # into the fields_with_type ordered hash.
             fields_with_type[field.to_s] = attribute_type
-
           end
-
-        rescue
-          fields = read_model_config['fields']['default'].extract_settings
-          retry
         end
-
-        fields_with_type
       end
 
       def typus_filters
