@@ -1,7 +1,7 @@
 ##
-# Generate a Rails application with typus, typus_cms and typus_settings.
+# Generate a Rails application with is something like a CMS.
 #
-#     $ rails new typus-cms -m http://core.typuscms.com/templates/typus-cms.rb
+#     $ rails new rails-app-cms -m http://core.typuscms.com/templates/cms.rb
 #
 # Enjoy!
 
