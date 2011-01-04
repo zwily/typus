@@ -109,8 +109,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal expected_fields.map { |i| i.last }, Asset.typus_fields_for(:form).values
     end
 
-    should "return form fields for a Model without configuration" do
-      assert Class.new(ActiveRecord::Base).typus_fields_for(:form).empty?
+    should "raise a RuntimeError when model does not have configuration" do
+      assert_raises RuntimeError do
+        Class.new(ActiveRecord::Base).typus_fields_for(:form)
+      end
     end
 
     should "return relationship fields for TypusUser" do
