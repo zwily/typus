@@ -207,11 +207,7 @@ module Typus
       end
 
       def read_model_config
-        if data = Typus::Configuration.config[name]
-          data
-        else
-          raise "No typus configuration specified for #{name}"
-        end
+        Typus::Configuration.config[name] or raise "No typus configuration specified for #{name}"
       end
 
     end
