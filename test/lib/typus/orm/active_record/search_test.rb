@@ -40,19 +40,17 @@ class ActiveRecordTest < ActiveSupport::TestCase
       @tomorrow = Time.zone.now.beginning_of_day.tomorrow.to_s(:db)
     end
 
-    should "generate the condition" do
-      %w(today last_few_days last_7_days last_30_days).each do |interval|
-        output = Article.build_datetime_conditions('created_at', 'today').first
-        assert_equal "articles.created_at BETWEEN ? AND ?", output
-      end
-    end
-
     [["today", 0.days.ago.beginning_of_day.to_s(:db)],
      ["last_few_days", 3.days.ago.beginning_of_day.to_s(:db)],
      ["last_7_days", 6.days.ago.beginning_of_day.to_s(:db)],
      ["last_30_days", 30.days.ago.beginning_of_day.to_s(:db)]].each do |interval|
 
-      should "work for #{interval}" do
+      should "generate the condition for #{interval.first}" do
+        output = Article.build_datetime_conditions('created_at', interval.first).first
+        assert_equal "articles.created_at BETWEEN ? AND ?", output
+      end
+
+      should "work for #{interval.first}" do
         expected = [interval.last, @tomorrow]
         output = Article.build_datetime_conditions('created_at', interval.first)[1..-1]
         assert_equal expected, output
