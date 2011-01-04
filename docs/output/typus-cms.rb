@@ -54,9 +54,9 @@ route "match '/' => redirect('/admin')"
 run <<-CMD
 mkdir -p public/vendor
 cd public/vendor
-curl -O http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.4/ckeditor_3.4.tar.gz
-tar xvzf ckeditor_3.4.tar.gz
-rm ckeditor_3.4.tar.gz
+curl -s -O http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.5/ckeditor_3.5.tar.gz
+tar xvzf ckeditor_3.5.tar.gz
+rm ckeditor_3.5.tar.gz
 CMD
 
 file 'public/admin/javascripts/application.js', <<-END
