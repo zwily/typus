@@ -77,7 +77,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
       Post.stubs(:typus_defaults_for).with(:search).returns(["id"])
 
       params = { :search => '1' }
-      expected = "posts.id LIKE '%1%'"
+
+      expected = case ENV["DB"]
+                 when "postgresql"
+                   "LOWER(TEXT(posts.id)) LIKE '%1%'"
+                 else
+                   "posts.id LIKE '%1%'"
+                 end
 
       assert_equal expected, Post.build_conditions(params).first
     end
@@ -86,7 +92,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
       Post.stubs(:typus_defaults_for).with(:search).returns(["=id"])
 
       params = { :search => '1' }
-      expected = "posts.id LIKE '1'"
+
+      expected = case ENV["DB"]
+                 when "postgresql"
+                   "LOWER(TEXT(posts.id)) LIKE '1'"
+                 else
+                   "posts.id LIKE '1'"
+                 end
 
       assert_equal expected, Post.build_conditions(params).first
     end
@@ -95,18 +107,24 @@ class ActiveRecordTest < ActiveSupport::TestCase
       Post.stubs(:typus_defaults_for).with(:search).returns(["^id"])
 
       params = { :search => '1' }
-      expected = "posts.id LIKE '1%'"
+
+      expected = case ENV["DB"]
+                 when "postgresql"
+                   "LOWER(TEXT(posts.id)) LIKE '1%'"
+                 else
+                   "posts.id LIKE '1%'"
+                 end
 
       assert_equal expected, Post.build_conditions(params).first
     end
 
     should "return_sql_conditions_on_search_for_typus_user" do
       expected = case ENV["DB"]
-                 when /postgresql/
-                   ["TEXT(role) LIKE '%francesc%'",
-                    "TEXT(last_name) LIKE '%francesc%'",
-                    "TEXT(email) LIKE '%francesc%'",
-                    "TEXT(first_name) LIKE '%francesc%'"]
+                 when "postgresql"
+                   ["LOWER(TEXT(typus_users.first_name)) LIKE '%francesc%'",
+                    "LOWER(TEXT(typus_users.last_name)) LIKE '%francesc%'", 
+                    "LOWER(TEXT(typus_users.email)) LIKE '%francesc%'",
+                    "LOWER(TEXT(typus_users.role)) LIKE '%francesc%'"]
                  else
                    ["typus_users.first_name LIKE '%francesc%'",
                     "typus_users.last_name LIKE '%francesc%'",
@@ -124,7 +142,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     should_eventually "return_sql_conditions_on_search_and_filter_for_typus_user" do
       case ENV["DB"]
-      when /mysql/
+      when "mysql"
         boolean_true = "(typus_users.`status` = 1)"
         boolean_false = "(typus_users.`status` = 0)"
       else
