@@ -63,13 +63,13 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
     should "return link for non image files" do
       Typus.expects(:file_preview).at_least_once.returns(nil)
       assert_equal "rails.png", typus_file_preview_for_paperclip(@asset.paperclip).first
-      assert_equal "/system/paperclips/1/original/rails.png", typus_file_preview_for_paperclip(@asset.paperclip).last
+      assert_equal "/system/paperclips/#{@asset.id}/original/rails.png", typus_file_preview_for_paperclip(@asset.paperclip).last
     end
 
     should "return image and link for image files" do
       expected = ["admin/helpers/file_preview",
-                  {:preview => "/system/paperclips/1/medium/rails.png",
-                   :thumb => "/system/paperclips/1/thumb/rails.png"}]
+                  {:preview => "/system/paperclips/#{@asset.id}/medium/rails.png",
+                   :thumb => "/system/paperclips/#{@asset.id}/thumb/rails.png"}]
       assert_equal expected, typus_file_preview_for_paperclip(@asset.paperclip)
     end
 

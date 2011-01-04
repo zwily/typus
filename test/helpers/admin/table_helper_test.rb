@@ -79,13 +79,15 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     should "work with associated model when user has access" do
       admin_user.expects(:can?).returns(true)
       comment = Factory(:comment)
-      assert_equal %(<a href="/admin/posts/edit/1">Post#1</a>), table_belongs_to_field("post", comment)
+      post = comment.post
+      assert_equal %(<a href="/admin/posts/edit/#{post.id}">#{post.to_label}</a>), table_belongs_to_field("post", comment)
     end
 
     should "work with associated model when user does not have access" do
       admin_user.expects(:can?).returns(false)
       comment = Factory(:comment)
-      assert_equal "Post#1", table_belongs_to_field("post", comment)
+      post = comment.post
+      assert_equal post.to_label, table_belongs_to_field("post", comment)
     end
 
   end
@@ -151,20 +153,20 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
     should "work when default status is true" do
       post = Factory(:typus_user)
-      expected = %(<a href="/admin/typus_users/toggle/1?field=status" data-confirm="Change status?">Active</a>)
+      expected = %(<a href="/admin/typus_users/toggle/#{post.id}?field=status" data-confirm="Change status?">Active</a>)
       assert_equal expected, table_boolean_field("status", post)
     end
 
     should "work when default status is false" do
       post = Factory(:typus_user, :status => false)
-      expected = %(<a href="/admin/typus_users/toggle/1?field=status" data-confirm="Change status?">Inactive</a>)
+      expected = %(<a href="/admin/typus_users/toggle/#{post.id}?field=status" data-confirm="Change status?">Inactive</a>)
       assert_equal expected, table_boolean_field("status", post)
     end
 
     should "work when default status is nil" do
       post = Factory(:typus_user, :status => nil)
       assert post.status.nil?
-      expected = %(<a href="/admin/typus_users/toggle/1?field=status" data-confirm="Change status?">Inactive</a>)
+      expected = %(<a href="/admin/typus_users/toggle/#{post.id}?field=status" data-confirm="Change status?">Inactive</a>)
       assert_equal expected, table_boolean_field("status", post)
     end
 
@@ -177,19 +179,19 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
     output = table_position_field(nil, first_category)
     expected = <<-HTML
-1<br/><br/><span class="inactive">Top</span> / <span class="inactive">Up</span> / <a href="/admin/categories/position/1?go=move_lower">Down</a> / <a href="/admin/categories/position/1?go=move_to_bottom">Bottom</a>
+1<br/><br/><span class="inactive">Top</span> / <span class="inactive">Up</span> / <a href="/admin/categories/position/#{first_category.id}?go=move_lower">Down</a> / <a href="/admin/categories/position/#{first_category.id}?go=move_to_bottom">Bottom</a>
     HTML
     assert_equal expected.strip, output
 
     output = table_position_field(nil, second_category)
     expected = <<-HTML
-2<br/><br/><a href="/admin/categories/position/2?go=move_to_top">Top</a> / <a href="/admin/categories/position/2?go=move_higher">Up</a> / <a href="/admin/categories/position/2?go=move_lower">Down</a> / <a href="/admin/categories/position/2?go=move_to_bottom">Bottom</a>
+2<br/><br/><a href="/admin/categories/position/#{second_category.id}?go=move_to_top">Top</a> / <a href="/admin/categories/position/#{second_category.id}?go=move_higher">Up</a> / <a href="/admin/categories/position/#{second_category.id}?go=move_lower">Down</a> / <a href="/admin/categories/position/#{second_category.id}?go=move_to_bottom">Bottom</a>
     HTML
     assert_equal expected.strip, output
 
     output = table_position_field(nil, last_category)
     expected = <<-HTML
-3<br/><br/><a href="/admin/categories/position/3?go=move_to_top">Top</a> / <a href="/admin/categories/position/3?go=move_higher">Up</a> / <span class="inactive">Down</span> / <span class="inactive">Bottom</span>
+3<br/><br/><a href="/admin/categories/position/#{last_category.id}?go=move_to_top">Top</a> / <a href="/admin/categories/position/#{last_category.id}?go=move_higher">Up</a> / <span class="inactive">Down</span> / <span class="inactive">Bottom</span>
     HTML
     assert_equal expected.strip, output
   end

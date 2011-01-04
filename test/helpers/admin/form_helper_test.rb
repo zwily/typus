@@ -91,9 +91,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   context "expand_tree_into_select_field" do
 
     setup do
-      page = Factory(:page)
-      children = Factory(:page, :parent => page)
-      subchildren = Factory(:page, :parent => children)
+      @page = Factory(:page)
+      @children = Factory(:page, :parent => @page)
+      @subchildren = Factory(:page, :parent => @children)
       @items = Page.roots
     end
 
@@ -101,9 +101,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
       @item = Page.first
 
       expected = <<-HTML
-<option  value="1"> Page#1</option>
-<option  value="2">&nbsp;&nbsp; Page#2</option>
-<option  value="3">&nbsp;&nbsp;&nbsp;&nbsp; Page#3</option>
+<option  value="#{@page.id}"> #{@page.to_label}</option>
+<option  value="#{@children.id}">&nbsp;&nbsp; #{@children.to_label}</option>
+<option  value="#{@subchildren.id}">&nbsp;&nbsp;&nbsp;&nbsp; #{@subchildren.to_label}</option>
       HTML
 
       assert_equal expected, expand_tree_into_select_field(@items, 'parent_id')
@@ -113,9 +113,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
       @item = Page.last
 
       expected = <<-HTML
-<option  value="1"> Page#1</option>
-<option selected value="2">&nbsp;&nbsp; Page#2</option>
-<option  value="3">&nbsp;&nbsp;&nbsp;&nbsp; Page#3</option>
+<option  value="#{@page.id}"> #{@page.to_label}</option>
+<option selected value="#{@children.id}">&nbsp;&nbsp; #{@children.to_label}</option>
+<option  value="#{@subchildren.id}">&nbsp;&nbsp;&nbsp;&nbsp; #{@subchildren.to_label}</option>
       HTML
 
       assert_equal expected, expand_tree_into_select_field(@items, 'parent_id')

@@ -74,7 +74,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       get :edit, { :id => @post.id }
 
       expected = [ {"action_name"=>"Edit", "action"=>"edit"},
-                   {"confirm"=>"Unrelate?", "action_name"=>"Unrelate", "resource_id"=>1, "resource"=>"Post", "action" => "unrelate"}]
+                   {"confirm"=>"Unrelate?", "action_name"=>"Unrelate", "resource_id"=>@post.id, "resource"=>"Post", "action" => "unrelate"}]
 
       assert_equal expected, assigns(:actions)
     end
@@ -98,7 +98,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
         get :edit, { :id => @post.id }
 
         expected = [ {"action_name"=>"Show", "action"=>"show"},
-                     {"confirm"=>"Unrelate?", "action_name"=>"Unrelate", "resource_id"=>1, "resource"=>"Post", "action" => "unrelate"}]
+                     {"confirm"=>"Unrelate?", "action_name"=>"Unrelate", "resource_id"=>@post.id, "resource"=>"Post", "action" => "unrelate"}]
 
         assert_equal expected, assigns(:actions)
       end
