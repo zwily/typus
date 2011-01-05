@@ -36,10 +36,10 @@ module Typus
         end
 
         def build_date_conditions(key, value)
-          tomorrow = Date.tomorrow
+          tomorrow = 0.days.ago.tomorrow.to_date
 
           interval = case value
-                     when 'today'         then Date.today..Date.today
+                     when 'today'         then 0.days.ago.to_date..tomorrow
                      when 'last_few_days' then 3.days.ago.to_date..tomorrow
                      when 'last_7_days'   then 6.days.ago.to_date..tomorrow
                      when 'last_30_days'  then 30.days.ago.to_date..tomorrow
