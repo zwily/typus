@@ -85,6 +85,8 @@ namespace.
 **[CHANGED]** AdminUser::LANGUAGES becomes AdminUser::LOCALE so you'll have to
 update your AdminUser.
 
+**[NEW]** Better application templates.
+
 == 3.0.2
 
 **[FIXED]** Use Arel to get the data on lists. After moving to will_paginate I
