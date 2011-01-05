@@ -11,3 +11,5 @@ if extras
   plugin "typus_settings", :git => "git@trunksapp.com:fesplugas/typus_settings.git"
   generate "typus_settings_migration"
 end
+
+rake "db:migrate"

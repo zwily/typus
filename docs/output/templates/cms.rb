@@ -1,15 +1,16 @@
 ##
-# Generate a Rails application which is something like a CMS.
+# Rails Application Template with:
+#
+# - Typus with authentication.
+# - CMS models.
+# - Themes.
+# - CKEditor for textarea fields.
+#
+# Run:
 #
 #     $ rails new rails-app-cms -m http://core.typuscms.com/templates/cms.rb
 #
-# What will you get?
-#
-# - Typus with authentication.
-# - A Entry model which is an STI model.
-# - CKEditor for all your textarea fields.
-#
-# Enjoy!
+##
 
 # Add gems to Gemfile.
 apply "http://core.typuscms.com/templates/extras/gems.rb"
@@ -17,8 +18,7 @@ apply "http://core.typuscms.com/templates/extras/gems.rb"
 # Run generators.
 apply "http://core.typuscms.com/templates/extras/cms.rb"
 
-# Run typus generators.
-rake "db:migrate"
+# Run `typus` generators.
 generate "typus"
 generate "typus:migration"
 rake "db:migrate"
