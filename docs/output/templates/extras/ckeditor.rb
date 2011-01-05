@@ -1,3 +1,10 @@
+##
+# You can apply this template to your existing project by running the
+# following command:
+#
+#     $ rake rails:template LOCATION=http://core.typuscms.com/templates/extras/ckeditor.rb
+#
+
 run <<-CMD
 mkdir -p public/vendor
 cd public/vendor
