@@ -1,5 +1,5 @@
 ##
-# Generate a Rails application with is something like a CMS.
+# Generate a Rails application which is something like a CMS.
 #
 #     $ rails new rails-app-cms -m http://core.typuscms.com/templates/cms.rb
 #
@@ -11,7 +11,7 @@
 #
 # Enjoy!
 
-# Add gems to Gemfile
+# Add gems to Gemfile.
 apply "http://core.typuscms.com/templates/extras/gems.rb"
 
 # Run generators.
@@ -25,3 +25,4 @@ rake "db:migrate"
 
 # Load extra templates.
 apply "http://core.typuscms.com/templates/extras/ckeditor.rb"
+apply "http://core.typuscms.com/templates/extras/themes.rb"
