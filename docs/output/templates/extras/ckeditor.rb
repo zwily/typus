@@ -1,6 +1,5 @@
 ##
-# You can apply this template to your existing project by running the
-# following command:
+# You can apply this template to your existing project by running:
 #
 #     $ rake rails:template LOCATION=http://core.typuscms.com/templates/extras/ckeditor.rb
 #
