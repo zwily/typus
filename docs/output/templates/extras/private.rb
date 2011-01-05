@@ -1,5 +1,9 @@
 ##
-# There are plugins/gems which are only available to clients.
+# You can apply this template to your existing project by running:
+#
+#     $ rake rails:template LOCATION=http://core.typuscms.com/templates/extras/private.rb
+#
+# NOTE: This is only available for registered users and clients.
 #
 
 answer = ask("Do you have access to trunksapp.com? (yes/NO)").downcase

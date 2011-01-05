@@ -1,3 +1,7 @@
-gem 'themes', :git => 'https://github.com/fesplugas/rails-themes.git'
+##
+# You can apply this template to your existing project by running:
+#
+#     $ rake rails:template LOCATION=http://core.typuscms.com/templates/extras/themes.rb
+#
 
-# Download and install default theme into public/themes
+gem 'themes', :git => 'https://github.com/fesplugas/rails-themes.git'
