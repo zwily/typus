@@ -32,7 +32,7 @@ Examples:
       DESC
 
       def self.next_migration_number(path)
-        Time.zone.now.utc.to_s(:number)
+        Time.zone.now.to_s(:number)
       end
 
       def generate_model

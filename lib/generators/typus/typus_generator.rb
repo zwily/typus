@@ -67,7 +67,7 @@ Description:
       end
 
       def timestamp
-        Time.zone.now.utc.to_s(:number)
+        Time.zone.now.to_s(:number)
       end
 
       private
