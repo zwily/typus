@@ -15,9 +15,7 @@ It’s not a CMS with a full working system but it provides a part of the system
 A category of people or things having common characteristics.
 }}}
 
-You can try a demo [[http://demo.typuscms.com/admin|here]]. (Demo can
-be [[https://github.com/fesplugas/rails-typuscms-demo|downloaded]] from GitHub
-or generated using the [[desmond.rb|desmond.rb]] template)
+You can try a demo [[http://demo.typuscms.com/admin|here]].
 
 == <a name="key_features" href="#key_features">Key Features</a>
 

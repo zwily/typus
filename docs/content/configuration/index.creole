@@ -17,7 +17,7 @@ Replicate the [[http://demo.typuscms.com/admin|demo]] application using the
 {{{desmond}}} template.
 
 {{{
-$ rails new desmond -m http://core.typuscms.com/desmond.rb
+$ rails new desmond -m http://core.typuscms.com/templates/desmond.rb
 $ cd desmond && rails server
 }}}
 

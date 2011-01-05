@@ -6,25 +6,25 @@ parent_title: Installation
 
 = Generators
 
-Once the plugin or gem is installed you need to run a generator to copy
-**Typus** stylesheets, images and other required files to your application.
+Once the gem is installed you need to run a generator to copy **Typus**
+stylesheets, images and other required files into your application.
 
 {{{
 $ rails generate typus
 }}}
 
-By default **Typus** will use an http authentication but if you want to use a
-better authentication system you need to run a second generator.
+By default **Typus** will not enable any authentication mechanism. If you want
+to add {{{session}}} authentication you need to run a generator and migrate
+your application database:
 
 {{{
 $ rails generate typus:migration
 $ rake db:migrate
 }}}
 
-This generator will create a new model, {{{AdminUser}}}, in your application,
-some settings which will be stored under {{{config/typus}}} folder and will
-also create a migration. You can see some options of this generator running
-the following command.
+This generator creates a new model, {{{AdminUser}}} and adds some settings
+which will be stored under {{{config/typus}}} folder. You can see some options
+of this generator running the following command:
 
 {{{
 $ rails generate typus:migration -h
@@ -35,4 +35,3 @@ If you want to customize views you can copy default views to your application.
 {{{
 $ rails generate typus:views
 }}}
-
