@@ -15,7 +15,7 @@
 apply "http://core.typuscms.com/templates/extras/gems.rb"
 
 # Run generators.
-apply "http://core.typuscms.com/templates/extras/cms_models.rb"
+apply "http://core.typuscms.com/templates/extras/cms.rb"
 
 # Run typus generators.
 rake "db:migrate"
