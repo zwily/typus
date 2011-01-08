@@ -72,7 +72,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "work for today (which is an special case)" do
-      expected = [Date.today.to_s(:db), Date.today.to_s(:db)]
+      expected = [0.days.ago.to_date.to_s(:db), 0.days.ago.tomorrow.to_date.to_s(:db)]
       output = Article.build_date_conditions('created_at', "today")[1..-1]
       assert_equal expected, output
     end
