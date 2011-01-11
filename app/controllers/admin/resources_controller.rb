@@ -169,7 +169,12 @@ class Admin::ResourcesController < Admin::BaseController
       end
     when :has_and_belongs_to_many
       attribute = resource_tableized
-      saved_succesfully = @item.send(attribute).delete(resource)
+      begin
+        saved_succesfully = @item.send(attribute).delete(resource)
+      rescue
+        attribute = resource_class.superclass.table_name
+        retry
+      end
     else
       saved_succesfully = false
     end
