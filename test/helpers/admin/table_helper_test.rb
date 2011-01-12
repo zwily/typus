@@ -172,6 +172,17 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
+  context "table_transversal_field" do
+
+    should "work" do
+      comment = Factory(:comment)
+      output = table_transversal_field("post.title", comment)
+      expected = comment.post.title
+      assert_equal expected, output
+    end
+
+  end
+
   should "test_table_position_field" do
     first_category = Factory(:category, :position => 0)
     second_category = Factory(:category, :position => 1)

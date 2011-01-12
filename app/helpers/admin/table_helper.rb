@@ -146,8 +146,8 @@ module Admin
     end
 
     def table_transversal_field(attribute, item)
-      _attribute, virtual = attribute.split(".")
-      item.send(_attribute).send(virtual)
+      field_1, field_2 = attribute.split(".")
+      item.send(field_1).send(field_2)
     end
 
   end
