@@ -26,6 +26,8 @@ class StringTest < ActiveSupport::TestCase
   context "extract_class" do
 
     setup do
+      class SucursalBancaria; end
+
       Typus::Configuration.models_constantized = { "Post" => Post,
                                                    "TypusUser" => TypusUser,
                                                    "Delayed::Task" => Delayed::Task,
