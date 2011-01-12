@@ -11,11 +11,4 @@ class Post < ActiveRecord::Base
 
   STATUS = %w( pending published unpublished )
 
-  def self.typus
-    "plugin"
-  end
-
-  def asset_file_name
-  end
-
 end
