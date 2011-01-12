@@ -100,4 +100,25 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
 
   end
 
+  context "create_with_back_to (for belongs_to)" do
+
+    setup do
+      @post = Factory(:post)
+    end
+
+    should "create a comment and assign it to post" do
+      category = {:name => "Category#1"}
+      back_to = "/admin/posts/edit/#{@post.id}"
+
+      assert_difference('@post.categories.count') do
+       post :create, { :category => category, :back_to => back_to, :resource => "Post", :resource_id => @post.id }
+      end
+
+      assert_response :redirect
+      assert_redirected_to back_to
+      assert_equal "Post successfully updated.", flash[:notice]
+    end
+
+  end
+
 end

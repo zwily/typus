@@ -265,14 +265,14 @@ class Admin::ResourcesController < Admin::BaseController
     association = @resource.reflect_on_association(params[:resource].to_sym)
 
     if params[:resource_id]
+      resource_symbol = params[:resource].downcase.to_sym
       resource_class = params[:resource].classify.typus_constantize
       resource_id = params[:resource_id]
       resource = resource_class.find(resource_id)
     end
 
-    message = Typus::I18n.t("%{model} successfully updated.", :model => resource_class.model_name.human)
-
     macro = association.macro unless association.nil?
+
     case macro
     when :has_and_belongs_to_many
       @item.send(params[:resource]) << resource
@@ -282,13 +282,19 @@ class Admin::ResourcesController < Admin::BaseController
       else
         path = "#{params[:back_to]}?#{association.primary_key_name}=#{@item.id}"
       end
+    else
+      if @item.update_attributes(resource_symbol => resource)
+        notice = Typus::I18n.t("%{model} successfully updated.", :model => resource_class.model_name.human)
+      else
+        alert = @item.error.full_messages
+      end
 =begin
     when :polymorphic
       resource.send(@item.class.to_resource).create(params[@object_name])
 =end
     end
 
-    redirect_to (path || params[:back_to]), :notice => message
+    redirect_to (path || params[:back_to]), :notice => notice
   end
 
   def default_action

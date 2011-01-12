@@ -5,6 +5,8 @@ require "test_helper"
   What's being tested here?
 
     - Unrelate "Comment" from "Post", where "Comment" belongs_to "Post".
+    - Create a "Comment" using the link provided when editing a "Post", this
+      will make the created "Comment" to be assigned to the "Post".
 
 =end
 
@@ -13,6 +15,27 @@ class Admin::CommentsControllerTest < ActionController::TestCase
   setup do
     @request.session[:typus_user_id] = Factory(:typus_user).id
     @request.env['HTTP_REFERER'] = '/admin/categories'
+  end
+
+  context "create_with_back_to (for belongs_to)" do
+
+    setup do
+      @post = Factory(:post)
+    end
+
+    should "create a comment and assign it to post" do
+      comment = {:name => "John", :email => "john@example.com", :body => "This is the body"}
+      back_to = "/admin/posts/edit/#{@post.id}"
+
+      assert_difference('@post.comments.count') do
+       post :create, { :comment => comment, :back_to => back_to, :resource => "Post", :resource_id => @post.id }
+      end
+
+      assert_response :redirect
+      assert_redirected_to back_to
+      assert_equal "Post successfully updated.", flash[:notice]
+    end
+
   end
 
   context "Unrelate (belongs_to)" do
