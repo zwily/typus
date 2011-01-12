@@ -414,13 +414,16 @@ title;status
 
   context "Relationships (relate)" do
 
+    setup do
+      @post = Factory(:post)
+    end
+
     should "relate comment with post (has_many)" do
       comment = Factory(:comment, :post => nil)
-      post_ = Factory(:post)
-      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#comments"
+      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
-      assert_difference('post_.comments.count') do
-        post :relate, { :id => post_.id, :related => { :model => 'Comment', :id => comment.id } }
+      assert_difference('@post.comments.count') do
+        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => comment.id } }
       end
 
       assert_response :redirect
@@ -430,11 +433,10 @@ title;status
 
     should "relate category with post (has_and_belongs_to_many)" do
       category = Factory(:category)
-      post_ = Factory(:post)
-      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#categories"
+      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"
 
-      assert_difference('category.posts.count') do
-        post :relate, { :id => post_.id, :related => { :model => 'Category', :id => category.id } }
+      assert_difference('@category.posts.count') do
+        post :relate, { :id => @post.id, :related => { :model => 'Category', :id => category.id } }
       end
 
       assert_response :redirect
