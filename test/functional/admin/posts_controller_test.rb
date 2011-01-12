@@ -418,7 +418,7 @@ title;status
       @post = Factory(:post)
     end
 
-    should "relate comment with post (has_many)" do
+    should "relate comment to post (has_many)" do
       comment = Factory(:comment, :post => nil)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
@@ -431,7 +431,7 @@ title;status
       assert_equal "Post successfully updated.", flash[:notice]
     end
 
-    should "relate category with post (has_and_belongs_to_many)" do
+    should "relate category to post (has_and_belongs_to_many)" do
       category = Factory(:category)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"
 
