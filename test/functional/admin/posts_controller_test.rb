@@ -479,7 +479,7 @@ title;status
     end
 
     ##
-    # Post => has_many :assets, :as => resource (Polimorphic)
+    # Post => has_many :assets, :as => resource (Polymorphic)
     ##
 
     should "relate_asset_with_post_and_then_unrelate" do

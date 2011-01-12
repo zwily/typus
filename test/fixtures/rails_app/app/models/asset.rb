@@ -4,7 +4,7 @@
 
     - Dragonfly Attachments
     - Paperclip Attachments
-    - Polimorphic Associations
+    - Polymorphic Associations
 
 =end
 
