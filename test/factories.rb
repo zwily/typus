@@ -21,14 +21,6 @@ Factory.define :page do |f|
   f.body "Content"
 end
 
-Factory.define :picture do |f|
-  f.sequence(:title) { |n| "Picture##{n}" }
-  f.picture_file_name "dog.jpg"
-  f.picture_content_type "image/jpeg"
-  f.picture_file_size "175938"
-  f.picture_updated_at 3.days.ago.to_s(:db)
-end
-
 Factory.define :post do |f|
   f.sequence(:title) { |n| "Post##{n}" }
   f.body "Body"

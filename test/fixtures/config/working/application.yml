@@ -65,13 +65,6 @@ Post:
   application: Blog
   export: csv, xml
 
-Picture:
-  fields:
-    default: title, picture
-    list: title, created_at
-  search: title
-  application: Blog
-
 View:
   fields:
     default: ip, post

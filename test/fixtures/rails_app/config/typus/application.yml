@@ -63,13 +63,6 @@ Post:
   application: Blog
   export: csv, xml
 
-Picture:
-  fields:
-    default: title, picture
-    list: title, created_at
-  search: title
-  application: Blog
-
 CustomUser:
   fields:
     list: first_name, last_name, email

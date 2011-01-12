@@ -54,13 +54,13 @@ class TypusTest < ActiveSupport::TestCase
 
   should "return modules of an application" do
     assert Typus.respond_to?(:application)
-    assert_equal %w(Comment Picture Post), Typus.application("Blog")
+    assert_equal %w(Comment Post), Typus.application("Blog")
   end
 
   should "return models and should be sorted" do
     assert Typus.respond_to?(:models)
     assert Typus.models.is_a?(Array)
-    assert_equal %w(Asset Category Comment CustomUser Page Picture Post TypusUser View), Typus.models
+    assert_equal %w(Asset Category Comment CustomUser Page Post TypusUser View), Typus.models
   end
 
   should "verify resources class_method" do

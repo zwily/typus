@@ -97,12 +97,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
     end
 
-    should "return form fields for Picture" do
-      expected_fields = [["title", :string], ["picture", :file]]
-      assert_equal expected_fields.map { |i| i.first }, Picture.typus_fields_for(:form).keys
-      assert_equal expected_fields.map { |i| i.last }, Picture.typus_fields_for(:form).values
-    end
-
     should "return form fields for Asset" do
       expected_fields = [["caption", :string], ["dragonfly", :file], ["dragonfly_required", :file]]
       assert_equal expected_fields.map { |i| i.first }, Asset.typus_fields_for(:form).keys
@@ -313,10 +307,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     should "return post formats" do
       assert_equal ["csv", "xml"], Post.typus_export_formats
-    end
-
-    should "return picture formats" do
-      assert Picture.typus_export_formats.empty?
     end
 
   end
