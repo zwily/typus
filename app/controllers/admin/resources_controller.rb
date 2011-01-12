@@ -282,8 +282,10 @@ class Admin::ResourcesController < Admin::BaseController
       else
         path = "#{params[:back_to]}?#{association.primary_key_name}=#{@item.id}"
       end
+=begin
     when :polymorphic
       resource.send(@item.class.to_resource).create(params[@object_name])
+=end
     end
 
     redirect_to (path || params[:back_to]), :notice => message
