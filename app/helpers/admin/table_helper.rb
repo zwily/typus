@@ -44,11 +44,7 @@ module Admin
 
     def table_fields_for_item(item, fields, link_options)
       fields.map do |key, value|
-        begin
-          send("table_#{value}_field", key, item)
-        rescue
-          send("table_virtual_field", key, item)
-        end
+        send("table_#{value}_field", key, item)
       end
     end
 

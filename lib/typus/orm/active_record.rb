@@ -29,6 +29,8 @@ module Typus
           data = read_model_config['fields']
           fields = data[filter.to_s] || data['default'] || ""
 
+          virtual_fields = instance_methods - model_fields.keys.map { |i| i.to_s }
+
           fields.extract_settings.map { |f| f.to_sym }.each do |field|
             if reflect_on_association(field)
               fields_with_type[field.to_s] = reflect_on_association(field).macro
@@ -48,13 +50,23 @@ module Typus
               next
             end
 
+            if virtual_fields.include?(field.to_s)
+              fields_with_type[field.to_s] = :virtual
+            end
+
             fields_with_type[field.to_s] = case field.to_s
                                            when 'parent', 'parent_id' then :tree
                                            when /password/            then :password
                                            when 'position'            then :position
                                            when /\./                  then :transversal
-                                           else                       model_fields[field]
+                                           else
+                                             if fields_with_type[field.to_s]
+                                               fields_with_type[field.to_s]
+                                             else
+                                               model_fields[field]
+                                             end
                                            end
+
           end
         end
       end

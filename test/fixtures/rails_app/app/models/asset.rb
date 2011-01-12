@@ -20,4 +20,7 @@ class Asset < ActiveRecord::Base
   # Paperclip Attachment
   has_attached_file :paperclip, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 
+  def original_file_name
+  end
+
 end
