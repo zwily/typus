@@ -33,6 +33,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
                          [:favorite_comment_id, :integer],
                          [:published_at, :datetime],
                          [:typus_user_id, :integer],
+                         [:published, :boolean],
                          [:created_at, :datetime],
                          [:updated_at, :datetime]]
       assert_equal expected_fields.map { |i| i.first }, Post.model_fields.keys

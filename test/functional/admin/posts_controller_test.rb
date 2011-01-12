@@ -59,6 +59,24 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+  context "CRUD extras" do
+
+    setup do
+      @request.env['HTTP_REFERER'] = "/admin/posts"
+    end
+
+    should "toggle" do
+      assert !@post.published
+      get :toggle, { :id => @post.id, :field => "published" }
+
+      assert_response :redirect
+      assert_redirected_to @request.env["HTTP_REFERER"]
+      assert_equal "Post successfully updated.", flash[:notice]
+      assert @post.reload.published
+    end
+
+  end
+
   context "Actions" do
 
     should "be edit and trash on index" do
