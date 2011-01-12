@@ -44,7 +44,11 @@ module Admin
 
     def table_fields_for_item(item, fields, link_options)
       fields.map do |key, value|
-        send("table_#{value}_field", key, item)
+        begin
+          send("table_#{value}_field", key, item)
+        rescue
+          send("table_virtual_field", key, item)
+        end
       end
     end
 
@@ -92,6 +96,7 @@ module Admin
     alias :table_float_field :table_generic_field
     alias :table_integer_field :table_generic_field
     alias :table_decimal_field :table_generic_field
+    alias :table_virtual_field :table_generic_field
 
     def table_selector_field(attribute, item)
       item.mapping(attribute)
