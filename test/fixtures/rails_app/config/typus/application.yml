@@ -63,10 +63,6 @@ Post:
   application: Blog
   export: csv, xml
 
-CustomUser:
-  fields:
-    list: first_name, last_name, email
-
 View:
   fields:
     default: ip, post

@@ -23,10 +23,6 @@ Comment:
   search: email, body
   application: Blog
 
-CustomUser:
-  fields:
-    list: first_name, last_name, email
-
 Page:
   fields:
     # Body field is overrided from a Page class method.
