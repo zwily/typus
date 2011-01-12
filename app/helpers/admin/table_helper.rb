@@ -42,7 +42,7 @@ module Admin
       end
     end
 
-    def table_fields_for_item(item, fields, link_options)
+    def table_fields_for_item(item, fields)
       fields.map do |key, value|
         send("table_#{value}_field", key, item)
       end
