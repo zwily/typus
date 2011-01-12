@@ -435,7 +435,7 @@ title;status
       category = Factory(:category)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"
 
-      assert_difference('@category.posts.count') do
+      assert_difference('category.posts.count') do
         post :relate, { :id => @post.id, :related => { :model => 'Category', :id => category.id } }
       end
 
