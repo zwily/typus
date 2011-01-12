@@ -89,7 +89,7 @@ class Admin::ResourcesController < Admin::BaseController
     if @item.destroy
       notice = Typus::I18n.t("%{model} successfully removed.", :model => @resource.model_name.human)
     else
-      alert = @item.errors.values
+      alert = @item.errors.full_messages
     end
     redirect_to set_path, :notice => notice, :alert => alert
   end
