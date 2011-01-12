@@ -1,5 +1,13 @@
 require "test_helper"
 
+=begin
+
+  What's being tested here?
+
+    - Stuff related to Admin users. (a.k.a. Profile Stuff)
+
+=end
+
 class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   context "Admin" do
