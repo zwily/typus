@@ -156,7 +156,12 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   ##
-  # Remove relationship between models, this action never removes items!
+  # Action to unrelate models which respond to:
+  #
+  #   - has_and_belongs_to_many
+  #   - has_many
+  #
+  # Otherwise will raise an error.
   #
   def unrelate
     resource_class = params[:resource].typus_constantize
