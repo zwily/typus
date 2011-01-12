@@ -118,6 +118,16 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal %w(first_name last_name role email locale), TypusUser.typus_fields_for(:undefined).keys
     end
 
+    should "work for transversal fields" do
+      expected_fields = [["email", :string],
+                         ["post", :belongs_to],
+                         ["post_id", :integer],
+                         ["spam", :boolean],
+                         ["post.title", :transversal]]
+      assert_equal expected_fields.map { |i| i.first }, Comment.typus_fields_for(:list).keys
+      assert_equal expected_fields.map { |i| i.last }, Comment.typus_fields_for(:list).values
+    end
+
   end
 
   context "typus_filters" do
