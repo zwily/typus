@@ -122,8 +122,27 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   ##
-  # Relate a model object to another, this action is used only by the
-  # `has_and_belongs_to_many` and `has_many` relationships.
+  # Action to relate models which respond to:
+  #
+  #   - has_and_belongs_to_many
+  #   - has_many
+  #
+  # For example:
+  #
+  #   class Item < ActiveRecord::Base
+  #     has_many :line_items
+  #   end
+  #
+  #   class LineItem < ActiveRecord::Base
+  #     belongs_to :item
+  #   end
+  #
+  #   >> related_item = LineItem.find(params[:related][:id])
+  #   => ...
+  #   >> item = Item.find(params[:id])
+  #   => ...
+  #   >> item.line_items << related_item
+  #   => ...
   #
   def relate
     resource_class = params[:related][:model].typus_constantize
