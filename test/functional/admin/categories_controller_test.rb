@@ -1,5 +1,14 @@
 require "test_helper"
 
+=begin
+
+  What's being tested here?
+
+    - ActsAsList.
+    - Template Override (TODO: Centralize this!!!)
+
+=end
+
 class Admin::CategoriesControllerTest < ActionController::TestCase
 
   setup do

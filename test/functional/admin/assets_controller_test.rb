@@ -1,5 +1,14 @@
 require "test_helper"
 
+=begin
+
+  What's being tested here?
+
+    - Polymorphic relationships.
+    - Asset management like attach (edit) and detach (update).
+
+=end
+
 class Admin::AssetsControllerTest < ActionController::TestCase
 
   setup do
