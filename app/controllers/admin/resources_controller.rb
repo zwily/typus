@@ -20,7 +20,7 @@ class Admin::ResourcesController < Admin::BaseController
   #
   def index
     add_action(:action_name => default_action.titleize, :action => default_action)
-    add_action(:action_name => "Trash", :action => "destroy", :confirm => Typus::I18n.t("Trash %{resource}?", :resource => @resource.model_name.human), :method => 'delete')
+    add_action(:action_name => "Trash", :action => "destroy", :confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete')
 
     get_objects
 

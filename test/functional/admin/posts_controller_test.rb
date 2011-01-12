@@ -83,7 +83,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       get :index
 
       expected = [ {"action_name"=>"Edit", "action"=>"edit"},
-                   {"confirm"=>"Trash Post?", "action_name"=>"Trash", "method"=>"delete", "action"=>"destroy"}]
+                   {"confirm"=>"Trash?", "action_name"=>"Trash", "method"=>"delete", "action"=>"destroy"}]
 
       assert_equal expected, assigns(:actions)
     end
@@ -107,7 +107,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
         get :index
 
         expected = [ {"action_name"=>"Show", "action"=>"show"},
-                     {"confirm"=>"Trash Post?", "action_name"=>"Trash", "method"=>"delete", "action"=>"destroy"}]
+                     {"confirm"=>"Trash?", "action_name"=>"Trash", "method"=>"delete", "action"=>"destroy"}]
 
         assert_equal expected, assigns(:actions)
       end
