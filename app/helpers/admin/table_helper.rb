@@ -43,9 +43,7 @@ module Admin
     end
 
     def table_fields_for_item(item, fields)
-      fields.map do |key, value|
-        send("table_#{value}_field", key, item)
-      end
+      fields.map { |k, v| send("table_#{v}_field", k, item) }
     end
 
     def actions
