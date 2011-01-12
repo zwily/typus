@@ -159,7 +159,7 @@ class Admin::ResourcesController < Admin::BaseController
   # Action to unrelate models which respond to:
   #
   #   - has_and_belongs_to_many
-  #   - has_many
+  #   - belongs_to
   #
   # Otherwise will raise an error.
   #
@@ -168,43 +168,32 @@ class Admin::ResourcesController < Admin::BaseController
     resource_tableized = params[:resource].tableize
     resource = resource_class.find(params[:resource_id])
 
-    # We consider that we are unrelating a has_many or has_and_belongs_to_many
-
     reflection = @resource.reflect_on_association(resource_class.table_name.to_sym)
     macro = reflection.try(:macro)
-    options = reflection.try(:options)
 
     case macro
     when :has_and_belongs_to_many
       attribute = resource_tableized
       begin
-        saved_succesfully = @item.send(attribute).delete(resource)
+        if @item.send(attribute).delete(resource)
+          notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
+        else
+          alert = @item.error.full_messages
+        end
       rescue
         attribute = resource_class.superclass.table_name
         retry
       end
-    when :has_many
-      if options.has_key?(:as) # We are in a polymorphic relationship
-        interface = options[:as]
-        saved_succesfully = resource.update_attributes("#{interface}_type" => nil, "#{interface}_id" => nil)
-      elsif options.has_key?(:through)
-        resource_parent = reflection.active_record.find(params[:id])
-        saved_succesfully = resource_parent.send(resource_tableized).delete(resource)
-      else
-        # We have to verify we can unrelate. For example: A Category which has
-        # many posts and Post validates_presence_of Category should not be removed.
-        attribute = @resource.table_name.singularize
-        saved_succesfully = resource.update_attributes(attribute => nil)
-      end
     else
-      raise "Not implemented! (Only has_and_belongs_to_many and has_many are supported)"
+      attribute = params[:resource].downcase.to_sym
+      if @item.update_attributes attribute => nil
+        notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
+      else
+        alert = @item.error.full_messages
+      end
     end
 
-    if saved_succesfully
-      flash[:notice] = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
-    end
-
-    redirect_to set_path
+    redirect_to set_path, :notice => notice, :alert => alert
   end
 
   private
@@ -295,8 +284,6 @@ class Admin::ResourcesController < Admin::BaseController
       end
     when :polymorphic
       resource.send(@item.class.to_resource).create(params[@object_name])
-    else
-      raise "Not implemented! (Only has_and_belongs_to_many, has_many and polymorphic are supported)"
     end
 
     redirect_to (path || params[:back_to]), :notice => message

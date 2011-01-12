@@ -10,7 +10,7 @@ Factory.define :category do |f|
 end
 
 Factory.define :comment do |f|
-  f.name "John"
+  f.sequence(:name) { |n| "Name#{n}" }
   f.sequence(:email) { |n| "john+#{n}@example.com" }
   f.body "Body of the comment"
   f.association :post

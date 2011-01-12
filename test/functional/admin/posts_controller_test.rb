@@ -412,86 +412,31 @@ title;status
 
   end
 
-  context "Relationships" do
+  context "Relationships (relate)" do
 
-    ##
-    # Post => has_many :comments
-    ##
-
-    should "relate_comment_with_post_and_then_unrelate" do
-
+    should "relate comment with post (has_many)" do
       comment = Factory(:comment, :post => nil)
       post_ = Factory(:post)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#comments"
 
       assert_difference('post_.comments.count') do
-        post :relate, { :id => post_.id,
-                        :related => { :model => 'Comment', :id => comment.id } }
+        post :relate, { :id => post_.id, :related => { :model => 'Comment', :id => comment.id } }
       end
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
       assert_equal "Post successfully updated.", flash[:notice]
-
-      assert_difference('post_.comments.count', -1) do
-        post :unrelate, { :id => post_.id,
-                          :resource => 'Comment', :resource_id => comment.id }
-      end
-
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Post successfully updated.", flash[:notice]
-
     end
 
-    ##
-    # Post => has_and_belongs_to_many :categories
-    ##
-
-    should "relate_category_with_post_and_then_unrelate" do
+    should "relate category with post (has_and_belongs_to_many)" do
       category = Factory(:category)
       post_ = Factory(:post)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#categories"
-
-      ##
-      # First Step: Relate
-      #
 
       assert_difference('category.posts.count') do
         post :relate, { :id => post_.id, :related => { :model => 'Category', :id => category.id } }
       end
 
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Post successfully updated.", flash[:notice]
-
-      ##
-      # Second Step: Unrelate
-      #
-
-      assert_difference('category.posts.count', -1) do
-        post :unrelate, { :id => post_.id, :resource => 'Category', :resource_id => category.id }
-      end
-
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Post successfully updated.", flash[:notice]
-    end
-
-    ##
-    # Post => has_many :assets, :as => resource (Polymorphic)
-    ##
-
-    should "relate_asset_with_post_and_then_unrelate" do
-      post_ = Factory(:post)
-      asset = Factory(:asset)
-      post_.assets << asset
-
-      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{post_.id}#assets"
-
-      assert_difference('post_.assets.count', -1) do
-        get :unrelate, { :id => post_.id, :resource => 'Asset', :resource_id => asset.id }
-      end
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
       assert_equal "Post successfully updated.", flash[:notice]

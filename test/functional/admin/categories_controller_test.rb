@@ -6,6 +6,7 @@ require "test_helper"
 
     - ActsAsList.
     - Template Override (TODO: Centralize this!!!)
+    - Unrelate (Post#categories) (has_and_belongs_to_many)
 
 =end
 
@@ -64,6 +65,37 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
       get :position, { :id => @second_category.id, :go => 'move_to_top' }
       assert_equal "Record moved to position to top.", flash[:notice]
       assert_equal 1, @second_category.reload.position
+    end
+
+  end
+
+  context "Unrelate (has_and_belongs_to_many)" do
+
+    ##
+    # We are in:
+    #
+    #   /admin/posts/edit/1
+    #
+    # And we see a list of comments under it:
+    #
+    #   /admin/categories/unrelate/1?resource=Post&resource_id=1
+    #   /admin/categories/unrelate/2?resource=Post&resource_id=1
+    ##
+
+    setup do
+      @category = Factory(:category)
+      @category.posts << Factory(:post)
+      @request.env['HTTP_REFERER'] = "/admin/dashboard"
+    end
+
+    should "unrelate category from post" do
+      assert_difference('@category.posts.count', -1) do
+        post :unrelate, { :id => @category.id, :resource => 'Post', :resource_id => @category.posts.first }
+      end
+
+      assert_response :redirect
+      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_equal "Category successfully updated.", flash[:notice]
     end
 
   end
