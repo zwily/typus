@@ -111,7 +111,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
       back_to = "/admin/posts/edit/#{@post.id}"
 
       assert_difference('@post.categories.count') do
-       post :create, { :category => category, :back_to => back_to, :resource => "Post", :resource_id => @post.id }
+       post :create, { :category => category, :back_to => back_to, :resource => "posts", :resource_id => @post.id }
       end
 
       assert_response :redirect

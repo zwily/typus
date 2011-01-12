@@ -272,6 +272,7 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     macro = association.macro unless association.nil?
+    notice = Typus::I18n.t("%{model} successfully updated.", :model => resource_class.model_name.human)
 
     case macro
     when :has_and_belongs_to_many
@@ -283,9 +284,7 @@ class Admin::ResourcesController < Admin::BaseController
         path = "#{params[:back_to]}?#{association.primary_key_name}=#{@item.id}"
       end
     else
-      if @item.update_attributes(resource_symbol => resource)
-        notice = Typus::I18n.t("%{model} successfully updated.", :model => resource_class.model_name.human)
-      else
+      unless @item.update_attributes(resource_symbol => resource)
         alert = @item.error.full_messages
       end
 =begin
@@ -294,7 +293,9 @@ class Admin::ResourcesController < Admin::BaseController
 =end
     end
 
-    redirect_to (path || params[:back_to]), :notice => notice
+    notice = nil if alert
+
+    redirect_to (path || params[:back_to]), :notice => notice, :alert => alert
   end
 
   def default_action
