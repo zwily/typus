@@ -176,7 +176,7 @@ class Admin::ResourcesController < Admin::BaseController
       attribute = resource_tableized
       begin
         if @item.send(attribute).delete(resource)
-          notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
+          notice = Typus::I18n.t("%{model} successfully updated.", :model => resource_class.model_name.human)
         else
           alert = @item.error.full_messages
         end
