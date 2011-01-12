@@ -176,7 +176,7 @@ class Admin::ResourcesController < Admin::BaseController
         retry
       end
     else
-      saved_succesfully = false
+      raise "Not implemented!"
     end
 
     if saved_succesfully
