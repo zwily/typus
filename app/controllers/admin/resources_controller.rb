@@ -151,6 +151,14 @@ class Admin::ResourcesController < Admin::BaseController
     options = reflection.try(:options)
 
     case macro
+    when :has_and_belongs_to_many
+      attribute = resource_tableized
+      begin
+        saved_succesfully = @item.send(attribute).delete(resource)
+      rescue
+        attribute = resource_class.superclass.table_name
+        retry
+      end
     when :has_many
       if options.has_key?(:as) # We are in a polymorphic relationship
         interface = options[:as]
@@ -163,14 +171,6 @@ class Admin::ResourcesController < Admin::BaseController
         # many posts and Post validates_presence_of Category should not be removed.
         attribute = @resource.table_name.singularize
         saved_succesfully = resource.update_attributes(attribute => nil)
-      end
-    when :has_and_belongs_to_many
-      attribute = resource_tableized
-      begin
-        saved_succesfully = @item.send(attribute).delete(resource)
-      rescue
-        attribute = resource_class.superclass.table_name
-        retry
       end
     else
       raise "Not implemented! (Only has_and_belongs_to_many and has_many are supported)"
