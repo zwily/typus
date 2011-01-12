@@ -173,7 +173,7 @@ class Admin::ResourcesController < Admin::BaseController
         retry
       end
     else
-      raise "Not implemented!"
+      raise "Not implemented! (Only has_and_belongs_to_many and has_many are supported)"
     end
 
     if saved_succesfully
@@ -271,6 +271,8 @@ class Admin::ResourcesController < Admin::BaseController
       end
     when :polymorphic
       resource.send(@item.class.to_resource).create(params[@object_name])
+    else
+      raise "Not implemented! (Only has_and_belongs_to_many, has_many and polymorphic are supported)"
     end
 
     redirect_to (path || params[:back_to]), :notice => message
