@@ -151,9 +151,6 @@ class Admin::ResourcesController < Admin::BaseController
     options = reflection.try(:options)
 
     case macro
-    # when :has_one
-    #   attribute = resource_tableized.singularize
-    #   saved_succesfully = @item.update_attribute attribute, nil
     when :has_many
       if options.has_key?(:as) # We are in a polymorphic relationship
         interface = options[:as]
