@@ -20,7 +20,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     get :new, { :back_to => "/admin/posts/#{@post.id}/edit",
                 :resource => @post.class.name, :resource_id => @post.id }
 
-    assert_select 'body div#flash', "Cancel adding a new Asset?"
+    assert_select 'body div#flash', "Cancel adding a new asset?"
   end
 
   # FIXME
@@ -87,7 +87,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
                    :back_to => "/admin/posts/#{@post.id}/edit",
                    :resource => @post.class.name, :resource_id => @post.id }
 
-      assert_select 'body div#flash', "Cancel adding a new Asset?"
+      assert_select 'body div#flash', "Cancel adding a new asset?"
     end
 
   end
