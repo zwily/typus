@@ -1,11 +1,13 @@
-##
-# This model is used to test:
-#
-#     - Dragonfly Attachments
-#     - Paperclip Attachments
-#     - Polimorphic Associations
-#
-##
+=begin
+
+  This model is used to test:
+
+    - Dragonfly Attachments
+    - Paperclip Attachments
+    - Polimorphic Associations
+
+=end
+
 class Asset < ActiveRecord::Base
 
   belongs_to :resource, :polymorphic => true

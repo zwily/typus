@@ -1,10 +1,12 @@
-##
-# This model is used to test:
-#
-#     - ActsAsList on resources_controller
-#     - Relate and unrelate for has_and_belongs_to_many.
-#
-##
+=begin
+
+  This model is used to test:
+
+    - ActsAsList on resources_controller
+    - Relate and unrelate for has_and_belongs_to_many.
+
+=end
+
 class Category < ActiveRecord::Base
 
   acts_as_list
