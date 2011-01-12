@@ -89,9 +89,12 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def destroy
-    @item.destroy
-    notice = Typus::I18n.t("%{model} successfully removed.", :model => @resource.model_name.human)
-    redirect_to set_path, :notice => notice
+    if @item.destroy
+      notice = Typus::I18n.t("%{model} successfully removed.", :model => @resource.model_name.human)
+    else
+      alert = @item.errors.values
+    end
+    redirect_to set_path, :notice => notice, :alert => alert
   end
 
   def toggle
