@@ -175,32 +175,18 @@ class ActiveRecordTest < ActiveSupport::TestCase
       end
     end
 
-    should_eventually "return_sql_conditions_on_search_and_filter_for_typus_user" do
-      case ENV["DB"]
-      when "mysql"
-        boolean_true = "(typus_users.`status` = 1)"
-        boolean_false = "(typus_users.`status` = 0)"
-      else
-        boolean_true = "(\"typus_users\".\"status\" = 't')"
-        boolean_false = "(\"typus_users\".\"status\" = 'f')"
-      end
-
+    should "return_sql_conditions_on_search_and_filter_for_typus_user" do
       expected = ["typus_users.first_name LIKE '%francesc%'",
                   "typus_users.last_name LIKE '%francesc%'",
                   "typus_users.email LIKE '%francesc%'",
-                  "typus_users.role LIKE '%francesc%'",
-                  boolean_true]
+                  "typus_users.role LIKE '%francesc%'"]
 
       params = { :search => "francesc", :status => "true" }
-      output = TypusUser.build_conditions(params).first
-      expected.each { |e| assert_match e, output }
+      output = TypusUser.build_conditions(params)
 
-      assert_match /AND/, output
-      assert_match /OR/, output
-
-      params = { :search => "francesc", :status => "false" }
-      output = TypusUser.build_conditions(params).first
-      assert_match boolean_false, output
+      boolean_true = {:status=>true}
+      assert_equal boolean_true, output.first
+      expected.each { |e| assert_match e, output.last }
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_status true" do
