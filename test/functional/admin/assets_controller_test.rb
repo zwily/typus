@@ -48,24 +48,6 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       end
     end
 
-    should_eventually "create a polymorphic relationship" do
-      asset = { :caption => "Caption",
-                :dragonfly_uid => File.new("#{Rails.root}/config/database.yml"),
-                :dragonfly_required_uid => File.new("#{Rails.root}/config/database.yml") }
-      back_to = "/admin/posts/edit/#{@post.id}"
-
-      assert_difference('@post.assets.count') do
-        post :create, { :asset => asset,
-                        :back_to => back_to,
-                        :resource => @post.class.name,
-                        :resource_id => @post.id }
-      end
-
-      assert_response :redirect
-      assert_redirected_to back_to
-      assert_equal "Asset successfully assigned to Post.", flash[:notice]
-    end
-
   end
 
   context "edit" do
