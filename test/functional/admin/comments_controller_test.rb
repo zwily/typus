@@ -28,6 +28,10 @@ class Admin::CommentsControllerTest < ActionController::TestCase
     #
     #   /admin/comments/unrelate/1?resource=Post&resource_id=1
     #   /admin/comments/unrelate/2?resource=Post&resource_id=1
+    #
+    # Notice that unrelating an item doesn't remove it from database unless
+    # defined on the model.
+    #
     ##
 
     should "unrelate comment from post" do
@@ -37,6 +41,8 @@ class Admin::CommentsControllerTest < ActionController::TestCase
       assert_difference('@post.comments.count', -1) do
         post :unrelate, { :id => comment.id, :resource => 'Post', :resource_id => @post.id }
       end
+
+      assert comment.reload.post.nil?
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
