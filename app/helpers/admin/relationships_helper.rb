@@ -161,10 +161,10 @@ module Admin
       related_fk = @resource.reflect_on_association(attribute.to_sym).primary_key_name
 
       if params[:action] == 'edit'
-        options = { :resource => @resource.to_resource,
+        options = { :resource => @resource.model_name,
                     :resource_id => @item.id }
       else
-        options = { :resource => @resource.to_resource }
+        options = { :resource => @resource.model_name }
       end
 
       default = { :controller => "/admin/#{related.to_resource}", :action => 'new', :back_to => back_to }
