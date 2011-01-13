@@ -253,12 +253,49 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   ##
-  # When `params[:back_to]` is defined this action is used.
+  # Here what we basically do is to associate objects after they have been
+  # created. It's similar to calling `relate`.
   #
-  # - `has_and_belongs_to_many` relationships.
-  # - `has_many` relationships (polymorphic ones).
+  # We have two objects:
+  #
+  #   - @item: Which is the create object.
+  #   - item: Which is the object which be associated to.
+  #
+  # http://0.0.0.0:3000/admin/entries/new?back_to=%2Fadmin%2Fcategories%2Fedit%2F3&resource=categories&resource_id=3
   #
   def create_with_back_to
+
+    ##
+    # Find the remote object which is named item!
+    #
+
+    item_class = params[:resource].typus_constantize
+    item = item_class.find(params[:resource_id])
+
+    ##
+    # Detect which kind of relationship there's between both models.
+    #
+    #     item respect @item
+    #
+
+    association_name = @resource.model_name.tableize.to_sym
+    association = item_class.reflect_on_association(association_name)
+
+    ##
+    # Finally delete the associated object. Depending on your models setup
+    # associated models will be removed or foreign_key will be set to nil.
+    #
+
+    if item.send(association_name).push(@item)
+      notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
+    else
+      alert = item.error.full_messages
+    end
+
+    redirect_to set_path, :notice => notice, :alert => alert
+
+=begin
+
     association = @resource.reflect_on_association(params[:resource].to_sym)
 
     if params[:resource_id]
@@ -284,15 +321,14 @@ class Admin::ResourcesController < Admin::BaseController
       unless @item.update_attributes(resource_symbol => resource)
         alert = @item.error.full_messages
       end
-=begin
-    when :polymorphic
-      resource.send(@item.class.to_resource).create(params[@object_name])
-=end
+    # when :polymorphic
+    #   resource.send(@item.class.to_resource).create(params[@object_name])
     end
+=end
 
-    notice = nil if alert
+#    notice = nil if alert
 
-    redirect_to (path || params[:back_to]), :notice => notice, :alert => alert
+#    redirect_to (path || params[:back_to]), :notice => notice, :alert => alert
   end
 
   def default_action
