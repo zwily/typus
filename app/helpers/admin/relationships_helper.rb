@@ -47,14 +47,12 @@ module Admin
         form = build_relate_form
       end
 
-      options = { :resource => @resource.to_resource }
-
       build_pagination
 
       render "admin/templates/has_n",
              :model_to_relate => @model_to_relate,
              :model_to_relate_as_resource => @model_to_relate_as_resource,
-             :add_new => build_add_new(options),
+             :add_new => build_add_new,
              :form => form,
              :table => build_relationship_table
     end
@@ -83,7 +81,7 @@ module Admin
 
     def build_add_new(options = {})
       default_options = { :controller => "/admin/#{@model_to_relate.to_resource}", :action => "new",
-                          :resource => @resource.to_resource.singularize, :resource_id => @item.id,
+                          :resource => @resource.model_name, :resource_id => @item.id,
                           :back_to => @back_to }
 
       if set_condition && admin_user.can?("create", @model_to_relate)
