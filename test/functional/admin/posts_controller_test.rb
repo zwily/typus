@@ -599,6 +599,13 @@ title;status
 
   end
 
+  ##
+  # We are in a View and we want to create a new Post from there to be able
+  # to assign it. There are two cases:
+  #
+  # - We are creating the view.
+  # - We are editing the view.
+  #
   context "create_with_back_to" do
 
     setup do
