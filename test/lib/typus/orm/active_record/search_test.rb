@@ -242,9 +242,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal expected, TypusUser.build_conditions(params).first
     end
 
-    should_eventually "return_sql_conditions_on_filtering_typus_users_by_created_at last_30_days" do
+    should "return_sql_conditions_on_filtering_typus_users_by_created_at last_30_days" do
       expected = ["typus_users.created_at BETWEEN ? AND ?",
-                  Time.zone.now.beginning_of_day.prev_month.to_s(:db),
+                  30.days.ago.beginning_of_day.to_s(:db),
                   Time.zone.now.beginning_of_day.tomorrow.to_s(:db)]
       params = { :created_at => "last_30_days" }
 
