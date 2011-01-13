@@ -61,7 +61,7 @@ class Admin::CommentsControllerTest < ActionController::TestCase
 
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Comment successfully updated.", flash[:notice]
+      assert_equal "Post successfully updated.", flash[:notice]
     end
 
   end
