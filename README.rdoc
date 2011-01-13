@@ -32,7 +32,7 @@ enough to match lots of use cases.
 == Installing
 
 Install from GitHub the latest version which it's compatible with 
-<tt>Rails 2.3.8</tt>.
+<tt>Rails 2.3.10</tt>.
 
     $ script/plugin install git://github.com/fesplugas/typus.git -r 2-3-stable
 
