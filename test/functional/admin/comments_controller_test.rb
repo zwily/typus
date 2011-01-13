@@ -4,9 +4,7 @@ require "test_helper"
 
   What's being tested here?
 
-    - Unrelate "Comment" from "Post", where "Comment" belongs_to "Post".
-    - Create a "Comment" using the link provided when editing a "Post", this
-      will make the created "Comment" to be assigned to the "Post".
+    - Unrelate "Comment" from "Post" (Post#comments)
 
 =end
 
@@ -17,7 +15,7 @@ class Admin::CommentsControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = '/admin/categories'
   end
 
-  context "Unrelate (belongs_to)" do
+  context "Unrelate" do
 
     ##
     # We are in:
