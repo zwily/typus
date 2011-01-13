@@ -60,7 +60,7 @@ class TypusTest < ActiveSupport::TestCase
   should "return models and should be sorted" do
     assert Typus.respond_to?(:models)
     assert Typus.models.is_a?(Array)
-    assert_equal %w(Asset Category Comment Page Post TypusUser View), Typus.models
+    assert_equal %w(Asset Case Category Comment Page Post TypusUser View), Typus.models
   end
 
   should "verify resources class_method" do
