@@ -159,38 +159,35 @@ class Admin::ResourcesController < Admin::BaseController
   # Action to unrelate models which respond to:
   #
   #   - has_and_belongs_to_many
-  #   - belongs_to
-  #
-  # Otherwise will raise an error.
+  #   - has_many
   #
   def unrelate
-    resource_class = params[:resource].typus_constantize
-    resource_tableized = params[:resource].tableize
-    resource = resource_class.find(params[:resource_id])
 
-    reflection = @resource.reflect_on_association(resource_class.table_name.to_sym)
-    macro = reflection.try(:macro)
+    ##
+    # Find the remote object which is named item!
+    #
 
-    case macro
-    when :has_and_belongs_to_many
-      attribute = resource_tableized
-      begin
-        if @item.send(attribute).delete(resource)
-          notice = Typus::I18n.t("%{model} successfully updated.", :model => resource_class.model_name.human)
-        else
-          alert = @item.error.full_messages
-        end
-      rescue
-        attribute = resource_class.superclass.table_name
-        retry
-      end
+    item_class = params[:resource].typus_constantize
+    item = item_class.find(params[:resource_id])
+
+    ##
+    # Detect which kind of relationship there's between both models.
+    #
+    #     item respect @item
+    #
+
+    association_name = @resource.model_name.tableize.to_sym
+    association = item_class.reflect_on_association(association_name)
+
+    ##
+    # Finally delete the associated object. Depending on your models setup
+    # associated models will be removed or foreign_key will be set to nil.
+    #
+
+    if item.send(association_name).delete(@item)
+      notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
     else
-      attribute = params[:resource].downcase.to_sym
-      if @item.update_attributes attribute => nil
-        notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
-      else
-        alert = @item.error.full_messages
-      end
+      alert = item.error.full_messages
     end
 
     redirect_to set_path, :notice => notice, :alert => alert
