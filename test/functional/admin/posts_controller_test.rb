@@ -614,6 +614,23 @@ title;status
 
     context "when creating an item" do
 
+      ##
+      # We click on the "Add new" link and we are redirected to:
+      #
+      #     /admin/posts/new
+      #
+      # With a collection of params which will be used to create the
+      # association if everything works as expected.
+      #
+      # Once the association is created we are redirected back to where we
+      # started with a param which selects the Post on the View form.
+      #
+      #     /admin/views/new?post_id=1
+      #
+      # So we end up having a new Post and if we save the form will be
+      # assigned to the view.
+      #
+
       setup do
         @back_to = "/admin/view/new"
       end
@@ -632,17 +649,33 @@ title;status
 
     context "when editing an item" do
 
+      ##
+      # We click on the "Add new" link and we are redirected to:
+      #
+      #     /admin/posts/new
+      #
+      # The important thing here is that we are passing the `resource_id`
+      # because we will assign the newly created Post to the View.
+      #
+      # So we will end up having a new Post assigned to the View.
+      #
+
       setup do
         @view = Factory(:view, :post => nil)
         @back_to = "/admin/view/edit/#{@view.id}"
       end
 
       should "create new post and redirect to view" do
-        post :create, { :post => @post,
-                        :back_to => @back_to,
-                        :resource => "View", :resource_id => @view.id }
+        assert_difference('Post.count') do
+          post :create, { :post => @post,
+                          :back_to => @back_to,
+                          :resource => "View", :resource_id => @view.id }
+        end
         assert_response :redirect
         assert_redirected_to @back_to
+
+        # Make sure the association is created!
+        assert @view.reload.post
       end
 
     end
