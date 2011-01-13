@@ -280,7 +280,8 @@ class Admin::ResourcesController < Admin::BaseController
     #     item respect @item
     #
 
-    association_name = item_class.model_name.tableize.to_sym
+    association_class = item_class.is_sti? ? item_class.superclass : item_class
+    association_name = association_class.model_name.tableize.to_sym
     association = @resource.reflect_on_association(association_name)
 
     ##
