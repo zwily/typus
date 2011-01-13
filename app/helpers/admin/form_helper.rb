@@ -70,7 +70,7 @@ module Admin::FormHelper
         label_text = @resource[:class].human_attribute_name(attribute)
         html << <<-HTML
 <li>
-  #{form.label related_fk, "#{label_text} <small>#{message}</small>"}
+  #{form.label related_fk, "#{label_text} <small>#{message}</small>".html_safe}
   #{form.select related_fk, values, options, html_options }
 </li>
         HTML
@@ -129,7 +129,7 @@ module Admin::FormHelper
         end
 
       end
-    end
+    end.html_safe
 
   end
 

@@ -58,7 +58,7 @@ module TypusHelper
     crumbs = []
     crumbs << @resource[:pluralized] if @resource
     crumbs << _(action.humanize) unless %w( index ).include?(action)
-    return crumbs.compact.map { |x| x }.join(' &rsaquo; ')
+    return crumbs.compact.map { |x| x }.join(' &rsaquo; ').html_safe
   end
 
   def header
