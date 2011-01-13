@@ -30,6 +30,8 @@ module Admin::FormHelper
 
   end
 
+  safe_helper :build_form
+
   # OPTIMIZE: Remove returning(String.new) and return directly the html.
   def typus_belongs_to_field(attribute, options)
 
