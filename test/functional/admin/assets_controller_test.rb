@@ -118,19 +118,4 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
   end
 
-  # FIXME
-  should_eventually "return to back_to url" do
-    asset = Factory(:asset)
-    back_to = "/admin/posts/edit/1#assets"
-
-    post :update, { :id => asset.id,
-                    :back_to => back_to,
-                    :resource => @post.class.name,
-                    :resource_id => @post.id }
-
-    assert_response :redirect
-    assert_redirected_to back_to
-    assert_equal "Asset successfully updated.", flash[:notice]
-  end
-
 end
