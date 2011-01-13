@@ -5,6 +5,12 @@ Factory.define :asset do |f|
   f.paperclip File.new("#{Rails.root}/public/images/rails.png")
 end
 
+Factory.define :case do |f|
+  # This is an STI model which inherits from Entry
+  f.sequence(:title) { |n| "Title##{n}" }
+  f.content "Body of the entry"
+end
+
 Factory.define :category do |f|
   f.sequence(:name) { |n| "Category##{n}" }
 end
@@ -14,6 +20,11 @@ Factory.define :comment do |f|
   f.sequence(:email) { |n| "john+#{n}@example.com" }
   f.body "Body of the comment"
   f.association :post
+end
+
+Factory.define :entry do |f|
+  f.sequence(:title) { |n| "Title##{n}" }
+  f.content "Body of the entry"
 end
 
 Factory.define :page do |f|

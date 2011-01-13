@@ -100,4 +100,41 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
 
   end
 
+  ##
+  # Basically we verify Admin::ResourcesController#create_with_back_to works
+  # as expected for STI models.
+  #
+  # We are editing a Case (which is an STI model). And we click on "Add New"
+  # to add a new category. Once create, we will be redirected and the new
+  # category will be assigned to the current case. Easy right?
+  #
+  #   /admin/categories/new?back_to=%2Fadmin%2Fcases%2Fedit%1F2&resource=Case&resource_id=2
+  #
+  context "Relate using Add New on STI models" do
+
+    setup do
+      @category = { :name => "Category Name" }
+    end
+
+    context "when editing an item" do
+
+      setup do
+        @case = Factory(:case)
+        @back_to = "/admin/cases/edit/#{@case.id}"
+      end
+
+      should "create new category and redirect to case" do
+        assert_difference('@case.categories.count') do
+          post :create, { :category => @category,
+                          :back_to => @back_to,
+                          :resource => "Case", :resource_id => @case.id }
+        end
+        assert_response :redirect
+        assert_redirected_to @back_to
+      end
+
+    end
+
+  end
+
 end

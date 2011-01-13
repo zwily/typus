@@ -50,6 +50,11 @@ ActiveRecord::Schema.define do
     t.string :type
   end
 
+  create_table :categories_entries, :force => true, :id => false do |t|
+    t.column :category_id, :integer
+    t.column :entry_id, :integer
+  end
+
   create_table :pages, :force => true do |t|
     t.string :title
     t.text :body
