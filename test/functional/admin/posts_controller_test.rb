@@ -614,7 +614,8 @@ title;status
       should "create new post and redirect to view" do
         assert_difference('Post.count') do
           post :create, { :post => @post,
-                          :back_to => @back_to, :resource => "View" }
+                          :back_to => @back_to,
+                          :resource => "View" }
         end
         assert_response :redirect
         assert_redirected_to "#{@back_to}?post_id=#{Post.last.id}"
@@ -632,8 +633,7 @@ title;status
       should "create new post and redirect to view" do
         post :create, { :post => @post,
                         :back_to => @back_to,
-                        :resource => "View",
-                        :resource_id => @view.id }
+                        :resource => "View", :resource_id => @view.id }
         assert_response :redirect
         assert_redirected_to @back_to
       end
