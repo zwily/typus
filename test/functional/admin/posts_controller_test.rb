@@ -599,7 +599,7 @@ title;status
 
   end
 
-  context "create_with_back_to for belongs_to" do
+  context "create_with_back_to" do
 
     setup do
       @post = { :title => 'This is another title', :body => 'Body' }
@@ -613,7 +613,7 @@ title;status
 
       should "create new post and redirect to view" do
         post :create, { :post => @post,
-                        :back_to => @back_to, :resource => "views" }
+                        :back_to => @back_to, :resource => "View" }
         assert_response :redirect
         assert_redirected_to "#{@back_to}?post_id=#{Post.last.id}"
       end
@@ -630,7 +630,7 @@ title;status
       should "create new post and redirect to view" do
         post :create, { :post => @post,
                         :back_to => @back_to,
-                        :resource => "views",
+                        :resource => "View",
                         :resource_id => @view.id }
         assert_response :redirect
         assert_redirected_to @back_to
