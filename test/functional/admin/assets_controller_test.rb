@@ -42,7 +42,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       @post.assets << @asset
     end
 
-    should_eventually "unrelate asset from post (which is a resource)" do
+    should "unrelate asset from post (which is a resource)" do
       assert_difference('@post.assets.count', -1) do
         post :unrelate, { :id => @asset.id, :resource => 'Post', :resource_id => @post.id }
       end
