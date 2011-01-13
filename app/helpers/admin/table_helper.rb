@@ -3,7 +3,7 @@ module Admin::TableHelper
   # OPTIMIZE: Move html code to partial & refactor.
   def build_typus_table(model, fields, items, link_options = {}, association = nil)
 
-    returning(String.new) do |html|
+    String.new.tap do |html|
 
       html << <<-HTML
 <table class="typus">

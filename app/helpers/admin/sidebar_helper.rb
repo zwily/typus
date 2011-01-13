@@ -88,7 +88,7 @@ module Admin::SidebarHelper
 
     current_request = request.env['QUERY_STRING'] || []
 
-    returning(String.new) do |html|
+    String.new.tap do |html|
       typus_filters.each do |key, value|
         case value
         when :boolean then html << boolean_filter(current_request, key)
@@ -123,7 +123,7 @@ module Admin::SidebarHelper
 
     items = []
 
-    returning(String.new) do |html|
+    String.new.tap do |html|
       related_items = model.find(:all, :order => model.typus_order_by)
       if related_items.size > model.typus_options_for(:sidebar_selector)
         related_items.each do |item|

@@ -4,7 +4,7 @@ module Admin::FormHelper
 
     options = { :form => form }
 
-    returning(String.new) do |html|
+    String.new.tap do |html|
 
       html << (error_messages_for :item, :header_tag => 'h3')
 
@@ -32,7 +32,6 @@ module Admin::FormHelper
 
   safe_helper :build_form
 
-  # OPTIMIZE: Remove returning(String.new) and return directly the html.
   def typus_belongs_to_field(attribute, options)
 
     form = options[:form]
@@ -52,7 +51,7 @@ module Admin::FormHelper
                 _("If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost."), 
                 _("Click OK to continue, or click Cancel to stay on this page.") ]
 
-    returning(String.new) do |html|
+    String.new.tap do |html|
 
       message = link_to _("Add"), { :controller => "admin/#{related.class_name.tableize}", 
                                     :action => 'new', 
@@ -108,7 +107,7 @@ module Admin::FormHelper
 
     @back_to = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id])
 
-    returning(String.new) do |html|
+    String.new.tap do |html|
       @resource[:class].typus_defaults_for(:relationships).each do |relationship|
 
         association = @resource[:class].reflect_on_association(relationship.to_sym)
@@ -136,7 +135,7 @@ module Admin::FormHelper
 
   # OPTIMIZE: Move html code to partial.
   def typus_form_has_many(field)
-    returning(String.new) do |html|
+    String.new.tap do |html|
 
       model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
       model_to_relate_as_resource = model_to_relate.name.tableize
@@ -241,7 +240,7 @@ module Admin::FormHelper
 
   # OPTIMIZE: Move html code to partial.
   def typus_form_has_and_belongs_to_many(field)
-    returning(String.new) do |html|
+    String.new.tap do |html|
 
       model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
       model_to_relate_as_resource = model_to_relate.name.tableize
@@ -326,7 +325,7 @@ module Admin::FormHelper
 
   # OPTIMIZE: Move html code to partial.
   def typus_form_has_one(field)
-    returning(String.new) do |html|
+    String.new.tap do |html|
 
       model_to_relate = @resource[:class].reflect_on_association(field.to_sym).class_name.constantize
       model_to_relate_as_resource = model_to_relate.name.tableize
@@ -454,7 +453,7 @@ module Admin::FormHelper
   # Tree builder when model +acts_as_tree+
   #
   def expand_tree_into_select_field(items, attribute)
-    returning(String.new) do |html|
+    String.new.tap do |html|
       items.each do |item|
         html << %{<option #{"selected" if @item.send(attribute) == item.id} value="#{item.id}">#{"&nbsp;" * item.ancestors.size * 2} &#8627; #{item.to_label}</option>\n}
         html << expand_tree_into_select_field(item.children, attribute) unless item.children.empty?
