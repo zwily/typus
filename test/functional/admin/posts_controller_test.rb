@@ -599,4 +599,45 @@ title;status
 
   end
 
+  context "create_with_back_to for belongs_to" do
+
+    setup do
+      @post = { :title => 'This is another title', :body => 'Body' }
+    end
+
+    context "when creating an item" do
+
+      setup do
+        @back_to = "/admin/view/new"
+      end
+
+      should "create new post and redirect to view" do
+        post :create, { :post => @post,
+                        :back_to => @back_to, :resource => "views" }
+        assert_response :redirect
+        assert_redirected_to @back_to
+      end
+
+    end
+
+    context "when editing an item" do
+
+      setup do
+        @view = Factory(:view, :post => nil)
+        @back_to = "/admin/view/edit/#{@view.id}"
+      end
+
+      should "create new post and redirect to view" do
+        post :create, { :post => @post,
+                        :back_to => @back_to,
+                        :resource => "views",
+                        :resource_id => @view.id }
+        assert_response :redirect
+        assert_redirected_to @back_to
+      end
+
+    end
+
+  end
+
 end

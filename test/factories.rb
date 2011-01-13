@@ -34,3 +34,8 @@ Factory.define :typus_user do |f|
   f.token "1A2B3C4D5E6F"
   f.password "12345678"
 end
+
+Factory.define :view do |f|
+  f.ip "127.0.0.1"
+  f.association :post
+end
