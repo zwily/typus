@@ -269,10 +269,10 @@ class Admin::ResourcesController < Admin::BaseController
       resource_class = params[:resource].classify.typus_constantize
       resource_id = params[:resource_id]
       resource = resource_class.find(resource_id)
+      notice = Typus::I18n.t("%{model} successfully updated.", :model => resource_class.model_name.human)
     end
 
     macro = association.macro unless association.nil?
-    notice = Typus::I18n.t("%{model} successfully updated.", :model => resource_class.model_name.human)
 
     case macro
     when :has_and_belongs_to_many

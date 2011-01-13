@@ -615,7 +615,7 @@ title;status
         post :create, { :post => @post,
                         :back_to => @back_to, :resource => "views" }
         assert_response :redirect
-        assert_redirected_to @back_to
+        assert_redirected_to "#{@back_to}?post_id=#{Post.last.id}"
       end
 
     end
