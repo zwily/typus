@@ -44,6 +44,12 @@ ActiveRecord::Schema.define do
     t.string :name
   end
 
+  create_table :entries, :force => true do |t|
+    t.string :title, :null => false
+    t.text :content
+    t.string :type
+  end
+
   create_table :pages, :force => true do |t|
     t.string :title
     t.text :body
