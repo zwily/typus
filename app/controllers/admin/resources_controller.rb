@@ -160,6 +160,7 @@ class Admin::ResourcesController < Admin::BaseController
   #
   #   - has_and_belongs_to_many
   #   - has_many
+  #   - has_one
   #
   def unrelate
 
@@ -176,7 +177,12 @@ class Admin::ResourcesController < Admin::BaseController
     #     item respect @item
     #
 
-    association_name = @resource.model_name.tableize.to_sym
+    association_name = case item_class.relationship_with(@resource)
+                       when :has_one
+                         @resource.model_name.downcase.to_sym
+                       else
+                         @resource.model_name.tableize.to_sym
+                       end
 
     ##
     # Finally delete the associated object. Depending on your models setup
