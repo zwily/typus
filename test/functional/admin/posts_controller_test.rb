@@ -25,6 +25,18 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_template 'index'
     end
 
+    should "render index with accepted params" do
+      get :index, { :published => 'true', :created_at => 'today', :search => 'test' }
+      assert_response :success
+      assert_template 'index'
+    end
+
+    should "render index with non-accepted params" do
+      get :index, { :non_accepted_param => 'non_accepted_param' }
+      assert_response :success
+      assert_template 'index'
+    end
+
     should "render new" do
       get :new
       assert_response :success
