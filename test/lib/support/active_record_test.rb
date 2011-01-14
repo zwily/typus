@@ -2,6 +2,26 @@ require "test_helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
+  context "relationship_with" do
+
+    should "return relationship between Post and Comment" do
+      assert_equal :has_many, Post.relationship_with(Comment)
+    end
+
+    should "return relationship between Comment and Post" do
+      assert_equal :belongs_to, Comment.relationship_with(Post)
+    end
+
+    should "return relationship between Post and Category" do
+      assert_equal :has_and_belongs_to_many, Post.relationship_with(Category)
+    end
+
+    should "return relationship between Category and Post" do
+      assert_equal :has_and_belongs_to_many, Category.relationship_with(Post)
+    end
+
+  end
+
   context "mapping" do
 
     context "with an array" do
