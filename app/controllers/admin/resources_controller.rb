@@ -182,7 +182,7 @@ class Admin::ResourcesController < Admin::BaseController
       association_name = @resource.model_name.downcase.to_sym
       worked = item.send(association_name).delete
     else
-      @resource.model_name.tableize.to_sym
+      association_name = @resource.model_name.tableize.to_sym
       worked = item.send(association_name).delete(@item)
     end
 
