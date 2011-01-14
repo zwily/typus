@@ -1,11 +1,9 @@
 class ActiveRecord::Base
 
   def self.relationship_with(model)
-    if (association = reflect_on_association(model.table_name.to_sym))
-      association.macro
-    else
-      reflect_on_association(model.model_name.downcase.to_sym).macro
-    end
+    association = reflect_on_association(model.table_name.to_sym) ||
+                  reflect_on_association(model.model_name.downcase.to_sym)
+    association.macro
   end
 
   #--
