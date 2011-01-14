@@ -177,19 +177,21 @@ class Admin::ResourcesController < Admin::BaseController
     #     item respect @item
     #
 
-    association_name = case item_class.relationship_with(@resource)
-                       when :has_one
-                         @resource.model_name.downcase.to_sym
-                       else
-                         @resource.model_name.tableize.to_sym
-                       end
+    case item_class.relationship_with(@resource)
+    when :has_one
+      association_name = @resource.model_name.downcase.to_sym
+      worked = item.send(association_name).delete
+    else
+      @resource.model_name.tableize.to_sym
+      worked = item.send(association_name).delete(@item)
+    end
 
     ##
     # Finally delete the associated object. Depending on your models setup
     # associated models will be removed or foreign_key will be set to nil.
     #
 
-    if item.send(association_name).delete(@item)
+    if worked
       notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
     else
       alert = item.error.full_messages
