@@ -26,9 +26,25 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
 
     should "render index with accepted params" do
-      get :index, { :published => 'true', :created_at => 'today', :search => 'test' }
+      @post.update_attributes(:published => true)
+      get :index, { :published => 'true' }
       assert_response :success
       assert_template 'index'
+      assert assigns(:items).size.eql?(1)
+
+      get :index, { :published => 'false' }
+      assert assigns(:items).size.eql?(0)
+    end
+
+    should "render index with accepted params - search" do
+      @post.update_attributes(:title => "neinonon")
+      get :index, { :search => 'neinonon' }
+      assert_response :success
+      assert_template 'index'
+      assert assigns(:items).size.eql?(1)
+
+      get :index, { :search => 'unexisting' }
+      assert assigns(:items).size.eql?(0)
     end
 
     should "render index with non-accepted params" do

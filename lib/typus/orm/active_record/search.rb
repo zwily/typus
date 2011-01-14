@@ -54,12 +54,19 @@ module Typus
 
         alias :build_integer_conditions :build_string_conditions
 
+        ##
+        # To build conditions we reject all those params which are not model
+        # fields.
+        #
+        # Note: We still want to be able to search so the search param is not
+        #       rejected.
+        #
         def build_conditions(params)
           Array.new.tap do |conditions|
             query_params = params.dup
-            %w(action controller utf8 sort_order order_by page format).each { |p| query_params.delete(p) }
+            query_params.reject! { |k, v| !model_fields.keys.include?(k.to_sym) && !(k.to_sym == :search) }
 
-            query_params.delete_if { |k, v| v.empty? }.each do |key, value|
+            query_params.compact.each do |key, value|
               filter_type = model_fields[key.to_sym] || model_relationships[key.to_sym] || key
               conditions << send("build_#{filter_type}_conditions", key, value)
             end
