@@ -20,6 +20,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal :has_and_belongs_to_many, Category.relationship_with(Post)
     end
 
+    should "return relationship between Order and Invoice" do
+      assert_equal :has_one, Order.relationship_with(Invoice)
+    end
+
+    should "return relationship between Invoice and Order" do
+      assert_equal :belongs_to, Invoice.relationship_with(Order)
+    end
+
   end
 
   context "mapping" do

@@ -121,4 +121,19 @@ ActiveRecord::Schema.define do
   add_index :categories_posts, :category_id
   add_index :categories_posts, :post_id
 
+  ##
+  # has_one relationships
+  #
+
+  create_table :invoices, :force => true do |t|
+    t.string :number
+    t.integer  :order_id
+    t.timestamps
+  end
+
+  create_table :orders, :force => true do |t|
+    t.string :number
+    t.timestamps
+  end
+
 end
