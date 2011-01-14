@@ -103,47 +103,17 @@ module Admin
       end
     end
 
-    #--
-    # TODO: Move html code to partial.
-    #++
     def typus_form_has_one(field)
-      html = ""
+      setup_relationship(field)
 
-      model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.typus_constantize
-      model_to_relate_as_resource = model_to_relate.to_resource
+      @items = Array.new
+      @items << @resource.find(params[:id]).send(field) unless @resource.find(params[:id]).send(field).nil?
 
-      reflection = @resource.reflect_on_association(field.to_sym)
-      association = reflection.macro
-
-      html << <<-HTML
-<a name="#{field}"></a>
-<div class="box_relationships" id="#{model_to_relate_as_resource}">
-  <h2>
-  #{link_to model_to_relate.model_name.human, :controller => "/admin/#{model_to_relate_as_resource}"}
-  </h2>
-      HTML
-      items = Array.new
-      items << @resource.find(params[:id]).send(field) unless @resource.find(params[:id]).send(field).nil?
-      unless items.empty?
-        options = { :back_to => @back_to, :resource => @resource.to_resource, :resource_id => @item.id }
-        html << build_list(model_to_relate,
-                           model_to_relate.typus_fields_for(:relationship),
-                           items,
-                           model_to_relate_as_resource,
-                           options,
-                           association)
-      else
-        message = Typus::I18n.t("No %{resources} found.",
-                     :resources => model_to_relate.model_name.human.pluralize.downcase)
-        html << <<-HTML
-  <div id="flash" class="notice"><p>#{message}</p></div>
-        HTML
-      end
-      html << <<-HTML
-</div>
-      HTML
-
-      return html
+      render "admin/templates/has_one",
+             :model_to_relate => @model_to_relate,
+             :model_to_relate_as_resource => @model_to_relate_as_resource,
+             :add_new => build_add_new(@reflection.primary_key_name => params[:id]),
+             :table => build_relationship_table
     end
 
     def typus_belongs_to_field(attribute, form)
