@@ -177,7 +177,6 @@ class Admin::ResourcesController < Admin::BaseController
     #
 
     association_name = @resource.model_name.tableize.to_sym
-    association = item_class.reflect_on_association(association_name)
 
     ##
     # Finally delete the associated object. Depending on your models setup
