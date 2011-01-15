@@ -36,6 +36,14 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
       assert_redirected_to @back_to
     end
 
+    should "raise an error if we try to add an invoice to an order which already has an invoice" do
+      @invoice = Factory(:invoice)
+      assert_raises RuntimeError do
+        post :new, { :back_to => @back_to,
+                     :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
+      end
+    end
+
   end
 
   context "Unrelate" do
