@@ -1,5 +1,3 @@
-default_environment['PATH'] = "/home/fesplugas/.rvm/gems/ruby-1.8.7-p302/bin:/home/fesplugas/.opt/bin:$PATH"
-
 set :user, "fesplugas"
 set :application, "demo.typuscms.com"
 set :use_sudo, false
