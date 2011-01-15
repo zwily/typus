@@ -47,7 +47,7 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "return applications sorted" do
-    assert_equal %w(Blog HasOne Site Typus), Typus.applications
+    assert_equal %w(Blog HasManyThrough HasOne Site Typus), Typus.applications
   end
 
   should "return modules of an application" do
@@ -55,7 +55,7 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "return models and should be sorted" do
-    assert_equal %w(Asset Case Category Comment Invoice Order Page Post TypusUser View), Typus.models
+    assert_equal %w(Asset Case Category Comment Invoice Order Page Post Project ProjectCollaborator TypusUser View), Typus.models
   end
 
   should "verify resources class_method" do

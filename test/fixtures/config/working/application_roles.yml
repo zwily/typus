@@ -11,6 +11,8 @@ admin:
   View: create, read, update, delete
   Order: all
   Invoice: all
+  Project: all
+  ProjectCollaborator: all
 
 editor:
   Category: create, read, update
