@@ -272,8 +272,6 @@ class Admin::ResourcesController < Admin::BaseController
   #
   def create_with_back_to
 
-    @back_to = params[:back_to]
-
     #
     # Find the remote object which is named item!
     #
@@ -292,6 +290,16 @@ class Admin::ResourcesController < Admin::BaseController
     association = @resource.reflect_on_association(association_name)
 
     ##
+    # Set @back_to
+    #
+
+    @back_to = if item
+                 params[:back_to]
+               else
+                 "#{params[:back_to]}?#{association.primary_key_name}=#{@item.id}"
+               end
+
+    ##
     # Finally delete the associated object. Depending on your models setup
     # associated models will be removed or foreign_key will be set to nil.
     #
@@ -302,8 +310,6 @@ class Admin::ResourcesController < Admin::BaseController
       else
         alert = @item.error.full_messages
       end
-    else
-      @back_to = "#{params[:back_to]}?#{association.primary_key_name}=#{@item.id}"
     end
 
     redirect_to set_path, :notice => notice, :alert => alert
