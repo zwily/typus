@@ -339,10 +339,12 @@ class Admin::ResourcesController < Admin::BaseController
       # Attachment#entries.push(item)
       association_name = @resource.model_name.tableize.to_sym
       worked = item.send(association_name).push(@item)
-    when :has_many
+    when :has_many, :belongs_to
       # Entry#comments.push(item)
-      association_name = @resource.model_name.tableize.to_sym
-      worked = @item.send(association_name).push(item)
+      association_name = item_class.model_name.tableize.to_sym
+      if item
+        worked = @item.send(association_name).push(item)
+      end
     else
       raise item_class.relationship_with(@resource).inspect
     end
