@@ -47,24 +47,18 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "return applications sorted" do
-    assert Typus.respond_to?(:applications)
-    assert Typus.applications.is_a?(Array)
     assert_equal %w(Blog HasOne Site Typus), Typus.applications
   end
 
   should "return modules of an application" do
-    assert Typus.respond_to?(:application)
     assert_equal %w(Comment Post), Typus.application("Blog")
   end
 
   should "return models and should be sorted" do
-    assert Typus.respond_to?(:models)
-    assert Typus.models.is_a?(Array)
     assert_equal %w(Asset Case Category Comment Invoice Order Page Post TypusUser View), Typus.models
   end
 
   should "verify resources class_method" do
-    assert Typus.respond_to?(:resources)
     assert_equal %w(Git Status WatchDog), Typus.resources
   end
 
