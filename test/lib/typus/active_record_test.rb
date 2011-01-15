@@ -100,8 +100,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     should "return form fields for Asset" do
       expected_fields = [["caption", :string], ["dragonfly", :file], ["dragonfly_required", :file], ["original_file_name", :virtual]]
-      assert_equal expected_fields.map { |i| i.first }, Asset.typus_fields_for(:form).keys
-      assert_equal expected_fields.map { |i| i.last }, Asset.typus_fields_for(:form).values
+      assert_equal expected_fields.map { |i| i.first }, Asset.typus_fields_for(:special).keys
+      assert_equal expected_fields.map { |i| i.last }, Asset.typus_fields_for(:special).values
     end
 
     should "raise a RuntimeError when model does not have configuration" do
@@ -346,7 +346,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "read_model_config" do
 
     should "return data for existing model" do
-      expected = {"application"=>"CRUD Extended", "fields"=>{"default"=>"caption, dragonfly, dragonfly_required, original_file_name"}}
+      expected = {"application"=>"CRUD Extended",
+                  "fields"=>{"default"=>"caption, dragonfly, dragonfly_required",
+                             "special"=>"caption, dragonfly, dragonfly_required, original_file_name"}}
       assert_equal expected, Asset.read_model_config
     end
 
