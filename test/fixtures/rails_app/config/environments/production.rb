@@ -49,6 +49,5 @@ RailsApp::Application.configure do
 end
 
 Typus.setup do |config|
-  config.config_folder = Rails.root.join("../config/working")
   config.authentication = :none
 end

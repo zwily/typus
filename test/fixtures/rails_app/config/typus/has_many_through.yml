@@ -1,0 +1,13 @@
+Project:
+  fields:
+    default: name
+  relationships: project_collaborators
+  application: HasManyThrough
+
+ProjectCollaborator:
+  fields:
+    default: user
+    form: user, project
+  order_by:
+  relationships:
+  application: HasManyThrough
