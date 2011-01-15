@@ -5,7 +5,7 @@ require "fixtures/rails_app/config/environment"
 require "rails/test_help"
 require "tartare"
 
-load File.join(File.dirname(__FILE__), "schema.rb")
+require "fixtures/rails_app/db/schema"
 require "factories"
 
 class ActiveSupport::TestCase
