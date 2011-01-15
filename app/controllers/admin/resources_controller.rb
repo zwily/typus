@@ -345,8 +345,6 @@ class Admin::ResourcesController < Admin::BaseController
       if item
         worked = @item.send(association_name).push(item)
       end
-    else
-      raise item_class.relationship_with(@resource).inspect
     end
 
     association = @resource.reflect_on_association(association_name)
