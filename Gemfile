@@ -20,7 +20,8 @@ gem "paperclip"
 
 gem "rack-cache", :require => "rack/cache"
 gem "rails", "~> 3.0"
-gem "sqlite3-ruby"
+
+gem 'sqlite3-ruby', '1.2.1'
 
 # Keep this here because I use it as reference for development.
 gem "fastercsv", "1.5.3" if RUBY_VERSION < '1.9'
