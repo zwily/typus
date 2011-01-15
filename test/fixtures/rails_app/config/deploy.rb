@@ -8,16 +8,19 @@ set :deploy_to, "/home/#{user}/public_html/#{application}"
 set :scm, :git
 set :default_run_options, { :pty => true }
 set :repository, "git://github.com/fesplugas/typus.git"
-set :deploy_via, :remote_cache
+set :deploy_via, :remote_cache_with_project_root
+set :project_root, "test/fixtures/rails_app"
+set :git_enable_submodules, 1
 set :keep_releases, 2
 
-set :domain, "174.121.79.186"
+set :domain, "demo.typuscms.com"
 
 role :web, domain
 role :app, domain
 role :db, domain, :primary => true # This is where Rails migrations will run
 role :db, domain
 
+before "deploy:restart", "deploy:migrate"
 after "deploy", "deploy:cleanup"
 
 namespace :deploy do
