@@ -45,6 +45,8 @@ class Admin::ResourcesController < Admin::BaseController
   # relationship between these items.
   #
   def create
+    check_if_we_can_add_a_new_item
+
     @item = @resource.new(params[@object_name])
 
     set_attributes_on_create
