@@ -114,7 +114,7 @@ module Admin
       render "admin/templates/has_one",
              :model_to_relate => @model_to_relate,
              :model_to_relate_as_resource => @model_to_relate_as_resource,
-             :add_new => build_add_new(@reflection.primary_key_name => params[:id]),
+             :add_new => build_add_new,
              :table => build_relationship_table
     end
 
