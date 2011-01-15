@@ -10,7 +10,6 @@ set :default_run_options, { :pty => true }
 set :repository, "git://github.com/fesplugas/typus.git"
 set :deploy_via, :remote_cache_with_project_root
 set :project_root, "test/fixtures/rails_app"
-set :git_enable_submodules, 1
 set :keep_releases, 2
 
 set :domain, "demo.typuscms.com"
