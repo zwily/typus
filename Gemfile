@@ -1,6 +1,10 @@
 source 'http://rubygems.org'
 
-gemspec
+if ENV['RAILS_ENV'] == 'test'
+  gemspec
+else
+  gem "typus", :git => "https://github.com/fesplugas/typus.git"
+end
 
 gem "acts_as_list"
 gem "acts_as_tree"

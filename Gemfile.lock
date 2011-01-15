@@ -6,8 +6,9 @@ GIT
       capybara (>= 0.4.0)
       rails (>= 3.0.0)
 
-PATH
-  remote: .
+GIT
+  remote: https://github.com/fesplugas/typus.git
+  revision: 43419ac9b0e44f0589994176eb8eeaa76910128f
   specs:
     typus (3.0.3)
       fastercsv (= 1.5.3)
