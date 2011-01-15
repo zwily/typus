@@ -1,6 +1,8 @@
 class Post < ActiveRecord::Base
 
-  STATUS = %w(pending published unpublished)
+  STATUS = { "Draft" => "draft",
+             "Published" => "published",
+             "Unpublished" => "unpublished" }
 
   validates_presence_of :title, :body
 
