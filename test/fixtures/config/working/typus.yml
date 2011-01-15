@@ -9,5 +9,5 @@ TypusUser:
         status: Active, Inactive
   filters: status, role
   search: first_name, last_name, email, role
-  application: Typus
+  application: Admin
   description: System Users Administration

@@ -1,20 +1,20 @@
 Asset:
   fields:
     default: caption, dragonfly, dragonfly_required, original_file_name
-  application: Site
+  application: CRUD Extended
 
 Case:
   fields:
     default: title
     form: content
-  application: Site
+  application: CRUD Extended
 
 Category:
   fields:
     default: name, position
     form: name, permalink, position
   order_by: position
-  module: Post
+  application: CRUD Extended
 
 Comment:
   fields:
@@ -27,7 +27,7 @@ Comment:
   export: csv
   filters: post
   search: email, body
-  application: Blog
+  application: CRUD Extended
 
 Page:
   fields:
@@ -37,10 +37,10 @@ Page:
   actions:
     index: rebuild_all
     edit: rebuild
-  application: Site
   options:
     form_rows: 25
     sortable: false
+  application: CRUD Extended
 
 Post:
   fields:
@@ -64,9 +64,5 @@ Post:
   filters: status, created_at
   search: title
   order_by: title, -created_at
-  application: Blog
   export: csv, xml
-
-View:
-  fields:
-    default: ip, post
+  application: CRUD Extended

@@ -5,14 +5,12 @@ admin:
   Order:
   Page: create, read, update, delete, rebuild, rebuild_all
   Post: create, read, update, delete
-  View: create, read, update, delete
 
 editor:
   Category: create, read, update
   Comment: read, update, delete
   Post: create, read, update
   TypusUser: read, update
-  View: create, read, update, delete
 
 designer:
   Category: read, update
