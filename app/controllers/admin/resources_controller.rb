@@ -285,18 +285,68 @@ class Admin::ResourcesController < Admin::BaseController
     # Detect which kind of relationship there's between both models.
     #
 
+    ##
+    # Here we have something like:
+    #
+    # Eg 1.
+    #
+    #   - We are editing an Order and want to add a new Invoice.
+    #   - Click on "Add New" and we are redirected to the form.
+    #   - We want to know which kind of relationship there's between both
+    #     objects.
+    #
+    #         >> Order.relationship_with(Invoice)
+    #         => :has_one
+    #
+    # Eg 2.
+    #
+    #   - We are editing a Entry and want to add a new Attachment.
+    #   - Click on "Add New" and we are redirected to the form.
+    #   - We want to know which kind of relationship there's between both
+    #     objects.
+    #
+    #         >> Entry.relationship_with(Attachment)
+    #         => :has_and_belongs_to_many
+    #
+    # Eg 3.
+    #
+    #   - We are editing a Entry and want to add a new Comment.
+    #   - Click on "Add New" and we are redirected to the form.
+    #   - We want to know which kind of relationship there's between both
+    #     objects.
+    #
+    #         >> Entry.relationship_with(Comment)
+    #         => :has_many
+    #
+    # Eg 4.
+    #
+    #   - We are editing a Post (Entry) and want to add a new Attachment.
+    #   - Click on "Add New" and we are redirected to the form.
+    #   - We want to know which kind of relationship there's between both
+    #     objects.
+    #
+    #         >> Post.relationship_with(Attachment)
+    #         => :has_and_belongs_to_many
+    #
+
     case item_class.relationship_with(@resource)
     when :has_one
+      # Order#invoice = @item
       association_name = @resource.model_name.downcase.to_sym
       item.send("#{association_name}=", @item)
       worked = true
-    else
+    when :has_and_belongs_to_many
+      # Attachment#entries.push(item)
+      association_name = @resource.model_name.tableize.to_sym
+      worked = item.send(association_name).push(@item)
+    when :has_many
+      # Entry#comments.push(item)
       association_name = @resource.model_name.tableize.to_sym
       worked = @item.send(association_name).push(item)
+    else
+      raise item_class.relationship_with(@resource).inspect
     end
 
-    # association_class = item_class.is_sti? ? item_class.superclass : item_class
-    # association_name = association_class.model_name.tableize.to_sym
     association = @resource.reflect_on_association(association_name)
 
     ##
