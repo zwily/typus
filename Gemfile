@@ -10,9 +10,14 @@ gem "acts_as_list"
 gem "acts_as_tree"
 gem "dragonfly", "~>0.8.1"
 gem "factory_girl"
-gem "mysql"
+
+group :test do
+  gem "mysql"
+  gem "pg"
+end
+
 gem "paperclip"
-gem "pg"
+
 gem "rack-cache", :require => "rack/cache"
 gem "rails", "~> 3.0"
 gem "sqlite3-ruby"
