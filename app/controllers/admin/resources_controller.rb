@@ -31,6 +31,8 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def new
+    check_if_we_can_add_a_new_item
+
     item_params = params.dup
     rejections = %w(controller action resource resource_id back_to selected)
     item_params.delete_if { |k, v| rejections.include?(k) }
@@ -282,11 +284,19 @@ class Admin::ResourcesController < Admin::BaseController
     ##
     # Detect which kind of relationship there's between both models.
     #
-    #     item respect @item
-    #
 
-    association_class = item_class.is_sti? ? item_class.superclass : item_class
-    association_name = association_class.model_name.tableize.to_sym
+    case item_class.relationship_with(@resource)
+    when :has_one
+      association_name = @resource.model_name.downcase.to_sym
+      item.send("#{association_name}=", @item)
+      worked = true
+    else
+      association_name = @resource.model_name.tableize.to_sym
+      worked = @item.send(association_name).push(item)
+    end
+
+    # association_class = item_class.is_sti? ? item_class.superclass : item_class
+    # association_name = association_class.model_name.tableize.to_sym
     association = @resource.reflect_on_association(association_name)
 
     ##
@@ -305,7 +315,7 @@ class Admin::ResourcesController < Admin::BaseController
     #
 
     if item
-      if @item.send(association_name).push(item)
+      if worked
         notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
       else
         alert = @item.error.full_messages
@@ -317,6 +327,33 @@ class Admin::ResourcesController < Admin::BaseController
 
   def default_action
     @resource.typus_options_for(:default_action_on_item)
+  end
+
+  ##
+  # If we are trying to create a new Invoice which belongs_to Order, we should
+  # verify before the the Order doesn't have an Invoice, otherwise we would
+  # have and Order with many Invoices which is something not desired.
+  #
+  # Eg:
+  #
+  #     @resource (Invoice)
+  #     params[:resource] = "Order"
+  #     params[:resource_id] = "1"
+  #
+  # Does this Order already has an Invoice. If true, redirect to back.
+  #
+  def check_if_we_can_add_a_new_item
+    if params[:resource] && params[:resource_id]
+      item_class = params[:resource].typus_constantize
+      item = item_class.find(params[:resource_id]) if params[:resource_id]
+
+      if item_class.relationship_with(@resource) == :has_one
+        association_name = @resource.model_name.downcase.to_sym
+        if item.send(association_name)
+          raise "Somehow I need to hide the `Add New` link.\nI'm protecting you off adding a new `#{@resource.model_name}` to `#{item_class.model_name}`."
+        end
+      end
+    end
   end
 
 end
