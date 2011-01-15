@@ -22,7 +22,8 @@ namespace :deploy do
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "#{try_sudo}  touch #{File.join(current_path,'test/fixtures/rails_app/tmp','restart.txt')}"
+    run "cd #{current_path}/test/fixtures/rails_app && rake db:setup RAILS_ENV=production"
+    run "cd #{current_path}/test/fixtures/rails_app && touch tmp/restart.txt"
   end
   task :finalize_update do ; end
 end
