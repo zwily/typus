@@ -50,3 +50,16 @@ Factory.define :view do |f|
   f.ip "127.0.0.1"
   f.association :post
 end
+
+##
+# has_one relationships
+#
+
+Factory.define :invoice do |f|
+  f.sequence(:number) { |n| "Invoice##{n}" }
+  f.association :order
+end
+
+Factory.define :order do |f|
+  f.sequence(:number) { |n| "Order##{n}" }
+end

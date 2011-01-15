@@ -9,6 +9,8 @@ admin:
   Status: index
   WatchDog: index, cleanup
   View: create, read, update, delete
+  Order: all
+  Invoice: all
 
 editor:
   Category: create, read, update

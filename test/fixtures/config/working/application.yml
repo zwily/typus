@@ -70,3 +70,20 @@ Post:
 View:
   fields:
     default: ip, post
+
+##
+# Has One
+##
+
+Invoice:
+  fields:
+    default: number, order
+  relationships: order
+  application: typus-has-one
+
+Order:
+  fields:
+    default: number
+    form: number
+  relationships: invoice
+  application: typus-has-one
