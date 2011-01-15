@@ -200,7 +200,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "typus_application" do
 
     should "return application for Post" do
-      assert_equal "Blog", Post.typus_application
+      assert_equal "CRUD Extended", Post.typus_application
     end
 
     should "return application for View" do
@@ -346,7 +346,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "read_model_config" do
 
     should "return data for existing model" do
-      expected = {"application"=>"Site", "fields"=>{"default"=>"caption, dragonfly, dragonfly_required, original_file_name"}}
+      expected = {"application"=>"CRUD Extended", "fields"=>{"default"=>"caption, dragonfly, dragonfly_required, original_file_name"}}
       assert_equal expected, Asset.read_model_config
     end
 

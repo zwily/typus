@@ -157,10 +157,13 @@ class TypusUserTest < ActiveSupport::TestCase
       assert_equal Typus.applications, @typus_user.applications
     end
 
-    should "get a list of application resources" do
-      assert_equal %w(Comment Post), @typus_user.application("Blog")
-      assert_equal %w(Asset Page), @typus_user.application("Site")
-      assert_equal %w(TypusUser), @typus_user.application("Typus")
+    should "get a list of application resources for CRUD Extended application" do
+      expected = ["Asset", "Category", "Comment", "Page", "Post"]
+      assert_equal expected, @typus_user.application("CRUD Extended")
+    end
+
+    should "get a list of application resources for Admin application" do
+      assert_equal %w(TypusUser), @typus_user.application("Admin")
     end
 
   end
@@ -177,12 +180,13 @@ class TypusUserTest < ActiveSupport::TestCase
     end
 
     should "get a list of all applications" do
-      assert_equal %w(Blog Typus), @typus_user.applications
+      expected = ["Admin", "CRUD Extended"]
+      assert_equal expected, @typus_user.applications
     end
 
     should "get a list of application resources" do
-      assert_equal %w(Comment Post), @typus_user.application("Blog")
-      assert_equal %w(TypusUser), @typus_user.application("Typus")
+      assert_equal %w(Category Comment Post), @typus_user.application("CRUD Extended")
+      assert_equal %w(TypusUser), @typus_user.application("Admin")
     end
 
   end

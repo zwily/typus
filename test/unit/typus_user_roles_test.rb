@@ -14,7 +14,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     end
 
     should "verify models access" do
-      expected = %w(Asset Category Comment Git Invoice Order Page Post Project ProjectCollaborator Status TypusUser View WatchDog)
+      expected = %w(Asset Category Comment Entry Git Invoice Order Page Post Project ProjectCollaborator Status TypusUser View WatchDog)
       assert_equal expected, @typus_user.resources.map(&:first).sort
     end
 
