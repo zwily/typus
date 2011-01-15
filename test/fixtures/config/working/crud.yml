@@ -1,0 +1,6 @@
+Entry:
+  fields:
+    default: title
+    form: title, content
+  search: title
+  application: CRUD

@@ -70,38 +70,3 @@ Post:
 View:
   fields:
     default: ip, post
-
-##
-# Has One
-##
-
-Invoice:
-  fields:
-    default: number, order
-  relationships: order
-  application: HasOne
-
-Order:
-  fields:
-    default: number
-    form: number
-  relationships: invoice
-  application: HasOne
-
-##
-# HasManyThrough
-##
-
-Project:
-  fields:
-    default: name
-  relationships: project_collaborators
-  application: HasManyThrough
-
-ProjectCollaborator:
-  fields:
-    default: user
-    form: user, project
-  order_by:
-  relationships:
-  application: HasManyThrough
