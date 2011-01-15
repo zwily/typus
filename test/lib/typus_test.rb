@@ -49,7 +49,7 @@ class TypusTest < ActiveSupport::TestCase
   should "return applications sorted" do
     assert Typus.respond_to?(:applications)
     assert Typus.applications.is_a?(Array)
-    assert_equal %w(Blog Site Typus), Typus.applications
+    assert_equal %w(Blog HasOne Site Typus), Typus.applications
   end
 
   should "return modules of an application" do
@@ -60,12 +60,12 @@ class TypusTest < ActiveSupport::TestCase
   should "return models and should be sorted" do
     assert Typus.respond_to?(:models)
     assert Typus.models.is_a?(Array)
-    assert_equal %w(Asset Case Category Comment Page Post TypusUser View), Typus.models
+    assert_equal %w(Asset Case Category Comment Invoice Order Page Post TypusUser View), Typus.models
   end
 
   should "verify resources class_method" do
     assert Typus.respond_to?(:resources)
-    assert_equal %w(Git Order Status WatchDog), Typus.resources
+    assert_equal %w(Git Status WatchDog), Typus.resources
   end
 
   context "user_class" do

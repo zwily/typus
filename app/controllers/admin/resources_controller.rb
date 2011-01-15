@@ -56,7 +56,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   def edit
     add_action(:action_name => default_action.titleize, :action => default_action)
-    add_action(:action_name => "Unrelate", :action => "unrelate", :confirm => "#{Typus::I18n.t("Unrelate")}?", :resource => @resource.name, :resource_id => @item.id)
+    add_action(:action_name => "Unrelate", :action => "unrelate", :confirm => "#{Typus::I18n.t("Unrelate")}?", :resource => @resource.model_name, :resource_id => @item.id)
   end
 
   def show

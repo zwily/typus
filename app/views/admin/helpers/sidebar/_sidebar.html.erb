@@ -9,7 +9,7 @@
     <h3><%= klass.model_name.human.pluralize %></h3>
   <% end %>
 
-  <% if @resource.name.eql?(key) %>
+  <% if @resource.model_name.eql?(key) %>
     <ul>
       <% value.each do |v| %>
         <li><%= v %></li>
