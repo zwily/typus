@@ -107,7 +107,9 @@ module Admin
       setup_relationship(field)
 
       @items = Array.new
-      @items << @resource.find(params[:id]).send(field) unless @resource.find(params[:id]).send(field).nil?
+      if item = @resource.find(params[:id]).send(field)
+        @items << item
+      end
 
       render "admin/templates/has_one",
              :model_to_relate => @model_to_relate,
