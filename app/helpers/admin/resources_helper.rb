@@ -15,10 +15,10 @@ module Admin
     # the `@items` so we can do whatever we want there. Notice that pagination
     # is still available.
     #++
-    def build_list(model, fields, items, resource = @resource.to_resource, link_options = {}, association = nil)
+    def build_list(model, fields, items, resource = @resource.to_resource, link_options = {}, association = nil, association_name = nil)
       render "admin/#{resource}/list", :items => items
     rescue ActionView::MissingTemplate
-      build_table(model, fields, items, link_options, association)
+      build_table(model, fields, items, link_options, association, association_name)
     end
 
     def display_link_to_previous

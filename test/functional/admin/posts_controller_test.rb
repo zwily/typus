@@ -451,7 +451,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_difference('@post.comments.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => comment.id } }
+        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => comment.id, :association_name => 'comments' } }
       end
 
       assert_response :redirect
@@ -465,7 +465,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#assets"
 
       assert_difference('@post.assets.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Asset', :id => asset.id } }
+        post :relate, { :id => @post.id, :related => { :model => 'Asset', :id => asset.id, :association_name => 'assets' } }
       end
 
       assert_response :redirect
@@ -478,7 +478,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"
 
       assert_difference('category.posts.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Category', :id => category.id } }
+        post :relate, { :id => @post.id, :related => { :model => 'Category', :id => category.id, :association_name => 'categories' } }
       end
 
       assert_response :redirect

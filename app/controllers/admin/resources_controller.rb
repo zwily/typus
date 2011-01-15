@@ -150,9 +150,9 @@ class Admin::ResourcesController < Admin::BaseController
   #
   def relate
     resource_class = params[:related][:model].typus_constantize
-    resource_tableized = params[:related][:model].tableize
+    association_name = params[:related][:association_name].tableize
 
-    if @item.send(resource_tableized) << resource_class.find(params[:related][:id])
+    if @item.send(association_name) << resource_class.find(params[:related][:id])
       flash[:notice] = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 
@@ -181,12 +181,15 @@ class Admin::ResourcesController < Admin::BaseController
     #     item respect @item
     #
 
+    # This is not nil in case of a has_many :through association.
+    association_name = params[:association_name].to_sym unless params[:association_name].blank?
+
     case item_class.relationship_with(@resource)
     when :has_one
       association_name = @resource.model_name.downcase.to_sym
       worked = item.send(association_name).delete
     else
-      association_name = @resource.model_name.tableize.to_sym
+      association_name ||= @resource.model_name.tableize.to_sym
       worked = item.send(association_name).delete(@item)
     end
 

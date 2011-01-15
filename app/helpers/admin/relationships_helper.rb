@@ -7,6 +7,7 @@ module Admin
       @model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.typus_constantize
       @model_to_relate_as_resource = @model_to_relate.to_resource
       @reflection = @resource.reflect_on_association(field.to_sym)
+      @association_name = @reflection.through_reflection ? @reflection.name.to_s : @model_to_relate.model_name.tableize
     end
 
     def typus_form_has_many(field)
@@ -32,6 +33,7 @@ module Admin
       render "admin/templates/has_n",
              :model_to_relate => @model_to_relate,
              :model_to_relate_as_resource => @model_to_relate_as_resource,
+             :association_name => @association_name,
              :foreign_key => foreign_key,
              :add_new => build_add_new(options),
              :form => form,
@@ -52,6 +54,7 @@ module Admin
       render "admin/templates/has_n",
              :model_to_relate => @model_to_relate,
              :model_to_relate_as_resource => @model_to_relate_as_resource,
+             :association_name => @association_name,
              :add_new => build_add_new,
              :form => form,
              :table => build_relationship_table
@@ -67,7 +70,8 @@ module Admin
     def build_relate_form
       render "admin/templates/relate_form",
              :model_to_relate => @model_to_relate,
-             :items_to_relate => @items_to_relate
+             :items_to_relate => @items_to_relate,
+             :association_name => @association_name
     end
 
     def build_relationship_table
@@ -76,7 +80,8 @@ module Admin
                  @items,
                  @model_to_relate_as_resource,
                  {},
-                 @reflection.macro)
+                 @reflection.macro,
+                 @association_name)
     end
 
     def build_add_new(options = {})

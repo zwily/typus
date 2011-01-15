@@ -2,13 +2,14 @@ module Admin
 
   module TableHelper
 
-    def build_table(model, fields, items, link_options = {}, association = nil)
+    def build_table(model, fields, items, link_options = {}, association = nil, association_name = nil)
       render "admin/helpers/table/table",
              :model => model,
              :fields => fields,
              :items => items,
              :link_options => link_options,
-             :headers => table_header(model, fields)
+             :headers => table_header(model, fields),
+             :association_name => association_name
     end
 
     def table_header(model, fields, params = params)
@@ -50,11 +51,11 @@ module Admin
       @actions ||= []
     end
 
-    def table_actions(model, item)
+    def table_actions(model, item, association_name = nil)
       actions.map do |action|
         if admin_user.can?(action[:action], model.name)
           link_to Typus::I18n.t(action[:action_name]),
-                  { :controller => model.to_resource, :action => action[:action], :id => item.id, :resource => action[:resource], :resource_id => action[:resource_id] },
+                  { :controller => model.to_resource, :action => action[:action], :id => item.id, :resource => action[:resource], :resource_id => action[:resource_id], :association_name => association_name },
                   { :confirm => action[:confirm], :method => action[:method], :target => "_parent" }
         end
       end.compact.join(" / ").html_safe
