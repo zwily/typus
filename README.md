@@ -57,4 +57,4 @@ Copyright © 2007-2011 Francesc Esplugas, released under the MIT license.
 
 [1]: http://rubygems.org/gems/paperclip
 [2]: http://rubygems.org/gems/dragonfly
-[3]: https://github.com/fesplugas/rails-typuscms-demo
+[3]: https://github.com/fesplugas/typus/tree/master/test/fixtures/rails_app
