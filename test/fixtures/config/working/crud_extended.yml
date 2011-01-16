@@ -25,7 +25,6 @@ Comment:
     options:
       booleans:
         spam: ["Yes, its spam", "No, its not spam"]
-  export: csv
   filters: post
   search: email, body
   application: CRUD Extended
