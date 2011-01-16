@@ -7,6 +7,11 @@ Factory.define :entry do |f|
   f.content "Body of the entry"
 end
 
+Factory.define :case do |f|
+  f.sequence(:title) { |n| "Case##{n}" }
+  f.content "Body of the entry"
+end
+
 ##
 # CRUD Extended
 ##
@@ -16,12 +21,6 @@ Factory.define :asset do |f|
   f.dragonfly File.new("#{Rails.root}/public/images/rails.png")
   f.dragonfly_required File.new("#{Rails.root}/public/images/rails.png")
   f.paperclip File.new("#{Rails.root}/public/images/rails.png")
-end
-
-Factory.define :case do |f|
-  # This is an STI model which inherits from Entry
-  f.sequence(:title) { |n| "Case##{n}" }
-  f.content "Body of the entry"
 end
 
 Factory.define :category do |f|
