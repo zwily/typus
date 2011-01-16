@@ -50,7 +50,7 @@ fr:
   "Record moved %{to}": "Entrées réordonnées"
   "Recover password": "Retrouver mon mot de passe"
   "Remove": "Supprimer"
-  "Remove %{resource}?": "Supprimer %{resource} ?"
+  "Remove %{resource}?": "Supprimer %{resource}?"
   "Reset password": "Renouveler le mot de passe"
   "Resources": "Ressources"
 
