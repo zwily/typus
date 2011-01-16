@@ -4,12 +4,6 @@ Asset:
     special: caption, dragonfly, dragonfly_required, original_file_name
   application: CRUD Extended
 
-Case:
-  fields:
-    default: title
-    form: content
-  application: CRUD Extended
-
 Category:
   fields:
     default: name, position
