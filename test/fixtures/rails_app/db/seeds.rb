@@ -15,6 +15,23 @@ require '../../factories'
 5.times { Factory(:entry) }
 
 ##
+# CRUD Extended
+##
+
+5.times { Factory(:post) }
+
+##
+# HasManyThrough
+##
+
+5.times do
+  project = Factory(:project)
+  5.times do
+    project.collaborators << Factory(:user)
+  end
+end
+
+##
 # HasOne
 ##
 

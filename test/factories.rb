@@ -76,12 +76,12 @@ end
 #
 
 Factory.define :user do |f|
-  f.sequence(:name) { |n| "User#{n}" }
-  f.sequence(:email) { |n| "user#{n}@example.com" }
+  f.sequence(:name) { |n| "User##{n}" }
+  f.sequence(:email) { |n| "user.#{n}@example.com" }
 end
 
 Factory.define :project do |f|
-  f.sequence(:name) { |n| "Project#{n}" }
+  f.sequence(:name) { |n| "Project##{n}" }
   f.association :user
 end
 
