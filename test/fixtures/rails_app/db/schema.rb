@@ -137,4 +137,26 @@ ActiveRecord::Schema.define do
     t.timestamps
   end
 
+  ##
+  # has_many through relationships
+  #
+
+  create_table :users, :force => true do |t|
+    t.string :name, :null => false
+    t.string :email
+    t.timestamps
+  end
+
+  create_table :projects do |t|
+    t.string :name, :null => false
+    t.integer :user_id, :null => false
+    t.timestamps
+  end
+
+  create_table :project_collaborators do |t|
+    t.integer :user_id, :null => false
+    t.integer :project_id, :null => false
+    t.timestamps
+  end
+
 end
