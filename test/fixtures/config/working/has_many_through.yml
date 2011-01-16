@@ -14,7 +14,6 @@ ProjectCollaborator:
 
 User:
   fields:
-    default: name, email, user
-    form: name, email, user
-  relationships: projects, third_party_projects
+    default: name, email
+  relationships: projects #, third_party_projects
   application: HasManyThrough
