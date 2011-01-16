@@ -53,7 +53,6 @@ it:
   "Record moved %{to}": "Record spostato %{to}"
   "Recover password": "Recupera la password"
   "Remove": "Elimina"
-  "Remove %{attribute}": "Elimina %{attribute}"
   "Remove %{resource}?": "Elimina %{resource}"
   "Reset password": "Resetta la password"
   "Resources": "Risorse"

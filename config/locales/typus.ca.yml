@@ -47,7 +47,6 @@ ca:
   "Record moved %{to}": "Registre desplaçat %{to}."
   "Recover password": "Recuperar contrasenya"
   "Remove": "Eliminar"
-  "Remove %{attribute}": "Esborrar %{attribute}"
   "Remove %{resource}?": "Esborrar %{resource}?"
   "Reset password": "Canviar contrasenya"
   "Resources": "Recursos"

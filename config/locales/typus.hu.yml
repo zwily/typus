@@ -46,7 +46,6 @@ hu:
   "Record moved %{to}": "A bejegyzés áthelyezve: %{to}"
   "Recover password": "Jelszó helyreállítás"
   "Remove": "Eltávolítás"
-  "Remove %{attribute}": "Eltávolítod %{attribute}"
   "Remove %{resource}?": "Eltávolítod %{resource}?"
   "Reset password": "Jelszó módosítása"
   "Resources": "Források"

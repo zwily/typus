@@ -46,7 +46,6 @@ ru:
   "Record moved %{to}": "Запись перемещена в %{to}."
   "Recover password": "Восстановить пароль"
   "Remove": "Удалить"
-  "Remove %{attribute}": "Удалить %{attribute}"
   "Remove %{resource}?": "Удалить %{resource}?"
   "Reset password": "Сбросить пароль"
   "Resources": "Ресурсы"

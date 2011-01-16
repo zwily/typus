@@ -31,7 +31,7 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
     end
 
     should "work for :dragonfly and return link when attribute is not required" do
-      assert_match /Remove Dragonfly/, link_to_detach_attribute('dragonfly')
+      assert_match /Remove/, link_to_detach_attribute('dragonfly')
     end
 
   end

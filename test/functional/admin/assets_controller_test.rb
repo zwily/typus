@@ -64,7 +64,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
     should "verify dragonfly can be removed" do
       get :edit, { :id => @asset.id }
-      assert_match /Remove Dragonfly/, @response.body
+      assert_match /Remove/, @response.body
 
       assert @asset.dragonfly_uid.present?
 

@@ -47,7 +47,6 @@ es:
   "Record moved %{to}": "Record moved %{to}."
   "Recover password": "Recuperar contraseña"
   "Remove": "Eliminar"
-  "Remove %{attribute}": "Borrar %{attribute}"
   "Remove %{resource}?": "¿Borrar %{resource}?"
   "Reset password": "Cambiar contraseña"
   "Resources": "Recursos"

@@ -46,7 +46,6 @@ pt-BR:
   "Record moved %{to}": "Registro movido %{to}."
   "Recover password": "Recuperar senha"
   "Remove": "Remover"
-  "Remove %{attribute}": "Remover %{attribute}"
   "Remove %{resource}?": "Remover %{resource}?"
   "Reset password": "Trocar senha"
   "Resources": "Recursos"

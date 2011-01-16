@@ -45,7 +45,6 @@ zh-CN:
   "Record moved %{to}": "记录移动到"
   "Recover password": "恢复密码"
   "Remove": "删除"
-  "Remove %{attribute}": "删除 %{attribute}"
   "Remove %{resource}?": "删除 %{resource}"
   "Reset password": "重置密码"
   "Resources": "资源"

@@ -45,7 +45,6 @@ el:
   "Record moved %{to}": "Η εγγραφή μεταφέρθηκε στο σημείο %{to}"
   "Recover password": "Ανάκτηση κωδικού"
   "Remove": "Απομάκρυνση"
-  "Remove %{attribute}": "Απομάκρυνση %{attribute}"
   "Remove %{resource}?": "Απομάκρυνση %{resource}"
   "Reset password": "Επαναφορά κωδικού"
   "Resources": "Πόροι"
