@@ -38,19 +38,17 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
 
     should "raise an error if we try to add an invoice to an order which already has an invoice" do
       @invoice = Factory(:invoice)
-      assert_raises RuntimeError do
-        post :new, { :back_to => @back_to,
-                     :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
-      end
+      post :new, { :back_to => @back_to,
+                   :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
+      assert_response :unprocessable_entity
     end
 
     should "raise an error if we try to create an invoice to an order which already has an invoice" do
       @invoice = Factory(:invoice)
-      assert_raises RuntimeError do
-        post :create, { :invoice => { :number => "Invoice#0000001" },
-                        :back_to => @back_to,
-                        :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
-      end
+      post :create, { :invoice => { :number => "Invoice#0000001" },
+                      :back_to => @back_to,
+                      :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
+      assert_response :unprocessable_entity
     end
 
   end

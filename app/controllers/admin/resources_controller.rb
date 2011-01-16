@@ -12,6 +12,8 @@ class Admin::ResourcesController < Admin::BaseController
   before_filter :set_order, :only => [:index]
   before_filter :set_fields, :only => [:index, :new, :edit, :create, :update, :show, :detach]
 
+  before_filter :check_if_we_can_add_a_new_item, :only => [:new, :create]
+
   ##
   # This is the main index of the model. With filters, conditions and more.
   #
@@ -31,8 +33,6 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def new
-    check_if_we_can_add_a_new_item
-
     item_params = params.dup
     rejections = %w(controller action resource resource_id back_to selected)
     item_params.delete_if { |k, v| rejections.include?(k) }
@@ -45,8 +45,6 @@ class Admin::ResourcesController < Admin::BaseController
   # relationship between these items.
   #
   def create
-    check_if_we_can_add_a_new_item
-
     @item = @resource.new(params[@object_name])
 
     set_attributes_on_create
@@ -405,7 +403,7 @@ class Admin::ResourcesController < Admin::BaseController
       if item_class.relationship_with(@resource) == :has_one
         association_name = @resource.model_name.downcase.to_sym
         if item.send(association_name)
-          raise "Somehow I need to hide the `Add New` link.\nI'm protecting you off adding a new `#{@resource.model_name}` to `#{item_class.model_name}`."
+          render :text => "Not allowed!", :status => :unprocessable_entity
         end
       end
     end
