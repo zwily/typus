@@ -52,7 +52,7 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "return modules of the CRUD Extended application" do
-    expected = ["Asset", "Case", "Category", "Comment", "Page", "Post"]
+    expected = ["Asset", "Category", "Comment", "Page", "Post"]
     assert_equal expected, Typus.application("CRUD Extended")
   end
 
