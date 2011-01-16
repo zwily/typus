@@ -63,3 +63,22 @@ end
 Factory.define :order do |f|
   f.sequence(:number) { |n| "Order##{n}" }
 end
+
+##
+# HasManyThrough
+#
+
+Factory.define :user do |f|
+  f.sequence(:name) { |n| "User#{n}" }
+  f.sequence(:email) { |n| "user#{n}@example.com" }
+end
+
+Factory.define :project do |f|
+  f.sequence(:name) { |n| "Project#{n}" }
+  f.association :user
+end
+
+Factory.define :project_collaborators do |f|
+  f.association :user
+  f.association :project
+end
