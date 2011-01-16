@@ -1,3 +1,16 @@
+##
+# CRUD
+##
+
+Factory.define :entry do |f|
+  f.sequence(:title) { |n| "Entry##{n}" }
+  f.content "Body of the entry"
+end
+
+##
+# CRUD Extended
+##
+
 Factory.define :asset do |f|
   f.sequence(:caption) { |n| "Asset##{n}" }
   f.dragonfly File.new("#{Rails.root}/public/images/rails.png")
@@ -20,11 +33,6 @@ Factory.define :comment do |f|
   f.sequence(:email) { |n| "john+#{n}@example.com" }
   f.body "Body of the comment"
   f.association :post
-end
-
-Factory.define :entry do |f|
-  f.sequence(:title) { |n| "Entry##{n}" }
-  f.content "Body of the entry"
 end
 
 Factory.define :page do |f|

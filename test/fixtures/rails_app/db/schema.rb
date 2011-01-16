@@ -48,7 +48,7 @@ ActiveRecord::Schema.define do
     t.string :title, :null => false
     t.text :content
     t.string :type
-    t.boolean :published
+    t.boolean :published, :null => false, :default => false
   end
 
   create_table :categories_entries, :force => true, :id => false do |t|

@@ -5,3 +5,17 @@
 #
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
+
+require '../../factories'
+
+##
+# CRUD
+##
+
+5.times { Factory(:entry) }
+
+##
+# HasOne
+##
+
+5.times { Factory(:invoice) }
