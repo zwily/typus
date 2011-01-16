@@ -18,6 +18,7 @@ require '../../factories'
 # CRUD Extended
 ##
 
+5.times { Factory(:category) }
 5.times { Factory(:post) }
 
 ##
