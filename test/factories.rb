@@ -52,7 +52,7 @@ Factory.define :view do |f|
 end
 
 ##
-# has_one relationships
+# HasOne Association
 #
 
 Factory.define :invoice do |f|
@@ -65,7 +65,7 @@ Factory.define :order do |f|
 end
 
 ##
-# HasManyThrough
+# HasManyThrough Association
 #
 
 Factory.define :user do |f|
