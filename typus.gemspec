@@ -1,11 +1,11 @@
 # -*- encoding: utf-8 -*-
 
-# $LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
-# require 'typus/version'
+$LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
+require 'typus/version'
 
 Gem::Specification.new do |s|
   s.name = "typus"
-  s.version = "3.0.3" # Typus::VERSION
+  s.version = Typus::VERSION
   s.date = "2010-11-28"
 
   s.platform = Gem::Platform::RUBY
