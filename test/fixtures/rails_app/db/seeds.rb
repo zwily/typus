@@ -21,6 +21,12 @@ require '../../factories'
 5.times { Factory(:category) }
 5.times { Factory(:post) }
 
+assets_path = "#{Rails.root}/db/seeds/assets"
+5.times { |i| Factory(:asset,
+                      :dragonfly => File.new("#{assets_path}/00#{i}.jpg"),
+                      :dragonfly_required => File.new("#{assets_path}/00#{i}.jpg"),
+                      :paperclip => File.new("#{assets_path}/00#{i}.jpg")) }
+
 ##
 # HasManyThrough
 ##
