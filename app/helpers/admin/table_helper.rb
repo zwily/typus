@@ -117,11 +117,11 @@ module Admin
         should_be_inactive = (item.respond_to?(:first?) && ([:move_higher, :move_to_top].include?(key) && item.first?)) ||
                              (item.respond_to?(:last?) &&  ([:move_lower, :move_to_bottom].include?(key) && item.last?))
         html_position << link_to_unless(should_be_inactive, Typus::I18n.t(value), params.merge(options)) do |name|
-          raw %(<span class="inactive">#{name}</span>)
+          %w(<span class="inactive">#{name}</span>)
         end
       end
 
-      "#{item.position}<br/><br/>#{html_position.join(connector)}".html_safe
+      "#{item.position}<br/><br/>#{html_position.compact.join(connector)}".html_safe
     end
 
     def table_datetime_field(attribute, item)
