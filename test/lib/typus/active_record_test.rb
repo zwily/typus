@@ -241,7 +241,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return booleans for Comment" do
-      expected = {"No, its not spam" => "false", "Yes, its spam" => "true"}
+      expected = {"No, it's not spam" => "false", "Yes, it's spam" => "true"}
       assert_equal expected, Comment.typus_boolean(:spam)
     end
 

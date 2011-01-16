@@ -24,7 +24,7 @@ Comment:
     csv: email, post_id
     options:
       booleans:
-        spam: ["Yes, its spam", "No, its not spam"]
+        spam: ["Yes, it's spam", "No, it's not spam"]
   filters: post
   search: email, body
   application: CRUD Extended
