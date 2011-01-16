@@ -121,7 +121,7 @@ class Admin::ResourcesController < Admin::BaseController
   #
   def position
     @item.send(params[:go])
-    notice = Typus::I18n.t("Record moved to position %{to}.", :to => params[:go].gsub(/move_/, '').humanize.downcase)
+    notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
     redirect_to set_path, :notice => notice
   end
 
