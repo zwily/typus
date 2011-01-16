@@ -10,7 +10,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
     should "return a 401 message when no credentials sent" do
       get :show
-      assert_response 401
+      assert_response :unauthorized
     end
 
     should "authenticate user with valid password" do
@@ -22,7 +22,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     should "not authenticate user with invalid password" do
       @request.env['HTTP_AUTHORIZATION'] = 'Basic ' + Base64::encode64("admin:admin")
       get :show
-      assert_response 401
+      assert_response :unauthorized
     end
 
   end
