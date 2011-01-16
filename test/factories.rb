@@ -7,7 +7,7 @@ end
 
 Factory.define :case do |f|
   # This is an STI model which inherits from Entry
-  f.sequence(:title) { |n| "Title##{n}" }
+  f.sequence(:title) { |n| "Case##{n}" }
   f.content "Body of the entry"
 end
 
@@ -16,19 +16,19 @@ Factory.define :category do |f|
 end
 
 Factory.define :comment do |f|
-  f.sequence(:name) { |n| "Name#{n}" }
+  f.sequence(:name) { |n| "Comment##{n}" }
   f.sequence(:email) { |n| "john+#{n}@example.com" }
   f.body "Body of the comment"
   f.association :post
 end
 
 Factory.define :entry do |f|
-  f.sequence(:title) { |n| "Title##{n}" }
+  f.sequence(:title) { |n| "Entry##{n}" }
   f.content "Body of the entry"
 end
 
 Factory.define :page do |f|
-  f.sequence(:title) { |n| "Title##{n}" }
+  f.sequence(:title) { |n| "Page##{n}" }
   f.body "Content"
 end
 
