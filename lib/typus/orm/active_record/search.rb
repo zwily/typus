@@ -54,6 +54,11 @@ module Typus
 
         alias :build_integer_conditions :build_string_conditions
 
+        # TODO: Make this work!
+        def build_has_many_conditions(key, value)
+          # joins(key.to_sym).where("#{key}.id = ?", value)
+        end
+
         ##
         # To build conditions we reject all those params which are not model
         # fields.
