@@ -18,3 +18,4 @@ User:
     list: name, email, projects
   relationships: projects #, third_party_projects
   application: HasManyThrough
+  filters: projects
