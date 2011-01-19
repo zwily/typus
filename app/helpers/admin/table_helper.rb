@@ -78,6 +78,8 @@ module Admin
       item.send(attribute).map { |i| i.to_label }.join(", ")
     end
 
+    alias :table_has_many_field :table_has_and_belongs_to_many_field
+
     def table_string_field(attribute, item)
       (raw_content = item.send(attribute)).present? ? truncate(raw_content) : "&mdash;".html_safe
     end
