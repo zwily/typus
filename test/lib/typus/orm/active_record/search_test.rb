@@ -106,6 +106,16 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
+  context "build_has_many_conditions" do
+
+    should "work" do
+      expected = ["projects.id = ?", "1"]
+      output = User.build_has_many_conditions('projects', '1')
+      assert_equal expected, output
+    end
+
+  end
+
   context "build_conditions" do
 
     should "generate conditions for id" do
@@ -249,6 +259,35 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "return_sql_conditions_on_filtering_posts_by_string" do
       params = { :role => "admin" }
       assert_equal params, TypusUser.build_conditions(params).first
+    end
+
+  end
+
+  context "build_joins" do
+
+    setup do
+      @project = Factory(:project)
+      2.times { Factory(:project) }
+    end
+
+    should "return the expected joins" do
+      params = { :projects => @project.id }
+      assert_equal [:projects], User.build_joins(params)
+    end
+
+    ##
+    # Get all user which are on project 1
+    #
+
+    should "work when users are filtered by projects" do
+      params = { :projects => @project.id }
+
+      @resource = User
+      @resource.build_conditions(params).each { |c| @resource = @resource.where(c) }
+      @resource.build_joins(params).each { |j| @resource = @resource.joins(j) }
+
+      assert_equal 1, @resource.count
+      assert_equal [@project.user.id], @resource.map(&:id)
     end
 
   end

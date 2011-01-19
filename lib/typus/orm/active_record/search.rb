@@ -54,9 +54,9 @@ module Typus
 
         alias :build_integer_conditions :build_string_conditions
 
-        # TODO: Make this work!
         def build_has_many_conditions(key, value)
-          # joins(key.to_sym).where("#{key}.id = ?", value)
+          # TODO: Detect the primary_key for this object.
+          ["#{key}.id = ?", value]
         end
 
         ##
@@ -76,6 +76,12 @@ module Typus
               conditions << send("build_#{filter_type}_conditions", key, value)
             end
           end
+        end
+
+        def build_joins(params)
+          query_params = params.dup
+          query_params.reject! { |k, v| !model_relationships.keys.include?(k.to_sym) }
+          query_params.compact.map { |k, v| k.to_sym }
         end
 
       end

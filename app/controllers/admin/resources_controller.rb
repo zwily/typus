@@ -227,6 +227,10 @@ class Admin::ResourcesController < Admin::BaseController
       @resource = @resource.where(condition)
     end
 
+    @resource.build_joins(params).each do |join|
+      @resource = @resource.joins(join)
+    end
+
     if @resource.typus_options_for(:only_user_items)
       check_resources_ownership
     end
