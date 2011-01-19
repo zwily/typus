@@ -10,7 +10,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
     @user = @project.user
   end
 
-  should "be able to destroy items" do
+  should_eventually "be able to destroy items" do
     get :destroy, { :id => @user.id, :method => :delete }
 
     assert_response :redirect
