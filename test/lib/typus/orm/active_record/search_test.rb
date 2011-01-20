@@ -114,6 +114,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal expected, output
     end
 
+    should_eventually "work for non standard primary keys"
+
   end
 
   context "build_conditions" do
