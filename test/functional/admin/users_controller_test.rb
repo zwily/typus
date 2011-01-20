@@ -18,4 +18,10 @@ class Admin::UsersControllerTest < ActionController::TestCase
     assert_redirected_to :action => :index
   end
 
+  context "index" do
+
+    should_eventually "filter by projects"
+
+  end
+
 end
