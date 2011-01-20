@@ -2,7 +2,9 @@ class Post < ActiveRecord::Base
 
   STATUS = { "Draft" => "draft",
              "Published" => "published",
-             "Unpublished" => "unpublished" }
+             "Unpublished" => "unpublished",
+             "--" => "",
+             "<div class=''>Something special</div>".html_safe => "special" }
 
   validates_presence_of :title, :body
 
