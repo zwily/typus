@@ -6,7 +6,7 @@ require 'typus/version'
 Gem::Specification.new do |s|
   s.name = "typus"
   s.version = Typus::VERSION
-  s.date = "2010-11-28"
+  s.date = Time.now.strftime('%Y-%m-%d')
 
   s.platform = Gem::Platform::RUBY
   s.authors = ["Francesc Esplugas"]
