@@ -15,8 +15,6 @@ module Admin
                                  when :belongs_to then relationship_filter(key)
                                  when :has_many, :has_and_belongs_to_many then
                                    relationship_filter(key, true)
-                                 # when nil then
-                                     # Do nothing. This is ugly but for now it's ok.
                                  else
                                    string_filter(key)
                                  end
