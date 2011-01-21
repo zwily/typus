@@ -6,6 +6,8 @@ class Post < ActiveRecord::Base
              "--" => "",
              "<div class=''>Something special</div>".html_safe => "special" }
 
+  ARRAY_SELECTOR = %w(item1 item2)
+
   validates_presence_of :title, :body
 
   belongs_to :favorite_comment, :class_name => "Comment"

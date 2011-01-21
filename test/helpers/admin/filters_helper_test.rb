@@ -54,6 +54,14 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
       assert_equal expected, output
     end
 
+    should "return an array from an ARRAY_SELECTOR" do
+      output = string_filter("request", "array_selector")
+      expected = "array_selector",
+                 {"item1"=>"item1", "item2"=>"item2"},
+                 "Show by array selector"
+      assert_equal expected, output
+    end
+
   end
 
   context "predefined_filters" do
