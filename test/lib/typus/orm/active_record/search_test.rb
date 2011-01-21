@@ -6,13 +6,27 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     should "work for Post (title)" do
       output = Post.build_search_conditions("search", "bacon")
-      expected = "posts.title LIKE '%bacon%'"
+
+      expected = case ENV["DB"]
+                 when "postgresql"
+                   "LOWER(TEXT(posts.title)) LIKE '%bacon%'"
+                 else
+                   "posts.title LIKE '%bacon%'"
+                 end
+
       assert_equal expected, output
     end
 
     should "work for Comment (email, body)" do
       output = Comment.build_search_conditions("search", "bacon")
-      expected = "comments.body LIKE '%bacon%' OR comments.email LIKE '%bacon%'"
+
+      expected = case ENV["DB"]
+                 when "postgresql"
+                   "LOWER(TEXT(comments.body)) LIKE '%bacon%' OR LOWER(TEXT(comments.email)) LIKE '%bacon%'"
+                 else
+                   "comments.body LIKE '%bacon%' OR comments.email LIKE '%bacon%'"
+                 end
+
       assert_equal expected, output
     end
 
@@ -188,10 +202,18 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_search_and_filter_for_typus_user" do
-      expected = ["typus_users.first_name LIKE '%francesc%'",
-                  "typus_users.last_name LIKE '%francesc%'",
-                  "typus_users.email LIKE '%francesc%'",
-                  "typus_users.role LIKE '%francesc%'"]
+      expected = case ENV["DB"]
+                 when "postgresql"
+                   ["LOWER(TEXT(typus_users.role)) LIKE '%francesc%'",
+                    "LOWER(TEXT(typus_users.last_name)) LIKE '%francesc%'",
+                    "LOWER(TEXT(typus_users.email)) LIKE '%francesc%'",
+                    "LOWER(TEXT(typus_users.first_name)) LIKE '%francesc%'"]
+                 else
+                    ["typus_users.first_name LIKE '%francesc%'",
+                     "typus_users.last_name LIKE '%francesc%'",
+                     "typus_users.email LIKE '%francesc%'",
+                     "typus_users.role LIKE '%francesc%'"]
+                 end
 
       params = { :search => "francesc", :status => "true" }
       output = TypusUser.build_conditions(params)
