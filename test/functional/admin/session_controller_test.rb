@@ -25,7 +25,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
     should "render new and verify title and header" do
       get :new
-      assert_select "title", "Sign in"
+      assert_select "title", "Typus &mdash; Sign in"
       assert_select "h1", "Typus"
     end
 

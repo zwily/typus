@@ -87,7 +87,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     end
 
     should "verify title" do
-      assert_select "title", "Dashboard"
+      assert_select "title", "Typus &mdash; Dashboard"
     end
 
     should "verify link to session sign out" do

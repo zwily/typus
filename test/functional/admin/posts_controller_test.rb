@@ -501,7 +501,7 @@ title;status
       end
 
       should "render_index_and_verify_page_title" do
-        assert_select "title", "Posts"
+        assert_select "title", "Typus &mdash; Posts"
       end
 
       should "render index_and_show_add_entry_link" do
@@ -523,7 +523,7 @@ title;status
       end
 
       should "render new and verify page title" do
-        assert_select "title", "New Post"
+        assert_select "title", "Typus &mdash; New Post"
       end
 
     end
@@ -539,7 +539,7 @@ title;status
       end
 
       should "render_edit_and_verify_page_title" do
-        assert_select "title", "Edit Post"
+        assert_select "title", "Typus &mdash; Edit Post"
       end
 
     end
@@ -554,8 +554,8 @@ title;status
         assert_match "posts#_show.html.erb", @response.body
       end
 
-      should "render_show_and_verify_page_title" do
-        assert_select "title", "Show Post"
+      should "render show and verify page title" do
+        assert_select "title", "Typus &mdash; Show Post"
       end
 
     end
