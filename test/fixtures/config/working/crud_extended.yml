@@ -37,6 +37,7 @@ Page:
 
 Post:
   fields:
+    default: title, body, created_at, status, published_at
     list: title, created_at, status
     form: title, body, created_at, status, published_at
     relationship: title, created_at
