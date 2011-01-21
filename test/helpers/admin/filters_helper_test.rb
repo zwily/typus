@@ -62,6 +62,14 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
       assert_equal expected, output
     end
 
+    should "return an array from an ARRAY_HASH_SELECTOR" do
+      output = string_filter("request", "array_hash_selector")
+      expected = "array_hash_selector",
+                 {"Draft" => "draft", "Custom Status" => "custom"},
+                 "Show by array hash selector"
+      assert_equal expected, output
+    end
+
   end
 
   context "predefined_filters" do

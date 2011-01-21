@@ -63,8 +63,20 @@ module Admin
     end
 
     def string_filter(request, filter)
-      values  = @resource::const_get(filter.to_s.upcase)
-      items   = values.is_a?(Hash) ? values : values.to_hash_with(values)
+      values = @resource::const_get(filter.to_s.upcase)
+
+      items = case values
+              when Hash
+                values
+              when Array
+                if values.first.is_a?(Array)
+                  keys, values = values.map { |i| i.first }, values.map { |i| i.last }
+                  keys.to_hash_with(values)
+                else
+                  values.to_hash_with(values)
+                end
+              end
+
       message = Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
       [filter, items, message]
     end

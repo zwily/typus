@@ -7,6 +7,7 @@ class Post < ActiveRecord::Base
              "<div class=''>Something special</div>".html_safe => "special" }
 
   ARRAY_SELECTOR = %w(item1 item2)
+  ARRAY_HASH_SELECTOR = [["Draft", "draft"], ["Custom Status", "custom"]]
 
   validates_presence_of :title, :body
 
