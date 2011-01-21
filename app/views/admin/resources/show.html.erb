@@ -30,6 +30,10 @@
              typus_file_preview(@item, key)
            when :selector
              @item.mapping(key)
+           when :datetime
+             if raw_data
+               I18n.localize(raw_data, :format => @item.class.typus_date_format(key))
+             end
            else
              raw_data
            end
