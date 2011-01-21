@@ -12,9 +12,11 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
     should "return an array" do
       output = date_filter("filter")
-      expected = "filter",
-                 [["Today", "today"], ["Last few days", "last_few_days"], ["Last 7 days", "last_7_days"], ["Last 30 days", "last_30_days"]],
-                 "Show all dates"
+      expected = [["Show all dates", ""],
+                  ["Today", "today"],
+                  ["Last few days", "last_few_days"],
+                  ["Last 7 days", "last_7_days"],
+                  ["Last 30 days", "last_30_days"]]
       assert_equal expected, output
     end
 
@@ -28,9 +30,9 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
     should "return an array" do
       output = boolean_filter("filter")
-      expected = "filter",
-                 [["True", "true"], ["False", "false"]],
-                 "Show by filter"
+      expected = [["Show by filter", ""],
+                  ["True", "true"],
+                  ["False", "false"]]
       assert_equal expected, output
     end
 
@@ -44,29 +46,28 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
     should "return an array" do
       output = string_filter("status")
-      expected = "status",
-                 [["--", ""],
-                   ["Unpublished", "unpublished"],
-                   ["<div class=''>Something special</div>", "special"],
-                   ["Draft", "draft"],
-                   ["Published", "published"]],
-                 "Show by status"
+      expected = [["Show by status", ""],
+                  ["--", ""],
+                  ["Unpublished", "unpublished"],
+                  ["<div class=''>Something special</div>", "special"],
+                  ["Draft", "draft"],
+                  ["Published", "published"]]
       assert_equal expected, output
     end
 
     should "return an array from an ARRAY_SELECTOR" do
       output = string_filter("array_selector")
-      expected = "array_selector",
-                 [["item1", "item1"], ["item2", "item2"]],
-                 "Show by array selector"
+      expected = [["Show by array selector", ""],
+                  ["item1", "item1"],
+                  ["item2", "item2"]]
       assert_equal expected, output
     end
 
     should "return an array from an ARRAY_HASH_SELECTOR" do
       output = string_filter("array_hash_selector")
-      expected = "array_hash_selector",
-                 [["Custom Status", "custom"], ["Draft", "draft"]],
-                 "Show by array hash selector"
+      expected = [["Show by array hash selector", ""],
+                  ["Custom Status", "custom"],
+                  ["Draft", "draft"]]
       assert_equal expected, output
     end
 
