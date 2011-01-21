@@ -19,7 +19,6 @@ module Admin
                                    string_filter(key)
                                  end
 
-        items = items.to_a
         items.insert(0, [message, ""])
 
         { :filter => filter, :items => items }
@@ -72,6 +71,8 @@ module Admin
                   values.to_hash_with(values)
                 end
               end
+
+      items = items.to_a
 
       message = Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
       [filter, items, message]
