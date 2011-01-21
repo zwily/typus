@@ -53,6 +53,7 @@ module Typus
         end
 
         alias :build_integer_conditions :build_string_conditions
+        alias :build_belongs_to_conditions, :build_string_conditions
 
         def build_has_many_conditions(key, value)
           # TODO: Detect the primary_key for this object.
