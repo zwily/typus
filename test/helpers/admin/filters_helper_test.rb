@@ -45,7 +45,11 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
     should "return an array" do
       output = string_filter("request", "status")
       expected = "status",
-                 {"unpublished"=>"unpublished", "pending"=>"pending", "published"=>"published"},
+                 {"Draft"=>"draft",
+                  "Published"=>"published",
+                  "Unpublished"=>"unpublished",
+                  "--"=>"",
+                  "<div class=''>Something special</div>" => "special"},
                  "Show by status"
       assert_equal expected, output
     end
