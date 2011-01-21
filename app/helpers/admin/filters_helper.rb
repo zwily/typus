@@ -7,20 +7,18 @@ module Admin
 
       return if typus_filters.empty?
 
-      current_request = request.env['QUERY_STRING'] || []
-
       filters = typus_filters.map do |key, value|
         filter, items, message = case value
-                                 when :boolean then boolean_filter(current_request, key)
-                                 when :string then string_filter(current_request, key)
-                                 when :date, :datetime then date_filter(current_request, key)
-                                 when :belongs_to then relationship_filter(current_request, key)
+                                 when :boolean then boolean_filter(key)
+                                 when :string then string_filter(key)
+                                 when :date, :datetime then date_filter(key)
+                                 when :belongs_to then relationship_filter(key)
                                  when :has_many, :has_and_belongs_to_many then
-                                   relationship_filter(current_request, key, true)
+                                   relationship_filter(key, true)
                                  # when nil then
                                      # Do nothing. This is ugly but for now it's ok.
                                  else
-                                   string_filter(current_request, key)
+                                   string_filter(key)
                                  end
 
         items = items.to_a
@@ -32,7 +30,7 @@ module Admin
       render "admin/helpers/filters/filters", :filters => filters
     end
 
-    def relationship_filter(request, filter, habtm = false)
+    def relationship_filter(filter, habtm = false)
       att_assoc = @resource.reflect_on_association(filter.to_sym)
       class_name = att_assoc.options[:class_name] || ((habtm) ? filter.classify : filter.capitalize.camelize)
       model = class_name.typus_constantize
@@ -48,21 +46,21 @@ module Admin
       [related_fk, items, message]
     end
 
-    def date_filter(request, filter)
+    def date_filter(filter)
       values  = %w(today last_few_days last_7_days last_30_days)
       items   = values.map { |v| [Typus::I18n.t(v.humanize), v] }
       message = Typus::I18n.t("Show all dates")
       [filter, items, message]
     end
 
-    def boolean_filter(request, filter)
+    def boolean_filter(filter)
       values  = @resource.typus_boolean(filter)
       items   = values.map { |k, v| [Typus::I18n.t(k.humanize), v] }
       message = Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase)
       [filter, items, message]
     end
 
-    def string_filter(request, filter)
+    def string_filter(filter)
       values = @resource::const_get(filter.to_s.upcase)
 
       items = case values
