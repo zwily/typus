@@ -32,6 +32,15 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   context "mapping" do
 
+    teardown do
+      Post.send(:remove_const, :STATUS)
+      Post::STATUS = { "Draft" => "draft",
+                       "Published" => "published",
+                       "Unpublished" => "unpublished",
+                       "--" => "",
+                       "<div class=''>Something special</div>".html_safe => "special" }
+    end
+
     context "with an array" do
 
       setup do
