@@ -13,14 +13,13 @@
 <%= render 'show' %>
 
 <dl>
-<%- @fields.each do |field| -%>
-  <dt><%=h @resource.human_attribute_name(field.first) %></dt>
+<%- @fields.each do |key, value| -%>
+  <dt><%=h @resource.human_attribute_name(key) %></dt>
   <%-
-    data_type = field.last
-    raw_data = @item.send(field.first)
-    data = case data_type
+    raw_data = @item.send(key)
+    data = case value
            when :boolean
-             @resource.typus_boolean(field.first).invert[raw_data.to_s]
+             @resource.typus_boolean(key).invert[raw_data.to_s]
            when :belongs_to
              if raw_data
                link_to raw_data.to_label, { :controller => raw_data.class.to_resource,
@@ -28,9 +27,9 @@
                                             :id => raw_data }
              end
            when :file
-             typus_file_preview(@item, field.first)
+             typus_file_preview(@item, key)
            when :selector
-             @item.mapping(field.first)
+             @item.mapping(key)
            else
              raw_data
            end
