@@ -4,6 +4,7 @@ Project:
     form: name, user
   relationships: collaborators
   application: HasManyThrough
+  filters: user
 
 ProjectCollaborator:
   fields:
