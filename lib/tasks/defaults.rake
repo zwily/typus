@@ -6,7 +6,7 @@ namespace :typus do
     plugins = [ "git://github.com/thoughtbot/paperclip.git", 
                 "git://github.com/rails/acts_as_list.git", 
                 "git://github.com/rails/acts_as_tree.git",
-                "git://github.com/rai/rails_xss.git" ]
+                "git://github.com/rails/rails_xss.git" ]
 
     system "script/plugin install #{plugins.join(" ")} --force"
 
