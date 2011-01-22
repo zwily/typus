@@ -44,6 +44,18 @@ migrate your database.
 
 Start the application server and go to {http://0.0.0.0:3000/admin}[http://0.0.0.0:3000/admin].
 
+== Requirements
+
+As a requirement you need to install <tt>rails_xss</tt> plugin:
+
+    $ script/plugin install https://github.com/rails/rails_xss
+
+Other optional stuff is <tt>paperclip</tt>, <tt>acts_as_list</tt> and
+<tt>acts_as_tree</tt>. Once typus is installed you can use the provided
+task to install all plugins:
+
+    $ rake typus:misc
+
 == License
 
 Copyright &copy; 2007-2011 Francesc Esplugas, released under the MIT license.
