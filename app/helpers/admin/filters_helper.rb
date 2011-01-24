@@ -76,17 +76,12 @@ module Admin
 
       array = case values
               when Hash
-                values
+                values.to_a
               when Array
-                if values.first.is_a?(Array)
-                  keys, values = values.map { |i| i.first }, values.map { |i| i.last }
-                  keys.to_hash_with(values)
-                else
-                  values.to_hash_with(values)
-                end
+                values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
               end
 
-      items += array.to_a
+      items += array
     end
 
     def predefined_filters

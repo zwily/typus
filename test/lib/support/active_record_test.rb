@@ -69,7 +69,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
       setup do
         Post.send(:remove_const, :STATUS)
-        Post::STATUS = [["Publicado", "published"], ["Pendiente", "pending"], ["No publicado", "unpublished"]]
+        Post::STATUS = [["Publicado", "published"],
+                        ["Pendiente", "pending"],
+                        ["No publicado", "unpublished"]]
       end
 
       should "verify" do
@@ -85,7 +87,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
       setup do
         Post.send(:remove_const, :STATUS)
-        Post::STATUS = { "Pending - Hash" => "pending", "Published - Hash" => "published", "Not Published - Hash" => "unpublished" }
+        Post::STATUS = { "Pending - Hash" => "pending",
+                         "Published - Hash" => "published",
+                         "Not Published - Hash" => "unpublished" }
       end
 
       should "verify" do

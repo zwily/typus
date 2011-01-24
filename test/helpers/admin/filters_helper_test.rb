@@ -66,8 +66,8 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
     should "return an array from an ARRAY_HASH_SELECTOR" do
       output = string_filter("array_hash_selector")
       expected = [["Show by array hash selector", ""],
-                  ["Custom Status", "custom"],
-                  ["Draft", "draft"]]
+                  ["Draft", "draft"],
+                  ["Custom Status", "custom"]]
       assert_equal expected, output
     end
 
