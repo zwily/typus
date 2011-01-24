@@ -176,7 +176,7 @@ module Typus
                     ["True", "False"]
                   end
 
-        { boolean.first => "true", boolean.last => "false" }
+        [[boolean.first, "true"], [boolean.last, "false"]]
       end
 
       #--

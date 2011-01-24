@@ -226,22 +226,22 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "typus_boolean" do
 
     should "accept strings" do
-      expected = {"Inactive"=>"false", "Active"=>"true"}
+      expected = [["Active", "true"], ["Inactive", "false"]]
       assert_equal expected, TypusUser.typus_boolean("status")
     end
 
     should "accept symbols" do
-      expected = {"Inactive"=>"false", "Active"=>"true"}
+      expected = [["Active", "true"], ["Inactive", "false"]]
       assert_equal expected, TypusUser.typus_boolean(:status)
     end
 
     should "return booleans for Post" do
-      expected = {"True" => "true", "False" => "false"}
+      expected = [["True", "true"], ["False", "false"]]
       assert_equal expected, Post.typus_boolean(:status)
     end
 
     should "return booleans for Comment" do
-      expected = {"No, it's not spam" => "false", "Yes, it's spam" => "true"}
+      expected = [["Yes, it's spam", "true"], ["No, it's not spam", "false"]]
       assert_equal expected, Comment.typus_boolean(:spam)
     end
 

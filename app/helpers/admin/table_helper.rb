@@ -137,8 +137,8 @@ module Admin
 
     def table_boolean_field(attribute, item)
       status = item.send(attribute)
-      boolean_hash = item.class.typus_boolean(attribute).invert
-      human_boolean = status ? boolean_hash["true"] : boolean_hash["false"]
+      boolean_assoc = item.class.typus_boolean(attribute)
+      human_boolean = (status ? boolean_assoc.rassoc("true") : boolean_assoc.rassoc("false")).first
 
       options = { :controller => "/admin/#{item.class.to_resource}",
                   :action => "toggle",
