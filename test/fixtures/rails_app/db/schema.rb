@@ -128,7 +128,7 @@ ActiveRecord::Schema.define do
 
   create_table :invoices, :force => true do |t|
     t.string :number
-    t.integer  :order_id
+    t.integer :order_id
     t.timestamps
   end
 
