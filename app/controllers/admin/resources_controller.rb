@@ -184,7 +184,7 @@ class Admin::ResourcesController < Admin::BaseController
 
     case item_class.relationship_with(@resource)
     when :has_one
-      association_name = @resource.model_name.downcase.to_sym
+      association_name = @resource.model_name.underscore.to_sym
       worked = item.send(association_name).delete
     else
       association_name ||= @resource.model_name.tableize.to_sym
@@ -339,7 +339,7 @@ class Admin::ResourcesController < Admin::BaseController
     case item_class.relationship_with(@resource)
     when :has_one
       # Order#invoice = @item
-      association_name = @resource.model_name.downcase.to_sym
+      association_name = @resource.model_name.underscore.to_sym
       item.send("#{association_name}=", @item)
       worked = true
     when :has_and_belongs_to_many
@@ -405,7 +405,7 @@ class Admin::ResourcesController < Admin::BaseController
       item = item_class.find(params[:resource_id]) if params[:resource_id]
 
       if item_class.relationship_with(@resource) == :has_one
-        association_name = @resource.model_name.downcase.to_sym
+        association_name = @resource.model_name.underscore.to_sym
         if item.send(association_name)
           render :text => "Not allowed!", :status => :unprocessable_entity
         end
