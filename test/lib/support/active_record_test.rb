@@ -28,6 +28,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
       assert_equal :belongs_to, Invoice.relationship_with(Order)
     end
 
+    should "return relationship between Invoice and TypusUser" do
+      assert_equal :belongs_to, Invoice.relationship_with(TypusUser)
+    end
+
+    should "return relationship between TypusUser and Invoice" do
+      assert_equal :has_many, TypusUser.relationship_with(Invoice)
+    end
+
   end
 
   context "mapping" do

@@ -5,4 +5,6 @@ class TypusUser < ActiveRecord::Base
 
   enable_as_typus_user
 
+  has_many :invoices
+
 end
