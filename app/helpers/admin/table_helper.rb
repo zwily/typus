@@ -241,9 +241,9 @@ module Admin::TableHelper
 
   def typus_table_boolean_field(attribute, item)
 
-    boolean_hash = item.class.typus_boolean(attribute)
+    boolean_assoc = item.class.typus_boolean(attribute).to_a
     status = item.send(attribute)
-    link_text = boolean_hash["#{status}".to_sym]
+    link_text = (status ? boolean_assoc.assoc(:true) : boolean_assoc.assoc(:false)).last
 
     options = { :controller => "admin/#{item.class.name.tableize}", 
                 :action => 'toggle', 
