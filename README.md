@@ -38,6 +38,9 @@ Add **Typus** to your `Gemfile`
 
     gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
 
+    # If you have problems with "Smart HTTP" use the "Git Transfer Protocol".
+    # gem 'typus', :git => 'git://github.com/fesplugas/typus.git'
+
 Update your bundle
 
     $ bundle install
