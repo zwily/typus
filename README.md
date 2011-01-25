@@ -19,7 +19,7 @@ Français, Magyar, Italiano, Portuguese, Russian, 中文)
 - Low memory footprint.
 - Works with `Rails 3.0`.
 - Tested with `Ruby 1.8.7-p300` and `Ruby 1.9.2-p136` and `JRuby 1.5.6`.
-- Tested with SQLite, MySQL and PostgreSQL.
+- Tested with `SQLite`, `MySQL` and `PostgreSQL`.
 - MIT License, the same as Rails.
 
 ## Links
