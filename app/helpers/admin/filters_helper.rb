@@ -70,17 +70,9 @@ module Admin
     end
 
     def string_filter(filter)
-      values = @resource::const_get(filter.to_s.upcase)
-
+      values = @resource::const_get(filter.to_s.upcase).to_a
       items = [[Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase), ""]]
-
-      array = case values
-              when Hash
-                values.to_a
-              when Array
-                values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
-              end
-
+      array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
       items += array
     end
 
