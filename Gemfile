@@ -9,13 +9,41 @@ gem 'factory_girl'
 gem 'paperclip'
 gem 'rack-cache', :require => 'rack/cache'
 gem 'rails', '~> 3.0'
-gem 'sqlite3-ruby', :require => 'sqlite3'
 
 group :test do
-  gem 'mysql'
-  gem 'pg'
   gem 'shoulda'
   gem 'tartare', :git => 'https://github.com/fesplugas/rails-tartare.git', :require => false
 
   gem 'mocha'
+end
+
+group :development, :test do
+
+  platforms :jruby do
+    gem 'activerecord-jdbc-adapter', :require => false
+    # gem 'activerecord-jdbcpostgresql-adapter'
+    gem 'jdbc-mysql'
+    gem 'jdbc-postgres'
+    gem 'jdbc-sqlite3'
+  end
+
+  platforms :ruby do
+    gem 'mysql2'
+    gem 'pg'
+    gem 'sqlite3-ruby', :require => 'sqlite3'
+  end
+
+end
+
+group :production do
+
+  platforms :jruby do
+    gem 'activerecord-jdbc-adapter'
+    gem 'jdbc-sqlite3'
+  end
+
+  platforms :ruby do
+    gem 'sqlite3-ruby', :require => 'sqlite3'
+  end
+
 end
