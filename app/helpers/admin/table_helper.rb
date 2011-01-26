@@ -47,12 +47,12 @@ module Admin
       fields.map { |k, v| send("table_#{v}_field", k, item) }
     end
 
-    def actions
-      @actions ||= []
+    def resource_actions
+      @resource_actions ||= []
     end
 
     def table_actions(model, item, association_name = nil)
-      actions.map do |action|
+      resource_actions.map do |action|
         if admin_user.can?(action[:action], model.name)
           link_to Typus::I18n.t(action[:action_name]),
                   { :controller => model.to_resource, :action => action[:action], :id => item.id, :resource => action[:resource], :resource_id => action[:resource_id], :association_name => association_name },

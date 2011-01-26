@@ -113,7 +113,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       expected = [ {"action_name"=>"Edit", "action"=>"edit"},
                    {"confirm"=>"Trash?", "action_name"=>"Trash", "method"=>"delete", "action"=>"destroy"}]
 
-      assert_equal expected, assigns(:actions)
+      assert_equal expected, assigns(:resource_actions)
     end
 
     should "be edit and unrelate on edit" do
@@ -122,7 +122,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       expected = [ {"action_name"=>"Edit", "action"=>"edit"},
                    {"confirm"=>"Unrelate?", "action_name"=>"Unrelate", "resource_id"=>@post.id, "resource"=>"Post", "action" => "unrelate"}]
 
-      assert_equal expected, assigns(:actions)
+      assert_equal expected, assigns(:resource_actions)
     end
 
     context "with overriden default action on item" do
@@ -137,7 +137,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
         expected = [ {"action_name"=>"Show", "action"=>"show"},
                      {"confirm"=>"Trash?", "action_name"=>"Trash", "method"=>"delete", "action"=>"destroy"}]
 
-        assert_equal expected, assigns(:actions)
+        assert_equal expected, assigns(:resource_actions)
       end
 
       should "be show and unrelate on edit" do
@@ -146,7 +146,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
         expected = [ {"action_name"=>"Show", "action"=>"show"},
                      {"confirm"=>"Unrelate?", "action_name"=>"Unrelate", "resource_id"=>@post.id, "resource"=>"Post", "action" => "unrelate"}]
 
-        assert_equal expected, assigns(:actions)
+        assert_equal expected, assigns(:resource_actions)
       end
 
     end

@@ -56,15 +56,15 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
-  context "actions" do
+  context "resource_actions" do
 
     should "return a default value which is an empty array" do
-      assert actions.empty?
+      assert resource_actions.empty?
     end
 
     should "return a predefined value" do
-      @actions = "mock"
-      assert_equal "mock", actions
+      @resource_actions = "mock"
+      assert_equal "mock", resource_actions
     end
 
   end
