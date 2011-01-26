@@ -26,6 +26,22 @@ class Admin::AssetsController < Admin::ResourcesController
     super
   end
 
+  def edit
+    if params[:layout]
+      add_resources_action("Back to list", {:action => "index"}, {})
+    end
+
+    super
+  end
+
+  def update
+    if params[:layout]
+      add_resources_action("Back to list", {:action => "index"}, {})
+    end
+
+    super
+  end
+
   private
 
   def set_layout
