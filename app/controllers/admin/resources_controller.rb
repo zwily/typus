@@ -21,8 +21,8 @@ class Admin::ResourcesController < Admin::BaseController
   # your formats.
   #
   def index
-    add_action(:action_name => default_action.titleize, :action => default_action)
-    add_action(:action_name => "Trash", :action => "destroy", :confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete')
+    add_resource_action(:action_name => default_action.titleize, :action => default_action)
+    add_resource_action(:action_name => "Trash", :action => "destroy", :confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete')
 
     get_objects
 
@@ -57,8 +57,8 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def edit
-    add_action(:action_name => default_action.titleize, :action => default_action)
-    add_action(:action_name => "Unrelate", :action => "unrelate", :confirm => "#{Typus::I18n.t("Unrelate")}?", :resource => @resource.model_name, :resource_id => @item.id)
+    add_resource_action(:action_name => default_action.titleize, :action => default_action)
+    add_resource_action(:action_name => "Unrelate", :action => "unrelate", :confirm => "#{Typus::I18n.t("Unrelate")}?", :resource => @resource.model_name, :resource_id => @item.id)
   end
 
   def show

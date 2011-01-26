@@ -4,22 +4,22 @@ module Typus
 
     protected
 
-    def add_action(*args)
+    def add_resource_action(*args)
       options = args.extract_options!
-      @actions ||= []
-      @actions << options
+      @resource_actions ||= []
+      @resource_actions << options
     end
 
-    def prepend_action(*args)
+    def prepend_resource_action(*args)
       options = args.extract_options!
-      @actions ||= []
-      @actions = @actions.unshift(options)
+      @resource_actions ||= []
+      @resource_actions = @resource_actions.unshift(options)
     end
 
-    def append_action(*args)
+    def append_resource_action(*args)
       options = args.extract_options!
-      @actions ||= []
-      @actions = @actions.concat([options])
+      @resource_actions ||= []
+      @resource_actions = @resource_actions.concat([options])
     end
 
   end
