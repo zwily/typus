@@ -7,11 +7,11 @@ module Admin
     end
 
     def list_actions
-      resources_actions.map do |action|
-        if admin_user.can?(action[:action], @resource.name)
-          link_to Typus::I18n.t(action[:action_name]),
-                  { :controller => @resource.to_resource, :action => action[:action], :resource => action[:resource], :resource_id => action[:resource_id], :layout => params[:layout] },
-                  { :confirm => action[:confirm], :method => action[:method], :target => "_parent" }
+      resources_actions.map do |body, url, options|
+        if admin_user.can?(url[:action], @resource.name)
+          link_to Typus::I18n.t(body),
+                  url.merge(:controller => @resource.to_resource, :layout => params[:layout]),
+                  options.merge(:target => "_parent")
         end
       end.compact.join(" / ").html_safe
     end

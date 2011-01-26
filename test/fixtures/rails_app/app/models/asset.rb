@@ -17,6 +17,8 @@ class Asset < ActiveRecord::Base
   image_accessor :dragonfly_required
   validates_presence_of :dragonfly_required
 
+  validates_presence_of :caption
+
   # Paperclip Attachment
   has_attached_file :paperclip, :styles => { :medium => "300x300>", :thumb => "100x100>" }
 

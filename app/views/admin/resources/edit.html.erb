@@ -9,6 +9,7 @@
 
 <h2>
   <%= page_title %>
+  <small><%= list_actions %></small>
 </h2>
 
 <%= display_link_to_previous %>
@@ -20,7 +21,8 @@
               :id => @item.id ,
               :back_to => params[:back_to],
               :resource => params[:resource],
-              :resource_id => params[:resource_id] }
+              :resource_id => params[:resource_id],
+              :layout => params[:layout] }
   button = Typus::I18n.t("Save %{resource}", :resource => @resource.model_name.human)
 %>
 

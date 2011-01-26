@@ -252,15 +252,15 @@ class Admin::ResourcesController < Admin::BaseController
 
     case params[:action]
     when "create"
-      path = { :action => action }
+      path = { :action => action, :layout => params[:layout] }
       path.merge!(:id => @item.id) unless action.eql?("index")
       notice = Typus::I18n.t("%{model} successfully created.", :model => @resource.model_name.human)
     when "update", "detach"
       path = case action
              when "index"
-               params[:back_to] ? "#{params[:back_to]}##{@resource.to_resource}" : { :action => action }
+               params[:back_to] ? "#{params[:back_to]}##{@resource.to_resource}" : { :action => action, :layout => params[:layout] }
              else
-               { :action => action, :id => @item.id, :back_to => params[:back_to] }
+               { :action => action, :id => @item.id, :layout => params[:layout], :back_to => params[:back_to] }
              end
       notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
     end

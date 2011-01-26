@@ -7,6 +7,7 @@
 
 <h2>
   <%= page_title %>
+  <small><%= list_actions %></small>
 </h2>
 
 <%= display_flash_message %>
@@ -15,7 +16,7 @@
 
 <ul class="predefined_filters">
   <% predefined_filters.each do |filter, action, scope| %>
-    <li><%= link_to Typus::I18n.t(filter), :action => action %> (<%= @resource.send(scope).count %>)</li>
+    <li><%= link_to Typus::I18n.t(filter), :action => action, :layout => params[:layout] %> (<%= @resource.send(scope).count %>)</li>
   <% end %>
 </ul>
 
