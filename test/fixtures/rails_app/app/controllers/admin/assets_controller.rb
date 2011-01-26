@@ -12,7 +12,7 @@ class Admin::AssetsController < Admin::ResourcesController
 
   def new
     if params[:layout]
-      add_resources_action(:action_name => Typus::I18n.t("Back to list"), :action => "index")
+      add_resources_action("Back to list", {:action => "index"}, {})
     end
 
     super
@@ -20,7 +20,7 @@ class Admin::AssetsController < Admin::ResourcesController
 
   def create
     if params[:layout]
-      add_resources_action(:action_name => Typus::I18n.t("Back to list"), :action => "index")
+      add_resources_action("Back to list", {:action => "index"}, {})
     end
 
     super
