@@ -53,10 +53,22 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_template 'index'
     end
 
-    should "render new" do
-      get :new
-      assert_response :success
-      assert_template 'new'
+    context "new" do
+
+      should "render" do
+        get :new
+        assert_response :success
+        assert_template 'new'
+      end
+
+      should "reject some params" do
+        %w(resource resource_id back_to selected layout).each do |param|
+          get :new, {param => param}
+          assert_response :success
+          assert_template 'new'
+        end
+      end
+
     end
 
     should "create" do
