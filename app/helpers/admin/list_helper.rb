@@ -11,7 +11,7 @@ module Admin
         if admin_user.can?(url[:action], @resource.name)
 
           this_url = params.merge(url)
-          whitelist = %w(layout CKEditor CKEditorFuncNum langCode)
+          whitelist = %w(layout CKEditor CKEditorFuncNum langCode controller action id)
           this_url.delete_if { |k, v| !whitelist.include?(k) }
 
           this_options = options.merge(:target => "_parent")
