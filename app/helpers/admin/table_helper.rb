@@ -52,11 +52,11 @@ module Admin
     end
 
     def table_actions(model, item, association_name = nil)
-      resource_actions.map do |action|
-        if admin_user.can?(action[:action], model.name)
-          link_to Typus::I18n.t(action[:action_name]),
-                  { :controller => model.to_resource, :action => action[:action], :id => item.id, :resource => action[:resource], :resource_id => action[:resource_id], :association_name => association_name },
-                  { :confirm => action[:confirm], :method => action[:method], :target => "_parent" }
+      resource_actions.map do |body, url, options|
+        if admin_user.can?(url[:action], model.name)
+          link_to Typus::I18n.t(body),
+                  url.merge(:controller => model.to_resource, :id => item.id),
+                  options.merge(:target => "_parent")
         end
       end.compact.join(" / ").html_safe
     end
