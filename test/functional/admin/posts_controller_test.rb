@@ -110,8 +110,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
     should "be edit and trash on index" do
       get :index
 
-      expected = [ {"action_name"=>"Edit", "action"=>"edit"},
-                   {"confirm"=>"Trash?", "action_name"=>"Trash", "method"=>"delete", "action"=>"destroy"}]
+      expected = [["Edit", {:action=>"edit"}, {}],
+                  ["Trash", {:action=>"destroy"}, {:method=>"delete", :confirm=>"Trash?"}]]
 
       assert_equal expected, assigns(:resource_actions)
     end
@@ -119,8 +119,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
     should "be edit and unrelate on edit" do
       get :edit, { :id => @post.id }
 
-      expected = [ {"action_name"=>"Edit", "action"=>"edit"},
-                   {"confirm"=>"Unrelate?", "action_name"=>"Unrelate", "resource_id"=>@post.id, "resource"=>"Post", "action" => "unrelate"}]
+      expected = [["Edit", {:action=>"edit"}, {}],
+                  ["Unrelate", {:action=>"unrelate", :resource_id=>1, :resource=>"Post"}, {:confirm=>"Unrelate?"}]]
 
       assert_equal expected, assigns(:resource_actions)
     end
@@ -134,8 +134,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
       should "be show and trash on index" do
         get :index
 
-        expected = [ {"action_name"=>"Show", "action"=>"show"},
-                     {"confirm"=>"Trash?", "action_name"=>"Trash", "method"=>"delete", "action"=>"destroy"}]
+        expected = [["Show", {:action=>"show"}, {}],
+                    ["Trash", {:action=>"destroy"}, {:method=>"delete", :confirm=>"Trash?"}]]
 
         assert_equal expected, assigns(:resource_actions)
       end
@@ -143,8 +143,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
       should "be show and unrelate on edit" do
         get :edit, { :id => @post.id }
 
-        expected = [ {"action_name"=>"Show", "action"=>"show"},
-                     {"confirm"=>"Unrelate?", "action_name"=>"Unrelate", "resource_id"=>@post.id, "resource"=>"Post", "action" => "unrelate"}]
+        expected = [["Show", {:action=>"show"}, {}],
+                    ["Unrelate", {:action=>"unrelate", :resource_id=>1, :resource=>"Post"}, {:confirm=>"Unrelate?"}]]
 
         assert_equal expected, assigns(:resource_actions)
       end
