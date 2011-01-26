@@ -61,8 +61,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
         assert_template 'new'
       end
 
-      should "reject some params" do
-        %w(resource resource_id back_to selected layout).each do |param|
+      should "reject params which are not included in @resource.columns.map(&:name)" do
+        %w(chunky_bacon).each do |param|
           get :new, {param => param}
           assert_response :success
           assert_template 'new'
