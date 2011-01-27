@@ -29,7 +29,7 @@ module Typus
           data = read_model_config['fields']
           fields = data[filter.to_s] || data['default'] || ""
 
-          virtual_fields = instance_methods - model_fields.keys.map { |i| i.to_s }
+          virtual_fields = instance_methods.map { |i| i.to_s } - model_fields.keys.map { |i| i.to_s }
 
           fields.extract_settings.map { |f| f.to_sym }.each do |field|
             if reflect_on_association(field)
