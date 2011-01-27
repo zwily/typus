@@ -30,7 +30,7 @@ group :development, :test do
   platforms :ruby do
     gem 'mysql2'
     gem 'pg'
-    gem 'sqlite3-ruby', :require => 'sqlite3'
+    gem 'sqlite3'
   end
 
 end
@@ -43,7 +43,7 @@ group :production do
   end
 
   platforms :ruby do
-    gem 'sqlite3-ruby', :require => 'sqlite3'
+    gem 'sqlite3'
   end
 
 end
