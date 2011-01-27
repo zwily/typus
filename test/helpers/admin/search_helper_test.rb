@@ -8,15 +8,23 @@ class Admin::SearchHelperTest < ActiveSupport::TestCase
 
   context "search" do
 
-    should "reject some params" do
-      parameters = {"controller"=>"admin/posts",
-                    "action"=>"index",
-                    "locale"=>"jp",
-                    "sort_order"=>"asc",
-                    "order_by"=>"title"}
-
+    should "reject controller and action params" do
+      parameters = {"controller"=>"admin/posts", "action"=>"index"}
       expected = ["admin/helpers/search/search", {:hidden_filters => {}}]
+      assert_equal expected, search(Entry, parameters)
+    end
 
+    # TODO: I want to think about it ...
+    should "reject locale params" do
+      parameters = {"locale"=>"jp"}
+      expected = ["admin/helpers/search/search", {:hidden_filters => {}}]
+      assert_equal expected, search(Entry, parameters)
+    end
+
+    # TODO: I want to think about it ...
+    should "reject to sort_order and order_by" do
+      parameters = {"sort_order"=>"asc", "order_by"=>"title"}
+      expected = ["admin/helpers/search/search", {:hidden_filters => {}}]
       assert_equal expected, search(Entry, parameters)
     end
 
