@@ -2,7 +2,7 @@ module Admin
 
   module FiltersHelper
 
-    def build_filters(resource = @resource)
+    def build_filters(resource = @resource, params = params)
       typus_filters = resource.typus_filters
 
       return if typus_filters.empty?
