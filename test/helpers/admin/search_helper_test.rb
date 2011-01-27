@@ -42,10 +42,7 @@ class Admin::SearchHelperTest < ActiveSupport::TestCase
 
     should "not reject applied filters" do
       parameters = {"published"=>"true", "user_id"=>"1"}
-
-      expected = ["admin/helpers/search/search",
-                  {:hidden_filters=>{"published"=>"true", "user_id"=>"1"}}]
-
+      expected = ["admin/helpers/search/search", {:hidden_filters=>{"published"=>"true", "user_id"=>"1"}}]
       assert_equal expected, search(Entry, parameters)
     end
 
