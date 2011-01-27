@@ -6,7 +6,7 @@ module Admin
       if (typus_search = resource.typus_defaults_for(:search)) && typus_search.any?
 
         hidden_filters = params.dup
-        rejections = %w(controller action locale utf8 sort_order)
+        rejections = %w(controller action locale utf8 sort_order order_by search)
         hidden_filters.delete_if { |k, v| rejections.include?(k) }
 
         render "admin/helpers/search/search", :hidden_filters => hidden_filters
