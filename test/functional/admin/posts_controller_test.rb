@@ -25,34 +25,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_template 'index'
     end
 
-    should "render index with accepted params" do
-      @post.update_attributes(:published => true)
-      get :index, { :published => 'true' }
-      assert_response :success
-      assert_template 'index'
-      assert assigns(:items).size.eql?(1)
-
-      get :index, { :published => 'false' }
-      assert assigns(:items).size.eql?(0)
-    end
-
-    should "render index with accepted params - search" do
-      @post.update_attributes(:title => "neinonon")
-      get :index, { :search => 'neinonon' }
-      assert_response :success
-      assert_template 'index'
-      assert assigns(:items).size.eql?(1)
-
-      get :index, { :search => 'unexisting' }
-      assert assigns(:items).size.eql?(0)
-    end
-
-    should "render index with non-accepted params" do
-      get :index, { :non_accepted_param => 'non_accepted_param' }
-      assert_response :success
-      assert_template 'index'
-    end
-
     context "new" do
 
       should "render" do
@@ -113,6 +85,38 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_redirected_to @request.env["HTTP_REFERER"]
       assert_equal "Post successfully updated.", flash[:notice]
       assert @post.reload.published
+    end
+
+  end
+
+  context "Filters" do
+
+    should "render index with accepted params" do
+      @post.update_attributes(:published => true)
+      get :index, { :published => 'true' }
+      assert_response :success
+      assert_template 'index'
+      assert assigns(:items).size.eql?(1)
+
+      get :index, { :published => 'false' }
+      assert assigns(:items).size.eql?(0)
+    end
+
+    should "render index with accepted params - search" do
+      @post.update_attributes(:title => "neinonon")
+      get :index, { :search => 'neinonon' }
+      assert_response :success
+      assert_template 'index'
+      assert assigns(:items).size.eql?(1)
+
+      get :index, { :search => 'unexisting' }
+      assert assigns(:items).size.eql?(0)
+    end
+
+    should "render index with non-accepted params" do
+      get :index, { :non_accepted_param => 'non_accepted_param' }
+      assert_response :success
+      assert_template 'index'
     end
 
   end
