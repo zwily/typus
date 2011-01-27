@@ -22,14 +22,16 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
       expected = case ENV["DB"]
                  when "postgresql"
-                   "LOWER(TEXT(comments.body)) LIKE '%bacon%' OR LOWER(TEXT(comments.email)) LIKE '%bacon%'"
+                   ["LOWER(TEXT(comments.body)) LIKE '%bacon%'",
+                    "LOWER(TEXT(comments.email)) LIKE '%bacon%'"]
                  else
-                   "comments.body LIKE '%bacon%' OR comments.email LIKE '%bacon%'"
+                   ["comments.body LIKE '%bacon%'",
+                    "comments.email LIKE '%bacon%'"]
                  end
 
-      assert_equal expected, output
+      expected.each { |e| assert_match e, output }
+      assert_match /OR/, output
     end
-
   end
 
   context "build_boolean_conditions" do
@@ -134,6 +136,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   context "build_conditions" do
 
+    should "return an array" do
+      params = { :search => '1' }
+      assert Post.build_conditions(params).is_a?(Array)
+    end
+
     should "generate conditions for id" do
       Post.stubs(:typus_defaults_for).with(:search).returns(["id"])
 
@@ -216,11 +223,17 @@ class ActiveRecordTest < ActiveSupport::TestCase
                  end
 
       params = { :search => "francesc", :status => "true" }
-      output = TypusUser.build_conditions(params)
 
-      boolean_true = {:status=>true}
-      assert_equal boolean_true, output.first
-      expected.each { |e| assert_match e, output.last }
+      Factory(:typus_user, :email => "francesc.one@example.com")
+      Factory(:typus_user, :email => "francesc.dos@example.com", :status => false)
+
+      resource = TypusUser
+      resource.build_conditions(params).each do |condition|
+        resource = resource.where(condition)
+      end
+
+      assert_equal 1, resource.count
+      assert_equal ["francesc.one@example.com"], resource.map(&:email)
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_status true" do

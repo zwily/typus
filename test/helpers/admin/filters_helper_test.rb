@@ -44,7 +44,7 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
       @resource = Post
     end
 
-    should "return an array" do
+    should "return an array from status which is a Hash" do
       output = string_filter("status")
       expected = [["Show by status", ""],
                   ["--", ""],
@@ -52,7 +52,8 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
                   ["<div class=''>Something special</div>", "special"],
                   ["Draft", "draft"],
                   ["Published", "published"]]
-      assert_equal expected, output
+
+      expected.each { |e| assert output.include?(e) }
     end
 
     should "return an array from an ARRAY_SELECTOR" do

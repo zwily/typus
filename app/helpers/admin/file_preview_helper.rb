@@ -11,7 +11,7 @@ module Admin
     end
 
     def link_to_detach_attribute(attribute)
-      validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map { |i| i.attributes.to_s }.flatten
+      validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map { |i| i.attributes }.flatten.map { |i| i.to_s }
 
       attachment = @item.send(attribute)
 
