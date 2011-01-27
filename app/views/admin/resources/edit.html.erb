@@ -17,7 +17,7 @@
 <%= render 'edit' %>
 
 <%
-  options = params.cleanup.merge!(:action => 'update')
+  options = params.dup.cleanup.merge!(:action => 'update')
   button = Typus::I18n.t("Save %{resource}", :resource => @resource.model_name.human)
 %>
 
