@@ -4,7 +4,26 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
   include Admin::FiltersHelper
 
-  should "build_filters"
+  def render(*args); args; end
+
+  context "build_filters" do
+
+    setup do
+      @resource = Post
+    end
+
+    should "work" do
+      parameters = {"controller"=>"admin/entries", "action"=>"index"}
+
+      expected = ["admin/helpers/filters/filters",
+                 {:filters=>[{:items=>[["Show by published", ""], ["True", "true"], ["False", "false"]],
+                              :filter=>"published"}],
+                  :hidden_filters=>{}}]
+
+      assert_equal expected, build_filters(Entry, parameters)
+    end
+
+  end
 
   should "relationship_filter"
 
