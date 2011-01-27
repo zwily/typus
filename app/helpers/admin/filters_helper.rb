@@ -24,7 +24,17 @@ module Admin
         { :filter => filter, :items => items }
       end
 
-      render "admin/helpers/filters/filters", :filters => filters
+      hidden_filters = params.dup
+
+      # Remove default params.
+      rejections = %w(controller action locale utf8 sort_order)
+      hidden_filters.delete_if { |k, v| rejections.include?(k) }
+
+      # Remove also custom params.
+      rejections = filters.map { |i| i[:filter] }
+      hidden_filters.delete_if { |k, v| rejections.include?(k) }
+
+      render "admin/helpers/filters/filters", :filters => filters, :hidden_filters => hidden_filters
     end
 
     def set_filter(key, value)
