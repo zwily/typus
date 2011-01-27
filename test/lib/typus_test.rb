@@ -47,7 +47,7 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "return applications sorted" do
-    expected = ["Admin", "CRUD", "CRUD Extended", "HasManyThrough", "HasOne"]
+    expected = ["Admin", "CRUD", "CRUD Extended", "HasManyThrough", "HasOne", "Polymorphic"]
     assert_equal expected, Typus.applications
   end
 
@@ -57,7 +57,24 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "return models and should be sorted" do
-    expected = %w(Asset Case Category Comment Entry Invoice Order Page Post Project ProjectCollaborator TypusUser User View)
+    expected = ["Animal",
+                "Asset",
+                "Bird",
+                "Case",
+                "Category",
+                "Comment",
+                "Dog",
+                "Entry",
+                "ImageHolder",
+                "Invoice",
+                "Order",
+                "Page",
+                "Post",
+                "Project",
+                "ProjectCollaborator",
+                "TypusUser",
+                "User",
+                "View"]
     assert_equal expected, Typus.models
   end
 

@@ -89,3 +89,19 @@ Factory.define :project_collaborators do |f|
   f.association :user
   f.association :project
 end
+
+##
+# Polymorphic
+##
+
+Factory.define :animal do |f|
+  f.sequence(:name) { |n| "Animal##{n}" }
+end
+
+Factory.define :bird do |f|
+  f.sequence(:name) { |n| "Bird##{n}" }
+end
+
+Factory.define :dog do |f|
+  f.sequence(:name) { |n| "Dog##{n}" }
+end

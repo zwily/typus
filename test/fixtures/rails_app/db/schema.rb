@@ -160,4 +160,19 @@ ActiveRecord::Schema.define do
     t.timestamps
   end
 
+  ##
+  # Polymorphic
+  #
+
+  create_table :animals, :force => true do |t|
+    t.string :name, :null => false
+    t.string :type
+  end
+
+  create_table :image_holders, :force => true do |t|
+    t.string :name
+    t.integer :imageable_id
+    t.string :imageable_type
+  end
+
 end

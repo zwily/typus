@@ -43,3 +43,12 @@ end
 ##
 
 5.times { Factory(:invoice) }
+
+##
+# Polymorphic
+##
+
+5.times do
+  Factory(:bird)
+  Factory(:dog)
+end

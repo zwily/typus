@@ -15,11 +15,14 @@ class TypusUserRolesTest < ActiveSupport::TestCase
 
     should "verify models access" do
       expected = ["Asset",
+                  "Bird",
                   "Case",
                   "Category",
                   "Comment",
+                  "Dog",
                   "Entry",
                   "Git",
+                  "ImageHolder",
                   "Invoice",
                   "Order",
                   "Page",

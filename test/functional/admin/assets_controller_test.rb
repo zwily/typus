@@ -23,6 +23,12 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     assert_select 'body div#flash', "Cancel adding a new asset?"
   end
 
+  context "create polymorphic association" do
+
+    should_eventually "work"
+
+  end
+
   context "Unrelate (polymorphic relationship)" do
 
     ##
