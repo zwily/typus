@@ -80,7 +80,8 @@ class Admin::ResourcesController < Admin::BaseController
 
   def detach
     if @item.update_attributes(params[:attribute] => nil)
-      redirect_on_success
+      notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
+      redirect_to :back, :notice => notice
     else
       render :edit
     end
@@ -248,19 +249,24 @@ class Admin::ResourcesController < Admin::BaseController
 
   def redirect_on_success
     action = @resource.typus_options_for(:action_after_save)
+    path = params.dup.cleanup
+    path.merge!(:action => action)
 
     case params[:action]
     when "create"
-      path = { :action => action, :layout => params[:layout] }
       path.merge!(:id => @item.id) unless action.eql?("index")
       notice = Typus::I18n.t("%{model} successfully created.", :model => @resource.model_name.human)
     when "update", "detach"
-      path = case action
-             when "index"
-               params[:back_to] ? "#{params[:back_to]}##{@resource.to_resource}" : { :action => action, :layout => params[:layout] }
-             else
-               { :action => action, :id => @item.id, :layout => params[:layout], :back_to => params[:back_to] }
-             end
+      case action
+      when "index"
+        if params[:back_to]
+          path = "#{params[:back_to]}##{@resource.to_resource}"
+        else
+          path.delete_if { |k, v| %w(action id).include?(k) }
+        end
+      else
+        path.merge!(:action => action) #, :id => @item.id)
+      end
       notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 

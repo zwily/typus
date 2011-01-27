@@ -12,7 +12,7 @@ class Admin::AssetsController < Admin::ResourcesController
 
   def new
     if params[:layout]
-      add_resources_action("Back to list", {:action => "index"}, {})
+      add_resources_action("Back to list", {:action => "index", :id => nil}, {})
     end
 
     super
@@ -20,7 +20,7 @@ class Admin::AssetsController < Admin::ResourcesController
 
   def create
     if params[:layout]
-      add_resources_action("Back to list", {:action => "index"}, {})
+      add_resources_action("Back to list", {:action => "index", :id => nil}, {})
     end
 
     super
@@ -28,7 +28,7 @@ class Admin::AssetsController < Admin::ResourcesController
 
   def edit
     if params[:layout]
-      add_resources_action("Back to list", {:action => "index"}, {})
+      add_resources_action("Back to list", {:action => "index", :id => nil}, {})
     end
 
     super
@@ -36,7 +36,7 @@ class Admin::AssetsController < Admin::ResourcesController
 
   def update
     if params[:layout]
-      add_resources_action("Back to list", {:action => "index"}, {})
+      add_resources_action("Back to list", {:action => "index", :id => nil}, {})
     end
 
     super

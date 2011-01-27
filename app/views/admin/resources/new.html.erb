@@ -14,12 +14,7 @@
 <%= render 'new' %>
 
 <%
-  options = { :action => 'create',
-              :back_to => params[:back_to],
-              :selected => params[:selected],
-              :resource => params[:resource],
-              :resource_id => params[:resource_id],
-              :layout => params[:layout] }
+  options = params.cleanup.merge(:action => 'create')
   button = Typus::I18n.t("Create %{resource}", :resource => @resource.model_name.human)
 %>
 

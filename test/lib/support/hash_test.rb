@@ -8,4 +8,38 @@ class HashTest < ActiveSupport::TestCase
     assert_equal hash_compacted, hash.compact
   end
 
+  context "cleanup" do
+
+    should "work" do
+      hash = {"value"=>"1000"}
+      expected = {}
+      assert_equal expected, hash.cleanup
+    end
+
+    should "verify whitelist for basics" do
+      hash = {"controller"=>"welcome", "action"=>"index", "id" => "1"}
+      expected = hash
+      assert_equal expected, hash.cleanup
+    end
+
+    should "verify whitelist for CKEditor stuff" do
+      hash = {"CKEditor"=>"1", "CKEditorFuncNum"=>"1", "langCode"=>"en"}
+      expected = hash
+      assert_equal expected, hash.cleanup
+    end
+
+    should "verify whitelist for layout" do
+      hash = {"layout"=>"admin/headless"}
+      expected = hash
+      assert_equal expected, hash.cleanup
+    end
+
+    should "verify whitelist for target" do
+      hash = {"target"=>"_parent"}
+      expected = hash
+      assert_equal expected, hash.cleanup
+    end
+
+  end
+
 end
