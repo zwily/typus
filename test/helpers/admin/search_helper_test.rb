@@ -14,19 +14,24 @@ class Admin::SearchHelperTest < ActiveSupport::TestCase
                     "locale"=>"jp",
                     "utf8"=>"✓",
                     "sort_order"=>"asc",
-                    "order_by"=>"title",
-                    "search"=>"Chunky Bacon"}
+                    "order_by"=>"title"}
 
       expected = ["admin/helpers/search/search", { :hidden_filters => {} }]
 
       assert_equal expected, search(Entry, parameters)
     end
 
-    should "work" do
-      parameters = {"published"=>"true", "user_id"}
+    should "reject the search param because the form is going to send it" do
+      parameters = {"search"=>"Chunky Bacon"}
+      expected = ["admin/helpers/search/search", { :hidden_filters => {} }]
+      assert_equal expected, search(Entry, parameters)
+    end
+
+    should "not reject applied filters" do
+      parameters = {"published"=>"true", "user_id"=>"1"}
 
       expected = ["admin/helpers/search/search",
-                  {:hidden_filters=>{"published"=>"true"}}]
+                  {:hidden_filters=>{"published"=>"true", "user_id"=>"1"}}]
 
       assert_equal expected, search(Entry, parameters)
     end
