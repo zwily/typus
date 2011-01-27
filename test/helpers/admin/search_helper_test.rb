@@ -12,18 +12,23 @@ class Admin::SearchHelperTest < ActiveSupport::TestCase
       parameters = {"controller"=>"admin/posts",
                     "action"=>"index",
                     "locale"=>"jp",
-                    "utf8"=>"✓",
                     "sort_order"=>"asc",
                     "order_by"=>"title"}
 
-      expected = ["admin/helpers/search/search", { :hidden_filters => {} }]
+      expected = ["admin/helpers/search/search", {:hidden_filters => {}}]
 
       assert_equal expected, search(Entry, parameters)
     end
 
-    should "reject the search param because the form is going to send it" do
+    should "reject the utf8 param because the form already contains it" do
+      parameters = {"utf8"=>"✓"}
+      expected = ["admin/helpers/search/search", {:hidden_filters => {}}]
+      assert_equal expected, search(Entry, parameters)
+    end
+
+    should "reject the search param because the form already contains it" do
       parameters = {"search"=>"Chunky Bacon"}
-      expected = ["admin/helpers/search/search", { :hidden_filters => {} }]
+      expected = ["admin/helpers/search/search", {:hidden_filters => {}}]
       assert_equal expected, search(Entry, parameters)
     end
 
