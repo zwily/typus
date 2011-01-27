@@ -55,7 +55,7 @@ Post:
   actions:
     index: cleanup
     edit: send_as_newsletter, preview
-  filters: status, created_at
+  filters: published, status, created_at
   search: title
   order_by: title, -created_at
   export: csv, xml

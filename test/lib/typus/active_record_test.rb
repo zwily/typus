@@ -140,7 +140,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return filters for Post" do
-      expected = [["status", :string], ["created_at", :datetime]]
+      expected = [["published", :boolean], ["status", :string], ["created_at", :datetime]]
       assert_equal expected.map { |i| i.first }.join(", "), Typus::Configuration.config["Post"]["filters"]
       assert_equal expected.map { |i| i.first }, Post.typus_filters.keys
       assert_equal expected.map { |i| i.last }, Post.typus_filters.values
