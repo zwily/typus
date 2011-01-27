@@ -357,6 +357,10 @@ class Admin::ResourcesController < Admin::BaseController
       if item
         worked = @item.send(association_name).push(item)
       end
+    when :has_many
+      # Dog#image_holders
+      association_name = @resource.model_name.tableize.to_sym
+      worked = item.send(association_name).push(@item)
     end
 
     association = @resource.reflect_on_association(association_name)
