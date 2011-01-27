@@ -8,16 +8,65 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
   context "build_filters" do
 
+    # FIXME: Should work without this ...
     setup do
-      @resource = Post
+      @resource = Entry
+      @expected = ["admin/helpers/filters/filters",
+                  {:filters=>[{:filter=>"published",
+                               :items=>[["Show by published", ""], ["Yes", "true"], ["No", "false"]]}],
+                   :hidden_filters=>{}}]
     end
 
-    should "work" do
-      parameters = {"controller"=>"admin/entries", "action"=>"index"}
+    should "reject controller and action params" do
+      parameters = {"controller"=>"admin/posts", "action"=>"index"}
+      assert_equal @expected, build_filters(Entry, parameters)
+    end
+
+    # TODO: I want to think about it ...
+    should "reject locale params" do
+      parameters = {"locale"=>"jp"}
+      assert_equal @expected, build_filters(Entry, parameters)
+    end
+
+    # TODO: I want to think about it ...
+    should "reject to sort_order and order_by" do
+      parameters = {"sort_order"=>"asc", "order_by"=>"title"}
+      assert_equal @expected, build_filters(Entry, parameters)
+    end
+
+    should "reject the utf8 param because the form already contains it" do
+      parameters = {"utf8"=>"✓"}
+      assert_equal @expected, build_filters(Entry, parameters)
+    end
+
+    should "not reject the search param" do
+      parameters = {"search"=>"Chunky Bacon"}
 
       expected = ["admin/helpers/filters/filters",
-                 {:filters=>[{:items=>[["Show by published", ""], ["True", "true"], ["False", "false"]],
-                              :filter=>"published"}],
+                 {:filters=>[{:filter=>"published",
+                              :items=>[["Show by published", ""], ["Yes", "true"], ["No", "false"]]}],
+                  :hidden_filters=>{"search"=>"Chunky Bacon"}}]
+
+      assert_equal expected, build_filters(Entry, parameters)
+    end
+
+    should "not reject applied filters" do
+      parameters = {"user_id"=>"1"}
+
+      expected = ["admin/helpers/filters/filters",
+                 {:filters=>[{:filter=>"published",
+                              :items=>[["Show by published", ""], ["Yes", "true"], ["No", "false"]]}],
+                  :hidden_filters=>{"user_id"=>"1"}}]
+
+      assert_equal expected, build_filters(Entry, parameters)
+    end
+
+    should "reject applied filter" do
+      parameters = {"published"=>"true"}
+
+      expected = ["admin/helpers/filters/filters",
+                 {:filters=>[{:filter=>"published",
+                              :items=>[["Show by published", ""], ["Yes", "true"], ["No", "false"]]}],
                   :hidden_filters=>{}}]
 
       assert_equal expected, build_filters(Entry, parameters)
