@@ -241,32 +241,14 @@ class Admin::PostsControllerTest < ActionController::TestCase
   context "Formats" do
 
     should "render index and return xml" do
-      expected = if RUBY_VERSION >= '1.9'
-      <<-RAW
-<?xml version="1.0" encoding="UTF-8"?>
-<posts type="array">
-  <post>
-    <status>#{@post.status}</status>
-    <title>#{@post.title}</title>
-  </post>
-</posts>
-      RAW
-      else
-      <<-RAW
-<?xml version="1.0" encoding="UTF-8"?>
-<posts type="array">
-  <post>
-    <title>#{@post.title}</title>
-    <status>#{@post.status}</status>
-  </post>
-</posts>
-      RAW
-      end
-
       get :index, :format => "xml"
 
       assert_response :success
-      assert_equal expected, @response.body
+
+      assert_match %Q[<?xml version="1.0" encoding="UTF-8"?>], @response.body
+      assert_match %Q[<posts type="array">], @response.body
+      assert_match "<status>#{@post.status}</status>", @response.body
+      assert_match "<title>#{@post.title}</title>", @response.body
     end
 
     should "render index and return csv" do
