@@ -16,9 +16,9 @@ module Admin
       attachment = @item.send(attribute)
 
       field = case get_type_of_attachment(attachment)
-                 when :dragonfly then attribute
-                 when :paperclip then "#{attribute}_file_name"
-                 end
+              when :dragonfly then attribute
+              when :paperclip then "#{attribute}_file_name"
+              end
 
       if !validators.include?(field) && attachment
         attribute_i18n = @item.class.human_attribute_name(attribute)
