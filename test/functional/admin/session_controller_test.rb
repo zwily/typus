@@ -56,7 +56,6 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
     should "not_create_session_for_invalid_users" do
       post :create, { :typus_user => { :email => "john@example.com", :password => "XXXXXXXX" } }
-
       assert_response :redirect
       assert_redirected_to new_admin_session_path
     end
