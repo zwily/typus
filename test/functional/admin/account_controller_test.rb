@@ -34,6 +34,8 @@ class Admin::AccountControllerTest < ActionController::TestCase
       assert_redirected_to new_admin_account_path
     end
 
+    should "verify send_password redirects to new when there are no admin users"
+
     should "not sign_up invalid emails" do
       post :create, :typus_user => { :email => "example.com" }
 
