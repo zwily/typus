@@ -9,35 +9,37 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "verify TypusUser model_fields" do
-      expected_fields = [[:id, :integer],
-                         [:first_name, :string],
-                         [:last_name, :string],
-                         [:role, :string],
-                         [:email, :string],
-                         [:status, :boolean],
-                         [:token, :string],
-                         [:salt, :string],
-                         [:crypted_password, :string],
-                         [:preferences, :string],
-                         [:created_at, :datetime],
-                         [:updated_at, :datetime]]
-      assert_equal expected_fields.map { |i| i.first }, TypusUser.model_fields.keys
-      assert_equal expected_fields.map { |i| i.last }, TypusUser.model_fields.values
+      expected = [[:id, :integer],
+                  [:first_name, :string],
+                  [:last_name, :string],
+                  [:role, :string],
+                  [:email, :string],
+                  [:status, :boolean],
+                  [:token, :string],
+                  [:salt, :string],
+                  [:crypted_password, :string],
+                  [:preferences, :string],
+                  [:created_at, :datetime],
+                  [:updated_at, :datetime]]
+
+      assert_equal expected.map { |i| i.first }, TypusUser.model_fields.keys
+      assert_equal expected.map { |i| i.last }, TypusUser.model_fields.values
     end
 
     should "verify Post model_fields" do
-      expected_fields = [[:id, :integer],
-                         [:title, :string],
-                         [:body, :text],
-                         [:status, :string],
-                         [:favorite_comment_id, :integer],
-                         [:published_at, :datetime],
-                         [:typus_user_id, :integer],
-                         [:published, :boolean],
-                         [:created_at, :datetime],
-                         [:updated_at, :datetime]]
-      assert_equal expected_fields.map { |i| i.first }, Post.model_fields.keys
-      assert_equal expected_fields.map { |i| i.last }, Post.model_fields.values
+      expected = [[:id, :integer],
+                  [:title, :string],
+                  [:body, :text],
+                  [:status, :string],
+                  [:favorite_comment_id, :integer],
+                  [:published_at, :datetime],
+                  [:typus_user_id, :integer],
+                  [:published, :boolean],
+                  [:created_at, :datetime],
+                  [:updated_at, :datetime]]
+
+      assert_equal expected.map { |i| i.first }, Post.model_fields.keys
+      assert_equal expected.map { |i| i.last }, Post.model_fields.values
     end
 
   end
@@ -78,29 +80,35 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return list fields for TypusUser" do
-      expected_fields = [["email", :string],
-                         ["role", :selector],
-                         ["status", :boolean]]
-      assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:list).keys
-      assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for(:list).values
+      expected = [["email", :string],
+                  ["role", :selector],
+                  ["status", :boolean]]
+
+      assert_equal expected.map { |i| i.first }, TypusUser.typus_fields_for(:list).keys
+      assert_equal expected.map { |i| i.last }, TypusUser.typus_fields_for(:list).values
     end
 
     should "return form fields for TypusUser" do
-      expected_fields = [["first_name", :string],
-                         ["last_name", :string],
-                         ["role", :selector],
-                         ["email", :string],
-                         ["password", :password],
-                         ["password_confirmation", :password],
-                         ["locale", :selector]]
-      assert_equal expected_fields.map { |i| i.first }, TypusUser.typus_fields_for(:form).keys
-      assert_equal expected_fields.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
+      expected = [["first_name", :string],
+                  ["last_name", :string],
+                  ["role", :selector],
+                  ["email", :string],
+                  ["password", :password],
+                  ["password_confirmation", :password],
+                  ["locale", :selector]]
+
+      assert_equal expected.map { |i| i.first }, TypusUser.typus_fields_for(:form).keys
+      assert_equal expected.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
     end
 
     should "return form fields for Asset" do
-      expected_fields = [["caption", :string], ["dragonfly", :file], ["dragonfly_required", :file], ["original_file_name", :virtual]]
-      assert_equal expected_fields.map { |i| i.first }, Asset.typus_fields_for(:special).keys
-      assert_equal expected_fields.map { |i| i.last }, Asset.typus_fields_for(:special).values
+      expected = [["caption", :string],
+                  ["dragonfly", :file],
+                  ["dragonfly_required", :file],
+                  ["original_file_name", :virtual]]
+
+      assert_equal expected.map { |i| i.first }, Asset.typus_fields_for(:special).keys
+      assert_equal expected.map { |i| i.last }, Asset.typus_fields_for(:special).values
     end
 
     should "raise a RuntimeError when model does not have configuration" do
@@ -118,13 +126,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "work for transversal fields" do
-      expected_fields = [["email", :string],
-                         ["post", :belongs_to],
-                         ["post_id", :integer],
-                         ["spam", :boolean],
-                         ["post.title", :transversal]]
-      assert_equal expected_fields.map { |i| i.first }, Comment.typus_fields_for(:list).keys
-      assert_equal expected_fields.map { |i| i.last }, Comment.typus_fields_for(:list).values
+      expected = [["email", :string],
+                  ["post", :belongs_to],
+                  ["post_id", :integer],
+                  ["spam", :boolean],
+                  ["post.title", :transversal]]
+
+      assert_equal expected.map { |i| i.first }, Comment.typus_fields_for(:list).keys
+      assert_equal expected.map { |i| i.last }, Comment.typus_fields_for(:list).values
     end
 
   end
