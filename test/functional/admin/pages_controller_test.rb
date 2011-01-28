@@ -23,16 +23,14 @@ class Admin::PagesControllerTest < ActionController::TestCase
   context "index" do
 
     setup do
-      5.times do
-        Factory(:page)
-        Factory(:page, :status => false)
-      end
+      Factory(:page)
+      Factory(:page, :status => false)
     end
 
     should "return unscoped results" do
-      assert Page.count.eql?(5)
+      assert Page.count.eql?(1)
       get :index
-      assert assigns(:items).size.eql?(10)
+      assert assigns(:items).size.eql?(2)
     end
   end
 
