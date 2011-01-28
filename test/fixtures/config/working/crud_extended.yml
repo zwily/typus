@@ -51,7 +51,7 @@ Post:
         created_at: short
       templates:
         published_at: datepicker
-  relationships: assets, categories, comments, views
+  relationships: categories, comments, views
   actions:
     index: cleanup
     edit: send_as_newsletter, preview

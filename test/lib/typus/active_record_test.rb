@@ -51,8 +51,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "verify Post model_relationships" do
       expected = [[:comments, :has_many],
                   [:categories, :has_and_belongs_to_many],
-                  [:user, nil],
-                  [:assets, :has_many]]
+                  [:user, nil]]
       expected.each do |i|
         assert_equal i.last, Post.model_relationships[i.first]
       end
@@ -291,7 +290,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return default_for relationships on Post" do
-      assert_equal %w(assets categories comments views), Post.typus_defaults_for(:relationships)
+      assert_equal %w(categories comments views), Post.typus_defaults_for(:relationships)
     end
 
   end

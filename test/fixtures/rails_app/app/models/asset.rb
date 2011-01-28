@@ -4,13 +4,10 @@
 
     - Dragonfly Attachments
     - Paperclip Attachments
-    - Polymorphic Associations
 
 =end
 
 class Asset < ActiveRecord::Base
-
-  belongs_to :resource, :polymorphic => true
 
   # Dragonfly Attachment
   image_accessor :dragonfly

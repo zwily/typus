@@ -457,20 +457,6 @@ title;status
       assert_equal "Post successfully updated.", flash[:notice]
     end
 
-    should "relate asset to post (has_many - polymorphic)" do
-      asset = Factory(:asset)
-      id = asset.id
-      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#assets"
-
-      assert_difference('@post.assets.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Asset', :id => asset.id, :association_name => 'assets' } }
-      end
-
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Post successfully updated.", flash[:notice]
-    end
-
     should "relate category to post (has_and_belongs_to_many)" do
       category = Factory(:category)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"

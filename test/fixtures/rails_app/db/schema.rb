@@ -10,8 +10,6 @@ ActiveRecord::Schema.define do
 
   create_table :assets, :force => true do |t|
     t.string :caption
-    t.string :resource_type
-    t.integer :resource_id
     # Dragonfly Attachment
     t.string :dragonfly_uid
     t.string :dragonfly_required_uid
@@ -21,8 +19,6 @@ ActiveRecord::Schema.define do
     t.integer :paperclip_file_size
     t.datetime :paperclip_updated_at
   end
-
-  add_index :assets, :resource_id
 
   create_table :categories, :force => true do |t|
     t.string :name
