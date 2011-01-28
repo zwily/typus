@@ -52,8 +52,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
       expected = [[:comments, :has_many],
                   [:categories, :has_and_belongs_to_many],
                   [:user, nil]]
-      expected.each do |i|
-        assert_equal i.last, Post.model_relationships[i.first]
+      expected.each do |key, value|
+        assert_equal value, Post.model_relationships[key]
       end
     end
 
