@@ -141,14 +141,19 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "typus_filters" do
 
     should "return filters for TypusUser" do
-      expected = [["status", :boolean], ["role", :string]]
+      expected = [["status", :boolean],
+                  ["role", :string]]
+
       assert_equal expected.map { |i| i.first }.join(", "), Typus::Configuration.config["TypusUser"]["filters"]
       assert_equal expected.map { |i| i.first }, TypusUser.typus_filters.keys
       assert_equal expected.map { |i| i.last }, TypusUser.typus_filters.values
     end
 
     should "return filters for Post" do
-      expected = [["published", :boolean], ["status", :string], ["created_at", :datetime]]
+      expected = [["published", :boolean],
+                  ["status", :string],
+                  ["created_at", :datetime]]
+
       assert_equal expected.map { |i| i.first }.join(", "), Typus::Configuration.config["Post"]["filters"]
       assert_equal expected.map { |i| i.first }, Post.typus_filters.keys
       assert_equal expected.map { |i| i.last }, Post.typus_filters.values
