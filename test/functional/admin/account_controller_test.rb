@@ -67,14 +67,12 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     should "verify forgot_password is rendered when there are admin users" do
       get :forgot_password
-
       assert_response :success
       assert_template "forgot_password"
     end
 
     should "not_send_recovery_password_link_to_unexisting_user" do
       post :forgot_password, { :typus_user => { :email => "unexisting" } }
-
       assert_response :success
       assert flash.empty?
     end

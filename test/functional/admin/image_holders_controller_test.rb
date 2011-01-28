@@ -24,7 +24,6 @@ class Admin::ImageHoldersControllerTest < ActionController::TestCase
     should "contain a message" do
       get :new, { :back_to => "/admin/birds/#{@bird.id}/edit",
                   :resource => @bird.class.name, :resource_id => @bird.id }
-
       assert_select 'body div#flash', "Cancel adding a new image holder?"
     end
 
