@@ -38,6 +38,9 @@ task :release => :build do
   system "git push && git push --tags"
   system "gem push typus-#{Typus::VERSION}.gem"
   system "git clean -fd && rm -f typus-#{Typus::VERSION}.gem"
+  system "git branch -D 3-0-stable"
+  system "git checkout -b 3-0-stable && git push -f"
+  system "git checkout master"
 end
 
 desc 'Deploy'
