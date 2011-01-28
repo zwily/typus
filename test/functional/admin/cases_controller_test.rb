@@ -5,9 +5,9 @@ require "test_helper"
   What's being tested here?
 
     - Single Table Inheritance Stuff
-      - Relate objects.
-      - Unrelate objects.
-      - Create (and relate objects).
+    - Relate objects.
+    - Unrelate objects.
+    - Create (and relate objects).
 
 =end
 

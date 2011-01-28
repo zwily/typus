@@ -1,5 +1,14 @@
 require "test_helper"
 
+=begin
+
+  What's being tested here?
+
+    - Create first user. (/admin/account/new)
+    - Stuff that happens when there are already users.
+
+=end
+
 class Admin::AccountControllerTest < ActionController::TestCase
 
   context "No users" do

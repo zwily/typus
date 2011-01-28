@@ -1,5 +1,13 @@
 require "test_helper"
 
+=begin
+
+  What's being tested here?
+
+    - Sessions
+
+=end
+
 class Admin::SessionControllerTest < ActionController::TestCase
 
   context "Setup" do

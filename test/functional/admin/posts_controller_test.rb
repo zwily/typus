@@ -1,5 +1,20 @@
 require "test_helper"
 
+=begin
+
+  What's being tested here?
+
+    - CRUD: Create, read, update, destroy
+    - CRUD Extras: toggle
+    - Filters
+    - Forms
+    - Overrides
+    - Permissions
+    - Roles
+    - Views
+
+=end
+
 class Admin::PostsControllerTest < ActionController::TestCase
 
   setup do

@@ -5,6 +5,7 @@ require "test_helper"
   What's being tested here?
 
     - Asset management like attach (edit) and detach (update).
+    - Assets runnings with a custom template.
 
 =end
 

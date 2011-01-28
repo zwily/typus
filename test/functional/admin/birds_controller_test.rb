@@ -2,7 +2,9 @@ require "test_helper"
 
 =begin
 
-  Here we test polymorphic associations.
+  What's being tested here?
+
+    - Polymorphic associations.
 
 =end
 

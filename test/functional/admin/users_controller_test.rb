@@ -1,5 +1,13 @@
 require "test_helper"
 
+=begin
+
+  What's being tested here?
+
+    - ?
+
+=end
+
 class Admin::UsersControllerTest < ActionController::TestCase
 
   setup do
