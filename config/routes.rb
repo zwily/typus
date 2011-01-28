@@ -10,7 +10,7 @@ Rails.application.routes.draw do
       resources :account, :only => [:new, :create, :show, :forgot_password] do
         collection do
           get :forgot_password
-          post :forgot_password
+          post :send_password
         end
       end
     end

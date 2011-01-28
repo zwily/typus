@@ -6,8 +6,8 @@ class Admin::AccountController < Admin::BaseController
   skip_before_filter :authenticate
   skip_before_filter :set_locale
 
-  before_filter :sign_in?, :except => [:forgot_password, :show]
-  before_filter :new?, :only => [:forgot_password]
+  before_filter :sign_in?, :except => [:forgot_password, :send_password, :show]
+  before_filter :new?, :only => [:forgot_password, :send_password]
 
   def new
     flash[:notice] = Typus::I18n.t("Enter your email below to create the first user.")
@@ -20,8 +20,9 @@ class Admin::AccountController < Admin::BaseController
   end
 
   def forgot_password
-    return unless request.post?
+  end
 
+  def send_password
     if user = Typus.user_class.find_by_email(params[:typus_user][:email])
       url = admin_account_url(user.token)
       Admin::Mailer.reset_password_link(user, url).deliver

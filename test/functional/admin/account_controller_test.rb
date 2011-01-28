@@ -72,13 +72,13 @@ class Admin::AccountControllerTest < ActionController::TestCase
     end
 
     should "not_send_recovery_password_link_to_unexisting_user" do
-      post :forgot_password, { :typus_user => { :email => "unexisting" } }
+      post :send_password, { :typus_user => { :email => "unexisting" } }
       assert_response :success
       assert flash.empty?
     end
 
     should "test_should_send_recovery_password_link_to_existing_user" do
-      post :forgot_password, { :typus_user => { :email => @typus_user.email } }
+      post :send_password, { :typus_user => { :email => @typus_user.email } }
 
       assert_response :redirect
       assert_redirected_to new_admin_session_path
