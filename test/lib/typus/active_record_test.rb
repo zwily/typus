@@ -118,11 +118,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return relationship fields for TypusUser" do
-      assert_equal %w(first_name last_name role email locale), TypusUser.typus_fields_for(:relationship).keys
+      expected = %w(first_name last_name role email locale)
+      assert_equal expected, TypusUser.typus_fields_for(:relationship).keys
     end
 
     should "return undefined fields for TypusUser" do
-      assert_equal %w(first_name last_name role email locale), TypusUser.typus_fields_for(:undefined).keys
+      expected = %w(first_name last_name role email locale)
+      assert_equal expected, TypusUser.typus_fields_for(:undefined).keys
     end
 
     should "work for transversal fields" do
