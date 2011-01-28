@@ -105,3 +105,7 @@ end
 Factory.define :dog do |f|
   f.sequence(:name) { |n| "Dog##{n}" }
 end
+
+Factory.define :image_holder do |f|
+  f.sequence(:name) { |n| "ImageHolder##{n}" }
+end
