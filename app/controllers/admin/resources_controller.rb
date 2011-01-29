@@ -365,10 +365,6 @@ class Admin::ResourcesController < Admin::BaseController
 
     association = @resource.reflect_on_association(association_name)
 
-    ##
-    # Set @back_to
-    #
-
     @back_to = if item
                  params[:back_to]
                else
