@@ -8,9 +8,3 @@ Entry:
   search: title
   filters: published
   application: CRUD
-
-Case:
-  fields:
-    default: title
-    form: title, content
-  application: CRUD
