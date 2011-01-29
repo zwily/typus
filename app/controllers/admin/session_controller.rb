@@ -4,7 +4,7 @@ class Admin::SessionController < Admin::BaseController
   skip_before_filter :authenticate
   skip_before_filter :set_locale
 
-  before_filter :create_an_account?, :except => [:destroy]
+  before_filter :create_an_account?, :only => [:new, :create]
 
   def new
   end
