@@ -34,7 +34,7 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
 
         should "render a partial with the user name" do
           admin_user.stubs(:can?).with('edit', 'TypusUser').returns(false)
-          assert_equal ["admin/helpers/login_info"], login_info
+          assert_equal ["admin/helpers/base/login_info"], login_info
         end
 
       end
@@ -47,7 +47,7 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
           admin_user.stubs(:can?).with('edit', 'TypusUser').returns(true)
           self.stubs(:link_to).with("Admin", link_options).returns(%(<a href="/admin/typus_users/edit/1">Admin</a>))
 
-          assert_equal ["admin/helpers/login_info"], login_info
+          assert_equal ["admin/helpers/base/login_info"], login_info
         end
 
       end
@@ -59,7 +59,7 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
   context "header" do
 
     should "work returning a partial" do
-      assert_equal ["admin/helpers/header"], header
+      assert_equal ["admin/helpers/base/header"], header
     end
 
   end
@@ -69,7 +69,7 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
     should "be displayed" do
       message = { :test => "This is the message." }
       output = display_flash_message(message)
-      expected = ["admin/helpers/flash_message",
+      expected = ["admin/helpers/base/flash_message",
                   { :flash_type => :test, :message => { :test => "This is the message." } }]
       assert_equal expected, output
     end
