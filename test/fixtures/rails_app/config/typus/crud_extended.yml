@@ -14,8 +14,9 @@ Category:
 Comment:
   fields:
     list: email, post, post_id, spam, post.title
-    form: email, post
+    form: name, email, body, post
     csv: email, post_id
+    relationship: name, email, spam
     options:
       booleans:
         spam: ["Yes, it's spam", "No, it's not spam"]
