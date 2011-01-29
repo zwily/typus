@@ -93,7 +93,7 @@ class Admin::ResourcesController < Admin::BaseController
     else
       alert = @item.errors.full_messages
     end
-    redirect_to set_path, :notice => notice, :alert => alert
+    redirect_to :back, :notice => notice, :alert => alert
   end
 
   def toggle
@@ -103,7 +103,7 @@ class Admin::ResourcesController < Admin::BaseController
     notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
 
     respond_to do |format|
-      format.html { redirect_to set_path, :notice => notice }
+      format.html { redirect_to :back, :notice => notice }
       format.json { render :json => @item }
     end
   end
@@ -120,7 +120,7 @@ class Admin::ResourcesController < Admin::BaseController
   def position
     @item.send(params[:go])
     notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
-    redirect_to set_path, :notice => notice
+    redirect_to :back, :notice => notice
   end
 
   ##
@@ -154,7 +154,7 @@ class Admin::ResourcesController < Admin::BaseController
       flash[:notice] = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 
-    redirect_to set_path
+    redirect_to :back
   end
 
   ##
