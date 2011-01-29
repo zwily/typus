@@ -367,11 +367,6 @@ class Admin::ResourcesController < Admin::BaseController
                  "#{params[:back_to]}?#{association.primary_key_name}=#{@item.id}"
                end
 
-    ##
-    # Finally delete the associated object. Depending on your models setup
-    # associated models will be removed or foreign_key will be set to nil.
-    #
-
     if item
       if worked
         notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
