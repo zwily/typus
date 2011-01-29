@@ -120,17 +120,18 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
 
       setup do
         @case = Factory(:case)
-        @back_to = "/admin/cases/edit/#{@case.id}"
       end
 
       should "create new category and redirect to case" do
+        back_to = "/admin/cases/edit/#{@case.id}"
+
         assert_difference('@case.categories.count') do
           post :create, { :category => @category,
-                          :back_to => @back_to,
+                          :back_to => back_to,
                           :resource => "Case", :resource_id => @case.id }
         end
         assert_response :redirect
-        assert_redirected_to @back_to
+        assert_redirected_to back_to
       end
 
     end

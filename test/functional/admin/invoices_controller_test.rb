@@ -24,29 +24,34 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
 
     setup do
       @order = Factory(:order)
-      @back_to = "/admin/orders/edit/#{@order.id}"
       @invoice = { :number => "Invoice#0000001" }
     end
 
     should "create new invoice assign it to order and redirect to order" do
+      back_to = "/admin/orders/edit/#{@order.id}"
+
       post :create, { :invoice => @invoice,
-                      :back_to => @back_to,
+                      :back_to => back_to,
                       :resource => "Order", :resource_id => @order.id, :order_id => @order.id }
       assert_response :redirect
-      assert_redirected_to @back_to
+      assert_redirected_to back_to
     end
 
     should "raise an error if we try to add an invoice to an order which already has an invoice" do
+      back_to = "/admin/orders/edit/#{@order.id}"
+
       @invoice = Factory(:invoice)
-      post :new, { :back_to => @back_to,
+      post :new, { :back_to => back_to,
                    :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
       assert_response :unprocessable_entity
     end
 
     should "raise an error if we try to create an invoice to an order which already has an invoice" do
+      back_to = "/admin/orders/edit/#{@order.id}"
+
       @invoice = Factory(:invoice)
       post :create, { :invoice => { :number => "Invoice#0000001" },
-                      :back_to => @back_to,
+                      :back_to => back_to,
                       :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
       assert_response :unprocessable_entity
     end

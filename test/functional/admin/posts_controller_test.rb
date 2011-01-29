@@ -658,18 +658,16 @@ title;status
       # assigned to the view.
       #
 
-      setup do
-        @back_to = "/admin/view/new"
-      end
-
       should "create new post and redirect to view" do
+        back_to = "/admin/view/new"
+
         assert_difference('Post.count') do
           post :create, { :post => @post,
-                          :back_to => @back_to,
+                          :back_to => back_to,
                           :resource => "View" }
         end
         assert_response :redirect
-        assert_redirected_to "#{@back_to}?post_id=#{Post.last.id}"
+        assert_redirected_to "#{back_to}?post_id=#{Post.last.id}"
       end
 
     end
@@ -689,17 +687,18 @@ title;status
 
       setup do
         @view = Factory(:view, :post => nil)
-        @back_to = "/admin/view/edit/#{@view.id}"
       end
 
       should "create new post and redirect to view" do
+        back_to = "/admin/view/edit/#{@view.id}"
+
         assert_difference('Post.count') do
           post :create, { :post => @post,
-                          :back_to => @back_to,
+                          :back_to => back_to,
                           :resource => "View", :resource_id => @view.id }
         end
         assert_response :redirect
-        assert_redirected_to @back_to
+        assert_redirected_to back_to
 
         # Make sure the association is created!
         assert @view.reload.post
