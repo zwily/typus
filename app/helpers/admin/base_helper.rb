@@ -7,7 +7,7 @@ module Admin
     end
 
     def header
-      render "admin/helpers/header"
+      render "admin/helpers/base/header"
     end
 
     def has_root_path?
@@ -15,18 +15,18 @@ module Admin
     end
 
     def apps
-      render "admin/helpers/apps"
+      render "admin/helpers/base/apps"
     end
 
     def login_info
       unless admin_user.is_a?(FakeUser)
-        render "admin/helpers/login_info"
+        render "admin/helpers/base/login_info"
       end
     end
 
     def display_flash_message(message = flash)
       if message.compact.any?
-        render "admin/helpers/flash_message",
+        render "admin/helpers/base/flash_message",
                :flash_type => message.keys.first,
                :message => message
       end
