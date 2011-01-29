@@ -12,11 +12,12 @@ module Admin
 
     def typus_form_has_many(field)
       setup_relationship(field)
-      if @reflection.through_reflection
-        @items_to_relate = @model_to_relate.all - @item.send(field)
-      else
-        @items_to_relate = @model_to_relate.where(@reflection.primary_key_name => nil) - @item.send(field)
-      end
+
+      @items_to_relate = if @reflection.through_reflection
+                           @model_to_relate.all - @item.send(field)
+                         else
+                           @model_to_relate.where(@reflection.primary_key_name => nil) - @item.send(field)
+                         end
 
       if set_condition && @items_to_relate.any?
         form = build_relate_form
@@ -31,10 +32,7 @@ module Admin
       build_pagination
 
       render "admin/templates/has_n",
-             :model_to_relate => @model_to_relate,
-             :model_to_relate_as_resource => @model_to_relate_as_resource,
              :association_name => @association_name,
-             :foreign_key => foreign_key,
              :add_new => build_add_new(options),
              :form => form,
              :table => build_relationship_table
