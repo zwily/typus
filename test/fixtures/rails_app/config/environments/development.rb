@@ -27,6 +27,6 @@ end
 # Be sure to restart your server when you modify this file.
 
 Typus.setup do |config|
-  config.config_folder = Rails.root.join("../config/working")
+  config.config_folder = Rails.root.join("config/typus")
   config.authentication = :session
 end

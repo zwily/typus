@@ -35,6 +35,6 @@ RailsApp::Application.configure do
 end
 
 Typus.setup do |config|
-  config.config_folder = Rails.root.join("../config/working")
+  config.config_folder = Rails.root.join("config/typus")
   config.authentication = :session
 end
