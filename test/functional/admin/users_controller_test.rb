@@ -30,14 +30,17 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
     setup do
       @user_1 = Factory(:user)
-      @project = Factory(:project, :user => @user_1)
+      @project_1 = Factory(:project, :user => @user_1)
       Factory(:project, :user => @user_1)
-      Factory(:project)
+      @project_2 = Factory(:project)
     end
 
     should "filter by projects" do
-      get :index, { 'projects' => @project.id }
+      get :index, { 'projects' => @project_1.id }
       assert_equal [@user_1], assigns(:items)
+
+      get :index, { 'projects' => @project_2.id }
+      assert_not_equal [@user_1], assigns(:items)
     end
 
   end
