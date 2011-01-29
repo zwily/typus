@@ -12,13 +12,24 @@ module Admin
     include Admin::TableHelper
 
     def display_link_to_previous
-      render File.join(path, "display_link_to_previous") if params[:back_to]
-    end
+      if params[:resource]
 
-    private
+        item_class = params[:resource].typus_constantize
+        url = { :controller => item_class.to_resource }
 
-    def path
-      "admin/helpers/resources"
+        if params[:resource_id]
+          item = item_class.find(params[:resource_id])
+          url.merge!(:action => 'edit', :id => item.id)
+        else
+          url.merge!(:action => 'new')
+        end
+
+        body = Typus::I18n.t("Cancel adding a new %{resource}?", :resource => @resource.model_name.human.downcase)
+
+        render "admin/helpers/resources/display_link_to_previous",
+               :body => body,
+               :url => url
+      end
     end
 
   end
