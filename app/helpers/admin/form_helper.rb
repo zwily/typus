@@ -31,8 +31,6 @@ module Admin
     end
 
     def typus_relationships
-      @back_to = url_for(:controller => params[:controller], :action => params[:action], :id => params[:id])
-
       String.new.tap do |html|
         @resource.typus_defaults_for(:relationships).each do |relationship|
           association = @resource.reflect_on_association(relationship.to_sym)

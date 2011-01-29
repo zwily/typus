@@ -64,6 +64,7 @@ class Admin::ImageHoldersControllerTest < ActionController::TestCase
       @image_holder = Factory(:image_holder)
       @bird = Factory(:bird)
       @bird.image_holders << @image_holder
+      @request.env['HTTP_REFERER'] = "/admin/birds/edit/#{@bird.id}"
     end
 
     should "work" do

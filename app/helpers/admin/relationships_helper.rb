@@ -88,8 +88,7 @@ module Admin
       default_options = { :controller => "/admin/#{@model_to_relate.to_resource}",
                           :action => "new",
                           :resource => @resource.model_name,
-                          :resource_id => @item.id,
-                          :back_to => @back_to }
+                          :resource_id => @item.id }
 
       if set_condition && admin_user.can?("create", @model_to_relate)
         link_to Typus::I18n.t("Add new"), default_options.merge(options)

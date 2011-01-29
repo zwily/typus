@@ -24,10 +24,6 @@ class Admin::BaseController < ActionController::Base
     Typus.reload! unless Rails.env.production?
   end
 
-  def set_path
-    @back_to || request.referer || admin_dashboard_path
-  end
-
   def set_locale
     I18n.locale = admin_user.locale
   end

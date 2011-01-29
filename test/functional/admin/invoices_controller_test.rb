@@ -63,6 +63,7 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
     setup do
       @invoice = Factory(:invoice)
       @order = @invoice.order
+      @request.env['HTTP_REFERER'] = "/admin/orders/edit/#{@order.id}"
     end
 
     should "work for unrelate Invoice from Order" do

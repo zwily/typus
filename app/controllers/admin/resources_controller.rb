@@ -202,7 +202,7 @@ class Admin::ResourcesController < Admin::BaseController
       alert = item.error.full_messages
     end
 
-    redirect_to set_path, :notice => notice, :alert => alert
+    redirect_to :back, :notice => notice, :alert => alert
   end
 
   private
@@ -360,7 +360,9 @@ class Admin::ResourcesController < Admin::BaseController
       end
     end
 
-    redirect_to set_path, :notice => notice, :alert => alert
+    path = @back_to || request.referer || admin_dashboard_path
+
+    redirect_to path, :notice => notice, :alert => alert
   end
 
   def default_action
