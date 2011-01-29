@@ -22,6 +22,7 @@ module Typus
   autoload :Resources, "typus/resources"
 
   autoload :Actions, "typus/actions"
+  autoload :Associations, "typus/associations"
   autoload :Filters, "typus/filters"
   autoload :Format, "typus/format"
 

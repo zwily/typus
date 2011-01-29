@@ -19,7 +19,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
 
   context "Categories Views" do
 
-    should "verify form partial can overrided by model" do
+    should_eventually "verify form partial can overrided by model" do
       get :new
       assert_match "categories#_form.html.erb", @response.body
     end
@@ -123,15 +123,12 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
       end
 
       should "create new category and redirect to case" do
-        back_to = "/admin/cases/edit/#{@case.id}"
-
         assert_difference('@case.categories.count') do
           post :create, { :category => @category,
-                          :back_to => back_to,
                           :resource => "Case", :resource_id => @case.id }
         end
         assert_response :redirect
-        assert_redirected_to back_to
+        assert_redirected_to "/admin/cases/edit/#{@case.id}"
       end
 
     end

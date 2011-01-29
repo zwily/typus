@@ -27,31 +27,32 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
       @invoice = { :number => "Invoice#0000001" }
     end
 
-    should "create new invoice assign it to order and redirect to order" do
-      back_to = "/admin/orders/edit/#{@order.id}"
-
-      post :create, { :invoice => @invoice,
-                      :back_to => back_to,
-                      :resource => "Order", :resource_id => @order.id, :order_id => @order.id }
-      assert_response :redirect
-      assert_redirected_to back_to
+    should "initialize the object with the params passed on the url" do
+      get :new, { :resource => "Order", :resource => "Order", :order_id => @order.id }
+      assert assigns(:item)
+      assert_equal @order.id, assigns(:item).order_id
     end
 
-    should "raise an error if we try to add an invoice to an order which already has an invoice" do
-      back_to = "/admin/orders/edit/#{@order.id}"
+    # TODO: Take a look at this to refactor the create method.
+    should "create new invoice assign it to order and redirect to order" do
+      @invoice = { :number => "Invoice#0000001", :order_id => @order.id }
 
+      assert_difference('Invoice.count') do
+        post :create, { :invoice => @invoice, :resource => "Order", :order_id => @order.id }
+      end
+      assert_response :redirect
+      assert_redirected_to "/admin/orders/edit/#{@order.id}"
+    end
+
+    should_eventually "raise an error if we try to add an invoice to an order which already has an invoice" do
       @invoice = Factory(:invoice)
-      post :new, { :back_to => back_to,
-                   :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
+      get :new, { :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
       assert_response :unprocessable_entity
     end
 
-    should "raise an error if we try to create an invoice to an order which already has an invoice" do
-      back_to = "/admin/orders/edit/#{@order.id}"
-
+    should_eventually "raise an error if we try to create an invoice to an order which already has an invoice" do
       @invoice = Factory(:invoice)
       post :create, { :invoice => { :number => "Invoice#0000001" },
-                      :back_to => back_to,
                       :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
       assert_response :unprocessable_entity
     end

@@ -3,6 +3,7 @@ class Admin::ResourcesController < Admin::BaseController
   include Typus::Actions
   include Typus::Filters
   include Typus::Format
+  include Typus::Associations
 
   before_filter :get_model
   before_filter :set_scope
@@ -11,8 +12,6 @@ class Admin::ResourcesController < Admin::BaseController
   before_filter :check_if_user_can_perform_action_on_resources
   before_filter :set_order, :only => [:index]
   before_filter :set_fields, :only => [:index, :new, :edit, :create, :update, :show, :detach]
-
-  before_filter :check_if_we_can_add_a_new_item, :only => [:new, :create]
 
   ##
   # This is the main index of the model. With filters, conditions and more.
@@ -49,7 +48,7 @@ class Admin::ResourcesController < Admin::BaseController
     set_attributes_on_create
 
     if @item.save
-      params[:back_to] ? create_with_back_to : redirect_on_success
+      params[:resource] ? create_with_back_to : redirect_on_success
     else
       render :new
     end
@@ -166,18 +165,9 @@ class Admin::ResourcesController < Admin::BaseController
   #
   def unrelate
 
-    ##
     # Find the remote object which is named item!
-    #
-
     item_class = params[:resource].typus_constantize
     item = item_class.find(params[:resource_id])
-
-    ##
-    # Detect which kind of relationship there's between both models.
-    #
-    #     item respect @item
-    #
 
     # This is not nil in case of a has_many :through association.
     association_name = params[:association_name].to_sym unless params[:association_name].blank?
@@ -275,125 +265,21 @@ class Admin::ResourcesController < Admin::BaseController
 
   ##
   # Here what we basically do is to associate objects after they have been
-  # created. It's similar to calling `relate`.
+  # created. It's similar to calling `relate` but which the difference that
+  # we are creating a new record.
   #
-  # We have two objects:
-  #
-  #   - @item: Which is the created object.
-  #   - item: Which is the object which is going to be associated with.
-  #
-  # Eg 1.
-  #
-  #   - We are editing an Order and want to add a new Invoice.
-  #   - Click on "Add New" and we are redirected to the form.
-  #   - We want to know which kind of relationship there's between both
-  #     objects.
-  #
-  #         >> Order.relationship_with(Invoice)
-  #         => :has_one
-  #
-  # Eg 2.
-  #
-  #   - We are editing a Entry and want to add a new Attachment.
-  #   - Click on "Add New" and we are redirected to the form.
-  #   - We want to know which kind of relationship there's between both
-  #     objects.
-  #
-  #         >> Entry.relationship_with(Attachment)
-  #         => :has_and_belongs_to_many
-  #
-  # Eg 3.
-  #
-  #   - We are editing a Entry and want to add a new Comment.
-  #   - Click on "Add New" and we are redirected to the form.
-  #   - We want to know which kind of relationship there's between both
-  #     objects.
-  #
-  #         >> Entry.relationship_with(Comment)
-  #         => :has_many
-  #
-  # Eg 4.
-  #
-  #   - We are editing a Post (Entry) and want to add a new Attachment.
-  #   - Click on "Add New" and we are redirected to the form.
-  #   - We want to know which kind of relationship there's between both
-  #     objects.
-  #
-  #         >> Post.relationship_with(Attachment)
-  #         => :has_and_belongs_to_many
+  # We have two objects, detect the relationship_between them and then
+  # call the related method.
   #
   def create_with_back_to
     item_class = params[:resource].typus_constantize
-    item = item_class.find(params[:resource_id]) if params[:resource_id]
-
-    case item_class.relationship_with(@resource)
-    when :has_one
-      association_name = @resource.model_name.underscore.to_sym
-      item.send("#{association_name}=", @item)
-      worked = true
-    when :has_and_belongs_to_many
-      association_name = @resource.model_name.tableize.to_sym
-      worked = item.send(association_name).push(@item)
-    when :belongs_to
-      association_name = item_class.model_name.tableize.to_sym
-      if item
-        worked = @item.send(association_name).push(item)
-      end
-    when :has_many
-      association_name = @resource.model_name.tableize.to_sym
-      worked = item.send(association_name).push(@item)
-    end
-
-    association = @resource.reflect_on_association(association_name)
-
-    @back_to = if item
-                 params[:back_to]
-               else
-                 "#{params[:back_to]}?#{association.primary_key_name}=#{@item.id}"
-               end
-
-    if item
-      if worked
-        notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
-      else
-        alert = @item.errors.full_messages
-      end
-    end
-
-    path = @back_to || request.referer || admin_dashboard_path
-
-    redirect_to path, :notice => notice, :alert => alert
+    options = { :controller => item_class.to_resource }
+    assoc = item_class.relationship_with(@resource).to_s
+    send("set_#{assoc}_association", item_class, options)
   end
 
   def default_action
     @resource.typus_options_for(:default_action_on_item)
-  end
-
-  ##
-  # If we are trying to create a new Invoice which belongs_to Order, we should
-  # verify before the the Order doesn't have an Invoice, otherwise we would
-  # have and Order with many Invoices which is something not desired.
-  #
-  # Eg:
-  #
-  #     @resource (Invoice)
-  #     params[:resource] = "Order"
-  #     params[:resource_id] = "1"
-  #
-  # Does this Order already has an Invoice. If true, redirect to back.
-  #
-  def check_if_we_can_add_a_new_item
-    if params[:resource] && params[:resource_id]
-      item_class = params[:resource].typus_constantize
-      item = item_class.find(params[:resource_id]) if params[:resource_id]
-
-      if item_class.relationship_with(@resource) == :has_one
-        association_name = @resource.model_name.underscore.to_sym
-        if item.send(association_name)
-          render :text => "Not allowed!", :status => :unprocessable_entity
-        end
-      end
-    end
   end
 
 end

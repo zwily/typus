@@ -659,15 +659,12 @@ title;status
       #
 
       should "create new post and redirect to view" do
-        back_to = "/admin/view/new"
-
         assert_difference('Post.count') do
           post :create, { :post => @post,
-                          :back_to => back_to,
                           :resource => "View" }
         end
         assert_response :redirect
-        assert_redirected_to "#{back_to}?post_id=#{Post.last.id}"
+        assert_redirected_to "/admin/views/new?post_id=#{Post.last.id}"
       end
 
     end
@@ -690,15 +687,11 @@ title;status
       end
 
       should "create new post and redirect to view" do
-        back_to = "/admin/view/edit/#{@view.id}"
-
         assert_difference('Post.count') do
-          post :create, { :post => @post,
-                          :back_to => back_to,
-                          :resource => "View", :resource_id => @view.id }
+          post :create, { :post => @post, :resource => "View", :resource_id => @view.id }
         end
         assert_response :redirect
-        assert_redirected_to back_to
+        assert_redirected_to "/admin/views/edit/#{@view.id}"
 
         # Make sure the association is created!
         assert @view.reload.post

@@ -21,18 +21,16 @@ class Admin::ImageHoldersControllerTest < ActionController::TestCase
       @bird = Factory(:bird)
     end
 
-    should "contain a message" do
-      get :new, { :back_to => "/admin/birds/#{@bird.id}/edit",
-                  :resource => @bird.class.name, :resource_id => @bird.id }
+    should_eventually "contain a message" do
+      # display_link_to_previous
+      get :new, { :resource => @bird.class.name, :resource_id => @bird.id }
       assert_select 'body div#flash', "Cancel adding a new image holder?"
     end
 
     should "work" do
       assert_difference('@bird.image_holders.count') do
         post :create, { :image_holder => { :name => "ImageHolder" },
-                        :resource => "Bird",
-                        :resource_id => @bird.id,
-                        :back_to => "/admin/birds/edit/#{@bird.id}" }
+                        :resource => "Bird", :resource_id => @bird.id }
       end
 
       assert_response :redirect

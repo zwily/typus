@@ -8,7 +8,7 @@ require "test_helper"
 
 =end
 
-class Admin::UsersControllerTest < ActionController::TestCase
+class Admin::ProjectsControllerTest < ActionController::TestCase
 
   setup do
     @typus_user = Factory(:typus_user)
@@ -32,31 +32,26 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
   end
 
-  context "unrelate collaborators" do
-
-    ##
-    # We have a project with many collaborators (which are users)
-    #
+  context "relate colaborators to project" do
 
     setup do
       @project = Factory(:project)
       @user = Factory(:user)
-      @project.collaborators << @user
-
       @request.env['HTTP_REFERER'] = "/admin/projects/edit/#{@project.id}"
     end
 
-    should_eventually "work" do
-      assert_difference('@project.collaborators.count', -1) do
-        post :unrelate, { :id => @user.id,
-                          :resource => 'Project',
-                          :resource_id => @project.id,
-                          :association_name => "collaborators" }
+    should "work" do
+      assert_difference('@project.collaborators.count') do
+        post :relate, { :id => @project.id,
+                        :related => { :model => 'User', :id => @user.id, :association_name => 'collaborators' } }
       end
+
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
       assert_equal "Project successfully updated.", flash[:notice]
     end
+
+    should_eventually "not allow to add collaborator twice"
 
   end
 
