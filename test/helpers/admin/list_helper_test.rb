@@ -4,6 +4,8 @@ class Admin::ListHelperTest < ActiveSupport::TestCase
 
   include Admin::ListHelper
 
+  def render(*args); args; end
+
   context "resources_actions" do
 
     should "return a default value which is an empty array" do
