@@ -279,67 +279,52 @@ class Admin::ResourcesController < Admin::BaseController
   #
   # We have two objects:
   #
-  #   - @item: Which is the create object.
-  #   - item: Which is the object which be associated to.
+  #   - @item: Which is the created object.
+  #   - item: Which is the object which is going to be associated with.
   #
-  # http://0.0.0.0:3000/admin/entries/new?back_to=%2Fadmin%2Fcategories%2Fedit%2F3&resource=categories&resource_id=3
+  # Eg 1.
+  #
+  #   - We are editing an Order and want to add a new Invoice.
+  #   - Click on "Add New" and we are redirected to the form.
+  #   - We want to know which kind of relationship there's between both
+  #     objects.
+  #
+  #         >> Order.relationship_with(Invoice)
+  #         => :has_one
+  #
+  # Eg 2.
+  #
+  #   - We are editing a Entry and want to add a new Attachment.
+  #   - Click on "Add New" and we are redirected to the form.
+  #   - We want to know which kind of relationship there's between both
+  #     objects.
+  #
+  #         >> Entry.relationship_with(Attachment)
+  #         => :has_and_belongs_to_many
+  #
+  # Eg 3.
+  #
+  #   - We are editing a Entry and want to add a new Comment.
+  #   - Click on "Add New" and we are redirected to the form.
+  #   - We want to know which kind of relationship there's between both
+  #     objects.
+  #
+  #         >> Entry.relationship_with(Comment)
+  #         => :has_many
+  #
+  # Eg 4.
+  #
+  #   - We are editing a Post (Entry) and want to add a new Attachment.
+  #   - Click on "Add New" and we are redirected to the form.
+  #   - We want to know which kind of relationship there's between both
+  #     objects.
+  #
+  #         >> Post.relationship_with(Attachment)
+  #         => :has_and_belongs_to_many
   #
   def create_with_back_to
-
-    #
-    # Find the remote object which is named item!
-    #
-
     item_class = params[:resource].typus_constantize
     item = item_class.find(params[:resource_id]) if params[:resource_id]
-
-    ##
-    # Here we have something like:
-    #
-    # Eg 1.
-    #
-    #   - We are editing an Order and want to add a new Invoice.
-    #   - Click on "Add New" and we are redirected to the form.
-    #   - We want to know which kind of relationship there's between both
-    #     objects.
-    #
-    #         >> Order.relationship_with(Invoice)
-    #         => :has_one
-    #
-    # Eg 2.
-    #
-    #   - We are editing a Entry and want to add a new Attachment.
-    #   - Click on "Add New" and we are redirected to the form.
-    #   - We want to know which kind of relationship there's between both
-    #     objects.
-    #
-    #         >> Entry.relationship_with(Attachment)
-    #         => :has_and_belongs_to_many
-    #
-    # Eg 3.
-    #
-    #   - We are editing a Entry and want to add a new Comment.
-    #   - Click on "Add New" and we are redirected to the form.
-    #   - We want to know which kind of relationship there's between both
-    #     objects.
-    #
-    #         >> Entry.relationship_with(Comment)
-    #         => :has_many
-    #
-    # Eg 4.
-    #
-    #   - We are editing a Post (Entry) and want to add a new Attachment.
-    #   - Click on "Add New" and we are redirected to the form.
-    #   - We want to know which kind of relationship there's between both
-    #     objects.
-    #
-    #         >> Post.relationship_with(Attachment)
-    #         => :has_and_belongs_to_many
-    #
-
-    ##
-    # Detect which kind of relationship there's between both models.
-    #
 
     case item_class.relationship_with(@resource)
     when :has_one
