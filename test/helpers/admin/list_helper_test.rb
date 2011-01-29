@@ -17,7 +17,7 @@ class Admin::ListHelperTest < ActiveSupport::TestCase
 
   end
 
-  context "table_actions" do
+  context "list_actions" do
 
     should "be empty" do
       assert list_actions.empty?
