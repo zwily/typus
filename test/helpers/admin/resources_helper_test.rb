@@ -11,7 +11,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
 
   context "display_link_to_previous" do
 
-    should "verify display_link_to_previous" do
+    should "work" do
       @resource = Post
       params = { :action => "edit", :back_to => "/back_to_param" }
       self.expects(:params).at_least_once.returns(params)
