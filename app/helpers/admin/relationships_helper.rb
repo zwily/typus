@@ -85,8 +85,10 @@ module Admin
     end
 
     def build_add_new(options = {})
-      default_options = { :controller => "/admin/#{@model_to_relate.to_resource}", :action => "new",
-                          :resource => @resource.model_name, :resource_id => @item.id,
+      default_options = { :controller => "/admin/#{@model_to_relate.to_resource}",
+                          :action => "new",
+                          :resource => @resource.model_name,
+                          :resource_id => @item.id,
                           :back_to => @back_to }
 
       if set_condition && admin_user.can?("create", @model_to_relate)
