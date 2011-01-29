@@ -294,10 +294,6 @@ class Admin::ResourcesController < Admin::BaseController
     item = item_class.find(params[:resource_id]) if params[:resource_id]
 
     ##
-    # Detect which kind of relationship there's between both models.
-    #
-
-    ##
     # Here we have something like:
     #
     # Eg 1.
@@ -341,24 +337,24 @@ class Admin::ResourcesController < Admin::BaseController
     #         => :has_and_belongs_to_many
     #
 
+    ##
+    # Detect which kind of relationship there's between both models.
+    #
+
     case item_class.relationship_with(@resource)
     when :has_one
-      # Order#invoice = @item
       association_name = @resource.model_name.underscore.to_sym
       item.send("#{association_name}=", @item)
       worked = true
     when :has_and_belongs_to_many
-      # Attachment#entries.push(item)
       association_name = @resource.model_name.tableize.to_sym
       worked = item.send(association_name).push(@item)
     when :belongs_to
-      # Entry#comments.push(item)
       association_name = item_class.model_name.tableize.to_sym
       if item
         worked = @item.send(association_name).push(item)
       end
     when :has_many
-      # Dog#image_holders
       association_name = @resource.model_name.tableize.to_sym
       worked = item.send(association_name).push(@item)
     end
