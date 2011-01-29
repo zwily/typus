@@ -28,7 +28,17 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
   context "index" do
 
-    should_eventually "filter by projects"
+    setup do
+      @user_1 = Factory(:user)
+      @project = Factory(:project, :user => @user_1)
+      Factory(:project, :user => @user_1)
+      Factory(:project)
+    end
+
+    should "filter by projects" do
+      get :index, { 'projects' => @project.id }
+      assert_equal [@user_1], assigns(:items)
+    end
 
   end
 
