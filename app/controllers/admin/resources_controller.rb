@@ -83,7 +83,7 @@ class Admin::ResourcesController < Admin::BaseController
         format.json { render :json => @item }
       else
         format.html { render :edit }
-        format.json { render :json => @item.errors.full_messages }
+        format.json { render :json => @item.errors, :status => :unprocessable_entity }
       end
     end
   end
