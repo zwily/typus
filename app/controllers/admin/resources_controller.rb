@@ -223,20 +223,16 @@ class Admin::ResourcesController < Admin::BaseController
     path = params.dup.cleanup
     path.merge!(:action => action)
 
-    message = case params[:action]
-              when "create"
-                "%{model} successfully created."
-              when "update"
-                "%{model} successfully updated."
-              end
-
     if action.eql?('index')
       path.delete_if { |k, v| %w(action id).include?(k) }
     else
       path.merge!(:id => @item.id)
     end
 
-    redirect_to path, :notice => Typus::I18n.t(message, :model => @resource.model_name.human)
+    message = (params[:action] == 'create') ? "%{model} successfully created." :"%{model} successfully updated."
+    notice = Typus::I18n.t(message, :model => @resource.model_name.human)
+
+    redirect_to path, :notice => notice
   end
 
   ##
