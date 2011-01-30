@@ -19,7 +19,7 @@ class String
   def action_mapper
     case self
     when "index" then :list
-    when "new", "create", "edit", "update" then :form
+    when "new", "create", "edit", "update", "toggle" then :form
     else self
     end
   end

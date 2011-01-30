@@ -92,14 +92,26 @@ class Admin::PostsControllerTest < ActionController::TestCase
       @request.env['HTTP_REFERER'] = "/admin/posts"
     end
 
-    should "toggle" do
-      assert !@post.published
-      get :toggle, { :id => @post.id, :field => "published" }
+    context "toggle" do
 
-      assert_response :redirect
-      assert_redirected_to @request.env["HTTP_REFERER"]
-      assert_equal "Post successfully updated.", flash[:notice]
-      assert @post.reload.published
+      should "work" do
+        assert !@post.published
+        get :toggle, { :id => @post.id, :field => "published" }
+
+        assert_response :redirect
+        assert_redirected_to @request.env["HTTP_REFERER"]
+        assert_equal "Post successfully updated.", flash[:notice]
+        assert @post.reload.published
+      end
+
+      should "render edit post when validation fails" do
+        @post.body = nil
+        @post.save(:validate => false)
+        get :toggle, { :id => @post.id, :field => "published" }
+        assert_response :success
+        assert_template "admin/resources/edit"
+      end
+
     end
 
   end

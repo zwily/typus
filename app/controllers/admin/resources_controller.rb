@@ -108,13 +108,21 @@ class Admin::ResourcesController < Admin::BaseController
 
   def toggle
     @item.toggle(params[:field])
-    @item.save!
-
-    notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
 
     respond_to do |format|
-      format.html { redirect_to :back, :notice => notice }
-      format.json { render :json => @item }
+      if @item.save
+        format.html do
+          notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
+          redirect_to :back, :notice => notice
+        end
+        format.json { render :json => @item }
+      else
+        format.html do
+          set_fields
+          render :edit
+        end
+        format.json { render :json => @item.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
