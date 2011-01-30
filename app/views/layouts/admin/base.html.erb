@@ -13,8 +13,8 @@
   <%= stylesheet_link_tag "/vendor/jquery-ui-1.8.9.custom/css/ui-lightness/jquery-ui-1.8.9.custom.css",
                           "/vendor/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css" %>
 
-  <%= stylesheet_link_tag "/admin/stylesheets/screen",
-                          "/admin/stylesheets/application" %>
+  <%= stylesheet_link_tag "/vendor/typus/stylesheets/screen",
+                          "/vendor/typus/stylesheets/application" %>
 
   <%= yield :stylesheets -%>
 
@@ -22,11 +22,11 @@
                              "/vendor/jquery-ui-1.8.9.custom/js/jquery-ui-1.8.9.custom.min.js",
                              "/vendor/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js" %>
 
-  <%= javascript_include_tag "/admin/javascripts/jquery.searchField.js",
-                             "/admin/javascripts/jquery.rails.js",
-                             "/admin/javascripts/jquery.rails.autocomplete.js",
-                             "/admin/javascripts/jquery.application.js",
-                             "/admin/javascripts/application" %>
+  <%= javascript_include_tag "/vendor/typus/javascripts/jquery.searchField.js",
+                             "/vendor/typus/javascripts/jquery.rails.js",
+                             "/vendor/typus/javascripts/jquery.rails.autocomplete.js",
+                             "/vendor/typus/javascripts/jquery.application.js",
+                             "/vendor/typus/javascripts/application" %>
 
   <%= yield :javascripts -%>
 
