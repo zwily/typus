@@ -65,6 +65,11 @@ class Admin::ResourcesController < Admin::BaseController
 
   def show
     check_resource_ownership if @resource.typus_options_for(:only_user_items)
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render :json => @item }
+    end
   end
 
   def update
