@@ -48,7 +48,7 @@ class Attachment < ActiveRecord::Base
   #
 
   image_accessor :file
-  validates_presence_of :file
+  validates :file, :presence => true
 
   ##
   # Paperclip:
@@ -130,7 +130,7 @@ which is generated from the title)
 # app/models/post.rb
 class Post < ActiveRecord::Base
 
-  validates_presence_of :title
+  validates :title, :presence => true
 
   def slug
     title.parameterize
