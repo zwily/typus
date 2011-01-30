@@ -13,26 +13,13 @@ module Admin
     def typus_form_has_many(field)
       setup_relationship(field)
 
-      available_items = if @reflection.through_reflection
-                           @model_to_relate.all
-                         else
-                           @model_to_relate.where(@reflection.primary_key_name => nil)
-                         end
-
-      @items_to_relate = available_items - @item.send(field)
-
-      if set_condition && @items_to_relate.any?
-        form = build_relate_form
-      end
-
       options = @reflection.through_reflection ? {} : { @reflection.primary_key_name => @item.id }
 
       build_pagination
 
-      render "admin/templates/has_n",
+      render "admin/templates/has_many",
              :association_name => @association_name,
              :add_new => build_add_new(options),
-             :form => form,
              :table => build_relationship_table
     end
 
