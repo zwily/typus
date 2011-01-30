@@ -31,6 +31,9 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     setup do
       @first_category = Factory(:category, :position => 1)
       @second_category = Factory(:category, :position => 2)
+
+      @second_category.name = nil
+      @second_category.save(:validate => false)
     end
 
     should "verify referer" do
