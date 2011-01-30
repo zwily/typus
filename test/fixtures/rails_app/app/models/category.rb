@@ -9,7 +9,15 @@
 
 class Category < ActiveRecord::Base
 
+  ##
+  # Mixins
+  #
+
   acts_as_list
+
+  ##
+  # Associations
+  #
 
   has_and_belongs_to_many :entries
   has_and_belongs_to_many :posts

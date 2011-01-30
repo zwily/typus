@@ -8,6 +8,10 @@
 
 class View < ActiveRecord::Base
 
+  ##
+  # Associations
+  #
+
   belongs_to :post
 
 end

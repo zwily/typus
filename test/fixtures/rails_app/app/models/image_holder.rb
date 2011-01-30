@@ -5,7 +5,17 @@
 =end
 
 class ImageHolder < ActiveRecord::Base
-  validates_presence_of :name
+
+  ##
+  # Validations
+  #
+
+  validates :name, :presence => true
+
+  ##
+  # Associations
+  #
 
   belongs_to :imageable, :polymorphic => true
+
 end

@@ -1,8 +1,16 @@
 class ProjectCollaborator < ActiveRecord::Base
 
-  belongs_to :user
-  belongs_to :project
+  ##
+  # Validations
+  #
 
   validates_uniqueness_of :user_id, :scope => :project_id
+
+  ##
+  # Associations
+  #
+
+  belongs_to :user
+  belongs_to :project
 
 end

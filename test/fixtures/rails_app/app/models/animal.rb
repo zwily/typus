@@ -5,7 +5,17 @@
 =end
 
 class Animal < ActiveRecord::Base
-  validates_presence_of :name
+
+  ##
+  # Validations
+  #
+
+  validates :name, :presence => true
+
+  ##
+  # Associations
+  #
 
   has_many :image_holders, :as => :imageable
+
 end

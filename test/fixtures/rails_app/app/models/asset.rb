@@ -9,15 +9,29 @@
 
 class Asset < ActiveRecord::Base
 
-  # Dragonfly Attachment
+  ##
+  # Validations
+  #
+
+  validates :caption, :presence => true
+
+  ##
+  # Dragonfly Stuff
+  #
+
   image_accessor :dragonfly
   image_accessor :dragonfly_required
-  validates_presence_of :dragonfly_required
+  validates :dragonfly_required, :presence => true
 
-  validates_presence_of :caption
+  ##
+  # Paperclip Stuff
+  #
 
-  # Paperclip Attachment
   has_attached_file :paperclip, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
+  ##
+  # Instance Methods
+  #
 
   def original_file_name
   end
