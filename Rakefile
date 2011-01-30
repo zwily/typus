@@ -46,9 +46,5 @@ end
 desc 'Deploy'
 task :deploy do
   system "cd test/fixtures/rails_app && cap deploy"
-end
-
-desc 'Publish site'
-task :site do
   system "cd docs && rake deploy"
 end
