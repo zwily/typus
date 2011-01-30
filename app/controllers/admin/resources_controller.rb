@@ -54,7 +54,7 @@ class Admin::ResourcesController < Admin::BaseController
     set_attributes_on_create
 
     respond_to do |format|
-      if @post.save
+      if @item.save
         format.html do
           params[:resource] ? create_with_back_to : redirect_on_success
         end
@@ -72,10 +72,13 @@ class Admin::ResourcesController < Admin::BaseController
   def show
     check_resource_ownership if @resource.typus_options_for(:only_user_items)
 
+=begin
+    # FIXME
     respond_to do |format|
       format.html # show.html.erb
       format.json { render :json => @item }
     end
+=end
   end
 
   def update
@@ -158,10 +161,10 @@ class Admin::ResourcesController < Admin::BaseController
     association_name = params[:related][:association_name].tableize
 
     if @item.send(association_name) << resource_class.find(params[:related][:id])
-      flash[:notice] = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
+      notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
     end
 
-    redirect_to :back
+    redirect_to :back, :notice => notice
   end
 
   ##
