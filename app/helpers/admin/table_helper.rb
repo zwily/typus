@@ -150,7 +150,12 @@ module Admin
 
     def table_transversal_field(attribute, item)
       field_1, field_2 = attribute.split(".")
-      item.send(field_1).send(field_2)
+
+      if related_item = item.send(field_1)
+        related_item.send(field_2)
+      else
+        "&mdash;".html_safe
+      end
     end
 
   end

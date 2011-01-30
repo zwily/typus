@@ -181,6 +181,11 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
       assert_equal expected, output
     end
 
+    should "return a dash if the association does not exist" do
+      comment = Factory(:comment, :post => nil)
+      assert_equal "&mdash;", table_transversal_field("post.title", comment)
+    end
+
   end
 
   should "test_table_position_field" do
