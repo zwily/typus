@@ -247,14 +247,12 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def redirect_on_success
-    action = @resource.typus_options_for(:action_after_save)
     path = params.dup.cleanup
-    path.merge!(:action => action)
 
-    if action.eql?('index')
+    if action_after_save.eql?('index')
       path.delete_if { |k, v| %w(action id).include?(k) }
     else
-      path.merge!(:id => @item.id)
+      path.merge!(:action => action_after_save, :id => @item.id)
     end
 
     message = (params[:action] == 'create') ? "%{model} successfully created." :"%{model} successfully updated."
@@ -280,6 +278,10 @@ class Admin::ResourcesController < Admin::BaseController
 
   def default_action
     @resource.typus_options_for(:default_action_on_item)
+  end
+
+  def action_after_save
+    @resource.typus_options_for(:action_after_save)
   end
 
 end
