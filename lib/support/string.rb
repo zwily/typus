@@ -30,7 +30,7 @@ class String
       "create"
     when "index", "show"
       "read"
-    when "edit", "update", "position", "toggle", "relate", "unrelate", "detach"
+    when "edit", "update", "position", "toggle", "relate", "unrelate"
       "update"
     when "destroy", "trash"
       "delete"
