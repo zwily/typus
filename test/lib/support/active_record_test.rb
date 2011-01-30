@@ -111,8 +111,15 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return name for Category" do
+      category = Factory(:category, :name => "Chunky Bacon")
+      assert_match "Chunky Bacon", category.to_label
+    end
+
+    should "return Model#id because Category#name is empty" do
       category = Factory(:category)
-      assert_match category.name, category.to_label
+      category.name = nil
+      category.save(:validate => false)
+      assert_equal "Category##{category.id}", category.to_label
     end
 
     should "return default Model#id" do
