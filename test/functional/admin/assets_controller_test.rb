@@ -34,7 +34,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
       assert @asset.dragonfly_uid.present?
 
-      get :detach, { :id => @asset.id, :attribute => "dragonfly" }
+      get :update, { :id => @asset.id, :attribute => "dragonfly" }
       assert_response :redirect
       assert_redirected_to "/admin/assets/edit/#{@asset.id}"
       assert_equal "Asset successfully updated.", flash[:notice]
@@ -47,7 +47,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       get :edit, { :id => @asset.id }
       assert_no_match /Remove required file/, @response.body
 
-      get :detach, { :id => @asset.id, :attribute => "dragonfly_required" }
+      get :update, { :id => @asset.id, :attribute => "dragonfly_required" }
       assert_response :success
 
       @asset.reload

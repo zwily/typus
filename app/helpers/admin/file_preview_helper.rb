@@ -25,7 +25,7 @@ module Admin
         message = Typus::I18n.t("Remove")
         label_text = <<-HTML
 #{attribute_i18n}
-<small>#{link_to message, { :action => 'detach', :id => @item.id, :attribute => attribute }, :confirm => Typus::I18n.t("Are you sure?")}</small>
+<small>#{link_to message, { :action => 'update', :id => @item.id, :attribute => attribute }, :confirm => Typus::I18n.t("Are you sure?")}</small>
         HTML
         label_text.html_safe
       end

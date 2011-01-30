@@ -7,11 +7,11 @@ class Admin::ResourcesController < Admin::BaseController
 
   before_filter :get_model
   before_filter :set_scope
-  before_filter :get_object, :only => [:show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate, :detach]
+  before_filter :get_object, :only => [:show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate]
   before_filter :check_resource_ownership, :only => [:edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
   before_filter :check_if_user_can_perform_action_on_resources
   before_filter :set_order, :only => [:index]
-  before_filter :set_fields, :only => [:index, :new, :edit, :create, :update, :show, :detach]
+  before_filter :set_fields, :only => [:index, :new, :edit, :create, :update, :show]
 
   ##
   # This is the main index of the model. With filters, conditions and more.
@@ -62,22 +62,12 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def update
+    attributes = params[:attribute] ? { params[:attribute] => nil } : params[@object_name]
+
     respond_to do |format|
-      if @item.update_attributes(params[@object_name])
+      if @item.update_attributes(attributes)
         set_attributes_on_update
         reload_locales
-        format.html { redirect_on_success }
-        format.json { render :json => @item }
-      else
-        format.html { render :edit }
-        format.json { render :json => @item.errors.full_messages }
-      end
-    end
-  end
-
-  def detach
-    respond_to do |format|
-      if @item.update_attributes(params[:attribute] => nil)
         format.html { redirect_on_success }
         format.json { render :json => @item }
       else
@@ -236,7 +226,7 @@ class Admin::ResourcesController < Admin::BaseController
     message = case params[:action]
               when "create"
                 "%{model} successfully created."
-              when "update", "detach"
+              when "update"
                 "%{model} successfully updated."
               end
 

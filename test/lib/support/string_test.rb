@@ -82,7 +82,7 @@ class StringTest < ActiveSupport::TestCase
     end
 
     should "return update" do
-      %w(edit update position toggle relate unrelate detach).each do |action|
+      %w(edit update position toggle relate unrelate).each do |action|
         assert_equal "update", action.acl_action_mapper
       end
     end
