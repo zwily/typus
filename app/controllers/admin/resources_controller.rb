@@ -164,27 +164,17 @@ class Admin::ResourcesController < Admin::BaseController
   #   - has_one
   #
   def unrelate
-
-    # Find the remote object which is named item!
     item_class = params[:resource].typus_constantize
     item = item_class.find(params[:resource_id])
-
-    # This is not nil in case of a has_many :through association.
-    association_name = params[:association_name].to_sym unless params[:association_name].blank?
 
     case item_class.relationship_with(@resource)
     when :has_one
       association_name = @resource.model_name.underscore.to_sym
       worked = item.send(association_name).delete
     else
-      association_name ||= @resource.model_name.tableize.to_sym
+      association_name = params[:association_name] ? params[:association_name].to_sym : @resource.model_name.tableize.to_sym
       worked = item.send(association_name).delete(@item)
     end
-
-    ##
-    # Finally delete the associated object. Depending on your models setup
-    # associated models will be removed or foreign_key will be set to nil.
-    #
 
     if worked
       notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
