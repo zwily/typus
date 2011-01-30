@@ -20,13 +20,14 @@ class Admin::ResourcesController < Admin::BaseController
   # your formats.
   #
   def index
-    add_resource_action(default_action.titleize, {:action => default_action}, {})
-    add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
-
     get_objects
 
     respond_to do |format|
-      format.html { generate_html }
+      format.html do
+        add_resource_action(default_action.titleize, {:action => default_action}, {})
+        add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
+        generate_html
+      end
       @resource.typus_export_formats.each { |f| format.send(f) { send("generate_#{f}") } }
     end
   end
