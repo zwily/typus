@@ -11,7 +11,7 @@ module Admin
     include Admin::SidebarHelper
     include Admin::TableHelper
 
-    def display_link_to_previous
+    def display_link_to_previous(params = params)
       if params[:resource]
 
         item_class = params[:resource].typus_constantize
