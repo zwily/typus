@@ -71,7 +71,11 @@ class Admin::ResourcesController < Admin::BaseController
         format.html { redirect_on_success }
         format.json { render :json => @item }
       else
-        format.html { render :edit }
+        format.html do
+          add_resource_action(default_action.titleize, {:action => default_action}, {})
+          add_resource_action("Unrelate", {:action => "unrelate", :resource => @resource.model_name, :resource_id => @item.id}, {:confirm => "#{Typus::I18n.t("Unrelate")}?"})
+          render :edit
+        end
         format.json { render :json => @item.errors.full_messages }
       end
     end
