@@ -78,10 +78,7 @@ class Admin::ResourcesController < Admin::BaseController
   def detach
     respond_to do |format|
       if @item.update_attributes(params[:attribute] => nil)
-        format.html do
-          notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
-          redirect_to :back, :notice => notice
-        end
+        format.html { redirect_on_success }
         format.json { render :json => @item }
       else
         format.html { render :edit }
