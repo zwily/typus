@@ -4,6 +4,7 @@ class Admin::ResourcesController < Admin::BaseController
   include Typus::Filters
   include Typus::Format
   include Typus::Associations
+  include Typus::Autocomplete
 
   before_filter :get_model
   before_filter :set_scope
