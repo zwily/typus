@@ -16,6 +16,12 @@ class Category < ActiveRecord::Base
   acts_as_list
 
   ##
+  # Validations
+  #
+
+  validates :name, :presence => true
+
+  ##
   # Associations
   #
 
