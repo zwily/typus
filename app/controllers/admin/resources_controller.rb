@@ -36,6 +36,11 @@ class Admin::ResourcesController < Admin::BaseController
     item_params = params.dup
     item_params.delete_if { |k, v| !@resource.columns.map(&:name).include?(k) }
     @item = @resource.new(item_params)
+
+    respond_to do |format|
+      format.html # new.html.erb
+      format.json { render :json => @item }
+    end
   end
 
   ##
