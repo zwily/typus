@@ -55,8 +55,6 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def edit
-    add_resource_action(default_action.titleize, {:action => default_action}, {})
-    add_resource_action("Unrelate", {:action => "unrelate", :resource => @resource.model_name, :resource_id => @item.id}, {:confirm => "#{Typus::I18n.t("Unrelate")}?"})
   end
 
   def show
@@ -72,8 +70,6 @@ class Admin::ResourcesController < Admin::BaseController
         format.json { render :json => @item }
       else
         format.html do
-          add_resource_action(default_action.titleize, {:action => default_action}, {})
-          add_resource_action("Unrelate", {:action => "unrelate", :resource => @resource.model_name, :resource_id => @item.id}, {:confirm => "#{Typus::I18n.t("Unrelate")}?"})
           render :edit
         end
         format.json { render :json => @item.errors.full_messages }

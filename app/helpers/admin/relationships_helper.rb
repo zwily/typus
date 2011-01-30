@@ -17,6 +17,10 @@ module Admin
 
       build_pagination
 
+      # TODO: Find a cleaner way to add these actions ...
+      @resource_actions = [["Edit", {:action=>"edit"}, {}],
+                           ["Trash", {:resource_id=>@item.id, :resource=>@resource.model_name, :action=>"destroy"}, {:confirm=>"Trash?"}]]
+
       render "admin/templates/has_many",
              :association_name => @association_name,
              :add_new => build_add_new(options),
@@ -33,6 +37,10 @@ module Admin
       end
 
       build_pagination
+
+      # TODO: Find a cleaner way to add these actions ...
+      @resource_actions = [["Edit", {:action=>"edit"}, {}],
+                           ["Unrelate", {:resource_id=> @item.id, :resource=> @resource.model_name, :action=>"unrelate"}, {:confirm=>"Unrelate?"}]]
 
       render "admin/templates/has_n",
              :association_name => @association_name,
