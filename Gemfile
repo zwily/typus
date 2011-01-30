@@ -19,6 +19,9 @@ end
 
 group :development, :test do
 
+  gem 'nanoc', :require => false
+  gem 'WikiCreole', :require => false
+
   platforms :jruby do
     gem 'activerecord-jdbc-adapter', :require => false
     # gem 'activerecord-jdbcpostgresql-adapter'
