@@ -69,9 +69,7 @@ class Admin::ResourcesController < Admin::BaseController
         format.html { redirect_on_success }
         format.json { render :json => @item }
       else
-        format.html do
-          render :edit
-        end
+        format.html { render :edit }
         format.json { render :json => @item.errors.full_messages }
       end
     end
