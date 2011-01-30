@@ -147,15 +147,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
       assert_equal expected, assigns(:resource_actions)
     end
 
-    should "be edit and unrelate on edit" do
-      get :edit, { :id => @post.id }
-
-      expected = [["Edit", {:action=>"edit"}, {}],
-                  ["Unrelate", {:action=>"unrelate", :resource_id=>1, :resource=>"Post"}, {:confirm=>"Unrelate?"}]]
-
-      assert_equal expected, assigns(:resource_actions)
-    end
-
     context "with overriden default action on item" do
 
       setup do
@@ -167,15 +158,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
         expected = [["Show", {:action=>"show"}, {}],
                     ["Trash", {:action=>"destroy"}, {:method=>"delete", :confirm=>"Trash?"}]]
-
-        assert_equal expected, assigns(:resource_actions)
-      end
-
-      should "be show and unrelate on edit" do
-        get :edit, { :id => @post.id }
-
-        expected = [["Show", {:action=>"show"}, {}],
-                    ["Unrelate", {:action=>"unrelate", :resource_id=>1, :resource=>"Post"}, {:confirm=>"Unrelate?"}]]
 
         assert_equal expected, assigns(:resource_actions)
       end
