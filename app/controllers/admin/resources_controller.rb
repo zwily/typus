@@ -237,11 +237,7 @@ class Admin::ResourcesController < Admin::BaseController
     when "update", "detach"
       case action
       when "index"
-        if params[:back_to]
-          path = "#{params[:back_to]}##{@resource.to_resource}"
-        else
-          path.delete_if { |k, v| %w(action id).include?(k) }
-        end
+        path.delete_if { |k, v| %w(action id).include?(k) }
       else
         path.merge!(:action => action) #, :id => @item.id)
       end
