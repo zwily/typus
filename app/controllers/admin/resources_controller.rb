@@ -53,10 +53,16 @@ class Admin::ResourcesController < Admin::BaseController
 
     set_attributes_on_create
 
-    if @item.save
-      params[:resource] ? create_with_back_to : redirect_on_success
-    else
-      render :new
+    respond_to do |format|
+      if @post.save
+        format.html do
+          params[:resource] ? create_with_back_to : redirect_on_success
+        end
+        format.json { render :json => @item, :status => :created, :location => @item }
+      else
+        format.html { render :action => "new" }
+        format.json { render :json => @item.errors, :status => :unprocessable_entity }
+      end
     end
   end
 
