@@ -33,7 +33,11 @@ module Admin
       @items_to_relate = @model_to_relate.all - @item.send(field)
 
       if set_condition && @items_to_relate.any?
-        form = build_relate_form
+        form = if @items_to_relate.count > 100
+                 build_relate_form('admin/templates/relate_form_with_autocomplete')
+               else
+                 build_relate_form
+               end
       end
 
       build_pagination
@@ -56,8 +60,8 @@ module Admin
       @items = data.paginate(:per_page => items_per_page, :page => params[:page])
     end
 
-    def build_relate_form
-      render "admin/templates/relate_form",
+    def build_relate_form(template = "admin/templates/relate_form")
+      render template,
              :association_name => @association_name,
              :items_to_relate => @items_to_relate,
              :model_to_relate => @model_to_relate
@@ -133,15 +137,26 @@ module Admin
         message = link_to Typus::I18n.t("Add"), options
       end
 
-      values = related.respond_to?(:roots) ?
-        expand_tree_into_select_field(related.roots, related_fk) :
-        related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
+      # Choose the autocomplete template if we are going to have a lot of records.
+      if related.respond_to?(:roots)
+        values = expand_tree_into_select_field(related.roots, related_fk)
+        template = "admin/templates/belongs_to"
+      else
+        if related.count > 100
+          values = []
+          template = "admin/templates/belongs_to_autocomplete"
+        else
+          values = related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
+          template = "admin/templates/belongs_to"
+        end
+      end
 
-      render "admin/templates/belongs_to",
+      render template,
              :resource => @resource,
              :attribute => attribute,
              :form => form,
              :related_fk => related_fk,
+             :related => related,
              :message => message,
              :label_text => @resource.human_attribute_name(attribute),
              :values => values,
