@@ -153,8 +153,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
     should "be edit and trash on index" do
       get :index
 
-      expected = [["Edit", {:action=>"edit"}, {}],
-                  ["Trash", {:action=>"destroy"}, {:method=>"delete", :confirm=>"Trash?"}]]
+      expected = [["Edit", {"action"=>"edit"}, {}],
+                  ["Trash", {"action"=>"destroy"}, {"method"=>"delete", "confirm"=>"Trash?"}]]
 
       assert_equal expected, assigns(:resource_actions)
     end
@@ -168,8 +168,8 @@ class Admin::PostsControllerTest < ActionController::TestCase
       should "be show and trash on index" do
         get :index
 
-        expected = [["Show", {:action=>"show"}, {}],
-                    ["Trash", {:action=>"destroy"}, {:method=>"delete", :confirm=>"Trash?"}]]
+        expected = [["Show", {"action"=>"show"}, {}],
+                    ["Trash", {"action"=>"destroy"}, {"method"=>"delete", "confirm"=>"Trash?"}]]
 
         assert_equal expected, assigns(:resource_actions)
       end

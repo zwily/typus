@@ -8,7 +8,7 @@ gem 'dragonfly', '~>0.8.1'
 gem 'factory_girl'
 gem 'paperclip'
 gem 'rack-cache', :require => 'rack/cache'
-gem 'rails', '~> 3.0'
+gem 'rails', '3.0.4.rc1'
 
 group :test do
   gem 'shoulda', :git => 'https://github.com/thoughtbot/shoulda.git'
