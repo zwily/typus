@@ -144,7 +144,7 @@ module Admin
       else
         if related.count > 100
           values = []
-          template = "admin/templates/belongs_to_autocomplete"
+          template = "admin/templates/belongs_to_with_autocomplete"
         else
           values = related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
           template = "admin/templates/belongs_to"
