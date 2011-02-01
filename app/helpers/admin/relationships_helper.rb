@@ -27,6 +27,7 @@ module Admin
 
       build_pagination
 
+      # If we are on a through_reflection set the association name!
       @resource_actions = if @reflection.through_reflection
                             [["Edit", {:action=>"edit"}, {}],
                              ["Unrelate", {:resource_id=> @item.id, :resource=> @resource.model_name, :action=>"unrelate", :association_name => @association_name}, {:confirm=>"Unrelate?"}]]
