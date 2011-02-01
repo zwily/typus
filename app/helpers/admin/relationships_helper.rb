@@ -125,6 +125,10 @@ module Admin
         @items << item
       end
 
+      # TODO: Find a cleaner way to add these actions ...
+      @resource_actions = [["Edit", {:action=>"edit"}, {}],
+                           ["Trash", {:resource_id=>@item.id, :resource=>@resource.model_name, :action=>"destroy"}, {:confirm=>"Trash?"}]]
+
       options = { :resource_id => nil,
                   @reflection.primary_key_name => @item.id }
 
