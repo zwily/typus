@@ -29,7 +29,7 @@ module Admin
 
       # TODO: Find a cleaner way to add these actions ...
       @resource_actions = [["Edit", {:action=>"edit"}, {}],
-                           ["Trash", {:resource_id=>@item.id, :resource=>@resource.model_name, :action=>"destroy"}, {:confirm=>"Trash?"}]]
+                           ["Unrelate", {:resource_id=> @item.id, :resource=> @resource.model_name, :action=>"unrelate"}, {:confirm=>"Unrelate?"}]]
 
       render "admin/templates/has_n",
              :association_name => @association_name,
