@@ -73,4 +73,34 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
   end
 
+  ##
+  # THIS IS HERE BECAUSE I FOUND A BIG HOLE IN THE FILTERS STUFF!
+  #
+  context "autocomplete" do
+
+    setup do
+      15.times { Factory(:user) }
+    end
+
+    should "work and return a json hash with ten items" do
+      get :autocomplete, { :term => "User" }
+      assert_response :success
+      assert_equal 10, assigns(:items).size
+    end
+
+    should "work and return json hash with one item" do
+      post = User.first
+      post.update_attributes(:name => "fesplugas")
+
+      get :autocomplete, { :term => "jmeiss" }
+      assert_response :success
+      assert_equal 0, assigns(:items).size
+
+      get :autocomplete, { :term => "fesplugas" }
+      assert_response :success
+      assert_equal 1, assigns(:items).size
+    end
+
+  end
+
 end
