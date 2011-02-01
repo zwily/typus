@@ -33,7 +33,7 @@ assets_path = "#{Rails.root}/db/seeds/assets"
 
 5.times do
   project = Factory(:project)
-  5.times do
+  50.times do
     project.collaborators << Factory(:user)
   end
 end
