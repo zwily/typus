@@ -121,7 +121,7 @@ module Admin
       setup_relationship(field)
 
       @items = Array.new
-      if item = @resource.find(params[:id]).send(field)
+      if item = @item.send(field)
         @items << item
       end
 
