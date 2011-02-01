@@ -66,6 +66,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
         assert_equal "unpublished", post.mapping('status')
       end
 
+      should "for unexisting keys returning the current key" do
+        post = Factory(:post, :status => "unexisting")
+        assert_equal "unexisting", post.mapping(:status)
+      end
+
     end
 
     context "with a two dimension array" do

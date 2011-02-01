@@ -37,7 +37,9 @@ class ActiveRecord::Base
   def mapping(attribute)
     values = self.class::const_get(attribute.to_s.upcase).to_a
     array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
-    array.rassoc(send(attribute)).first
+
+    value = array.rassoc(send(attribute))
+    value ? value.first : send(attribute)
   end
 
   def to_label
