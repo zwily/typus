@@ -2,6 +2,10 @@ require "test_helper"
 
 class TypusTest < ActiveSupport::TestCase
 
+  should "verify default_config for autocomplete" do
+    assert_equal 100, Typus.autocomplete
+  end
+
   should "verify default_config for admin_title" do
     assert_equal "Typus", Typus.admin_title
   end

@@ -35,6 +35,9 @@ module Typus
     autoload :Session, "typus/authentication/session"
   end
 
+  mattr_accessor :autocomplete
+  @@autocomplete = 100
+
   mattr_accessor :admin_title
   @@admin_title = "Typus"
 

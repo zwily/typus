@@ -18,7 +18,7 @@ module Admin
       @items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by) - @item.send(field)
 
       if set_condition && @items_to_relate.any?
-        form = if @items_to_relate.count > 100
+        form = if @items_to_relate.count > Typus.autocomplete
                  build_relate_form('admin/templates/relate_form_with_autocomplete')
                else
                  build_relate_form
@@ -49,7 +49,7 @@ module Admin
       @items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by) - @item.send(field)
 
       if set_condition && @items_to_relate.any?
-        form = if @items_to_relate.count > 100
+        form = if @items_to_relate.count > Typus.autocomplete
                  build_relate_form('admin/templates/relate_form_with_autocomplete')
                else
                  build_relate_form
@@ -161,7 +161,7 @@ module Admin
         values = expand_tree_into_select_field(related.roots, related_fk)
         template = "admin/templates/belongs_to"
       else
-        if related.count > 100
+        if related.count > Typus.autocomplete
           template = "admin/templates/belongs_to_with_autocomplete"
         else
           values = related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
