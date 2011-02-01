@@ -59,7 +59,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
       @request.env['HTTP_REFERER'] = "/admin/projects/edit/#{@project.id}"
     end
 
-    should_eventually "work" do
+    should "work" do
       assert_difference('@project.collaborators.count', -1) do
         post :unrelate, { :id => @user.id,
                           :resource => 'Project',

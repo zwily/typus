@@ -27,9 +27,19 @@ module Admin
 
       build_pagination
 
-      # TODO: Find a cleaner way to add these actions ...
-      @resource_actions = [["Edit", {:action=>"edit"}, {}],
-                           ["Unrelate", {:resource_id=> @item.id, :resource=> @resource.model_name, :action=>"unrelate"}, {:confirm=>"Unrelate?"}]]
+      if @reflection.through_reflection
+        # TODO: Find a cleaner way to add these actions ...
+        @resource_actions = [["Edit", {:action=>"edit"}, {}],
+                             ["Unrelate", {:resource_id=> @item.id,
+                                           :resource=> @resource.model_name,
+                                           :action=>"unrelate",
+                                           :association_name => @association_name}, {:confirm=>"Unrelate?"}]]
+      else
+        # TODO: Find a cleaner way to add these actions ...
+        @resource_actions = [["Edit", {:action=>"edit"}, {}],
+                             ["Trash", {:resource_id=>@item.id, :resource=>@resource.model_name, :action=>"destroy"}, {:confirm=>"Trash?"}]]
+      end
+
 
       render "admin/templates/has_n",
              :association_name => @association_name,
