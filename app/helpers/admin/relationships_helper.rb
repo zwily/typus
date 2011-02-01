@@ -155,18 +155,19 @@ module Admin
         message = link_to Typus::I18n.t("Add"), options
       end
 
-      # Choose the autocomplete template if we are going to have a lot of records.
-      if related.respond_to?(:roots)
-        values = expand_tree_into_select_field(related.roots, related_fk)
-        template = "admin/templates/belongs_to"
-      else
-        if related.count > Typus.autocomplete
-          template = "admin/templates/belongs_to_with_autocomplete"
-        else
-          values = related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
-          template = "admin/templates/belongs_to"
-        end
-      end
+      # Set the template.
+      template = if related.respond_to?(:roots) || !(related.count > Typus.autocomplete)
+                   "admin/templates/belongs_to"
+                 else
+                   "admin/templates/belongs_to_with_autocomplete"
+                 end
+
+      # Set the values.
+      values = if related.respond_to?(:roots)
+                 expand_tree_into_select_field(related.roots, related_fk)
+               elsif !(related.count > Typus.autocomplete)
+                 related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
+               end
 
       render template,
              :resource => @resource,
