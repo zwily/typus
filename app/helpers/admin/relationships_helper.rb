@@ -129,8 +129,7 @@ module Admin
       @resource_actions = [["Edit", {:action=>"edit"}, {}],
                            ["Trash", {:resource_id=>@item.id, :resource=>@resource.model_name, :action=>"destroy"}, {:confirm=>"Trash?"}]]
 
-      options = { :resource_id => nil,
-                  @reflection.primary_key_name => @item.id }
+      options = { :resource_id => nil, @reflection.primary_key_name => @item.id }
 
       render "admin/templates/has_one",
              :association_name => @association_name,
