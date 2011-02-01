@@ -56,11 +56,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
         Post::STATUS = %w(pending published unpublished)
       end
 
-      should "verify" do
+      should "work for symbols" do
         post = Factory(:post)
         assert_equal "published", post.mapping(:status)
+      end
+
+      should "work for strings" do
         post = Factory(:post, :status => "unpublished")
-        assert_equal "unpublished", post.mapping(:status)
+        assert_equal "unpublished", post.mapping('status')
       end
 
     end
