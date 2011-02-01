@@ -15,7 +15,7 @@ module Admin
 
       options = @reflection.through_reflection ? {} : { @reflection.primary_key_name => @item.id }
 
-      @items_to_relate = @model_to_relate.all - @item.send(field)
+      @items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by) - @item.send(field)
 
       if set_condition && @items_to_relate.any?
         form = if @items_to_relate.count > 100

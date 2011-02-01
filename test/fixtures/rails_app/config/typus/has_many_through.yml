@@ -20,3 +20,4 @@ User:
   relationships: projects #, third_party_projects
   application: HasManyThrough
   filters: projects
+  order_by: name
