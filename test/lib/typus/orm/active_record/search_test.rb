@@ -32,6 +32,49 @@ class ActiveRecordTest < ActiveSupport::TestCase
       expected.each { |e| assert_match e, output }
       assert_match /OR/, output
     end
+
+    should "generate conditions for id" do
+      Post.stubs(:typus_defaults_for).with(:search).returns(["id"])
+
+      expected = case ENV["DB"]
+                 when "postgresql"
+                   "LOWER(TEXT(posts.id)) LIKE '%1%'"
+                 else
+                   "posts.id LIKE '%1%'"
+                 end
+      output = Post.build_search_conditions("search", "1")
+
+      assert_equal expected, output
+    end
+
+    should "generate conditions for fields starting with equal" do
+      Post.expects(:typus_defaults_for).with(:search).returns(["=id"])
+
+      expected = case ENV["DB"]
+                 when "postgresql"
+                   "LOWER(TEXT(posts.id)) LIKE '1'"
+                 else
+                   "posts.id LIKE '1'"
+                 end
+      output = Post.build_search_conditions("search", "1")
+
+      assert_equal expected, output
+    end
+
+    should "generate conditions for fields starting with ^" do
+      Post.expects(:typus_defaults_for).with(:search).returns(["^id"])
+
+      expected = case ENV["DB"]
+                 when "postgresql"
+                   "LOWER(TEXT(posts.id)) LIKE '1%'"
+                 else
+                   "posts.id LIKE '1%'"
+                 end
+      output = Post.build_search_conditions("search", "1")
+
+      assert_equal expected, output
+    end
+
   end
 
   context "build_boolean_conditions" do
@@ -139,51 +182,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "return an array" do
       params = { :search => '1' }
       assert Post.build_conditions(params).is_a?(Array)
-    end
-
-    should "generate conditions for id" do
-      Post.stubs(:typus_defaults_for).with(:search).returns(["id"])
-
-      params = { :search => '1' }
-
-      expected = case ENV["DB"]
-                 when "postgresql"
-                   "LOWER(TEXT(posts.id)) LIKE '%1%'"
-                 else
-                   "posts.id LIKE '%1%'"
-                 end
-
-      assert_equal expected, Post.build_conditions(params).first
-    end
-
-    should "generate conditions for fields starting with equal" do
-      Post.stubs(:typus_defaults_for).with(:search).returns(["=id"])
-
-      params = { :search => '1' }
-
-      expected = case ENV["DB"]
-                 when "postgresql"
-                   "LOWER(TEXT(posts.id)) LIKE '1'"
-                 else
-                   "posts.id LIKE '1'"
-                 end
-
-      assert_equal expected, Post.build_conditions(params).first
-    end
-
-    should "generate conditions for fields starting with ^" do
-      Post.stubs(:typus_defaults_for).with(:search).returns(["^id"])
-
-      params = { :search => '1' }
-
-      expected = case ENV["DB"]
-                 when "postgresql"
-                   "LOWER(TEXT(posts.id)) LIKE '1%'"
-                 else
-                   "posts.id LIKE '1%'"
-                 end
-
-      assert_equal expected, Post.build_conditions(params).first
     end
 
     should "return_sql_conditions_on_search_for_typus_user" do
