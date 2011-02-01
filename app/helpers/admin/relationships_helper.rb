@@ -15,15 +15,26 @@ module Admin
 
       options = @reflection.through_reflection ? {} : { @reflection.primary_key_name => @item.id }
 
+      @items_to_relate = @model_to_relate.all - @item.send(field)
+
+      if set_condition && @items_to_relate.any?
+        form = if @items_to_relate.count > 100
+                 build_relate_form
+               else
+                 build_relate_form('admin/templates/relate_form_with_autocomplete')
+               end
+      end
+
       build_pagination
 
       # TODO: Find a cleaner way to add these actions ...
       @resource_actions = [["Edit", {:action=>"edit"}, {}],
                            ["Trash", {:resource_id=>@item.id, :resource=>@resource.model_name, :action=>"destroy"}, {:confirm=>"Trash?"}]]
 
-      render "admin/templates/has_many",
+      render "admin/templates/has_n",
              :association_name => @association_name,
              :add_new => build_add_new(options),
+             :form => form,
              :table => build_relationship_table
     end
 
