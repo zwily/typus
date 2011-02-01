@@ -695,4 +695,18 @@ title;status
 
   end
 
+  context "autocomplete" do
+
+    setup do
+      15.times { Factory(:post) }
+    end
+
+    should "work and return a json hash with ten items" do
+      get :autocomplete, { :term => "Post" }
+      assert_response :success
+      assert_equal 10, assigns(:items).size
+    end
+
+  end
+
 end
