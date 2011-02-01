@@ -19,9 +19,9 @@ module Admin
 
       if set_condition && @items_to_relate.any?
         form = if @items_to_relate.count > 100
-                 build_relate_form
-               else
                  build_relate_form('admin/templates/relate_form_with_autocomplete')
+               else
+                 build_relate_form
                end
       end
 
