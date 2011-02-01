@@ -707,6 +707,19 @@ title;status
       assert_equal 10, assigns(:items).size
     end
 
+    should "work and return json hash with one item" do
+      post = Post.first
+      post.update_attributes(:title => "fesplugas")
+
+      get :autocomplete, { :term => "jmeiss" }
+      assert_response :success
+      assert_equal 0, assigns(:items).size
+
+      get :autocomplete, { :term => "fesplugas" }
+      assert_response :success
+      assert_equal 1, assigns(:items).size
+    end
+
   end
 
 end
