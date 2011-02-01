@@ -235,7 +235,7 @@ class Admin::ResourcesController < Admin::BaseController
       check_resources_ownership
     end
 
-    @items = @resource.order(set_order).includes(eager_loading)
+    @resource = @resource.order(set_order).includes(eager_loading)
   end
 
   def set_fields

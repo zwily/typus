@@ -13,7 +13,7 @@ module Typus
 
     def generate_html
       items_per_page = @resource.typus_options_for(:per_page)
-      @items = @items.paginate(:per_page => items_per_page, :page => params[:page])
+      @items = @resource.paginate(:per_page => items_per_page, :page => params[:page])
     end
 
     #--
@@ -62,7 +62,7 @@ module Typus
       fields = @resource.typus_fields_for(format).map { |i| i.first }
       methods = fields - @resource.column_names
       except = @resource.column_names - fields
-      render format => @items.send("to_#{format}", :methods => methods, :except => except)
+      render format => @resource.send("to_#{format}", :methods => methods, :except => except)
     end
 
   end
