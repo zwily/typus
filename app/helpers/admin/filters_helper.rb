@@ -87,7 +87,7 @@ module Admin
     end
 
     def predefined_filters
-      @predefined_filters ||= [["All", "index", "unscoped"]]
+      @predefined_filters ||= []
     end
 
   end

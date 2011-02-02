@@ -2,9 +2,9 @@ module Typus
 
   module Filters
 
-    def add_predefined_filter(filter, action, scope)
-      @predefined_filters ||= [["All", "index", "unscoped"]]
-      @predefined_filters << [filter, action, scope]
+    def add_predefined_filter(*args)
+      @predefined_filters ||= []
+      @predefined_filters << args unless args.empty?
     end
 
   end

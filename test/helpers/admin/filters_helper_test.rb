@@ -146,9 +146,8 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
   context "predefined_filters" do
 
-    should "have a value" do
-      expected = [["All", "index", "unscoped"]]
-      assert_equal expected, predefined_filters
+    should "be empty" do
+      assert predefined_filters.empty?
     end
 
     should "return my filter" do
