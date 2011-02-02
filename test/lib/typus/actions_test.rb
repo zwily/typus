@@ -72,4 +72,74 @@ class ActionsTest < ActiveSupport::TestCase
 
   end
 
+  # FIXME: Cleanup all test after this line.
+
+  context "add_resources_action" do
+
+    should "work" do
+      output = add_resources_action("something")
+      expected = [["something"]]
+
+      assert_equal expected, @resources_actions
+    end
+
+    should "work when no params are set" do
+      add_resources_action()
+      assert_equal [], @resources_actions
+    end
+
+  end
+
+  context "prepend_resources_action" do
+
+    should "work without args" do
+      prepend_resources_action()
+      assert_equal [], @resources_actions
+    end
+
+    should "work with args" do
+      prepend_resources_action("something")
+      assert_equal [["something"]], @resources_actions
+    end
+
+    should "work prepending an action without args" do
+      add_resources_action("something")
+      prepend_resources_action()
+      assert_equal [["something"]], @resources_actions
+    end
+
+    should "work prepending an action with args" do
+      add_resources_action("something")
+      prepend_resources_action("something_else")
+      assert_equal [["something_else"], ["something"]], @resources_actions
+    end
+
+  end
+
+  context "append_resources_action" do
+
+    should "work without args" do
+      append_resources_action()
+      assert_equal [], @resources_actions
+    end
+
+    should "work with args" do
+      append_resources_action("something")
+      assert_equal [["something"]], @resources_actions
+    end
+
+    should "work appending an action without args" do
+      add_resources_action("something")
+      append_resources_action()
+      assert_equal [["something"]], @resources_actions
+    end
+
+    should "work appending an action with args" do
+      add_resources_action("something")
+      append_resources_action("something_else")
+      assert_equal [["something"], ["something_else"]], @resources_actions
+    end
+
+  end
+
 end
