@@ -15,12 +15,13 @@ module Admin
 
       options = @reflection.through_reflection ? {} : { @reflection.primary_key_name => @item.id }
 
-      @items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by) - @item.send(field)
+      count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
 
-      if set_condition && @items_to_relate.any?
-        form = if @items_to_relate.count > Typus.autocomplete
+      if set_condition && !count_items_to_relate.zero?
+        form = if count_items_to_relate > Typus.autocomplete
                  build_relate_form('admin/templates/relate_form_with_autocomplete')
                else
+                 @items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by) - @item.send(field)
                  build_relate_form
                end
       end
