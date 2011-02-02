@@ -1,11 +1,13 @@
 ENV["RAILS_ENV"] = "test"
 
-# Boot rails application and testing parts ...
+##
+# Boot rails_app and load the schema.
+#
 require "fixtures/rails_app/config/environment"
+require "fixtures/rails_app/db/schema"
+
 require "rails/test_help"
 require "tartare"
-
-require "fixtures/rails_app/db/schema"
 require "factories"
 
 class ActiveSupport::TestCase
