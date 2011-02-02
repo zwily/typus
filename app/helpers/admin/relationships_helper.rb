@@ -78,10 +78,10 @@ module Admin
     end
 
     def build_relate_form(template = "admin/templates/relate_form")
-      render template,
-             :association_name => @association_name,
-             :items_to_relate => @items_to_relate,
-             :model_to_relate => @model_to_relate
+      options = { :association_name => @association_name,
+                  :items_to_relate => @items_to_relate,
+                  :model_to_relate => @model_to_relate }
+      render template, options
     end
 
     def build_relationship_table
