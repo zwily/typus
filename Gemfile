@@ -12,7 +12,6 @@ gem 'rails', '3.0.4.rc1'
 
 group :test do
   gem 'shoulda', :git => 'https://github.com/thoughtbot/shoulda.git'
-  gem 'tartare', :git => 'https://github.com/fesplugas/rails-tartare.git', :require => false
 
   gem 'mocha'
 end
