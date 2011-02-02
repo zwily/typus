@@ -23,6 +23,8 @@ class Admin::ResourcesController < Admin::BaseController
   def index
     get_objects
 
+    add_predefined_filter("All", "index", "unscoped")
+
     respond_to do |format|
       format.html do
         add_resource_action(default_action.titleize, {:action => default_action}, {})

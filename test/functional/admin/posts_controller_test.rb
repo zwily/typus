@@ -148,6 +148,16 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
+  context "Filters" do
+
+    should "be included in index" do
+      get :index
+      expected = [["All", "index", "unscoped"]]
+      assert_equal expected, assigns(:predefined_filters)
+    end
+
+  end
+
   context "Actions" do
 
     should "be edit and trash on index" do
