@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ActiveRecordTest < ActiveSupport::TestCase
+class ClassMethodsTest < ActiveSupport::TestCase
 
   context "model_fields" do
 
