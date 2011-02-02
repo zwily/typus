@@ -33,12 +33,8 @@ module Admin
 
     def typus_file_preview(item, attribute)
       if (attachment = item.send(attribute))
-        case get_type_of_attachment(attachment)
-        when :dragonfly
-          typus_file_preview_for_dragonfly(attachment)
-        when :paperclip
-          typus_file_preview_for_paperclip(attachment)
-        end
+        adapter = get_type_of_attachment(attachment)
+        send("typus_file_preview_for_#{adapter}", attachment)
       end
     end
 
