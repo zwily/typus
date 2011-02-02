@@ -25,8 +25,8 @@ module Typus
   module Controller
 
     autoload :Actions, "typus/controller/actions"
-    autoload :Autocomplete, "typus/controller/autocomplete"
     autoload :Associations, "typus/controller/associations"
+    autoload :Autocomplete, "typus/controller/autocomplete"
     autoload :Filters, "typus/controller/filters"
     autoload :Format, "typus/controller/format"
 
