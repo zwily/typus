@@ -58,7 +58,7 @@ module Admin
                   params.dup.cleanup.merge(url).merge(:controller => model.to_resource, :id => item.id),
                   options.merge(:target => "_parent")
         end
-      end.compact.join(" / ").html_safe
+      end.join(" / ").html_safe
     end
 
     def table_belongs_to_field(attribute, item)

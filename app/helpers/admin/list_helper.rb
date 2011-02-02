@@ -12,7 +12,7 @@ module Admin
           path = params.dup.merge!(url)
           link_to Typus::I18n.t(body), path.cleanup, options # .merge(:target => "_parent")
         end
-      end.compact.join(" / ").html_safe
+      end.join(" / ").html_safe
     end
 
     #--
