@@ -43,12 +43,16 @@ task :release => :build do
   system "git checkout master"
 end
 
-desc "Deploy demo"
-task :deploy_demo do
-  system "cd test/fixtures/rails_app && cap deploy"
-end
+namespace :deploy do
 
-desc "Deploy docs"
-task :deploy_docs do
-  system "cd docs && rake deploy"
+  desc "Deploy demo"
+  task :demo do
+    system "cd test/fixtures/rails_app && cap deploy"
+  end
+
+  desc "Deploy docs"
+  task :docs do
+    system "cd docs && rake deploy"
+  end
+
 end
