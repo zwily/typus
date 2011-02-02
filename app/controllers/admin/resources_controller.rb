@@ -1,10 +1,10 @@
 class Admin::ResourcesController < Admin::BaseController
 
-  include Typus::Actions
-  include Typus::Filters
-  include Typus::Format
-  include Typus::Associations
-  include Typus::Autocomplete
+  include Typus::Controller::Actions
+  include Typus::Controller::Filters
+  include Typus::Controller::Format
+  include Typus::Controller::Associations
+  include Typus::Controller::Autocomplete
 
   before_filter :get_model
   before_filter :set_scope

@@ -22,11 +22,15 @@ module Typus
   autoload :Configuration, "typus/configuration"
   autoload :Resources, "typus/resources"
 
-  autoload :Actions, "typus/actions"
-  autoload :Autocomplete, "typus/autocomplete"
-  autoload :Associations, "typus/associations"
-  autoload :Filters, "typus/filters"
-  autoload :Format, "typus/format"
+  module Controller
+
+    autoload :Actions, "typus/controller/actions"
+    autoload :Autocomplete, "typus/controller/autocomplete"
+    autoload :Associations, "typus/controller/associations"
+    autoload :Filters, "typus/controller/filters"
+    autoload :Format, "typus/controller/format"
+
+  end
 
   module Authentication
     autoload :Base, "typus/authentication/base"

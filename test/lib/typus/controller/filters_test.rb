@@ -2,7 +2,7 @@ require "test_helper"
 
 class FiltersTest < ActiveSupport::TestCase
 
-  include Typus::Filters
+  include Typus::Controller::Filters
 
   context "add_predefined_filter" do
 

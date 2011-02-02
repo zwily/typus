@@ -2,7 +2,7 @@ require "test_helper"
 
 class ActionsTest < ActiveSupport::TestCase
 
-  include Typus::Actions
+  include Typus::Controller::Actions
 
   context "add_resource_action" do
 
