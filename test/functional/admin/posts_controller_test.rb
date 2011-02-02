@@ -286,6 +286,16 @@ title;status
       assert_equal expected, @response.body
     end
 
+    should "not instantiate resource_actions" do
+      get :index, :format => "xml"
+      assert assigns(:resource_actions).nil?
+    end
+
+    should "not instantiate predefined_filters" do
+      get :index, :format => "xml"
+      assert assigns(:predefined_filters).nil?
+    end
+
   end
 
   context "Permissions" do
