@@ -140,8 +140,6 @@ module Admin
     end
 
     def typus_belongs_to_field(attribute, form)
-      # TODO: Use setup_relationship(attribute) to create the following three
-      #       variables.
       association = @resource.reflect_on_association(attribute.to_sym)
       related = association.class_name.typus_constantize
       related_fk = association.primary_key_name
