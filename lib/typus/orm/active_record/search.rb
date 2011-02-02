@@ -74,7 +74,12 @@ module Typus
         def build_conditions(params)
           Array.new.tap do |conditions|
             query_params = params.dup
-            query_params.reject! { |k, v| !model_fields.keys.include?(k.to_sym) && !model_relationships.keys.include?(k.to_sym) && !(k.to_sym == :search) }
+
+            query_params.reject! do |k, v|
+              !model_fields.keys.include?(k.to_sym) &&
+              !model_relationships.keys.include?(k.to_sym) &&
+              !(k.to_sym == :search)
+            end
 
             query_params.compact.each do |key, value|
               filter_type = model_fields[key.to_sym] || model_relationships[key.to_sym] || key
