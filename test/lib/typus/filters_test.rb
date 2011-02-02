@@ -8,7 +8,7 @@ class FiltersTest < ActiveSupport::TestCase
 
     should "work without args" do
       add_predefined_filter()
-      assert_equal [], @predefined_filters
+      assert @predefined_filters.empty?
     end
 
     should "work with args" do

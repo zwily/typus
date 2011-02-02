@@ -8,14 +8,12 @@ class ActionsTest < ActiveSupport::TestCase
 
     should "work" do
       output = add_resource_action("something")
-      expected = [["something"]]
-
-      assert_equal expected, @resource_actions
+      assert_equal [["something"]], @resource_actions
     end
 
     should "work when no params are set" do
       add_resource_action()
-      assert_equal [], @resource_actions
+      assert @resource_actions.empty?
     end
 
   end
@@ -24,7 +22,7 @@ class ActionsTest < ActiveSupport::TestCase
 
     should "work without args" do
       prepend_resource_action()
-      assert_equal [], @resource_actions
+      assert @resource_actions.empty?
     end
 
     should "work with args" do
@@ -50,7 +48,7 @@ class ActionsTest < ActiveSupport::TestCase
 
     should "work without args" do
       append_resource_action()
-      assert_equal [], @resource_actions
+      assert @resource_actions.empty?
     end
 
     should "work with args" do
@@ -77,15 +75,13 @@ class ActionsTest < ActiveSupport::TestCase
   context "add_resources_action" do
 
     should "work" do
-      output = add_resources_action("something")
-      expected = [["something"]]
-
-      assert_equal expected, @resources_actions
+      add_resources_action("something")
+      assert_equal [["something"]], @resources_actions
     end
 
     should "work when no params are set" do
       add_resources_action()
-      assert_equal [], @resources_actions
+      assert @resources_actions.empty?
     end
 
   end
@@ -94,7 +90,7 @@ class ActionsTest < ActiveSupport::TestCase
 
     should "work without args" do
       prepend_resources_action()
-      assert_equal [], @resources_actions
+      assert @resources_actions.empty?
     end
 
     should "work with args" do
@@ -120,7 +116,7 @@ class ActionsTest < ActiveSupport::TestCase
 
     should "work without args" do
       append_resources_action()
-      assert_equal [], @resources_actions
+      assert @resources_actions.empty?
     end
 
     should "work with args" do
