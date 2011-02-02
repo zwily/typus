@@ -117,7 +117,6 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
     should "return an array from status which is a Hash" do
       output = string_filter("status")
       expected = [["Show by status", ""],
-                  ["--", ""],
                   ["Unpublished", "unpublished"],
                   ["<div class=''>Something special</div>", "special"],
                   ["Draft", "draft"],

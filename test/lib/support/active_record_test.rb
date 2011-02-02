@@ -45,7 +45,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
       Post::STATUS = { "Draft" => "draft",
                        "Published" => "published",
                        "Unpublished" => "unpublished",
-                       "--" => "",
                        "<div class=''>Something special</div>".html_safe => "special" }
     end
 
