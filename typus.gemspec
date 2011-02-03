@@ -18,7 +18,7 @@ Gem::Specification.new do |s|
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = "typus"
 
-  s.files = Dir.glob('**/*') - Dir.glob('test/**/*')  - Dir.glob('docs/**/*') - ['Gemfile', 'Gemfile.lock', 'typus.gemspec']
+  s.files = Dir.glob('**/*') - Dir.glob('docs/**/*') - ['Gemfile', 'Gemfile.lock', 'typus.gemspec']
   s.require_path = "lib"
 
   s.add_dependency "fastercsv", "~> 1.5" if RUBY_VERSION < '1.9'
