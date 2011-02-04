@@ -56,7 +56,7 @@ module Admin
         if admin_user.can?(url[:action], model.name)
           link_to Typus::I18n.t(body),
                   params.dup.cleanup.merge(url).merge(:controller => model.to_resource, :id => item.id),
-                  options.merge(:target => "_parent")
+                  options # .merge(:target => "_parent")
         end
       end.join(" / ").html_safe
     end
