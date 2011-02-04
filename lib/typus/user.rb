@@ -18,7 +18,7 @@ module Typus
         validates :email,
                   :presence => true,
                   :uniqueness => true,
-                  :format => { :with => Typus::Constants::EMAIL_REGEX }
+                  :format => { :with => Typus::Regex::Email }
 
         validates :password,
                   :confirmation => { :if => :password_required? },

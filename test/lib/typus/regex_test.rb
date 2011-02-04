@@ -1,6 +1,6 @@
 require "test_helper"
 
-class ConstantsTest < ActiveSupport::TestCase
+class RegexTest < ActiveSupport::TestCase
 
   context "email_regex" do
 
@@ -9,7 +9,7 @@ class ConstantsTest < ActiveSupport::TestCase
        "john+locke@example.com",
        "john.locke@example.com",
        "john.locke@example.us"].each do |value|
-        assert_match Typus::Constants::EMAIL_REGEX, value
+        assert_match Typus::Regex::Email, value
       end
     end
 
@@ -20,7 +20,7 @@ class ConstantsTest < ActiveSupport::TestCase
        "test@example",
        "test@example.c",
        "testexample.com"].each do |value|
-        assert_no_match Typus::Constants::EMAIL_REGEX, value
+        assert_no_match Typus::Regex::Email, value
       end
     end
 
@@ -35,7 +35,7 @@ class ConstantsTest < ActiveSupport::TestCase
        "http://www.example.co.uk",
        "http://four.sentenc.es",
        "http://www.ex-ample.com"].each do |value|
-        assert_match Typus::Constants::URI_REGEX, value
+        assert_match Typus::Regex::Url, value
       end
     end
 
@@ -44,7 +44,7 @@ class ConstantsTest < ActiveSupport::TestCase
        "example.com",
        "http://examplecom",
        "http://ex+ample.com"].each do |value|
-        assert_no_match Typus::Constants::URI_REGEX, value
+        assert_no_match Typus::Regex::Url, value
       end
     end
 
