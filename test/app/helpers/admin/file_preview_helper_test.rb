@@ -69,7 +69,8 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
     should "return image and link for image files" do
       expected = ["admin/helpers/file_preview",
                   {:preview => "/system/paperclips/#{@asset.id}/medium/rails.png",
-                   :thumb => "/system/paperclips/#{@asset.id}/thumb/rails.png"}]
+                   :thumb => "/system/paperclips/#{@asset.id}/thumb/rails.png",
+                   :options=>{}}]
       assert_equal expected, typus_file_preview_for_paperclip(@asset.paperclip)
     end
 
