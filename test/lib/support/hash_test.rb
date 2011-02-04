@@ -18,25 +18,25 @@ class HashTest < ActiveSupport::TestCase
 
     should "verify whitelist for basics" do
       hash = {"controller"=>"welcome", "action"=>"index", "id" => "1"}
-      expected = hash
+      expected = hash.dup
       assert_equal expected, hash.cleanup
     end
 
     should "verify whitelist for CKEditor stuff" do
       hash = {"CKEditor"=>"1", "CKEditorFuncNum"=>"1", "langCode"=>"en"}
-      expected = hash
+      expected = hash.dup
       assert_equal expected, hash.cleanup
     end
 
     should "verify whitelist for layout" do
       hash = {"layout"=>"admin/headless"}
-      expected = hash
+      expected = hash.dup
       assert_equal expected, hash.cleanup
     end
 
     should "verify whitelist for target" do
       hash = {"target"=>"_parent"}
-      expected = hash
+      expected = hash.dup
       assert_equal expected, hash.cleanup
     end
 
