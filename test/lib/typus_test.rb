@@ -30,12 +30,32 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal "columbia", Typus.password
   end
 
-  should "verify default_config for file_preview" do
-    assert_equal :medium, Typus.file_preview
-  end
+  context "file management" do
 
-  should "verify default_config for file_thumbnail" do
-    assert_equal :thumb, Typus.file_thumbnail
+    context "paperclip" do
+
+      should "verify default_config for file_preview" do
+        assert_equal :medium, Typus.file_preview
+      end
+
+      should "verify default_config for file_thumbnail" do
+        assert_equal :thumb, Typus.file_thumbnail
+      end
+
+    end
+
+    context "dragonfly" do
+
+      should "verify default_config for image_preview_size" do
+        assert_equal "x450", Typus.image_preview_size
+      end
+
+      should "verify default_config for image_thumb_size" do
+        assert_equal "150x150#", Typus.image_thumb_size
+      end
+
+    end
+
   end
 
   should "verify default_config for relationship" do
