@@ -10,7 +10,8 @@
 
   <title><%= Typus.admin_title %> &mdash; <%= yield :title %></title>
 
-  <%= stylesheet_link_tag "/vendor/typus/stylesheets/screen",
+  <%= stylesheet_link_tag "/vendor/typus/stylesheets/reset",
+                          "/vendor/typus/stylesheets/screen",
                           "/vendor/typus/stylesheets/application" %>
 
   <%= csrf_meta_tag %>
