@@ -31,30 +31,32 @@ module Admin
       end
     end
 
-    def typus_file_preview(item, attribute)
+    def typus_file_preview(item, attribute, options = {})
       if (attachment = item.send(attribute))
         adapter = get_type_of_attachment(attachment)
-        send("typus_file_preview_for_#{adapter}", attachment)
+        send("typus_file_preview_for_#{adapter}", attachment, options)
       end
     end
 
-    def typus_file_preview_for_dragonfly(attachment)
+    def typus_file_preview_for_dragonfly(attachment, options)
       if attachment.mime_type =~ /^image\/.+/
         render "admin/helpers/file_preview",
                :preview => attachment.process(:thumb, Typus.image_preview_size).url,
-               :thumb => attachment.process(:thumb, Typus.image_thumb_size).url
+               :thumb => attachment.process(:thumb, Typus.image_thumb_size).url,
+               :options => options
       else
         link_to attachment.name, attachment.url
       end
     end
 
-    def typus_file_preview_for_paperclip(attachment)
+    def typus_file_preview_for_paperclip(attachment, options)
       if attachment.exists?
         styles = attachment.styles.keys
         if styles.include?(Typus.file_preview) && styles.include?(Typus.file_thumbnail)
           render "admin/helpers/file_preview",
                  :preview => attachment.url(Typus.file_preview, false),
-                 :thumb => attachment.url(Typus.file_thumbnail, false)
+                 :thumb => attachment.url(Typus.file_thumbnail, false),
+                 :options => options
         else
           link_to attachment.original_filename, attachment.url(:original, false)
         end
