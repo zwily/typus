@@ -38,7 +38,7 @@ module Admin
       end
     end
 
-    def typus_file_preview_for_dragonfly(attachment, options)
+    def typus_file_preview_for_dragonfly(attachment, options = {})
       if attachment.mime_type =~ /^image\/.+/
         render "admin/helpers/file_preview",
                :preview => attachment.process(:thumb, Typus.image_preview_size).url,
@@ -49,7 +49,7 @@ module Admin
       end
     end
 
-    def typus_file_preview_for_paperclip(attachment, options)
+    def typus_file_preview_for_paperclip(attachment, options = {})
       if attachment.exists?
         styles = attachment.styles.keys
         if styles.include?(Typus.file_preview) && styles.include?(Typus.file_thumbnail)
