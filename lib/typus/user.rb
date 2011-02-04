@@ -18,7 +18,7 @@ module Typus
         validates :email,
                   :presence => true,
                   :uniqueness => true,
-                  :format => { :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/ }
+                  :format => { :with => Typus::Constants::EMAIL_REGEX }
 
         validates :password,
                   :confirmation => { :if => :password_required? },
