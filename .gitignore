@@ -8,3 +8,8 @@ Gemfile.lock
 
 test/fixtures/rails_app/public/system/*
 test/fixtures/rails_app/tmp/*
+
+# Ignore cached stuff.
+all.css
+all.js
+
