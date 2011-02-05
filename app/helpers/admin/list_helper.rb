@@ -9,7 +9,7 @@ module Admin
     def list_actions
       resources_actions.map do |body, url, options|
         if admin_user.can?(url[:action], @resource.name)
-          path = params.dup.merge!(url)
+          path = params.dup.merge!(url).compact
           link_to Typus::I18n.t(body), path.cleanup, options # .merge(:target => "_parent")
         end
       end.join(" / ").html_safe
