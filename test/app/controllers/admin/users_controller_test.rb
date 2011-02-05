@@ -79,13 +79,13 @@ class Admin::UsersControllerTest < ActionController::TestCase
   context "autocomplete" do
 
     setup do
-      15.times { Factory(:user) }
+      25.times { Factory(:user) }
     end
 
     should "work and return a json hash with ten items" do
       get :autocomplete, { :term => "User" }
       assert_response :success
-      assert_equal 10, assigns(:items).size
+      assert_equal 20, assigns(:items).size
     end
 
     should "work and return json hash with one item" do
