@@ -25,7 +25,7 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       format.html do
-        add_predefined_filter("All", "index", "unscoped")
+        prepend_predefined_filter("All", "index", "unscoped")
         add_resource_action(default_action.titleize, {:action => default_action}, {})
         add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
         generate_html
