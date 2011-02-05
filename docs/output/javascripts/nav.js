@@ -63,7 +63,7 @@ function create_menu(basepath)
 
 		'<h3>Additional Resources</h3>' +
 		'<ul>' +
-		'<li><a href="/desmond.rb">Application Template</a></li>' +
+		'<li><a href="/templates/desmond.rb">Application Template</a></li>' +
 		'<li><a href="http://demo.typuscms.com/">Application Demo</a></li>' +
 		'<li><a href="http://rubygems.org/gems/typus">Gems</a></li>' +
 		'<li><a href="http://github.com/fesplugas/typus">Plugin Source Code</a></li>' +
