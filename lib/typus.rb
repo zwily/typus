@@ -9,7 +9,6 @@ require "typus/engine"
 require "typus/i18n"
 require "typus/orm/active_record"
 require "typus/regex"
-require "typus/user"
 require "typus/version"
 
 require "render_inheritable"
