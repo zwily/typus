@@ -7,9 +7,9 @@
 run <<-CMD
 mkdir -p public/vendor
 cd public/vendor
-curl -s -O http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.5/ckeditor_3.5.tar.gz
-tar xvzf ckeditor_3.5.tar.gz
-rm ckeditor_3.5.tar.gz
+curl -s -O http://download.cksource.com/CKEditor/CKEditor/CKEditor%203.5.1/ckeditor_3.5.1.tar.gz
+tar xvzf ckeditor_3.5.1.tar.gz
+rm ckeditor_3.5.1.tar.gz
 CMD
 
 run 'rm public/admin/javascripts/application.js'
