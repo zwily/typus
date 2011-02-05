@@ -15,6 +15,13 @@ class Admin::SearchHelperTest < ActiveSupport::TestCase
       expected = ["admin/helpers/search/search", {:hidden_filters => {}}]
       assert_equal expected, search(Entry, parameters)
     end
+    
+    # Why do you need the pagination page for a new search?
+    should "reject the page param" do
+      parameters = {"page"=>"1"}
+      expected = ["admin/helpers/search/search", {:hidden_filters => {}}]
+      assert_equal expected, search(Entry, parameters)
+    end
 
     # TODO: I want to think about it ...
     should "reject locale params" do
