@@ -21,8 +21,7 @@ class Admin::ImageHoldersControllerTest < ActionController::TestCase
       @bird = Factory(:bird)
     end
 
-    should_eventually "contain a message" do
-      # display_link_to_previous
+    should "contain a message" do
       get :new, { :resource => @bird.class.name, :resource_id => @bird.id }
       assert_select 'body div#flash', "Cancel adding a new image holder?"
     end

@@ -54,8 +54,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       assert @asset.dragonfly_required.present?
     end
 
-    should_eventually "verify message on polymorphic relationship" do
-      # display_link_to_previous
+    should "verify message on polymorphic relationship" do
       asset = Factory(:asset)
       get :edit, { :id => asset.id, :resource => @post.class.name, :resource_id => @post.id }
       assert_select 'body div#flash', "Cancel adding a new asset?"
