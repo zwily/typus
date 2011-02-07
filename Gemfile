@@ -10,6 +10,8 @@ gem 'paperclip'
 gem 'rack-cache', :require => 'rack/cache'
 gem 'rails', '3.0.4.rc1'
 
+gem 'typus_pro', :git => 'git@typuscms.com:typus_pro.git'
+
 group :test do
   gem 'shoulda', :git => 'https://github.com/thoughtbot/shoulda.git'
 
@@ -17,9 +19,6 @@ group :test do
 end
 
 group :development, :test do
-
-  gem 'nanoc', :require => false
-  gem 'WikiCreole', :require => false
 
   platforms :jruby do
     gem 'activerecord-jdbc-adapter', :require => false

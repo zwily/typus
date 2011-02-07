@@ -1,9 +1,0 @@
----
-title: Troubleshooting
-
-parent_title: Installation
----
-
-= Troubleshooting
-
-Pending.

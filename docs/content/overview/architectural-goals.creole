@@ -1,9 +1,0 @@
----
-title: Architectural Goals
-
-parent_title: Overview
----
-
-= Architectural Goals
-
-Pending.
