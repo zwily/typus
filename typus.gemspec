@@ -13,7 +13,7 @@ Gem::Specification.new do |s|
   s.email = ["core@typuscms.com"]
   s.homepage = "http://core.typuscms.com/"
   s.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator)"
-  s.description = "Awesome admin scaffold generator for Ruby on Rails applications."
+  s.description = "Ruby on Rails Admin Panel (Engine) to allow trusted users edit structured content."
 
   s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = "typus"
