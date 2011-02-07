@@ -29,15 +29,15 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
   context "relate colaborators to project" do
 
     setup do
-      @project = Factory(:project)
-      @user = Factory(:user)
       @request.env['HTTP_REFERER'] = "/admin/projects/edit/#{@project.id}"
     end
 
     should "work" do
+      user = Factory(:user)
+
       assert_difference('@project.collaborators.count') do
         post :relate, { :id => @project.id,
-                        :related => { :model => 'User', :id => @user.id, :association_name => 'collaborators' } }
+                        :related => { :model => 'User', :id => user.id, :association_name => 'collaborators' } }
       end
 
       assert_response :redirect
