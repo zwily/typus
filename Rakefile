@@ -47,7 +47,8 @@ task :deploy do
   system "cd test/fixtures/rails_app && cap deploy"
 end
 
-RUBIES = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02", "jruby-1.5.6"]
+# RUBIES = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02", "jruby-1.5.6"]
+RUBIES = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02"]
 
 task :setup_test_environment do
   RUBIES.each do |ruby|
