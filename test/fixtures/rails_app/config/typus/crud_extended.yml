@@ -21,7 +21,7 @@ Comment:
       booleans:
         spam: ["Yes, it's spam", "No, it's not spam"]
   filters: post
-  search: email, body
+  search: email, body, posts.title
   application: CRUD Extended
 
 Page:

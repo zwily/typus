@@ -16,7 +16,10 @@ module Typus
                        when "^" then "#{query}%"
                        when "@" then "%#{query}%"
                        end
-              table_key = (adapter == 'postgresql') ? "LOWER(TEXT(#{table_name}.#{key}))" : "#{table_name}.#{key}"
+
+              column_name = (key.match('\.') ? key : "#{table_name}.#{key}")
+              table_key = (adapter == 'postgresql') ? "LOWER(TEXT(#{column_name}))" : "#{column_name}"
+
               search << "#{table_key} LIKE '#{_query}'"
             end
           end.join(" OR ")
