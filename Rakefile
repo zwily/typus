@@ -50,16 +50,28 @@ end
 # RUBIES = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02", "jruby-1.5.6"]
 RUBIES = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02"]
 
-task :setup_test_environment do
-  RUBIES.each do |ruby|
-    system "rvm install #{ruby}"
+namespace :setup do
+
+  desc "Setup test environment"
+  task :setup_test_environment do
+    RUBIES.each { |ruby| system "rvm install #{ruby}" }
   end
+
+  desc "Setup CI Joe" do
+  task :cijoe do
+    system "git config --add cijoe.runner 'rake -s test:all'"
+  end
+
 end
 
-task :test_all do
-  system "rm -f Gemfile.lock && bundle install"
+namespace :test do
 
-  RUBIES.each do |ruby|
-    system "bash -l -c 'rvm use #{ruby} && rake && rake DB=postgresql && rake DB=mysql'"
+  task :all do
+    system "rm -f Gemfile.lock && bundle install"
+
+    RUBIES.each do |ruby|
+      system "bash -l -c 'rvm use #{ruby} && rake && rake DB=postgresql && rake DB=mysql'"
+    end
   end
+
 end
