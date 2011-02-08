@@ -1,7 +1,7 @@
 <%
   connection = case ENV["DB"]
                when "mysql"
-                 { :adapter => "mysql", :database => "typus_test" }
+                 { :adapter => "mysql2", :database => "typus_test" }
                when "postgresql"
                  { :adapter => "postgresql", :database => "typus_test", :encoding => "unicode" }
                else
