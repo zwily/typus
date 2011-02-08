@@ -48,8 +48,10 @@ task :deploy do
 end
 
 task :test_all do
+  system "rm -f Gemfile.lock && bundle install"
+
   rubies = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02", "jruby-1.5.6"]
   rubies.each do |ruby|
-    system "rvm use #{ruby} && rm -f Gemfile.lock && bundle install && rake && rake DB=postgresql && rake DB=mysql"
+    system "bash -l -c 'rvm use #{ruby} && rake && rake DB=postgresql && rake DB=mysql'"
   end
 end
