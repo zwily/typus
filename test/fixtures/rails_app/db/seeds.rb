@@ -12,7 +12,7 @@ require '../../factories'
 # CRUD
 ##
 
-5.times { Factory(:entry) }
+50.times { Factory(:entry) }
 
 ##
 # CRUD Extended
