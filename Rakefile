@@ -57,7 +57,7 @@ namespace :setup do
     RUBIES.each { |ruby| system "rvm install #{ruby}" }
   end
 
-  desc "Setup CI Joe" do
+  desc "Setup CI Joe"
   task :cijoe do
     system "git config --add cijoe.runner 'rake -s test:all'"
   end
