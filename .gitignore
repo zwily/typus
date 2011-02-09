@@ -12,4 +12,4 @@ test/fixtures/rails_app/tmp/*
 # Ignore cached stuff.
 all.css
 all.js
-
+vendor/
