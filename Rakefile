@@ -71,8 +71,8 @@ namespace :test do
       system "rm -f Gemfile.lock"
       system "bundle install"
       system "rake"
-      system "rake DB=postgresql"
-      system "rake DB=mysql"
+      # system "rake DB=postgresql"
+      # system "rake DB=mysql"
       # system "bash -l -c 'rvm use #{ruby} && rm -f Gemfile.lock && bundle install && rake && rake DB=postgresql && rake DB=mysql'"
     end
   end
