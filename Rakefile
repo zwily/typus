@@ -47,8 +47,7 @@ task :deploy do
   system "cd test/fixtures/rails_app && cap deploy"
 end
 
-# RUBIES = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02", "jruby-1.5.6"]
-RUBIES = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02"]
+RUBIES = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02", "jruby-1.5.6"]
 
 namespace :setup do
 
@@ -68,7 +67,13 @@ namespace :test do
 
   task :all do
     RUBIES.each do |ruby|
-      system "bash -l -c 'rvm use #{ruby} && rm -f Gemfile.lock && bundle install && rake && rake DB=postgresql && rake DB=mysql'"
+      system "rvm use #{ruby}"
+      system "rm -f Gemfile.lock"
+      system "bundle install"
+      system "rake"
+      system "rake DB=postgresql"
+      system "rake DB=mysql"
+      # system "bash -l -c 'rvm use #{ruby} && rm -f Gemfile.lock && bundle install && rake && rake DB=postgresql && rake DB=mysql'"
     end
   end
 
