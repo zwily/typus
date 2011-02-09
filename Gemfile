@@ -20,7 +20,7 @@ group :development, :test do
 
   platforms :jruby do
     gem 'activerecord-jdbc-adapter', :require => false
-    # gem 'activerecord-jdbcpostgresql-adapter'
+
     gem 'jdbc-mysql'
     gem 'jdbc-postgres'
     gem 'jdbc-sqlite3'
