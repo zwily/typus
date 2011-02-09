@@ -24,6 +24,8 @@ group :development, :test do
     gem 'jdbc-mysql'
     gem 'jdbc-postgres'
     gem 'jdbc-sqlite3'
+
+    gem 'jruby-openssl' # JRuby limited openssl loaded. http://jruby.org/openssl
   end
 
   platforms :ruby do
