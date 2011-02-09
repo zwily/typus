@@ -58,7 +58,7 @@ namespace :setup do
 
   desc "Setup CI Joe"
   task :cijoe do
-    system "git config --add cijoe.runner 'rake -s test:all'"
+    system "git config --replace-all cijoe.runner 'rake test:all'"
   end
 
 end
