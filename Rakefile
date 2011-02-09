@@ -67,10 +67,8 @@ end
 namespace :test do
 
   task :all do
-    system "rm -f Gemfile.lock && bundle install"
-
     RUBIES.each do |ruby|
-      system "bash -l -c 'rvm use #{ruby} && rake && rake DB=postgresql && rake DB=mysql'"
+      system "bash -l -c 'rvm use #{ruby} && rm -f Gemfile.lock && bundle install && rake && rake DB=postgresql && rake DB=mysql'"
     end
   end
 
