@@ -8,7 +8,6 @@ Gemfile.lock
 
 test/fixtures/rails_app/public/system/*
 test/fixtures/rails_app/tmp/*
-test/fixtures/rails_app/config/typus/*
 
 # Ignore cached stuff.
 all.css
