@@ -1,7 +1,5 @@
 module Typus
-
   module Generators
-
     class ViewsGenerator < Rails::Generators::Base
 
       source_root File.expand_path("../../../../app", __FILE__)
@@ -17,7 +15,5 @@ Description:
       end
 
     end
-
   end
-
 end

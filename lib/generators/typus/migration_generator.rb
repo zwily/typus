@@ -2,9 +2,7 @@ require "rails/generators/migration"
 require "generators/typus/controller_generator"
 
 module Typus
-
   module Generators
-
     class MigrationGenerator < Rails::Generators::Base
 
       include Rails::Generators::Migration
@@ -97,7 +95,5 @@ Examples:
       end
 
     end
-
   end
-
 end
