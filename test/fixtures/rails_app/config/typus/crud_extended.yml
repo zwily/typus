@@ -44,6 +44,7 @@ Post:
     relationship: title, created_at
     csv: title, status
     xml: title, status
+    show: title, body, status, published, created_at
     options:
       selectors: status
       read_only: permalink
