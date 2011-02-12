@@ -14,34 +14,10 @@
 <%= render 'show' %>
 
 <dl>
-<%- @fields.each do |key, value| -%>
-  <dt><%=h @resource.human_attribute_name(key) %></dt>
-  <%-
-    raw_data = @item.send(key)
-    data = case value
-           when :boolean
-             boolean_assoc = @resource.typus_boolean(key)
-             (raw_data ? boolean_assoc.rassoc("true") : boolean_assoc.rassoc("false")).first
-           when :belongs_to
-             if raw_data
-               link_to raw_data.to_label, { :controller => raw_data.class.to_resource,
-                                            :action => raw_data.class.typus_options_for(:default_action_on_item),
-                                            :id => raw_data }
-             end
-           when :file
-             typus_file_preview(@item, key)
-           when :selector
-             @item.mapping(key)
-           when :datetime
-             if raw_data
-               I18n.localize(raw_data, :format => @resource.typus_date_format(key))
-             end
-           else
-             raw_data
-           end
-  -%>
-  <dd><%= data.present? ? data : "&mdash;".html_safe %></dd>
-<%- end -%>
+  <% build_display(@item, @fields).each do |attribute, type| %>
+    <dt><%= attribute %></dt>
+    <dd><%= type %></dd>
+  <% end %>
 </dl>
 
 <%= raw typus_relationships %>
