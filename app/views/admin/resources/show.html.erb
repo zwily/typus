@@ -20,7 +20,8 @@
     raw_data = @item.send(key)
     data = case value
            when :boolean
-             @resource.typus_boolean(key).invert[raw_data.to_s]
+             boolean_assoc = @resource.typus_boolean(key)
+             (raw_data ? boolean_assoc.rassoc("true") : boolean_assoc.rassoc("false")).first
            when :belongs_to
              if raw_data
                link_to raw_data.to_label, { :controller => raw_data.class.to_resource,
