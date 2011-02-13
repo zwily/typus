@@ -1,6 +1,10 @@
-source 'http://rubygems.org'
+source "http://rubygems.org"
 
+# Specify your gem's dependencies in typus.gemspec
 gemspec
+
+# Yes, some dependencies are in typus.gemspec, but it's a little bit difficult
+# to mantain the above code there. I'll keep here for the moment ...
 
 gem 'acts_as_list'
 gem 'acts_as_tree'
@@ -12,8 +16,7 @@ gem 'rails', '~> 3.0'
 
 group :test do
   gem 'shoulda'
-
-  gem 'mocha'
+  gem 'mocha' # Make sure mocha is loaded at the end ...
 end
 
 group :development, :test do
