@@ -1,4 +1,4 @@
-# encoding: utf-8
+# -*- encoding: utf-8 -*-
 
 require "support/active_record"
 require "support/hash"
