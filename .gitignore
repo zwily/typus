@@ -1,16 +1,15 @@
+*.gem
 .bundle
-db/*.sqlite3
-log/*.log
-tmp/**/*
-
-# Ignore Gemfile.lock because the file WILL BE different in production.
 Gemfile.lock
+pkg/*
 
-test/fixtures/rails_app/public/system/*
-test/fixtures/rails_app/tmp/*
-
-# Ignore cached stuff.
+# Projecte specific ignores
+.bundle
 all.css
 all.js
+db/*.sqlite3
+log/*.log
+test/fixtures/rails_app/public/system/*
+test/fixtures/rails_app/tmp/*
+tmp/**/*
 vendor/
-
