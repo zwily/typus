@@ -1,11 +1,10 @@
+require 'bundler'
+Bundler::GemHelper.install_tasks
+
 require 'rubygems'
 require 'rake/testtask'
 require 'rake/rdoctask'
 
-$LOAD_PATH.unshift File.expand_path('../lib', __FILE__)
-require 'typus/version'
-
-desc 'Default: run unit tests.'
 task :default => :test
 
 desc 'Test the typus plugin.'
@@ -16,6 +15,7 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = true
 end
 
+=begin
 desc 'Generate plugin documentation.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
@@ -24,24 +24,7 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-
-desc 'Build the gem.'
-task :build do
-  system "gem build typus.gemspec"
-  system "gem install typus-#{Typus::VERSION}.gem"
-end
-
-desc 'Build and release the gem.'
-task :release => :build do
-  system "git commit -m 'Bump version to #{Typus::VERSION}' lib/typus/version.rb"
-  system "git tag v#{Typus::VERSION}"
-  system "git push && git push --tags"
-  system "gem push typus-#{Typus::VERSION}.gem"
-  system "git clean -fd && rm -f typus-#{Typus::VERSION}.gem"
-  system "git branch -D 3-0-stable"
-  system "git checkout -b 3-0-stable && git push -f"
-  system "git checkout master"
-end
+=end
 
 task :deploy do
   system "cd test/fixtures/rails_app && cap deploy"
@@ -52,7 +35,7 @@ RUBIES = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02", "jruby-1.5.
 namespace :setup do
 
   desc "Setup test environment"
-  task :setup_test_environment do
+  task :test_environment do
     RUBIES.each { |ruby| system "rvm install #{ruby}" }
   end
 
