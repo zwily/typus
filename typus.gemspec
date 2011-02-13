@@ -1,13 +1,10 @@
-# encoding: utf-8
-
-$LOAD_PATH << File.join(File.dirname(__FILE__), 'lib')
-require 'typus/version'
+# -*- encoding: utf-8 -*-
+$:.push File.expand_path("../lib", __FILE__)
+require "typus/version"
 
 Gem::Specification.new do |s|
   s.name = "typus"
   s.version = Typus::VERSION
-  s.date = Time.now.strftime('%Y-%m-%d')
-
   s.platform = Gem::Platform::RUBY
   s.authors = ["Francesc Esplugas"]
   s.email = ["core@typuscms.com"]
@@ -15,11 +12,12 @@ Gem::Specification.new do |s|
   s.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator)"
   s.description = "Ruby on Rails Admin Panel (Engine) to allow trusted users edit structured content."
 
-  s.required_rubygems_version = ">= 1.3.6"
   s.rubyforge_project = "typus"
 
-  s.files = Dir.glob('**/*') - Dir.glob('docs/**/*') - ['Gemfile', 'Gemfile.lock', 'typus.gemspec']
-  s.require_path = "lib"
+  s.files         = `git ls-files`.split("\n")
+  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
+  s.require_paths = ["lib"]
 
   s.add_dependency "fastercsv", "~> 1.5" if RUBY_VERSION < '1.9'
   s.add_dependency "render_inheritable"
