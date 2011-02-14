@@ -1,5 +1,4 @@
 module Typus
-
   module Resources
 
     # Setup Typus::Resources. This should be run from an initializer.
@@ -44,5 +43,4 @@ module Typus
     end
 
   end
-
 end

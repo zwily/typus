@@ -1,5 +1,4 @@
 module Typus
-
   module Configuration
 
     # Read configuration from <tt>config/typus/**/*.yml</tt>.
@@ -49,5 +48,4 @@ module Typus
     mattr_accessor :models_constantized
 
   end
-
 end

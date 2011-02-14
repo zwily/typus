@@ -1,5 +1,4 @@
 module Typus
-
   module I18n
 
     class << self
@@ -26,5 +25,4 @@ module Typus
     end
 
   end
-
 end
