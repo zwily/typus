@@ -1,7 +1,5 @@
 module Typus
-
   module Authentication
-
     module Session
 
       protected
@@ -129,7 +127,5 @@ module Typus
       end
 
     end
-
   end
-
 end

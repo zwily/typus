@@ -1,7 +1,5 @@
 module Typus
-
   module Authentication
-
     module Base
 
       def admin_user
@@ -19,7 +17,5 @@ module Typus
       def reload_locales; end
 
     end
-
   end
-
 end

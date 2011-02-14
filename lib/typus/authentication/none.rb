@@ -1,7 +1,5 @@
 module Typus
-
   module Authentication
-
     module None
 
       protected
@@ -13,7 +11,5 @@ module Typus
       end
 
     end
-
   end
-
 end

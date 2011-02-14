@@ -1,7 +1,5 @@
 module Typus
-
   module Authentication
-
     module HttpBasic
 
       protected
@@ -16,7 +14,5 @@ module Typus
       end
 
     end
-
   end
-
 end
