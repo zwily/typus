@@ -3,10 +3,6 @@ module Typus
     module ActiveRecord
       module User
 
-        def self.included(base)
-          base.extend(ClassMethods)
-        end
-
         module ClassMethods
 
           def enable_as_typus_user
