@@ -118,7 +118,6 @@ module Typus
 
           protected
 
-          # TODO: Update the hash generation by a harder one ...
           def generate_hash(string)
             Digest::SHA1.hexdigest(string)
           end
