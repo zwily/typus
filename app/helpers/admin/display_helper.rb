@@ -44,6 +44,7 @@ module Admin
 
     alias_method :display_text, :display_string
     alias_method :display_position, :display_string
+    alias_method :display_integer, :display_string
 
   end
 end
