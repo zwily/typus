@@ -19,6 +19,7 @@ Gem::Specification.new do |s|
   s.executables   = `git ls-files -- bin/*`.split("\n").map{ |f| File.basename(f) }
   s.require_paths = ["lib"]
 
+  s.add_dependency "bcrypt-ruby"
   s.add_dependency "fastercsv", "~> 1.5" if RUBY_VERSION < '1.9'
   s.add_dependency "render_inheritable"
   s.add_dependency "will_paginate", "~> 3.0.pre2"
