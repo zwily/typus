@@ -112,7 +112,6 @@ module Typus
           end
 
           def locale=(locale)
-            options = { :locale => locale }
             self.preferences ||= {}
             self.preferences[:locale] = locale
           end
