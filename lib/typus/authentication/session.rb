@@ -104,12 +104,19 @@ module Typus
         end
       end
 
+      ##
+      # OPTIMIZE: This method should accept args.
+      #
       def set_attributes_on_create
         if @resource.typus_user_id?
           @item.attributes = { Typus.user_fk => admin_user.id }
         end
       end
 
+      ##
+      # OPTIMIZE: This method should accept args and not perform an update
+      #           because we are updating the attributes twice!
+      #
       def set_attributes_on_update
         if @resource.typus_user_id? && admin_user.is_not_root?
           @item.update_attributes(Typus.user_fk => admin_user.id)

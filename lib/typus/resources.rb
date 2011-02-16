@@ -1,7 +1,8 @@
 module Typus
   module Resources
 
-    # Setup Typus::Resources. This should be run from an initializer.
+    ##
+    # Setup Typus::Resources:
     #
     #     Typus::Resources.setup do |config|
     #       config.default_action_on_item = "index"

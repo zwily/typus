@@ -3,7 +3,9 @@ module Typus
     module ActiveRecord
       module InstanceMethods
 
-        # This method should be moved to the user class.
+        ##
+        # TODO: Move this methos to the User::InstancheMethods module.
+        #
         def owned_by?(user)
           send(Typus.user_fk) == user.id
         end
