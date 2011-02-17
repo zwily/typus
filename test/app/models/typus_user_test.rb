@@ -52,6 +52,11 @@ class TypusUserTest < ActiveSupport::TestCase
       assert TypusUser.generate(options).valid?
     end
 
+    should "have set a default locale" do
+      options = { :email => 'demo@example.com', :role => 'admin' }
+      assert_equal :en, TypusUser.generate(options).locale
+    end
+
   end
 
   context "TypusUser" do
