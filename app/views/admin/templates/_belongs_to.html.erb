@@ -1,3 +1,10 @@
+<%
+  if @resource.typus_field_options_for(:read_only).include?(attribute.to_sym)
+    html_options.merge!(:disabled => 'disabled')
+    message = Typus::I18n.t("Read only")
+  end
+%>
+
 <li id="<%= attribute %>">
   <%= form.label related_fk, raw("#{label_text} <small>#{message}</small>") %>
   <%= form.select related_fk, values, options, html_options %>
