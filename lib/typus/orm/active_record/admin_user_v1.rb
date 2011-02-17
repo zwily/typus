@@ -36,15 +36,9 @@ module Typus
 
             def generate(*args)
               options = args.extract_options!
-
               options[:password] ||= ActiveSupport::SecureRandom.hex(4)
               options[:role] ||= Typus.master_role
-
-              new :email => options[:email],
-                  :password => options[:password],
-                  :password_confirmation => options[:password],
-                  :role => options[:role],
-                  :preferences => { :locale => ::I18n.default_locale.to_s }
+              new :email => options[:email], :password => options[:password], :role => options[:role]
             end
 
             include InstanceMethods
