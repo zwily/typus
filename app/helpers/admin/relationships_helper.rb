@@ -1,5 +1,4 @@
 module Admin
-
   module RelationshipsHelper
 
     def setup_relationship(field)
@@ -183,5 +182,4 @@ module Admin
     end
 
   end
-
 end

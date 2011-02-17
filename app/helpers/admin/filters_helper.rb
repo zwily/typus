@@ -1,5 +1,4 @@
 module Admin
-
   module FiltersHelper
 
     def build_filters(resource = @resource, params = params)
@@ -91,5 +90,4 @@ module Admin
     end
 
   end
-
 end

@@ -1,5 +1,4 @@
 module Admin
-
   module FilePreviewHelper
 
     def get_type_of_attachment(attachment)
@@ -64,5 +63,4 @@ module Admin
     end
 
   end
-
 end

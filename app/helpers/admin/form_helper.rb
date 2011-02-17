@@ -1,5 +1,4 @@
 module Admin
-
   module FormHelper
 
     def build_form(fields, form)
@@ -74,5 +73,4 @@ module Admin
     end
 
   end
-
 end

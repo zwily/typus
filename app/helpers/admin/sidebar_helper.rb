@@ -1,5 +1,4 @@
 module Admin
-
   module SidebarHelper
 
     def build_sidebar
@@ -41,5 +40,4 @@ module Admin
     end
 
  end
-
 end

@@ -1,5 +1,4 @@
 module Admin
-
   module DashboardHelper
 
     def applications
@@ -12,5 +11,4 @@ module Admin
     end
 
   end
-
 end

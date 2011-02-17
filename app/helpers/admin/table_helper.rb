@@ -1,5 +1,4 @@
 module Admin
-
   module TableHelper
 
     def build_table(model, fields, items, link_options = {}, association = nil, association_name = nil)
@@ -159,5 +158,4 @@ module Admin
     end
 
   end
-
 end

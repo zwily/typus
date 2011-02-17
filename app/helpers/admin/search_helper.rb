@@ -1,5 +1,4 @@
 module Admin
-
   module SearchHelper
 
     def search(resource = @resource, params = params)
@@ -14,5 +13,4 @@ module Admin
     end
 
   end
-
 end

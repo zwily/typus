@@ -1,5 +1,4 @@
 module Admin
-
   module ListHelper
 
     def resources_actions
@@ -27,5 +26,4 @@ module Admin
     end
 
   end
-
 end

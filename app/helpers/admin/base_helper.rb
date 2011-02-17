@@ -1,5 +1,4 @@
 module Admin
-
   module BaseHelper
 
     def title(page_title)
@@ -33,5 +32,4 @@ module Admin
     end
 
   end
-
 end

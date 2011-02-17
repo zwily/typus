@@ -1,5 +1,4 @@
 module Admin
-
   module ResourcesHelper
 
     include Admin::DisplayHelper
@@ -34,5 +33,4 @@ module Admin
     end
 
   end
-
 end
