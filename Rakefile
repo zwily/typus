@@ -30,33 +30,26 @@ task :deploy do
   system "cd test/fixtures/rails_app && cap deploy"
 end
 
-RUBIES = ["ruby-1.8.7-p330", "ruby-1.9.2-p136", "ree-1.8.7-2010.02", "jruby-1.5.6"]
+RUBIES = %w[1.8.7 ree 1.9.2 jruby].join(",")
 
 namespace :setup do
 
   desc "Setup test environment"
   task :test_environment do
-    RUBIES.each { |ruby| system "rvm install #{ruby}" }
+    system "rvm install #{RUBIES}"
   end
 
   desc "Setup CI Joe"
   task :cijoe do
-    system "git config --replace-all cijoe.runner 'rake test:all'"
+    system "git config --replace-all cijoe.runner 'rake test:rubies'"
   end
 
 end
 
 namespace :test do
 
-  task :all do
-    RUBIES.each do |ruby|
-      system "rvm use #{ruby}"
-      system "rm -f Gemfile.lock"
-      system "bundle install"
-      system "rake"
-      # system "rake DB=postgresql"
-      # system "rake DB=mysql"
-    end
+  task :rubies do
+    system "rvm #{RUBIES} rake"
   end
 
 end
