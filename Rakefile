@@ -15,7 +15,6 @@ Rake::TestTask.new(:test) do |t|
   t.verbose = true
 end
 
-=begin
 desc 'Generate plugin documentation.'
 Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
@@ -24,7 +23,6 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
-=end
 
 task :deploy do
   system "cd test/fixtures/rails_app && cap deploy"
