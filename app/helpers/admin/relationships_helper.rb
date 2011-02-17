@@ -151,7 +151,7 @@ module Admin
         # Pass the resource_id only to edit/update because only there is where
         # the record actually exists.
         options.merge!(:resource_id => @item.id) if %w(edit update).include?(params[:action])
-        message = link_to Typus::I18n.t("Add"), options
+        message = link_to Typus::I18n.t("Add new"), options
       end
 
       # Set the template.
