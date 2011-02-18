@@ -123,16 +123,6 @@ module Typus
         end
       end
 
-      #--
-      # Reload admin_user when updating to see flash message in the
-      # correct locale.
-      #++
-      def reload_locales
-        if @resource.eql?(Typus.user_class)
-          ::I18n.locale = admin_user.reload.locale
-        end
-      end
-
     end
   end
 end

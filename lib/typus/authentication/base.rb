@@ -14,7 +14,6 @@ module Typus
       def check_resources_ownership; end
       def set_attributes_on_create; end
       def set_attributes_on_update; end
-      def reload_locales; end
 
     end
   end

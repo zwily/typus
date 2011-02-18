@@ -89,7 +89,6 @@ class Admin::ResourcesController < Admin::BaseController
     respond_to do |format|
       if @item.update_attributes(attributes)
         set_attributes_on_update
-        reload_locales
         format.html { redirect_on_success }
         format.json { render :json => @item }
       else
