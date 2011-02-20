@@ -25,7 +25,7 @@ class Admin::BaseController < ActionController::Base
   end
 
   def set_locale
-    I18n.locale = admin_user.locale
+    I18n.locale = admin_user.locale if admin_user.respond_to?(:locale)
   end
 
 end
