@@ -96,7 +96,9 @@ class Admin::AccountControllerTest < ActionController::TestCase
     end
 
     should "test_should_return_404_on_reset_passsword_if_token_is_not_valid" do
-      assert_raise(ActiveRecord::RecordNotFound) { get :show, { :id => "unexisting" } }
+      assert_raises ActiveRecord::RecordNotFound do
+        get :show, { :id => "unexisting" }
+      end
     end
 
   end
