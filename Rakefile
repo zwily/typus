@@ -24,6 +24,7 @@ Rake::RDocTask.new(:rdoc) do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
+desc "Deploy test/fixtures/rails_app"
 task :deploy do
   system "cd test/fixtures/rails_app && cap deploy"
 end
