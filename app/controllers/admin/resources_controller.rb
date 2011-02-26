@@ -12,7 +12,6 @@ class Admin::ResourcesController < Admin::BaseController
   before_filter :check_resource_ownership, :only => [:edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
   before_filter :check_if_user_can_perform_action_on_resources
   before_filter :set_order, :only => [:index]
-  before_filter :set_fields, :only => [:index, :new, :edit, :create, :update, :show]
 
   ##
   # This is the main index of the model. With filters, conditions and more.
@@ -118,10 +117,7 @@ class Admin::ResourcesController < Admin::BaseController
         end
         format.json { render :json => @item }
       else
-        format.html do
-          set_fields
-          render :edit
-        end
+        format.html { render :edit }
         format.json { render :json => @item.errors, :status => :unprocessable_entity }
       end
     end
@@ -238,9 +234,10 @@ class Admin::ResourcesController < Admin::BaseController
     @resource = @resource.order(set_order).includes(eager_loading)
   end
 
-  def set_fields
-    @fields = @resource.typus_fields_for(params[:action].action_mapper)
+  def fields
+    @resource.typus_fields_for(params[:action].action_mapper)
   end
+  helper_method :fields
 
   def set_order
     params[:sort_order] ||= "desc"
