@@ -9,7 +9,7 @@ set :repository, "git://github.com/fesplugas/typus.git"
 set :deploy_via, :remote_cache
 set :keep_releases, 2
 
-# Override default :bundle_flags because I don't provice a Gemfile.lock.
+# Override default `:bundle_flags` because I don't provide a Gemfile.lock.
 set :bundle_flags, "--quiet"
 
 set :domain, "demo.typuscms.com"
