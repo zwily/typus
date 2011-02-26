@@ -76,12 +76,8 @@ module Typus
       end
 
       #--
-      # If item is owned by another user, we only can perform a
-      # show action on the item. Updated item is also blocked.
-      #
-      #   before_filter :check_resource_ownership, :only => [ :edit, :update, :destroy,
-      #                                                       :toggle, :position,
-      #                                                       :relate, :unrelate ]
+      # If item is owned by another user, we only can perform a show action on
+      # the item. Updated item is also blocked.
       #++
       def check_resource_ownership
         if admin_user.is_not_root?
