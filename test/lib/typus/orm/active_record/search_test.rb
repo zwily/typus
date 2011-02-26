@@ -34,7 +34,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "generate conditions for id" do
-      Post.stubs(:typus_defaults_for).with(:search).returns(["id"])
+      Post.expects(:typus_defaults_for).with(:search).returns(["id"])
 
       expected = case ENV["DB"]
                  when "postgresql"
