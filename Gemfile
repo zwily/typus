@@ -15,7 +15,7 @@ gem 'rack-cache', :require => 'rack/cache'
 gem 'rails', '~> 3.0'
 
 group :test do
-  gem 'shoulda'
+  gem 'shoulda-context'
   gem 'mocha' # Make sure mocha is loaded at the end ...
 end
 

@@ -8,22 +8,38 @@ class TypusUserTest < ActiveSupport::TestCase
     'test@example',
     'test@example.c',
     'testexample.com' ].each do |value|
-    should_not allow_value(value).for(:email)
+    should "not allow #{value}" do
+      assert !Factory.build(:typus_user, :email => value).valid?
+    end
   end
 
   [ 'test+filter@example.com',
     'test.filter@example.com',
     'test@example.co.uk',
     'test@example.es' ].each do |value|
-    should allow_value(value).for(:email)
+    should "allow #{value}" do
+      assert Factory.build(:typus_user, :email => value).valid?
+    end
   end
 
-  should validate_presence_of :email
-  should validate_presence_of :role
+  should "validate_presence_of :email" do
+    assert !Factory.build(:typus_user, :email => nil).valid?
+  end
 
-  should_not allow_mass_assignment_of :status
+  should "validate_presence_of :role" do
+    assert !Factory.build(:typus_user, :role => nil).valid?
+  end
 
-  should ensure_length_of(:password).is_at_least(6).is_at_most(40)
+  should "validate password length" do
+    assert !Factory.build(:typus_user, :password => "0"*5).valid?, "5"
+    assert Factory.build(:typus_user, :password => "0"*6).valid?, "6"
+    assert Factory.build(:typus_user, :password => "0"*40).valid?, "40"
+    assert !Factory.build(:typus_user, :password => "0"*41).valid?, "41"
+  end
+
+  should "not allow_mass_assignment_of :status" do
+    assert TypusUser.attr_protected.include?("status")
+  end
 
   should "verify columns" do
     expected = %w(id first_name last_name email role status salt crypted_password token preferences created_at updated_at).sort
