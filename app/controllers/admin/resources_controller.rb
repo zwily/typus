@@ -6,10 +6,12 @@ class Admin::ResourcesController < Admin::BaseController
   include Typus::Controller::Filters
   include Typus::Controller::Format
 
+  Whitelist = [:edit, :update, :destroy, :toggle, :position, :relate, :unrelate]
+
   before_filter :get_model
   before_filter :set_scope
-  before_filter :get_object, :only => [:show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate]
-  before_filter :check_resource_ownership, :only => [:edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
+  before_filter :get_object, :only => Whitelist + [:show]
+  before_filter :check_resource_ownership, :only => Whitelist
   before_filter :check_if_user_can_perform_action_on_resources
 
   ##
