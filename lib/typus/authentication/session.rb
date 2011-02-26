@@ -15,6 +15,12 @@ module Typus
         end
       end
 
+      def deauthenticate
+        session[:typus_user_id] = nil
+        ::I18n.locale = ::I18n.default_locale
+        redirect_to new_admin_session_path
+      end
+
       #--
       # Return the current user. If role does not longer exist on the system
       # admin_user will be signed out from the system.
@@ -23,8 +29,7 @@ module Typus
         @admin_user ||= Typus.user_class.find_by_id(session[:typus_user_id])
 
         if !@admin_user || !Typus::Configuration.roles.has_key?(@admin_user.role) || !@admin_user.status
-          session[:typus_user_id] = nil
-          redirect_to new_admin_session_path
+          deauthenticate
         end
 
         @admin_user

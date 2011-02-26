@@ -23,9 +23,7 @@ class Admin::SessionController < Admin::BaseController
   end
 
   def destroy
-    session[:typus_user_id] = nil
-    I18n.locale = I18n.default_locale
-    redirect_to :action => :new
+    deauthenticate
   end
 
   private
