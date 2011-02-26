@@ -363,8 +363,7 @@ title;status
       end
 
       should "verify_editor_tried_to_edit_a_post_owned_by_himself" do
-        post_ = Factory(:post, :typus_user => @typus_user)
-        get :edit, { :id => post_.id }
+        get :edit, { :id => Factory(:post, :typus_user => @typus_user).id }
         assert_response :success
       end
 
