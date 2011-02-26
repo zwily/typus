@@ -16,8 +16,8 @@ module Typus
       end
 
       #--
-      # Return the current user. If role does not longer exist on the
-      # system admin_user will be signed out from Typus.
+      # Return the current user. If role does not longer exist on the system
+      # admin_user will be signed out from the system.
       #++
       def admin_user
         @admin_user ||= Typus.user_class.find_by_id(session[:typus_user_id])
