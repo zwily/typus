@@ -18,7 +18,7 @@ module Admin
                     typus_template_field(key, :string, form)
                   end
         end
-      end
+      end.html_safe
     end
 
     def typus_tree_field(attribute, form)
@@ -37,7 +37,7 @@ module Admin
           next if admin_user.cannot?('read', association.class_name.typus_constantize)
           html << send("typus_form_#{association.macro}", relationship)
         end
-      end
+      end.html_safe
     end
 
     def typus_template_field(attribute, template, form)

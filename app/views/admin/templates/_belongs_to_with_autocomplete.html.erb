@@ -1,5 +1,5 @@
 <li id="<%= attribute %>">
-  <%= form.label related_fk, raw("#{label_text} <small>#{message}</small>") %>
+  <%= form.label related_fk, "#{label_text} <small>#{message}</small>".html_safe %>
   <%= form.hidden_field related_fk %>
   <input data-autocomplete="<%= "/admin/#{related.to_resource}/autocomplete" %>"
          id="autocomplete"

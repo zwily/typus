@@ -11,6 +11,6 @@
 %>
 
 <li id="<%= attribute %>">
-  <%= form.label attribute, raw(label_text) %>
+  <%= form.label attribute, label_text.html_safe %>
   <%= form.text_area attribute, options %>
 </li>
