@@ -99,8 +99,7 @@ module Typus
       #++
       def check_resources_ownership
         if admin_user.is_not_root? && @resource.typus_user_id?
-          condition = { Typus.user_fk => admin_user }
-          @resource = @resource.where(condition)
+          @resource = @resource.where(Typus.user_fk => admin_user)
         end
       end
 
