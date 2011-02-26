@@ -4,7 +4,7 @@ module Typus
       module User
         module InstanceMethods
 
-          def name
+          def to_label
             full_name = [first_name, last_name].delete_if { |s| s.blank? }
             full_name.any? ? full_name.join(" ") : email
           end
