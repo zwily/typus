@@ -66,9 +66,7 @@ module Typus
       #++
       def check_if_user_can_perform_action_on_resource
         resource = params[:controller].remove_prefix.camelize
-        unless admin_user.can?(params[:action], resource, { :special => true })
-          not_allowed
-        end
+        not_allowed if admin_user.cannot?(params[:action], resource, { :special => true })
       end
 
       def not_allowed
