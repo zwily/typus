@@ -38,7 +38,7 @@ class Admin::CommentsControllerTest < ActionController::TestCase
       @post = comment.post
 
       assert_difference('@post.comments.count', -1) do
-        post :unrelate, { :id => comment.id, :resource => 'Post', :resource_id => @post.id }
+        post :unrelate, :id => comment.id, :resource => 'Post', :resource_id => @post.id
       end
 
       assert comment.reload.post.nil?

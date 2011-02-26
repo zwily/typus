@@ -66,7 +66,7 @@ class Admin::ImageHoldersControllerTest < ActionController::TestCase
 
     should "work" do
       assert_difference('@bird.image_holders.count', -1) do
-        post :unrelate, { :id => @image_holder.id, :resource => "Bird", :resource_id => @bird.id }
+        post :unrelate, :id => @image_holder.id, :resource => "Bird", :resource_id => @bird.id
       end
     end
 

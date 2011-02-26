@@ -46,7 +46,7 @@ Factory.define :post do |f|
 end
 
 Factory.define :typus_user do |f|
-  f.sequence(:email) { |n| "admin+#{n}@example.com" }
+  f.sequence(:email) { |n| "user+#{n}@example.com" }
   f.role "admin"
   f.status true
   f.token "1A2B3C4D5E6F"

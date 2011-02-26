@@ -19,7 +19,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
   end
 
   should_eventually "be able to destroy items" do
-    get :destroy, { :id => @user.id, :method => :delete }
+    get :destroy, :id => @user.id, :method => :delete
 
     assert_response :redirect
     assert_equal "User successfully removed.", flash[:notice]

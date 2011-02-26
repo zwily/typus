@@ -88,7 +88,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
     end
 
     should "test_should_create_admin_user_session_and_redirect_user_to_its_details" do
-      get :show, { :id => @typus_user.token }
+      get :show, :id => @typus_user.token
 
       assert_equal @typus_user.id, @request.session[:typus_user_id]
       assert_response :redirect
@@ -97,7 +97,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     should "test_should_return_404_on_reset_passsword_if_token_is_not_valid" do
       assert_raises ActiveRecord::RecordNotFound do
-        get :show, { :id => "unexisting" }
+        get :show, :id => "unexisting"
       end
     end
 

@@ -19,7 +19,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
   end
 
   should_eventually "be able to destroy items" do
-    get :destroy, { :id => @user.id, :method => :delete }
+    get :destroy, :id => @user.id, :method => :delete
 
     assert_response :redirect
     assert_equal "User successfully removed.", flash[:notice]
@@ -36,10 +36,10 @@ class Admin::UsersControllerTest < ActionController::TestCase
     end
 
     should "filter by projects" do
-      get :index, { 'projects' => @project_1.id }
+      get :index, :projects => @project_1.id
       assert_equal [@user_1], assigns(:items)
 
-      get :index, { 'projects' => @project_2.id }
+      get :index, :projects => @project_2.id
       assert_not_equal [@user_1], assigns(:items)
     end
 
@@ -61,10 +61,10 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
     should "work" do
       assert_difference('@project.collaborators.count', -1) do
-        post :unrelate, { :id => @user.id,
-                          :resource => 'Project',
-                          :resource_id => @project.id,
-                          :association_name => "collaborators" }
+        post :unrelate, :id => @user.id,
+                        :resource => 'Project',
+                        :resource_id => @project.id,
+                        :association_name => "collaborators"
       end
       assert_response :redirect
       assert_redirected_to @request.env['HTTP_REFERER']
@@ -92,11 +92,11 @@ class Admin::UsersControllerTest < ActionController::TestCase
       post = User.first
       post.update_attributes(:name => "fesplugas")
 
-      get :autocomplete, { :term => "jmeiss" }
+      get :autocomplete, :term => "jmeiss"
       assert_response :success
       assert_equal 0, assigns(:items).size
 
-      get :autocomplete, { :term => "fesplugas" }
+      get :autocomplete, :term => "fesplugas"
       assert_response :success
       assert_equal 1, assigns(:items).size
     end

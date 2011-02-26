@@ -68,7 +68,7 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
     end
 
     should "work for unrelate Invoice from Order" do
-      post :unrelate, { :id => @invoice.id, :resource => 'Order', :resource_id => @order.id }
+      post :unrelate, :id => @invoice.id, :resource => 'Order', :resource_id => @order.id
       assert @order.reload.invoice.nil?
       assert_equal "Order successfully updated.", flash[:notice]
     end

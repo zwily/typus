@@ -44,30 +44,23 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
 
     should "position item one step down" do
       get :position, { :id => @first_category.id, :go => 'move_lower' }
-
       assert_equal "Category successfully updated.", flash[:notice]
-      assert_equal 2, @first_category.reload.position
-      assert_equal 1, @second_category.reload.position
+      assert_equal 2, assigns(:item).position
     end
 
     should "position item one step up" do
       get :position, { :id => @second_category.id, :go => 'move_higher' }
-
-      assert_equal "Category successfully updated.", flash[:notice]
-      assert_equal 2, @first_category.reload.position
-      assert_equal 1, @second_category.reload.position
+      assert_equal 1, assigns(:item).position
     end
 
     should "position top item to bottom" do
       get :position, { :id => @first_category.id, :go => 'move_to_bottom' }
-      assert_equal "Category successfully updated.", flash[:notice]
-      assert_equal 2, @first_category.reload.position
+      assert_equal 2, assigns(:item).position
     end
 
     should "position bottom item to top" do
       get :position, { :id => @second_category.id, :go => 'move_to_top' }
-      assert_equal "Category successfully updated.", flash[:notice]
-      assert_equal 1, @second_category.reload.position
+      assert_equal 1, assigns(:item).position
     end
 
   end
@@ -93,7 +86,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
 
     should "unrelate category from post" do
       assert_difference('@category.posts.count', -1) do
-        post :unrelate, { :id => @category.id, :resource => 'Post', :resource_id => @category.posts.first }
+        post :unrelate, :id => @category.id, :resource => 'Post', :resource_id => @category.posts.first
       end
 
       assert_response :redirect

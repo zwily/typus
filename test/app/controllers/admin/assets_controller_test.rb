@@ -24,17 +24,17 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     end
 
     should "verify there is a file link" do
-      get :edit, { :id => @asset.id }
+      get :edit, :id => @asset.id
       assert_match /media/, @response.body
     end
 
     should "verify dragonfly can be removed" do
-      get :edit, { :id => @asset.id }
+      get :edit, :id => @asset.id
       assert_match /Remove/, @response.body
 
       assert @asset.dragonfly_uid.present?
 
-      get :update, { :id => @asset.id, :attribute => "dragonfly" }
+      get :update, :id => @asset.id, :attribute => "dragonfly"
       assert_response :redirect
       assert_redirected_to "/admin/assets/edit/#{@asset.id}"
       assert_equal "Asset successfully updated.", flash[:notice]
@@ -44,10 +44,10 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     end
 
     should "verify dragonfly_required can not removed" do
-      get :edit, { :id => @asset.id }
+      get :edit, :id => @asset.id
       assert_no_match /Remove required file/, @response.body
 
-      get :update, { :id => @asset.id, :attribute => "dragonfly_required" }
+      get :update, :id => @asset.id, :attribute => "dragonfly_required"
       assert_response :success
 
       @asset.reload
@@ -56,7 +56,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
     should "verify message on polymorphic relationship" do
       asset = Factory(:asset)
-      get :edit, { :id => asset.id, :resource => @post.class.name, :resource_id => @post.id }
+      get :edit, :id => asset.id, :resource => @post.class.name, :resource_id => @post.id
       assert_select 'body div#flash', "Cancel adding a new asset?"
     end
 
@@ -65,20 +65,20 @@ class Admin::AssetsControllerTest < ActionController::TestCase
   context "Headless" do
 
     should "render index with a custom layout" do
-      get :index, { :layout => "admin/headless" }
+      get :index, :layout => "admin/headless"
       assert_response :success
       assert_template "admin/headless"
     end
 
     should "render new with a custom layout" do
-      get :new, { :layout => "admin/headless" }
+      get :new, :layout => "admin/headless"
       assert_response :success
       assert_template "admin/headless"
     end
 
     should "render edit with a custom layout" do
       asset = Factory(:asset)
-      get :edit, { :id => asset.id, :layout => "admin/headless" }
+      get :edit, :id => asset.id, :layout => "admin/headless"
       assert_response :success
       assert_template "admin/headless"
     end
@@ -125,13 +125,13 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
       should "redirect to edit with custom layout" do
         asset = {:caption => "My Caption", :dragonfly_required => File.new("#{Rails.root}/public/images/rails.png")}
-        post :update, { :id => @asset.id, :asset => asset, :layout => "admin/headless" }
+        post :update, :id => @asset.id, :asset => asset, :layout => "admin/headless"
         assert_response :redirect
         assert_redirected_to :action => "edit", :id => @asset.id, :layout => "admin/headless"
       end
 
       should "render update with custom layout after an error" do
-        post :update, { :id => @asset.id, :asset => { :caption => nil }, :layout => "admin/headless" }
+        post :update, :id => @asset.id, :asset => { :caption => nil }, :layout => "admin/headless"
         assert_response :success
         assert_template "admin/helpers/resources/_errors"
         assert_template "admin/resources/edit"
@@ -141,7 +141,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       should "redirect to index with custom layout" do
         Typus::Resources.expects(:action_after_save).returns("index")
         asset = {:caption => "My Caption", :dragonfly_required => File.new("#{Rails.root}/public/images/rails.png")}
-        post :update, { :id => @asset.id, :asset => asset, :layout => "admin/headless" }
+        post :update, :id => @asset.id, :asset => asset, :layout => "admin/headless"
         assert_response :redirect
         assert_redirected_to :action => "index", :layout => "admin/headless"
       end

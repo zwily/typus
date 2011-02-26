@@ -60,26 +60,26 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     should "create" do
       assert_difference('Post.count') do
-        post :create, { :post => { :title => 'This is another title', :body => 'Body' } }
+        post :create, :post => @post.attributes
         assert_response :redirect
         assert_redirected_to "/admin/posts/edit/#{Post.last.id}"
       end
     end
 
     should "render show" do
-      get :show, { :id => @post.id }
+      get :show, :id => @post.id
       assert_response :success
       assert_template 'show'
     end
 
     should "render edit" do
-      get :edit, { :id => @post.id }
+      get :edit, :id => @post.id
       assert_response :success
       assert_template 'edit'
     end
 
     should "update" do
-      post :update, { :id => @post.id, :title => 'Updated' }
+      post :update, :id => @post.id, :post => { :title => 'Updated' }
       assert_response :redirect
       assert_redirected_to "/admin/posts/edit/#{@post.id}"
     end
@@ -96,7 +96,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
       should "work" do
         assert !@post.published
-        get :toggle, { :id => @post.id, :field => "published" }
+        get :toggle, :id => @post.id, :field => "published"
 
         assert_response :redirect
         assert_redirected_to @request.env["HTTP_REFERER"]
@@ -107,7 +107,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
       should "render edit post when validation fails" do
         @post.body = nil
         @post.save(:validate => false)
-        get :toggle, { :id => @post.id, :field => "published" }
+        get :toggle, :id => @post.id, :field => "published"
         assert_response :success
         assert_template "admin/resources/edit"
       end
@@ -120,28 +120,28 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     should "render index with accepted params" do
       @post.update_attributes(:published => true)
-      get :index, { :published => 'true' }
+      get :index, :published => 'true'
       assert_response :success
       assert_template 'index'
       assert assigns(:items).size.eql?(1)
 
-      get :index, { :published => 'false' }
+      get :index, :published => 'false'
       assert assigns(:items).size.eql?(0)
     end
 
     should "render index with accepted params - search" do
       @post.update_attributes(:title => "neinonon")
-      get :index, { :search => 'neinonon' }
+      get :index, :search => 'neinonon'
       assert_response :success
       assert_template 'index'
       assert assigns(:items).size.eql?(1)
 
-      get :index, { :search => 'unexisting' }
+      get :index, :search => 'unexisting'
       assert assigns(:items).size.eql?(0)
     end
 
     should "render index with non-accepted params" do
-      get :index, { :non_accepted_param => 'non_accepted_param' }
+      get :index, :non_accepted_param => 'non_accepted_param'
       assert_response :success
       assert_template 'index'
     end
@@ -247,14 +247,14 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     should "create an item and redirect to index" do
       assert_difference('Post.count') do
-        post :create, { :post => { :title => 'This is another title', :body => 'Body' } }
+        post :create, :post => @post.attributes
         assert_response :redirect
         assert_redirected_to :action => 'index'
       end
     end
 
     should "update an item and redirect to index" do
-      post :update, { :id => @post.id, :title => 'Updated' }
+      post :update, :id => @post.id, :post => { :title => 'Updated' }
       assert_response :redirect
       assert_redirected_to :action => 'index'
     end
@@ -323,7 +323,7 @@ title;status
 
       should "be able to edit any record" do
         Post.all.each do |post|
-          get :edit, { :id => post.id }
+          get :edit, :id => post.id
           assert_response :success
           assert_template 'edit'
         end
@@ -331,12 +331,12 @@ title;status
 
       should "verify_admin_updating_an_item_does_not_change_typus_user_id_if_not_defined" do
         _post = @post
-        post :update, { :id => @post.id, :post => { :title => 'Updated by admin' } }
+        post :update, :id => @post.id, :post => { :title => 'Updated by admin' }
         assert_equal _post.typus_user_id, @post.reload.typus_user_id
       end
 
       should "verify_admin_updating_an_item_does_change_typus_user_id_to_whatever_admin_wants" do
-        post :update, { :id => @post.id, :post => { :title => 'Updated', :typus_user_id => 108 } }
+        post :update, :id => @post.id, :post => { :title => 'Updated', :typus_user_id => 108 }
         assert_equal 108, @post.reload.typus_user_id
       end
 
@@ -356,24 +356,24 @@ title;status
 
       should "verify_editor_can_show_any_record" do
         Post.all.each do |post|
-          get :show, { :id => post.id }
+          get :show, :id => post.id
           assert_response :success
           assert_template 'show'
         end
       end
 
       should "verify_editor_tried_to_edit_a_post_owned_by_himself" do
-        get :edit, { :id => Factory(:post, :typus_user => @typus_user).id }
+        get :edit, :id => Factory(:post, :typus_user => @typus_user).id
         assert_response :success
       end
 
       should "verify_editor_tries_to_edit_a_post_owned_by_the_admin" do
-        get :edit, { :id => Factory(:post).id }
+        get :edit, :id => Factory(:post).id
         assert_response :unprocessable_entity
       end
 
       should "verify_editor_tries_to_show_a_post_owned_by_the_admin" do
-        get :show, { :id => Factory(:post).id }
+        get :show, :id => Factory(:post).id
         assert_response :success
       end
 
@@ -394,7 +394,7 @@ title;status
       should "verify_editor_tries_to_show_a_post_owned_by_the_admin when only user items" do
         Typus::Resources.expects(:only_user_items).returns(true)
         post = Factory(:post)
-        get :show, { :id => post.id }
+        get :show, :id => post.id
         assert_response :unprocessable_entity
       end
 
@@ -409,9 +409,9 @@ title;status
       should "verify_editor_updating_an_item_does_not_change_typus_user_id" do
         [ 108, nil ].each do |typus_user_id|
           post_ = Factory(:post, :typus_user => @typus_user)
-          post :update, { :id => post_.id, :post => { :title => 'Updated', :typus_user_id => @typus_user.id } }
+          post :update, :id => post_.id, :post => { :title => 'Updated', :typus_user_id => @typus_user.id }
           post_updated = Post.find(post_.id)
-          assert_equal  @request.session[:typus_user_id], post_updated.typus_user_id
+          assert_equal @request.session[:typus_user_id], post_updated.typus_user_id
         end
       end
 
@@ -432,7 +432,7 @@ title;status
       end
 
       should "be able to destroy posts" do
-        get :destroy, { :id => Factory(:post).id, :method => :delete }
+        get :destroy, :id => Factory(:post).id, :method => :delete
 
         assert_response :redirect
         assert_equal "Post successfully removed.", flash[:notice]
@@ -458,7 +458,7 @@ title;status
 
       should "not be able to destroy posts" do
         assert_no_difference('Post.count') do
-          get :destroy, { :id => @post.id, :method => :delete }
+          get :destroy, :id => @post.id, :method => :delete
         end
         assert_response :unprocessable_entity
       end
@@ -544,7 +544,7 @@ title;status
     context "Edit" do
 
       setup do
-        get :edit, { :id => Factory(:post).id }
+        get :edit, :id => Factory(:post).id
       end
 
       should "render_edit_and_verify_presence_of_custom_partials" do
@@ -560,7 +560,7 @@ title;status
     context "Show" do
 
       setup do
-        get :show, { :id => Factory(:post).id }
+        get :show, :id => Factory(:post).id
       end
 
       should "render_show_and_verify_presence_of_custom_partials" do
