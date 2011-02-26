@@ -106,9 +106,7 @@ module Typus
       # OPTIMIZE: This method should accept args.
       #
       def set_attributes_on_create
-        if @resource.typus_user_id?
-          @item.attributes = { Typus.user_fk => admin_user.id }
-        end
+        @item.send("#{Typus.user_fk}=", admin_user.id) if @resource.typus_user_id?
       end
 
       ##
