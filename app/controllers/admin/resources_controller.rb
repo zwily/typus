@@ -11,7 +11,6 @@ class Admin::ResourcesController < Admin::BaseController
   before_filter :get_object, :only => [:show, :edit, :update, :destroy, :toggle, :position, :relate, :unrelate]
   before_filter :check_resource_ownership, :only => [:edit, :update, :destroy, :toggle, :position, :relate, :unrelate ]
   before_filter :check_if_user_can_perform_action_on_resources
-  before_filter :set_order, :only => [:index]
 
   ##
   # This is the main index of the model. With filters, conditions and more.
