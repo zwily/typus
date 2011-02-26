@@ -400,10 +400,11 @@ title;status
       end
 
       should "verify_typus_user_id_of_item_when_creating_record" do
-        post :create, { :post => { :title => "Chunky Bacon", :body => "Lorem ipsum ..." } }
-        post_ = Post.find_by_title("Chunky Bacon")
+        assert_difference('Post.count') do
+          post :create, :post => { :title => "Chunky Bacon", :body => "Lorem ipsum ..." }
+        end
 
-        assert_equal @request.session[:typus_user_id], post_.typus_user_id
+        assert_equal @request.session[:typus_user_id], assigns(:item).typus_user_id
       end
 
       should "verify_editor_updating_an_item_does_not_change_typus_user_id" do
