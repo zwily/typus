@@ -25,6 +25,23 @@ class Admin::ListHelperTest < ActiveSupport::TestCase
       assert list_actions.empty?
     end
 
+    should "not include actions that a role cannot perform" do
+      @resource = mock
+      @resource.stubs(:name).returns("resource")
+      
+      self.stubs(:link_to).returns("some_link")
+      sample_action = ["a body", {:action => :some_action}, {}]
+      self.stubs(:resources_actions).returns([sample_action] * 3)
+
+      admin_user = mock
+      admin_user.stubs(:can?).returns(true, false, true)
+      self.stubs(:admin_user).returns(admin_user)
+      self.stubs(:params).returns({:action => 'some_other_action'})
+
+      results = list_actions.split("/")
+      assert_equal 2, results.size
+    end
+
     should_eventually "return an array with our custom actions"
 
   end
