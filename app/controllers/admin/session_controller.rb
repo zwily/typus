@@ -2,7 +2,6 @@ class Admin::SessionController < Admin::BaseController
 
   skip_before_filter :reload_config_and_roles
   skip_before_filter :authenticate
-  skip_before_filter :set_locale
 
   before_filter :create_an_account?, :only => [:new, :create]
 
@@ -30,6 +29,10 @@ class Admin::SessionController < Admin::BaseController
 
   def create_an_account?
     redirect_to new_admin_account_path if Typus.user_class.count.zero?
+  end
+
+  def set_locale
+    I18n.locale = I18n.default_locale
   end
 
 end
