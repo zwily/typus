@@ -7,16 +7,6 @@ class ActiveRecord::Base
   end
 
   #--
-  #     >> Post.to_resource
-  #     => "posts"
-  #     >> Admin::User.to_resource
-  #     => "admin/users"
-  #++
-  def self.to_resource
-    name.underscore.pluralize
-  end
-
-  #--
   # On a model:
   #
   #     class Post < ActiveRecord::Base
