@@ -1,29 +1,37 @@
-<% admin_user.applications.each do |app| %>
+<% if admin_user.applications.any? %>
 
-  <table>
+  <% admin_user.applications.each do |app| %>
 
-    <thead>
-      <tr>
-        <th><%= Typus::I18n.t(app) %></th>
-      </tr>
-    </thead>
+    <table>
 
-    <% admin_user.application(app).each do |model| %>
+      <thead>
+        <tr>
+          <th><%= Typus::I18n.t(app) %></th>
+        </tr>
+      </thead>
 
-      <%
-        klass = model.typus_constantize
-        klass_human_name = klass.model_name.human.pluralize
-        admin_items_path = { :controller => "/admin/#{klass.to_resource}" }
-      %>
+      <% admin_user.application(app).each do |model| %>
 
-      <tr class="<%= cycle("even", "odd") %>">
-        <td>
-          <%= link_to klass_human_name, admin_items_path %>
-        </td>
-      </tr>
+        <%
+          klass = model.typus_constantize
+          klass_human_name = klass.model_name.human.pluralize
+          admin_items_path = { :controller => "/admin/#{klass.to_resource}" }
+        %>
 
-    <% end %>
+        <tr class="<%= cycle("even", "odd") %>">
+          <td>
+            <%= link_to klass_human_name, admin_items_path %>
+          </td>
+        </tr>
 
-  </table>
+      <% end %>
 
+    </table>
+
+  <% end %>
+
+<% else %>
+  <div class="notice">
+    No applications detected.
+  </div>
 <% end %>
