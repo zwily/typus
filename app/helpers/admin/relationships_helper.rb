@@ -106,7 +106,7 @@ module Admin
 
     def set_condition
       if @resource.typus_user_id? && admin_user.is_not_root?
-        @item.owned_by?(admin_user)
+        admin_user.owns?(@item)
       else
         true
       end

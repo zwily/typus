@@ -46,4 +46,8 @@ class FakeUser
     true
   end
 
+  def owns?(resource)
+    true
+  end
+
 end

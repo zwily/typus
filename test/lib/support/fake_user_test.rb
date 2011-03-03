@@ -56,4 +56,8 @@ class FakeUserTest < ActiveSupport::TestCase
     assert !@fake_user.respond_to?(:resources)
   end
 
+  should "always be the owner of a resource" do
+    assert @fake_user.owns?('a')
+  end
+
 end

@@ -86,7 +86,7 @@ module Typus
         if admin_user.is_not_root?
 
           condition_typus_users = @item.respond_to?(Typus.relationship) && !@item.send(Typus.relationship).include?(admin_user)
-          condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !@item.owned_by?(admin_user)
+          condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !admin_user.owns?(@item)
 
           not_allowed if (condition_typus_users || condition_typus_user_id)
         end

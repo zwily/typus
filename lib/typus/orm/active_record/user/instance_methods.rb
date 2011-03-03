@@ -53,6 +53,10 @@ module Typus
             self.preferences[:locale] = locale
           end
 
+          def owns?(resource)
+            id == resource.send(Typus.user_fk)
+          end
+
         end
       end
     end

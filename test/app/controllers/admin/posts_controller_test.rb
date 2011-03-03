@@ -627,7 +627,7 @@ title;status
           Typus::Resources.stubs(:default_action_on_item).returns(action)
           get :index
           Post.all.each do |post|
-            if post.owned_by?(@typus_user)
+            if @typus_user.owns?(post)
               assert_match "/posts/#{action}/#{post.id}", @response.body
             else
               assert_no_match /\/posts\/#{action}\/#{post.id}/, @response.body
