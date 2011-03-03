@@ -14,7 +14,7 @@ module Admin
     def table_header(model, fields, params = params)
       fields.map do |key, value|
 
-        key = key.gsub(".", " ") if key.match(/\./)
+        key = key.gsub(".", " ") if key.to_s.match(/\./)
         content = model.human_attribute_name(key)
 
         if params[:action].eql?('index') && model.typus_options_for(:sortable)
