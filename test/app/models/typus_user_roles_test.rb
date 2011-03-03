@@ -22,6 +22,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
                   "Dog",
                   "Entry",
                   "Git",
+                  "Hit",
                   "ImageHolder",
                   "Invoice",
                   "Order",
