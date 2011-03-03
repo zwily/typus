@@ -212,4 +212,17 @@ class TypusUserTest < ActiveSupport::TestCase
 
   end
 
+  should "owns a resource" do
+    typus_user = Factory(:typus_user)
+    resource = Factory(:post, :typus_user_id => typus_user.id)
+    assert typus_user.owns?(resource)
+  end
+
+  should "not own a resource" do
+    typus_user = Factory(:typus_user)
+    typus_user_2 = Factory(:typus_user)
+    resource = Factory(:post, :typus_user_id => typus_user_2.id)
+    assert !typus_user.owns?(resource)
+  end
+
 end
