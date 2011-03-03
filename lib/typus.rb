@@ -5,7 +5,7 @@ require "support/hash"
 require "support/object"
 require "support/string"
 
-# require "typus/engine"
+require "typus/engine"
 require "typus/i18n"
 require "typus/orm/base"
 require "typus/orm/active_record"
