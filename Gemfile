@@ -14,10 +14,6 @@ gem 'paperclip'
 gem 'rack-cache', :require => 'rack/cache'
 gem 'rails', '~> 3.0'
 
-# MongoDB support
-gem 'mongoid', '2.0.0.rc.7'
-gem 'bson_ext'
-
 group :test do
   gem 'shoulda-context'
   gem 'mocha' # Make sure mocha is loaded at the end ...
@@ -44,6 +40,10 @@ group :development, :test do
 end
 
 group :production do
+
+  # MongoDB support
+  gem 'mongoid', '2.0.0.rc.7'
+  gem 'bson_ext'
 
   platforms :jruby do
     gem 'activerecord-jdbc-adapter'
