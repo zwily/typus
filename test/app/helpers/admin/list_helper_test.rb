@@ -28,7 +28,7 @@ class Admin::ListHelperTest < ActiveSupport::TestCase
     should "not include actions that a role cannot perform" do
       @resource = mock
       @resource.stubs(:name).returns("resource")
-      
+
       self.stubs(:link_to).returns("some_link")
       sample_action = ["a body", {:action => :some_action}, {}]
       self.stubs(:resources_actions).returns([sample_action] * 3)
