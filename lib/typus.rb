@@ -7,6 +7,7 @@ require "support/string"
 
 require "typus/engine"
 require "typus/i18n"
+require "typus/orm/base"
 require "typus/orm/active_record"
 require "typus/regex"
 require "typus/version"
