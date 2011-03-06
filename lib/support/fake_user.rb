@@ -24,12 +24,6 @@ class FakeUser
     ::I18n.locale
   end
 
-=begin
-  def resources
-    Typus::Configuration.roles[role].compact
-  end
-=end
-
   def applications
     Typus.applications
   end
