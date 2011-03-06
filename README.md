@@ -17,8 +17,8 @@ Français, Magyar, Italiano, Portuguese, Russian, 中文)
 - Customizable and extensible templates.
 - Integrated [paperclip][1] and [dragonfly][2] attachments viewer.
 - Low memory footprint.
-- Works with `Rails 3.0`.
-- Tested with `Ruby 1.8.7-p300` and `Ruby 1.9.2-p136` and `JRuby 1.5.6`.
+- Works with `Rails 3.0.5`.
+- Tested with `ruby-1.8.7-p334`, `ree-1.8.7-2011.03` and `ruby-1.9.2-p180` and `jruby-1.5.6`.
 - Tested with `SQLite`, `MySQL` and `PostgreSQL`.
 - MIT License, the same as Rails.
 
