@@ -23,13 +23,11 @@ module Typus
   autoload :Resources, "typus/resources"
 
   module Controller
-
     autoload :Actions, "typus/controller/actions"
     autoload :Associations, "typus/controller/associations"
     autoload :Autocomplete, "typus/controller/autocomplete"
     autoload :Filters, "typus/controller/filters"
     autoload :Format, "typus/controller/format"
-
   end
 
   module Authentication
