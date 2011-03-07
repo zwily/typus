@@ -10,7 +10,7 @@ module Typus
           end
 
           def resources
-            Typus::Configuration.roles[role].compact
+            Typus::Configuration.roles[role.to_s].compact
           end
 
           def applications
