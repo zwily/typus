@@ -10,7 +10,9 @@
         <%= hidden_field_tag key, value %>
       <% end %>
 
-      <li><%= submit_tag Typus::I18n.t("Filter"), :name => nil %></li>
+      <li><%= submit_tag Typus::I18n.t("Filter"),
+                         :name => nil,
+                         :disable_with => Typus::I18n.t("Sending data ...") %></li>
     </ul>
   </div>
 

@@ -10,7 +10,10 @@
 
   <fieldset class="buttons">
     <ol>
-      <li><%= submit_tag button, :class => "commit", :onclick => "setConfirmUnload(false);" %></li>
+      <li><%= submit_tag button,
+                         :class => "commit",
+                         :onclick => "setConfirmUnload(false);",
+                         :disable_with => Typus::I18n.t("Sending data ...") %></li>
     </ol>
   </fieldset>
 
