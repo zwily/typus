@@ -36,11 +36,11 @@ module Typus
                        #       the near future.
                        data[filter.to_s] || data['default'] || ""
                      when :index
-                       data[filter.to_s] || data['list'] || data['default'] || ""
+                       data['index'] || data['list'] || data['default'] || ""
                      when :new, :create
                        data['new'] || data['form'] || data['default'] || ""
                      when :edit, :update, :toggle
-                       data[filter.to_s] || data['form'] || data['default'] || ""
+                       data['edit'] || data['form'] || data['default'] || ""
                      else
                        data[filter.to_s] || data['default'] || ""
                      end
