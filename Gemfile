@@ -40,7 +40,7 @@ group :development, :test do
 end
 
 # MongoDB support is still in "beta" mode, so I'm not testing it for the moment.
-group :development, :production do
+group :production do
   # MongoDB support
   gem 'mongoid', '2.0.0.rc.7'
   gem 'bson_ext'
