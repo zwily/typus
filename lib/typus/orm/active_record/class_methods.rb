@@ -37,7 +37,9 @@ module Typus
                        data[filter.to_s] || data['default'] || ""
                      when :index
                        data[filter.to_s] || data['list'] || data['default'] || ""
-                     when :new, :create, :edit, :update, :toggle
+                     when :new, :create
+                       data['new'] || data['form'] || data['default'] || ""
+                     when :edit, :update, :toggle
                        data[filter.to_s] || data['form'] || data['default'] || ""
                      else
                        data[filter.to_s] || data['default'] || ""
