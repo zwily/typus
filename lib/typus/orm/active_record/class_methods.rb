@@ -23,7 +23,25 @@ module Typus
         def typus_fields_for(filter)
           ActiveSupport::OrderedHash.new.tap do |fields_with_type|
             data = read_model_config['fields']
-            fields = data[filter.to_s] || data['default'] || ""
+
+            ##
+            # Let's say for example we want to get the fields for actions
+            # related with editing stuff.
+            #
+
+            fields = case filter.to_sym
+                     when :list, :form
+                       # TODO: This statement is for backwards compatibility
+                       #       with the current tests, so can be removed in
+                       #       the near future.
+                       data[filter.to_s] || data['default'] || ""
+                     when :index
+                       data[filter.to_s] || data['list'] || data['default'] || ""
+                     when :new, :create, :edit, :update, :toggle
+                       data[filter.to_s] || data['form'] || data['default'] || ""
+                     else
+                       data[filter.to_s] || data['default'] || ""
+                     end
 
             virtual_fields = instance_methods.map { |i| i.to_s } - model_fields.keys.map { |i| i.to_s }
 

@@ -10,12 +10,6 @@
 class Asset < ActiveRecord::Base
 
   ##
-  # Validations
-  #
-
-  validates :caption, :presence => true
-
-  ##
   # Dragonfly Stuff
   #
 

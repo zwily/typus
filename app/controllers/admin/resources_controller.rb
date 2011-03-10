@@ -236,7 +236,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def fields
-    @resource.typus_fields_for(params[:action].action_mapper)
+    @resource.typus_fields_for(params[:action])
   end
   helper_method :fields
 

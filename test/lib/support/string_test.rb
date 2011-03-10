@@ -49,24 +49,6 @@ class StringTest < ActiveSupport::TestCase
 
   end
 
-  context "action_mapper" do
-
-    should "return list for index" do
-      assert_equal :list, 'index'.action_mapper
-    end
-
-    should "return form for new, create, edit and update" do
-      %w(new create edit update).each do |action|
-        assert_equal :form, action.action_mapper
-      end
-    end
-
-    should "return the same action for everything else" do
-      assert_equal 'undefined', 'undefined'.action_mapper
-    end
-
-  end
-
   context "acl_action_mapper" do
 
     should "return create" do

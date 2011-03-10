@@ -97,7 +97,7 @@ class ClassMethodsTest < ActiveSupport::TestCase
                   ["password_confirmation", :password],
                   ["locale", :selector]]
 
-      assert_equal expected.map { |i| i.first }, TypusUser.typus_fields_for(:form).keys
+      assert_equal expected.map { |i| i.first }, TypusUser.typus_fields_for(:new).keys
       assert_equal expected.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
     end
 
@@ -125,6 +125,16 @@ class ClassMethodsTest < ActiveSupport::TestCase
     should "return undefined fields for TypusUser" do
       expected = %w(first_name last_name role email locale)
       assert_equal expected, TypusUser.typus_fields_for(:undefined).keys
+    end
+
+    should "return fields for new Asset" do
+      expected = %w(dragonfly_required)
+      assert_equal expected, Asset.typus_fields_for(:new).keys
+    end
+
+    should "return fields for edit Asset" do
+      expected = %w(caption dragonfly dragonfly_required original_file_name)
+      assert_equal expected, Asset.typus_fields_for(:edit).keys
     end
 
     should "work for transversal fields" do
@@ -363,7 +373,9 @@ class ClassMethodsTest < ActiveSupport::TestCase
     should "return data for existing model" do
       expected = {"application"=>"CRUD Extended",
                   "fields"=>{"default"=>"caption, dragonfly, dragonfly_required",
-                             "special"=>"caption, dragonfly, dragonfly_required, original_file_name"}}
+                             "special"=>"caption, dragonfly, dragonfly_required, original_file_name",
+                             "form"=>"caption, dragonfly, dragonfly_required, original_file_name",
+                             "new"=>"dragonfly_required"}}
       assert_equal expected, Asset.read_model_config
     end
 
