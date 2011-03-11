@@ -10,8 +10,6 @@ module Admin
         if admin_user.can?(url[:action], @resource.name)
           path = params.dup.merge!(url).compact.cleanup
           link_to Typus::I18n.t(body), path, options
-        else
-          nil
         end
       end.compact.join(" / ").html_safe
     end
