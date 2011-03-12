@@ -6,7 +6,6 @@ require "support/object"
 require "support/string"
 
 require "typus/engine"
-require "typus/i18n"
 require "typus/orm/base"
 require "typus/orm/active_record"
 require "typus/regex"
@@ -20,6 +19,7 @@ autoload :FakeUser, "support/fake_user"
 module Typus
 
   autoload :Configuration, "typus/configuration"
+  autoload :I18n, "typus/i18n"
   autoload :Resources, "typus/resources"
 
   module Controller
