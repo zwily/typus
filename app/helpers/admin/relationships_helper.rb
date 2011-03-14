@@ -6,7 +6,7 @@ module Admin
       @model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.typus_constantize
       @model_to_relate_as_resource = @model_to_relate.to_resource
       @reflection = @resource.reflect_on_association(field.to_sym)
-      @association_name = @reflection.through_reflection ? @reflection.name.to_s : @model_to_relate.model_name
+      @association_name = @reflection.name.to_s
     end
 
     def typus_form_has_many(field)
