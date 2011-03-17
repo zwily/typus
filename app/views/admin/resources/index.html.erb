@@ -16,7 +16,8 @@
 
 <ul class="predefined_filters">
   <% predefined_filters.each do |filter, action, scope| %>
-    <li><%= link_to Typus::I18n.t(filter), params.dup.cleanup.merge(:action => action) %> (<%= @resource.send(scope).count %>)</li>
+    <% url = action.is_a?(String) ? params.dup.cleanup.merge(:action => action) : action %>
+    <li><%= link_to Typus::I18n.t(filter), url %> (<%= @resource.send(scope).count %>)</li>
   <% end %>
 </ul>
 
