@@ -79,7 +79,7 @@ module Admin
     end
 
     def string_filter(filter)
-      values = if @resource.const_defined?(filter.to_s.upcase)
+      values = if set_context.const_defined?(filter.to_s.upcase)
                  set_context::const_get(filter.to_s.upcase).to_a
                else
                  set_context.send(filter.to_s).to_a
