@@ -9,7 +9,7 @@ class Admin::SessionController < Admin::BaseController
   end
 
   def create
-    user = Typus.user_class.authenticate(params[:typus_user][:email], params[:typus_user][:password])
+    user = user_scope.authenticate(params[:typus_user][:email], params[:typus_user][:password])
 
     path = if user
              session[:typus_user_id] = user.id
@@ -33,6 +33,14 @@ class Admin::SessionController < Admin::BaseController
 
   def set_locale
     I18n.locale = I18n.default_locale
+  end
+
+  def user_scope
+    if Typus.user_class.scopes.include?(:in_domain)
+      Typus.user_class.in_domain(request.host)
+    else
+      Typus.user_class
+    end
   end
 
 end
