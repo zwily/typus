@@ -1,8 +1,8 @@
 <%
-  values = if @resource.const_defined?(filter.to_s.upcase)
-             @resource::const_get(filter.to_s.upcase).to_a
+  values = if @resource.const_defined?(attribute.upcase)
+             @resource::const_get(attribute.upcase)
            else
-             @resource.send(filter.to_s).to_a
+             @resource.send(attribute)
            end
 %>
 
