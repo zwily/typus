@@ -152,8 +152,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
     should "be included in index" do
       get :index
-      expected = [["All", "index", "unscoped"]]
-      assert_equal expected, assigns(:predefined_filters)
+      assert assigns(:predefined_filters).nil?
     end
 
   end

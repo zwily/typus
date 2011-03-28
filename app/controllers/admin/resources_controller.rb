@@ -9,6 +9,7 @@ class Admin::ResourcesController < Admin::BaseController
   Whitelist = [:edit, :update, :destroy, :toggle, :position, :relate, :unrelate]
 
   before_filter :get_model
+  before_filter :set_context # MultiSite ...
   before_filter :set_scope
   before_filter :get_object, :only => Whitelist + [:show]
   before_filter :check_resource_ownership, :only => Whitelist
@@ -25,7 +26,6 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       format.html do
-        prepend_predefined_filter("All", "index", "unscoped")
         add_resource_action(default_action.titleize, {:action => default_action}, {})
         add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
         generate_html
@@ -209,8 +209,13 @@ class Admin::ResourcesController < Admin::BaseController
     @object_name = ActiveModel::Naming.singular(@resource)
   end
 
+  def set_context
+    @resource
+  end
+  helper_method :set_context
+
   def set_scope
-    @resource = @resource.unscoped
+    @resource
   end
 
   def get_object

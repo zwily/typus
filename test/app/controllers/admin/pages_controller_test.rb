@@ -27,10 +27,10 @@ class Admin::PagesControllerTest < ActionController::TestCase
       Factory(:page, :status => false)
     end
 
-    should "return unscoped results" do
+    should "return scoped results" do
       assert Page.count.eql?(1)
       get :index
-      assert assigns(:items).size.eql?(2)
+      assert assigns(:items).size.eql?(1)
     end
   end
 
