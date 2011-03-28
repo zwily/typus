@@ -80,9 +80,9 @@ module Admin
 
     def string_filter(filter)
       values = if @resource.const_defined?(filter.to_s.upcase)
-                 @resource::const_get(filter.to_s.upcase).to_a
+                 set_context::const_get(filter.to_s.upcase).to_a
                else
-                 @resource.send(filter.to_s).to_a
+                 set_context.send(filter.to_s).to_a
                end
 
       items = [[Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase), ""]]
