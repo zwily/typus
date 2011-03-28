@@ -140,7 +140,11 @@ module Admin
 
     def typus_belongs_to_field(attribute, form)
       association = @resource.reflect_on_association(attribute.to_sym)
-      related = association.class_name.typus_constantize
+      related = if defined?(set_belongs_to_context)
+                  set_belongs_to_context.send(attribute.pluralize.to_sym)
+                else
+                  association.class_name.typus_constantize
+                end
       related_fk = association.primary_key_name
 
       # TODO: Use the build_add_new method.
