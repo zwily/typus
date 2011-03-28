@@ -116,6 +116,7 @@ ActiveRecord::Schema.define do
   create_table :views, :force => true do |t|
     t.string :ip, :default => '127.0.0.1'
     t.integer :post_id
+    t.integer :site_id
     t.timestamps
   end
 
@@ -180,6 +181,15 @@ ActiveRecord::Schema.define do
     t.string :name
     t.integer :imageable_id
     t.string :imageable_type
+  end
+
+  ##
+  # Context
+  #
+
+  create_table :sites, :force => true do |t|
+    t.string :name, :null => false
+    t.string :domain, :null => false
   end
 
 end

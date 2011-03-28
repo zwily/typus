@@ -56,6 +56,7 @@ end
 Factory.define :view do |f|
   f.ip "127.0.0.1"
   f.association :post
+  f.association :site
 end
 
 ##
@@ -108,4 +109,13 @@ end
 
 Factory.define :image_holder do |f|
   f.sequence(:name) { |n| "ImageHolder##{n}" }
+end
+
+##
+# Contexts
+##
+
+Factory.define :site do |f|
+  f.sequence(:name) { |n| "Site##{n}" }
+  f.sequence(:domain) { |n| "site#{n}.local" }
 end
