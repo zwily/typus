@@ -41,9 +41,13 @@ end
 
 # MongoDB support is still in "beta" mode, so I'm not testing it for the moment.
 group :production do
-  # MongoDB support
-  gem 'mongoid', '2.0.0.rc.7'
-  gem 'bson_ext'
+
+  gem 'mongoid'
+
+  platforms :ruby do
+    gem 'bson_ext'
+  end
+
 end
 
 group :production do
