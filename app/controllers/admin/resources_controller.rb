@@ -10,7 +10,6 @@ class Admin::ResourcesController < Admin::BaseController
 
   before_filter :get_model
   before_filter :set_context # MultiSite ...
-  before_filter :set_scope
   before_filter :get_object, :only => Whitelist + [:show]
   before_filter :check_resource_ownership, :only => Whitelist
   before_filter :check_if_user_can_perform_action_on_resources
@@ -213,10 +212,6 @@ class Admin::ResourcesController < Admin::BaseController
     @resource
   end
   helper_method :set_context
-
-  def set_scope
-    @resource
-  end
 
   def get_object
     @item = @resource.find(params[:id])

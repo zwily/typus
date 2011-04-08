@@ -34,7 +34,4 @@ class Admin::HitsController < Admin::ResourcesController
     end
   end
 
-  def set_scope; end
-  private :set_scope
-
 end
