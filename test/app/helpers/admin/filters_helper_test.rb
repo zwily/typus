@@ -114,6 +114,11 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
       @resource = Post
     end
 
+    # This hack has to be removed!
+    def set_context
+      Post
+    end
+
     should "return an array from status which is a Hash" do
       output = string_filter("status")
       expected = [["Show by status", ""],
