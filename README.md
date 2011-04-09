@@ -12,10 +12,9 @@ extensible enough to match lots of use cases.
 - Built-in Authentication.
 - User Permissions by using Access Control Lists. (stored in yaml files)
 - CRUD and custom actions for your models on a clean interface.
-- Internationalized interface (Català, German, Greek, English, Español,
-Français, Magyar, Italiano, Portuguese, Russian, 中文)
+- Internationalized interface ([See available translations][locales])
 - Customizable and extensible templates.
-- Integrated [paperclip][1] and [dragonfly][2] attachments viewer.
+- Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
 - Low memory footprint.
 - Works with `Rails 3.0.5`.
 - Tested with `ruby-1.8.7-p334`, `ree-1.8.7-2011.03`, `ruby-1.9.2-p180` and `jruby-1.6.0`.
@@ -25,7 +24,7 @@ Français, Magyar, Italiano, Portuguese, Russian, 中文)
 ## Links
 
 - [Documentation](http://core.typuscms.com/)
-- [Demo](http://demo.typuscms.com/) ([Code][3])
+- [Demo](http://demo.typuscms.com/) ([Code][code])
 - [Source Code](http://github.com/fesplugas/typus)
 - [Mailing List](http://groups.google.com/group/typus)
 - [Gems](http://rubygems.org/gems/typus)
@@ -78,6 +77,7 @@ and go to <http://0.0.0.0:3000/admin>.
     OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[1]: http://rubygems.org/gems/paperclip
-[2]: http://rubygems.org/gems/dragonfly
-[3]: https://github.com/fesplugas/typus/tree/master/test/fixtures/rails_app
+[paperclip]: http://rubygems.org/gems/paperclip
+[dragonfly]: http://rubygems.org/gems/dragonfly
+[code]: https://github.com/fesplugas/typus/tree/master/test/fixtures/rails_app
+[locales]: https://github.com/fesplugas/typus/tree/master/config/locales
