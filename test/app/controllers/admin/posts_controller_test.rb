@@ -485,6 +485,32 @@ title;status
       assert_equal "Post successfully updated.", flash[:notice]
     end
 
+    should "return a message instead a 404 error if related_id is empty" do
+      comment = Factory(:comment, :post => nil)
+      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
+
+      assert_no_difference('@post.comments.count') do
+        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => "", :association_name => 'comments' } }
+      end
+
+      assert_response :redirect
+      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_equal "Please, select an option.", flash[:notice]
+    end
+
+    should "return a message instead a 404 error if related_id is nil" do
+      comment = Factory(:comment, :post => nil)
+      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
+
+      assert_no_difference('@post.comments.count') do
+        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => nil, :association_name => 'comments' } }
+      end
+
+      assert_response :redirect
+      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_equal "Please, select an option.", flash[:notice]
+    end
+
     should "relate category to post (has_and_belongs_to_many)" do
       category = Factory(:category)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"

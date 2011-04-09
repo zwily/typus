@@ -165,8 +165,11 @@ class Admin::ResourcesController < Admin::BaseController
     resource_class = params[:related][:model].typus_constantize
     association_name = params[:related][:association_name].tableize
 
-    if @item.send(association_name) << resource_class.find(params[:related][:id])
+    if params[:related][:id].present? && (item = resource_class.find(params[:related][:id]))
+      @item.send(association_name) << item
       notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
+    else
+      notice = Typus::I18n.t("Please, select an option.")
     end
 
     redirect_to :back, :notice => notice
