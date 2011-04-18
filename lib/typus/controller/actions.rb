@@ -20,6 +20,13 @@ module Typus
       #       super
       #     end
       #
+      # Additionally you can set a condition to each action passing a Proc as 4th parameter. If the proc return true
+      # the item will be showed and if return false will be hidden.
+      #
+      #     def index
+      #       add_resource_action('Recover', {:action => 'untrash'}, {}, Proc.new {|item| item.is_trash? })
+      #       super
+      #     end
 
       def add_resource_action(*args)
         @resource_actions ||= []

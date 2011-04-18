@@ -56,6 +56,32 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
 
   end
 
+  context "table_actions" do
+    setup do
+      admin_user = mock
+      admin_user.stubs(:can?).returns(true)
+      self.stubs(:admin_user).returns(admin_user)
+      self.stubs(:params).returns({:controller => 'admin/comments', :action => 'some_other_action'})
+    end
+
+    should "work" do
+      item = Factory(:comment)
+      @resource_actions = [["Show", {:action => :show}, {}]]
+      expected = %Q(<a href="/admin/comments/show/#{item.id}">Show</a>)
+
+      assert_equal expected, table_actions(Comment, item, nil)
+    end
+
+    should "work with conditions" do
+      item = Factory(:comment, :id => 1)
+      proc1 = Proc.new {|item| item.id != 1}
+      @resource_actions = [["Show", {:action => :show}, {}, proc1], ["Edit", {:action => :edit}, {}]]
+      expected = %Q(<a href="/admin/comments/edit/#{item.id}">Edit</a>)
+
+      assert_equal expected, table_actions(Comment, item, nil)
+    end
+  end
+
   context "resource_actions" do
 
     should "return a default value which is an empty array" do

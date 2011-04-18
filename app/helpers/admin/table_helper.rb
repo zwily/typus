@@ -51,10 +51,12 @@ module Admin
     end
 
     def table_actions(model, item, association_name = nil)
-      resource_actions.map do |body, url, options|
+      resource_actions.map do |body, url, options, proc|
         if admin_user.can?(url[:action], model.name)
+          next if proc && proc.respond_to?(:call) && proc.call(item) == false
+
           link_to Typus::I18n.t(body),
-                  params.dup.cleanup.merge(url).merge(:controller => model.to_resource, :id => item.id),
+                  params.dup.cleanup.merge(url).merge(:controller => "admin/#{model.to_resource}", :id => item.id),
                   options
         end
       end.compact.join(" / ").html_safe
