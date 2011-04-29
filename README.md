@@ -15,7 +15,8 @@
 
 ## Links
 
-- [Documentation](http://core.typuscms.com/)
+- [Documentation](https://github.com/fesplugas/typus/wiki)
+- [Issues](https://github.com/fesplugas/typus/issues)
 - [Demo](http://demo.typuscms.com/) ([Code][code])
 - [Source Code](http://github.com/fesplugas/typus)
 - [Mailing List](http://groups.google.com/group/typus)
