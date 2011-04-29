@@ -29,7 +29,6 @@ extensible enough to match lots of use cases.
 - [Mailing List](http://groups.google.com/group/typus)
 - [Gems](http://rubygems.org/gems/typus)
 - [Contributors List](http://github.com/fesplugas/typus/contributors)
-- [Continous Integration](http://ci.typuscms.com/)
 
 ## Installing
 
