@@ -34,21 +34,12 @@ extensible enough to match lots of use cases.
 
 Add **Typus** to your `Gemfile`
 
-    gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
+    gem 'typus', :git => 'git://github.com/fesplugas/typus.git'
 
-    # If you have problems with "Smart HTTP" use the "Git Transfer Protocol".
-    # gem 'typus', :git => 'git://github.com/fesplugas/typus.git'
-
-Update your bundle
+Update your bundle, run the generator and start the application server:
 
     $ bundle install
-
-Run the generator
-
     $ rails generate typus
-
-Start the application server
-
     $ rails server
 
 and go to <http://0.0.0.0:3000/admin>.
