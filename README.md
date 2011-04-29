@@ -9,8 +9,7 @@ extensible enough to match lots of use cases.
 
 ## Key Features
 
-- Built-in Authentication.
-- User Permissions by using Access Control Lists. (stored in yaml files)
+- Built-in Authentication and Access Control Lists.
 - CRUD and custom actions for your models on a clean interface.
 - Internationalized interface ([See available translations][locales])
 - Customizable and extensible templates.
