@@ -15,11 +15,9 @@ extensible enough to match lots of use cases.
 - Internationalized interface ([See available translations][locales])
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
-- Low memory footprint.
 - Works with `Rails 3.0.X`.
 - Tested with `ruby-1.8.7-p334`, `ree-1.8.7-2011.03`, `ruby-1.9.2-p180` and `jruby-1.6.0`.
 - Tested with `SQLite`, `MySQL` and `PostgreSQL`.
-- MIT License, the same as Rails.
 
 ## Links
 
