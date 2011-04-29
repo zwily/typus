@@ -1,11 +1,6 @@
 # Typus: Admin Panel for Ruby on Rails applications
 
-**Typus** is designed for a single activity:
-
-    Trusted users editing structured content.
-
-**Typus** doesn't try to be all the things to all the people but it's
-extensible enough to match lots of use cases.
+**Typus** allows trusted users to edit structured content.
 
 ## Key Features
 
