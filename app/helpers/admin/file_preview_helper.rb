@@ -24,14 +24,12 @@ module Admin
                   attachment.present?
                 end
 
-      return unless present
-
       field = case get_type_of_attachment(attachment)
               when :dragonfly then attribute
               when :paperclip then "#{attribute}_file_name"
               end
 
-      if !validators.include?(field) && attachment
+      if present && !validators.include?(field) && attachment
         attribute_i18n = @item.class.human_attribute_name(attribute)
         message = Typus::I18n.t("Remove")
         label_text = <<-HTML
