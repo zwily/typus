@@ -10,7 +10,7 @@
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
 - Works with `Rails 3.0.X`.
-- Tested with `ruby-1.8.7-p334`, `ree-1.8.7-2011.03`, `ruby-1.9.2-p180` and `jruby-1.6.0`.
+- Tested with latest versions of `1.8.7`, `ree`, `1.9.2` and `jruby`.
 - Tested with `SQLite`, `MySQL` and `PostgreSQL`.
 
 ## Links
