@@ -29,6 +29,11 @@ ActiveRecord::Schema.define do
     t.string :paperclip_content_type
     t.integer :paperclip_file_size
     t.datetime :paperclip_updated_at
+    # Paperclip Required Attachment
+    t.string :paperclip_required_file_name
+    t.string :paperclip_required_content_type
+    t.integer :paperclip_required_file_size
+    t.datetime :paperclip_required_updated_at
   end
 
   create_table :categories, :force => true do |t|

@@ -14,6 +14,7 @@ class Asset < ActiveRecord::Base
   #
 
   image_accessor :dragonfly
+
   image_accessor :dragonfly_required
   validates :dragonfly_required, :presence => true
 
@@ -22,6 +23,9 @@ class Asset < ActiveRecord::Base
   #
 
   has_attached_file :paperclip, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
+  has_attached_file :paperclip_required, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  validates_attachment_presence :paperclip_required
 
   ##
   # Instance Methods

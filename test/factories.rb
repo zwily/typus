@@ -21,6 +21,7 @@ Factory.define :asset do |f|
   f.dragonfly File.new("#{Rails.root}/public/images/rails.png")
   f.dragonfly_required File.new("#{Rails.root}/public/images/rails.png")
   f.paperclip File.new("#{Rails.root}/public/images/rails.png")
+  f.paperclip_required File.new("#{Rails.root}/public/images/rails.png")
 end
 
 Factory.define :category do |f|

@@ -85,11 +85,15 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
     context "create" do
 
-      should "redirect to edit with custom layout" do
-        asset = {:caption => "My Caption", :dragonfly_required => File.new("#{Rails.root}/public/images/rails.png")}
+      setup do
+        @asset = { :caption => "My Caption",
+                   :dragonfly_required => File.new("#{Rails.root}/public/images/rails.png"),
+                   :paperclip_required => File.new("#{Rails.root}/public/images/rails.png") }
+      end
 
+      should "redirect to edit with custom layout" do
         assert_difference('Asset.count') do
-          post :create, { :asset => asset, :layout => "admin/headless" }
+          post :create, { :asset => @asset, :layout => "admin/headless" }
         end
 
         assert_response :redirect
@@ -98,10 +102,9 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
       should "redirect to index with custom layout" do
         Typus::Resources.expects(:action_after_save).returns("index")
-        asset = {:caption => "My Caption", :dragonfly_required => File.new("#{Rails.root}/public/images/rails.png")}
 
         assert_difference('Asset.count') do
-          post :create, { :asset => asset, :layout => "admin/headless" }
+          post :create, { :asset => @asset, :layout => "admin/headless" }
         end
 
         assert_response :redirect
