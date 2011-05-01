@@ -26,12 +26,20 @@ class Admin::FilePreviewHelperTest < ActiveSupport::TestCase
       @asset = @item = Factory(:asset)
     end
 
-    should "work for :dragonfly and return nil when attribute is required" do
+    should "work for :dragonfly_required and return nil when attribute is required" do
       assert_nil link_to_detach_attribute('dragonfly_required')
+    end
+
+    should "work for :paperclip_required and return nil when attribute is required" do
+      assert_nil link_to_detach_attribute('paperclip_required')
     end
 
     should "work for :dragonfly and return link when attribute is not required" do
       assert_match /Remove/, link_to_detach_attribute('dragonfly')
+    end
+
+    should "work for :paperclip_required and return link when attribute is not required" do
+      assert_match /Remove/, link_to_detach_attribute('paperclip')
     end
 
   end

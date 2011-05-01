@@ -14,6 +14,18 @@ module Admin
 
       attachment = @item.send(attribute)
 
+      # We are here and we already know we are handling attachments, but
+      # `dragonfly` and `paperclip` have different behaviors.
+
+      present = case attachment
+                when Paperclip::Attachment
+                  attachment.exists?
+                else
+                  attachment.present?
+                end
+
+      return unless present
+
       field = case get_type_of_attachment(attachment)
               when :dragonfly then attribute
               when :paperclip then "#{attribute}_file_name"
