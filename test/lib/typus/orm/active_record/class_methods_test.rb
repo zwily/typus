@@ -128,7 +128,7 @@ class ClassMethodsTest < ActiveSupport::TestCase
     end
 
     should "return fields for new Asset" do
-      expected = %w(dragonfly_required paperclip_required)
+      expected = %w(dragonfly dragonfly_required paperclip paperclip_required)
       assert_equal expected, Asset.typus_fields_for(:new).keys
     end
 
@@ -375,7 +375,7 @@ class ClassMethodsTest < ActiveSupport::TestCase
                   "fields"=>{"default"=>"caption, dragonfly, dragonfly_required",
                              "special"=>"caption, dragonfly, dragonfly_required, original_file_name",
                              "form"=>"caption, dragonfly, dragonfly_required, paperclip, paperclip_required, original_file_name",
-                             "new"=>"dragonfly_required, paperclip_required"}}
+                             "new"=>"dragonfly, dragonfly_required, paperclip, paperclip_required"}}
       assert_equal expected, Asset.read_model_config
     end
 
