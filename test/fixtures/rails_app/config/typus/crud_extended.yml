@@ -2,7 +2,7 @@ Asset:
   fields:
     default: caption, dragonfly, dragonfly_required
     special: caption, dragonfly, dragonfly_required, original_file_name
-    form: caption, dragonfly, dragonfly_required, original_file_name
+    form: caption, dragonfly, dragonfly_required, paperclip, original_file_name
     new: dragonfly_required
   application: CRUD Extended
 
