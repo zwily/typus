@@ -13,19 +13,27 @@ class Asset < ActiveRecord::Base
   # Dragonfly Stuff
   #
 
-  image_accessor :dragonfly
+  if defined?(Dragonfly)
 
-  image_accessor :dragonfly_required
-  validates :dragonfly_required, :presence => true
+    image_accessor :dragonfly
+
+    image_accessor :dragonfly_required
+    validates :dragonfly_required, :presence => true
+
+  end
 
   ##
   # Paperclip Stuff
   #
 
-  has_attached_file :paperclip, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+  if defined?(Paperclip)
 
-  has_attached_file :paperclip_required, :styles => { :medium => "300x300>", :thumb => "100x100>" }
-  validates_attachment_presence :paperclip_required
+    has_attached_file :paperclip, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+
+    has_attached_file :paperclip_required, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+    validates_attachment_presence :paperclip_required
+
+  end
 
   ##
   # Instance Methods
