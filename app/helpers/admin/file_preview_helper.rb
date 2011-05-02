@@ -17,12 +17,16 @@ module Admin
       # We are here and we already know we are handling attachments, but
       # `dragonfly` and `paperclip` have different behaviors.
 
-      present = case attachment
-                when Paperclip::Attachment
-                  attachment.exists?
-                else
-                  attachment.present?
-                end
+      if defined?(Paperclip)
+        present = case attachment
+                  when Paperclip::Attachment
+                    attachment.exists?
+                  else
+                    attachment.present?
+                  end
+      else
+        present = attachment.present?
+      end
 
       field = case get_type_of_attachment(attachment)
               when :dragonfly then attribute
