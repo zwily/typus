@@ -37,6 +37,10 @@ Update your bundle, run the generator and start the application server:
 
 and go to <http://0.0.0.0:3000/admin>.
 
+## Known Issues
+
+- Dragonfly supported version is 0.8.X.
+
 ## License
 
 Typus is released under the MIT license.
