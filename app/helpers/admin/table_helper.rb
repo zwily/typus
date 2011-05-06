@@ -94,6 +94,7 @@ module Admin
     alias :table_decimal_field :table_generic_field
     alias :table_virtual_field :table_generic_field
     alias :table_string_field :table_generic_field
+    alias :table_password_field :table_generic_field
 
     def table_selector_field(attribute, item)
       item.mapping(attribute)
