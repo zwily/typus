@@ -10,7 +10,7 @@ module Admin
                   items = case value
                           when :boolean then boolean_filter(key)
                           when :string then string_filter(key)
-                          when :date, :datetime then date_filter(key)
+                          when :date, :datetime, :timestamp then date_filter(key)
                           when :belongs_to then belongs_to_filter(key)
                           when :has_many, :has_and_belongs_to_many then
                             has_many_filter(key)
