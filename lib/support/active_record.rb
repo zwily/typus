@@ -40,4 +40,12 @@ class ActiveRecord::Base
     end
   end
 
+  def self.namespaced?
+    name.match(/::/)
+  end
+
+  def self.namespace
+    name.split("::").first if self.namespaced?
+  end
+
 end

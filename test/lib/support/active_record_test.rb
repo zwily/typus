@@ -147,4 +147,28 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
+  context "namespaced?" do
+
+    should "return true if namespaced" do
+      assert Delayed::Task.namespaced?
+    end
+
+    should "return false if no namespaced" do
+      assert !Entry.namespaced?
+    end
+
+  end
+
+  context "namespace" do
+
+    should "return the namespace" do
+      assert_equal "Delayed", Delayed::Task.namespace
+    end
+
+    should "not return the namespace" do
+      assert Entry.namespace.nil?
+    end
+
+  end
+
 end
