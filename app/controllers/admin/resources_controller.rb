@@ -191,7 +191,7 @@ class Admin::ResourcesController < Admin::BaseController
       association_name = @resource.model_name.underscore.to_sym
       worked = item.send(association_name).delete
     else
-      association_name = params[:association_name] ? params[:association_name].to_sym : @resource.model_name.tableize.to_sym
+      association_name = params[:association_name] ? params[:association_name].to_sym : @resource.model_name.tableize.split("/").last.to_sym
       worked = item.send(association_name).delete(@item)
     end
 
