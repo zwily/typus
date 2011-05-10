@@ -56,7 +56,7 @@ module Admin
           next if proc && proc.respond_to?(:call) && proc.call(item) == false
 
           link_to Typus::I18n.t(body),
-                  params.dup.cleanup.merge(url).merge(:controller => "admin/#{model.to_resource}", :id => item.id),
+                  params.dup.cleanup.merge(url).merge(:controller => "/admin/#{model.to_resource}", :id => item.id),
                   options
         end
       end.compact.join(" / ").html_safe
