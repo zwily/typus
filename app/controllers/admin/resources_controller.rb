@@ -273,7 +273,9 @@ class Admin::ResourcesController < Admin::BaseController
   #
   def create_with_back_to
     item_class = params[:resource].typus_constantize
-    options = { :controller => item_class.to_resource }
+    # For some reason we are forced to set the /admin prefix to the controller
+    # when working with namespaced stuff.
+    options = { :controller => "/admin/#{item_class.to_resource}" }
     assoc = item_class.relationship_with(@resource).to_s
     send("set_#{assoc}_association", item_class, options)
   end

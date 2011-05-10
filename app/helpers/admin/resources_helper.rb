@@ -15,7 +15,10 @@ module Admin
       if params[:resource]
 
         item_class = params[:resource].typus_constantize
-        url = { :controller => item_class.to_resource }
+
+        # For some reason we are forced to set the /admin prefix to the controller
+        # when working with namespaced stuff.
+        url = { :controller => "/admin/#{item_class.to_resource}" }
 
         if params[:resource_id]
           item = item_class.find(params[:resource_id])
