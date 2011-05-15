@@ -13,16 +13,16 @@
   <title><%= Typus.admin_title %> &mdash; <%= yield :title %></title>
 
   <%= stylesheet_link_tag "/vendor/typus/stylesheets/reset",
-                          "/vendor/jquery-ui-1.8.9.custom/css/ui-lightness/jquery-ui-1.8.9.custom.css",
-                          "/vendor/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css",
+                          "/vendor/typus/jquery-ui-1.8.9.custom/css/ui-lightness/jquery-ui-1.8.9.custom.css",
+                          "/vendor/typus/vendor/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.css",
                           "/vendor/typus/stylesheets/screen",
                           "/vendor/typus/stylesheets/application" %>
 
   <%= yield :stylesheets -%>
 
-  <%= javascript_include_tag "/vendor/jquery-ui-1.8.9.custom/js/jquery-1.4.4.min.js",
-                             "/vendor/jquery-ui-1.8.9.custom/js/jquery-ui-1.8.9.custom.min.js",
-                             "/vendor/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js",
+  <%= javascript_include_tag "/vendor/typus/vendor/jquery-ui-1.8.9.custom/js/jquery-1.4.4.min.js",
+                             "/vendor/typus/vendor/jquery-ui-1.8.9.custom/js/jquery-ui-1.8.9.custom.min.js",
+                             "/vendor/typus/vendor/jquery.fancybox-1.3.4/fancybox/jquery.fancybox-1.3.4.pack.js",
                              "/vendor/typus/javascripts/jquery.searchField.js",
                              "/vendor/typus/javascripts/jquery.rails.js",
                              "/vendor/typus/javascripts/jquery.rails.autocomplete.js",

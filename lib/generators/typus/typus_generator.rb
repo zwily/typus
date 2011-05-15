@@ -1,6 +1,5 @@
 require "rails/generators/migration"
 
-require "generators/typus/assets_generator"
 require "generators/typus/config_generator"
 require "generators/typus/controller_generator"
 require "generators/typus/initializers_generator"
@@ -26,10 +25,6 @@ Description:
 
       def generate_initializers
         Typus::Generators::InitializersGenerator.new.invoke_all
-      end
-
-      def generate_assets
-        Typus::Generators::AssetsGenerator.new.invoke_all
       end
 
       def generate_controllers
