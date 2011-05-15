@@ -8,7 +8,7 @@ gemspec
 
 gem 'acts_as_list'
 gem 'acts_as_tree'
-gem 'dragonfly', '~>0.8.1'
+gem 'dragonfly', '~> 0.9'
 gem 'factory_girl'
 gem 'paperclip'
 gem 'rack-cache', :require => 'rack/cache'

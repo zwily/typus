@@ -58,7 +58,7 @@ module Typus
                 next
               end
 
-              dragonfly = respond_to?(:dragonfly_apps_for_attributes) && dragonfly_apps_for_attributes.try(:has_key?, field)
+              dragonfly = respond_to?(:dragonfly_attachment_classes) && dragonfly_attachment_classes.map { |i| i.attribute }.include?(field)
               paperclip = respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
 
               if dragonfly || paperclip
