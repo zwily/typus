@@ -19,7 +19,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
       params = { :resource => "Post" }
 
       expected = ["admin/helpers/resources/display_link_to_previous",
-                  {:body=>"Cancel adding a new comment?", :url=>{:controller=>"posts", :action => 'new'}}]
+                  {:body=>"Cancel adding a new comment?", :url=>{:controller=>"/admin/posts", :action => 'new'}}]
 
       assert_equal expected, display_link_to_previous(params)
     end
@@ -29,7 +29,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
       params = { :resource => "Post", :resource_id => @post.id }
 
       expected = ["admin/helpers/resources/display_link_to_previous",
-                  {:body=>"Cancel adding a new comment?", :url=>{:controller=>"posts", :action => 'edit', :id => @post.id}}]
+                  {:body=>"Cancel adding a new comment?", :url=>{:controller=>"/admin/posts", :action => 'edit', :id => @post.id}}]
 
       assert_equal expected, display_link_to_previous(params)
     end
