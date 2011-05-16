@@ -7,7 +7,7 @@ module Typus
           params.merge!(:search => params[:term])
           get_objects
           @items = @resource.limit(20)
-          render :json => @items.map { |i| { "id" => i.id, "label" => i.to_label, "value" => i.to_label } }
+          render :json => @items.map { |i| { "id" => i.id, "label" => i.to_label, "value" => i.to_label, "name" => i.to_label } }
         end
       end
 
