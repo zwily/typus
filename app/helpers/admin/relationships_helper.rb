@@ -158,6 +158,10 @@ module Admin
         message = link_to Typus::I18n.t("Add new"), options
       end
 
+=begin
+
+      # TODO: Remove all this stuff because when you find a nicer solution.
+
       # Set the template.
       template = if related.respond_to?(:roots) || !(related.count > Typus.autocomplete)
                    "admin/templates/belongs_to"
@@ -169,6 +173,15 @@ module Admin
       values = if related.respond_to?(:roots)
                  expand_tree_into_select_field(related.roots, related_fk)
                elsif !(related.count > Typus.autocomplete)
+                 related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
+               end
+=end
+
+      template = "admin/templates/belongs_to"
+
+      values = if related.respond_to?(:roots)
+                 expand_tree_into_select_field(related.roots, related_fk)
+               else
                  related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
                end
 
