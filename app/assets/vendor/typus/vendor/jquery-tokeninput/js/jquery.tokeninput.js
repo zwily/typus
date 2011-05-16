@@ -25,6 +25,7 @@ var DEFAULT_SETTINGS = {
     tokenDelimiter: ",",
     preventDuplicates: false,
     prePopulate: null,
+    processPrePopulate: false,
     animateDropdown: true,
     onResult: null,
     onAdd: null,
@@ -89,7 +90,7 @@ $.TokenList = function (input, url_or_data, settings) {
     //
 
     // Configure the data source
-    if($.type(url_or_data) === "string") {
+    if(typeof(url_or_data) === "string") {
         // Set the url to query against
         settings.url = url_or_data;
 
@@ -101,7 +102,7 @@ $.TokenList = function (input, url_or_data, settings) {
                 settings.crossDomain = (location.href.split(/\/+/g)[1] !== settings.url.split(/\/+/g)[1]);
             }
         }
-    } else if($.type(url_or_data) === "array") {
+    } else if(typeof(url_or_data) === "object") {
         // Set the local data to search through
         settings.local_data = url_or_data;
     }
@@ -246,6 +247,7 @@ $.TokenList = function (input, url_or_data, settings) {
 
     // Keep a reference to the selected token and dropdown item
     var selected_token = null;
+    var selected_token_index = 0;
     var selected_dropdown_item = null;
 
     // The list to store the token items in
@@ -308,14 +310,15 @@ $.TokenList = function (input, url_or_data, settings) {
 
     // Pre-populate list if items exist
     hidden_input.val("");
-    li_data = settings.prePopulate || hidden_input.data("pre");
+    var li_data = settings.prePopulate || hidden_input.data("pre");
+    if(settings.processPrePopulate && $.isFunction(settings.onResult)) {
+        li_data = settings.onResult.call(hidden_input, li_data);
+    }
     if(li_data && li_data.length) {
         $.each(li_data, function (index, value) {
             insert_token(value.id, value.name);
         });
     }
-
-
 
     //
     // Private functions
@@ -339,7 +342,7 @@ $.TokenList = function (input, url_or_data, settings) {
 
     // Inner function to a token to the list
     function insert_token(id, value) {
-        var this_token = $("<li><p>"+ value +"</p> </li>")
+        var this_token = $("<li><p>"+ value +"</p></li>")
           .addClass(settings.classes.token)
           .insertBefore(input_token);
 
@@ -357,7 +360,8 @@ $.TokenList = function (input, url_or_data, settings) {
         $.data(this_token.get(0), "tokeninput", token_data);
 
         // Save this token for duplicate checking
-        saved_tokens.push(token_data);
+        saved_tokens = saved_tokens.slice(0,selected_token_index).concat([token_data]).concat(saved_tokens.slice(selected_token_index));
+        selected_token_index++;
 
         // Update the hidden input
         var token_ids = $.map(saved_tokens, function (el) {
@@ -366,6 +370,12 @@ $.TokenList = function (input, url_or_data, settings) {
         hidden_input.val(token_ids.join(settings.tokenDelimiter));
 
         token_count += 1;
+
+        // Check the token limit
+        if(settings.tokenLimit !== null && token_count >= settings.tokenLimit) {
+            input_box.hide();
+            hide_dropdown();
+        }
 
         return this_token;
     }
@@ -402,20 +412,19 @@ $.TokenList = function (input, url_or_data, settings) {
         if(settings.tokenLimit !== null && token_count >= settings.tokenLimit) {
             input_box.hide();
             hide_dropdown();
-            return;
         } else {
             input_box.focus();
+            
+            // Clear input box
+            input_box.val("");
+
+            // Don't show the help dropdown, they've got the idea
+            hide_dropdown();
         }
-
-        // Clear input box
-        input_box.val("");
-
-        // Don't show the help dropdown, they've got the idea
-        hide_dropdown();
 
         // Execute the onAdd callback if defined
         if($.isFunction(callback)) {
-            callback(li_data);
+            callback.call(hidden_input,li_data);
         }
     }
 
@@ -438,10 +447,13 @@ $.TokenList = function (input, url_or_data, settings) {
 
         if(position === POSITION.BEFORE) {
             input_token.insertBefore(token);
+            selected_token_index--;
         } else if(position === POSITION.AFTER) {
             input_token.insertAfter(token);
+            selected_token_index++;
         } else {
             input_token.appendTo(token_list);
+            selected_token_index = token_count;
         }
 
         // Show the input box and give it focus again
@@ -469,6 +481,9 @@ $.TokenList = function (input, url_or_data, settings) {
         var token_data = $.data(token.get(0), "tokeninput");
         var callback = settings.onDelete;
 
+        var index = token.prevAll().length;
+        if(index > selected_token_index) index--;
+
         // Delete the token
         token.remove();
         selected_token = null;
@@ -477,9 +492,8 @@ $.TokenList = function (input, url_or_data, settings) {
         input_box.focus();
 
         // Remove this token from the saved list
-        saved_tokens = $.grep(saved_tokens, function (val) {
-            return (val.id !== token_data.id);
-        });
+        saved_tokens = saved_tokens.slice(0,index).concat(saved_tokens.slice(index+1));
+        if(index < selected_token_index) selected_token_index--;
 
         // Update the hidden input
         var token_ids = $.map(saved_tokens, function (el) {
@@ -498,7 +512,7 @@ $.TokenList = function (input, url_or_data, settings) {
 
         // Execute the onDelete callback if defined
         if($.isFunction(callback)) {
-            callback(token_data);
+            callback.call(hidden_input,token_data);
         }
     }
 
@@ -661,7 +675,7 @@ $.TokenList = function (input, url_or_data, settings) {
                 // Attach the success callback
                 ajax_params.success = function(results) {
                   if($.isFunction(settings.onResult)) {
-                      results = settings.onResult.call(this, results);
+                      results = settings.onResult.call(hidden_input, results);
                   }
                   cache.add(query, settings.jsonContainer ? results[settings.jsonContainer] : results);
 
@@ -679,6 +693,10 @@ $.TokenList = function (input, url_or_data, settings) {
                     return row.name.toLowerCase().indexOf(query.toLowerCase()) > -1;
                 });
 
+                if($.isFunction(settings.onResult)) {
+                    results = settings.onResult.call(hidden_input, results);
+                }
+                cache.add(query, results);
                 populate_dropdown(query, results);
             }
         }
