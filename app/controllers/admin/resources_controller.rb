@@ -1,6 +1,7 @@
 class Admin::ResourcesController < Admin::BaseController
 
   include Typus::Controller::Actions
+  include Typus::Controller::ActsAs
   include Typus::Controller::Associations
   include Typus::Controller::Autocomplete
   include Typus::Controller::Filters
@@ -121,21 +122,6 @@ class Admin::ResourcesController < Admin::BaseController
         format.json { render :json => @item.errors, :status => :unprocessable_entity }
       end
     end
-  end
-
-  ##
-  # Change item position:
-  #
-  #   params[:go] = 'move_to_top'
-  #
-  # Available positions are move_to_top, move_higher, move_lower, move_to_bottom.
-  #
-  # NOTE: Only works if `acts_as_list` is installed.
-  #
-  def position
-    @item.send(params[:go])
-    notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
-    redirect_to :back, :notice => notice
   end
 
   private
