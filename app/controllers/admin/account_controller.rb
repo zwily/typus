@@ -42,11 +42,11 @@ class Admin::AccountController < Admin::BaseController
   private
 
   def sign_in?
-    redirect_to new_admin_session_path unless Typus.user_class.count.zero?
+    redirect_to new_admin_session_path unless zero_users
   end
 
   def new?
-    redirect_to new_admin_account_path if Typus.user_class.count.zero?
+    redirect_to new_admin_account_path if zero_users
   end
 
 end

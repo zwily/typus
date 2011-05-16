@@ -28,7 +28,7 @@ class Admin::SessionController < Admin::BaseController
   private
 
   def create_an_account?
-    redirect_to new_admin_account_path if Typus.user_class.count.zero?
+    redirect_to new_admin_account_path if zero_users
   end
 
   def set_locale

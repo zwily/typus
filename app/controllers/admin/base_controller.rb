@@ -28,4 +28,8 @@ class Admin::BaseController < ActionController::Base
     I18n.locale = admin_user.locale if admin_user.respond_to?(:locale)
   end
 
+  def zero_users
+    Typus.user_class.count.zero?
+  end
+
 end
