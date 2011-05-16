@@ -170,6 +170,7 @@ fieldset.inputs { }
 
   fieldset.inputs input[type='text'],
   fieldset.inputs input[type='password'] {
+    border: 1px solid #999;
     font-size: 20px;
     padding: 5px;
     width: 685px;
@@ -177,7 +178,7 @@ fieldset.inputs { }
 
   fieldset.inputs input[type='text']:focus,
   fieldset.inputs input[type='password']:focus {
-    background: #FFFCE1;
+    /* background: #FFFCE1; */
   }
 
   fieldset.inputs textarea {

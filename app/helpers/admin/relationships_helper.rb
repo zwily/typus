@@ -173,6 +173,7 @@ module Admin
                end
 
       render template,
+             :association => association,
              :resource => @resource,
              :attribute => attribute,
              :form => form,
