@@ -20,12 +20,6 @@ $(document).ready(function(){
       minLength: 3,
       source: $(this).attr('data-autocomplete'),
 
-      change: function (event, ui) {
-        if (!this.value) {
-          $($(this).attr('id_element')).val('');
-        }
-      },
-
       select: function(event, ui) {
         $(this).val(ui.item.value);
         if ($(this).attr('id_element')) {
