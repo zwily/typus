@@ -3,7 +3,7 @@ require "test_helper"
 class TypusTest < ActiveSupport::TestCase
 
   should "verify default_config for autocomplete" do
-    assert_equal 100, Typus.autocomplete
+    assert Typus.autocomplete.nil?
   end
 
   should "verify default_config for admin_title" do

@@ -39,7 +39,7 @@ module Typus
   end
 
   mattr_accessor :autocomplete
-  @@autocomplete = 100
+  @@autocomplete = nil
 
   mattr_accessor :admin_title
   @@admin_title = "Typus"
