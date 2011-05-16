@@ -2,6 +2,72 @@ module Typus
   module Controller
     module Associations
 
+      ##
+      # Action to relate models which respond to:
+      #
+      #   - has_and_belongs_to_many
+      #   - has_many
+      #
+      # For example:
+      #
+      #   class Item < ActiveRecord::Base
+      #     has_many :line_items
+      #   end
+      #
+      #   class LineItem < ActiveRecord::Base
+      #     belongs_to :item
+      #   end
+      #
+      #   >> related_item = LineItem.find(params[:related][:id])
+      #   => ...
+      #   >> item = Item.find(params[:id])
+      #   => ...
+      #   >> item.line_items << related_item
+      #   => ...
+      #
+      def relate
+        resource_class = params[:related][:model].typus_constantize
+        association_name = params[:related][:association_name].tableize
+
+        if params[:related][:id].present? && (item = resource_class.find(params[:related][:id]))
+          @item.send(association_name) << item
+          notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
+        else
+          notice = Typus::I18n.t("Please, select an option.")
+        end
+
+        redirect_to :back, :notice => notice
+      end
+
+      ##
+      # Action to unrelate models which respond to:
+      #
+      #   - has_and_belongs_to_many
+      #   - has_many
+      #   - has_one
+      #
+      def unrelate
+        item_class = params[:resource].typus_constantize
+        item = item_class.find(params[:resource_id])
+
+        case item_class.relationship_with(@resource)
+        when :has_one
+          association_name = @resource.model_name.underscore.to_sym
+          worked = item.send(association_name).delete
+        else
+          association_name = params[:association_name] ? params[:association_name].to_sym : @resource.model_name.tableize.split("/").last.to_sym
+          worked = item.send(association_name).delete(@item)
+        end
+
+        if worked
+          notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
+        else
+          alert = item.error.full_messages
+        end
+
+        redirect_to :back, :notice => notice, :alert => alert
+      end
+
       protected
 
       ##
