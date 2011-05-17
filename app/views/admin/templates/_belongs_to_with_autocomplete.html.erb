@@ -1,4 +1,5 @@
 <% content_for :javascripts do %>
+  <% label = "#{@item.class.model_name.underscore.gsub("/","_")}_#{related_fk}" %>
   <script type="text/javascript">
     $(document).ready(function () {
         $("#tokenInput_for_<%= related_fk %>").tokenInput("/admin/<%= association.name.to_s.pluralize %>/autocomplete", {
@@ -9,10 +10,10 @@
             prePopulate: [ { id: <%= item.id %>, name: "<%= item.to_label %>" } ],
             <% end %>
             onAdd: function(item) {
-                $("#<%= @item.class.model_name.underscore %>_<%= related_fk %>").val(item.id);
+                $("#<%= label %>").val(item.id);
             },
             onDelete: function (item) {
-                $("#<%= @item.class.model_name.underscore %>_<%= related_fk %>").val("");
+                $("#<%= label %>").val("");
             }
         });
     });
