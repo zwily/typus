@@ -5,14 +5,13 @@ require "support/hash"
 require "support/object"
 require "support/string"
 
-require "typus/engine"
+# require "typus/engine"
 require "typus/orm/base"
 require "typus/orm/active_record"
 require "typus/regex"
 require "typus/version"
 
-require "render_inheritable"
-require "will_paginate"
+require "kaminari"
 
 autoload :FakeUser, "support/fake_user"
 
@@ -69,7 +68,8 @@ module Typus
   # Pagination options
   #
   mattr_accessor :pagination
-  @@pagination = { :previous_label => "&larr; " + Typus::I18n.t("Previous"),
+  @@pagination = { :window => 0,
+                   :previous_label => "&larr; " + Typus::I18n.t("Previous"),
                    :next_label => Typus::I18n.t("Next") + " &rarr;" }
 
   ##
