@@ -10,9 +10,10 @@ gem 'acts_as_list'
 gem 'acts_as_tree'
 gem 'dragonfly', '~> 0.9'
 gem 'factory_girl'
+gem 'jquery-rails'
 gem 'paperclip'
 gem 'rack-cache', :require => 'rack/cache'
-gem 'rails', '~> 3.0'
+gem 'rails', :git => 'git://github.com/rails/rails.git'
 
 group :test do
   gem 'shoulda-context'
@@ -42,7 +43,7 @@ end
 # MongoDB support is still in "beta" mode, so I'm not testing it for the moment.
 group :production do
 
-  gem 'mongoid'
+#  gem 'mongoid'
 
   platforms :ruby do
     gem 'bson_ext'
