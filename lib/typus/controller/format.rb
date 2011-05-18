@@ -38,7 +38,7 @@ module Typus
                          a, b = key.split(".")
                          record.send(a).send(b)
                        when :belongs_to
-                         record.send(key).to_label
+                         record.send(key).try(:to_label)
                        else
                          record.send(key)
                        end
