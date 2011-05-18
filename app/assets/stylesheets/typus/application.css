@@ -1,6 +1,7 @@
 /*
- *= require typus/reset
- *= require typus/screen
- *= require typus/pagination
- *= require typus/custom
+*= require typus/reset
+*= require typus/screen
+*= require typus/pagination
+*= require_tree ../../vendor
+*= require typus/custom
 */
