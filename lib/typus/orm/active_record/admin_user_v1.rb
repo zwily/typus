@@ -78,7 +78,7 @@ module Typus
           end
 
           def generate_token
-            self.token = encrypt("--#{Time.zone.now.to_s(:number)}--#{password}--").first(12)
+            self.token = ActiveSupport::SecureRandom.hex(12)
           end
 
           def password_required?
