@@ -22,4 +22,16 @@ class UserTest < ActiveSupport::TestCase
     assert_equal "John Locke", user.to_label
   end
 
+  test "can?" do
+    user = Factory.build(:user, :role => 'admin')
+    assert user.can?('delete', TypusUser)
+    assert user.can?('delete', 'TypusUser')
+  end
+
+  test "cannot?" do
+    user = Factory.build(:user, :role => 'admin')
+    assert !user.cannot?('delete', TypusUser)
+    assert !user.cannot?('delete', 'TypusUser')
+  end
+
 end

@@ -92,22 +92,6 @@ class TypusUserTest < ActiveSupport::TestCase
       assert !@typus_user.authenticated?('87654321')
     end
 
-    should "verify can? accepts a Class" do
-      assert @typus_user.can?('delete', TypusUser)
-    end
-
-    should "verify can? accepts an String" do
-      assert @typus_user.can?('delete', 'TypusUser')
-    end
-
-    should "verify cannot? acccepts a Class" do
-      assert !@typus_user.cannot?('delete', TypusUser)
-    end
-
-    should "verify cannot? acccepts an String" do
-      assert !@typus_user.cannot?('delete', 'TypusUser')
-    end
-
     should "verify preferences are nil by default" do
       assert @typus_user.preferences.nil?
     end
