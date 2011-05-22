@@ -24,13 +24,13 @@ class Admin::ViewsControllerTest < ActionController::TestCase
   should_eventually "get :index returns only views on the current_context" do
     get :index
     assert_response :success
-    assert_equal [@site.id], assigns(:items).map(&:site_id)
+    assert_equal [@site], assigns(:items)
   end
 
   test "get :new should initialize item in the current_scope" do
     get :new
     assert_response :success
-    assert assigns(:item).site_id.eql?(@site.id)
+    assert assigns(:item).site.eql?(@site)
   end
 
 end
