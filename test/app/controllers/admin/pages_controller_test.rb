@@ -6,6 +6,10 @@ require "test_helper"
 
     - Scopes
 
+  Hey! I do not recommend setting a default_scope because you'll probably get
+  unexpected results. This is here for testing purposes, but please, avoid
+  using this kind of stuff.
+
 =end
 
 class Admin::PagesControllerTest < ActionController::TestCase
@@ -13,6 +17,9 @@ class Admin::PagesControllerTest < ActionController::TestCase
   setup do
     @typus_user = Factory(:typus_user)
     @request.session[:typus_user_id] = @typus_user.id
+
+    Factory(:page)
+    Factory(:page, :status => false)
   end
 
   teardown do
@@ -20,18 +27,9 @@ class Admin::PagesControllerTest < ActionController::TestCase
     TypusUser.delete_all
   end
 
-  context "index" do
-
-    setup do
-      Factory(:page)
-      Factory(:page, :status => false)
-    end
-
-    should "return scoped results" do
-      assert Page.count.eql?(1)
-      get :index
-      assert assigns(:items).size.eql?(1)
-    end
+  test "get :index returns scoped results" do
+    get :index
+    assert_equal Page.all, assigns(:items)
   end
 
 end
