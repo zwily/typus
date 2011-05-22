@@ -140,21 +140,11 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
   end
 
-  context "When designer is logged in" do
-
-    setup do
-      designer_sign_in
-      get :show
-    end
-
-    should "not have links to new posts" do
-      assert_no_match /\/admin\/posts\/new/, @response.body
-    end
-
-    should "not have links to new typus_users" do
-      assert_no_match /\/admin\/typus_users\/new/, @response.body
-    end
-
+  test "designer should not see links to unallowed resources" do
+    designer_sign_in
+    get :show
+    assert_no_match /\/admin\/posts\/new/, @response.body
+    assert_no_match /\/admin\/typus_users\/new/, @response.body
   end
 
 end
