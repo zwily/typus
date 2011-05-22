@@ -1,5 +1,10 @@
 require "test_helper"
 
+##
+# Here we test:
+#
+# - Typus::Orm::ActiveRecord::AdminUserV2
+#
 class AdminUserTest < ActiveSupport::TestCase
 
   test "token changes everytime we save the user" do

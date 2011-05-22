@@ -3,9 +3,8 @@ require "test_helper"
 ##
 # Here we test:
 #
-#   include Typus::Orm::ActiveRecord::User::InstanceMethods
+# - Typus::Orm::ActiveRecord::User::InstanceMethods
 #
-
 class UserTest < ActiveSupport::TestCase
 
   test "to_label" do

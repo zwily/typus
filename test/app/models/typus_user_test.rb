@@ -1,5 +1,10 @@
 require "test_helper"
 
+##
+# Here we test:
+#
+# - Typus::Orm::ActiveRecord::AdminUserV1
+#
 class TypusUserTest < ActiveSupport::TestCase
 
   ##
