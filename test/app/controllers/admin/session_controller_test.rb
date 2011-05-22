@@ -72,7 +72,6 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
     should "create_session_for_an_enabled_user" do
       post :create, { :typus_user => { :email => @typus_user.email, :password => "12345678" } }
-
       assert_equal @typus_user.id, @request.session[:typus_user_id]
       assert_response :redirect
       assert_redirected_to admin_dashboard_path
