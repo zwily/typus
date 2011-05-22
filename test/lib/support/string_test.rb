@@ -3,8 +3,9 @@ require "test_helper"
 class StringTest < ActiveSupport::TestCase
 
   should "extract_settings" do
-    assert_equal %w( a b c ), "a, b, c".extract_settings
-    assert_equal %w( a b c ), " a  , b,  c ".extract_settings
+    expected = %w( a b c )
+    assert "a, b, c".extract_settings.eql?(expected)
+    assert " a  , b,  c ".extract_settings.eql?(expected)
   end
 
   context "remove_prefix" do
