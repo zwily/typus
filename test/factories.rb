@@ -1,4 +1,14 @@
 ##
+# Models Provided by Typus!
+##
+
+Factory.define :admin_user do |f|
+  f.sequence(:email) { |n| "admin+#{n}@example.com" }
+  f.password "XXXXXXXX"
+  f.role "admin"
+end
+
+##
 # CRUD
 ##
 
