@@ -13,8 +13,8 @@ class Admin::ViewsControllerTest < ActionController::TestCase
   setup do
     @request.session[:typus_user_id] = Factory(:typus_user).id
     @site = Factory(:site, :domain => 'test.host')
-    view = Factory(:view, :site => @site)
-    view = Factory(:view)
+    Factory(:view, :site => @site)
+    Factory(:view)
   end
 
   teardown do
