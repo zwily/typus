@@ -7,7 +7,7 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "verify default_config for admin_title" do
-    assert_equal "Typus", Typus.admin_title
+    assert Typus.admin_title.eql?('Typus')
   end
 
   should "verify default_config for admin_sub_title" do
@@ -15,19 +15,19 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "verify default_config for authentication" do
-    assert_equal :session, Typus.authentication
+    assert Typus.authentication.eql?(:session)
   end
 
   should "verify default_config for mailer_sender" do
-    assert_nil Typus.mailer_sender
+    assert Typus.mailer_sender.nil?
   end
 
   should "verify default_config for username" do
-    assert_equal "admin", Typus.username
+    assert Typus.username.eql?('admin')
   end
 
   should "verify default_config for password" do
-    assert_equal "columbia", Typus.password
+    assert Typus.password.eql?('columbia')
   end
 
   context "file management" do
@@ -35,11 +35,11 @@ class TypusTest < ActiveSupport::TestCase
     context "paperclip" do
 
       should "verify default_config for file_preview" do
-        assert_equal :medium, Typus.file_preview
+        assert Typus.file_preview.eql?(:medium)
       end
 
       should "verify default_config for file_thumbnail" do
-        assert_equal :thumb, Typus.file_thumbnail
+        assert Typus.file_thumbnail.eql?(:thumb)
       end
 
     end
@@ -47,11 +47,11 @@ class TypusTest < ActiveSupport::TestCase
     context "dragonfly" do
 
       should "verify default_config for image_preview_size" do
-        assert_equal "x450", Typus.image_preview_size
+        assert Typus.image_preview_size.eql?('x450')
       end
 
       should "verify default_config for image_thumb_size" do
-        assert_equal "150x150#", Typus.image_thumb_size
+        assert Typus.image_thumb_size.eql?('150x150#')
       end
 
     end
@@ -59,11 +59,11 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "verify default_config for relationship" do
-    assert_equal "typus_users", Typus.relationship
+    assert Typus.relationship.eql?('typus_users')
   end
 
   should "verify default_config for master_role" do
-    assert_equal "admin", Typus.master_role
+    assert Typus.master_role.eql?('admin')
   end
 
   should "verify config_folder is a Pathname" do
@@ -76,8 +76,8 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "return modules of the CRUD Extended application" do
-    expected = ["Asset", "Category", "Comment", "Page", "Post"]
-    assert_equal expected, Typus.application("CRUD Extended")
+    expected = %w(Asset Category Comment Page Post)
+    assert Typus.application("CRUD Extended").eql?(expected)
   end
 
   should "return models and should be sorted" do
@@ -108,37 +108,25 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal %w(Git Status WatchDog), Typus.resources
   end
 
-  context "user_class" do
-
-    should "return default value" do
-      Typus::Configuration.models_constantized!
-      assert_equal TypusUser, Typus.user_class
-    end
-
+  test "user_class returns default value" do
+    Typus::Configuration.models_constantized!
+    assert_equal TypusUser, Typus.user_class
   end
 
-  context "user_class_name" do
-
-    should "return default value" do
-      assert_equal "TypusUser", Typus.user_class_name
-    end
-
-    should "be overrided on demand" do
-      assert Typus.respond_to?("user_class_name=")
-    end
-
+  test "user_class_name returns default value" do
+    assert Typus.user_class_name.eql?("TypusUser")
   end
 
-  context "user_fk" do
+  test "user_class_name setter presence" do
+    assert Typus.respond_to?("user_class_name=")
+  end
 
-    should "return default value" do
-      assert_equal "typus_user_id", Typus.user_fk
-    end
+  test "user_fk returns default value" do
+    assert Typus.user_fk.eql?("typus_user_id")
+  end
 
-    should "be overrided on demand" do
-      assert Typus.respond_to?("user_fk=")
-    end
-
+  test "user_fk setter presence" do
+    assert Typus.respond_to?("user_fk=")
   end
 
 end
