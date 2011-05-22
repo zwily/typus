@@ -42,7 +42,7 @@ module Admin
         att_assoc = @resource.reflect_on_association(key.to_sym)
         class_name = att_assoc.options[:class_name] || key.capitalize.camelize
         resource = class_name.typus_constantize
-        att_assoc.primary_key_name
+        att_assoc.foreign_key
       else
         key
       end

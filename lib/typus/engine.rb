@@ -1,7 +1,7 @@
 module Admin
   class Engine < Rails::Engine
 
-    isolate_namespace Admin
+#    isolate_namespace Admin
 
   end
 end

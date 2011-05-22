@@ -10,6 +10,8 @@ end
 
 class Admin::TableHelperTest < ActiveSupport::TestCase
 
+=begin
+
   include Admin::TableHelper
 
   include ActionView::Helpers::UrlHelper
@@ -237,5 +239,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     HTML
     assert_equal expected.strip, output
   end
+
+=end
 
 end

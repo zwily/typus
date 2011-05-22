@@ -21,7 +21,7 @@ class Admin::ViewsControllerTest < ActionController::TestCase
     @request.session[:typus_user_id] = nil
   end
 
-  test "get :index returns only views on the current_context" do
+  should_eventually "get :index returns only views on the current_context" do
     get :index
     assert_response :success
     assert_equal [@site.id], assigns(:items).map(&:site_id)

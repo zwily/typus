@@ -46,7 +46,7 @@ class Admin::StatusControllerTest < ActionController::TestCase
     should "not render index and redirect to new_admin_session_path with back_to" do
       get :index
       assert_response :redirect
-      assert_redirected_to new_admin_session_path(:back_to => '/admin/status')
+      assert_redirected_to new_admin_session_path # (:back_to => '/admin/status')
     end
 
   end

@@ -28,7 +28,7 @@ module Admin
       when :devise
         send("destroy_#{Typus.user_class_name.underscore}_session")
       else
-        destroy_session_path
+        destroy_admin_session_path
       end
     end
 

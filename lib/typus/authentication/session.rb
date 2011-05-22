@@ -12,14 +12,14 @@ module Typus
         else
           # back_to = request.env['PATH_INFO'] unless [root_path].include?(request.env['PATH_INFO'])
           # redirect_to new_session_path(:back_to => back_to)
-          redirect_to new_session_path
+          redirect_to new_admin_session_path
         end
       end
 
       def deauthenticate
         session[:typus_user_id] = nil
         ::I18n.locale = ::I18n.default_locale
-        redirect_to new_session_path
+        redirect_to new_admin_session_path
       end
 
       #--

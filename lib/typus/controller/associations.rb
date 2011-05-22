@@ -126,7 +126,7 @@ module Typus
       #
       def set_belongs_to_association(item_class, options)
         association_name = item_class.model_name.tableize.to_sym
-        foreign_key = @resource.reflect_on_association(association_name).primary_key_name
+        foreign_key = @resource.reflect_on_association(association_name).foreign_key
 
         if params[:resource_id]
           item = item_class.find(params[:resource_id])

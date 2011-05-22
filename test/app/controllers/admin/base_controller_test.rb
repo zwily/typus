@@ -16,7 +16,7 @@ class Admin::BaseControllerTest < ActionController::TestCase
     should "not be able to get the user_guide" do
       get :user_guide
       assert_response :redirect
-      assert_redirected_to new_admin_session_path(:back_to => '/admin/user_guide')
+      assert_redirected_to new_admin_session_path # (:back_to => '/admin/user_guide')
     end
 
   end

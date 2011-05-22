@@ -12,7 +12,7 @@ module Admin
     def typus_form_has_many(field)
       setup_relationship(field)
 
-      options = @reflection.through_reflection ? {} : { @reflection.primary_key_name => @item.id }
+      options = @reflection.through_reflection ? {} : { @reflection.foreign_key => @item.id }
 
       count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
 
@@ -130,7 +130,7 @@ module Admin
       @resource_actions = [["Edit", {:action=>"edit"}, {}],
                            ["Trash", {:resource_id=>@item.id, :resource=>@resource.model_name, :action=>"destroy"}, {:confirm=>"Trash?"}]]
 
-      options = { :resource_id => nil, @reflection.primary_key_name => @item.id }
+      options = { :resource_id => nil, @reflection.foreign_key => @item.id }
 
       render "admin/templates/has_one",
              :association_name => @association_name,
@@ -145,7 +145,7 @@ module Admin
                 else
                   association.class_name.typus_constantize
                 end
-      related_fk = association.primary_key_name
+      related_fk = association.foreign_key
 
       # TODO: Use the build_add_new method.
       if admin_user.can?('create', related)

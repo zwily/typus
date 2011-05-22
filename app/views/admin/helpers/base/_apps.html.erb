@@ -2,7 +2,7 @@
 
   <% dashboard = 'active' if params[:controller].include?('dashboard') %>
 
-  <li><%= link_to Typus::I18n.t("Dashboard"), root_path, :class => dashboard %></li>
+  <li><%= link_to Typus::I18n.t("Dashboard"), admin_dashboard_path, :class => dashboard %></li>
 
   <% admin_user.applications.each do |application| %>
 

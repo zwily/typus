@@ -24,9 +24,9 @@ class Admin::AccountController < Admin::BaseController
 
   def send_password
     if user = Typus.user_class.find_by_email(params[:typus_user][:email])
-      url = account_url(user.token)
+      url = admin_account_url(user.token)
       Admin::Mailer.reset_password_link(user, url).deliver
-      redirect_to new_session_path, :notice => Typus::I18n.t("Password recovery link sent to your email.")
+      redirect_to new_admin_session_path, :notice => Typus::I18n.t("Password recovery link sent to your email.")
     else
       render :action => :forgot_password
     end
@@ -42,11 +42,11 @@ class Admin::AccountController < Admin::BaseController
   private
 
   def sign_in?
-    redirect_to new_session_path unless zero_users
+    redirect_to new_admin_session_path unless zero_users
   end
 
   def new?
-    redirect_to new_account_path if zero_users
+    redirect_to new_admin_account_path if zero_users
   end
 
 end

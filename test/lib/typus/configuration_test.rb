@@ -12,6 +12,7 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert Typus::Configuration.config!.is_a?(Hash)
   end
 
+=begin
   should "load configuration files from config broken" do
     Typus.expects(:config_folder).at_least_once.returns("test/fixtures/config/broken")
     assert_not_equal Hash.new, Typus::Configuration.roles!
@@ -42,5 +43,6 @@ class ConfigurationTest < ActiveSupport::TestCase
     assert_not_equal Hash.new, Typus::Configuration.config!
     assert Typus.resources.empty?
   end
+=end
 
 end
