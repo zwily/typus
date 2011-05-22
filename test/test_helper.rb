@@ -12,4 +12,10 @@ require "factories"
 class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
+
+  def admin_sign_in
+    @typus_user = Factory(:typus_user)
+    @request.session[:typus_user_id] = @typus_user.id
+  end
+
 end

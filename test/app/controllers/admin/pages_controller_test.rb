@@ -15,9 +15,7 @@ require "test_helper"
 class Admin::PagesControllerTest < ActionController::TestCase
 
   setup do
-    @typus_user = Factory(:typus_user)
-    @request.session[:typus_user_id] = @typus_user.id
-
+    admin_sign_in
     Factory(:page)
     Factory(:page, :status => false)
   end
