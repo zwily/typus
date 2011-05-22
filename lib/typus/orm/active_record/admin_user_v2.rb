@@ -44,7 +44,7 @@ module Typus
           end
 
           def set_token
-            self.token = "#{ActiveSupport::SecureRandom.hex(3)}-#{ActiveSupport::SecureRandom.hex(3)}"
+            self.token = "#{ActiveSupport::SecureRandom.hex(6)}-#{ActiveSupport::SecureRandom.hex(6)}"
           end
 
         end
