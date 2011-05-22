@@ -7,7 +7,7 @@ class FakeUserTest < ActiveSupport::TestCase
   end
 
   should "have the id set to 0" do
-    assert_equal 0, @fake_user.id
+    assert @fake_user.id.eql?(0)
   end
 
   should "be able to do anything" do
@@ -16,7 +16,7 @@ class FakeUserTest < ActiveSupport::TestCase
   end
 
   should "have a locale" do
-    assert_equal ::I18n.locale, @fake_user.locale
+    assert @fake_user.locale.eql?(::I18n.locale)
   end
 
   should "have status set to true" do
@@ -42,7 +42,7 @@ class FakeUserTest < ActiveSupport::TestCase
     end
 
     should "make sure I get what I want" do
-      expected = ["Animal", "Bird", "Dog", "ImageHolder"]
+      expected = %w(Animal Bird Dog ImageHolder)
       assert_equal expected, @fake_user.application("Polymorphic")
     end
 
