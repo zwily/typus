@@ -135,22 +135,16 @@ class TypusUserTest < ActiveSupport::TestCase
 
   end
 
-  context "Editor Role" do
+  test "editor get a list of all applications" do
+    typus_user = Factory.build(:typus_user, :role => "editor")
+    expected = ["Admin", "CRUD Extended"]
+    assert_equal expected, typus_user.applications
+  end
 
-    setup do
-      @typus_user = Factory(:typus_user, :role => "editor")
-    end
-
-    should "get a list of all applications" do
-      expected = ["Admin", "CRUD Extended"]
-      assert_equal expected, @typus_user.applications
-    end
-
-    should "get a list of application resources" do
-      assert_equal %w(Category Comment Post), @typus_user.application("CRUD Extended")
-      assert_equal %w(TypusUser), @typus_user.application("Admin")
-    end
-
+  test "editor gets a list of application resources" do
+    typus_user = Factory.build(:typus_user, :role => "editor")
+    assert_equal %w(Category Comment Post), typus_user.application("CRUD Extended")
+    assert_equal %w(TypusUser), typus_user.application("Admin")
   end
 
   should "owns a resource" do
