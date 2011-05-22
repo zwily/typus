@@ -3,26 +3,21 @@ require "test_helper"
 class RoutesTest < ActiveSupport::TestCase
 
   setup do
-    @routes = Rails.application.routes.routes.map(&:name)
+    @routes = Admin::Engine.routes.routes.map(&:name)
   end
 
-  should "verify admin routes" do
-    expected = %w(admin)
+  should "have root" do
+    expected = %w(root)
     expected.each { |r| assert @routes.include?(r) }
   end
 
-  should "verify admin dashboard routes" do
-    expected = %w(admin_dashboard)
+  should "have account routes" do
+    expected = %w(forgot_password_account_index account_index new_account account)
     expected.each { |r| assert @routes.include?(r) }
   end
 
-  should "verify admin account named routes" do
-    expected = %w(forgot_password_admin_account_index admin_account_index new_admin_account admin_account)
-    expected.each { |r| assert @routes.include?(r) }
-  end
-
-  should "verify admin session named routes" do
-    expected = %w(new_admin_session admin_session)
+  should "have session routes" do
+    expected = %w(new_session session)
     expected.each { |r| assert @routes.include?(r) }
   end
 
