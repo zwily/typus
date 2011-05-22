@@ -129,11 +129,6 @@ class TypusUserTest < ActiveSupport::TestCase
       @typus_user = Factory(:typus_user)
     end
 
-    should "respond true and false to is_root? and is_not_root?" do
-      assert @typus_user.is_root?
-      assert !@typus_user.is_not_root?
-    end
-
     should "get a list of all applications" do
       assert_equal Typus.applications, @typus_user.applications
     end
@@ -153,11 +148,6 @@ class TypusUserTest < ActiveSupport::TestCase
 
     setup do
       @typus_user = Factory(:typus_user, :role => "editor")
-    end
-
-    should "respond true and false to is_no_root? and is_root?" do
-      assert @typus_user.is_not_root?
-      assert !@typus_user.is_root?
     end
 
     should "get a list of all applications" do

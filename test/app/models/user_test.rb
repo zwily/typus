@@ -34,4 +34,10 @@ class UserTest < ActiveSupport::TestCase
     assert !user.cannot?('delete', 'TypusUser')
   end
 
+  test "is_root?" do
+    user = Factory.build(:user, :role => 'admin')
+    assert user.is_root?
+    assert !user.is_not_root?
+  end
+
 end
