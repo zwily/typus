@@ -1,6 +1,6 @@
 Admin::Engine.routes.draw do
 
-  root :to => "dashboard#show", :as => "dashboard"
+  root :to => "dashboard#show"
   match "user_guide" => "base#user_guide"
 
   if Typus.authentication == :session

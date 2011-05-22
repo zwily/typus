@@ -75,7 +75,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
       assert_equal @typus_user.id, @request.session[:typus_user_id]
       assert_response :redirect
-      assert_redirected_to admin_dashboard_path
+      assert_redirected_to root_path
     end
 
     should "destroy" do
