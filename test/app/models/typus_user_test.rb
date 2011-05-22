@@ -128,14 +128,13 @@ class TypusUserTest < ActiveSupport::TestCase
 
   test "user owns a resource" do
     typus_user = Factory.build(:typus_user)
-    resource = Factory.build(:post, :typus_user_id => typus_user.id)
+    resource = Factory.build(:post, :typus_user => typus_user)
     assert typus_user.owns?(resource)
   end
 
   test "user does not own a resource" do
     typus_user = Factory(:typus_user)
-    typus_user_2 = Factory(:typus_user)
-    resource = Factory(:post, :typus_user_id => typus_user_2.id)
+    resource = Factory(:post, :typus_user => Factory(:typus_user))
     assert !typus_user.owns?(resource)
   end
 
