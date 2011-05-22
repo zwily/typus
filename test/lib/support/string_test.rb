@@ -8,20 +8,13 @@ class StringTest < ActiveSupport::TestCase
     assert " a  , b,  c ".extract_settings.eql?(expected)
   end
 
-  context "remove_prefix" do
-
-    should "return strings without default prefix" do
-      assert_equal "posts", "admin/posts".remove_prefix
-      assert_equal "typus_users", "admin/typus_users".remove_prefix
-      assert_equal "delayed/jobs", "admin/delayed/jobs".remove_prefix
-    end
-
-    should "return strings without custom prefix" do
-      assert_equal "posts", "typus/posts".remove_prefix
-      assert_equal "typus_users", "typus/typus_users".remove_prefix
-      assert_equal "delayed/tasks", "typus/delayed/tasks".remove_prefix
-    end
-
+  test "remove_prefix returns strings without prefixes" do
+    assert_equal "posts", "admin/posts".remove_prefix
+    assert_equal "typus_users", "admin/typus_users".remove_prefix
+    assert_equal "delayed/jobs", "admin/delayed/jobs".remove_prefix
+    assert_equal "posts", "typus/posts".remove_prefix
+    assert_equal "typus_users", "typus/typus_users".remove_prefix
+    assert_equal "delayed/tasks", "typus/delayed/tasks".remove_prefix
   end
 
   context "extract_class" do
