@@ -18,7 +18,6 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
 
   should_eventually "be able to destroy items" do
     get :destroy, :id => @user.id, :method => :delete
-
     assert_response :redirect
     assert_equal "User successfully removed.", flash[:notice]
     assert_redirected_to :action => :index
@@ -34,8 +33,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
       user = Factory(:user)
 
       assert_difference('@project.collaborators.count') do
-        post :relate, { :id => @project.id,
-                        :related => { :model => 'User', :id => user.id, :association_name => 'collaborators' } }
+        post :relate, :id => @project.id, :related => { :model => 'User', :id => user.id, :association_name => 'collaborators' }
       end
 
       assert_response :redirect
