@@ -83,21 +83,18 @@ class Admin::UsersControllerTest < ActionController::TestCase
     end
 
     should "work and return a json hash with ten items" do
-      get :autocomplete, { :term => "User" }
+      get :autocomplete, :term => "User"
       assert_response :success
-      assert_equal 20, assigns(:items).size
+      assert assigns(:items).size.eql?(20)
     end
 
     should "work and return json hash with one item" do
-      post = User.first
-      post.update_attributes(:name => "fesplugas")
+      User.first.update_attributes(:name => "fesplugas")
 
       get :autocomplete, :term => "jmeiss"
-      assert_response :success
       assert assigns(:items).size.eql?(0)
 
       get :autocomplete, :term => "fesplugas"
-      assert_response :success
       assert assigns(:items).size.eql?(1)
     end
 
