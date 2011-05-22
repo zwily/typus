@@ -10,6 +10,7 @@ ActiveRecord::Schema.define do
     t.string :password_digest, :null => false
     t.string :preferences
     t.boolean :status, :default => false
+    t.string :token
     t.timestamps
   end
 

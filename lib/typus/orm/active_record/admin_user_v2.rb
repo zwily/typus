@@ -20,6 +20,8 @@ module Typus
             include InstanceMethodsOnActivation
             include Typus::Orm::ActiveRecord::User::InstanceMethods
 
+            before_save :set_token
+
           end
 
         end
@@ -39,6 +41,10 @@ module Typus
           def password=(unencrypted_password)
             @password = unencrypted_password
             self.password_digest = BCrypt::Password.create(unencrypted_password)
+          end
+
+          def set_token
+            self.token = "#{ActiveSupport::SecureRandom.hex(3)}-#{ActiveSupport::SecureRandom.hex(3)}"
           end
 
         end
