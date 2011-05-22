@@ -77,7 +77,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
       expected = {:locale => :jp}
       assert_equal expected, @typus_user.preferences
-      assert_equal @typus_user.locale.eql?(:jp)
+      assert @typus_user.locale.eql?(:jp)
     end
 
     should "be able to set preferences" do
