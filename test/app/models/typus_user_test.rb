@@ -105,8 +105,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
   test "admin gets a list of application resources for CRUD Extended application" do
     typus_user = Factory.build(:typus_user)
-    expected = ["Asset", "Category", "Comment", "Page", "Post"]
-    assert_equal expected, typus_user.application("CRUD Extended")
+    assert_equal %w(Asset Category Comment Page Post), typus_user.application("CRUD Extended")
   end
 
   test "admin gets a list of application resources for Admin application" do
@@ -116,8 +115,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
   test "editor get a list of all applications" do
     typus_user = Factory.build(:typus_user, :role => "editor")
-    expected = ["Admin", "CRUD Extended"]
-    assert_equal expected, typus_user.applications
+    assert_equal ["Admin", "CRUD Extended"], typus_user.applications
   end
 
   test "editor gets a list of application resources" do
