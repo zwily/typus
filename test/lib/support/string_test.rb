@@ -46,15 +46,13 @@ class StringTest < ActiveSupport::TestCase
   context "acl_action_mapper" do
 
     should "return create" do
-      %w(new create).each do |action|
-        assert_equal "create", action.acl_action_mapper
-      end
+      assert_equal "create", "new".acl_action_mapper
+      assert_equal "create", "create".acl_action_mapper
     end
 
     should "return read" do
-      %w(index show).each do |action|
-        assert_equal "read", action.acl_action_mapper
-      end
+      assert_equal "read", "index".action.acl_action_mapper
+      assert_equal "read", "show".acl_action_mapper
     end
 
     should "return update" do
@@ -64,15 +62,12 @@ class StringTest < ActiveSupport::TestCase
     end
 
     should "return delete" do
-      %w(destroy trash).each do |action|
-        assert_equal "delete", action.acl_action_mapper
-      end
+      assert_equal "delete", "destroy".acl_action_mapper
+      assert_equal "delete", "trash".acl_action_mapper
     end
 
     should "return other" do
-      %w(other).each do |action|
-        assert_equal "other", action.acl_action_mapper
-      end
+      assert_equal "other", "other".acl_action_mapper
     end
 
   end
