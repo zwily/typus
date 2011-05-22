@@ -28,7 +28,7 @@ class Admin::BaseControllerTest < ActionController::TestCase
     end
 
     teardown do
-      @request.session[:typus_user_id] = nil
+      reset_session
     end
 
     should "be able to get the user_guide" do

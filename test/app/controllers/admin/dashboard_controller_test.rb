@@ -43,7 +43,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   context "Not logged" do
 
     setup do
-      @request.session[:typus_user_id] = nil
+      reset_session
     end
 
     should "redirect to sign in when not signed in" do

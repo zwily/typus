@@ -40,7 +40,7 @@ class Admin::StatusControllerTest < ActionController::TestCase
   context "Not logged user" do
 
     setup do
-      @request.session[:typus_user_id] = nil
+      reset_session
     end
 
     should "not render index and redirect to new_admin_session_path with back_to" do
