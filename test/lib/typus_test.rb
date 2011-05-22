@@ -111,6 +111,7 @@ class TypusTest < ActiveSupport::TestCase
   context "user_class" do
 
     should "return default value" do
+      Typus::Configuration.models_constantized!
       assert_equal TypusUser, Typus.user_class
     end
 
