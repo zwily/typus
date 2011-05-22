@@ -10,15 +10,15 @@ module Typus
         if session[:typus_user_id]
           admin_user
         else
-          back_to = request.env['PATH_INFO'] unless [admin_dashboard_path, admin_path].include?(request.env['PATH_INFO'])
-          redirect_to new_admin_session_path(:back_to => back_to)
+          back_to = request.env['PATH_INFO'] unless [dashboard_path].include?(request.env['PATH_INFO'])
+          redirect_to new_session_path(:back_to => back_to)
         end
       end
 
       def deauthenticate
         session[:typus_user_id] = nil
         ::I18n.locale = ::I18n.default_locale
-        redirect_to new_admin_session_path
+        redirect_to new_session_path
       end
 
       #--

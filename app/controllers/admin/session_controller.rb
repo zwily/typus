@@ -13,9 +13,9 @@ class Admin::SessionController < Admin::BaseController
 
     path = if user
              session[:typus_user_id] = user.id
-             params[:back_to] || admin_dashboard_path
+             params[:back_to] || dashboard_path
            else
-             new_admin_session_path(:back_to => params[:back_to])
+             new_session_path(:back_to => params[:back_to])
            end
 
     redirect_to path
@@ -28,7 +28,7 @@ class Admin::SessionController < Admin::BaseController
   private
 
   def create_an_account?
-    redirect_to new_admin_account_path if zero_users
+    redirect_to new_account_path if zero_users
   end
 
   def set_locale
