@@ -161,4 +161,12 @@ class TypusUserTest < ActiveSupport::TestCase
     assert !typus_user.owns?(resource)
   end
 
+  test "token changes everytime we save the user" do
+    admin_user = Factory(:typus_user)
+    first_token = admin_user.token
+    admin_user.save
+    second_token = admin_user.token
+    assert !first_token.eql?(second_token)
+  end
+
 end

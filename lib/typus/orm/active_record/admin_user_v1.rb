@@ -22,7 +22,7 @@ module Typus
 
             validates :role, :presence => true
 
-            before_save :initialize_salt, :encrypt_password, :initialize_token
+            before_save :initialize_salt, :encrypt_password, :set_token
 
             serialize :preferences
 
@@ -70,8 +70,8 @@ module Typus
             self.salt = generate_hash("--#{Time.zone.now.to_s(:number)}--#{email}--") if new_record?
           end
 
-          def initialize_token
-            self.token = "#{ActiveSupport::SecureRandom.hex(3)}-#{ActiveSupport::SecureRandom.hex(3)}" if new_record?
+          def set_token
+            self.token = "#{ActiveSupport::SecureRandom.hex(3)}-#{ActiveSupport::SecureRandom.hex(3)}"
           end
 
           def password_required?
