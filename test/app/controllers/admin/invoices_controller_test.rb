@@ -11,8 +11,7 @@ require "test_helper"
 class Admin::InvoicesControllerTest < ActionController::TestCase
 
   setup do
-    @typus_user = Factory(:typus_user)
-    @request.session[:typus_user_id] = @typus_user.id
+    admin_sign_in
   end
 
   ##

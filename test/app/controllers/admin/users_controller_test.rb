@@ -11,9 +11,7 @@ require "test_helper"
 class Admin::UsersControllerTest < ActionController::TestCase
 
   setup do
-    @typus_user = Factory(:typus_user)
-    @request.session[:typus_user_id] = @typus_user.id
-
+    admin_sign_in
     @project = Factory(:project)
     @user = @project.user
   end

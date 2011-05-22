@@ -11,8 +11,7 @@ require "test_helper"
 class Admin::ImageHoldersControllerTest < ActionController::TestCase
 
   setup do
-    @typus_user = Factory(:typus_user)
-    @request.session[:typus_user_id] = @typus_user.id
+    admin_sign_in
   end
 
   context "create polymorphic association" do

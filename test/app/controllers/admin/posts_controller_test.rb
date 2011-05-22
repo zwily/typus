@@ -18,8 +18,7 @@ require "test_helper"
 class Admin::PostsControllerTest < ActionController::TestCase
 
   setup do
-    @typus_user = Factory(:typus_user)
-    @request.session[:typus_user_id] = @typus_user.id
+    admin_sign_in
     @post = Factory(:post)
   end
 
@@ -344,8 +343,7 @@ title;status
     context "No root" do
 
       setup do
-        @typus_user = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
-        @request.session[:typus_user_id] = @typus_user.id
+        editor_sign_in
         @request.env['HTTP_REFERER'] = '/admin/posts'
       end
 
@@ -611,8 +609,7 @@ title;status
     context "Designer" do
 
       setup do
-        @typus_user = Factory(:typus_user, :email => "designer@example.com", :role => "designer")
-        @request.session[:typus_user_id] = @typus_user.id
+        designer_sign_in
       end
 
       should "render_index_and_not_show_add_entry_link" do
@@ -626,8 +623,7 @@ title;status
     context "Editor" do
 
       setup do
-        @typus_user = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
-        @request.session[:typus_user_id] = @typus_user.id
+        editor_sign_in
       end
 
 =begin

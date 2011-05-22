@@ -68,8 +68,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   context "Admin is logged and gets dashboard" do
 
     setup do
-      @typus_user = Factory(:typus_user)
-      @request.session[:typus_user_id] = @typus_user.id
+      admin_sign_in
       get :show
     end
 
@@ -110,8 +109,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   context "Security" do
 
     setup do
-      @typus_user = Factory(:typus_user)
-      @request.session[:typus_user_id] = @typus_user.id
+      admin_sign_in
     end
 
     teardown do

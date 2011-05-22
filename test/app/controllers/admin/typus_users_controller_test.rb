@@ -13,9 +13,8 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
   context "Admin" do
 
     setup do
-      @typus_user = Factory(:typus_user)
+      admin_sign_in
       @typus_user_editor = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
-      @request.session[:typus_user_id] = @typus_user.id
       @request.env['HTTP_REFERER'] = '/admin/typus_users'
     end
 
