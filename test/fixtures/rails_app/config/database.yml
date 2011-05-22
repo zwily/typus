@@ -9,13 +9,21 @@
                end
 %>
 
-# SQLite version 3.x
-#   gem install sqlite3-ruby (not necessary on OS X Leopard)
-development:
+sqlite3: &sqlite
   adapter: sqlite3
   database: db/development.sqlite3
   pool: 5
   timeout: 5000
+
+postgresql: &postgresql
+  adapter: postgresql
+  database: typus_test
+  username: fesplugas
+  pool: 5
+  timeout: 5000
+
+development:
+  <<: *postgresql
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
