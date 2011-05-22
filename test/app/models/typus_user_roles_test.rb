@@ -2,12 +2,11 @@ require "test_helper"
 
 class TypusUserRolesTest < ActiveSupport::TestCase
 
-  should "get a list of roles" do
-    roles = %w(admin designer editor)
-    assert_equal roles, Typus::Configuration.roles.map(&:first).sort
+  test "configuration roles" do
+    assert_equal %w(admin designer editor), Typus::Configuration.roles.map(&:first).sort
   end
 
-  context "A TypusUser with role admin" do
+  context "admin" do
 
     setup do
       @typus_user = Factory(:typus_user)
@@ -62,7 +61,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
 
   end
 
-  context "A TypusUser with role editor" do
+  context "editor" do
 
     setup do
       @typus_user = Factory(:typus_user, :role => "editor")
@@ -95,7 +94,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
 
   end
 
-  context "A TypusUser with role designer" do
+  context "designer" do
 
     setup do
       @typus_user = Factory(:typus_user, :role => "designer")
