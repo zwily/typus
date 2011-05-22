@@ -12,6 +12,7 @@ module Typus
 
             attr_reader   :password
             attr_accessor :password_confirmation
+            attr_protected :status
 
             validates :email, :presence => true, :uniqueness => true, :format => { :with => Typus::Regex::Email }
             validates :password, :confirmation => true, :length => { :within => 6..40 }

@@ -10,4 +10,8 @@ class AdminUserTest < ActiveSupport::TestCase
     assert !first_token.eql?(second_token)
   end
 
+  test "mass_assignment" do
+    assert TypusUser.attr_protected[:default].include?(:status)
+  end
+
 end
