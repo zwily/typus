@@ -25,12 +25,8 @@ class UserTest < ActiveSupport::TestCase
   test "can?" do
     user = Factory.build(:user, :role => 'admin')
     assert user.can?('delete', TypusUser)
-    assert user.can?('delete', 'TypusUser')
-  end
-
-  test "cannot?" do
-    user = Factory.build(:user, :role => 'admin')
     assert !user.cannot?('delete', TypusUser)
+    assert user.can?('delete', 'TypusUser')
     assert !user.cannot?('delete', 'TypusUser')
   end
 
