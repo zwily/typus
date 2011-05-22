@@ -126,13 +126,13 @@ class TypusUserTest < ActiveSupport::TestCase
     assert_equal %w(TypusUser), typus_user.application("Admin")
   end
 
-  should "owns a resource" do
+  test "user owns a resource" do
     typus_user = Factory.build(:typus_user)
     resource = Factory.build(:post, :typus_user_id => typus_user.id)
     assert typus_user.owns?(resource)
   end
 
-  should "not own a resource" do
+  test "user does not own a resource" do
     typus_user = Factory(:typus_user)
     typus_user_2 = Factory(:typus_user)
     resource = Factory(:post, :typus_user_id => typus_user_2.id)
