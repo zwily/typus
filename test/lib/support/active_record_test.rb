@@ -2,40 +2,36 @@ require "test_helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
-  context "relationship_with" do
+  test "relationship between Post and Comment" do
+    assert Post.relationship_with(Comment).eql?(:has_many)
+  end
 
-    should "return relationship between Post and Comment" do
-      assert_equal :has_many, Post.relationship_with(Comment)
-    end
+  test "relationship between Comment and Post" do
+    assert Comment.relationship_with(Post).eql?(:belongs_to)
+  end
 
-    should "return relationship between Comment and Post" do
-      assert_equal :belongs_to, Comment.relationship_with(Post)
-    end
+  test "relationship between Post and Category" do
+    assert Post.relationship_with(Category).eql?(:has_and_belongs_to_many)
+  end
 
-    should "return relationship between Post and Category" do
-      assert_equal :has_and_belongs_to_many, Post.relationship_with(Category)
-    end
+  test "relationship between Category and Post" do
+    assert Category.relationship_with(Post).eql?(:has_and_belongs_to_many)
+  end
 
-    should "return relationship between Category and Post" do
-      assert_equal :has_and_belongs_to_many, Category.relationship_with(Post)
-    end
+  test "relationship between Order and Invoice" do
+    assert Order.relationship_with(Invoice).eql?(:has_one)
+  end
 
-    should "return relationship between Order and Invoice" do
-      assert_equal :has_one, Order.relationship_with(Invoice)
-    end
+  test "relationship between Invoice and Order" do
+    assert Invoice.relationship_with(Order).eql?(:belongs_to)
+  end
 
-    should "return relationship between Invoice and Order" do
-      assert_equal :belongs_to, Invoice.relationship_with(Order)
-    end
+  test "relationship between Invoice and TypusUser" do
+    assert Invoice.relationship_with(TypusUser).eql?(:belongs_to)
+  end
 
-    should "return relationship between Invoice and TypusUser" do
-      assert_equal :belongs_to, Invoice.relationship_with(TypusUser)
-    end
-
-    should "return relationship between TypusUser and Invoice" do
-      assert_equal :has_many, TypusUser.relationship_with(Invoice)
-    end
-
+  test "relationship between TypusUser and Invoice" do
+    assert TypusUser.relationship_with(Invoice).eql?(:has_many)
   end
 
   context "mapping" do
@@ -135,16 +131,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  context "to_resource" do
-
-    should "work for models" do
-      assert_equal "typus_users", TypusUser.to_resource
-    end
-
-    should "work for namespaced models" do
-      assert_equal "delayed/tasks", Delayed::Task.to_resource
-    end
-
+  test "to_resource" do
+    assert_equal "typus_users", TypusUser.to_resource
+    assert_equal "delayed/tasks", Delayed::Task.to_resource
   end
 
 end
