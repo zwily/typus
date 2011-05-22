@@ -16,7 +16,12 @@ class Admin::AccountController < Admin::BaseController
   def create
     user = Typus.user_class.generate(:email => params[:typus_user][:email])
     user.status = true
-    redirect_to user.save ? { :action => "show", :id => user.token } : { :action => :new }
+    if user.save
+      session[:typus_user_id] = user.id
+      redirect_to :controller => "/admin/#{Typus.user_class.to_resource}", :action => "edit", :id => user.id
+    else
+      redirect_to :action => :new
+    end
   end
 
   def forgot_password
