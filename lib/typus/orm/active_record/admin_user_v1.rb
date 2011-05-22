@@ -74,11 +74,7 @@ module Typus
           end
 
           def initialize_token
-            generate_token if new_record?
-          end
-
-          def generate_token
-            self.token = ActiveSupport::SecureRandom.hex(12)
+            self.token = ActiveSupport::SecureRandom.hex(12) if new_record?
           end
 
           def password_required?
