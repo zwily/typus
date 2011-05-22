@@ -93,7 +93,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
       should "redirect to edit with custom layout" do
         assert_difference('Asset.count') do
-          post :create, { :asset => @asset, :layout => "admin/headless" }
+          post :create, :asset => @asset, :layout => "admin/headless"
         end
 
         assert_response :redirect
@@ -104,7 +104,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
         Typus::Resources.expects(:action_after_save).returns("index")
 
         assert_difference('Asset.count') do
-          post :create, { :asset => @asset, :layout => "admin/headless" }
+          post :create, :asset => @asset, :layout => "admin/headless"
         end
 
         assert_response :redirect
@@ -112,7 +112,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       end
 
       should "render new with custom layout after an error" do
-        post :create, { :asset => {}, :layout => "admin/headless" }
+        post :create, :asset => {}, :layout => "admin/headless"
         assert_response :success
         assert_template "new"
         assert_template "admin/headless"
