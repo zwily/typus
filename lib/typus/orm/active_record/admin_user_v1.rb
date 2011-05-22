@@ -12,10 +12,7 @@ module Typus
             attr_accessor :password
             attr_protected :status
 
-            validates :email,
-                      :presence => true,
-                      :uniqueness => true,
-                      :format => { :with => Typus::Regex::Email }
+            validates :email, :presence => true, :uniqueness => true, :format => { :with => Typus::Regex::Email }
 
             validates :password,
                       :confirmation => { :if => :password_required? },
