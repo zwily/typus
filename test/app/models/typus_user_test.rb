@@ -38,7 +38,7 @@ class TypusUserTest < ActiveSupport::TestCase
   end
 
   should "not allow_mass_assignment_of :status" do
-    assert TypusUser.attr_protected.include?("status")
+    assert TypusUser.attr_protected[:default].include?(:status)
   end
 
   should "verify columns" do
