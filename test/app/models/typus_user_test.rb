@@ -45,9 +45,6 @@ class TypusUserTest < ActiveSupport::TestCase
 
     options = { :email => 'demo@example.com', :role => 'admin' }
     assert TypusUser.generate(options).valid?
-
-    options = { :email => 'demo@example.com', :role => 'admin' }
-    assert_equal :en, TypusUser.generate(options).locale
   end
 
   context "TypusUser" do
