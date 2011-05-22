@@ -335,7 +335,7 @@ title;status
 
       should "verify_admin_updating_an_item_does_change_typus_user_id_to_whatever_admin_wants" do
         post :update, :id => @post.id, :post => { :title => 'Updated', :typus_user_id => 108 }
-        assert_equal 108, @post.reload.typus_user_id
+        assert @post.reload.typus_user_id.eql?(108)
       end
 
     end
@@ -383,8 +383,8 @@ title;status
 
         get :index
 
-        assert_equal 4, Post.count
-        assert_equal 2, assigns(:items).size
+        assert Post.count.eql?(4)
+        assert assigns(:items).size.eql?(2)
         assert_equal [@typus_user.id, @typus_user.id], assigns(:items).map(&:typus_user_id)
       end
 
@@ -475,7 +475,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_difference('@post.comments.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => comment.id, :association_name => 'comments' } }
+        post :relate, :id => @post.id, :related => { :model => 'Comment', :id => comment.id, :association_name => 'comments' }
       end
 
       assert_response :redirect
@@ -488,7 +488,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_no_difference('@post.comments.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => "", :association_name => 'comments' } }
+        post :relate, :id => @post.id, :related => { :model => 'Comment', :id => "", :association_name => 'comments' }
       end
 
       assert_response :redirect
@@ -501,7 +501,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_no_difference('@post.comments.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Comment', :id => nil, :association_name => 'comments' } }
+        post :relate, :id => @post.id, :related => { :model => 'Comment', :id => nil, :association_name => 'comments' }
       end
 
       assert_response :redirect
@@ -514,7 +514,7 @@ title;status
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"
 
       assert_difference('category.posts.count') do
-        post :relate, { :id => @post.id, :related => { :model => 'Category', :id => category.id, :association_name => 'categories' } }
+        post :relate, :id => @post.id, :related => { :model => 'Category', :id => category.id, :association_name => 'categories' }
       end
 
       assert_response :redirect
@@ -695,9 +695,9 @@ title;status
 
       should "create new post and redirect to view" do
         assert_difference('Post.count') do
-          post :create, { :post => @post,
-                          :resource => "View" }
+          post :create, :post => @post, :resource => "View"
         end
+
         assert_response :redirect
         assert_redirected_to "/admin/views/new?post_id=#{Post.last.id}"
       end
@@ -723,7 +723,7 @@ title;status
 
       should "create new post and redirect to view" do
         assert_difference('Post.count') do
-          post :create, { :post => @post, :resource => "View", :resource_id => @view.id }
+          post :create, :post => @post, :resource => "View", :resource_id => @view.id
         end
         assert_response :redirect
         assert_redirected_to "/admin/views/edit/#{@view.id}"
@@ -745,20 +745,18 @@ title;status
     should "work and return a json hash with ten items" do
       get :autocomplete, { :term => "Post" }
       assert_response :success
-      assert_equal 20, assigns(:items).size
+      assert assigns(:items).size.eql?(20)
     end
 
     should "work and return json hash with one item" do
       post = Post.first
       post.update_attributes(:title => "fesplugas")
 
-      get :autocomplete, { :term => "jmeiss" }
-      assert_response :success
-      assert_equal 0, assigns(:items).size
+      get :autocomplete, :term => "jmeiss"
+      assert assigns(:items).size.eql?(0)
 
-      get :autocomplete, { :term => "fesplugas" }
-      assert_response :success
-      assert_equal 1, assigns(:items).size
+      get :autocomplete, :term => "fesplugas"
+      assert assigns(:items).size.eql?(1)
     end
 
   end
