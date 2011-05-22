@@ -67,9 +67,8 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
   context "Editor" do
 
     setup do
+      editor_sign_in
       @request.env['HTTP_REFERER'] = '/admin/typus_users'
-      @editor = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
-      @request.session[:typus_user_id] = @editor.id
     end
 
     should "not be able  to create typus_users" do
@@ -78,29 +77,29 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "be able to edit his profile" do
-      get :edit, :id => @editor.id
+      get :edit, :id => @typus_user.id
       assert_response :success
     end
 
     should "be able to update his profile" do
-      post :update, :id => @editor.id, :typus_user => { :role => 'editor' }
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'editor' }
       assert_response :redirect
-      assert_redirected_to "/admin/typus_users/edit/#{@editor.id}"
+      assert_redirected_to "/admin/typus_users/edit/#{@typus_user.id}"
       assert_equal "Typus user successfully updated.", flash[:notice]
     end
 
     should "not be able to change his role" do
-      post :update, :id => @editor.id, :typus_user => { :role => 'admin' }
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'admin' }
       assert_response :unprocessable_entity
     end
 
     should "not be able to destroy his profile" do
-      delete :destroy, :id => @editor.id
+      delete :destroy, :id => @typus_user.id
       assert_response :unprocessable_entity
     end
 
     should "not be able to toggle his status" do
-      get :toggle, { :id => @editor.id, :field => 'status' }
+      get :toggle, { :id => @typus_user.id, :field => 'status' }
       assert_response :unprocessable_entity
     end
 
@@ -120,7 +119,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "not be able to toggle other profiles status" do
-      get :toggle, { :id => Factory(:typus_user).id, :field => 'status' }
+      get :toggle, :id => Factory(:typus_user).id, :field => 'status'
       assert_response :unprocessable_entity
     end
 
@@ -133,19 +132,19 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
   context "Designer" do
 
     setup do
-      @designer = Factory(:typus_user, :role => "designer")
-      @request.session[:typus_user_id] = @designer.id
+      designer_sign_in
     end
 
     should "be able to edit his profile" do
-      get :edit, :id => @designer.id
+      get :edit, :id => @typus_user.id
       assert_response :success
     end
 
     should "be able to update his profile" do
-      post :update, :id => @designer.id, :typus_user => { :role => 'designer', :email => 'designer@withafancydomain.com' }
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'designer', :email => 'designer@withafancydomain.com' }
+
       assert_response :redirect
-      assert_redirected_to "/admin/typus_users/edit/#{@designer.id}"
+      assert_redirected_to "/admin/typus_users/edit/#{@typus_user.id}"
       assert_equal "Typus user successfully updated.", flash[:notice]
       assert_equal "designer@withafancydomain.com", assigns(:item).email
     end
