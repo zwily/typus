@@ -47,7 +47,7 @@ module RailsApp
     config.filter_parameters += [:password]
 
     # Enable IdentityMap for Active Record, to disable set to false or remove the line below.
-    config.active_record.identity_map = true
+    config.active_record.identity_map = false
 
     # Enable the asset pipeline
     config.assets.enabled = true
