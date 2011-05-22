@@ -94,11 +94,11 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
       get :autocomplete, :term => "jmeiss"
       assert_response :success
-      assert_equal 0, assigns(:items).size
+      assert assigns(:items).size.eql?(0)
 
       get :autocomplete, :term => "fesplugas"
       assert_response :success
-      assert_equal 1, assigns(:items).size
+      assert assigns(:items).size.eql?(1)
     end
 
   end
