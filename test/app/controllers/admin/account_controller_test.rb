@@ -87,7 +87,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
       assert_equal "Password recovery link sent to your email.", flash[:notice]
     end
 
-    should_eventually "test_should_create_admin_user_session_and_redirect_user_to_its_details" do
+    should "test_should_create_admin_user_session_and_redirect_user_to_its_details" do
       get :show, :id => @typus_user.token
 
       assert_equal @typus_user.id, @request.session[:typus_user_id]
