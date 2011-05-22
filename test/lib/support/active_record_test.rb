@@ -56,17 +56,17 @@ class ActiveRecordTest < ActiveSupport::TestCase
       end
 
       should "work for symbols" do
-        post = Factory(:post)
+        post = Factory.build(:post)
         assert_equal "published", post.mapping(:status)
       end
 
       should "work for strings" do
-        post = Factory(:post, :status => "unpublished")
+        post = Factory.build(:post, :status => "unpublished")
         assert_equal "unpublished", post.mapping('status')
       end
 
       should "for unexisting keys returning the current key" do
-        post = Factory(:post, :status => "unexisting")
+        post = Factory.build(:post, :status => "unexisting")
         assert_equal "unexisting", post.mapping(:status)
       end
 
@@ -82,9 +82,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
       end
 
       should "verify" do
-        post = Factory(:post)
+        post = Factory.build(:post)
         assert_equal "Publicado", post.mapping(:status)
-        post = Factory(:post, :status => "unpublished")
+        post = Factory.build(:post, :status => "unpublished")
         assert_equal "No publicado", post.mapping(:status)
       end
 
@@ -100,9 +100,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
       end
 
       should "verify" do
-        page = Factory(:post)
+        page = Factory.build(:post)
         assert_equal "Published - Hash", page.mapping(:status)
-        page = Factory(:post, :status => "unpublished")
+        page = Factory.build(:post, :status => "unpublished")
         assert_equal "Not Published - Hash", page.mapping(:status)
       end
 
@@ -113,12 +113,12 @@ class ActiveRecordTest < ActiveSupport::TestCase
   context "to_label" do
 
     should "return email for TypusUser" do
-      typus_user = Factory(:typus_user)
+      typus_user = Factory.build(:typus_user)
       assert_equal typus_user.email, typus_user.to_label
     end
 
     should "return name for Category" do
-      category = Factory(:category, :name => "Chunky Bacon")
+      category = Factory.build(:category, :name => "Chunky Bacon")
       assert_match "Chunky Bacon", category.to_label
     end
 
