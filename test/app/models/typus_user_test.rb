@@ -115,18 +115,18 @@ class TypusUserTest < ActiveSupport::TestCase
   end
 
   test "admin gets a list of all applications" do
-    typus_user = Factory(:typus_user)
+    typus_user = Factory.build(:typus_user)
     assert_equal Typus.applications, typus_user.applications
   end
 
   test "admin gets a list of application resources for CRUD Extended application" do
-    typus_user = Factory(:typus_user)
+    typus_user = Factory.build(:typus_user)
     expected = ["Asset", "Category", "Comment", "Page", "Post"]
     assert_equal expected, typus_user.application("CRUD Extended")
   end
 
   test "admin gets a list of application resources for Admin application" do
-    typus_user = Factory(:typus_user)
+    typus_user = Factory.build(:typus_user)
     assert_equal %w(TypusUser), typus_user.application("Admin")
   end
 
@@ -143,8 +143,8 @@ class TypusUserTest < ActiveSupport::TestCase
   end
 
   should "owns a resource" do
-    typus_user = Factory(:typus_user)
-    resource = Factory(:post, :typus_user_id => typus_user.id)
+    typus_user = Factory.build(:typus_user)
+    resource = Factory.build(:post, :typus_user_id => typus_user.id)
     assert typus_user.owns?(resource)
   end
 
