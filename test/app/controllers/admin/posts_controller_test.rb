@@ -314,8 +314,8 @@ title;status
 
         get :index
 
-        assert_equal 4, Post.count
-        assert_equal 4, assigns(:items).size
+        assert Post.count.eql?(4)
+        assert assigns(:items).size.eql?(4)
         assert_equal [@editor.id, @editor.id, @typus_user.id, @typus_user.id], assigns(:items).map(&:typus_user_id)
       end
 

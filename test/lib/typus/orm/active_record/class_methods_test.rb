@@ -196,11 +196,11 @@ class ClassMethodsTest < ActiveSupport::TestCase
   context "typus_options_for" do
 
     should "accept strings" do
-      assert_equal 15, Post.typus_options_for("form_rows")
+      assert Post.typus_options_for("form_rows").eql?(15)
     end
 
     should "accept symbols" do
-      assert_equal 15, Post.typus_options_for(:form_rows)
+      assert Post.typus_options_for(:form_rows).eql?(15)
     end
 
     should "return nil when options do not exist" do
@@ -208,11 +208,11 @@ class ClassMethodsTest < ActiveSupport::TestCase
     end
 
     should "return options for Post" do
-      assert_equal 15, Post.typus_options_for(:form_rows)
+      assert Post.typus_options_for(:form_rows).eql?(15)
     end
 
     should "return options for Page" do
-      assert_equal 25, Page.typus_options_for(:form_rows)
+      assert Page.typus_options_for(:form_rows).eql?(25)
     end
 
     should "return sortable options as a boolean" do

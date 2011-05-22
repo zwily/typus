@@ -69,7 +69,7 @@ class TypusUserTest < ActiveSupport::TestCase
     end
 
     should "return default_locale when no preferences are set" do
-      assert_equal :en, @typus_user.locale
+      assert @typus_user.locale.eql?(:en)
     end
 
     should "be able to set a locale" do
@@ -77,7 +77,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
       expected = {:locale => :jp}
       assert_equal expected, @typus_user.preferences
-      assert_equal :jp, @typus_user.locale
+      assert_equal @typus_user.locale.eql?(:jp)
     end
 
     should "be able to set preferences" do

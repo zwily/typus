@@ -230,7 +230,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
         resource = resource.where(condition)
       end
 
-      assert_equal 1, resource.count
       assert_equal ["francesc.one@example.com"], resource.map(&:email)
     end
 
@@ -321,7 +320,6 @@ class ActiveRecordTest < ActiveSupport::TestCase
       @resource.build_conditions(params).each { |c| @resource = @resource.where(c) }
       @resource.build_joins(params).each { |j| @resource = @resource.joins(j) }
 
-      assert_equal 1, @resource.count
       assert_equal [@project.user.id], @resource.map(&:id)
     end
 

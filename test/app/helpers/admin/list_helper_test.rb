@@ -39,7 +39,7 @@ class Admin::ListHelperTest < ActiveSupport::TestCase
       self.stubs(:params).returns({:action => 'some_other_action'})
 
       results = list_actions.split("/")
-      assert_equal 2, results.size
+      assert results.size.eql?(2)
     end
 
     should_eventually "return an array with our custom actions"

@@ -15,11 +15,11 @@ class ResourcesTest < ActiveSupport::TestCase
   end
 
   should "return form_rows" do
-    assert_equal 15, Typus::Resources.form_rows
+    assert Typus::Resources.form_rows.eql?(15)
   end
 
   should "return minute_step" do
-    assert_equal 5, Typus::Resources.minute_step
+    assert Typus::Resources.minute_step.eql?(5)
   end
 
   should "return only_user_items" do
@@ -27,7 +27,7 @@ class ResourcesTest < ActiveSupport::TestCase
   end
 
   should "return per_page" do
-    assert_equal 15, Typus::Resources.per_page
+    assert Typus::Resources.per_page.eql?(15)
   end
 
   should "return sortable" do
