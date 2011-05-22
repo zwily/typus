@@ -158,14 +158,14 @@ ActiveRecord::Schema.define do
 
   create_table :users, :force => true do |t|
     t.string :name, :null => false
-    t.string :first_name, :default => "", :null => false
-    t.string :last_name, :default => "", :null => false
-    t.string :role, :null => false
+    t.string :first_name, :default => ""
+    t.string :last_name, :default => ""
+    t.string :role
     t.string :email, :null => false
     t.boolean :status, :default => false
-    t.string :token, :null => false
-    t.string :salt, :null => false
-    t.string :crypted_password, :null => false
+    t.string :token
+    t.string :salt
+    t.string :crypted_password
     t.string :preferences
     t.timestamps
   end

@@ -90,6 +90,8 @@ end
 Factory.define :user do |f|
   f.sequence(:name) { |n| "User##{n}" }
   f.sequence(:email) { |n| "user.#{n}@example.com" }
+  f.role "admin"
+  f.token "qw1rd3-1w3f5b"
 end
 
 Factory.define :project do |f|
