@@ -13,7 +13,7 @@ gem 'factory_girl'
 gem 'jquery-rails'
 gem 'paperclip'
 gem 'rack-cache', :require => 'rack/cache'
-gem 'rails', :git => 'git://github.com/rails/rails.git'
+gem 'rails', '3.1.0.rc1'
 
 group :test do
   gem 'shoulda-context'
