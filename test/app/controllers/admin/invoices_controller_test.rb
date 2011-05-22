@@ -27,9 +27,8 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
     end
 
     should "initialize the object with the params passed on the url" do
-      get :new, { :resource => "Order", :resource => "Order", :order_id => @order.id }
-      assert assigns(:item)
-      assert_equal @order.id, assigns(:item).order_id
+      get :new, :resource => "Order", :resource => "Order", :order_id => @order.id
+      assert assigns(:item).order.eql?(@order)
     end
 
     # TODO: Take a look at this to refactor the create method.
@@ -39,6 +38,7 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
       assert_difference('Invoice.count') do
         post :create, { :invoice => @invoice, :resource => "Order", :order_id => @order.id }
       end
+
       assert_response :redirect
       assert_redirected_to "/admin/orders/edit/#{@order.id}"
     end
@@ -51,8 +51,8 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
 
     should_eventually "raise an error if we try to create an invoice to an order which already has an invoice" do
       @invoice = Factory(:invoice)
-      post :create, { :invoice => { :number => "Invoice#0000001" },
-                      :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
+      post :create, :invoice => { :number => "Invoice#0000001" },
+                    :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id
       assert_response :unprocessable_entity
     end
 
