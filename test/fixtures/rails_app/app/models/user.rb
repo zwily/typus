@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
 
   ##
+  #
+  #
+
+  include Typus::Orm::ActiveRecord::User::InstanceMethods
+
+  ##
   # Associations
   #
 
