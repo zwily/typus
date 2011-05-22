@@ -32,4 +32,8 @@ class ActiveSupport::TestCase
     @request.session[:typus_user_id] = @typus_user.id
   end
 
+  def reset_session
+    @request.session[:typus_user_id] = nil
+  end
+
 end

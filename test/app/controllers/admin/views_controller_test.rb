@@ -18,7 +18,7 @@ class Admin::ViewsControllerTest < ActionController::TestCase
   end
 
   teardown do
-    @request.session[:typus_user_id] = nil
+    reset_session
   end
 
   should_eventually "get :index returns only views on the current_context" do
