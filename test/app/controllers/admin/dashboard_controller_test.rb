@@ -143,7 +143,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   context "When designer is logged in" do
 
     setup do
-      @request.session[:typus_user_id] = Factory(:typus_user, :role => "designer").id
+      designer_sign_in
       get :show
     end
 
