@@ -1,14 +1,11 @@
 require "test_helper"
 
-=begin
-
-  What's being tested here?
-
-    - Unrelate "Comment" from "Post" (Post#comments)
-    - Search by "Posts.title" (Post#comments)
-
-=end
-
+##
+# What's being tested here?
+#
+# - Unrelate "Comment" from "Post" (Post#comments)
+# - Search by "Posts.title" (Post#comments)
+#
 class Admin::CommentsControllerTest < ActionController::TestCase
 
   setup do
@@ -31,8 +28,6 @@ class Admin::CommentsControllerTest < ActionController::TestCase
     # Notice that unrelating an item doesn't remove it from database unless
     # defined on the model.
     #
-    ##
-
     should "unrelate comment from post" do
       comment = Factory(:comment)
       @post = comment.post
@@ -59,9 +54,6 @@ class Admin::CommentsControllerTest < ActionController::TestCase
     #
     # And we can search by "posts.title" because "Comment" is belongs_to :post
     #
-    #
-    ##
-
     should "search in Posts.title from Comments list" do
       post_1 = Factory(:post, :title => "A title with_keyword")
       comment_1 = Factory(:comment, :post => post_1)
