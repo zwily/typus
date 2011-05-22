@@ -2,39 +2,25 @@ require "test_helper"
 
 class TypusUserTest < ActiveSupport::TestCase
 
-  [ %Q(this_is_chelm@example.com\n<script>location.href="http://spammersite.com"</script>),
-    'admin',
-    'TEST@EXAMPLE.COM',
-    'test@example',
-    'test@example.c',
-    'testexample.com' ].each do |value|
-    should "not allow #{value}" do
-      assert !Factory.build(:typus_user, :email => value).valid?
-    end
+  ##
+  # Validations
+  #
+
+  test "validate email" do
+    assert Factory.build(:typus_user, :email => "dong").invalid?
+    assert Factory.build(:typus_user, :email => "john@example.com").valid?
+    assert Factory.build(:typus_user, :email => nil).invalid?
   end
 
-  [ 'test+filter@example.com',
-    'test.filter@example.com',
-    'test@example.co.uk',
-    'test@example.es' ].each do |value|
-    should "allow #{value}" do
-      assert Factory.build(:typus_user, :email => value).valid?
-    end
+  test "validate :role" do
+    assert Factory.build(:typus_user, :role => nil).invalid?
   end
 
-  should "validate_presence_of :email" do
-    assert !Factory.build(:typus_user, :email => nil).valid?
-  end
-
-  should "validate_presence_of :role" do
-    assert !Factory.build(:typus_user, :role => nil).valid?
-  end
-
-  should "validate password length" do
-    assert !Factory.build(:typus_user, :password => "0"*5).valid?, "5"
-    assert Factory.build(:typus_user, :password => "0"*6).valid?, "6"
-    assert Factory.build(:typus_user, :password => "0"*40).valid?, "40"
-    assert !Factory.build(:typus_user, :password => "0"*41).valid?, "41"
+  test "validate :password" do
+    assert Factory.build(:typus_user, :password => "0"*5).invalid?
+    assert Factory.build(:typus_user, :password => "0"*6).valid?
+    assert Factory.build(:typus_user, :password => "0"*40).valid?
+    assert Factory.build(:typus_user, :password => "0"*41).invalid?
   end
 
   should "not allow_mass_assignment_of :status" do
