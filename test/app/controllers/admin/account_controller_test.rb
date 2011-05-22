@@ -24,7 +24,6 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     should "verify forgot_password redirects to new when there are no admin users" do
       get :forgot_password
-
       assert_response :redirect
       assert_redirected_to new_admin_account_path
     end
@@ -33,17 +32,13 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     should "not sign_up invalid emails" do
       post :create, :typus_user => { :email => "example.com" }
-
       assert_response :redirect
       assert_redirected_to :action => :new
       assert flash.empty?
     end
 
     should "sign_up a valid email" do
-      assert_difference('TypusUser.count') do
-        post :create, :typus_user => { :email => "john@example.com" }
-      end
-
+      assert_difference('TypusUser.count') { post :create, :typus_user => { :email => "john@example.com" } }
       assert_response :redirect
       assert_redirected_to :action => "show", :id => TypusUser.find_by_email("john@example.com").token
     end
@@ -76,7 +71,6 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     should "test_should_send_recovery_password_link_to_existing_user" do
       post :send_password, :typus_user => { :email => @typus_user.email }
-
       assert_response :redirect
       assert_redirected_to new_admin_session_path
       assert_equal "Password recovery link sent to your email.", flash[:notice]
@@ -84,7 +78,6 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
     should "test_should_create_admin_user_session_and_redirect_user_to_its_details" do
       get :show, :id => @typus_user.token
-
       assert_equal @typus_user.id, @request.session[:typus_user_id]
       assert_response :redirect
       assert_redirected_to :controller => "/admin/typus_users", :action => "edit", :id => @typus_user.id
