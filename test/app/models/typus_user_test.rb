@@ -114,25 +114,20 @@ class TypusUserTest < ActiveSupport::TestCase
 
   end
 
-  context "Admin Role" do
+  test "admin gets a list of all applications" do
+    typus_user = Factory(:typus_user)
+    assert_equal Typus.applications, typus_user.applications
+  end
 
-    setup do
-      @typus_user = Factory(:typus_user)
-    end
+  test "admin gets a list of application resources for CRUD Extended application" do
+    typus_user = Factory(:typus_user)
+    expected = ["Asset", "Category", "Comment", "Page", "Post"]
+    assert_equal expected, typus_user.application("CRUD Extended")
+  end
 
-    should "get a list of all applications" do
-      assert_equal Typus.applications, @typus_user.applications
-    end
-
-    should "get a list of application resources for CRUD Extended application" do
-      expected = ["Asset", "Category", "Comment", "Page", "Post"]
-      assert_equal expected, @typus_user.application("CRUD Extended")
-    end
-
-    should "get a list of application resources for Admin application" do
-      assert_equal %w(TypusUser), @typus_user.application("Admin")
-    end
-
+  test "admin gets a list of application resources for Admin application" do
+    typus_user = Factory(:typus_user)
+    assert_equal %w(TypusUser), typus_user.application("Admin")
   end
 
   test "editor get a list of all applications" do
