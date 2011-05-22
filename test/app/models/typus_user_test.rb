@@ -7,10 +7,6 @@ require "test_helper"
 #
 class TypusUserTest < ActiveSupport::TestCase
 
-  ##
-  # Validations
-  #
-
   test "validate email" do
     assert Factory.build(:typus_user, :email => "dong").invalid?
     assert Factory.build(:typus_user, :email => "john@example.com").valid?
