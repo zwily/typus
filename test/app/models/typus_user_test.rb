@@ -38,32 +38,20 @@ class TypusUserTest < ActiveSupport::TestCase
     assert_equal expected, output
   end
 
-  context "generate" do
+  test "generate" do
+    assert TypusUser.generate.invalid?
 
-    should "not be valid if email is not passed" do
-      assert TypusUser.generate.invalid?
-    end
+    options = { :email => 'demo@example.com' }
+    assert TypusUser.generate(options).valid?
 
-    should "be valid when email is passed" do
-      options = { :email => 'demo@example.com' }
-      assert TypusUser.generate(options).valid?
-    end
+    options = { :email => 'demo@example.com', :password => 'XXXXXXXX' }
+    assert TypusUser.generate(options).valid?
 
-    should "accept password" do
-      options = { :email => 'demo@example.com', :password => 'XXXXXXXX' }
-      assert TypusUser.generate(options).valid?
-    end
+    options = { :email => 'demo@example.com', :role => 'admin' }
+    assert TypusUser.generate(options).valid?
 
-    should "accept role" do
-      options = { :email => 'demo@example.com', :role => 'admin' }
-      assert TypusUser.generate(options).valid?
-    end
-
-    should "have set a default locale" do
-      options = { :email => 'demo@example.com', :role => 'admin' }
-      assert_equal :en, TypusUser.generate(options).locale
-    end
-
+    options = { :email => 'demo@example.com', :role => 'admin' }
+    assert_equal :en, TypusUser.generate(options).locale
   end
 
   context "TypusUser" do
