@@ -21,6 +21,11 @@ RailsApp::Application.configure do
 
   # Only use best-standards-support built into browsers
   config.action_dispatch.best_standards_support = :builtin
+
+  # Tell Action Mailer not to deliver emails to the real world.
+  # The :test delivery method accumulates sent emails in the
+  # ActionMailer::Base.deliveries array.
+  config.action_mailer.delivery_method = :test
 end
 
 # Be sure to restart your server when you modify this file.
@@ -28,4 +33,5 @@ end
 Typus.setup do |config|
   config.config_folder = Rails.root.join("config/typus")
   config.authentication = :session
+  config.mailer_sender = "admin@example.com"
 end
