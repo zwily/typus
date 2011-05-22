@@ -65,7 +65,7 @@ module Typus
   @@username = "admin"
 
   ##
-  # Pagination options
+  # Pagination options passed to Kaminari helper.
   #
   mattr_accessor :pagination
   @@pagination = { :window => 0,
