@@ -1,6 +1,7 @@
 RailsApp::Application.routes.draw do
 
   match "/" => redirect("/admin")
+  mount Admin::Engine => "/admin"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
