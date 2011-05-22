@@ -18,6 +18,7 @@ gem 'rails', '3.1.0.rc1'
 group :test do
   gem 'shoulda-context'
   gem 'mocha' # Make sure mocha is loaded at the end ...
+  gem 'turn'
 end
 
 group :development, :test do
