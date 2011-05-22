@@ -3,7 +3,7 @@ require "test_helper"
 class Admin::MailerTest < ActiveSupport::TestCase
 
   setup do
-    @typus_user = Factory(:typus_user)
+    @typus_user = Factory.build(:typus_user, :token => "qswed3-64g3fb")
     @url = "http://test.host/admin/account/#{@typus_user.token}"
     @email = Admin::Mailer.reset_password_link(@typus_user, @url)
   end
