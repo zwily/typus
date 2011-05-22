@@ -15,7 +15,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   include ActionView::Helpers::UrlHelper
   include ActionView::Helpers::TagHelper
   include ActionView::Helpers::TextHelper
-  include ActionView::Helpers::RawOutputHelper
+  # include ActionView::Helpers::RawOutputHelper
 
   include ActionView::Context
 
