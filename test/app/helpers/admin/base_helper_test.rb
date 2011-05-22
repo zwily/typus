@@ -56,28 +56,20 @@ class Admin::BaseHelperTest < ActiveSupport::TestCase
 
   end
 
-  context "header" do
-
-    should "work returning a partial" do
-      assert_equal ["admin/helpers/base/header"], header
-    end
-
+  test "header returns a partial" do
+    assert_equal ["admin/helpers/base/header"], header
   end
 
-  context "display_flash_message" do
+  test "display_flash_message is displayed" do
+    message = { :test => "This is the message." }
+    output = display_flash_message(message)
+    expected = ["admin/helpers/base/flash_message",
+                { :flash_type => :test, :message => { :test => "This is the message." } }]
+    assert_equal expected, output
+  end
 
-    should "be displayed" do
-      message = { :test => "This is the message." }
-      output = display_flash_message(message)
-      expected = ["admin/helpers/base/flash_message",
-                  { :flash_type => :test, :message => { :test => "This is the message." } }]
-      assert_equal expected, output
-    end
-
-    should "not be displayed when message is empty" do
-      assert_nil display_flash_message(Hash.new)
-    end
-
+  test "display_flash_message is not displayed when message is empty" do
+    assert_nil display_flash_message(Hash.new)
   end
 
 end
