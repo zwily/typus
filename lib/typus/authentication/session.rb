@@ -10,8 +10,9 @@ module Typus
         if session[:typus_user_id]
           admin_user
         else
-          back_to = request.env['PATH_INFO'] unless [dashboard_path].include?(request.env['PATH_INFO'])
-          redirect_to new_session_path(:back_to => back_to)
+          # back_to = request.env['PATH_INFO'] unless [dashboard_path].include?(request.env['PATH_INFO'])
+          # redirect_to new_session_path(:back_to => back_to)
+          redirect_to new_session_path
         end
       end
 
