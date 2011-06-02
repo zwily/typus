@@ -100,7 +100,7 @@ module Admin
     end
 
     def table_file_field(attribute, item)
-      typus_file_preview(item, attribute, { :height => 60, :width => 60})
+      typus_file_preview(item, attribute, { :height => 25, :width => 25})
     end
 
     def table_tree_field(attribute, item)
