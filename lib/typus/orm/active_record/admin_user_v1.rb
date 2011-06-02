@@ -38,6 +38,14 @@ module Typus
               new :email => options[:email], :password => options[:password], :role => options[:role]
             end
 
+            def role
+              Typus::Configuration.roles.keys.sort
+            end
+
+            def locale
+              Typus.locales
+            end
+
             include InstanceMethods
             include Typus::Orm::ActiveRecord::User::InstanceMethods
 

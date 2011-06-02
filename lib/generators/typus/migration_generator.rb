@@ -43,9 +43,6 @@ Examples:
         inject_into_class "app/models/#{model_filename}.rb", options[:user_class_name] do
           <<-MSG
 
-  ROLE = Typus::Configuration.roles.keys.sort
-  LOCALE = Typus.locales
-
   enable_as_typus_user
 
           MSG

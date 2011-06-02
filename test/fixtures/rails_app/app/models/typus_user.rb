@@ -1,13 +1,6 @@
 class TypusUser < ActiveRecord::Base
 
   ##
-  # Constants
-  #
-
-  ROLE = Typus::Configuration.roles.keys.sort
-  LOCALE = Typus.locales
-
-  ##
   # Mixins
   #
 
