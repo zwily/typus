@@ -104,8 +104,7 @@ class ClassMethodsTest < ActiveSupport::TestCase
     should "return form fields for Asset" do
       expected = [["caption", :string],
                   ["dragonfly", :file],
-                  ["dragonfly_required", :file],
-                  ["original_file_name", :virtual]]
+                  ["dragonfly_required", :file]]
 
       assert_equal expected.map { |i| i.first }, Asset.typus_fields_for(:special).keys
       assert_equal expected.map { |i| i.last }, Asset.typus_fields_for(:special).values
@@ -133,7 +132,7 @@ class ClassMethodsTest < ActiveSupport::TestCase
     end
 
     should "return fields for edit Asset" do
-      expected = %w(caption dragonfly dragonfly_required paperclip paperclip_required original_file_name)
+      expected = %w(caption dragonfly dragonfly_required paperclip paperclip_required)
       assert_equal expected, Asset.typus_fields_for(:edit).keys
     end
 
@@ -373,8 +372,8 @@ class ClassMethodsTest < ActiveSupport::TestCase
     should "return data for existing model" do
       expected = {"application"=>"CRUD Extended",
                   "fields"=>{"default"=>"caption, dragonfly, dragonfly_required",
-                             "special"=>"caption, dragonfly, dragonfly_required, original_file_name",
-                             "form"=>"caption, dragonfly, dragonfly_required, paperclip, paperclip_required, original_file_name",
+                             "special"=>"caption, dragonfly, dragonfly_required",
+                             "form"=>"caption, dragonfly, dragonfly_required, paperclip, paperclip_required",
                              "new"=>"dragonfly, dragonfly_required, paperclip, paperclip_required"}}
       assert_equal expected, Asset.read_model_config
     end

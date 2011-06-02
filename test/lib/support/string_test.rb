@@ -51,7 +51,7 @@ class StringTest < ActiveSupport::TestCase
     end
 
     should "return read" do
-      assert_equal "read", "index".action.acl_action_mapper
+      assert_equal "read", "index".acl_action_mapper
       assert_equal "read", "show".acl_action_mapper
     end
 

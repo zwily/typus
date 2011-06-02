@@ -95,9 +95,10 @@ class TypusUserTest < ActiveSupport::TestCase
 
   end
 
-  test "admin gets a list of all applications" do
+  test "admin gets a list of all applications expect MongoDB becuase is disabled" do
     typus_user = Factory.build(:typus_user)
-    assert_equal Typus.applications, typus_user.applications
+    # assert_equal Typus.applications, typus_user.applications
+    assert_equal Typus.applications.reject { |i| i.eql?("MongoDB") }, typus_user.applications
   end
 
   test "admin gets a list of application resources for CRUD Extended application" do

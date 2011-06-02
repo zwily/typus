@@ -66,6 +66,7 @@ module Typus
                 next
               end
 
+              # TODO: This is not tested!
               if virtual_fields.include?(field.to_s)
                 fields_with_type[field.to_s] = :virtual
               end
