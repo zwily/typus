@@ -11,12 +11,7 @@
       klass = (@resource && apps.include?(@resource.model_name)) ? 'active' : nil
     %>
 
-    <%
-      url = { :controller => "/admin/#{apps.first.tableize}" }
-      html_options = { :class => klass }
-    %>
-
-    <li><%= link_to Typus::I18n.t(application), url, html_options %></li>
+    <li><%= link_to Typus::I18n.t(application), { :controller => "/admin/#{apps.first.tableize}" }, { :class => klass } %></li>
 
   <% end %>
 
