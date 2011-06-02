@@ -28,8 +28,8 @@ Comment:
 
 Page:
   fields:
-    list: title
-    form: title, body
+    list: title, parent_id
+    form: title, body, parent_id
   actions:
     index: rebuild_all
     edit: rebuild
