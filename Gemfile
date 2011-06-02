@@ -33,7 +33,7 @@ group :development, :test do
   end
 
   platforms :ruby do
-    gem 'mysql2', '0.2.7'
+    gem 'mysql2'
     gem 'pg'
     gem 'sqlite3'
   end
