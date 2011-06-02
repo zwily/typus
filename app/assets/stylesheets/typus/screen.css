@@ -69,6 +69,7 @@ a:hover { color: #333; text-decoration: underline!important; }
 #header_wrapper #links .left ul { display: block; }
 #header_wrapper #links .left ul li { display: inline; padding: 0 0.5em 0 0; }
 #header_wrapper #links .left ul li a {
+  -moz-border-radius: 5px;
   -webkit-border-radius: 5px;
   background: #242527;
   padding: 3px 5px;
