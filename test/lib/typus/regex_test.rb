@@ -22,6 +22,23 @@ class RegexTest < ActiveSupport::TestCase
     end
   end
 
+  test "domain_regex matches valid domains" do
+    ["example.com",
+     "site1.example.com",
+     "site-with-dash.com",
+     "sub-domain.with-dash.com"].each do |value|
+      assert_match Typus::Regex::Domain, value
+    end
+  end
+
+  test "domain_regex not matches invalid domains" do
+    ["example",
+     "site1_with_underscore.com",
+     "site+with-non-accepted-chars.com"].each do |value|
+      assert_no_match Typus::Regex::Domain, value
+    end
+  end
+
   test "uri_regex matches valid urls" do
     ["http://example.com",
      "http://www.example.com",
