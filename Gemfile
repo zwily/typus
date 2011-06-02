@@ -1,19 +1,19 @@
-source "http://rubygems.org"
+source 'http://rubygems.org'
+
+gem 'rails', '3.1.0.rc1'
+gem 'sqlite3'
+gem 'jquery-rails'
 
 # Specify your gem's dependencies in typus.gemspec
 gemspec
 
-# Yes, some dependencies are in typus.gemspec, but it's a little bit difficult
-# to mantain the above code there. I'll keep here for the moment ...
-
+# And this stuff needed for the demo application.
 gem 'acts_as_list'
 gem 'acts_as_tree'
 gem 'dragonfly', '~> 0.9'
 gem 'factory_girl'
-gem 'jquery-rails'
 gem 'paperclip'
 gem 'rack-cache', :require => 'rack/cache'
-gem 'rails', '3.1.0.rc1'
 
 group :test do
   gem 'shoulda-context'
@@ -40,18 +40,9 @@ group :development, :test do
 
 end
 
-# MongoDB support is still in "beta" mode, so I'm not testing it for the moment.
 group :production do
 
-#  gem 'mongoid'
-
-  platforms :ruby do
-    gem 'bson_ext'
-  end
-
-end
-
-group :production do
+  # gem 'mongoid'
 
   platforms :jruby do
     gem 'activerecord-jdbc-adapter'
@@ -59,6 +50,7 @@ group :production do
   end
 
   platforms :ruby do
+    # gem 'bson_ext'
     gem 'sqlite3'
   end
 
