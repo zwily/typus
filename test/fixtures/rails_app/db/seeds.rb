@@ -25,13 +25,11 @@ end
   Factory(:post)
 end
 
-=begin
 assets_path = "#{Rails.root}/db/seeds/assets"
 5.times { |i| Factory(:asset,
                      :dragonfly => File.new("#{assets_path}/00#{i}.jpg"),
                      :dragonfly_required => File.new("#{assets_path}/00#{i}.jpg"),
                      :paperclip => File.new("#{assets_path}/00#{i}.jpg")) }
-=end
 
 ##
 # HasManyThrough
