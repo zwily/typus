@@ -22,6 +22,10 @@ module Typus
         ::I18n.t(msg, options)
       end
 
+      def default_locale
+        :en
+      end
+
     end
 
   end
