@@ -17,11 +17,4 @@ class Admin::SidebarHelperTest < ActiveSupport::TestCase
     default_url_options[:host] = 'test.host'
   end
 
-  test "export returns array with expected values" do
-    params = { :controller => '/admin/posts', :action => 'index' }
-    expected = [["Export as CSV", { :action => "index", :format => "csv", :controller => "/admin/posts" }],
-                ["Export as XML", { :action => "index", :format => "xml", :controller => "/admin/posts" }]]
-    assert_equal expected, export(Post , params)
-  end
-
 end

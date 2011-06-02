@@ -338,14 +338,6 @@ class ClassMethodsTest < ActiveSupport::TestCase
 
   end
 
-  context "typus_export_formats" do
-
-    should "return post formats" do
-      assert_equal ["csv", "xml"], Post.typus_export_formats
-    end
-
-  end
-
   context "typus_order_by" do
 
     should "return defaults_for order_by on Post" do

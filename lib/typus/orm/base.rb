@@ -79,10 +79,6 @@ module Typus
         end
       end
 
-      def typus_export_formats
-        read_model_config['export'].try(:extract_settings) || []
-      end
-
       def typus_order_by
         typus_defaults_for(:order_by).map do |field|
           field.include?('-') ? "#{table_name}.#{field.delete('-')} DESC" : "#{table_name}.#{field} ASC"
