@@ -34,4 +34,5 @@ Typus.setup do |config|
   config.config_folder = Rails.root.join("config/typus")
   config.authentication = :session
   config.mailer_sender = "admin@example.com"
+  #config.user_class_name = "AdminUser"
 end
