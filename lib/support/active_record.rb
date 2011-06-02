@@ -25,7 +25,13 @@ class ActiveRecord::Base
   #     => "Publicado"
   #++
   def mapping(attribute)
-    values = self.class::const_get(attribute.to_s.upcase).to_a
+    klass = self.class
+    values = if klass.const_defined?(attribute.upcase)
+               klass::const_get(attribute.upcase)
+             else
+               klass.send(attribute)
+             end
+
     array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
 
     value = array.rassoc(send(attribute))
