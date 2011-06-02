@@ -181,11 +181,7 @@ fieldset.inputs { }
     /* background: #FFFCE1; */
   }
 
-  fieldset.inputs textarea {
-    font-size: 1.2em;
-    padding: 3px;
-    width: 691px;
-  }
+  fieldset.inputs textarea { font-size: 1.2em; padding: 3px; width: 691px; }
 
   fieldset.inputs select { border: 1px solid #999; font-size: 1.20em; }
 
