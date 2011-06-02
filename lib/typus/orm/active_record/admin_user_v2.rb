@@ -15,13 +15,25 @@ module Typus
             attr_protected :status
 
             validates :email, :presence => true, :uniqueness => true, :format => { :with => Typus::Regex::Email }
-            validates :password, :confirmation => true, :length => { :within => 6..40 }
+            validates :password, :confirmation => true
             validates :password_digest, :presence => true
+
+            validate :password_must_be_strong
 
             include InstanceMethodsOnActivation
             include Typus::Orm::ActiveRecord::User::InstanceMethods
 
+            serialize :preferences
+
             before_save :set_token
+
+            def self.role
+              Typus::Configuration.roles.keys.sort
+            end
+
+            def self.locale
+              Typus.locales
+            end
 
           end
 
@@ -46,6 +58,12 @@ module Typus
 
           def set_token
             self.token = "#{ActiveSupport::SecureRandom.hex(6)}-#{ActiveSupport::SecureRandom.hex(6)}"
+          end
+
+          def password_must_be_strong
+            if password.present?
+              errors.add(:password, :too_short, :count => 7) unless password.size > 6
+            end
           end
 
         end

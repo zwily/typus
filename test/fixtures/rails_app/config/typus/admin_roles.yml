@@ -1,2 +1,3 @@
 admin:
+  AdminUser: create, read, update, delete
   TypusUser: create, read, update, delete
