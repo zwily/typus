@@ -12,20 +12,26 @@ require '../../factories'
 # CRUD
 ##
 
-50.times { Factory(:entry) }
+20.times do
+  Factory(:entry)
+end
 
 ##
 # CRUD Extended
 ##
 
-5.times { Factory(:category) }
-5.times { Factory(:post) }
+5.times do
+  Factory(:category)
+  Factory(:post)
+end
 
+=begin
 assets_path = "#{Rails.root}/db/seeds/assets"
 5.times { |i| Factory(:asset,
-                      :dragonfly => File.new("#{assets_path}/00#{i}.jpg"),
-                      :dragonfly_required => File.new("#{assets_path}/00#{i}.jpg"),
-                      :paperclip => File.new("#{assets_path}/00#{i}.jpg")) }
+                     :dragonfly => File.new("#{assets_path}/00#{i}.jpg"),
+                     :dragonfly_required => File.new("#{assets_path}/00#{i}.jpg"),
+                     :paperclip => File.new("#{assets_path}/00#{i}.jpg")) }
+=end
 
 ##
 # HasManyThrough
@@ -33,16 +39,16 @@ assets_path = "#{Rails.root}/db/seeds/assets"
 
 5.times do
   project = Factory(:project)
-  50.times do
-    project.collaborators << Factory(:user)
-  end
+  5.times { project.collaborators << Factory(:user) }
 end
 
 ##
 # HasOne
 ##
 
-5.times { Factory(:invoice) }
+5.times do
+  Factory(:invoice)
+end
 
 ##
 # Polymorphic
