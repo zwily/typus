@@ -8,7 +8,7 @@
 
     <%
       apps = admin_user.application(application)
-      klass = (@resource && apps.include?(@resource.model_name)) ? 'active' : nil
+      klass = 'active' if (@resource && apps.include?(@resource.model_name))
     %>
 
     <li><%= link_to Typus::I18n.t(application), { :controller => "/admin/#{apps.first.tableize}" }, { :class => klass } %></li>
