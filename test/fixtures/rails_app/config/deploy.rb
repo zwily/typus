@@ -8,6 +8,7 @@ set :default_run_options, { :pty => true }
 set :repository, "git://github.com/fesplugas/typus.git"
 set :deploy_via, :remote_cache
 set :keep_releases, 2
+set :branch, "3-1-unstable"
 
 # Override default `:bundle_flags` because I don't provide a Gemfile.lock.
 set :bundle_flags, "--quiet"
