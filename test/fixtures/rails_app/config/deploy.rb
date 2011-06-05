@@ -13,6 +13,9 @@ set :branch, "3-1-unstable"
 # Override default `:bundle_flags` because I don't provide a Gemfile.lock.
 set :bundle_flags, "--quiet"
 
+# RVM version
+set :rvm_ruby_string, '1.9.2'
+
 set :domain, "demo.typuscms.com"
 
 role :web, domain
