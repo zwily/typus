@@ -26,7 +26,7 @@ namespace :deploy do
   task :start do ; end
   task :stop do ; end
   task :restart, :roles => :app, :except => { :no_release => true } do
-    run "cd #{current_path}/test/fixtures/rails_app && rake db:setup RAILS_ENV=production"
+    run "cd #{current_path}/test/fixtures/rails_app && bundle rake db:setup RAILS_ENV=production"
     run "cd #{current_path}/test/fixtures/rails_app && touch tmp/restart.txt"
   end
   task :finalize_update do ; end
