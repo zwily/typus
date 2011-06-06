@@ -33,7 +33,7 @@ module Typus
 
             def generate(*args)
               options = args.extract_options!
-              options[:password] ||= Typus.pasword
+              options[:password] ||= Typus.password
               options[:role] ||= Typus.master_role
               new :email => options[:email], :password => options[:password], :role => options[:role]
             end
