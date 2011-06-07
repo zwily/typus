@@ -15,7 +15,8 @@ $(document).ready(function() {
     'autoScale': false,
     'transitionIn': 'none',
     'transitionOut': 'none',
-    'type': 'iframe'
+    'type': 'iframe',
+    'scrolling': false,
   });
 
 });
