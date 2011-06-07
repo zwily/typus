@@ -6,7 +6,9 @@ $(document).ready(function() {
 
   $("a.fancybox").fancybox({
     'titlePosition': 'over',
-    'type': 'image'
+    'type': 'image',
+    'centerOnScroll': true,
+    'scrolling': false,
   });
 
   $(".iframe").fancybox({
@@ -16,6 +18,7 @@ $(document).ready(function() {
     'transitionIn': 'none',
     'transitionOut': 'none',
     'type': 'iframe',
+    'centerOnScroll': true,
     'scrolling': false,
   });
 
