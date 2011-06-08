@@ -18,5 +18,6 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ["lib"]
 
+  s.add_dependency "rails", "~> 3.1.0.rc2"
   s.add_dependency "kaminari"
 end
