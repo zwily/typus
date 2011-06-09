@@ -10,6 +10,11 @@ gem 'acts_as_list'
 gem 'acts_as_tree'
 gem 'factory_girl'
 
+# Asset Management
+gem "dragonfly", "~> 0.9"
+gem "rack-cache", :require => "rack/cache"
+gem "paperclip"
+
 group :test do
   gem 'shoulda-context'
   gem 'mocha' # Make sure mocha is loaded at the end ...
