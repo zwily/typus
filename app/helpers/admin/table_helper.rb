@@ -2,13 +2,14 @@ module Admin
   module TableHelper
 
     def build_table(model, fields, items, link_options = {}, association = nil, association_name = nil)
-      render "admin/helpers/table/table",
-             :model => model,
-             :fields => fields,
-             :items => items,
-             :link_options => link_options,
-             :headers => table_header(model, fields),
-             :association_name => association_name
+      locals = { :model => model,
+                 :fields => fields,
+                 :items => items,
+                 :link_options => link_options,
+                 :headers => table_header(model, fields),
+                 :association_name => association_name }
+
+      render "admin/helpers/table/table", locals
     end
 
     def table_header(model, fields, params = params)
