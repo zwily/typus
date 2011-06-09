@@ -28,6 +28,7 @@ module Typus
     autoload :Autocomplete, "typus/controller/autocomplete"
     autoload :Filters, "typus/controller/filters"
     autoload :Format, "typus/controller/format"
+    autoload :Headless, "typus/controller/headless"
     autoload :Trash, "typus/controller/trash"
   end
 
