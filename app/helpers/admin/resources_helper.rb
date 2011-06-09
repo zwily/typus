@@ -29,9 +29,8 @@ module Admin
 
         body = Typus::I18n.t("Cancel adding a new %{resource}?", :resource => @resource.model_name.human.downcase)
 
-        render "admin/helpers/resources/display_link_to_previous",
-               :body => body,
-               :url => url
+        locals = { :body => body, :url => url }
+        render "admin/helpers/resources/display_link_to_previous", locals
       end
     end
 
