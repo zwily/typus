@@ -1,3 +1,3 @@
 module Typus
-  VERSION = "3.1.0.rc3"
+  VERSION = "3.1.0.rc4"
 end
