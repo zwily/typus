@@ -22,11 +22,12 @@ module Admin
     end
 
     def typus_tree_field(attribute, form)
-      render "admin/templates/tree",
-             :attribute => attribute,
-             :form => form,
-             :label_text => @resource.human_attribute_name(attribute),
-             :values => expand_tree_into_select_field(@resource.roots, "parent_id")
+      locals = { :attribute => attribute,
+                 :form => form,
+                 :label_text => @resource.human_attribute_name(attribute),
+                 :values => expand_tree_into_select_field(@resource.roots, "parent_id") }
+
+      render "admin/templates/tree", locals
     end
 
     def typus_relationships
