@@ -30,6 +30,7 @@ module Typus
     autoload :Filters, "typus/controller/filters"
     autoload :Format, "typus/controller/format"
     autoload :Headless, "typus/controller/headless"
+    autoload :Multisite, "typus/controller/multisite"
     autoload :Trash, "typus/controller/trash"
   end
 
