@@ -13,7 +13,8 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     end
 
     should "verify models access" do
-      expected = ["Article::Entry",
+      expected = ["AdminUser",
+                  "Article::Entry",
                   "Asset",
                   "Bird",
                   "Case",

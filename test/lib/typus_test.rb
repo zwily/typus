@@ -47,11 +47,11 @@ class TypusTest < ActiveSupport::TestCase
     context "dragonfly" do
 
       should "verify default_config for image_preview_size" do
-        assert Typus.image_preview_size.eql?('x450')
+        assert_equal "x650>", Typus.image_preview_size
       end
 
       should "verify default_config for image_thumb_size" do
-        assert Typus.image_thumb_size.eql?('150x150#')
+        assert_equal "x100", Typus.image_thumb_size
       end
 
     end
@@ -81,7 +81,8 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   should "return models and should be sorted" do
-    expected = ["Animal",
+    expected = ["AdminUser",
+                "Animal",
                 "Article::Entry",
                 "Asset",
                 "Bird",

@@ -7,7 +7,7 @@ class I18nTest < ActiveSupport::TestCase
   end
 
   test "default_locale" do
-    assert Typus::I18n.default_locale(:en)
+    assert_equal :en, Typus::I18n.default_locale
   end
 
 end
