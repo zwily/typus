@@ -3,7 +3,7 @@ Bundler::GemHelper.install_tasks
 
 require 'rubygems'
 require 'rake/testtask'
-require 'rake/rdoctask'
+require 'rdoc/task'
 
 task :default => :test
 
