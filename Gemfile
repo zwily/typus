@@ -1,7 +1,6 @@
 source 'http://rubygems.org'
 
 gem 'sqlite3'
-gem 'jquery-rails'
 
 # Specify your gem's dependencies in typus.gemspec
 gemspec

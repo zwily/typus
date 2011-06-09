@@ -19,5 +19,6 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "rails", "~> 3.1.0.rc2"
+  s.add_dependency "jquery-rails"
   s.add_dependency "kaminari"
 end
