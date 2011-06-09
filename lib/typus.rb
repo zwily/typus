@@ -28,6 +28,7 @@ module Typus
     autoload :Autocomplete, "typus/controller/autocomplete"
     autoload :Filters, "typus/controller/filters"
     autoload :Format, "typus/controller/format"
+    autoload :Trash, "typus/controller/trash"
   end
 
   module Authentication
