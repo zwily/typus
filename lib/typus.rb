@@ -102,10 +102,10 @@ module Typus
   #
 
   mattr_accessor :image_preview_size
-  @@image_preview_size = 'x450'
+  @@image_preview_size = 'x650>'
 
   mattr_accessor :image_thumb_size
-  @@image_thumb_size = '150x150#'
+  @@image_thumb_size = 'x100'
 
   ##
   # Defines the default relationship table.
