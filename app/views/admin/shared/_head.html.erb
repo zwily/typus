@@ -6,8 +6,8 @@
 
 <title><%= Typus.admin_title %> &mdash; <%= yield :title %></title>
 
-<%= stylesheet_link_tag "typus/application" %>
-<%= javascript_include_tag "typus/application" %>
+<%= stylesheet_link_tag :typus %>
+<%= javascript_include_tag :typus %>
 
 <%= yield :stylesheets -%>
 <%= yield :javascripts -%>

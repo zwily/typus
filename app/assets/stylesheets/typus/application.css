@@ -1,7 +1,12 @@
+
+/* Create the file `app/assets/stylesheets/typus/application.css` in your
+   application if you need/want to override/add some stylesheets. */
+
 /*
-*= require typus/reset
-*= require typus/screen
-*= require typus/pagination
-*= require_tree ../../vendor
-*= require typus/custom
+.logo {
+  height: 50px;
+  width: 150px;
+  background: transparent url(/images/logo.gif) no-repeat;
+  text-indent: -10000px;
+}
 */
