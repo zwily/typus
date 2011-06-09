@@ -18,7 +18,12 @@ Gem::Specification.new do |s|
   s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
   s.require_paths = ["lib"]
 
-  s.add_dependency "rails", "~> 3.1.0.rc2"
+  s.add_development_dependency "dragonfly", "~> 0.9"
+  s.add_development_dependency "jquery-rails"
+  s.add_development_dependency "paperclip"
+  s.add_development_dependency "rack-cache"
+
   s.add_dependency "jquery-rails"
   s.add_dependency "kaminari"
+  s.add_dependency "rails", "~> 3.1.0.rc2"
 end

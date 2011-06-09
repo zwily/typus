@@ -1,17 +1,14 @@
 source 'http://rubygems.org'
 
-gem 'sqlite3'
-
 # Specify your gem's dependencies in typus.gemspec
 gemspec
+
+gem 'sqlite3'
 
 # And this stuff needed for the demo application.
 gem 'acts_as_list'
 gem 'acts_as_tree'
-gem 'dragonfly', '~> 0.9'
 gem 'factory_girl'
-gem 'paperclip'
-gem 'rack-cache', :require => 'rack/cache'
 
 group :test do
   gem 'shoulda-context'
