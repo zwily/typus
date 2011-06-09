@@ -1,0 +1,17 @@
+<% content_for :javascripts do %>
+  <%= javascript_include_tag '/vendor/ckeditor/ckeditor' %>
+<% end %>
+
+<%
+  custom = { :rows => @resource.typus_options_for(:form_rows), :class => "rich_text" }
+  options = options.merge!(custom)
+%>
+
+<input type="hidden"
+       id="pageListJSON"
+       value="[<%= Page.all.map { |p| "['#{p.to_label}', '/pages/#{p.permalink}']" }.join(", ") %>]">
+
+<li id="<%= attribute %>">
+  <%= form.label attribute, label_text %>
+  <%= form.text_area attribute, options %>
+</li>
