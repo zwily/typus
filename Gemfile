@@ -4,6 +4,7 @@ source 'http://rubygems.org'
 gemspec
 
 gem 'sqlite3'
+gem 'jquery-rails'
 
 # And this stuff needed for the demo application.
 gem 'acts_as_list'
