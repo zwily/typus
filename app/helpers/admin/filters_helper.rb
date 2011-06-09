@@ -79,11 +79,7 @@ module Admin
     end
 
     def string_filter(filter)
-      values = if set_context.const_defined?(filter.to_s.upcase)
-                 set_context::const_get(filter.to_s.upcase).to_a
-               else
-                 set_context.send(filter.to_s).to_a
-               end
+      values = set_context.send(filter.to_s).to_a
 
       items = [[Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase), ""]]
       array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }

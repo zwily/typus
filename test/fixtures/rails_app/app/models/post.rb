@@ -1,18 +1,6 @@
 class Post < ActiveRecord::Base
 
   ##
-  # Constants
-  #
-
-  STATUS = { "Draft" => "draft",
-             "Published" => "published",
-             "Unpublished" => "unpublished",
-             "<div class=''>Something special</div>".html_safe => "special" }
-
-  ARRAY_SELECTOR = %w(item1 item2)
-  ARRAY_HASH_SELECTOR = [["Draft", "draft"], ["Custom Status", "custom"]]
-
-  ##
   # Validations
   #
 
@@ -28,5 +16,25 @@ class Post < ActiveRecord::Base
   has_and_belongs_to_many :categories
   has_many :comments
   has_many :views
+
+  ##
+  # Class Methods
+  #
+
+  def self.status
+    { "Draft" => "draft",
+      "Published" => "published",
+      "Unpublished" => "unpublished",
+      "<div class=''>Something special</div>".html_safe => "special" }
+  end
+
+  def self.array_selector
+    %w(item1 item2)
+  end
+
+  def self.array_hash_selector
+    [["Draft", "draft"],
+     ["Custom Status", "custom"]]
+  end
 
 end

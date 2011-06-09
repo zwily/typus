@@ -26,11 +26,7 @@ class ActiveRecord::Base
   #++
   def mapping(attribute)
     klass = self.class
-    values = if klass.const_defined?(attribute.upcase)
-               klass::const_get(attribute.upcase)
-             else
-               klass.send(attribute)
-             end
+    values = klass.send(attribute)
 
     array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
 

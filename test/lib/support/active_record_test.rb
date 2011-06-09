@@ -36,19 +36,11 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   context "mapping" do
 
-    teardown do
-      Post.send(:remove_const, :STATUS)
-      Post::STATUS = { "Draft" => "draft",
-                       "Published" => "published",
-                       "Unpublished" => "unpublished",
-                       "<div class=''>Something special</div>".html_safe => "special" }
-    end
-
     context "with an array" do
 
       setup do
-        Post.send(:remove_const, :STATUS)
-        Post::STATUS = %w(pending published unpublished)
+        expected = %w(pending published unpublished)
+        Post.stubs(:status).returns(expected)
       end
 
       should "work for symbols" do
@@ -71,10 +63,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
     context "with a two dimension array" do
 
       setup do
-        Post.send(:remove_const, :STATUS)
-        Post::STATUS = [["Publicado", "published"],
-                        ["Pendiente", "pending"],
-                        ["No publicado", "unpublished"]]
+        expected = [["Publicado", "published"],
+                    ["Pendiente", "pending"],
+                    ["No publicado", "unpublished"]]
+        Post.stubs(:status).returns(expected)
       end
 
       should "verify" do
@@ -89,10 +81,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
     context "with a hash" do
 
       setup do
-        Post.send(:remove_const, :STATUS)
-        Post::STATUS = { "Pending - Hash" => "pending",
-                         "Published - Hash" => "published",
-                         "Not Published - Hash" => "unpublished" }
+        expected = { "Pending - Hash" => "pending",
+                     "Published - Hash" => "published",
+                     "Not Published - Hash" => "unpublished" }
+        Post.stubs(:status).returns(expected)
       end
 
       should "verify" do
