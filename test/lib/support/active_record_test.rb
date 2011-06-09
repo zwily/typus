@@ -2,35 +2,14 @@ require "test_helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
-  test "relationship between Post and Comment" do
-    assert Post.relationship_with(Comment).eql?(:has_many)
-  end
-
-  test "relationship between Comment and Post" do
-    assert Comment.relationship_with(Post).eql?(:belongs_to)
-  end
-
-  test "relationship between Post and Category" do
-    assert Post.relationship_with(Category).eql?(:has_and_belongs_to_many)
-  end
-
-  test "relationship between Category and Post" do
+  test "relationship between models" do
     assert Category.relationship_with(Post).eql?(:has_and_belongs_to_many)
-  end
-
-  test "relationship between Order and Invoice" do
-    assert Order.relationship_with(Invoice).eql?(:has_one)
-  end
-
-  test "relationship between Invoice and Order" do
+    assert Comment.relationship_with(Post).eql?(:belongs_to)
     assert Invoice.relationship_with(Order).eql?(:belongs_to)
-  end
-
-  test "relationship between Invoice and TypusUser" do
     assert Invoice.relationship_with(TypusUser).eql?(:belongs_to)
-  end
-
-  test "relationship between TypusUser and Invoice" do
+    assert Order.relationship_with(Invoice).eql?(:has_one)
+    assert Post.relationship_with(Category).eql?(:has_and_belongs_to_many)
+    assert Post.relationship_with(Comment).eql?(:has_many)
     assert TypusUser.relationship_with(Invoice).eql?(:has_many)
   end
 
