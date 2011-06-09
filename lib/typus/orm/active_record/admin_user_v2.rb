@@ -62,7 +62,7 @@ module Typus
           end
 
           def set_token
-            self.token = "#{ActiveSupport::SecureRandom.hex(6)}-#{ActiveSupport::SecureRandom.hex(6)}"
+            self.token = "#{SecureRandom.hex(6)}-#{SecureRandom.hex(6)}"
           end
 
           def password_must_be_strong

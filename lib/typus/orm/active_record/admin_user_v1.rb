@@ -79,7 +79,7 @@ module Typus
           end
 
           def set_token
-            self.token = "#{ActiveSupport::SecureRandom.hex(3)}-#{ActiveSupport::SecureRandom.hex(3)}"
+            self.token = "#{SecureRandom.hex(3)}-#{SecureRandom.hex(3)}"
           end
 
           def password_required?
