@@ -48,29 +48,25 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal "Not Published - Hash", page.mapping(:status)
   end
 
-  context "to_label" do
+  test "to_label returns email for TypusUser" do
+    typus_user = Factory.build(:typus_user)
+    assert_equal typus_user.email, typus_user.to_label
+  end
 
-    should "return email for TypusUser" do
-      typus_user = Factory.build(:typus_user)
-      assert_equal typus_user.email, typus_user.to_label
-    end
+  test "to_label returns name for Category" do
+    category = Factory.build(:category, :name => "Chunky Bacon")
+    assert_match "Chunky Bacon", category.to_label
+  end
 
-    should "return name for Category" do
-      category = Factory.build(:category, :name => "Chunky Bacon")
-      assert_match "Chunky Bacon", category.to_label
-    end
+  test "to_label returns Model#id because Category#name is empty" do
+    category = Factory(:category)
+    category.name = nil
+    category.save(:validate => false)
+    assert_equal "Category##{category.id}", category.to_label
+  end
 
-    should "return Model#id because Category#name is empty" do
-      category = Factory(:category)
-      category.name = nil
-      category.save(:validate => false)
-      assert_equal "Category##{category.id}", category.to_label
-    end
-
-    should "return default Model#id" do
-      assert_match /Post#/, Factory(:post).to_label
-    end
-
+  test "to_label returns default Model#id" do
+    assert_match /Post#/, Factory(:post).to_label
   end
 
   test "to_resource" do
