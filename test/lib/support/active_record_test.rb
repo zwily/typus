@@ -34,68 +34,39 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert TypusUser.relationship_with(Invoice).eql?(:has_many)
   end
 
-  context "mapping" do
+  test "mapping with an array" do
+    expected = %w(pending published unpublished)
+    Post.stubs(:status).returns(expected)
 
-    context "with an array" do
+    post = Factory.build(:post)
+    assert_equal "published", post.mapping(:status)
 
-      setup do
-        expected = %w(pending published unpublished)
-        Post.stubs(:status).returns(expected)
-      end
+    post = Factory.build(:post, :status => "unpublished")
+    assert_equal "unpublished", post.mapping('status')
 
-      should "work for symbols" do
-        post = Factory.build(:post)
-        assert_equal "published", post.mapping(:status)
-      end
+    post = Factory.build(:post, :status => "unexisting")
+    assert_equal "unexisting", post.mapping(:status)
+  end
 
-      should "work for strings" do
-        post = Factory.build(:post, :status => "unpublished")
-        assert_equal "unpublished", post.mapping('status')
-      end
+  test "mapping with a two dimension array" do
+    expected = [["Publicado", "published"], ["Pendiente", "pending"], ["No publicado", "unpublished"]]
+    Post.stubs(:status).returns(expected)
 
-      should "for unexisting keys returning the current key" do
-        post = Factory.build(:post, :status => "unexisting")
-        assert_equal "unexisting", post.mapping(:status)
-      end
+    post = Factory.build(:post)
+    assert_equal "Publicado", post.mapping(:status)
 
-    end
+    post = Factory.build(:post, :status => "unpublished")
+    assert_equal "No publicado", post.mapping(:status)
+  end
 
-    context "with a two dimension array" do
+  test "mapping with a hash" do
+    expected = { "Pending - Hash" => "pending", "Published - Hash" => "published", "Not Published - Hash" => "unpublished" }
+    Post.stubs(:status).returns(expected)
 
-      setup do
-        expected = [["Publicado", "published"],
-                    ["Pendiente", "pending"],
-                    ["No publicado", "unpublished"]]
-        Post.stubs(:status).returns(expected)
-      end
-
-      should "verify" do
-        post = Factory.build(:post)
-        assert_equal "Publicado", post.mapping(:status)
-        post = Factory.build(:post, :status => "unpublished")
-        assert_equal "No publicado", post.mapping(:status)
-      end
-
-    end
-
-    context "with a hash" do
-
-      setup do
-        expected = { "Pending - Hash" => "pending",
-                     "Published - Hash" => "published",
-                     "Not Published - Hash" => "unpublished" }
-        Post.stubs(:status).returns(expected)
-      end
-
-      should "verify" do
-        page = Factory.build(:post)
-        assert_equal "Published - Hash", page.mapping(:status)
-        page = Factory.build(:post, :status => "unpublished")
-        assert_equal "Not Published - Hash", page.mapping(:status)
-      end
-
-    end
-
+    page = Factory.build(:post)
+    assert_equal "Published - Hash", page.mapping(:status)
+    page = Factory.build(:post, :status => "unpublished")
+    assert_equal "Not Published - Hash", page.mapping(:status)
   end
 
   context "to_label" do
