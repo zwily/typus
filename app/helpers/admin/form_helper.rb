@@ -48,13 +48,14 @@ module Admin
                   :disabled => attribute_disabled?(attribute),
                   :include_blank => true }
 
-      render "admin/templates/#{template}",
-             :resource => @resource,
-             :attribute => attribute,
-             :options => options,
-             :html_options => {},
-             :form => form,
-             :label_text => @resource.human_attribute_name(attribute)
+      locals = { :resource => @resource,
+                 :attribute => attribute,
+                 :options => options,
+                 :html_options => {},
+                 :form => form,
+                 :label_text => @resource.human_attribute_name(attribute) }
+
+      render "admin/templates/#{template}", locals
     end
 
     def attribute_disabled?(attribute)
