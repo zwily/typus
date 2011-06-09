@@ -36,11 +36,12 @@ module Admin
                              ["Trash", {:resource_id=>@item.id, :resource=>@resource.model_name, :action=>"destroy"}, {:confirm=>"Trash?"}]]
                            end
 
-      render "admin/templates/has_n",
-             :association_name => @association_name,
-             :add_new => build_add_new(options),
-             :form => form,
-             :table => build_relationship_table
+      locals = { :association_name => @association_name,
+                 :add_new => build_add_new(options),
+                 :form => form,
+                 :table => build_relationship_table }
+
+      render "admin/templates/has_n", locals
     end
 
     def typus_form_has_and_belongs_to_many(field)
