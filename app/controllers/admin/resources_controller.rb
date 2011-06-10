@@ -153,7 +153,7 @@ class Admin::ResourcesController < Admin::BaseController
       @resource = @resource.where(condition)
     end
 
-    @resource.build_joins(params).each do |join|
+    @resource.build_my_joins(params).each do |join|
       @resource = @resource.joins(join)
     end
 
