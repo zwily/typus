@@ -144,7 +144,7 @@ module Typus
       end
 
       def typus_user_id?
-        columns.map { |u| u.name }.include?(Typus.user_fk)
+        columns.map { |u| u.name }.include?(Typus.user_foreign_key)
       end
 
       def read_model_config

@@ -87,19 +87,19 @@ module Typus
         if admin_user.is_not_root?
 
           condition_typus_users = @item.respond_to?(Typus.relationship) && !@item.send(Typus.relationship).include?(admin_user)
-          condition_typus_user_id = @item.respond_to?(Typus.user_fk) && !admin_user.owns?(@item)
+          condition_typus_user_id = @item.respond_to?(Typus.user_foreign_key) && !admin_user.owns?(@item)
 
           not_allowed if (condition_typus_users || condition_typus_user_id)
         end
       end
 
       #--
-      # Show only related items it @resource has a foreign_key (Typus.user_fk)
+      # Show only related items it @resource has a foreign_key (Typus.user_foreign_key)
       # related to the logged user.
       #++
       def check_resources_ownership
         if admin_user.is_not_root? && @resource.typus_user_id?
-          @resource = @resource.where(Typus.user_fk => admin_user)
+          @resource = @resource.where(Typus.user_foreign_key => admin_user)
         end
       end
 
@@ -107,7 +107,7 @@ module Typus
       # OPTIMIZE: This method should accept args.
       #
       def set_attributes_on_create
-        @item.send("#{Typus.user_fk}=", admin_user.id) if @resource.typus_user_id?
+        @item.send("#{Typus.user_foreign_key}=", admin_user.id) if @resource.typus_user_id?
       end
 
       ##
@@ -116,7 +116,7 @@ module Typus
       #
       def set_attributes_on_update
         if @resource.typus_user_id? && admin_user.is_not_root?
-          @item.update_attributes(Typus.user_fk => admin_user.id)
+          @item.update_attributes(Typus.user_foreign_key => admin_user.id)
         end
       end
 

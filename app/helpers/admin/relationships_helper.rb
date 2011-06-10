@@ -116,7 +116,7 @@ module Admin
 
     def set_conditions
       if @model_to_relate.typus_options_for(:only_user_items) && admin_user.is_not_root?
-        { Typus.user_fk => admin_user }
+        { Typus.user_foreign_key => admin_user }
       end
     end
 

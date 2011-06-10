@@ -54,7 +54,7 @@ module Typus
           end
 
           def owns?(resource)
-            id == resource.send(Typus.user_fk)
+            id == resource.send(Typus.user_foreign_key)
           end
 
         end

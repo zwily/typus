@@ -12,7 +12,7 @@ Typus.setup do |config|
   # Define user_class_name.
   config.user_class_name = "<%= options[:user_class_name] %>"
 
-  # Define user_fk.
-  config.user_fk = "<%= options[:user_fk] %>"
+  # Define user_foreign_key.
+  config.user_foreign_key = "<%= options[:user_foreign_key] %>"
 
 end

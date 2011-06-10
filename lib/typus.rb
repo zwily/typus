@@ -123,8 +123,8 @@ module Typus
   mattr_accessor :user_class_name
   @@user_class_name = "TypusUser"
 
-  mattr_accessor :user_fk
-  @@user_fk = "typus_user_id"
+  mattr_accessor :user_foreign_key
+  @@user_foreign_key = "typus_user_id"
 
   class << self
 

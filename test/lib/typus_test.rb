@@ -122,12 +122,12 @@ class TypusTest < ActiveSupport::TestCase
     assert Typus.respond_to?("user_class_name=")
   end
 
-  test "user_fk returns default value" do
-    assert Typus.user_fk.eql?("typus_user_id")
+  test "user_foreign_key returns default value" do
+    assert Typus.user_foreign_key.eql?("typus_user_id")
   end
 
-  test "user_fk setter presence" do
-    assert Typus.respond_to?("user_fk=")
+  test "user_foreign_key setter presence" do
+    assert Typus.respond_to?("user_foreign_key=")
   end
 
 end
