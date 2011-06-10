@@ -25,7 +25,8 @@ module Typus
             generate_html
             render 'index'
           end
-          @resource.typus_export_formats.each { |f| format.send(f) { send("generate_#{f}") } }
+
+          %w(json xml csv).each { |f| format.send(f) { send("generate_#{f}") } }
         end
       end
 
