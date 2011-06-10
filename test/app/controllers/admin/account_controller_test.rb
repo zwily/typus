@@ -83,6 +83,13 @@ class Admin::AccountControllerTest < ActionController::TestCase
       assert_redirected_to :controller => "/admin/typus_users", :action => "edit", :id => @typus_user.id
     end
 
+    should "redirect user to dashboard if return_to params is set" do
+      get :show, :id => @typus_user.token, :return_to => "/admin"
+      assert_equal @typus_user.id, @request.session[:typus_user_id]
+      assert_response :redirect
+      assert_redirected_to "http://test.host/admin"
+    end
+
     should "test_should_return_404_on_reset_passsword_if_token_is_not_valid" do
       assert_raises ActiveRecord::RecordNotFound do
         get :show, :id => "unexisting"

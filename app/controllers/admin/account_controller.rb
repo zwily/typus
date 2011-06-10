@@ -36,7 +36,7 @@ class Admin::AccountController < Admin::BaseController
     flash[:notice] = Typus::I18n.t("Please set a new password.")
     typus_user = Typus.user_class.find_by_token!(params[:id])
     session[:typus_user_id] = typus_user.id
-    redirect_to :controller => "/admin/#{Typus.user_class.to_resource}", :action => "edit", :id => typus_user.id
+    redirect_to params[:return_to] || { :controller => "/admin/#{Typus.user_class.to_resource}", :action => "edit", :id => typus_user.id }
   end
 
   private
