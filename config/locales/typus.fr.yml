@@ -7,7 +7,7 @@ fr:
   "Actions": "Actions"
   "Active": "Actif"
   "Add": "Ajouter"
-  "Add new": "Ajouter nouveau"
+  "Add New": "Ajouter nouveau"
   "Are you sure?": "Êtes-vous sûre ?"
   "Are you sure you want to sign out and end your session?": "Etes-vous sûre de vouloir vous déconnecter et mettre fin à votre session ?"
 
@@ -34,7 +34,6 @@ fr:
   "Last few days": "Ces derniers jours"
   "Last 30 days": "30 derniers jours"
   "Last 7 days": "7 derniers jours"
-  "List": "Liste"
   "Logged as": "Identifié comme"
   "Login": "Identification"
 

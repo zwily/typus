@@ -6,7 +6,7 @@ it:
   "Actions": "Azioni"
   "Active": "Attivo"
   "Add": "Inserisci"
-  "Add new": "Inserisci nuovo"
+  "Add New": "Inserisci nuovo"
   "Are you sure?": "Sei sicuro?"
   "Are you sure you want to sign out and end your session?": "Sei sicuro che vuoi disconnetterti dal sistema?"
 
@@ -34,7 +34,6 @@ it:
   "Last few days": "Ultimi giorni"
   "Last 30 days": "Ultimi 30 giorni"
   "Last 7 days": "Ultimi 7 giorni"
-  "List": "Lista"
   "Loading": "Caricamento"
   "Logged as": "Loggato come"
   "Login": "Login"

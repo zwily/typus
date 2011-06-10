@@ -542,7 +542,7 @@ title;status
 
       should "render index_and_show_add_entry_link" do
         assert_select "#sidebar ul" do
-          assert_select "li", "Add new"
+          assert_select "li", "Add New"
         end
       end
 
@@ -677,7 +677,7 @@ title;status
     context "when creating an item" do
 
       ##
-      # We click on the "Add new" link and we are redirected to:
+      # We click on the "Add New" link and we are redirected to:
       #
       #     /admin/posts/new
       #
@@ -707,7 +707,7 @@ title;status
     context "when editing an item" do
 
       ##
-      # We click on the "Add new" link and we are redirected to:
+      # We click on the "Add New" link and we are redirected to:
       #
       #     /admin/posts/new
       #

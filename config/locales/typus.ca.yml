@@ -6,7 +6,7 @@ ca:
   "Actions": "Accions"
   "Active": "Actiu"
   "Add": "Afegir"
-  "Add new": "Afegir nou"
+  "Add New": "Afegir nou"
   "All": "Tots"
   "Are you sure?": "Estàs segur?"
   "Are you sure you want to sign out and end your session?": "Estàs segur que vols sortir i tancar la sessió?"
@@ -32,7 +32,6 @@ ca:
   "Last few days": "Últims dies"
   "Last 30 days": "Últims 30 dies"
   "Last 7 days": "Últims 7 dies"
-  "List": "Llista"
   "Logged as": "Identificat com"
   "Login": "Login"
 

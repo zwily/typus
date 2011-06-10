@@ -4,7 +4,7 @@ class Admin::AssetsController < Admin::ResourcesController
 
   def index
     if params[:layout]
-      add_resources_action("Add new", {:action => "new"}, {})
+      add_resources_action("Add New", {:action => "new"}, {})
     end
 
     super
