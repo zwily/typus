@@ -297,7 +297,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  context "build_joins" do
+  context "build_my_joins" do
 
     setup do
       @project = Factory(:project)
@@ -306,7 +306,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
     should "return the expected joins" do
       params = { :projects => @project.id }
-      assert_equal [:projects], User.build_joins(params)
+      assert_equal [:projects], User.build_my_joins(params)
     end
 
     ##
@@ -318,7 +318,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
       @resource = User
       @resource.build_conditions(params).each { |c| @resource = @resource.where(c) }
-      @resource.build_joins(params).each { |j| @resource = @resource.joins(j) }
+      @resource.build_my_joins(params).each { |j| @resource = @resource.joins(j) }
 
       assert_equal [@project.user.id], @resource.map(&:id)
     end
