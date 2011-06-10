@@ -10,7 +10,7 @@ Rails.application.routes.draw do
         get :destroy, :as => "destroy"
       end
 
-      resources :account, :only => [:new, :create, :show, :forgot_password] do
+      resources :account, :only => [:new, :create, :show] do
         collection do
           get :forgot_password
           post :send_password
