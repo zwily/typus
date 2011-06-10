@@ -10,6 +10,7 @@ gem 'jquery-rails'
 gem 'acts_as_list'
 gem 'acts_as_tree'
 gem 'factory_girl'
+gem "rails-trash"
 
 # Asset Management
 gem "dragonfly", "~> 0.9"

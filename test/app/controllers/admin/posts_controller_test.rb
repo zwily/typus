@@ -559,7 +559,7 @@ title;status
       end
 
       should "render new and verify page title" do
-        assert_select "title", "Typus &mdash; New Post"
+        assert_select "title", "Typus &mdash; Add New Post"
       end
 
     end
