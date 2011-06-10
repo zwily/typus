@@ -62,6 +62,7 @@ ActiveRecord::Schema.define do
     t.text :content
     t.string :type
     t.boolean :published, :null => false, :default => false
+    t.datetime :deleted_at
   end
 
   create_table :categories_entries, :force => true, :id => false do |t|

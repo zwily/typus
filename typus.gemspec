@@ -22,6 +22,7 @@ Gem::Specification.new do |s|
   s.add_development_dependency "jquery-rails"
   s.add_development_dependency "paperclip"
   s.add_development_dependency "rack-cache"
+  s.add_development_dependency "rails-trash"
 
   s.add_dependency "jquery-rails"
   s.add_dependency "kaminari"

@@ -9,6 +9,12 @@
 class Entry < ActiveRecord::Base
 
   ##
+  # Macros
+  #
+
+  has_trash
+
+  ##
   # Validations
   #
 
@@ -19,5 +25,11 @@ class Entry < ActiveRecord::Base
   #
 
   has_and_belongs_to_many :categories
+
+  ##
+  # Scopes
+  #
+
+  default_scope where(:deleted_at => nil)
 
 end
