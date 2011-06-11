@@ -10,9 +10,14 @@
 
   <fieldset class="buttons">
     <ol>
-      <li><%= submit_tag Typus::I18n.t("Save and add another"), :name => "_addanother" %></li>
-      <li><%= submit_tag Typus::I18n.t("Save and continue editing"), :name => "_continue" %></li>
-      <li><%= submit_tag Typus::I18n.t("Save"), :name => "_save", :class => "commit", :onclick => "setConfirmUnload(false);" %></li>
+      <%
+        save_options = { "_addanother" => "Save and add another",
+                         "_continue" => "Save and continue editing",
+                         "_save" => "Save" }
+      %>
+      <% save_options.each do |key, value| %>
+        <li><%= submit_tag Typus::I18n.t(value), :name => key, :onclick => "setConfirmUnload(false);" %></li>
+      <% end %>
     </ol>
   </fieldset>
 
