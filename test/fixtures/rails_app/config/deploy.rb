@@ -5,7 +5,7 @@ set :deploy_to, "/home/#{user}/public_html/#{application}"
 
 set :scm, :git
 set :default_run_options, { :pty => true }
-set :repository, "git://github.com/fesplugas/typus.git"
+set :repository, "git://github.com/typus/typus.git"
 set :deploy_via, :remote_cache
 set :keep_releases, 2
 
