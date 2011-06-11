@@ -15,19 +15,19 @@
 
 ## Links
 
-- [Documentation](https://github.com/fesplugas/typus/wiki)
-- [Issues](https://github.com/fesplugas/typus/issues)
+- [Documentation](https://github.com/typus/typus/wiki)
+- [Issues](https://github.com/typus/typus/issues)
 - [Demo](http://demo.typuscms.com/) ([Code][code])
-- [Source Code](http://github.com/fesplugas/typus)
+- [Source Code](http://github.com/typus/typus)
 - [Mailing List](http://groups.google.com/group/typus)
 - [Gems](http://rubygems.org/gems/typus)
-- [Contributors List](http://github.com/fesplugas/typus/contributors)
+- [Contributors List](http://github.com/typus/typus/contributors)
 
 ## Installing
 
 Add **Typus** to your `Gemfile`
 
-    gem 'typus', :git => 'git://github.com/fesplugas/typus.git', :branch => '3-1-unstable'
+    gem 'typus', :git => 'git://github.com/typus/typus.git', :branch => '3-1-unstable'
 
 Update your bundle, run the generator and start the application server:
 
@@ -43,5 +43,5 @@ Typus is released under the MIT license.
 
 [paperclip]: http://rubygems.org/gems/paperclip
 [dragonfly]: http://rubygems.org/gems/dragonfly
-[code]: https://github.com/fesplugas/typus/tree/master/test/fixtures/rails_app
-[locales]: https://github.com/fesplugas/typus/tree/master/config/locales
+[code]: https://github.com/typus/typus/tree/master/test/fixtures/rails_app
+[locales]: https://github.com/typus/typus/tree/master/config/locales
