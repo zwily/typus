@@ -191,6 +191,10 @@ fieldset.inputs { }
 
 fieldset.buttons { }
 
+  fieldset.buttons ol li {
+    display: inline;
+  }
+
 /* @end */
 
 /* @group Content Tables */

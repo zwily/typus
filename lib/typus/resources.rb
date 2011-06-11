@@ -12,9 +12,6 @@ module Typus
       yield self
     end
 
-    mattr_accessor :action_after_save
-    @@action_after_save = "edit"
-
     mattr_accessor :default_action_on_item
     @@default_action_on_item = "edit"
 

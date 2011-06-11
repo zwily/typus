@@ -2,10 +2,6 @@ require "test_helper"
 
 class ResourcesTest < ActiveSupport::TestCase
 
-  test "action_after_save" do
-    assert Typus::Resources.action_after_save.eql?('edit')
-  end
-
   test "default_action_on_item" do
     assert Typus::Resources.default_action_on_item.eql?('edit')
   end

@@ -10,10 +10,9 @@
 
   <fieldset class="buttons">
     <ol>
-      <li><%= submit_tag button,
-                         :class => "commit",
-                         :onclick => "setConfirmUnload(false);",
-                         :disable_with => Typus::I18n.t("Sending data ...") %></li>
+      <li><%= submit_tag Typus::I18n.t("Save and add another"), :name => "_addanother" %></li>
+      <li><%= submit_tag Typus::I18n.t("Save and continue editing"), :name => "_continue" %></li>
+      <li><%= submit_tag Typus::I18n.t("Save"), :name => "_save", :class => "commit", :onclick => "setConfirmUnload(false);" %></li>
     </ol>
   </fieldset>
 

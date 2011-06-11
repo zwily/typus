@@ -236,29 +236,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   end
 
-  context "Overwrite action_after_save" do
-
-    setup do
-      Typus::Resources.expects(:action_after_save).returns("index")
-      @post = Factory(:post)
-    end
-
-    should "create an item and redirect to index" do
-      assert_difference('Post.count') do
-        post :create, :post => @post.attributes
-        assert_response :redirect
-        assert_redirected_to :action => 'index'
-      end
-    end
-
-    should "update an item and redirect to index" do
-      post :update, :id => @post.id, :post => { :title => 'Updated' }
-      assert_response :redirect
-      assert_redirected_to :action => 'index'
-    end
-
-  end
-
   context "Formats" do
 
     should "render index and return xml" do

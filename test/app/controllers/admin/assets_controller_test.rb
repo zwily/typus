@@ -100,17 +100,6 @@ class Admin::AssetsControllerTest < ActionController::TestCase
         assert_redirected_to :action => "edit", :id => Asset.last.id, :layout => "admin/headless"
       end
 
-      should "redirect to index with custom layout" do
-        Typus::Resources.expects(:action_after_save).returns("index")
-
-        assert_difference('Asset.count') do
-          post :create, :asset => @asset, :layout => "admin/headless"
-        end
-
-        assert_response :redirect
-        assert_redirected_to :action => "index", :layout => "admin/headless"
-      end
-
       should "render new with custom layout after an error" do
         post :create, :asset => {}, :layout => "admin/headless"
         assert_response :success
@@ -139,14 +128,6 @@ class Admin::AssetsControllerTest < ActionController::TestCase
         assert_template "admin/helpers/resources/_errors"
         assert_template "admin/resources/edit"
         assert_template "admin/headless"
-      end
-
-      should "redirect to index with custom layout" do
-        Typus::Resources.expects(:action_after_save).returns("index")
-        asset = {:caption => "My Caption", :dragonfly_required => File.new("#{Rails.root}/public/images/rails.png")}
-        post :update, :id => @asset.id, :asset => asset, :layout => "admin/headless"
-        assert_response :redirect
-        assert_redirected_to :action => "index", :layout => "admin/headless"
       end
 
     end

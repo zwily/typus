@@ -13,9 +13,5 @@
 <%= display_link_to_previous %>
 <%= render 'new' %>
 
-<%
-  options = params.dup.cleanup.merge(:action => 'create')
-  button = Typus::I18n.t("Create %{resource}", :resource => @resource.model_name.human)
-%>
-
-<%= render :partial => 'form', :locals => { :options => options, :button => button } %>
+<%= render :partial => 'form',
+           :locals => { :options => params.dup.cleanup.merge(:action => 'create') } %>
