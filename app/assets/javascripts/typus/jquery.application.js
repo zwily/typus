@@ -22,6 +22,12 @@ $(document).ready(function() {
     'scrolling': false,
   });
 
+    $(".action-toggle").click(function() {
+      var status = this.checked;
+      $('input.action-select').each(function() { this.checked = status; });
+      $('.action-toggle').each(function() { this.checked = status; });
+    });
+
 });
 
 function setConfirmUnload(on) {

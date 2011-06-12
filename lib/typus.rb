@@ -26,6 +26,7 @@ module Typus
     autoload :ActsAs, "typus/controller/acts_as"
     autoload :Associations, "typus/controller/associations"
     autoload :Autocomplete, "typus/controller/autocomplete"
+    autoload :Bulk, "typus/controller/bulk"
     autoload :FeaturedImage, "typus/controller/featured_image"
     autoload :Filters, "typus/controller/filters"
     autoload :Format, "typus/controller/format"

@@ -30,7 +30,11 @@
 <% end %>
 
 <% if @items.any? -%>
-  <%= build_list(@resource, fields, @items) %>
+  <% if controller.respond_to?(:bulk) %>
+    <%= build_actions { build_list(@resource, fields, @items) } %>
+  <% else %>
+    <%= build_list(@resource, fields, @items) %>
+  <% end %>
   <%= paginate(@items, Typus.pagination) %>
 <% else %>
   <p><%= Typus::I18n.t("No %{resources} found.", :resources => @resource.model_name.human.downcase.pluralize) %></p>

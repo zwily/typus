@@ -1,6 +1,7 @@
 module Admin
   module ResourcesHelper
 
+    include Admin::ActionsHelper
     include Admin::DisplayHelper
     include Admin::ListHelper
     include Admin::FiltersHelper
