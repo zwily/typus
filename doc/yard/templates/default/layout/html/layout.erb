@@ -28,7 +28,7 @@
 
     <div id="header" class="clearfix">
       <%#= erb(:breadcrumb) %>
-      <div id="logo">DRAGONFLY (v <%= DRAGONFLY_VERSION %>)</div>
+      <div id="logo">Typus</div>
       <%= erb(:search) %>
     </div>
 
@@ -43,8 +43,10 @@
       <div class="col2">
         <ul class="main_files clearfix">
           <%= [
-            ['Index', 'Home'],
-            ['ExampleUseCases', 'Example Use Cases'],
+            ['home', 'Home'],
+            ['installation-instructions', 'Installation Instructions'],
+            ['requirements', 'Requirements'],
+            ['mit-license', 'MIT License'],
           ].map{|(file, text)|
             "<li>#{link_file(file, text)}</li>"
           }.join

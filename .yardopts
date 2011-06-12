@@ -1,6 +1,7 @@
---main doc/raw_docs/Index.md
+--main doc/raw_docs/Home.md
 -e ./doc/yard/setup.rb
 -
 README.md
-doc/raw_docs/ExampleUseCases.md
-MIT-LICENSE
+doc/raw_docs/requirements.md
+doc/raw_docs/mit-license.md
+doc/raw_docs/installation-instructions.md
