@@ -1,5 +1,5 @@
---main doc/raw_docs/Home.md
+--main doc/wiki/Home.md
 -e ./doc/yard/setup.rb
 -
 README.md
-doc/raw_docs/*
+doc/wiki/*
