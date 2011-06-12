@@ -13,7 +13,7 @@ Description:
       MSG
 
       def generate_controller
-        template "controller.rb", "app/controllers/admin/#{file_name}_controller.rb"
+        template "controller.erb", "app/controllers/admin/#{file_name}_controller.rb"
       end
 
       hook_for :test_framework do |instance, generator|
