@@ -1,8 +1,8 @@
 # Adding a Rich Text Editor
 
-You can add a **Rich Text Editor**, [CKEditor][1], to your application by
+You can add a **Rich Text Editor**, [CKEditor][ckeditor], to your application by
 running the following task into your application folder:
 
-    $ rake rails:template LOCATION=https://github.com/typus/typus-templates/raw/master/extras/ckeditor.rb
+    $ rake rails:template LOCATION=http://core.typuscms.com/templates/extras/ckeditor.txt
 
-[1]: http://ckeditor.com/
+[ckeditor]: http://ckeditor.com/
