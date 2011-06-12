@@ -1,3 +1,0 @@
-# Supported Features
-
-Pending.

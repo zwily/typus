@@ -1,3 +1,0 @@
-# Architectural Goals
-
-Pending.
