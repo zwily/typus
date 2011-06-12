@@ -52,3 +52,15 @@ namespace :test do
   end
 
 end
+
+require 'yard'
+
+YARD::Rake::YardocTask.new do |t|
+  t.files   = []
+  t.options = []
+end
+
+YARD::Rake::YardocTask.new 'yard:changed' do |t|
+  t.files   = `git status | grep '.rb' | grep modified | grep -v yard | cut -d' ' -f4`.split
+  t.options = []
+end

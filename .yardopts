@@ -1,0 +1,6 @@
+--main doc/raw_docs/Index.md
+-e ./doc/yard/setup.rb
+-
+README.md
+doc/raw_docs/ExampleUseCases.md
+MIT-LICENSE
