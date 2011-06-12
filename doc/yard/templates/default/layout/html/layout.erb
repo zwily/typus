@@ -41,17 +41,82 @@
         <%= yieldall %>
       </div>
       <div class="col2">
+
+        <h2>Overview</h2>
+
+        <%
+          links = [['home', 'Home'],
+                   ['overview-supported-features', 'Supported Features'],
+                   ['overview-architectural-goals', 'Architectural Goal'],
+                   ['changelog', 'Changelog']]
+        %>
+
         <ul class="main_files clearfix">
-          <%= [
-            ['home', 'Home'],
-            ['installation-instructions', 'Installation Instructions'],
-            ['requirements', 'Requirements'],
-            ['mit-license', 'MIT License'],
-          ].map{|(file, text)|
-            "<li>#{link_file(file, text)}</li>"
-          }.join
-          %>
+          <% links.each do |file, text| %>
+            <li><%= link_file(file, text) %></li>
+          <% end %>
         </ul>
+
+        <h2>Installation</h2>
+
+        <%
+          links = [['requirements', 'Requirements'],
+                   ['installation-instructions', 'Instructions'],
+                   ['installation-generators-and-rake-tasks', 'Generators and Rake Tasks'],
+                   ['configuration-initializers', 'Initializers'],
+                   ['configuration-resources', 'Resources'],
+                   ['configuration-resource', 'Resource'],
+                   ['configuration-roles', 'Roles'],
+                   ['customization-user-interface', 'User Interface'],
+                   ['customization-attribute-templates', 'Attribute Templates'],
+                   ['customization-selectors', 'Selectors']]
+        %>
+
+        <ul class="main_files clearfix">
+          <% links.each do |file, text| %>
+            <li><%= link_file(file, text) %></li>
+          <% end %>
+        </ul>
+
+        <h2>Recipes</h2>
+
+        <%
+          links = [['recipes-rich-text-editor', 'Adding a Rich Text Editor'],
+                   ['recipes-custom-actions', 'Custom Actions'],
+                   ['recipes-single-table-inheritance', 'Single Table Inheritance'],
+                   ['recipes-configuration-files', 'Configuration Files'],
+                   ['recipes-testing-the-plugin', 'Testing the Plugin'],
+                   ['recipes-devise-authentication', 'Devise Authentication']]
+        %>
+
+        <ul class="main_files clearfix">
+          <% links.each do |file, text| %>
+            <li><%= link_file(file, text) %></li>
+          <% end %>
+        </ul>
+
+        <h2>Additional Resources</h2>
+
+        <%
+          links = [['http://core.typuscms.com/templates/desmond.rb', 'Application Template'],
+                   ['http://demo.typuscms.com/', 'Application Demo'],
+                   ['http://rubygems.org/gems/typus', 'Gems'],
+                   ['http://github.com/typus/typus', 'Plugin Source Code'],
+                   ['http://groups.google.com/group/typus', 'Mailing List'],
+                   ['https://github.com/typus/typus/issues', 'Bug Reports'],
+                   ['https://github.com/typus/typus/contributors', 'Contributors List'],
+                   ['http://pledgie.com/campaigns/11233', 'Donate'],
+                   ['http://ruby-toolbox.com/categories/rails_admin_interfaces.html', 'Ruby Toolbox'],
+                   ['http://www.joshcrews.com/2010/03/using-heroku-to-host-your-rails-cms/', 'Using Heroku to host your Rails CMS'],
+                   ['http://github.com/typus/typus/wiki/ci-server', 'Setting up the CI server']]
+        %>
+
+        <ul class="main_files clearfix">
+          <% links.each do |url, title| %>
+            <li><%= link_url(url, title) %></li>
+          <% end %>
+        </ul>
+
       </div>
     </div>
 

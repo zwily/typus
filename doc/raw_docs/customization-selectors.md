@@ -1,6 +1,6 @@
 # Selectors
 
-Form selectors by are using the instance method `to_label`:
+Form selectors are using the instance method `to_label`:
 
     def to_label
       if respond_to?(:name) && send(:name).present?

@@ -23,7 +23,7 @@ of the site. List is for lists, form is for forms.
         csv: name, body
         xml: name, created_at, status
 
-##= File Fields
+### File Fields
 
 File upload works for `Paperclip` and `Dragonfly`.
 

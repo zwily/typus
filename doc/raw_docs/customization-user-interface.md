@@ -18,16 +18,16 @@ To override dashboard's sidebar:
 
 You can override views and partials for all resources or by resource.
 
-For all resources:
+For all `resources`:
 
-  views/admin/resources/index.html.erb
-  views/admin/resources/_index.html.erb
-  views/admin/resources/new.html.erb
-  views/admin/resources/_new.html.erb
-  views/admin/resources/edit.html.erb
-  views/admin/resources/_edit.html.erb
-  views/admin/resources/show.html.erb
-  views/admin/resources/_show.html.erb
+    views/admin/resources/index.html.erb
+    views/admin/resources/_index.html.erb
+    views/admin/resources/new.html.erb
+    views/admin/resources/_new.html.erb
+    views/admin/resources/edit.html.erb
+    views/admin/resources/_edit.html.erb
+    views/admin/resources/show.html.erb
+    views/admin/resources/_show.html.erb
 
 For `articles`:
 
