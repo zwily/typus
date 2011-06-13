@@ -4,13 +4,9 @@ module Admin
 
       def link_to_detach_attribute_for_dragonfly(attribute)
         validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map { |i| i.attributes }.flatten.map { |i| i.to_s }
-
-        field = attribute
         attachment = @item.send(attribute)
 
-        present = attachment.present?
-
-        if present && !validators.include?(field) && attachment
+        if attachment.present? && !validators.include?(attribute) && attachment
           attribute_i18n = @item.class.human_attribute_name(attribute)
           message = Typus::I18n.t("Remove")
           label_text = <<-HTML

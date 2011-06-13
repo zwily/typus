@@ -4,13 +4,9 @@ module Admin
 
       def link_to_detach_attribute_for_paperclip(attribute)
         validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map { |i| i.attributes }.flatten.map { |i| i.to_s }
-
-        field = "#{attribute}_file_name"
         attachment = @item.send(attribute)
 
-        present = attachment.exists?
-
-        if present && !validators.include?(field) && attachment
+        if attachment.exists? && !validators.include?("#{attribute}_file_name") && attachment
           attribute_i18n = @item.class.human_attribute_name(attribute)
           message = Typus::I18n.t("Remove")
           label_text = <<-HTML
