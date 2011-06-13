@@ -100,16 +100,6 @@ module Admin
       item.mapping(attribute)
     end
 
-    def table_dragonfly_field(attribute, item)
-      options = { :height => 25, :width => 25 }
-      typus_dragonfly_preview(item, attribute, options)
-    end
-
-    def table_paperclip_field(attribute, item)
-      options = { :height => 25, :width => 25 }
-      typus_paperclip_preview(item, attribute, options)
-    end
-
     def table_tree_field(attribute, item)
       item.parent ? item.parent.to_label : "&mdash;".html_safe
     end

@@ -2,6 +2,11 @@ module Admin
   module FilePreview
     module DragonflyHelper
 
+      def table_dragonfly_field(attribute, item)
+        options = { :height => 25, :width => 25 }
+        typus_dragonfly_preview(item, attribute, options)
+      end
+
       def link_to_detach_attribute_for_dragonfly(attribute)
         validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map { |i| i.attributes }.flatten.map { |i| i.to_s }
         attachment = @item.send(attribute)
