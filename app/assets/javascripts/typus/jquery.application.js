@@ -28,6 +28,11 @@ $(document).ready(function() {
       $('.action-toggle').each(function() { this.checked = status; });
     });
 
+  if ($('textarea.ckeditor').length > 0) {
+    var data = $('textarea');
+    $.each(data, function(i) { CKEDITOR.replace(data[i].id); });
+  }
+
 });
 
 function setConfirmUnload(on) {
