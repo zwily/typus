@@ -1,6 +1,6 @@
 Asset:
   fields:
-    default: caption, dragonfly, dragonfly_required
+    default: caption, dragonfly, dragonfly_required, paperclip
     special: caption, dragonfly, dragonfly_required
     form: caption, dragonfly, dragonfly_required, paperclip, paperclip_required
     new: dragonfly, dragonfly_required, paperclip, paperclip_required

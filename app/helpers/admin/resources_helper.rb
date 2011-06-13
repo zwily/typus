@@ -7,7 +7,6 @@ module Admin
     include Admin::FiltersHelper
     include Admin::FormHelper
     include Admin::RelationshipsHelper
-    include Admin::FilePreviewHelper
     include Admin::SearchHelper
     include Admin::SidebarHelper
     include Admin::TableHelper

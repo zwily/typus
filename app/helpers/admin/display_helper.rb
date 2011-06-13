@@ -26,10 +26,6 @@ module Admin
                                :id => data.id }
     end
 
-    def display_file(item, attribute)
-      typus_file_preview(item, attribute)
-    end
-
     def display_selector(item, attribute)
       item.mapping(attribute)
     end

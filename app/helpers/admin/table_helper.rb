@@ -100,8 +100,14 @@ module Admin
       item.mapping(attribute)
     end
 
-    def table_file_field(attribute, item)
-      typus_file_preview(item, attribute, { :height => 25, :width => 25 })
+    def table_dragonfly_field(attribute, item)
+      options = { :height => 25, :width => 25 }
+      typus_dragonfly_preview(item, attribute, options)
+    end
+
+    def table_paperclip_field(attribute, item)
+      options = { :height => 25, :width => 25 }
+      typus_paperclip_preview(item, attribute, options)
     end
 
     def table_tree_field(attribute, item)
