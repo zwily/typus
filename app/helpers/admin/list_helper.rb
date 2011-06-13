@@ -14,6 +14,10 @@ module Admin
       end.compact.join(" / ").html_safe
     end
 
+    def build_actions(&block)
+      render "admin/helpers/list/actions", :block => block
+    end
+
     #--
     # If partial `list` exists we will use it. This partial will have available
     # the `@items` so we can do whatever we want there. Notice that pagination
