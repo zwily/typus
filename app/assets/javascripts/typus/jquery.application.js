@@ -12,8 +12,8 @@ $(document).ready(function() {
   });
 
   $(".iframe").fancybox({
-    'width': '75%',
-    'height': '100%',
+    'width': 720,
+    'height': '90%',
     'autoScale': false,
     'transitionIn': 'none',
     'transitionOut': 'none',
