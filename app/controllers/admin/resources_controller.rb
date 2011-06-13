@@ -6,6 +6,7 @@ class Admin::ResourcesController < Admin::BaseController
   include Typus::Controller::Autocomplete
   include Typus::Controller::Filters
   include Typus::Controller::Format
+  include Typus::Controller::Headless
 
   Whitelist = [:edit, :update, :destroy, :toggle, :position, :relate, :unrelate]
 
@@ -26,8 +27,19 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       format.html do
-        add_resource_action(default_action.titleize, {:action => default_action}, {})
-        add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
+        if params[:layout] == "admin/headless" && params[:resource_action]
+          body = params[:resource_action].titleize
+          url = { :controller => params[:resource].tableize,
+                  :action => params[:resource_action],
+                  :resource => params[:resource],
+                  :resource_id => params[:resource_id],
+                  :return_to => params[:return_to] }
+          options = { :target => "_parent" }
+          add_resource_action(body, url, options)
+        else
+          add_resource_action(default_action.titleize, {:action => default_action}, {})
+          add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
+        end
         generate_html
       end
 
@@ -58,9 +70,7 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       if @item.save
-        format.html do
-          params[:resource] ? create_with_back_to : redirect_on_success
-        end
+        format.html { redirect_on_success }
         format.json { render :json => @item, :status => :created, :location => @item }
       else
         format.html { render :action => "new" }
@@ -182,6 +192,24 @@ class Admin::ResourcesController < Admin::BaseController
       path.delete_if { |k, v| %w(action id).include?(k) }
     end
 
+    ##
+    # Here what we basically do is to associate objects after they have been
+    # created. It's similar to calling `relate` but which the difference that
+    # we are creating a new record.
+    #
+    # We have two objects, detect the relationship_between them and then
+    # call the related method.
+    #
+    if params[:_saveandassign]
+      item_class = params[:resource].typus_constantize
+      # For some reason we are forced to set the /admin prefix to the controller
+      # when working with namespaced stuff.
+      options = { :controller => "/admin/#{item_class.to_resource}" }
+      assoc = item_class.relationship_with(@resource).to_s
+      unused_path, notice, alert = send("set_#{assoc}_association", item_class, options)
+      path.merge!(:action => 'edit', :id => @item.id)
+    end
+
     # Redirects to { :action => 'new' }
     if params[:_addanother]
       path.merge!(:action => 'new', :id => nil)
@@ -196,23 +224,6 @@ class Admin::ResourcesController < Admin::BaseController
     notice = Typus::I18n.t(message, :model => @resource.model_name.human)
 
     redirect_to path, :notice => notice
-  end
-
-  ##
-  # Here what we basically do is to associate objects after they have been
-  # created. It's similar to calling `relate` but which the difference that
-  # we are creating a new record.
-  #
-  # We have two objects, detect the relationship_between them and then
-  # call the related method.
-  #
-  def create_with_back_to
-    item_class = params[:resource].typus_constantize
-    # For some reason we are forced to set the /admin prefix to the controller
-    # when working with namespaced stuff.
-    options = { :controller => "/admin/#{item_class.to_resource}" }
-    assoc = item_class.relationship_with(@resource).to_s
-    send("set_#{assoc}_association", item_class, options)
   end
 
   def default_action

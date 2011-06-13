@@ -1,0 +1,24 @@
+<% content_for :javascripts do %>
+  <%= javascript_include_tag '/vendor/ckeditor/ckeditor' %>
+<% end %>
+
+<%
+  custom = { :rows => @resource.typus_options_for(:form_rows), :class => "ckeditor" }
+  options = options.merge!(custom)
+%>
+
+<%
+  input = "#{@resource.model_name.underscore.gsub("/", "_")}_#{attribute}"
+  label_text << <<-DATA
+<small>
+  #{link_to "Insert picture",
+            {:controller => "/admin/assets", :layout => 'admin/headless', :input => input},
+            {:class => "iframe", :style => "font-size: 10px; background: black; color: white; padding: 2px 5px; -moz-border-radius: 3px; -webkit-border-radius: 3px;"}}
+</small>
+  DATA
+%>
+
+<li id="<%= attribute %>">
+  <%= form.label attribute, label_text.html_safe %>
+  <%= form.text_area attribute, options %>
+</li>

@@ -5,8 +5,6 @@
     <small><%= add_new %></small>
   </h2>
 
-  <%= form %>
-
   <% if @items.any? -%>
     <%= table %>
     <%= paginate(@items, Typus.pagination.merge(:anchor => association_name)) %>

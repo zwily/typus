@@ -29,11 +29,18 @@ module Admin
 
       # If we are on a through_reflection set the association name!
       @resource_actions = if @reflection.through_reflection
-                            [["Edit", {:action=>"edit"}, {}],
-                             ["Unrelate", {:resource_id=> @item.id, :resource=> @resource.model_name, :action=>"unrelate", :association_name => @association_name}, {:confirm=>"Unrelate?"}]]
+                            [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
+                             ["Unrelate", { :resource_id => @item.id,
+                                            :resource => @resource.model_name,
+                                            :action => "unrelate",
+                                            :association_name => @association_name},
+                                          { :confirm => "Unrelate?" } ]]
                           else
-                            [["Edit", {:action=>"edit"}, {}],
-                             ["Trash", {:resource_id=>@item.id, :resource=>@resource.model_name, :action=>"destroy"}, {:confirm=>"Trash?"}]]
+                            [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
+                             ["Trash", { :resource_id => @item.id,
+                                         :resource => @resource.model_name,
+                                         :action => "destroy" },
+                                       { :confirm => "Trash?" } ]]
                            end
 
       locals = { :association_name => @association_name,
@@ -46,27 +53,17 @@ module Admin
 
     def typus_form_has_and_belongs_to_many(field)
       setup_relationship(field)
-
-      count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
-
-      if set_condition && !count_items_to_relate.zero?
-        form = if Typus.autocomplete && (count_items_to_relate > Typus.autocomplete)
-                 build_relate_form('admin/templates/relate_form_with_autocomplete')
-               else
-                 @items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by) - @item.send(field)
-                 build_relate_form
-               end
-      end
-
       build_pagination
 
       # TODO: Find a cleaner way to add these actions ...
-      @resource_actions = [["Edit", {:action=>"edit"}, {}],
-                           ["Unrelate", {:resource_id=> @item.id, :resource=> @resource.model_name, :action=>"unrelate"}, {:confirm=>"Unrelate?"}]]
+      @resource_actions = [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
+                           ["Unrelate", { :resource_id => @item.id,
+                                          :resource => @resource.model_name,
+                                          :action => "unrelate"},
+                                        { :confirm =>"Unrelate?" }]]
 
       locals = { :association_name => @association_name,
                  :add_new => build_add_new,
-                 :form => form,
                  :table => build_relationship_table }
 
       render "admin/templates/has_n", locals
@@ -76,13 +73,6 @@ module Admin
       items_per_page = @model_to_relate.typus_options_for(:per_page)
       data = @item.send(@field).order(@model_to_relate.typus_order_by).where(set_conditions)
       @items = data.page(params[:page]).per(items_per_page)
-    end
-
-    def build_relate_form(template = "admin/templates/relate_form")
-      options = { :association_name => @association_name,
-                  :items_to_relate => @items_to_relate,
-                  :model_to_relate => @model_to_relate }
-      render template, options
     end
 
     def build_relationship_table
@@ -97,12 +87,15 @@ module Admin
 
     def build_add_new(options = {})
       default_options = { :controller => "/admin/#{@model_to_relate.to_resource}",
-                          :action => "new",
+                          :action => "index",
                           :resource => @resource.model_name,
-                          :resource_id => @item.id }
+                          :layout => 'admin/headless',
+                          :resource_id => @item.id,
+                          :resource_action => 'relate',
+                          :return_to => request.path }
 
       if set_condition && admin_user.can?("create", @model_to_relate)
-        link_to Typus::I18n.t("Add New"), default_options.merge(options)
+        link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
       end
     end
 
@@ -153,11 +146,12 @@ module Admin
       if admin_user.can?('create', related)
         options = { :controller => "/admin/#{related.to_resource}",
                     :action => 'new',
-                    :resource => @resource.model_name }
+                    :resource => @resource.model_name,
+                    :layout => 'admin/headless' }
         # Pass the resource_id only to edit/update because only there is where
         # the record actually exists.
         options.merge!(:resource_id => @item.id) if %w(edit update).include?(params[:action])
-        message = link_to Typus::I18n.t("Add New"), options
+        message = link_to Typus::I18n.t("Add New"), options, { :class => 'iframe' }
       end
 
       # Set the template.

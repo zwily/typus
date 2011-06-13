@@ -26,17 +26,15 @@ module Typus
       #   => ...
       #
       def relate
-        resource_class = params[:related][:model].typus_constantize
-        association_name = params[:related][:association_name].tableize
+        resource_class = params[:resource].typus_constantize
+        association_name = params[:resource].tableize
 
-        if params[:related][:id].present? && (item = resource_class.find(params[:related][:id]))
-          @item.send(association_name) << item
-          notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
-        else
-          notice = Typus::I18n.t("Please, select an option.")
-        end
+        item = resource_class.find(params[:resource_id])
+        @item.send(association_name) << item
 
-        redirect_to :back, :notice => notice
+        notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
+
+        redirect_to params[:return_to], :notice => notice
       end
 
       ##
@@ -79,7 +77,7 @@ module Typus
         options.merge!(:action => 'edit', :id => @item.send(association_name).id)
         notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
 
-        redirect_to options, :notice => notice
+        [options, notice, nil]
       end
 
       ##
@@ -98,7 +96,7 @@ module Typus
 
         options.merge!(:action => 'edit', :id => item.id)
 
-        redirect_to options, :notice => notice, :alert => alert
+        [options, notice, alert]
       end
 
       ##
@@ -117,7 +115,7 @@ module Typus
           alert = @item.errors.full_messages
         end
 
-        redirect_to options, :notice => notice, :alert => alert
+        [options, notice, alert]
       end
 
       ##
@@ -140,7 +138,7 @@ module Typus
           options.merge!(:action => 'new', foreign_key => @item.id)
         end
 
-        redirect_to options, :notice => notice, :alert => alert
+        [options, notice, alert]
       end
 
     end
