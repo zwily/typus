@@ -12,6 +12,7 @@ Category:
     form: name, permalink, position
   order_by: position
   application: CRUD Extended
+  search: name
 
 Comment:
   fields:
@@ -54,6 +55,7 @@ Post:
       date_formats:
         created_at: short
       templates:
+        body: text_with_ckeditor_and_assets
         published_at: datepicker
   relationships: categories, comments, views
   actions:
