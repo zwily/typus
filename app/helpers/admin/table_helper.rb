@@ -96,29 +96,6 @@ module Admin
     alias :table_virtual_field :table_generic_field
     alias :table_string_field :table_generic_field
 
-    def table_tree_field(attribute, item)
-      item.parent ? item.parent.to_label : "&mdash;".html_safe
-    end
-
-    def table_position_field(attribute, item, connector = " / ")
-      html_position = []
-
-      [ [:move_to_top, "Top"],
-        [:move_higher,  "Up"],
-        [:move_lower,   "Down"],
-        [:move_to_bottom, "Bottom"] ].each do |key, value|
-
-        options = { :controller => "/admin/#{item.class.to_resource}", :action => "position", :id => item.id, :go => key }
-        should_be_inactive = (item.respond_to?(:first?) && ([:move_higher, :move_to_top].include?(key) && item.first?)) ||
-                             (item.respond_to?(:last?) &&  ([:move_lower, :move_to_bottom].include?(key) && item.last?))
-        html_position << link_to_unless(should_be_inactive, Typus::I18n.t(value), params.merge(options)) do |name|
-          %w(<span class="inactive">#{name}</span>)
-        end
-      end
-
-      "#{item.position}<br/><br/>#{html_position.compact.join(connector)}".html_safe
-    end
-
     def table_datetime_field(attribute, item)
       if field = item.send(attribute)
         I18n.localize(field, :format => item.class.typus_date_format(attribute))
@@ -140,11 +117,6 @@ module Admin
                   :field => attribute.gsub(/\?$/, '') }
       confirm = Typus::I18n.t("Change %{attribute}?", :attribute => item.class.human_attribute_name(attribute).downcase)
       link_to Typus::I18n.t(human_boolean), options, :confirm => confirm
-    end
-
-    def table_transversal_field(attribute, item)
-      field_1, field_2 = attribute.split(".")
-      (related_item = item.send(field_1)) ? related_item.send(field_2) : "&mdash;".html_safe
     end
 
   end

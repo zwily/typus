@@ -2,6 +2,10 @@ module Admin
   module DataTypes
     module TreeHelper
 
+      def table_tree_field(attribute, item)
+        item.parent ? item.parent.to_label : "&mdash;".html_safe
+      end
+
       def typus_tree_field(attribute, form)
         locals = { :attribute => attribute,
                    :form => form,
