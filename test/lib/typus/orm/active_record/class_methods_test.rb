@@ -247,28 +247,19 @@ class ClassMethodsTest < ActiveSupport::TestCase
 
   end
 
-  context "typus_boolean" do
+  test "typus_boolean accepts string and symbols" do
+    expected = [["Active", "true"], ["Inactive", "false"]]
 
-    should "accept strings" do
-      expected = [["Active", "true"], ["Inactive", "false"]]
-      assert_equal expected, TypusUser.typus_boolean("status")
-    end
+    assert_equal expected, TypusUser.typus_boolean("status")
+    assert_equal expected, TypusUser.typus_boolean(:status)
+  end
 
-    should "accept symbols" do
-      expected = [["Active", "true"], ["Inactive", "false"]]
-      assert_equal expected, TypusUser.typus_boolean(:status)
-    end
+  test "typus_boolean returns custom keys" do
+    expected = [["True", "true"], ["False", "false"]]
+    assert_equal expected, Post.typus_boolean(:status)
 
-    should "return booleans for Post" do
-      expected = [["True", "true"], ["False", "false"]]
-      assert_equal expected, Post.typus_boolean(:status)
-    end
-
-    should "return booleans for Comment" do
-      expected = [["Yes, it's spam", "true"], ["No, it's not spam", "false"]]
-      assert_equal expected, Comment.typus_boolean(:spam)
-    end
-
+    expected = [["Yes, it's spam", "true"], ["No, it's not spam", "false"]]
+    assert_equal expected, Comment.typus_boolean(:spam)
   end
 
   context "typus_date_format" do
