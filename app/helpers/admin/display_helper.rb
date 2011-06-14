@@ -26,10 +26,6 @@ module Admin
                                :id => data.id }
     end
 
-    def display_selector(item, attribute)
-      item.mapping(attribute)
-    end
-
     def display_datetime(item, attribute)
       I18n.l(item.send(attribute), :format => @resource.typus_date_format(attribute))
     end

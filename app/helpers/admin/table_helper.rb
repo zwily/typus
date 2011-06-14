@@ -96,10 +96,6 @@ module Admin
     alias :table_virtual_field :table_generic_field
     alias :table_string_field :table_generic_field
 
-    def table_selector_field(attribute, item)
-      item.mapping(attribute)
-    end
-
     def table_tree_field(attribute, item)
       item.parent ? item.parent.to_label : "&mdash;".html_safe
     end
