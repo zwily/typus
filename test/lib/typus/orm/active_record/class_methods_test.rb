@@ -221,30 +221,17 @@ class ClassMethodsTest < ActiveSupport::TestCase
 
   end
 
-  context "typus_application" do
-
-    should "return application for Post" do
-      assert_equal "CRUD Extended", Post.typus_application
-    end
-
-    should "return application for View" do
-      assert_equal "Unknown", View.typus_application
-    end
-
+  test "typus_application" do
+    assert_equal "CRUD Extended", Post.typus_application
+    assert_equal "Unknown", View.typus_application
   end
 
-  context "typus_field_options_for" do
+  test "typus_field_options_for" do
+    assert_equal [:status], Post.typus_field_options_for(:selectors)
+    assert_equal [:permalink], Post.typus_field_options_for(:read_only)
+    assert_equal [:created_at], Post.typus_field_options_for(:auto_generated)
 
-    should "verify on models" do
-      assert_equal [:status], Post.typus_field_options_for(:selectors)
-      assert_equal [:permalink], Post.typus_field_options_for(:read_only)
-      assert_equal [:created_at], Post.typus_field_options_for(:auto_generated)
-    end
-
-    should "return empty array for unexisting option" do
-      assert Post.typus_field_options_for(:unexisting).empty?
-    end
-
+    assert Post.typus_field_options_for(:unexisting).empty?
   end
 
   test "typus_boolean accepts string and symbols" do
