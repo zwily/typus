@@ -262,53 +262,32 @@ class ClassMethodsTest < ActiveSupport::TestCase
     assert_equal expected, Comment.typus_boolean(:spam)
   end
 
-  context "typus_date_format" do
-
-    should "accept strings" do
-      assert_equal :default, Post.typus_date_format("unknown")
-    end
-
-    should "accept symbols" do
-      assert_equal :default, Post.typus_date_format(:unknown)
-    end
-
-    should "return date_format for Post" do
-      assert_equal :default, Post.typus_date_format
-      assert_equal :short, Post.typus_date_format(:created_at)
-    end
-
+  test "typus_date_format accepts string and symbols" do
+    assert_equal :default, Post.typus_date_format("unknown")
+    assert_equal :default, Post.typus_date_format(:unknown)
   end
 
-  context "typus_template" do
-
-    should "accept strings" do
-      assert_equal "datepicker", Post.typus_template("published_at")
-    end
-
-    should "accept symbols" do
-      assert_equal "datepicker", Post.typus_template(:published_at)
-    end
-
-    should "return nil if template does not exist" do
-      assert_nil Post.typus_template(:created_at)
-    end
-
+  test "typus_date_format returns date_format for Post" do
+    assert_equal :default, Post.typus_date_format
+    assert_equal :short, Post.typus_date_format(:created_at)
   end
 
-  context "typus_defaults_for" do
+  test "typus_template accepts strings and symbols" do
+    assert_equal "datepicker", Post.typus_template("published_at")
+    assert_equal "datepicker", Post.typus_template(:published_at)
+  end
 
-    should "accept strings" do
-      assert_equal %w(title), Post.typus_defaults_for("search")
-    end
+  test "typus_template returns nil if template does not exist" do
+    assert_nil Post.typus_template(:created_at)
+  end
 
-    should "accepts symbols" do
-      assert_equal %w(title), Post.typus_defaults_for(:search)
-    end
+  test "typus_defaults_for accepts string and symbols" do
+    assert_equal %w(title), Post.typus_defaults_for("search")
+    assert_equal %w(title), Post.typus_defaults_for(:search)
+  end
 
-    should "return default_for relationships on Post" do
-      assert_equal %w(categories comments views), Post.typus_defaults_for(:relationships)
-    end
-
+  test "typus_defaults_for returns default_for relationships on Post" do
+    assert_equal %w(categories comments views), Post.typus_defaults_for(:relationships)
   end
 
   context "typus_search_fields" do
@@ -338,16 +317,12 @@ class ClassMethodsTest < ActiveSupport::TestCase
 
   end
 
-  context "typus_user_id?" do
+  test "typus_user_id exists on post" do
+    assert Post.typus_user_id?
+  end
 
-    should "exist on Post" do
-      assert Post.typus_user_id?
-    end
-
-    should "not exist on TypusUser" do
-      assert !TypusUser.typus_user_id?
-    end
-
+  test "typus_user_id does not exist on TypusUser" do
+    assert !TypusUser.typus_user_id?
   end
 
   context "read_model_config" do
