@@ -192,33 +192,23 @@ class ClassMethodsTest < ActiveSupport::TestCase
 
   end
 
-  context "typus_options_for" do
+  test "typus_options_for accepts strings and symbols" do
+    assert Post.typus_options_for("form_rows").eql?(15)
+    assert Post.typus_options_for(:form_rows).eql?(15)
+  end
 
-    should "accept strings" do
-      assert Post.typus_options_for("form_rows").eql?(15)
-    end
+  test "typus_options_for returns nil when options do not exist" do
+    assert_nil TypusUser.typus_options_for(:unexisting)
+  end
 
-    should "accept symbols" do
-      assert Post.typus_options_for(:form_rows).eql?(15)
-    end
+  test "typus_options_for returns options for models" do
+    assert Post.typus_options_for(:form_rows).eql?(15)
+    assert Page.typus_options_for(:form_rows).eql?(25)
+  end
 
-    should "return nil when options do not exist" do
-      assert_nil TypusUser.typus_options_for(:unexisting)
-    end
-
-    should "return options for Post" do
-      assert Post.typus_options_for(:form_rows).eql?(15)
-    end
-
-    should "return options for Page" do
-      assert Page.typus_options_for(:form_rows).eql?(25)
-    end
-
-    should "return sortable options as a boolean" do
-      assert Post.typus_options_for(:sortable)
-      assert !Page.typus_options_for(:sortable)
-    end
-
+  test "typus_options_for returns sortable options as a boolean" do
+    assert Post.typus_options_for(:sortable)
+    assert !Page.typus_options_for(:sortable)
   end
 
   test "typus_application" do
