@@ -27,7 +27,7 @@ class Admin::StatusControllerTest < ActionController::TestCase
     reset_session
     get :index
     assert_response :redirect
-    assert_redirected_to new_admin_session_path # (:back_to => '/admin/status')
+    assert_redirected_to new_admin_session_path
   end
 
 end
