@@ -3,3 +3,4 @@ Case:
     default: title
     form: title, content
   application: STI
+  relationships: categories

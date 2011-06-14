@@ -101,34 +101,16 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
   # as expected for STI models.
   #
   # We are editing a Case (which is an STI model). And we click on "Add New"
-  # to add a new category. Once create, we will be redirected and the new
+  # to add a new category. Once created, we will be redirected and the new
   # category will be assigned to the current case. Easy right?
   #
-  #   /admin/categories/new?back_to=%2Fadmin%2Fcases%2Fedit%1F2&resource=Case&resource_id=2
-  #
-  context "Relate using Add New on STI models" do
+  test "relate using add new on sti models" do
+    category = { :name => "Category Name" }
+    kase = Factory(:case)
 
-    setup do
-      @category = { :name => "Category Name" }
+    assert_difference('kase.categories.count') do
+      post :create, { :category => category, :resource => "Case", :resource_id => kase.id, :_saveandassign => true }
     end
-
-    context "when editing an item" do
-
-      setup do
-        @case = Factory(:case)
-      end
-
-      should "create new category and redirect to case" do
-        assert_difference('@case.categories.count') do
-          post :create, { :category => @category,
-                          :resource => "Case", :resource_id => @case.id }
-        end
-        assert_response :redirect
-        assert_redirected_to "/admin/cases/edit/#{@case.id}"
-      end
-
-    end
-
   end
 
 end
