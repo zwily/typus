@@ -1,10 +1,13 @@
 require "test_helper"
 
-##
-# Here we test:
-#
-# - Typus::Orm::ActiveRecord::AdminUserV1
-#
+=begin
+
+  Here we test:
+
+  - Typus::Orm::ActiveRecord::AdminUserV1
+
+=end
+
 class TypusUserTest < ActiveSupport::TestCase
 
   test "validate email" do

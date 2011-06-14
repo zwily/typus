@@ -1,10 +1,13 @@
 require "test_helper"
 
-##
-# Here we test:
-#
-# - Typus::Orm::ActiveRecord::User::InstanceMethods
-#
+=begin
+
+  Here we test:
+
+  - Typus::Orm::ActiveRecord::User::InstanceMethods
+
+=end
+
 class UserTest < ActiveSupport::TestCase
 
   test "to_label" do
