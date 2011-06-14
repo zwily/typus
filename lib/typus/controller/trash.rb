@@ -19,8 +19,8 @@ module Typus
         respond_to do |format|
           format.html do
             # Actions by resource.
-            add_resource_action('Restore', {:action => 'restore'}, {:confirm => Typus::I18n.t("Restore %{resource}?", :resource => @resource.model_name.human)})
-            add_resource_action('Delete Permanently', {:action => 'wipe'}, {:confirm => Typus::I18n.t("Delete Permanently?", :resource => @resource.model_name.human)})
+            add_resource_action 'Restore', { :action => 'restore' }, { :confirm => Typus::I18n.t("Restore %{resource}?", :resource => @resource.model_name.human) }
+            add_resource_action 'Delete Permanently', { :action => 'wipe' }, { :confirm => Typus::I18n.t("Delete Permanently?") }
             # Generate and render.
             generate_html
             render 'index'
