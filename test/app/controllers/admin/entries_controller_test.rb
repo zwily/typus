@@ -119,6 +119,9 @@ class Admin::EntriesControllerTest < ActionController::TestCase
     get :restore, :id => @entry.id
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
+
+    get :trash
+    assert assigns(:items).empty?
   end
 
 end
