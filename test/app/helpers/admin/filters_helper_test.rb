@@ -148,17 +148,13 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
 
   end
 
-  context "predefined_filters" do
+  test "predefined_filters is empty" do
+    assert predefined_filters.empty?
+  end
 
-    should "be empty" do
-      assert predefined_filters.empty?
-    end
-
-    should "return my filter" do
-      @predefined_filters = "mock"
-      assert_equal "mock", predefined_filters
-    end
-
+  test "predefined_filters returns my filter" do
+    @predefined_filters = "mock"
+    assert_equal "mock", predefined_filters
   end
 
   def link_to(*args); args; end
