@@ -16,15 +16,6 @@ module Admin
 
       count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
 
-      if set_condition && !count_items_to_relate.zero?
-        form = if Typus.autocomplete && (count_items_to_relate > Typus.autocomplete)
-                 build_relate_form('admin/templates/relate_form_with_autocomplete')
-               else
-                 @items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by) - @item.send(field)
-                 build_relate_form
-               end
-      end
-
       build_pagination
 
       # If we are on a through_reflection set the association name!
@@ -45,7 +36,6 @@ module Admin
 
       locals = { :association_name => @association_name,
                  :add_new => build_add_new(options),
-                 :form => form,
                  :table => build_relationship_table }
 
       render "admin/templates/has_n", locals

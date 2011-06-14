@@ -14,61 +14,42 @@ class Admin::ImageHoldersControllerTest < ActionController::TestCase
     admin_sign_in
   end
 
-  context "create polymorphic association" do
+  test "create polymorphic association" do
+    bird = Factory(:bird)
 
-    setup do
-      @bird = Factory(:bird)
+    assert_difference('bird.image_holders.count') do
+      post :create, { :image_holder => { :name => "ImageHolder" },
+                      :resource => "Bird", :resource_id => bird.id }
     end
 
-    should "contain a message" do
-      get :new, { :resource => @bird.class.name, :resource_id => @bird.id }
-      assert_select 'body div#flash', "Cancel adding a new image holder?"
-    end
-
-    should "work" do
-      assert_difference('@bird.image_holders.count') do
-        post :create, { :image_holder => { :name => "ImageHolder" },
-                        :resource => "Bird", :resource_id => @bird.id }
-      end
-
-      assert_response :redirect
-      assert_redirected_to "http://test.host/admin/birds/edit/#{@bird.id}"
-      assert_equal "Bird successfully updated.", flash[:notice]
-    end
-
+    assert_response :redirect
+    assert_redirected_to "http://test.host/admin/birds/edit/#{bird.id}"
+    assert_equal "Bird successfully updated.", flash[:notice]
   end
 
   ##
+  # We are in:
+  #
+  #   /admin/birds/edit/1
+  #
+  # And we see a list of comments under it:
+  #
+  #   /admin/image_holders/unrelate/1?resource=Bird&resource_id=1
+  #   /admin/image_holders/unrelate/2?resource=Bird&resource_id=1
+  #   ...
+  #
   # TODO: Eventually this code should be run in the Original model, so ideally
   #       a Bird unrelates ImageHolder and not ImageHolder unrelates Bird.
   #
-  context "unrelate" do
+  test "unrelate" do
+    image_holder = Factory(:image_holder)
+    bird = Factory(:bird)
+    bird.image_holders << image_holder
+    @request.env['HTTP_REFERER'] = "/admin/birds/edit/#{bird.id}"
 
-    ##
-    # We are in:
-    #
-    #   /admin/birds/edit/1
-    #
-    # And we see a list of comments under it:
-    #
-    #   /admin/image_holders/unrelate/1?resource=Bird&resource_id=1
-    #   /admin/image_holders/unrelate/2?resource=Bird&resource_id=1
-    #   ...
-    ##
-
-    setup do
-      @image_holder = Factory(:image_holder)
-      @bird = Factory(:bird)
-      @bird.image_holders << @image_holder
-      @request.env['HTTP_REFERER'] = "/admin/birds/edit/#{@bird.id}"
+    assert_difference('bird.image_holders.count', -1) do
+      post :unrelate, :id => image_holder.id, :resource => "Bird", :resource_id => bird.id
     end
-
-    should "work" do
-      assert_difference('@bird.image_holders.count', -1) do
-        post :unrelate, :id => @image_holder.id, :resource => "Bird", :resource_id => @bird.id
-      end
-    end
-
   end
 
 end
