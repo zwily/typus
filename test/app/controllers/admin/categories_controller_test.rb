@@ -56,7 +56,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
 
   end
 
-  context "Unrelate (has_and_belongs_to_many)" do
+  test "unrelate (has_and_belongs_to_many)" do
 
     ##
     # We are in:
@@ -69,22 +69,17 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     #   /admin/categories/unrelate/2?resource=Post&resource_id=1
     ##
 
-    setup do
-      @category = Factory(:category)
-      @category.posts << Factory(:post)
-      @request.env['HTTP_REFERER'] = "/admin/dashboard"
+    category = Factory(:category)
+    category.posts << Factory(:post)
+    @request.env['HTTP_REFERER'] = "/admin/dashboard"
+
+    assert_difference('category.posts.count', -1) do
+      post :unrelate, :id => category.id, :resource => 'Post', :resource_id => category.posts.first
     end
 
-    should "unrelate category from post" do
-      assert_difference('@category.posts.count', -1) do
-        post :unrelate, :id => @category.id, :resource => 'Post', :resource_id => @category.posts.first
-      end
-
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-      assert_equal "Post successfully updated.", flash[:notice]
-    end
-
+    assert_response :redirect
+    assert_redirected_to @request.env['HTTP_REFERER']
+    assert_equal "Post successfully updated.", flash[:notice]
   end
 
   ##
