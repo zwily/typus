@@ -18,9 +18,7 @@ module Admin
     end
 
     def login_info
-      unless admin_user.is_a?(FakeUser)
-        render "admin/helpers/base/login_info"
-      end
+      render "admin/helpers/base/login_info" unless admin_user.is_a?(FakeUser)
     end
 
     def admin_sign_out_path
