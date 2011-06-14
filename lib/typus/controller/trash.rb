@@ -38,8 +38,7 @@ module Typus
       end
 
       def wipe
-        set_deleted
-        item = @resource.find(params[:id])
+        item = @resource.find_in_trash(params[:id])
         item.disable_trash { item.destroy }
         redirect_to :back, :notice => Typus::I18n.t("%{resource} has been successfully removed from trash.", :resource => @resource.name)
       end
