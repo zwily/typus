@@ -1,5 +1,5 @@
 module Admin
-  module FilePreview
+  module DataTypes
     module PaperclipHelper
 
       def table_paperclip_field(attribute, item)

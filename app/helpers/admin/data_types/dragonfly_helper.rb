@@ -1,5 +1,5 @@
 module Admin
-  module FilePreview
+  module DataTypes
     module DragonflyHelper
 
       def table_dragonfly_field(attribute, item)
