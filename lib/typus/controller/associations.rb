@@ -27,7 +27,7 @@ module Typus
       #
       def relate
         resource_class = params[:resource].typus_constantize
-        association_name = params[:resource].tableize
+        association_name = resource_class.table_name
 
         item = resource_class.find(params[:resource_id])
         @item.send(association_name) << item
