@@ -5,8 +5,7 @@ require "test_helper"
   What's being tested here?
 
     - Typus::Controller::ActsAsList
-    - Template Override (TODO: Centralize this!!!)
-    - Unrelate (Post#categories) (has_and_belongs_to_many)
+    - Relate and Unrelate (Post#categories) (has_and_belongs_to_many)
 
 =end
 
@@ -17,43 +16,34 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = '/admin/categories'
   end
 
-  context "Categories List" do
+  test "get position" do
+    first_category = Factory(:category, :position => 1)
+    second_category = Factory(:category, :position => 2)
 
-    setup do
-      @first_category = Factory(:category, :position => 1)
-      @second_category = Factory(:category, :position => 2)
+    second_category.name = nil
+    second_category.save(:validate => false)
 
-      @second_category.name = nil
-      @second_category.save(:validate => false)
-    end
+    # "verify referer"
+    get :position, :id => first_category.id, :go => 'move_lower'
+    assert_response :redirect
+    assert_redirected_to @request.env['HTTP_REFERER']
 
-    should "verify referer" do
-      get :position, :id => @first_category.id, :go => 'move_lower'
-      assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
-    end
+    # "position item one step down"
+    get :position, :id => first_category.id, :go => 'move_lower'
+    assert_equal "Category successfully updated.", flash[:notice]
+    assert assigns(:item).position.eql?(2)
 
-    should "position item one step down" do
-      get :position, :id => @first_category.id, :go => 'move_lower'
-      assert_equal "Category successfully updated.", flash[:notice]
-      assert assigns(:item).position.eql?(2)
-    end
+    # "position item one step up"
+    get :position, :id => second_category.id, :go => 'move_higher'
+    assert assigns(:item).position.eql?(1)
 
-    should "position item one step up" do
-      get :position, :id => @second_category.id, :go => 'move_higher'
-      assert assigns(:item).position.eql?(1)
-    end
+    # "position top item to bottom"
+    get :position, :id => first_category.id, :go => 'move_to_bottom'
+    assert assigns(:item).position.eql?(2)
 
-    should "position top item to bottom" do
-      get :position, :id => @first_category.id, :go => 'move_to_bottom'
-      assert assigns(:item).position.eql?(2)
-    end
-
-    should "position bottom item to top" do
-      get :position, :id => @second_category.id, :go => 'move_to_top'
-      assert assigns(:item).position.eql?(1)
-    end
-
+    # "position bottom item to top"
+    get :position, :id => second_category.id, :go => 'move_to_top'
+    assert assigns(:item).position.eql?(1)
   end
 
   ##
