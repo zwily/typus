@@ -16,7 +16,7 @@ class Admin::BaseControllerTest < ActionController::TestCase
     assert_redirected_to new_admin_session_path
   end
 
-  test "user_guide display" do
+  test "user_guide is displayed when user is logged in" do
     admin_sign_in
     get :user_guide
     assert_response :success
