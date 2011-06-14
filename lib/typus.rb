@@ -23,7 +23,7 @@ module Typus
 
   module Controller
     autoload :Actions, "typus/controller/actions"
-    autoload :ActsAs, "typus/controller/acts_as"
+    autoload :ActsAsList, "typus/controller/acts_as_list"
     autoload :Associations, "typus/controller/associations"
     autoload :Autocomplete, "typus/controller/autocomplete"
     autoload :Bulk, "typus/controller/bulk"

@@ -1,6 +1,6 @@
 module Typus
   module Controller
-    module ActsAs
+    module ActsAsList
 
       ##
       # Change item position:

@@ -4,7 +4,7 @@ require "test_helper"
 
   What's being tested here?
 
-    - ActsAsList.
+    - Typus::Controller::ActsAsList
     - Template Override (TODO: Centralize this!!!)
     - Unrelate (Post#categories) (has_and_belongs_to_many)
 

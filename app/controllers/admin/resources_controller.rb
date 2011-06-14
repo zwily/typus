@@ -1,7 +1,6 @@
 class Admin::ResourcesController < Admin::BaseController
 
   include Typus::Controller::Actions
-  include Typus::Controller::ActsAs
   include Typus::Controller::Associations
   include Typus::Controller::Autocomplete
   include Typus::Controller::Filters
