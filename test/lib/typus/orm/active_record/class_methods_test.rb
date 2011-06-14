@@ -61,12 +61,8 @@ class ClassMethodsTest < ActiveSupport::TestCase
 
   end
 
-  context "typus_description" do
-
-    should "return the description of a model" do
-      assert_equal "System Users Administration", TypusUser.typus_description
-    end
-
+  test "typus_description returns the description of a model" do
+    assert_equal "System Users Administration", TypusUser.typus_description
   end
 
   context "typus_fields_for" do
@@ -172,24 +168,14 @@ class ClassMethodsTest < ActiveSupport::TestCase
 
   end
 
-  context "typus_actions_on" do
+  test "typus_actions_on accepts strings and symbols" do
+    assert_equal %w(cleanup), Post.typus_actions_on("index")
+    assert_equal %w(cleanup), Post.typus_actions_on(:index)
+  end
 
-    should "accept strings" do
-      assert_equal %w(cleanup), Post.typus_actions_on("index")
-    end
-
-    should "accept symbols" do
-      assert_equal %w(cleanup), Post.typus_actions_on(:index)
-    end
-
-    should "return actions on list for TypusUser" do
-      assert TypusUser.typus_actions_on(:list).empty?
-    end
-
-    should "return actions on edit for Post" do
-      assert_equal %w(send_as_newsletter preview), Post.typus_actions_on(:edit)
-    end
-
+  test "typus_actions_on returns actions for our models" do
+    assert TypusUser.typus_actions_on(:list).empty?
+    assert_equal %w(send_as_newsletter preview), Post.typus_actions_on(:edit)
   end
 
   test "typus_options_for accepts strings and symbols" do
@@ -298,23 +284,19 @@ class ClassMethodsTest < ActiveSupport::TestCase
     assert !TypusUser.typus_user_id?
   end
 
-  context "read_model_config" do
+  test "read_model_config returns data for existing model" do
+    expected = {"application"=>"CRUD Extended",
+                "fields"=>{"default"=>"caption, dragonfly, dragonfly_required",
+                           "special"=>"caption, dragonfly, dragonfly_required",
+                           "form"=>"caption, dragonfly, dragonfly_required, paperclip, paperclip_required",
+                           "new"=>"dragonfly, dragonfly_required, paperclip, paperclip_required"}}
+    assert_equal expected, Asset.read_model_config
+  end
 
-    should "return data for existing model" do
-      expected = {"application"=>"CRUD Extended",
-                  "fields"=>{"default"=>"caption, dragonfly, dragonfly_required",
-                             "special"=>"caption, dragonfly, dragonfly_required",
-                             "form"=>"caption, dragonfly, dragonfly_required, paperclip, paperclip_required",
-                             "new"=>"dragonfly, dragonfly_required, paperclip, paperclip_required"}}
-      assert_equal expected, Asset.read_model_config
+  test "read_model_config raises an error when model does not exist on configuration" do
+    assert_raises RuntimeError do
+      Article.read_model_config
     end
-
-    should "raise error when model does not exist on configuration" do
-      assert_raises RuntimeError do
-        Article.read_model_config
-      end
-    end
-
   end
 
 end
