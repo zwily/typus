@@ -31,8 +31,7 @@ module Typus
       end
 
       def restore
-        set_deleted
-        @resource.find(params[:id]).restore
+        @resource.restore(params[:id])
         redirect_to :back, :notice => Typus::I18n.t("%{resource} recovered from trash.", :resource => @resource.name)
       rescue ActiveRecord::RecordNotFound
         redirect_to :back, :notice => Typus::I18n.t("%{resource} can't be recovered from trash.", :resource => @resource.name)
