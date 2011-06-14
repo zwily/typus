@@ -4,8 +4,7 @@ require "test_helper"
 
   What's being tested here?
 
-    - CRUD: Create, read, update, destroy
-    - CRUD Extras: toggle
+    - Admin::ResourcesController
     - Typus::Controller::Trash (Which probably shoould be moved somewhere else)
 
 =end

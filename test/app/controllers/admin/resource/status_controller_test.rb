@@ -4,7 +4,7 @@ require "test_helper"
 
   What's being tested here?
 
-    - Resource controller (which is not associated with a model).
+    - Resource controller.
 
 =end
 

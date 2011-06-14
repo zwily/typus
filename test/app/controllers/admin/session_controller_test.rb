@@ -10,14 +10,10 @@ require "test_helper"
 
 class Admin::SessionControllerTest < ActionController::TestCase
 
-  context "Setup" do
-
-    should "redirect_to_new_admin_account_when_no_admin_users" do
-      get :new
-      assert_response :redirect
-      assert_redirected_to new_admin_account_path
-    end
-
+  test "get new redirects to new_admin_account_path when no admin users" do
+    get :new
+    assert_response :redirect
+    assert_redirected_to new_admin_account_path
   end
 
   context "With users" do
