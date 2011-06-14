@@ -3,7 +3,7 @@ require "test_helper"
 class Admin::FormHelperTest < ActiveSupport::TestCase
 
   include Admin::FormHelper
-  include Admin::ResourcesHelper
+  # include Admin::ResourcesHelper
 
   should_eventually "verify_belongs_to_field" do
 

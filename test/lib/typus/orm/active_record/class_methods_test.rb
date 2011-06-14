@@ -103,8 +103,8 @@ class ClassMethodsTest < ActiveSupport::TestCase
 
     should "return form fields for Asset" do
       expected = [["caption", :string],
-                  ["dragonfly", :file],
-                  ["dragonfly_required", :file]]
+                  ["dragonfly", :dragonfly],
+                  ["dragonfly_required", :dragonfly]]
 
       assert_equal expected.map { |i| i.first }, Asset.typus_fields_for(:special).keys
       assert_equal expected.map { |i| i.last }, Asset.typus_fields_for(:special).values
