@@ -290,22 +290,18 @@ class ClassMethodsTest < ActiveSupport::TestCase
     assert_equal %w(categories comments views), Post.typus_defaults_for(:relationships)
   end
 
-  context "typus_search_fields" do
+  test "typus_search_fields returns a hash with the search modifiers" do
+    search = ["=id", "^title", "body"]
+    Post.stubs(:typus_defaults_for).with(:search).returns(search)
+    expected = {"body"=>"@", "title"=>"^", "id"=>"="}
+    assert_equal expected, Post.typus_search_fields
+  end
 
-    should "return a hash with the search modifiers" do
-      search = ["=id", "^title", "body"]
-      Post.stubs(:typus_defaults_for).with(:search).returns(search)
-      expected = {"body"=>"@", "title"=>"^", "id"=>"="}
-      assert_equal expected, Post.typus_search_fields
-    end
-
-    should "return and empty hash" do
-      search = []
-      Post.stubs(:typus_defaults_for).with(:search).returns(search)
-      expected = {}
-      assert_equal expected, Post.typus_search_fields
-    end
-
+  test "typus_search_fields returns and empty hash" do
+    search = []
+    Post.stubs(:typus_defaults_for).with(:search).returns(search)
+    expected = {}
+    assert_equal expected, Post.typus_search_fields
   end
 
   context "typus_order_by" do
