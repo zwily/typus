@@ -17,15 +17,6 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = '/admin/categories'
   end
 
-  context "Categories Views" do
-
-    should_eventually "verify form partial can overrided by model" do
-      get :new
-      assert_match "categories#_form.html.erb", @response.body
-    end
-
-  end
-
   context "Categories List" do
 
     setup do
