@@ -36,7 +36,7 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
       @invoice = { :number => "Invoice#0000001", :order_id => @order.id }
 
       assert_difference('Invoice.count') do
-        post :create, { :invoice => @invoice, :resource => "Order", :order_id => @order.id }
+        post :create, :invoice => @invoice, :resource => "Order", :order_id => @order.id, :_saveandassign => true
       end
 
       assert_response :redirect
@@ -58,20 +58,14 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
 
   end
 
-  context "Unrelate" do
+  test "unrelate Invoice from Order" do
+    invoice = Factory(:invoice)
+    order = invoice.order
+    @request.env['HTTP_REFERER'] = "/admin/orders/edit/#{order.id}"
 
-    setup do
-      @invoice = Factory(:invoice)
-      @order = @invoice.order
-      @request.env['HTTP_REFERER'] = "/admin/orders/edit/#{@order.id}"
-    end
-
-    should "work for unrelate Invoice from Order" do
-      post :unrelate, :id => @invoice.id, :resource => 'Order', :resource_id => @order.id
-      assert @order.reload.invoice.nil?
-      assert_equal "Order successfully updated.", flash[:notice]
-    end
-
+    post :unrelate, :id => invoice.id, :resource => 'Order', :resource_id => order.id
+    assert order.reload.invoice.nil?
+    assert_equal "Order successfully updated.", flash[:notice]
   end
 
 end
