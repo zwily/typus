@@ -10,7 +10,7 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
   def render(*args); args; end
 
   setup do
-    @expected = ["admin/helpers/dashboard/resources", { :resources => ["Git", "Status", "WatchDog"] }]
+    @expected = ["helpers/admin/resources/dashboard/resources", { :resources => ["Git", "Status", "WatchDog"] }]
   end
 
   test "resources work for typus_user" do

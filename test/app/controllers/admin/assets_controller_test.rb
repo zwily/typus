@@ -125,7 +125,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
       should "render update with custom layout after an error" do
         post :update, :id => @asset.id, :asset => { :dragonfly_required => nil }, :layout => "admin/headless"
         assert_response :success
-        assert_template "admin/helpers/resources/_errors"
+        assert_template "helpers/admin/resources/resources/_errors"
         assert_template "admin/resources/edit"
         assert_template "admin/headless"
       end

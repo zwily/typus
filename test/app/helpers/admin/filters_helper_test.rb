@@ -13,7 +13,7 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
     # FIXME: Should work without this ...
     setup do
       @resource = Entry
-      @expected = ["admin/helpers/filters/filters",
+      @expected = ["helpers/admin/resources/filters/filters",
                   {:filters=>[{:filter=>"published",
                                :items=>[["Show by published", ""], ["Yes", "true"], ["No", "false"]]}],
                    :hidden_filters=>{}}]
@@ -44,7 +44,7 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
     should "not reject the search param" do
       parameters = {"search"=>"Chunky Bacon"}
 
-      expected = ["admin/helpers/filters/filters",
+      expected = ["helpers/admin/resources/filters/filters",
                  {:filters=>[{:filter=>"published",
                               :items=>[["Show by published", ""], ["Yes", "true"], ["No", "false"]]}],
                   :hidden_filters=>{"search"=>"Chunky Bacon"}}]
@@ -55,7 +55,7 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
     should "not reject applied filters" do
       parameters = {"user_id"=>"1"}
 
-      expected = ["admin/helpers/filters/filters",
+      expected = ["helpers/admin/resources/filters/filters",
                  {:filters=>[{:filter=>"published",
                               :items=>[["Show by published", ""], ["Yes", "true"], ["No", "false"]]}],
                   :hidden_filters=>{"user_id"=>"1"}}]
@@ -66,7 +66,7 @@ class Admin::FiltersHelperTest < ActiveSupport::TestCase
     should "reject applied filter" do
       parameters = {"published"=>"true"}
 
-      expected = ["admin/helpers/filters/filters",
+      expected = ["helpers/admin/resources/filters/filters",
                  {:filters=>[{:filter=>"published",
                               :items=>[["Show by published", ""], ["Yes", "true"], ["No", "false"]]}],
                   :hidden_filters=>{}}]
