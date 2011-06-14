@@ -9,12 +9,8 @@
             <% if (item = @item.send(attribute)) %>
             prePopulate: [ { id: <%= item.id %>, name: "<%= item.to_label %>" } ],
             <% end %>
-            onAdd: function(item) {
-                $("#<%= label %>").val(item.id);
-            },
-            onDelete: function (item) {
-                $("#<%= label %>").val("");
-            }
+            onAdd: function(item) { $("#<%= label %>").val(item.id); },
+            onDelete: function (item) { $("#<%= label %>").val(""); }
         });
     });
   </script>
