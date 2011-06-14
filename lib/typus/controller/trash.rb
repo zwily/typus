@@ -1,3 +1,9 @@
+##
+# This module is designed to work with `rails-trash`. Add it to your `Gemfile`
+# if you have plans to use it:
+#
+#     gem "rails-trash", "~> 1.1.1"
+#
 module Typus
   module Controller
     module Trash
