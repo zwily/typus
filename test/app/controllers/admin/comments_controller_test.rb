@@ -1,11 +1,14 @@
 require "test_helper"
 
-##
-# What's being tested here?
-#
-# - Unrelate "Comment" from "Post" (Post#comments)
-# - Search by "Posts.title" (Post#comments)
-#
+=begin
+
+  What's being tested here?
+
+  - Unrelate "Comment" from "Post" (Post#comments)
+  - Search by "Posts.title" (Post#comments)
+
+=end
+
 class Admin::CommentsControllerTest < ActionController::TestCase
 
   setup do
