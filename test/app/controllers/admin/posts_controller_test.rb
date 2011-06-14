@@ -20,11 +20,6 @@ class Admin::PostsControllerTest < ActionController::TestCase
     @post = Factory(:post)
   end
 
-  teardown do
-    Post.delete_all
-    TypusUser.delete_all
-  end
-
   context "Filters" do
 
     should "render index with accepted params" do

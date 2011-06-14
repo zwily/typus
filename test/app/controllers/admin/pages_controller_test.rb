@@ -20,11 +20,6 @@ class Admin::PagesControllerTest < ActionController::TestCase
     Factory(:page, :status => false)
   end
 
-  teardown do
-    Page.delete_all
-    TypusUser.delete_all
-  end
-
   test "get :index returns scoped results" do
     get :index
     assert_equal Page.all, assigns(:items)

@@ -17,10 +17,6 @@ class Admin::ViewsControllerTest < ActionController::TestCase
     Factory(:view)
   end
 
-  teardown do
-    reset_session
-  end
-
   should_eventually "get :index returns only views on the current_context" do
     get :index
     assert_response :success

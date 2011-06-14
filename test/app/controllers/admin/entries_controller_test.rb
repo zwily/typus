@@ -16,11 +16,6 @@ class Admin::EntriesControllerTest < ActionController::TestCase
     @entry = Factory(:entry)
   end
 
-  teardown do
-    Entry.delete_all
-    TypusUser.delete_all
-  end
-
   test "get index" do
     get :index
     assert_response :success

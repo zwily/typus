@@ -15,6 +15,11 @@ class ActiveSupport::TestCase
   self.use_transactional_fixtures = true
   self.use_instantiated_fixtures  = false
 
+  teardown do
+    reset_session
+    [Entry, Page, Post, TypusUser].each { |i| i.delete_all }
+  end
+
   def admin_sign_in
     @typus_user = Factory(:typus_user)
     set_session

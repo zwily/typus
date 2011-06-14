@@ -72,10 +72,6 @@ class Admin::DashboardControllerTest < ActionController::TestCase
       get :show
     end
 
-    teardown do
-      TypusUser.delete_all
-    end
-
     should "render dashboard" do
       assert_response :success
       assert_template "show"
@@ -110,10 +106,6 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
     setup do
       admin_sign_in
-    end
-
-    teardown do
-      TypusUser.delete_all
     end
 
     should "block users_on_the_fly" do
