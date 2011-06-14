@@ -13,7 +13,7 @@ class Admin::BaseControllerTest < ActionController::TestCase
   test "user_guide is not displayed when user is not logged in" do
     get :user_guide
     assert_response :redirect
-    assert_redirected_to new_admin_session_path # (:back_to => '/admin/user_guide')
+    assert_redirected_to new_admin_session_path
   end
 
   test "user_guide display" do
