@@ -56,19 +56,17 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
 
   end
 
+  ##
+  # We are in:
+  #
+  #   /admin/posts/edit/1
+  #
+  # And we see a list of comments under it:
+  #
+  #   /admin/categories/unrelate/1?resource=Post&resource_id=1
+  #   /admin/categories/unrelate/2?resource=Post&resource_id=1
+  #
   test "unrelate (has_and_belongs_to_many)" do
-
-    ##
-    # We are in:
-    #
-    #   /admin/posts/edit/1
-    #
-    # And we see a list of comments under it:
-    #
-    #   /admin/categories/unrelate/1?resource=Post&resource_id=1
-    #   /admin/categories/unrelate/2?resource=Post&resource_id=1
-    ##
-
     category = Factory(:category)
     category.posts << Factory(:post)
     @request.env['HTTP_REFERER'] = "/admin/dashboard"
