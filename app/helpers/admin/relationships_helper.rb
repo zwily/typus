@@ -107,7 +107,7 @@ module Admin
 
       # TODO: Find a cleaner way to add these actions ...
       @resource_actions = [["Edit", {:action=>"edit"}, {}],
-                           ["Trash", {:resource_id=>@item.id, :resource=>@resource.model_name, :action=>"destroy"}, {:confirm=>"Trash?"}]]
+                           ["Trash", { :resource_id => @item.id, :resource => @resource.model_name, :action => "destroy" }, { :confirm => "Trash?" }]]
 
       options = { :resource_id => nil, @reflection.foreign_key => @item.id }
 
