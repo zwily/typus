@@ -82,15 +82,17 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "be able to update his profile" do
-      post :update, :id => @typus_user.id, :typus_user => { :role => 'editor' }, :_save => true
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'editor' }, :_continue => true
       assert_response :redirect
-      assert_redirected_to "/admin/typus_users"
+      assert_redirected_to "/admin/typus_users/edit/#{@typus_user.id}"
       assert_equal "Typus user successfully updated.", flash[:notice]
     end
 
     should "not be able to change his role" do
-      post :update, :id => @typus_user.id, :typus_user => { :role => 'admin' }, :_save => true
-      assert_response :unprocessable_entity
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'admin' }, :_continue => true
+      assert_response :redirect
+      assert_redirected_to "/admin/typus_users/edit/#{@typus_user.id}"
+      assert_equal "editor", @typus_user.role
     end
 
     should "not be able to destroy his profile" do
