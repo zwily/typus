@@ -5,21 +5,21 @@ module Admin::Resources::FiltersHelper
 
     return if typus_filters.empty?
 
-    filters = typus_filters.map do |key, value|
-                { :filter => set_filter(key, value), :items => send("#{value}_filter", key) }
-              end
+    locals = {}
 
-    hidden_filters = params.dup
+    locals[:filters] = typus_filters.map do |key, value|
+                         { :filter => set_filter(key, value), :items => send("#{value}_filter", key) }
+                       end
+
+    locals[:hidden_filters] = params.dup
 
     # Remove default params.
     rejections = %w(controller action locale utf8 sort_order order_by)
-    hidden_filters.delete_if { |k, v| rejections.include?(k) }
+    locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
 
     # Remove also custom params.
-    rejections = filters.map { |f| f[:filter] }
-    hidden_filters.delete_if { |k, v| rejections.include?(k) }
-
-    locals = { :filters => filters, :hidden_filters => hidden_filters }
+    rejections = locals[:filters].map { |f| f[:filter] }
+    locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
 
     render "helpers/admin/resources/filters/filters", locals
   end
