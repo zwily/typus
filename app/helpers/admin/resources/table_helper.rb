@@ -8,7 +8,7 @@ module Admin::Resources::TableHelper
                :headers => table_header(model, fields),
                :association_name => association_name }
 
-    render "helpers/admin/resources/table/table", locals
+    render "helpers/admin/resources/table", locals
   end
 
   def table_header(model, fields, params = params)
