@@ -1,4 +1,5 @@
 require 'typus/orm/active_record/user/instance_methods'
+require 'typus/orm/active_record/user/class_methods'
 require 'bcrypt'
 
 module Typus
@@ -9,6 +10,11 @@ module Typus
         module ClassMethods
 
           def has_admin
+
+            extend Typus::Orm::ActiveRecord::User::ClassMethods
+
+            include InstanceMethodsOnActivation
+            include Typus::Orm::ActiveRecord::User::InstanceMethods
 
             attr_reader   :password
             attr_accessor :password_confirmation
@@ -21,22 +27,11 @@ module Typus
 
             validate :password_must_be_strong
 
-            include InstanceMethodsOnActivation
-            include Typus::Orm::ActiveRecord::User::InstanceMethods
-
             serialize :preferences
 
             before_save :set_token
 
-            def self.role
-              Typus::Configuration.roles.keys.sort
-            end
-
-            def self.locale
-              Typus.locales
-            end
-
-            def self.authenticate(email, password)
+            def authenticate(email, password)
               user = find_by_email_and_status(email, true)
               user && user.authenticate(password) ? user : nil
             end

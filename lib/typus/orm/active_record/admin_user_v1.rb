@@ -1,4 +1,5 @@
 require 'typus/orm/active_record/user/instance_methods'
+require 'typus/orm/active_record/user/class_methods'
 
 module Typus
   module Orm
@@ -8,6 +9,11 @@ module Typus
         module ClassMethods
 
           def enable_as_typus_user
+
+            extend Typus::Orm::ActiveRecord::User::ClassMethods
+
+            include InstanceMethods
+            include Typus::Orm::ActiveRecord::User::InstanceMethods
 
             attr_accessor :password
 
@@ -31,24 +37,6 @@ module Typus
               user = find_by_email_and_status(email, true)
               user && user.authenticated?(password) ? user : nil
             end
-
-            def generate(*args)
-              options = args.extract_options!
-              options[:password] ||= Typus.password
-              options[:role] ||= Typus.master_role
-              new :email => options[:email], :password => options[:password], :role => options[:role]
-            end
-
-            def role
-              Typus::Configuration.roles.keys.sort
-            end
-
-            def locale
-              Typus.locales
-            end
-
-            include InstanceMethods
-            include Typus::Orm::ActiveRecord::User::InstanceMethods
 
           end
 
