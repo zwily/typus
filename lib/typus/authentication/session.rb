@@ -53,9 +53,7 @@ module Typus
           # Edit other items is not allowed unless current user is root
           # and is not the current user.
           not_allowed if admin_user.is_not_root? && !is_current_user
-        when 'destroy'
-          not_allowed if admin_user.is_not_root? || current_user_is_root
-        when 'toggle'
+        when 'toggle', 'destroy'
           not_allowed if admin_user.is_not_root? || current_user_is_root
         when 'update'
           # Admin can update himself except setting the status to false!. Other
