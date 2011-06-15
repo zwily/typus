@@ -12,7 +12,6 @@ module Typus
 
       def deauthenticate
         session[:typus_user_id] = nil
-        ::I18n.locale = ::I18n.default_locale
         redirect_to new_admin_session_path
       end
 

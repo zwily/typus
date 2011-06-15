@@ -16,6 +16,12 @@ class Admin::SessionControllerTest < ActionController::TestCase
     assert_redirected_to new_admin_account_path
   end
 
+  test "get new always sets locale to Typus::I18n.default_locale" do
+    I18n.locale = :jp
+    get :new
+    assert_equal :en, I18n.locale
+  end
+
   context "With users" do
 
     setup do
