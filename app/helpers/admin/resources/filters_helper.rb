@@ -25,15 +25,12 @@ module Admin::Resources::FiltersHelper
   end
 
   def set_filter(key, value)
-    case value
-    when :belongs_to
-      att_assoc = @resource.reflect_on_association(key.to_sym)
-      class_name = att_assoc.options[:class_name] || key.capitalize.camelize
-      resource = class_name.typus_constantize
-      att_assoc.foreign_key
-    else
-      key
-    end
+    return key unless value == :belongs_to
+
+    att_assoc = @resource.reflect_on_association(key.to_sym)
+    class_name = att_assoc.options[:class_name] || key.capitalize.camelize
+    resource = class_name.typus_constantize
+    att_assoc.foreign_key
   end
 
   def predefined_filters
