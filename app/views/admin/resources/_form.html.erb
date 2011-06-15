@@ -10,17 +10,6 @@
 
   <fieldset class="buttons">
     <ol>
-
-      <%
-        save_options = if params[:layout] == 'admin/headless' && params[:resource]
-                         { "_saveandassign" => "Save and assign" }
-                       elsif params[:layout] == 'admin/headless'
-                         { "_continue" => "Save and continue editing" }
-                       else
-                         { "_addanother" => "Save and add another", "_continue" => "Save and continue editing", "_save" => "Save" }
-                       end
-      %>
-
       <% save_options.each do |key, value| %>
         <li><%= submit_tag Typus::I18n.t(value), :name => key, :onclick => "setConfirmUnload(false);", :disable_with => Typus::I18n.t(value) %></li>
       <% end %>

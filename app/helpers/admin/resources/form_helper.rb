@@ -45,4 +45,20 @@ module Admin::Resources::FormHelper
     render "helpers/admin/resources/errors"
   end
 
+  def save_options
+    if Typus.user_class == @resource && admin_user.is_not_root?
+      options = { "_continue" => "Save and continue editing" }
+    end
+
+    if params[:layout] == 'admin/headless' && params[:resource]
+      options = { "_saveandassign" => "Save and assign" }
+    end
+
+    if params[:layout] == 'admin/headless'
+      options = { "_continue" => "Save and continue editing" }
+    end
+
+    options || { "_addanother" => "Save and add another", "_continue" => "Save and continue editing", "_save" => "Save" }
+  end
+
 end
