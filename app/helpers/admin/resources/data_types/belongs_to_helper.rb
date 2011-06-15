@@ -63,4 +63,20 @@ module Admin::Resources::DataTypes::BelongsToHelper
     end
   end
 
+  def display_belongs_to(item, attribute)
+    data = item.send(attribute)
+    link_to data.to_label, { :controller => data.class.to_resource,
+                             :action => data.class.typus_options_for(:default_action_on_item),
+                             :id => data.id }
+  end
+
+  def belongs_to_filter(filter)
+    att_assoc = @resource.reflect_on_association(filter.to_sym)
+    class_name = att_assoc.options[:class_name] || filter.capitalize.camelize
+    resource = class_name.typus_constantize
+
+    items = [[Typus::I18n.t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize), ""]]
+    items += resource.order(resource.typus_order_by).map { |v| [v.to_label, v.id] }
+  end
+
 end

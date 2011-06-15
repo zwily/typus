@@ -8,50 +8,6 @@ module Admin::Resources::RelationshipsHelper
     @association_name = @reflection.name.to_s
   end
 
-  def typus_form_has_many(field)
-    setup_relationship(field)
-
-    options = @reflection.through_reflection ? {} : { @reflection.foreign_key => @item.id }
-
-    count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
-
-    build_pagination
-
-    # If we are on a through_reflection set the association name!
-    @resource_actions = if @reflection.through_reflection
-                          [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
-                           ["Unrelate", { :resource_id => @item.id,
-                                          :resource => @resource.model_name,
-                                          :action => "unrelate",
-                                          :association_name => @association_name},
-                                        { :confirm => "Unrelate?" } ]]
-                        else
-                          [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
-                           ["Trash", { :resource_id => @item.id,
-                                       :resource => @resource.model_name,
-                                       :action => "destroy" },
-                                     { :confirm => "Trash?" } ]]
-                         end
-
-    locals = { :association_name => @association_name, :add_new => build_add_new(options), :table => build_relationship_table }
-    render "admin/templates/has_n", locals
-  end
-
-  def typus_form_has_and_belongs_to_many(field)
-    setup_relationship(field)
-    build_pagination
-
-    # TODO: Find a cleaner way to add these actions ...
-    @resource_actions = [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
-                         ["Unrelate", { :resource_id => @item.id,
-                                        :resource => @resource.model_name,
-                                        :action => "unrelate"},
-                                      { :confirm =>"Unrelate?" }]]
-
-    locals = { :association_name => @association_name, :add_new => build_add_new, :table => build_relationship_table }
-    render "admin/templates/has_n", locals
-  end
-
   def build_pagination
     items_per_page = @model_to_relate.typus_options_for(:per_page)
     data = @item.send(@field).order(@model_to_relate.typus_order_by).where(set_conditions)
@@ -94,26 +50,6 @@ module Admin::Resources::RelationshipsHelper
     if @model_to_relate.typus_options_for(:only_user_items) && admin_user.is_not_root?
       { Typus.user_foreign_key => admin_user }
     end
-  end
-
-  def typus_form_has_one(field)
-    setup_relationship(field)
-
-    @items = Array.new
-    if item = @item.send(field)
-      @items << item
-    end
-
-    # TODO: Find a cleaner way to add these actions ...
-    @resource_actions = [["Edit", {:action=>"edit"}, {}],
-                         ["Trash", { :resource_id => @item.id, :resource => @resource.model_name, :action => "destroy" }, { :confirm => "Trash?" }]]
-
-    options = { :resource_id => nil, @reflection.foreign_key => @item.id }
-
-    render "admin/templates/has_one",
-           :association_name => @association_name,
-           :add_new => @items.empty? ? build_add_new(options) : nil,
-           :table => build_relationship_table
   end
 
 end

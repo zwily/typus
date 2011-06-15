@@ -62,47 +62,4 @@ module Admin::Resources::TableHelper
     end.compact.join(" / ").html_safe
   end
 
-  def table_has_and_belongs_to_many_field(attribute, item)
-    item.send(attribute).map { |i| i.to_label }.join(", ")
-  end
-
-  alias :table_has_many_field :table_has_and_belongs_to_many_field
-
-  def table_text_field(attribute, item)
-    (raw_content = item.send(attribute)).present? ? truncate(raw_content) : "&mdash;".html_safe
-  end
-
-  def table_generic_field(attribute, item)
-    (raw_content = item.send(attribute)).present? ? raw_content : "&mdash;".html_safe
-  end
-
-  alias :table_float_field :table_generic_field
-  alias :table_integer_field :table_generic_field
-  alias :table_decimal_field :table_generic_field
-  alias :table_virtual_field :table_generic_field
-  alias :table_string_field :table_generic_field
-
-  def table_datetime_field(attribute, item)
-    if field = item.send(attribute)
-      I18n.localize(field, :format => item.class.typus_date_format(attribute))
-    end
-  end
-
-  alias :table_date_field :table_datetime_field
-  alias :table_time_field :table_datetime_field
-  alias :table_timestamp_field :table_datetime_field
-
-  def table_boolean_field(attribute, item)
-    status = item.send(attribute)
-    boolean_assoc = item.class.typus_boolean(attribute)
-    human_boolean = (status ? boolean_assoc.rassoc("true") : boolean_assoc.rassoc("false")).first
-
-    options = { :controller => "/admin/#{item.class.to_resource}",
-                :action => "toggle",
-                :id => item.id,
-                :field => attribute.gsub(/\?$/, '') }
-    confirm = Typus::I18n.t("Change %{attribute}?", :attribute => item.class.human_attribute_name(attribute).downcase)
-    link_to Typus::I18n.t(human_boolean), options, :confirm => confirm
-  end
-
 end

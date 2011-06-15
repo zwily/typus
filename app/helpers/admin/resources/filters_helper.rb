@@ -47,44 +47,6 @@ module Admin::Resources::FiltersHelper
     end
   end
 
-  def belongs_to_filter(filter)
-    att_assoc = @resource.reflect_on_association(filter.to_sym)
-    class_name = att_assoc.options[:class_name] || filter.capitalize.camelize
-    resource = class_name.typus_constantize
-
-    items = [[Typus::I18n.t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize), ""]]
-    items += resource.order(resource.typus_order_by).map { |v| [v.to_label, v.id] }
-  end
-
-  def has_many_filter(filter)
-    att_assoc = @resource.reflect_on_association(filter.to_sym)
-    class_name = att_assoc.options[:class_name] || filter.classify
-    resource = class_name.typus_constantize
-
-    items = [[Typus::I18n.t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize), ""]]
-    items += resource.order(resource.typus_order_by).map { |v| [v.to_label, v.id] }
-  end
-
-  def date_filter(filter)
-    values = %w(today last_few_days last_7_days last_30_days)
-    items = [[Typus::I18n.t("Show all dates"), ""]]
-    items += values.map { |v| [Typus::I18n.t(v.humanize), v] }
-  end
-
-  def boolean_filter(filter)
-    values  = @resource.typus_boolean(filter)
-    items = [[Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase), ""]]
-    items += values.map { |k, v| [Typus::I18n.t(k.humanize), v] }
-  end
-
-  def string_filter(filter)
-    values = set_context.send(filter.to_s).to_a
-
-    items = [[Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase), ""]]
-    array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
-    items += array
-  end
-
   def predefined_filters
     @predefined_filters ||= []
   end
