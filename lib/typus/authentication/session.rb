@@ -41,10 +41,11 @@ module Typus
       # It works on models, so its available on the `resources_controller`.
       #++
       def check_if_user_can_perform_action_on_resources
-        if @item.is_a?(Typus.user_class)
+        case @item
+        when Typus.user_class
           check_if_user_can_perform_action_on_user
-        elsif admin_user.cannot?(params[:action], @resource.model_name)
-          not_allowed
+        else
+          not_allowed if admin_user.cannot?(params[:action], @resource.model_name)
         end
       end
 
