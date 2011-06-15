@@ -23,6 +23,22 @@ module Typus
       end
       private :set_headless_layout
 
+      def headless_mode_is_enabled?
+        params[:layout] == "admin/headless" && params[:resource_action]
+      end
+      private :headless_mode_is_enabled?
+
+      def set_headless_resource_actions
+        body = params[:resource_action].titleize
+        url = { :controller => params[:resource].tableize,
+                :action => params[:resource_action],
+                :resource => params[:resource],
+                :resource_id => params[:resource_id],
+                :return_to => params[:return_to] }
+        options = { :target => "_parent" }
+        add_resource_action(body, url, options)
+      end
+
     end
   end
 end

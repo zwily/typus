@@ -26,15 +26,8 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       format.html do
-        if params[:layout] == "admin/headless" && params[:resource_action]
-          body = params[:resource_action].titleize
-          url = { :controller => params[:resource].tableize,
-                  :action => params[:resource_action],
-                  :resource => params[:resource],
-                  :resource_id => params[:resource_id],
-                  :return_to => params[:return_to] }
-          options = { :target => "_parent" }
-          add_resource_action(body, url, options)
+        if headless_mode_is_enabled?
+          set_headless_resource_actions
         else
           add_resource_action(default_action.titleize, {:action => default_action}, {})
           add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
