@@ -12,4 +12,15 @@ module Admin::Resources::DisplayHelper
     end
   end
 
+  def typus_relationships
+    String.new.tap do |html|
+      @resource.typus_defaults_for(:relationships).each do |relationship|
+        association = @resource.reflect_on_association(relationship.to_sym)
+        next if association.macro == :belongs_to
+        next if admin_user.cannot?('read', association.class_name.typus_constantize)
+        html << send("typus_form_#{association.macro}", relationship)
+      end
+    end.html_safe
+  end
+
 end

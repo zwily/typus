@@ -20,21 +20,6 @@ module Admin::Resources::FormHelper
     end.html_safe
   end
 
-  def display_errors
-    render "helpers/admin/resources/errors"
-  end
-
-  def typus_relationships
-    String.new.tap do |html|
-      @resource.typus_defaults_for(:relationships).each do |relationship|
-        association = @resource.reflect_on_association(relationship.to_sym)
-        next if association.macro == :belongs_to
-        next if admin_user.cannot?('read', association.class_name.typus_constantize)
-        html << send("typus_form_#{association.macro}", relationship)
-      end
-    end.html_safe
-  end
-
   def typus_template_field(attribute, template, form)
     options = { :start_year => @resource.typus_options_for(:start_year),
                 :end_year => @resource.typus_options_for(:end_year),
@@ -54,6 +39,10 @@ module Admin::Resources::FormHelper
 
   def attribute_disabled?(attribute)
     @resource.protected_attributes.include?(attribute)
+  end
+
+  def display_errors
+    render "helpers/admin/resources/errors"
   end
 
 end
