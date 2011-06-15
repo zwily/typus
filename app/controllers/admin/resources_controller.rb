@@ -97,7 +97,8 @@ class Admin::ResourcesController < Admin::BaseController
     attributes = params[:attribute] ? { params[:attribute] => nil } : params[@object_name]
 
     respond_to do |format|
-      if @item.update_attributes(attributes)
+      role = admin_user.is_root? ? :admin : :default
+      if @item.update_attributes(attributes, :as => role)
         set_attributes_on_update
         format.html { redirect_on_success }
         format.json { render :json => @item }
