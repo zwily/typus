@@ -4,8 +4,7 @@ require "test_helper"
 
   What's being tested here?
 
-    - Admin::ResourcesController
-    - Typus::Controller::Trash (Which probably shoould be moved somewhere else)
+    - CRUD
 
 =end
 
