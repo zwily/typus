@@ -7,13 +7,7 @@ module Typus
       include Base
 
       def authenticate
-        if session[:typus_user_id]
-          admin_user
-        else
-          # back_to = request.env['PATH_INFO'] unless [root_path].include?(request.env['PATH_INFO'])
-          # redirect_to new_session_path(:back_to => back_to)
-          redirect_to new_admin_session_path
-        end
+        session[:typus_user_id] ? admin_user : redirect_to(new_admin_session_path)
       end
 
       def deauthenticate
