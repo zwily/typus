@@ -1,9 +1,5 @@
 module Admin::Resources::ListHelper
 
-  def resources_actions
-    @resources_actions ||= []
-  end
-
   def list_actions
     resources_actions.map do |body, url, options|
       if admin_user.can?(url[:action], @resource.name)

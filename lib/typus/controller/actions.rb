@@ -9,6 +9,7 @@ module Typus
 
       def self.included(base)
         base.helper_method :resource_actions
+        base.helper_method :resources_actions
       end
 
       protected
@@ -47,6 +48,10 @@ module Typus
         @resource_actions = @resource_actions.concat([args]) unless args.empty?
       end
 
+      def resource_actions
+        @resource_actions ||= []
+      end
+
       ##
       # @resources_actions is used to build a list of custom actions which will
       # be appended beside "<h2></h2>" all the actions.
@@ -75,8 +80,8 @@ module Typus
         @resources_actions = @resources_actions.concat([args]) unless args.empty?
       end
 
-      def resource_actions
-        @resource_actions ||= []
+      def resources_actions
+        @resources_actions ||= []
       end
 
     end
