@@ -26,7 +26,7 @@ module Admin::Resources::DataTypes::PaperclipHelper
 
     styles = data.styles.keys
     if data.content_type =~ /^image\/.+/ && styles.include?(Typus.file_preview) && styles.include?(Typus.file_thumbnail)
-      render "admin/templates/file/paperclip_preview",
+      render "admin/templates/paperclip_preview",
              :preview => data.url(Typus.file_preview, false),
              :thumb => data.url(Typus.file_thumbnail, false),
              :options => options

@@ -25,7 +25,7 @@ module Admin::Resources::DataTypes::DragonflyHelper
     return unless data
 
     if data.mime_type =~ /^image\/.+/
-      render "admin/templates/file/dragonfly_preview",
+      render "admin/templates/dragonfly_preview",
              :preview => data.process(:thumb, Typus.image_preview_size).url,
              :thumb => data.process(:thumb, Typus.image_thumb_size).url,
              :options => options
