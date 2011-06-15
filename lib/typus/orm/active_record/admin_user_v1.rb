@@ -33,7 +33,7 @@ module Typus
 
             serialize :preferences
 
-            def authenticate(email, password)
+            def self.authenticate(email, password)
               user = find_by_email_and_status(email, true)
               user && user.authenticated?(password) ? user : nil
             end

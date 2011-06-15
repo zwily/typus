@@ -56,9 +56,9 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "be able to update other users role" do
-      post :update, :id => @typus_user_editor.id, :typus_user => { :role => 'admin' }
+      post :update, :id => @typus_user_editor.id, :typus_user => { :role => 'admin' }, :_save => true
       assert_response :redirect
-      assert_redirected_to "/admin/typus_users/edit/#{@typus_user_editor.id}"
+      assert_redirected_to "/admin/typus_users"
       assert_equal "Typus user successfully updated.", flash[:notice]
     end
 
@@ -82,14 +82,14 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "be able to update his profile" do
-      post :update, :id => @typus_user.id, :typus_user => { :role => 'editor' }
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'editor' }, :_save => true
       assert_response :redirect
-      assert_redirected_to "/admin/typus_users/edit/#{@typus_user.id}"
+      assert_redirected_to "/admin/typus_users"
       assert_equal "Typus user successfully updated.", flash[:notice]
     end
 
     should "not be able to change his role" do
-      post :update, :id => @typus_user.id, :typus_user => { :role => 'admin' }
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'admin' }, :_save => true
       assert_response :unprocessable_entity
     end
 
@@ -141,10 +141,10 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "be able to update his profile" do
-      post :update, :id => @typus_user.id, :typus_user => { :role => 'designer', :email => 'designer@withafancydomain.com' }
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'designer', :email => 'designer@withafancydomain.com' }, :_save => true
 
       assert_response :redirect
-      assert_redirected_to "/admin/typus_users/edit/#{@typus_user.id}"
+      assert_redirected_to "/admin/typus_users"
       assert_equal "Typus user successfully updated.", flash[:notice]
       assert_equal "designer@withafancydomain.com", assigns(:item).email
     end

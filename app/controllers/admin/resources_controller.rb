@@ -63,7 +63,8 @@ class Admin::ResourcesController < Admin::BaseController
   # relationship between these items.
   #
   def create
-    @item = @resource.new(params[@object_name])
+    @item = @resource.new
+    @item.assign_attributes(params[@object_name], :as => :admin)
 
     set_attributes_on_create
 

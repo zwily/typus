@@ -65,7 +65,13 @@ module Typus
           # Admin can update himself except setting the status to false!. Other
           # users can update their profile as the attributes (role & status)
           # are protected.
-          not_allowed if admin_user.is_root? && is_current_user && @item.status == false
+          if admin_user.is_root? && is_current_user
+            not_allowed
+          end
+
+          if admin_user.is_not_root? && !is_current_user
+            not_allowed
+          end
         end
       end
 
