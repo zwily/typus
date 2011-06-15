@@ -1,4 +1,4 @@
-<% if params[:layout] == 'admin/headless' %>
+<% if headless_mode? %>
 
   <%
      attachment, caption = @item.dragonfly_required, @item.caption

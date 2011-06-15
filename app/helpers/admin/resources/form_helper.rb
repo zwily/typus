@@ -55,11 +55,11 @@ module Admin::Resources::FormHelper
       options = { "_continue" => "Save and continue editing" }
     end
 
-    if params[:layout] == 'admin/headless' && params[:resource]
+    if headless_mode? && params[:resource]
       options = { "_saveandassign" => "Save and assign" }
     end
 
-    if params[:layout] == 'admin/headless'
+    if headless_mode?
       options = { "_continue" => "Save and continue editing" }
     end
 

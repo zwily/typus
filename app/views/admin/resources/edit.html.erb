@@ -12,7 +12,7 @@
   <small><%= list_actions %></small>
 </h2>
 
-<% if flash[:notice] && params[:layout] == 'admin/headless' %>
+<% if flash[:notice] && headless_mode? %>
   <script>
     $(document).ready(function() { parent.location.reload(); });
   </script>
@@ -28,4 +28,4 @@
 
 <%= render :partial => 'form', :locals => { :options => options, :button => button } %>
 
-<%= typus_relationships unless params[:layout] == 'admin/headless' %>
+<%= typus_relationships unless headless_mode? %>

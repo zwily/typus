@@ -5,6 +5,7 @@ module Typus
       def self.included(base)
         base.before_filter :set_resources_action_for_headless_on_index, :only => [:index]
         base.before_filter :set_resources_action_for_headless, :only => [:new, :create, :edit, :show]
+        base.helper_method :headless_mode?
         base.layout :set_headless_layout
       end
 
@@ -24,7 +25,7 @@ module Typus
       private :set_headless_layout
 
       def headless_mode_with_custom_action_is_enabled?
-        params[:layout] == "admin/headless" && params[:resource_action]
+        headless_mode? && params[:resource_action]
       end
       private :headless_mode_with_custom_action_is_enabled?
 
@@ -37,6 +38,10 @@ module Typus
                 :return_to => params[:return_to] }
         options = { :target => "_parent" }
         add_resource_action(body, url, options)
+      end
+
+      def headless_mode?
+        params[:layout] == "admin/headless"
       end
 
     end
