@@ -62,19 +62,6 @@ module Admin::Resources::TableHelper
     end.compact.join(" / ").html_safe
   end
 
-  def table_belongs_to_field(attribute, item)
-    if att_value = item.send(attribute)
-      action = item.send(attribute).class.typus_options_for(:default_action_on_item)
-      if admin_user.can?(action, att_value.class.name)
-        link_to att_value.to_label, :controller => "/admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id
-      else
-        att_value.to_label
-      end
-    else
-      "&mdash;".html_safe
-    end
-  end
-
   def table_has_and_belongs_to_many_field(attribute, item)
     item.send(attribute).map { |i| i.to_label }.join(", ")
   end
