@@ -46,10 +46,6 @@ module Admin::Resources::TableHelper
     fields.map { |k, v| send("table_#{v}_field", k, item) }
   end
 
-  def resource_actions
-    @resource_actions ||= []
-  end
-
   def table_actions(model, item, association_name = nil)
     resource_actions.map do |body, url, options, proc|
       if admin_user.can?(url[:action], model.name)

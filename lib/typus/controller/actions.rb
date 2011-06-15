@@ -7,6 +7,10 @@ module Typus
   module Controller
     module Actions
 
+      def self.included(base)
+        base.helper_method :resource_actions
+      end
+
       protected
 
       ##
@@ -69,6 +73,10 @@ module Typus
       def append_resources_action(*args)
         @resources_actions ||= []
         @resources_actions = @resources_actions.concat([args]) unless args.empty?
+      end
+
+      def resource_actions
+        @resource_actions ||= []
       end
 
     end
