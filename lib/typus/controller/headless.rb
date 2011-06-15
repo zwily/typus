@@ -23,10 +23,10 @@ module Typus
       end
       private :set_headless_layout
 
-      def headless_mode_is_enabled?
+      def headless_mode_with_custom_action_is_enabled?
         params[:layout] == "admin/headless" && params[:resource_action]
       end
-      private :headless_mode_is_enabled?
+      private :headless_mode_with_custom_action_is_enabled?
 
       def set_headless_resource_actions
         body = params[:resource_action].titleize

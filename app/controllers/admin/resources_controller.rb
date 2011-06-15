@@ -26,7 +26,7 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       format.html do
-        if headless_mode_is_enabled?
+        if headless_mode_with_custom_action_is_enabled?
           set_headless_resource_actions
         else
           add_resource_action(default_action.titleize, {:action => default_action}, {})
