@@ -6,13 +6,12 @@ Asset:
     new: dragonfly, dragonfly_required, paperclip, paperclip_required
   application: CRUD Extended
 
-Category:
+Case:
   fields:
-    default: name, position
-    form: name, permalink, position
-  order_by: position
+    default: title
+    form: title, content
   application: CRUD Extended
-  search: name
+  relationships: categories
 
 Comment:
   fields:
@@ -65,4 +64,15 @@ Post:
   search: title
   order_by: title, -created_at
   export: csv, xml
+  application: CRUD Extended
+
+Article::Entry:
+  fields:
+    default: title, published
+    form: title, content, published
+    options:
+      booleans:
+        published: ["Yes", "No"]
+  search: title
+  filters: published
   application: CRUD Extended

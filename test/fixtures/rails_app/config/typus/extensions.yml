@@ -1,3 +1,11 @@
+Category:
+  fields:
+    default: name, position
+    form: name, permalink, position
+  order_by: position
+  application: Extensions
+  search: name
+
 EntryBulk:
   fields:
     default: title, published
