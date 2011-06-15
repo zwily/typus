@@ -2,18 +2,23 @@
 
   <%= block.call %>
 
-  <div id="filters">
-    <ul class="predefined_filters">
-      <li>
-        <select id="bulk_action" name="batch_action">
-          <option value="" selected="selected">Bulk actions</option>
-          <option value="bulk_destroy">Move to Trash</option>
-          <option value="bulk_restore">Restore from Trash</option>
-        </select>
-      </li>
+  <% if bulk_actions.any? %>
 
-      <li><%= submit_tag Typus::I18n.t("Apply") %></li>
-    </ul>
-  </div>
+    <div id="filters">
+      <ul class="predefined_filters">
+        <li>
+          <select id="bulk_action" name="batch_action">
+            <option value="" selected="selected">Bulk actions</option>
+            <% bulk_actions.each do |name, action| %>
+              <option value="<%= action %>"><%= Typus::I18n.t(name) %></option>
+            <% end %>
+          </select>
+        </li>
+
+        <li><%= submit_tag Typus::I18n.t("Apply") %></li>
+      </ul>
+    </div>
+
+  <% end %>
 
 <% end %>
