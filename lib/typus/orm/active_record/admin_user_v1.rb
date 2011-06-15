@@ -10,7 +10,8 @@ module Typus
           def enable_as_typus_user
 
             attr_accessor :password
-            attr_protected :status
+
+            attr_protected :role, :status
 
             validates :email, :presence => true, :uniqueness => true, :format => { :with => Typus::Regex::Email }
 
