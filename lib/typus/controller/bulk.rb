@@ -4,7 +4,6 @@ module Typus
 
       def self.included(base)
         base.helper_method :bulk_actions
-        base.before_filter :set_predefined_filter_for_trash, :only => [:index, :trash]
         base.before_filter :set_bulk_action, :only => [:index]
         base.before_filter :set_bulk_action_for_trash, :only => [:trash]
       end
