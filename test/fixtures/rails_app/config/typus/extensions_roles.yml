@@ -1,2 +1,3 @@
 admin:
+  EntryBulk: all
   EntryTrash: all

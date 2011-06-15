@@ -17,6 +17,11 @@ Factory.define :entry do |f|
   f.content "Body of the entry"
 end
 
+Factory.define :entry_bulk do |f|
+  f.sequence(:title) { |n| "EntryBulk##{n}" }
+  f.content "Body of the entry"
+end
+
 Factory.define :entry_trash do |f|
   f.sequence(:title) { |n| "EntryTrash##{n}" }
   f.content "Body of the entry"
