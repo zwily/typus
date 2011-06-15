@@ -33,8 +33,4 @@ module Admin::Resources::FiltersHelper
     att_assoc.foreign_key
   end
 
-  def predefined_filters
-    @predefined_filters ||= []
-  end
-
 end
