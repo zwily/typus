@@ -46,25 +46,22 @@ module Typus
       #++
       def check_if_user_can_perform_action_on_user
         is_current_user = (admin_user == @item)
+        current_user_is_root = admin_user.is_root? && is_current_user
 
         case params[:action]
-        when 'edit', 'destroy'
-          # Edit/Destroy other items is not allowed unless current user is root
+        when 'edit'
+          # Edit other items is not allowed unless current user is root
           # and is not the current user.
           not_allowed if admin_user.is_not_root? && !is_current_user
+        when 'destroy'
+          not_allowed if admin_user.is_not_root? || current_user_is_root
         when 'toggle'
-          not_allowed if admin_user.is_not_root? || (admin_user.is_root? && is_current_user)
+          not_allowed if admin_user.is_not_root? || current_user_is_root
         when 'update'
           # Admin can update himself except setting the status to false!. Other
           # users can update their profile as the attributes (role & status)
           # are protected.
-          if admin_user.is_root? && is_current_user
-            not_allowed
-          end
-
-          if admin_user.is_not_root? && !is_current_user
-            not_allowed
-          end
+          not_allowed if (admin_user.is_not_root? && !is_current_user) || current_user_is_root
         end
       end
 
