@@ -40,8 +40,10 @@ module Admin::Resources::FormHelper
   end
 
   def attribute_disabled?(attribute)
-    role = admin_user.is_root? ? :admin : :default
-    @resource._protected_attributes[role].include?(attribute)
+    if protected_attributes = @resource._protected_attributes
+      role = admin_user.is_root? ? :admin : :default
+      protected_attributes[role].include?(attribute)
+    end
   end
 
   def display_errors
