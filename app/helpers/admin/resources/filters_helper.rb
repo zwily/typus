@@ -6,21 +6,8 @@ module Admin::Resources::FiltersHelper
     return if typus_filters.empty?
 
     filters = typus_filters.map do |key, value|
-                items = case value
-                        when :boolean then boolean_filter(key)
-                        when :string then string_filter(key)
-                        when :date, :datetime, :timestamp then date_filter(key)
-                        when :belongs_to then belongs_to_filter(key)
-                        when :has_many, :has_and_belongs_to_many then
-                          has_many_filter(key)
-                        else
-                          string_filter(key)
-                        end
-
-                filter = set_filter(key, value)
-
-      { :filter => filter, :items => items }
-    end
+                { :filter => set_filter(key, value), :items => send("#{value}_filter", key) }
+              end
 
     hidden_filters = params.dup
 
@@ -32,7 +19,9 @@ module Admin::Resources::FiltersHelper
     rejections = filters.map { |i| i[:filter] }
     hidden_filters.delete_if { |k, v| rejections.include?(k) }
 
-    render "helpers/admin/resources/filters/filters", :filters => filters, :hidden_filters => hidden_filters
+    locals = { :filters => filters, :hidden_filters => hidden_filters }
+
+    render "helpers/admin/resources/filters/filters", locals
   end
 
   def set_filter(key, value)

@@ -6,4 +6,7 @@ module Admin::Resources::DataTypes::DateHelper
     items += values.map { |v| [Typus::I18n.t(v.humanize), v] }
   end
 
+  alias :datetime_filter :date_filter
+  alias :timestamp_filter :date_filter
+
 end
