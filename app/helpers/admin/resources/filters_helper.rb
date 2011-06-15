@@ -21,7 +21,7 @@ module Admin::Resources::FiltersHelper
     rejections = locals[:filters].map { |f| f[:filter] }
     locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
 
-    render "helpers/admin/resources/filters/filters", locals
+    render "helpers/admin/resources/filters", locals
   end
 
   def set_filter(key, value)
