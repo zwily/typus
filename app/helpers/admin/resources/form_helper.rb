@@ -27,10 +27,12 @@ module Admin::Resources::FormHelper
                 :disabled => attribute_disabled?(attribute),
                 :include_blank => true }
 
+    html_options = attribute_disabled?(attribute) ? { :disabled => 'disabled' } : {}
+
     locals = { :resource => @resource,
                :attribute => attribute,
                :options => options,
-               :html_options => {},
+               :html_options => html_options,
                :form => form,
                :label_text => @resource.human_attribute_name(attribute) }
 
@@ -38,7 +40,8 @@ module Admin::Resources::FormHelper
   end
 
   def attribute_disabled?(attribute)
-    @resource.protected_attributes.include?(attribute)
+    role = admin_user.is_root? ? :admin : :default
+    @resource._protected_attributes[role].include?(attribute)
   end
 
   def display_errors

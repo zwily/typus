@@ -1,11 +1,11 @@
 <%
   if @resource.typus_field_options_for(:read_only).include?(attribute.to_sym)
-    html_options = { :disabled => 'disabled' }
+    html_options.merge!(:disabled => 'disabled')
     message = Typus::I18n.t("Read only")
   end
 %>
 
 <li id="<%= attribute %>">
   <%= form.label attribute, "#{label_text} <small>#{message}</small>".html_safe %>
-  <%= form.select attribute, @resource.send(attribute), options.merge!(:include_blank => false), html_options %>
+  <%= form.select attribute, @resource.send(attribute), options.merge!(:include_blank => true), html_options %>
 </li>
