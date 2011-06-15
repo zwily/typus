@@ -24,4 +24,12 @@ module Admin::ResourcesHelper
     render "helpers/admin/resources/sidebar", :resources => resources
   end
 
+  def resource_actions
+    @resource_actions ||= []
+  end
+
+  def resources_actions
+    @resources_actions ||= []
+  end
+
 end

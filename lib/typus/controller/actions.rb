@@ -3,8 +3,8 @@ module Typus
     module Actions
 
       def self.included(base)
-        base.helper_method :resource_actions
-        base.helper_method :resources_actions
+#        base.helper_method :resource_actions
+#        base.helper_method :resources_actions
       end
 
       protected
@@ -30,23 +30,23 @@ module Typus
       #
 
       def add_resource_action(*args)
-        resource_actions
+        @resource_actions ||= []
         @resource_actions << args unless args.empty?
       end
 
       def prepend_resource_action(*args)
-        resource_actions
+        @resource_actions ||= []
         @resource_actions = @resource_actions.unshift(args) unless args.empty?
       end
 
       def append_resource_action(*args)
-        resource_actions
+        @resource_actions ||= []
         @resource_actions = @resource_actions.concat([args]) unless args.empty?
       end
 
-      def resource_actions
-        @resource_actions ||= []
-      end
+#      def resource_actions
+#        @resource_actions ||= []
+#      end
 
       ##
       # @resources_actions is used to build a list of custom actions which will
@@ -62,23 +62,23 @@ module Typus
       #
 
       def add_resources_action(*args)
-        resources_actions
+        @resources_actions ||= []
         @resources_actions << args unless args.empty?
       end
 
       def prepend_resources_action(*args)
-        resources_actions
+        @resources_actions ||= []
         @resources_actions = @resources_actions.unshift(args) unless args.empty?
       end
 
       def append_resources_action(*args)
-        resources_actions
+        @resources_actions ||= []
         @resources_actions = @resources_actions.concat([args]) unless args.empty?
       end
 
-      def resources_actions
-        @resources_actions ||= []
-      end
+#      def resources_actions
+#        @resources_actions ||= []
+#      end
 
     end
   end
