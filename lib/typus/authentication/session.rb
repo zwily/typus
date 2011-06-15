@@ -52,17 +52,20 @@ module Typus
       # Action is available on: edit, update, toggle and destroy
       #++
       def check_if_user_can_perform_action_on_user
+        is_current_user = (admin_user == @item)
+
         case params[:action]
-        when 'edit'
-          not_allowed if admin_user.is_not_root? && (admin_user != @item)
+        when 'edit', 'destroy'
+          # Edit/Destroy other items is not allowed unless current user is root
+          # and is not the current user.
+          not_allowed if admin_user.is_not_root? && !is_current_user
+        when 'toggle'
+          not_allowed if admin_user.is_not_root? || (admin_user.is_root? && is_current_user)
         when 'update'
-          user_profile = (admin_user.is_root? || admin_user.is_not_root?) && (admin_user == @item) && !(@item.role == params[@object_name][:role])
-          other_user   = admin_user.is_not_root? && !(admin_user == @item)
-          not_allowed if (user_profile || other_user)
-        when 'toggle', 'destroy'
-          root = admin_user.is_root? && (admin_user == @item)
-          user = admin_user.is_not_root?
-          not_allowed if (root || user)
+          # Admin can update himself except setting the status to false!. Other
+          # users can update their profile as the attributes (role & status)
+          # are protected.
+          not_allowed if admin_user.is_root? && is_current_user && @item.status == false
         end
       end
 
