@@ -16,7 +16,7 @@ module Admin::Resources::FiltersHelper
     hidden_filters.delete_if { |k, v| rejections.include?(k) }
 
     # Remove also custom params.
-    rejections = filters.map { |i| i[:filter] }
+    rejections = filters.map { |f| f[:filter] }
     hidden_filters.delete_if { |k, v| rejections.include?(k) }
 
     locals = { :filters => filters, :hidden_filters => hidden_filters }
