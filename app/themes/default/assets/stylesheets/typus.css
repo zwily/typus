@@ -1,7 +1,8 @@
 /*
+*= require jquery.fancybox-1.3.4.css
+*= require token-input.css
 *= require typus/reset
 *= require typus/screen
 *= require typus/pagination
-*= require_tree ../vendor
 *= require typus/application
 */
