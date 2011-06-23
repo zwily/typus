@@ -14,4 +14,6 @@ module Admin::Resources::DataTypes::DatetimeHelper
     I18n.l(item.send(attribute), :format => @resource.typus_date_format(attribute))
   end
 
+  alias_method :display_date, :display_datetime
+
 end
