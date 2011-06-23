@@ -25,5 +25,6 @@ module Admin::Resources::DataTypes::StringHelper
   alias :table_float_field :table_string_field
   alias :table_integer_field :table_string_field
   alias :table_virtual_field :table_string_field
+  alias :table_password_field :table_string_field
 
 end
