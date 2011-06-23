@@ -78,6 +78,6 @@
   "%{model} successfully created": "%{model} criado com sucesso."
   "%{model} successfully removed": "%{model} removido com sucesso."
   "%{model} successfully updated": "%{model} atualizado com sucesso."
-  
+
   "Top": "Topo"
   "Bottom": "Fundo"
