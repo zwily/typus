@@ -28,7 +28,7 @@ module Typus
 
         options = { :conditions => @conditions, :batch_size => 1000 }
 
-        ::CSV.open(filename, 'w', :col_sep => ';') do |csv|
+        ::CSV.open(filename, 'w') do |csv|
           csv << fields.keys
           @resource.find_in_batches(options) do |records|
             records.each do |record|
