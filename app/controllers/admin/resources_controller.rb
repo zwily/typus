@@ -151,6 +151,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def get_objects
+    set_scope
     set_wheres
     set_joins
     check_resources_ownership if @resource.typus_options_for(:only_user_items)
@@ -162,6 +163,10 @@ class Admin::ResourcesController < Admin::BaseController
     @resource.typus_fields_for(params[:action])
   end
   helper_method :fields
+
+  # Here we set the current scope!
+  def set_scope
+  end
 
   def set_wheres
     @resource.build_conditions(params).each do |condition|
