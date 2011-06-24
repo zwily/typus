@@ -151,10 +151,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def get_objects
-    @resource.build_conditions(params).each do |condition|
-      @resource = @resource.where(condition)
-    end
-
+    set_wheres
     set_joins
 
     if @resource.typus_options_for(:only_user_items)
@@ -169,6 +166,12 @@ class Admin::ResourcesController < Admin::BaseController
     @resource.typus_fields_for(params[:action])
   end
   helper_method :fields
+
+  def set_wheres
+    @resource.build_conditions(params).each do |condition|
+      @resource = @resource.where(condition)
+    end
+  end
 
   def set_joins
     @resource.build_my_joins(params).each do |join|
