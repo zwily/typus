@@ -165,7 +165,9 @@ class Admin::ResourcesController < Admin::BaseController
       check_resources_ownership
     end
 
-    @resource = @resource.order(set_order).includes(eager_loading)
+    set_order
+
+    @resource = @resource.includes(eager_loading)
   end
 
   def fields
@@ -175,7 +177,8 @@ class Admin::ResourcesController < Admin::BaseController
 
   def set_order
     params[:sort_order] ||= "desc"
-    params[:order_by] ? "#{@resource.table_name}.#{params[:order_by]} #{params[:sort_order]}" : @resource.typus_order_by
+    order = params[:order_by] ? "#{params[:order_by]} #{params[:sort_order]}" : @resource.typus_order_by
+    @resource = @resource.order(order) unless order.empty?
   end
 
   def redirect_on_success
