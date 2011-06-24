@@ -153,11 +153,7 @@ class Admin::ResourcesController < Admin::BaseController
   def get_objects
     set_wheres
     set_joins
-
-    if @resource.typus_options_for(:only_user_items)
-      check_resources_ownership
-    end
-
+    check_resources_ownership if @resource.typus_options_for(:only_user_items)
     set_order
     set_eager_loading
   end
