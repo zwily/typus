@@ -1,27 +1,25 @@
 module Admin::Resources::FiltersHelper
 
   def build_filters(resource = @resource, params = params)
-    typus_filters = resource.typus_filters
+    if (typus_filters = resource.typus_filters).any?
+      locals = {}
 
-    return if typus_filters.empty?
+      locals[:filters] = typus_filters.map do |key, value|
+                           { :filter => set_filter(key, value), :items => send("#{value}_filter", key) }
+                         end
 
-    locals = {}
+      locals[:hidden_filters] = params.dup
 
-    locals[:filters] = typus_filters.map do |key, value|
-                         { :filter => set_filter(key, value), :items => send("#{value}_filter", key) }
-                       end
+      # Remove default params.
+      rejections = %w(controller action locale utf8 sort_order order_by)
+      locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
 
-    locals[:hidden_filters] = params.dup
+      # Remove also custom params.
+      rejections = locals[:filters].map { |f| f[:filter] }
+      locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
 
-    # Remove default params.
-    rejections = %w(controller action locale utf8 sort_order order_by)
-    locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
-
-    # Remove also custom params.
-    rejections = locals[:filters].map { |f| f[:filter] }
-    locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
-
-    render "helpers/admin/resources/filters", locals
+      render "helpers/admin/resources/filters", locals
+    end
   end
 
   def set_filter(key, value)
