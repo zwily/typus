@@ -39,11 +39,7 @@ module Admin::Resources::RelationshipsHelper
   end
 
   def set_condition
-    if @resource.typus_user_id? && admin_user.is_not_root?
-      admin_user.owns?(@item)
-    else
-      true
-    end
+    (@resource.typus_user_id? && admin_user.is_not_root?) ? admin_user.owns?(@item) : true
   end
 
   def set_conditions
