@@ -151,8 +151,6 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def get_objects
-    eager_loading = @resource.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name }
-
     @resource.build_conditions(params).each do |condition|
       @resource = @resource.where(condition)
     end
@@ -166,8 +164,7 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     set_order
-
-    @resource = @resource.includes(eager_loading)
+    set_eager_loading
   end
 
   def fields
@@ -179,6 +176,12 @@ class Admin::ResourcesController < Admin::BaseController
     params[:sort_order] ||= "desc"
     order = params[:order_by] ? "#{params[:order_by]} #{params[:sort_order]}" : @resource.typus_order_by
     @resource = @resource.order(order) unless order.empty?
+  end
+
+  def set_eager_loading
+    if (eager_loading = @resource.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name }).any?
+      @resource = @resource.includes(eager_loading)
+    end
   end
 
   def redirect_on_success
