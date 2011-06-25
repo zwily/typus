@@ -1,3 +1,5 @@
+var CKEDITOR_BASEPATH = '/assets/ckeditor/';
+
 $(document).ready(function() {
 
     $("#quicksearch").searchField();
