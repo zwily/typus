@@ -21,7 +21,7 @@ Gem::Specification.new do |s|
   s.test_files    = []
   s.require_paths = ["lib"]
 
-  s.add_development_dependency "ckeditor-rails"
+  s.add_development_dependency "ckeditor-rails", "0.0.2"
   s.add_development_dependency "dragonfly", "~> 0.9"
   s.add_development_dependency "jquery-rails"
   s.add_development_dependency "paperclip"

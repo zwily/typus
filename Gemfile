@@ -5,7 +5,7 @@ gemspec
 
 gem "sqlite3"
 gem "jquery-rails"
-gem "ckeditor-rails"
+gem "ckeditor-rails", "0.0.2"
 
 # And this stuff needed for the demo application.
 gem "acts_as_list"
