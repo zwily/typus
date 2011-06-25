@@ -22,12 +22,14 @@ $(document).ready(function() {
         'scrolling': false,
     });
 
+    // This method is used by Typus::Controller::Bulk
     $(".action-toggle").click(function() {
         var status = this.checked;
         $('input.action-select').each(function() { this.checked = status; });
         $('.action-toggle').each(function() { this.checked = status; });
     });
 
+    // This method is used by `text_with_ckeditor` template.
     if ($('textarea.ckeditor').length > 0) {
         var data = $('textarea');
         $.each(data, function(i) { CKEDITOR.replace(data[i].id); });
