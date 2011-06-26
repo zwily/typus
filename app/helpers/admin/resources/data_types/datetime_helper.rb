@@ -6,9 +6,9 @@ module Admin::Resources::DataTypes::DatetimeHelper
     end
   end
 
-  alias :table_date_field :table_datetime_field
-  alias :table_time_field :table_datetime_field
-  alias :table_timestamp_field :table_datetime_field
+  alias_method :table_date_field, :table_datetime_field
+  alias_method :table_time_field, :table_datetime_field
+  alias_method :table_timestamp_field, :table_datetime_field
 
   def display_datetime(item, attribute)
     I18n.l(item.send(attribute), :format => @resource.typus_date_format(attribute))

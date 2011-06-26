@@ -4,7 +4,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
     item.send(attribute).map { |i| i.to_label }.join(", ")
   end
 
-  alias :table_has_many_field :table_has_and_belongs_to_many_field
+  alias_method :table_has_many_field, :table_has_and_belongs_to_many_field
 
   def typus_form_has_and_belongs_to_many(field)
     setup_relationship(field)

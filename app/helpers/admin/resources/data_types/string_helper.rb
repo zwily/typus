@@ -22,10 +22,10 @@ module Admin::Resources::DataTypes::StringHelper
     (raw_content = item.send(attribute)).present? ? raw_content : "&mdash;".html_safe
   end
 
-  alias :table_decimal_field :table_string_field
-  alias :table_float_field :table_string_field
-  alias :table_integer_field :table_string_field
-  alias :table_virtual_field :table_string_field
-  alias :table_password_field :table_string_field
+  alias_method :table_decimal_field, :table_string_field
+  alias_method :table_float_field, :table_string_field
+  alias_method :table_integer_field, :table_string_field
+  alias_method :table_virtual_field, :table_string_field
+  alias_method :table_password_field, :table_string_field
 
 end

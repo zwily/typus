@@ -9,7 +9,7 @@ module Admin::Resources::DataTypes::HasManyHelper
     items += resource.order(resource.typus_order_by).map { |v| [v.to_label, v.id] }
   end
 
-  alias :has_and_belongs_to_many_filter :has_many_filter
+  alias_method :has_and_belongs_to_many_filter, :has_many_filter
 
   def typus_form_has_many(field)
     setup_relationship(field)
