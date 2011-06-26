@@ -4,11 +4,11 @@ module Admin::Resources::DataTypes::StringHelper
     item.send(attribute)
   end
 
-  alias_method :display_text, :display_string
-  alias_method :display_position, :display_string
-  alias_method :display_integer, :display_string
   alias_method :display_decimal, :display_string
   alias_method :display_float, :display_string
+  alias_method :display_integer, :display_string
+  alias_method :display_position, :display_string
+  alias_method :display_text, :display_string
 
   def string_filter(filter)
     values = set_context.send(filter.to_s).to_a
