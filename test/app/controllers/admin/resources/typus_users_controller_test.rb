@@ -50,8 +50,21 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
       assert_equal "Typus user successfully removed.", flash[:notice]
     end
 
+    should "be able to update his profile" do
+      post :update, :id => @typus_user.id, :typus_user => { :first_name => "John", :last_name => "Locke", :role => 'admin', :status => true }, :_save => true
+      assert_response :redirect
+      assert_redirected_to "/admin/typus_users"
+      assert_equal "Typus user successfully updated.", flash[:notice]
+      assert_equal "John Locke", @typus_user.reload.to_label
+    end
+
     should "not be able to change his role" do
-      post :update, :id => @typus_user.id, :typus_user => { :role => 'editor' }
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'editor', :status => true }, :_save => true
+      assert_response :unprocessable_entity
+    end
+
+    should "not be able to change his status" do
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'admin', :status => false }, :_save => true
       assert_response :unprocessable_entity
     end
 
