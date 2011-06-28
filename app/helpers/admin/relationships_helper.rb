@@ -162,16 +162,17 @@ module Admin
       end
 
       # Set the template.
-      template = if Typus.autocomplete && (related.respond_to?(:roots) || !(related.count > Typus.autocomplete))
+      template = if related.respond_to?(:roots) || !Typus.autocomplete || !(related.count > Typus.autocomplete)
                    "admin/templates/belongs_to"
                  else
                    "admin/templates/belongs_to_with_autocomplete"
                  end
 
-      # Set the values.
       values = if related.respond_to?(:roots)
                  expand_tree_into_select_field(related.roots, related_fk)
-               elsif Typus.autocomplete && !(related.count > Typus.autocomplete)
+               end
+
+      values = if Typus.autocomplete && !(related.count > Typus.autocomplete)
                  related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
                end
 
