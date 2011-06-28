@@ -1,32 +1,27 @@
 module Typus
   module Configuration
 
-    # Read configuration from <tt>config/typus/**/*.yml</tt>.
+    # Read configuration from <tt>config/typus/*.yml</tt>.
     def self.config!
-      application = Dir[File.join(Typus.config_folder, "**", "*.yml").to_s]
-      plugins = Dir[File.join("vendor", "plugins", "*", "config", "typus", "*.yml").to_s]
-      files = (application + plugins).reject { |f| f.include?("_roles.yml") }
-
-      @@config = {}
+      files = Dir[Typus.config_folder.join("*.yml").to_s].reject { |f| f.match(/_roles.yml/) }
 
       files.each do |file|
         if data = YAML::load_file(file)
           @@config.merge!(data)
         end
       end
-
-      @@config
     end
 
     mattr_accessor :config
+    @@config = {}
 
-    # Read roles from files <tt>config/typus/**/*_roles.yml</tt>.
+    def self.register_config(config)
+      @@config.merge!(config)
+    end
+
+    # Read roles from files <tt>config/typus/*_roles.yml</tt>.
     def self.roles!
-      application = Dir[File.join(Typus.config_folder, "**", "*_roles.yml").to_s]
-      plugins = Dir[File.join("vendor", "plugins", "*", "config", "typus", "*_roles.yml").to_s]
-      files = (application + plugins).sort
-
-      @@roles = {}
+      files = Dir[Typus.config_folder.join("*_roles.yml").to_s].sort
 
       files.each do |file|
         if data = YAML::load_file(file)
@@ -35,11 +30,14 @@ module Typus
           end
         end
       end
-
-      @@roles
     end
 
     mattr_accessor :roles
+    @@roles = {}
+
+    def self.register_roles(roles)
+      @@roles.merge!(roles)
+    end
 
     def self.models_constantized!
       @@models_constantized = config.map { |i| i.first }.inject({}) { |result, model| result[model] = model.constantize; result }
