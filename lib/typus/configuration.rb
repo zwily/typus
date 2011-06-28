@@ -3,7 +3,7 @@ module Typus
 
     # Read configuration from <tt>config/typus/*.yml</tt>.
     def self.config!
-      files = Dir[Typus.config_folder.join("*.yml").to_s].reject { |f| f.match(/_roles.yml/) }
+      files = Dir[File.join(Typus.config_folder, "*.yml").to_s].reject { |f| f.match(/_roles.yml/) }
 
       files.each do |file|
         if data = YAML::load_file(file)
@@ -21,7 +21,7 @@ module Typus
 
     # Read roles from files <tt>config/typus/*_roles.yml</tt>.
     def self.roles!
-      files = Dir[Typus.config_folder.join("*_roles.yml").to_s].sort
+      files = Dir[File.join(Typus.config_folder, "*_roles.yml").to_s].sort
 
       files.each do |file|
         if data = YAML::load_file(file)
