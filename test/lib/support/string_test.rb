@@ -2,8 +2,8 @@ require "test_helper"
 
 class StringTest < ActiveSupport::TestCase
 
-  should "extract_settings" do
-    expected = %w( a b c )
+  test "extract_settings" do
+    expected = %w(a b c)
     assert "a, b, c".extract_settings.eql?(expected)
     assert " a  , b,  c ".extract_settings.eql?(expected)
   end
@@ -43,33 +43,29 @@ class StringTest < ActiveSupport::TestCase
 
   end
 
-  context "acl_action_mapper" do
+  test "acl_action_mapper returns create" do
+    assert_equal "create", "new".acl_action_mapper
+    assert_equal "create", "create".acl_action_mapper
+  end
 
-    should "return create" do
-      assert_equal "create", "new".acl_action_mapper
-      assert_equal "create", "create".acl_action_mapper
+  test "acl_action_mapper returns read" do
+    assert_equal "read", "index".acl_action_mapper
+    assert_equal "read", "show".acl_action_mapper
+  end
+
+  test "acl_action_mapper returns update" do
+    %w(edit update position toggle relate unrelate).each do |action|
+      assert_equal "update", action.acl_action_mapper
     end
+  end
 
-    should "return read" do
-      assert_equal "read", "index".acl_action_mapper
-      assert_equal "read", "show".acl_action_mapper
-    end
+  test "acl_action_mapper returns delete" do
+    assert_equal "delete", "destroy".acl_action_mapper
+    assert_equal "delete", "trash".acl_action_mapper
+  end
 
-    should "return update" do
-      %w(edit update position toggle relate unrelate).each do |action|
-        assert_equal "update", action.acl_action_mapper
-      end
-    end
-
-    should "return delete" do
-      assert_equal "delete", "destroy".acl_action_mapper
-      assert_equal "delete", "trash".acl_action_mapper
-    end
-
-    should "return other" do
-      assert_equal "other", "other".acl_action_mapper
-    end
-
+  test "acl_action_mapper returns other" do
+    assert_equal "other", "other".acl_action_mapper
   end
 
   test "to_resource converts String into resource" do
