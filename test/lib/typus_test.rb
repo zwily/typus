@@ -2,31 +2,31 @@ require "test_helper"
 
 class TypusTest < ActiveSupport::TestCase
 
-  should "verify default_config for autocomplete" do
+  test "default_config for autocomplete" do
     assert Typus.autocomplete.nil?
   end
 
-  should "verify default_config for admin_title" do
+  test "default_config for admin_title" do
     assert Typus.admin_title.eql?('Typus')
   end
 
-  should "verify default_config for admin_sub_title" do
+  test "default_config for admin_sub_title" do
     assert Typus.admin_sub_title.is_a?(String)
   end
 
-  should "verify default_config for authentication" do
+  test "default_config for authentication" do
     assert Typus.authentication.eql?(:session)
   end
 
-  should "verify default_config for mailer_sender" do
+  test "default_config for mailer_sender" do
     assert Typus.mailer_sender.nil?
   end
 
-  should "verify default_config for username" do
+  test "default_config for username" do
     assert Typus.username.eql?('admin')
   end
 
-  should "verify default_config for password" do
+  test "default_config for password" do
     assert Typus.password.eql?('columbia')
   end
 
@@ -40,29 +40,29 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal "x100", Typus.image_thumb_size
   end
 
-  should "verify default_config for relationship" do
+  test "default_config for relationship" do
     assert Typus.relationship.eql?('typus_users')
   end
 
-  should "verify default_config for master_role" do
+  test "default_config for master_role" do
     assert Typus.master_role.eql?('admin')
   end
 
-  should "verify config_folder is a Pathname" do
+  test "config_folder is a Pathname" do
     assert Typus.config_folder.is_a?(Pathname)
   end
 
-  should "return applications sorted" do
+  test "applications returns applications sorted" do
     expected = ["Admin", "CRUD", "CRUD Extended", "CRUD Namespaced", "HasManyThrough", "HasOne", "MongoDB", "Polymorphic", "STI"]
     assert_equal expected, Typus.applications
   end
 
-  should "return modules of the CRUD Extended application" do
+  test "application returns modules of the CRUD Extended application" do
     expected = %w(Asset Category Comment Page Post)
     assert Typus.application("CRUD Extended").eql?(expected)
   end
 
-  should "return models and should be sorted" do
+  test "models are sorted" do
     expected = ["AdminUser",
                 "Animal",
                 "Article::Entry",
@@ -87,7 +87,7 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal expected, Typus.models
   end
 
-  should "verify resources class_method" do
+  test "resources class_method" do
     assert_equal %w(Git Status WatchDog), Typus.resources
   end
 
