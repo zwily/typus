@@ -22,21 +22,19 @@ module Admin::Resources::DataTypes::BelongsToHelper
       message = link_to Typus::I18n.t("Add New"), options, { :class => 'iframe' }
     end
 
-    # Set the template.
-    template = if Typus.autocomplete && (related.respond_to?(:roots) || !(related.count > Typus.autocomplete))
-                 "admin/templates/belongs_to"
-               else
-                 "admin/templates/belongs_to_with_autocomplete"
-               end
+    # By default the used template is ALWAYS `belongs_to` unless we have the
+    # `Typus.autocomplete` feature enabled.
+    template = Typus.autocomplete ? "belongs_to_with_autocomplete" : "belongs_to"
 
-    # Set the values.
-    values = if related.respond_to?(:roots)
-               expand_tree_into_select_field(related.roots, related_fk)
-             elsif Typus.autocomplete && !(related.count > Typus.autocomplete)
-               related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
-             end
+    # If `Typus.autocomplete` is enabled we don't set the values as will be
+    # autocompleted.
+    if related.respond_to?(:roots)
+      values = expand_tree_into_select_field(related.roots, related_fk)
+    elsif !Typus.autocomplete
+      values = related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
+    end
 
-    render template,
+    render "admin/templates/#{template}",
            :association => association,
            :resource => @resource,
            :attribute => attribute,
