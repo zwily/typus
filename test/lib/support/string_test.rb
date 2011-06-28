@@ -17,30 +17,18 @@ class StringTest < ActiveSupport::TestCase
     assert_equal "delayed/tasks", "typus/delayed/tasks".remove_prefix
   end
 
-  context "extract_class" do
+  test "extract_class" do
+    class SucursalBancaria; end
 
-    setup do
-      class SucursalBancaria; end
+    Typus::Configuration.models_constantized = { "Post" => Post,
+                                                 "TypusUser" => TypusUser,
+                                                 "Delayed::Task" => Delayed::Task,
+                                                 "SucursalBancaria" => SucursalBancaria }
 
-      Typus::Configuration.models_constantized = { "Post" => Post,
-                                                   "TypusUser" => TypusUser,
-                                                   "Delayed::Task" => Delayed::Task,
-                                                   "SucursalBancaria" => SucursalBancaria }
-    end
-
-    should "work for models" do
-      assert_equal Post, "admin/posts".extract_class
-      assert_equal TypusUser, "admin/typus_users".extract_class
-    end
-
-    should "work for namespaced models" do
-      assert_equal Delayed::Task, "admin/delayed/tasks".extract_class
-    end
-
-    should "work with inflections" do
-      assert_equal SucursalBancaria, "admin/sucursales_bancarias".extract_class
-    end
-
+    assert_equal Post, "admin/posts".extract_class
+    assert_equal TypusUser, "admin/typus_users".extract_class
+    assert_equal Delayed::Task, "admin/delayed/tasks".extract_class
+    assert_equal SucursalBancaria, "admin/sucursales_bancarias".extract_class
   end
 
   test "acl_action_mapper returns create" do
