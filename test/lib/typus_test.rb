@@ -30,32 +30,14 @@ class TypusTest < ActiveSupport::TestCase
     assert Typus.password.eql?('columbia')
   end
 
-  context "file management" do
+  test "default_config for file_preview and file_thumbnail (paperclip)" do
+    assert Typus.file_preview.eql?(:medium)
+    assert Typus.file_thumbnail.eql?(:thumb)
+  end
 
-    context "paperclip" do
-
-      should "verify default_config for file_preview" do
-        assert Typus.file_preview.eql?(:medium)
-      end
-
-      should "verify default_config for file_thumbnail" do
-        assert Typus.file_thumbnail.eql?(:thumb)
-      end
-
-    end
-
-    context "dragonfly" do
-
-      should "verify default_config for image_preview_size" do
-        assert_equal "x650>", Typus.image_preview_size
-      end
-
-      should "verify default_config for image_thumb_size" do
-        assert_equal "x100", Typus.image_thumb_size
-      end
-
-    end
-
+  test "default_config for image_preview_size and image_thumb_size (dragonfly)" do
+    assert_equal "x650>", Typus.image_preview_size
+    assert_equal "x100", Typus.image_thumb_size
   end
 
   should "verify default_config for relationship" do
