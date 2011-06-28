@@ -147,11 +147,7 @@ module Typus
 
     # Lists models from the configuration file.
     def models
-      if config = Typus::Configuration.config
-        config.map { |i| i.first }.sort
-      else
-        []
-      end
+      Typus::Configuration.config.map { |i| i.first }.sort
     end
 
     # Lists resources, which are tableless models.
