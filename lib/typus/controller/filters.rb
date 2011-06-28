@@ -1,3 +1,25 @@
+##
+# How predefined filters work?
+#
+# On your controllers ...
+#
+#     def index
+#       # Added predefined filter takes any argumes, but in the views we
+#       # expected the following:
+#       #
+#       #     add_predefined_filter(filter_name, action, scope)
+#       #
+#       ...
+#       add_predefined_filter("Trash", "trash", "deleted")
+#       ...
+#     end
+#
+# On your views ...
+#
+#     <% predefined_filters.each do |filter_name, action, scope| %>
+#       ...
+#     <% end %>
+#
 module Typus
   module Controller
     module Filters
