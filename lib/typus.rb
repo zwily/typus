@@ -161,12 +161,6 @@ module Typus
       end
     end
 
-    # Lists models under <tt>app/models</tt>.
-    def detect_application_models
-      model_dir = Rails.root.join("app/models")
-      Dir.chdir(model_dir) { Dir["**/*.rb"] }
-    end
-
     def locales
       { "Brazilian Portuguese" => "pt-BR",
         "Català" => "ca",
@@ -180,6 +174,12 @@ module Typus
         "Portuguese" => "pt-PT",
         "Russian" => "ru",
         "中文" => "zh-CN" }
+    end
+
+    # Lists models under <tt>app/models</tt>.
+    def detect_application_models
+      model_dir = Rails.root.join("app/models")
+      Dir.chdir(model_dir) { Dir["**/*.rb"] }
     end
 
     def application_models
