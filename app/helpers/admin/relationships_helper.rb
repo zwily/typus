@@ -17,7 +17,7 @@ module Admin
       count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
 
       if set_condition && !count_items_to_relate.zero?
-        form = if Typus.autocomplete && (count_items_to_relate > Typus.autocomplete)
+        form = if Typus.autocomplete
                  build_relate_form('admin/templates/relate_form_with_autocomplete')
                else
                  @items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by) - @item.send(field)
@@ -50,7 +50,7 @@ module Admin
       count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
 
       if set_condition && !count_items_to_relate.zero?
-        form = if Typus.autocomplete && (count_items_to_relate > Typus.autocomplete)
+        form = if Typus.autocomplete
                  build_relate_form('admin/templates/relate_form_with_autocomplete')
                else
                  @items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by) - @item.send(field)
