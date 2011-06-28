@@ -172,16 +172,16 @@ module Typus
     end
 
     def locales
-      { "Català" => "ca",
+      { "Brazilian Portuguese" => "pt-BR",
+        "Català" => "ca",
         "German" => "de",
         "Greek"  => "el",
+        "Italiano" => "it",
         "English" => "en",
         "Español" => "es",
         "Français" => "fr",
         "Magyar" => "hu",
-        "Italiano" => "It",
         "Portuguese" => "pt-PT",
-        "Brazilian Portuguese" => "pt-BR",
         "Russian" => "ru",
         "中文" => "zh-CN" }
     end
