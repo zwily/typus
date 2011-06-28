@@ -150,7 +150,8 @@ module Typus
       Typus::Configuration.config.map { |i| i.first }.sort
     end
 
-    # Lists resources, which are tableless models.
+    # Lists resources, which are tableless models. This is done by looking at
+    # the roles, which handle the permissions for this kind of data.
     def resources
       if roles = Typus::Configuration.roles
         roles.keys.map do |key|
