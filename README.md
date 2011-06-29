@@ -1,6 +1,18 @@
 # Typus: Admin Panel for Ruby on Rails applications
 
-**Typus** allows trusted users to edit structured content.
+**Typus** is a control panel for [Ruby on Rails][rails] applications to allow
+trusted users edit structured content.
+
+It’s not a CMS with a full working system but it provides a part of the
+system: authentication, permissions and basic look and feel for your
+websites control panel. So using [Rails][rails] with **Typus** lets you
+concentrate on your application instead of the bits to manage the system.
+
+**Typus** is the "old latin" word for **type** which stands for:
+
+> A category of people or things having common characteristics.
+
+You can try a demo [here][demo].
 
 ## Key Features
 
@@ -9,7 +21,7 @@
 - Internationalized interface ([See available translations][locales])
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
-- Works with `Rails 3.0.X`.
+- Works with `Rails 3.1.X`.
 - Tested with latest versions of `1.8.7`, `ree`, `1.9.2` and `jruby`.
 - Tested with `SQLite`, `MySQL` and `PostgreSQL`.
 
@@ -17,18 +29,18 @@
 
 - [Documentation](https://github.com/typus/typus/wiki)
 - [Issues](https://github.com/typus/typus/issues)
-- [Demo](http://demo.typuscms.com/) ([Code][code])
-- [Source Code](http://github.com/typus/typus)
+- [Source Code](http://github.com/typus/typus) and [RubyGems](http://rubygems.org/gems/typus)
 - [Mailing List](http://groups.google.com/group/typus)
-- [Gems](http://rubygems.org/gems/typus)
 - [Contributors List](http://github.com/typus/typus/contributors)
 
 ## Installing
 
 Add **Typus** to your `Gemfile`
 
-    # gem 'typus', '~> 3.1.0.rc'
-    gem 'typus', :git => 'git://github.com/typus/typus.git', :branch => '3-1-unstable'
+    gem 'typus', '~> 3.1.0.rc'
+
+    # Bundle edge typus instead:
+    # gem 'typus', :git => 'git://github.com/typus/typus.git', :branch => '3-1-unstable'
 
 Update your bundle, run the generator and start the application server:
 
@@ -40,9 +52,30 @@ and go to <http://0.0.0.0:3000/admin>.
 
 ## License
 
-Typus is released under the MIT license.
+    Copyright (c) 2007-2011 Francesc Esplugas Marti
 
+    Permission is hereby granted, free of charge, to any person obtaining
+    a copy of this software and associated documentation files (the
+    "Software"), to deal in the Software without restriction, including
+    without limitation the rights to use, copy, modify, merge, publish,
+    distribute, sublicense, and/or sell copies of the Software, and to
+    permit persons to whom the Software is furnished to do so, subject to
+    the following conditions:
+
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
+    LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+    OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+    WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+[demo]: http://demo.typuscms.com/
 [paperclip]: http://rubygems.org/gems/paperclip
 [dragonfly]: http://rubygems.org/gems/dragonfly
+[rails]: http://rubyonrails.org/
 [code]: https://github.com/typus/typus/tree/master/test/fixtures/rails_app
 [locales]: https://github.com/typus/typus/tree/master/config/locales
