@@ -25,14 +25,6 @@ You can try a demo [here][demo].
 - Tested with latest versions of `1.8.7`, `ree`, `1.9.2` and `jruby`.
 - Tested with `SQLite`, `MySQL` and `PostgreSQL`.
 
-## Links
-
-- [Documentation](https://github.com/typus/typus/wiki)
-- [Issues](https://github.com/typus/typus/issues)
-- [Source Code](http://github.com/typus/typus) and [RubyGems](http://rubygems.org/gems/typus)
-- [Mailing List](http://groups.google.com/group/typus)
-- [Contributors List](http://github.com/typus/typus/contributors)
-
 ## Installing
 
 Add **Typus** to your `Gemfile`
@@ -50,7 +42,15 @@ Update your bundle, run the generator and start the application server:
 
 and go to <http://0.0.0.0:3000/admin>.
 
-## License
+## Links
+
+- [Documentation](https://github.com/typus/typus/wiki)
+- [Issues](https://github.com/typus/typus/issues)
+- [Source Code](http://github.com/typus/typus) and [RubyGems](http://rubygems.org/gems/typus)
+- [Mailing List](http://groups.google.com/group/typus)
+- [Contributors List](http://github.com/typus/typus/contributors)
+
+## MIT License
 
     Copyright (c) 2007-2011 Francesc Esplugas Marti
 
