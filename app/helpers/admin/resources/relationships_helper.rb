@@ -33,7 +33,10 @@ module Admin::Resources::RelationshipsHelper
                         :resource_action => 'relate',
                         :return_to => request.path }
 
-    if set_condition && admin_user.can?("create", @model_to_relate)
+    # Add new basically means: We can create new items or relate existing ones.
+    create_or_read = admin_user.can?("create", @model_to_relate) || admin_user.can?("read", @model_to_relate)
+
+    if set_condition && create_or_read
       link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
     end
   end
