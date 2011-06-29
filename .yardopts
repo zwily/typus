@@ -1,6 +1,0 @@
---main doc/wiki/home.md
---output doc/site
--e ./doc/yard/setup.rb
--
-README.md
-doc/wiki/*
