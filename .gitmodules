@@ -1,6 +1,0 @@
-[submodule "doc/wiki"]
-	path = doc/wiki
-	url = git@github.com:typus/typus.wiki.git
-[submodule "doc/site"]
-	path = doc/site
-	url = git@github.com:typus/site.git
