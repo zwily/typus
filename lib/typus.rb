@@ -72,10 +72,19 @@ module Typus
   ##
   # Pagination options passed to Kaminari helper.
   #
+  #     :previous_label => "&larr; " + Typus::I18n.t("Previous")
+  #     :next_label => Typus::I18n.t("Next") + " &rarr;"
+  #
+  # Note that `Kaminari` only accepts the following configuration options:
+  #
+  # - default_per_page (25 by default)
+  # - window (4 by default)
+  # - outer_window (0 by default)
+  # - left (0 by default)
+  # - right (0 by default)
+  #
   mattr_accessor :pagination
-  @@pagination = { :window => 0,
-                   :previous_label => "&larr; " + Typus::I18n.t("Previous"),
-                   :next_label => Typus::I18n.t("Next") + " &rarr;" }
+  @@pagination = { :window => 0 }
 
   ##
   # Define a password.
