@@ -14,7 +14,7 @@ Rake::TestTask.new(:test) do |t|
 end
 
 desc 'Generate plugin documentation.'
-Rake::RDocTask.new(:rdoc) do |rdoc|
+RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'Typus'
   rdoc.options << '--line-numbers' << '--inline-source'
