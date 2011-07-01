@@ -1,25 +1,12 @@
-*.gem
+# Bundler stuff
 .bundle
+vendor/gems
 Gemfile.lock
-pkg/*
 
-# Projecte specific ignores
-.bundle
-all.css
-all.js
+# Generated stuff
+*.gem
 db/*.sqlite3
 log/*.log
 test/fixtures/rails_app/public/system/*
 test/fixtures/rails_app/tmp/*
 tmp/**/*
-vendor/gems
-
-# Ignore generated documentation
-.yardoc
-doc/*.html
-doc/css
-doc/js
-doc/Admin
-doc/Typus
-doc/ActiveRecord
-
