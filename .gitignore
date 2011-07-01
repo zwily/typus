@@ -12,6 +12,7 @@ log/*.log
 test/fixtures/rails_app/public/system/*
 test/fixtures/rails_app/tmp/*
 tmp/**/*
+vendor/gems
 
 # Ignore generated documentation
 .yardoc
