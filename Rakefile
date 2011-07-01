@@ -6,7 +6,7 @@ task :default => :test
 
 Rake::TestTask.new do |t|
   t.libs << "test"
-  t.test_files = FileList['test/app/controllers/**/*_test.rb']
+  t.test_files = FileList['test/app/controllers/**/*_test.rb', 'test/lib/support/*_test.rb']
   t.verbose = true
 end
 
