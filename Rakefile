@@ -4,16 +4,12 @@ require 'rdoc/task'
 
 task :default => :test
 
-desc 'Test the typus plugin.'
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'lib'
-  t.libs << 'test'
-  # t.pattern = 'test/**/*_test.rb'
-  t.pattern = 'test/app/controllers/**/*_test.rb'
+Rake::TestTask.new do |t|
+  t.libs << "test"
+  t.test_files = FileList['test/app/controllers/**/*_test.rb']
   t.verbose = true
 end
 
-desc 'Generate plugin documentation.'
 RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'Typus'
