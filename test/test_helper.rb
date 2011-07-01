@@ -40,7 +40,7 @@ class ActiveSupport::TestCase
   end
 
   def reset_session
-    @request.session[:typus_user_id] = nil
+    @request.session[:typus_user_id] = nil if @request
   end
 
 end
