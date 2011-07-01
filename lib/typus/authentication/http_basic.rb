@@ -8,8 +8,8 @@ module Typus
 
       def authenticate
         @admin_user = FakeUser.new
-        authenticate_or_request_with_http_basic(Typus.admin_title) do |user_name, password|
-          user_name == Typus.username && password == Typus.password
+        authenticate_or_request_with_http_basic(Typus.admin_title) do |username, password|
+          username == Typus.username && password == Typus.password
         end
       end
 
