@@ -15,6 +15,10 @@ module Typus
       def set_attributes_on_create; end
       def set_attributes_on_update; end
 
+      def not_allowed
+        render :text => "Not allowed!", :status => :unprocessable_entity
+      end
+
     end
   end
 end

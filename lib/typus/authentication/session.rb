@@ -78,10 +78,6 @@ module Typus
         not_allowed if admin_user.cannot?(params[:action], resource, { :special => true })
       end
 
-      def not_allowed
-        render :text => "Not allowed!", :status => :unprocessable_entity
-      end
-
       #--
       # If item is owned by another user, we only can perform a show action on
       # the item. Updated item is also blocked.
