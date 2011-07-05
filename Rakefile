@@ -43,3 +43,17 @@ namespace :test do
   end
 
 end
+
+namespace :demo do
+
+  desc "Update demo"
+  task :update do
+    system "git pull && git submodule update --init"
+  end
+
+  desc "Upgrade demo"
+  task :upgrade do
+    system "git submodule foreach 'git pull origin master'"
+  end
+
+end
