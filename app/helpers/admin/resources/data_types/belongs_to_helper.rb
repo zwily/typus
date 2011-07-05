@@ -51,14 +51,13 @@ module Admin::Resources::DataTypes::BelongsToHelper
   def table_belongs_to_field(attribute, item)
     if att_value = item.send(attribute)
       action = item.send(attribute).class.typus_options_for(:default_action_on_item)
+      message = att_value.to_label
       if admin_user.can?(action, att_value.class.name)
-        link_to att_value.to_label, :controller => "/admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id
-      else
-        att_value.to_label
+        message = link_to(message, :controller => "/admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id)
       end
-    else
-      "&mdash;".html_safe
     end
+
+    message || "&mdash;".html_safe
   end
 
   def display_belongs_to(item, attribute)
