@@ -43,15 +43,15 @@ module Admin::Resources::TableHelper
   end
 
   def table_actions(model, item, association_name = nil)
-    resource_actions.map do |body, url, options, proc|
-      if admin_user.can?(url[:action], model.name)
-        next if proc && proc.respond_to?(:call) && proc.call(item) == false
+    resource_actions.reject! do |body, url, options, proc|
+      admin_user.cannot?(url[:action], model.name)
+    end
 
-        link_to Typus::I18n.t(body),
-                params.dup.cleanup.merge(url).merge(:controller => "/admin/#{model.to_resource}", :id => item.id),
-                options
-      end
-    end.compact.join(" / ").html_safe
+    resource_actions.map do |body, url, options, proc|
+      next if proc && proc.respond_to?(:call) && proc.call(item) == false
+      url = params.dup.cleanup.merge(url).merge(:controller => "/admin/#{model.to_resource}", :id => item.id)
+      link_to Typus::I18n.t(body), url, options
+    end.join(" / ").html_safe
   end
 
 end
