@@ -54,6 +54,7 @@ namespace :demo do
   desc "Upgrade demo"
   task :upgrade do
     system "git submodule foreach 'git pull origin master'"
+    system "git ci -m 'Updated submodules' ."
   end
 
 end
