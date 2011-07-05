@@ -20,11 +20,6 @@ RDoc::Task.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-desc "Deploy test/fixtures/rails_app"
-task :deploy do
-  system "cd test/fixtures/rails_app && cap deploy"
-end
-
 RUBIES = %w[1.8.7 ree 1.9.2 jruby].join(",")
 
 namespace :setup do
