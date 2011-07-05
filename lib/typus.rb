@@ -1,5 +1,3 @@
-# -*- encoding: utf-8 -*-
-
 require "support/active_record"
 require "support/hash"
 require "support/object"
@@ -169,21 +167,6 @@ module Typus
       else
         []
       end
-    end
-
-    def locales
-      { "Brazilian Portuguese" => "pt-BR",
-        "Català" => "ca",
-        "German" => "de",
-        "Greek"  => "el",
-        "Italiano" => "it",
-        "English" => "en",
-        "Español" => "es",
-        "Français" => "fr",
-        "Magyar" => "hu",
-        "Portuguese" => "pt-PT",
-        "Russian" => "ru",
-        "中文" => "zh-CN" }
     end
 
     # Lists models under <tt>app/models</tt>.
