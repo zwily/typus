@@ -5,6 +5,8 @@ module Typus
     def self.config!
       files = Dir[File.join(Typus.config_folder, "*.yml").to_s].reject { |f| f.match(/_roles.yml/) }
 
+      @@config = {}
+
       files.each do |file|
         if data = YAML::load_file(file)
           @@config.merge!(data)
@@ -22,6 +24,8 @@ module Typus
     # Read roles from files <tt>config/typus/*_roles.yml</tt>.
     def self.roles!
       files = Dir[File.join(Typus.config_folder, "*_roles.yml").to_s].sort
+
+      @@roles = {}
 
       files.each do |file|
         if data = YAML::load_file(file)
