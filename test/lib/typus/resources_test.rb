@@ -23,7 +23,7 @@ class ResourcesTest < ActiveSupport::TestCase
   end
 
   test "per_page" do
-    assert Typus::Resources.per_page.eql?(15)
+    assert Typus::Resources.per_page.eql?(25)
   end
 
   test "sortable" do

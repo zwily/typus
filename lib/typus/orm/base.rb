@@ -58,7 +58,7 @@ module Typus
       # With Typus::Resources we some application defaults.
       #
       #     Typus::Resources.setup do |config|
-      #       config.per_page = 15
+      #       config.per_page = 25
       #     end
       #
       # If for any reason we need a better default for an specific resource we
@@ -67,7 +67,7 @@ module Typus
       #     Post:
       #       ...
       #       options:
-      #         per_page: 15
+      #         per_page: 25
       #++
       def typus_options_for(filter)
         options = read_model_config['options']

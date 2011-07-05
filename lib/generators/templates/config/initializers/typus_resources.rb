@@ -16,7 +16,7 @@ Typus::Resources.setup do |config|
   # config.only_user_items = false
 
   # Defines per_page.
-  # config.per_page = 15
+  # config.per_page = 25
 
   # Defines start_year.
   # config.start_year = nil

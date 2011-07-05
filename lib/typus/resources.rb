@@ -28,7 +28,7 @@ module Typus
     @@only_user_items = false
 
     mattr_accessor :per_page
-    @@per_page = 15
+    @@per_page = 25
 
     mattr_accessor :sortable
     @@sortable = true
