@@ -18,8 +18,8 @@ module Admin::ResourcesHelper
     admin_user.application(app_name).each do |resource|
       klass = resource.typus_constantize
       resources[resource] = []
-      resources[resource] << link_to_unless_current(Typus::I18n.t("All #{klass.model_name.human.pluralize}"), :action => "index")
-      resources[resource] << link_to_unless_current(Typus::I18n.t("Add New"), :action => "new") if admin_user.can?("create", klass)
+      resources[resource] << link_to(Typus::I18n.t("All #{klass.model_name.human.pluralize}"), :action => "index")
+      resources[resource] << link_to(Typus::I18n.t("Add New"), :action => "new") if admin_user.can?("create", klass)
     end
 
     render "helpers/admin/resources/sidebar", :resources => resources
