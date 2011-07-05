@@ -1,2 +1,0 @@
-class EntryTrash < Entry
-end

@@ -1,2 +1,0 @@
-class EntryBulk < Entry
-end
