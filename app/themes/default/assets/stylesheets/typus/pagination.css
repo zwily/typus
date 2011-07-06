@@ -13,5 +13,4 @@
 
 .pagination .first,
 .pagination .last,
-.pagination .current,
-.pagination .gap { display: none; }
+.pagination .current { display: none; }
