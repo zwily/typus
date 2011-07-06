@@ -46,10 +46,6 @@ module Admin::Resources::FormHelper
     end
   end
 
-  def display_errors
-    render "helpers/admin/resources/errors"
-  end
-
   def build_save_options
     save_options_for_user_class || save_options_for_headless_mode || save_options
   end

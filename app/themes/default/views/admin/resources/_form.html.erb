@@ -1,6 +1,6 @@
 <%= form_for @item, :url => options, :html => { :class => "resource", :multipart => true } do |form| %>
 
-  <%= display_errors %>
+  <%= render "helpers/admin/resources/errors" %>
 
   <fieldset class="inputs">
     <ol>
