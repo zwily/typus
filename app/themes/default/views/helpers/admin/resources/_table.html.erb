@@ -23,7 +23,10 @@
           <%= field %>
           <% if index.zero? %>
             <div class="actions">
-              <%= table_actions(model, item, association_name) %>
+                <% table_actions(model, item, association_name).each_with_index do |action, index| %>
+                  <%= "/" unless index.zero? %>
+                  <%= link_to action[:message], action[:url], action[:options] %>
+                <% end %>
             </div>
           <% end %>
         </td>

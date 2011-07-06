@@ -49,9 +49,10 @@ module Admin::Resources::TableHelper
 
     resource_actions.map do |body, url, options, proc|
       next if proc && proc.respond_to?(:call) && proc.call(item) == false
-      url = params.dup.cleanup.merge(url).merge(:controller => "/admin/#{model.to_resource}", :id => item.id)
-      link_to Typus::I18n.t(body), url, options
-    end.join(" / ").html_safe
+      { :message => Typus::I18n.t(body),
+        :url => params.dup.cleanup.merge(url).merge(:controller => "/admin/#{model.to_resource}", :id => item.id),
+        :options => options }
+    end
   end
 
 end
