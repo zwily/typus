@@ -1,5 +1,4 @@
-<table>
-
+<% content_for :table_headers do %>
   <thead>
     <tr>
       <% if controller.respond_to?(:bulk) %>
@@ -10,6 +9,11 @@
       <% end %>
     </tr>
   </thead>
+<% end %>
+
+<table>
+
+  <%= yield :table_headers %>
 
   <% items.each do |item| %>
     <tr class="<%= cycle('even', 'odd') %>" id="<%= dom_id(item) %>">
@@ -34,15 +38,6 @@
     </tr>
   <% end %>
 
-  <thead>
-    <tr>
-      <% if controller.respond_to?(:bulk) %>
-        <th><%= check_box_tag "action-toggle", "", false, :class => "action-toggle" %></th>
-      <% end %>
-      <% headers.each do |header| %>
-        <th><%= header %></th>
-      <% end %>
-    </tr>
-  </thead>
+  <%= yield :table_headers %>
 
 </table>
