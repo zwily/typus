@@ -8,7 +8,6 @@ require "fixtures/rails_app/config/environment"
 require "fixtures/rails_app/db/schema"
 
 require "rails/test_help"
-require "factories"
 
 class ActiveSupport::TestCase
 
