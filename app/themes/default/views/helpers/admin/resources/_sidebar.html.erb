@@ -1,18 +1,15 @@
-<% resources.each do |key, value| %>
+<% resources.each do |resource, actions| %>
 
-  <%
-    klass = key.typus_constantize
-    resource = "/admin/#{klass.to_resource}"
-  %>
+  <% klass = resource.typus_constantize %>
 
-  <%= link_to :controller => resource, :action => "index" do %>
+  <%= link_to :controller => "/admin/#{klass.to_resource}" do %>
     <h3><%= klass.model_name.human.pluralize %></h3>
   <% end %>
 
-  <% if @resource.model_name.eql?(key) %>
+  <% if @resource.model_name.eql?(resource) %>
     <ul>
-      <% value.each do |v| %>
-        <li><%= v %></li>
+      <% actions.each do |action| %>
+        <li><%= link_to action[:message], action[:url] %></li>
       <% end %>
     </ul>
   <% end %>

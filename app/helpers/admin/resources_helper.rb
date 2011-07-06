@@ -17,12 +17,20 @@ module Admin::ResourcesHelper
 
     admin_user.application(app_name).each do |resource|
       klass = resource.typus_constantize
-      resources[resource] = []
-      resources[resource] << link_to(Typus::I18n.t("All #{klass.model_name.human.pluralize}"), :action => "index")
-      resources[resource] << link_to(Typus::I18n.t("Add New"), :action => "new") if admin_user.can?("create", klass)
+      resources[resource] = [sidebar_all_resource(klass), sidebar_add_new(klass)].compact
     end
 
     render "helpers/admin/resources/sidebar", :resources => resources
+  end
+
+  def sidebar_add_new(klass)
+    if admin_user.can?("dcreate", klass)
+      { :message => Typus::I18n.t("Add New"), :url => { :action => "new" } }
+    end
+  end
+
+  def sidebar_all_resource(klass)
+    { :message => Typus::I18n.t("All #{klass.model_name.human.pluralize}"), :url => { :action => "index" } }
   end
 
   # TODO: This method should be moved to `lib/typus/controller/actions.rb`
