@@ -1,6 +1,6 @@
 <% resources.each do |resource, actions| %>
 
-  <% klass = resource.typus_constantize %>
+  <% klass = resource.constantize %>
 
   <%= link_to :controller => "/admin/#{klass.to_resource}" do %>
     <h3><%= klass.model_name.human.pluralize %></h3>

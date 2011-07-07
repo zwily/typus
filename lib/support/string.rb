@@ -9,11 +9,7 @@ class String
   end
 
   def extract_class
-    remove_prefix.classify.typus_constantize
-  end
-
-  def typus_constantize
-    Typus::Configuration.models_constantized[self]
+    remove_prefix.classify.constantize
   end
 
   def acl_action_mapper

@@ -27,7 +27,7 @@ module Admin::Resources::FiltersHelper
 
     att_assoc = @resource.reflect_on_association(key.to_sym)
     class_name = att_assoc.options[:class_name] || key.capitalize.camelize
-    resource = class_name.typus_constantize
+    resource = class_name.constantize
     att_assoc.foreign_key
   end
 

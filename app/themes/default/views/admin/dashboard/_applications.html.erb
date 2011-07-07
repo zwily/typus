@@ -8,7 +8,7 @@
       </tr>
     </thead>
 
-    <% admin_user.application(app).map { |i| i.typus_constantize }.each do |klass| %>
+    <% admin_user.application(app).map { |i| i.constantize }.each do |klass| %>
       <tr class="<%= cycle("even", "odd") %>">
         <td>
           <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>

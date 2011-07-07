@@ -26,7 +26,7 @@ module Typus
       #   => ...
       #
       def relate
-        resource_class = params[:resource].typus_constantize
+        resource_class = params[:resource].constantize
         association_name = resource_class.table_name
 
         item = resource_class.find(params[:resource_id])
@@ -45,7 +45,7 @@ module Typus
       #   - has_one
       #
       def unrelate
-        item_class = params[:resource].typus_constantize
+        item_class = params[:resource].constantize
         item = item_class.find(params[:resource_id])
 
         case item_class.relationship_with(@resource)

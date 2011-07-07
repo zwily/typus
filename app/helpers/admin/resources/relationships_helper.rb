@@ -2,7 +2,7 @@ module Admin::Resources::RelationshipsHelper
 
   def setup_relationship(field)
     @field = field
-    @model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.typus_constantize
+    @model_to_relate = @resource.reflect_on_association(field.to_sym).class_name.constantize
     @model_to_relate_as_resource = @model_to_relate.to_resource
     @reflection = @resource.reflect_on_association(field.to_sym)
     @association_name = @reflection.name.to_s

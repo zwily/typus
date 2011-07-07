@@ -16,7 +16,7 @@ module Admin::ResourcesHelper
     app_name = @resource.typus_application
 
     admin_user.application(app_name).each do |resource|
-      klass = resource.typus_constantize
+      klass = resource.constantize
       resources[resource] = [sidebar_all_resource(klass), sidebar_add_new(klass)].compact
     end
 

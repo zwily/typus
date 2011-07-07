@@ -211,7 +211,7 @@ class Admin::ResourcesController < Admin::BaseController
     # call the related method.
     #
     if params[:_saveandassign]
-      item_class = params[:resource].typus_constantize
+      item_class = params[:resource].constantize
       # For some reason we are forced to set the /admin prefix to the controller
       # when working with namespaced stuff.
       options = { :controller => "/admin/#{item_class.to_resource}" }

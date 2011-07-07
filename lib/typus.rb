@@ -184,7 +184,7 @@ module Typus
     end
 
     def user_class
-      user_class_name.typus_constantize
+      user_class_name.constantize
     end
 
     def reload!
