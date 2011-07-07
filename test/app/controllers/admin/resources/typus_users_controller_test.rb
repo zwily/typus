@@ -51,7 +51,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "be able to update his profile" do
-      post :update, :id => @typus_user.id, :typus_user => { :first_name => "John", :last_name => "Locke", :role => 'admin', :status => true }, :_save => true
+      post :update, :id => @typus_user.id, :typus_user => { :first_name => "John", :last_name => "Locke", :role => 'admin', :status => '1' }, :_save => true
       assert_response :redirect
       assert_redirected_to "/admin/typus_users"
       assert_equal "Typus user successfully updated.", flash[:notice]
@@ -59,12 +59,12 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "not be able to change his role" do
-      post :update, :id => @typus_user.id, :typus_user => { :role => 'editor', :status => true }, :_save => true
+      post :update, :id => @typus_user.id, :typus_user => { :role => 'editor' }, :_save => true
       assert_response :unprocessable_entity
     end
 
     should "not be able to change his status" do
-      post :update, :id => @typus_user.id, :typus_user => { :role => 'admin', :status => false }, :_save => true
+      post :update, :id => @typus_user.id, :typus_user => { :status => '0' }, :_save => true
       assert_response :unprocessable_entity
     end
 
