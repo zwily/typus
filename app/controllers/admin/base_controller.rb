@@ -14,7 +14,7 @@ class Admin::BaseController < ActionController::Base
   protected
 
   def reload_config_and_roles
-    Typus.reload! unless Rails.env.production?
+    Typus.reload! if Rails.env.development?
   end
 
   def set_locale
