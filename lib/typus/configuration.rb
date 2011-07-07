@@ -17,10 +17,6 @@ module Typus
     mattr_accessor :config
     @@config = {}
 
-    def self.register_config(config)
-      @@config.merge!(config)
-    end
-
     # Read roles from files <tt>config/typus/*_roles.yml</tt>.
     def self.roles!
       files = Dir[File.join(Typus.config_folder, "*_roles.yml").to_s].sort
@@ -38,10 +34,6 @@ module Typus
 
     mattr_accessor :roles
     @@roles = {}
-
-    def self.register_roles(roles)
-      @@roles.merge!(roles)
-    end
 
     def self.models_constantized!
       @@models_constantized = config.map { |i| i.first }.inject({}) { |result, model| result[model] = model.constantize; result }
