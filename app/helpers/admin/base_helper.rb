@@ -5,7 +5,16 @@ module Admin::BaseHelper
   end
 
   def header
-    render "helpers/admin/base/header"
+    locals = { :admin_title => admin_title }
+    render "helpers/admin/base/header", locals
+  end
+
+  def admin_title
+    if defined?(Admin::Setting)
+      Admin::Setting.admin_title || Typus.admin_title
+    else
+      Typus.admin_title
+    end
   end
 
   def has_root_path?
