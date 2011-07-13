@@ -44,14 +44,14 @@ namespace :test do
 
 end
 
-namespace :demo do
+namespace :submodules do
 
-  desc "Update demo"
+  desc "Update submodules"
   task :update do
     system "git pull && git submodule update --init"
   end
 
-  desc "Upgrade demo"
+  desc "Upgrade submodules"
   task :upgrade do
     system "git submodule foreach 'git pull origin master'"
     system "git ci -m 'Updated submodules' ."
