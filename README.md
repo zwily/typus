@@ -27,7 +27,7 @@
 
 Add **Typus** to your `Gemfile`
 
-    gem 'typus', :git => 'git://github.com/typus/typus.git'
+    gem 'typus', :git => 'git://github.com/typus/typus.git', :branch => '3-0-stable'
 
 Update your bundle, run the generator and start the application server:
 
