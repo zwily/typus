@@ -12,13 +12,13 @@ concentrate on your application instead of the bits to manage the system.
 
 > A category of people or things having common characteristics.
 
-You can try a demo [here][demo].
+You can try a demo [here][typus_demo].
 
 ## Key Features
 
 - Built-in Authentication and Access Control Lists.
 - CRUD and custom actions for your models on a clean interface.
-- Internationalized interface ([See available translations][locales])
+- Internationalized interface ([See available translations][typus_locales])
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
 - Works with `Rails 3.1.X`.
@@ -62,7 +62,7 @@ To clone repository and initialize submodules:
 
 - [Documentation](https://github.com/typus/typus/wiki)
 - [Issues](https://github.com/typus/typus/issues)
-- [Source Code](http://github.com/typus/typus) and [RubyGems](http://rubygems.org/gems/typus)
+- [Source Code][typus] and [RubyGems][typus_gem]
 - [Mailing List](http://groups.google.com/group/typus)
 - [Contributors List](http://github.com/typus/typus/contributors)
 
@@ -89,9 +89,11 @@ To clone repository and initialize submodules:
     OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
     WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[demo]: http://demo.typuscms.com/
+[typus]: http://github.com/typus/typus
+[typus_demo]: http://demo.typuscms.com/
+[typus_demo_code]: https://github.com/typus/demo
+[typus_locales]: https://github.com/typus/typus/tree/master/config/locales
+[typus_gem]: http://rubygems.org/gems/typus
 [paperclip]: http://rubygems.org/gems/paperclip
 [dragonfly]: http://rubygems.org/gems/dragonfly
 [rails]: http://rubyonrails.org/
-[code]: https://github.com/typus/typus/tree/master/test/fixtures/rails_app
-[locales]: https://github.com/typus/typus/tree/master/config/locales
