@@ -1,3 +1,6 @@
 [submodule "test/fixtures/rails_app"]
 	path = test/fixtures/rails_app
 	url = git@github.com:typus/demo.git
+[submodule "config/locales"]
+	path = config/locales
+	url = git@github.com:typus/locales.git
