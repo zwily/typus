@@ -42,6 +42,12 @@ Update your bundle, run the generator and start the application server:
 
 and go to <http://0.0.0.0:3000/admin>.
 
+## Development
+
+To clone repository and initialize submodules:
+
+    $ git clone --recursive git://github.com/typus/typus.git
+
 ## Links
 
 - [Documentation](https://github.com/typus/typus/wiki)
