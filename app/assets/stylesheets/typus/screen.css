@@ -85,7 +85,11 @@ a:hover { color: #333; text-decoration: underline!important; }
 
 /* @group Wrapper */
 
-#wrapper { min-height: 100%; position: relative; }
+#wrapper {
+  min-height: 100%;
+  position: relative;
+  min-width: 960px;
+}
 
 /* @end */
 
@@ -100,7 +104,7 @@ a:hover { color: #333; text-decoration: underline!important; }
 #content { margin: 0 0 0 20em; }
 #content.headless { margin: 1em; }
 
-#content h2 { font-size: 1.5em; margin: 0.5em 0; }
+h2 { font-size: 1.5em; margin: 0.5em 0; }
 #content h2 small { font-size: 0.75em; }
 #content h2 small a { color: #666; }
 
