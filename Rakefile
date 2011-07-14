@@ -11,6 +11,7 @@ Rake::TestTask.new do |t|
                           'test/app/mailers/**/*_test.rb',
                           'test/lib/support/*_test.rb',
                           'test/lib/typus/*_test.rb',
+                          'test/lib/typus/orm/**/*_test.rb',
                           'test/config/*_test.rb']
   t.verbose = true
 end
