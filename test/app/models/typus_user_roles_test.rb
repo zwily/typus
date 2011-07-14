@@ -22,6 +22,8 @@ class TypusUserRolesTest < ActiveSupport::TestCase
                   "Comment",
                   "Dog",
                   "Entry",
+                  "EntryBulk",
+                  "EntryTrash",
                   "Git",
                   # "Hit",
                   "ImageHolder",
@@ -69,13 +71,8 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     end
 
     should "verify models access" do
-      expected = %w(Category Comment Git Post TypusUser View)
+      expected = %w(Comment Git Post TypusUser View)
       assert_equal expected, @typus_user.resources.map(&:first).sort
-    end
-
-    should "only create, read and update categories" do
-      %w(create read update).each { |a| assert @typus_user.can?(a, 'Category') }
-      %w(delete).each { |a| assert @typus_user.cannot?(a, 'Category') }
     end
 
     should "only create, read and update posts" do
@@ -102,13 +99,8 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     end
 
     should "verify models access" do
-      expected = %w(Category Comment Post)
+      expected = %w(Comment Post)
       assert_equal expected, @typus_user.resources.map(&:first).sort
-    end
-
-    should "only read and update categories" do
-      %w(read update).each { |a| assert @typus_user.can?(a, 'Category') }
-      %w(create delete).each { |a| assert @typus_user.cannot?(a, 'Category') }
     end
 
     should "only read comments" do

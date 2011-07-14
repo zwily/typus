@@ -38,16 +38,22 @@ class TypusUserTest < ActiveSupport::TestCase
   end
 
   test "generate" do
-    assert TypusUser.generate.invalid?
+    assert !TypusUser.generate
 
-    options = { :email => 'demo@example.com' }
-    assert TypusUser.generate(options).valid?
+    options = { :email => Factory.build(:typus_user).email }
+    typus_user = TypusUser.generate(options)
+    assert_equal options[:email], typus_user.email
 
-    options = { :email => 'demo@example.com', :password => 'XXXXXXXX' }
-    assert TypusUser.generate(options).valid?
+    typus_user_factory = Factory.build(:typus_user)
+    options = { :email => typus_user_factory.email, :password => typus_user_factory.password }
+    typus_user = TypusUser.generate(options)
+    assert_equal options[:email], typus_user.email
 
-    options = { :email => 'demo@example.com', :role => 'admin' }
-    assert TypusUser.generate(options).valid?
+    typus_user_factory = Factory.build(:typus_user)
+    options = { :email => typus_user_factory.email, :role => typus_user_factory.role }
+    typus_user = TypusUser.generate(options)
+    assert_equal options[:email], typus_user.email
+    assert_equal options[:role], typus_user.role
   end
 
   context "TypusUser" do
@@ -104,9 +110,9 @@ class TypusUserTest < ActiveSupport::TestCase
     assert_equal Typus.applications.reject { |i| i.eql?("MongoDB") }, typus_user.applications
   end
 
-  test "admin gets a list of application resources for CRUD Extended application" do
+  test "admin gets a list of application resources for crud extended application" do
     typus_user = Factory.build(:typus_user)
-    assert_equal %w(Asset Category Comment Page Post), typus_user.application("CRUD Extended")
+    assert_equal ["Asset", "Case", "Comment", "Page", "Post", "Article::Entry"], typus_user.application("CRUD Extended")
   end
 
   test "admin gets a list of application resources for Admin application" do
@@ -121,7 +127,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
   test "editor gets a list of application resources" do
     typus_user = Factory.build(:typus_user, :role => "editor")
-    assert_equal %w(Category Comment Post), typus_user.application("CRUD Extended")
+    assert_equal %w(Comment Post), typus_user.application("CRUD Extended")
     assert_equal %w(TypusUser), typus_user.application("Admin")
   end
 
