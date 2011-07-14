@@ -8,9 +8,8 @@ module Typus
             options = args.extract_options!
             options[:password] ||= Typus.password
             options[:role] ||= Typus.master_role
-            user = new :email => options[:email], :password => options[:password]
-            user.status = true
-            user.role = options[:role]
+            options[:status] = true
+            user = new options, :without_protection => true
             user.save ? user : false
           end
 
