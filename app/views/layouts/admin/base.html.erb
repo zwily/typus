@@ -35,16 +35,18 @@
 
     <div id="content_wrapper">
 
-      <div id="sidebar">
-        <%= yield :sidebar %>
-      </div>
-
-      <div id="content">
+      <% if controller.controller_name == 'dashboard' %>
         <%= yield :layout %>
-      </div>
+      <% else %>
+        <div id="sidebar">
+          <%= yield :sidebar %>
+        </div>
+        <div id="content">
+          <%= yield :layout %>
+        </div>
+      <% end %>
 
       <div class="clear"></div>
-
     </div>
 
     <div id="footer_wrapper">
