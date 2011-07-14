@@ -2,17 +2,17 @@ require "test_helper"
 
 class ConfigurationTest < ActiveSupport::TestCase
 
+=begin
   should "verify typus roles is loaded" do
     assert Typus::Configuration.respond_to?(:roles!)
-    assert Typus::Configuration.roles!.is_a?(Hash)
+    assert_equal Hash, Typus::Configuration.roles!.class
   end
 
   should "verify typus config file is loaded" do
     assert Typus::Configuration.respond_to?(:config!)
-    assert Typus::Configuration.config!.is_a?(Hash)
+    assert_equal Hash, Typus::Configuration.config!
   end
 
-=begin
   should "load configuration files from config broken" do
     Typus.expects(:config_folder).at_least_once.returns("test/fixtures/config/broken")
     assert_not_equal Hash.new, Typus::Configuration.roles!

@@ -10,6 +10,7 @@ Rake::TestTask.new do |t|
                           'test/app/models/**/*_test.rb',
                           'test/app/mailers/**/*_test.rb',
                           'test/lib/support/*_test.rb',
+                          'test/lib/typus/*_test.rb',
                           'test/config/*_test.rb']
   t.verbose = true
 end
