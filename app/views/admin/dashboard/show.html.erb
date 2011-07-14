@@ -7,16 +7,4 @@
   <%= render "sidebar" %>
 <% end %>
 
-<h2>
-  <%= page_title %>
-</h2>
-
-<% if admin_user.applications.any? %>
-  <%= render 'applications' %>
-<% else %>
-  <div class="notice">
-    No applications detected.
-  </div>
-<% end %>
-
-<%= resources(admin_user) %>
+<%= render 'admin/dashboard/widgets/applications' %>

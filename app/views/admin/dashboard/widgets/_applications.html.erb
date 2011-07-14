@@ -1,0 +1,31 @@
+<!-- Applications list with models. -->
+
+<h2><%= Typus::I18n.t("Applications") %></h2>
+
+<% if admin_user.applications.any? %>
+  <% admin_user.applications.each do |app| %>
+
+    <table>
+
+      <thead>
+        <tr>
+          <th><%= Typus::I18n.t(app) %></th>
+        </tr>
+      </thead>
+
+      <% admin_user.application(app).map { |i| i.constantize }.each do |klass| %>
+        <tr class="<%= cycle("even", "odd") %>">
+          <td>
+            <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>
+          </td>
+        </tr>
+      <% end %>
+
+    </table>
+
+  <% end %>
+<% else %>
+  <div class="notice">
+    No applications detected.
+  </div>
+<% end %>

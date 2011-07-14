@@ -13,6 +13,10 @@ module Typus
             Typus::Configuration.roles[role.to_s].compact
           end
 
+          def models
+            Typus.models.delete_if { |m| cannot?('read', m) }
+          end
+
           def applications
             Typus.applications.delete_if { |a| application(a).empty? }
           end
