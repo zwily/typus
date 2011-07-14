@@ -1,0 +1,11 @@
+#content table { margin-bottom: 2em!important; width: 100%; text-align: left; }
+#content table a { text-decoration: none; }
+#content table th { background: #242527; color: #FFF; padding: 6px; }
+#content table th a { color: #FFF!important; text-decoration: none; }
+#content table th a:hover { text-decoration: underline; }
+#content table td.right { text-align: right; }
+#content table tr.even { background: #FFF!important; }
+#content table tr.even:hover,
+#content table tr.odd:hover { background: #E4E4E4!important; }
+#content table tr.odd { background: #F3F3F3; }
+#content table td { border: none; padding: 5px; vertical-align: top; }

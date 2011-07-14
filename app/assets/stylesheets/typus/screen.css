@@ -159,59 +159,6 @@ a:hover { color: #333; text-decoration: underline!important; }
 
 /* @end */
 
-/* @group Fieldsets */
-
-fieldset { margin: 0; padding: 0; }
-fieldset ol { margin: 0!important; }
-fieldset ol li { list-style: none!important; margin: 1em 0!important; }
-fieldset small { font-size: 0.9em; font-weight: normal; margin: 0 0 0 0.25em; }
-fieldset small a { text-decoration: none; }
-
-fieldset.inputs { }
-
-  fieldset.inputs input[type='text'],
-  fieldset.inputs input[type='password'] {
-    border: 1px solid #999;
-    font-size: 20px;
-    padding: 5px;
-    width: 685px;
-  }
-
-  fieldset.inputs input[type='text']:focus,
-  fieldset.inputs input[type='password']:focus {
-    /* background: #FFFCE1; */
-  }
-
-  fieldset.inputs textarea { font-size: 1.2em; padding: 3px; width: 691px; }
-
-  fieldset.inputs select { border: 1px solid #999; font-size: 1.20em; }
-
-  fieldset.inputs textarea:focus { background: #FFFCE1; }
-  fieldset.inputs label.inline_label { display: inline; }
-
-fieldset.buttons { }
-
-  fieldset.buttons ol li {
-    display: inline;
-  }
-
-/* @end */
-
-/* @group Content Tables */
-
-#content table { margin-bottom: 2em!important; width: 100%; text-align: left; }
-#content table a { text-decoration: none; }
-#content table th { background: #242527; color: #FFF; padding: 6px; }
-#content table th a { color: #FFF!important; text-decoration: none; }
-#content table th a:hover { text-decoration: underline; }
-#content table td.right { text-align: right; }
-#content table tr.even { background: #FFF!important; }
-#content table tr.even:hover,
-#content table tr.odd:hover { background: #E4E4E4!important; }
-#content table tr.odd { background: #F3F3F3; }
-#content table td { border: none; padding: 5px; vertical-align: top; }
-
-/* @end */
 
 /* @group Login Page Dialog */
 
@@ -237,44 +184,6 @@ fieldset.buttons { }
 
 #account #footer { font-size: 0.9em; line-height: 1.8em; text-align: center; }
 #account #footer a { font-weight: bold; }
-
-/* @end */
-
-/* @group Rails errors and flashes */
-
-#errorExplanation,
-.alert,
-.notice {
-  padding: 0.8em;
-  margin: 1em 0;
-  border: 1px solid #ddd;
-  -moz-border-radius: 8px;
-  -webkit-border-radius: 8px;
-  line-height: 1.5em;
-}
-
-#errorExplanation p,
-#errorExplanation li,
-#errorExplanation h3 {
-  color: #D12F19;
-}
-
-#errorExplanation h3 { margin: 5px 0 0 0; }
-
-#errorExplanation ul { margin: 10px 0 0 20px!important; }
-
-#errorExplanation,
-.alert { background: #FBE3E4; border-color: #FBC2C4; color: #D12F19; }
-.alert a { color: #D12F19; text-decoration: underline; }
-
-.notice { background: #FFF6BF; border-color: #FFD324; color: #817134; }
-.notice a { color: #817134; text-decoration: underline; }
-
-.fieldWithErrors label { color: #CD0A0A;}
-.fieldWithErrors input { background: #FEF8F6; }
-
-#errorExplanation ul { margin: 1em 1.5em; }
-#errorExplanation ul li { list-style: square!important; margin: 0!important; }
 
 /* @end */
 
@@ -316,7 +225,6 @@ fieldset.buttons { }
 /* @group Search */
 
 #search { float: right; }
-#search input { font-size: 1em; padding: 3px; }
 
 /* @end */
 
