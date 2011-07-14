@@ -8,6 +8,7 @@ Rake::TestTask.new do |t|
   t.libs << "test"
   t.test_files = FileList['test/app/controllers/**/*_test.rb',
                           'test/app/models/**/*_test.rb',
+                          'test/app/mailers/**/*_test.rb',
                           'test/lib/support/*_test.rb',
                           'test/config/*_test.rb']
   t.verbose = true
