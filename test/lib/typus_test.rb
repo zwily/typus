@@ -53,13 +53,13 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   test "applications returns applications sorted" do
-    expected = ["Admin", "CRUD", "CRUD Extended", "CRUD Namespaced", "HasManyThrough", "HasOne", "MongoDB", "Polymorphic", "STI"]
+    expected = ["Admin", "CRUD", "CRUD Extended", "Extensions", "HasManyThrough", "HasOne", "MongoDB", "Polymorphic"]
     assert_equal expected, Typus.applications
   end
 
   test "application returns modules of the CRUD Extended application" do
-    expected = %w(Asset Category Comment Page Post)
-    assert Typus.application("CRUD Extended").eql?(expected)
+    expected = %w(Asset Case Comment Page Post Article::Entry)
+    assert_equal expected, Typus.application("CRUD Extended")
   end
 
   test "models are sorted" do
@@ -73,6 +73,8 @@ class TypusTest < ActiveSupport::TestCase
                 "Comment",
                 "Dog",
                 "Entry",
+                "EntryBulk",
+                "EntryTrash",
                 "Hit",
                 "ImageHolder",
                 "Invoice",
