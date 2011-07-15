@@ -34,17 +34,14 @@
     </div>
 
     <div id="content_wrapper">
-
-      <% if controller.controller_name == 'dashboard' %>
-        <%= yield :layout %>
-      <% else %>
-        <div id="sidebar">
+      <div class="container_12">
+        <div class="grid_<%= grid[:sidebar] %>">
           <%= yield :sidebar %>
         </div>
-        <div id="content">
+        <div class="grid_<%= grid[:main] %>">
           <%= yield :layout %>
         </div>
-      <% end %>
+      </div>
 
       <div class="clear"></div>
     </div>

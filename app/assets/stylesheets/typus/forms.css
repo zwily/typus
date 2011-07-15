@@ -22,18 +22,18 @@ fieldset small a {
   text-decoration: none;
 }
 
-fieldset.inputs { }
+fieldset.inputs {}
 
   fieldset.inputs input[type='text'],
   fieldset.inputs input[type='password'] {
     font-size: 1.25em;
-    width: 685px;
+    width: 100%;
   }
 
   fieldset.inputs textarea {
     font-size: 1.25em;
     padding: 3px;
-    width: 691px;
+/*    width: 100%;*/
   }
 
   fieldset.inputs select {
@@ -44,7 +44,9 @@ fieldset.inputs { }
     display: inline;
   }
 
-fieldset.buttons { }
+fieldset.buttons {
+  margin-top: 1.5em;
+}
 
   fieldset.buttons ol li {
     display: inline;
