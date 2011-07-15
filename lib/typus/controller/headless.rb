@@ -3,7 +3,7 @@ module Typus
     module Headless
 
       def self.included(base)
-        base.before_filter :set_resources_action_for_headless_on_index, :only => [:index]
+        base.before_filter :set_resources_action_for_headless_on_index, :only => [:index, :trash]
         base.before_filter :set_resources_action_for_headless, :only => [:new, :create, :edit, :show]
         base.helper_method :headless_mode?
         base.layout :set_headless_layout
