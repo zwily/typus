@@ -4,17 +4,21 @@
 
     <% klass = resource.constantize %>
 
-    <%= link_to :controller => "/admin/#{klass.to_resource}" do %>
-      <h3><%= klass.model_name.human.pluralize %></h3>
-    <% end %>
+    <ul>
 
-    <% if @resource.model_name.eql?(resource) %>
-      <ul>
-        <% actions.each do |action| %>
-          <li><%= link_to action[:message], action[:url] %></li>
-        <% end %>
-      </ul>
-    <% end %>
+      <%= link_to :controller => "/admin/#{klass.to_resource}" do %>
+        <li class="header"><%= klass.model_name.human.pluralize %></li>
+      <% end %>
+
+      <% if @resource.model_name.eql?(resource) %>
+        <ul>
+          <% actions.each do |action| %>
+            <li><%= link_to action[:message], action[:url] %></li>
+          <% end %>
+        </ul>
+      <% end %>
+
+    </ul>
 
   <% end %>
 
