@@ -47,3 +47,7 @@
 #account #footer a {
   font-weight: bold;
 }
+
+#account #actions {
+  text-align: center;
+}

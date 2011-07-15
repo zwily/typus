@@ -16,6 +16,12 @@
       <%= yield :layout %>
     </div>
 
+    <% if content_for?(:actions) %>
+      <div id="actions">
+        <%= yield :actions %>
+      </div>
+    <% end %>
+
   </div>
 
 </body>
