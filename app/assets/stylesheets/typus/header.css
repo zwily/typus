@@ -44,8 +44,8 @@
 }
 
 #header_wrapper #links .left ul li a {
-  -moz-border-radius: 5px;
-  -webkit-border-radius: 5px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
   background: #242527;
   padding: 3px 5px;
   text-decoration: none;

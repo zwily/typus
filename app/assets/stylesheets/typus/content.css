@@ -52,8 +52,8 @@
 }
 
 #content_wrapper blockquote {
-  -moz-border-radius: 3px;
-  -webkit-border-radius: 3px;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
   font-size: 1.25em;
   font-family: georgia;
   line-height: 1.5em;

@@ -1,6 +1,6 @@
 #sidebar ul li.header {
-  -moz-border-radius: 0.5em;
-  -webkit-border-radius: 0.5em;
+  -moz-border-radius: 4px;
+  -webkit-border-radius: 4px;
   background: #242527;
   color: #FFF;
   font-size: 1.20em;
