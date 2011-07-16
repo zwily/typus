@@ -3,38 +3,38 @@
   position: relative;
 }
 
-#content_wrapper {
+#content {
   margin: 0;
   padding: 1em;
 }
 
-#content_wrapper h2 {
+#content h2 {
   font-size: 1.5em;
   margin: 0.5em 0;
 }
 
-#content_wrapper h2 small {
+#content h2 small {
   font-size: 0.75em;
 }
 
-#content_wrapper h2 small a {
+#content h2 small a {
   color: #666;
 }
 
-#content_wrapper ol {
+#content ol {
   margin: 1em 2em;
 }
 
-#content_wrapper ul {
+#content ul {
   margin: 0 1.5em;
 }
 
-#content_wrapper li {
+#content li {
   list-style: square;
   line-height: 1.5em;
 }
 
-#content_wrapper pre {
+#content pre {
   background: #000;
   color: #FFF;
   font-size: 1.5em;
@@ -43,7 +43,7 @@
   padding: 1em;
 }
 
-#content_wrapper blockquote {
+#content blockquote {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   font-size: 1.25em;
@@ -54,43 +54,43 @@
   border: 1px solid #AAA;
 }
 
-#content_wrapper .filters {
+#content .filters {
   border-bottom: 1px solid #D3D3D3;
   height: 2em;
   margin-bottom: 1em;
   padding: 1em 0;
 }
 
-#content_wrapper .filters ul {
+#content .filters ul {
   margin: 0;
 }
 
-#content_wrapper .filters ul li {
+#content .filters ul li {
   float: left;
   list-style: none;
   margin: 0 1em 0 0;
 }
 
-#content_wrapper #search {
+#content #search {
   float: right;
 }
 
-#content_wrapper #search ul li {
+#content #search ul li {
   margin: 0;
 }
 
-#content_wrapper ul.predefined_filters {
+#content ul.predefined_filters {
   border-bottom: 1px solid #D3D3D3;
   margin: -0.5em 0 0 0;
   padding: 1em 0;
 }
 
-#content_wrapper ul.predefined_filters li {
+#content ul.predefined_filters li {
   display: inline;
   margin: 0 0.5em 0 0;
 }
 
-#content_wrapper .actions {
+#content .actions {
   font-size: 0.9em;
   margin: 0.5em 0;
   height: 1em;
