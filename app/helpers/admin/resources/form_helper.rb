@@ -31,6 +31,7 @@ module Admin::Resources::FormHelper
 
     locals = { :resource => @resource,
                :attribute => attribute,
+               :attribute_id => "#{@resource.table_name}_#{attribute}",
                :options => options,
                :html_options => html_options,
                :form => form,

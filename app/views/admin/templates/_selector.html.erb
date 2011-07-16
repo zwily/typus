@@ -8,7 +8,7 @@
   end
 %>
 
-<li id="<%= attribute %>">
+<li id="<%= attribute_id %>">
   <%= form.label attribute, "#{label_text} <small>#{message}</small>".html_safe %>
   <%= form.select attribute, @resource.send(attribute), options, html_options %>
 </li>

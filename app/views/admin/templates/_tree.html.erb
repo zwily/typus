@@ -1,5 +1,5 @@
 <% unless values.empty? %>
-  <li id="<%= attribute %>">
+  <li id="<%= attribute_id %>">
     <%= form.label label_text %>
     <%= form.select :parent_id, values, { :include_blank => true } %>
   </li>

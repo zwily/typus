@@ -5,7 +5,7 @@
   end
 %>
 
-<li id="<%= attribute %>">
+<li id="<%= attribute_id %>">
   <%= form.label related_fk, "#{label_text} <small>#{message}</small>".html_safe %>
   <%= form.select related_fk, values, options, html_options %>
 </li>

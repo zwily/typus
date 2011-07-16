@@ -16,7 +16,7 @@
   </script>
 <% end %>
 
-<li id="<%= attribute %>">
+<li id="<%= attribute_id %>">
   <%= form.label related_fk, "#{label_text} <small>#{message}</small>".html_safe %>
   <%= form.hidden_field related_fk %>
   <input id="tokenInput_for_<%= related_fk %>"
