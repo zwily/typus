@@ -3,51 +3,36 @@
   padding: 1.25em 1em;
 }
 
-#header #title {
-  color: #FFF;
+#header .title {
   margin-bottom: 1.5em;
 }
 
-#header #title h1 a {
-  color: #FFF;
+#header .title h1 a {
   text-decoration: none;
 }
 
-#header #title h1 a:hover {
+#header .title h1 a:hover {
   text-decoration: underline;
 }
 
-#header #links {
+#header .title,
+#header .title h1 a,
+#header .applications,
+#header .applications a,
+#header .profile,
+#header .profile a {
   color: #FFF;
 }
 
-#header #links ul li {
+#header ul li {
   display: inline;
-  padding-left: 0.5em;
-  color: #FFF;
 }
 
-#header #links a {
-  color: #FFF;
+#header .applications ul li {
+  padding-right: 0.25em;
 }
 
-#header #links .left {
-  float: left;
-}
-
-#header #links .left ul {
-  display: block;
-  padding: 0 0.0em 0 0;
-  margin: 0;
-}
-
-#header #links .left ul li {
-  display: inline;
-  padding: 0 0.25em 0 0;
-  margin: 0;
-}
-
-#header #links .left ul li a {
+#header .applications ul li a {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   background: #242527;
@@ -55,12 +40,16 @@
   text-decoration: none;
 }
 
-#header #links .left ul li a.active,
-#header #links .left ul li a:hover {
+#header .applications ul li a.active,
+#header .applications ul li a:hover {
   background: #FFF;
   color: #000;
 }
 
-#header #links .right {
-  float: right;
+#header .profile {
+  text-align: right;
+}
+
+#header .profile ul li {
+  padding-left: 0.5em;
 }
