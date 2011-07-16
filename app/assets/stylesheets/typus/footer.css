@@ -1,3 +1,7 @@
 #footer_wrapper {
-  display: none;
+  padding: 1em;
+}
+
+#footer_wrapper .copyright {
+  font-size: 0.80em;
 }
