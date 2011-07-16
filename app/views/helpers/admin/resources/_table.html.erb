@@ -1,4 +1,6 @@
-<% content_for :table_headers do %>
+<% yield_name = "table_headers_#{model}" %>
+
+<% content_for yield_name do %>
   <thead>
     <tr>
       <% if controller.respond_to?(:bulk) %>
@@ -13,7 +15,7 @@
 
 <table>
 
-  <%= yield :table_headers %>
+  <%= yield yield_name %>
 
   <% items.each do |item| %>
     <tr class="<%= cycle('even', 'odd') %>" id="<%= dom_id(item) %>">
@@ -38,6 +40,6 @@
     </tr>
   <% end %>
 
-  <%= yield :table_headers %>
+  <%= yield yield_name %>
 
 </table>
