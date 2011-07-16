@@ -1,53 +1,53 @@
-#header_wrapper {
+#header {
   background: #4A525A;
   padding: 1.25em 1em;
 }
 
-#header_wrapper #title {
+#header #title {
   color: #FFF;
   margin-bottom: 1.5em;
 }
 
-#header_wrapper #title h1 a {
+#header #title h1 a {
   color: #FFF;
   text-decoration: none;
 }
 
-#header_wrapper #title h1 a:hover {
+#header #title h1 a:hover {
   text-decoration: underline;
 }
 
-#header_wrapper #links {
+#header #links {
   color: #FFF;
 }
 
-#header_wrapper #links ul li {
+#header #links ul li {
   display: inline;
   padding-left: 0.5em;
   color: #FFF;
 }
 
-#header_wrapper #links a {
+#header #links a {
   color: #FFF;
 }
 
-#header_wrapper #links .left {
+#header #links .left {
   float: left;
 }
 
-#header_wrapper #links .left ul {
+#header #links .left ul {
   display: block;
   padding: 0 0.0em 0 0;
   margin: 0;
 }
 
-#header_wrapper #links .left ul li {
+#header #links .left ul li {
   display: inline;
   padding: 0 0.25em 0 0;
   margin: 0;
 }
 
-#header_wrapper #links .left ul li a {
+#header #links .left ul li a {
   -moz-border-radius: 4px;
   -webkit-border-radius: 4px;
   background: #242527;
@@ -55,12 +55,12 @@
   text-decoration: none;
 }
 
-#header_wrapper #links .left ul li a.active,
-#header_wrapper #links .left ul li a:hover {
+#header #links .left ul li a.active,
+#header #links .left ul li a:hover {
   background: #FFF;
   color: #000;
 }
 
-#header_wrapper #links .right {
+#header #links .right {
   float: right;
 }
