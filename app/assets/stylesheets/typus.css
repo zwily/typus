@@ -4,6 +4,7 @@
 *= require css/fluid
 *= require token-input
 *= require typus/reset
+*= require typus/layout
 *= require typus/defaults
 *= require typus/errors
 *= require typus/account
