@@ -1,12 +1,16 @@
-#header_wrapper { background: #4A525A; }
+#header_wrapper {
+  background: #4A525A;
+  padding: 1.25em 1em;
+}
 
 #header_wrapper #header {
   color: #FFF;
-  padding: 1.25em 2em 0.25em 2em;
+  margin-bottom: 1.5em;
 }
 
 #header_wrapper #header h1 a {
-  color: #FFF; text-decoration: none;
+  color: #FFF;
+  text-decoration: none;
 }
 
 #header_wrapper #header h1 a:hover {
@@ -14,7 +18,7 @@
 }
 
 #header_wrapper #links {
-  color: #FFF; padding: 1.25em 2em;
+  color: #FFF;
 }
 
 #header_wrapper #links ul li {
