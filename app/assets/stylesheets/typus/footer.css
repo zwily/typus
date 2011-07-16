@@ -3,5 +3,6 @@
 }
 
 #footer .copyright {
+  display: none;
   font-size: 0.80em;
 }
