@@ -8,14 +8,6 @@
   padding: 1em;
 }
 
-#content {
-  margin: 0 0 0 20em;
-}
-
-#content.headless {
-  margin: 1em;
-}
-
 #content_wrapper h2 {
   font-size: 1.5em;
   margin: 0.5em 0;
