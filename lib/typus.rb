@@ -134,6 +134,9 @@ module Typus
   mattr_accessor :user_foreign_key
   @@user_foreign_key = "typus_user_id"
 
+  mattr_accessor :quick_sidebar
+  @@user_foreign_key = false
+
   class << self
 
     # Default way to setup typus. Run `rails generate typus` to create a fresh
