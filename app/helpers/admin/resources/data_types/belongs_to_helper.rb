@@ -38,6 +38,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
            :association => association,
            :resource => @resource,
            :attribute => attribute,
+           :attribute_id => "#{@resource.table_name}_#{attribute}",
            :form => form,
            :related_fk => related_fk,
            :related => related,

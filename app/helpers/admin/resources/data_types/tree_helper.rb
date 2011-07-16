@@ -6,6 +6,7 @@ module Admin::Resources::DataTypes::TreeHelper
 
   def typus_tree_field(attribute, form)
     locals = { :attribute => attribute,
+               :attribute_id => "#{@resource.table_name}_#{attribute}",
                :form => form,
                :label_text => @resource.human_attribute_name(attribute),
                :values => expand_tree_into_select_field(@resource.roots, "parent_id") }
