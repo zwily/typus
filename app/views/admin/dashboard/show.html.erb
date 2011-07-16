@@ -3,8 +3,10 @@
   title(page_title)
 %>
 
-<% content_for :sidebar do %>
+<div class="grid_2">
   <%= render 'admin/dashboard/sidebar' %>
-<% end %>
+</div>
 
-<%= render 'admin/dashboard/widgets/applications' %>
+<div class="grid_10">
+  <%= render 'admin/dashboard/widgets/applications' %>
+</div>
