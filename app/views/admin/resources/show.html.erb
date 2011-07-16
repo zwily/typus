@@ -3,21 +3,27 @@
   title(page_title)
 %>
 
-<% content_for :sidebar, build_sidebar %>
+<div class="grid_2">
+  <%= build_sidebar %>
+</div>
 
-<h2>
-  <%= page_title %>
-  <small><%= list_actions %></small>
-</h2>
+<div class="grid_8">
 
-<%= display_flash_message %>
-<%= render 'show' %>
+  <h2>
+    <%= page_title %>
+    <small><%= list_actions %></small>
+  </h2>
 
-<dl>
-  <% build_display(@item, fields).each do |attribute, type| %>
-    <dt><%= attribute %></dt>
-    <dd><%= type %></dd>
-  <% end %>
-</dl>
+  <%= display_flash_message %>
+  <%= render 'show' %>
 
-<%= typus_relationships %>
+  <dl>
+    <% build_display(@item, fields).each do |attribute, type| %>
+      <dt><%= attribute %></dt>
+      <dd><%= type %></dd>
+    <% end %>
+  </dl>
+
+  <%= typus_relationships %>
+
+</div>

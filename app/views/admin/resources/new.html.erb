@@ -3,14 +3,18 @@
   title(page_title)
 %>
 
-<% content_for :sidebar, build_sidebar %>
+<div class="grid_2">
+  <%= build_sidebar %>
+</div>
 
-<h2>
-  <%= page_title %>
-  <small><%= list_actions %></small>
-</h2>
+<div class="grid_8">
+  <h2>
+    <%= page_title %>
+    <small><%= list_actions %></small>
+  </h2>
 
-<%= render 'new' %>
+  <%= render 'new' %>
 
-<%= render :partial => 'form',
-           :locals => { :options => params.dup.cleanup.merge(:action => 'create') } %>
+  <%= render :partial => 'form',
+             :locals => { :options => params.dup.cleanup.merge(:action => 'create') } %>
+</div>

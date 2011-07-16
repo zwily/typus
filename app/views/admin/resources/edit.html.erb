@@ -3,29 +3,33 @@
   title(page_title)
 %>
 
-<% content_for :sidebar do %>
-  <% build_sidebar.present? ? build_sidebar : render("admin/templates/profile_sidebar") %>
-<% end %>
+<div class="grid_2">
+  <%= build_sidebar.present? ? build_sidebar : render("admin/templates/profile_sidebar") %>
+</div>
 
-<h2>
-  <%= page_title %>
-  <small><%= list_actions %></small>
-</h2>
+<div class="grid_8">
 
-<% if flash[:notice] && headless_mode? %>
-  <script>
-    $(document).ready(function() { parent.location.reload(); });
-  </script>
-<% end %>
+  <h2>
+    <%= page_title %>
+    <small><%= list_actions %></small>
+  </h2>
 
-<%= display_flash_message %>
-<%= render 'edit' %>
+  <% if flash[:notice] && headless_mode? %>
+    <script>
+      $(document).ready(function() { parent.location.reload(); });
+    </script>
+  <% end %>
 
-<%
-  options = params.dup.cleanup.merge!(:action => 'update')
-  button = Typus::I18n.t("Save %{resource}", :resource => @resource.model_name.human)
-%>
+  <%= display_flash_message %>
+  <%= render 'edit' %>
 
-<%= render :partial => 'form', :locals => { :options => options, :button => button } %>
+  <%
+    options = params.dup.cleanup.merge!(:action => 'update')
+    button = Typus::I18n.t("Save %{resource}", :resource => @resource.model_name.human)
+  %>
 
-<%= typus_relationships unless headless_mode? %>
+  <%= render :partial => 'form', :locals => { :options => options, :button => button } %>
+
+  <%= typus_relationships unless headless_mode? %>
+
+</div>

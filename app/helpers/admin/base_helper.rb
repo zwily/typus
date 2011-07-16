@@ -45,8 +45,4 @@ module Admin::BaseHelper
     end
   end
 
-  def grid
-    { :main => 10, :sidebar => 2 }
-  end
-
 end
