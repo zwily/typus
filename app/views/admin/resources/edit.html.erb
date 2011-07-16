@@ -3,12 +3,7 @@
   title(page_title)
 %>
 
-<div class="grid_2">
-  <%= build_sidebar.present? ? build_sidebar : render("admin/templates/profile_sidebar") %>
-</div>
-
-<div class="grid_8">
-
+<% content_for :main_grid do %>
   <h2>
     <%= page_title %>
     <small><%= list_actions %></small>
@@ -31,12 +26,12 @@
   <%= render :partial => 'form', :locals => { :options => options, :button => button } %>
 
   <%= typus_relationships unless headless_mode? %>
-
-</div>
+<% end %>
 
 <div class="grid_2">
-  <!--
-    'admin/resources/edit/rencently_edited'
-    'admin/resources/edit/actions'
-  -->
+  <%= build_sidebar.present? ? build_sidebar : render("admin/templates/profile_sidebar") %>
+</div>
+
+<div class="grid_8">
+  <%= yield :main_grid %>
 </div>

@@ -3,11 +3,7 @@
   title(page_title)
 %>
 
-<div class="grid_2">
-  <%= build_sidebar %>
-</div>
-
-<div class="grid_10">
+<% content_for :main_grid do %>
 
   <h2>
     <%= page_title %>
@@ -49,4 +45,12 @@
     <p><%= Typus::I18n.t("No %{resources} found.", :resources => @resource.model_name.human.downcase.pluralize) %></p>
   <% end %>
 
+<% end %>
+
+<div class="grid_2">
+  <%= build_sidebar %>
+</div>
+
+<div class="grid_10">
+  <%= yield :main_grid %>
 </div>

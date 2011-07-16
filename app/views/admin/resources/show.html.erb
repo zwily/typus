@@ -3,12 +3,7 @@
   title(page_title)
 %>
 
-<div class="grid_2">
-  <%= build_sidebar %>
-</div>
-
-<div class="grid_8">
-
+<% content_for :main_grid do %>
   <h2>
     <%= page_title %>
     <small><%= list_actions %></small>
@@ -25,5 +20,12 @@
   </dl>
 
   <%= typus_relationships %>
+<% end %>
 
+<div class="grid_2">
+  <%= build_sidebar %>
+</div>
+
+<div class="grid_8">
+  <%= yield :main_grid %>
 </div>
