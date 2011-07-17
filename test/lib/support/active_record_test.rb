@@ -48,6 +48,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal "Not Published - Hash", page.mapping(:status)
   end
 
+  test "mapping with a hash when value does not exist on the mapping definition" do
+    expected = { }
+    Post.stubs(:status).returns(expected)
+
+    page = Factory.build(:post, :status => "unexisting")
+    assert_equal "unexisting", page.mapping(:status)
+  end
+
   test "to_label returns email for TypusUser" do
     typus_user = Factory.build(:typus_user)
     assert_equal typus_user.email, typus_user.to_label
