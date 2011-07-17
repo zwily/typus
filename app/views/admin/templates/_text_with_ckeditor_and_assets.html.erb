@@ -1,4 +1,8 @@
 <% content_for :javascripts do %>
+  <script type="text/javascript">
+    var CKEDITOR_BASEPATH = '/assets/ckeditor/';
+  </script>
+
   <%= javascript_include_tag 'ckeditor/ckeditor' %>
   <%= javascript_include_tag 'ckeditor/adapters/jquery' %>
 
