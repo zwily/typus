@@ -49,9 +49,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test "mapping with a hash when value does not exist on the mapping definition" do
-    expected = { }
-    Post.stubs(:status).returns(expected)
-
+    Post.stubs(:status).returns(Hash.new)
     page = Factory.build(:post, :status => "unexisting")
     assert_equal "unexisting", page.mapping(:status)
   end
