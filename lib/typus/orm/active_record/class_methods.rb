@@ -22,87 +22,79 @@ module Typus
         # Form and list fields
         def typus_fields_for(filter)
           ActiveSupport::OrderedHash.new.tap do |fields_with_type|
-            fields = get_typus_fields_for(filter)
-
-            fields.extract_settings.map { |f| f.to_sym }.each do |field|
-              if reflect_on_association(field)
-                fields_with_type[field.to_s] = reflect_on_association(field).macro
-                next
+            get_typus_fields_for(filter).each do |field|
+              [:virtual, :custom, :association, :selector, :dragonfly, :paperclip].each do |attribute|
+                if (value = send("#{attribute}_attribute?", field))
+                  fields_with_type[field.to_s] = value
+                end
               end
-
-              if typus_field_options_for(:selectors).include?(field)
-                fields_with_type[field.to_s] = :selector
-                next
-              end
-
-              dragonfly = respond_to?(:dragonfly_attachment_classes) && dragonfly_attachment_classes.map { |i| i.attribute }.include?(field)
-              paperclip = respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
-
-              if respond_to?(:dragonfly_attachment_classes) && dragonfly_attachment_classes.map { |i| i.attribute }.include?(field)
-                fields_with_type[field.to_s] = :dragonfly
-                next
-              end
-
-              if respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
-                fields_with_type[field.to_s] = :paperclip
-                next
-              end
-
-              # TODO: This is not tested!
-              if virtual_fields.include?(field.to_s)
-                fields_with_type[field.to_s] = :virtual
-              end
-
-              fields_with_type[field.to_s] = case field.to_s
-                                             when 'parent', 'parent_id' then :tree
-                                             when /password/            then :password
-                                             when 'position'            then :position
-                                             when /\./                  then :transversal
-                                             else
-                                               if fields_with_type[field.to_s]
-                                                 fields_with_type[field.to_s]
-                                               else
-                                                 model_fields[field]
-                                               end
-                                             end
-
+              fields_with_type[field.to_s] ||= model_fields[field]
             end
           end
         end
 
         def get_typus_fields_for(filter)
           data = read_model_config['fields']
-          case filter.to_sym
-          when :list, :form
-           # TODO: This statement is for backwards compatibility with the current tests, so can be removed in the near future.
-            data[filter.to_s] || data['default'] || ""
-          when :index
-            data['index'] || data['list'] || data['default'] || ""
-          when :new, :create
-            data['new'] || data['form'] || data['default'] || ""
-          when :edit, :update, :toggle
-            data['edit'] || data['form'] || data['default'] || ""
-          else
-            data[filter.to_s] || data['default'] || ""
-          end
+          fields = case filter.to_sym
+                   when :index                  then data['index'] || data['list']
+                   when :new, :create           then data['new'] || data['form']
+                   when :edit, :update, :toggle then data['edit'] || data['form']
+                   else
+                     data[filter.to_s]
+                   end
+
+          fields ||= data['default'] || ""
+          fields.extract_settings.map { |f| f.to_sym }
         end
 
         def virtual_fields
           instance_methods.map { |i| i.to_s } - model_fields.keys.map { |i| i.to_s }
         end
 
+        def virtual_attribute?(field)
+          virtual_fields.include?(field.to_s)
+        end
+
+        def dragonfly_attribute?(field)
+          if respond_to?(:dragonfly_attachment_classes) && dragonfly_attachment_classes.map { |i| i.attribute }.include?(field)
+            :dragonfly
+          end
+        end
+
+        def paperclip_attribute?(field)
+          if respond_to?(:attachment_definitions) && attachment_definitions.try(:has_key?, field)
+            :paperclip
+          end
+        end
+
+        def selector_attribute?(field)
+          :selector if typus_field_options_for(:selectors).include?(field)
+        end
+
+        def association_attribute?(field)
+          reflect_on_association(field).macro if reflect_on_association(field)
+        end
+
+        def custom_attribute?(field)
+          case field.to_s
+          when 'parent', 'parent_id' then :tree
+          when /password/            then :password
+          when 'position'            then :position
+          when /\./                  then :transversal
+          end
+        end
+
         def typus_filters
           ActiveSupport::OrderedHash.new.tap do |fields_with_type|
-            if data = read_model_config['filters']
-              data.extract_settings.map { |i| i.to_sym }.each do |field|
-                attribute_type = model_fields[field.to_sym]
-                if reflect_on_association(field.to_sym)
-                  attribute_type = reflect_on_association(field.to_sym).macro
-                end
-                fields_with_type[field.to_s] = attribute_type
-              end
+            get_typus_filters.each do |field|
+              fields_with_type[field.to_s] = association_attribute?(field) || model_fields[field.to_sym]
             end
           end
+        end
+
+        def get_typus_filters
+          data = read_model_config['filters']
+          data.extract_settings.map { |i| i.to_sym }
         end
 
       end
