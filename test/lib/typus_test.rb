@@ -109,7 +109,7 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   test "user_foreign_key returns default value" do
-    assert Typus.user_foreign_key.eql?("typus_user_id")
+    assert_equal "typus_user_id", Typus.user_foreign_key
   end
 
   test "user_foreign_key setter presence" do
