@@ -136,7 +136,7 @@ module Typus
   @@user_foreign_key = "admin_user_id"
 
   mattr_accessor :quick_sidebar
-  @@user_foreign_key = false
+  @@quick_sidebar = false
 
   class << self
 
