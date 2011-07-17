@@ -77,20 +77,16 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  context "build_boolean_conditions" do
+  test "build_boolean_conditions returns true" do
+    expected = {'status'=>true}
+    output = Page.build_boolean_conditions('status', 'true')
+    assert_equal expected, output
+  end
 
-    should "return true" do
-      expected = {'status'=>true}
-      output = Page.build_boolean_conditions('status', 'true')
-      assert_equal expected, output
-    end
-
-    should "return false" do
-      expected = {'status'=>false}
-      output = Page.build_boolean_conditions('status', 'false')
-      assert_equal expected, output
-    end
-
+  test "build_boolean_conditions returns false" do
+    expected = {'status'=>false}
+    output = Page.build_boolean_conditions('status', 'false')
+    assert_equal expected, output
   end
 
   context "build_datetime_conditions" do
@@ -155,26 +151,17 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  context "build_string_conditions" do
-
-    should "work" do
-      expected = {'test'=>'true'}
-      output = Page.build_string_conditions('test', 'true')
-      assert_equal expected, output
-    end
-
+  test "build_string_conditions" do
+    expected = {'test'=>'true'}
+    output = Page.build_string_conditions('test', 'true')
+    assert_equal expected, output
   end
 
-  context "build_has_many_conditions" do
-
-    should "work" do
-      expected = ["projects.id = ?", "1"]
-      output = User.build_has_many_conditions('projects', '1')
-      assert_equal expected, output
-    end
-
-    should_eventually "work for non standard primary keys"
-
+  # TODO: build_has_many_conditions with non-standard primary keys
+  test "build_has_many_conditions" do
+    expected = ["projects.id = ?", "1"]
+    output = User.build_has_many_conditions('projects', '1')
+    assert_equal expected, output
   end
 
   context "build_conditions" do
@@ -297,32 +284,25 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   end
 
-  context "build_my_joins" do
+  test "build_my_joins return the expected joins" do
+    @project = Factory(:project)
+    2.times { Factory(:project) }
 
-    setup do
-      @project = Factory(:project)
-      2.times { Factory(:project) }
-    end
+    params = { :projects => @project.id }
+    assert_equal [:projects], User.build_my_joins(params)
+  end
 
-    should "return the expected joins" do
-      params = { :projects => @project.id }
-      assert_equal [:projects], User.build_my_joins(params)
-    end
+  test "build_my_joins works when users are filtered by projects" do
+    @project = Factory(:project)
+    2.times { Factory(:project) }
 
-    ##
-    # Get all user which are on project 1
-    #
+    params = { :projects => @project.id }
 
-    should "work when users are filtered by projects" do
-      params = { :projects => @project.id }
+    @resource = User
+    @resource.build_conditions(params).each { |c| @resource = @resource.where(c) }
+    @resource.build_my_joins(params).each { |j| @resource = @resource.joins(j) }
 
-      @resource = User
-      @resource.build_conditions(params).each { |c| @resource = @resource.where(c) }
-      @resource.build_my_joins(params).each { |j| @resource = @resource.joins(j) }
-
-      assert_equal [@project.user.id], @resource.map(&:id)
-    end
-
+    assert_equal [@project.user.id], @resource.map(&:id)
   end
 
 end

@@ -2,170 +2,154 @@ require "test_helper"
 
 class ClassMethodsTest < ActiveSupport::TestCase
 
-  context "model_fields" do
-
-    should "be an ActiveSupport::OrderedHash" do
-      assert TypusUser.model_fields.instance_of?(ActiveSupport::OrderedHash)
-    end
-
-    should "verify TypusUser model_fields" do
-      expected = [[:id, :integer],
-                  [:first_name, :string],
-                  [:last_name, :string],
-                  [:role, :string],
-                  [:email, :string],
-                  [:status, :boolean],
-                  [:token, :string],
-                  [:salt, :string],
-                  [:crypted_password, :string],
-                  [:preferences, :string],
-                  [:created_at, :datetime],
-                  [:updated_at, :datetime]]
-
-      assert_equal expected.map { |i| i.first }, TypusUser.model_fields.keys
-      assert_equal expected.map { |i| i.last }, TypusUser.model_fields.values
-    end
-
-    should "verify Post model_fields" do
-      expected = [[:id, :integer],
-                  [:title, :string],
-                  [:body, :text],
-                  [:status, :string],
-                  [:favorite_comment_id, :integer],
-                  [:published_at, :datetime],
-                  [:typus_user_id, :integer],
-                  [:published, :boolean],
-                  [:created_at, :datetime],
-                  [:updated_at, :datetime]]
-
-      assert_equal expected.map { |i| i.first }, Post.model_fields.keys
-      assert_equal expected.map { |i| i.last }, Post.model_fields.values
-    end
-
+  test "model_fields is an ActiveSupport::OrderedHash" do
+    assert TypusUser.model_fields.instance_of?(ActiveSupport::OrderedHash)
   end
 
-  context "model_relationships" do
+  test "model_fields for TypusUser" do
+    expected = [[:id, :integer],
+                [:first_name, :string],
+                [:last_name, :string],
+                [:role, :string],
+                [:email, :string],
+                [:status, :boolean],
+                [:token, :string],
+                [:salt, :string],
+                [:crypted_password, :string],
+                [:preferences, :string],
+                [:created_at, :datetime],
+                [:updated_at, :datetime]]
 
-    should "be an ActiveSupport::OrderedHash" do
-      assert TypusUser.model_relationships.instance_of?(ActiveSupport::OrderedHash)
+    assert_equal expected.map { |i| i.first }, TypusUser.model_fields.keys
+    assert_equal expected.map { |i| i.last }, TypusUser.model_fields.values
+  end
+
+  test "model_fields for Post" do
+    expected = [[:id, :integer],
+                [:title, :string],
+                [:body, :text],
+                [:status, :string],
+                [:favorite_comment_id, :integer],
+                [:published_at, :datetime],
+                [:typus_user_id, :integer],
+                [:published, :boolean],
+                [:created_at, :datetime],
+                [:updated_at, :datetime]]
+
+    assert_equal expected.map { |i| i.first }, Post.model_fields.keys
+    assert_equal expected.map { |i| i.last }, Post.model_fields.values
+  end
+
+  test "model_relationships is an ActiveSupport::OrderedHash" do
+    assert TypusUser.model_relationships.instance_of?(ActiveSupport::OrderedHash)
+  end
+
+  test "model_relationships for Post" do
+    expected = [[:comments, :has_many],
+                [:categories, :has_and_belongs_to_many],
+                [:user, nil]]
+    expected.each do |key, value|
+      assert_equal value, Post.model_relationships[key]
     end
-
-    should "verify Post model_relationships" do
-      expected = [[:comments, :has_many],
-                  [:categories, :has_and_belongs_to_many],
-                  [:user, nil]]
-      expected.each do |key, value|
-        assert_equal value, Post.model_relationships[key]
-      end
-    end
-
   end
 
   test "typus_description returns the description of a model" do
     assert_equal "System Users Administration", TypusUser.typus_description
   end
 
-  context "typus_fields_for" do
-
-    should "accept strings" do
-      assert_equal %w(email role status), TypusUser.typus_fields_for("list").keys
-    end
-
-    should "accept symbols" do
-      assert_equal %w(email role status), TypusUser.typus_fields_for(:list).keys
-    end
-
-    should "return list fields for TypusUser" do
-      expected = [["email", :string],
-                  ["role", :selector],
-                  ["status", :boolean]]
-
-      assert_equal expected.map { |i| i.first }, TypusUser.typus_fields_for(:list).keys
-      assert_equal expected.map { |i| i.last }, TypusUser.typus_fields_for(:list).values
-    end
-
-    should "return form fields for TypusUser" do
-      expected = [["first_name", :string],
-                  ["last_name", :string],
-                  ["role", :selector],
-                  ["email", :string],
-                  ["password", :password],
-                  ["password_confirmation", :password],
-                  ["locale", :selector],
-                  ["status", :boolean]]
-
-      assert_equal expected.map { |i| i.first }, TypusUser.typus_fields_for(:new).keys
-      assert_equal expected.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
-    end
-
-    should "return form fields for Asset" do
-      expected = [["caption", :string],
-                  ["dragonfly", :dragonfly],
-                  ["dragonfly_required", :dragonfly]]
-
-      assert_equal expected.map { |i| i.first }, Asset.typus_fields_for(:special).keys
-      assert_equal expected.map { |i| i.last }, Asset.typus_fields_for(:special).values
-    end
-
-    should "raise a RuntimeError when model does not have configuration" do
-      assert_raises RuntimeError do
-        Class.new(ActiveRecord::Base).typus_fields_for(:form)
-      end
-    end
-
-    should "return relationship fields for TypusUser" do
-      expected = %w(first_name last_name role email locale)
-      assert_equal expected, TypusUser.typus_fields_for(:relationship).keys
-    end
-
-    should "return undefined fields for TypusUser" do
-      expected = %w(first_name last_name role email locale)
-      assert_equal expected, TypusUser.typus_fields_for(:undefined).keys
-    end
-
-    should "return fields for new Asset" do
-      expected = %w(dragonfly dragonfly_required paperclip paperclip_required)
-      assert_equal expected, Asset.typus_fields_for(:new).keys
-    end
-
-    should "return fields for edit Asset" do
-      expected = %w(caption dragonfly dragonfly_required paperclip paperclip_required)
-      assert_equal expected, Asset.typus_fields_for(:edit).keys
-    end
-
-    should "work for transversal fields" do
-      expected = [["email", :string],
-                  ["post", :belongs_to],
-                  ["post_id", :integer],
-                  ["spam", :boolean],
-                  ["post.title", :transversal]]
-
-      assert_equal expected.map { |i| i.first }, Comment.typus_fields_for(:list).keys
-      assert_equal expected.map { |i| i.last }, Comment.typus_fields_for(:list).values
-    end
-
+  test "typus_fields_for accepts strings" do
+    assert_equal %w(email role status), TypusUser.typus_fields_for("list").keys
   end
 
-  context "typus_filters" do
+  test "typus_fields_for accepts symbols" do
+    assert_equal %w(email role status), TypusUser.typus_fields_for(:list).keys
+  end
 
-    should "return filters for TypusUser" do
-      expected = [["status", :boolean],
-                  ["role", :string]]
+  test "typus_fields_for returns list fields for TypusUser" do
+    expected = [["email", :string],
+                ["role", :selector],
+                ["status", :boolean]]
 
-      assert_equal expected.map { |i| i.first }.join(", "), Typus::Configuration.config["TypusUser"]["filters"]
-      assert_equal expected.map { |i| i.first }, TypusUser.typus_filters.keys
-      assert_equal expected.map { |i| i.last }, TypusUser.typus_filters.values
+    assert_equal expected.map { |i| i.first }, TypusUser.typus_fields_for(:list).keys
+    assert_equal expected.map { |i| i.last }, TypusUser.typus_fields_for(:list).values
+  end
+
+  test "typus_fields_for returns form fields for TypusUser" do
+    expected = [["first_name", :string],
+                ["last_name", :string],
+                ["role", :selector],
+                ["email", :string],
+                ["password", :password],
+                ["password_confirmation", :password],
+                ["locale", :selector],
+                ["status", :boolean]]
+
+    assert_equal expected.map { |i| i.first }, TypusUser.typus_fields_for(:new).keys
+    assert_equal expected.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
+  end
+
+  test "typus_fields_for returns form fields for Asset" do
+    expected = [["caption", :string],
+                ["dragonfly", :dragonfly],
+                ["dragonfly_required", :dragonfly]]
+
+    assert_equal expected.map { |i| i.first }, Asset.typus_fields_for(:special).keys
+    assert_equal expected.map { |i| i.last }, Asset.typus_fields_for(:special).values
+  end
+
+  test "typus_fields_for raises a RuntimeError when model does not have configuration" do
+    assert_raises RuntimeError do
+      Class.new(ActiveRecord::Base).typus_fields_for(:form)
     end
+  end
 
-    should "return filters for Post" do
-      expected = [["status", :string],
-                  ["created_at", :datetime]]
+  test "typus_fields_for returns relationship fields for TypusUser" do
+    expected = %w(first_name last_name role email locale)
+    assert_equal expected, TypusUser.typus_fields_for(:relationship).keys
+  end
 
-      assert_equal expected.map { |i| i.first }.join(", "), Typus::Configuration.config["Post"]["filters"]
-      assert_equal expected.map { |i| i.first }, Post.typus_filters.keys
-      assert_equal expected.map { |i| i.last }, Post.typus_filters.values
-    end
+  test "typus_fields_for returns undefined fields for TypusUser" do
+    expected = %w(first_name last_name role email locale)
+    assert_equal expected, TypusUser.typus_fields_for(:undefined).keys
+  end
 
+  test "typus_fields_for returns fields for new Asset" do
+    expected = %w(dragonfly dragonfly_required paperclip paperclip_required)
+    assert_equal expected, Asset.typus_fields_for(:new).keys
+  end
+
+  test "typus_fields_for returns fields for edit Asset" do
+    expected = %w(caption dragonfly dragonfly_required paperclip paperclip_required)
+    assert_equal expected, Asset.typus_fields_for(:edit).keys
+  end
+
+  test "typus_fields_for works for transversal fields" do
+    expected = [["email", :string],
+                ["post", :belongs_to],
+                ["post_id", :integer],
+                ["spam", :boolean],
+                ["post.title", :transversal]]
+
+    assert_equal expected.map { |i| i.first }, Comment.typus_fields_for(:list).keys
+    assert_equal expected.map { |i| i.last }, Comment.typus_fields_for(:list).values
+  end
+
+  test "typus_filters for TypusUser" do
+    expected = [["status", :boolean],
+                ["role", :string]]
+
+    assert_equal expected.map { |i| i.first }.join(", "), Typus::Configuration.config["TypusUser"]["filters"]
+    assert_equal expected.map { |i| i.first }, TypusUser.typus_filters.keys
+    assert_equal expected.map { |i| i.last }, TypusUser.typus_filters.values
+  end
+
+  test "typus_filters for Post" do
+    expected = [["status", :string],
+                ["created_at", :datetime]]
+
+    assert_equal expected.map { |i| i.first }.join(", "), Typus::Configuration.config["Post"]["filters"]
+    assert_equal expected.map { |i| i.first }, Post.typus_filters.keys
+    assert_equal expected.map { |i| i.last }, Post.typus_filters.values
   end
 
   test "typus_actions_on accepts strings and symbols" do
