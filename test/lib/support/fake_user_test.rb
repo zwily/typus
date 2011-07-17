@@ -35,17 +35,9 @@ class FakeUserTest < ActiveSupport::TestCase
     assert_equal Typus.applications, @fake_user.applications
   end
 
-  context "application" do
-
-    should "have access to all applications filtered" do
-      assert_equal Typus.application("CRUD"), @fake_user.application("CRUD")
-    end
-
-    should "make sure I get what I want" do
-      expected = %w(Animal Bird Dog ImageHolder)
-      assert_equal expected, @fake_user.application("Polymorphic")
-    end
-
+  test "FakeUser#application" do
+    assert_equal Typus.application("CRUD"), @fake_user.application("CRUD")
+    assert_equal %w(Animal Bird Dog ImageHolder), @fake_user.application("Polymorphic")
   end
 
   should "be master_role" do
