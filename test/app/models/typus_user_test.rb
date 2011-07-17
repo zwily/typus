@@ -104,6 +104,20 @@ class TypusUserTest < ActiveSupport::TestCase
 
   end
 
+  test "to_label" do
+    user = Factory.build(:typus_user)
+    assert_equal user.email, user.to_label
+
+    user = Factory.build(:typus_user, :first_name => "John")
+    assert_equal "John", user.to_label
+
+    user = Factory.build(:typus_user, :last_name => "Locke")
+    assert_equal "Locke", user.to_label
+
+    user = Factory.build(:typus_user, :first_name => "John", :last_name => "Locke")
+    assert_equal "John Locke", user.to_label
+  end
+
   test "admin gets a list of all applications expect MongoDB becuase is disabled" do
     typus_user = Factory.build(:typus_user)
     # assert_equal Typus.applications, typus_user.applications
