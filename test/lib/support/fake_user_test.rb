@@ -16,7 +16,7 @@ class FakeUserTest < ActiveSupport::TestCase
   end
 
   should "have a locale" do
-    assert @fake_user.locale.eql?(::I18n.locale)
+    assert_equal ::I18n.locale, @fake_user.locale
   end
 
   should "have status set to true" do
