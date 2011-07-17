@@ -71,6 +71,7 @@ class TypusTest < ActiveSupport::TestCase
                 "Case",
                 "Category",
                 "Comment",
+                "DeviseUser",
                 "Dog",
                 "Entry",
                 "EntryBulk",

@@ -131,7 +131,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
   test "admin gets a list of application resources for Admin application" do
     typus_user = Factory.build(:typus_user)
-    assert_equal %w(AdminUser TypusUser), typus_user.application("Admin")
+    assert_equal %w(AdminUser TypusUser DeviseUser), typus_user.application("Admin")
   end
 
   test "editor get a list of all applications" do

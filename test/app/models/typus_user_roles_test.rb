@@ -20,6 +20,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
                   "Case",
                   "Category",
                   "Comment",
+                  "DeviseUser",
                   "Dog",
                   "Entry",
                   "EntryBulk",
