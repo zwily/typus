@@ -34,12 +34,14 @@ class ActiveRecord::Base
     value ? value.first : send(attribute)
   end
 
-  def to_label
+  def to_str
     if respond_to?(:name) && send(:name).present?
       send(:name)
     else
       [self.class, id].join("#")
     end
   end
+
+  alias_method :to_label, :to_str
 
 end
