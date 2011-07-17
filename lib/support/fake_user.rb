@@ -1,3 +1,5 @@
+require 'typus/orm/active_record/user/instance_methods_more'
+
 class FakeUser
 
   include Typus::Orm::ActiveRecord::User::InstanceMethodsMore
