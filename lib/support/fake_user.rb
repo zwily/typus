@@ -1,5 +1,7 @@
 class FakeUser
 
+  include Typus::Orm::ActiveRecord::User::InstanceMethods
+
   def id
     0
   end
@@ -20,20 +22,12 @@ class FakeUser
     !is_root?
   end
 
-  def locale
-    ::I18n.locale
-  end
-
   def applications
     Typus.applications
   end
 
   def application(name)
     Typus.application(name)
-  end
-
-  def role
-    Typus.master_role
   end
 
   def status

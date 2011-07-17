@@ -5,8 +5,7 @@ module Typus
         module InstanceMethods
 
           def to_label
-            full_name = [first_name, last_name].delete_if { |s| s.blank? }
-            full_name.any? ? full_name.join(" ") : email
+            email
           end
 
           def resources
@@ -48,17 +47,16 @@ module Typus
             !is_root?
           end
 
-          def locale
-            (preferences && preferences[:locale]) ? preferences[:locale] : ::I18n.default_locale
-          end
-
-          def locale=(locale)
-            self.preferences ||= {}
-            self.preferences[:locale] = locale
-          end
-
           def owns?(resource)
             id == resource.send(Typus.user_foreign_key)
+          end
+
+          def role
+            Typus.master_role
+          end
+
+          def locale
+            ::I18n.locale
           end
 
         end

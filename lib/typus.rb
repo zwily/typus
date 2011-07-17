@@ -35,6 +35,7 @@ module Typus
 
   module Authentication
     autoload :Base, "typus/authentication/base"
+    autoload :Devise, "typus/authentication/devise"
     autoload :None, "typus/authentication/none"
     autoload :HttpBasic, "typus/authentication/http_basic"
     autoload :Session, "typus/authentication/session"
@@ -129,10 +130,10 @@ module Typus
   @@master_role = "admin"
 
   mattr_accessor :user_class_name
-  @@user_class_name = "TypusUser"
+  @@user_class_name = "AdminUser"
 
   mattr_accessor :user_foreign_key
-  @@user_foreign_key = "typus_user_id"
+  @@user_foreign_key = "admin_user_id"
 
   mattr_accessor :quick_sidebar
   @@user_foreign_key = false
