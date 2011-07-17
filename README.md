@@ -22,7 +22,7 @@ You can try a demo [here][typus_demo].
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
 - Works with `Rails 3.1.X`.
-- Tested with latest versions of `1.8.7`, `ree`, `1.9.2` and `jruby`.
+- Tested with latest Rubies. (`1.8.7-p352`, `ree-1.8.7-2011.03`, `1.9.2-p290`, `jruby-1.6.3`)
 - Tested with `SQLite`, `MySQL` and `PostgreSQL`.
 
 ## Installing
