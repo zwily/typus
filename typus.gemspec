@@ -2,7 +2,7 @@
 $:.push File.expand_path("../lib", __FILE__)
 require "typus/version"
 
-files = `git ls-files`.split("\n")
+files = `git ls-files`.split("\n") + Dir["config/locales/*.yml"]
 test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
 
 Gem::Specification.new do |s|
