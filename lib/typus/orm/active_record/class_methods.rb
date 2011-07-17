@@ -23,7 +23,6 @@ module Typus
         def typus_fields_for(filter)
           ActiveSupport::OrderedHash.new.tap do |fields_with_type|
             fields = get_typus_fields_for(filter)
-            virtual_fields = instance_methods.map { |i| i.to_s } - model_fields.keys.map { |i| i.to_s }
 
             fields.extract_settings.map { |f| f.to_sym }.each do |field|
               if reflect_on_association(field)
@@ -86,6 +85,10 @@ module Typus
           else
             data[filter.to_s] || data['default'] || ""
           end
+        end
+
+        def virtual_fields
+          instance_methods.map { |i| i.to_s } - model_fields.keys.map { |i| i.to_s }
         end
 
         def typus_filters
