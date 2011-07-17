@@ -43,8 +43,13 @@ module Typus
                      data[filter.to_s]
                    end
 
-          fields ||= data['default'] || ""
-          fields.extract_settings.map { |f| f.to_sym }
+          fields ||= data['default'] || typus_default_fields_for(filter)
+          fields = fields.extract_settings if fields.is_a?(String)
+          fields.map { |f| f.to_sym }
+        end
+
+        def typus_default_fields_for(filter)
+          filter.to_sym.eql?(:index) ? ['id'] : model_fields.keys
         end
 
         def virtual_fields

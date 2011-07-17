@@ -24,6 +24,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
                   "Dog",
                   "Entry",
                   "EntryBulk",
+                  "EntryDefault",
                   "EntryTrash",
                   "Git",
                   # "Hit",

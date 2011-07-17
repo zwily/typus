@@ -134,6 +134,24 @@ class ClassMethodsTest < ActiveSupport::TestCase
     assert_equal expected.map { |i| i.last }, Comment.typus_fields_for(:list).values
   end
 
+  test "typus_fields_for for EntryDefault which does not have field values on index" do
+    expected = [["id", :integer]]
+    assert_equal expected.map { |i| i.first }, EntryDefault.typus_fields_for(:index).keys
+    assert_equal expected.map { |i| i.last }, EntryDefault.typus_fields_for(:index).values
+  end
+
+  test "typus_fields_for for EntryDefault which does not have field values on other actions" do
+    expected = [["id", :integer],
+                ["title", :string],
+                ["content", :text],
+                ["type", :string],
+                ["published", :boolean],
+                ["deleted_at", :datetime]]
+
+    assert_equal expected.map { |i| i.first }, EntryDefault.typus_fields_for(:new).keys
+    assert_equal expected.map { |i| i.last }, EntryDefault.typus_fields_for(:new).values
+  end
+
   test "typus_filters for TypusUser" do
     expected = [["status", :boolean],
                 ["role", :string]]
