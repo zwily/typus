@@ -57,7 +57,7 @@ module Typus
         end
 
         def virtual_attribute?(field)
-          virtual_fields.include?(field.to_s)
+          :virtual if virtual_fields.include?(field.to_s)
         end
 
         def dragonfly_attribute?(field)

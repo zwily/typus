@@ -97,6 +97,14 @@ class ClassMethodsTest < ActiveSupport::TestCase
     assert_equal expected.map { |i| i.last }, Asset.typus_fields_for(:special).values
   end
 
+  test "typus_fields_for with virtual attributes" do
+    expected = [["caption", :string],
+                ["original_file_name", :virtual]]
+
+    assert_equal expected.map { |i| i.first }, Asset.typus_fields_for(:virtual).keys
+    assert_equal expected.map { |i| i.last }, Asset.typus_fields_for(:virtual).values
+  end
+
   test "typus_fields_for raises a RuntimeError when model does not have configuration" do
     assert_raises RuntimeError do
       Class.new(ActiveRecord::Base).typus_fields_for(:form)
@@ -301,7 +309,8 @@ class ClassMethodsTest < ActiveSupport::TestCase
                 "fields"=>{"default"=>"caption, dragonfly, dragonfly_required",
                            "special"=>"caption, dragonfly, dragonfly_required",
                            "form"=>"caption, dragonfly, dragonfly_required, paperclip, paperclip_required",
-                           "new"=>"dragonfly, dragonfly_required, paperclip, paperclip_required"}}
+                           "new"=>"dragonfly, dragonfly_required, paperclip, paperclip_required",
+                           "virtual"=>"caption, original_file_name"}}
     assert_equal expected, Asset.read_model_config
   end
 
