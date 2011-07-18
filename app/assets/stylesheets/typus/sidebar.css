@@ -18,6 +18,14 @@
   padding-left: 0.5em;
 }
 
+#sidebar ul li a {
+  color: white;
+}
+
+#sidebar ul ul li a {
+  color: black;
+}
+
 #sidebar a {
   text-decoration: none;
 }
