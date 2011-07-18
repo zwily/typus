@@ -170,6 +170,18 @@ class ClassMethodsTest < ActiveSupport::TestCase
     assert_equal expected.map { |i| i.last }, Post.typus_filters.values
   end
 
+  test "typus_filters for Case" do
+    assert_equal Hash.new, Case.typus_filters
+  end
+
+  test "get_typus_filters for Case" do
+    assert_equal [], Case.get_typus_filters
+  end
+
+  test "get_typus_filters for Post" do
+    assert_equal [:status, :created_at], Post.get_typus_filters
+  end
+
   test "typus_actions_on accepts strings and symbols" do
     assert_equal %w(cleanup), Post.typus_actions_on("index")
     assert_equal %w(cleanup), Post.typus_actions_on(:index)
