@@ -11,7 +11,7 @@ module Admin::Resources::DataTypes::StringHelper
   alias_method :display_text, :display_string
 
   def string_filter(filter)
-    values = set_context.send(filter.to_s).to_a
+    values = set_context.send(filter.to_s.pluralize).to_a
 
     items = [[Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase), ""]]
     array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }

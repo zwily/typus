@@ -13,11 +13,11 @@ module Typus
             user.save ? user : false
           end
 
-          def role
+          def roles
             Typus::Configuration.roles.keys.sort
           end
 
-          def locale
+          def locales
             Typus::I18n.available_locales
           end
 

@@ -10,9 +10,11 @@ class ActiveRecord::Base
   # On a model:
   #
   #     class Post < ActiveRecord::Base
-  #       STATUS = {  t("Published") => "published",
-  #                   t("Pending") => "pending",
-  #                   t("Draft") => "draft" }
+  #       def self.statuses
+  #         { t("Published") => "published",
+  #           t("Pending") => "pending",
+  #           t("Draft") => "draft" }
+  #       end
   #     end
   #
   #     >> Post.first.status
@@ -26,7 +28,7 @@ class ActiveRecord::Base
   #++
   def mapping(attribute)
     klass = self.class
-    values = klass.send(attribute)
+    values = klass.send(attribute.to_s.pluralize)
 
     array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
 

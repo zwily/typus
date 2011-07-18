@@ -15,7 +15,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   test "mapping with an array" do
     expected = %w(pending published unpublished)
-    Post.stubs(:status).returns(expected)
+    Post.stubs(:statuses).returns(expected)
 
     post = Factory.build(:post)
     assert_equal "published", post.mapping(:status)
@@ -29,7 +29,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   test "mapping with a two dimension array" do
     expected = [["Publicado", "published"], ["Pendiente", "pending"], ["No publicado", "unpublished"]]
-    Post.stubs(:status).returns(expected)
+    Post.stubs(:statuses).returns(expected)
 
     post = Factory.build(:post)
     assert_equal "Publicado", post.mapping(:status)
@@ -40,7 +40,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   test "mapping with a hash" do
     expected = { "Pending - Hash" => "pending", "Published - Hash" => "published", "Not Published - Hash" => "unpublished" }
-    Post.stubs(:status).returns(expected)
+    Post.stubs(:statuses).returns(expected)
 
     page = Factory.build(:post)
     assert_equal "Published - Hash", page.mapping(:status)
@@ -49,7 +49,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test "mapping with a hash when value does not exist on the mapping definition" do
-    Post.stubs(:status).returns(Hash.new)
+    Post.stubs(:statuses).returns(Hash.new)
     page = Factory.build(:post, :status => "unexisting")
     assert_equal "unexisting", page.mapping(:status)
   end

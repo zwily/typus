@@ -5,6 +5,7 @@ require "test_helper"
   Here we test:
 
   - Typus::Orm::ActiveRecord::AdminUserV2
+  - Typus::Orm::ActiveRecord::User::ClassMethods
 
 =end
 
@@ -20,6 +21,19 @@ class AdminUserTest < ActiveSupport::TestCase
 
   test "mass_assignment" do
     assert TypusUser.attr_protected[:default].include?(:status)
+  end
+
+  test "mapping locales" do
+    admin_user = Factory.build(:admin_user, :locale => "en")
+    assert_equal "English", admin_user.mapping(:locale)
+  end
+
+  test "locales" do
+    assert_equal Typus::I18n.available_locales, AdminUser.locales
+  end
+
+  test "roles" do
+    assert_equal Typus::Configuration.roles.keys.sort, AdminUser.roles
   end
 
 end
