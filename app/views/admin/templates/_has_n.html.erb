@@ -11,7 +11,7 @@
     <%= table %>
     <%= will_paginate(@items, Typus.pagination.merge(:anchor => association_name)) %>
   <% else %>
-    <p><%= Typus::I18n.t("No %{resources} found.", :resources => association_title.downcase) %></p>
+    <p><%= Typus::I18n.t("No %{resources} found.", :resources => association_title) %></p>
   <% end %>
 
 </div>
