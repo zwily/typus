@@ -74,7 +74,7 @@ ru:
   "You can't change your role": "Вы не можете менять свою собственную роль"
   "You can't toggle your status": "Вы не можете менять свой статус"
 
-  "%{errors} prohibited this page from being saved:":
+  "%{errors} errors prohibited this page from being saved:":
   "%{model} successfully created": "%{model} создан"
   "%{model} successfully removed": "%{model} удален"
   "%{model} successfully updated": "%{model} успешно обновлен"

@@ -77,7 +77,7 @@ de:
   "You can't change your role": "Sie können Ihre Rolle nicht ändern"
   "You can't toggle your status": "Sie können Ihren Status nicht umschalten"
 
-  "%{errors} prohibited this page from being saved:": "%{errors} haben diese Seite davon abgehalten gespeichert zu werden:"
+  "%{errors} errors prohibited this page from being saved:": "%{errors} Fehler haben diese Seite davon abgehalten gespeichert zu werden:"
   "%{model} successfully created": "%{model} wurde erfolgreich erstellt"
   "%{model} successfully removed": "%{model} wurde erfolgreich gelöscht"
   "%{model} successfully updated": "%{model} wurde erfolgreich geändert"

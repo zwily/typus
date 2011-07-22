@@ -75,7 +75,7 @@ el:
   "You can't change your role": "Δεν έχετε την δυνατότητα να αλλάξετε τον ρόλο σας"
   "You can't toggle your status": "Δεν επιτρέπεται η αλλαγή της κατάστασής σας"
 
-  "%{errors} prohibited this page from being saved:":
+  "%{errors} errors prohibited this page from being saved:":
   "%{model} successfully created": "Το μοντέλο %{model} δημιουργήθηκε επιτυχώς"
   "%{model} successfully removed": "Το μοντέλο %{model} απομακρύνθηκε επιτυχώς"
   "%{model} successfully updated": "Το μοντέλο %{model} ανανεώθηκε επιτυχώς"
