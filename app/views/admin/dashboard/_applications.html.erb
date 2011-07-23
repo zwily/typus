@@ -12,7 +12,7 @@
 
       <%
         klass = model.typus_constantize
-        klass_human_name = klass.model_name.human.pluralize
+        klass_human_name = klass.model_name.human(:count => 2)
         admin_items_path = { :controller => "/admin/#{klass.to_resource}" }
       %>
 

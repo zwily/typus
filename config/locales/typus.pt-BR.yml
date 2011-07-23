@@ -74,7 +74,7 @@ pt-BR:
   "You can update your password at": "Você pode atualizar sua senha em"
   "You can't change your role": "Você não pode mudar sua própria função no sistema."
 
-  "%{errors} prohibited this page from being saved:":
+  "%{errors} errors prohibited this page from being saved:":
   "%{model} successfully created": "%{model} criado com sucesso."
   "%{model} successfully removed": "%{model} removido com sucesso."
   "%{model} successfully updated": "%{model} atualizado com sucesso."

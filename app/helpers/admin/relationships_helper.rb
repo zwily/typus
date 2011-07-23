@@ -38,7 +38,7 @@ module Admin
 
       render "admin/templates/has_n",
              :association_name => @association_name,
-             :association_title => @model_to_relate.model_name.human.pluralize,
+             :association_title => @model_to_relate.model_name.human(:count => 2),
              :add_new => build_add_new(options),
              :form => form,
              :table => build_relationship_table
@@ -66,7 +66,7 @@ module Admin
 
       render "admin/templates/has_n",
              :association_name => @association_name,
-             :association_title => @model_to_relate.model_name.human.pluralize,
+             :association_title => @model_to_relate.model_name.human(:count => 2),
              :add_new => build_add_new,
              :form => form,
              :table => build_relationship_table
