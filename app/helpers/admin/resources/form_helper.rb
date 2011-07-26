@@ -63,7 +63,7 @@ module Admin::Resources::FormHelper
   end
 
   def save_options_for_user_class
-    return unless Typus.user_class == @resource && admin_user.is_not_root?
+    return unless !defined?(Typus.user_class) && Typus.user_class == @resource && admin_user.is_not_root?
     { "_continue" => "Save and continue editing" }
   end
 
