@@ -74,6 +74,16 @@ end
 
 namespace :test do
 
+  # Typus should be compatible with Ruby 1.8.7 and 1.9.2. Currently tests only
+  # pass when using 1.9.2 because on 1.8.7 we get an error because `fastercsv`
+  # is not loaded. This is because I've not added that library in the Gemfile.
+  desc "Test officially supported Ruby versions and database adapters"
+  task :supported do
+    system "rvm 1.9.2 rake test DB=sqlite3"
+    system "rvm 1.9.2 rake test DB=postgresql"
+    system "rvm 1.9.2 rake test DB=mysql"
+  end
+
   # We want to test Typus with all supported databases:
   #
   # - Postgresql
