@@ -42,10 +42,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
     expected = { "Pending - Hash" => "pending", "Published - Hash" => "published", "Not Published - Hash" => "unpublished" }
     Post.stubs(:statuses).returns(expected)
 
-    page = Factory.build(:post)
-    assert_equal "Published - Hash", page.mapping(:status)
-    page = Factory.build(:post, :status => "unpublished")
-    assert_equal "Not Published - Hash", page.mapping(:status)
+    post = Factory.build(:post)
+    assert_equal "Published - Hash", post.mapping(:status)
+    post = Factory.build(:post, :status => "unpublished")
+    assert_equal "Not Published - Hash", post.mapping(:status)
   end
 
   test "mapping with a hash when value does not exist on the mapping definition" do
