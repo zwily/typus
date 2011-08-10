@@ -40,6 +40,16 @@ namespace :install do
     system "rvm install --force ree"
   end
 
+  desc "Install JRuby on Mac OS X Lion"
+  task :jruby_on_lion do
+    system "rvm remove jruby"
+    system "rvm install --force jruby"
+    system "rvm use jruby"
+    system "gem install rubygems-update"
+    system "update_rubygems"
+    system "gem updat --system"
+  end
+
   desc "Install common Rubies"
   task :rubies do
     system "rvm install 1.8.7,ree,1.9.2,jruby"
