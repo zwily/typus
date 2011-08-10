@@ -22,8 +22,6 @@ RDoc::Task.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-RUBIES = "1.8.7,ree,1.9.2,jruby"
-
 namespace :setup do
 
   desc "Setup CI Joe"
@@ -44,24 +42,22 @@ namespace :install do
 
   desc "Install common Rubies"
   task :rubies do
-    system "rvm install #{RUBIES}"
+    system "rvm install 1.8.7,ree,1.9.2,jruby"
   end
 
   desc "Install latest Rubygems"
   task :latest_rubygems do
-    system "rvm #{RUBIES} gem update --system"
+    system "rvm ruby gem update --system"
   end
 
   desc "Install bundler and rake"
   task :bundler_and_rake do
-    system "rvm #{RUBIES} gem install --no-ri --no-rdoc bundler rake"
+    system "rvm ruby gem install --no-ri --no-rdoc bundler rake"
   end
 
   desc "Gems"
   task :gems do
-    RUBIES.split(",").each do |ruby_version|
-      system "rvm use #{ruby_version}; pushd test/fixtures/rails_app/; bundle install; popd"
-    end
+    system "rvm ruby bundle install --gemfile=test/fixtures/rails_app/Gemfile"
   end
 
 end
@@ -75,9 +71,9 @@ namespace :test do
   # - SQLite3
   #
   task :rubies do
-    system "rvm #{RUBIES} rake DB=sqlite3"
-    system "rvm #{RUBIES} rake DB=postgresql"
-    system "rvm #{RUBIES} rake DB=mysql"
+    system "rvm ruby rake DB=sqlite3"
+    system "rvm ruby rake DB=postgresql"
+    system "rvm ruby rake DB=mysql"
   end
 
 end
