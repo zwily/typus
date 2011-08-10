@@ -40,14 +40,14 @@ namespace :install do
     system "rvm install --force ree"
   end
 
-  desc "Install JRuby on Mac OS X Lion"
+  desc "Install JRuby and update Rubygems to latest version."
   task :jruby_on_lion do
     system "rvm remove jruby"
     system "rvm install --force jruby"
     system "rvm use jruby"
     system "gem install rubygems-update"
     system "update_rubygems"
-    system "gem updat --system"
+    system "gem update --system"
   end
 
   desc "Install common Rubies"
@@ -65,7 +65,7 @@ namespace :install do
     system "rvm ruby gem install --no-ri --no-rdoc bundler rake"
   end
 
-  desc "Gems"
+  desc "Run bundle in all Ruby versions."
   task :gems do
     system "rvm ruby bundle install --gemfile=test/fixtures/rails_app/Gemfile"
   end
