@@ -26,11 +26,6 @@ RUBIES = %w[1.8.7 ree 1.9.2 jruby].join(",")
 
 namespace :setup do
 
-  desc "Setup test environment"
-  task :test_environment do
-    system "rvm install #{RUBIES}"
-  end
-
   desc "Setup CI Joe"
   task :cijoe do
     system "git config --replace-all cijoe.runner 'rake test:rubies'"
@@ -38,10 +33,44 @@ namespace :setup do
 
 end
 
+namespace :install do
+
+  desc "Install REE on Mac OS X Lion"
+  task :ree_on_lion do
+    system "rvm remove ree"
+    system "export CC=/usr/bin/gcc-4.2"
+    system "rvm install --force ree"
+  end
+
+  desc "Install common Rubies"
+  task :rubies do
+    system "rvm install #{RUBIES}"
+  end
+
+  desc "Install latest Rubygems"
+  task :latest_rubygems do
+    system "rvm #{RUBIES} gem update --system"
+  end
+
+  desc "Install bundler and rake"
+  task :bundler_and_rake do
+    system "rvm #{RUBIES} gem install --no-ri --no-rdoc bundler rake"
+  end
+
+end
+
 namespace :test do
 
+  # We want to test Typus with all supported databases:
+  #
+  # - Postgresql
+  # - MySQL
+  # - SQLite3
+  #
   task :rubies do
-    system "rvm #{RUBIES} rake"
+    system "rvm #{RUBIES} rake DB=sqlite3"
+    system "rvm #{RUBIES} rake DB=postgresql"
+    system "rvm #{RUBIES} rake DB=mysql"
   end
 
 end
