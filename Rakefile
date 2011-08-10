@@ -22,7 +22,7 @@ RDoc::Task.new do |rdoc|
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
 
-RUBIES = %w[1.8.7 ree 1.9.2 jruby].join(",")
+RUBIES = "1.8.7,ree,1.9.2,jruby"
 
 namespace :setup do
 
@@ -55,6 +55,13 @@ namespace :install do
   desc "Install bundler and rake"
   task :bundler_and_rake do
     system "rvm #{RUBIES} gem install --no-ri --no-rdoc bundler rake"
+  end
+
+  desc "Gems"
+  task :gems do
+    RUBIES.split(",").each do |ruby_version|
+      system "rvm use #{ruby_version}; pushd test/fixtures/rails_app/; bundle install; popd"
+    end
   end
 
 end
