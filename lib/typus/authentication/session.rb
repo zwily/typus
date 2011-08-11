@@ -7,7 +7,7 @@ module Typus
       include Base
 
       def authenticate
-        session[:typus_user_id] ? admin_user : redirect_to(new_admin_session_path)
+        session[:typus_user_id] ? admin_user : deauthenticate
       end
 
       def deauthenticate
