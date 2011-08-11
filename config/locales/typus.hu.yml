@@ -74,7 +74,7 @@ hu:
   "You can't change your role": "Nincsen jogod megváltoztatni a jogosultsági szintedet"
   "You can't toggle your status": "Nincs jogod változtatni a státuszodat"
 
-  "%{errors} prohibited this page from being saved:":
+  "%{errors} errors prohibited this page from being saved:":
   "%{model} successfully created": "%{model} sikeresen létrehozva"
   "%{model} successfully removed": "%{model} sikeresen törölve"
   "%{model} successfully updated": "%{model} sikereseb frissítve"

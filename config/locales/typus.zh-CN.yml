@@ -73,7 +73,7 @@ zh-CN:
   "You can't change your role": "你不能修改你的角色"
   "You can't toggle your status": "你不能修改自己的状态"
 
-  "%{errors} prohibited this page from being saved:":
+  "%{errors} errors prohibited this page from being saved:":
   "%{model} successfully created": "%{model} 创建成功"
   "%{model} successfully removed": "%{model} 删除成功"
   "%{model} successfully updated": "%{model} 更新成功"

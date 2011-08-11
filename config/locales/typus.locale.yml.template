@@ -75,7 +75,7 @@
   "You can't change your role":
   "You can't toggle your status":
 
-  "%{errors} prohibited this page from being saved:":
+  "%{errors} errors prohibited this page from being saved:":
   "%{model} successfully created":
   "%{model} successfully removed":
   "%{model} successfully updated":

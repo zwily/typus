@@ -6,7 +6,7 @@
   %>
 
   <%= link_to :controller => resource, :action => "index" do %>
-    <h3><%= klass.model_name.human.pluralize %></h3>
+    <h3><%= klass.model_name.human(:count => 2) %></h3>
   <% end %>
 
   <% if @resource.model_name.eql?(key) %>

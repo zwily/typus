@@ -75,7 +75,7 @@ ca:
   "View all %{attribute}":
   "View site": "Veure la web"
 
-  "%{errors} prohibited this page from being saved:":
+  "%{errors} errors prohibited this page from being saved:":
   "%{model} successfully created": "%{model} satisfactòriament creat."
   "%{model} successfully removed": "%{model} satisfactòriament eliminat."
   "%{model} successfully updated": "%{model} satisfactòriament actualitzat."
