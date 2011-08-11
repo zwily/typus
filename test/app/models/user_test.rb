@@ -29,4 +29,18 @@ class UserTest < ActiveSupport::TestCase
     assert !user.is_not_root?
   end
 
+  test "active?" do
+    user = Factory.build(:user, :role => 'admin', :status => true)
+    assert user.active?
+
+    user = Factory.build(:user, :role => 'admin', :status => false)
+    assert !user.active?
+
+    user = Factory.build(:user, :role => 'unexisting', :status => true)
+    assert !user.active?
+
+    user = Factory.build(:user, :role => 'unexisting', :status => false)
+    assert !user.active?
+  end
+
 end

@@ -47,6 +47,10 @@ module Typus
             !is_root?
           end
 
+          def active?
+            status && Typus::Configuration.roles.has_key?(role)
+          end
+
           def locale
             (preferences && preferences[:locale]) ? preferences[:locale] : ::I18n.default_locale
           end
