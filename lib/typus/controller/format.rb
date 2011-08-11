@@ -1,9 +1,4 @@
-if RUBY_VERSION >= '1.9'
-  require 'csv'
-else
-  require 'fastercsv'
-  CSV = FasterCSV
-end
+require 'csv'
 
 module Typus
   module Controller
