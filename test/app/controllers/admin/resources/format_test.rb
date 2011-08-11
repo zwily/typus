@@ -15,6 +15,7 @@ class Admin::EntriesControllerTest < ActionController::TestCase
   end
 
   test "export csv" do
+    Entry.delete_all
     entry = Factory(:entry)
 
     expected = <<-RAW
