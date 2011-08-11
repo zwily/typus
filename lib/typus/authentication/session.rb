@@ -7,7 +7,9 @@ module Typus
       include Base
 
       def authenticate
-        session[:typus_user_id] ? admin_user : deauthenticate
+        unless session[:typus_user_id] && admin_user && admin_user.active?
+          deauthenticate
+        end
       end
 
       def deauthenticate
@@ -21,12 +23,6 @@ module Typus
       #++
       def admin_user
         @admin_user ||= Typus.user_class.find_by_id(session[:typus_user_id])
-
-        if !@admin_user || !Typus::Configuration.roles.has_key?(@admin_user.role) || !@admin_user.status
-          deauthenticate
-        end
-
-        @admin_user
       end
 
       #--
