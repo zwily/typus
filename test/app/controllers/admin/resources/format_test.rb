@@ -28,10 +28,4 @@ title,published
     assert_equal expected, @response.body
   end
 
-#  test "export csv" do
-#    entry = Factory(:entry)
-#    get :index, :format => :csv
-#    assert_response :success
-#  end
-
 end
