@@ -2,6 +2,9 @@
 $:.push File.expand_path("../lib", __FILE__)
 require "typus/version"
 
+files = `git ls-files`.split("\n") + Dir["config/locales/*.yml"]
+test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
+
 Gem::Specification.new do |s|
   s.name = "typus"
   s.version = Typus::VERSION
@@ -14,8 +17,8 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "typus"
 
-  s.files         = `git ls-files`.split("\n")
-  s.test_files    = `git ls-files -- {test,spec,features}/*`.split("\n")
+  s.files         = files - test_files
+  s.test_files    = []
   s.require_paths = ["lib"]
 
   s.add_dependency "bcrypt-ruby"
