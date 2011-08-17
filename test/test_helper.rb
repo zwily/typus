@@ -1,13 +1,13 @@
+# Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
 
-##
-# Boot dummy and load the schema.
-##
-
-require "dummy/config/environment"
-require "dummy/db/schema"
-
+require File.expand_path("../dummy/config/environment.rb",  __FILE__)
+require File.expand_path("../dummy/db/schema.rb",  __FILE__)
 require "rails/test_help"
+
+require 'shoulda-context'
+
+Rails.backtrace_cleaner.remove_silencers!
 
 class ActiveSupport::TestCase
 
