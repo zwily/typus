@@ -6,7 +6,8 @@ $:.push File.expand_path("../lib", __FILE__)
 require "typus/version"
 
 files = `git ls-files`.split("\n")
-test_files = `git ls-files -- {test}/*`.split("\n")
+test_files = `git ls-files -- test/*`.split("\n")
+ignores = `git ls-files -- script/*`.split("\n")
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
@@ -21,7 +22,7 @@ Gem::Specification.new do |s|
 
   s.rubyforge_project = "typus"
 
-  s.files         = files - test_files
+  s.files         = files - test_files - ignores
   s.test_files    = []
   s.require_paths = ["lib"]
 
