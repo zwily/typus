@@ -22,7 +22,7 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
   context "Create an invoice from an Order" do
 
     setup do
-      @order = Factory(:order)
+      @order = FactoryGirl.create(:order)
       @invoice = { :number => "Invoice#0000001" }
     end
 
@@ -44,13 +44,13 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
     end
 
     should_eventually "raise an error if we try to add an invoice to an order which already has an invoice" do
-      @invoice = Factory(:invoice)
+      @invoice = FactoryGirl.create(:invoice)
       get :new, { :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id }
       assert_response :unprocessable_entity
     end
 
     should_eventually "raise an error if we try to create an invoice to an order which already has an invoice" do
-      @invoice = Factory(:invoice)
+      @invoice = FactoryGirl.create(:invoice)
       post :create, :invoice => { :number => "Invoice#0000001" },
                     :resource => "Order", :resource_id => @invoice.order.id, :order_id => @invoice.order.id
       assert_response :unprocessable_entity
@@ -59,7 +59,7 @@ class Admin::InvoicesControllerTest < ActionController::TestCase
   end
 
   test "unrelate Invoice from Order" do
-    invoice = Factory(:invoice)
+    invoice = FactoryGirl.create(:invoice)
     order = invoice.order
     @request.env['HTTP_REFERER'] = "/admin/orders/edit/#{order.id}"
 

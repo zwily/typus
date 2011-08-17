@@ -11,13 +11,13 @@ require "test_helper"
 class Admin::CategoriesControllerTest < ActionController::TestCase
 
   setup do
-    @request.session[:typus_user_id] = Factory(:typus_user).id
+    @request.session[:typus_user_id] = FactoryGirl.create(:typus_user).id
     @request.env['HTTP_REFERER'] = '/admin/categories'
   end
 
   test "get position" do
-    first_category = Factory(:category, :position => 1)
-    second_category = Factory(:category, :position => 2)
+    first_category = FactoryGirl.create(:category, :position => 1)
+    second_category = FactoryGirl.create(:category, :position => 2)
 
     second_category.name = nil
     second_category.save(:validate => false)

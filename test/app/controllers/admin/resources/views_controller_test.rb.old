@@ -11,10 +11,10 @@ require "test_helper"
 class Admin::ViewsControllerTest < ActionController::TestCase
 
   setup do
-    @request.session[:typus_user_id] = Factory(:typus_user).id
-    @site = Factory(:site, :domain => 'test.host')
-    Factory(:view, :site => @site)
-    Factory(:view)
+    @request.session[:typus_user_id] = FactoryGirl.create(:typus_user).id
+    @site = FactoryGirl.create(:site, :domain => 'test.host')
+    FactoryGirl.create(:view, :site => @site)
+    FactoryGirl.create(:view)
   end
 
   should_eventually "get :index returns only views on the current_context" do

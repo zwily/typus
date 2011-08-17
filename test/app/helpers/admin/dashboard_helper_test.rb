@@ -14,7 +14,7 @@ class Admin::DashboardHelperTest < ActiveSupport::TestCase
   end
 
   test "resources work for typus_user" do
-    admin_user = Factory(:typus_user)
+    admin_user = FactoryGirl.create(:typus_user)
     output = resources(admin_user)
     assert_equal @expected, output
   end

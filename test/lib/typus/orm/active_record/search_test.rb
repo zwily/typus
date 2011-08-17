@@ -209,8 +209,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
       params = { :search => "francesc", :status => "true" }
 
-      Factory(:typus_user, :email => "francesc.one@example.com")
-      Factory(:typus_user, :email => "francesc.dos@example.com", :status => false)
+      FactoryGirl.create(:typus_user, :email => "francesc.one@example.com")
+      FactoryGirl.create(:typus_user, :email => "francesc.dos@example.com", :status => false)
 
       resource = TypusUser
       resource.build_conditions(params).each do |condition|
@@ -285,16 +285,16 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test "build_my_joins return the expected joins" do
-    @project = Factory(:project)
-    2.times { Factory(:project) }
+    @project = FactoryGirl.create(:project)
+    2.times { FactoryGirl.create(:project) }
 
     params = { :projects => @project.id }
     assert_equal [:projects], User.build_my_joins(params)
   end
 
   test "build_my_joins works when users are filtered by projects" do
-    @project = Factory(:project)
-    2.times { Factory(:project) }
+    @project = FactoryGirl.create(:project)
+    2.times { FactoryGirl.create(:project) }
 
     params = { :projects => @project.id }
 

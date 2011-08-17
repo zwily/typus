@@ -10,47 +10,39 @@
 # CRUD
 ##
 
-30.times do
-  Factory(:entry)
-end
+FactoryGirl.create_list(:entry, 30)
 
 ##
 # CRUD Extended
 ##
 
-5.times do
-  Factory(:category)
-  Factory(:post)
-end
+FactoryGirl.create_list(:category, 5)
+FactoryGirl.create_list(:post, 5)
 
 assets_path = "#{Rails.root}/db/seeds/assets"
-5.times { |i| Factory(:asset,
-                     :dragonfly => File.new("#{assets_path}/00#{i}.jpg"),
-                     :dragonfly_required => File.new("#{assets_path}/00#{i}.jpg"),
-                     :paperclip => File.new("#{assets_path}/00#{i}.jpg")) }
+5.times { |i| FactoryGirl.create(:asset,
+                                 :dragonfly => File.new("#{assets_path}/00#{i}.jpg"),
+                                 :dragonfly_required => File.new("#{assets_path}/00#{i}.jpg"),
+                                 :paperclip => File.new("#{assets_path}/00#{i}.jpg")) }
 
 ##
 # HasManyThrough
 ##
 
 5.times do
-  project = Factory(:project)
-  5.times { project.collaborators << Factory(:user) }
+  project = FactoryGirl.create(:project)
+  5.times { project.collaborators << FactoryGirl.create(:user) }
 end
 
 ##
 # HasOne
 ##
 
-5.times do
-  Factory(:invoice)
-end
+FactoryGirl.create_list(:invoice, 5)
 
 ##
 # Polymorphic
 ##
 
-5.times do
-  Factory(:bird)
-  Factory(:dog)
-end
+FactoryGirl.create_list(:bird, 5)
+FactoryGirl.create_list(:dog, 5)

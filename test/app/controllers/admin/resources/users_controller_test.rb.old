@@ -12,7 +12,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    @project = Factory(:project)
+    @project = FactoryGirl.create(:project)
     @user = @project.user
   end
 
@@ -27,10 +27,10 @@ class Admin::UsersControllerTest < ActionController::TestCase
   context "index" do
 
     setup do
-      @user_1 = Factory(:user)
-      @project_1 = Factory(:project, :user => @user_1)
-      Factory(:project, :user => @user_1)
-      @project_2 = Factory(:project)
+      @user_1 = FactoryGirl.create(:user)
+      @project_1 = FactoryGirl.create(:project, :user => @user_1)
+      FactoryGirl.create(:project, :user => @user_1)
+      @project_2 = FactoryGirl.create(:project)
     end
 
     should "filter by projects" do
@@ -50,8 +50,8 @@ class Admin::UsersControllerTest < ActionController::TestCase
     #
 
     setup do
-      @project = Factory(:project)
-      @user = Factory(:user)
+      @project = FactoryGirl.create(:project)
+      @user = FactoryGirl.create(:user)
       @project.collaborators << @user
 
       @request.env['HTTP_REFERER'] = "/admin/projects/edit/#{@project.id}"
@@ -77,7 +77,7 @@ class Admin::UsersControllerTest < ActionController::TestCase
   context "autocomplete" do
 
     setup do
-      25.times { Factory(:user) }
+      25.times { FactoryGirl.create(:user) }
     end
 
     should "work and return a json hash with ten items" do

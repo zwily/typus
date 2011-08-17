@@ -91,9 +91,9 @@ class Admin::FormHelperTest < ActiveSupport::TestCase
   context "expand_tree_into_select_field" do
 
     setup do
-      @page = Factory(:page)
-      @children = Factory(:page, :parent => @page)
-      @subchildren = Factory(:page, :parent => @children)
+      @page = FactoryGirl.create(:page)
+      @children = FactoryGirl.create(:page, :parent => @page)
+      @subchildren = FactoryGirl.create(:page, :parent => @children)
       @items = Page.roots
     end
 

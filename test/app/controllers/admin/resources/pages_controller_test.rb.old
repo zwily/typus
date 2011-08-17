@@ -16,8 +16,8 @@ class Admin::PagesControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    Factory(:page)
-    Factory(:page, :status => false)
+    FactoryGirl.create(:page)
+    FactoryGirl.create(:page, :status => false)
   end
 
   test "get :index returns scoped results" do

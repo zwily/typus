@@ -17,7 +17,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    @post = Factory(:post)
+    @post = FactoryGirl.create(:post)
   end
 
   context "Filters" do
@@ -183,15 +183,15 @@ title;status
     context "Root" do
 
       setup do
-        @editor = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
-        @post = Factory(:post, :typus_user => @editor)
+        @editor = FactoryGirl.create(:typus_user, :email => "editor@example.com", :role => "editor")
+        @post = FactoryGirl.create(:post, :typus_user => @editor)
       end
 
       should "should list all posts no matter who is the owner" do
         Post.delete_all
         admin = TypusUser.where(:role => 'admin').first
-        2.times { Factory(:post, :typus_user => @editor) }
-        2.times { Factory(:post, :typus_user => @typus_user) }
+        2.times { FactoryGirl.create(:post, :typus_user => @editor) }
+        2.times { FactoryGirl.create(:post, :typus_user => @typus_user) }
         Typus::Resources.expects(:only_user_items).returns(true)
 
         get :index
@@ -242,25 +242,25 @@ title;status
       end
 
       should "verify_editor_tried_to_edit_a_post_owned_by_himself" do
-        get :edit, :id => Factory(:post, :typus_user => @typus_user).id
+        get :edit, :id => FactoryGirl.create(:post, :typus_user => @typus_user).id
         assert_response :success
       end
 
       should "verify_editor_tries_to_edit_a_post_owned_by_the_admin" do
-        get :edit, :id => Factory(:post).id
+        get :edit, :id => FactoryGirl.create(:post).id
         assert_response :unprocessable_entity
       end
 
       should "verify_editor_tries_to_show_a_post_owned_by_the_admin" do
-        get :show, :id => Factory(:post).id
+        get :show, :id => FactoryGirl.create(:post).id
         assert_response :success
       end
 
       should "only list editor posts" do
         Post.delete_all
         admin = TypusUser.where(:role => 'admin').first
-        2.times { Factory(:post, :typus_user => admin) }
-        2.times { Factory(:post, :typus_user => @typus_user) }
+        2.times { FactoryGirl.create(:post, :typus_user => admin) }
+        2.times { FactoryGirl.create(:post, :typus_user => @typus_user) }
         Typus::Resources.expects(:only_user_items).returns(true)
 
         get :index
@@ -272,7 +272,7 @@ title;status
 
       should "verify_editor_tries_to_show_a_post_owned_by_the_admin when only user items" do
         Typus::Resources.expects(:only_user_items).returns(true)
-        post = Factory(:post)
+        post = FactoryGirl.create(:post)
         get :show, :id => post.id
         assert_response :unprocessable_entity
       end
@@ -287,7 +287,7 @@ title;status
 
       should "verify_editor_updating_an_item_does_not_change_typus_user_id" do
         [ 108, nil ].each do |typus_user_id|
-          post_ = Factory(:post, :typus_user => @typus_user)
+          post_ = FactoryGirl.create(:post, :typus_user => @typus_user)
           post :update, :id => post_.id, :post => { :title => 'Updated', :typus_user_id => @typus_user.id }
           post_updated = Post.find(post_.id)
           assert_equal @request.session[:typus_user_id], post_updated.typus_user_id
@@ -311,7 +311,7 @@ title;status
       end
 
       should "be able to destroy posts" do
-        get :destroy, :id => Factory(:post).id, :method => :delete
+        get :destroy, :id => FactoryGirl.create(:post).id, :method => :delete
 
         assert_response :redirect
         assert_equal "Post successfully removed.", flash[:notice]
@@ -324,9 +324,9 @@ title;status
 
       setup do
         Typus.user_class.delete_all
-        @designer = Factory(:typus_user, :role => "designer")
+        @designer = FactoryGirl.create(:typus_user, :role => "designer")
         @request.session[:typus_user_id] = @designer.id
-        @post = Factory(:post)
+        @post = FactoryGirl.create(:post)
       end
 
       should "not be able to add posts" do
@@ -351,11 +351,11 @@ title;status
   context "Relationships (relate)" do
 
     setup do
-      @post = Factory(:post)
+      @post = FactoryGirl.create(:post)
     end
 
     should "relate comment to post (has_many)" do
-      comment = Factory(:comment, :post => nil)
+      comment = FactoryGirl.create(:comment, :post => nil)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_difference('@post.comments.count') do
@@ -368,7 +368,7 @@ title;status
     end
 
     should "return a message instead a 404 error if related_id is empty" do
-      comment = Factory(:comment, :post => nil)
+      comment = FactoryGirl.create(:comment, :post => nil)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_no_difference('@post.comments.count') do
@@ -381,7 +381,7 @@ title;status
     end
 
     should "return a message instead a 404 error if related_id is nil" do
-      comment = Factory(:comment, :post => nil)
+      comment = FactoryGirl.create(:comment, :post => nil)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_no_difference('@post.comments.count') do
@@ -394,7 +394,7 @@ title;status
     end
 
     should "relate category to post (has_and_belongs_to_many)" do
-      category = Factory(:category)
+      category = FactoryGirl.create(:category)
       @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"
 
       assert_difference('category.posts.count') do
@@ -452,7 +452,7 @@ title;status
     context "Edit" do
 
       setup do
-        get :edit, :id => Factory(:post).id
+        get :edit, :id => FactoryGirl.create(:post).id
       end
 
       should "render_edit_and_verify_presence_of_custom_partials" do
@@ -468,7 +468,7 @@ title;status
     context "Show" do
 
       setup do
-        get :show, :id => Factory(:post).id
+        get :show, :id => FactoryGirl.create(:post).id
       end
 
       should "render_show_and_verify_presence_of_custom_partials" do
@@ -603,7 +603,7 @@ title;status
       #
 
       setup do
-        @view = Factory(:view, :post => nil)
+        @view = FactoryGirl.create(:view, :post => nil)
       end
 
       should_eventually "create new post and redirect to view" do
@@ -624,7 +624,7 @@ title;status
   context "autocomplete" do
 
     setup do
-      25.times { Factory(:post) }
+      25.times { FactoryGirl.create(:post) }
     end
 
     should "work and return a json hash with ten items" do

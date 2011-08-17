@@ -14,7 +14,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     setup do
       admin_sign_in
-      @typus_user_editor = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
+      @typus_user_editor = FactoryGirl.create(:typus_user, :email => "editor@example.com", :role => "editor")
       @request.env['HTTP_REFERER'] = '/admin/typus_users'
     end
 
@@ -119,22 +119,22 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     end
 
     should "not be able to edit other profiles" do
-      get :edit, :id => Factory(:typus_user).id
+      get :edit, :id => FactoryGirl.create(:typus_user).id
       assert_response :unprocessable_entity
     end
 
     should "not be able to update other profiles" do
-      post :update, :id => Factory(:typus_user).id, :typus_user => { :role => 'admin' }
+      post :update, :id => FactoryGirl.create(:typus_user).id, :typus_user => { :role => 'admin' }
       assert_response :unprocessable_entity
     end
 
     should "not be able to destroy other profiles" do
-      delete :destroy, :id => Factory(:typus_user).id
+      delete :destroy, :id => FactoryGirl.create(:typus_user).id
       assert_response :unprocessable_entity
     end
 
     should "not be able to toggle other profiles status" do
-      get :toggle, :id => Factory(:typus_user).id, :field => 'status'
+      get :toggle, :id => FactoryGirl.create(:typus_user).id, :field => 'status'
       assert_response :unprocessable_entity
     end
 

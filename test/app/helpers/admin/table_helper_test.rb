@@ -67,7 +67,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     end
 
     should "work" do
-      item = Factory(:comment)
+      item = FactoryGirl.create(:comment)
       @resource_actions = [["Show", {:action => :show}, {}]]
       expected = %Q(<a href="/admin/comments/show/#{item.id}">Show</a>)
 
@@ -75,7 +75,7 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
     end
 
     should "work with conditions" do
-      item = Factory(:comment, :id => 1)
+      item = FactoryGirl.create(:comment, :id => 1)
       proc1 = Proc.new {|item| item.id != 1}
       @resource_actions = [["Show", {:action => :show}, {}, proc1], ["Edit", {:action => :edit}, {}]]
       expected = %Q(<a href="/admin/comments/edit/#{item.id}">Edit</a>)
@@ -100,20 +100,20 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   context "table_belongs_to_field" do
 
     should "work without associated model" do
-      comment = Factory(:comment, :post => nil)
+      comment = FactoryGirl.create(:comment, :post => nil)
       assert_equal "&mdash;", table_belongs_to_field("post", comment)
     end
 
     should "work with associated model when user has access" do
       admin_user.expects(:can?).returns(true)
-      comment = Factory(:comment)
+      comment = FactoryGirl.create(:comment)
       post = comment.post
       assert_equal %(<a href="/admin/posts/edit/#{post.id}">#{post.to_label}</a>), table_belongs_to_field("post", comment)
     end
 
     should "work with associated model when user does not have access" do
       admin_user.expects(:can?).returns(false)
-      comment = Factory(:comment)
+      comment = FactoryGirl.create(:comment)
       post = comment.post
       assert_equal post.to_label, table_belongs_to_field("post", comment)
     end
@@ -121,21 +121,21 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   end
 
   should "test_table_has_and_belongs_to_many_field" do
-    post = Factory(:post)
-    post.comments << Factory(:comment, :name => "John")
-    post.comments << Factory(:comment, :name => "Jack")
+    post = FactoryGirl.create(:post)
+    post.comments << FactoryGirl.create(:comment, :name => "John")
+    post.comments << FactoryGirl.create(:comment, :name => "Jack")
     assert_equal "John, Jack", table_has_and_belongs_to_many_field("comments", post)
   end
 
   context "table_string_field" do
 
     should "work" do
-      post = Factory(:post)
+      post = FactoryGirl.create(:post)
       assert_equal post.title, table_string_field(:title, post)
     end
 
     should "work when attribute is empty" do
-      post = Factory(:post)
+      post = FactoryGirl.create(:post)
       post.title = ""
       assert_equal "&mdash;", table_string_field(:title, post)
     end
@@ -145,12 +145,12 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   context "table_integer_field" do
 
     should "work" do
-      post = Factory(:post)
+      post = FactoryGirl.create(:post)
       assert_equal post.id, table_integer_field(:id, post)
     end
 
     should "work when attribute is empty" do
-      post = Factory(:post)
+      post = FactoryGirl.create(:post)
       post.id = nil
       assert_equal "&mdash;", table_integer_field(:id, post)
     end
@@ -160,39 +160,39 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   context "table_tree_field" do
 
     should "work when no parent" do
-      page = Factory(:page)
+      page = FactoryGirl.create(:page)
       assert_equal "&mdash;", table_tree_field("title", page)
     end
 
     should "work when parent" do
-      parent = Factory(:page)
-      page = Factory(:page, :parent => parent)
+      parent = FactoryGirl.create(:page)
+      page = FactoryGirl.create(:page, :parent => parent)
       assert_equal parent.to_label, table_tree_field("title", page)
     end
 
   end
 
   should "test_table_datetime_field" do
-    post = Factory(:post)
+    post = FactoryGirl.create(:post)
     assert_equal post.created_at.strftime("%d %b %H:%M"), table_datetime_field(:created_at, post)
   end
 
   context "table_boolean_field" do
 
     should "work when default status is true" do
-      post = Factory(:typus_user)
+      post = FactoryGirl.create(:typus_user)
       expected = %(<a href="/admin/typus_users/toggle/#{post.id}?field=status" data-confirm="Change status?">Active</a>)
       assert_equal expected, table_boolean_field("status", post)
     end
 
     should "work when default status is false" do
-      post = Factory(:typus_user, :status => false)
+      post = FactoryGirl.create(:typus_user, :status => false)
       expected = %(<a href="/admin/typus_users/toggle/#{post.id}?field=status" data-confirm="Change status?">Inactive</a>)
       assert_equal expected, table_boolean_field("status", post)
     end
 
     should "work when default status is nil" do
-      post = Factory(:typus_user, :status => nil)
+      post = FactoryGirl.create(:typus_user, :status => nil)
       assert post.status.nil?
       expected = %(<a href="/admin/typus_users/toggle/#{post.id}?field=status" data-confirm="Change status?">Inactive</a>)
       assert_equal expected, table_boolean_field("status", post)
@@ -203,23 +203,23 @@ class Admin::TableHelperTest < ActiveSupport::TestCase
   context "table_transversal_field" do
 
     should "work" do
-      comment = Factory(:comment)
+      comment = FactoryGirl.create(:comment)
       output = table_transversal_field("post.title", comment)
       expected = comment.post.title
       assert_equal expected, output
     end
 
     should "return a dash if the association does not exist" do
-      comment = Factory(:comment, :post => nil)
+      comment = FactoryGirl.create(:comment, :post => nil)
       assert_equal "&mdash;", table_transversal_field("post.title", comment)
     end
 
   end
 
   should "test_table_position_field" do
-    first_category = Factory(:category, :position => 0)
-    second_category = Factory(:category, :position => 1)
-    last_category = Factory(:category, :position => 2)
+    first_category = FactoryGirl.create(:category, :position => 0)
+    second_category = FactoryGirl.create(:category, :position => 1)
+    last_category = FactoryGirl.create(:category, :position => 2)
 
     output = table_position_field(nil, first_category)
     expected = <<-HTML

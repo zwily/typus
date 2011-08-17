@@ -12,7 +12,7 @@ require "test_helper"
 class AdminUserTest < ActiveSupport::TestCase
 
   test "token changes everytime we save the user" do
-    admin_user = Factory(:admin_user)
+    admin_user = FactoryGirl.create(:admin_user)
     first_token = admin_user.token
     admin_user.save
     second_token = admin_user.token

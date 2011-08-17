@@ -55,7 +55,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   end
 
   should "verify_a_removed_role_cannot_sign_in" do
-    typus_user = Factory(:typus_user, :role => "removed")
+    typus_user = FactoryGirl.create(:typus_user, :role => "removed")
     @request.session[:typus_user_id] = typus_user.id
 
     get :show

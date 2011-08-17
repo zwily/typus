@@ -12,7 +12,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    @project = Factory(:project)
+    @project = FactoryGirl.create(:project)
     @user = @project.user
   end
 
@@ -30,7 +30,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     end
 
     should "work" do
-      user = Factory(:user)
+      user = FactoryGirl.create(:user)
 
       assert_difference('@project.collaborators.count') do
         post :relate, :id => @project.id, :related => { :model => 'User', :id => user.id, :association_name => 'collaborators' }

@@ -22,7 +22,7 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
   test "get bulk_destroy removes all items" do
     @request.env['HTTP_REFERER'] = "/admin/entry_bulks"
 
-    10.times { Factory(:entry_bulk) }
+    10.times { FactoryGirl.create(:entry_bulk) }
     items_to_destroy = EntryBulk.limit(5).map(&:id)
     items_to_keep = EntryBulk.limit(5).offset(5).map(&:id)
 

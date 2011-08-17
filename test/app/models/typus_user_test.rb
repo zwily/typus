@@ -59,7 +59,7 @@ class TypusUserTest < ActiveSupport::TestCase
   context "TypusUser" do
 
     setup do
-      @typus_user = Factory(:typus_user)
+      @typus_user = FactoryGirl.create(:typus_user)
     end
 
     should "verify salt never changes" do
@@ -152,13 +152,13 @@ class TypusUserTest < ActiveSupport::TestCase
   end
 
   test "user does not own a resource" do
-    typus_user = Factory(:typus_user)
-    resource = Factory(:post, :typus_user => Factory(:typus_user))
+    typus_user = FactoryGirl.create(:typus_user)
+    resource = FactoryGirl.create(:post, :typus_user => FactoryGirl.create(:typus_user))
     assert !typus_user.owns?(resource)
   end
 
   test "token changes everytime we save the user" do
-    admin_user = Factory(:typus_user)
+    admin_user = FactoryGirl.create(:typus_user)
     first_token = admin_user.token
     admin_user.save
     second_token = admin_user.token

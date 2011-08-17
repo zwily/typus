@@ -12,7 +12,7 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    @entry = Factory(:entry_trash)
+    @entry = FactoryGirl.create(:entry_trash)
   end
 
   test "get trash lists destroyed items" do

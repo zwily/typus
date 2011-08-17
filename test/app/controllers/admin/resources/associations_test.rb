@@ -11,7 +11,7 @@ require "test_helper"
 class Admin::CategoriesControllerTest < ActionController::TestCase
 
   setup do
-    @request.session[:typus_user_id] = Factory(:typus_user).id
+    @request.session[:typus_user_id] = FactoryGirl.create(:typus_user).id
     @request.env['HTTP_REFERER'] = '/admin/categories'
   end
 
@@ -26,8 +26,8 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
   #   /admin/categories/unrelate/2?resource=Post&resource_id=1
   #
   test "unrelate (has_and_belongs_to_many)" do
-    category = Factory(:category)
-    category.posts << Factory(:post)
+    category = FactoryGirl.create(:category)
+    category.posts << FactoryGirl.create(:post)
     @request.env['HTTP_REFERER'] = "/admin/dashboard"
 
     assert_difference('category.posts.count', -1) do
@@ -49,7 +49,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
   #
   test "relate using add new on sti models" do
     category = { :name => "Category Name" }
-    kase = Factory(:case)
+    kase = FactoryGirl.create(:case)
 
     assert_difference('kase.categories.count') do
       post :create, { :category => category, :resource => "Case", :resource_id => kase.id, :_saveandassign => true }

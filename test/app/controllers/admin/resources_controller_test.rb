@@ -12,7 +12,7 @@ class Admin::EntriesControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    @entry = Factory(:entry)
+    @entry = FactoryGirl.create(:entry)
   end
 
   test "get index" do

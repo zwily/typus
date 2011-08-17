@@ -20,17 +20,17 @@ class ActiveSupport::TestCase
   end
 
   def admin_sign_in
-    @typus_user = Factory(:typus_user)
+    @typus_user = FactoryGirl.create(:typus_user)
     set_session
   end
 
   def editor_sign_in
-    @typus_user = Factory(:typus_user, :email => "editor@example.com", :role => "editor")
+    @typus_user = FactoryGirl.create(:typus_user, :email => "editor@example.com", :role => "editor")
     set_session
   end
 
   def designer_sign_in
-    @typus_user = Factory(:typus_user, :email => "designer@example.com", :role => "designer")
+    @typus_user = FactoryGirl.create(:typus_user, :email => "designer@example.com", :role => "designer")
     set_session
   end
 

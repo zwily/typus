@@ -9,7 +9,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   context "admin" do
 
     setup do
-      @typus_user = Factory(:typus_user)
+      @typus_user = FactoryGirl.create(:typus_user)
     end
 
     should "verify models access" do
@@ -69,7 +69,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   context "editor" do
 
     setup do
-      @typus_user = Factory(:typus_user, :role => "editor")
+      @typus_user = FactoryGirl.create(:typus_user, :role => "editor")
     end
 
     should "verify models access" do
@@ -97,7 +97,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   context "designer" do
 
     setup do
-      @typus_user = Factory(:typus_user, :role => "designer")
+      @typus_user = FactoryGirl.create(:typus_user, :role => "designer")
     end
 
     should "verify models access" do

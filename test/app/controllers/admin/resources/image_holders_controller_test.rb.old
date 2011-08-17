@@ -15,7 +15,7 @@ class Admin::ImageHoldersControllerTest < ActionController::TestCase
   end
 
   test "create polymorphic association" do
-    bird = Factory(:bird)
+    bird = FactoryGirl.create(:bird)
 
     assert_difference('bird.image_holders.count') do
       post :create, { :image_holder => { :name => "ImageHolder" },
@@ -42,8 +42,8 @@ class Admin::ImageHoldersControllerTest < ActionController::TestCase
   #       a Bird unrelates ImageHolder and not ImageHolder unrelates Bird.
   #
   test "unrelate" do
-    image_holder = Factory(:image_holder)
-    bird = Factory(:bird)
+    image_holder = FactoryGirl.create(:image_holder)
+    bird = FactoryGirl.create(:bird)
     bird.image_holders << image_holder
     @request.env['HTTP_REFERER'] = "/admin/birds/edit/#{bird.id}"
 

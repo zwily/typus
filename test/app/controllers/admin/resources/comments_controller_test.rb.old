@@ -12,7 +12,7 @@ require "test_helper"
 class Admin::CommentsControllerTest < ActionController::TestCase
 
   setup do
-    @request.session[:typus_user_id] = Factory(:typus_user).id
+    @request.session[:typus_user_id] = FactoryGirl.create(:typus_user).id
     @request.env['HTTP_REFERER'] = '/admin/categories'
   end
 
@@ -32,7 +32,7 @@ class Admin::CommentsControllerTest < ActionController::TestCase
     # defined on the model.
     #
     should "unrelate comment from post" do
-      comment = Factory(:comment)
+      comment = FactoryGirl.create(:comment)
       @post = comment.post
 
       assert_difference('@post.comments.count', -1) do
@@ -58,11 +58,11 @@ class Admin::CommentsControllerTest < ActionController::TestCase
     # And we can search by "posts.title" because "Comment" is belongs_to :post
     #
     should "search in Posts.title from Comments list" do
-      post_1 = Factory(:post, :title => "A title with_keyword")
-      comment_1 = Factory(:comment, :post => post_1)
+      post_1 = FactoryGirl.create(:post, :title => "A title with_keyword")
+      comment_1 = FactoryGirl.create(:comment, :post => post_1)
 
-      post_2 = Factory(:post, :title => "A title without_keyword")
-      comment_2 = Factory(:comment, :post => post_2)
+      post_2 = FactoryGirl.create(:post, :title => "A title without_keyword")
+      comment_2 = FactoryGirl.create(:comment, :post => post_2)
 
       post :index, {:search => "with_keyword" }
       assert_equal [comment_1], assigns(:items)

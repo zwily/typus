@@ -12,14 +12,14 @@ require "test_helper"
 class Admin::AssetsControllerTest < ActionController::TestCase
 
   setup do
-    @request.session[:typus_user_id] = Factory(:typus_user).id
-    @post = Factory(:post)
+    @request.session[:typus_user_id] = FactoryGirl.create(:typus_user).id
+    @post = FactoryGirl.create(:post)
   end
 
   context "edit" do
 
     setup do
-      @asset = Factory(:asset)
+      @asset = FactoryGirl.create(:asset)
       @request.env['HTTP_REFERER'] = "/admin/assets/edit/#{@asset.id}"
     end
 
@@ -55,7 +55,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     end
 
     should "verify message on polymorphic relationship" do
-      asset = Factory(:asset)
+      asset = FactoryGirl.create(:asset)
       get :edit, :id => asset.id, :resource => @post.class.name, :resource_id => @post.id
       assert_select 'body div#flash', "Cancel adding a new asset?"
     end
@@ -77,7 +77,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     end
 
     should "render edit with a custom layout" do
-      asset = Factory(:asset)
+      asset = FactoryGirl.create(:asset)
       get :edit, :id => asset.id, :layout => "admin/headless"
       assert_response :success
       assert_template "admin/headless"
@@ -112,7 +112,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
     context "update" do
 
       setup do
-        @asset = Factory(:asset)
+        @asset = FactoryGirl.create(:asset)
       end
 
       should "redirect to edit with custom layout" do

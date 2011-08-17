@@ -52,7 +52,7 @@ class Admin::AccountControllerTest < ActionController::TestCase
   context "There are users" do
 
     setup do
-      @typus_user = Factory(:typus_user)
+      @typus_user = FactoryGirl.create(:typus_user)
     end
 
     should "new redirect new admin session when there are admin users" do
