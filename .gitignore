@@ -7,3 +7,6 @@ test/dummy/db/*.sqlite3
 test/dummy/log/*.log
 test/dummy/public/system/
 test/dummy/tmp/
+
+# This is a RubyGem so there's no need to keep the `Gemfile.lock`.
+Gemfile.lock
