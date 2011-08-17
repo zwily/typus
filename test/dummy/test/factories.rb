@@ -2,18 +2,18 @@
 # Auth
 ##
 
-Factory.define :admin_user do |f|
+FactoryGirl.define :admin_user do |f|
   f.sequence(:email) { |n| "admin+#{n}@example.com" }
   f.password "XXXXXXXX"
   f.role "admin"
 end
 
-Factory.define :devise_user do |f|
+FactoryGirl.define :devise_user do |f|
   f.sequence(:email) { |n| "john+#{n}@example.com"}
   f.password "12345678"
 end
 
-Factory.define :typus_user do |f|
+FactoryGirl.define :typus_user do |f|
   f.sequence(:email) { |n| "user+#{n}@example.com" }
   f.role "admin"
   f.status true
@@ -25,22 +25,22 @@ end
 # CRUD
 ##
 
-Factory.define :entry do |f|
+FactoryGirl.define :entry do |f|
   f.sequence(:title) { |n| "Entry##{n}" }
   f.content "Body of the entry"
 end
 
-Factory.define :entry_bulk do |f|
+FactoryGirl.define :entry_bulk do |f|
   f.sequence(:title) { |n| "EntryBulk##{n}" }
   f.content "Body of the entry"
 end
 
-Factory.define :entry_trash do |f|
+FactoryGirl.define :entry_trash do |f|
   f.sequence(:title) { |n| "EntryTrash##{n}" }
   f.content "Body of the entry"
 end
 
-Factory.define :case do |f|
+FactoryGirl.define :case do |f|
   f.sequence(:title) { |n| "Case##{n}" }
   f.content "Body of the entry"
 end
@@ -49,7 +49,7 @@ end
 # CRUD Extended
 ##
 
-Factory.define :asset do |f|
+FactoryGirl.define :asset do |f|
   f.sequence(:caption) { |n| "Asset##{n}" }
   f.dragonfly File.new("#{Rails.root}/public/images/rails.png")
   f.dragonfly_required File.new("#{Rails.root}/public/images/rails.png")
@@ -57,29 +57,29 @@ Factory.define :asset do |f|
   f.paperclip_required File.new("#{Rails.root}/public/images/rails.png")
 end
 
-Factory.define :category do |f|
+FactoryGirl.define :category do |f|
   f.sequence(:name) { |n| "Category##{n}" }
 end
 
-Factory.define :comment do |f|
+FactoryGirl.define :comment do |f|
   f.sequence(:name) { |n| "Comment##{n}" }
   f.sequence(:email) { |n| "john+#{n}@example.com" }
   f.body "Body of the comment"
   f.association :post
 end
 
-Factory.define :page do |f|
+FactoryGirl.define :page do |f|
   f.sequence(:title) { |n| "Page##{n}" }
   f.body "Content"
 end
 
-Factory.define :post do |f|
+FactoryGirl.define :post do |f|
   f.sequence(:title) { |n| "Post##{n}" }
   f.body "Body"
   f.status "published"
 end
 
-Factory.define :view do |f|
+FactoryGirl.define :view do |f|
   f.ip "127.0.0.1"
   f.association :post
   f.association :site
@@ -89,12 +89,12 @@ end
 # HasOne Association
 #
 
-Factory.define :invoice do |f|
+FactoryGirl.define :invoice do |f|
   f.sequence(:number) { |n| "Invoice##{n}" }
   f.association :order
 end
 
-Factory.define :order do |f|
+FactoryGirl.define :order do |f|
   f.sequence(:number) { |n| "Order##{n}" }
 end
 
@@ -102,19 +102,19 @@ end
 # HasManyThrough Association
 #
 
-Factory.define :user do |f|
+FactoryGirl.define :user do |f|
   f.sequence(:name) { |n| "User##{n}" }
   f.sequence(:email) { |n| "user.#{n}@example.com" }
   f.role "admin"
   f.token "qw1rd3-1w3f5b"
 end
 
-Factory.define :project do |f|
+FactoryGirl.define :project do |f|
   f.sequence(:name) { |n| "Project##{n}" }
   f.association :user
 end
 
-Factory.define :project_collaborators do |f|
+FactoryGirl.define :project_collaborators do |f|
   f.association :user
   f.association :project
 end
@@ -123,19 +123,19 @@ end
 # Polymorphic
 ##
 
-Factory.define :animal do |f|
+FactoryGirl.define :animal do |f|
   f.sequence(:name) { |n| "Animal##{n}" }
 end
 
-Factory.define :bird do |f|
+FactoryGirl.define :bird do |f|
   f.sequence(:name) { |n| "Bird##{n}" }
 end
 
-Factory.define :dog do |f|
+FactoryGirl.define :dog do |f|
   f.sequence(:name) { |n| "Dog##{n}" }
 end
 
-Factory.define :image_holder do |f|
+FactoryGirl.define :image_holder do |f|
   f.sequence(:name) { |n| "ImageHolder##{n}" }
 end
 
@@ -143,7 +143,7 @@ end
 # Contexts
 ##
 
-Factory.define :site do |f|
+FactoryGirl.define :site do |f|
   f.sequence(:name) { |n| "Site##{n}" }
   f.sequence(:domain) { |n| "site#{n}.local" }
 end
