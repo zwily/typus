@@ -1,0 +1,32 @@
+<% connection = ENV["DB"] || 'sqlite3' %>
+
+##
+# Database settings.
+#
+
+sqlite3: &sqlite3
+  adapter: sqlite3
+  database: db/typus.sqlite3
+
+postgresql: &postgresql
+  adapter: postgresql
+  encoding: unicode
+  database: typus
+
+mysql2: &mysql2
+  adapter: mysql2
+  database: typus
+  host: localhost
+
+##
+# Environments
+#
+
+development:
+  <<: *<%= connection %>
+
+test:
+  <<: *<%= connection %>
+
+production:
+  <<: *<%= connection %>

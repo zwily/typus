@@ -1,0 +1,4 @@
+admin:
+  AdminUser: create, read, update, delete
+  DeviseUser: create, read, update, delete
+  TypusUser: create, read, update, delete
