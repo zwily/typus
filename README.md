@@ -42,6 +42,14 @@ Update your bundle, run the generator and start the application server:
 
 and go to <http://0.0.0.0:3000/admin>.
 
+## Testing
+
+To test clone the git repo and run the following commands:
+
+    $ git clone git://github.com/typus/typus.git
+    $ bundle install --path vendor/bundle
+    $ bundle exec rake
+
 ## Links
 
 - [Documentation](https://github.com/typus/typus/wiki)
