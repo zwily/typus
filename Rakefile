@@ -67,7 +67,7 @@ namespace :install do
 
   desc "Run bundle in all Ruby versions."
   task :gems do
-    system "rvm ruby bundle install --gemfile=test/fixtures/rails_app/Gemfile"
+    system "rvm ruby bundle install --gemfile=test/dummy/Gemfile"
   end
 
 end

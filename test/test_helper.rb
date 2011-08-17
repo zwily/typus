@@ -1,11 +1,11 @@
 ENV["RAILS_ENV"] = "test"
 
 ##
-# Boot rails_app and load the schema.
+# Boot dummy and load the schema.
 ##
 
-require "fixtures/rails_app/config/environment"
-require "fixtures/rails_app/db/schema"
+require "dummy/config/environment"
+require "dummy/db/schema"
 
 require "rails/test_help"
 
