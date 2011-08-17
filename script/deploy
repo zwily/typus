@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+echo "Pulling latest changes ..."
+ssh fesplugas@labs.francescesplugas.com "cd ~/public_html/typus-demo && git pull"
+
+echo "Restarting the application ..."
+ssh fesplugas@labs.francescesplugas.com "cd ~/public_html/typus-demo && touch test/dummy/tmp/restart.txt"
