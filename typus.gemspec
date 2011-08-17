@@ -29,8 +29,5 @@ Gem::Specification.new do |s|
   s.add_dependency "kaminari"
   s.add_dependency "rails", "~> 3.1.0.rc6"
 
-#  s.add_development_dependency "dragonfly", "~> 0.9"
-#  s.add_development_dependency "paperclip"
-#  s.add_development_dependency "rack-cache"
-#  s.add_development_dependency "rails-trash", "~> 1.1.1"
+  # Development dependencies are defined in the `Gemfile`.
 end
