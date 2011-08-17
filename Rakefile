@@ -1,23 +1,38 @@
-require 'bundler/gem_tasks'
+begin
+  require 'bundler/setup'
+  require 'bundler/gem_tasks'
+rescue LoadError
+  puts 'You must `gem install bundler` and `bundle install` to run rake tasks'
+end
+
+begin
+  require 'rdoc/task'
+rescue LoadError
+  require 'rdoc/rdoc'
+  require 'rake/rdoctask'
+  RDoc::Task = Rake::RDocTask
+end
+
 require 'rake/testtask'
-require 'rdoc/task'
 
-task :default => :test
-
-Rake::TestTask.new do |t|
-  t.libs << "test"
+Rake::TestTask.new(:test) do |t|
+  t.libs << 'lib'
+  t.libs << 'test'
+  # t.pattern = 'test/**/*_test.rb'
   t.test_files = FileList['test/app/controllers/**/*_test.rb',
                           'test/app/models/**/*_test.rb',
                           'test/app/mailers/**/*_test.rb',
                           'test/config/*_test.rb',
                           'test/lib/**/*_test.rb']
-  t.verbose = true
+  t.verbose = false
 end
 
-RDoc::Task.new do |rdoc|
+task :default => :test
+
+RDoc::Task.new(:rdoc) do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title    = 'Typus'
-  rdoc.options << '--line-numbers' << '--inline-source'
+  rdoc.options << '--line-numbers'
   rdoc.rdoc_files.include('README.rdoc')
   rdoc.rdoc_files.include('lib/**/*.rb')
 end
@@ -94,21 +109,6 @@ namespace :test do
     system "rvm ruby rake DB=sqlite3"
     system "rvm ruby rake DB=postgresql"
     system "rvm ruby rake DB=mysql"
-  end
-
-end
-
-namespace :submodules do
-
-  desc "Update submodules"
-  task :update do
-    system "git pull && git submodule update --init"
-  end
-
-  desc "Upgrade submodules"
-  task :upgrade do
-    system "git submodule foreach 'git pull origin master'"
-    system "git ci -m 'Updated submodules' ."
   end
 
 end
