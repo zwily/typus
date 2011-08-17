@@ -1,10 +1,14 @@
 # -*- encoding: utf-8 -*-
+
 $:.push File.expand_path("../lib", __FILE__)
+
+# Maintain your gem's version:
 require "typus/version"
 
-files = `git ls-files`.split("\n") + Dir["config/locales/*.yml"]
-test_files = `git ls-files -- {test,spec,features}/*`.split("\n")
+files = `git ls-files`.split("\n")
+test_files = `git ls-files -- {test}/*`.split("\n")
 
+# Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name = "typus"
   s.version = Typus::VERSION
@@ -21,14 +25,12 @@ Gem::Specification.new do |s|
   s.test_files    = []
   s.require_paths = ["lib"]
 
-  s.add_development_dependency "dragonfly", "~> 0.9"
-  s.add_development_dependency "jquery-rails"
-  s.add_development_dependency "paperclip"
-  s.add_development_dependency "rack-cache"
-  s.add_development_dependency "rails-trash", "~> 1.1.1"
-
   s.add_dependency "jquery-rails"
   s.add_dependency "kaminari"
-  s.add_dependency "sass-rails", "~> 3.1.0.rc.6"
   s.add_dependency "rails", "~> 3.1.0.rc6"
+
+#  s.add_development_dependency "dragonfly", "~> 0.9"
+#  s.add_development_dependency "paperclip"
+#  s.add_development_dependency "rack-cache"
+#  s.add_development_dependency "rails-trash", "~> 1.1.1"
 end

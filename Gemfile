@@ -1,11 +1,9 @@
 source 'http://rubygems.org'
 
-# Minimun requirements
-gem "rails", "~> 3.1.0.rc6"
-
-# This is provided by the Gem but for some reason is not loaded.
-gem "kaminari"
-gem "jquery-rails"
+# Declare your gem's dependencies in typus.gemspec.
+# Bundler will treat runtime dependencies like base dependencies, and
+# development dependencies will be added by default to the :development group.
+gemspec
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -58,6 +56,6 @@ group :test do
   gem "mocha" # Make sure mocha is loaded at the end ...
 end
 
-gem "typus", "~> 3.1.0.rc18"
+# gem "typus", "~> 3.1.0.rc18"
 # gem "typus", :path => "../../../"
 # gem "typus", :git => "git://github.com/typus/typus.git"
