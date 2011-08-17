@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
 
-rm -f Gemfile.lock
-rm -rf .bundle/config
-bundle install --path .bundle/gems
-# bundle exec rake db:setup RAILS_ENV=production
-# bundle exec rake db:migrate RAILS_ENV=production
-touch tmp/restart.txt
+pushd test/dummy
+  rm -f Gemfile.lock
+  rm -rf .bundle/config
+  bundle install --path .bundle/gems
+  bundle exec rake db:setup RAILS_ENV=production
+  bundle exec rake db:migrate RAILS_ENV=production
+  touch tmp/restart.txt
+popd
