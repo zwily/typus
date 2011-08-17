@@ -11,20 +11,20 @@ require "test_helper"
 class TypusUserTest < ActiveSupport::TestCase
 
   test "validate email" do
-    assert Factory.build(:typus_user, :email => "dong").invalid?
-    assert Factory.build(:typus_user, :email => "john@example.com").valid?
-    assert Factory.build(:typus_user, :email => nil).invalid?
+    assert FactoryGirl.build(:typus_user, :email => "dong").invalid?
+    assert FactoryGirl.build(:typus_user, :email => "john@example.com").valid?
+    assert FactoryGirl.build(:typus_user, :email => nil).invalid?
   end
 
   test "validate :role" do
-    assert Factory.build(:typus_user, :role => nil).invalid?
+    assert FactoryGirl.build(:typus_user, :role => nil).invalid?
   end
 
   test "validate :password" do
-    assert Factory.build(:typus_user, :password => "0"*5).invalid?
-    assert Factory.build(:typus_user, :password => "0"*6).valid?
-    assert Factory.build(:typus_user, :password => "0"*40).valid?
-    assert Factory.build(:typus_user, :password => "0"*41).invalid?
+    assert FactoryGirl.build(:typus_user, :password => "0"*5).invalid?
+    assert FactoryGirl.build(:typus_user, :password => "0"*6).valid?
+    assert FactoryGirl.build(:typus_user, :password => "0"*40).valid?
+    assert FactoryGirl.build(:typus_user, :password => "0"*41).invalid?
   end
 
   should "not allow_mass_assignment_of :status" do
@@ -40,16 +40,16 @@ class TypusUserTest < ActiveSupport::TestCase
   test "generate" do
     assert !TypusUser.generate
 
-    options = { :email => Factory.build(:typus_user).email }
+    options = { :email => FactoryGirl.build(:typus_user).email }
     typus_user = TypusUser.generate(options)
     assert_equal options[:email], typus_user.email
 
-    typus_user_factory = Factory.build(:typus_user)
+    typus_user_factory = FactoryGirl.build(:typus_user)
     options = { :email => typus_user_factory.email, :password => typus_user_factory.password }
     typus_user = TypusUser.generate(options)
     assert_equal options[:email], typus_user.email
 
-    typus_user_factory = Factory.build(:typus_user)
+    typus_user_factory = FactoryGirl.build(:typus_user)
     options = { :email => typus_user_factory.email, :role => typus_user_factory.role }
     typus_user = TypusUser.generate(options)
     assert_equal options[:email], typus_user.email
@@ -105,49 +105,49 @@ class TypusUserTest < ActiveSupport::TestCase
   end
 
   test "to_label" do
-    user = Factory.build(:typus_user)
+    user = FactoryGirl.build(:typus_user)
     assert_equal user.email, user.to_label
 
-    user = Factory.build(:typus_user, :first_name => "John")
+    user = FactoryGirl.build(:typus_user, :first_name => "John")
     assert_equal "John", user.to_label
 
-    user = Factory.build(:typus_user, :last_name => "Locke")
+    user = FactoryGirl.build(:typus_user, :last_name => "Locke")
     assert_equal "Locke", user.to_label
 
-    user = Factory.build(:typus_user, :first_name => "John", :last_name => "Locke")
+    user = FactoryGirl.build(:typus_user, :first_name => "John", :last_name => "Locke")
     assert_equal "John Locke", user.to_label
   end
 
   test "admin gets a list of all applications expect MongoDB becuase is disabled" do
-    typus_user = Factory.build(:typus_user)
+    typus_user = FactoryGirl.build(:typus_user)
     # assert_equal Typus.applications, typus_user.applications
     assert_equal Typus.applications.reject { |i| i.eql?("MongoDB") }, typus_user.applications
   end
 
   test "admin gets a list of application resources for crud extended application" do
-    typus_user = Factory.build(:typus_user)
+    typus_user = FactoryGirl.build(:typus_user)
     assert_equal ["Asset", "Case", "Comment", "Page", "Post", "Article::Entry"], typus_user.application("CRUD Extended")
   end
 
   test "admin gets a list of application resources for Admin application" do
-    typus_user = Factory.build(:typus_user)
+    typus_user = FactoryGirl.build(:typus_user)
     assert_equal %w(AdminUser TypusUser DeviseUser), typus_user.application("Admin")
   end
 
   test "editor get a list of all applications" do
-    typus_user = Factory.build(:typus_user, :role => "editor")
+    typus_user = FactoryGirl.build(:typus_user, :role => "editor")
     assert_equal ["Admin", "CRUD Extended"], typus_user.applications
   end
 
   test "editor gets a list of application resources" do
-    typus_user = Factory.build(:typus_user, :role => "editor")
+    typus_user = FactoryGirl.build(:typus_user, :role => "editor")
     assert_equal %w(Comment Post), typus_user.application("CRUD Extended")
     assert_equal %w(TypusUser), typus_user.application("Admin")
   end
 
   test "user owns a resource" do
-    typus_user = Factory.build(:typus_user)
-    resource = Factory.build(:post, :typus_user => typus_user)
+    typus_user = FactoryGirl.build(:typus_user)
+    resource = FactoryGirl.build(:post, :typus_user => typus_user)
     assert typus_user.owns?(resource)
   end
 

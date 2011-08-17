@@ -2,148 +2,162 @@
 # Auth
 ##
 
-FactoryGirl.define :admin_user do |f|
-  f.sequence(:email) { |n| "admin+#{n}@example.com" }
-  f.password "XXXXXXXX"
-  f.role "admin"
-end
+FactoryGirl.define do
+  factory :admin_user do
+    sequence(:email) { |n| "admin+#{n}@example.com" }
+    password "XXXXXXXX"
+    role "admin"
+  end
 
-FactoryGirl.define :devise_user do |f|
-  f.sequence(:email) { |n| "john+#{n}@example.com"}
-  f.password "12345678"
-end
+  factory :devise_user do
+    sequence(:email) { |n| "john+#{n}@example.com"}
+    password "12345678"
+  end
 
-FactoryGirl.define :typus_user do |f|
-  f.sequence(:email) { |n| "user+#{n}@example.com" }
-  f.role "admin"
-  f.status true
-  f.token "1A2B3C4D5E6F"
-  f.password "12345678"
+  factory :typus_user do
+    sequence(:email) { |n| "user+#{n}@example.com" }
+    role "admin"
+    status true
+    token "1A2B3C4D5E6F"
+    password "12345678"
+  end
 end
 
 ##
 # CRUD
 ##
 
-FactoryGirl.define :entry do |f|
-  f.sequence(:title) { |n| "Entry##{n}" }
-  f.content "Body of the entry"
-end
+FactoryGirl.define do
+  factory :entry do
+    sequence(:title) { |n| "Entry##{n}" }
+    content "Body of the entry"
+  end
 
-FactoryGirl.define :entry_bulk do |f|
-  f.sequence(:title) { |n| "EntryBulk##{n}" }
-  f.content "Body of the entry"
-end
+  factory :entry_bulk do
+    sequence(:title) { |n| "EntryBulk##{n}" }
+    content "Body of the entry"
+  end
 
-FactoryGirl.define :entry_trash do |f|
-  f.sequence(:title) { |n| "EntryTrash##{n}" }
-  f.content "Body of the entry"
-end
+  factory :entry_trash do
+    sequence(:title) { |n| "EntryTrash##{n}" }
+    content "Body of the entry"
+  end
 
-FactoryGirl.define :case do |f|
-  f.sequence(:title) { |n| "Case##{n}" }
-  f.content "Body of the entry"
+  factory :case do
+    sequence(:title) { |n| "Case##{n}" }
+    content "Body of the entry"
+  end
 end
 
 ##
 # CRUD Extended
 ##
 
-FactoryGirl.define :asset do |f|
-  f.sequence(:caption) { |n| "Asset##{n}" }
-  f.dragonfly File.new("#{Rails.root}/public/images/rails.png")
-  f.dragonfly_required File.new("#{Rails.root}/public/images/rails.png")
-  f.paperclip File.new("#{Rails.root}/public/images/rails.png")
-  f.paperclip_required File.new("#{Rails.root}/public/images/rails.png")
-end
+FactoryGirl.define do
+  factory :asset do
+    sequence(:caption) { |n| "Asset##{n}" }
+    dragonfly File.new("#{Rails.root}/public/images/rails.png")
+    dragonfly_required File.new("#{Rails.root}/public/images/rails.png")
+    paperclip File.new("#{Rails.root}/public/images/rails.png")
+    paperclip_required File.new("#{Rails.root}/public/images/rails.png")
+  end
 
-FactoryGirl.define :category do |f|
-  f.sequence(:name) { |n| "Category##{n}" }
-end
+  factory :category do
+    sequence(:name) { |n| "Category##{n}" }
+  end
 
-FactoryGirl.define :comment do |f|
-  f.sequence(:name) { |n| "Comment##{n}" }
-  f.sequence(:email) { |n| "john+#{n}@example.com" }
-  f.body "Body of the comment"
-  f.association :post
-end
+  factory :comment do
+    sequence(:name) { |n| "Comment##{n}" }
+    sequence(:email) { |n| "john+#{n}@example.com" }
+    body "Body of the comment"
+    association :post
+  end
 
-FactoryGirl.define :page do |f|
-  f.sequence(:title) { |n| "Page##{n}" }
-  f.body "Content"
-end
+  factory :page do
+    sequence(:title) { |n| "Page##{n}" }
+    body "Content"
+  end
 
-FactoryGirl.define :post do |f|
-  f.sequence(:title) { |n| "Post##{n}" }
-  f.body "Body"
-  f.status "published"
-end
+  factory :post do
+    sequence(:title) { |n| "Post##{n}" }
+    body "Body"
+    status "published"
+  end
 
-FactoryGirl.define :view do |f|
-  f.ip "127.0.0.1"
-  f.association :post
-  f.association :site
+  factory :view do
+    ip "127.0.0.1"
+    association :post
+    association :site
+  end
 end
 
 ##
 # HasOne Association
 #
 
-FactoryGirl.define :invoice do |f|
-  f.sequence(:number) { |n| "Invoice##{n}" }
-  f.association :order
-end
+FactoryGirl.define do
+  factory :invoice do
+    sequence(:number) { |n| "Invoice##{n}" }
+    association :order
+  end
 
-FactoryGirl.define :order do |f|
-  f.sequence(:number) { |n| "Order##{n}" }
+  factory :order do
+    sequence(:number) { |n| "Order##{n}" }
+  end
 end
 
 ##
 # HasManyThrough Association
 #
 
-FactoryGirl.define :user do |f|
-  f.sequence(:name) { |n| "User##{n}" }
-  f.sequence(:email) { |n| "user.#{n}@example.com" }
-  f.role "admin"
-  f.token "qw1rd3-1w3f5b"
-end
+FactoryGirl.define do
+  factory :user do
+    sequence(:name) { |n| "User##{n}" }
+    sequence(:email) { |n| "user.#{n}@example.com" }
+    role "admin"
+    token "qw1rd3-1w3f5b"
+  end
 
-FactoryGirl.define :project do |f|
-  f.sequence(:name) { |n| "Project##{n}" }
-  f.association :user
-end
+  factory :project do
+    sequence(:name) { |n| "Project##{n}" }
+    association :user
+  end
 
-FactoryGirl.define :project_collaborators do |f|
-  f.association :user
-  f.association :project
+  factory :project_collaborators do
+    association :user
+    association :project
+  end
 end
 
 ##
 # Polymorphic
 ##
 
-FactoryGirl.define :animal do |f|
-  f.sequence(:name) { |n| "Animal##{n}" }
-end
+FactoryGirl.define do
+  factory :animal do
+    sequence(:name) { |n| "Animal##{n}" }
+  end
 
-FactoryGirl.define :bird do |f|
-  f.sequence(:name) { |n| "Bird##{n}" }
-end
+  factory :bird do
+    sequence(:name) { |n| "Bird##{n}" }
+  end
 
-FactoryGirl.define :dog do |f|
-  f.sequence(:name) { |n| "Dog##{n}" }
-end
+  factory :dog do
+    sequence(:name) { |n| "Dog##{n}" }
+  end
 
-FactoryGirl.define :image_holder do |f|
-  f.sequence(:name) { |n| "ImageHolder##{n}" }
+  factory :image_holder do
+    sequence(:name) { |n| "ImageHolder##{n}" }
+  end
 end
 
 ##
 # Contexts
 ##
 
-FactoryGirl.define :site do |f|
-  f.sequence(:name) { |n| "Site##{n}" }
-  f.sequence(:domain) { |n| "site#{n}.local" }
+FactoryGirl.define do
+  factory :site do
+    sequence(:name) { |n| "Site##{n}" }
+    sequence(:domain) { |n| "site#{n}.local" }
+  end
 end

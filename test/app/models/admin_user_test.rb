@@ -24,7 +24,7 @@ class AdminUserTest < ActiveSupport::TestCase
   end
 
   test "mapping locales" do
-    admin_user = Factory.build(:admin_user, :locale => "en")
+    admin_user = FactoryGirl.build(:admin_user, :locale => "en")
     assert_equal "English", admin_user.mapping(:locale)
   end
 

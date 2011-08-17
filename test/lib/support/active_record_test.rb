@@ -17,13 +17,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
     expected = %w(pending published unpublished)
     Post.stubs(:statuses).returns(expected)
 
-    post = Factory.build(:post)
+    post = FactoryGirl.build(:post)
     assert_equal "published", post.mapping(:status)
 
-    post = Factory.build(:post, :status => "unpublished")
+    post = FactoryGirl.build(:post, :status => "unpublished")
     assert_equal "unpublished", post.mapping('status')
 
-    post = Factory.build(:post, :status => "unexisting")
+    post = FactoryGirl.build(:post, :status => "unexisting")
     assert_equal "unexisting", post.mapping(:status)
   end
 
@@ -31,10 +31,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
     expected = [["Publicado", "published"], ["Pendiente", "pending"], ["No publicado", "unpublished"]]
     Post.stubs(:statuses).returns(expected)
 
-    post = Factory.build(:post)
+    post = FactoryGirl.build(:post)
     assert_equal "Publicado", post.mapping(:status)
 
-    post = Factory.build(:post, :status => "unpublished")
+    post = FactoryGirl.build(:post, :status => "unpublished")
     assert_equal "No publicado", post.mapping(:status)
   end
 
@@ -42,25 +42,25 @@ class ActiveRecordTest < ActiveSupport::TestCase
     expected = { "Pending - Hash" => "pending", "Published - Hash" => "published", "Not Published - Hash" => "unpublished" }
     Post.stubs(:statuses).returns(expected)
 
-    post = Factory.build(:post)
+    post = FactoryGirl.build(:post)
     assert_equal "Published - Hash", post.mapping(:status)
-    post = Factory.build(:post, :status => "unpublished")
+    post = FactoryGirl.build(:post, :status => "unpublished")
     assert_equal "Not Published - Hash", post.mapping(:status)
   end
 
   test "mapping with a hash when value does not exist on the mapping definition" do
     Post.stubs(:statuses).returns(Hash.new)
-    page = Factory.build(:post, :status => "unexisting")
+    page = FactoryGirl.build(:post, :status => "unexisting")
     assert_equal "unexisting", page.mapping(:status)
   end
 
   test "to_label returns email for TypusUser" do
-    typus_user = Factory.build(:typus_user)
+    typus_user = FactoryGirl.build(:typus_user)
     assert_equal typus_user.email, typus_user.to_label
   end
 
   test "to_label returns name for Category" do
-    category = Factory.build(:category, :name => "Chunky Bacon")
+    category = FactoryGirl.build(:category, :name => "Chunky Bacon")
     assert_match "Chunky Bacon", category.to_label
   end
 

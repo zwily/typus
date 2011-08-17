@@ -11,12 +11,12 @@ require "test_helper"
 class UserTest < ActiveSupport::TestCase
 
   test "to_label" do
-    user = Factory.build(:user)
+    user = FactoryGirl.build(:user)
     assert_equal user.email, user.to_label
   end
 
   test "can?" do
-    user = Factory.build(:user, :role => 'admin')
+    user = FactoryGirl.build(:user, :role => 'admin')
     assert user.can?('delete', TypusUser)
     assert !user.cannot?('delete', TypusUser)
     assert user.can?('delete', 'TypusUser')
@@ -24,22 +24,22 @@ class UserTest < ActiveSupport::TestCase
   end
 
   test "is_root?" do
-    user = Factory.build(:user, :role => 'admin')
+    user = FactoryGirl.build(:user, :role => 'admin')
     assert user.is_root?
     assert !user.is_not_root?
   end
 
   test "active?" do
-    user = Factory.build(:user, :role => 'admin', :status => true)
+    user = FactoryGirl.build(:user, :role => 'admin', :status => true)
     assert user.active?
 
-    user = Factory.build(:user, :role => 'admin', :status => false)
+    user = FactoryGirl.build(:user, :role => 'admin', :status => false)
     assert !user.active?
 
-    user = Factory.build(:user, :role => 'unexisting', :status => true)
+    user = FactoryGirl.build(:user, :role => 'unexisting', :status => true)
     assert !user.active?
 
-    user = Factory.build(:user, :role => 'unexisting', :status => false)
+    user = FactoryGirl.build(:user, :role => 'unexisting', :status => false)
     assert !user.active?
   end
 
