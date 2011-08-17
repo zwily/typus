@@ -1,12 +1,7 @@
-# Bundler stuff
-.bundle
-vendor/gems
-Gemfile.lock
-
-# Generated stuff
-*.gem
-db/*.sqlite3
+.bundle/
 log/*.log
-test/fixtures/rails_app/public/system/*
-test/fixtures/rails_app/tmp/*
-tmp/**/*
+pkg/
+test/dummy/db/*.sqlite3
+test/dummy/log/*.log
+test/dummy/public/system/
+test/dummy/tmp/
