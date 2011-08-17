@@ -1,6 +1,6 @@
 #header {
   background: #4A525A;
-  padding: 1.25em 1em;
+  padding: 1.25em 0 1.25em 1em;
 }
 
 #header .title {
@@ -28,8 +28,13 @@
   display: inline;
 }
 
+#header .applications {
+  margin: -0.5em 1em;
+}
+
 #header .applications ul li {
-  padding-right: 0.25em;
+  line-height: 2.5em;
+  padding: 0 0.25em 0 0;
 }
 
 #header .applications ul li a {
@@ -47,6 +52,7 @@
 }
 
 #header .profile {
+  margin: 0.25em 0 0 0;
   text-align: right;
 }
 
