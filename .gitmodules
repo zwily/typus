@@ -1,3 +1,0 @@
-[submodule "config/locales"]
-	path = config/locales
-	url = git@github.com:typus/locales.git
