@@ -2,7 +2,8 @@
 ENV["RAILS_ENV"] = "test"
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
-require File.expand_path("../dummy/db/schema.rb",  __FILE__)
+load_schema = lambda { load File.expand_path("../dummy/db/schema.rb",  __FILE__) }
+silence_stream(STDOUT, &load_schema)
 require "rails/test_help"
 
 require 'shoulda-context'
