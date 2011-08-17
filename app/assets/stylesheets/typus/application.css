@@ -1,12 +1,20 @@
-
-/* Create the file `app/assets/stylesheets/typus/application.css` in your
-   application if you need/want to override/add some stylesheets. */
-
 /*
-.logo {
-  height: 50px;
-  width: 150px;
-  background: transparent url(/images/logo.gif) no-repeat;
-  text-indent: -10000px;
-}
+*= require jquery.fancybox-1.3.4
+*= require css/formalize
+*= require css/fluid
+*= require token-input
+*= require typus/reset
+*= require typus/layout
+*= require typus/defaults
+*= require typus/errors
+*= require typus/account
+*= require typus/header
+*= require typus/content
+*= require typus/sidebar
+*= require typus/footer
+*= require typus/tables
+*= require typus/pagination
+*= require typus/forms
+*= require typus/hacks
+*= require typus/custom
 */
