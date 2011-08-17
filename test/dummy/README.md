@@ -8,14 +8,14 @@ You can see it working at <http://demo.typuscms.com/>.
 
 Clone the repository:
 
-    $ git clone git://github.com/typus/demo.git typus-demo
-    $ cd typus-demo
+    $ git clone git://github.com/typus/typus.git typus
+    $ cd typus/test/dummy
 
 Edit the file `config/mongoid.yml` to set your **MongoDB** settings.
 
     $ bundle install
     $ bundle exec rake db:setup
-    $ bundle rails server
+    $ bundle exec rails server
 
 Open your browser and go to <http://localhost:3000/>.
 
