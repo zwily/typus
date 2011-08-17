@@ -49,6 +49,7 @@ and go to <http://0.0.0.0:3000/admin>.
 - [Source Code][typus] and [RubyGems][typus_gem]
 - [Mailing List](http://groups.google.com/group/typus)
 - [Contributors List](http://github.com/typus/typus/contributors)
+- [Travis Builds](http://travis-ci.org/#!/typus/typus)
 
 ## MIT License
 
