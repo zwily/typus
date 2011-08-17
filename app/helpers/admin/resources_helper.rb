@@ -17,9 +17,7 @@ module Admin::ResourcesHelper
 
     admin_user.application(app_name).each do |resource|
       klass = resource.constantize
-      if (new_link = sidebar_add_new(klass))
-        resources[resource] = [new_link]
-      end
+      resources[resource] = [sidebar_add_new(klass)].compact
     end
 
     render "helpers/admin/resources/sidebar", :resources => resources
