@@ -55,7 +55,3 @@ group :test do
   gem "shoulda-context", "~> 1.0.0.beta1"
   gem "mocha" # Make sure mocha is loaded at the end ...
 end
-
-# gem "typus", "~> 3.1.0.rc18"
-# gem "typus", :path => "../../../"
-# gem "typus", :git => "git://github.com/typus/typus.git"
