@@ -38,6 +38,7 @@ module Typus
     autoload :Base, "typus/authentication/base"
     autoload :Devise, "typus/authentication/devise"
     autoload :None, "typus/authentication/none"
+    autoload :NoneWithRole, "typus/authentication/none_with_role"
     autoload :HttpBasic, "typus/authentication/http_basic"
     autoload :Session, "typus/authentication/session"
   end

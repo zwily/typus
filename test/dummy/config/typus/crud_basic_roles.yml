@@ -1,2 +1,2 @@
 admin:
-  Entry: all
+  Entry: create, read, update, destroy

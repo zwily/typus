@@ -30,6 +30,9 @@ Typus.setup do |config|
   config.config_folder = Rails.root.join("config/typus")
   config.mailer_sender = "admin@example.com"
 
+  # Authenticate using `:none_with_role`
+  config.authentication = :none_with_role
+
   # Authenticate using `:http_basic` authentication.
   # config.authentication = :http_basic
   # config.username = 'admin'
