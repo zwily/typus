@@ -34,6 +34,9 @@ gem "acts_as_tree"
 gem "factory_girl_rails"
 gem "rails-trash", "~> 1.1.2"
 
+# For some reason I also need to define the `jquery-rails` gem here.
+gem "jquery-rails"
+
 # Rich Text Editor
 gem "ckeditor-rails", "0.0.2"
 
