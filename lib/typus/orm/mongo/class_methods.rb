@@ -8,6 +8,7 @@ module Typus
         def table_name
           self.collection_name
         end
+
       end
     end
   end
