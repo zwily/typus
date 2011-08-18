@@ -3,7 +3,7 @@ module Typus
     module Mongoid
       module ClassMethods
 
-        include Typus::Orm::Base
+        extend Typus::Orm::Base
 
         def table_name
           collection_name
