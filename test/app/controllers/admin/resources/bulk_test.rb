@@ -33,4 +33,17 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
     assert_equal items_to_keep, EntryBulk.all.map(&:id)
   end
 
+  test "get bulk with empty action and selected items redirects to back with a feedback message" do
+    @request.env['HTTP_REFERER'] = "/admin/entry_bulks"
+
+    5.times { FactoryGirl.create(:entry_bulk) }
+    items = EntryBulk.limit(5).map(&:id)
+
+    get :bulk, :batch_action => "", :selected_item_ids => items
+    assert_response :redirect
+    assert_redirected_to @request.env['HTTP_REFERER']
+
+    assert_equal "No bulk action selected.", flash[:notice]
+  end
+
 end
