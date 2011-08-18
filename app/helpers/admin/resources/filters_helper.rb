@@ -8,15 +8,8 @@ module Admin::Resources::FiltersHelper
                            { :key => set_filter(key, value), :value => send("#{value}_filter", key) }
                          end
 
-      locals[:hidden_filters] = params.dup
-
-      # Remove default params.
-      rejections = %w(controller action locale utf8 sort_order order_by)
-      locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
-
-      # Remove also custom params.
-      rejections = locals[:filters].map { |f| f[:key] }
-      locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
+      rejections = %w(controller action locale utf8 sort_order order_by) + locals[:filters].map { |f| f[:key] }
+      locals[:hidden_filters] = params.dup.delete_if { |k, v| rejections.include?(k) }
 
       render "helpers/admin/resources/filters", locals
     end
