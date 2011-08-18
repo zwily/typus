@@ -7,5 +7,9 @@
 
 <li id="<%= attribute_id %>">
   <%= form.label related_fk, "#{label_text} <small>#{message}</small>".html_safe %>
-  <%= form.select related_fk, values, options, html_options %>
+  <% if values.any? %>
+    <%= form.select related_fk, values, options, html_options %>
+  <% else %>
+    <%= "&mdash;".html_safe %>
+  <% end %>
 </li>
