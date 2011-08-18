@@ -10,6 +10,6 @@
   <% if values.any? %>
     <%= form.select related_fk, values, options, html_options %>
   <% else %>
-    <%= mdash %>
+    <%= Typus::I18n.t("No %{resources} found.", :resources => related.model_name.human.downcase.pluralize) %>
   <% end %>
 </li>
