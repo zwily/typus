@@ -12,7 +12,7 @@
 #errorExplanation p,
 #errorExplanation li,
 #errorExplanation h3 {
-  color: #D12F19;
+  color: #D12F19!important;
 }
 
 #errorExplanation h3 { margin: 5px 0 0 0; }
