@@ -19,7 +19,7 @@ module Typus
             attr_reader   :password
             attr_accessor :password_confirmation
 
-            attr_protected :role, :status, :first_name, :last_name, :as => :admin
+            attr_protected :role, :status
 
             validates :email, :presence => true, :uniqueness => true, :format => { :with => Typus::Regex::Email }
             validates :password, :confirmation => true
