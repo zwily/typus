@@ -1,7 +1,4 @@
 <%
-  custom = { :include_blank => true }
-  options.merge!(custom)
-
   if @resource.typus_field_options_for(:read_only).include?(attribute.to_sym)
     html_options.merge!(:disabled => 'disabled')
     message = Typus::I18n.t("Read only")
