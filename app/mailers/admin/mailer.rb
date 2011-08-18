@@ -5,8 +5,13 @@ class Admin::Mailer < ActionMailer::Base
   def reset_password_link(user, url)
     @user, @url = user, url
 
-    mail :to => user.email,
-         :subject => "[#{Typus.admin_title}] #{Typus::I18n.t("Reset password")}"
+    options = { :to => user.email,
+                :subject => "[#{Typus.admin_title}] #{Typus::I18n.t("Reset password")}" }
+
+    mail(options) do |format|
+      format.text
+      format.html
+    end
   end
 
 end
