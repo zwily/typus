@@ -3,7 +3,8 @@
   <div id="filters">
     <ul>
       <% filters.each do |filter| %>
-        <li><%= select_tag filter[:filter], options_for_select(filter[:items], params[filter[:filter]]) %></li>
+        <% key, value = filter[:key], filter[:value] %>
+        <li><%= select_tag key, options_for_select(value, params[key]) %></li>
       <% end %>
 
       <% hidden_filters.each do |key, value| %>

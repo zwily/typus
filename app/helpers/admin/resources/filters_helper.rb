@@ -5,7 +5,7 @@ module Admin::Resources::FiltersHelper
       locals = {}
 
       locals[:filters] = typus_filters.map do |key, value|
-                           { :filter => set_filter(key, value), :items => send("#{value}_filter", key) }
+                           { :key => set_filter(key, value), :value => send("#{value}_filter", key) }
                          end
 
       locals[:hidden_filters] = params.dup
@@ -15,7 +15,7 @@ module Admin::Resources::FiltersHelper
       locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
 
       # Remove also custom params.
-      rejections = locals[:filters].map { |f| f[:filter] }
+      rejections = locals[:filters].map { |f| f[:key] }
       locals[:hidden_filters].delete_if { |k, v| rejections.include?(k) }
 
       render "helpers/admin/resources/filters", locals
