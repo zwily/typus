@@ -12,7 +12,6 @@ most common settings.
         show: title, category, is_published?
         relationship: title, status
         options:
-          auto_generated:
           booleans:
             is_published: ["Yes, it is", "No, it isn't"]
           date_formats:

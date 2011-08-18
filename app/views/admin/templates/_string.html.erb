@@ -6,12 +6,6 @@
     label_text << " <small>#{Typus::I18n.t("Read only")}</small>"
   end
 
-  # Auto generated fields.
-  if @resource.typus_field_options_for(:auto_generated).include?(attribute.to_sym)
-    custom = { :auto_generated => true }
-    label_text << " <small>#{Typus::I18n.t("Auto generated")}</small>"
-  end
-
   options.merge!(custom) if custom
 
 %>

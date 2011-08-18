@@ -28,7 +28,6 @@ Post:
     options:
       selectors: status
       read_only: permalink
-      auto_generated: created_at
       date_formats:
         created_at: short
   relationships: assets, categories

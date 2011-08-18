@@ -227,7 +227,6 @@ class ClassMethodsTest < ActiveSupport::TestCase
   test "typus_field_options_for" do
     assert_equal [:status], Post.typus_field_options_for(:selectors)
     assert_equal [:permalink], Post.typus_field_options_for(:read_only)
-    assert_equal [:created_at], Post.typus_field_options_for(:auto_generated)
 
     assert Post.typus_field_options_for(:unexisting).empty?
   end
