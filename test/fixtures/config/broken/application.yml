@@ -27,7 +27,6 @@ Post:
     relationship: title, created_at
     options:
       selectors: status
-      read_only: permalink
       date_formats:
         created_at: short
   relationships: assets, categories

@@ -10,6 +10,9 @@ module Admin::Resources::DataTypes::BelongsToHelper
               end
     related_fk = association.foreign_key
 
+    html_options = { :disabled => attribute_disabled?(attribute) }
+    label_text = @resource.human_attribute_name(attribute)
+
     # TODO: Use the build_add_new method.
     if admin_user.can?('create', related)
       options = { :controller => "/admin/#{related.to_resource}",
@@ -19,8 +22,17 @@ module Admin::Resources::DataTypes::BelongsToHelper
       # Pass the resource_id only to edit/update because only there is where
       # the record actually exists.
       options.merge!(:resource_id => @item.id) if %w(edit update).include?(params[:action])
-      message = link_to Typus::I18n.t("Add New"), options, { :class => 'iframe' }
+      # This is a default message ... which we can change if
+      unless html_options[:disabled] == true
+        label_text_more = link_to Typus::I18n.t("Add New"), options, { :class => 'iframe' }
+      end
     end
+
+    if html_options[:disabled] == true
+      label_text_more = Typus::I18n.t("Read only")
+    end
+
+    label_text += " <small>#{label_text_more}</small>" if label_text_more.present?
 
     # By default the used template is ALWAYS `belongs_to` unless we have the
     # `Typus.autocomplete` feature enabled.
@@ -42,10 +54,9 @@ module Admin::Resources::DataTypes::BelongsToHelper
            :form => form,
            :related_fk => related_fk,
            :related => related,
-           :message => message,
-           :label_text => @resource.human_attribute_name(attribute),
+           :label_text => label_text.html_safe,
            :values => values,
-           :html_options => { :disabled => attribute_disabled?(attribute) },
+           :html_options => html_options,
            :options => { :include_blank => true }
   end
 

@@ -1,16 +1,4 @@
-<%
-
-  # Read only fields.
-  if @resource.typus_field_options_for(:read_only).include?(attribute.to_sym)
-    custom = { :readonly => 'readonly' }
-    label_text << " <small>#{Typus::I18n.t("Read only")}</small>"
-  end
-
-  options.merge!(custom) if custom
-
-%>
-
 <li id="<%= attribute_id %>">
-  <%= form.label attribute, label_text.html_safe %>
+  <%= form.label attribute, label_text %>
   <%= form.text_field attribute, options %>
 </li>

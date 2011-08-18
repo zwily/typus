@@ -17,7 +17,6 @@ most common settings.
           date_formats:
             created_at: post_long
           selectors:
-          read_only:
           filter_by_date_range: valid_until
           templates:
             body: rich_text

@@ -50,7 +50,6 @@ Post:
     show: title, body, status, published, created_at
     options:
       selectors: status
-      read_only: permalink
       date_formats:
         created_at: short
       templates:
