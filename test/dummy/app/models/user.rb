@@ -1,7 +1,7 @@
 class User < ActiveRecord::Base
 
   ##
-  #
+  # Modules
   #
 
   include Typus::Orm::ActiveRecord::User::InstanceMethods
