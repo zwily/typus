@@ -39,8 +39,6 @@ most common settings.
         per_page: 25
         start_year: 1990
 
-Note: To define namespace models use :: as a separator. (i.e. Delayed::Job)
-
 # Roles
 
 In this file you can configure the actions available for each of your models
