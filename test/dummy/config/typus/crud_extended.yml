@@ -75,3 +75,8 @@ Article::Entry:
   search: title
   filters: published
   application: CRUD Extended
+
+ReadOnlyEntry:
+  fields:
+    default: title, content, published
+  application: Special

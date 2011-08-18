@@ -85,6 +85,7 @@ class TypusTest < ActiveSupport::TestCase
                 "Post",
                 "Project",
                 "ProjectCollaborator",
+                "ReadOnlyEntry",
                 "TypusUser",
                 "User",
                 "View"]

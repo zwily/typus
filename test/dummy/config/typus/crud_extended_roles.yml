@@ -6,6 +6,7 @@ admin:
   Order:
   Page: create, read, update, delete, rebuild, rebuild_all
   Post: create, read, update, delete
+  ReadOnlyEntry: all
 
 editor:
   Comment: read, update, delete

@@ -35,6 +35,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
                   "Post",
                   "Project",
                   "ProjectCollaborator",
+                  "ReadOnlyEntry",
                   "Status",
                   "TypusUser",
                   "User",
