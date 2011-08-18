@@ -185,9 +185,19 @@ module Typus
       detect_application_models.map do |model|
         class_name = model.sub(/\.rb$/,"").camelize
         klass = class_name.split("::").inject(Object) { |klass,part| klass.const_get(part) }
-        class_name if klass < ActiveRecord::Base && !klass.abstract_class?
+        class_name if is_active_record?(klass) || is_mongoid?(klass)
       end.compact
     end
+
+    def is_active_record?(klass)
+      (defined?(ActiveRecord) && klass < ActiveRecord::Base && !klass.abstract_class?)
+    end
+    private :is_active_record?
+
+    def is_mongoid?(klass)
+      (defined?(Mongoid) && klass < Mongoid::Document)
+    end
+    private :is_mongoid?
 
     def user_class
       user_class_name.constantize
