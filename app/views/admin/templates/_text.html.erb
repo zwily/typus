@@ -1,5 +1,5 @@
 <%
-  custom = {:rows => @resource.typus_options_for(:form_rows)}
+  custom = { :rows => @resource.typus_options_for(:form_rows) }
 
   # Read only fields.
   if @resource.typus_field_options_for(:read_only).include?(attribute.to_sym)
