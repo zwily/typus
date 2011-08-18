@@ -1,6 +1,6 @@
 module Typus
   module Orm
-    module Mongo
+    module Mongoid
       module ClassMethods
 
         include Typus::Orm::Base
@@ -8,6 +8,10 @@ module Typus
         def table_name
           collection_name
         end
+
+#        def columns
+#          model_fields.keys
+#        end
 
       end
     end
