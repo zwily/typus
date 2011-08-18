@@ -6,7 +6,7 @@ module Typus
         include Typus::Orm::Base
 
         def table_name
-          self.collection_name
+          collection_name
         end
 
       end
