@@ -1,7 +1,7 @@
 module Admin::Resources::DataTypes::TreeHelper
 
   def table_tree_field(attribute, item)
-    item.parent ? item.parent.to_label : "&mdash;".html_safe
+    item.parent ? item.parent.to_label : mdash
   end
 
   def typus_tree_field(attribute, form)

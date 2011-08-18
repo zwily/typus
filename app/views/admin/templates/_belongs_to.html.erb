@@ -10,6 +10,6 @@
   <% if values.any? %>
     <%= form.select related_fk, values, options, html_options %>
   <% else %>
-    <%= "&mdash;".html_safe %>
+    <%= mdash %>
   <% end %>
 </li>

@@ -58,7 +58,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
       end
     end
 
-    message || "&mdash;".html_safe
+    message || mdash
   end
 
   def display_belongs_to(item, attribute)

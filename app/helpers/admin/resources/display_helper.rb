@@ -1,11 +1,15 @@
 module Admin::Resources::DisplayHelper
 
+  def mdash
+    "&mdash;".html_safe
+  end
+
   def build_display(item, fields)
     fields.map do |attribute, type|
       value = if (type == :boolean) || (data = item.send(attribute)).present?
                 send("display_#{type}", item, attribute)
               else
-                "&mdash;".html_safe
+                mdash
               end
 
       [@resource.human_attribute_name(attribute), value]

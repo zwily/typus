@@ -19,7 +19,7 @@ module Admin::Resources::DataTypes::StringHelper
   end
 
   def table_string_field(attribute, item)
-    (raw_content = item.send(attribute)).present? ? raw_content : "&mdash;".html_safe
+    (raw_content = item.send(attribute)).present? ? raw_content : mdash
   end
 
   alias_method :table_decimal_field, :table_string_field
