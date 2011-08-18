@@ -9,10 +9,6 @@ module Typus
           collection_name
         end
 
-#        def columns
-#          model_fields.keys
-#        end
-
       end
     end
   end
