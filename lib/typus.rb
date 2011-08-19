@@ -122,6 +122,9 @@ module Typus
   mattr_accessor :image_thumb_size
   @@image_thumb_size = 'x100'
 
+  mattr_accessor :image_table_thumb_size
+  @@image_table_thumb_size = '25x25#'
+
   ##
   # Defines the default relationship table.
   #

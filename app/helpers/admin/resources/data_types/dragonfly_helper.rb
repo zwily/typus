@@ -1,8 +1,7 @@
 module Admin::Resources::DataTypes::DragonflyHelper
 
   def table_dragonfly_field(attribute, item)
-    options = { :height => 25, :width => 25 }
-    typus_dragonfly_preview(item, attribute, options)
+    typus_dragonfly_preview(item, attribute)
   end
 
   def link_to_detach_attribute_for_dragonfly(attribute)
@@ -19,15 +18,14 @@ module Admin::Resources::DataTypes::DragonflyHelper
     end
   end
 
-  def typus_dragonfly_preview(item, attachment, options = {})
+  def typus_dragonfly_preview(item, attachment)
     data = item.send(attachment)
     return unless data
 
     if data.mime_type =~ /^image\/.+/
       render "admin/templates/dragonfly_preview",
              :preview => data.process(:thumb, Typus.image_preview_size).url,
-             :thumb => data.process(:thumb, Typus.image_thumb_size).url,
-             :options => options
+             :thumb => data.process(:thumb, Typus.image_table_thumb_size).url
     else
       link_to data.name, data.url
     end
