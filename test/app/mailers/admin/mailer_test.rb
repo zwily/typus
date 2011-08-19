@@ -2,19 +2,24 @@ require "test_helper"
 
 class Admin::MailerTest < ActiveSupport::TestCase
 
+  include Rails.application.routes.url_helpers
+
+  def default_url_options
+    Rails.application.config.action_mailer.default_url_options
+  end
+
   test "reset_password_instructions" do
-    @typus_user = FactoryGirl.build(:typus_user, :token => "qswed3-64g3fb")
-    @url = "http://test.host/admin/account/#{@typus_user.token}"
-    @email = Admin::Mailer.reset_password_instructions(@typus_user, @url)
+    user = FactoryGirl.build(:typus_user, :token => "qswed3-64g3fb")
+    mail = Admin::Mailer.reset_password_instructions(user)
 
     assert_nil Admin::Mailer.default[:from]
-    assert @email.to.include?(@typus_user.email)
+    assert mail.to.include?(user.email)
 
     expected = "[#{Typus.admin_title}] Reset password"
-    assert_equal expected, @email.subject
-    assert_equal "multipart/alternative", @email.mime_type
+    assert_equal expected, mail.subject
+    assert_equal "multipart/alternative", mail.mime_type
 
-    assert_match @url, @email.body.encoded
+    assert_match admin_account_url(user.token), mail.body.encoded
   end
 
 end
