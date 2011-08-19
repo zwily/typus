@@ -1,6 +1,10 @@
 <!-- Applications list with models. -->
 
-<h2><%= Typus::I18n.t("Applications") %></h2>
+<%
+  page_title = Typus::I18n.t("Applications")
+%>
+
+<h2><%= page_title %></h2>
 
 <% if admin_user.applications.any? %>
   <% admin_user.applications.each do |app| %>
