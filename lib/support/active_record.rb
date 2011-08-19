@@ -32,7 +32,7 @@ class ActiveRecord::Base
 
     array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
 
-    value = array.rassoc(send(attribute))
+    value = array.to_a.rassoc(send(attribute))
     value ? value.first : send(attribute)
   end
 
