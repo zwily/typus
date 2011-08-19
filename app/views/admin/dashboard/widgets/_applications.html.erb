@@ -4,16 +4,28 @@
   page_title = Typus::I18n.t("Applications")
 %>
 
+<%
+  # Detect if we are inside an application.
+  if (application = params[:application])
+    applications = [application]
+    page_title = application
+  else
+    applications = admin_user.applications
+  end
+%>
+
 <h2><%= page_title %></h2>
 
-<% if admin_user.applications.any? %>
-  <% admin_user.applications.each do |app| %>
+<% if applications.any? %>
+  <% applications.each do |app| %>
 
     <table>
 
+      <% table_header = application ? "Models" : app %>
+
       <thead>
         <tr>
-          <th><%= Typus::I18n.t(app) %></th>
+          <th><%= Typus::I18n.t(table_header) %></th>
         </tr>
       </thead>
 

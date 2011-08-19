@@ -1,6 +1,10 @@
 <ul>
 
-  <% dashboard = 'active' if params[:controller].include?('dashboard') %>
+  <%
+    if !params[:application] && params[:controller].include?('dashboard')
+      dashboard = 'active'
+    end
+  %>
 
   <li><%= link_to Typus::I18n.t("Dashboard"), admin_dashboard_path, :class => dashboard %></li>
 
@@ -8,10 +12,12 @@
 
     <%
       apps = admin_user.application(application)
-      klass = 'active' if (@resource && apps.include?(@resource.model_name))
+      if (params[:application] == application) || (@resource && apps.include?(@resource.model_name))
+        klass = 'active'
+      end
     %>
 
-    <li><%= link_to Typus::I18n.t(application), { :controller => "/admin/#{apps.first.tableize}" }, { :class => klass } %></li>
+    <li><%= link_to Typus::I18n.t(application), admin_dashboard_path(:application => application), { :class => klass } %></li>
 
   <% end %>
 
