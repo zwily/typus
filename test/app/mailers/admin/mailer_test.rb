@@ -12,7 +12,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
 
     expected = "[#{Typus.admin_title}] Reset password"
     assert_equal expected, @email.subject
-    assert_equal "text/plain", @email.mime_type
+    assert_equal "multipart/alternative", @email.mime_type
 
     assert_match @url, @email.body.encoded
   end
