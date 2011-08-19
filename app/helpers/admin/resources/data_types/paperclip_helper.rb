@@ -1,7 +1,7 @@
 module Admin::Resources::DataTypes::PaperclipHelper
 
   def table_paperclip_field(attribute, item)
-    options = { :height => 25, :width => 25 }
+    options = { :width => 25 }
     typus_paperclip_preview(item, attribute, options)
   end
 
