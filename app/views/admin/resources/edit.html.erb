@@ -9,12 +9,6 @@
     <small><%= list_actions %></small>
   </h2>
 
-  <% if flash[:notice] && headless_mode? %>
-    <script>
-      $(document).ready(function() { parent.location.reload(); });
-    </script>
-  <% end %>
-
   <%= display_flash_message %>
   <%= render 'edit' %>
 
