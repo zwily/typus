@@ -33,4 +33,19 @@ module Admin::Resources::DataTypes::DragonflyHelper
     end
   end
 
+  def typus_dragonfly_form_preview(item, attachment, options = {})
+    data = item.send(attachment)
+    return unless data
+
+    if data.mime_type =~ /^image\/.+/
+      render "admin/templates/dragonfly_form_preview",
+             :attachment => data,
+             :preview => data.process(:thumb, Typus.image_preview_size).url,
+             :thumb => data.process(:thumb, Typus.image_thumb_size).url,
+             :options => options
+    else
+      link_to data.name, data.url
+    end
+  end
+
 end
