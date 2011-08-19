@@ -37,7 +37,10 @@ class FakeUserTest < ActiveSupport::TestCase
 
   test "FakeUser#application" do
     assert_equal Typus.application("CRUD"), @fake_user.application("CRUD")
-    assert_equal %w(Animal Bird Dog ImageHolder), @fake_user.application("Polymorphic")
+    # OPTIMIZE: There's no need to sort stuff but this is required to make it
+    #           work with Ruby 1.8.7.
+    expected = %w(Animal Bird Dog ImageHolder).sort
+    assert_equal expected, @fake_user.application("Polymorphic").sort
   end
 
   should "be master_role" do
