@@ -2,10 +2,10 @@ require "test_helper"
 
 class Admin::MailerTest < ActiveSupport::TestCase
 
-  test "reset_password_link" do
+  test "reset_password_instructions" do
     @typus_user = FactoryGirl.build(:typus_user, :token => "qswed3-64g3fb")
     @url = "http://test.host/admin/account/#{@typus_user.token}"
-    @email = Admin::Mailer.reset_password_link(@typus_user, @url)
+    @email = Admin::Mailer.reset_password_instructions(@typus_user, @url)
 
     assert_nil Admin::Mailer.default[:from]
     assert @email.to.include?(@typus_user.email)

@@ -2,7 +2,7 @@ class Admin::Mailer < ActionMailer::Base
 
   default :from => Typus.mailer_sender
 
-  def reset_password_link(user, url)
+  def reset_password_instructions(user, url)
     @user, @url = user, url
 
     options = { :to => user.email,
