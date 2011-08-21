@@ -3,8 +3,8 @@
   <ul>
     <% related_items.each do |item| %>
       <li>
-        <%= check_box_tag related_ids, item.id, @item.send(attribute).include?(item) %>
-        <%= item.to_label %>
+        <%= check_box_tag related_ids, item.id, @item.send(attribute).include?(item), :id => "#{attribute}_#{item.id}" %>
+        <label for="<%= "#{attribute}_#{item.id}" %>" class="inline_label"><%= item.to_label %></label>
       </li>
     <% end %>
   </ul>

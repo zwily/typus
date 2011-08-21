@@ -54,3 +54,8 @@ fieldset.buttons {
 fieldset ol ul {
   margin: 0!important;
 }
+
+  fieldset ol ul label.inline_label {
+    display: inline;
+    font-weight: normal;
+  }
