@@ -13,6 +13,8 @@ module Admin::Resources::FormHelper
                   typus_template_field(key, value, form)
                 when :template
                   typus_template_field(key, template, form)
+                when :has_and_belongs_to_many
+                  typus_has_and_belongs_to_many_field(key, form)
                 else
                   typus_template_field(key, :string, form)
                 end

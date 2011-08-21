@@ -43,7 +43,7 @@ Post:
   fields:
     default: title, body, created_at, status, published_at
     list: title, created_at, status
-    form: title, body, created_at, status, published_at
+    form: title, body, created_at, status, published_at, categories
     relationship: title, created_at
     csv: title, status
     xml: title, status

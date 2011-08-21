@@ -50,3 +50,7 @@ fieldset.buttons {
   fieldset.buttons ol li {
     display: inline;
   }
+
+fieldset ol ul {
+  margin: 0!important;
+}

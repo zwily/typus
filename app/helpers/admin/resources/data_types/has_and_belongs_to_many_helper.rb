@@ -21,4 +21,17 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
     render "admin/templates/has_n", locals
   end
 
+  def typus_has_and_belongs_to_many_field(attribute, form)
+    label_text = @resource.human_attribute_name(attribute)
+
+    locals = { :attribute => attribute,
+               :attribute_id => "#{@resource.table_name}_#{attribute}",
+               :related_items => attribute.singularize.capitalize.constantize.all,
+               :related_ids => "#{@resource.name.downcase}[#{attribute.singularize}_ids][]",
+               :form => form,
+               :label_text => label_text.html_safe }
+
+    render "admin/templates/has_and_belongs_to_many", locals
+  end
+
 end
