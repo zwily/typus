@@ -28,9 +28,9 @@ module Admin::Resources::RelationshipsHelper
     default_options = { :controller => "/admin/#{@model_to_relate.to_resource}",
                         :action => "index",
                         :resource => @resource.model_name,
-                        :layout => 'admin/headless',
+                        :layout => "admin/headless",
                         :resource_id => @item.id,
-                        :resource_action => 'relate',
+                        :resource_action => "relate",
                         :return_to => request.path }
 
     # Add new basically means: We can create new items or relate existing ones.
