@@ -8,7 +8,7 @@ class Admin::ResourcesController < Admin::BaseController
   Whitelist = [:edit, :update, :destroy, :toggle, :position, :relate, :unrelate]
 
   before_filter :get_model
-  before_filter :set_context # MultiSite ...
+  before_filter :set_context
   before_filter :get_object, :only => Whitelist + [:show]
   before_filter :check_resource_ownership, :only => Whitelist
   before_filter :check_if_user_can_perform_action_on_resources
