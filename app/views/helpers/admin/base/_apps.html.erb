@@ -6,7 +6,7 @@
     end
   %>
 
-  <li><%= link_to Typus::I18n.t("Dashboard"), admin_dashboard_path, :class => dashboard %></li>
+  <li><%= link_to Typus::I18n.t("Dashboard"), admin_dashboard_index_path, :class => dashboard %></li>
 
   <% admin_user.applications.each do |application| %>
 
@@ -19,7 +19,7 @@
       end
     %>
 
-    <li><%= link_to Typus::I18n.t(application), admin_dashboard_app_path(app_id), { :class => klass } %></li>
+    <li><%= link_to Typus::I18n.t(application), admin_dashboard_path(app_id), { :class => klass } %></li>
 
   <% end %>
 
