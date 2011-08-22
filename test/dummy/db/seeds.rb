@@ -7,6 +7,12 @@
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 
 ##
+# Setup an initial site ...
+##
+
+FactoryGirl.create(:site, :domain => "localhost")
+
+##
 # CRUD
 ##
 
