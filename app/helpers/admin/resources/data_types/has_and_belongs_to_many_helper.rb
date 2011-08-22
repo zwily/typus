@@ -20,6 +20,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
 
     locals = { :attribute => attribute,
                :attribute_id => "#{@resource.table_name}_#{attribute}",
+               :related_klass => klass,
                :related_items => klass.all,
                :related_ids => "#{@resource.name.downcase}[#{attribute.singularize}_ids][]",
                :form => form,

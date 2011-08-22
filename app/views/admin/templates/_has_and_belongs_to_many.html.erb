@@ -1,11 +1,15 @@
 <li id="<%= attribute_id %>">
   <%= form.label attribute, label_text %>
-  <ul>
-    <% related_items.each do |item| %>
-      <li>
-        <%= check_box_tag related_ids, item.id, @item.send(attribute).include?(item), :id => "#{attribute}_#{item.id}" %>
-        <label for="<%= "#{attribute}_#{item.id}" %>" class="inline_label"><%= item.to_label %></label>
-      </li>
-    <% end %>
-  </ul>
+  <% if values = (@item.send(attribute)).any? %>
+    <ul>
+      <% related_items.each do |item| %>
+        <li>
+          <%= check_box_tag related_ids, item.id, values.include?(item), :id => "#{attribute}_#{item.id}" %>
+          <label for="<%= "#{attribute}_#{item.id}" %>" class="inline_label"><%= item.to_label %></label>
+        </li>
+      <% end %>
+    </ul>
+  <% else %>
+    <%= Typus::I18n.t("No %{resources} found.", :resources => related_klass.model_name.human.downcase.pluralize) %>
+  <% end %>
 </li>
