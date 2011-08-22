@@ -36,7 +36,10 @@ module Admin::Resources::DataTypes::HasManyHelper
                                      { :confirm => "Trash?" } ]]
                          end
 
-    locals = { :association_name => @association_name, :add_new => build_add_new(options), :table => build_relationship_table }
+    locals = { :association_name => @association_name,
+               :add_new => build_add_new(options),
+               :table => build_relationship_table }
+
     render "admin/templates/has_many", locals
   end
 
