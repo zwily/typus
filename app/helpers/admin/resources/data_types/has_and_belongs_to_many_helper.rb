@@ -25,6 +25,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
                :related_ids => "#{@resource.name.downcase}[#{attribute.singularize}_ids][]",
                :values => @item.send(attribute),
                :form => form,
+               :use_checkboxes => false,
                :label_text => label_text.html_safe }
 
     render "admin/templates/has_and_belongs_to_many", locals
