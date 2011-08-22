@@ -7,8 +7,8 @@ module Admin::Resources::DataTypes::HasOneHelper
     @items =  related_items ? [related_items] : []
 
     # TODO: Find a cleaner way to add these actions ...
-    @resource_actions = [["Edit", {:action=>"edit"}, {}],
-                         ["Trash", { :resource_id => @item.id, :resource => @resource.model_name, :action => "destroy" }, { :confirm => "Trash?" }]]
+    @resource_actions = [["Edit", { :action => "edit" }, {}],
+                         ["Trash", { :action => "destroy" }, { :confirm => "Trash?" }]]
 
     locals = { :association_name => @association_name, :table => build_relationship_table, :add_new => nil }
 
