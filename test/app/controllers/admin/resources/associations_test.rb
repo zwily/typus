@@ -39,21 +39,4 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_equal "Post successfully updated.", flash[:notice]
   end
 
-  ##
-  # Basically we verify Admin::ResourcesController#create_with_back_to works
-  # as expected for STI models.
-  #
-  # We are editing a Case (which is an STI model). And we click on "Add New"
-  # to add a new category. Once created, we will be redirected and the new
-  # category will be assigned to the current case. Easy right?
-  #
-  test "relate using add new on sti models" do
-    category = { :name => "Category Name" }
-    kase = FactoryGirl.create(:case)
-
-    assert_difference('kase.categories.count') do
-      post :create, { :category => category, :resource => "Case", :resource_id => kase.id, :_saveandassign => true }
-    end
-  end
-
 end
