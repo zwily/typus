@@ -7,6 +7,6 @@ Entry:
         published: ["Yes", "No"]
   search: title
   filters: published
-  application: CRUD
+  application: CRUD, 1
   options:
     export: csv

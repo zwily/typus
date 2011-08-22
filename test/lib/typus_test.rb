@@ -62,7 +62,9 @@ class TypusTest < ActiveSupport::TestCase
                 "MongoDB",
                 "Polymorphic",
                 "Special"]
-    assert_equal expected, Typus.applications
+
+    assert_equal "CRUD", Typus.applications.first
+    expected.each { |e| assert Typus.applications.include?(e) }
   end
 
   test "application returns modules of the CRUD Extended application" do

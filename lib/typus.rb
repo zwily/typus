@@ -153,12 +153,26 @@ module Typus
     end
 
     def applications
-      Typus::Configuration.config.map { |i| i.last["application"] }.compact.uniq.sort
+      hash = {}
+
+      Typus::Configuration.config.map { |i| i.last["application"] }.compact.uniq.each do |app|
+        settings = app.extract_settings
+        hash[settings.first] = settings.size > 1 ? settings.last : 1000
+      end
+
+      hash.sort { |a1, a2| a1[1].to_i <=> a2[1].to_i }.map { |i| i.first }
     end
 
     # Lists modules of an application.
     def application(name)
-      Typus::Configuration.config.map { |i| i.first if i.last["application"] == name }.compact.uniq
+      array = []
+
+      Typus::Configuration.config.each do |i|
+        settings = i.last["application"]
+        array << i.first if settings && settings.extract_settings.first.eql?(name)
+      end
+
+      array.compact.uniq
     end
 
     # Lists models from the configuration file.
