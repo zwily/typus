@@ -31,11 +31,15 @@ module Admin::Resources::DataTypes::BelongsToHelper
     end
 =end
 
+=begin
     if html_options[:disabled] == true
       label_text_more = Typus::I18n.t("Read only")
     end
+=end
 
+=begin
     label_text += " <small>#{label_text_more}</small>" if label_text_more.present?
+=end
 
     # By default the used template is ALWAYS `belongs_to` unless we have the
     # `Typus.autocomplete` feature enabled.

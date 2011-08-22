@@ -33,9 +33,11 @@ module Admin::Resources::FormHelper
 
     label_text = @resource.human_attribute_name(attribute)
 
+=begin
     if options[:disabled] == true
       label_text += " <small>#{Typus::I18n.t("Read only")}</small>"
     end
+=end
 
     locals = { :resource => @resource,
                :attribute => attribute,
