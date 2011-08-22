@@ -10,7 +10,6 @@ admin:
 editor:
   Comment: read, update, delete
   Post: create, read, update
-  TypusUser: read, update
 
 designer:
   Comment: read

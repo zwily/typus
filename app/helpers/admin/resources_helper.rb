@@ -22,7 +22,7 @@ module Admin::ResourcesHelper
       end
     end
 
-    render "helpers/admin/resources/sidebar", :resources => resources
+    render "helpers/admin/resources/sidebar", :resources => resources if resources.any?
   end
 
   def sidebar_add_new(klass)

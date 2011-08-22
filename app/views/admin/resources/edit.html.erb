@@ -23,7 +23,7 @@
 <% end %>
 
 <div class="grid_2">
-  <%= build_sidebar.present? ? build_sidebar : render("admin/templates/profile_sidebar") %>
+  <%= build_sidebar || render("admin/templates/profile_sidebar") %>
 </div>
 
 <div class="grid_8">
