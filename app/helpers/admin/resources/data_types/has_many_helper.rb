@@ -22,7 +22,7 @@ module Admin::Resources::DataTypes::HasManyHelper
     count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
 
     build_pagination
-    set_has_many_resource_actions
+    @reflection.through_reflection ? set_has_many_through_resource_actions : set_has_many_resource_actions
 
     locals = { :association_name => @association_name,
                :add_new => build_add_new_for_has_many(@model_to_relate, field, options),
@@ -42,18 +42,17 @@ module Admin::Resources::DataTypes::HasManyHelper
   end
 
   def set_has_many_resource_actions
-    # If we are on a through_reflection set the association name!
-    @resource_actions = if @reflection.through_reflection
-                          [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
-                           ["Unrelate", { :resource_id => @item.id,
-                                          :resource => @resource.model_name,
-                                          :action => "unrelate",
-                                          :association_name => @association_name},
-                                        { :confirm => "Unrelate?" } ]]
-                        else
-                          [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
-                           ["Trash", { :action => "destroy" }, { :confirm => "Trash?" } ]]
-                         end
+    @resource_actions = [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
+                         ["Trash", { :action => "destroy" }, { :confirm => "Trash?" } ]]
+  end
+
+  def set_has_many_through_resource_actions
+    @resource_actions = [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
+                         ["Unrelate", { :resource_id => @item.id,
+                                        :resource => @resource.model_name,
+                                        :action => "unrelate",
+                                        :association_name => @association_name},
+                                      { :confirm => "Unrelate?" } ]]
   end
 
 end
