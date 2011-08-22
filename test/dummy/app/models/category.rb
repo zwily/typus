@@ -21,6 +21,7 @@ class Category < ActiveRecord::Base
   #
 
   acts_as_list
+  permalink :name
 
   ##
   # Validations

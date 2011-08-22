@@ -32,6 +32,7 @@ end
 gem "acts_as_list"
 gem "acts_as_tree"
 gem "factory_girl_rails", "~> 1.1.0"
+gem "rails-permalink", "~> 1.0.0"
 gem "rails-trash", "~> 1.1.2"
 
 # For some reason I also need to define the `jquery-rails` gem here.
