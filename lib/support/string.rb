@@ -16,7 +16,7 @@ class String
     case self
     when "new", "create"
       "create"
-    when "index", "show", "autocomplete"
+    when "index", "show"
       "read"
     when "edit", "update", "position", "toggle", "relate", "unrelate"
       "update"

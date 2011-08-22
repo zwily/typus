@@ -41,19 +41,13 @@ module Admin::Resources::DataTypes::BelongsToHelper
     label_text += " <small>#{label_text_more}</small>" if label_text_more.present?
 =end
 
-    # By default the used template is ALWAYS `belongs_to` unless we have the
-    # `Typus.autocomplete` feature enabled.
-    template = Typus.autocomplete ? "belongs_to_with_autocomplete" : "belongs_to"
+    values = if related.respond_to?(:roots)
+               expand_tree_into_select_field(related.roots, related_fk)
+             else
+               related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
+             end
 
-    # If `Typus.autocomplete` is enabled we don't set the values as will be
-    # autocompleted.
-    if related.respond_to?(:roots)
-      values = expand_tree_into_select_field(related.roots, related_fk)
-    elsif !Typus.autocomplete
-      values = related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
-    end
-
-    render "admin/templates/#{template}",
+    render "admin/templates/belongs_to",
            :association => association,
            :resource => @resource,
            :attribute => attribute,

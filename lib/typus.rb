@@ -23,7 +23,6 @@ module Typus
     autoload :Actions, "typus/controller/actions"
     autoload :ActsAsList, "typus/controller/acts_as_list"
     autoload :Ancestry, "typus/controller/ancestry"
-    autoload :Autocomplete, "typus/controller/autocomplete"
     autoload :Bulk, "typus/controller/bulk"
     autoload :FeaturedImage, "typus/controller/featured_image"
     autoload :Filters, "typus/controller/filters"
@@ -41,9 +40,6 @@ module Typus
     autoload :HttpBasic, "typus/authentication/http_basic"
     autoload :Session, "typus/authentication/session"
   end
-
-  mattr_accessor :autocomplete
-  @@autocomplete = nil
 
   mattr_accessor :admin_title
   @@admin_title = "Typus"

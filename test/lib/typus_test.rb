@@ -2,10 +2,6 @@ require "test_helper"
 
 class TypusTest < ActiveSupport::TestCase
 
-  test "default_config for autocomplete" do
-    assert Typus.autocomplete.nil?
-  end
-
   test "default_config for admin_title" do
     assert Typus.admin_title.eql?('Typus')
   end
