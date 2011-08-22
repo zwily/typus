@@ -13,12 +13,6 @@ class Admin::ResourcesController < Admin::BaseController
   before_filter :check_resource_ownership, :only => Whitelist
   before_filter :check_if_user_can_perform_action_on_resources
 
-  ##
-  # This is the main index of the model. With filters, conditions and more.
-  #
-  # By default application can respond to html, csv and xml, but you can add
-  # your formats.
-  #
   def index
     get_objects
 
