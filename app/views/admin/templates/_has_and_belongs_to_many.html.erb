@@ -1,6 +1,6 @@
 <li id="<%= attribute_id %>">
   <%= form.label attribute, label_text %>
-  <% if values = (@item.send(attribute)).any? %>
+  <% if related_items.any? %>
     <ul>
       <% related_items.each do |item| %>
         <li>

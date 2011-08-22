@@ -23,6 +23,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
                :related_klass => klass,
                :related_items => klass.all,
                :related_ids => "#{@resource.name.downcase}[#{attribute.singularize}_ids][]",
+               :values => @item.send(attribute),
                :form => form,
                :label_text => label_text.html_safe }
 
