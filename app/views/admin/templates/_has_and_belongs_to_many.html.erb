@@ -1,20 +1,9 @@
 <li id="<%= attribute_id %>">
   <%= form.label attribute, label_text %>
   <% if related_items.any? %>
-    <% if use_checkboxes %>
-      <ul>
-        <% related_items.each do |item| %>
-          <li>
-            <%= check_box_tag related_ids, item.id, values.include?(item), :id => "#{attribute}_#{item.id}" %>
-            <label for="<%= "#{attribute}_#{item.id}" %>" class="inline_label"><%= item.to_label %></label>
-          </li>
-        <% end %>
-      </ul>
-    <% else %>
-      <%= select_tag related_ids,
-                     options_from_collection_for_select(related_items, "id", "to_label", values.map(&:id)),
-                     { :multiple => true, :size => 5, :id => "#{@resource.name.downcase}_#{attribute}", :class => "chzn-select", :style => "width: 350px;", "data-placeholder" => Typus::I18n.t("Select Some Options") } %>
-    <% end %>
+    <%= select_tag related_ids,
+                   options_from_collection_for_select(related_items, "id", "to_label", values.map(&:id)),
+                   { :multiple => true, :size => 5, :id => "#{@resource.name.downcase}_#{attribute}", :class => "chzn-select", :style => "width: 350px;", "data-placeholder" => Typus::I18n.t("Select Some Options") } %>
   <% else %>
     <%= Typus::I18n.t("No %{resources} found.", :resources => related_klass.model_name.human.downcase.pluralize) %>
   <% end %>
