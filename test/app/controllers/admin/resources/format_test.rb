@@ -29,4 +29,9 @@ title,published
     assert_equal expected, @response.body
   end
 
+  test "export XML" do
+    get :index, :format => "xml"
+    assert_response :unprocessable_entity
+  end
+
 end

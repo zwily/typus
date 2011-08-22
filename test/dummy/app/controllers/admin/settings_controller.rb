@@ -21,7 +21,7 @@ class Admin::SettingsController < Admin::BaseController
   private
 
   def verify_role
-    redirect_to admin_dashboard_path if admin_user.is_not_root?
+    redirect_to admin_dashboard_index_path if admin_user.is_not_root?
   end
 
 end

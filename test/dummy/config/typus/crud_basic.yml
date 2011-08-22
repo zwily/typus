@@ -8,3 +8,5 @@ Entry:
   search: title
   filters: published
   application: CRUD
+  options:
+    export: csv

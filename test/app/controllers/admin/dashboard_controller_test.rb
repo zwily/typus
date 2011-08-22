@@ -9,19 +9,19 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     end
 
     should "return a 401 message when no credentials sent" do
-      get :show
+      get :index
       assert_response :unauthorized
     end
 
     should "authenticate user with valid password" do
       @request.env['HTTP_AUTHORIZATION'] = 'Basic ' + Base64::encode64("admin:columbia")
-      get :show
+      get :index
       assert_response :success
     end
 
     should "not authenticate user with invalid password" do
       @request.env['HTTP_AUTHORIZATION'] = 'Basic ' + Base64::encode64("admin:admin")
-      get :show
+      get :index
       assert_response :unauthorized
     end
 
@@ -34,7 +34,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     end
 
     should "render dashboard" do
-      get :show
+      get :index
       assert_response :success
     end
 
@@ -47,7 +47,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     end
 
     should "redirect to sign in when not signed in" do
-      get :show
+      get :index
       assert_response :redirect
       assert_redirected_to new_admin_session_path
     end
@@ -58,7 +58,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
     typus_user = FactoryGirl.create(:typus_user, :role => "removed")
     @request.session[:typus_user_id] = typus_user.id
 
-    get :show
+    get :index
 
     assert_response :redirect
     assert_redirected_to new_admin_session_path
@@ -69,12 +69,12 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
     setup do
       admin_sign_in
-      get :show
+      get :index
     end
 
     should "render dashboard" do
       assert_response :success
-      assert_template "show"
+      assert_template "index"
     end
 
     should "render admin layout" do
@@ -112,7 +112,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
       @typus_user.status = false
       @typus_user.save
 
-      get :show
+      get :index
 
       assert_response :redirect
       assert_redirected_to new_admin_session_path
@@ -123,7 +123,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
       @typus_user.role = 'unexisting'
       @typus_user.save
 
-      get :show
+      get :index
 
       assert_response :redirect
       assert_redirected_to new_admin_session_path
@@ -134,7 +134,7 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
   test "designer should not see links to unallowed resources" do
     designer_sign_in
-    get :show
+    get :index
     assert_no_match /\/admin\/posts\/new/, @response.body
     assert_no_match /\/admin\/typus_users\/new/, @response.body
   end

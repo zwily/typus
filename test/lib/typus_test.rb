@@ -53,7 +53,15 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   test "applications returns applications sorted" do
-    expected = ["Admin", "CRUD", "CRUD Extended", "Extensions", "HasManyThrough", "HasOne", "MongoDB", "Polymorphic", "Special"]
+    expected = ["Admin",
+                "CRUD",
+                "CRUD Extended",
+                "Extensions",
+                "HasMany",
+                "HasOne",
+                "MongoDB",
+                "Polymorphic",
+                "Special"]
     assert_equal expected, Typus.applications
   end
 
@@ -88,6 +96,7 @@ class TypusTest < ActiveSupport::TestCase
                 "Project",
                 "ProjectCollaborator",
                 "ReadOnlyEntry",
+                "Task",
                 "TypusUser",
                 "User",
                 "View"]

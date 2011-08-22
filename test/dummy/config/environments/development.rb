@@ -42,8 +42,8 @@ Typus.setup do |config|
   # config.password = 'columbia'
 
   # Authenticate using typus provided authentication.
-  # config.authentication = :session
-  # config.user_class_name = "AdminUser"
+  config.authentication = :session
+  config.user_class_name = "AdminUser"
 
   # Authenticate using devise.
   # config.authentication = :devise
