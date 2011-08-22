@@ -99,48 +99,6 @@ module Typus
         [options, notice, alert]
       end
 
-      ##
-      #     >> Entry.relationship_with(Category)
-      #     => :has_and_belongs_to_many
-      #
-      def set_has_and_belongs_to_many_association(item_class, options)
-        # In this case we DO need to get the remote item to make to association.
-        item = item_class.find(params[:resource_id])
-        association_name = @resource.model_name.tableize.to_sym
-        options.merge!(:action => 'edit', :id => item.id)
-
-        if item.send(association_name).push(@item)
-          notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
-        else
-          alert = @item.errors.full_messages
-        end
-
-        [options, notice, alert]
-      end
-
-      ##
-      #     >> Invoice.relationship_with(Order)
-      #     => :belongs_to
-      #
-      def set_belongs_to_association(item_class, options)
-        association_name = item_class.model_name.tableize.to_sym
-        foreign_key = @resource.reflect_on_association(association_name).foreign_key
-
-        if params[:resource_id]
-          item = item_class.find(params[:resource_id])
-          options.merge!(:action => 'edit', :id => item.id)
-          if @item.send(association_name).push(item)
-            notice = Typus::I18n.t("%{model} successfully updated.", :model => item_class.model_name.human)
-          else
-            alert = @item.errors.full_messages
-          end
-        else
-          options.merge!(:action => 'new', foreign_key => @item.id)
-        end
-
-        [options, notice, alert]
-      end
-
     end
   end
 end

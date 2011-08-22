@@ -24,27 +24,6 @@ module Admin::Resources::RelationshipsHelper
                @association_name)
   end
 
-  def build_add_new(options = {})
-    default_options = { :controller => "/admin/#{@model_to_relate.to_resource}",
-                        :action => "index",
-                        :resource => @resource.model_name,
-                        :layout => "admin/headless",
-                        :resource_id => @item.id,
-                        :resource_action => "relate",
-                        :return_to => request.path }
-
-    # Add new basically means: We can create new items or relate existing ones.
-    create_or_read = admin_user.can?("create", @model_to_relate) || admin_user.can?("read", @model_to_relate)
-
-    if set_condition && create_or_read
-      link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
-    end
-  end
-
-  def set_condition
-    (@resource.typus_user_id? && admin_user.is_not_root?) ? admin_user.owns?(@item) : true
-  end
-
   def set_conditions
     if @model_to_relate.typus_options_for(:only_user_items) && admin_user.is_not_root?
       { Typus.user_foreign_key => admin_user }

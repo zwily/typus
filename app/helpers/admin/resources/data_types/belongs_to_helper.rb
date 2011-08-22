@@ -13,6 +13,8 @@ module Admin::Resources::DataTypes::BelongsToHelper
     html_options = { :disabled => attribute_disabled?(attribute) }
     label_text = @resource.human_attribute_name(attribute)
 
+=begin
+    # TODO: Make it work as we expect.
     # TODO: Use the build_add_new method.
     if admin_user.can?('create', related)
       options = { :controller => "/admin/#{related.to_resource}",
@@ -27,6 +29,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
         label_text_more = link_to Typus::I18n.t("Add New"), options, { :class => 'iframe' }
       end
     end
+=end
 
     if html_options[:disabled] == true
       label_text_more = Typus::I18n.t("Read only")

@@ -16,6 +16,9 @@ module Admin::Resources::DataTypes::HasManyHelper
 
     options = @reflection.through_reflection ? {} : { @reflection.foreign_key => @item.id }
 
+    # This options should only be merged when there's a Polymorphic association.
+    # options.merge!(:resource => @resource.model_name, :resource_id => @item.id, :resource_action => "relate")
+
     count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
 
     build_pagination
