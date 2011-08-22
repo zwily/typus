@@ -202,19 +202,16 @@ class Admin::ResourcesController < Admin::BaseController
   def redirect_on_success
     path = params.dup.cleanup
 
-    # Redirects to { :action => 'index' }
     if params[:_save]
-      path.delete_if { |k, v| %w(action id).include?(k) }
+      path.delete_if { |k, v| %w(action id).include?(k) } # Redirects to { :action => 'index' }
     end
 
-    # Redirects to { :action => 'new' }
     if params[:_addanother]
-      path.merge!(:action => 'new', :id => nil)
+      path.merge!(:action => 'new', :id => nil) # Redirects to { :action => 'new' }
     end
 
-    # Redirects to { :action => 'edit' => :id => @item.id }
     if params[:_continue]
-      path.merge!(:action => 'edit', :id => @item.id)
+      path.merge!(:action => 'edit', :id => @item.id) # Redirects to { :action => 'edit' => :id => @item.id }
     end
 
     message = (params[:action] == 'create') ? "%{model} successfully created." : "%{model} successfully updated."
