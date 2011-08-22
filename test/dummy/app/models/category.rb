@@ -10,6 +10,13 @@
 class Category < ActiveRecord::Base
 
   ##
+  #
+  #
+
+  attr_protected :permalink, :position, :as => :admin
+  attr_protected :permalink, :position
+
+  ##
   # Mixins
   #
 
