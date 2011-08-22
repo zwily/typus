@@ -5,3 +5,8 @@ EntryDefault:
         published: ["Yes", "No"]
   filters: published
   application: Special
+
+ReadOnlyEntry:
+  fields:
+    default: title, content, published
+  application: Special
