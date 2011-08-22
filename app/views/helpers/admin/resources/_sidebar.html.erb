@@ -1,41 +1,25 @@
-<% if Typus.quick_sidebar %>
-  <h2><%= @resource.typus_application %></h2>
+<div id="sidebar">
 
-  <ul>
-    <% resources.each do |resource, actions| %>
-      <% klass = resource.constantize %>
-      <li>
-        <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>
-        <small>
-          <%= link_to Typus::I18n.t("Add New"), :controller => "/admin/#{klass.to_resource}", :action => "new" %>
-        </small>
-      </li>
-    <% end %>
-  </ul>
-<% else %>
-  <div id="sidebar">
+  <% resources.each do |resource, actions| %>
 
-    <% resources.each do |resource, actions| %>
+    <% klass = resource.constantize %>
 
-      <% klass = resource.constantize %>
+    <ul>
 
-      <ul>
+      <%= link_to :controller => "/admin/#{klass.to_resource}" do %>
+        <li class="header"><%= klass.model_name.human.pluralize %></li>
+      <% end %>
 
-        <%= link_to :controller => "/admin/#{klass.to_resource}" do %>
-          <li class="header"><%= klass.model_name.human.pluralize %></li>
-        <% end %>
+      <% if @resource.model_name.eql?(resource) %>
+        <ul>
+          <% actions.each do |action| %>
+            <li><%= link_to action[:message], action[:url] %></li>
+          <% end %>
+        </ul>
+      <% end %>
 
-        <% if @resource.model_name.eql?(resource) %>
-          <ul>
-            <% actions.each do |action| %>
-              <li><%= link_to action[:message], action[:url] %></li>
-            <% end %>
-          </ul>
-        <% end %>
+    </ul>
 
-      </ul>
+  <% end %>
 
-    <% end %>
-
-  </div>
-<% end %>
+</div>
