@@ -47,8 +47,7 @@ module Admin::Resources::DataTypes::HasManyHelper
     if admin_user.can?("create", klass)
       default_options = { :controller => "/admin/#{klass.to_resource}",
                           :action => "new",
-                          :layout => "admin/headless",
-                          :return_to => request.path }
+                          :layout => "admin/headless" }
 
       link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
     end
