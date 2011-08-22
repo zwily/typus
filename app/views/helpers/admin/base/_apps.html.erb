@@ -10,14 +10,16 @@
 
   <% admin_user.applications.each do |application| %>
 
+    <% app_id = application.parameterize %>
+
     <%
       apps = admin_user.application(application)
-      if (params[:application] == application) || (@resource && apps.include?(@resource.model_name))
+      if (params[:application] == app_id) || (@resource && apps.include?(@resource.model_name))
         klass = 'active'
       end
     %>
 
-    <li><%= link_to Typus::I18n.t(application), admin_dashboard_path(:application => application), { :class => klass } %></li>
+    <li><%= link_to Typus::I18n.t(application), admin_dashboard_app_path(app_id), { :class => klass } %></li>
 
   <% end %>
 

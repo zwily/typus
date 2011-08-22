@@ -5,12 +5,16 @@
 %>
 
 <%
+  applications = admin_user.applications
+
   # Detect if we are inside an application.
   if (application = params[:application])
-    applications = [application]
-    page_title = application
-  else
-    applications = admin_user.applications
+    applications.each do |app|
+      if app.parameterize == application
+        applications = [app]
+      end
+    end
+    page_title = applications.first
   end
 %>
 

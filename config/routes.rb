@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   scope "admin", :module => :admin, :as => "admin" do
 
     match "/" => "dashboard#show", :as => "dashboard"
+    match "/app/:application" => "dashboard#show", :as => "dashboard_app"
     match "user_guide" => "base#user_guide"
 
     if Typus.authentication == :session
