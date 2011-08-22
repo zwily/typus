@@ -10,9 +10,8 @@ Asset:
 Case:
   fields:
     default: title
-    form: title, content
+    form: title, content, categories
   application: CRUD Extended
-  relationships: categories
 
 Comment:
   fields:
