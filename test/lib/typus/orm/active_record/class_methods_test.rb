@@ -220,6 +220,7 @@ class ClassMethodsTest < ActiveSupport::TestCase
   end
 
   test "typus_application" do
+    assert_equal "CRUD", Entry.typus_application
     assert_equal "CRUD Extended", Post.typus_application
     assert_equal "Unknown", View.typus_application
   end

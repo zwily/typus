@@ -46,7 +46,8 @@ module Typus
       end
 
       def typus_application
-        read_model_config['application'] || 'Unknown'
+        name = read_model_config['application'] || 'Unknown'
+        name.extract_settings.first
       end
 
       def typus_field_options_for(filter)
