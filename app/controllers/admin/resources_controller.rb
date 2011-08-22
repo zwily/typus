@@ -204,13 +204,9 @@ class Admin::ResourcesController < Admin::BaseController
 
     if params[:_save]
       path.delete_if { |k, v| %w(action id).include?(k) } # Redirects to { :action => 'index' }
-    end
-
-    if params[:_addanother]
+    elsif params[:_addanother]
       path.merge!(:action => 'new', :id => nil) # Redirects to { :action => 'new' }
-    end
-
-    if params[:_continue]
+    elsif params[:_continue]
       path.merge!(:action => 'edit', :id => @item.id) # Redirects to { :action => 'edit' => :id => @item.id }
     end
 
