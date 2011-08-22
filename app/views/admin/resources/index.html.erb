@@ -20,6 +20,7 @@
       <% url = action.is_a?(String) ? params.dup.cleanup.merge(:action => action) : action %>
       <li><%= link_to Typus::I18n.t(filter), url %> <%= "(#{@resource.send(scope).count})" if scope && @resource.respond_to?(scope) %></li>
     <% end %>
+
     <% unless resource.count.zero? %>
       <li>|</li>
       <li><%= link_to "CSV", :format => 'csv' %></li>
