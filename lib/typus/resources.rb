@@ -42,6 +42,9 @@ module Typus
     mattr_accessor :hide_from_dashboard
     @@hide_from_dashboard = false
 
+    mattr_accessor :export
+    @@export = ""
+
     def self.method_missing(*args)
       nil
     end

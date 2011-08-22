@@ -19,32 +19,36 @@ module Typus
       #       to be able to process large amounts of data.
       #++
       def generate_csv
-        fields = @resource.typus_fields_for(:csv)
+        if can_export?(:csv)
+          fields = @resource.typus_fields_for(:csv)
 
-        filename = Rails.root.join("tmp", "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv")
+          filename = Rails.root.join("tmp", "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv")
 
-        options = { :conditions => @conditions, :batch_size => 1000 }
+          options = { :conditions => @conditions, :batch_size => 1000 }
 
-        ::CSV.open(filename, 'w') do |csv|
-          csv << fields.keys
-          @resource.find_in_batches(options) do |records|
-            records.each do |record|
-              csv << fields.map do |key, value|
-                       case value
-                       when :transversal
-                         a, b = key.split(".")
-                         record.send(a).send(b)
-                       when :belongs_to
-                         record.send(key).try(:to_label)
-                       else
-                         record.send(key)
+          ::CSV.open(filename, 'w') do |csv|
+            csv << fields.keys
+            @resource.find_in_batches(options) do |records|
+              records.each do |record|
+                csv << fields.map do |key, value|
+                         case value
+                         when :transversal
+                           a, b = key.split(".")
+                           record.send(a).send(b)
+                         when :belongs_to
+                           record.send(key).try(:to_label)
+                         else
+                           record.send(key)
+                         end
                        end
-                     end
+              end
             end
           end
-        end
 
-        send_file filename
+          send_file filename
+        else
+          not_allowed
+        end
       end
 
       def generate_json
@@ -56,13 +60,21 @@ module Typus
       end
 
       def export(format)
-        fields = @resource.typus_fields_for(format).map { |i| i.first }
-        methods = fields - @resource.column_names
-        except = @resource.column_names - fields
+        if can_export?(format)
+          fields = @resource.typus_fields_for(format).map { |i| i.first }
+          methods = fields - @resource.column_names
+          except = @resource.column_names - fields
 
-        get_paginated_data
+          get_paginated_data
 
-        render format => @items.send("to_#{format}", :methods => methods, :except => except)
+          render format => @items.send("to_#{format}", :methods => methods, :except => except)
+        else
+          not_allowed
+        end
+      end
+
+      def can_export?(format)
+        @resource.typus_options_for(:export).extract_settings.include?(format.to_s)
       end
 
     end

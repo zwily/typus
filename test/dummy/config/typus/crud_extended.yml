@@ -37,6 +37,7 @@ Page:
   options:
     form_rows: 25
     sortable: false
+    export: csv
   application: CRUD Extended
 
 Post:
@@ -62,7 +63,6 @@ Post:
   filters: status, created_at
   search: title
   order_by: title, -created_at
-  export: csv, xml
   application: CRUD Extended
 
 Article::Entry:
