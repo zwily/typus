@@ -13,7 +13,7 @@
       <% if @item.respond_to?(:created_at) %>
         <li><strong>Upload date:</strong> <%= @item.created_at %></li>
       <% end %>
-      <li><strong>Dimensions:</strong> <%= attachment.width %>px x <%= attachment.height %>px</li>
+      <li><strong>Dimensions:</strong> <%= attachment.width %> x <%= attachment.height %></li>
     </ul>
   </div>
 
