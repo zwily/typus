@@ -42,11 +42,6 @@ class Admin::ResourcesController < Admin::BaseController
     end
   end
 
-  ##
-  # Create new items. There's an special case when we create an item from
-  # another item. In this case, after the item is created we also create the
-  # relationship between these items.
-  #
   def create
     @item = @resource.new
     @item.assign_attributes(params[@object_name], :as => :admin)
