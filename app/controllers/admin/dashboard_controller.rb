@@ -4,7 +4,10 @@ class Admin::DashboardController < Admin::BaseController
   end
 
   def show
-    render 'index'
+    app_id = params[:application].parameterize
+    render app_id
+  rescue ActionView::MissingTemplate
+    render "index"
   end
 
 end
