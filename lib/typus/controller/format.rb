@@ -6,10 +6,12 @@ module Typus
 
       protected
 
-      def generate_html
+      def get_paginated_data
         items_per_page = @resource.typus_options_for(:per_page)
         @items = @resource.page(params[:page]).per(items_per_page)
       end
+
+      alias_method :generate_html, :get_paginated_data
 
       #--
       # TODO: Find in batches only works properly if it's used on models, not
@@ -57,7 +59,10 @@ module Typus
         fields = @resource.typus_fields_for(format).map { |i| i.first }
         methods = fields - @resource.column_names
         except = @resource.column_names - fields
-        render format => @resource.send("to_#{format}", :methods => methods, :except => except)
+
+        get_paginated_data
+
+        render format => @items.send("to_#{format}", :methods => methods, :except => except)
       end
 
     end
