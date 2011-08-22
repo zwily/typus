@@ -8,8 +8,7 @@ class Admin::BaseController < ActionController::Base
 
   helper_method :admin_user
 
-  def user_guide
-  end
+  def user_guide; end
 
   protected
 

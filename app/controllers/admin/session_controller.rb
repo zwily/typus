@@ -5,8 +5,7 @@ class Admin::SessionController < Admin::BaseController
 
   before_filter :create_an_account?, :only => [:new, :create]
 
-  def new
-  end
+  def new; end
 
   def create
     user = user_scope.authenticate(params[:typus_user][:email], params[:typus_user][:password])
