@@ -6,7 +6,7 @@ module Admin::Resources::DataTypes::HasOneHelper
     related_items = @item.send(field)
     @items =  related_items ? [related_items] : []
 
-    set_has_one_resouce_actions
+    set_has_one_resource_actions
 
     locals = { :association_name => @association_name, :table => build_relationship_table, :add_new => nil }
 
@@ -28,7 +28,7 @@ module Admin::Resources::DataTypes::HasOneHelper
     end
   end
 
-  def set_has_one_resouce_actions
+  def set_has_one_resource_actions
     @resource_actions = [["Edit", { :action => "edit" }, {}],
                          ["Trash", { :action => "destroy" }, { :confirm => "Trash?" }]]
   end
