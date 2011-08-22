@@ -6,12 +6,8 @@ module Admin::Resources::DisplayHelper
 
   def build_display(item, fields)
     fields.map do |attribute, type|
-      value = if (type == :boolean) || (data = item.send(attribute)).present?
-                send("display_#{type}", item, attribute)
-              else
-                mdash
-              end
-
+      condition = (type == :boolean) || item.send(attribute).present?
+      value = condition ? send("display_#{type}", item, attribute) : mdash
       [@resource.human_attribute_name(attribute), value]
     end
   end
