@@ -4,6 +4,7 @@ Rails.application.routes.draw do
 
     match "/" => "dashboard#show", :as => "dashboard"
     match "/dashboard/:application" => "dashboard#show", :as => "dashboard_app"
+
     match "user_guide" => "base#user_guide"
 
     if Typus.authentication == :session
