@@ -13,7 +13,7 @@
     <% else %>
       <%= select_tag related_ids,
                      options_from_collection_for_select(related_items, "id", "to_label", values.map(&:id)),
-                     { :multiple => true, :size => 5, :id => "model_name_states" } %>
+                     { :multiple => true, :size => 5, :id => "#{@resource.name.downcase}_#{attribute}", :class => "chzn-select", :style => "width: 350px;", "data-placeholder" => Typus::I18n.t("Select Some Options") } %>
     <% end %>
   <% else %>
     <%= Typus::I18n.t("No %{resources} found.", :resources => related_klass.model_name.human.downcase.pluralize) %>

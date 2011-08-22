@@ -8,8 +8,9 @@ fieldset ol {
 }
 
 fieldset ol li {
+  line-height: 1.5em;
   list-style: none!important;
-  margin: 1em 0!important;
+  margin: 1em 0;
 }
 
 fieldset small {

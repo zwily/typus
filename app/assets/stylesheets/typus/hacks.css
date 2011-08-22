@@ -18,3 +18,7 @@
 .box_relationships {
   margin-top: 2.5em;
 }
+
+.search-choice span {
+  color: black!important;
+}

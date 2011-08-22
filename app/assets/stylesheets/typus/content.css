@@ -25,9 +25,7 @@
 }
 
 #content li {
-  color: #777;
   list-style: square;
-  line-height: 1.5em;
 }
 
 #content pre {

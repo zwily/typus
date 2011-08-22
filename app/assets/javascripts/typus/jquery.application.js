@@ -43,6 +43,8 @@ $(document).ready(function() {
         $('.action-toggle').each(function() { this.checked = status; });
     });
 
+    $(".chzn-select").chosen();
+
 });
 
 function setConfirmUnload(on) {
