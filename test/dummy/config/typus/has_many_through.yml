@@ -19,6 +19,9 @@ Task:
     form: name, description, status, project
   filters: project
   application: HasMany
+  options:
+    hide_from_sidebar: true
+    hide_from_dashboard: true
 
 User:
   fields:

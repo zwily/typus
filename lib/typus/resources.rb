@@ -36,6 +36,12 @@ module Typus
     mattr_accessor :start_year
     @@start_year = nil
 
+    mattr_accessor :hide_from_sidebar
+    @@hide_from_sidebar = false
+
+    mattr_accessor :hide_from_dashboard
+    @@hide_from_dashboard = false
+
     def self.method_missing(*args)
       nil
     end

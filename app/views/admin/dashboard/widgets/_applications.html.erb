@@ -34,11 +34,13 @@
       </thead>
 
       <% admin_user.application(app).map { |i| i.constantize }.each do |klass| %>
-        <tr class="<%= cycle("even", "odd") %>">
-          <td>
-            <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>
-          </td>
-        </tr>
+        <% if klass.typus_options_for(:hide_from_dashboard) == false %>
+          <tr class="<%= cycle("even", "odd") %>">
+            <td>
+              <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>
+            </td>
+          </tr>
+        <% end %>
       <% end %>
 
     </table>
