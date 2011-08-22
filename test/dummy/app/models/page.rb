@@ -21,4 +21,12 @@ class Page < ActiveRecord::Base
 
   default_scope where(:status => true)
 
+  ##
+  # Instance Methods
+  #
+
+  def to_label
+    title
+  end
+
 end
