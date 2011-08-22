@@ -52,10 +52,7 @@ module Admin::Resources::DataTypes::HasManyHelper
                                         { :confirm => "Unrelate?" } ]]
                         else
                           [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
-                           ["Trash", { :resource_id => @item.id,
-                                       :resource => @resource.model_name,
-                                       :action => "destroy" },
-                                     { :confirm => "Trash?" } ]]
+                           ["Trash", { :action => "destroy" }, { :confirm => "Trash?" } ]]
                          end
   end
 
