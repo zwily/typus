@@ -63,6 +63,7 @@ Post:
   filters: status, created_at
   search: title
   order_by: title, -created_at
+  scopes: published, draft, unexisting
   application: CRUD Extended
 
 Article::Entry:

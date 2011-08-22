@@ -16,6 +16,11 @@
 
   <ul class="predefined_filters">
     <li><%= link_to Typus::I18n.t("All"), params.dup.cleanup.merge(:action => 'index') %> (<%= resource.count %>)</li>
+
+    <% scopes.each do |scope| %>
+      <li><%= link_to Typus::I18n.t(scope.humanize), :scope => scope %> <%= "(#{@resource.send(scope).count})" %></li>
+    <% end %>
+
     <% predefined_filters.each do |filter, action, scope| %>
       <% url = action.is_a?(String) ? params.dup.cleanup.merge(:action => action) : action %>
       <li><%= link_to Typus::I18n.t(filter), url %> <%= "(#{@resource.send(scope).count})" if scope && @resource.respond_to?(scope) %></li>

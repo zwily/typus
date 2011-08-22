@@ -18,6 +18,13 @@ class Post < ActiveRecord::Base
   has_many :views
 
   ##
+  # Scopes
+  #
+
+  scope :draft, where(:status => "draft")
+  scope :published, where(:status => "published")
+
+  ##
   # Class Methods
   #
 

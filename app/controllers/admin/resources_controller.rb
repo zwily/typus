@@ -166,6 +166,13 @@ class Admin::ResourcesController < Admin::BaseController
 
   # Here we set the current scope!
   def set_scope
+    if (scope = params[:scope])
+     if @resource.respond_to?(scope)
+       @resource = @resource.send(scope)
+     else
+       not_allowed
+     end
+   end
   end
 
   def set_wheres
