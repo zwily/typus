@@ -6,9 +6,7 @@ module Admin::Resources::DataTypes::HasOneHelper
     related_items = @item.send(field)
     @items =  related_items ? [related_items] : []
 
-    # TODO: Find a cleaner way to add these actions ...
-    @resource_actions = [["Edit", { :action => "edit" }, {}],
-                         ["Trash", { :action => "destroy" }, { :confirm => "Trash?" }]]
+    set_has_one_resouce_actions
 
     locals = { :association_name => @association_name, :table => build_relationship_table, :add_new => nil }
 
@@ -28,6 +26,11 @@ module Admin::Resources::DataTypes::HasOneHelper
 
       link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
     end
+  end
+
+  def set_has_one_resouce_actions
+    @resource_actions = [["Edit", { :action => "edit" }, {}],
+                         ["Trash", { :action => "destroy" }, { :confirm => "Trash?" }]]
   end
 
 end
