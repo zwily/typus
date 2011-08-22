@@ -23,7 +23,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
       # the record actually exists.
       options.merge!(:resource_id => @item.id) if %w(edit update).include?(params[:action])
       # This is a default message ... which we can change if
-      unless html_options[:disabled] == true
+      unless html_options[:disabled] == true || headless_mode?
         label_text_more = link_to Typus::I18n.t("Add New"), options, { :class => 'iframe' }
       end
     end

@@ -37,10 +37,21 @@ module Admin::Resources::DataTypes::HasManyHelper
                          end
 
     locals = { :association_name => @association_name,
-               :add_new => build_add_new(options),
+               :add_new => build_add_new_for_has_many(@model_to_relate, field, options),
                :table => build_relationship_table }
 
     render "admin/templates/has_many", locals
+  end
+
+  def build_add_new_for_has_many(klass, field, options = {})
+    if admin_user.can?("create", klass)
+      default_options = { :controller => "/admin/#{klass.to_resource}",
+                          :action => "new",
+                          :layout => "admin/headless",
+                          :return_to => request.path }
+
+      link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
+    end
   end
 
 end
