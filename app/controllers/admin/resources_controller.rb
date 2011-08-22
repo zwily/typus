@@ -210,7 +210,7 @@ class Admin::ResourcesController < Admin::BaseController
       path.merge!(:action => 'edit', :id => @item.id) # Redirects to { :action => 'edit' => :id => @item.id }
     end
 
-    message = (params[:action] == 'create') ? "%{model} successfully created." : "%{model} successfully updated."
+    message = params[:action].eql?('create') ? "%{model} successfully created." : "%{model} successfully updated."
     notice = Typus::I18n.t(message, :model => @resource.model_name.human)
 
     redirect_to path, :notice => notice
