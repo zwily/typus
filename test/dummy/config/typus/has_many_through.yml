@@ -2,7 +2,7 @@ Project:
   fields:
     default: name, user
     form: name, user
-  relationships: tasks
+  relationships: tasks, project_collaborators
   filters: user
   application: HasMany
 
