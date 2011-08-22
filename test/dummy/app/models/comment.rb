@@ -14,4 +14,12 @@ class Comment < ActiveRecord::Base
 
   belongs_to :post
 
+  ##
+  # Instance Methods
+  #
+
+  def to_label
+    name
+  end
+
 end
