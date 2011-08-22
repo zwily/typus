@@ -20,10 +20,10 @@ module Admin::Resources::DisplayHelper
     String.new.tap do |html|
       @resource.typus_defaults_for(:relationships).each do |relationship|
         association = @resource.reflect_on_association(relationship.to_sym)
-        next if association.macro == :belongs_to
-        next if association.macro == :has_and_belongs_to_many
-        next if admin_user.cannot?('read', association.class_name.constantize)
-        html << send("typus_form_#{association.macro}", relationship)
+        macro, klass = association.macro, association.class_name.constantize
+        if [:has_many, :has_one].include?(macro) && admin_user.can?('read', klass)
+          html << send("typus_form_#{macro}", relationship)
+        end
       end
     end.html_safe
   end
