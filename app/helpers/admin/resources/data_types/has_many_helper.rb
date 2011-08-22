@@ -16,8 +16,10 @@ module Admin::Resources::DataTypes::HasManyHelper
 
     options = { @reflection.foreign_key => @item.id }
 
-    # This options should only be merged when there's a Polymorphic association.
-    # options.merge!(:resource => @resource.model_name, :resource_id => @item.id, :resource_action => "relate")
+    if @reflection.options && (as = @reflection.options[:as])
+      klass = @resource.is_sti? ? @resource.superclass : @resource
+      options.merge!("#{as}_type" => klass)
+    end
 
     count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
 

@@ -12,8 +12,8 @@
   <%= display_flash_message %>
   <%= render 'new' %>
 
-  <%= render :partial => 'form',
-             :locals => { :options => params.dup.cleanup.merge(:action => 'create') } %>
+  <% locals = { :options => params.dup.cleanup.merge(:action => 'create') } %>
+  <%= render 'form', locals %>
 <% end %>
 
 <div class="grid_2">

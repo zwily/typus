@@ -207,24 +207,6 @@ class Admin::ResourcesController < Admin::BaseController
       path.delete_if { |k, v| %w(action id).include?(k) }
     end
 
-    ##
-    # Here what we basically do is to associate objects after they have been
-    # created. It's similar to calling `relate` but which the difference that
-    # we are creating a new record.
-    #
-    # We have two objects, detect the relationship_between them and then
-    # call the related method.
-    #
-    if params[:_saveandassign]
-      item_class = params[:resource].constantize
-      # For some reason we are forced to set the /admin prefix to the controller
-      # when working with namespaced stuff.
-      options = { :controller => "/admin/#{item_class.to_resource}" }
-      assoc = item_class.relationship_with(@resource).to_s
-      unused_path, notice, alert = send("set_#{assoc}_association", item_class, options)
-      path.merge!(:action => 'edit', :id => @item.id)
-    end
-
     # Redirects to { :action => 'new' }
     if params[:_addanother]
       path.merge!(:action => 'new', :id => nil)

@@ -13,5 +13,5 @@ Dog:
 ImageHolder:
   fields:
     default: name, imageable_id, imageable_type
-    form: name
+    # form: name
   application: Polymorphic
