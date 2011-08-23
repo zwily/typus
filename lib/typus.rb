@@ -46,7 +46,7 @@ module Typus
 
   mattr_accessor :admin_sub_title
   @@admin_sub_title = <<-CODE
-<a href="http://core.typuscms.com/">core.typuscms.com</a>
+<a href="http://core.typuscmf.com/">core.typuscmf.com</a>
   CODE
 
   ##

@@ -2,7 +2,7 @@
 
 This is the Rails application used to test **Typus** and to demo it.
 
-You can see it working at <http://demo.typuscms.com/>.
+You can see it working at <http://demo.typuscmf.com/>.
 
 ## Installation
 

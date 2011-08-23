@@ -1,5 +1,5 @@
 ##
-# mongo staff.mongohq.com:10051/demo_typuscms_com -u <user> -p<password>
+# mongo staff.mongohq.com:10051/demo_typuscmf_com -u <user> -p<password>
 #
 
 defaults: &defaults

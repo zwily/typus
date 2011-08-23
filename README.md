@@ -62,7 +62,7 @@ To test clone the git repo and run the following commands:
 Typus is released under the MIT license.
 
 [typus]: http://github.com/typus/typus
-[typus_demo]: http://demo.typuscms.com/
+[typus_demo]: http://demo.typuscmf.com/
 [typus_demo_code]: https://github.com/typus/demo
 [typus_locales]: https://github.com/typus/typus/tree/master/config/locales
 [typus_gem]: http://rubygems.org/gems/typus
