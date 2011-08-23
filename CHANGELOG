@@ -32,6 +32,47 @@
 
  * [CHANGED] TypusCMS becomes TypusCMF.
 
+ * [NEW] Applications tabs can be sorted!
+
+ * [NEW] Models can be hidden from sidebars and dashboard.
+
+ * [NEW] Module to enable Trash functionality. Need the rails-trash plugin.
+
+ * [FIXED] We should be able to use namespaced models with more than 2 levels
+   of namespace.
+
+ * [CHANGED] We can't longer set models as "Read Only" from the configuration
+   files, this was interesting but not really usefull as anyone could mass-assign
+   attributes. Now to set an attribute as "Read Only" you only need to protect
+   it using "attr_protected".
+
+ * [NEW] Detect "attr_protected" roles.
+
+ * [NEW] Asset pipeline usage. (Yes, we are in Rails 3.1)
+
+ * [CHANGED] Removed "Autocomplete" module.
+
+ * [NEW] Typus is now tested with Travis-CI.
+
+ * [NEW] Improved MongoDB support.
+
+ * [NEW] Improved Devise support out of the box.
+
+ * [CHANGED] Improved how exporters work. Exporting only works if we define it
+   on the model, otherwise will raise a 422 error.
+
+ * [CHANGED] Updated mailer templates and renamed them. We are using the
+   templates provided by Devise.
+
+ * [CHANGED] We can set image sizes.
+
+ * [CHANGED] Moved demo application to "test/dummy" following "enginex"
+   conventions.
+
+ * [CHANGED] We are not longer using FasterCSV on Ruby 1.8.7.
+
+ * [NEW] Introduced the concept of "Widgets". Dashboard is now a "Widget".
+
 = 3.0.12
 
  * [FIXED] Use will_paginate 3.0.0.
