@@ -30,6 +30,8 @@
 
  * [CHANGED] WillPaginate has been replaced by Kaminari.
 
+ * [CHANGED] TypusCMS becomes TypusCMF.
+
 = 3.0.12
 
  * [FIXED] Use will_paginate 3.0.0.
