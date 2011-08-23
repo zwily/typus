@@ -27,7 +27,7 @@ You can try a demo [here][typus_demo].
 
 Add **Typus** to your `Gemfile`
 
-    gem 'typus', '~> 3.1.0.rc'
+    gem 'typus'
 
     # Bundle edge Typus instead:
     # gem 'typus', :git => 'git://github.com/typus/typus.git'
