@@ -49,7 +49,7 @@
     <% end %>
     <%= paginate(@items, Typus.pagination) %>
   <% else %>
-    <p><%= Typus::I18n.t("No %{resources} found.", :resources => @resource.model_name.human.downcase.pluralize) %></p>
+    <p><%= Typus::I18n.t("No %{resources} found.", :resources => @resource.model_name.human(:count => 2)) %></p>
   <% end %>
 
 <% end %>
