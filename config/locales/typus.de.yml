@@ -5,12 +5,13 @@
 de:
   "Actions": "Aktionen"
   "Active": "Aktiv"
-  "All" : 'Alle'
   "List" : 'Liste'
   "Add": "Hinzufügen"
   "Add New": "Erstellen"
+  "All" : 'Alle'
   "Are you sure?": "Sind Sie sicher?"
   "Are you sure you want to sign out and end your session?": "Wollen Sie sich abmelden und die Sitzung beenden?"
+  "Assign": "Zuweisen"
 
   "Change %{attribute}?": "%{attribute} ändern?"
   "Create %{resource}": "%{resource} erstellen"
@@ -33,6 +34,7 @@ de:
   "Last few days": "Letzten Tage"
   "Last 30 days": "Letzten 30 Tage"
   "Last 7 days": "Letzten 7 Tage"
+  "List" : "Liste"
   "Logged as": "Angemeldet als"
   "Login": "Anmelden"
 
@@ -63,9 +65,10 @@ de:
   "System Users Administration": "Admin Benutzer Verwaltung"
 
   "Today": "Heute"
+  "Trash": "Löschen"
   "True": "Ja"
 
-  "Unrelate": "trennen"
+  "Unrelate": "Trennen"
   "Up": "Hoch"
 
   "View all %{attribute}": "Alle %{attribute} anzeigen"
