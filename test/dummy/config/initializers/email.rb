@@ -1,4 +1,6 @@
-unless Rails.env.test?
+if File.exists?("config/email.yml")
   email_settings = YAML::load_file("config/email.yml")
-  ActionMailer::Base.smtp_settings = email_settings[Rails.env] unless email_settings[Rails.env].nil?
+  if (settings = email_settings[Rails.env])
+    ActionMailer::Base.smtp_settings = settings
+  end
 end
