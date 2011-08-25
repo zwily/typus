@@ -1,5 +1,5 @@
 admin:
-  View: create, read, update, delete
+  View: all
 
 editor:
-  View: create, read, update, delete
+  View: all

@@ -1,11 +1,11 @@
 admin:
   Article::Entry: all
-  Asset: create, read, update, delete
+  Asset: all
   Case: all
-  Comment: create, read, update, delete
+  Comment: all
   Order:
-  Page: create, read, update, delete, rebuild, rebuild_all
-  Post: create, read, update, delete
+  Page: all, rebuild, rebuild_all
+  Post: all
   EntryDefault: all
   ReadOnlyEntry: all
 
