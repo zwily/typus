@@ -21,7 +21,7 @@ module Typus
 
         @items = Kaminari.paginate_array(items).page(params[:page]).per(1000)
 
-        add_resource_action(default_action.titleize, {:action => default_action}, {})
+        set_default_action
         add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
       end
 

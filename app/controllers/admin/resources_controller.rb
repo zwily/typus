@@ -21,7 +21,7 @@ class Admin::ResourcesController < Admin::BaseController
         if headless_mode_with_custom_action_is_enabled?
           set_headless_resource_actions
         else
-          add_resource_action(default_action.titleize, {:action => default_action}, {})
+          set_default_action
           add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
         end
         generate_html
@@ -204,8 +204,10 @@ class Admin::ResourcesController < Admin::BaseController
     redirect_to path, :notice => notice
   end
 
-  def default_action
-    @resource.typus_options_for(:default_action_on_item)
+  def set_default_action
+    default_action = @resource.typus_options_for(:default_action_on_item)
+    action = admin_user.can?('edit', @resource) ? default_action : "show"
+    add_resource_action(action.titleize, {:action => action}, {})
   end
 
 end
