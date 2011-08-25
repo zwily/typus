@@ -34,3 +34,25 @@ User:
   application: HasMany
   filters: projects
   order_by: name
+
+##
+# Polymorphic
+#
+
+Animal: &ANIMAL_BASE
+  fields:
+    default: name
+  relationships: image_holders
+  application: Polymorphic
+
+Bird:
+  <<: *ANIMAL_BASE
+
+Dog:
+  <<: *ANIMAL_BASE
+
+ImageHolder:
+  fields:
+    default: name, imageable_id, imageable_type
+    # form: name
+  application: Polymorphic
