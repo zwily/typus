@@ -9,20 +9,20 @@ class ConfigurationTest < ActiveSupport::TestCase
   end
 
   should "verify typus config file is loaded" do
-    assert Typus::Configuration.respond_to?(:config!)
-    assert_equal Hash, Typus::Configuration.config!
+    assert Typus::Configuration.respond_to?(:models!)
+    assert_equal Hash, Typus::Configuration.models!
   end
 
   should "load configuration files from config broken" do
     Typus.expects(:config_folder).at_least_once.returns("test/fixtures/config/broken")
     assert_not_equal Hash.new, Typus::Configuration.roles!
-    assert_not_equal Hash.new, Typus::Configuration.config!
+    assert_not_equal Hash.new, Typus::Configuration.models!
   end
 
   should "load configuration files from config empty" do
     Typus.expects(:config_folder).at_least_once.returns("test/fixtures/config/empty")
     assert_equal Hash.new, Typus::Configuration.roles!
-    assert_equal Hash.new, Typus::Configuration.config!
+    assert_equal Hash.new, Typus::Configuration.models!
   end
 
   should "load configuration files from config ordered" do
@@ -40,7 +40,7 @@ class ConfigurationTest < ActiveSupport::TestCase
   should "load configuration files from config default" do
     Typus.expects(:config_folder).at_least_once.returns("test/fixtures/config/default")
     assert_not_equal Hash.new, Typus::Configuration.roles!
-    assert_not_equal Hash.new, Typus::Configuration.config!
+    assert_not_equal Hash.new, Typus::Configuration.models!
     assert Typus.resources.empty?
   end
 =end

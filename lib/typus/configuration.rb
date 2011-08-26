@@ -2,10 +2,10 @@ module Typus
   module Configuration
 
     # Read configuration from <tt>config/typus/*.yml</tt>.
-    def self.config!
+    def self.models!
       @@config = {}
 
-      Typus.config_files.each do |file|
+      Typus.model_configuration_files.each do |file|
         if data = YAML::load_file(file)
           @@config.merge!(data)
         end
@@ -19,7 +19,7 @@ module Typus
     def self.roles!
       @@roles = {}
 
-      Typus.role_files.each do |file|
+      Typus.role_configuration_files.each do |file|
         if data = YAML::load_file(file)
           data.compact.each do |key, value|
             @@roles[key] ? @@roles[key].merge!(value) : (@@roles[key] = value)
