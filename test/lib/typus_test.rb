@@ -44,8 +44,12 @@ class TypusTest < ActiveSupport::TestCase
     assert Typus.master_role.eql?('admin')
   end
 
-  test "config_folder is a Pathname" do
-    assert Typus.config_folder.is_a?(Pathname)
+  test "root is a Pathname" do
+    assert Typus.root.is_a?(Pathname)
+  end
+
+  test "config_folder is an String" do
+    assert Typus.config_folder.is_a?(String)
   end
 
   test "applications returns applications sorted" do

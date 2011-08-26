@@ -42,7 +42,6 @@ Dummy::Application.configure do
 end
 
 Typus.setup do |config|
-  config.config_folder = Rails.root.join("config/typus")
   config.authentication = :session
   config.user_class_name = "TypusUser"
   config.user_foreign_key = "typus_user_id"

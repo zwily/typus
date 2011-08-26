@@ -215,12 +215,18 @@ module Typus
       user_class_name.constantize
     end
 
+    def root
+      Rails.root.join(config_folder)
+    end
+
     def model_configuration_files
-      Dir[File.join(config_folder, "*.yml").to_s].reject { |f| f.match(/_roles.yml/) }
+      paths = Typus.root.join("*.yml")
+      Dir[paths].reject { |f| f.match(/_roles.yml/) }.sort
     end
 
     def role_configuration_files
-      Dir[File.join(config_folder, "*_roles.yml").to_s].sort
+      paths = Typus.root.join("*_roles.yml")
+      Dir[paths].sort
     end
 
     def reload!

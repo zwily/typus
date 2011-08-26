@@ -30,7 +30,6 @@ Dummy::Application.configure do
 end
 
 Typus.setup do |config|
-  config.config_folder = Rails.root.join("config/typus")
   config.mailer_sender = "admin@example.com"
 
   # Authenticate using `:none_with_role`
