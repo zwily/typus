@@ -56,8 +56,7 @@ class TypusTest < ActiveSupport::TestCase
                 "HasMany",
                 "HasOne",
                 "MongoDB",
-                "Polymorphic",
-                "Special"]
+                "Polymorphic"]
 
     assert_equal "CRUD", Typus.applications.first
     expected.each { |e| assert Typus.applications.include?(e) }
@@ -66,7 +65,7 @@ class TypusTest < ActiveSupport::TestCase
   test "application returns modules of the CRUD Extended application" do
     # OPTIMIZE: There's no need to sort stuff but this is required to make it
     #           work with Ruby 1.8.7.
-    expected = %w(Asset Case Comment Page Post Article::Entry).sort
+    expected = %w(Asset Case Comment Page Post Article::Entry ReadOnlyEntry EntryDefault).sort
     assert_equal expected, Typus.application("CRUD Extended").sort
   end
 

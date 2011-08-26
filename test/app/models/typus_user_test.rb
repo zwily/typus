@@ -128,7 +128,7 @@ class TypusUserTest < ActiveSupport::TestCase
     typus_user = FactoryGirl.build(:typus_user)
     # OPTIMIZE: There's no need to sort stuff but this is required to make it
     #           work with Ruby 1.8.7.
-    expected = %w(Asset Case Comment Page Post Article::Entry).sort
+    expected = %w(Asset Case Comment EntryDefault Page Post Article::Entry ReadOnlyEntry).sort
     assert_equal expected, typus_user.application("CRUD Extended").sort
   end
 
