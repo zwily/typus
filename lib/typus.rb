@@ -215,6 +215,14 @@ module Typus
       user_class_name.constantize
     end
 
+    def config_files
+      Dir[File.join(config_folder, "*.yml").to_s].reject { |f| f.match(/_roles.yml/) }
+    end
+
+    def role_files
+      Dir[File.join(config_folder, "*_roles.yml").to_s].sort
+    end
+
     def reload!
       Typus::Configuration.roles!
       Typus::Configuration.config!
