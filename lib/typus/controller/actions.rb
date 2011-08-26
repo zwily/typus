@@ -2,15 +2,6 @@ module Typus
   module Controller
     module Actions
 
-      def self.included(base)
-        base.helper_method :add_resource_action
-        base.helper_method :prepend_resource_action
-        base.helper_method :append_resource_action
-        base.helper_method :add_resources_action
-        base.helper_method :prepend_resources_action
-        base.helper_method :append_resources_action
-      end
-
       protected
 
       ##
