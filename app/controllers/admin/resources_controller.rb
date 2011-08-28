@@ -59,7 +59,11 @@ class Admin::ResourcesController < Admin::BaseController
     end
   end
 
-  def edit; end
+  def edit
+    custom_actions_for(:edit).each do |action|
+      prepend_resources_action(action.titleize, {:action => action, :id => @item}, {})
+    end
+  end
 
   def show
     check_resource_ownership if @resource.typus_options_for(:only_user_items)
@@ -210,6 +214,10 @@ class Admin::ResourcesController < Admin::BaseController
     default_action = @resource.typus_options_for(:default_action_on_item)
     action = admin_user.can?('edit', @resource) ? default_action : "show"
     add_resource_action(action.titleize, {:action => action}, {})
+  end
+
+  def custom_actions_for(action)
+    @resource.typus_actions_on(:edit).reject { |a| admin_user.cannot?(a, @resource) }
   end
 
 end
