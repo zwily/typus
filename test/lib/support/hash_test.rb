@@ -4,8 +4,8 @@ class HashTest < ActiveSupport::TestCase
 
   test "compact" do
     hash = { "a" => "", "b" => nil, "c" => "hello" }
-    hash_compacted = { "c" => "hello" }
-    assert_equal hash_compacted, hash.compact
+    expected = { "c" => "hello" }
+    assert_equal expected, hash.compact
   end
 
   test "cleanup" do
