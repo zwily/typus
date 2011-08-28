@@ -17,10 +17,10 @@ class Admin::ViewsControllerTest < ActionController::TestCase
     FactoryGirl.create(:view)
   end
 
-  should_eventually "get :index returns only views on the current_context" do
+  test "get :index returns only views on the current_context" do
     get :index
     assert_response :success
-    assert_equal [@site], assigns(:items)
+    assert_equal @site.views, assigns(:items)
   end
 
   test "get :new should initialize item in the current_scope" do
