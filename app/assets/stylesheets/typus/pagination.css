@@ -1,7 +1,6 @@
 .pagination {
   border-top: 1px solid #D3D3D3;
-  border-bottom: 1px solid #D3D3D3;
-  margin: -1em auto 1em auto;
+  margin: 1em auto;
   padding: 1em 0;
   text-align: center;
 }
