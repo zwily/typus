@@ -8,6 +8,9 @@ admin:
   Post: all
   EntryDefault: all
   ReadOnlyEntry: all
+  Category: all
+  EntryBulk: all
+  EntryTrash: all
 
 editor:
   Comment: read, update, delete
