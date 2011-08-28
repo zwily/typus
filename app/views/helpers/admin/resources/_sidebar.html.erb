@@ -7,7 +7,7 @@
     <ul>
 
       <%= link_to :controller => "/admin/#{klass.to_resource}" do %>
-        <li class="header"><%= klass.model_name.human(:count => 2) %></li>
+        <li class="header"><%= klass.model_name.human.pluralize %></li>
       <% end %>
 
       <% if @resource.model_name.eql?(resource) %>
