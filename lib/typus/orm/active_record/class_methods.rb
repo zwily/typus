@@ -19,7 +19,6 @@ module Typus
           end
         end
 
-        # Form and list fields
         def typus_fields_for(filter)
           ActiveSupport::OrderedHash.new.tap do |fields_with_type|
             get_typus_fields_for(filter).each do |field|
