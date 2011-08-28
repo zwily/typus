@@ -7,7 +7,7 @@ class FiltersTest < ActiveSupport::TestCase
   context "add_predefined_filter" do
 
     should "work without args" do
-      add_predefined_filter()
+      add_predefined_filter
       assert @predefined_filters.empty?
     end
 
@@ -21,7 +21,7 @@ class FiltersTest < ActiveSupport::TestCase
   context "prepend_predefined_filter" do
 
     should "work without args" do
-      prepend_predefined_filter()
+      prepend_predefined_filter
       assert @predefined_filters.empty?
     end
 
@@ -32,7 +32,7 @@ class FiltersTest < ActiveSupport::TestCase
 
     should "work prepending an action without args" do
       add_predefined_filter("something")
-      prepend_predefined_filter()
+      prepend_predefined_filter
       assert_equal [["something"]], @predefined_filters
     end
 
@@ -47,7 +47,7 @@ class FiltersTest < ActiveSupport::TestCase
   context "append_predefined_filter" do
 
     should "work without args" do
-      append_predefined_filter()
+      append_predefined_filter
       assert @predefined_filters.empty?
     end
 
@@ -58,7 +58,7 @@ class FiltersTest < ActiveSupport::TestCase
 
     should "work appending an action without args" do
       add_predefined_filter("something")
-      append_predefined_filter()
+      append_predefined_filter
       assert_equal [["something"]], @predefined_filters
     end
 
