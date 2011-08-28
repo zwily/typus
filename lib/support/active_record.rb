@@ -1,11 +1,5 @@
 class ActiveRecord::Base
 
-  def self.relationship_with(model)
-    association = reflect_on_association(model.table_name.to_sym) ||
-                  reflect_on_association(model.model_name.underscore.to_sym)
-    association.macro
-  end
-
   #--
   # On a model:
   #

@@ -2,17 +2,6 @@ require "test_helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
-  test "relationship between models" do
-    assert Category.relationship_with(Post).eql?(:has_and_belongs_to_many)
-    assert Comment.relationship_with(Post).eql?(:belongs_to)
-    assert Invoice.relationship_with(Order).eql?(:belongs_to)
-    assert Invoice.relationship_with(TypusUser).eql?(:belongs_to)
-    assert Order.relationship_with(Invoice).eql?(:has_one)
-    assert Post.relationship_with(Category).eql?(:has_and_belongs_to_many)
-    assert Post.relationship_with(Comment).eql?(:has_many)
-    assert TypusUser.relationship_with(Invoice).eql?(:has_many)
-  end
-
   test "mapping with an array" do
     expected = %w(pending published unpublished)
     Post.stubs(:statuses).returns(expected)
