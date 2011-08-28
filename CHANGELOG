@@ -72,6 +72,8 @@
  * [CHANGED] We are not longer using FasterCSV on Ruby 1.8.7.
 
  * [NEW] Introduced the concept of "Widgets". Dashboard is now a "Widget".
+ 
+ * [CHANGED] Custom actions are back!
 
 = 3.0.12
 
