@@ -10,4 +10,8 @@ class I18nTest < ActiveSupport::TestCase
     assert_equal :en, Typus::I18n.default_locale
   end
 
+  test "available_locales" do
+    assert Typus::I18n.available_locales.is_a?(Hash)
+  end
+
 end
