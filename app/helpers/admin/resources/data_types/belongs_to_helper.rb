@@ -76,7 +76,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
   def display_belongs_to(item, attribute)
     data = item.send(attribute)
     link_to data.to_label, { :controller => data.class.to_resource,
-                             :action => data.class.typus_options_for(:default_action_on_item),
+                             :action => params[:action],
                              :id => data.id }
   end
 
