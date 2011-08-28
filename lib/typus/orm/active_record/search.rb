@@ -39,7 +39,7 @@ module Typus
                      when 'last_30_days'  then 30.days.ago.beginning_of_day..tomorrow
                      end
 
-          ["#{table_name}.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
+          build_filter_interval(interval)
         end
 
         def build_date_conditions(key, value)
@@ -52,6 +52,10 @@ module Typus
                      when 'last_30_days'  then 30.days.ago.to_date..tomorrow
                      end
 
+          build_filter_interval(interval)
+        end
+
+        def build_filter_interval(interval)
           ["#{table_name}.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
         end
 
