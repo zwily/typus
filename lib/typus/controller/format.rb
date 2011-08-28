@@ -56,21 +56,17 @@ module Typus
       end
 
       def generate_xml
-        export(:xml)
+        can_export?(:xml) ? export(:xml) : not_allowed
       end
 
       def export(format)
-        if can_export?(format)
-          fields = @resource.typus_fields_for(format).map { |i| i.first }
-          methods = fields - @resource.column_names
-          except = @resource.column_names - fields
+        fields = @resource.typus_fields_for(format).map { |i| i.first }
+        methods = fields - @resource.column_names
+        except = @resource.column_names - fields
 
-          get_paginated_data
+        get_paginated_data
 
-          render format => @items.send("to_#{format}", :methods => methods, :except => except)
-        else
-          not_allowed
-        end
+        render format => @items.send("to_#{format}", :methods => methods, :except => except)
       end
 
       def can_export?(format)
