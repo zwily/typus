@@ -10,11 +10,8 @@ module Admin::BaseHelper
   end
 
   def admin_title
-    if defined?(Admin::Setting)
-      Admin::Setting.admin_title || Typus.admin_title
-    else
-      Typus.admin_title
-    end
+    setting = defined?(Admin::Setting) && Admin::Setting.admin_title
+    setting || Typus.admin_title
   end
 
   def has_root_path?
