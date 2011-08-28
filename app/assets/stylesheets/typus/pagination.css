@@ -36,6 +36,7 @@
 
 .pagination .first,
 .pagination .last,
-.pagination .current {
+.pagination .current,
+.pagination .gap {
   display: none;
 }
