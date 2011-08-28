@@ -152,7 +152,7 @@ class TypusUserTest < ActiveSupport::TestCase
   test "editor gets a list of application resources" do
     typus_user = FactoryGirl.build(:typus_user, :role => "editor")
     assert_equal %w(Comment Post), typus_user.application("CRUD Extended")
-    assert_equal %w(), typus_user.application("Admin")
+    assert typus_user.application("Admin").empty?
   end
 
   test "user owns a resource" do
