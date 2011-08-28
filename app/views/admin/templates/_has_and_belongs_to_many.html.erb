@@ -1,6 +1,7 @@
 <li id="<%= attribute_id %>">
   <%= form.label attribute, label_text %>
   <% if related_items.any? %>
+    <%= hidden_field_tag related_ids %>
     <%= select_tag related_ids,
                    options_from_collection_for_select(related_items, "id", "to_label", values.map(&:id)),
                    { :multiple => true, :size => 5, :id => "#{@resource.name.downcase}_#{attribute}", :class => "chzn-select", :style => "width: 350px;", "data-placeholder" => Typus::I18n.t("Select Some Options") } %>
