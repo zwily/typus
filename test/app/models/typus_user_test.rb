@@ -27,11 +27,11 @@ class TypusUserTest < ActiveSupport::TestCase
     assert FactoryGirl.build(:typus_user, :password => "0"*41).invalid?
   end
 
-  should "not allow_mass_assignment_of :status" do
+  test "status is protected from mass_assignment" do
     assert TypusUser.attr_protected[:default].include?(:status)
   end
 
-  should "verify columns" do
+  test "fields" do
     expected = %w(id first_name last_name email role status salt crypted_password token preferences created_at updated_at).sort
     output = TypusUser.columns.map(&:name).sort
     assert_equal expected, output
