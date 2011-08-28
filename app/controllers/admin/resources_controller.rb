@@ -16,6 +16,10 @@ class Admin::ResourcesController < Admin::BaseController
   def index
     get_objects
 
+    custom_actions_for(:index).each do |action|
+      prepend_resources_action(action.titleize, {:action => action, :id => nil}, {})
+    end
+
     respond_to do |format|
       format.html do
         if headless_mode_with_custom_action_is_enabled?
