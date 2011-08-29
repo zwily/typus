@@ -1,12 +1,16 @@
 module Admin::Resources::ListHelper
 
   def list_actions
-    resources_actions.map do |body, url, options|
-      if admin_user.can?(url[:action], @resource.name)
-        path = params.dup.merge!(url).compact.cleanup
-        link_to Typus::I18n.t(body), path, options
-      end
+    resources_actions_for_current_role.map do |body, url, options|
+      path = params.dup.merge!(url).compact.cleanup
+      link_to Typus::I18n.t(body), path, options
     end.compact.join(" / ").html_safe
+  end
+
+  def resources_actions_for_current_role
+    resources_actions.reject do |body, url, options|
+      admin_user.cannot?(url[:action], @resource.name)
+    end
   end
 
   def build_actions(&block)
