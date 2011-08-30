@@ -20,9 +20,7 @@ $(document).ready(function() {
         'type': 'iframe',
         'centerOnScroll': true,
         'scrolling': false,
-        'onClosed': function() {
-          parent.location.reload(true);
-        },
+        onClosed: function() { parent.location.reload(true); },
     });
 
     $(".iframe").fancybox({
