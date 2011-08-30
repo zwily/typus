@@ -3,5 +3,11 @@
 echo "Pulling latest changes ..."
 ssh fesplugas@labs.francescesplugas.com "cd ~/public_html/typus-demo && git pull"
 
+echo "Removing Gemfile.lock ..."
+ssh fesplugas@labs.francescesplugas.com "cd ~/public_html/typus-demo && rm Gemfile.lock"
+
+echo "Running bundler ..."
+ssh fesplugas@labs.francescesplugas.com "cd ~/public_html/typus-demo && bundle install"
+
 echo "Restarting the application ..."
 ssh fesplugas@labs.francescesplugas.com "cd ~/public_html/typus-demo && touch test/dummy/tmp/restart.txt"
