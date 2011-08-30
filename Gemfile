@@ -42,7 +42,8 @@ gem "jquery-rails"
 gem "ckeditor-rails", "0.0.2"
 
 # Alternative authentication
-gem "devise", "~> 1.4.2"
+# gem "devise", "~> 1.4.2"
+gem "devise", :git => 'https://github.com/plataformatec/devise.git'
 
 # Asset Management with Dragonfly
 gem "dragonfly", "~> 0.9"
