@@ -35,7 +35,7 @@ module Admin::Resources::FormHelper
 
 =begin
     if options[:disabled] == true
-      label_text += " <small>#{Typus::I18n.t("Read only")}</small>"
+      label_text += "<small>#{Typus::I18n.t("Read only")}</small>"
     end
 =end
 

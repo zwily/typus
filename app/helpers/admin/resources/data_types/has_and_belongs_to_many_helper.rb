@@ -14,7 +14,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
 =begin
     # TODO: Make it work as we expect.
     if (link = build_add_new_for_has_and_belongs_to_many(klass))
-      label_text += " <small>#{link}</small>"
+      label_text += "<small>#{link}</small>"
     end
 =end
 
