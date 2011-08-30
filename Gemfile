@@ -60,3 +60,11 @@ group :test do
   gem "shoulda-context", "~> 1.0.0.beta1"
   gem "mocha" # Make sure mocha is loaded at the end ...
 end
+
+# Remember to install the Chrome or Safari extension, otherwise it doesn't
+# make sense to have this here.
+group :development do
+  gem "guard-livereload"
+  gem "rb-fsevent"
+  gem "growl_notify"
+end
