@@ -13,33 +13,10 @@ module Admin::Resources::DataTypes::BelongsToHelper
     html_options = { :disabled => attribute_disabled?(attribute) }
     label_text = @resource.human_attribute_name(attribute)
 
-=begin
-    # TODO: Make it work as we expect.
-    # TODO: Use the build_add_new method.
-    if admin_user.can?('create', related)
-      options = { :controller => "/admin/#{related.to_resource}",
-                  :action => 'new',
-                  :resource => @resource.model_name,
-                  :layout => 'admin/headless' }
-      # Pass the resource_id only to edit/update because only there is where
-      # the record actually exists.
-      options.merge!(:resource_id => @item.id) if %w(edit update).include?(params[:action])
-      # This is a default message ... which we can change if
-      unless html_options[:disabled] == true || headless_mode?
-        label_text_more = link_to Typus::I18n.t("Add New"), options, { :class => 'iframe' }
-      end
+    label_text = @resource.human_attribute_name(attribute)
+    if (text = build_label_text_for_belongs_to(related, html_options))
+      label_text += "<small>#{text}</small>"
     end
-=end
-
-=begin
-    if html_options[:disabled] == true
-      label_text_more = Typus::I18n.t("Read only")
-    end
-=end
-
-=begin
-    label_text += " <small>#{label_text_more}</small>" if label_text_more.present?
-=end
 
     values = if related.respond_to?(:roots)
                expand_tree_into_select_field(related.roots, related_fk)
@@ -87,6 +64,25 @@ module Admin::Resources::DataTypes::BelongsToHelper
 
     items = [[Typus::I18n.t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize), ""]]
     items += resource.order(resource.typus_order_by).map { |v| [v.to_label, v.id] }
+  end
+
+  def build_label_text_for_belongs_to(klass, html_options)
+    if html_options[:disabled] == true
+      Typus::I18n.t("Read only")
+    elsif admin_user.can?('create', klass) && !headless_mode?
+      build_add_new_for_belongs_to(klass)
+    end
+  end
+
+  def build_add_new_for_belongs_to(klass)
+    options = { :controller => "/admin/#{klass.to_resource}",
+                :action => 'new',
+                :resource => @resource.model_name,
+                :layout => 'admin/headless' }
+    # Pass the resource_id only to edit/update because only there is where
+    # the record actually exists.
+    options.merge!(:resource_id => @item.id) if %w(edit update).include?(params[:action])
+    link_to Typus::I18n.t("Add New"), options, { :class => 'iframe' }
   end
 
 end
