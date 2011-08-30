@@ -14,9 +14,9 @@ fieldset ol li {
 }
 
 fieldset small {
-  font-size: 0.9em;
+  font-size: 0.85em;
   font-weight: normal;
-  margin: 0 0 0 0.25em;
+  margin: 0 0 0 0.5em;
 }
 
 fieldset small a {
