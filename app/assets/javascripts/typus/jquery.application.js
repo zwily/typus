@@ -11,7 +11,7 @@ $(document).ready(function() {
         'scrolling': false,
     });
 
-    $(".iframe").fancybox({
+    $(".iframe_with_reload").fancybox({
         'width': 720,
         'height': '90%',
         'autoScale': false,
@@ -25,7 +25,7 @@ $(document).ready(function() {
         },
     });
 
-    $(".iframe_without_reload").fancybox({
+    $(".iframe").fancybox({
         'width': 720,
         'height': '90%',
         'autoScale': false,
