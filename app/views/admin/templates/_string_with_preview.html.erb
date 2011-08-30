@@ -1,8 +1,7 @@
 <%
   unless @item.new_record?
-    label_text << " <small>"
-    label_text << link_to(Typus::I18n.t("Preview"), send("#{@item.class.model_name.downcase}_path",@item.to_param), :target => "_blank")
-    label_text << "</small>"
+    text = link_to(Typus::I18n.t("Preview"), send("#{@item.class.model_name.downcase}_path",@item.to_param), :target => "_blank")
+    label_text << "<small>#{text}</small>"
   end
 %>
 
