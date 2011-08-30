@@ -1,13 +1,16 @@
 #!/usr/bin/env bash
 
+SERVER=fesplugas@labs.francescesplugas.com
+DEPLOY_TO=/home/fesplugas/public_html/typus-demo
+
 echo "Pulling latest changes ..."
-ssh fesplugas@labs.francescesplugas.com "cd ~/public_html/typus-demo && git pull"
+ssh $SERVER "cd $DEPLOY_TO && git pull"
 
 echo "Removing Gemfile.lock ..."
-ssh fesplugas@labs.francescesplugas.com "cd ~/public_html/typus-demo && rm Gemfile.lock"
+ssh $SERVER "cd $DEPLOY_TO && rm Gemfile.lock"
 
 echo "Running bundler ..."
-ssh fesplugas@labs.francescesplugas.com "cd ~/public_html/typus-demo && bundle install"
+ssh $SERVER "cd $DEPLOY_TO && bundle install"
 
 echo "Restarting the application ..."
-ssh fesplugas@labs.francescesplugas.com "cd ~/public_html/typus-demo && touch test/dummy/tmp/restart.txt"
+ssh $SERVER "cd $DEPLOY_TO && touch test/dummy/tmp/restart.txt"
