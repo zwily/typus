@@ -221,6 +221,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def custom_actions_for(action)
+    return [] if headless_mode?
     @resource.typus_actions_on(action).reject { |a| admin_user.cannot?(a, @resource.model_name) }
   end
 
