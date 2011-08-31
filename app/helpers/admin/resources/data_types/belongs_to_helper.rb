@@ -13,8 +13,10 @@ module Admin::Resources::DataTypes::BelongsToHelper
     html_options = { :disabled => attribute_disabled?(attribute) }
     label_text = @resource.human_attribute_name(attribute)
 
+    options = { :attribute => "#{@resource.name.downcase}_#{related_fk}" }
+
     label_text = @resource.human_attribute_name(attribute)
-    if (text = build_label_text_for_belongs_to(related, html_options))
+    if (text = build_label_text_for_belongs_to(related, html_options, options))
       label_text += "<small>#{text}</small>"
     end
 
@@ -66,23 +68,24 @@ module Admin::Resources::DataTypes::BelongsToHelper
     items += resource.order(resource.typus_order_by).map { |v| [v.to_label, v.id] }
   end
 
-  def build_label_text_for_belongs_to(klass, html_options)
+  def build_label_text_for_belongs_to(klass, html_options, options)
     if html_options[:disabled] == true
       Typus::I18n.t("Read only")
     elsif admin_user.can?('create', klass) && !headless_mode?
-      build_add_new_for_belongs_to(klass)
+      build_add_new_for_belongs_to(klass, options)
     end
   end
 
-  def build_add_new_for_belongs_to(klass)
+  def build_add_new_for_belongs_to(klass, options)
     options = { :controller => "/admin/#{klass.to_resource}",
                 :action => 'new',
                 :resource => @resource.model_name,
-                :layout => 'admin/headless' }
+                :layout => 'admin/headless',
+                :attribute => options[:attribute] }
     # Pass the resource_id only to edit/update because only there is where
     # the record actually exists.
     options.merge!(:resource_id => @item.id) if %w(edit update).include?(params[:action])
-    link_to Typus::I18n.t("Add New"), options, { :class => 'iframe' }
+    link_to Typus::I18n.t("Add New"), options, { :class => 'iframe_with_form_reload' }
   end
 
 end

@@ -10,6 +10,7 @@ class Hash
                    layout
                    resource resource_id resource_action
                    selected
+                   attribute
                    back_to)
     delete_if { |k, v| !whitelist.include?(k) }
   end

@@ -9,6 +9,16 @@
     <small><%= list_actions %></small>
   </h2>
 
+  <% if headless_mode? && params[:action] == 'edit' %>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        parent.Typus.resource_attribute = "#<%= params[:attribute] %>";
+        parent.Typus.resource_id = '<%= @item.id %>';
+        parent.Typus.resource_to_label = '<%= @item.to_label %>';
+      });
+    </script>
+  <% end %>
+
   <%= display_flash_message %>
   <%= render 'edit' %>
 
