@@ -64,6 +64,6 @@ end
 # make sense to have this here.
 group :development do
   gem "guard-livereload"
-  gem "rb-fsevent"
-  gem "growl_notify"
+  # gem "rb-fsevent"
+  # gem "growl_notify"
 end
