@@ -1,35 +1,6 @@
 = 3.2.0 (unreleased)
 
- * [PLANNED] Models without a controller defined should use the "Resources"
-   controller.
-
- * [PLANNED] New theme and theme support.
-
 = 3.1.0 (unreleased)
-
- * [PLANNED] Block changing uploaded files.
-
- * [PLANNED] Use roles when using `:none` authentication.
-
- * [PLANNED] Fix bulk actions combo separator. (UI)
-
- * [PLANNED] Remove "Versions" stuff from demo sidebar.
-
- * [PLANNED] Fix selector UI problems.
-
- * [PLANNED] Reload data on forms only if data has changed. (UI)
-
- * [PLANNED] Take back "Add New" on "BelongsTo" associations.
-
- * [PLANNED] Document: `text_with_ckeditor_with_assets`.
-
- * [PLANNED] Document: Migrate from `3.0` to `3.1`.
-
- * [PLANNED] Document: How to test an admin controller?
-
- * [PLANNED] Namespace filters to avoid collision with model attributes.
-
- * [PLANNED] Helpers for `display_dragonfly` and `display_paperclip`.
 
  * [NEW] Mountable apps support!
 
