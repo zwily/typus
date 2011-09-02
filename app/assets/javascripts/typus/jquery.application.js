@@ -11,18 +11,6 @@ $(document).ready(function() {
         'scrolling': false,
     });
 
-    $(".iframe_with_reload").fancybox({
-        'width': 720,
-        'height': '90%',
-        'autoScale': false,
-        'transitionIn': 'none',
-        'transitionOut': 'none',
-        'type': 'iframe',
-        'centerOnScroll': true,
-        'scrolling': false,
-        onClosed: function() { parent.location.reload(true); },
-    });
-
     $(".iframe_with_form_reload").fancybox({
         'width': 720,
         'height': '90%',
@@ -51,6 +39,10 @@ $(document).ready(function() {
         'type': 'iframe',
         'centerOnScroll': true,
         'scrolling': false,
+        onClosed: function() {
+            if (Typus.parent_location_reload)
+                parent.location.reload(true);
+        },
     });
 
     // This method is used by Typus::Controller::Bulk

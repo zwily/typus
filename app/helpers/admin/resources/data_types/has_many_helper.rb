@@ -39,7 +39,7 @@ module Admin::Resources::DataTypes::HasManyHelper
                           :action => "new",
                           :layout => "admin/headless" }
 
-      link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe_with_reload" }
+      link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
     end
   end
 
