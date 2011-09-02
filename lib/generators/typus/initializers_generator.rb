@@ -4,8 +4,6 @@ module Typus
 
       source_root File.expand_path("../../templates", __FILE__)
 
-      class_option :admin_title, :default => Rails.root.basename
-
       desc <<-MSG
 Description:
   Copies all Typus initializers into your application.
