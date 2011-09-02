@@ -197,7 +197,7 @@ module Typus
       detect_application_models.map do |model|
         class_name = model.sub(/\.rb$/,"").camelize
         klass = class_name.split("::").inject(Object) { |klass,part| klass.const_get(part) }
-        class_name if is_active_record?(klass) || is_mongoid?(klass)
+        class_name if is_active_record?(klass) && !is_mongoid?(klass)
       end.compact
     end
 
