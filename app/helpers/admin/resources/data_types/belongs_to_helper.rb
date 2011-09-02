@@ -27,8 +27,6 @@ module Admin::Resources::DataTypes::BelongsToHelper
              end
 
     render "admin/templates/belongs_to",
-           :association => association,
-           :resource => @resource,
            :attribute => attribute,
            :attribute_id => "#{@resource.table_name}_#{attribute}",
            :form => form,
