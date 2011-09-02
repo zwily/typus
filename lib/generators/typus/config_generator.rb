@@ -69,7 +69,6 @@ Description:
           form = fields.reject { |f| f.match(form_rejections) }
 
           # Model defaults.
-          order_by = "position" if default.include?("position")
           filters = "created_at" if fields.include?("created_at")
           search = ( %w(name title) & default ).join(", ")
 
@@ -85,7 +84,6 @@ Description:
   fields:
     default: #{default.join(", ")}
     form: #{form.join(", ")}
-  order_by: #{order_by}
   relationships: #{relationships.join(", ")}
   filters: #{filters}
   search: #{search}
