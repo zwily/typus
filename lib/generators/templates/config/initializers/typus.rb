@@ -13,7 +13,7 @@ Typus.setup do |config|
   #     config.action_mailer.default_url_options = { :host => 'localhost:3000' }
   #
   # This is a required Rails configuration. In production it must be the actual
-  # actual host of your application
+  # actual host of your application.
   #
   # config.mailer_sender = "admin@example.com"
 
@@ -25,7 +25,7 @@ Typus.setup do |config|
   # Run `rails g typus:migration` if you need an advanced authentication system.
   # config.authentication = :none
 
-  # Define username and password for +:http_basic+ authentication
+  # Define username and password for +:http_basic+ authentication.
   # config.username = "admin"
   # config.password = "columbia"
 
