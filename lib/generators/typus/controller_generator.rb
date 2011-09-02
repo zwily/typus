@@ -8,7 +8,7 @@ module Typus
 
       desc <<-MSG
 Description:
-  Generates admin controllers for the given resource
+  Generates admin controllers for the given resource.
 
       MSG
 
