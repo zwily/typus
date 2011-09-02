@@ -6,7 +6,7 @@ module Typus
 
       desc <<-MSG
 Description:
-  Copies all Typus initializers into your application.
+  Copies Typus initializers into your application.
 
       MSG
 
