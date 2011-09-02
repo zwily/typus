@@ -68,9 +68,6 @@ Description:
           default = fields.reject { |f| f.match(default_rejections) }
           form = fields.reject { |f| f.match(form_rejections) }
 
-          # Model defaults.
-          search = ( %w(name title) & default ).join(", ")
-
           # We want attributes of belongs_to relationships to be shown in our
           # field collections if those are not polymorphic.
           [ default, form ].each do |fields|
@@ -84,7 +81,6 @@ Description:
     default: #{default.join(", ")}
     form: #{form.join(", ")}
   relationships: #{relationships.join(", ")}
-  search: #{search}
   application: #{options[:admin_title]}
 
           RAW
