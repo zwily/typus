@@ -14,7 +14,7 @@ module Admin::Resources::DataTypes::HasManyHelper
   def typus_form_has_many(field)
     setup_relationship(field)
 
-    options = { @reflection.foreign_key => @item.id }
+    options = { "resource[#{@reflection.foreign_key}]" => @item.id }
 
     if @reflection.options && (as = @reflection.options[:as])
       klass = @resource.is_sti? ? @resource.superclass : @resource
