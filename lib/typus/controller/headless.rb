@@ -34,8 +34,7 @@ module Typus
         url = { :controller => params[:resource].tableize,
                 :action => params[:resource_action],
                 :resource => params[:resource],
-                :resource_id => params[:resource_id],
-                :return_to => params[:return_to] }
+                :resource_id => params[:resource_id] }
         options = { :target => "_parent" }
         add_resource_action(body, url, options)
       end
