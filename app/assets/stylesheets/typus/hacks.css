@@ -22,3 +22,12 @@
 .search-choice span {
   color: black!important;
 }
+
+/* frikin' forms hacks */
+
+.chzn-search input {
+ -webkit-box-sizing: content-box;
+ -moz-box-sizing: content-box;
+ box-sizing: content-box;
+ height:1em;
+}
