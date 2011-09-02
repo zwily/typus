@@ -19,7 +19,7 @@ Description:
   This generator creates required files to enable an admin panel which allows
   trusted users to edit structured content.
 
-  To enable session authentication run `rails g typus:migration`.
+  To enable session authentication run `rails generate typus:migration`.
 
       DESC
 
