@@ -12,8 +12,10 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
 
     html_options = { :disabled => attribute_disabled?(resource_ids.to_sym) }
 
+    options = { :attribute => "#{@resource.name.downcase}_#{attribute}" }
+
     label_text = @resource.human_attribute_name(attribute)
-    if (text = build_label_text_for_has_and_belongs_to_many(klass, html_options))
+    if (text = build_label_text_for_has_and_belongs_to_many(klass, html_options, options))
       label_text += "<small>#{text}</small>"
     end
 
@@ -30,26 +32,21 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
     render "admin/templates/has_and_belongs_to_many", locals
   end
 
-  def build_label_text_for_has_and_belongs_to_many(klass, html_options)
+  def build_label_text_for_has_and_belongs_to_many(klass, html_options, options)
     if html_options[:disabled] == true
       Typus::I18n.t("Read only")
-=begin
-    # TODO: Take this back at some point in the future. Adding a new item
-    #       using the pop-up should update the items on the selector. I know
-    #       this might be the most trivial thing in the world, but I don't
-    #       know how to do it.
     elsif admin_user.can?('create', klass) && !headless_mode?
-      build_add_new_for_has_and_belongs_to_many(klass)
-=end
+      build_add_new_for_has_and_belongs_to_many(klass, options)
     end
   end
 
-  def build_add_new_for_has_and_belongs_to_many(klass)
+  def build_add_new_for_has_and_belongs_to_many(klass, options)
     options = { :controller => "/admin/#{klass.to_resource}",
                 :action => "new",
-                :layout => "admin/headless" }
+                :layout => "admin/headless",
+                :attribute => options[:attribute] }
 
-    link_to Typus::I18n.t("Add New"), options, { :class => "iframe" }
+    link_to Typus::I18n.t("Add New"), options, { :class => "iframe_with_form_reload" }
   end
 
 end
