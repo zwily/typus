@@ -6,7 +6,7 @@ module Typus
 
       desc <<-MSG
 Description:
-  Creates configuration files and stores them in `config/typus`.
+  Creates configuration files.
 
       MSG
 
