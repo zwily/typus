@@ -30,7 +30,6 @@ most common settings.
       application: Application
       description: Some text to describe the model
       options:
-        export: csv, xml
         default_action_on_item: show
         end_year: 2015
         form_rows: 25
