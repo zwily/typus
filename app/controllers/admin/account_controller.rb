@@ -18,8 +18,7 @@ class Admin::AccountController < Admin::BaseController
     redirect_to user ? { :action => "show", :id => user.token } : { :action => :new }
   end
 
-  def forgot_password
-  end
+  def forgot_password; end
 
   def send_password
     if user = Typus.user_class.find_by_email(params[:typus_user][:email])
