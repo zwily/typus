@@ -3,7 +3,7 @@
 This is an example of a **Typus** enabled model with all available options.
 Use this example as reference to customize your YAML files.
 
-    Post:
+    Entry:
       fields:
         default: id, title, category_id, created_at, is_published?
         list: id, title, category_id, created_at, is_published?
@@ -43,12 +43,12 @@ This is an example of a roles file. Use this example as reference to customize
 your YAML files.
 
     admin:
-      Post: create, read, update, delete
+      Entry: create, read, update, delete
       Category: create, read, update, delete
       AdminUser: all
 
     editor:
-      Post: create, read, update
+      Entry: create, read, update
       Category: read, update
 
 You can also define `resources` which are not related to a model, for example
