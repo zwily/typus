@@ -4,8 +4,6 @@ module Typus
 
       source_root File.expand_path("../../templates", __FILE__)
 
-      class_option :admin_title, :default => Rails.root.basename
-
       desc <<-MSG
 Description:
   Creates configuration files and stores them in `config/typus`.
@@ -50,7 +48,7 @@ Description:
     default: #{fields}
     form: #{fields}
   relationships: #{relationships}
-  application: #{options[:admin_title]}
+  application: Application
           RAW
 
           configuration[model.table_name][:roles] = <<-RAW
