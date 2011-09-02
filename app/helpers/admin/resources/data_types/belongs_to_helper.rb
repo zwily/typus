@@ -77,15 +77,11 @@ module Admin::Resources::DataTypes::BelongsToHelper
   end
 
   def build_add_new_for_belongs_to(klass, options)
-    options = { :controller => "/admin/#{klass.to_resource}",
-                :action => 'new',
-                :resource => @resource.model_name,
-                :layout => 'admin/headless',
-                :attribute => options[:attribute] }
-    # Pass the resource_id only to edit/update because only there is where
-    # the record actually exists.
-    options.merge!(:resource_id => @item.id) if %w(edit update).include?(params[:action])
-    link_to Typus::I18n.t("Add New"), options, { :class => 'iframe_with_form_reload' }
+    default_options = { :controller => "/admin/#{klass.to_resource}",
+                        :action => 'new',
+                        :layout => 'admin/headless',
+                        :attribute => options[:attribute] }
+    link_to Typus::I18n.t("Add New"), default_options, { :class => 'iframe_with_form_reload' }
   end
 
 end
