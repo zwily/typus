@@ -32,9 +32,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def new
-    item_params = params.dup
-    item_params.delete_if { |k, v| !@resource.columns.map(&:name).include?(k) }
-    @item = @resource.new(item_params)
+    @item = @resource.new(params[:resource])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -43,8 +41,12 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def create
+    # Note that we still can still assign the item to another model. To change
+    # this behavior we need only to change how we merge the params.
+    item_params = params[:resource].merge!(params[@object_name])
+
     @item = @resource.new
-    @item.assign_attributes(params[@object_name], :as => current_role)
+    @item.assign_attributes(item_params, :as => current_role)
 
     set_attributes_on_create
 
