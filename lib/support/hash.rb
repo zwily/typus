@@ -6,9 +6,9 @@ class Hash
 
   def cleanup
     whitelist = %w(controller action id
-                   input
+                   _input
                    _popup
-                   resource resource_id resource_action
+                   resource
                    selected
                    attribute
                    back_to)

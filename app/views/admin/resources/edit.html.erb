@@ -15,7 +15,7 @@
         parent.Typus.resource_attribute = "#<%= params[:attribute] %>";
         parent.Typus.resource_id = '<%= @item.id %>';
         parent.Typus.resource_to_label = '<%= @item.to_label %>';
-        <% if flash.keys.any? %>
+        <% if flash.keys.any? && !params[:_input] %>
           parent.Typus.parent_location_reload = true;
         <% end %>
       });

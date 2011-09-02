@@ -83,7 +83,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def update
-    attributes = params[:attribute] ? { params[:attribute] => nil } : params[@object_name]
+    attributes = params[:_nullify] ? { params[:_nullify] => nil } : params[@object_name]
 
     respond_to do |format|
       if @item.update_attributes(attributes, :as => current_role)

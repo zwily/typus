@@ -17,7 +17,7 @@
       <% files.each do |key, value| %>
         <li>
           <%= link_to_function "Insert #{key} into entry.",
-                               "window.parent.CKEDITOR.instances['#{params[:input]}'].insertHtml('#{value}'); parent.$.fancybox.close();" %></li>
+                               "window.parent.CKEDITOR.instances['#{params[:_input]}'].insertHtml('#{value}'); parent.$.fancybox.close();" %></li>
         </li>
       <% end %>
     </ul>
