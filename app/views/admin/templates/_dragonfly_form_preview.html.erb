@@ -10,9 +10,6 @@
     <ul style="margin: 0 0 0 15px!important;">
       <li><strong>File name:</strong> <%= attachment.name %></li>
       <li><strong>File type:</strong> <%= attachment.mime_type %></li>
-      <% if @item.respond_to?(:created_at) %>
-        <li><strong>Upload date:</strong> <%= @item.created_at %></li>
-      <% end %>
       <li><strong>Dimensions:</strong> <%= attachment.width %> x <%= attachment.height %></li>
     </ul>
   </div>
