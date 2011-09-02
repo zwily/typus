@@ -46,13 +46,6 @@ Description:
                             klass.reflect_on_all_associations(relationship).map { |i| i.name.to_s }
                           end.flatten
 
-          ##
-          # Model fields for:
-          #
-          # - Default
-          # - Form
-          #
-
           rejections = %w( ^id$
                            created_at created_on updated_at updated_on deleted_at
                            salt crypted_password
