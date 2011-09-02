@@ -45,7 +45,7 @@ your YAML files.
     admin:
       Post: create, read, update, delete
       Category: create, read, update, delete
-      TypusUser: all
+      AdminUser: all
 
     editor:
       Post: create, read, update
