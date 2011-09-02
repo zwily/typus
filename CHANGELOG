@@ -77,6 +77,10 @@
  
  * [CHANGED] Custom actions are back!
 
+ * [REMOVED] Read Only option has been removed from configuration files. This
+   wasn't really protecting the forms. We are now using `attr_protected` with
+   roles: `attr_protected :title, :as => :admin`.
+
 = 3.0.12
 
  * [FIXED] Use will_paginate 3.0.0.
