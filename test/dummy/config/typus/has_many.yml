@@ -19,7 +19,7 @@ ProjectCollaborator:
 Task:
   fields:
     default: name, description
-    form: name, description, status, project
+    form: name, description, status
   filters: project
   application: HasMany
   options:
