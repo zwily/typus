@@ -69,7 +69,6 @@ Description:
           form = fields.reject { |f| f.match(form_rejections) }
 
           # Model defaults.
-          filters = "created_at" if fields.include?("created_at")
           search = ( %w(name title) & default ).join(", ")
 
           # We want attributes of belongs_to relationships to be shown in our
@@ -85,7 +84,6 @@ Description:
     default: #{default.join(", ")}
     form: #{form.join(", ")}
   relationships: #{relationships.join(", ")}
-  filters: #{filters}
   search: #{search}
   application: #{options[:admin_title]}
 
