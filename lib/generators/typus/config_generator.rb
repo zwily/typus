@@ -51,10 +51,7 @@ Description:
   application: Application
           RAW
 
-          configuration[model.table_name][:roles] = <<-RAW
-  #{model}: create, read, update, delete
-          RAW
-
+          configuration[model.table_name][:roles] = "#{model}: create, read, update, delete"
         end
 
         configuration
