@@ -22,12 +22,8 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       format.html do
-        if headless_mode_with_custom_action_is_enabled?
-          set_headless_resource_actions
-        else
-          set_default_action
-          add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
-        end
+        set_default_action
+        add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
         generate_html
       end
 

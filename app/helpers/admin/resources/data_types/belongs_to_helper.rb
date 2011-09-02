@@ -79,7 +79,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
   def build_add_new_for_belongs_to(klass, options)
     default_options = { :controller => "/admin/#{klass.to_resource}",
                         :action => 'new',
-                        :layout => 'admin/headless',
+                        :_popup => true,
                         :attribute => options[:attribute] }
     link_to Typus::I18n.t("Add New"), default_options, { :class => 'iframe_with_form_reload' }
   end

@@ -43,8 +43,8 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
   def build_add_new_for_has_and_belongs_to_many(klass, options)
     options = { :controller => "/admin/#{klass.to_resource}",
                 :action => "new",
-                :layout => "admin/headless",
-                :attribute => options[:attribute] }
+                :attribute => options[:attribute],
+                :_popup => true }
 
     link_to Typus::I18n.t("Add New"), options, { :class => "iframe_with_form_reload" }
   end

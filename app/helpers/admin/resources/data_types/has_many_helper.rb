@@ -35,14 +35,14 @@ module Admin::Resources::DataTypes::HasManyHelper
     if admin_user.can?("create", klass)
       default_options = { :controller => "/admin/#{klass.to_resource}",
                           :action => "new",
-                          :layout => "admin/headless" }
+                          :_popup => true }
 
       link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
     end
   end
 
   def set_has_many_resource_actions
-    @resource_actions = [["Edit", { :action => "edit", :layout => 'admin/headless' }, { :class => 'iframe' }],
+    @resource_actions = [["Edit", { :action => "edit", :_popup => true }, { :class => 'iframe' }],
                          ["Trash", { :action => "destroy" }, { :confirm => "Trash?" } ]]
   end
 
