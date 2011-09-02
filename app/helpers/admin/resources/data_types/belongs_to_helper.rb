@@ -4,15 +4,14 @@ module Admin::Resources::DataTypes::BelongsToHelper
     association = @resource.reflect_on_association(attribute.to_sym)
 
     related = if defined?(set_belongs_to_context)
-                set_belongs_to_context.send(attribute.pluralize.to_sym)
-              else
-                association.class_name.constantize
-              end
-    related_fk = association.foreign_key
+      set_belongs_to_context.send(attribute.pluralize.to_sym)
+    else
+      association.class_name.constantize
+    end
 
+    related_fk = association.foreign_key
     html_options = { :disabled => attribute_disabled?(attribute) }
     label_text = @resource.human_attribute_name(attribute)
-
     options = { :attribute => "#{@resource.name.downcase}_#{related_fk}" }
 
     label_text = @resource.human_attribute_name(attribute)
