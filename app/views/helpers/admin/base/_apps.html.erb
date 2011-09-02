@@ -10,10 +10,8 @@
 
   <% admin_user.applications.each do |application| %>
 
-    <% app_id = application.parameterize %>
-
     <%
-      apps = admin_user.application(application)
+      app_id, apps = application.parameterize, admin_user.application(application)
       if (params[:application] == app_id) || (@resource && apps.include?(@resource.model_name))
         klass = 'active'
       end
