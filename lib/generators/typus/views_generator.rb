@@ -6,7 +6,7 @@ module Typus
 
       desc <<-MSG
 Description:
-  Copies all Typus views to your application.
+  Copies Typus views into your application.
 
       MSG
 
