@@ -44,4 +44,8 @@ class Post < ActiveRecord::Base
      ["Custom Status", "custom"]]
   end
 
+  def to_label
+    title
+  end
+
 end
