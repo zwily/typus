@@ -2,8 +2,6 @@
 
 = 3.1.0 (unreleased)
 
- * [NEW] Mountable apps support!
-
  * [NEW] Filter with scopes.
 
  * [NEW] Three different actions to save a record.
