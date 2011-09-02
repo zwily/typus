@@ -14,7 +14,7 @@ Description:
 
       def generate_config
         copy_file "config/typus/README"
-        if (@configuration = generate_yaml_files)[:base].present?
+        if (@configuration = generate_yaml)[:base].present?
           %w(application.yml application_roles.yml).each do |file|
             template "config/typus/#{file}", "config/typus/#{timestamp}_#{file}"
           end
@@ -31,7 +31,7 @@ Description:
         @configuration
       end
 
-      def generate_yaml_files
+      def generate_yaml
         Typus.reload!
 
         configuration = { :base => "", :roles => "" }
