@@ -25,10 +25,10 @@ module Typus
           send(params[:batch_action], ids)
         else
           notice = if action.empty?
-                     Typus::I18n.t("No bulk action selected.")
-                   else
-                     Typus::I18n.t("Items must be selected in order to perform actions on them. No items have been changed.")
-                   end
+            Typus::I18n.t("No bulk action selected.")
+          else
+            Typus::I18n.t("Items must be selected in order to perform actions on them. No items have been changed.")
+          end
           redirect_to :back, :notice => notice
         end
       end

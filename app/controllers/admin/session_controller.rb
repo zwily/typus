@@ -11,11 +11,11 @@ class Admin::SessionController < Admin::BaseController
     user = user_scope.authenticate(params[:typus_user][:email], params[:typus_user][:password])
 
     path = if user
-             session[:typus_user_id] = user.id
-             params[:back_to] || admin_dashboard_index_path
-           else
-             new_admin_session_path(:back_to => params[:back_to])
-           end
+      session[:typus_user_id] = user.id
+      params[:back_to] || admin_dashboard_index_path
+    else
+      new_admin_session_path(:back_to => params[:back_to])
+    end
 
     redirect_to path
   end
