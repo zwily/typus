@@ -6,6 +6,10 @@ module Typus
         @admin_user
       end
 
+      def current_role
+        admin_user.role.to_sym
+      end
+
       def authenticate; end
       def check_if_user_can_perform_action_on_user; end
       def check_if_user_can_perform_action_on_resources; end

@@ -50,8 +50,7 @@ module Admin::Resources::FormHelper
 
   def attribute_disabled?(attribute)
     if protected_attributes = @resource._protected_attributes
-      role = admin_user.is_root? ? :admin : :default
-      protected_attributes[role].include?(attribute)
+      protected_attributes[current_role].include?(attribute)
     end
   end
 

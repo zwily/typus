@@ -48,7 +48,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   def create
     @item = @resource.new
-    @item.assign_attributes(params[@object_name], :as => :admin)
+    @item.assign_attributes(params[@object_name], :as => current_role)
 
     set_attributes_on_create
 
@@ -87,8 +87,7 @@ class Admin::ResourcesController < Admin::BaseController
     attributes = params[:attribute] ? { params[:attribute] => nil } : params[@object_name]
 
     respond_to do |format|
-      role = admin_user.is_root? ? :admin : :default
-      if @item.update_attributes(attributes, :as => role)
+      if @item.update_attributes(attributes, :as => current_role)
         set_attributes_on_update
         format.html { redirect_on_success }
         format.json { render :json => @item }
