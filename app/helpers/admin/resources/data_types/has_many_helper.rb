@@ -21,8 +21,6 @@ module Admin::Resources::DataTypes::HasManyHelper
       options.merge!("#{as}_type" => klass)
     end
 
-    count_items_to_relate = @model_to_relate.order(@model_to_relate.typus_order_by).count - @item.send(field).count
-
     build_pagination
     set_has_many_resource_actions
 
