@@ -1,8 +1,7 @@
 # Models
 
 This is an example of a **Typus** enabled model with all available options.
-You can use this example to customize your YAML files which only have set the
-most common settings.
+Use this example as reference to customize your YAML files.
 
     Post:
       fields:
@@ -40,9 +39,8 @@ most common settings.
 
 # Roles
 
-In this file you can configure the actions available for each of your models
-on the application. You can also use the 'all' shortcut to allow the user the
-access to all actions.
+This is an example of a roles file. Use this example as reference to customize
+your YAML files.
 
     admin:
       Post: create, read, update, delete
