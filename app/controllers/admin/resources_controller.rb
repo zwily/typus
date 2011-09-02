@@ -43,7 +43,8 @@ class Admin::ResourcesController < Admin::BaseController
   def create
     # Note that we still can still assign the item to another model. To change
     # this behavior we need only to change how we merge the params.
-    item_params = params[:resource].merge!(params[@object_name])
+    item_params = params[:resource] || {}
+    item_params.merge!(params[@object_name])
 
     @item = @resource.new
     @item.assign_attributes(item_params, :as => current_role)
