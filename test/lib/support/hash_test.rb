@@ -17,7 +17,7 @@ class HashTest < ActiveSupport::TestCase
   end
 
   test "cleanup rejects unwanted stuff" do
-    hash = {"attribute" => "dragonfly"}
+    hash = {"_nullify" => "dragonfly"}
     expected = {}
     assert_equal expected, hash.cleanup
   end
