@@ -42,10 +42,9 @@ Description:
 
           klass = model.constantize
 
-          # Detect all relationships except polymorphic belongs_to using reflection.
-          relationships = [ :belongs_to, :has_and_belongs_to_many, :has_many, :has_one ].map do |relationship|
-                            klass.reflect_on_all_associations(relationship).reject { |i| i.options[:polymorphic] }.map { |i| i.name.to_s }
-                          end.flatten.sort
+          relationships = [ :has_many, :has_one ].map do |relationship|
+                            klass.reflect_on_all_associations(relationship).map { |i| i.name.to_s }
+                          end.flatten
 
           ##
           # Model fields for:
