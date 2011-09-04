@@ -130,4 +130,4 @@ doctest:
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
 deploy:
-	ssh fesplugas@docs.typuscmf.com 'cd ~/public_html/docs.typuscmf.com && git pull && make html'
+	ssh fesplugas@docs.typuscmf.com 'cd ~/projects/typus && git pull && cd ~/projects/typus/doc/user_guide && make html'
