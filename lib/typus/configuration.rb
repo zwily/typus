@@ -1,12 +1,13 @@
 module Typus
   module Configuration
+		require 'erb'
 
     # Read configuration from <tt>config/typus/*.yml</tt>.
     def self.models!
       @@config = {}
 
       Typus.model_configuration_files.each do |file|
-        if data = YAML::load_file(file)
+        if data = YAML::load(ERB.new(File.read(file)).result)
           @@config.merge!(data)
         end
       end
@@ -20,7 +21,7 @@ module Typus
       @@roles = {}
 
       Typus.role_configuration_files.each do |file|
-        if data = YAML::load_file(file)
+        if data = YAML::load(ERB.new(File.read(file)).result)
           data.compact.each do |key, value|
             @@roles[key] ? @@roles[key].merge!(value) : (@@roles[key] = value)
           end
