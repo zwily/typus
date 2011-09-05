@@ -17,7 +17,7 @@ class Admin::ResourcesController < Admin::BaseController
     get_objects
 
     custom_actions_for(:index).each do |action|
-      prepend_resources_action(action.titleize, {:action => action, :id => nil}, {})
+      prepend_resources_action(action.titleize, {:action => action, :id => nil})
     end
 
     respond_to do |format|
@@ -64,7 +64,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   def edit
     custom_actions_for(:edit).each do |action|
-      prepend_resources_action(action.titleize, {:action => action, :id => @item}, {})
+      prepend_resources_action(action.titleize, {:action => action, :id => @item})
     end
   end
 
@@ -72,7 +72,7 @@ class Admin::ResourcesController < Admin::BaseController
     check_resource_ownership if @resource.typus_options_for(:only_user_items)
 
     if admin_user.can?('edit', @resource)
-      prepend_resources_action("Edit", {:action => 'edit', :id => @item}, {})
+      prepend_resources_action("Edit", {:action => 'edit', :id => @item})
     end
 
     respond_to do |format|
@@ -215,7 +215,7 @@ class Admin::ResourcesController < Admin::BaseController
   def set_default_action
     default_action = @resource.typus_options_for(:default_action_on_item)
     action = admin_user.can?('edit', @resource.model_name) ? default_action : "show"
-    prepend_resource_action(action.titleize, {:action => action}, {})
+    prepend_resource_action(action.titleize, {:action => action})
   end
 
   def custom_actions_for(action)

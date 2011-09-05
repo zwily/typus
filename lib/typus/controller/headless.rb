@@ -10,12 +10,12 @@ module Typus
       end
 
       def set_resources_action_for_headless_on_index
-        add_resources_action("Add New", {:action => "new"}, {})
+        add_resources_action("Add New", {:action => "new"})
       end
       private :set_resources_action_for_headless_on_index
 
       def set_resources_action_for_headless
-        add_resources_action("All Entries", {:action => 'index', :id => nil}, {})
+        add_resources_action("All Entries", {:action => 'index', :id => nil})
       end
       private :set_resources_action_for_headless
 
