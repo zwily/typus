@@ -7,12 +7,12 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
   alias_method :table_has_many_field, :table_has_and_belongs_to_many_field
 
   def typus_has_and_belongs_to_many_field(attribute, form)
-    klass = attribute.singularize.capitalize.constantize
+    klass = @resource.reflect_on_association(attribute.to_sym).class_name.constantize
+
     resource_ids = "#{attribute.singularize}_ids"
-
     html_options = { :disabled => attribute_disabled?(resource_ids.to_sym) }
-
-    options = { :attribute => "#{@resource.name.downcase}_#{attribute}" }
+    model = @resource.name.downcase.gsub("::", "_")
+    options = { :attribute => "#{model}_#{attribute}" }
 
     label_text = @resource.human_attribute_name(attribute)
     if (text = build_label_text_for_has_and_belongs_to_many(klass, html_options, options))
@@ -20,10 +20,10 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
     end
 
     locals = { :attribute => attribute,
-               :attribute_id => "#{@resource.table_name}_#{attribute}",
+               :attribute_id => "#{model}_#{attribute}",
                :related_klass => klass,
                :related_items => klass.all,
-               :related_ids => "#{@resource.name.downcase}[#{resource_ids}][]",
+               :related_ids => "#{model}[#{resource_ids}][]",
                :values => @item.send(attribute),
                :form => form,
                :label_text => label_text.html_safe,
