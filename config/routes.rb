@@ -2,7 +2,11 @@ Rails.application.routes.draw do
   
   routes_block = lambda do
 
-    match "/" => redirect("/admin/dashboard")
+    if Typus.subdomain
+      match "/" => redirect("/dashboard")
+    else
+      match "/" => redirect("/admin/dashboard")
+    end
 
     match "dashboard" => "dashboard#index", :as => "dashboard_index"
     match "dashboard/:application" => "dashboard#show", :as => "dashboard"
