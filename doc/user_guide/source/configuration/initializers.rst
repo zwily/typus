@@ -94,3 +94,16 @@ User Foreign Key
   Typus.setup do |config|
     config.user_foreign_key = "typus_user_id"
   end
+
+
+Subdomain
+---------
+
+If you need your application to be served from a subdomain you need to set the
+``subdomain`` setting.
+
+.. code-block:: ruby
+
+  Typus.setup do |config|
+    config.subdomain = "admin" # Default is nil
+  end
