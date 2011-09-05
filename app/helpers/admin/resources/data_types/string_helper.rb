@@ -9,6 +9,7 @@ module Admin::Resources::DataTypes::StringHelper
   alias_method :display_integer, :display_string
   alias_method :display_position, :display_string
   alias_method :display_text, :display_string
+  alias_method :display_virtual, :display_string
 
   def string_filter(filter)
     values = set_context.send(filter.to_s.pluralize).to_a
