@@ -215,7 +215,7 @@ class Admin::ResourcesController < Admin::BaseController
   def set_default_action
     default_action = @resource.typus_options_for(:default_action_on_item)
     action = admin_user.can?('edit', @resource.model_name) ? default_action : "show"
-    add_resource_action(action.titleize, {:action => action}, {})
+    prepend_resource_action(action.titleize, {:action => action}, {})
   end
 
   def custom_actions_for(action)
