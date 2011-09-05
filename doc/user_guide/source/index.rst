@@ -60,22 +60,18 @@ Customization
 
 .. toctree::
   :maxdepth: 1
+  :glob:
 
-  customization/user-interface
-  customization/attribute-templates
+  customization/*
 
 Recipes
 -------
 
 .. toctree::
   :maxdepth: 1
+  :glob:
 
-  recipes/configuration-files
-  recipes/custom-actions
-  recipes/export-on-heroku
-  recipes/devise-authentication
-  recipes/rich-text-editor
-  recipes/single-table-inheritance
+  recipes/*
 
 Misc
 ----
