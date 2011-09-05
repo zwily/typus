@@ -7,7 +7,7 @@ Dummy::Application.routes.draw do
     post "settings" => "settings#update"
   end
 
-  root :to => redirect("/admin")
+  root :to => redirect("/admin") unless Typus.subdomain
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
