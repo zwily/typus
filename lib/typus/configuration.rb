@@ -1,6 +1,7 @@
+require 'erb'
+
 module Typus
   module Configuration
-		require 'erb'
 
     # Read configuration from <tt>config/typus/*.yml</tt>.
     def self.models!
