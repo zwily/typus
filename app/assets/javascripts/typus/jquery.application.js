@@ -21,7 +21,6 @@ $(document).ready(function() {
         'centerOnScroll': true,
         'scrolling': false,
         onClosed: function() {
-            // console.log(arguments);
             var attribute = Typus.resource_attribute;
             var text = Typus.resource_to_label;
             var value = Typus.resource_id;
