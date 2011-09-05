@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-
-  scope "admin", :module => :admin, :as => "admin" do
+  
+  routes_block = lambda do
 
     match "/" => redirect("/admin/dashboard")
 
@@ -27,7 +27,13 @@ Rails.application.routes.draw do
     Typus.resources.map { |i| i.underscore }.each do |resource|
       match "#{resource}(/:action(/:id))(.:format)", :controller => resource
     end
-
   end
 
+  if Typus.subdomain
+    constraints :subdomain => Typus.subdomain do
+      namespace :admin, :path=>'', &routes_block
+    end
+  else
+    scope "admin", {:module => :admin, :as => "admin"}, &routes_block
+  end
 end

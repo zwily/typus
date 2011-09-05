@@ -29,6 +29,9 @@ Typus.setup do |config|
   # config.username = "admin"
   # config.password = "columbia"
 
+  # Define subdomain to use instead of additional path
+  # config.subdomain = "admin"
+
   # Pagination options: These options are passed to `kaminari`.
   # config.pagination = { :previous_label => "&larr; " + Typus::I18n.t("Previous"),
   #                       :next_label => Typus::I18n.t("Next") + " &rarr;" }
