@@ -9,8 +9,6 @@ class Admin::BaseController < ActionController::Base
   helper_method :admin_user
   helper_method :current_role
 
-  def user_guide; end
-
   protected
 
   def reload_config_and_roles

@@ -7,8 +7,6 @@ Rails.application.routes.draw do
     match "dashboard" => "dashboard#index", :as => "dashboard_index"
     match "dashboard/:application" => "dashboard#show", :as => "dashboard"
 
-    match "user_guide" => "base#user_guide"
-
     if Typus.authentication == :session
       resource :session, :only => [:new, :create], :controller => :session do
         get :destroy, :as => "destroy"

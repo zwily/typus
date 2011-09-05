@@ -73,6 +73,7 @@ Misc
 .. toctree::
   :maxdepth: 1
 
+  usage
   upgrade
   credits
   license
