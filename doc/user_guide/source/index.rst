@@ -62,7 +62,7 @@ Customization
   :maxdepth: 1
 
   customization/user-interface
-
+  customization/attribute-templates
 
 Recipes
 -------
