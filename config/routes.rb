@@ -1,13 +1,10 @@
 Rails.application.routes.draw do
-  
+
   routes_block = lambda do
 
-    if Typus.subdomain
-      match "/" => redirect("/dashboard")
-    else
-      match "/" => redirect("/admin/dashboard")
-    end
+    dashboard = Typus.subdomain ? "/dashboard" : "/admin/dashboard"
 
+    match "/" => redirect(dashboard)
     match "dashboard" => "dashboard#index", :as => "dashboard_index"
     match "dashboard/:application" => "dashboard#show", :as => "dashboard"
 
@@ -35,7 +32,7 @@ Rails.application.routes.draw do
 
   if Typus.subdomain
     constraints :subdomain => Typus.subdomain do
-      namespace :admin, :path=>'', &routes_block
+      namespace :admin, :path => "", &routes_block
     end
   else
     scope "admin", {:module => :admin, :as => "admin"}, &routes_block
