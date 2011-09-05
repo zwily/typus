@@ -4,6 +4,17 @@
 
  * [CHANGED] Removed user guide. Docs can now be found at http://docs.typuscmf.com/
 
+ * [NEW] New configuration setting which allows serving Typus from a subdomain. (42b5d8ae)
+
+ * [FIXED] HABTM associations were not working as expected when using namespaced
+   models.
+
+ * [CHANGED] Configuration can be read from subfolders so you can organize better
+   your models. I'm starting to use a file per model and I'd recommend you start
+   using it ... (8a3fc09f)
+
+ * [FIXED] Helper Method `display_virtual` was not defined. (2b7e1948)
+
 = 3.1.0
 
  * [NEW] Filter with scopes.
