@@ -54,6 +54,16 @@ Configuration
   configuration/roles
   customization/selectors
 
+
+Customization
+-------------
+
+.. toctree::
+  :maxdepth: 1
+
+  customization/user-interface
+
+
 Recipes
 -------
 
