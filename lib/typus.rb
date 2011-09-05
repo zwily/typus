@@ -65,6 +65,9 @@ module Typus
   mattr_accessor :username
   @@username = "admin"
 
+  mattr_accessor :subdomain
+  @@subdomain = nil
+
   ##
   # Pagination options passed to Kaminari helper.
   #
