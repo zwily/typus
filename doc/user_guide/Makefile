@@ -33,6 +33,8 @@ help:
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
 	@echo "  deploy     to push changes to the documentation server"
+	@echo "  open       to view html on your default browser"
+
 clean:
 	-rm -rf $(BUILDDIR)/*
 
@@ -131,3 +133,6 @@ doctest:
 
 deploy:
 	ssh fesplugas@docs.typuscmf.com 'cd ~/projects/typus && git pull && cd ~/projects/typus/doc/user_guide && make html'
+
+open:
+	open build/html/index.html
