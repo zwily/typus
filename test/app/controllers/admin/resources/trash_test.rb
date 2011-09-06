@@ -34,6 +34,10 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
     assert_equal [@entry], assigns(:items)
   end
 
+  test "get trash return error when user does not have edit access" do
+    pending
+  end
+
   test "get restore recovers an item from the trash" do
     @request.env['HTTP_REFERER'] = "/admin/entries/trash"
 
@@ -44,6 +48,10 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
 
     get :trash
     assert assigns(:items).empty?
+  end
+
+  test "get restore returns error when user does not have edit access" do
+    pending
   end
 
 end
