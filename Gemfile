@@ -57,7 +57,6 @@ gem "bson_ext", "~> 1.3"
 
 group :test do
   gem "shoulda-context", "~> 1.0.0.beta1"
-  gem "turn"
   gem "mocha" # Make sure mocha is loaded at the end ...
 end
 
