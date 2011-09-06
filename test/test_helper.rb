@@ -8,6 +8,9 @@ require "rails/test_help"
 
 require 'shoulda-context'
 
+require 'minitest/autorun'
+require 'minitest/pride'
+
 Rails.backtrace_cleaner.remove_silencers!
 
 class ActiveSupport::TestCase
