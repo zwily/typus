@@ -15,6 +15,8 @@
 
  * [FIXED] Helper Method `display_virtual` was not defined. (2b7e1948)
 
+ * [FIXED] Do not show Trash link when user can't edit items.
+
 = 3.1.0
 
  * [NEW] Filter with scopes.
