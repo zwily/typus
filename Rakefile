@@ -18,12 +18,8 @@ require 'rake/testtask'
 Rake::TestTask.new(:test) do |t|
   t.libs << 'lib'
   t.libs << 'test'
-  # t.pattern = 'test/**/*_test.rb'
-  t.test_files = FileList['test/app/controllers/**/*_test.rb',
-                          'test/app/models/**/*_test.rb',
-                          'test/app/mailers/**/*_test.rb',
-                          'test/config/*_test.rb',
-                          'test/lib/**/*_test.rb']
+  t.pattern = 'test/**/*_test.rb'
+  # t.test_files = FileList['test/**/*_test.rb']
   t.verbose = false
 end
 
