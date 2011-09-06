@@ -14,7 +14,7 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
     admin_sign_in
   end
 
-  test "get index will show the available bulk_actions" do
+  test "get index shows available bulk_actions" do
     get :index
     assert_equal [["Move to Trash", "bulk_destroy"]], assigns(:bulk_actions)
   end
@@ -22,7 +22,7 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
   test "get bulk_destroy removes all items" do
     @request.env['HTTP_REFERER'] = "/admin/entry_bulks"
 
-    10.times { FactoryGirl.create(:entry_bulk) }
+    FactoryGirl.create_list(:entry_bulk, 10)
     items_to_destroy = EntryBulk.limit(5).map(&:id)
     items_to_keep = EntryBulk.limit(5).offset(5).map(&:id)
 
@@ -36,7 +36,7 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
   test "get bulk with empty action and selected items redirects to back with a feedback message" do
     @request.env['HTTP_REFERER'] = "/admin/entry_bulks"
 
-    5.times { FactoryGirl.create(:entry_bulk) }
+    FactoryGirl.create_list(:entry_bulk, 5)
     items = EntryBulk.limit(5).map(&:id)
 
     get :bulk, :batch_action => "", :selected_item_ids => items
