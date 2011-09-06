@@ -286,15 +286,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   test "build_my_joins return the expected joins" do
     @project = FactoryGirl.create(:project)
-    2.times { FactoryGirl.create(:project) }
-
+    FactoryGirl.create_list(:project, 2)
     params = { :projects => @project.id }
     assert_equal [:projects], User.build_my_joins(params)
   end
 
   test "build_my_joins works when users are filtered by projects" do
     @project = FactoryGirl.create(:project)
-    2.times { FactoryGirl.create(:project) }
+    FactoryGirl.create_list(:project, 2)
 
     params = { :projects => @project.id }
 
