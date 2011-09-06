@@ -11,7 +11,7 @@ require "test_helper"
 class Admin::EntriesControllerTest < ActionController::TestCase
 
   setup do
-    @request.session[:typus_user_id] = FactoryGirl.create(:typus_user).id
+    admin_sign_in
   end
 
   test "export csv" do
