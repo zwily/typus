@@ -13,7 +13,9 @@ module Typus
       end
 
       def set_predefined_filter_for_trash
-        add_predefined_filter("Trash", "trash", "deleted")
+        if admin_user.can?('edit', @resource.model_name)
+          add_predefined_filter("Trash", "trash", "deleted")
+        end
       end
       private :set_predefined_filter_for_trash
 
