@@ -45,7 +45,8 @@ class TypusUserRolesTest < ActiveSupport::TestCase
       assert_equal expected, @typus_user.resources.map(&:first).sort
     end
 
-    should_eventually "verify resources without actions related are removed" do
+    should "verify resources without actions related are removed" do
+      pending
       assert !@typus_user.resources.map(&:first).include?('Order')
     end
 
@@ -62,7 +63,8 @@ class TypusUserRolesTest < ActiveSupport::TestCase
       assert @typus_user.cannot?('show', 'Status', { :special => true })
     end
 
-    should_eventually "verify we cannot perform actions on resources which don't have that action defined" do
+    should "verify we cannot perform actions on resources which don't have that action defined" do
+      pending
       assert @typus_user.cannot?('index', 'Order')
     end
 
