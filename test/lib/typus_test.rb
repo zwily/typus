@@ -22,6 +22,10 @@ class TypusTest < ActiveSupport::TestCase
     assert Typus.username.eql?('admin')
   end
 
+  test "default_config for subdomain" do
+    assert Typus.subdomain.nil?
+  end
+
   test "default_config for password" do
     assert Typus.password.eql?('columbia')
   end
@@ -114,12 +118,9 @@ class TypusTest < ActiveSupport::TestCase
     assert_equal %w(Git Status WatchDog), Typus.resources
   end
 
-=begin
   test "user_class returns default value" do
-    Typus::Configuration.models_constantized!
     assert_equal TypusUser, Typus.user_class
   end
-=end
 
   test "user_class_name returns default value" do
     assert Typus.user_class_name.eql?("TypusUser")

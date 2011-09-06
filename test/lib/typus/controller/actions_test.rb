@@ -4,138 +4,136 @@ class ActionsTest < ActiveSupport::TestCase
 
   include Typus::Controller::Actions
 
-  context "add_resource_action" do
+  ##
+  # add_resource_action
+  #
 
-    should "work" do
-      output = add_resource_action("something")
-      assert_equal [["something"]], @resource_actions
-    end
-
-    should "work when no params are set" do
-      add_resource_action
-      assert @resource_actions.empty?
-    end
-
+  test "add_resource_action" do
+    output = add_resource_action("something")
+    assert_equal [["something"]], @resource_actions
   end
 
-  context "prepend_resource_action" do
-
-    should "work without args" do
-      prepend_resource_action
-      assert @resource_actions.empty?
-    end
-
-    should "work with args" do
-      prepend_resource_action("something")
-      assert_equal [["something"]], @resource_actions
-    end
-
-    should "work prepending an action without args" do
-      add_resource_action("something")
-      prepend_resource_action
-      assert_equal [["something"]], @resource_actions
-    end
-
-    should "work prepending an action with args" do
-      add_resource_action("something")
-      prepend_resource_action("something_else")
-      assert_equal [["something_else"], ["something"]], @resource_actions
-    end
-
+  test "add_resource_action when no params are set" do
+    add_resource_action
+    assert @resource_actions.empty?
   end
 
-  context "append_resource_action" do
+  ##
+  # prepend_resource_action
+  #
 
-    should "work without args" do
-      append_resource_action
-      assert @resource_actions.empty?
-    end
-
-    should "work with args" do
-      append_resource_action("something")
-      assert_equal [["something"]], @resource_actions
-    end
-
-    should "work appending an action without args" do
-      add_resource_action("something")
-      append_resource_action
-      assert_equal [["something"]], @resource_actions
-    end
-
-    should "work appending an action with args" do
-      add_resource_action("something")
-      append_resource_action("something_else")
-      assert_equal [["something"], ["something_else"]], @resource_actions
-    end
-
+  test "prepend_resource_action without args" do
+    prepend_resource_action
+    assert @resource_actions.empty?
   end
 
-  # FIXME: Cleanup all test after this line.
-
-  context "add_resources_action" do
-
-    should "work" do
-      add_resources_action("something")
-      assert_equal [["something"]], @resources_actions
-    end
-
-    should "work when no params are set" do
-      add_resources_action
-      assert @resources_actions.empty?
-    end
-
+  test "prepend_resource_action with args" do
+    prepend_resource_action("something")
+    assert_equal [["something"]], @resource_actions
   end
 
-  context "prepend_resources_action" do
-
-    should "work without args" do
-      prepend_resources_action
-      assert @resources_actions.empty?
-    end
-
-    should "work with args" do
-      prepend_resources_action("something")
-      assert_equal [["something"]], @resources_actions
-    end
-
-    should "work prepending an action without args" do
-      add_resources_action("something")
-      prepend_resources_action
-      assert_equal [["something"]], @resources_actions
-    end
-
-    should "work prepending an action with args" do
-      add_resources_action("something")
-      prepend_resources_action("something_else")
-      assert_equal [["something_else"], ["something"]], @resources_actions
-    end
-
+  test "prepend_resource_action prepending an action without args" do
+    add_resource_action("something")
+    prepend_resource_action
+    assert_equal [["something"]], @resource_actions
   end
 
-  context "append_resources_action" do
+  test "prepend_resource_action prepending an action with args" do
+    add_resource_action("something")
+    prepend_resource_action("something_else")
+    assert_equal [["something_else"], ["something"]], @resource_actions
+  end
 
-    should "work without args" do
-      append_resources_action
-      assert @resources_actions.empty?
-    end
+  ##
+  # append_resource_action
+  #
 
-    should "work with args" do
-      append_resources_action("something")
-      assert_equal [["something"]], @resources_actions
-    end
+  test "append_resource_action without args" do
+    append_resource_action
+    assert @resource_actions.empty?
+  end
 
-    should "work appending an action without args" do
-      add_resources_action("something")
-      append_resources_action
-      assert_equal [["something"]], @resources_actions
-    end
+  test "append_resource_action with args" do
+    append_resource_action("something")
+    assert_equal [["something"]], @resource_actions
+  end
 
-    should "work appending an action with args" do
-      add_resources_action("something")
-      append_resources_action("something_else")
-      assert_equal [["something"], ["something_else"]], @resources_actions
-    end
+  test "append_resource_action appending an action without args" do
+    add_resource_action("something")
+    append_resource_action
+    assert_equal [["something"]], @resource_actions
+  end
 
+  test "append_resource_action appending an action with args" do
+    add_resource_action("something")
+    append_resource_action("something_else")
+    assert_equal [["something"], ["something_else"]], @resource_actions
+  end
+
+  ##
+  # add_resources_action
+  #
+
+  test "add_resources_action" do
+    add_resources_action("something")
+    assert_equal [["something"]], @resources_actions
+  end
+
+  test "add_resources_action when no params are set" do
+    add_resources_action
+    assert @resources_actions.empty?
+  end
+
+  ##
+  # prepend_resources_action
+  #
+
+  test "prepend_resources_action without args" do
+    prepend_resources_action
+    assert @resources_actions.empty?
+  end
+
+  test "prepend_resources_action with args" do
+    prepend_resources_action("something")
+    assert_equal [["something"]], @resources_actions
+  end
+
+  test "prepend_resources_action prepending an action without args" do
+    add_resources_action("something")
+    prepend_resources_action
+    assert_equal [["something"]], @resources_actions
+  end
+
+  test "prepend_resources_action prepending an action with args" do
+    add_resources_action("something")
+    prepend_resources_action("something_else")
+    assert_equal [["something_else"], ["something"]], @resources_actions
+  end
+
+  ##
+  # append_resources_action
+  #
+
+  test "append_resources_action without args" do
+    append_resources_action
+    assert @resources_actions.empty?
+  end
+
+  test "append_resources_action with args" do
+    append_resources_action("something")
+    assert_equal [["something"]], @resources_actions
+  end
+
+  test "append_resources_action appending an action without args" do
+    add_resources_action("something")
+    append_resources_action
+    assert_equal [["something"]], @resources_actions
+  end
+
+  test "append_resources_action appending an action with args" do
+    add_resources_action("something")
+    append_resources_action("something_else")
+    assert_equal [["something"], ["something_else"]], @resources_actions
   end
 
 end

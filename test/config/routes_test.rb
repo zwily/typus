@@ -7,12 +7,12 @@ class RoutesTest < ActiveSupport::TestCase
     @routes = Rails.application.routes.routes.map(&:name)
   end
 
-  should "have dashboard routes" do
+  test "dashboard routes" do
     expected = %w(admin_dashboard)
     expected.each { |r| assert @routes.include?(r) }
   end
 
-  should "have account routes" do
+  test "account routes" do
     expected = %w(forgot_password_admin_account_index
                   send_password_admin_account_index
                   admin_account_index
@@ -22,7 +22,7 @@ class RoutesTest < ActiveSupport::TestCase
     expected.each { |r| assert @routes.include?(r) }
   end
 
-  should "have session routes" do
+  test "session routes" do
     expected = %w(new_admin_session admin_session)
     expected.each { |r| assert @routes.include?(r) }
   end
