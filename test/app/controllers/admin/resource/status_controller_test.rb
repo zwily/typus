@@ -10,20 +10,20 @@ require "test_helper"
 
 class Admin::StatusControllerTest < ActionController::TestCase
 
-  test "admin has access" do
+  test "index works when user has access" do
     admin_sign_in
     get :index
     assert_response :success
     assert_template 'index'
   end
 
-  test "editor should not have access" do
+  test "index returns unprocessable_entity when user has no access" do
     editor_sign_in
     get :index
     assert_response :unprocessable_entity
   end
 
-  test "not logged in user is redirected to new_admin_session_path" do
+  test "index redirects to new_admin_session_path when user is not logged" do
     reset_session
     get :index
     assert_response :redirect
