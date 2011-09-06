@@ -27,12 +27,19 @@ class Admin::EntriesControllerTest < ActionController::TestCase
     assert_template 'new'
   end
 
-  test "get new and reject params which are not included in @resource.columns.map(&:name)" do
+  test "get new ignores url params" do
     %w(chunky_bacon).each do |param|
       get :new, { param => param }
       assert_response :success
       assert_template 'new'
     end
+  end
+
+  test "get new reads params[:resource]" do
+    get :new, { :resource => { :title => "Chunky Bacon" } }
+    assert_response :success
+    assert_template 'new'
+      assert_equal "Chunky Bacon", assigns(:item).title
   end
 
   test "post create and redirect to index" do
@@ -89,7 +96,7 @@ class Admin::EntriesControllerTest < ActionController::TestCase
     assert @entry.reload.published
   end
 
-  test "get toggle redirects to edit because validation has failed" do
+  test "get toggle redirects to edit when validation fails" do
     @request.env['HTTP_REFERER'] = "/admin/entries"
 
     @entry.content = nil
