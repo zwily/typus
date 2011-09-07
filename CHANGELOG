@@ -17,6 +17,10 @@
 
  * [FIXED] Do not show Trash link when user can't edit items.
 
+ * [CHANGED] Updated Rubies list for Travis-CI.
+
+ * [CHANGED] Default development/test database is now **Postgresql**.
+
 = 3.1.0
 
  * [NEW] Filter with scopes.
