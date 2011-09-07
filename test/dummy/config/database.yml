@@ -1,4 +1,4 @@
-<% connection = ENV["DB"] || 'sqlite3' %>
+<% connection = ENV["DB"] || 'postgresql' %>
 
 ##
 # Database settings.
@@ -11,11 +11,11 @@ sqlite3: &sqlite3
 postgresql: &postgresql
   adapter: postgresql
   encoding: unicode
-  database: typus
+  database: typus_development
 
 mysql2: &mysql2
   adapter: mysql2
-  database: typus
+  database: typus_development
   host: localhost
 
 ##
@@ -27,6 +27,7 @@ development:
 
 test:
   <<: *<%= connection %>
+  database: typus_test
 
 production:
   <<: *<%= connection %>
