@@ -67,3 +67,5 @@ group :development do
   # gem "rb-fsevent"
   # gem "growl_notify"
 end
+
+gem "SystemTimer", :platform => :ruby_18
