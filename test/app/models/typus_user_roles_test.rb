@@ -46,8 +46,9 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     end
 
     should "verify resources without actions related are removed" do
-      pending
-      assert !@typus_user.resources.map(&:first).include?('Order')
+      pending do
+        assert !@typus_user.resources.map(&:first).include?('Order')
+      end
     end
 
     should "have access to all actions on models" do
@@ -64,8 +65,9 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     end
 
     should "verify we cannot perform actions on resources which don't have that action defined" do
-      pending
-      assert @typus_user.cannot?('index', 'Order')
+      pending do
+        assert @typus_user.cannot?('index', 'Order')
+      end
     end
 
   end
