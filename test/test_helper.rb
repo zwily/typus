@@ -20,6 +20,10 @@ class ActiveSupport::TestCase
     [Entry, Page, Post, TypusUser].each { |i| i.delete_all }
   end
 
+  def db_adapter
+    ::ActiveRecord::Base.configurations[Rails.env]['adapter']
+  end
+
   def admin_sign_in
     @typus_user = FactoryGirl.create(:typus_user)
     set_session

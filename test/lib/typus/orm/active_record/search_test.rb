@@ -7,7 +7,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "work for Post (title)" do
       output = Post.build_search_conditions("search", "bacon")
 
-      expected = case ENV["DB"]
+      expected = case db_adapter
                  when "postgresql"
                    "LOWER(TEXT(posts.title)) LIKE '%bacon%'"
                  else
@@ -20,7 +20,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "work for Comment (email, body)" do
       output = Comment.build_search_conditions("search", "bacon")
 
-      expected = case ENV["DB"]
+      expected = case db_adapter
                  when "postgresql"
                    ["LOWER(TEXT(comments.body)) LIKE '%bacon%'",
                     "LOWER(TEXT(comments.email)) LIKE '%bacon%'"]
@@ -36,7 +36,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "generate conditions for id" do
       Post.expects(:typus_defaults_for).with(:search).returns(["id"])
 
-      expected = case ENV["DB"]
+      expected = case db_adapter
                  when "postgresql"
                    "LOWER(TEXT(posts.id)) LIKE '%1%'"
                  else
@@ -50,7 +50,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "generate conditions for fields starting with equal" do
       Post.expects(:typus_defaults_for).with(:search).returns(["=id"])
 
-      expected = case ENV["DB"]
+      expected = case db_adapter
                  when "postgresql"
                    "LOWER(TEXT(posts.id)) LIKE '1'"
                  else
@@ -64,7 +64,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     should "generate conditions for fields starting with ^" do
       Post.expects(:typus_defaults_for).with(:search).returns(["^id"])
 
-      expected = case ENV["DB"]
+      expected = case db_adapter
                  when "postgresql"
                    "LOWER(TEXT(posts.id)) LIKE '1%'"
                  else
@@ -172,7 +172,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_search_for_typus_user" do
-      expected = case ENV["DB"]
+      expected = case db_adapter
                  when "postgresql"
                    ["LOWER(TEXT(typus_users.first_name)) LIKE '%francesc%'",
                     "LOWER(TEXT(typus_users.last_name)) LIKE '%francesc%'", 
@@ -194,7 +194,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_search_and_filter_for_typus_user" do
-      expected = case ENV["DB"]
+      expected = case db_adapter
                  when "postgresql"
                    ["LOWER(TEXT(typus_users.role)) LIKE '%francesc%'",
                     "LOWER(TEXT(typus_users.last_name)) LIKE '%francesc%'",
