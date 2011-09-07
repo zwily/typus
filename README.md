@@ -48,6 +48,11 @@ To test clone the git repo and run the following commands:
     $ bundle install --path vendor/bundle
     $ bundle exec rake
 
+**Note:** In `OSX Lion` it's possible you need to create a `postgres`
+user to be able to run tests.
+
+    CREATE USER postgres SUPERUSER;
+
 ## Links
 
 - [Documentation](https://docs.typuscmf.com/)
