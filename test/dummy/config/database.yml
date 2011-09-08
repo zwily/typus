@@ -13,6 +13,7 @@ postgresql: &postgresql
   encoding: unicode
   database: typus_development
   username: postgres
+  min_messages: warning
 
 mysql2: &mysql2
   adapter: mysql2
