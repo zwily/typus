@@ -54,10 +54,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test "to_label returns Model#id because Category#name is empty" do
-    category = FactoryGirl.create(:category)
-    category.name = nil
-    category.save(:validate => false)
-    assert_equal "Category##{category.id}", category.to_label
+    assert_match /Category#/, FactoryGirl.build(:category, :name => nil).to_label
   end
 
   test "to_label returns default Model#id" do
