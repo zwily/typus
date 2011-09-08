@@ -179,11 +179,11 @@ class ClassMethodsTest < ActiveSupport::TestCase
   end
 
   test "typus_filters for Case" do
-    assert_equal Hash.new, Case.typus_filters
+    assert Case.typus_filters.empty?
   end
 
   test "get_typus_filters for Case" do
-    assert_equal [], Case.get_typus_filters
+    assert Case.get_typus_filters.empty?
   end
 
   test "get_typus_filters for Post" do
@@ -227,13 +227,11 @@ class ClassMethodsTest < ActiveSupport::TestCase
 
   test "typus_field_options_for" do
     assert_equal [:status], Post.typus_field_options_for(:selectors)
-
     assert Post.typus_field_options_for(:unexisting).empty?
   end
 
   test "typus_boolean accepts string and symbols" do
     expected = [["Active", "true"], ["Inactive", "false"]]
-
     assert_equal expected, TypusUser.typus_boolean("status")
     assert_equal expected, TypusUser.typus_boolean(:status)
   end
@@ -241,7 +239,6 @@ class ClassMethodsTest < ActiveSupport::TestCase
   test "typus_boolean returns custom keys" do
     expected = [["True", "true"], ["False", "false"]]
     assert_equal expected, Post.typus_boolean(:status)
-
     expected = [["Yes, it's spam", "true"], ["No, it's not spam", "false"]]
     assert_equal expected, Comment.typus_boolean(:spam)
   end
