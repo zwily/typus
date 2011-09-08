@@ -42,7 +42,9 @@ module Admin::Resources::DataTypes::DragonflyHelper
              :thumb => data.process(:thumb, Typus.image_thumb_size).url,
              :options => options
     else
-      params[:_popup] ? data.name : link_to(data.name, data.url)
+      html = params[:_popup] ? data.name : link_to(data.name, data.url)
+      # OPTIMIZE: Generate the tag with Ruby.
+      "<p>#{html}</p>".html_safe
     end
   end
 
