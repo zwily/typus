@@ -2,8 +2,8 @@
 ENV["RAILS_ENV"] = "test"
 
 require File.expand_path("../dummy/config/environment.rb",  __FILE__)
-load_schema = lambda { load File.expand_path("../dummy/db/schema.rb",  __FILE__) }
-silence_stream(STDOUT, &load_schema)
+ActiveRecord::Schema.verbose = false
+require File.expand_path("../dummy/db/schema",  __FILE__)
 require "rails/test_help"
 
 require 'shoulda-context'
