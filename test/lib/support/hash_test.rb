@@ -18,8 +18,7 @@ class HashTest < ActiveSupport::TestCase
 
   test "cleanup rejects unwanted stuff" do
     hash = {"_nullify" => "dragonfly"}
-    expected = {}
-    assert_equal expected, hash.cleanup
+    assert hash.cleanup.empty?
   end
 
 end
