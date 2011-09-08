@@ -282,10 +282,8 @@ class ClassMethodsTest < ActiveSupport::TestCase
   end
 
   test "typus_search_fields returns and empty hash" do
-    search = []
-    Post.stubs(:typus_defaults_for).with(:search).returns(search)
-    expected = {}
-    assert_equal expected, Post.typus_search_fields
+    Post.stubs(:typus_defaults_for).with(:search).returns([])
+    assert Post.typus_search_fields.empty?
   end
 
   # I expect ARel to take care of table names when building queries.
