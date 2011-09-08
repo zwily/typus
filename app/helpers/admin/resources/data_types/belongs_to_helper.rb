@@ -41,7 +41,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
     if att_value = item.send(attribute)
       action = item.send(attribute).class.typus_options_for(:default_action_on_item)
       message = att_value.to_label
-      if admin_user.can?(action, att_value.class.name)
+      if !params[:_popup] && admin_user.can?(action, att_value.class.name)
         message = link_to(message, :controller => "/admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id)
       end
     end
@@ -51,9 +51,14 @@ module Admin::Resources::DataTypes::BelongsToHelper
 
   def display_belongs_to(item, attribute)
     data = item.send(attribute)
-    link_to data.to_label, { :controller => data.class.to_resource,
-                             :action => params[:action],
-                             :id => data.id }
+
+    options = {
+      :controller => data.class.to_resource,
+      :action => params[:action],
+      :id => data.id
+    }
+
+    params[:_popup] ? data.to_label : link_to(data.to_label, options)
   end
 
   def belongs_to_filter(filter)
