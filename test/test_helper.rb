@@ -1,10 +1,11 @@
 # Configure Rails Environment
 ENV["RAILS_ENV"] = "test"
 
-ActiveRecord::Schema.verbose = false
-
 require File.expand_path("../dummy/config/environment",  __FILE__)
+
+ActiveRecord::Schema.verbose = false
 require File.expand_path("../dummy/db/schema",  __FILE__)
+
 require "rails/test_help"
 
 require "shoulda-context"
