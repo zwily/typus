@@ -1,3 +1,7 @@
-<%= link_to preview, :class => "fancybox" do %>
+<% if params[:_popup] %>
   <%= image_tag thumb, :alt => preview %>
+<% else %>
+  <%= link_to preview, :class => "fancybox" do %>
+    <%= image_tag thumb, :alt => preview %>
+  <% end %>
 <% end %>

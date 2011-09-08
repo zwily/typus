@@ -27,7 +27,7 @@ module Admin::Resources::DataTypes::DragonflyHelper
              :preview => data.process(:thumb, Typus.image_preview_size).url,
              :thumb => data.process(:thumb, Typus.image_table_thumb_size).url
     else
-      link_to data.name, data.url
+      params[:_popup] ? data.name : link_to(data.name, data.url)
     end
   end
 
@@ -42,7 +42,7 @@ module Admin::Resources::DataTypes::DragonflyHelper
              :thumb => data.process(:thumb, Typus.image_thumb_size).url,
              :options => options
     else
-      link_to data.name, data.url
+      params[:_popup] ? data.name : link_to(data.name, data.url)
     end
   end
 
