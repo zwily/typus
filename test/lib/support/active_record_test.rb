@@ -61,7 +61,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test "to_label returns default Model#id" do
-    assert_match /Post#/, FactoryGirl.create(:post).to_label
+    assert_match /Post#/, FactoryGirl.build(:post).to_label
   end
 
   test "to_resource" do
