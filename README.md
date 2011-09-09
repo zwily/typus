@@ -55,7 +55,7 @@ user to be able to run tests.
 
 ## Links
 
-- [Documentation](https://docs.typuscmf.com/)
+- [Documentation](http://docs.typuscmf.com/)
 - [Issues](https://github.com/typus/typus/issues)
 - [Source Code][typus] and [RubyGems][typus_gem]
 - [Mailing List](http://groups.google.com/group/typus)
