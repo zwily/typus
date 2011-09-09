@@ -64,6 +64,11 @@ module Typus
             id == resource.send(Typus.user_foreign_key)
           end
 
+          def set_token
+            self.token = "#{SecureRandom.hex(6)}-#{SecureRandom.hex(6)}"
+          end
+          protected :set_token
+
         end
       end
     end

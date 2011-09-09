@@ -81,10 +81,6 @@ module Typus
             self.salt = generate_hash("--#{Time.zone.now.to_s(:number)}--#{email}--") if new_record?
           end
 
-          def set_token
-            self.token = "#{SecureRandom.hex(3)}-#{SecureRandom.hex(3)}"
-          end
-
           def password_required?
             crypted_password.blank? || !password.blank?
           end

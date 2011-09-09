@@ -71,10 +71,6 @@ module Typus
             self.password_digest = BCrypt::Password.create(unencrypted_password)
           end
 
-          def set_token
-            self.token = "#{SecureRandom.hex(6)}-#{SecureRandom.hex(6)}"
-          end
-
           def password_must_be_strong
             if password.present?
               errors.add(:password, :too_short, :count => 7) unless password.size > 6
