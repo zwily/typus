@@ -65,7 +65,9 @@ module Typus
           end
 
           def set_token
-            self.token = "#{SecureRandom.hex(6)}-#{SecureRandom.hex(6)}".encode('UTF-8')
+            token = "#{SecureRandom.hex(6)}-#{SecureRandom.hex(6)}"
+            token.encode!('UTF-8') if token.respond_to?(:encode)
+            self.token = token
           end
           protected :set_token
 
