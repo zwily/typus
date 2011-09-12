@@ -32,7 +32,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
     render "admin/templates/has_and_belongs_to_many", locals
   end
 
-  def build_label_text_for_has_and_belongs_to_many(klass, html_options, options)
+  def build_label_text_for_has_and_belongs_to_many(klass, html_options, options = {})
     if html_options[:disabled] == true
       Typus::I18n.t("Read only")
     elsif admin_user.can?('create', klass) && !headless_mode?
