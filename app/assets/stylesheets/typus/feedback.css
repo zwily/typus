@@ -31,3 +31,9 @@
 
 #errorExplanation ul { margin: 1em 1.5em; }
 #errorExplanation ul li { list-style: square!important; margin: 0!important; }
+
+.notice p,
+.alert p {
+  margin: 0;
+  padding: 5px 0;
+}
