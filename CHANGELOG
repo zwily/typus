@@ -1,9 +1,11 @@
 = 3.2.0 (unreleased)
 
-= 3.1.2 (unreleased)
+= 3.1.2
 
  * [CHANGED] Images, links and belongs_to associations do not have links
    when popup mode. This will avoid an "Inception" problem.
+
+ * [FIXED] Problems on HABTM associations when generating association names.
 
 = 3.1.1
 
