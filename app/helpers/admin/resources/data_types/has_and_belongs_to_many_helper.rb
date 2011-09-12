@@ -11,7 +11,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
 
     resource_ids = "#{attribute.singularize}_ids"
     html_options = { :disabled => attribute_disabled?(resource_ids.to_sym) }
-    model = @resource.name.downcase.gsub("::", "_")
+    model = @resource.name.underscore.gsub("/", "_")
     options = { :attribute => "#{model}_#{attribute}" }
 
     label_text = @resource.human_attribute_name(attribute)
