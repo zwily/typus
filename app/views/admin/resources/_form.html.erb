@@ -12,8 +12,12 @@
 
   <fieldset class="buttons">
     <ol>
-      <% build_save_options.each do |key, value| %>
-        <li><%= submit_tag Typus::I18n.t(value), :name => key, :onclick => "setConfirmUnload(false);", :disable_with => Typus::I18n.t(value) %></li>
+      <% build_save_options.each do |key, value, special| %>
+        <%
+          message = Typus::I18n.t(value)
+          options = { :name => key, :onclick => "setConfirmUnload(false);", :disable_with => message  }
+        %>
+        <li><%= submit_tag message, options %></li>
       <% end %>
     </ol>
   </fieldset>
