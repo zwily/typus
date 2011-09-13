@@ -1,3 +1,11 @@
+<% if Typus.chosen %>
+  <% content_for :javascripts do %>
+    <script type="text/javascript">
+      $(document).ready(function() { $(".chzn-select").chosen(); });
+    </script>
+  <% end %>
+<% end %>
+
 <%= render "form_javascripts" %>
 
 <%= form_for @item, :url => options, :html => { :class => "resource", :multipart => true } do |form| %>
