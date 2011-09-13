@@ -142,9 +142,6 @@ module Typus
   mattr_accessor :quick_sidebar
   @@quick_sidebar = false
 
-  mattr_accessor :chosen
-  @@chosen = true
-
   class << self
 
     # Default way to setup typus. Run `rails generate typus` to create a fresh
