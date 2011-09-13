@@ -5,4 +5,4 @@
 //= require js/jquery.formalize.min
 //= require typus/jquery.application
 //= require typus/custom
-//= require chosen.jquery.min
+//= require chosen.jquery
