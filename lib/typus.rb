@@ -23,6 +23,7 @@ module Typus
     autoload :Actions, "typus/controller/actions"
     autoload :ActsAsList, "typus/controller/acts_as_list"
     autoload :Ancestry, "typus/controller/ancestry"
+    autoload :Autocomplete, "typus/controller/autocomplete"
     autoload :Bulk, "typus/controller/bulk"
     autoload :FeaturedImage, "typus/controller/featured_image"
     autoload :Filters, "typus/controller/filters"
