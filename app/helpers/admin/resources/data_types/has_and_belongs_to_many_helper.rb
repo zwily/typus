@@ -24,7 +24,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
                :related_klass => klass,
                :related_items => @item.send(attribute),
                :related_ids => "#{model}[#{resource_ids}][]",
-               :values => klass.all,
+               :values => klass,
                :form => form,
                :label_text => label_text.html_safe,
                :html_options => html_options }
