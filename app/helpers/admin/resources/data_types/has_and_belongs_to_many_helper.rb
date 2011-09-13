@@ -22,9 +22,9 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
     locals = { :attribute => attribute,
                :attribute_id => "#{model}_#{attribute}",
                :related_klass => klass,
-               :related_items => klass.all,
+               :related_items => @item.send(attribute),
                :related_ids => "#{model}[#{resource_ids}][]",
-               :values => @item.send(attribute),
+               :values => klass.all,
                :form => form,
                :label_text => label_text.html_safe,
                :html_options => html_options }
