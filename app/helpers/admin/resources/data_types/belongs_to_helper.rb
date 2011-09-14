@@ -83,7 +83,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
                         :action => 'new',
                         :attribute => options[:attribute],
                         :_popup => true }
-    link_to Typus::I18n.t("Add New"), default_options, { :class => 'iframe_with_form_reload' }
+    link_to Typus::I18n.t("Add New"), default_options, { :class => 'iframe' }
   end
 
 end

@@ -37,12 +37,12 @@ module Admin::Resources::DataTypes::HasManyHelper
                           :action => "new",
                           :_popup => true }
 
-      link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe" }
+      link_to Typus::I18n.t("Add New"), default_options.merge(options), { :class => "iframe_with_page_reload" }
     end
   end
 
   def set_has_many_resource_actions
-    @resource_actions = [["Edit", { :action => "edit", :_popup => true }, { :class => 'iframe' }],
+    @resource_actions = [["Edit", { :action => "edit", :_popup => true }, { :class => 'iframe_with_page_reload' }],
                          ["Trash", { :action => "destroy" }, { :confirm => "Trash?" } ]]
   end
 

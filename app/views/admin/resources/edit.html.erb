@@ -9,15 +9,29 @@
     <small><%= list_actions %></small>
   </h2>
 
-  <% if headless_mode? && params[:action] == 'edit' %>
+  <% if headless_mode? && params[:action] == 'edit' && flash.keys.include?(:notice) && !params[:_input] %>
     <script type="text/javascript">
       $(document).ready(function () {
-        parent.Typus.resource_attribute = "#<%= params[:attribute] %>";
-        parent.Typus.resource_id = '<%= @item.id %>';
-        parent.Typus.resource_to_label = '<%= @item.to_label %>';
-        <% if flash.keys.any? && !params[:_input] %>
+        <% if params[:attribute] %>
+          // Get the params we want to assign when we close Fancybox
+          // with the click button.
+          var attribute = "#<%= params[:attribute] %>";
+          var value = "<%= @item.id %>";
+          var label = "<%= @item.to_label %>";
+
+          // Make sure we remove any item which has the same ID as the
+          // item we are trying to insert.
+          // parent.$(attribute + " " + "option[value='" + value + "']").remove();
+          parent.$(attribute).append(new Option(label, value, true, true));
+
+          // This should be performed only in chosen is enabled.
+          // parent.$(".chzn-select").trigger("liszt:updated");
+        <% else %>
           parent.Typus.parent_location_reload = true;
         <% end %>
+
+        // And finally close Fancybox!
+        parent.$.fancybox.close();
       });
     </script>
   <% end %>

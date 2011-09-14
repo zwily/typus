@@ -11,7 +11,7 @@ $(document).ready(function() {
         'scrolling': false,
     });
 
-    $(".iframe_with_form_reload").fancybox({
+    $(".iframe").fancybox({
         'width': 720,
         'height': '90%',
         'autoScale': false,
@@ -20,16 +20,9 @@ $(document).ready(function() {
         'type': 'iframe',
         'centerOnScroll': true,
         'scrolling': false,
-        onClosed: function() {
-            var attribute = Typus.resource_attribute;
-            var text = Typus.resource_to_label;
-            var value = Typus.resource_id;
-            $(attribute).append(new Option(text, value, true, true));
-            $(".chzn-select").trigger("liszt:updated");
-        },
     });
 
-    $(".iframe").fancybox({
+    $(".iframe_with_page_reload").fancybox({
         'width': 720,
         'height': '90%',
         'autoScale': false,
@@ -51,7 +44,7 @@ $(document).ready(function() {
         $('.action-toggle').each(function() { this.checked = status; });
     });
 
-    $(".chzn-select").chosen();
+    // $(".chzn-select").chosen();
 
 });
 

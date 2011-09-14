@@ -66,7 +66,7 @@ module Admin::Resources::FormHelper
 
   def save_options_for_headless_mode
     return unless headless_mode?
-    { "_continue" => "Save and continue editing" }
+    { "_continue" => "Save" }
   end
 
   def save_options_for_user_class
