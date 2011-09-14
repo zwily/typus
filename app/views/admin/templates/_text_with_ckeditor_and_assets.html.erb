@@ -22,7 +22,7 @@
 %>
 
 <%
-  unless options[:disabled] == true
+  unless params[:_popup] || options[:disabled] == true
     input = "#{@resource.model_name.underscore.gsub("/", "_")}_#{attribute}"
     insert_picture = <<-DATA
   <small>
