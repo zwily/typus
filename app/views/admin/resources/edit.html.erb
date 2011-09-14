@@ -25,7 +25,7 @@
           parent.$(attribute).append(new Option(label, value, true, true));
 
           // This should be performed only in chosen is enabled.
-          // parent.$(".chzn-select").trigger("liszt:updated");
+          parent.$(".chzn-select").trigger("liszt:updated");
         <% else %>
           parent.Typus.parent_location_reload = true;
         <% end %>
