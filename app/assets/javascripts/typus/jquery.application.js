@@ -44,8 +44,6 @@ $(document).ready(function() {
         $('.action-toggle').each(function() { this.checked = status; });
     });
 
-    $(".chzn-select").chosen();
-
 });
 
 Typus = {}
