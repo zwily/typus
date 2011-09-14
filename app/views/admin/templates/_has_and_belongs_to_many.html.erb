@@ -1,21 +1,11 @@
-<%
-  if values.count > 250
-    values = values.limit(0)
-    message = "Click Add New ..."
-  else
-    values = values.all
-    message = "Select Some Options"
-  end
-%>
-
 <li id="<%= attribute_id %>_field">
   <%= form.label attribute, label_text %>
   <%= hidden_field_tag related_ids %>
   <%= select_tag related_ids,
-                 options_from_collection_for_select(values, "id", "to_label", related_items.map(&:id)),
+                 options_from_collection_for_select(values.all, "id", "to_label", related_items.map(&:id)),
                  html_options.merge(:multiple => true,
                                     :id => attribute_id,
                                     :class => "chzn-select",
                                     :style => "width: 550px;",
-                                    "data-placeholder" => Typus::I18n.t(message)) %>
+                                    "data-placeholder" => Typus::I18n.t("Select Some Options")) %>
 </li>
