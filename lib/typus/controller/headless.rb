@@ -15,7 +15,9 @@ module Typus
       private :set_resources_action_for_headless_on_index
 
       def set_resources_action_for_headless
-        add_resources_action("All Entries", {:action => 'index', :id => nil})
+        if params[:_input]
+          add_resources_action("All Entries", {:action => 'index', :id => nil})
+        end
       end
       private :set_resources_action_for_headless
 
