@@ -13,18 +13,8 @@
     <script type="text/javascript">
       $(document).ready(function () {
         <% if params[:attribute] %>
-          // Get the params we want to assign when we close Fancybox
-          // with the click button.
-          var attribute = "#<%= params[:attribute] %>";
-          var value = "<%= @item.id %>";
-          var label = "<%= @item.to_label %>";
-
-          // Make sure we remove any item which has the same ID as the
-          // item we are trying to insert.
-          // parent.$(attribute + " " + "option[value='" + value + "']").remove();
-          parent.$(attribute).append(new Option(label, value, true, true));
-
-          // This should be performed only in chosen is enabled.
+          var option = new Option("<%= @item.to_label %>", "<%= @item.id %>", true, true);
+          parent.$("#<%= params[:attribute] %>").append(option);
           parent.$(".chzn-select-<%= params[:attribute] %>").trigger("liszt:updated");
         <% else %>
           parent.Typus.parent_location_reload = true;
