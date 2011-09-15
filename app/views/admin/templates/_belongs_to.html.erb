@@ -1,6 +1,6 @@
 <% chosen_class = "chzn-select-#{attribute_id}" %>
 
-<li id="<%= attribute_id %>">
+<li id="<%= attribute_id %>_li">
   <%= form.label attribute, label_text %>
   <% if values.any? %>
     <%= form.select related_fk, values, options, html_options.merge(:class => chosen_class, :style => "width: 350px;") %>
@@ -15,6 +15,6 @@
 
 <% if values.count > 250 %>
   <style type="text/css">
-    #<%= attribute_id %>_id_chzn .chzn-search { display: none; }
+    #<%= attribute_id %>_chzn .chzn-search { display: none; }
   </style>
 <% end %>
