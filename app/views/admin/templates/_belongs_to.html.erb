@@ -9,8 +9,12 @@
   <% end %>
 </li>
 
-<% if values.count < 250 %>
-  <script type="text/javascript">
-    $(document).ready(function () { $(".<%= chosen_class %>").chosen(); });
-  </script>
+<script type="text/javascript">
+  $(document).ready(function () { $(".<%= chosen_class %>").chosen(); });
+</script>
+
+<% if values.count > 250 %>
+  <style type="text/css">
+    #<%= attribute_id %>_id_chzn .chzn-search { display: none; }
+  </style>
 <% end %>

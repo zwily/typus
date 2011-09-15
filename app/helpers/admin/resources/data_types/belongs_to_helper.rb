@@ -25,9 +25,11 @@ module Admin::Resources::DataTypes::BelongsToHelper
       related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
     end
 
+    attribute_id = "#{@resource.name.underscore}_#{attribute}"
+
     render "admin/templates/belongs_to",
            :attribute => attribute,
-           :attribute_id => "#{@resource.table_name}_#{attribute}",
+           :attribute_id => attribute_id,
            :form => form,
            :related_fk => related_fk,
            :related => related,
