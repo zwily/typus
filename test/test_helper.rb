@@ -28,21 +28,21 @@ class ActiveSupport::TestCase
 
   def admin_sign_in
     @typus_user = FactoryGirl.create(:typus_user)
-    set_session
+    set_session(@typus_user.id)
   end
 
   def editor_sign_in
     @typus_user = FactoryGirl.create(:typus_user, :email => "editor@example.com", :role => "editor")
-    set_session
+    set_session(@typus_user.id)
   end
 
   def designer_sign_in
     @typus_user = FactoryGirl.create(:typus_user, :email => "designer@example.com", :role => "designer")
-    set_session
+    set_session(@typus_user.id)
   end
 
-  def set_session
-    @request.session[:typus_user_id] = @typus_user.id
+  def set_session(id)
+    @request.session[:typus_user_id] = id
   end
 
   def reset_session
