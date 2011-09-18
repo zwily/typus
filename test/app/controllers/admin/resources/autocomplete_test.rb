@@ -26,7 +26,9 @@ class Admin::EntriesControllerTest < ActionController::TestCase
     get :autocomplete, :search => "fesp"
     assert_response :success
     assert assigns(:items).size.eql?(1)
-    assert_equal '[{"id":10000,"name":"fesplugas"}]', response.body
+
+    assert_match %Q["id":10000], response.body
+    assert_match %Q["name":"fesplugas"], response.body
   end
 
   test "autocomplete with only a search result" do
