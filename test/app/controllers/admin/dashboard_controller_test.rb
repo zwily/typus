@@ -87,17 +87,17 @@ class Admin::DashboardControllerTest < ActionController::TestCase
 
     should "verify link to session sign out" do
       link = %(href="/admin/session")
-      assert_match link, @response.body
+      assert_match link, response.body
     end
 
     should "verify link to edit user" do
       link = %(href="/admin/typus_users/edit/#{@request.session[:typus_user_id]})
-      assert_match link, @response.body
+      assert_match link, response.body
     end
 
     should "verify we can set our own partials" do
       partials = %w( _sidebar.html.erb )
-      partials.each { |p| assert_match p, @response.body }
+      partials.each { |p| assert_match p, response.body }
     end
 
   end
@@ -135,8 +135,8 @@ class Admin::DashboardControllerTest < ActionController::TestCase
   test "designer should not see links to unallowed resources" do
     designer_sign_in
     get :index
-    assert_no_match /\/admin\/posts\/new/, @response.body
-    assert_no_match /\/admin\/typus_users\/new/, @response.body
+    assert_no_match /\/admin\/posts\/new/, response.body
+    assert_no_match /\/admin\/typus_users\/new/, response.body
   end
 
 end

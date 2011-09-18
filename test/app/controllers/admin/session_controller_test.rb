@@ -47,13 +47,13 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
     should "verify_typus_sign_in_layout_does_not_include_recover_password_link" do
       get :new
-      assert !@response.body.include?("Recover password")
+      assert !response.body.include?("Recover password")
     end
 
     should "verify new includes recover_password_link when mailer_sender is set" do
       Typus.expects(:mailer_sender).returns("john@example.com")
       get :new
-      assert @response.body.include?("Recover password")
+      assert response.body.include?("Recover password")
     end
 
     should "not_create_session_for_invalid_users" do
@@ -67,14 +67,14 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
       post :create, { :typus_user => { :email => typus_user.email, :password => "12345678" } }
 
-      assert_nil @request.session[:typus_user_id]
+      assert_nil request.session[:typus_user_id]
       assert_response :redirect
       assert_redirected_to new_admin_session_path
     end
 
     should "create_session_for_an_enabled_user" do
       post :create, { :typus_user => { :email => @typus_user.email, :password => "12345678" } }
-      assert_equal @typus_user.id, @request.session[:typus_user_id]
+      assert_equal @typus_user.id, request.session[:typus_user_id]
       assert_response :redirect
       assert_redirected_to admin_dashboard_index_path
     end
@@ -82,7 +82,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
     should "destroy" do
       delete :destroy
 
-      assert_nil @request.session[:typus_user_id]
+      assert_nil request.session[:typus_user_id]
       assert_response :redirect
       assert_redirected_to new_admin_session_path
       assert flash.empty?

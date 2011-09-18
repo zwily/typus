@@ -136,7 +136,7 @@ class Admin::PostsControllerTest < ActionController::TestCase
     end
 
     should "have 1 template" do
-      assert_match "templates#datepicker_template_published_at", @response.body
+      assert_match "templates#datepicker_template_published_at", response.body
     end
 
   end
@@ -148,10 +148,10 @@ class Admin::PostsControllerTest < ActionController::TestCase
 
       assert_response :success
 
-      assert_match %Q[<?xml version="1.0" encoding="UTF-8"?>], @response.body
-      assert_match %Q[<posts type="array">], @response.body
-      assert_match "<status>#{@post.status}</status>", @response.body
-      assert_match "<title>#{@post.title}</title>", @response.body
+      assert_match %Q[<?xml version="1.0" encoding="UTF-8"?>], response.body
+      assert_match %Q[<posts type="array">], response.body
+      assert_match "<status>#{@post.status}</status>", response.body
+      assert_match "<title>#{@post.title}</title>", response.body
     end
 
     should "render index and return csv" do
@@ -163,7 +163,7 @@ title;status
       get :index, :format => "csv"
 
       assert_response :success
-      assert_equal expected, @response.body
+      assert_equal expected, response.body
     end
 
     should "not instantiate resource_actions" do
@@ -226,7 +226,7 @@ title;status
 
       setup do
         editor_sign_in
-        @request.env['HTTP_REFERER'] = '/admin/posts'
+        request.env['HTTP_REFERER'] = '/admin/posts'
       end
 
       should "not be root" do
@@ -282,7 +282,7 @@ title;status
           post :create, :post => { :title => "Chunky Bacon", :body => "Lorem ipsum ..." }
         end
 
-        assert_equal @request.session[:typus_user_id], assigns(:item).typus_user_id
+        assert_equal request.session[:typus_user_id], assigns(:item).typus_user_id
       end
 
       should "verify_editor_updating_an_item_does_not_change_typus_user_id" do
@@ -290,7 +290,7 @@ title;status
           post_ = FactoryGirl.create(:post, :typus_user => @typus_user)
           post :update, :id => post_.id, :post => { :title => 'Updated', :typus_user_id => @typus_user.id }
           post_updated = Post.find(post_.id)
-          assert_equal @request.session[:typus_user_id], post_updated.typus_user_id
+          assert_equal request.session[:typus_user_id], post_updated.typus_user_id
         end
       end
 
@@ -301,7 +301,7 @@ title;status
   context "Roles" do
 
     setup do
-      @request.env['HTTP_REFERER'] = '/admin/posts'
+      request.env['HTTP_REFERER'] = '/admin/posts'
     end
 
     context "Admin" do
@@ -325,7 +325,7 @@ title;status
       setup do
         Typus.user_class.delete_all
         @designer = FactoryGirl.create(:typus_user, :role => "designer")
-        @request.session[:typus_user_id] = @designer.id
+        request.session[:typus_user_id] = @designer.id
         @post = FactoryGirl.create(:post)
       end
 
@@ -356,53 +356,53 @@ title;status
 
     should "relate comment to post (has_many)" do
       comment = FactoryGirl.create(:comment, :post => nil)
-      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
+      request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_difference('@post.comments.count') do
         post :relate, :id => @post.id, :related => { :model => 'Comment', :id => comment.id, :association_name => 'comments' }
       end
 
       assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_redirected_to request.env['HTTP_REFERER']
       assert_equal "Post successfully updated.", flash[:notice]
     end
 
     should "return a message instead a 404 error if related_id is empty" do
       comment = FactoryGirl.create(:comment, :post => nil)
-      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
+      request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_no_difference('@post.comments.count') do
         post :relate, :id => @post.id, :related => { :model => 'Comment', :id => "", :association_name => 'comments' }
       end
 
       assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_redirected_to request.env['HTTP_REFERER']
       assert_equal "Please, select an option.", flash[:notice]
     end
 
     should "return a message instead a 404 error if related_id is nil" do
       comment = FactoryGirl.create(:comment, :post => nil)
-      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
+      request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#comments"
 
       assert_no_difference('@post.comments.count') do
         post :relate, :id => @post.id, :related => { :model => 'Comment', :id => nil, :association_name => 'comments' }
       end
 
       assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_redirected_to request.env['HTTP_REFERER']
       assert_equal "Please, select an option.", flash[:notice]
     end
 
     should "relate category to post (has_and_belongs_to_many)" do
       category = FactoryGirl.create(:category)
-      @request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"
+      request.env['HTTP_REFERER'] = "/admin/posts/edit/#{@post.id}#categories"
 
       assert_difference('category.posts.count') do
         post :relate, :id => @post.id, :related => { :model => 'Category', :id => category.id, :association_name => 'categories' }
       end
 
       assert_response :redirect
-      assert_redirected_to @request.env['HTTP_REFERER']
+      assert_redirected_to request.env['HTTP_REFERER']
       assert_equal "Post successfully updated.", flash[:notice]
     end
 
@@ -418,7 +418,7 @@ title;status
       end
 
       should "render index and validates_presence_of_custom_partials" do
-        assert_match "posts#_index.html.erb", @response.body
+        assert_match "posts#_index.html.erb", response.body
       end
 
       should "render_index_and_verify_page_title" do
@@ -440,7 +440,7 @@ title;status
       end
 
       should "render new and partials_on_new" do
-        assert_match "posts#_new.html.erb", @response.body
+        assert_match "posts#_new.html.erb", response.body
       end
 
       should "render new and verify page title" do
@@ -456,7 +456,7 @@ title;status
       end
 
       should "render_edit_and_verify_presence_of_custom_partials" do
-        assert_match "posts#_edit.html.erb", @response.body
+        assert_match "posts#_edit.html.erb", response.body
       end
 
       should "render_edit_and_verify_page_title" do
@@ -472,7 +472,7 @@ title;status
       end
 
       should "render_show_and_verify_presence_of_custom_partials" do
-        assert_match "posts#_show.html.erb", @response.body
+        assert_match "posts#_show.html.erb", response.body
       end
 
       should "render show and verify page title" do
@@ -486,7 +486,7 @@ title;status
         Typus::Resources.expects(:default_action_on_item).at_least_once.returns(action)
         get :index
         Post.all.each do |post|
-          assert_match "/posts/#{action}/#{post.id}", @response.body
+          assert_match "/posts/#{action}/#{post.id}", response.body
         end
       end
     end
@@ -500,7 +500,7 @@ title;status
       should "render_index_and_not_show_add_entry_link" do
         get :index
         assert_response :success
-        assert_no_match /Add Post/, @response.body
+        assert_no_match /Add Post/, response.body
       end
 
     end
@@ -521,7 +521,7 @@ title;status
         get :index
         Post.all.each do |post|
           action = post.owned_by?(@typus_user) ? "edit" : "show"
-          assert_match "/posts/#{action}/#{post.id}", @response.body
+          assert_match "/posts/#{action}/#{post.id}", response.body
         end
       end
 
@@ -534,9 +534,9 @@ title;status
           get :index
           Post.all.each do |post|
             if @typus_user.owns?(post)
-              assert_match "/posts/#{action}/#{post.id}", @response.body
+              assert_match "/posts/#{action}/#{post.id}", response.body
             else
-              assert_no_match /\/posts\/#{action}\/#{post.id}/, @response.body
+              assert_no_match /\/posts\/#{action}\/#{post.id}/, response.body
             end
           end
         end

@@ -26,7 +26,7 @@ title,published
     get :index, :format => "csv"
 
     assert_response :success
-    assert_equal expected, @response.body
+    assert_equal expected, response.body
   end
 
   test "export XML" do

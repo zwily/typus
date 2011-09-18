@@ -12,7 +12,7 @@ require "test_helper"
 class Admin::AssetsControllerTest < ActionController::TestCase
 
   setup do
-    @request.session[:typus_user_id] = FactoryGirl.create(:typus_user).id
+    request.session[:typus_user_id] = FactoryGirl.create(:typus_user).id
     @post = FactoryGirl.create(:post)
   end
 
@@ -20,17 +20,17 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
     setup do
       @asset = FactoryGirl.create(:asset)
-      @request.env['HTTP_REFERER'] = "/admin/assets/edit/#{@asset.id}"
+      request.env['HTTP_REFERER'] = "/admin/assets/edit/#{@asset.id}"
     end
 
     should "verify there is a file link" do
       get :edit, :id => @asset.id
-      assert_match /media/, @response.body
+      assert_match /media/, response.body
     end
 
     should "verify dragonfly can be removed" do
       get :edit, :id => @asset.id
-      assert_match /Remove/, @response.body
+      assert_match /Remove/, response.body
 
       assert @asset.dragonfly_uid.present?
 
@@ -45,7 +45,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
 
     should "verify dragonfly_required can not removed" do
       get :edit, :id => @asset.id
-      assert_no_match /Remove required file/, @response.body
+      assert_no_match /Remove required file/, response.body
 
       get :update, :id => @asset.id, :attribute => "dragonfly_required"
       assert_response :success
