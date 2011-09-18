@@ -2,7 +2,7 @@ $(document).ready(function() {
 
     $("#quicksearch").searchField();
 
-    $(".resource :input", document.myForm).bind("change", function() { setConfirmUnload(true); });
+    $(".resource :input", document.myForm).bind("change", function() { Typus.setConfirmUnload(true); });
 
     $("a.fancybox").fancybox({
         'titlePosition': 'over',
@@ -46,12 +46,12 @@ $(document).ready(function() {
 
 });
 
-Typus = {}
+var Typus = {};
 
-function setConfirmUnload(on) {
-    window.onbeforeunload = (on) ? unloadMessage : null;
+Typus.setConfirmUnload = function(on) {
+    window.onbeforeunload = (on) ? Typus.unloadMessage : null;
 }
 
-function unloadMessage() {
+Typus.unloadMessage = function () {
     return "You have entered new data on this page. If you navigate away from this page without first saving your data, the changes will be lost.";
 }
