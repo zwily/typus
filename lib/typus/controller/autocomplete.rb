@@ -4,8 +4,8 @@ module Typus
 
       def autocomplete
         get_objects
-        data = @resource.limit(20)
-        render :json => data.map { |i| { "id" => i.id, "name" => i.to_label } }
+        @items = @resource.limit(20)
+        render :json => @items.map { |i| { "id" => i.id, "name" => i.to_label } }
       end
 
     end
