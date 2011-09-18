@@ -11,31 +11,11 @@ $(document).ready(function() {
         'scrolling': false,
     });
 
-    $(".iframe").fancybox({
-        'width': 720,
-        'height': '90%',
-        'autoScale': false,
-        'transitionIn': 'none',
-        'transitionOut': 'none',
-        'type': 'iframe',
-        'centerOnScroll': true,
-        'scrolling': false,
-    });
+    $(".iframe").fancybox(Typus.fancyboxDefaults);
 
-    $(".iframe_with_page_reload").fancybox({
-        'width': 720,
-        'height': '90%',
-        'autoScale': false,
-        'transitionIn': 'none',
-        'transitionOut': 'none',
-        'type': 'iframe',
-        'centerOnScroll': true,
-        'scrolling': false,
-        onClosed: function() {
-            if (Typus.parent_location_reload)
-                parent.location.reload(true);
-        },
-    });
+    $(".iframe_with_page_reload").fancybox(
+        $.extend(Typus.fancyboxDefaults, { onClosed: Typus.reloadParent })
+    );
 
     // This method is used by Typus::Controller::Bulk
     $(".action-toggle").click(function() {
@@ -48,8 +28,23 @@ $(document).ready(function() {
 
 var Typus = {};
 
+Typus.fancyboxDefaults = {
+    'width': 720,
+    'height': '90%',
+    'autoScale': false,
+    'transitionIn': 'none',
+    'transitionOut': 'none',
+    'type': 'iframe',
+    'centerOnScroll': true,
+    'scrolling': false,
+};
+
 Typus.setConfirmUnload = function(on) {
     window.onbeforeunload = (on) ? Typus.unloadMessage : null;
+}
+
+Typus.reloadParent = function() {
+    if (Typus.parent_location_reload) parent.location.reload(true);
 }
 
 Typus.unloadMessage = function () {
