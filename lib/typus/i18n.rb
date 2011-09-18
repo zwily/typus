@@ -19,7 +19,7 @@ module Typus
       #     Typus::I18n.t("Hello %{world}!", :world => @world)
       #
       def t(key, options = {})
-        options[:default] = key
+        options[:default] ||= key
         ::I18n.t(key, options)
       end
 

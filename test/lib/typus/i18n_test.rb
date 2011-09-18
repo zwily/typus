@@ -4,6 +4,7 @@ class I18nTest < ActiveSupport::TestCase
 
   test "t" do
     assert_equal "Hello", Typus::I18n.t("Hello")
+    assert_equal "Hello", Typus::I18n.t(".hello", :default => "Hello")
   end
 
   test "default_locale" do
