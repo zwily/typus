@@ -3,7 +3,7 @@ require "test_helper"
 class I18nTest < ActiveSupport::TestCase
 
   test "t" do
-    assert_equal "Missing Translation", Typus::I18n.t("Missing Translation")
+    assert_equal "Hello", Typus::I18n.t("Hello")
   end
 
   test "default_locale" do

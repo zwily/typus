@@ -18,10 +18,9 @@ module Typus
       #
       #     Typus::I18n.t("Hello %{world}!", :world => @world)
       #
-      def t(msg, *args)
-        options = args.extract_options!
-        options[:default] = msg
-        ::I18n.t(msg, options)
+      def t(key, options = {})
+        options[:default] = key
+        ::I18n.t(key, options)
       end
 
       def default_locale
