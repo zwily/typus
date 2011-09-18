@@ -26,8 +26,8 @@ class Admin::Resources::DataTypes::HasAndBelongsToManyHelperTest < ActiveSupport
     assert_equal "entry_default_categories", options[:attribute_id]
     assert_equal "entry_default[category_ids][]", options[:related_ids]
     assert_equal "Categories", options[:label_text]
-    assert_equal @item.categories, options[:values]
-    assert_equal categories, options[:related_items]
+    assert_equal Category, options[:values]
+    assert_equal @item.categories, options[:related_items]
   end
 
   test "build_label_text_for_has_and_belongs_to_many when disabled" do
@@ -36,10 +36,17 @@ class Admin::Resources::DataTypes::HasAndBelongsToManyHelperTest < ActiveSupport
     assert_equal expected, output
   end
 
+  # OPTIMIZE: This method should not be redefined here!
   def admin_user
     FactoryGirl.create(:typus_user)
   end
 
+  # OPTIMIZE: This method should not be redefined here!
+  def current_role
+    admin_user.role.to_sym
+  end
+
+  # OPTIMIZE: This method should not be redefined here!
   def headless_mode?
     true
   end
