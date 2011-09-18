@@ -33,4 +33,12 @@ class Entry < ActiveRecord::Base
 
   default_scope where(:deleted_at => nil)
 
+  ##
+  # Instance Methods
+  #
+
+  def to_label
+    title
+  end
+
 end

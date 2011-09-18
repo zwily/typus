@@ -22,11 +22,11 @@ class Admin::EntriesControllerTest < ActionController::TestCase
   end
 
   test "autocomplete with a search result" do
-    FactoryGirl.create(:entry, :title => "fesplugas")
-    get :autocomplete, :search => "fesplugas"
+    FactoryGirl.create(:entry, :title => "fesplugas", :id => 10000)
+    get :autocomplete, :search => "fesp"
     assert_response :success
     assert assigns(:items).size.eql?(1)
-    assert_equal '[{"id":51,"name":"Entry#51"}]', response.body
+    assert_equal '[{"id":10000,"name":"fesplugas"}]', response.body
   end
 
   test "autocomplete with only a search result" do
