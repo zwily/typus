@@ -33,7 +33,9 @@ Description:
         models = Typus.application_models.reject { |m| Typus.models.include?(m) }.map(&:constantize)
 
         models.each do |model|
-          configuration[model.table_name] = {}
+          key = model.name.underscore
+
+          configuration[key] = {}
 
           relationships = [ :has_many, :has_one ].map do |relationship|
                             model.reflect_on_all_associations(relationship).map { |i| i.name.to_s }
@@ -42,7 +44,7 @@ Description:
           rejections = %w( ^id$ _type$ type created_at created_on updated_at updated_on deleted_at ).join("|")
           fields = model.columns.map(&:name).reject { |f| f.match(rejections) }.join(", ")
 
-          configuration[model.table_name][:base] = <<-RAW
+          configuration[key][:base] = <<-RAW
 #{model}:
   fields:
     default: #{fields}
@@ -51,7 +53,7 @@ Description:
   application: Application
           RAW
 
-          configuration[model.table_name][:roles] = "#{model}: create, read, update, delete"
+          configuration[key][:roles] = "#{model}: create, read, update, delete"
         end
 
         configuration
