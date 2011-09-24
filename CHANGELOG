@@ -9,6 +9,8 @@
    feature which will be used eventually by "Chosen" once they support
    remote calls.
 
+ * [CHANGED] Typus::Resources.minute_step is now nil by default.
+
 = 3.1.2
 
  * [CHANGED] Images, links and belongs_to associations do not have links

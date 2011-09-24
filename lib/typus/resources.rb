@@ -22,7 +22,7 @@ module Typus
     @@form_rows = 15
 
     mattr_accessor :minute_step
-    @@minute_step = 5
+    @@minute_step = nil
 
     mattr_accessor :only_user_items
     @@only_user_items = false

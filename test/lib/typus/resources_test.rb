@@ -15,7 +15,7 @@ class ResourcesTest < ActiveSupport::TestCase
   end
 
   test "minute_step" do
-    assert Typus::Resources.minute_step.eql?(5)
+    assert Typus::Resources.minute_step.nil?
   end
 
   test "only_user_items" do
