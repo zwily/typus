@@ -60,7 +60,7 @@ module Typus
       end
 
       def export(format)
-        fields = @resource.typus_fields_for(format).map { |i| i.first }
+        fields = @resource.typus_fields_for(format).map(&:first)
         methods = fields - @resource.column_names
         except = @resource.column_names - fields
 

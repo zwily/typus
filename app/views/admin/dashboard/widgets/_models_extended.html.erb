@@ -12,7 +12,7 @@
     </tr>
   </thead>
 
-  <% admin_user.models.map { |i| i.constantize }.each do |klass| %>
+  <% admin_user.models.map(&:constantize).each do |klass| %>
     <tr class="<%= cycle("even", "odd") %>">
       <td><%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %></td>
       <td width="30px" align="right"><%= klass.count %></td>

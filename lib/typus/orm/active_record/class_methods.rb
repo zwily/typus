@@ -44,7 +44,7 @@ module Typus
 
           fields ||= data['default'] || typus_default_fields_for(filter)
           fields = fields.extract_settings if fields.is_a?(String)
-          fields.map { |f| f.to_sym }
+          fields.map(&:to_sym)
         end
 
         def typus_default_fields_for(filter)
@@ -52,7 +52,7 @@ module Typus
         end
 
         def virtual_fields
-          instance_methods.map { |i| i.to_s } - model_fields.keys.map { |i| i.to_s }
+          instance_methods.map(&:to_s) - model_fields.keys.map(&:to_s)
         end
 
         def virtual_attribute?(field)
@@ -60,7 +60,7 @@ module Typus
         end
 
         def dragonfly_attribute?(field)
-          if respond_to?(:dragonfly_attachment_classes) && dragonfly_attachment_classes.map { |i| i.attribute }.include?(field)
+          if respond_to?(:dragonfly_attachment_classes) && dragonfly_attachment_classes.map(&:attribute).include?(field)
             :dragonfly
           end
         end
@@ -98,7 +98,7 @@ module Typus
 
         def get_typus_filters
           data = read_model_config['filters'] || ""
-          data.extract_settings.map { |i| i.to_sym }
+          data.extract_settings.map(&:to_sym)
         end
 
       end

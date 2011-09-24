@@ -6,7 +6,7 @@ module Admin::Resources::DataTypes::PaperclipHelper
   end
 
   def link_to_detach_attribute_for_paperclip(attribute)
-    validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map { |i| i.attributes }.flatten.map { |i| i.to_s }
+    validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map(&:attributes).flatten.map(&:to_s)
     attachment = @item.send(attribute)
 
     if attachment.exists? && !validators.include?("#{attribute}_file_name") && attachment

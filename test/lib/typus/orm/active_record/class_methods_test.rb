@@ -20,8 +20,8 @@ class ClassMethodsTest < ActiveSupport::TestCase
                 [:created_at, :datetime],
                 [:updated_at, :datetime]]
 
-    assert_equal expected.map { |i| i.first }, TypusUser.model_fields.keys
-    assert_equal expected.map { |i| i.last }, TypusUser.model_fields.values
+    assert_equal expected.map(&:first), TypusUser.model_fields.keys
+    assert_equal expected.map(&:last), TypusUser.model_fields.values
   end
 
   test "model_fields for Post" do
@@ -36,8 +36,8 @@ class ClassMethodsTest < ActiveSupport::TestCase
                 [:created_at, :datetime],
                 [:updated_at, :datetime]]
 
-    assert_equal expected.map { |i| i.first }, Post.model_fields.keys
-    assert_equal expected.map { |i| i.last }, Post.model_fields.values
+    assert_equal expected.map(&:first), Post.model_fields.keys
+    assert_equal expected.map(&:last), Post.model_fields.values
   end
 
   test "model_relationships is an ActiveSupport::OrderedHash" do
@@ -70,8 +70,8 @@ class ClassMethodsTest < ActiveSupport::TestCase
                 ["role", :selector],
                 ["status", :boolean]]
 
-    assert_equal expected.map { |i| i.first }, TypusUser.typus_fields_for(:list).keys
-    assert_equal expected.map { |i| i.last }, TypusUser.typus_fields_for(:list).values
+    assert_equal expected.map(&:first), TypusUser.typus_fields_for(:list).keys
+    assert_equal expected.map(&:last), TypusUser.typus_fields_for(:list).values
   end
 
   test "typus_fields_for returns form fields for TypusUser" do
@@ -84,8 +84,8 @@ class ClassMethodsTest < ActiveSupport::TestCase
                 ["locale", :selector],
                 ["status", :boolean]]
 
-    assert_equal expected.map { |i| i.first }, TypusUser.typus_fields_for(:new).keys
-    assert_equal expected.map { |i| i.last }, TypusUser.typus_fields_for(:form).values
+    assert_equal expected.map(&:first), TypusUser.typus_fields_for(:new).keys
+    assert_equal expected.map(&:last), TypusUser.typus_fields_for(:form).values
   end
 
   test "typus_fields_for returns form fields for Asset" do
@@ -93,16 +93,16 @@ class ClassMethodsTest < ActiveSupport::TestCase
                 ["dragonfly", :dragonfly],
                 ["dragonfly_required", :dragonfly]]
 
-    assert_equal expected.map { |i| i.first }, Asset.typus_fields_for(:special).keys
-    assert_equal expected.map { |i| i.last }, Asset.typus_fields_for(:special).values
+    assert_equal expected.map(&:first), Asset.typus_fields_for(:special).keys
+    assert_equal expected.map(&:last), Asset.typus_fields_for(:special).values
   end
 
   test "typus_fields_for with virtual attributes" do
     expected = [["caption", :string],
                 ["original_file_name", :virtual]]
 
-    assert_equal expected.map { |i| i.first }, Asset.typus_fields_for(:virtual).keys
-    assert_equal expected.map { |i| i.last }, Asset.typus_fields_for(:virtual).values
+    assert_equal expected.map(&:first), Asset.typus_fields_for(:virtual).keys
+    assert_equal expected.map(&:last), Asset.typus_fields_for(:virtual).values
   end
 
   test "typus_fields_for raises a RuntimeError when model does not have configuration" do
@@ -138,14 +138,14 @@ class ClassMethodsTest < ActiveSupport::TestCase
                 ["spam", :boolean],
                 ["post.title", :transversal]]
 
-    assert_equal expected.map { |i| i.first }, Comment.typus_fields_for(:list).keys
-    assert_equal expected.map { |i| i.last }, Comment.typus_fields_for(:list).values
+    assert_equal expected.map(&:first), Comment.typus_fields_for(:list).keys
+    assert_equal expected.map(&:last), Comment.typus_fields_for(:list).values
   end
 
   test "typus_fields_for for EntryDefault which does not have field values on index" do
     expected = [["id", :integer]]
-    assert_equal expected.map { |i| i.first }, EntryDefault.typus_fields_for(:index).keys
-    assert_equal expected.map { |i| i.last }, EntryDefault.typus_fields_for(:index).values
+    assert_equal expected.map(&:first), EntryDefault.typus_fields_for(:index).keys
+    assert_equal expected.map(&:last), EntryDefault.typus_fields_for(:index).values
   end
 
   test "typus_fields_for for EntryDefault which does not have field values on other actions" do
@@ -156,26 +156,26 @@ class ClassMethodsTest < ActiveSupport::TestCase
                 ["published", :boolean],
                 ["deleted_at", :datetime]]
 
-    assert_equal expected.map { |i| i.first }, EntryDefault.typus_fields_for(:new).keys
-    assert_equal expected.map { |i| i.last }, EntryDefault.typus_fields_for(:new).values
+    assert_equal expected.map(&:first), EntryDefault.typus_fields_for(:new).keys
+    assert_equal expected.map(&:last), EntryDefault.typus_fields_for(:new).values
   end
 
   test "typus_filters for TypusUser" do
     expected = [["status", :boolean],
                 ["role", :string]]
 
-    assert_equal expected.map { |i| i.first }.join(", "), Typus::Configuration.config["TypusUser"]["filters"]
-    assert_equal expected.map { |i| i.first }, TypusUser.typus_filters.keys
-    assert_equal expected.map { |i| i.last }, TypusUser.typus_filters.values
+    assert_equal expected.map(&:first).join(", "), Typus::Configuration.config["TypusUser"]["filters"]
+    assert_equal expected.map(&:first), TypusUser.typus_filters.keys
+    assert_equal expected.map(&:last), TypusUser.typus_filters.values
   end
 
   test "typus_filters for Post" do
     expected = [["status", :string],
                 ["created_at", :datetime]]
 
-    assert_equal expected.map { |i| i.first }.join(", "), Typus::Configuration.config["Post"]["filters"]
-    assert_equal expected.map { |i| i.first }, Post.typus_filters.keys
-    assert_equal expected.map { |i| i.last }, Post.typus_filters.values
+    assert_equal expected.map(&:first).join(", "), Typus::Configuration.config["Post"]["filters"]
+    assert_equal expected.map(&:first), Post.typus_filters.keys
+    assert_equal expected.map(&:last), Post.typus_filters.values
   end
 
   test "typus_filters for Case" do

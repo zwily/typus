@@ -52,7 +52,7 @@ module Typus
 
       def typus_field_options_for(filter)
         options = read_model_config['fields']['options']
-        options && options[filter.to_s] ? options[filter.to_s].extract_settings.map { |i| i.to_sym } : []
+        options && options[filter.to_s] ? options[filter.to_s].extract_settings.map(&:to_sym) : []
       end
 
       #--
@@ -145,7 +145,7 @@ module Typus
       end
 
       def typus_user_id?
-        columns.map { |u| u.name }.include?(Typus.user_foreign_key)
+        columns.map(&:name).include?(Typus.user_foreign_key)
       end
 
       def read_model_config

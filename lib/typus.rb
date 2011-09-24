@@ -159,7 +159,7 @@ module Typus
         hash[settings.first] = settings.size > 1 ? settings.last : 1000
       end
 
-      hash.sort { |a1, a2| a1[1].to_i <=> a2[1].to_i }.map { |i| i.first }
+      hash.sort { |a1, a2| a1[1].to_i <=> a2[1].to_i }.map(&:first)
     end
 
     # Lists modules of an application.
@@ -176,7 +176,7 @@ module Typus
 
     # Lists models from the configuration file.
     def models
-      Typus::Configuration.config.map { |i| i.first }.sort
+      Typus::Configuration.config.map(&:first).sort
     end
 
     # Lists resources, which are tableless models. This is done by looking at

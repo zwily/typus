@@ -33,7 +33,7 @@
         </tr>
       </thead>
 
-      <% admin_user.application(app).map { |i| i.constantize }.each do |klass| %>
+      <% admin_user.application(app).map(&:constantize).each do |klass| %>
         <% if klass.typus_options_for(:hide_from_dashboard) == false %>
           <tr class="<%= cycle("even", "odd") %>">
             <td>

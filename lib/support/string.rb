@@ -1,7 +1,7 @@
 class String
 
   def extract_settings
-    split(",").map { |x| x.strip }
+    split(",").map(&:strip)
   end
 
   def remove_prefix

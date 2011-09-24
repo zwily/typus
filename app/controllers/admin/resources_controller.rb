@@ -190,7 +190,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def set_eager_loading
-    if (eager_loading = @resource.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map { |i| i.name }).any?
+    if (eager_loading = @resource.reflect_on_all_associations(:belongs_to).reject { |i| i.options[:polymorphic] }.map(&:name)).any?
       @resource = @resource.includes(eager_loading)
     end
   end

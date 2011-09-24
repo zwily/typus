@@ -30,7 +30,7 @@ Description:
         Typus.reload!
 
         configuration = {}
-        models = Typus.application_models.reject { |m| Typus.models.include?(m) }.map { |m| m.constantize }
+        models = Typus.application_models.reject { |m| Typus.models.include?(m) }.map(&:constantize)
 
         models.each do |model|
           configuration[model.table_name] = {}
