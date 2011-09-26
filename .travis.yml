@@ -6,7 +6,7 @@ rvm:
 
 notifications:
   recipients:
-    - support@typuscms.com
+    - support@typuscmf.com
 
 branches:
   only:
