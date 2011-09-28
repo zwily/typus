@@ -26,6 +26,7 @@ Gem::Specification.new do |s|
   s.test_files    = []
   s.require_paths = ["lib"]
 
+  s.add_dependency "bcrypt-ruby", "~> 3.0.0"
   s.add_dependency "jquery-rails"
   s.add_dependency "kaminari"
   s.add_dependency "rails", "~> 3.1.0"
