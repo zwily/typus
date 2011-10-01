@@ -58,12 +58,9 @@ user to be able to run tests.
 ## Links
 
 - [Documentation](http://docs.typuscmf.com/)
-- [Issues](https://github.com/typus/typus/issues)
-- [Source Code][typus]
 - [RubyGems][typus_gem]
 - [Mailing List](http://groups.google.com/group/typus)
 - [Contributors List](http://github.com/typus/typus/contributors)
-- [Travis Builds](http://travis-ci.org/#!/typus/typus)
 
 ## License
 
