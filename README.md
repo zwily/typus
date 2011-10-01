@@ -44,7 +44,7 @@ and go to <http://0.0.0.0:3000/admin>.
 
 ## Testing
 
-To test clone the git repo and run the following commands:
+To test, clone the repo and run the following commands:
 
     $ git clone git://github.com/typus/typus.git
     $ bundle install --path vendor/bundle
