@@ -1,7 +1,7 @@
 # Typus: Admin Panel for Ruby on Rails applications
 
-**Typus** is a control panel for [Ruby on Rails][rails] applications to allow
-trusted users edit structured content.
+**Typus** is a control panel for [Ruby on Rails][rails] applications to
+allow trusted users edit structured content.
 
 It’s not a CMS with a full working system but it provides a part of the
 system: authentication, permissions and basic look and feel for your
@@ -57,14 +57,15 @@ user to be able to run tests.
 
 - [Documentation](http://docs.typuscmf.com/)
 - [Issues](https://github.com/typus/typus/issues)
-- [Source Code][typus] and [RubyGems][typus_gem]
+- [Source Code][typus]
+- [RubyGems][typus_gem]
 - [Mailing List](http://groups.google.com/group/typus)
 - [Contributors List](http://github.com/typus/typus/contributors)
 - [Travis Builds](http://travis-ci.org/#!/typus/typus)
 
 ## License
 
-Typus is released under the MIT license.
+**Typus** is released under the MIT license.
 
 [typus]: http://github.com/typus/typus
 [typus_demo]: http://demo.typuscmf.com/
