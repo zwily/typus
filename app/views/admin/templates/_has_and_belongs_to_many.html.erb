@@ -15,9 +15,3 @@
 <script type="text/javascript">
   $(document).ready(function () { $(".<%= chosen_class %>").chosen(); });
 </script>
-
-<% if values.count > 250 %>
-  <style type="text/css">
-    #<%= attribute_id %>_chzn li.search-field { display: none; }
-  </style>
-<% end %>
