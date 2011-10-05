@@ -11,7 +11,7 @@ require "test_helper"
 class Admin::CategoriesControllerTest < ActionController::TestCase
 
   setup do
-    @request.session[:typus_user_id] = FactoryGirl.create(:typus_user).id
+    admin_sign_in
     @request.env['HTTP_REFERER'] = '/admin/categories'
   end
 
