@@ -21,6 +21,8 @@
  * [CHANGED] We do not longer hide search boxes on Chosen. Apparently
    it has been fixed: https://github.com/harvesthq/chosen/commit/d4c7005b5c
 
+ * [FIXED] Detaching a Paperclip was not working.
+
 = 3.1.2
 
  * [CHANGED] Images, links and belongs_to associations do not have links
