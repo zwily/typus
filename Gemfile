@@ -49,7 +49,7 @@ gem "dragonfly", "~> 0.9"
 gem "rack-cache", :require => "rack/cache"
 
 # Asset Management with Paperclip
-gem "paperclip", "~> 2.3.16"
+gem "paperclip", "~> 2.4.2"
 
 # MongoDB
 gem "mongoid", "~> 2.3.0"
