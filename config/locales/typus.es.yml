@@ -7,6 +7,7 @@ es:
   "Active": "Activo"
   "Add": "Añadir"
   "Add New": "Añadir nuevo"
+  "Add New %{resource}": "Añadir Nuevo %{resource}"
   "All": "Todos"
   "Are you sure?": "¿Estás seguro?"
   "Are you sure you want to sign out and end your session?": "¿Estás seguro que quieres salir y cerrar la sessión?"
@@ -16,6 +17,7 @@ es:
 
   "Dashboard": "Panel de control"
   "Down": "Bajar"
+  "Applications": "Applicaciones"
 
   "Edit": "Editar"
   "Edit %{resource}": "Editar %{resource}"
@@ -50,6 +52,9 @@ es:
   "Reset password": "Cambiar contraseña"
   "Resources": "Recursos"
 
+  "Save": "Guardar"
+  "Save and add another": "Guardar y añadir nuevo"
+  "Save and continue editing": "Guardar y seguir editando"
   "Save %{resource}": "Guardar %{resource}"
   "Search": "Buscar"
   "Show": "Mostrar"
