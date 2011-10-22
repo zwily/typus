@@ -2,6 +2,11 @@ module Typus
   module Controller
     module ActsAsList
 
+      def self.included(base)
+        base.before_filter :get_object, :only => [:position]
+        base.before_filter :check_resource_ownership, :only => [:position]
+      end
+
       ##
       # This module is designed to work with `acts_as_list`.
       #
