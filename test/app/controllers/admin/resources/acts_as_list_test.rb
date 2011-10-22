@@ -40,4 +40,11 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert assigns(:item).position.eql?(1)
   end
 
+  test "get position with not allowed go option" do
+    category = FactoryGirl.create(:category, :position => 1)
+    get :position, :id => category.id, :go => 'move_up'
+    assert_response :unprocessable_entity
+    assert_equal "Not allowed!", response.body
+  end
+
 end
