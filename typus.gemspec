@@ -7,7 +7,7 @@ require "typus/version"
 
 files = `git ls-files`.split("\n")
 test_files = `git ls-files -- test/*`.split("\n")
-ignores = `git ls-files -- doc/* Guardfile .travis.yml .gitignor .travis.yml .gitignore`.split("\n")
+ignores = `git ls-files -- doc/* Guardfile .travis.yml .gitignore`.split("\n")
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
