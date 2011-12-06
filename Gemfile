@@ -56,7 +56,7 @@ gem "mongoid", "~> 2.3.4"
 gem "bson_ext", "~> 1.5.1"
 
 group :test do
-  gem "shoulda-context", "~> 1.0.0.beta1"
+  gem "shoulda-context", "~> 1.0.0"
   gem "mocha" # Make sure mocha is loaded at the end ...
 end
 
