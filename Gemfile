@@ -52,8 +52,8 @@ gem "rack-cache", :require => "rack/cache"
 gem "paperclip", "~> 2.4.2"
 
 # MongoDB
-gem "mongoid", "~> 2.3.0"
-gem "bson_ext", "~> 1.4.0"
+gem "mongoid", "~> 2.3.4"
+gem "bson_ext", "~> 1.5.1"
 
 group :test do
   gem "shoulda-context", "~> 1.0.0.beta1"
@@ -63,7 +63,7 @@ end
 # Remember to install the Chrome or Safari extension, otherwise it doesn't
 # make sense to have this here.
 group :development do
-  gem "guard-livereload"
+  # gem "guard-livereload"
   # gem "rb-fsevent"
   # gem "growl_notify"
 end
