@@ -4,6 +4,14 @@
 
  * [CHANGED] Association tables now contain a "show" link.
 
+ * [FIXED] Generators check if there's a database connection.
+
+ * [CHANGED] ActsAsList module now can only perform whitelisted actions.
+
+ * [CHANGED] ActsAsList hooks moved completely to it's module.
+
+ * [CHANGED] Repository moved again to http://github.com/fesplugas/typus
+
 = 3.1.4
 
  * [FIXED] Belongs to helper was not creating properly class ids.
