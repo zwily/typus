@@ -313,5 +313,3 @@ accepted.
 * Nested models.
 
 * Contextual content depending on the role logged.
-
-* Replace typus authentication by devise.
