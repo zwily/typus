@@ -12,7 +12,9 @@ postgresql: &postgresql
   adapter: postgresql
   encoding: unicode
   database: typus_<%= Rails.env %>
-  username: postgres
+  pool: 5
+  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
+  password: <%= ENV['DB_PASSWORD'] || '' %>
   min_messages: warning
 
 mysql2: &mysql2
