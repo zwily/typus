@@ -6,18 +6,18 @@
 
 sqlite3: &sqlite3
   adapter: sqlite3
-  database: db/typus.sqlite3
+  database: db/typus_<%= Rails.env %>.sqlite3
 
 postgresql: &postgresql
   adapter: postgresql
   encoding: unicode
-  database: typus_development
+  database: typus_<%= Rails.env %>
   username: postgres
   min_messages: warning
 
 mysql2: &mysql2
   adapter: mysql2
-  database: typus_development
+  database: typus_<%= Rails.env %>
   host: localhost
 
 ##
@@ -29,7 +29,6 @@ development:
 
 test:
   <<: *<%= connection %>
-  database: typus_test
 
 production:
   <<: *<%= connection %>
