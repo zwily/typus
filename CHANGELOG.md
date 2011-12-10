@@ -10,13 +10,13 @@
 
  * [CHANGED] Repository moved again to http://github.com/fesplugas/typus
 
-Changes: https://github.com/fesplugas/typus/compare/v3.1.4...v3.1.5
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.4...v3.1.5>
 
 = 3.1.4
 
  * [FIXED] Belongs to helper was not creating properly class ids.
 
-Changes: https://github.com/fesplugas/typus/compare/v3.1.3...v3.1.4
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.3...v3.1.4>
 
 = 3.1.3
 
@@ -41,7 +41,7 @@ Changes: https://github.com/fesplugas/typus/compare/v3.1.3...v3.1.4
 
  * [FIXED] Detaching a Paperclip was not working.
 
-Changes: https://github.com/fesplugas/typus/compare/v3.1.2...v3.1.3
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.2...v3.1.3>
 
 = 3.1.2
 
