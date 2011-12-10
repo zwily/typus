@@ -5,8 +5,8 @@ Add **Typus** and **Devise** to your ``Gemfile``:
 
 .. code-block:: ruby
 
-  gem "devise", "~> 1.4.2"
-  gem "typus", "~> 3.1.0.rc17"
+  gem "devise", "~> 1.5.2"
+  gem "typus", "~> 3.1.5"
 
 Generate **Devise** required stuff:
 
