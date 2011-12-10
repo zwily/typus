@@ -182,8 +182,8 @@ Changes: <https://github.com/fesplugas/typus/compare/v3.1.2...v3.1.3>
 3.0.7
 -----
 
- *[CHANGED] Updated assets. Please run the `typus:assets` generator in order
-  to create the new files on the new location.
+ * [CHANGED] Updated assets. Please run the `typus:assets` generator in order
+   to create the new files on the new location.
 
 3.0.3
 -----
