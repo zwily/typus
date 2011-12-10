@@ -31,7 +31,7 @@ end
 # And this stuff needed for the demo application.
 gem "acts_as_list"
 gem "acts_as_tree"
-gem "factory_girl_rails", "~> 1.1.0"
+gem "factory_girl_rails", "~> 1.4.0"
 gem "rails-permalink", "~> 1.0.0"
 gem "rails-trash", "~> 1.1.2"
 
