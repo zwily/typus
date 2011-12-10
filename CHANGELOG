@@ -1,6 +1,4 @@
-= 3.2.0 (unreleased)
-
-= 3.1.5 (unreleased)
+= 3.1.5 (2011-12-10)
 
  * [CHANGED] Association tables now contain a "show" link.
 
