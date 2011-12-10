@@ -6,7 +6,9 @@
 
 sqlite3: &sqlite3
   adapter: sqlite3
-  database: db/typus_<%= Rails.env %>.sqlite3
+  database: db/<%= Rails.env %>.sqlite3
+  pool: 5
+  timeout: 5000
 
 postgresql: &postgresql
   adapter: postgresql
