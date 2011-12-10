@@ -297,9 +297,9 @@ Previously
 Why a 3.0.0 version? After considering the work done for the Rails 3 transition
 I though it would be a good idea to keep versions syncronized with Rails.
 
-Typus will have the same version numbers as Rails as I considered it's pretty
-tied to it. With each release of Rails, we will take the latest features into
-Typus.
+**Typus** will have the same version numbers as Rails as I considered it's
+pretty tied to it. With each release of Rails, we will take the latest features
+into **Typus**.
 
 Pending stuff that someday will be done, donations and collaborations are
 accepted.
