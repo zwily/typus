@@ -42,14 +42,14 @@ gem "jquery-rails"
 gem "ckeditor-rails", "0.0.2"
 
 # Alternative authentication
-gem "devise", "~> 1.4.7"
+gem "devise", "~> 1.5.2"
 
 # Asset Management with Dragonfly
 gem "dragonfly", "~> 0.9.8"
 gem "rack-cache", :require => "rack/cache"
 
 # Asset Management with Paperclip
-gem "paperclip", "~> 2.4.2"
+gem "paperclip", "~> 2.4.5"
 
 # MongoDB
 gem "mongoid", "~> 2.3.4"
