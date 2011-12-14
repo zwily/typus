@@ -59,9 +59,11 @@ module Admin::Resources::FormHelper
   end
 
   def save_options
-    { "_addanother" => "Save and add another",
-      "_continue" => "Save and continue editing",
-      "_save" => "Save" }
+    options = {}
+    options["_addanother"] = "Save and add another"
+    options["_continue"] = "Save and continue editing"
+    options["_save"] = "Save"
+    options
   end
 
   def save_options_for_headless_mode
