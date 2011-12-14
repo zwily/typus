@@ -61,7 +61,9 @@ module Admin::Resources::FormHelper
   def save_options
     options = {}
     options["_addanother"] = "Save and add another"
-    options["_continue"] = "Save and continue editing"
+    if admin_user.can?('edit', @resource.model_name)
+      options["_continue"] = "Save and continue editing"
+    end
     options["_save"] = "Save"
     options
   end
