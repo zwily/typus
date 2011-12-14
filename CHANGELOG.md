@@ -1,6 +1,12 @@
 CHANGELOG
 =========
 
+3.1.6 (unreleased)
+------------------
+
+ * [FIXED] "Save and continue editing" button was shown even when the
+   user didn't have acess to it.
+
 3.1.5 (2011-12-10)
 ------------------
 
