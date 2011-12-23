@@ -10,7 +10,7 @@ module Admin::Resources::DataTypes::PositionHelper
 
       unless first_item || last_item
         options = { :controller => "/admin/#{item.class.to_resource}", :action => "position", :id => item.id, :go => key }
-        locals[:html_position] << link_to(Typus::I18n.t(value), params.merge(options))
+        locals[:html_position] << link_to(Typus::I18n.t(value), params.merge(options), { :class => Typus::I18n.t(value).downcase })
       end
     end
 
