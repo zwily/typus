@@ -34,6 +34,7 @@ module Typus
         def virtual_attribute?(field)
           :virtual if virtual_fields.include?(field.to_s)
         end
+
         def selector_attribute?(field)
           :selector if typus_field_options_for(:selectors).include?(field)
         end
