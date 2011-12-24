@@ -12,10 +12,6 @@ class Hit
     extend ActiveModel::Naming
   end
 
-  def self.typus_fields_for(*args)
-    [[:name, :string], [:description, :text]]
-  end
-
   def self.model_fields
     [[:name, :string], [:description, :text]]
   end
