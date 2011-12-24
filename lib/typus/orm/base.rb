@@ -1,3 +1,11 @@
+##
+# These are class methods which we want our orms inherit from. This
+# module should be renamed to something like:
+#
+#     Typus::Orm::Base::ClassMethods
+#
+# Which obviously it's a better name.
+#
 module Typus
   module Orm
     module Base
