@@ -170,6 +170,10 @@ module Typus
           end
         end
 
+        def virtual_fields
+          instance_methods.map(&:to_s) - model_fields.keys.map(&:to_s)
+        end
+
       end
     end
   end

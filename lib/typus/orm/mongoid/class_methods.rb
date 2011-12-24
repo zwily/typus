@@ -27,10 +27,6 @@ module Typus
           model_fields
         end
 
-        def virtual_fields
-          instance_methods.map { |i| i.to_s } - model_fields.keys.map { |i| i.to_s }
-        end
-
         def virtual_attribute?(field)
           :virtual if virtual_fields.include?(field.to_s)
         end

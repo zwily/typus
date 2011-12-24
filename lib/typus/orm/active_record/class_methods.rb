@@ -51,10 +51,6 @@ module Typus
           filter.to_sym.eql?(:index) ? ['id'] : model_fields.keys
         end
 
-        def virtual_fields
-          instance_methods.map(&:to_s) - model_fields.keys.map(&:to_s)
-        end
-
         def virtual_attribute?(field)
           :virtual if virtual_fields.include?(field.to_s)
         end
