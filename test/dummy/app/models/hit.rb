@@ -13,7 +13,10 @@ class Hit
   end
 
   def self.model_fields
-    [[:name, :string], [:description, :text]]
+    hash = ActiveSupport::OrderedHash.new
+    hash[:name] = :string
+    hash[:description] = :text
+    hash
   end
 
 end
