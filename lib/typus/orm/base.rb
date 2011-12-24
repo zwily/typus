@@ -152,9 +152,7 @@ module Typus
         @adapter ||= ::ActiveRecord::Base.configurations[Rails.env]['adapter']
       end
 
-      def typus_user_id?
-        columns.map(&:name).include?(Typus.user_foreign_key)
-      end
+      def typus_user_id?; end
 
       def read_model_config
         Typus::Configuration.config[name] or raise "No typus configuration specified for #{name}"
