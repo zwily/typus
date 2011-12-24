@@ -3,7 +3,7 @@ module Typus
     module Mongoid
       module ClassMethods
 
-        include Typus::Orm::Base
+        include Typus::Orm::Base::ClassMethods
 
         delegate :any?, :to => :all
 

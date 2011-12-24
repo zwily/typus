@@ -4,7 +4,7 @@ require "support/object"
 require "support/string"
 
 require "typus/engine"
-require "typus/orm/base"
+require "typus/orm/base/class_methods"
 require "typus/orm/base/search"
 require "typus/orm/active_record"
 require "typus/orm/mongoid"

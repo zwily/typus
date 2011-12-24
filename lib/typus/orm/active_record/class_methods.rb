@@ -3,7 +3,7 @@ module Typus
     module ActiveRecord
       module ClassMethods
 
-        include Typus::Orm::Base
+        include Typus::Orm::Base::ClassMethods
 
         # Model fields as an <tt>ActiveSupport::OrderedHash</tt>.
         def model_fields
