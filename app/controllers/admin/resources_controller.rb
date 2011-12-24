@@ -149,7 +149,7 @@ class Admin::ResourcesController < Admin::BaseController
     set_wheres
     set_joins
     check_resources_ownership if @resource.typus_options_for(:only_user_items)
-    set_order
+    set_order if @resource.respond_to?(:order)
     set_eager_loading
   end
 
@@ -185,7 +185,7 @@ class Admin::ResourcesController < Admin::BaseController
     params[:sort_order] ||= "desc"
 
     if (order = params[:order_by] ? "#{params[:order_by]} #{params[:sort_order]}" : @resource.typus_order_by).present?
-      @resource = @resource.order(order) if @resource.respond_to?(:order)
+      @resource = @resource.order(order)
     end
   end
 
