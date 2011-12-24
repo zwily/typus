@@ -24,6 +24,8 @@ module Typus
           build_filter_interval(interval, key)
         end
 
+        alias_method :build_time_conditions, :build_datetime_conditions
+
         def build_date_conditions(key, value)
           tomorrow = 0.days.ago.tomorrow.to_date
 
