@@ -118,10 +118,9 @@ class TypusUserTest < ActiveSupport::TestCase
     assert_equal "John Locke", user.to_label
   end
 
-  test "admin gets a list of all applications expect MongoDB becuase is disabled" do
+  test "admin gets a list of all applications" do
     typus_user = FactoryGirl.build(:typus_user)
-    # assert_equal Typus.applications, typus_user.applications
-    assert_equal Typus.applications.reject { |i| i.eql?("MongoDB") }, typus_user.applications
+    assert_equal Typus.applications, typus_user.applications
   end
 
 =begin

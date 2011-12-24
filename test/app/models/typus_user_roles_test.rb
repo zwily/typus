@@ -3,7 +3,7 @@ require "test_helper"
 class TypusUserRolesTest < ActiveSupport::TestCase
 
   test "configuration roles" do
-    assert_equal %w(admin designer disabled editor), Typus::Configuration.roles.map(&:first).sort
+    assert_equal %w(admin designer editor), Typus::Configuration.roles.map(&:first).sort
   end
 
   context "admin" do
@@ -27,7 +27,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
                   "EntryDefault",
                   "EntryTrash",
                   "Git",
-                  # "Hit",
+                  "Hit",
                   "ImageHolder",
                   "Invoice",
                   "Order",
