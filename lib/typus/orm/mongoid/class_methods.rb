@@ -42,15 +42,6 @@ module Typus
           reflect_on_association(field).macro if reflect_on_association(field)
         end
 
-        def custom_attribute?(field)
-          case field.to_s
-          when 'parent', 'parent_id' then :tree
-          when /password/            then :password
-          when 'position'            then :position
-          when /\./                  then :transversal
-          end
-        end
-
         #
         # Model fields as an <tt>ActiveSupport::OrderedHash</tt>.
         def model_fields

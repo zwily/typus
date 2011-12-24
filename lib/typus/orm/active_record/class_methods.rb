@@ -79,15 +79,6 @@ module Typus
           reflect_on_association(field).macro if reflect_on_association(field)
         end
 
-        def custom_attribute?(field)
-          case field.to_s
-          when 'parent', 'parent_id' then :tree
-          when /password/            then :password
-          when 'position'            then :position
-          when /\./                  then :transversal
-          end
-        end
-
         def typus_filters
           ActiveSupport::OrderedHash.new.tap do |fields_with_type|
             get_typus_filters.each do |field|

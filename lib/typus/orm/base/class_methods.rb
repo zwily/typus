@@ -161,6 +161,15 @@ module Typus
           name.underscore.pluralize
         end
 
+        def custom_attribute?(field)
+          case field.to_s
+          when 'parent', 'parent_id' then :tree
+          when /password/            then :password
+          when 'position'            then :position
+          when /\./                  then :transversal
+          end
+        end
+
       end
     end
   end
