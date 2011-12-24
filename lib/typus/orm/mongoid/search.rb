@@ -31,8 +31,6 @@ module Typus
           {'$or' => search_query}
         end
 
-        alias_method :build_time_conditions, :build_datetime_conditions
-
         def build_filter_interval(interval, key)
           {key.to_sym.gt => interval.first, key.to_sym.lt => interval.last}
         end
