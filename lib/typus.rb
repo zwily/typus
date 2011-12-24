@@ -4,12 +4,13 @@ require "support/object"
 require "support/string"
 
 require "typus/engine"
+require "typus/regex"
+require "typus/version"
+
 require "typus/orm/base/class_methods"
 require "typus/orm/base/search"
 require "typus/orm/active_record"
 require "typus/orm/mongoid"
-require "typus/regex"
-require "typus/version"
 
 require "kaminari"
 
