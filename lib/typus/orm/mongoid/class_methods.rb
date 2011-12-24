@@ -42,9 +42,14 @@ module Typus
         #
         # Model fields as an <tt>ActiveSupport::OrderedHash</tt>.
         def model_fields
-          ActiveSupport::OrderedHash.new.tap do |hash|
-            fields.values.map { |u| hash[u.name.to_sym] = u.type.name.downcase.to_sym }
+          hash = ActiveSupport::OrderedHash.new
+
+          fields.each do |key, value|
+            hash[key.to_sym] = value.options[:type].to_s.downcase.to_sym
           end
+
+          rejections = [:_id, :_type]
+          hash.reject { |k, v| rejections.include?(k) }
         end
 
         # Model relationships as an <tt>ActiveSupport::OrderedHash</tt>.
