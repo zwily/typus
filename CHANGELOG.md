@@ -9,6 +9,8 @@ CHANGELOG
 
  * [CHANGED] Improved MongoDB support.
 
+ * [NEW] We can now filter by integer.
+
 3.1.5 (2011-12-10)
 ------------------
 

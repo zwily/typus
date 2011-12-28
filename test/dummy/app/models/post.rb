@@ -35,6 +35,10 @@ class Post < ActiveRecord::Base
       "<div class=''>Something special</div>".html_safe => "special" }
   end
 
+  def self.numeric_statuses
+    0.upto(5)
+  end
+
   def self.array_selector
     %w(item1 item2)
   end

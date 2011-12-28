@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20110822074025) do
+ActiveRecord::Schema.define(:version => 20110906010101) do
 
   create_table "admin_settings", :force => true do |t|
     t.string   "key"
@@ -171,6 +171,7 @@ ActiveRecord::Schema.define(:version => 20110822074025) do
     t.boolean  "published"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "numeric_status",      :default => 0,       :null => false
   end
 
   add_index "posts", ["favorite_comment_id"], :name => "index_posts_on_favorite_comment_id"
