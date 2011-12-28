@@ -5,7 +5,8 @@ module Admin::Resources::FiltersHelper
       locals = {}
 
       locals[:filters] = typus_filters.map do |key, value|
-                           { :key => set_filter(key, value), :value => send("#{value}_filter", key) }
+                           { :key => set_filter(key, value),
+                             :value => send("#{value}_filter", key) }
                          end
 
       rejections = %w(controller action locale utf8 sort_order order_by) + locals[:filters].map { |f| f[:key] }
