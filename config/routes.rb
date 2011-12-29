@@ -21,13 +21,10 @@ Rails.application.routes.draw do
       end
     end
 
-    Typus.models.map(&:to_resource).each do |resource|
+    (Typus.models.map(&:to_resource) + Typus.resources.map(&:underscore)).each do |resource|
       match "#{resource}(/:action(/:id))(.:format)", :controller => resource
     end
 
-    Typus.resources.map(&:underscore).each do |resource|
-      match "#{resource}(/:action(/:id))(.:format)", :controller => resource
-    end
   end
 
   if Typus.subdomain
