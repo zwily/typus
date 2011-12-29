@@ -22,7 +22,7 @@ Rails.application.routes.draw do
     end
 
     controllers = Typus.models.map(&:to_resource) + Typus.resources.map(&:underscore)
-    controllers.each { |r| match "#{c}(/:action(/:id))(.:format)", :controller => c }
+    controllers.each { |c| match "#{c}(/:action(/:id))(.:format)", :controller => c }
 
   end
 
