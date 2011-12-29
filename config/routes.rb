@@ -37,4 +37,5 @@ Rails.application.routes.draw do
   else
     scope "admin", {:module => :admin, :as => "admin"}, &routes_block
   end
+
 end
