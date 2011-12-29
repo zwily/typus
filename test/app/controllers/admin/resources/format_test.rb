@@ -19,7 +19,7 @@ class Admin::EntriesControllerTest < ActionController::TestCase
     entry = FactoryGirl.create(:entry)
 
     expected = <<-RAW
-title,published
+Title,Published
 #{entry.title},#{entry.published}
      RAW
 

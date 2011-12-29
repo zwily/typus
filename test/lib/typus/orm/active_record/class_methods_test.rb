@@ -34,7 +34,8 @@ class ClassMethodsTest < ActiveSupport::TestCase
                 [:typus_user_id, :integer],
                 [:published, :boolean],
                 [:created_at, :datetime],
-                [:updated_at, :datetime]]
+                [:updated_at, :datetime],
+                [:numeric_status, :integer]]
 
     assert_equal expected.map(&:first), Post.model_fields.keys
     assert_equal expected.map(&:last), Post.model_fields.values
@@ -171,6 +172,7 @@ class ClassMethodsTest < ActiveSupport::TestCase
 
   test "typus_filters for Post" do
     expected = [["status", :string],
+                ["numeric_status", :integer],
                 ["created_at", :datetime]]
 
     assert_equal expected.map(&:first).join(", "), Typus::Configuration.config["Post"]["filters"]
@@ -187,7 +189,7 @@ class ClassMethodsTest < ActiveSupport::TestCase
   end
 
   test "get_typus_filters for Post" do
-    assert_equal [:status, :created_at], Post.get_typus_filters
+    assert_equal [:status, :numeric_status, :created_at], Post.get_typus_filters
   end
 
   test "typus_actions_on accepts strings and symbols" do
@@ -226,7 +228,7 @@ class ClassMethodsTest < ActiveSupport::TestCase
   end
 
   test "typus_field_options_for" do
-    assert_equal [:status], Post.typus_field_options_for(:selectors)
+    assert_equal [:status, :numeric_status], Post.typus_field_options_for(:selectors)
     assert Post.typus_field_options_for(:unexisting).empty?
   end
 
