@@ -13,6 +13,8 @@ CHANGELOG
 
  * [FIXED] Independent paginators when showing associations.
 
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.5...master>
+
 3.1.5 (2011-12-10)
 ------------------
 
