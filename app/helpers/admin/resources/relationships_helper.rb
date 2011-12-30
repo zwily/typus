@@ -11,7 +11,8 @@ module Admin::Resources::RelationshipsHelper
   def build_pagination
     items_per_page = @model_to_relate.typus_options_for(:per_page)
     data = @item.send(@field).order(@model_to_relate.typus_order_by).where(set_conditions)
-    @items = data.page(params[:page]).per(items_per_page)
+    page = params["#{@association_name}_page"]
+    @items = data.page(page).per(items_per_page)
   end
 
   def build_relationship_table

@@ -11,6 +11,8 @@ CHANGELOG
 
  * [NEW] We can now filter by integer.
 
+ * [FIXED] Independent paginators when showing associations.
+
 3.1.5 (2011-12-10)
 ------------------
 
