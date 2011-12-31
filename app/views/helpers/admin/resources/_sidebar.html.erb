@@ -1,16 +1,9 @@
-<div id="sidebar">
+<% resources.each do |resource| %>
 
-  <% resources.each do |resource| %>
-    <% html_class = @resource.model_name.eql?(resource.model_name) ? 'active' : 'inactive' %>
+  <% html_class = @resource.model_name.eql?(resource.model_name) ? 'active' : 'inactive' %>
 
-    <ul>
-      <%= link_to :controller => "/admin/#{resource.to_resource}" do %>
-        <li class="header <%= html_class %>">
-          <%= resource.model_name.human.pluralize %>
-        </li>
-      <% end %>
-    </ul>
-
+  <%= link_to :controller => "/admin/#{resource.to_resource}" do %>
+    <h5><%= resource.model_name.human.pluralize %></h5>
   <% end %>
 
-</div>
+<% end %>

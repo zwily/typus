@@ -1,4 +1,2 @@
-<ul>
-  <li><%= link_to admin_user.to_label, admin_edit_user_path(admin_user) %></li>
-  <li><%= link_to Typus::I18n.t("Sign out"), admin_sign_out_path, :method => :delete %></li>
-</ul>
+<%= link_to admin_user.to_label, admin_edit_user_path(admin_user) %>
+<%= link_to Typus::I18n.t("Sign out"), admin_sign_out_path, :method => :delete %>

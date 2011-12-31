@@ -1,25 +1,24 @@
 <%= render "form_javascripts" %>
 
-<%= form_for @item, :url => options, :html => { :class => "resource", :multipart => true } do |form| %>
+<%= form_for @item, :url => options, :html => { :class => "resource form-stacked", :multipart => true } do |form| %>
 
   <%= render "helpers/admin/resources/errors" %>
 
-  <fieldset class="inputs">
-    <ol>
-      <%= build_form(fields, form) %>
-    </ol>
-  </fieldset>
+  <fieldset>
+    <%= build_form(fields, form) %>
 
-  <fieldset class="buttons">
-    <ol>
+    <div class="actions">
       <% build_save_options.each do |key, value, special| %>
         <%
           message = Typus::I18n.t(value)
-          options = { :name => key, :onclick => "Typus.setConfirmUnload(false);", 'data-disable-with' => message }
+          options = { :name => key,
+                      :onclick => "Typus.setConfirmUnload(false);",
+                      'data-disable-with' => message,
+                      :class => "btn" }
         %>
-        <li><%= submit_tag message, options %></li>
+        <%= submit_tag message, options %>
       <% end %>
-    </ol>
+    </div>
   </fieldset>
 
 <% end %>

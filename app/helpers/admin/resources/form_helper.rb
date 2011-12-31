@@ -34,7 +34,7 @@ module Admin::Resources::FormHelper
     label_text = @resource.human_attribute_name(attribute)
 
     if options[:disabled] == true
-      label_text += "<small>#{Typus::I18n.t("Read only")}</small>"
+      help_block = "<small>#{Typus::I18n.t("Read only")}</small>".html_safe
     end
 
     locals = { :resource => @resource,
@@ -43,7 +43,8 @@ module Admin::Resources::FormHelper
                :options => options,
                :html_options => html_options,
                :form => form,
-               :label_text => label_text.html_safe }
+               :label_text => label_text,
+               :help_block => help_block }
 
     render "admin/templates/#{template}", locals
   end

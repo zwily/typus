@@ -16,10 +16,12 @@
   <%= render 'form', locals %>
 <% end %>
 
-<div class="grid_2">
-  <%= build_sidebar %>
+<div class="sidebar">
+  <div class="well">
+    <%= build_sidebar %>
+  </div>
 </div>
 
-<div class="grid_8">
+<div class="content">
   <%= yield :main_grid %>
 </div>

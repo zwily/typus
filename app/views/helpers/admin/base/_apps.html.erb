@@ -1,4 +1,4 @@
-<ul>
+<ul class="nav">
 
   <%
     if !params[:application] && params[:controller].include?('dashboard')
@@ -6,7 +6,9 @@
     end
   %>
 
-  <li><%= link_to Typus::I18n.t("Dashboard"), admin_dashboard_index_path, :class => dashboard %></li>
+  <li class="<%= dashboard %>">
+    <%= link_to Typus::I18n.t("Dashboard"), admin_dashboard_index_path %>
+  </li>
 
   <% admin_user.applications.each do |application| %>
 
@@ -17,7 +19,9 @@
       end
     %>
 
-    <li><%= link_to Typus::I18n.t(application), admin_dashboard_path(app_id), { :class => klass } %></li>
+    <li class="<%= klass %>">
+      <%= link_to Typus::I18n.t(application), admin_dashboard_path(app_id) %>
+    </li>
 
   <% end %>
 

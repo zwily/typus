@@ -1,7 +1,5 @@
-<h1 class="logo">
-  <% if Typus.admin_title_link %>
-    <%= link_to admin_title, Typus.admin_title_link, :title => Typus::I18n.t("View site") %>
-  <% else %>
-    <%= admin_title %>
-  <% end %>
-</h1>
+<% if Typus.admin_title_link %>
+  <%= link_to admin_title, Typus.admin_title_link, :title => Typus::I18n.t("View site") %>
+<% else %>
+  <%= admin_title %>
+<% end %>

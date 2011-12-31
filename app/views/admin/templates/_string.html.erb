@@ -1,4 +1,5 @@
-<li id="<%= attribute_id %>">
+<div class="clearfix" id="<%= attribute_id %>">
   <%= form.label attribute, label_text %>
-  <%= form.text_field attribute, options.merge(:class => 'text') %>
-</li>
+  <%= form.text_field attribute, options.merge(:class => 'span12') %>
+  <span class="help-block"><%= help_block %></span>
+</div>

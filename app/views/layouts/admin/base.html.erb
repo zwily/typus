@@ -6,42 +6,20 @@
   <%= render 'admin/shared/head' %>
 </head>
 
-<body>
+<body class="base">
 
-  <div id="wrapper">
-
-    <div id="header">
-      <div class="container_12">
-        <div class="grid_12 title">
-          <%= admin_header %>
-        </div>
-
-        <div class="grid_8 applications">
-          <%= admin_apps %>
-        </div>
-
-        <div class="grid_4 profile">
-          <%= admin_login_info %>
-        </div>
+  <div class="topbar">
+    <div class="topbar-inner">
+      <div class="container-fluid">
+        <a class="brand" href="#"><%= admin_header %></a>
+        <%= admin_apps %>
+        <p class="pull-right"><%= admin_login_info %></p>
       </div>
     </div>
+  </div>
 
-    <div id="content">
-      <div class="container_12">
-        <%= yield :layout %>
-      </div>
-    </div>
-
-    <div id="footer">
-      <div class="container_12">
-        <div class="grid_12">
-          <span class="copyright">
-            Powered by <%= link_to "Typus", "http://core.typuscmf.com/" %> &#183; <%= Typus.admin_sub_title.html_safe %>
-          </span>
-        </div>
-      </div>
-    </div>
-
+  <div class="container-fluid">
+    <%= yield :layout %>
   </div>
 
 </body>
