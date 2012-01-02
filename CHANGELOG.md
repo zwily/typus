@@ -1,7 +1,7 @@
 CHANGELOG
 =========
 
-3.1.6 (unreleased)
+3.1.6 (2012-01-02)
 ------------------
 
  * [FIXED] "Save and continue editing" button was shown even when the
@@ -13,7 +13,7 @@ CHANGELOG
 
  * [FIXED] Independent paginators when showing associations.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.5...master>
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.5...v3.1.6>
 
 
 3.1.5 (2011-12-10)
