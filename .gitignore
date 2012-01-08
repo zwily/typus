@@ -8,6 +8,7 @@ test/dummy/db/*.sqlite3
 test/dummy/log/*.log
 test/dummy/public/system/
 test/dummy/tmp/
+test/dummy/vendor/bundle/
 
 vendor/bundle
 vendor/gems
