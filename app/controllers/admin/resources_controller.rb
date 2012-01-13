@@ -166,7 +166,7 @@ class Admin::ResourcesController < Admin::BaseController
      else
        not_allowed
      end
-   end
+    end
   end
 
   def set_wheres
