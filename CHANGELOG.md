@@ -4,6 +4,8 @@ CHANGELOG
 3.1.7 (unreleased)
 ------------------
 
+ * [FIXED] Require ActiveRecord extension only if ActiveRecord is defined.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.6...master>
 
 
