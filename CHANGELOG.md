@@ -6,6 +6,8 @@ CHANGELOG
 
  * [FIXED] Require ActiveRecord extension only if ActiveRecord is defined.
 
+ * [NEW] Show association name on related tables.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.6...master>
 
 
