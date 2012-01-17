@@ -5,7 +5,7 @@
 <div class="box_relationships" id="<%= association_name %>">
 
   <h2>
-    <%= @model_to_relate.model_name.human.pluralize %>
+    <%= @resource.human_attribute_name(association_name) %>
     <small><%= add_new %></small>
   </h2>
 

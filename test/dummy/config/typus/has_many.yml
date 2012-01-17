@@ -30,7 +30,7 @@ User:
   fields:
     default: name, email
     list: name, email, projects
-  relationships: projects #, third_party_projects
+  relationships: projects, featured_projects,  #, third_party_projects
   application: HasMany
   filters: projects
   order_by: name
