@@ -22,6 +22,18 @@ module Admin::ResourcesHelper
     end
   end
 
+  def sidebar_add_new(klass)
+    if admin_user.can?("create", klass)
+      { :message => Typus::I18n.t("Add New"), :url => { :controller => "/admin/#{klass.to_resource}", :action => "new" } }
+    end
+  end
+
+  def sidebar_list(klass)
+    if admin_user.can?("read", klass)
+      { :message => Typus::I18n.t("List"), :url => { :controller => "/admin/#{klass.to_resource}", :action => "index" } }
+    end
+  end
+
   # TODO: This method should be moved to `lib/typus/controller/actions.rb`
   def resource_actions
     @resource_actions ||= []
