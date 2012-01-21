@@ -1,6 +1,6 @@
 <% chosen_class = "chzn-select-#{attribute_id}" %>
 
-<li id="<%= attribute_id %>_li">
+<div class="clearfix" id="<%= attribute_id %>_li">
   <%= form.label attribute, label_text %>
   <% if values.kind_of?(String) %>
     <%= select_tag related_fk, values.html_safe, options.merge(html_options).merge(:class => chosen_class, :style => "width: 350px;", :id => "#{form.object.class.name.underscore}_#{related_fk}", :name => "#{form.object.class.name.underscore}[#{related_fk}]") %>
@@ -9,7 +9,7 @@
   <% else %>
     <%= Typus::I18n.t("No %{resources} found.", :resources => related.model_name.human.downcase.pluralize) %>
   <% end %>
-</li>
+</div>
 
 <script type="text/javascript">
   $(document).ready(function () { $(".<%= chosen_class %>").chosen({allow_single_deselect: true}); });
