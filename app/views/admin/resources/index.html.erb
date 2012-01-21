@@ -60,9 +60,7 @@
     <% end %>
     <%= admin_paginate(@items, Typus.pagination) %>
   <% else %>
-    <div class="alert-message info">
-      <p><%= Typus::I18n.t("No entries found.") %></p>
-    </div>
+    <p><%= Typus::I18n.t("No entries found.") %></p>
   <% end %>
 
 <% end %>
