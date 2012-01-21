@@ -6,3 +6,4 @@
 //= require typus/jquery.application
 //= require typus/custom
 //= require chosen.jquery
+//= require js/bootstrap-alerts.js
