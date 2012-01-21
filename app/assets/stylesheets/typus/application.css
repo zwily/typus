@@ -10,3 +10,7 @@ body.base {
   border: none;
   background: none;
 }
+
+.form-stacked {
+  margin-left: -20px;
+}
