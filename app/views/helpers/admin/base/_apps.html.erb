@@ -19,8 +19,17 @@
       end
     %>
 
-    <li class="<%= klass %>">
-      <%= link_to Typus::I18n.t(application), admin_dashboard_path(app_id) %>
+    <li class="<%= klass %> dropdown" data-dropdown="dropdown">
+      <%= link_to Typus::I18n.t(application), "#", :class => "dropdown-toggle" %>
+      <ul class="dropdown-menu">
+        <% admin_user.application(application).map(&:constantize).each do |klass| %>
+          <% if klass.typus_options_for(:hide_from_dashboard) == false %>
+            <li>
+                <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>
+            </li>
+          <% end %>
+        <% end %>
+      </ul>
     </li>
 
   <% end %>

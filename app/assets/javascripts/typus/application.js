@@ -7,3 +7,4 @@
 //= require typus/custom
 //= require chosen.jquery
 //= require js/bootstrap-alerts.js
+//= require js/bootstrap-dropdown.js
