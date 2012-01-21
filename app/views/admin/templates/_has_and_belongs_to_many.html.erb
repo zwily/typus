@@ -1,6 +1,6 @@
 <% chosen_class = "chzn-select-#{attribute_id}" %>
 
-<li id="<%= attribute_id %>_field">
+<div class="clearfix" id="<%= attribute_id %>_field">
   <%= form.label attribute, label_text %>
   <%= hidden_field_tag related_ids %>
   <%= select_tag related_ids,
@@ -10,7 +10,7 @@
                                     :class => chosen_class,
                                     :style => "width: 550px;",
                                     "data-placeholder" => Typus::I18n.t("Select Some Options")) %>
-</li>
+</div>
 
 <script type="text/javascript">
   $(document).ready(function () { $(".<%= chosen_class %>").chosen(); });
