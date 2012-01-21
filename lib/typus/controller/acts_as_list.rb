@@ -1,5 +1,5 @@
 ##
-# This module is designed to work with `acts_as_list`.
+# Module designed to work with `acts_as_list`.
 #
 module Typus
   module Controller
