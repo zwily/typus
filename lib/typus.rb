@@ -71,7 +71,7 @@ module Typus
   # Pagination options passed to pagination helper. Note that pagination
   # options are different in Kaminari and WillPaginate.
   mattr_accessor :pagination
-  @@pagination = { :window => 0 }
+  @@pagination = { :theme => 'twitter-bootstrap' }
 
   # Define a default password for http authentication.
   mattr_accessor :password
