@@ -4,6 +4,8 @@
 %>
 
 <% content_for :main_grid do %>
+  <%= render 'edit' %>
+
   <h2>
     <%= page_title %>
     <small><%= list_actions %></small>
@@ -25,7 +27,6 @@
   <% end %>
 
   <%= admin_display_flash_message %>
-  <%= render 'edit' %>
 
   <% locals = { :options => params.dup.cleanup.merge!(:action => 'update') } %>
   <%= render 'form', locals %>

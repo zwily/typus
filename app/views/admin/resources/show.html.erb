@@ -4,13 +4,14 @@
 %>
 
 <% content_for :main_grid do %>
+  <%= render 'show' %>
+
   <h2>
     <%= page_title %>
     <small><%= list_actions %></small>
   </h2>
 
   <%= admin_display_flash_message %>
-  <%= render 'show' %>
 
   <dl>
     <% build_display(@item, fields).each do |attribute, type| %>
