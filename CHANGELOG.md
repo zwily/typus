@@ -1,14 +1,22 @@
 CHANGELOG
 =========
 
-3.1.7 (unreleased)
+3.1.8 (unreleased)
+------------------
+
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.7...master>
+
+
+3.1.7 (2012-01-25)
 ------------------
 
  * [FIXED] Require ActiveRecord extension only if ActiveRecord is defined.
 
  * [NEW] Show association name on related tables.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.6...master>
+ * [FIXED] Fixed gemspec to add compatibility with Rails 3.2.0
+
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.6...v3.1.7>
 
 
 3.1.6 (2012-01-02)
