@@ -23,7 +23,7 @@ You can try a demo [here][typus_demo].
 - Internationalized interface ([See available translations][typus_locales])
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
-- Works with `Rails 3.1.X`.
+- Works with `Rails 3.1.X` and `Rails 3.2.X`.
 
 ## Installing
 
