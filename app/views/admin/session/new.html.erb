@@ -12,7 +12,7 @@
 
 <% if Typus.mailer_sender %>
   <% content_for :actions do %>
-    <ul>
+    <ul class="unstyled">
       <li><%= link_to Typus::I18n.t("Recover password"), forgot_password_admin_account_index_path %></li>
     </ul>
   <% end %>
