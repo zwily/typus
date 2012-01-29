@@ -16,7 +16,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
 
     label_text = @resource.human_attribute_name(attribute)
     if (text = build_label_text_for_belongs_to(related, html_options, options))
-      label_text += "<small>#{text}</small>"
+      label_text += " <small>#{text}</small>"
     end
 
     values = if related.respond_to?(:roots)
@@ -85,7 +85,13 @@ module Admin::Resources::DataTypes::BelongsToHelper
                         :action => 'new',
                         :attribute => options[:attribute],
                         :_popup => true }
-    link_to Typus::I18n.t("Add"), default_options, { :class => 'iframe' }
+
+    html_options = { "data-controls-modal" => "modal-from-dom-#{options[:attribute]}",
+                     "data-backdrop" => "true",
+                     "data-keyboard" => "true",
+                     "class" => "ajax-modal",
+                     "url" => "/admin/#{klass.to_resource}/new?_popup=true" }
+    link_to Typus::I18n.t("Add"), default_options, html_options
   end
 
 end

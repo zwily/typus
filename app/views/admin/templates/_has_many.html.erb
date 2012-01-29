@@ -1,6 +1,15 @@
 <%
   param_name = "#{association_name}_page"
+  new_page_title = Typus::I18n.t("Add New %{resource}", :resource => @model_to_relate.model_name.human.titleize)
 %>
+
+<div id="modal-from-dom-<%= @model_to_relate.table_name %>" class="modal hide">
+  <div class="modal-header">
+    <a href="#" class="close">&times;</a>
+    <h3><%= new_page_title %></h3>
+  </div>
+  <div class="modal-body"></div>
+</div>
 
 <div class="box_relationships" id="<%= association_name %>">
 

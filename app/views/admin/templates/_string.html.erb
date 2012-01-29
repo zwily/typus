@@ -1,5 +1,9 @@
+<%
+  klass = params[:_popup] ? 'span9' : 'span12'
+%>
+
 <div class="clearfix" id="<%= attribute_id %>">
   <%= form.label attribute, label_text %>
-  <%= form.text_field attribute, options.merge(:class => 'span12') %>
+  <%= form.text_field attribute, options.merge(:class => klass) %>
   <span class="help-block"><%= help_block %></span>
 </div>

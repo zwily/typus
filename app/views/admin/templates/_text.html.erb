@@ -1,5 +1,6 @@
 <%
-  custom = { :rows => @resource.typus_options_for(:form_rows), :class => "span12" }
+  klass = params[:_popup] ? 'span9' : 'span12'
+  custom = { :rows => @resource.typus_options_for(:form_rows), :class => klass }
   options = options.merge!(custom)
 %>
 

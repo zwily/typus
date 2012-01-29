@@ -1,4 +1,15 @@
-<% chosen_class = "chzn-select-#{attribute_id}" %>
+<%
+  chosen_class = "chzn-select-#{attribute_id}"
+  new_page_title = Typus::I18n.t("Add New %{resource}", :resource => related.model_name.human.titleize)
+%>
+
+<div id="modal-from-dom-<%= attribute_id %>" class="modal hide">
+  <div class="modal-header">
+    <a href="#" class="close">&times;</a>
+    <h3><%= new_page_title %></h3>
+  </div>
+  <div class="modal-body"></div>
+</div>
 
 <div class="clearfix" id="<%= attribute_id %>_li">
   <%= form.label attribute, label_text %>

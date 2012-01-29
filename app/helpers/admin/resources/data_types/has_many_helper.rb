@@ -37,7 +37,13 @@ module Admin::Resources::DataTypes::HasManyHelper
                           :action => "new",
                           :_popup => true }
 
-      link_to Typus::I18n.t("Add"), default_options.merge(options), { :class => "iframe_with_page_reload" }
+      html_options = { "data-controls-modal" => "modal-from-dom-#{klass.to_resource}",
+                       "data-backdrop" => "true",
+                       "data-keyboard" => "true",
+                       "class" => "ajax-modal",
+                       "url" => "/admin/#{klass.to_resource}/new?_popup=true" }
+
+      link_to Typus::I18n.t("Add"), default_options.merge(options), html_options
     end
   end
 
