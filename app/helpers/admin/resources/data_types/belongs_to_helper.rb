@@ -81,21 +81,14 @@ module Admin::Resources::DataTypes::BelongsToHelper
   end
 
   def build_add_new_for_belongs_to(klass, options)
-    default_options = { :controller => "/admin/#{klass.to_resource}",
-                        :action => 'new',
-                        :attribute => options[:attribute],
-                        :_popup => true }
-
-    href= "modal-from-dom-#{options[:attribute]}"
-
     html_options = { "data-toggle" => "modal",
-                     "data-target=" => href,
+                     "data-controls-modal" => "modal-from-dom-#{options[:attribute]}",
                      "data-backdrop" => "true",
                      "data-keyboard" => "true",
                      "class" => "ajax-modal",
                      "url" => "/admin/#{klass.to_resource}/new?_popup=true" }
 
-    link_to Typus::I18n.t("Add"), default_options, html_options
+    link_to Typus::I18n.t("Add"), "##{html_options['data-controls-modal']}", html_options
   end
 
 end

@@ -13,3 +13,8 @@ label {
 .btn-group {
   margin-top: 10px;
 }
+
+.modal {
+  width: 490px;
+  margin: -250px 0 0 -220px;
+}

@@ -33,17 +33,14 @@ module Admin::Resources::DataTypes::HasManyHelper
 
   def build_add_new_for_has_many(klass, field, options = {})
     if admin_user.can?("create", klass)
-      default_options = { :controller => "/admin/#{klass.to_resource}",
-                          :action => "new",
-                          :_popup => true }
-
-      html_options = { "data-controls-modal" => "modal-from-dom-#{klass.to_resource}",
+      html_options = { "data-toggle" => "modal",
+                       "data-controls-modal" => "modal-from-dom-#{klass.to_resource}",
                        "data-backdrop" => "true",
                        "data-keyboard" => "true",
                        "class" => "ajax-modal",
                        "url" => "/admin/#{klass.to_resource}/new?_popup=true" }
 
-      link_to Typus::I18n.t("Add"), default_options.merge(options), html_options
+      link_to Typus::I18n.t("Add"), "##{html_options['data-controls-modal']}", html_options
     end
   end
 
