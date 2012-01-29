@@ -91,6 +91,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
                      "data-keyboard" => "true",
                      "class" => "ajax-modal",
                      "url" => "/admin/#{klass.to_resource}/new?_popup=true" }
+
     link_to Typus::I18n.t("Add"), default_options, html_options
   end
 
