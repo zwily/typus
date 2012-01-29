@@ -1,9 +1,7 @@
-<% resources.each do |resource| %>
+<h5><%= @resource.model_name.human.pluralize %></h5>
 
-  <% html_class = @resource.model_name.eql?(resource.model_name) ? 'active' : 'inactive' %>
-
-  <%= link_to :controller => "/admin/#{resource.to_resource}" do %>
-    <h5><%= resource.model_name.human.pluralize %></h5>
+<ul>
+  <% actions.each do |action| %>
+    <li><%= link_to action[:message], action[:url] %></li>
   <% end %>
-
-<% end %>
+</ul>
