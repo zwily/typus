@@ -7,10 +7,10 @@
   <%= render 'new' %>
 
   <% unless params[:_popup] %>
-    <h2>
+    <h1>
       <%= page_title %>
       <small><%= list_actions %></small>
-    </h2>
+    </h1>
   <% end %>
 
   <%= admin_display_flash_message %>
@@ -19,12 +19,8 @@
   <%= render 'form', locals %>
 <% end %>
 
-<div class="sidebar">
-  <div class="well">
-    <%= build_sidebar %>
+<div class="row">
+  <div class="span10 offset1">
+    <%= yield :main_grid %>
   </div>
-</div>
-
-<div class="content">
-  <%= yield :main_grid %>
 </div>

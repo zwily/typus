@@ -8,17 +8,17 @@
 
 <body class="base">
 
-  <div class="topbar">
-    <div class="topbar-inner">
-      <div class="container-fluid">
+  <div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+      <div class="fluid-container">
         <a class="brand" href="#"><%= admin_header %></a>
-        <%= admin_apps %>
+        <%= apps %>
         <p class="pull-right"><%= admin_login_info %></p>
       </div>
     </div>
   </div>
 
-  <div class="container-fluid">
+  <div class="container">
     <%= yield :layout %>
   </div>
 

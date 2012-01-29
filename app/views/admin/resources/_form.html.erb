@@ -7,7 +7,7 @@
   <fieldset>
     <%= build_form(fields, form) %>
 
-    <div class="actions">
+    <div class="btn-group">
       <% build_save_options.each do |key, value, special| %>
         <% klass = key.eql?("_save") ? 'btn primary' : 'btn'  %>
         <%

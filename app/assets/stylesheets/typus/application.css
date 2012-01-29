@@ -1,17 +1,15 @@
 /*
-*= require bootstrap
+*= require docs/assets/css/bootstrap
 */
 
 body.base {
   padding-top: 60px;
 }
 
-.actions {
-  border: none;
-  background: none;
-  margin: 0;
+label {
+  font-weight: bold;
 }
 
-.form-stacked {
-  margin-left: -20px;
+.btn-group {
+  margin-top: 10px;
 }

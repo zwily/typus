@@ -6,19 +6,6 @@ $(document).ready(function() {
         Typus.setConfirmUnload(true);
     });
 
-    $("a.fancybox").fancybox({
-        'titlePosition': 'over',
-        'type': 'image',
-        'centerOnScroll': true,
-        'scrolling': false,
-    });
-
-    $(".iframe").fancybox(Typus.fancyboxDefaults);
-
-    $(".iframe_with_page_reload").fancybox(
-        $.extend(Typus.fancyboxDefaults, { onClosed: Typus.reloadParent })
-    );
-
     // This method is used by Typus::Controller::Bulk
     $(".action-toggle").click(function() {
         var status = this.checked;
@@ -29,17 +16,6 @@ $(document).ready(function() {
 });
 
 var Typus = {};
-
-Typus.fancyboxDefaults = {
-    'width': 720,
-    'height': '90%',
-    'autoScale': false,
-    'transitionIn': 'none',
-    'transitionOut': 'none',
-    'type': 'iframe',
-    'centerOnScroll': true,
-    'scrolling': false,
-};
 
 Typus.setConfirmUnload = function(on) {
     window.onbeforeunload = (on) ? Typus.unloadMessage : null;

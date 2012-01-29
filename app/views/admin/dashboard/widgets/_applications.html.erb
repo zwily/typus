@@ -14,12 +14,12 @@
   page_title = Typus::I18n.t("#{title} administration", :title => title)
 %>
 
-<h2><%= page_title %></h2>
+<h1><%= page_title %></h1>
 
 <% if applications.any? %>
   <% applications.each do |app| %>
 
-    <table class="zebra-striped">
+    <table class="table table-striped table-bordered">
 
       <thead>
         <tr>

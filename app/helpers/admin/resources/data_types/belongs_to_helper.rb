@@ -86,7 +86,10 @@ module Admin::Resources::DataTypes::BelongsToHelper
                         :attribute => options[:attribute],
                         :_popup => true }
 
-    html_options = { "data-controls-modal" => "modal-from-dom-#{options[:attribute]}",
+    href= "modal-from-dom-#{options[:attribute]}"
+
+    html_options = { "data-toggle" => "modal",
+                     "data-target=" => href,
                      "data-backdrop" => "true",
                      "data-keyboard" => "true",
                      "class" => "ajax-modal",

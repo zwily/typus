@@ -1,15 +1,5 @@
 <ul class="nav">
 
-  <%
-    if !params[:application] && params[:controller].include?('dashboard')
-      dashboard = 'active'
-    end
-  %>
-
-  <li class="<%= dashboard %>">
-    <%= link_to Typus::I18n.t("Dashboard"), admin_dashboard_index_path %>
-  </li>
-
   <% admin_user.applications.each do |application| %>
 
     <%
@@ -20,7 +10,11 @@
     %>
 
     <li class="<%= klass %> dropdown" data-dropdown="dropdown">
-      <%= link_to Typus::I18n.t(application), "#", :class => "dropdown-toggle" %>
+      <%= link_to "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
+        <%= Typus::I18n.t(application) %>
+        <b class="caret"></b>
+      <% end %>
+
       <ul class="dropdown-menu">
         <% admin_user.application(application).map(&:constantize).each do |klass| %>
           <% if klass.typus_options_for(:hide_from_dashboard) == false %>

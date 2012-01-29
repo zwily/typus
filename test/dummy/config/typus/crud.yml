@@ -10,4 +10,5 @@ Entry:
   application: CRUD, 1
   options:
     export: csv
+    per_page: 5
   scopes: published

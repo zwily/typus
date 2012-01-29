@@ -1,13 +1,11 @@
 //= require typus/jquery-1.8.3-min
 //= require jquery_ujs
-//= require jquery.searchField
-//= require js/jquery.formalize.min
-// require typus/jquery.application
-//= require typus/custom
 //= require chosen.jquery
-//= require js/bootstrap-alerts.js
+//= require js/bootstrap-alert.js
 //= require js/bootstrap-dropdown.js
 //= require js/bootstrap-modal.js
+//= require typus/jquery.application
+//= require typus/custom
 
 $(".ajax-modal").live('click', function() {
   var url = $(this).attr('url');
