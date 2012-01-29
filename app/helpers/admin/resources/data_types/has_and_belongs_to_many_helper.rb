@@ -16,7 +16,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
 
     label_text = @resource.human_attribute_name(attribute)
     if (text = build_label_text_for_has_and_belongs_to_many(klass, html_options, options))
-      label_text += "<small>#{text}</small>"
+      label_text += " <small>#{text}</small>"
     end
 
     locals = { :attribute => attribute,
