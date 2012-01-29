@@ -25,8 +25,8 @@ module Admin::Resources::TableHelper
 
         if (model.model_fields.map(&:first).map(&:to_s).include?(key) || model.reflect_on_all_associations(:belongs_to).map(&:name).include?(key.to_sym))
           sort_order = case params[:sort_order]
-                       when 'asc' then ['desc', '&#9660;']
-                       when 'desc' then ['asc', '&#9650;']
+                       when 'asc' then ['desc', '&darr;']
+                       when 'desc' then ['asc', '&uarr;']
                        else [nil, nil]
                        end
           switch = sort_order.last if params[:order_by].eql?(order_by)
