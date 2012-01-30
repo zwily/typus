@@ -198,12 +198,12 @@ class Admin::ResourcesController < Admin::BaseController
   def redirect_on_success
     path = params.dup.cleanup
 
-    options = if params[:_save]
-      { :action => nil, :id => nil }
-    elsif params[:_addanother]
+    options = if params[:_addanother]
       { :action => 'new', :id => nil }
     elsif params[:_continue]
       { :action => 'edit', :id => @item.id }
+    else
+      { :action => nil, :id => nil }
     end
 
     message = params[:action].eql?('create') ? "%{model} successfully created." : "%{model} successfully updated."
