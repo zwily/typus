@@ -16,6 +16,9 @@ CHANGELOG
  * [CHANGED] We now also load configuration files from "lib/<plugin>/config"
    as this is marked as deprecated in Rails 3.2.0.
 
+ * [CHANGED] Updated Gems for the dummy application. This fixes deprecation
+   warnings and keeps the plugin up to date.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.7...master>
 
 
