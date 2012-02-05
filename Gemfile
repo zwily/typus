@@ -8,8 +8,8 @@ gemspec
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails',   '~> 3.1.5'
-  gem 'coffee-rails', '~> 3.1.1'
+  gem 'sass-rails',   '~> 3.2.3'
+  gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
 
@@ -33,13 +33,13 @@ gem "acts_as_list"
 gem "acts_as_tree"
 gem "factory_girl_rails", "~> 1.4.0"
 gem "rails-permalink", "~> 1.0.0"
-gem "rails-trash", "~> 1.1.2"
+gem "rails-trash", "~> 2.0.0"
 
 # For some reason I also need to define the `jquery-rails` gem here.
 gem "jquery-rails"
 
 # Rich Text Editor
-gem "ckeditor-rails", "0.0.2"
+gem "ckeditor-rails", "~> 0.0.3"
 
 # Alternative authentication
 gem "devise", "~> 1.5.2"
