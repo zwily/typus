@@ -9,12 +9,6 @@
 class Entry < ActiveRecord::Base
 
   ##
-  # Macros
-  #
-
-  has_trash
-
-  ##
   # Validations
   #
 
