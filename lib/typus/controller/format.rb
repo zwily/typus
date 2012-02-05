@@ -22,9 +22,7 @@ module Typus
         not_allowed unless can_export?(:csv)
 
         fields = @resource.typus_fields_for(:csv)
-
         filename = Rails.root.join("tmp", "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv")
-
         options = { :conditions => @conditions, :batch_size => 1000 }
 
         ::CSV.open(filename, 'w') do |csv|
