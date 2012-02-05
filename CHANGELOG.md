@@ -4,6 +4,12 @@ CHANGELOG
 3.1.8 (unreleased)
 ------------------
 
+ * [CHANGED] CSV generation is now performed in memory so we play nice
+   with Heroku.
+
+ * [CHANGED] We now can export XML, CSV and JSON without restriction. If
+   fields are not defined for a format, defaults will be used.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.7...master>
 
 
