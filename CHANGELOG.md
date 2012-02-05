@@ -1,7 +1,13 @@
 CHANGELOG
 =========
 
-3.1.8 (unreleased)
+3.1.9 (unreleased)
+------------------
+
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...master>
+
+
+3.1.8 (2012-02-05)
 ------------------
 
  * [CHANGED] CSV generation is now performed in memory so we play nice
@@ -19,7 +25,7 @@ CHANGELOG
  * [CHANGED] Updated Gems for the dummy application. This fixes deprecation
    warnings and keeps the plugin up to date.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.7...master>
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.7...v3.1.8>
 
 
 3.1.7 (2012-01-25)
