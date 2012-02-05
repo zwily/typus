@@ -14,16 +14,18 @@
 
   <%= admin_display_flash_message %>
 
-  <% # if scopes.any? || predefined_filters.any? %>
+  <% if scopes.any? || predefined_filters.any? %>
     <div class="tabbable tabs-below">
       <ul class="nav tabs">
-        <li class="active">
+        <% all_klass = params[:scope] ? "inactive" : "active" %>
+        <li class="<%= all_klass %>">
           <%= link_to Typus::I18n.t("All"), params.dup.cleanup.merge(:action => 'index') %>
           <%= "(#{resource.count})" if @resource.typus_options_for(:counters) %>
         </li>
 
         <% scopes.each do |scope| %>
-          <li>
+          <% klass = params[:scope].eql?(scope) ? "active" : "inactive" %>
+          <li class="<%= klass %>">
             <%= link_to Typus::I18n.t(scope.humanize), :scope => scope %>
             <%= "(#{@resource.send(scope).count})" if @resource.typus_options_for(:counters)  %>
           </li>
@@ -44,7 +46,7 @@
         <% end %>
       </ul>
     </div>
-  <% # end %>
+  <% end %>
 
   <% if (build_filters || admin_search) %>
     <%#= build_filters %>

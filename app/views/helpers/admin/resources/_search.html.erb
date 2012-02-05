@@ -1,5 +1,9 @@
 <%= form_tag nil, :method => :get, :class => "well form-search" do %>
-  <%= search_field_tag "search", nil, :id => "quicksearch", :title => (params[:search] || Typus::I18n.t("Search")) %>
+  <%= search_field_tag "search",
+                       nil,
+                       :placeholder => params[:search],
+                       :class => "input-medium search-query" %>
+
   <button type="submit" class="btn">Search</button>
 
   <% hidden_filters.each do |key, value| %>
