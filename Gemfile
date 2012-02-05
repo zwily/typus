@@ -52,8 +52,8 @@ gem "rack-cache", :require => "rack/cache"
 gem "paperclip", "~> 2.5.2"
 
 # MongoDB
-gem "mongoid", "~> 2.3.4"
-gem "bson_ext", "~> 1.5.1"
+gem "mongoid", "~> 2.4.3"
+gem "bson_ext", "~> 1.5.2"
 
 group :test do
   gem "shoulda-context", "~> 1.0.0"
