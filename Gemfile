@@ -45,7 +45,7 @@ gem "ckeditor-rails", "~> 0.0.3"
 gem "devise", "~> 1.5.2"
 
 # Asset Management with Dragonfly
-gem "dragonfly", "~> 0.9.8"
+gem "dragonfly", "~> 0.9.10"
 gem "rack-cache", :require => "rack/cache"
 
 # Asset Management with Paperclip
