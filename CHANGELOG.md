@@ -13,6 +13,9 @@ CHANGELOG
  * [CHANGED] Updated Kaminari to `0.13.0` so we are now Rails `3.2.0`
    compatible.
 
+ * [CHANGED] We now also load configuration files from "lib/<plugin>/config"
+   as this is marked as deprecated in Rails 3.2.0.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.7...master>
 
 
