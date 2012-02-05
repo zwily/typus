@@ -42,7 +42,7 @@ gem "jquery-rails"
 gem "ckeditor-rails", "~> 0.0.3"
 
 # Alternative authentication
-gem "devise", "~> 1.5.2"
+gem "devise", "~> 2.0.0"
 
 # Asset Management with Dragonfly
 gem "dragonfly", "~> 0.9.10"
