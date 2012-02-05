@@ -22,10 +22,9 @@ module Typus
         not_allowed unless can_export?(:csv)
 
         fields = @resource.typus_fields_for(:csv)
-        filename = Rails.root.join("tmp", "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv")
         options = { :conditions => @conditions, :batch_size => 1000 }
 
-        ::CSV.open(filename, 'w') do |csv|
+        data = ::CSV.generate do |csv|
           csv << fields.keys.map { |k| @resource.human_attribute_name(k) }
           @resource.find_in_batches(options) do |records|
             records.each do |record|
@@ -44,7 +43,7 @@ module Typus
           end
         end
 
-        send_file filename
+        send_data data, :filename => "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv"
       end
 
       def generate_json
