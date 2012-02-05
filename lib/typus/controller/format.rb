@@ -19,8 +19,6 @@ module Typus
       #       to be able to process large amounts of data.
       #++
       def generate_csv
-        not_allowed unless can_export?(:csv)
-
         fields = @resource.typus_fields_for(:csv)
         options = { :conditions => @conditions, :batch_size => 1000 }
 
@@ -46,14 +44,6 @@ module Typus
         send_data data, :filename => "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv"
       end
 
-      def generate_json
-        export(:json)
-      end
-
-      def generate_xml
-        can_export?(:xml) ? export(:xml) : not_allowed
-      end
-
       def export(format)
         fields = @resource.typus_fields_for(format).map(&:first)
         methods = fields - @resource.column_names
@@ -62,10 +52,6 @@ module Typus
         get_paginated_data
 
         render format => @items.send("to_#{format}", :methods => methods, :except => except)
-      end
-
-      def can_export?(format)
-        @resource.typus_options_for(:export).extract_settings.include?(format.to_s)
       end
 
     end

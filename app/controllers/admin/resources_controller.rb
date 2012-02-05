@@ -27,7 +27,9 @@ class Admin::ResourcesController < Admin::BaseController
         generate_html
       end
 
-      %w(json xml csv).each { |f| format.send(f) { send("generate_#{f}") } }
+      format.csv { generate_csv }
+      format.json { export(:json) }
+      format.xml { export(:xml) }
     end
   end
 
