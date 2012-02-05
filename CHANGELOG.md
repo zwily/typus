@@ -10,6 +10,9 @@ CHANGELOG
  * [CHANGED] We now can export XML, CSV and JSON without restriction. If
    fields are not defined for a format, defaults will be used.
 
+ * [CHANGED] Updated Kaminari to `0.13.0` so we are now Rails `3.2.0`
+   compatible.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.7...master>
 
 
