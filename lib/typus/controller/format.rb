@@ -19,36 +19,34 @@ module Typus
       #       to be able to process large amounts of data.
       #++
       def generate_csv
-        if can_export?(:csv)
-          fields = @resource.typus_fields_for(:csv)
+        not_allowed unless can_export?(:csv)
 
-          filename = Rails.root.join("tmp", "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv")
+        fields = @resource.typus_fields_for(:csv)
 
-          options = { :conditions => @conditions, :batch_size => 1000 }
+        filename = Rails.root.join("tmp", "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv")
 
-          ::CSV.open(filename, 'w') do |csv|
-            csv << fields.keys.map { |k| @resource.human_attribute_name(k) }
-            @resource.find_in_batches(options) do |records|
-              records.each do |record|
-                csv << fields.map do |key, value|
-                         case value
-                         when :transversal
-                           a, b = key.split(".")
-                           record.send(a).send(b)
-                         when :belongs_to
-                           record.send(key).try(:to_label)
-                         else
-                           record.send(key)
-                         end
+        options = { :conditions => @conditions, :batch_size => 1000 }
+
+        ::CSV.open(filename, 'w') do |csv|
+          csv << fields.keys.map { |k| @resource.human_attribute_name(k) }
+          @resource.find_in_batches(options) do |records|
+            records.each do |record|
+              csv << fields.map do |key, value|
+                       case value
+                       when :transversal
+                         a, b = key.split(".")
+                         record.send(a).send(b)
+                       when :belongs_to
+                         record.send(key).try(:to_label)
+                       else
+                         record.send(key)
                        end
-              end
+                     end
             end
           end
-
-          send_file filename
-        else
-          not_allowed
         end
+
+        send_file filename
       end
 
       def generate_json
