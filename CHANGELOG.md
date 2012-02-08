@@ -7,6 +7,8 @@ CHANGELOG
  * [FIXED] _addanother save button is only shown if the user has permission
    to perform the action.
 
+ * [FIXED] Custom actions on show are now showed.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...master>
 
 

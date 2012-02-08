@@ -77,6 +77,10 @@ class Admin::ResourcesController < Admin::BaseController
       prepend_resources_action("Edit", {:action => 'edit', :id => @item})
     end
 
+    custom_actions_for(:show).each do |action|
+      prepend_resources_action(action.titleize, {:action => action, :id => @item})
+    end
+
     respond_to do |format|
       format.html # show.html.erb
       format.xml { can_export?(:xml) ? render(:xml => @item) : not_allowed }
