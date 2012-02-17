@@ -6,9 +6,18 @@ module Typus
 
       protected
 
+      # This is crazy, but I want to have support for Kaminari, WillPaginate
+      # and whatever other pagination system which comes.
       def get_paginated_data
         items_per_page = @resource.typus_options_for(:per_page)
-        @items = @resource.page(params[:page]).per(items_per_page)
+
+        @items = if defined?(Kaminari)
+          @resource.page(params[:page]).per(items_per_page)
+        elsif defined?(WillPaginate)
+          @resource.paginate(:page => params[:page], :per_page => items_per_page)
+        else
+          @resource.limit(items_per_page) # Pagination is disabled, so just in case limit to 50 records.
+        end
       end
 
       alias_method :generate_html, :get_paginated_data

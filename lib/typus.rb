@@ -12,8 +12,6 @@ require "typus/orm/base/search"
 require "typus/orm/active_record"
 require "typus/orm/mongoid"
 
-require "kaminari"
-
 autoload :FakeUser, "support/fake_user"
 
 module Typus

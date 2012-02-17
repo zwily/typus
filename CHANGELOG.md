@@ -9,6 +9,11 @@ CHANGELOG
 
  * [FIXED] Custom actions on show are now showed.
 
+ * [CHANGED] Detect if application has Kaminari or WillPaginate, otherwise
+   we will not setup a paginate and will tell the user to install one of
+   those mechanisms. In the near future Typus will provide a simple
+   pagination mechahism.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...master>
 
 

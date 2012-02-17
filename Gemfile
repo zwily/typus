@@ -69,3 +69,6 @@ group :development do
 end
 
 gem "SystemTimer", :platform => :ruby_18
+
+gem "kaminari"
+# gem "will_paginate"
