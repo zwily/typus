@@ -14,6 +14,8 @@ CHANGELOG
    those mechanisms. In the near future Typus will provide a simple
    pagination mechahism.
 
+ * [NEW] Option to enable and disable counters on resources. Enabled by default.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...master>
 
 
