@@ -127,8 +127,6 @@ class TypusUserTest < ActiveSupport::TestCase
   # TODO: Decide if we want this test ...
   test "admin gets a list of application resources for crud extended application" do
     typus_user = FactoryGirl.build(:typus_user)
-    # OPTIMIZE: There's no need to sort stuff but this is required to make it
-    #           work with Ruby 1.8.7.
     expected = %w(Asset Case Comment EntryDefault Page Post Article::Entry ReadOnlyEntry).sort
     assert_equal expected, typus_user.application("CRUD Extended").sort
   end
@@ -136,8 +134,6 @@ class TypusUserTest < ActiveSupport::TestCase
 
   test "admin gets a list of application resources for Admin application" do
     typus_user = FactoryGirl.build(:typus_user)
-    # OPTIMIZE: There's no need to sort stuff but this is required to make it
-    #           work with Ruby 1.8.7.
     expected = %w(AdminUser TypusUser DeviseUser).sort
     assert_equal expected, typus_user.application("Admin").sort
   end

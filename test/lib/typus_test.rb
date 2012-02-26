@@ -76,8 +76,6 @@ class TypusTest < ActiveSupport::TestCase
 =begin
   # TODO: Decide if we want this test ...
   test "application returns modules of the CRUD Extended application" do
-    # OPTIMIZE: There's no need to sort stuff but this is required to make it
-    #           work with Ruby 1.8.7.
     expected = %w(Asset Case Comment Page Post Article::Entry ReadOnlyEntry EntryDefault).sort
     assert_equal expected, Typus.application("CRUD Extended").sort
   end
