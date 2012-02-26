@@ -17,8 +17,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
     assert_equal @expected, search(Entry, parameters)
   end
 
-  # Why do you need the pagination page for a new search?
-  test "search rejects page param" do
+  test "search rejects page param because we want to start from first page" do
     parameters = {"page"=>"1"}
     assert_equal @expected, search(Entry, parameters)
   end
