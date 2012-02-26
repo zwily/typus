@@ -23,13 +23,11 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
     assert_equal @expected, search(Entry, parameters)
   end
 
-  # TODO: I want to think about it ...
   test "search rejects locale params" do
     parameters = {"locale"=>"jp"}
     assert_equal @expected, search(Entry, parameters)
   end
 
-  # TODO: I want to think about it ...
   test "search rejects to sort_order and order_by" do
     parameters = {"sort_order"=>"asc", "order_by"=>"title"}
     assert_equal @expected, search(Entry, parameters)
