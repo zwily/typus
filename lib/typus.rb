@@ -119,8 +119,8 @@ module Typus
 
   class << self
 
-    # Default way to setup typus. Run `rails generate typus` to create a fresh
-    # initializer with all configuration values.
+    # Default way to setup typus. Run `rails generate typus` to create a
+    # fresh initializer with all configuration values.
     def setup
       yield self
       reload!
