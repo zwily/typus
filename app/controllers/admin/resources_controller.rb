@@ -83,7 +83,7 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       format.html
-      format.xml { can_export?(:xml) ? render(:xml => @item) : not_allowed }
+      format.xml { render :xml => @item }
       format.json { render :json => @item }
     end
   end
