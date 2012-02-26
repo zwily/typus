@@ -123,15 +123,6 @@ class TypusUserTest < ActiveSupport::TestCase
     assert_equal Typus.applications, typus_user.applications
   end
 
-=begin
-  # TODO: Decide if we want this test ...
-  test "admin gets a list of application resources for crud extended application" do
-    typus_user = FactoryGirl.build(:typus_user)
-    expected = %w(Asset Case Comment EntryDefault Page Post Article::Entry ReadOnlyEntry).sort
-    assert_equal expected, typus_user.application("CRUD Extended").sort
-  end
-=end
-
   test "admin gets a list of application resources for Admin application" do
     typus_user = FactoryGirl.build(:typus_user)
     expected = %w(AdminUser TypusUser DeviseUser).sort
