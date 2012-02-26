@@ -51,13 +51,7 @@ module Typus
 <a href="http://core.typuscmf.com/">core.typuscmf.com</a>
   CODE
 
-  ##
-  # Available Authentication Mechanisms are:
-  #
-  # - none
-  # - basic: Uses http authentication
-  # - session
-  #
+  # Set authentication (none, basic, session or devise)
   mattr_accessor :authentication
   @@authentication = :none
 
@@ -70,35 +64,17 @@ module Typus
   mattr_accessor :subdomain
   @@subdomain = nil
 
-  ##
-  # Pagination options passed to Kaminari helper.
-  #
-  #     :previous_label => "&larr; " + Typus::I18n.t("Previous")
-  #     :next_label => Typus::I18n.t("Next") + " &rarr;"
-  #
-  # Note that `Kaminari` only accepts the following configuration options:
-  #
-  # - default_per_page (25 by default)
-  # - window (4 by default)
-  # - outer_window (0 by default)
-  # - left (0 by default)
-  # - right (0 by default)
-  #
+  # Pagination options passed to pagination helper. Note that pagination
+  # options are different in Kaminari and WillPaginate.
   mattr_accessor :pagination
   @@pagination = { :window => 0 }
 
-  ##
-  # Define a password.
-  #
-  # Used as default password for http and advanced authentication.
-  #
+  # Define a default password for http authentication.
   mattr_accessor :password
   @@password = "columbia"
 
-  ##
-  # Configure the e-mail address which will be shown in Admin::Mailer. If not
-  # set `forgot_password` feature is disabled.
-  #
+  # Configure the e-mail address which will be shown in Admin::Mailer.
+  # If not set `forgot_password` feature is disabled.
   mattr_accessor :mailer_sender
   @@mailer_sender = nil
 
@@ -125,9 +101,7 @@ module Typus
   mattr_accessor :image_table_thumb_size
   @@image_table_thumb_size = '25x25#'
 
-  ##
-  # Defines the default relationship table.
-  #
+  # Define the default relationship table.
   mattr_accessor :relationship
   @@relationship = "typus_users"
 
