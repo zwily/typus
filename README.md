@@ -51,16 +51,16 @@ and go to <http://0.0.0.0:3000/admin>.
 Testing
 -------
 
+Create a PostgreSQL database:
+
+    $ psql -c 'CREATE USER postgres SUPERUSER' -d postgres
+    $ psql -c 'CREATE DATABASE typus_test;' -U postgres
+
 To test, clone the repo and run the following commands:
 
     $ git clone git://github.com/fesplugas/typus.git
     $ bundle install --path vendor/bundle
     $ bundle exec rake
-
-**Note:** In `OSX Lion` it's possible you need to create a `postgres`
-user to be able to run tests.
-
-    CREATE USER postgres SUPERUSER;
 
 
 Submitting an Issue
