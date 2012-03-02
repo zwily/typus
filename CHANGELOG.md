@@ -20,6 +20,8 @@ CHANGELOG
 
  * [CHANGED] session#destroy now uses DELETE.
 
+ * [CHANGED] CSV/XML links should include filters.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...master>
 
 

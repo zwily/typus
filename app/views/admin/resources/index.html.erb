@@ -38,7 +38,7 @@
     <% if resource.any? && (formats = resource.typus_options_for(:export).extract_settings).any? %>
       <li>|</li>
       <% formats.each do |format| %>
-        <li><%= link_to format.upcase, :format => format %></li>
+        <li><%= link_to format.upcase, params.merge(:format => format) %></li>
       <% end %>
     <% end %>
   </ul>
