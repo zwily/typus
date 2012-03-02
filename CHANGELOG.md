@@ -16,6 +16,8 @@ CHANGELOG
 
  * [NEW] Option to enable and disable counters on resources. Enabled by default.
 
+ * [FIXED] Fixed Dir compatibility for Jruby.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...master>
 
 
