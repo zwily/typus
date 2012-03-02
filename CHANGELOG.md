@@ -22,6 +22,8 @@ CHANGELOG
 
  * [CHANGED] CSV/XML links should include filters.
 
+ * [CHANGED] Removed find_in_batches from "csv_export". It was useless.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...master>
 
 
