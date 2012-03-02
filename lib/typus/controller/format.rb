@@ -29,7 +29,7 @@ module Typus
       #++
       def generate_csv
         fields = @resource.typus_fields_for(:csv)
-        options = { :conditions => @conditions, :batch_size => 1000 }
+        options = { :conditions => @conditions }
 
         data = ::CSV.generate do |csv|
           csv << fields.keys.map { |k| @resource.human_attribute_name(k) }
