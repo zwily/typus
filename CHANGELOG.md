@@ -18,6 +18,8 @@ CHANGELOG
 
  * [FIXED] Fixed Dir compatibility for Jruby.
 
+ * [CHANGED] session#destroy now uses DELETE.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...master>
 
 
