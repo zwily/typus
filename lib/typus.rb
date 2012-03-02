@@ -169,7 +169,7 @@ module Typus
     # Lists models under <tt>app/models</tt>.
     def detect_application_models
       model_dir = Rails.root.join("app/models")
-      Dir.chdir(model_dir) { Dir["**/*.rb"] }
+      Dir.chdir(model_dir.to_s) { Dir["**/*.rb"] }
     end
 
     def application_models
@@ -202,14 +202,14 @@ module Typus
       app = Typus.root.join("**", "*.yml")
       plugins = Rails.root.join("vendor", "plugins", "*", "config", "typus", "**", "*.yml")
       lib = Rails.root.join("lib", "*", "config", "typus", "**", "*.yml")
-      Dir[app, plugins, lib].reject { |f| f.match(/_roles.yml/) }.sort
+      Dir[app.to_s, plugins.to_s, lib.to_s].reject { |f| f.match(/_roles.yml/) }.sort
     end
 
     def role_configuration_files
       app = Typus.root.join("**", "*_roles.yml")
       plugins = Rails.root.join("vendor", "plugins", "*", "config", "typus", "**", "*_roles.yml")
       lib = Rails.root.join("lib", "*", "config", "typus", "**", "*_roles.yml")
-      Dir[app, plugins, lib].sort
+      Dir[app.to_s, plugins.to_s, lib.to_s].sort
     end
 
     def reload!
