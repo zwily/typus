@@ -164,7 +164,6 @@ class Admin::ResourcesController < Admin::BaseController
   end
   helper_method :fields
 
-  # Here we set the current scope!
   def set_scope
     if (scope = params[:scope])
      if @resource.respond_to?(scope)
