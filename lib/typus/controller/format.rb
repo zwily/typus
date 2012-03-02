@@ -22,31 +22,23 @@ module Typus
 
       alias_method :generate_html, :get_paginated_data
 
-      #--
-      # TODO: Find in batches only works properly if it's used on models, not
-      #       controllers, so in this action does nothing. We should find a way
-      #       to be able to process large amounts of data.
-      #++
       def generate_csv
         fields = @resource.typus_fields_for(:csv)
-        options = { :conditions => @conditions }
 
         data = ::CSV.generate do |csv|
           csv << fields.keys.map { |k| @resource.human_attribute_name(k) }
-          @resource.find_in_batches(options) do |records|
-            records.each do |record|
-              csv << fields.map do |key, value|
-                       case value
-                       when :transversal
-                         a, b = key.split(".")
-                         record.send(a).send(b)
-                       when :belongs_to
-                         record.send(key).try(:to_label)
-                       else
-                         record.send(key)
-                       end
+          @resource.each do |record|
+            csv << fields.map do |key, value|
+                     case value
+                     when :transversal
+                       a, b = key.split(".")
+                       record.send(a).send(b)
+                     when :belongs_to
+                       record.send(key).try(:to_label)
+                     else
+                       record.send(key)
                      end
-            end
+                   end
           end
         end
 
