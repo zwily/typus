@@ -37,7 +37,7 @@ class Admin::ResourcesController < Admin::BaseController
     @item = @resource.new(params[:resource])
 
     respond_to do |format|
-      format.html # new.html.erb
+      format.html
       format.json { render :json => @item }
     end
   end
