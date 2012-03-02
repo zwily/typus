@@ -5,8 +5,8 @@ Add **Typus** and **Devise** to your ``Gemfile``:
 
 .. code-block:: ruby
 
-  gem "devise", "~> 1.5.2"
-  gem "typus", "~> 3.1.5"
+  gem "devise", "~> 2.0.4"
+  gem "typus", "~> 3.1.9"
 
 Generate **Devise** required stuff:
 
@@ -52,4 +52,4 @@ There are some changes you need to do to your ``AdminUser``.
   end
 
 Finally start your application and go to http://localhost:3000/admin, you should
-be redirected to the sign in form provided by devise.
+be redirected to the sign in form provided by **Devise**.
