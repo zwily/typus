@@ -27,7 +27,7 @@ Key Features
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
 - Support for [Kamaniri][kaminari] and [WillPaginate][will_paginate].
-- Works with `Rails 3.1.X` and `Rails 3.2.X`.
+- Works with `Rails 3.2.X`.
 
 
 Installing

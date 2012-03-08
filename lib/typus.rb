@@ -200,14 +200,12 @@ module Typus
 
     def model_configuration_files
       app = Typus.root.join("**", "*.yml")
-      plugins = Rails.root.join("vendor", "plugins", "*", "config", "typus", "**", "*.yml")
       lib = Rails.root.join("lib", "*", "config", "typus", "**", "*.yml")
       Dir[app.to_s, plugins.to_s, lib.to_s].reject { |f| f.match(/_roles.yml/) }.sort
     end
 
     def role_configuration_files
       app = Typus.root.join("**", "*_roles.yml")
-      plugins = Rails.root.join("vendor", "plugins", "*", "config", "typus", "**", "*_roles.yml")
       lib = Rails.root.join("lib", "*", "config", "typus", "**", "*_roles.yml")
       Dir[app.to_s, plugins.to_s, lib.to_s].sort
     end

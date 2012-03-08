@@ -8,6 +8,13 @@ CHANGELOG
    not run willith that version of Ruby, but I don't longer have plans to
    test against that version.
 
+ * [CHANGED] We do not longer look for Typus configuration files in the
+   plugins folder. Store them in `config/typus` or `lib/*/config/typus`.
+   Rails 4 will not support plugins and Rails 3.2 marks them as deprecated
+   so doesn't make sense to support them anymore.
+
+ * [CHANGED] Require at least `Rails 3.2.2`.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
