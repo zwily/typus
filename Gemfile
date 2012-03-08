@@ -67,14 +67,6 @@ group :test do
   gem "mocha" # Make sure mocha is loaded at the end ...
 end
 
-# Remember to install the Chrome or Safari extension, otherwise it doesn't
-# make sense to have this here.
-group :development do
-  # gem "guard-livereload"
-  # gem "rb-fsevent"
-  # gem "growl_notify"
-end
-
 gem "SystemTimer", :platform => :ruby_18
 
 gem "kaminari"
