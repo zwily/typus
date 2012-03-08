@@ -27,7 +27,7 @@ module Typus
 
         data = ::CSV.generate do |csv|
           csv << fields.keys.map { |k| @resource.human_attribute_name(k) }
-          @resource.each do |record|
+          @resource.all.each do |record|
             csv << fields.map do |key, value|
                      case value
                      when :transversal
