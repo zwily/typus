@@ -8,7 +8,7 @@ module Typus
       # Instead of having to translate strings and defining a default
       # value to avoid "missing translation" messages:
       #
-      #     I18n.t("Hello World!", :default => 'Hello World!')
+      #     I18n.t("Hello World!", :default => "Hello World!")
       #
       # We define a Typus translation method which will set up a default
       # value for you: (Interpolation still works)
