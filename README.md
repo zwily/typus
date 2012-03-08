@@ -26,6 +26,7 @@ Key Features
 - Internationalized interface ([See available translations][typus_locales])
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
+- Support for [Kamaniri][kaminari] and [WillPaginate][will_paginate].
 - Works with `Rails 3.1.X` and `Rails 3.2.X`.
 
 
@@ -99,3 +100,5 @@ License
 [rails]: http://rubyonrails.org/
 [gist]: https://gist.github.com/
 [issues]: https://github.com/fesplugas/typus/issues
+[kaminari]: http://rubygems.org/gems/kaminari
+[will_paginate]: http://rubygems.org/gems/will_paginate
