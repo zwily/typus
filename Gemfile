@@ -67,7 +67,5 @@ group :test do
   gem "mocha" # Make sure mocha is loaded at the end ...
 end
 
-gem "SystemTimer", :platform => :ruby_18
-
 gem "kaminari"
 # gem "will_paginate"

@@ -1,8 +1,12 @@
 CHANGELOG
 =========
 
-3.1.10 (unrelased)
+3.2.0 (unrelased)
 ------------------
+
+ * [CHANGED] Dropped support for Ruby 1.8.7. This doesn't mean Typus will
+   not run willith that version of Ruby, but I don't longer have plans to
+   test against that version.
 
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
