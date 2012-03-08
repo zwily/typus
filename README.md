@@ -33,7 +33,7 @@ Key Features
 Installing
 ----------
 
-Add **Typus** to your `Gemfile`
+Add **Typus** to your `Gemfile`:
 
     gem 'typus'
 
