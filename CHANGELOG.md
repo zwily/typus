@@ -1,7 +1,13 @@
 CHANGELOG
 =========
 
-3.1.9 (unreleased)
+3.1.10 (unrelased)
+------------------
+
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
+
+
+3.1.9 (2012-03-08)
 ------------------
 
  * [FIXED] _addanother save button is only shown if the user has permission
@@ -27,7 +33,7 @@ CHANGELOG
  * [FIXED] Fixed converting route to resource for "singular" class. Eg.
    "CustomerData" was being converted to "CustomerDatum".
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...master>
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...v3.1.9>
 
 
 3.1.8 (2012-02-05)
