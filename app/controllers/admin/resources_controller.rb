@@ -138,6 +138,8 @@ class Admin::ResourcesController < Admin::BaseController
 
   def resource
     params[:controller].extract_class
+  rescue
+    params[:controller].extract_singular_class
   end
   helper_method :resource
 

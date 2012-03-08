@@ -33,6 +33,10 @@ class StringTest < ActiveSupport::TestCase
   end
 =end
 
+  test "extract_singular_class" do
+    assert_equal CustomerData, "admin/customer_data".extract_singular_class
+  end
+
   test "acl_action_mapper returns create" do
     assert_equal "create", "new".acl_action_mapper
     assert_equal "create", "create".acl_action_mapper

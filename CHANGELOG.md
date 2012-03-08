@@ -24,6 +24,9 @@ CHANGELOG
 
  * [CHANGED] Removed find_in_batches from "csv_export". It was useless.
 
+ * [FIXED] Fixed converting route to resource for "singular" class. Eg.
+   "CustomerData" was being converted to "CustomerDatum".
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...master>
 
 
