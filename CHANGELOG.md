@@ -15,6 +15,8 @@ CHANGELOG
 
  * [CHANGED] Require at least `Rails 3.2.2`.
 
+ * [FIXED] Documentation about exporting data.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
