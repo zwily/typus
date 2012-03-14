@@ -359,32 +359,6 @@ For feedback you can use the following flash methods.
 * ``flash[:alert]`` when there's something wrong.
 
 
-Exporting Data
---------------
-
-**Typus** allows to export data. Only XML and CSV exporting methods are
-implemented but you can easily add your own. You will see the export links on
-the sidebar of your resource.
-
-.. code-block:: yaml
-
-  Order:
-    ...
-    export: csv, xml
-
-And the actions for those export options are:
-
-.. code-block:: ruby
-  
-  def export_csv
-    # Already implemented but you can override it.
-  end
-
-  def export_xml
-    # Already implemented but you can override it.
-  end
-
-
 Applications
 ------------
 
@@ -519,3 +493,15 @@ You can also define this option by model.
     ...
     options:
       counters: true
+
+Exporting Data
+^^^^^^^^^^^^^^
+
+**Typus** allows to export data in CSV, JSON and XML.
+
+.. code-block:: yaml
+
+  Post:
+    ...
+    options:
+      export: csv, json, xml
