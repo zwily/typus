@@ -50,6 +50,10 @@
   "Resources": "Recursos"
 
   "Save %{resource}": "Salvar %{resource}"
+  "Save": "Salvar"
+  "Save and continue editing": "Salvar e continuar editando"
+  "Save and add another": "Salvar e adicionar outro"
+  "Trash": "Excluir"
   "Search": "Procurar"
   "Show": "Mostrar"
   "Show all dates": "Mostrar todas as datas"
