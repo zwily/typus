@@ -15,13 +15,15 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
     @entry = FactoryGirl.create(:entry_trash)
   end
 
-  test "get index shows link to trash" do
-    pending
-  end
+  # FIXME
+  # test "get index shows link to trash" do
+  #   pending
+  # end
 
-  test "get index does not show link to trash when user does not have edit access" do
-    pending
-  end
+  # FIXME
+  # test "get index does not show link to trash when user does not have edit access" do
+  #   pending
+  # end
 
   test "get trash lists destroyed items" do
     get :trash
@@ -34,9 +36,10 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
     assert_equal [@entry], assigns(:items)
   end
 
-  test "get trash return error when user does not have edit access" do
-    pending
-  end
+  # FIXME
+  # test "get trash return error when user does not have edit access" do
+  #   pending
+  # end
 
   test "get restore recovers an item from the trash" do
     @request.env['HTTP_REFERER'] = "/admin/entries/trash"
@@ -50,8 +53,9 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
     assert assigns(:items).empty?
   end
 
-  test "get restore returns error when user does not have edit access" do
-    pending
-  end
+  # FIXME
+  # test "get restore returns error when user does not have edit access" do
+  #   pending
+  # end
 
 end

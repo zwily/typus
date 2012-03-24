@@ -53,8 +53,9 @@ Title,Published
      assert_equal expected_published, response.body
   end
 
-  test "export XML" do
-    pending
-  end
+  # FIXME
+  # test "export XML" do
+  #   pending
+  # end
 
 end
