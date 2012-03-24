@@ -20,8 +20,6 @@ module Typus
         end
       end
 
-      alias_method :generate_html, :get_paginated_data
-
       def generate_csv
         fields = @resource.typus_fields_for(:csv)
 

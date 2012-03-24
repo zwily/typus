@@ -41,6 +41,9 @@ CHANGELOG
 
  * [FIXED] Model names in Trash module.
 
+ * [CHANGED] Removed `generate_html` alias method and use `get_paginated_data`.
+   This also fixes the usage of `ctags`.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
