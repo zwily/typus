@@ -14,10 +14,6 @@ module Admin::BaseHelper
     end
   end
 
-  def has_root_path?
-    Rails.application.routes.routes.map(&:name).include?("root")
-  end
-
   def admin_apps
     render "helpers/admin/base/apps"
   end

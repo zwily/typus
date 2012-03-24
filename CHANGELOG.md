@@ -25,6 +25,11 @@ CHANGELOG
 
  * [CHANGED] `apps` helper becomes `admin_apps`.
 
+ * [CHANGED] We do not longer detect if the application has a `root_path`
+   defined. A new setting `Typus.admin_title_link` has been added so we have
+   more control on which URL we want to use. This is useful because we don't
+   always want to link to the main site.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
