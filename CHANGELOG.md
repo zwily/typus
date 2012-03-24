@@ -23,6 +23,8 @@ CHANGELOG
 
  * [CHANGED] `title` helper becomes `admin_title` (and merged methods).
 
+ * [CHANGED] `apps` helper becomes `admin_apps`.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
