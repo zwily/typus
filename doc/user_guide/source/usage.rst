@@ -15,7 +15,7 @@ Create Entries
 To create a new entry:
 
 * Click on entries tab.
-* Click "Add New" sub tab.
+* Click "Add" sub tab.
 * Start filling in the blanks.
 * When you are ready, click "Save Entry".
 

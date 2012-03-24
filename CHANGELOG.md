@@ -32,6 +32,8 @@ CHANGELOG
 
  * [CHANGED] `display_flash_message` becomes `admin_display_flash_message`.
 
+ * [CHANGED] "Add New" becomes "Add".
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 

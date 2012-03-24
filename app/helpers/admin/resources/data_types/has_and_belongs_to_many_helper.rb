@@ -46,7 +46,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
                 :attribute => options[:attribute],
                 :_popup => true }
 
-    link_to Typus::I18n.t("Add New"), options, { :class => "iframe" }
+    link_to Typus::I18n.t("Add"), options, { :class => "iframe" }
   end
 
 end

@@ -27,7 +27,7 @@ module Admin::ResourcesHelper
 
   def sidebar_add_new(klass)
     if admin_user.can?("create", klass)
-      { :message => Typus::I18n.t("Add New"), :url => { :action => "new" } }
+      { :message => Typus::I18n.t("Add"), :url => { :action => "new" } }
     end
   end
 
