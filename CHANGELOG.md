@@ -48,6 +48,8 @@ CHANGELOG
    duplicated. We also have plans to remove the sidebar, so consider this as an
    starting point. (Sidebar will be replaced by a drop down menu.)
 
+ * [CHANGED] No need to confirm when pressing "Sign out".
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 

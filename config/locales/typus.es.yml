@@ -10,7 +10,6 @@ es:
   "Add New %{resource}": "Añadir Nuevo %{resource}"
   "All": "Todos"
   "Are you sure?": "¿Estás seguro?"
-  "Are you sure you want to sign out and end your session?": "¿Estás seguro que quieres salir y cerrar la sessión?"
 
   "Change %{attribute}?": "Cambiar %{attribute}?"
   "Create %{resource}": "Crear %{resource}"

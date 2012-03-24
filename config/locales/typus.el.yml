@@ -8,7 +8,6 @@ el:
   "Add": "Προσθήκη"
   "Add New": "Προσθήκη νέου"
   "Are you sure?": "Είσαστε βέβαιοι;"
-  "Are you sure you want to sign out and end your session?": "Είσαστε σίγουροι ότι επιθυμείτε να αποσυνδεθείτε και να τερματίσετε το session;"
 
   "Change %{attribute}?": "Τροποποίηση του χαρακτηριστικού %{attribute};"
   "Create %{resource}": "Δημιουργία %{resource}"
