@@ -44,6 +44,10 @@ CHANGELOG
  * [CHANGED] Removed `generate_html` alias method and use `get_paginated_data`.
    This also fixes the usage of `ctags`.
 
+ * [CHANGED] Do not show "Add" link on the sidebar because it's confusing,
+   duplicated. We also have plans to remove the sidebar, so consider this as an
+   starting point. (Sidebar will be replaced by a drop down menu.)
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 

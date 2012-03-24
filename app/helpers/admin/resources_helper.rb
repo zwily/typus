@@ -12,13 +12,13 @@ module Admin::ResourcesHelper
   end
 
   def build_sidebar
-    resources = ActiveSupport::OrderedHash.new
+    resources = []
     app_name = @resource.typus_application
 
     admin_user.application(app_name).each do |resource|
       klass = resource.constantize
       unless klass.typus_options_for(:hide_from_sidebar)
-        resources[resource] = [sidebar_add_new(klass)].compact
+        resources << klass
       end
     end
 
@@ -26,12 +26,6 @@ module Admin::ResourcesHelper
       render "helpers/admin/resources/sidebar", :resources => resources
     else
       render "admin/dashboard/sidebar"
-    end
-  end
-
-  def sidebar_add_new(klass)
-    if admin_user.can?("create", klass)
-      { :message => Typus::I18n.t("Add"), :url => { :action => "new" } }
     end
   end
 
