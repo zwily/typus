@@ -19,6 +19,8 @@ CHANGELOG
 
  * [CHANGED] `login_info` helper becomes `admin_login_info`.
 
+ * [CHANGED] `search` helper becomes `admin_search`.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
