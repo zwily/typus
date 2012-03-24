@@ -11,9 +11,9 @@ class Admin::SessionController < Admin::BaseController
 
     path = if user
       session[:typus_user_id] = user.id
-      params[:back_to] || admin_dashboard_index_path
+      params[:return_to] || admin_dashboard_index_path
     else
-      new_admin_session_path(:back_to => params[:back_to])
+      new_admin_session_path(:return_to => params[:return_to])
     end
 
     redirect_to path

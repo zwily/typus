@@ -34,6 +34,9 @@ CHANGELOG
 
  * [CHANGED] "Add New" becomes "Add".
 
+ * [FIXED] `return_to` now works as expected so now it's easier to send links to
+    the admin interface.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 

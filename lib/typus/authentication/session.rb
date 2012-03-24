@@ -8,13 +8,14 @@ module Typus
 
       def authenticate
         unless session[:typus_user_id] && admin_user && admin_user.active?
-          deauthenticate
+          path = request.path != "/admin/dashboard" ? request.path : nil
+          deauthenticate(path)
         end
       end
 
-      def deauthenticate
+      def deauthenticate(return_to = nil)
         session[:typus_user_id] = nil
-        redirect_to new_admin_session_path
+        redirect_to new_admin_session_path(:return_to => return_to)
       end
 
       #--
