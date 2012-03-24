@@ -1,17 +1,17 @@
 module Admin::BaseHelper
 
-  def title(page_title)
-    content_for(:title) { page_title }
-  end
-
   def admin_header
     locals = { :admin_title => admin_title }
     render "helpers/admin/base/header", locals
   end
 
-  def admin_title
-    setting = defined?(Admin::Setting) && Admin::Setting.admin_title
-    setting || Typus.admin_title
+  def admin_title(page_title = nil)
+    if page_title
+      content_for(:title) { page_title }
+    else
+      setting = defined?(Admin::Setting) && Admin::Setting.admin_title
+      setting || Typus.admin_title
+    end
   end
 
   def has_root_path?

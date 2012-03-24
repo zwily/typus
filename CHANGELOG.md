@@ -21,6 +21,8 @@ CHANGELOG
 
  * [CHANGED] `search` helper becomes `admin_search`.
 
+ * [CHANGED] `title` helper becomes `admin_title` (and merged methods).
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
