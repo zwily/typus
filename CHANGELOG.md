@@ -30,6 +30,8 @@ CHANGELOG
    more control on which URL we want to use. This is useful because we don't
    always want to link to the main site.
 
+ * [CHANGED] `display_flash_message` becomes `admin_display_flash_message`.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 

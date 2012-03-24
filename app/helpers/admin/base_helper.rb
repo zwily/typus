@@ -31,7 +31,7 @@ module Admin::BaseHelper
     end
   end
 
-  def display_flash_message(message = flash)
+  def admin_display_flash_message(message = flash)
     if message.keys.any?
       locals = { :flash_type => message.keys.first, :message => message }
       render "helpers/admin/base/flash_message", locals

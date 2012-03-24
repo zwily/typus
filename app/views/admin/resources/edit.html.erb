@@ -24,7 +24,7 @@
     </script>
   <% end %>
 
-  <%= display_flash_message %>
+  <%= admin_display_flash_message %>
   <%= render 'edit' %>
 
   <% locals = { :options => params.dup.cleanup.merge!(:action => 'update') } %>
