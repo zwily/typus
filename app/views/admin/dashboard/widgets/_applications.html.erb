@@ -1,10 +1,6 @@
 <!-- Applications list with models. -->
 
 <%
-  page_title = Typus::I18n.t("Applications")
-%>
-
-<%
   applications = admin_user.applications
 
   # Detect if we are inside an application.
@@ -14,8 +10,12 @@
         applications = [app]
       end
     end
-    page_title = applications.first
+    title = applications.first
+  else
+    title = "Site"
   end
+
+  page_title = Typus::I18n.t("#{title} administration", :title => title)
 %>
 
 <h2><%= page_title %></h2>
@@ -25,11 +25,9 @@
 
     <table style="margin-bottom: 1em;">
 
-      <% table_header = application ? "Models" : app %>
-
       <thead>
         <tr>
-          <th><%= Typus::I18n.t(table_header) %></th>
+          <th><%= link_to Typus::I18n.t(app), admin_dashboard_path(app.parameterize) %></th>
         </tr>
       </thead>
 
