@@ -37,15 +37,15 @@ module Typus
 
       def restore
         @resource.restore(params[:id])
-        redirect_to :back, :notice => Typus::I18n.t("%{resource} recovered from trash.", :resource => @resource.name)
+        redirect_to :back, :notice => Typus::I18n.t("%{resource} recovered from trash.", :resource => @resource.model_name.human)
       rescue ActiveRecord::RecordNotFound
-        redirect_to :back, :notice => Typus::I18n.t("%{resource} can't be recovered from trash.", :resource => @resource.name)
+        redirect_to :back, :notice => Typus::I18n.t("%{resource} can't be recovered from trash.", :resource => @resource.model_name.human)
       end
 
       def wipe
         item = @resource.find_in_trash(params[:id])
         item.disable_trash { item.destroy }
-        redirect_to :back, :notice => Typus::I18n.t("%{resource} has been successfully removed from trash.", :resource => @resource.name)
+        redirect_to :back, :notice => Typus::I18n.t("%{resource} has been successfully removed from trash.", :resource => @resource.model_name.human)
       end
 
       def set_deleted

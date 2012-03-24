@@ -39,6 +39,8 @@ CHANGELOG
 
  * [CHANGED] "Applications" in dashboard is now "Site administration".
 
+ * [FIXED] Model names in Trash module.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
