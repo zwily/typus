@@ -17,7 +17,7 @@ module Admin::ResourcesHelper
 
     admin_user.application(app_name).each do |resource|
       klass = resource.constantize
-      if klass.typus_options_for(:hide_from_sidebar) == false
+      unless klass.typus_options_for(:hide_from_sidebar)
         resources[resource] = [sidebar_add_new(klass)].compact
       end
     end
