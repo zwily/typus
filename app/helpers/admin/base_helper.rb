@@ -22,7 +22,7 @@ module Admin::BaseHelper
     render "helpers/admin/base/apps"
   end
 
-  def login_info
+  def admin_login_info
     render "helpers/admin/base/login_info" unless admin_user.is_a?(FakeUser)
   end
 

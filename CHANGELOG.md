@@ -17,6 +17,8 @@ CHANGELOG
 
  * [FIXED] Documentation about exporting data.
 
+ * [CHANGED] `login_info` helper becomes `admin_login_info`.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
