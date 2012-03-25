@@ -55,7 +55,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
       assert_response :redirect
       assert_redirected_to "/admin/typus_users"
       assert_equal "Typus user successfully updated.", flash[:notice]
-      assert_equal "John Locke", @typus_user.reload.to_label
+      assert_equal "John", @typus_user.reload.first_name
     end
 
     should "not be able to change his role" do

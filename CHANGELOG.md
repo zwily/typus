@@ -53,6 +53,8 @@ CHANGELOG
  * [CHANGED] Instead of settings the session to `nil` when login out, we are
    now removing it using `session.delete(:typus_user_id)`.
 
+ * [CHANGED] `TypusClass#to_label` now returns the email.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
