@@ -28,4 +28,8 @@ class Admin::BaseController < ActionController::Base
     render :text => "Not allowed!", :status => :unprocessable_entity
   end
 
+  def admin_user_params
+    params[Typus.user_class_as_symbol]
+  end
+
 end

@@ -7,7 +7,8 @@ class Admin::SessionController < Admin::BaseController
   def new; end
 
   def create
-    user = user_scope.authenticate(params[:typus_user][:email], params[:typus_user][:password])
+    email, password = admin_user_params[:email], admin_user_params[:password]
+    user = user_scope.authenticate(email, password)
 
     path = if user
       session[:typus_user_id] = user.id

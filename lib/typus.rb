@@ -197,6 +197,10 @@ module Typus
       user_class_name.constantize
     end
 
+    def user_class_as_symbol
+      user_class_name.underscore.to_sym
+    end
+
     def root
       Rails.root.join(config_folder)
     end

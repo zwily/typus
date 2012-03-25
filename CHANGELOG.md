@@ -55,6 +55,8 @@ CHANGELOG
 
  * [CHANGED] `TypusClass#to_label` now returns the email.
 
+ * [CHANGED] Session and account forms are now using `Typus.user_class`.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 

@@ -12,14 +12,14 @@ class Admin::AccountController < Admin::BaseController
   end
 
   def create
-    user = Typus.user_class.generate(:email => params[:typus_user][:email])
+    user = Typus.user_class.generate(:email => admin_user_params[:email])
     redirect_to user ? { :action => "show", :id => user.token } : { :action => :new }
   end
 
   def forgot_password; end
 
   def send_password
-    if user = Typus.user_class.find_by_email(params[:typus_user][:email])
+    if user = Typus.user_class.find_by_email(admin_user_params[:email])
       Admin::Mailer.reset_password_instructions(user).deliver
       redirect_to new_admin_session_path, :notice => Typus::I18n.t("Password recovery link sent to your email.")
     else
