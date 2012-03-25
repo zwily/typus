@@ -57,6 +57,8 @@ CHANGELOG
 
  * [CHANGED] Session and account forms are now using `Typus.user_class`.
 
+ * [CHANGED] Extracted `account` and `session` forms into a partial.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
