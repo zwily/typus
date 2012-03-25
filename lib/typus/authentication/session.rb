@@ -14,7 +14,7 @@ module Typus
       end
 
       def deauthenticate(return_to = nil)
-        session[:typus_user_id] = nil
+        session.delete(:typus_user_id)
         redirect_to new_admin_session_path(:return_to => return_to)
       end
 

@@ -50,6 +50,9 @@ CHANGELOG
 
  * [CHANGED] No need to confirm when pressing "Sign out".
 
+ * [CHANGED] Instead of settings the session to `nil` when login out, we are
+   now removing it using `session.delete(:typus_user_id)`.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
