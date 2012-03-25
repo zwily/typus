@@ -8,7 +8,7 @@
   <% if @items.any? -%>
     <%= table %>
   <% else %>
-    <p><%= Typus::I18n.t("No %{resources} found.", :resources => association_name.humanize.downcase) %></p>
+    <p><%= Typus::I18n.t("No entries found.") %></p>
   <% end %>
 
 </div>

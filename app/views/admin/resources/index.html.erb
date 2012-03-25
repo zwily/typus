@@ -58,7 +58,7 @@
     <% end %>
     <%= admin_paginate(@items, Typus.pagination) %>
   <% else %>
-    <p><%= Typus::I18n.t("No %{resources} found.", :resources => @resource.model_name.human(:count => 2)) %></p>
+    <p><%= Typus::I18n.t("No entries found.") %></p>
   <% end %>
 
 <% end %>
