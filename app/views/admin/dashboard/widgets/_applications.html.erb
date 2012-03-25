@@ -4,15 +4,13 @@
   applications = admin_user.applications
 
   # Detect if we are inside an application.
-  if (application = params[:application])
+  title = if (application = params[:application])
     applications.each do |app|
-      if app.parameterize == application
-        applications = [app]
-      end
+      applications = [app] if app.parameterize == application
     end
-    title = applications.first
+    applications.first
   else
-    title = "Site"
+    "Site"
   end
 
   page_title = Typus::I18n.t("#{title} administration", :title => title)
