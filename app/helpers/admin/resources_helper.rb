@@ -12,15 +12,8 @@ module Admin::ResourcesHelper
   end
 
   def build_sidebar
-    resources = []
     app_name = @resource.typus_application
-
-    admin_user.application(app_name).each do |resource|
-      klass = resource.constantize
-      unless klass.typus_options_for(:hide_from_sidebar)
-        resources << klass
-      end
-    end
+    resources = admin_user.application(app_name).map(&:constantize).delete_if { |k| k.typus_options_for(:hide_from_sidebar) }
 
     if resources.any?
       render "helpers/admin/resources/sidebar", :resources => resources
