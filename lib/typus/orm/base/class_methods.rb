@@ -30,6 +30,10 @@ module Typus
           read_model_config[filter.to_s].try(:extract_settings) || []
         end
 
+        def typus_scopes
+          typus_defaults_for(:scopes).reject { |s| !respond_to?(s) }
+        end
+
         def typus_search_fields
           Hash.new.tap do |search|
             typus_defaults_for(:search).each do |field|
