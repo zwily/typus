@@ -67,7 +67,24 @@ CHANGELOG
 
  * [NEW] `Model.typus_scopes` to detect defined scopes.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...master>
+
+
+3.1.11 (unrelased)
+-------------------
+
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...3-1-stable>
+
+
+3.1.10 (2012-03-27)
+-------------------
+
+ * [FIXED] Filter scopes so we can only run those scopes defined in configuration
+   files.
+
+ * [NEW] `Model.typus_scopes` to detect defined scopes.
+
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...v3.1.10>
 
 
 3.1.9 (2012-03-08)
