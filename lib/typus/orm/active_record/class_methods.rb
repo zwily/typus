@@ -82,7 +82,7 @@ module Typus
             end
           end
           # Remove unsupported filters!
-          filters.reject! { |k, v| [:time].include?(v) }
+          filters.reject { |k, v| [:time].include?(v) }
         end
 
         def get_typus_filters
