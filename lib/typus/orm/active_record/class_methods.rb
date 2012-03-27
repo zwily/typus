@@ -76,11 +76,13 @@ module Typus
         end
 
         def typus_filters
-          ActiveSupport::OrderedHash.new.tap do |fields_with_type|
+          filters = ActiveSupport::OrderedHash.new.tap do |fields_with_type|
             get_typus_filters.each do |field|
               fields_with_type[field.to_s] = association_attribute?(field) || model_fields[field.to_sym]
             end
           end
+          # Remove unsupported filters!
+          filters.reject! { |k, v| [:time].include?(v) }
         end
 
         def get_typus_filters
