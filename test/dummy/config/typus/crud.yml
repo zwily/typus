@@ -10,3 +10,4 @@ Entry:
   application: CRUD, 1
   options:
     export: csv
+  scopes: published

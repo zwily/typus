@@ -62,6 +62,9 @@ CHANGELOG
  * [CHANGED] `not_allowed` now accepts an param so we can give better feedback
    to the user when an action is not allowed.
 
+ * [FIXED] Filter scopes so we can only run those scopes defined in configuration
+   files.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 

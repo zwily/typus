@@ -21,6 +21,19 @@ class Admin::EntriesControllerTest < ActionController::TestCase
     assert_template 'index'
   end
 
+  test "get index with scope" do
+    get :index, :scope => 'published'
+    assert_response :success
+    assert_template 'index'
+
+    %w(delete_all).each do |scope|
+      get :index, :scope => scope
+      assert_response :unprocessable_entity
+      assert_equal "Not allowed! Requested scope not defined on your whitelist.", response.body
+      assert !Entry.count.eql?(0)
+    end
+  end
+
   test "get new" do
     get :new
     assert_response :success
