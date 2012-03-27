@@ -70,12 +70,6 @@ CHANGELOG
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...master>
 
 
-3.1.11 (unrelased)
--------------------
-
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...3-1-stable>
-
-
 3.1.10 (2012-03-27)
 -------------------
 
