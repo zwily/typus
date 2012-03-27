@@ -28,8 +28,4 @@ module Admin::Resources::ListHelper
     build_table(model, fields, items, link_options, association, association_name)
   end
 
-  def scopes
-    @resource.typus_defaults_for(:scopes).reject { |s| !@resource.respond_to?(s) }
-  end
-
 end

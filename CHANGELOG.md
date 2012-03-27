@@ -65,6 +65,8 @@ CHANGELOG
  * [FIXED] Filter scopes so we can only run those scopes defined in configuration
    files.
 
+ * [NEW] `Model.typus_scopes` to detect defined scopes.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
 
