@@ -69,6 +69,7 @@ CHANGELOG
 
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...master>
 
+
 3.1.11 (unrelased)
 -------------------
 
