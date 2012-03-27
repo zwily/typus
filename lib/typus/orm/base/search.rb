@@ -11,33 +11,17 @@ module Typus
           { key => (value == 'true') ? true : false }
         end
 
-        def build_datetime_conditions(key, value)
-          tomorrow = Time.zone.now.beginning_of_day.tomorrow
-
-          interval = case value
-                     when 'today'         then 0.days.ago.beginning_of_day..tomorrow
-                     when 'last_few_days' then 3.days.ago.beginning_of_day..tomorrow
-                     when 'last_7_days'   then 6.days.ago.beginning_of_day..tomorrow
-                     when 'last_30_days'  then 30.days.ago.beginning_of_day..tomorrow
-                     end
-
-          build_filter_interval(interval, key)
-        end
-
-        alias_method :build_time_conditions, :build_datetime_conditions
-
         def build_date_conditions(key, value)
-          tomorrow = 0.days.ago.tomorrow.to_date
-
-          interval = case value
-                     when 'today'         then 0.days.ago.to_date..tomorrow
-                     when 'last_few_days' then 3.days.ago.to_date..tomorrow
-                     when 'last_7_days'   then 6.days.ago.to_date..tomorrow
-                     when 'last_30_days'  then 30.days.ago.to_date..tomorrow
-                     end
-
-          build_filter_interval(interval, key)
+          if %w(all_day all_week all_month all_year).include?(value)
+            interval = Time.zone.now.send(value)
+            build_filter_interval(interval, key)
+          else
+            raise "#{value} is not allowed!"
+          end
         end
+
+        alias_method :build_datetime_conditions, :build_date_conditions
+        alias_method :build_time_conditions, :build_date_conditions
 
         def build_filter_interval(interval, key)
           raise "Not implemented!"

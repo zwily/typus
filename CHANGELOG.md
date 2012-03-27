@@ -67,6 +67,8 @@ CHANGELOG
 
  * [NEW] `Model.typus_scopes` to detect defined scopes.
 
+ * [CHANGED] Datetime/Time filters use Time intervals. (all_day, all_week ...)
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...master>
 
 
