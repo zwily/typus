@@ -1,8 +1,66 @@
 CHANGELOG
 =========
 
-3.1.10 (unrelased)
+3.2.0 (unrelased)
 ------------------
+
+ * [CHANGED] Dropped support for Ruby 1.8.7. This doesn't mean Typus will
+   not run willith that version of Ruby, but I don't longer have plans to
+   test against that version.
+
+ * [CHANGED] We do not longer look for Typus configuration files in the
+   plugins folder. Store them in `config/typus` or `lib/*/config/typus`.
+   Rails 4 will not support plugins and Rails 3.2 marks them as deprecated
+   so doesn't make sense to support them anymore.
+
+ * [CHANGED] Require at least `Rails 3.2.2`.
+
+ * [FIXED] Documentation about exporting data.
+
+ * [CHANGED] `login_info` helper becomes `admin_login_info`.
+
+ * [CHANGED] `search` helper becomes `admin_search`.
+
+ * [CHANGED] `title` helper becomes `admin_title` (and merged methods).
+
+ * [CHANGED] `apps` helper becomes `admin_apps`.
+
+ * [CHANGED] We do not longer detect if the application has a `root_path`
+   defined. A new setting `Typus.admin_title_link` has been added so we have
+   more control on which URL we want to use. This is useful because we don't
+   always want to link to the main site.
+
+ * [CHANGED] `display_flash_message` becomes `admin_display_flash_message`.
+
+ * [CHANGED] "Add New" becomes "Add".
+
+ * [FIXED] `return_to` now works as expected so now it's easier to send links to
+    the admin interface.
+
+ * [CHANGED] "Applications" in dashboard is now "Site administration".
+
+ * [FIXED] Model names in Trash module.
+
+ * [CHANGED] Removed `generate_html` alias method and use `get_paginated_data`.
+   This also fixes the usage of `ctags`.
+
+ * [CHANGED] Do not show "Add" link on the sidebar because it's confusing,
+   duplicated. We also have plans to remove the sidebar, so consider this as an
+   starting point. (Sidebar will be replaced by a drop down menu.)
+
+ * [CHANGED] No need to confirm when pressing "Sign out".
+
+ * [CHANGED] Instead of settings the session to `nil` when login out, we are
+   now removing it using `session.delete(:typus_user_id)`.
+
+ * [CHANGED] `TypusClass#to_label` now returns the email.
+
+ * [CHANGED] Session and account forms are now using `Typus.user_class`.
+
+ * [CHANGED] Extracted `account` and `session` forms into a partial.
+
+ * [CHANGED] `not_allowed` now accepts an param so we can give better feedback
+   to the user when an action is not allowed.
 
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...master>
 
