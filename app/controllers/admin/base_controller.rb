@@ -24,8 +24,9 @@ class Admin::BaseController < ActionController::Base
     Typus.user_class.count.zero?
   end
 
-  def not_allowed
-    render :text => "Not allowed!", :status => :unprocessable_entity
+  def not_allowed(reason = nil)
+    message = reason ? "Not allowed! #{reason}" : "Not allowed!"
+    render :text => message, :status => :unprocessable_entity
   end
 
   def admin_user_params
