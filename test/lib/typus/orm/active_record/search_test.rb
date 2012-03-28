@@ -87,21 +87,17 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal expected, Page.build_boolean_conditions('status', 'false')
   end
 
-  context "build_datetime_conditions" do
-
-    %w(all_day all_week all_month all_year).each do |interval|
-      should "accept #{interval}" do
-        output = Article.build_datetime_conditions('created_at', interval).first
-        assert_equal "articles.created_at BETWEEN ? AND ?", output
-      end
+  %w(all_day all_week all_month all_year).each do |interval|
+    test "build_datetime_conditions accepts #{interval}" do
+      output = Article.build_datetime_conditions('created_at', interval).first
+      assert_equal "articles.created_at BETWEEN ? AND ?", output
     end
+  end
 
-    should "not accept invalid interval" do
-      assert_raises RuntimeError do
-        Article.build_datetime_conditions('created_at', 'tomorrow')
-      end
+  test "build_datetime_condition does not accept invalid interval" do
+    assert_raises RuntimeError do
+      Article.build_datetime_conditions('created_at', 'tomorrow')
     end
-
   end
 
   test "build_string_conditions" do
