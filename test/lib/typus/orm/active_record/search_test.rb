@@ -79,14 +79,12 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   test "build_boolean_conditions returns true" do
     expected = {'status'=>true}
-    output = Page.build_boolean_conditions('status', 'true')
-    assert_equal expected, output
+    assert_equal expected, Page.build_boolean_conditions('status', 'true')
   end
 
   test "build_boolean_conditions returns false" do
     expected = {'status'=>false}
-    output = Page.build_boolean_conditions('status', 'false')
-    assert_equal expected, output
+    assert_equal expected, Page.build_boolean_conditions('status', 'false')
   end
 
   context "build_datetime_conditions" do
@@ -108,22 +106,19 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   test "build_string_conditions" do
     expected = {'test'=>'true'}
-    output = Page.build_string_conditions('test', 'true')
-    assert_equal expected, output
+    assert_equal expected, Page.build_string_conditions('test', 'true')
   end
 
   # TODO: build_has_many_conditions with non-standard primary keys
   test "build_has_many_conditions" do
     expected = ["projects.id = ?", "1"]
-    output = User.build_has_many_conditions('projects', '1')
-    assert_equal expected, output
+    assert_equal expected, User.build_has_many_conditions('projects', '1')
   end
 
   context "build_conditions" do
 
     should "return an array" do
-      params = { :search => '1' }
-      assert Post.build_conditions(params).is_a?(Array)
+      assert Post.build_conditions({:search => '1'}).is_a?(Array)
     end
 
     should "return_sql_conditions_on_search_for_typus_user" do
@@ -176,15 +171,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_status true" do
-      params = { :status => "true" }
       expected = { :status => true }
-      assert_equal expected, TypusUser.build_conditions(params).first
+      assert_equal expected, TypusUser.build_conditions({:status => 'true'}).first
     end
 
     should "return_sql_conditions_on_filtering_typus_users_by_status false" do
-      params = { :status => "false" }
       expected = { :status => false }
-      assert_equal expected, TypusUser.build_conditions(params).first
+      assert_equal expected, TypusUser.build_conditions({:status => 'false'}).first
     end
 
     # This applies for all_day, all_week, all_month, all_year, so there's no
@@ -196,8 +189,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
 
     should "return_sql_conditions_on_filtering_posts_by_string" do
-      params = { :role => "admin" }
-      assert_equal params, TypusUser.build_conditions(params).first
+      expected = { :role => 'admin' }
+      assert_equal expected, TypusUser.build_conditions({:role => 'admin'}).first
     end
 
   end
@@ -205,8 +198,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   test "build_my_joins return the expected joins" do
     @project = FactoryGirl.create(:project)
     FactoryGirl.create_list(:project, 2)
-    params = { :projects => @project.id }
-    assert_equal [:projects], User.build_my_joins(params)
+    assert_equal [:projects], User.build_my_joins({:projects => @project.id})
   end
 
   test "build_my_joins works when users are filtered by projects" do
