@@ -21,7 +21,7 @@ module Typus
         end
 
         alias_method :build_datetime_conditions, :build_date_conditions
-        alias_method :build_time_conditions, :build_date_conditions
+        alias_method :build_timestamp_conditions, :build_date_conditions
 
         def build_filter_interval(interval, key)
           raise "Not implemented!"
