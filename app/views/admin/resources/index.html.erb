@@ -14,7 +14,7 @@
 
   <%= admin_display_flash_message %>
 
-  <% if scopes.any? || predefined_filters.any? %>
+  <% if @resource.typus_scopes.any? || predefined_filters.any? %>
     <div class="tabbable tabs-below">
       <ul class="nav tabs">
         <% all_klass = params[:scope] ? "inactive" : "active" %>
@@ -23,7 +23,7 @@
           <%= "(#{resource.count})" if @resource.typus_options_for(:counters) %>
         </li>
 
-        <% scopes.each do |scope| %>
+        <% @resource.typus_scopes.each do |scope| %>
           <% klass = params[:scope].eql?(scope) ? "active" : "inactive" %>
           <li class="<%= klass %>">
             <%= link_to Typus::I18n.t(scope.humanize), :scope => scope %>
