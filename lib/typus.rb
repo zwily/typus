@@ -31,6 +31,7 @@ module Typus
     autoload :Format, "typus/controller/format"
     autoload :Headless, "typus/controller/headless"
     autoload :Multisite, "typus/controller/multisite"
+    autoload :Navigation, "typus/controller/navigation"
     autoload :Trash, "typus/controller/trash"
   end
 
