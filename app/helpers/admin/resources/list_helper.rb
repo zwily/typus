@@ -4,7 +4,7 @@ module Admin::Resources::ListHelper
     resources_actions_for_current_role.map do |body, url, options|
       path = params.dup.merge!(url).compact.cleanup
       link_to Typus::I18n.t(body), path, options
-    end.compact.join(" / ").html_safe
+    end.compact.reverse.join(" / ").html_safe
   end
 
   def resources_actions_for_current_role
