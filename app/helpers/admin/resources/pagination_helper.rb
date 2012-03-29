@@ -6,7 +6,7 @@ module Admin::Resources::PaginationHelper
     elsif defined?(WillPaginate)
       will_paginate(items, options)
     else
-      "<p align='center'>Showing only #{@resource.typus_options_for(:per_page)} records. Please, install <strong>Kaminari</strong> or <strong>WillPaginate</strong> to paginate.</p>".html_safe
+      render :partial => "admin/resources/pagination"
     end
   end
 
