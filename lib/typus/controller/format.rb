@@ -16,7 +16,10 @@ module Typus
         elsif defined?(WillPaginate)
           @resource.paginate(:page => params[:page], :per_page => items_per_page)
         else
-          @resource.limit(items_per_page) # Pagination is disabled, so just in case limit to 50 records.
+          # TODO: Pagination at this point is disabled so we need to implement
+          # our own pagination solution. At this point we are showing a message
+          # to the user suggesting to install Kamaniri or WillPaginate.
+          @resource.limit(items_per_page)
         end
       end
 
