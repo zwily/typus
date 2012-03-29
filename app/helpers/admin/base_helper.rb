@@ -1,8 +1,7 @@
 module Admin::BaseHelper
 
   def admin_header
-    locals = { :admin_title => admin_title }
-    render "helpers/admin/base/header", locals
+    render "helpers/admin/base/header", { :admin_title => admin_title }
   end
 
   def admin_title(page_title = nil)
