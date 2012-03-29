@@ -31,6 +31,10 @@ module Admin::BaseHelper
     end
   end
 
+  def admin_edit_user_path(user)
+    { :controller => "/admin/#{Typus.user_class.to_resource}", :action => 'edit', :id => user.id }
+  end
+
   def admin_display_flash_message(message = flash)
     if message.keys.any?
       locals = { :flash_type => message.keys.first, :message => message }
