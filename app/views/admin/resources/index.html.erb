@@ -9,33 +9,44 @@
 
   <h1>
     <%= page_title %>
-    <small><%= list_actions %></small>
   </h1>
 
   <%= admin_display_flash_message %>
 
   <% if @resource.typus_scopes.any? || predefined_filters.any? %>
     <div class="tabbable tabs-below">
-      <ul class="nav tabs">
+      <ul class="nav nav-tabs">
         <% all_klass = params[:scope] ? "inactive" : "active" %>
         <li class="<%= all_klass %>">
-          <%= link_to Typus::I18n.t("All"), params.dup.cleanup.merge(:action => 'index') %>
-          <%= "(#{resource.count})" if @resource.typus_options_for(:counters) %>
+          <%= link_to params.dup.cleanup.merge(:action => 'index') do %>
+            <%= Typus::I18n.t("All") %>
+            <% if @resource.typus_options_for(:counters) %>
+              <%= "&nbsp;<span class='badge'>#{resource.count}</span>".html_safe %>
+            <% end %>
+          <% end %>
         </li>
 
         <% @resource.typus_scopes.each do |scope| %>
           <% klass = params[:scope].eql?(scope) ? "active" : "inactive" %>
           <li class="<%= klass %>">
-            <%= link_to Typus::I18n.t(scope.humanize), :scope => scope %>
-            <%= "(#{@resource.send(scope).count})" if @resource.typus_options_for(:counters)  %>
+            <%= link_to :scope => scope do %>
+              <%= Typus::I18n.t(scope.humanize) %>
+              <% if @resource.typus_options_for(:counters)  %>
+                <%= "&nbsp; <span class='badge'>#{@resource.send(scope).count}</span>".html_safe %>
+              <% end %>
+          <% end %>
           </li>
         <% end %>
 
         <% predefined_filters.each do |filter, action, scope| %>
           <li>
             <% url = action.is_a?(String) ? params.dup.cleanup.merge(:action => action) : action %>
-            <%= link_to Typus::I18n.t(filter), url %>
-            <%= "(#{@resource.send(scope).count})" if @resource.typus_options_for(:counters) && scope && @resource.respond_to?(scope) %>
+            <%= link_to url do %>
+              <%= Typus::I18n.t(filter) %>
+              <% if @resource.typus_options_for(:counters) && scope && @resource.respond_to?(scope) %>
+                <%= "&nbsp;<span class='badge'>#{@resource.send(scope).count}</span>".html_safe %>
+              <% end %>
+            <% end %>
           </li>
         <% end %>
 

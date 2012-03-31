@@ -8,7 +8,6 @@
 
   <h1>
     <%= page_title %>
-    <small><%= list_actions %></small>
   </h1>
 
   <% if headless_mode? && params[:action] == 'edit' && flash.keys.include?(:notice) && !params[:_input] %>
@@ -33,9 +32,3 @@
 
   <%= typus_relationships unless headless_mode? %>
 <% end %>
-
-<div class="row">
-  <div class="span10 offset1">
-    <%= yield :main_grid %>
-  </div>
-</div>

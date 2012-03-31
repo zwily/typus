@@ -1,20 +1,11 @@
 /*
-*= require docs/assets/css/bootstrap
+*= require css/bootstrap.min
 */
 
 body.base {
-  padding-top: 60px;
+  padding: 20px 0;
 }
 
-label {
-  font-weight: bold;
-}
-
-.btn-group {
-  margin-top: 10px;
-}
-
-.modal {
-  width: 490px;
-  margin: -250px 0 0 -220px;
+h1 {
+  padding-bottom: 0.25em;
 }

@@ -1,2 +1,24 @@
-<%= link_to admin_user.to_label, admin_edit_user_path(admin_user) %>
-<%= link_to Typus::I18n.t("Sign out"), admin_sign_out_path, :method => :delete %>
+<ul class="nav pull-right">
+  <li class="dropdown" data-dropdown="dropdown">
+    <%= link_to "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
+      <%= admin_user.to_label %>
+      <b class="caret"></b>
+    <% end %>
+
+    <ul class="dropdown-menu">
+      <li>
+        <%= link_to admin_edit_user_path(admin_user) do %>
+          <i class="icon-user"></i>
+          <%= Typus::I18n.t("Settings") %>
+        <% end %>
+      </li>
+      <li class="divider"></li>
+      <li>
+        <%= link_to admin_sign_out_path, :method => :delete do %>
+          <i class="icon-off"></i>
+          <%= Typus::I18n.t("Sign out") %>
+        <% end %>
+      </li>
+    </ul>
+  </li>
+</ul>

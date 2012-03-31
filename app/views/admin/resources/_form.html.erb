@@ -7,22 +7,26 @@
   <%= render "helpers/admin/resources/errors" %>
 
   <fieldset>
-    <legend></legend>
+    <% unless params[:_popup] %>
+      <legend><%= @item.to_label %></legend>
+    <% end %>
 
     <%= build_form(fields, form) %>
 
     <% unless params[:_popup] %>
-      <% build_save_options.each do |key, value, special| %>
-        <% klass = key.eql?("_save") ? 'btn primary' : 'btn'  %>
-        <%
-          message = Typus::I18n.t(value)
-          options = { :name => key,
-                      :onclick => "Typus.setConfirmUnload(false);",
-                      'data-disable-with' => message,
-                      :class => klass }
-        %>
-        <%= submit_tag message, options %>
-      <% end %>
+      <div class="form-actions">
+        <% build_save_options.each do |key, value, special| %>
+          <% klass = key.eql?("_save") ? 'btn-primary' : 'btn'  %>
+          <%
+            message = Typus::I18n.t(value)
+            options = { :name => key,
+                        :onclick => "Typus.setConfirmUnload(false);",
+                        'data-disable-with' => message,
+                        :class => "btn #{klass}" }
+          %>
+          <%= submit_tag message, options %>
+        <% end %>
+      </div>
     <% end %>
   </fieldset>
 

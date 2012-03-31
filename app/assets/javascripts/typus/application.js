@@ -1,10 +1,7 @@
 //= require typus/jquery-1.8.3-min
 //= require jquery_ujs
 //= require chosen.jquery
-//= require js/bootstrap-transition.js
-//= require js/bootstrap-alert.js
-//= require js/bootstrap-dropdown.js
-//= require js/bootstrap-modal.js
+//= require js/bootstrap.js
 //= require typus/jquery.application
 //= require typus/custom
 
