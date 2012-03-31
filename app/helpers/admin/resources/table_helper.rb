@@ -1,5 +1,7 @@
 module Admin::Resources::TableHelper
 
+  # TODO: Use a options hash! So we can pass it directly to the render
+  # method.
   def build_table(model, fields, items, link_options = {}, association = nil, association_name = nil)
     locals = { :model => model,
                :fields => fields,
