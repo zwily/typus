@@ -25,10 +25,10 @@ module Typus
                       :format => { :with => Typus::Regex::Email }
 
             validates :password,
-                      :confirmation => { :if => :password_required? },
-                      :presence => { :if => :password_required? }
-
-            validates :password, :length => 6..40, :if => :password_required?
+                      :confirmation => true,
+                      :presence => true,
+                      :length => 6..40,
+                      :if => :password_required?
 
             validates :role, :presence => true
 
