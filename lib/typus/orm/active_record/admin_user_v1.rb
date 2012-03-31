@@ -19,7 +19,10 @@ module Typus
 
             attr_protected :role, :status
 
-            validates :email, :presence => true, :uniqueness => true, :format => { :with => Typus::Regex::Email }
+            validates :email,
+                      :presence => true,
+                      :uniqueness => true,
+                      :format => { :with => Typus::Regex::Email }
 
             validates :password,
                       :confirmation => { :if => :password_required? },
