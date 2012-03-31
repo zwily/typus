@@ -28,7 +28,7 @@ module Typus
                       :confirmation => { :if => :password_required? },
                       :presence => { :if => :password_required? }
 
-            validates_length_of :password, :within => 6..40, :if => :password_required?
+            validates :password, :length => 6..40, :if => :password_required?
 
             validates :role, :presence => true
 
