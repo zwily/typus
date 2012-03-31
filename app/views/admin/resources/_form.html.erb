@@ -7,9 +7,7 @@
   <%= render "helpers/admin/resources/errors" %>
 
   <fieldset>
-    <% unless params[:_popup] %>
-      <legend><%= link_to Typus::I18n.t("Back to list"), :action => 'index' %></legend>
-    <% end %>
+    <legend></legend>
 
     <%= build_form(fields, form) %>
 
