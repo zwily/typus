@@ -1,18 +1,14 @@
-<%= form_tag nil, :method => :get do %>
+<%= form_tag nil, :method => :get, :class => "well form-inline" do %>
 
-  <div id="filters">
-    <ul>
-      <% filters.each do |filter| %>
-        <% key, value = filter[:key], filter[:value] %>
-        <li><%= select_tag key, options_for_select(value, params[key]) %></li>
-      <% end %>
+  <% filters.each do |filter| %>
+    <% key, value = filter[:key], filter[:value] %>
+    <%= select_tag key, options_for_select(value, params[key]) %>
+  <% end %>
 
-      <% hidden_filters.each do |key, value| %>
-        <%= hidden_field_tag key, value %>
-      <% end %>
+  <% hidden_filters.each do |key, value| %>
+    <%= hidden_field_tag key, value %>
+  <% end %>
 
-      <li><%= submit_tag Typus::I18n.t("Filter"), :name => nil %></li>
-    </ul>
-  </div>
+  <%= submit_tag Typus::I18n.t("Filter"), :name => nil, :class => "btn" %>
 
 <% end %>
