@@ -28,8 +28,10 @@
         <% end %>
       </div>
     <% else %>
-      <%= hidden_field_tag "_id", @item.id %>
-      <%= hidden_field_tag "_label", @item.to_label %>
+      <% unless @item.new_record? %>
+        <%= hidden_field_tag "_id", @item.id %>
+        <%= hidden_field_tag "_label", @item.to_label %>
+      <% end %>
       <%= hidden_field_tag "_continue" %>
     <% end %>
   </fieldset>
