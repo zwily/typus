@@ -55,7 +55,7 @@ Post:
       templates:
         body: text_with_ckeditor_and_assets
         published_at: datepicker
-  relationships: views
+  relationships: categories, comments, views
   actions:
     index: cleanup
     edit: send_as_newsletter, preview
