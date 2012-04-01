@@ -1,5 +1,3 @@
-<% chosen_class = "chzn-select-#{attribute_id}" %>
-
 <%= render  :partial => 'admin/templates/modals/belongs_to',
             :locals => { :attribute => attribute, :related => related, :attribute_id => attribute_id } %>
 
@@ -7,13 +5,9 @@
   <%= form.label attribute, label_text, { :class => "control-label" } %>
   <div class="controls">
     <% if values.any? %>
-      <%= form.select related_fk, values, options, html_options.merge(:class => chosen_class, :style => "width: 350px;") %>
+      <%= form.select related_fk, values, options, html_options %>
     <% else %>
       <%= Typus::I18n.t("No entries found.") %>
     <% end %>
   </div>
 </div>
-
-<script type="text/javascript">
-  // $(document).ready(function () { $(".<%= chosen_class %>").chosen(); });
-</script>

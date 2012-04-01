@@ -10,6 +10,12 @@
 class View < ActiveRecord::Base
 
   ##
+  # Validations
+  #
+
+  validates :post, :presence => true
+
+  ##
   # Associations
   #
 
