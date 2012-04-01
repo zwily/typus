@@ -48,10 +48,6 @@ module Admin::Resources::SidebarHelper
   end
 
   # def sidebar_actions
-  #   resources_actions_for_current_role
-  # end
-
-  # def sidebar_actions
   #   resources_actions_for_current_role.map do |body, url, options|
   #     path = params.dup.merge!(url).compact.cleanup
   #     { :message => Typus::I18n.t(body), :url => path, :options => options }
