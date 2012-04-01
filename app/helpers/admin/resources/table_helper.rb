@@ -51,6 +51,12 @@ module Admin::Resources::TableHelper
 
     resource_actions.map do |body, url, options, proc|
       next if proc && proc.respond_to?(:call) && proc.call(item) == false
+
+      # Hack to fix options URL
+      if options && options["data-toggle"]
+        options[:url] = url_for(:controller => "/admin/#{model.to_resource}", :action => url[:action], :id => item.id, :_popup => true)
+      end
+
       { :message => Typus::I18n.t(body),
         :url => params.dup.cleanup.merge({ :controller => "/admin/#{model.to_resource}", :id => item.id }).merge(url),
         :options => options }

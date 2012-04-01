@@ -41,12 +41,13 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
   end
 
   def build_add_new_for_has_and_belongs_to_many(klass, options)
-    options = { :controller => "/admin/#{klass.to_resource}",
-                :action => "new",
-                :attribute => options[:attribute],
-                :_popup => true }
+    html_options = set_modal_options_for(klass)
+    html_options["url"] = url_for(:controller => "/admin/#{klass.to_resource}", :action => :new, :_popup => true)
+    html_options["data-controls-modal"] = "modal-from-dom-#{options[:attribute]}"
 
-    link_to Typus::I18n.t("Add"), options, { :class => "iframe" }
+    options = { :anchor => html_options["data-controls-modal"] }
+
+    link_to Typus::I18n.t("Add"), options, html_options
   end
 
 end

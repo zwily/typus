@@ -33,21 +33,33 @@ module Admin::Resources::DataTypes::HasManyHelper
 
   def build_add_new_for_has_many(klass, field, options = {})
     if admin_user.can?("create", klass)
-      html_options = { "data-toggle" => "modal",
-                       "data-controls-modal" => "modal-from-dom-#{klass.to_resource}",
-                       "data-backdrop" => "true",
-                       "data-keyboard" => "true",
-                       "class" => "ajax-modal",
-                       "url" => "/admin/#{klass.to_resource}/new?_popup=true" }
+
+      html_options = set_modal_options_for(klass)
+      html_options["url"] = "/admin/#{klass.to_resource}/new?_popup=true"
 
       link_to Typus::I18n.t("Add"), "##{html_options['data-controls-modal']}", html_options
     end
   end
 
   def set_has_many_resource_actions
-    @resource_actions = [["Edit", { :action => "edit", :_popup => true }, { :class => 'iframe_with_page_reload' }],
-                         ["Show", { :action => "show", :_popup => true }, { :class => 'iframe'}],
-                         ["Trash", { :action => "destroy" }, { :data => { :confirm => "Trash?" } } ]]
+    klass = @model_to_relate
+    @resource_actions = [set_has_many_resource_edit_action(klass),
+                         set_has_many_resource_show_action(klass),
+                         set_has_many_resource_destroy_action(klass)]
+  end
+
+  def set_has_many_resource_edit_action(klass)
+    html_options = set_modal_options_for(klass)
+    [ "Edit", { :action => 'edit', :anchor => html_options['data-controls-modal'] }, html_options ]
+  end
+
+  def set_has_many_resource_show_action(klass)
+    html_options = set_modal_options_for(klass)
+    [ "Show", { :action => 'show', :anchor => html_options['data-controls-modal'] }, html_options ]
+  end
+
+  def set_has_many_resource_destroy_action(klass)
+    [ "Trash", { :action => 'destroy' }, { :confirm => "Trash?" } ]
   end
 
 end

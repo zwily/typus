@@ -46,4 +46,13 @@ module Admin::BaseHelper
     end
   end
 
+  def set_modal_options_for(klass)
+    { "data-toggle" => "modal",
+      "data-controls-modal" => "modal-from-dom-#{klass.to_resource}",
+      "data-backdrop" => "true",
+      "data-keyboard" => "true",
+      "class" => "ajax-modal",
+      "url" => "override-this" }
+  end
+
 end

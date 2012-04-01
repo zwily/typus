@@ -6,14 +6,15 @@
 <% content_for :main_grid do %>
   <%= render 'show' %>
 
-  <h2>
-    <%= page_title %>
-    <small><%= list_actions %></small>
-  </h2>
+  <% unless params[:_popup] %>
+    <h1>
+      <%= page_title %>
+    </h1>
+  <% end %>
 
   <%= admin_display_flash_message %>
 
-  <dl>
+  <dl class="dl-horizontal">
     <% build_display(@item, fields).each do |attribute, type| %>
       <dt><%= attribute %></dt>
       <dd><%= type %></dd>

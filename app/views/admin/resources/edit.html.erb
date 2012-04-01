@@ -6,9 +6,11 @@
 <% content_for :main_grid do %>
   <%= render 'edit' %>
 
-  <h1>
-    <%= page_title %>
-  </h1>
+  <% unless params[:_popup] %>
+    <h1>
+      <%= page_title %>
+    </h1>
+  <% end %>
 
   <% if headless_mode? && params[:action] == 'edit' && flash.keys.include?(:notice) && !params[:_input] %>
     <%= javascript_tag do %>
