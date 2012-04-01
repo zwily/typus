@@ -1,14 +1,20 @@
 module Admin::Resources::SidebarHelper
 
   def build_sidebar
-    actions = [sidebar_list(@resource.name),
-               sidebar_add_new(@resource.name)]
+    actions = if @resource
+      [sidebar_list(@resource.name), sidebar_add_new(@resource.name)]
+    else
+      []
+    end
 
     extra_actions = [sidebar_help,
                      sidebar_view_site]
 
+    sidebar_title = @resource ? @resource.model_name.human.pluralize : Typus::I18n.t("Dashboard")
+
     locals = { :actions => actions.compact,
-               :extra_actions => extra_actions }
+               :extra_actions => extra_actions,
+               :sidebar_title => sidebar_title }
 
     render "helpers/admin/resources/sidebar", locals
   end

@@ -1,7 +1,7 @@
 <div class="well" style="padding: 8px 0;">
   <ul class="nav nav-list">
 
-    <li class="nav-header"><%= @resource.model_name.human.pluralize %></li>
+    <li class="nav-header"><%= sidebar_title %></li>
 
     <% actions.each do |action| %>
       <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
