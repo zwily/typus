@@ -30,7 +30,7 @@
               $('.modal-body').html(data);
 
               var option = new Option($("#_label").attr("value"), $("#_id").attr("value"), true, true);
-              parent.$("#<%= attribute_id %>").append(option);
+              parent.$("#<%= attribute_id %>").prepend(option);
 
               $("#modal-from-dom-<%= attribute_id %>").modal('hide');
             })
