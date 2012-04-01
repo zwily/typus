@@ -1,0 +1,19 @@
+<% content_for "modal_for_#{attribute}" do %>
+
+  <% new_page_title = Typus::I18n.t("Add New %{resource}", :resource => "Something") %>
+
+  <div id="modal-from-dom-<%= attribute_id %>" class="modal hide fade">
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3><%= new_page_title %></h3>
+    </div>
+
+    <div class="modal-body"></div>
+
+    <div class="modal-footer">
+      <a href="#" class="btn" data-dismiss="modal"><%= Typus::I18n.t("Cancel") %></a>
+      <a href="#" class="btn btn-primary"><%= Typus::I18n.t("Save") %></a>
+    </div>
+  </div>
+
+<% end %>

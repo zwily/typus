@@ -1,19 +1,7 @@
-<%
-  chosen_class = "chzn-select-#{attribute_id}"
-  new_page_title = "WIP"
-%>
+<% chosen_class = "chzn-select-#{attribute_id}" %>
 
-<div id="modal-from-dom-<%= attribute_id %>" class="modal hide fade">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">&times;</a>
-    <h3><%= new_page_title %></h3>
-  </div>
-  <div class="modal-body"></div>
-  <div class="modal-footer">
-    <a href="#" class="btn" data-dismiss="modal"><%= Typus::I18n.t("Cancel") %></a>
-    <a href="#" class="btn btn-primary"><%= Typus::I18n.t("Save") %></a>
-  </div>
-</div>
+<%= render :partial => 'admin/templates/modals/has_and_belongs_to_many',
+           :locals => { :attribute => attribute, :attribute_id => attribute_id } %>
 
 <div class="control-group" id="<%= attribute_id %>">
   <%= form.label attribute, label_text, { :class => "control-label" } %>

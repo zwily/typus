@@ -1,0 +1,35 @@
+<% content_for "modal_for_#{attribute}" do %>
+
+  <% new_page_title = Typus::I18n.t("Add New %{resource}", :resource => related.model_name.human.titleize) %>
+
+  <div id="modal-from-dom-<%= attribute_id %>" class="modal hide fade">
+
+    <div class="modal-header">
+      <a class="close" data-dismiss="modal">&times;</a>
+      <h3><%= new_page_title %></h3>
+    </div>
+
+    <%= form_for attribute,
+                 :url => {:controller => "/admin/#{related.to_resource}", :action => :create },
+                 :html => { :multipart => true, :class => "form-horizontal" } do |form| %>
+
+      <div class="modal-body"></div>
+
+      <div class="modal-footer">
+        <% build_save_options.each do |key, value, special| %>
+          <% klass = key.eql?("_save") ? 'btn-primary' : 'btn' %>
+          <%
+            message = Typus::I18n.t(value)
+            options = { :name => key,
+                        :onclick => "Typus.setConfirmUnload(false);",
+                        :class => "btn #{klass}" }
+          %>
+          <%= submit_tag message, options %>
+        <% end %>
+      </div>
+
+    <% end %>
+
+  </div>
+
+<% end %>

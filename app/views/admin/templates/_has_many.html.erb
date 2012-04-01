@@ -1,19 +1,6 @@
-<%
-  param_name = "#{association_name}_page"
-  new_page_title = Typus::I18n.t("Add New %{resource}", :resource => @model_to_relate.model_name.human.titleize)
-%>
+<% param_name = "#{association_name}_page" %>
 
-<div id="modal-from-dom-<%= @model_to_relate.table_name %>" class="modal hide fade">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">&times;</a>
-    <h3><%= new_page_title %></h3>
-  </div>
-  <div class="modal-body"></div>
-  <div class="modal-footer">
-    <a href="#" class="btn" data-dismiss="modal"><%= Typus::I18n.t("Cancel") %></a>
-    <a href="#" class="btn btn-primary"><%= Typus::I18n.t("Save") %></a>
-  </div>
-</div>
+<%= render :partial => 'admin/templates/modals/has_many' %>
 
 <div class="box_relationships" id="<%= association_name %>">
 
