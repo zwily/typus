@@ -7,6 +7,7 @@ class Comment < ActiveRecord::Base
   validates :email, :presence => true
   validates :body, :presence => true
   validates :name, :presence => true
+  validates :post, :presence => true
 
   ##
   # Associations
