@@ -97,7 +97,7 @@ module Typus
   #
 
   mattr_accessor :image_preview_size
-  @@image_preview_size = 'x650>'
+  @@image_preview_size = '530x'
 
   mattr_accessor :image_thumb_size
   @@image_thumb_size = 'x100'
