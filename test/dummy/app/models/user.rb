@@ -7,6 +7,12 @@ class User < ActiveRecord::Base
   include Typus::Orm::ActiveRecord::User::InstanceMethods
 
   ##
+  # Validations
+  #
+
+  validates :name, :presence => true, :uniqueness => true
+
+  ##
   # Associations
   #
 
