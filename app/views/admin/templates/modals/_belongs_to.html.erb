@@ -10,22 +10,15 @@
     </div>
 
     <%= form_for attribute,
-                 :url => {:controller => "/admin/#{related.to_resource}", :action => :create },
-                 :html => { :multipart => true, :class => "form-horizontal" } do |form| %>
+                 :url => { :controller => "/admin/#{related.to_resource}", :action => :create },
+                 :html => { :multipart => true, :class => "form-horizontal", :style => "margin-bottom: 0px;" } do |form| %>
 
       <div class="modal-body"></div>
 
       <div class="modal-footer">
-        <% build_save_options.each do |key, value, special| %>
-          <% klass = key.eql?("_save") ? 'btn-primary' : 'btn' %>
-          <%
-            message = Typus::I18n.t(value)
-            options = { :name => key,
-                        :onclick => "Typus.setConfirmUnload(false);",
-                        :class => "btn #{klass}" }
-          %>
-          <%= submit_tag message, options %>
-        <% end %>
+        <%= form.submit Typus::I18n.t("Save"),
+                        :class => "btn btn-primary",
+                        :onclick => "Typus.setConfirmUnload(false);" %>
       </div>
 
     <% end %>
