@@ -1,7 +1,7 @@
 <div style="margin: 0 0 0.5em 0;">
 
   <div style="float: left;">
-    <% html_options = { "data-toggle" => "modal", "modal-id" => "#{item.id}_#{attribute}" } %>
+    <% html_options = { "class" => "thumbnail", "data-toggle" => "modal", "modal-id" => "#{item.id}_#{attribute}" } %>
 
     <%= render :partial => 'admin/templates/modals/dragonfly',
                :locals => { :html_options => html_options, :preview => preview, :attachment => attachment } %>
