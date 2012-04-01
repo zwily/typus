@@ -11,26 +11,6 @@ module Admin::ResourcesHelper
     end
   end
 
-  def build_sidebar
-    if @resource.typus_options_for(:hide_from_sidebar) == false
-      actions = [sidebar_add_new(@resource.name), sidebar_list(@resource.name)].compact
-    end
-
-    render "helpers/admin/resources/sidebar", :actions => actions
-  end
-
-  def sidebar_add_new(klass)
-    if admin_user.can?("create", klass)
-      { :message => Typus::I18n.t("Add"), :url => { :controller => "/admin/#{klass.to_resource}", :action => "new" } }
-    end
-  end
-
-  def sidebar_list(klass)
-    if admin_user.can?("read", klass)
-      { :message => Typus::I18n.t("List"), :url => { :controller => "/admin/#{klass.to_resource}", :action => "index" } }
-    end
-  end
-
   # TODO: This method should be moved to `lib/typus/controller/actions.rb`
   def resource_actions
     @resource_actions ||= []

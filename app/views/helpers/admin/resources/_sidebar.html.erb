@@ -1,7 +1,29 @@
-<h5><%= @resource.model_name.human.pluralize %></h5>
+<div class="well" style="padding: 8px 0;">
+  <ul class="nav nav-list">
 
-<ul>
-  <% actions.each do |action| %>
-    <li><%= link_to action[:message], action[:url] %></li>
-  <% end %>
-</ul>
+    <li class="nav-header"><%= @resource.model_name.human.pluralize %></li>
+
+    <% actions.each do |action| %>
+      <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
+      <li class="<%= klass %>">
+        <%= link_to action[:url] do %>
+          <i class="icon-<%= action[:icon] %>"></i>
+          <%= action[:message] %>
+        <% end %>
+      </li>
+    <% end %>
+
+    <li class="divider"></li>
+
+    <% extra_actions.each do |action| %>
+      <li>
+        <%= link_to action[:url] do %>
+          <i class="icon-<%= action[:icon] %>"></i>
+          <%= action[:message] %>
+        <% end %>
+      </li>
+    <% end %>
+
+  </ul>
+</div>
+

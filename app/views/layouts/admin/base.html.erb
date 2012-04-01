@@ -19,42 +19,9 @@
       </div>
     </div>
 
-    <% content_for :sidebar do %>
-      <div class="well" style="padding: 8px 0;">
-        <ul class="nav nav-list">
-          <li class="nav-header">Sidebar</li>
-          <li>
-            <a href="#">
-              <i class="icon-plus"></i>
-              Add New
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="icon-list"></i>
-              List
-            </a>
-          </li>
-          <li class="divider"></li>
-          <li>
-            <a href="#">
-              <i class="icon-info-sign"></i>
-              Help
-            </a>
-          </li>
-          <li>
-            <a href="#">
-              <i class="icon-share"></i>
-              View Site
-            </a>
-          </li>
-        </ul>
-      </div>
-    <% end %>
-
     <div class="row-fluid">
       <div class="span3">
-        <%= yield :sidebar %>
+        <%= build_sidebar %>
       </div>
       <div class="span9">
         <%= yield :main_grid %>
