@@ -1,6 +1,6 @@
 $(document).ready(function() {
 
-    $("#quicksearch").searchField();
+    // $("#quicksearch").searchField();
 
     $(".resource :input", document.myForm).bind("change", function() {
         Typus.setConfirmUnload(true);
