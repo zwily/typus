@@ -8,7 +8,7 @@ module Admin::Resources::SidebarHelper
       locals[:sidebar_title] = @resource.model_name.human.pluralize
     end
 
-    locals[:extra_actions] = [sidebar_dashboard, sidebar_help, sidebar_view_site]
+    locals[:extra_actions] = [sidebar_dashboard, sidebar_help, sidebar_view_site].compact
 
     render "helpers/admin/resources/sidebar", locals
   end
@@ -42,9 +42,11 @@ module Admin::Resources::SidebarHelper
   end
 
   def sidebar_view_site
-    { :message => Typus::I18n.t("View Site"),
-      :url => "#",
-      :icon => "share" }
+    if Typus.admin_title_link
+      { :message => Typus::I18n.t("View Site"),
+        :url => Typus.admin_title_link,
+        :icon => "share" }
+    end
   end
 
   # def sidebar_actions
