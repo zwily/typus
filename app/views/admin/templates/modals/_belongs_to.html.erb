@@ -27,7 +27,12 @@
             action = $('#new_user').attr('action');
 
             $.post(action, $(this).serialize(), function(data){})
-            .success(function(data, text) {
+            .success(function(data, text, xhr) {
+              $('.modal-body').html(data);
+
+              var option = new Option($("#_label").attr("value"), $("#_id").attr("value"), true, true);
+              parent.$("#<%= attribute_id %>").append(option);
+
               $("#modal-from-dom-<%= attribute_id %>").modal('hide');
             })
             .error(function(request, status, error) {
