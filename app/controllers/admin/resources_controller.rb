@@ -59,7 +59,7 @@ class Admin::ResourcesController < Admin::BaseController
         format.html { redirect_on_success }
         format.json { render :json => @item, :status => :created, :location => @item }
       else
-        format.html { render :action => "new" }
+        format.html { render :action => "new", :status => :unprocessable_entity }
         format.json { render :json => @item.errors, :status => :unprocessable_entity }
       end
     end
@@ -98,7 +98,7 @@ class Admin::ResourcesController < Admin::BaseController
         format.html { redirect_on_success }
         format.json { render :json => @item }
       else
-        format.html { render :edit }
+        format.html { render :edit, :status => :unprocessable_entity }
         format.json { render :json => @item.errors, :status => :unprocessable_entity }
       end
     end
