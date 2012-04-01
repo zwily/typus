@@ -28,3 +28,5 @@
 [ ] Improve "Remove" button on images.
     Eg. http://localhost:3000/admin/assets/edit/2
 
+[ ] Fix how posts are displayed.
+    Eg. http://localhost:3000/admin/posts/edit/10
