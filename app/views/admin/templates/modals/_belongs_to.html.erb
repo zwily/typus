@@ -19,7 +19,6 @@
       <script>
         $('#modal-form-submit').click(function(e){
           e.preventDefault();
-          console.log("#new_<%= related.model_name.downcase %>")
           $('#new_<%= related.model_name.downcase %>').submit(function() {
 
             // Get the action url:
