@@ -9,19 +9,41 @@
       <h3><%= new_page_title %></h3>
     </div>
 
-    <%= form_for attribute,
-                 :url => { :controller => "/admin/#{related.to_resource}", :action => :create },
-                 :html => { :multipart => true, :class => "form-horizontal", :style => "margin-bottom: 0px;" } do |form| %>
-
       <div class="modal-body"></div>
 
       <div class="modal-footer">
-        <%= form.submit Typus::I18n.t("Save"),
-                        :class => "btn btn-primary",
-                        :onclick => "Typus.setConfirmUnload(false);" %>
+        <% html_options = { :id => "modal-form-submit", :class => "btn btn-primary" } %>
+        <%= link_to Typus::I18n.t("Save"), { :anchor => "", :_continue => "" }, html_options %>
       </div>
 
-    <% end %>
+      <script>
+        $('#modal-form-submit').click(function(e){
+          e.preventDefault();
+          console.log("#new_<%= related.model_name.downcase %>")
+          $('#new_<%= related.model_name.downcase %>').submit(function() {
+
+            // Get the action url:
+            var action;
+            action = $('#new_user').attr('action');
+
+            $.post(action, $(this).serialize(), function(data){})
+            .success(function(data, text) {
+              $("#modal-from-dom-<%= attribute_id %>").modal('hide');
+            })
+            .error(function(request, status, error) {
+              $('.modal-body').html(request.responseText);
+            });
+
+            return false;
+          });
+
+          $('#new_<%= related.model_name.downcase %>').submit();
+
+          return false;
+        });
+      </script>
+
+    <%# end %>
 
   </div>
 

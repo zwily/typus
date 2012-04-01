@@ -7,14 +7,16 @@
   <%= render "helpers/admin/resources/errors" %>
 
   <fieldset>
-    <legend><%= @item.to_label %></legend>
+    <% unless headless_mode? %>
+      <legend><%= @item.to_label %></legend>
+    <% end %>
 
     <%= build_form(fields, form) %>
 
-    <% unless params[:_popup] %>
+    <% unless headless_mode? %>
       <div class="form-actions">
         <% build_save_options.each do |key, value, special| %>
-          <% klass = key.eql?("_save") ? 'btn-primary' : 'btn'  %>
+          <% klass = key.eql?("_save") ? 'btn-primary' : 'btn' %>
           <%
             message = Typus::I18n.t(value)
             options = { :name => key,
@@ -25,6 +27,8 @@
           <%= submit_tag message, options %>
         <% end %>
       </div>
+    <% else %>
+      <%= hidden_field_tag "_continue" %>
     <% end %>
   </fieldset>
 

@@ -13,11 +13,10 @@
   <%= admin_display_flash_message %>
   <% locals = { :options => params.dup.cleanup.merge(:action => 'create') } %>
 
-  <% unless headless_mode? %>
     <%= render 'form', locals %>
+
+  <% unless headless_mode? %>
     <%= render 'admin/shared/modals' %>
-  <% else %>
-    <%= render 'form_modal', locals %>
   <% end %>
 <% end %>
 
