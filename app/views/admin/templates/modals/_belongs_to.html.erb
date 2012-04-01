@@ -9,45 +9,43 @@
       <h3><%= new_page_title %></h3>
     </div>
 
-      <div class="modal-body"></div>
+    <div class="modal-body"></div>
 
-      <div class="modal-footer">
-        <% html_options = { :id => "modal-form-submit", :class => "btn btn-primary" } %>
-        <%= link_to Typus::I18n.t("Save"), { :anchor => "", :_continue => "" }, html_options %>
-      </div>
+    <div class="modal-footer">
+      <% html_options = { :id => "modal-form-submit", :class => "btn btn-primary" } %>
+      <%= link_to Typus::I18n.t("Save"), { :anchor => "", :_continue => "" }, html_options %>
+    </div>
 
-      <script>
-        $('#modal-form-submit').click(function(e){
-          e.preventDefault();
-          $('#new_<%= related.model_name.downcase %>').submit(function() {
+    <script>
+      $('#modal-form-submit').click(function(e){
+        e.preventDefault();
+        $('#new_<%= related.model_name.downcase %>').submit(function() {
 
-            // Get the action url:
-            var action;
-            action = $('#new_<%= related.model_name.downcase %>').attr('action');
+          // Get the action url:
+          var action;
+          action = $('#new_<%= related.model_name.downcase %>').attr('action');
 
-            $.post(action, $(this).serialize(), function(data){})
-            .success(function(data, text, xhr) {
-              $('.modal-body').html(data);
+          $.post(action, $(this).serialize(), function(data){})
+          .success(function(data, text, xhr) {
+            $('.modal-body').html(data);
 
-              var option = new Option($("#_label").attr("value"), $("#_id").attr("value"), true, true);
-              parent.$("#<%= attribute_id %>").prepend(option);
+            var option = new Option($("#_label").attr("value"), $("#_id").attr("value"), true, true);
+            parent.$("#<%= attribute_id %>").prepend(option);
 
-              $("#modal-from-dom-<%= attribute_id %>").modal('hide');
-            })
-            .error(function(request, status, error) {
-              $('.modal-body').html(request.responseText);
-            });
-
-            return false;
+            $("#modal-from-dom-<%= attribute_id %>").modal('hide');
+          })
+          .error(function(request, status, error) {
+            $('.modal-body').html(request.responseText);
           });
-
-          $('#new_<%= related.model_name.downcase %>').submit();
 
           return false;
         });
-      </script>
 
-    <%# end %>
+        $('#new_<%= related.model_name.downcase %>').submit();
+
+        return false;
+      });
+    </script>
 
   </div>
 
