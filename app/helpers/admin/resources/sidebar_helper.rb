@@ -1,20 +1,14 @@
 module Admin::Resources::SidebarHelper
 
   def build_sidebar
-    actions = if @resource
-      [sidebar_list(@resource.name), sidebar_add_new(@resource.name)]
-    else
-      []
+    locals = { :sidebar_title => Typus::I18n.t("Dashboard"), :actions => []}
+
+    if @resource
+      locals[:actions] = [sidebar_list(@resource.name), sidebar_add_new(@resource.name)].compact
+      locals[:sidebar_title] = @resource.model_name.human.pluralize
     end
 
-    extra_actions = [sidebar_help,
-                     sidebar_view_site]
-
-    sidebar_title = @resource ? @resource.model_name.human.pluralize : Typus::I18n.t("Dashboard")
-
-    locals = { :actions => actions.compact,
-               :extra_actions => extra_actions,
-               :sidebar_title => sidebar_title }
+    locals[:extra_actions] = [sidebar_dashboard, sidebar_help, sidebar_view_site]
 
     render "helpers/admin/resources/sidebar", locals
   end
@@ -33,6 +27,12 @@ module Admin::Resources::SidebarHelper
         :url => { :controller => "/admin/#{klass.to_resource}", :action => "index" },
         :icon => "list" }
     end
+  end
+
+  def sidebar_dashboard
+    { :message => Typus::I18n.t("Dashboard"),
+      :url => admin_dashboard_index_path,
+      :icon => "home" }
   end
 
   def sidebar_help
