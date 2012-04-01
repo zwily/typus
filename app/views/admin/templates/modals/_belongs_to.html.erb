@@ -23,7 +23,7 @@
 
             // Get the action url:
             var action;
-            action = $('#new_user').attr('action');
+            action = $('#new_<%= related.model_name.downcase %>').attr('action');
 
             $.post(action, $(this).serialize(), function(data){})
             .success(function(data, text, xhr) {
