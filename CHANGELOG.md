@@ -69,7 +69,16 @@ CHANGELOG
 
  * [CHANGED] Datetime/Time filters use Time intervals. (all_day, all_week ...)
 
+ * Added pagination detection on associations.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...master>
+
+3.1.11 (unreleased)
+-------------------
+
+ * Added pagination detection on associations.
+
+Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...3-1-stable>
 
 
 3.1.10 (2012-03-27)
