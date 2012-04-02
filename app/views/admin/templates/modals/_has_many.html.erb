@@ -39,7 +39,7 @@
           parent.location.reload();
         })
         .error(function(request, status, error) {
-          $('.modal-body').html(request.responseText);
+          $('#<%= html_modal_class %> .modal-body').html(request.responseText);
         });
 
         return false;
