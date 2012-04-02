@@ -19,16 +19,21 @@
   </div>
 
   <script>
-    $('#modal-form-submit-<%= modal_association %>').click(function(e){
+    $('#modal-form-submit-<%= modal_association %>').on('click', function(e){
       e.preventDefault();
 
-      $('#<%= html_class %>').submit(function() {
+      var form_data = $('#<%= html_class %>').serialize();
+      var my_data = $("#view_ip").attr('value');
+
+      $('#<%= html_class %>').on('submit', function(event) {
+
+        event.preventDefault();
 
         // Get the action url:
-        var action;
-        action = $('#<%= html_class %>').attr('action');
+        var action = $('#<%= html_class %>').attr('action');
+        var form_data = $('#<%= html_class %>').serialize();
 
-        $.post(action, $(this).serialize(), function(data){})
+        $.post(action, form_data, function(data){})
         .success(function(data, text, xhr) {
           $("#<%= html_modal_class %>").modal('hide');
           parent.location.reload();
@@ -41,7 +46,6 @@
       });
 
       $('#<%= html_class %>').submit();
-
       return false;
     });
 
