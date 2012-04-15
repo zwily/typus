@@ -262,7 +262,7 @@ video or whatever in the model?
 
 .. code-block:: yaml
 
-  Person:
+  Video:
     fields:
       ...
       options:
@@ -277,6 +277,10 @@ selector with the options that you define in your model.
   class Video < ActiveRecord::Base
     STATUS = %w(pending encoding encoded error published)
     validates_inclusion_of :status, :in => STATUS
+
+    def self.statuses
+      STATUS
+    end
   end
 
 .. note::
