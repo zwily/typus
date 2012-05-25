@@ -33,7 +33,7 @@
         <% unless klass.typus_options_for(:hide_from_dashboard) %>
           <tr class="<%= cycle("even", "odd") %>">
             <td>
-              <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>
+              <%= link_to klass.model_name.human(:count => 2), :controller => "/admin/#{klass.to_resource}" %>
             </td>
           </tr>
         <% end %>
