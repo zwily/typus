@@ -73,6 +73,8 @@ CHANGELOG
 
  * [FIXED] `acts_as_tree` select values should be scaped.
 
+ * [FIXED] Scope should be always we applied to index action.
+
 Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...master>
 
 3.1.11 (unreleased)
