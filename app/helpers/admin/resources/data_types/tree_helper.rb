@@ -9,7 +9,7 @@ module Admin::Resources::DataTypes::TreeHelper
                :attribute_id => "#{@resource.table_name}_#{attribute}",
                :form => form,
                :label_text => @resource.human_attribute_name(attribute),
-               :values => expand_tree_into_select_field(@resource.roots, "parent_id") }
+               :values => expand_tree_into_select_field(@resource.roots, "parent_id").html_safe }
 
     render "admin/templates/tree", locals
   end
