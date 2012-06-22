@@ -15,7 +15,7 @@
       <% build_save_options.each do |key, value, special| %>
         <%
           message = Typus::I18n.t(value)
-          options = { :name => key, :onclick => "Typus.setConfirmUnload(false);", :disable_with => message  }
+          options = { :name => key, :onclick => "Typus.setConfirmUnload(false);", 'data-disable-with' => message }
         %>
         <li><%= submit_tag message, options %></li>
       <% end %>

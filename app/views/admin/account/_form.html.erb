@@ -13,7 +13,7 @@
   <% end %>
 
   <li>
-    <%= form.submit Typus::I18n.t(submit_text), :class => "button", :disable_with => Typus::I18n.t("Sending data ...") %>
+    <%= form.submit Typus::I18n.t(submit_text), :class => "button", 'data-disable-with' => Typus::I18n.t("Sending data ...") %>
   </li>
 
 </ul>
