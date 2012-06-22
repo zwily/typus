@@ -17,6 +17,8 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
+gem 'thin'
+
 # Database adapters
 platforms :jruby do
   gem 'activerecord-jdbcmysql-adapter'
