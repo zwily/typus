@@ -36,10 +36,13 @@ module Admin::BaseHelper
       :id => user.id }
   end
 
-  def admin_display_flash_message(message = flash)
-    if message.keys.any?
-      locals = { :flash_type => message.keys.first, :message => message }
-      render "helpers/admin/base/flash_message", locals
+  def admin_display_flash_message
+    if flash.any?
+      data = String.new
+      flash.each do |type, message|
+        data << content_tag(:div, message, :id => 'flash', :class => type)
+      end
+      data.html_safe
     end
   end
 
