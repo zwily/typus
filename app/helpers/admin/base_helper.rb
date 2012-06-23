@@ -38,11 +38,11 @@ module Admin::BaseHelper
 
   def admin_display_flash_message
     if flash.any?
-      data = String.new
-      flash.each do |type, message|
-        data << content_tag(:div, message, :id => 'flash', :class => type)
-      end
-      data.html_safe
+      String.new.tap do |html|
+        flash.each do |type, message|
+          html << content_tag(:div, message, :id => 'flash', :class => type)
+        end
+      end.html_safe
     end
   end
 
