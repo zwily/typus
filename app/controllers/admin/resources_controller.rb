@@ -35,7 +35,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def new
-    @item = @resource.new(params[:resource])
+    @item = @resource.new(params[:resource], :as => current_role)
 
     respond_to do |format|
       format.html
