@@ -110,8 +110,6 @@ module Admin::TableHelper
 
   end
 
-  safe_helper :build_typus_table
-
   def typus_table_header(model, fields)
 
     headers = fields.map do |key, value|

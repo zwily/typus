@@ -30,8 +30,6 @@ module Admin::FormHelper
 
   end
 
-  safe_helper :build_form
-
   def typus_belongs_to_field(attribute, options)
 
     form = options[:form]

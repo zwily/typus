@@ -107,8 +107,6 @@ module Admin::SidebarHelper
 
   end
 
-  safe_helper :filters
-
   # OPTIMIZE: Move html code to partial.
   def relationship_filter(request, filter, habtm = false)
 
