@@ -66,7 +66,7 @@ class Admin::MasterController < ApplicationController
     check_ownership_of_referal_item
 
     item_params = params.dup
-    %w( controller action resource resource_id back_to selected ).each do |param|
+    %w( locale controller action resource resource_id back_to selected ).each do |param|
       item_params.delete(param)
     end
 
