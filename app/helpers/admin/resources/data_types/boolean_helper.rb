@@ -16,7 +16,7 @@ module Admin::Resources::DataTypes::BooleanHelper
                 :id => item.id,
                 :field => attribute.gsub(/\?$/, '') }
     confirm = Typus::I18n.t("Change %{attribute}?", :attribute => item.class.human_attribute_name(attribute).downcase)
-    link_to Typus::I18n.t(human_boolean), options, :confirm => confirm
+    link_to Typus::I18n.t(human_boolean), options, :data => { :confirm => confirm }
   end
 
   def boolean_filter(filter)
