@@ -6,7 +6,7 @@
     <ul>
       <%= link_to :controller => "/admin/#{resource.to_resource}" do %>
         <li class="header <%= html_class %>">
-          <%= resource.model_name.human.pluralize %>
+          <%= resource.model_name.human(:count => 2) %>
         </li>
       <% end %>
     </ul>
