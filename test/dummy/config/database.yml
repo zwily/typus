@@ -1,4 +1,4 @@
-<% connection = ENV["DB"] || 'postgresql' %>
+<% connection = ENV.fetch('DB', 'postgresql') %>
 
 ##
 # Database settings.
@@ -15,8 +15,8 @@ postgresql: &postgresql
   encoding: unicode
   database: typus_<%= Rails.env %>
   pool: 5
-  username: <%= ENV['DB_USERNAME'] || 'postgres' %>
-  password: <%= ENV['DB_PASSWORD'] || '' %>
+  username: <%= ENV.fetch('DB_USERNAME', 'postgres') %>
+  password: <%= ENV.fetch('DB_PASSWORD', '') %>
   min_messages: warning
   # host: localhost
   # port: 5432
@@ -27,9 +27,9 @@ mysql2: &mysql2
   reconnect: false
   database: typus_<%= Rails.env %>
   pool: 5
-  username: <%= ENV['DB_USERNAME'] || 'root' %>
-  password: <%= ENV['DB_PASSWORD'] || '' %>
-  host: <%= ENV['DB_HOST'] || 'localhost' %>
+  username: <%= ENV.fetch('DB_USERNAME', 'root') %>
+  password: <%= ENV.fetch('DB_PASSWORD', '') %>
+  host: <%= ENV.fetch('DB_HOST', 'localhost') %>
 
 ##
 # Environments
