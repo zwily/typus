@@ -115,4 +115,8 @@ class TypusTest < ActiveSupport::TestCase
     assert Typus.respond_to?("user_foreign_key=")
   end
 
+  test "ip_whitelist setter with a default value" do
+    assert Typus.ip_whitelist.empty?
+  end
+
 end

@@ -121,6 +121,9 @@ module Typus
   mattr_accessor :quick_sidebar
   @@quick_sidebar = false
 
+  mattr_accessor :ip_whitelist
+  @@ip_whitelist = []
+
   class << self
 
     # Default way to setup typus. Run `rails generate typus` to create a

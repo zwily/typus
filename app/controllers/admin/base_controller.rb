@@ -2,11 +2,19 @@ class Admin::BaseController < ActionController::Base
 
   include Typus::Authentication::const_get(Typus.authentication.to_s.classify)
 
-  before_filter :reload_config_and_roles, :authenticate, :set_locale
+  before_filter :verify_remote_ip, :reload_config_and_roles, :authenticate, :set_locale
 
   helper_method :admin_user, :current_role
 
   protected
+
+  def verify_remote_ip
+    if !request.local? && Typus.ip_whitelist.any?
+      unless Typus.ip_whitelist.include?(request.ip)
+        render :text => "IP not in our whitelist."
+      end
+    end
+  end
 
   def reload_config_and_roles
     Typus.reload! if Rails.env.development?

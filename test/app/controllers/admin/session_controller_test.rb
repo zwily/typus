@@ -10,6 +10,23 @@ require "test_helper"
 
 class Admin::SessionControllerTest < ActionController::TestCase
 
+  test "verify_remote_ip" do
+    Typus.ip_whitelist = %w(10.0.0.5)
+    get :new
+    assert_equal "IP not in our whitelist.", @response.body
+
+    request.stubs(:local?).returns(true)
+    Typus.ip_whitelist = %w(10.0.0.5)
+    get :new
+    assert_response :redirect
+    assert_redirected_to new_admin_account_path
+
+    Typus.ip_whitelist = []
+    get :new
+    assert_response :redirect
+    assert_redirected_to new_admin_account_path
+  end
+
   test "get new redirects to new_admin_account_path when no admin users" do
     get :new
     assert_response :redirect
