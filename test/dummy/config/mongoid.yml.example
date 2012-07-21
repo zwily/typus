@@ -8,19 +8,14 @@
 #
 #     mongodb://<user>:<password>@staff.mongohq.com:10051/typus_development
 #
-# Connection Details:
-#
-# - Database: typus_development
-# - Username: typus
-# - Password:
-#
+##
 
 defaults: &defaults
-  host: <%= ENV['MONGOID_HOST'] || 'staff.mongohq.com' %>
-  port: <%= ENV['MONGOID_PORT'] || 10051 %>
-  username: <%= ENV['MONGOID_USERNAME'] || 'typus' %>
-  password: <%= ENV['MONGOID_PASSWORD'] %>
-  database: <%= ENV['MONGOID_DATABASE'] || 'typus_development' %>
+  host: <%= ENV.fetch('MONGOID_HOST', 'staff.mongohq.com') %>
+  port: <%= ENV.fetch('MONGOID_PORT', '10051').to_i %>
+  username: <%= ENV.fetch('MONGOID_USERNAME', 'typus') %>
+  password: <%= ENV.fetch('MONGOID_PASSWORD', '********') %>
+  database: <%= ENV.fetch('MONGOID_DATABASE', 'typus_development') %>
 
 development:
   <<: *defaults
