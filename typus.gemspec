@@ -12,7 +12,7 @@ ignores = `git ls-files -- doc/* Guardfile .travis.yml .gitignore`.split("\n")
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
   s.name = "typus"
-  s.version = Typus::VERSION
+  s.version = Typus::VERSION::STRING
   s.platform = Gem::Platform::RUBY
   s.authors = ["Francesc Esplugas"]
   s.email = ["support@typuscmf.com"]
