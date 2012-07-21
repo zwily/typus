@@ -6,8 +6,9 @@ module Typus
 
       protected
 
-      # This is crazy, but I want to have support for Kaminari, WillPaginate
-      # and whatever other pagination system which comes.
+      # We want to have support for Kaminari, WillPaginate and other
+      # pagination systems. If no pagination system is found, we just
+      # limit items using `per_page` option.
       def get_paginated_data
         items_per_page = @resource.typus_options_for(:per_page)
 
@@ -16,9 +17,6 @@ module Typus
         elsif defined?(WillPaginate)
           @resource.paginate(:page => params[:page], :per_page => items_per_page)
         else
-          # TODO: Pagination at this point is disabled so we need to implement
-          # our own pagination solution. At this point we are showing a message
-          # to the user suggesting to install Kamaniri or WillPaginate.
           @resource.limit(items_per_page)
         end
       end
