@@ -26,7 +26,8 @@ module Typus
       end
 
       def available_locales
-        { "Brazilian Portuguese" => "pt-BR",
+        {
+          "Brazilian Portuguese" => "pt-BR",
           "Català" => "ca",
           "German" => "de",
           "Greek"  => "el",
@@ -37,7 +38,8 @@ module Typus
           "Magyar" => "hu",
           "Portuguese" => "pt-PT",
           "Russian" => "ru",
-          "中文" => "zh-CN" }
+          "中文" => "zh-CN",
+        }
       end
 
     end
