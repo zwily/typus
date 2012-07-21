@@ -12,6 +12,8 @@ module Typus
           @@config.merge!(data)
         end
       end
+
+      @@config
     end
 
     mattr_accessor :config
@@ -28,6 +30,8 @@ module Typus
           end
         end
       end
+
+      @@roles
     end
 
     mattr_accessor :roles
