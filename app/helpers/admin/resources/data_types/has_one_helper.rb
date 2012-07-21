@@ -30,7 +30,7 @@ module Admin::Resources::DataTypes::HasOneHelper
 
   def set_has_one_resource_actions
     @resource_actions = [["Edit", { :action => "edit" }, {}],
-                         ["Trash", { :action => "destroy" }, { :data => { :confirm => "Trash?" } }]]
+                         ["Trash", { :action => "destroy" }, { :data => { :confirm => Typus::I18n.t("Trash?") } }]]
   end
 
 end
