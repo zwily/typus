@@ -25,17 +25,16 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
   #   pending
   # end
 
-  # FIXME
-  # test "get trash lists destroyed items" do
-  #   get :trash
-  #   assert assigns(:items).empty?
-  #
-  #   @entry.destroy
-  #   get :trash
-  #   assert_response :success
-  #   assert_template 'admin/resources/index'
-  #   assert_equal [@entry], assigns(:items)
-  # end
+  test "get trash lists destroyed items" do
+    get :trash
+    assert assigns(:items).empty?
+
+    @entry.destroy
+    get :trash
+    assert_response :success
+    assert_template 'admin/resources/index'
+    assert_equal [@entry], assigns(:items)
+  end
 
   # FIXME
   # test "get trash return error when user does not have edit access" do
