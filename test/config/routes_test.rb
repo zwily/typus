@@ -3,7 +3,6 @@ require "test_helper"
 class RoutesTest < ActiveSupport::TestCase
 
   setup do
-    # @routes = Admin::Engine.routes.routes.map(&:name)
     @routes = Rails.application.routes.routes.map(&:name)
   end
 
