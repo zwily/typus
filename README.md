@@ -84,7 +84,6 @@ Links
 
 - [Documentation](http://docs.typuscmf.com/)
 - [RubyGems][typus_gem]
-- [Mailing List](http://groups.google.com/group/typus)
 - [Contributors List](http://github.com/fesplugas/typus/contributors)
 
 

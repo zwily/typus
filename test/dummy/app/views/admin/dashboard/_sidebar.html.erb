@@ -3,16 +3,21 @@
 <%
   code = link_to('GitHub', 'https://github.com/typus/typus/tree/master/test/dummy')
   typus = link_to('Typus', 'http://www.typuscmf.com/')
-  mailing_list = link_to('mailing list', 'http://groups.google.com/group/typus')
+  issue = link_to('issue', 'https://github.com/fesplugas/typus/issues')
   user_guide = link_to('user guide', 'http://docs.typuscmf.com/')
 %>
 
 <h2>Welcome!</h2>
 
-<p>This is the collection of models, organized by functionality, I use to
+<p>This is the collection of models, organized by functionality used to
 <strong>test</strong> <%= typus %>.</p>
 
 <p>Code for this application is available at <%= code %>.</p>
 
-<p>If you need help don't hesitate in joining the <%= mailing_list %> or use
-the <%= user_guide %>.</p>
+<p>Learn more about configuring the interface in the official <%= user_guide %>.</p>
+
+<p>If you find a bug or think something in the documentation is
+missing don't hesitate in opening an <%= issue %>.</p>
+
+<p>Replace this sidebar by dropping a file named
+<code>_sidebar.html.erb</code> on the <code>app/views/admin/dashboard</code> folder.</p>
