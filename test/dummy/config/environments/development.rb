@@ -25,23 +25,8 @@ Dummy::Application.configure do
   # Do not compress assets
   config.assets.compress = false
 
-  # Dear Developer,
-  #
-  # The following configuration option:
-  #
-  #   > Expands the lines which load the assets
-  #
-  # You might think in development this should be set to true, and you are
-  # completely right, unless you reload pages a hundres of times a day.
-  #
-  # Change it to true if you need it, but please, do not commit your changes
-  # to the repository.
-  #
-  # Best,
-  #
-  # - Francesc
-  #
-  config.assets.debug = false
+  # Expands the lines which load the assets
+  config.assets.debug = true
 
   # Default url options for action mailer
   config.action_mailer.default_url_options = { :host => 'localhost:3000' }
