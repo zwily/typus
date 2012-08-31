@@ -12,7 +12,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
     related_fk = association.foreign_key
     html_options = { :disabled => attribute_disabled?(attribute) }
     label_text = @resource.human_attribute_name(attribute)
-    options = { :attribute => "#{@resource.name.downcase}_#{related_fk}" }
+    options = { :attribute => "#{@resource.name.underscore}_#{related_fk}" }
 
     label_text = @resource.human_attribute_name(attribute)
     if (text = build_label_text_for_belongs_to(related, html_options, options))
