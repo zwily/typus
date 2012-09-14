@@ -27,7 +27,7 @@ Gem::Specification.new do |s|
   s.require_paths = ["lib"]
 
   s.add_dependency "bcrypt-ruby", "~> 3.0.1"
-  s.add_dependency "jquery-rails", "~> 2.0.1"
+  s.add_dependency "jquery-rails", "~> 2.1.2"
   s.add_dependency "rails", "~> 3.2.8"
 
   # Development dependencies are defined in the `Gemfile`.
