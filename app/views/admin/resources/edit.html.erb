@@ -10,10 +10,10 @@
   </h2>
 
   <% if headless_mode? && params[:action] == 'edit' && flash.keys.include?(:notice) && !params[:_input] %>
-    <script type="text/javascript">
+    <%= javascript_tag do %>
       $(document).ready(function () {
         <% if params[:attribute] %>
-          var option = new Option("<%= @item.to_label %>", "<%= @item.id %>", true, true);
+          var option = new Option("<%=j @item.to_label.html_safe %>", "<%= @item.id %>", true, true);
           parent.$("#<%= params[:attribute] %>").append(option);
           parent.$(".chzn-select-<%= params[:attribute] %>").trigger("liszt:updated");
         <% else %>
@@ -21,7 +21,7 @@
         <% end %>
         parent.$.fancybox.close();
       });
-    </script>
+    <% end %>
   <% end %>
 
   <%= admin_display_flash_message %>
