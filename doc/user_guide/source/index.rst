@@ -53,6 +53,7 @@ Configuration
   configuration/resource
   configuration/roles
   customization/selectors
+  customization/custom_css_and_js
 
 
 Customization
