@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+
+if [ ! $(which bundle) ]; then
+  echo "error: bundler not found"
+  exit 1
+fi
+
+bundle install
+bundle exec rake db:schema:load
+
+echo "Now you can start the application by running:"
+echo ""
+echo "    rails server"
