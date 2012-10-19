@@ -2,7 +2,9 @@ $(document).ready(function() {
 
     $("#quicksearch").searchField();
 
-    $(".resource :input", document.myForm).bind("change", function() { Typus.setConfirmUnload(true); });
+    $(".resource :input", document.myForm).bind("change", function() {
+        Typus.setConfirmUnload(true);
+    });
 
     $("a.fancybox").fancybox({
         'titlePosition': 'over',
