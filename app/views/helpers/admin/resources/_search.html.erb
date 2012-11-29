@@ -1,9 +1,9 @@
 <div id="search">
 
-  <%= form_tag nil, :method => :get do %>
+  <%= form_tag nil, :method => :get, :title => ("Searches #{Typus::Configuration.config[controller_name.classify.to_s]["search"].try(:extract_settings)}" if Typus::Configuration.config[controller_name.classify.to_s].present?), :rel => 'tooltip' do %>
 
     <ul>
-      <li><%= search_field_tag "search", nil, :id => "quicksearch", :title => (params[:search] || Typus::I18n.t("Search")) %></li>
+      <li><%= search_field_tag "search", nil, :id => "quicksearch", :placeholder => Typus::I18n.t("Search"), :value => params[:search] %></li>
     </ul>
 
     <% hidden_filters.each do |key, value| %>
