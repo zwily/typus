@@ -35,7 +35,7 @@ class ResourcesTest < ActiveSupport::TestCase
   end
 
   test "counters" do
-    assert Typus::Resources.counters
+    assert !Typus::Resources.counters
   end
 
 end
