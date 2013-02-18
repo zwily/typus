@@ -7,16 +7,19 @@ es:
   "Active": "Activo"
   "Add": "Añadir"
   "Add New": "Añadir nuevo"
-  "Add New %{resource}": "Añadir Nuevo %{resource}"
+  "Add %{resource}": "Añadir %{resource}"
   "All": "Todos"
+  "Applications": "Applicaciones"
   "Are you sure?": "¿Estás seguro?"
+
+  "Back to list": "Volver al listado"
 
   "Change %{attribute}?": "Cambiar %{attribute}?"
   "Create %{resource}": "Crear %{resource}"
 
   "Dashboard": "Panel de control"
   "Down": "Bajar"
-  "Applications": "Applicaciones"
+  "Delete Permanently": "Eliminar de la papelera"
 
   "Edit": "Editar"
   "Edit %{resource}": "Editar %{resource}"
@@ -39,6 +42,7 @@ es:
   "New %{resource}": "Nuevo %{resource}"
   "Next": "Siguiente"
   "No %{resources} found": "No se han encontrado %{resources}."
+  "No entries found": "No se han encontrado entradas."
 
   "Password recovery link sent to your email": "Enlace de recuperación de contraseña enviado a tu correo electrónico."
   "Previous": "Anterior"
@@ -49,6 +53,7 @@ es:
   "Remove %{resource}?": "¿Borrar %{resource}?"
   "Reset password": "Cambiar contraseña"
   "Resources": "Recursos"
+  "Restore": "Restaurar"
 
   "Save": "Guardar"
   "Save and add another": "Guardar y añadir nuevo"
@@ -65,7 +70,7 @@ es:
   "System Users Administration": "Administrar usuarios del sistema"
 
   "Today": "Hoy"
-  "Trash": "Eliminar"
+  "Trash": "Papelera"
   "True": "Verdadero"
 
   "Unrelate": "Desvincular"

@@ -24,7 +24,7 @@ class Admin::ResourcesController < Admin::BaseController
     respond_to do |format|
       format.html do
         set_default_action
-        add_resource_action("Trash", {:action => "destroy"}, { :data => { :confirm => "#{Typus::I18n.t("Trash")}?" }, :method => 'delete'})
+        add_resource_action("Destroy", {:action => "destroy"}, { :data => { :confirm => "#{Typus::I18n.t("Trash")}?" }, :method => 'delete'})
         get_paginated_data
       end
 
