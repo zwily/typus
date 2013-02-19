@@ -1,3 +1,3 @@
 class EntryTrash < Entry
-  has_trash
+  include Rails::Trash
 end

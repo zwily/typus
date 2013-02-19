@@ -37,7 +37,9 @@ end
 gem 'acts_as_list'
 gem 'acts_as_tree'
 gem 'rails-permalink', '~> 1.0.0'
-gem 'rails-trash', '~> 2.0.0'
+# gem 'rails-trash', '~> 2.0.0'
+gem 'rails-trash', :git => 'git://github.com/fesplugas/rails-trash.git'
+# gem 'rails-trash', :path => "~/Development/rails-trash"
 
 # We want to be able to use Factory Girl for seeding data.
 gem 'factory_girl_rails', '~> 1.7.0'
