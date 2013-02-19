@@ -19,9 +19,6 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     first_category = FactoryGirl.create(:category, :position => 1)
     second_category = FactoryGirl.create(:category, :position => 2)
 
-    second_category.name = nil
-    second_category.save(:validate => false)
-
     get :position, :id => first_category.id, :go => 'move_lower'
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
