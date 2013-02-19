@@ -2,15 +2,10 @@ require "test_helper"
 
 class Admin::MailerTest < ActiveSupport::TestCase
 
-  include Rails.application.routes.url_helpers
-
-  def default_url_options
-    Rails.application.config.action_mailer.default_url_options
-  end
-
   test "reset_password_instructions" do
+    host = 'example.com'
     user = FactoryGirl.build(:typus_user, :token => "qswed3-64g3fb")
-    mail = Admin::Mailer.reset_password_instructions(user)
+    mail = Admin::Mailer.reset_password_instructions(user, host)
 
     assert_nil Admin::Mailer.default[:from]
     assert mail.to.include?(user.email)
@@ -19,7 +14,8 @@ class Admin::MailerTest < ActiveSupport::TestCase
     assert_equal expected, mail.subject
     assert_equal "multipart/alternative", mail.mime_type
 
-    assert_match admin_account_url(user.token), mail.body.encoded
+    url = "http://#{host}/admin/account/#{user.token}"
+    assert_match url, mail.body.encoded
   end
 
 end
