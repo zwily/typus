@@ -52,7 +52,7 @@ and go to <http://0.0.0.0:3000/admin>.
 Testing
 -------
 
-[![Build Status](https://secure.travis-ci.org/fesplugas/typus.png)](http://travis-ci.org/fesplugas/typus)
+[![Build Status](https://travis-ci.org/fesplugas/typus.png?branch=master)](https://travis-ci.org/fesplugas/typus)
 
 Create a PostgreSQL database:
 
