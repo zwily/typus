@@ -61,7 +61,7 @@ Create a PostgreSQL database:
 
 To test, clone the repo and run the following commands:
 
-    $ git clone git://github.com/fesplugas/typus.git
+    $ git clone --recursive git://github.com/fesplugas/typus.git
     $ bundle install --path vendor/bundle
     $ bundle exec rake
 
