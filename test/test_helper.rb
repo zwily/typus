@@ -8,6 +8,7 @@ require File.expand_path("../dummy/db/schema",  __FILE__)
 require "rails/test_help"
 require "shoulda-context"
 # require "minitest/pride"
+require "mocha"
 
 Rails.backtrace_cleaner.remove_silencers!
 

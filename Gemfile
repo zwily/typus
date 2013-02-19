@@ -28,8 +28,8 @@ end
 
 platforms :ruby do
   gem 'mysql2', '~> 0.3.11'
-  gem 'pg', '~> 0.13.2'
-  gem 'sqlite3', '~> 1.3.5'
+  gem 'pg', '~> 0.14.1'
+  gem 'sqlite3', '~> 1.3.7'
 end
 
 # Typus can manage lists, trees, trashes, so we want to enable this stuff
@@ -49,22 +49,22 @@ gem 'jquery-rails'
 gem "ckeditor-rails", "~> 0.0.5"
 
 # Alternative authentication
-gem 'devise', '~> 2.0.4'
+gem 'devise', '~> 2.0.5'
 
 # Asset Management with Dragonfly
-gem 'dragonfly', '~> 0.9.10'
+gem 'dragonfly', '~> 0.9.14'
 gem 'rack-cache', :require => 'rack/cache'
 
 # Asset Management with Paperclip
-gem 'paperclip', '~> 2.7.0'
+gem 'paperclip', '~> 2.7.5'
 
 # MongoDB
 gem 'mongoid', '~> 2.4.6'
 gem 'bson_ext', '~> 1.6.1'
 
 group :test do
-  gem 'shoulda-context', '~> 1.0.0'
-  gem 'mocha' # Make sure mocha is loaded at the end ...
+  gem 'shoulda-context'
+  gem 'mocha', '~> 0.12.10', :require => false
 end
 
 gem 'kaminari'
