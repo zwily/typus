@@ -4,8 +4,13 @@ CHANGELOG
 3.2.0 (unrelased)
 ------------------
 
+ * [CHANGED] Application emails now use host_with_port to generate the
+   url. This is usefull when running multi-domain applications.
+
+ * [CHANGED] Updated gems dependencies.
+
  * [CHANGED] Dropped support for Ruby 1.8.7. This doesn't mean Typus will
-   not run willith that version of Ruby, but I don't longer have plans to
+   not run with that version of Ruby, but I don't longer have plans to
    test against that version.
 
  * [CHANGED] We do not longer look for Typus configuration files in the
