@@ -7,7 +7,6 @@ class Admin::MailerTest < ActiveSupport::TestCase
     user = FactoryGirl.build(:typus_user, :token => "qswed3-64g3fb")
     mail = Admin::Mailer.reset_password_instructions(user, host)
 
-    assert_nil Admin::Mailer.default[:from]
     assert mail.to.include?(user.email)
 
     expected = "[#{Typus.admin_title}] Reset password"

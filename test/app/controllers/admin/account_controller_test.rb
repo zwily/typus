@@ -67,11 +67,13 @@ class Admin::AccountControllerTest < ActionController::TestCase
   end
 
   test "send_password for existing email" do
-    typus_user = FactoryGirl.create(:typus_user)
-    post :send_password, :typus_user => { :email => typus_user.email }
-    assert_response :redirect
-    assert_redirected_to new_admin_session_path
-    assert_equal "Password recovery link sent to your email.", flash[:notice]
+    Typus.stub :mailer_sender, 'typus@example.com' do
+      typus_user = FactoryGirl.create(:typus_user)
+      post :send_password, :typus_user => { :email => typus_user.email }
+      assert_response :redirect
+      assert_redirected_to new_admin_session_path
+      assert_equal "Password recovery link sent to your email.", flash[:notice]
+    end
   end
 
   test "show with token generates a session a redirects user to edit" do

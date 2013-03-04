@@ -25,7 +25,7 @@ class Entry < ActiveRecord::Base
   # Scopes
   #
 
-  scope :published, where(:published => true)
+  scope :published, -> { where(:published => true) }
 
   ##
   # Instance Methods

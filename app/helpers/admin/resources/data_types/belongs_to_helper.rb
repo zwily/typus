@@ -10,7 +10,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
     end
 
     related_fk = association.foreign_key
-    html_options = { :disabled => attribute_disabled?(attribute) }
+    html_options = {}
     label_text = @resource.human_attribute_name(attribute)
     options = { :attribute => "#{@resource.name.underscore}_#{related_fk}" }
 

@@ -26,10 +26,7 @@ module Admin::Resources::FormHelper
     options = { :start_year => @resource.typus_options_for(:start_year),
                 :end_year => @resource.typus_options_for(:end_year),
                 :minute_step => @resource.typus_options_for(:minute_step),
-                :disabled => attribute_disabled?(attribute),
                 :include_blank => true }
-
-    html_options = attribute_disabled?(attribute) ? { :disabled => 'disabled' } : {}
 
     label_text = @resource.human_attribute_name(attribute)
 
@@ -41,17 +38,11 @@ module Admin::Resources::FormHelper
                :attribute => attribute,
                :attribute_id => "#{@resource.table_name}_#{attribute}",
                :options => options,
-               :html_options => html_options,
+               :html_options => {},
                :form => form,
                :label_text => label_text.html_safe }
 
     render "admin/templates/#{template}", locals
-  end
-
-  def attribute_disabled?(attribute)
-    if protected_attributes = @resource._protected_attributes
-      protected_attributes[current_role].include?(attribute)
-    end
   end
 
   def build_save_options

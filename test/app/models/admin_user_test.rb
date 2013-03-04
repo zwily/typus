@@ -19,10 +19,6 @@ class AdminUserTest < ActiveSupport::TestCase
     assert !first_token.eql?(second_token)
   end
 
-  test "mass_assignment" do
-    assert TypusUser.attr_protected[:default].include?(:status)
-  end
-
   test "mapping locales" do
     admin_user = FactoryGirl.build(:admin_user, :locale => "en")
     assert_equal "English", admin_user.mapping(:locale)

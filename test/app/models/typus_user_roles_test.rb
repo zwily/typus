@@ -11,7 +11,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
 
     expected = %w(AdminUser Article::Entry Asset Bird Case Category Comment
                   DeviseUser Dog Entry EntryBulk EntryDefault EntryTrash Git
-                  Hit ImageHolder Invoice Order Page Post Project ProjectCollaborator
+                  ImageHolder Invoice Order Page Post Project ProjectCollaborator
                   ReadOnlyEntry Status Task TypusUser User View WatchDog)
     assert_equal expected, typus_user.resources.map(&:first).sort
 

@@ -32,45 +32,45 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test 'build_search_conditions should generate conditions for id' do
-    Post.expects(:typus_defaults_for).with(:search).returns(["id"])
+    Post.stub :typus_defaults_for, %w(id) do
+      expected = case db_adapter
+                 when "postgresql"
+                   "LOWER(TEXT(posts.id)) LIKE '%1%'"
+                 else
+                   "posts.id LIKE '%1%'"
+                 end
+      output = Post.build_search_conditions("search", "1")
 
-    expected = case db_adapter
-               when "postgresql"
-                 "LOWER(TEXT(posts.id)) LIKE '%1%'"
-               else
-                 "posts.id LIKE '%1%'"
-               end
-    output = Post.build_search_conditions("search", "1")
-
-    assert_equal expected, output
+      assert_equal expected, output
+    end
   end
 
   test 'build_search_conditions should generate conditions for fields starting with equal' do
-    Post.expects(:typus_defaults_for).with(:search).returns(["=id"])
+    Post.stub :typus_defaults_for, %w(=id) do
+      expected = case db_adapter
+                 when "postgresql"
+                   "LOWER(TEXT(posts.id)) LIKE '1'"
+                 else
+                   "posts.id LIKE '1'"
+                 end
+      output = Post.build_search_conditions("search", "1")
 
-    expected = case db_adapter
-               when "postgresql"
-                 "LOWER(TEXT(posts.id)) LIKE '1'"
-               else
-                 "posts.id LIKE '1'"
-               end
-    output = Post.build_search_conditions("search", "1")
-
-    assert_equal expected, output
+      assert_equal expected, output
+    end
   end
 
   test 'build_search_conditions should generate conditions for fields starting with ^' do
-    Post.expects(:typus_defaults_for).with(:search).returns(["^id"])
+    Post.stub :typus_defaults_for, %w(^id) do
+      expected = case db_adapter
+                 when "postgresql"
+                   "LOWER(TEXT(posts.id)) LIKE '1%'"
+                 else
+                   "posts.id LIKE '1%'"
+                 end
+      output = Post.build_search_conditions("search", "1")
 
-    expected = case db_adapter
-               when "postgresql"
-                 "LOWER(TEXT(posts.id)) LIKE '1%'"
-               else
-                 "posts.id LIKE '1%'"
-               end
-    output = Post.build_search_conditions("search", "1")
-
-    assert_equal expected, output
+      assert_equal expected, output
+    end
   end
 
   test "build_boolean_conditions returns true" do

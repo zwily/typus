@@ -23,10 +23,11 @@ module Typus
 
       def generate_csv
         fields = @resource.typus_fields_for(:csv)
+        records = @resource.all
 
         data = ::CSV.generate do |csv|
           csv << fields.keys.map { |k| @resource.human_attribute_name(k) }
-          @resource.all.each do |record|
+          records.each do |record|
             csv << fields.map do |key, value|
                      case value
                      when :transversal

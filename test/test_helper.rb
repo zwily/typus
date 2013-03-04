@@ -6,8 +6,7 @@ ActiveRecord::Schema.verbose = false
 require File.expand_path("../dummy/db/schema",  __FILE__)
 
 require "rails/test_help"
-# require "minitest/pride"
-require "mocha"
+require 'minitest/autorun'
 
 Rails.backtrace_cleaner.remove_silencers!
 
