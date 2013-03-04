@@ -2,79 +2,75 @@ require "test_helper"
 
 class ActiveRecordTest < ActiveSupport::TestCase
 
-  context "build_search_conditions" do
+  test 'build_search_conditions should work for Post (title)' do
+    output = Post.build_search_conditions("search", "bacon")
 
-    should "work for Post (title)" do
-      output = Post.build_search_conditions("search", "bacon")
+    expected = case db_adapter
+               when "postgresql"
+                 "LOWER(TEXT(posts.title)) LIKE '%bacon%'"
+               else
+                 "posts.title LIKE '%bacon%'"
+               end
 
-      expected = case db_adapter
-                 when "postgresql"
-                   "LOWER(TEXT(posts.title)) LIKE '%bacon%'"
-                 else
-                   "posts.title LIKE '%bacon%'"
-                 end
+    assert_equal expected, output
+  end
 
-      assert_equal expected, output
-    end
+  test 'build_search_conditions should work for Comment (email, body)' do
+    output = Comment.build_search_conditions("search", "bacon")
 
-    should "work for Comment (email, body)" do
-      output = Comment.build_search_conditions("search", "bacon")
+    expected = case db_adapter
+               when "postgresql"
+                 ["LOWER(TEXT(comments.body)) LIKE '%bacon%'",
+                  "LOWER(TEXT(comments.email)) LIKE '%bacon%'"]
+               else
+                 ["comments.body LIKE '%bacon%'",
+                  "comments.email LIKE '%bacon%'"]
+               end
 
-      expected = case db_adapter
-                 when "postgresql"
-                   ["LOWER(TEXT(comments.body)) LIKE '%bacon%'",
-                    "LOWER(TEXT(comments.email)) LIKE '%bacon%'"]
-                 else
-                   ["comments.body LIKE '%bacon%'",
-                    "comments.email LIKE '%bacon%'"]
-                 end
+    expected.each { |e| assert_match e, output }
+    assert_match /OR/, output
+  end
 
-      expected.each { |e| assert_match e, output }
-      assert_match /OR/, output
-    end
+  test 'build_search_conditions should generate conditions for id' do
+    Post.expects(:typus_defaults_for).with(:search).returns(["id"])
 
-    should "generate conditions for id" do
-      Post.expects(:typus_defaults_for).with(:search).returns(["id"])
+    expected = case db_adapter
+               when "postgresql"
+                 "LOWER(TEXT(posts.id)) LIKE '%1%'"
+               else
+                 "posts.id LIKE '%1%'"
+               end
+    output = Post.build_search_conditions("search", "1")
 
-      expected = case db_adapter
-                 when "postgresql"
-                   "LOWER(TEXT(posts.id)) LIKE '%1%'"
-                 else
-                   "posts.id LIKE '%1%'"
-                 end
-      output = Post.build_search_conditions("search", "1")
+    assert_equal expected, output
+  end
 
-      assert_equal expected, output
-    end
+  test 'build_search_conditions should generate conditions for fields starting with equal' do
+    Post.expects(:typus_defaults_for).with(:search).returns(["=id"])
 
-    should "generate conditions for fields starting with equal" do
-      Post.expects(:typus_defaults_for).with(:search).returns(["=id"])
+    expected = case db_adapter
+               when "postgresql"
+                 "LOWER(TEXT(posts.id)) LIKE '1'"
+               else
+                 "posts.id LIKE '1'"
+               end
+    output = Post.build_search_conditions("search", "1")
 
-      expected = case db_adapter
-                 when "postgresql"
-                   "LOWER(TEXT(posts.id)) LIKE '1'"
-                 else
-                   "posts.id LIKE '1'"
-                 end
-      output = Post.build_search_conditions("search", "1")
+    assert_equal expected, output
+  end
 
-      assert_equal expected, output
-    end
+  test 'build_search_conditions should generate conditions for fields starting with ^' do
+    Post.expects(:typus_defaults_for).with(:search).returns(["^id"])
 
-    should "generate conditions for fields starting with ^" do
-      Post.expects(:typus_defaults_for).with(:search).returns(["^id"])
+    expected = case db_adapter
+               when "postgresql"
+                 "LOWER(TEXT(posts.id)) LIKE '1%'"
+               else
+                 "posts.id LIKE '1%'"
+               end
+    output = Post.build_search_conditions("search", "1")
 
-      expected = case db_adapter
-                 when "postgresql"
-                   "LOWER(TEXT(posts.id)) LIKE '1%'"
-                 else
-                   "posts.id LIKE '1%'"
-                 end
-      output = Post.build_search_conditions("search", "1")
-
-      assert_equal expected, output
-    end
-
+    assert_equal expected, output
   end
 
   test "build_boolean_conditions returns true" do
@@ -111,84 +107,80 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal expected, User.build_has_many_conditions('projects', '1')
   end
 
-  context "build_conditions" do
+  test "build_conditions should return an array" do
+    assert Post.build_conditions({:search => '1'}).is_a?(Array)
+  end
 
-    should "return an array" do
-      assert Post.build_conditions({:search => '1'}).is_a?(Array)
-    end
+  test "build_conditions should return_sql_conditions_on_search_for_typus_user" do
+    expected = case db_adapter
+               when "postgresql"
+                 ["LOWER(TEXT(typus_users.first_name)) LIKE '%francesc%'",
+                  "LOWER(TEXT(typus_users.last_name)) LIKE '%francesc%'", 
+                  "LOWER(TEXT(typus_users.email)) LIKE '%francesc%'",
+                  "LOWER(TEXT(typus_users.role)) LIKE '%francesc%'"]
+               else
+                 ["typus_users.first_name LIKE '%francesc%'",
+                  "typus_users.last_name LIKE '%francesc%'",
+                  "typus_users.email LIKE '%francesc%'",
+                  "typus_users.role LIKE '%francesc%'"]
+               end
 
-    should "return_sql_conditions_on_search_for_typus_user" do
-      expected = case db_adapter
-                 when "postgresql"
-                   ["LOWER(TEXT(typus_users.first_name)) LIKE '%francesc%'",
-                    "LOWER(TEXT(typus_users.last_name)) LIKE '%francesc%'", 
-                    "LOWER(TEXT(typus_users.email)) LIKE '%francesc%'",
-                    "LOWER(TEXT(typus_users.role)) LIKE '%francesc%'"]
-                 else
-                   ["typus_users.first_name LIKE '%francesc%'",
-                    "typus_users.last_name LIKE '%francesc%'",
-                    "typus_users.email LIKE '%francesc%'",
-                    "typus_users.role LIKE '%francesc%'"]
-                 end
-
-      [{:search =>"francesc"}, {:search => "Francesc"}].each do |params|
-        expected.each do |expect|
-          assert_match expect, TypusUser.build_conditions(params).first
-        end
-        assert_no_match /AND/, TypusUser.build_conditions(params).first
+    [{:search =>"francesc"}, {:search => "Francesc"}].each do |params|
+      expected.each do |expect|
+        assert_match expect, TypusUser.build_conditions(params).first
       end
+      assert_no_match /AND/, TypusUser.build_conditions(params).first
+    end
+  end
+
+  test 'build_conditions should return_sql_conditions_on_search_and_filter_for_typus_user' do
+    expected = case db_adapter
+               when "postgresql"
+                 ["LOWER(TEXT(typus_users.role)) LIKE '%francesc%'",
+                  "LOWER(TEXT(typus_users.last_name)) LIKE '%francesc%'",
+                  "LOWER(TEXT(typus_users.email)) LIKE '%francesc%'",
+                  "LOWER(TEXT(typus_users.first_name)) LIKE '%francesc%'"]
+               else
+                 ["typus_users.first_name LIKE '%francesc%'",
+                  "typus_users.last_name LIKE '%francesc%'",
+                  "typus_users.email LIKE '%francesc%'",
+                  "typus_users.role LIKE '%francesc%'"]
+               end
+
+    params = { :search => "francesc", :status => "true" }
+
+    FactoryGirl.create(:typus_user, :email => "francesc.one@example.com")
+    FactoryGirl.create(:typus_user, :email => "francesc.dos@example.com", :status => false)
+
+    resource = TypusUser
+    resource.build_conditions(params).each do |condition|
+      resource = resource.where(condition)
     end
 
-    should "return_sql_conditions_on_search_and_filter_for_typus_user" do
-      expected = case db_adapter
-                 when "postgresql"
-                   ["LOWER(TEXT(typus_users.role)) LIKE '%francesc%'",
-                    "LOWER(TEXT(typus_users.last_name)) LIKE '%francesc%'",
-                    "LOWER(TEXT(typus_users.email)) LIKE '%francesc%'",
-                    "LOWER(TEXT(typus_users.first_name)) LIKE '%francesc%'"]
-                 else
-                    ["typus_users.first_name LIKE '%francesc%'",
-                     "typus_users.last_name LIKE '%francesc%'",
-                     "typus_users.email LIKE '%francesc%'",
-                     "typus_users.role LIKE '%francesc%'"]
-                 end
+    assert_equal ["francesc.one@example.com"], resource.map(&:email)
+  end
 
-      params = { :search => "francesc", :status => "true" }
+  test 'build_conditions return_sql_conditions_on_filtering_typus_users_by_status true' do
+    expected = { :status => true }
+    assert_equal expected, TypusUser.build_conditions({:status => 'true'}).first
+  end
 
-      FactoryGirl.create(:typus_user, :email => "francesc.one@example.com")
-      FactoryGirl.create(:typus_user, :email => "francesc.dos@example.com", :status => false)
+  test 'build_conditions should return_sql_conditions_on_filtering_typus_users_by_status false' do
+    expected = { :status => false }
+    assert_equal expected, TypusUser.build_conditions({:status => 'false'}).first
+  end
 
-      resource = TypusUser
-      resource.build_conditions(params).each do |condition|
-        resource = resource.where(condition)
-      end
+  # This applies for all_day, all_week, all_month, all_year, so there's no
+  # need to repeat them.
+  test 'build_conditions should return sql conditions on filtering posts published_at all_day' do
+    all_day = Time.zone.now.all_day
+    expected = ["posts.published_at BETWEEN ? AND ?", all_day.first.to_s(:db), all_day.last.to_s(:db)]
+    assert_equal expected, Post.build_conditions({:published_at => "all_day"}).first
+  end
 
-      assert_equal ["francesc.one@example.com"], resource.map(&:email)
-    end
-
-    should "return_sql_conditions_on_filtering_typus_users_by_status true" do
-      expected = { :status => true }
-      assert_equal expected, TypusUser.build_conditions({:status => 'true'}).first
-    end
-
-    should "return_sql_conditions_on_filtering_typus_users_by_status false" do
-      expected = { :status => false }
-      assert_equal expected, TypusUser.build_conditions({:status => 'false'}).first
-    end
-
-    # This applies for all_day, all_week, all_month, all_year, so there's no
-    # need to repeat them.
-    should "return sql conditions on filtering posts published_at all_day" do
-      all_day = Time.zone.now.all_day
-      expected = ["posts.published_at BETWEEN ? AND ?", all_day.first.to_s(:db), all_day.last.to_s(:db)]
-      assert_equal expected, Post.build_conditions({:published_at => "all_day"}).first
-    end
-
-    should "return_sql_conditions_on_filtering_posts_by_string" do
-      expected = { :role => 'admin' }
-      assert_equal expected, TypusUser.build_conditions({:role => 'admin'}).first
-    end
-
+  test 'build_conditions return_sql_conditions_on_filtering_posts_by_string' do
+    expected = { :role => 'admin' }
+    assert_equal expected, TypusUser.build_conditions({:role => 'admin'}).first
   end
 
   test "build_my_joins return the expected joins" do

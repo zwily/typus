@@ -56,52 +56,52 @@ class TypusUserTest < ActiveSupport::TestCase
     assert_equal options[:role], typus_user.role
   end
 
-  context "TypusUser" do
+  test "should verify salt never changes" do
+    typus_user = FactoryGirl.create(:typus_user)
+    expected = typus_user.salt
+    typus_user.update_attributes(:password => '11111111', :password_confirmation => '11111111')
+    assert_equal expected, typus_user.salt
+  end
 
-    setup do
-      @typus_user = FactoryGirl.create(:typus_user)
-    end
+  test "should verify authenticated? returns true or false" do
+    typus_user = FactoryGirl.create(:typus_user)
+    assert typus_user.authenticated?('12345678')
+    assert !typus_user.authenticated?('87654321')
+  end
 
-    should "verify salt never changes" do
-      expected = @typus_user.salt
-      @typus_user.update_attributes(:password => '11111111', :password_confirmation => '11111111')
-      assert_equal expected, @typus_user.salt
-    end
+  test "should verify preferences are nil by default" do
+    typus_user = FactoryGirl.create(:typus_user)
+    assert typus_user.preferences.nil?
+  end
 
-    should "verify authenticated? returns true or false" do
-      assert @typus_user.authenticated?('12345678')
-      assert !@typus_user.authenticated?('87654321')
-    end
+  test "should return default_locale when no preferences are set" do
+    typus_user = FactoryGirl.create(:typus_user)
+    assert typus_user.locale.eql?(:en)
+  end
 
-    should "verify preferences are nil by default" do
-      assert @typus_user.preferences.nil?
-    end
+  test "should be able to set a locale" do
+    typus_user = FactoryGirl.create(:typus_user)
+    typus_user.locale = :jp
 
-    should "return default_locale when no preferences are set" do
-      assert @typus_user.locale.eql?(:en)
-    end
+    expected = {:locale => :jp}
+    assert_equal expected, typus_user.preferences
+    assert typus_user.locale.eql?(:jp)
+  end
 
-    should "be able to set a locale" do
-      @typus_user.locale = :jp
+  test "should be able to set preferences" do
+    typus_user = FactoryGirl.create(:typus_user)
+    typus_user.preferences = {:chunky => "bacon"}
+    assert typus_user.preferences.present?
+  end
 
-      expected = {:locale => :jp}
-      assert_equal expected, @typus_user.preferences
-      assert @typus_user.locale.eql?(:jp)
-    end
+  test "should set locale preference without overriding previously set preferences" do
+    typus_user = FactoryGirl.create(:typus_user)
 
-    should "be able to set preferences" do
-      @typus_user.preferences = {:chunky => "bacon"}
-      assert @typus_user.preferences.present?
-    end
+    typus_user.preferences = {:chunky => "bacon"}
+    typus_user.locale = :jp
 
-    should "set locale preference without overriding previously set preferences" do
-      @typus_user.preferences = {:chunky => "bacon"}
-      @typus_user.locale = :jp
-
-      expected = {:locale => :jp, :chunky => "bacon"}
-      assert_equal expected, @typus_user.preferences
-    end
-
+    expected = {:locale => :jp, :chunky => "bacon"}
+    assert_equal expected, typus_user.preferences
   end
 
   test "to_label" do

@@ -6,32 +6,32 @@ class FakeUserTest < ActiveSupport::TestCase
     @fake_user = FakeUser.new
   end
 
-  should "have the id set to 0" do
+  test "should have the id set to 0" do
     assert @fake_user.id.eql?(0)
   end
 
-  should "be able to do anything" do
+  test "should be able to do anything" do
     assert @fake_user.can?("sing")
     assert !@fake_user.cannot?("sing")
   end
 
-  should "have a locale" do
+  test "should have a locale" do
     assert_equal ::I18n.locale, @fake_user.locale
   end
 
-  should "have status set to true" do
+  test "should have status set to true" do
     assert @fake_user.status
   end
 
-  should "be considered as root" do
+  test "should be considered as root" do
     assert @fake_user.is_root?
   end
 
-  should "not be considered as no_root" do
+  test "should not be considered as no_root" do
     assert !@fake_user.is_not_root?
   end
 
-  should "have access to all applications" do
+  test "should have access to all applications" do
     assert_equal Typus.applications, @fake_user.applications
   end
 
@@ -41,15 +41,15 @@ class FakeUserTest < ActiveSupport::TestCase
     assert_equal expected, @fake_user.application("Polymorphic").sort
   end
 
-  should "be master_role" do
+  test "should be master_role" do
     assert_equal Typus.master_role, @fake_user.role
   end
 
-  should "not respond to resources" do
+  test "should not respond to resources" do
     assert !@fake_user.respond_to?(:resources)
   end
 
-  should "always be the owner of a resource" do
+  test "should always be the owner of a resource" do
     assert @fake_user.owns?('a')
   end
 
