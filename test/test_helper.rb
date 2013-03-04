@@ -42,6 +42,7 @@ class ActiveSupport::TestCase
   def editor_sign_in
     build_editor
     set_session(@typus_user.id)
+    @request.env['HTTP_REFERER'] = '/admin/typus_users'
   end
 
   def build_designer
