@@ -65,7 +65,6 @@ gem 'mongoid', '~> 2.4.6'
 gem 'bson_ext', '~> 1.6.1'
 
 group :test do
-  gem 'shoulda-context'
   gem 'mocha', '~> 0.12.10', :require => false
 end
 
