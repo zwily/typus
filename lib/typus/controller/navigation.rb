@@ -1,10 +1,14 @@
+require 'active_support/concern'
+
 module Typus
   module Controller
     module Navigation
 
-      def self.included(base)
-        base.before_filter :set_resources_action_on_lists, :only => [:index, :trash]
-        base.before_filter :set_resources_action, :only => [:new, :create, :edit, :show]
+      extend ActiveSupport::Concern
+
+      included do
+        before_filter :set_resources_action_on_lists, :only => [:index, :trash]
+        before_filter :set_resources_action, :only => [:new, :create, :edit, :show]
       end
 
       def set_resources_action_on_lists
