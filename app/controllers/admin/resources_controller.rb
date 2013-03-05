@@ -229,10 +229,22 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def item_params_for_new
+    extras = []
+
     if params[:resource]
       params[@object_name] = params[:resource]
-      item_params
+
+      attribute = params[:resource].keys.first
+
+      if attribute.match(/_id$/)
+        candidate = attribute.split('_id').first
+        extras << attribute if whitelist.include?(candidate)
+      end
+
+      params.delete(:resource)
     end
+
+    item_params(extras)
   end
 
   # Note that we still can assign the item to another model. To change this
@@ -251,8 +263,9 @@ class Admin::ResourcesController < Admin::BaseController
     item_params
   end
 
-  def item_params
-    params.require(@object_name).permit(whitelist)
+  def item_params(extra_params = [])
+    permitted_attrs = whitelist + extra_params
+    params.require(@object_name).permit(permitted_attrs)
   end
 
 end
