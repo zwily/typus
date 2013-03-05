@@ -265,15 +265,9 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def whitelist_extras
-    extras = []
-
-    params[@object_name].keys.each do |attribute|
-      if attribute.end_with?('_id')
-        extras << attribute if whitelist.include?(attribute.chomp('_id'))
-      end
+    params[@object_name].keys.delete_if do |p|
+      !p.end_with?('_id') && !whitelist.include?(p.chomp('_id'))
     end
-
-    extras
   end
 
 end
