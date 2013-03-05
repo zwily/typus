@@ -264,7 +264,15 @@ class Admin::ResourcesController < Admin::BaseController
       params[@object_name] = { attr => nil }
     end
 
-    item_params
+    extras = []
+
+    params[@object_name].keys.each do |attribute|
+      if attribute.end_with?('_id')
+        extras << attribute if whitelist.include?(attribute.chomp('_id'))
+      end
+    end
+
+    item_params(extras)
   end
 
   def item_params(extra_params = [])
