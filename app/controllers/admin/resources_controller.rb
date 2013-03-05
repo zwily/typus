@@ -244,8 +244,10 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def item_params_for_update
-    # data = params[:_nullify] ? { params[:_nullify] => nil } : {}
-    # data.merge!(params[@object_name])
+    if (attr = params[:_nullify])
+      params[@object_name] = { attr => nil }
+    end
+
     item_params
   end
 
