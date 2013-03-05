@@ -16,7 +16,7 @@ class AdminUserTest < ActiveSupport::TestCase
     first_token = admin_user.token
     admin_user.save
     second_token = admin_user.token
-    assert !first_token.eql?(second_token)
+    refute first_token.eql?(second_token)
   end
 
   test "mapping locales" do
