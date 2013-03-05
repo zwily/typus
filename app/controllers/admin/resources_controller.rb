@@ -234,11 +234,10 @@ class Admin::ResourcesController < Admin::BaseController
     if params[:resource]
       params[@object_name] = params[:resource]
 
-      attribute = params[:resource].keys.first
-
-      if attribute.match(/_id$/)
-        candidate = attribute.split('_id').first
-        extras << attribute if whitelist.include?(candidate)
+      params[:resource].keys.each do |attribute|
+        if attribute.end_with?('_id')
+          extras << attribute if whitelist.include?(attribute.chomp('_id'))
+        end
       end
 
       params.delete(:resource)
