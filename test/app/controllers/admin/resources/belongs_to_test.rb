@@ -14,6 +14,11 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     admin_sign_in
   end
 
+  test 'should get new' do
+    get :new
+    assert_response :success
+  end
+
   test 'get new reads params[:resource] and allows the usage of _id' do
     get :new, { :resource => { :user_id => 1 } }
     assert_response :success

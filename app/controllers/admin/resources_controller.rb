@@ -229,9 +229,9 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def item_params_for_new
-    extras = []
-
     if params[:resource]
+      extras = []
+
       params[@object_name] = params[:resource]
 
       params[:resource].keys.each do |attribute|
@@ -241,9 +241,8 @@ class Admin::ResourcesController < Admin::BaseController
       end
 
       params.delete(:resource)
+      item_params(extras)
     end
-
-    item_params(extras)
   end
 
   # Note that we still can assign the item to another model. To change this
