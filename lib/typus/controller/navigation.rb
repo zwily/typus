@@ -17,7 +17,9 @@ module Typus
       private :set_resources_action_on_lists
 
       def set_resources_action
-        add_resources_action("Back to list", {:action => 'index', :id => nil})
+        unless params[:_popup]
+          add_resources_action('Back to list', {:action => 'index', :id => nil})
+        end
       end
       private :set_resources_action
 
