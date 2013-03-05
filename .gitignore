@@ -12,6 +12,3 @@ test/dummy/vendor/bundle/
 
 vendor/bundle
 vendor/gems
-
-# This is a RubyGem so there's no need to keep the `Gemfile.lock`.
-Gemfile.lock

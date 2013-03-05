@@ -42,7 +42,7 @@ gem 'rails-trash', :git => 'git://github.com/fesplugas/rails-trash.git'
 # gem 'rails-trash', :path => "~/Development/rails-trash"
 
 # We want to be able to use Factory Girl for seeding data.
-gem 'factory_girl_rails', '~> 1.7.0'
+gem 'factory_girl_rails', '~> 4.2.1'
 
 # For some reason I also need to define the `jquery-rails` gem here.
 gem 'jquery-rails'
