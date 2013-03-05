@@ -23,7 +23,8 @@ Dummy::Application.configure do
   config.active_record.migration_error = :page_load
 
   # Debug mode disables concatenation and preprocessing of assets.
-  config.assets.debug = true
+  # config.assets.debug = true
+  config.assets.debug = false
 
   # Tell Action Mailer not to deliver emails to the real world.
   # The :test delivery method accumulates sent emails in the
