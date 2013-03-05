@@ -248,9 +248,15 @@ class Admin::ResourcesController < Admin::BaseController
   # Note that we still can assign the item to another model. To change this
   # behavior we need only to change how we merge the params.
   def item_params_for_create
-    data = params[:resource] || {}
-    params[@object_name].merge!(data)
-    item_params
+    extras = []
+
+    params[@object_name].keys.each do |attribute|
+      if attribute.end_with?('_id')
+        extras << attribute if whitelist.include?(attribute.chomp('_id'))
+      end
+    end
+
+    item_params(extras)
   end
 
   def item_params_for_update
