@@ -248,15 +248,7 @@ class Admin::ResourcesController < Admin::BaseController
   # Note that we still can assign the item to another model. To change this
   # behavior we need only to change how we merge the params.
   def item_params_for_create
-    extras = []
-
-    params[@object_name].keys.each do |attribute|
-      if attribute.end_with?('_id')
-        extras << attribute if whitelist.include?(attribute.chomp('_id'))
-      end
-    end
-
-    item_params(extras)
+    item_params(whitelist_extras)
   end
 
   def item_params_for_update
@@ -264,6 +256,15 @@ class Admin::ResourcesController < Admin::BaseController
       params[@object_name] = { attr => nil }
     end
 
+    item_params(whitelist_extras)
+  end
+
+  def item_params(extra_params = [])
+    permitted_attrs = whitelist + extra_params
+    params.require(@object_name).permit(permitted_attrs)
+  end
+
+  def whitelist_extras
     extras = []
 
     params[@object_name].keys.each do |attribute|
@@ -272,12 +273,7 @@ class Admin::ResourcesController < Admin::BaseController
       end
     end
 
-    item_params(extras)
-  end
-
-  def item_params(extra_params = [])
-    permitted_attrs = whitelist + extra_params
-    params.require(@object_name).permit(permitted_attrs)
+    extras
   end
 
 end
