@@ -28,7 +28,7 @@ end
 
 platforms :ruby do
   # gem 'mysql2', '~> 0.3.11'
-  # gem 'pg', '~> 0.13.2'
+  gem 'pg', '~> 0.13.2'
   gem 'sqlite3', '~> 1.3.5'
 end
 
