@@ -71,3 +71,6 @@ end
 
 gem 'kaminari'
 # gem 'will_paginate'
+
+gem 'foreman'
+gem 'unicorn'
