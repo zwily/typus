@@ -48,7 +48,8 @@ gem 'factory_girl_rails', '~> 1.7.0'
 gem 'jquery-rails'
 
 # Rich Text Editor
-gem "ckeditor-rails", "~> 0.0.5"
+# gem "ckeditor-rails", "~> 0.0.5"
+gem "ckeditor-rails", :git => "git://github.com/fesplugas/rails-ckeditor.git"
 
 # Alternative authentication
 gem 'devise', '~> 2.0.5'
