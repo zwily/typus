@@ -37,13 +37,9 @@ mysql2: &mysql2
 
 development:
   <<: *<%= connection %>
-  username:
-  password:
 
 test:
   <<: *<%= connection %>
-  username:
-  password:
 
 production:
   <<: *<%= connection %>
