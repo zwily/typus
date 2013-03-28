@@ -104,7 +104,7 @@ GEM
       treetop (~> 1.4.8)
     metaclass (0.0.1)
     mime-types (1.21)
-    mocha (0.12.10)
+    mocha (0.13.3)
       metaclass (~> 0.0.1)
     mongo (1.6.2)
       bson (~> 1.6.2)
@@ -200,7 +200,7 @@ DEPENDENCIES
   jquery-rails
   jruby-openssl
   kaminari
-  mocha (~> 0.12.10)
+  mocha (~> 0.13.3)
   mongoid (~> 2.4.6)
   mysql2 (~> 0.3.11)
   paperclip (~> 2.7.5)
