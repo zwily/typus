@@ -5,6 +5,9 @@ notifications:
   recipients:
     - support@typuscmf.com
 
+services:
+  - mongodb
+
 branches:
   only:
     - master
