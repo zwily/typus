@@ -1,4 +1,4 @@
-source 'http://rubygems.org'
+source 'https://rubygems.org'
 
 # Declare your gem's dependencies in typus.gemspec.
 # Bundler will treat runtime dependencies like base dependencies, and
@@ -12,7 +12,7 @@ group :assets do
   gem 'coffee-rails', '~> 3.2.1'
 
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
+  gem 'therubyracer', :platforms => :ruby
 
   gem 'uglifier', '>= 1.0.3'
 end
@@ -48,7 +48,8 @@ gem 'factory_girl_rails', '~> 1.7.0'
 gem 'jquery-rails'
 
 # Rich Text Editor
-gem "ckeditor-rails", "~> 0.0.5"
+# gem "ckeditor-rails", "~> 0.0.5"
+gem "ckeditor-rails", :git => "git://github.com/fesplugas/rails-ckeditor.git"
 
 # Alternative authentication
 gem 'devise', '~> 2.0.5'
@@ -65,8 +66,11 @@ gem 'mongoid', '~> 2.4.6'
 gem 'bson_ext', '~> 1.6.1'
 
 group :test do
-  gem 'mocha', '~> 0.12.10', :require => false
+  gem 'mocha', '~> 0.13.3', :require => false
 end
 
 gem 'kaminari'
 # gem 'will_paginate'
+
+gem 'foreman'
+gem 'unicorn'
