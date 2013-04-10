@@ -32,6 +32,9 @@ platforms :ruby do
   gem 'mysql2', '~> 0.3.11'
   gem 'pg', '~> 0.14.1'
   gem 'sqlite3', '~> 1.3.7'
+  gem 'bson_ext', '~> 1.6.1'
+  gem 'unicorn'
+  gem 'foreman'
 end
 
 # Typus can manage lists, trees, trashes, so we want to enable this stuff
@@ -65,7 +68,6 @@ gem 'paperclip', '~> 2.7.5'
 
 # MongoDB
 gem 'mongoid', '~> 2.4.6'
-gem 'bson_ext', '~> 1.6.1'
 
 group :test do
   gem 'mocha', '~> 0.13.3', :require => false
@@ -73,6 +75,3 @@ end
 
 gem 'kaminari'
 # gem 'will_paginate'
-
-gem 'foreman'
-gem 'unicorn'
