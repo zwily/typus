@@ -3,7 +3,6 @@ log/*.log
 pkg/
 
 test/dummy/config/email.yml
-test/dummy/config/mongoid.yml
 test/dummy/db/*.sqlite3
 test/dummy/log/*.log
 test/dummy/public/system/
@@ -12,3 +11,4 @@ test/dummy/vendor/bundle/
 
 vendor/bundle
 vendor/gems
+vendor/ruby
