@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 
 cd test/dummy
-bundle install --path vendor
-bundle exec rake assets:precompile
+/usr/local/bin/bundle install --path vendor
+/usr/local/bin/bundle exec rake assets:precompile
