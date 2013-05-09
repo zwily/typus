@@ -1,7 +1,5 @@
 #!/usr/bin/env bash
 
-echo "Current Path: $PWD"
-/usr/local/bin/bundle install --path vendor
-
 cd test/dummy
-/usr/local/bin/bundle exec rake assets:precompile
+bundle install --path vendor --deployment --binstubs
+bundle exec rake assets:precompile
