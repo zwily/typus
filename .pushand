@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+unset GIT_DIR
+
 cd test/dummy
 bundle install --path vendor --deployment --binstubs
 bundle exec rake assets:precompile
