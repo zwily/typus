@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+cd test/dummy
+bundle install --path vendor --binstubs --deployment
+bundle exec rake assets:precompile
