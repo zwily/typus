@@ -1,9 +1,5 @@
 #!/usr/bin/env bash
 
-# For some reason we have to unset the GIT_DIR, will probably move
-# this hack to pushand.
-unset GIT_DIR
-
 cd test/dummy
 bundle install --path vendor --deployment --binstubs
 bundle exec rake assets:precompile
