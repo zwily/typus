@@ -22,3 +22,6 @@ before_script:
 before_install:
   - git submodule update --init --recursive
   - gem update --system 1.8.24
+
+env:
+  - DB_USERNAME=postgres
