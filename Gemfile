@@ -28,6 +28,7 @@ platforms :ruby do
   gem 'mysql2', '~> 0.3.11'
   gem 'pg', '~> 0.14.1'
   gem 'sqlite3', '~> 1.3.7'
+  gem 'bson_ext'
 end
 
 # Typus can manage lists, trees, trashes, so we want to enable this stuff
