@@ -15,7 +15,7 @@ GIT
 PATH
   remote: .
   specs:
-    typus (3.2.0.beta)
+    typus (3.2.0)
       bcrypt-ruby (~> 3.0.1)
       jquery-rails (~> 2.2.1)
       rails (~> 3.2.13)
