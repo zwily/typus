@@ -39,6 +39,7 @@ Add **Typus** to your `Gemfile`:
 
     # Bundle edge Typus instead:
     # gem 'typus', :git => 'git://github.com/fesplugas/typus.git'
+    # gem 'typus', :git => 'git://github.com/fesplugas/typus.git', :branch => '3-2-stable'
 
 Update your bundle, run the generator and start the application server:
 
@@ -54,7 +55,7 @@ Testing
 
 [![Build Status](https://travis-ci.org/fesplugas/typus.png?branch=master)](https://travis-ci.org/fesplugas/typus)
 
-To test, clone the repo and run the following commands:
+To test, clone the repo and run:
 
     $ git clone --recursive git://github.com/fesplugas/typus.git
     $ bundle install --path vendor/bundle
