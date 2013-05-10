@@ -48,13 +48,9 @@ Title,Published
 #{entry_unpublished.title},false
      RAW
 
-     get :index, :format => "csv", :published => "true"
+     get :index, :format => "csv", :published => "false"
      assert_response :success
-     assert_equal expected_published, response.body
+     assert_equal expected_unpublished, response.body
   end
-
-  # test "export XML" do
-  #   pending
-  # end
 
 end

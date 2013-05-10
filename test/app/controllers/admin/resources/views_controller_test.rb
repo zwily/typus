@@ -26,7 +26,7 @@ class Admin::ViewsControllerTest < ActionController::TestCase
   test "get new initializes item in the current_scope" do
     get :new
     assert_response :success
-    assert assigns(:item).site.eql?(@site)
+    assert_equal @site, assigns(:item).site
   end
 
 end

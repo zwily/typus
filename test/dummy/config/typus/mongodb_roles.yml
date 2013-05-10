@@ -1,2 +1,3 @@
-admin:
-  Hit: all
+# FIXME: This model is disabled because mongoid is still not compatible with Rails 4
+# admin:
+#   Hit: all

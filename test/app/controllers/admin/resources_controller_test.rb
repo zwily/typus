@@ -48,11 +48,11 @@ class Admin::EntriesControllerTest < ActionController::TestCase
     end
   end
 
-  test "get new reads params[:resource]" do
-    get :new, { :resource => { :title => "Chunky Bacon" } }
+  test 'get new reads params[:resource]' do
+    get :new, { :resource => { :title => 'Chunky Bacon' } }
     assert_response :success
     assert_template 'new'
-      assert_equal "Chunky Bacon", assigns(:item).title
+    assert_equal 'Chunky Bacon', assigns(:item).title
   end
 
   test "post create and redirect to index" do

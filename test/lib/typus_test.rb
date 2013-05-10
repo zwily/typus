@@ -61,33 +61,10 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   test "models are sorted" do
-    expected = ["AdminUser",
-                "Animal",
-                "Article::Entry",
-                "Asset",
-                "Bird",
-                "Case",
-                "Category",
-                "Comment",
-                "DeviseUser",
-                "Dog",
-                "Entry",
-                "EntryBulk",
-                "EntryDefault",
-                "EntryTrash",
-                "Hit",
-                "ImageHolder",
-                "Invoice",
-                "Order",
-                "Page",
-                "Post",
-                "Project",
-                "ProjectCollaborator",
-                "ReadOnlyEntry",
-                "Task",
-                "TypusUser",
-                "User",
-                "View"]
+    expected = %w(AdminUser Animal Article::Entry Asset Bird Case Category Comment
+                DeviseUser Dog Entry EntryBulk EntryDefault EntryTrash
+                ImageHolder Invoice Order Page Post Project ProjectCollaborator
+                ReadOnlyEntry Task TypusUser User View)
     assert_equal expected, Typus.models
   end
 

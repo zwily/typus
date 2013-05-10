@@ -10,7 +10,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
     klass = @resource.reflect_on_association(attribute.to_sym).class_name.constantize
 
     resource_ids = "#{attribute.singularize}_ids"
-    html_options = { :disabled => attribute_disabled?(resource_ids.to_sym) }
+    html_options = {}
     model = @resource.name.underscore.gsub("/", "_")
     options = { :attribute => "#{model}_#{attribute}" }
 

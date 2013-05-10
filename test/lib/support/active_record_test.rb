@@ -4,43 +4,47 @@ class ActiveRecordTest < ActiveSupport::TestCase
 
   test "mapping with an array" do
     expected = %w(pending published unpublished)
-    Post.stubs(:statuses).returns(expected)
 
-    post = FactoryGirl.build(:post)
-    assert_equal "published", post.mapping(:status)
+    Post.stub :statuses, expected do
+      post = FactoryGirl.build(:post)
+      assert_equal "published", post.mapping(:status)
 
-    post = FactoryGirl.build(:post, :status => "unpublished")
-    assert_equal "unpublished", post.mapping('status')
+      post = FactoryGirl.build(:post, :status => "unpublished")
+      assert_equal "unpublished", post.mapping('status')
 
-    post = FactoryGirl.build(:post, :status => "unexisting")
-    assert_equal "unexisting", post.mapping(:status)
+      post = FactoryGirl.build(:post, :status => "unexisting")
+      assert_equal "unexisting", post.mapping(:status)
+    end
   end
 
   test "mapping with a two dimension array" do
     expected = [["Publicado", "published"], ["Pendiente", "pending"], ["No publicado", "unpublished"]]
-    Post.stubs(:statuses).returns(expected)
 
-    post = FactoryGirl.build(:post)
-    assert_equal "Publicado", post.mapping(:status)
+    Post.stub :statuses, expected do
+      post = FactoryGirl.build(:post)
+      assert_equal "Publicado", post.mapping(:status)
 
-    post = FactoryGirl.build(:post, :status => "unpublished")
-    assert_equal "No publicado", post.mapping(:status)
+      post = FactoryGirl.build(:post, :status => "unpublished")
+      assert_equal "No publicado", post.mapping(:status)
+    end
   end
 
   test "mapping with a hash" do
     expected = { "Pending - Hash" => "pending", "Published - Hash" => "published", "Not Published - Hash" => "unpublished" }
-    Post.stubs(:statuses).returns(expected)
 
-    post = FactoryGirl.build(:post)
-    assert_equal "Published - Hash", post.mapping(:status)
-    post = FactoryGirl.build(:post, :status => "unpublished")
-    assert_equal "Not Published - Hash", post.mapping(:status)
+    Post.stub :statuses, expected do
+      post = FactoryGirl.build(:post)
+      assert_equal "Published - Hash", post.mapping(:status)
+      post = FactoryGirl.build(:post, :status => "unpublished")
+      assert_equal "Not Published - Hash", post.mapping(:status)
+    end
   end
 
   test "mapping with a hash when value does not exist on the mapping definition" do
-    Post.stubs(:statuses).returns(Hash.new)
-    page = FactoryGirl.build(:post, :status => "unexisting")
-    assert_equal "unexisting", page.mapping(:status)
+    Post.stub :statuses, Hash.new do
+      page = FactoryGirl.build(:post, :status => "unexisting")
+      assert_equal "unexisting", page.mapping(:status)
+    end
   end
 
   test "to_label returns email for TypusUser" do

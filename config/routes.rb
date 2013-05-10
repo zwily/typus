@@ -4,9 +4,9 @@ Rails.application.routes.draw do
 
     dashboard = Typus.subdomain ? "/dashboard" : "/admin/dashboard"
 
-    match "/" => redirect(dashboard)
-    match "dashboard" => "dashboard#index", :as => "dashboard_index"
-    match "dashboard/:application" => "dashboard#show", :as => "dashboard"
+    get "/" => redirect(dashboard)
+    get "dashboard" => "dashboard#index", :as => "dashboard_index"
+    get "dashboard/:application" => "dashboard#show", :as => "dashboard"
 
     if Typus.authentication == :session
       resource :session, :only => [:new, :create], :controller => :session do
@@ -22,11 +22,15 @@ Rails.application.routes.draw do
     end
 
     Typus.models.map(&:to_resource).each do |_resource|
-      match "#{_resource}(/:action(/:id))(.:format)", :controller => _resource
+      get "#{_resource}(/:action(/:id))(.:format)", :controller => _resource
+      post "#{_resource}(/:action(/:id))(.:format)", :controller => _resource
+      patch "#{_resource}(/:action(/:id))(.:format)", :controller => _resource
+      delete "#{_resource}(/:action(/:id))(.:format)", :controller => _resource
     end
 
     Typus.resources.map(&:underscore).each do |_resource|
-      match "#{_resource}(/:action(/:id))(.:format)", :controller => _resource
+      get "#{_resource}(/:action(/:id))(.:format)", :controller => _resource
+      post "#{_resource}(/:action(/:id))(.:format)", :controller => _resource
     end
 
   end

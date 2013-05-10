@@ -19,25 +19,23 @@ class DeviseUserTest < ActiveSupport::TestCase
   test "can?" do
     user = FactoryGirl.build(:devise_user)
     assert user.can?('delete', TypusUser)
-    assert !user.cannot?('delete', TypusUser)
+    refute user.cannot?('delete', TypusUser)
     assert user.can?('delete', 'TypusUser')
-    assert !user.cannot?('delete', 'TypusUser')
+    refute user.cannot?('delete', 'TypusUser')
   end
 
   test "is_root?" do
     user = FactoryGirl.build(:devise_user)
     assert user.is_root?
-    assert !user.is_not_root?
+    refute user.is_not_root?
   end
 
   test "role" do
-    user = FactoryGirl.build(:devise_user)
-    assert_equal "admin", user.role
+    assert_equal 'admin', FactoryGirl.build(:devise_user).role
   end
 
   test "locale" do
-    user = FactoryGirl.build(:devise_user)
-    assert_equal :en, user.locale
+    assert_equal :en, FactoryGirl.build(:devise_user).locale
   end
 
 end

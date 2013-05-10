@@ -27,10 +27,6 @@ class TypusUserTest < ActiveSupport::TestCase
     assert FactoryGirl.build(:typus_user, :password => "0"*41).invalid?
   end
 
-  test "status is protected from mass_assignment" do
-    assert TypusUser.attr_protected[:default].include?(:status)
-  end
-
   test "fields" do
     expected = %w(id first_name last_name email role status salt crypted_password token preferences created_at updated_at).sort
     output = TypusUser.columns.map(&:name).sort
@@ -38,7 +34,7 @@ class TypusUserTest < ActiveSupport::TestCase
   end
 
   test "generate" do
-    assert !TypusUser.generate
+    refute TypusUser.generate
 
     options = { :email => FactoryGirl.build(:typus_user).email }
     typus_user = TypusUser.generate(options)
@@ -66,7 +62,7 @@ class TypusUserTest < ActiveSupport::TestCase
   test "should verify authenticated? returns true or false" do
     typus_user = FactoryGirl.create(:typus_user)
     assert typus_user.authenticated?('12345678')
-    assert !typus_user.authenticated?('87654321')
+    refute typus_user.authenticated?('87654321')
   end
 
   test "should verify preferences are nil by default" do
@@ -141,7 +137,7 @@ class TypusUserTest < ActiveSupport::TestCase
   test "user does not own a resource" do
     typus_user = FactoryGirl.create(:typus_user)
     resource = FactoryGirl.create(:post, :typus_user => FactoryGirl.create(:typus_user))
-    assert !typus_user.owns?(resource)
+    refute typus_user.owns?(resource)
   end
 
   test "token changes everytime we save the user" do
@@ -149,7 +145,7 @@ class TypusUserTest < ActiveSupport::TestCase
     first_token = admin_user.token
     admin_user.save
     second_token = admin_user.token
-    assert !first_token.eql?(second_token)
+    refute first_token.eql?(second_token)
   end
 
 end
