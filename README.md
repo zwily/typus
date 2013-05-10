@@ -25,18 +25,26 @@ You can try a demo [here][typus_demo].
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
 - Support for [Kamaniri][kaminari] and [WillPaginate][will_paginate].
-- Works with `Rails 4.0.X`.
+- Supports multiple Rails versions.
 
 
 ## Installing
 
-Add **Typus** to your `Gemfile`:
+Add **Typus** to your `Gemfile`.
 
-    gem 'typus'
+If you are using Rails 4.0, you can use `master` or `4-0-stable` branch:
 
-    # Bundle edge Typus instead:
-    # gem 'typus', :git => 'git://github.com/fesplugas/typus.git'
-    # gem 'typus', :git => 'git://github.com/fesplugas/typus.git', :branch => '3-2-stable'
+    gem "typus", :git => "git://github.com/fesplugas/typus.git"
+    gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "4-0-stable"
+
+If you are using Rails 3.2:
+
+    gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "3-2-stable"
+
+If you are using Rails 3.1:
+
+    gem "typus", "~> 3.1.10"
+    gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "3-1-stable"
 
 Update your bundle, run the generator and start the application server:
 
