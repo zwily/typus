@@ -54,11 +54,6 @@ Testing
 
 [![Build Status](https://travis-ci.org/fesplugas/typus.png?branch=master)](https://travis-ci.org/fesplugas/typus)
 
-Create a PostgreSQL database:
-
-    $ psql -c 'CREATE USER postgres SUPERUSER' -d postgres
-    $ psql -c 'CREATE DATABASE typus_test;' -U postgres
-
 To test, clone the repo and run the following commands:
 
     $ git clone --recursive git://github.com/fesplugas/typus.git

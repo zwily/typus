@@ -25,4 +25,5 @@ before_install:
   - gem update --system 1.8.24
 
 env:
+  - DB=postgresql
   - DB_USERNAME=postgres
