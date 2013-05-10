@@ -7,7 +7,14 @@
 
   <%= render 'index' %>
 
-  <h1><%= page_title %></h1>
+  <div class="row">
+    <div class="span6">
+      <h1><%= page_title %></h1>
+    </div>
+    <div class="span3">
+      <%= admin_search %>
+    </div>
+  </div>
 
   <%= admin_display_flash_message %>
 
@@ -57,10 +64,7 @@
     </div>
   <% end %>
 
-  <% if (build_filters || admin_search) %>
-    <%= build_filters %>
-    <%= admin_search %>
-  <% end %>
+  <%= build_filters %>
 
   <% if @items.any? -%>
     <% if controller.respond_to?(:bulk) %>
