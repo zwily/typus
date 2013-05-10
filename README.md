@@ -1,5 +1,4 @@
-Typus: Admin Panel for Ruby on Rails applications
-=================================================
+# Typus: Admin Panel for Ruby on Rails applications
 
 **Typus** is a control panel for [Ruby on Rails][rails] applications to
 allow trusted users edit structured content.
@@ -18,8 +17,7 @@ concentrate on your application instead of the bits to manage the system.
 You can try a demo [here][typus_demo].
 
 
-Key Features
-------------
+## Key Features
 
 - Built-in Authentication and Access Control Lists.
 - CRUD and custom actions for your models on a clean interface.
@@ -30,8 +28,7 @@ Key Features
 - Works with `Rails 3.2.X`.
 
 
-Installing
-----------
+## Installing
 
 Add **Typus** to your `Gemfile`:
 
@@ -50,8 +47,7 @@ Update your bundle, run the generator and start the application server:
 and go to <http://0.0.0.0:3000/admin>.
 
 
-Testing
--------
+## Testing
 
 [![Build Status](https://travis-ci.org/fesplugas/typus.png?branch=master)](https://travis-ci.org/fesplugas/typus)
 
@@ -62,8 +58,7 @@ To test, clone the repo and run:
     $ bundle exec rake
 
 
-Submitting an Issue
--------------------
+## Submitting an Issue
 
 We use the [GitHub issue tracker][issues] to track bugs and features.
 Before submitting a bug report or feature request, check to make sure it
@@ -75,16 +70,14 @@ version, and operating system. Ideally, a bug report should include a
 pull request with failing specs.
 
 
-Links
------
+## Links
 
 - [Documentation](http://docs.typuscmf.com/)
 - [RubyGems][typus_gem]
 - [Contributors List](http://github.com/fesplugas/typus/contributors)
 
 
-License
--------
+## License
 
 **Typus** is released under the MIT license.
 
