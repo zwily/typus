@@ -6,7 +6,7 @@
     <% actions.each do |action| %>
       <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
       <li class="<%= klass %>">
-        <%= link_to action[:url] do %>
+        <%= link_to "#{action[:url][:controller]}/#{action[:url][:action]}" do %>
           <i class="icon-<%= action[:icon] %>"></i>
           <%= action[:message] %>
         <% end %>
