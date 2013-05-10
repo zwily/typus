@@ -25,6 +25,7 @@ class TypusUserTest < ActiveSupport::TestCase
     assert FactoryGirl.build(:typus_user, :password => "0"*6).valid?
     assert FactoryGirl.build(:typus_user, :password => "0"*40).valid?
     assert FactoryGirl.build(:typus_user, :password => "0"*41).invalid?
+    assert FactoryGirl.build(:typus_user, :password => "").invalid?
   end
 
   test "fields" do
