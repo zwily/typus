@@ -16,7 +16,7 @@
       <ul class="nav nav-tabs">
         <% all_klass = params[:scope] ? "inactive" : "active" %>
         <li class="<%= all_klass %>">
-          <%= link_to params.dup.cleanup.merge(:action => 'index') do %>
+          <%= link_to url_for(params.dup.cleanup.merge(:action => 'index')) do %>
             <%= Typus::I18n.t("All") %>
             <% if @resource.typus_options_for(:counters) %>
               <%= "&nbsp;<span class='badge'>#{resource.count}</span>".html_safe %>
@@ -27,7 +27,7 @@
         <% @resource.typus_scopes.each do |scope| %>
           <% klass = params[:scope].eql?(scope) ? "active" : "inactive" %>
           <li class="<%= klass %>">
-            <%= link_to :scope => scope do %>
+            <%= link_to url_for(:scope => scope) do %>
               <%= Typus::I18n.t(scope.humanize) %>
               <% if @resource.typus_options_for(:counters)  %>
                 <%= "&nbsp; <span class='badge'>#{@resource.send(scope).count}</span>".html_safe %>

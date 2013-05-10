@@ -17,13 +17,17 @@
     </div>
 
     <script>
+
+      <%= object_id = "new_#{related.model_name.to_s.downcase}" %>
+
       $('#modal-form-submit').click(function(e){
         e.preventDefault();
-        $('#new_<%= related.model_name.downcase %>').submit(function() {
+
+        $('#<%= object_id %>').submit(function() {
 
           // Get the action url:
           var action;
-          action = $('#new_<%= related.model_name.downcase %>').attr('action');
+          action = $('#<%= object_id %>').attr('action');
 
           $.post(action, $(this).serialize(), function(data){})
           .success(function(data, text, xhr) {
@@ -41,7 +45,7 @@
           return false;
         });
 
-        $('#new_<%= related.model_name.downcase %>').submit();
+        $('#<%= related.model_name.to_s.downcase %>').submit();
 
         return false;
       });

@@ -1,17 +1,11 @@
 <fieldset>
-  <div class="clearfix" id="typus_user_email">
-    <%= form.label :email, Typus.user_class.human_attribute_name(:email) %>
-    <%= form.text_field :email, :size => 20, :style => "width: 410px;", :autofocus => "autofocus" %>
-  </div>
+    <% label = Typus.user_class.human_attribute_name(:email) %>
+    <%= form.text_field :email, :placeholder => label, :class => 'span4', :autofocus => 'autofocus' %>
 
   <% if controller.controller_name == 'session' %>
-    <div class="clearfix" id="typus_user_password">
-      <%= form.label :password, Typus.user_class.human_attribute_name(:password) %>
-      <%= form.password_field :password, :size => 20, :style => "width: 410px;" %>
-    </div>
+      <% label = Typus.user_class.human_attribute_name(:password) %>
+      <%= form.password_field :password, :placeholder => label, :class => 'span4' %>
   <% end %>
 
-  <div class="actions">
-    <%= form.submit Typus::I18n.t(submit_text), :class => "btn btn-primary", 'data-disable-with' => Typus::I18n.t("Sending data ...") %>
-  </div>
+  <%= form.submit Typus::I18n.t(submit_text), :class => 'btn btn-primary' %>
 </fieldset>

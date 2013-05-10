@@ -12,7 +12,7 @@
     <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
-          <a class="brand" href="#"><%= admin_header %></a>
+          <%= link_to admin_title, Typus.admin_title_link || '/', :title => Typus::I18n.t("View site"), :class => 'brand' %>
           <%= admin_apps %>
           <%= admin_login_info %>
         </div>
