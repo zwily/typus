@@ -32,16 +32,16 @@ You can try a demo [here][typus_demo].
 
 Add **Typus** to your `Gemfile`.
 
-If you are using Rails 4.0, you can use `master` or `4-0-stable` branch:
+If you are using **Rails 4.0**, you can use `master` or `4-0-stable` branch:
 
     gem "typus", :git => "git://github.com/fesplugas/typus.git"
     gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "4-0-stable"
 
-If you are using Rails 3.2:
+If you are using **Rails 3.2**:
 
     gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "3-2-stable"
 
-If you are using Rails 3.1:
+If you are using **Rails 3.1**:
 
     gem "typus", "~> 3.1.10"
     gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "3-1-stable"
