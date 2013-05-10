@@ -20,7 +20,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
 
   # This is a kind of hack to verify we are properly setting a value.
   test 'from is set from test.rb' do
-    assert_equal 'john@example.com', Admin::Mailer.default[:from]
+    assert_equal 'typus@example.com', Admin::Mailer.default[:from]
   end
 
 end

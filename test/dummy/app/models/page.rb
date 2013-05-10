@@ -13,13 +13,13 @@ class Page < ActiveRecord::Base
   # Mixins
   #
 
-  acts_as_tree
+  # acts_as_tree
 
   ##
   # Scopes
   #
 
-  default_scope where(:status => true)
+  default_scope { where(:status => true) }
 
   ##
   # Instance Methods

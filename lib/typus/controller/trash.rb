@@ -1,10 +1,15 @@
 # Module designed to work with `rails-trash`.
+
+require 'active_support/concern'
+
 module Typus
   module Controller
     module Trash
 
-      def self.included(base)
-        base.before_filter :set_predefined_filter_for_trash, :only => [:index, :trash]
+      extend ActiveSupport::Concern
+
+      included do
+        before_filter :set_predefined_filter_for_trash, :only => [:index, :trash]
       end
 
       def set_predefined_filter_for_trash

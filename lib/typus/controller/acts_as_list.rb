@@ -1,11 +1,16 @@
 # Module designed to work with `acts_as_list`.
+
+require 'active_support/concern'
+
 module Typus
   module Controller
     module ActsAsList
 
-      def self.included(base)
-        base.before_filter :get_object, :only => [:position]
-        base.before_filter :check_resource_ownership, :only => [:position]
+      extend ActiveSupport::Concern
+
+      included do
+        before_filter :get_object, :only => [:position]
+        before_filter :check_resource_ownership, :only => [:position]
       end
 
       def position

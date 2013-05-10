@@ -8,8 +8,8 @@ class DeviseUser < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :as => :admin
+  # attr_accessible :email, :password, :password_confirmation, :remember_me
+  # attr_accessible :email, :password, :password_confirmation, :remember_me, :as => :admin
 
   include Typus::Orm::ActiveRecord::User::InstanceMethods
   include Typus::Orm::ActiveRecord::User::InstanceMethodsMore

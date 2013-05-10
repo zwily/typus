@@ -17,7 +17,7 @@ module Typus
 
             attr_accessor :password
 
-            attr_protected :role, :status
+            # attr_protected :role, :status
 
             validates :email,
                       :presence => true,

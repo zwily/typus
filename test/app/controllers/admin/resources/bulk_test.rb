@@ -12,6 +12,8 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
+    @request.env['HTTP_REFERER'] = "/admin/entry_bulks"
+    FactoryGirl.create_list(:entry_bulk, 10)
   end
 
   test "get index shows available bulk_actions" do
@@ -20,9 +22,6 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
   end
 
   test "get bulk_destroy removes all items" do
-    @request.env['HTTP_REFERER'] = "/admin/entry_bulks"
-
-    FactoryGirl.create_list(:entry_bulk, 10)
     items_to_destroy = EntryBulk.limit(5).map(&:id)
     items_to_keep = EntryBulk.limit(5).offset(5).map(&:id)
 
@@ -34,9 +33,6 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
   end
 
   test "get bulk with empty action and selected items redirects to back with a feedback message" do
-    @request.env['HTTP_REFERER'] = "/admin/entry_bulks"
-
-    FactoryGirl.create_list(:entry_bulk, 5)
     items = EntryBulk.limit(5).map(&:id)
 
     get :bulk, :batch_action => "", :selected_item_ids => items

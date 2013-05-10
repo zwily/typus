@@ -16,11 +16,7 @@ class AdminUserTest < ActiveSupport::TestCase
     first_token = admin_user.token
     admin_user.save
     second_token = admin_user.token
-    assert !first_token.eql?(second_token)
-  end
-
-  test "mass_assignment" do
-    assert TypusUser.attr_protected[:default].include?(:status)
+    refute first_token.eql?(second_token)
   end
 
   test "mapping locales" do
@@ -41,8 +37,7 @@ class AdminUserTest < ActiveSupport::TestCase
     assert admin_user.invalid?
     assert_equal "is too short (minimum is 6 characters)", admin_user.errors[:password].first
 
-    admin_user = FactoryGirl.build(:typus_user, :password => "000000")
-    assert admin_user.valid?
+    assert FactoryGirl.build(:typus_user, :password => "000000").valid?
   end
 
 end

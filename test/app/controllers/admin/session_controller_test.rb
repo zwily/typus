@@ -15,16 +15,17 @@ class Admin::SessionControllerTest < ActionController::TestCase
     get :new
     assert_equal "IP not in our whitelist.", @response.body
 
-    request.stubs(:local?).returns(true)
-    Typus.ip_whitelist = %w(10.0.0.5)
-    get :new
-    assert_response :redirect
-    assert_redirected_to new_admin_account_path
+    request.stub :local?, true do
+      Typus.ip_whitelist = %w(10.0.0.5)
+      get :new
+      assert_response :redirect
+      assert_redirected_to new_admin_account_path
 
-    Typus.ip_whitelist = []
-    get :new
-    assert_response :redirect
-    assert_redirected_to new_admin_account_path
+      Typus.ip_whitelist = []
+      get :new
+      assert_response :redirect
+      assert_redirected_to new_admin_account_path
+    end
   end
 
   test "get new redirects to new_admin_account_path when no admin users" do
@@ -62,9 +63,13 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
   test "new includes recover_password_link when mailer_sender is set" do
     FactoryGirl.create(:typus_user)
-    Typus.expects(:mailer_sender).returns("john@example.com")
+
+    Typus.mailer_sender = 'john@example.com'
+
     get :new
     assert response.body.include?("Recover password")
+
+    Typus.mailer_sender = nil
   end
 
   test 'create should not create session for invalid users' do
@@ -97,7 +102,6 @@ class Admin::SessionControllerTest < ActionController::TestCase
   test 'destroy' do
     admin_sign_in
     assert request.session[:typus_user_id]
-
     delete :destroy
 
     assert_nil request.session[:typus_user_id]

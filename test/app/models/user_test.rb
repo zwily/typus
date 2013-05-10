@@ -18,29 +18,22 @@ class UserTest < ActiveSupport::TestCase
   test "can?" do
     user = FactoryGirl.build(:user, :role => 'admin')
     assert user.can?('delete', TypusUser)
-    assert !user.cannot?('delete', TypusUser)
+    refute user.cannot?('delete', TypusUser)
     assert user.can?('delete', 'TypusUser')
-    assert !user.cannot?('delete', 'TypusUser')
+    refute user.cannot?('delete', 'TypusUser')
   end
 
   test "is_root?" do
     user = FactoryGirl.build(:user, :role => 'admin')
     assert user.is_root?
-    assert !user.is_not_root?
+    refute user.is_not_root?
   end
 
   test "active?" do
-    user = FactoryGirl.build(:user, :role => 'admin', :status => true)
-    assert user.active?
-
-    user = FactoryGirl.build(:user, :role => 'admin', :status => false)
-    assert !user.active?
-
-    user = FactoryGirl.build(:user, :role => 'unexisting', :status => true)
-    assert !user.active?
-
-    user = FactoryGirl.build(:user, :role => 'unexisting', :status => false)
-    assert !user.active?
+    assert FactoryGirl.build(:user, :role => 'admin', :status => true).active?
+    refute FactoryGirl.build(:user, :role => 'admin', :status => false).active?
+    refute FactoryGirl.build(:user, :role => 'unexisting', :status => true).active?
+    refute FactoryGirl.build(:user, :role => 'unexisting', :status => false).active?
   end
 
 end

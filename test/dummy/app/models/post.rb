@@ -21,8 +21,8 @@ class Post < ActiveRecord::Base
   # Scopes
   #
 
-  scope :draft, where(:status => "draft")
-  scope :published, where(:status => "published")
+  scope :draft, -> { where(:status => "draft") }
+  scope :published, -> { where(:status => "published") }
 
   ##
   # Class Methods

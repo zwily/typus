@@ -1,11 +1,15 @@
+require 'active_support/concern'
+
 module Typus
   module Controller
     module Bulk
 
-      def self.included(base)
-        base.helper_method :bulk_actions
-        base.before_filter :set_bulk_action, :only => [:index]
-        base.before_filter :set_bulk_action_for_trash, :only => [:trash]
+      extend ActiveSupport::Concern
+
+      included do
+        helper_method :bulk_actions
+        before_filter :set_bulk_action, :only => [:index]
+        before_filter :set_bulk_action_for_trash, :only => [:trash]
       end
 
       def set_bulk_action

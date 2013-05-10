@@ -35,7 +35,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def new
-    @item = @resource.new(params[:resource], :as => current_role)
+    @item = @resource.new(item_params_for_new)
 
     respond_to do |format|
       format.html
@@ -44,13 +44,8 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def create
-    # Note that we still can still assign the item to another model. To change
-    # this behavior we need only to change how we merge the params.
-    item_params = params[:resource] || {}
-    item_params.merge!(params[@object_name])
-
     @item = @resource.new
-    @item.assign_attributes(item_params, :as => current_role)
+    @item.assign_attributes(item_params_for_create)
 
     set_attributes_on_create
 
@@ -90,10 +85,8 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def update
-    attributes = params[:_nullify] ? { params[:_nullify] => nil } : params[@object_name]
-
     respond_to do |format|
-      if @item.update_attributes(attributes, :as => current_role)
+      if @item.update_attributes(item_params_for_update)
         set_attributes_on_update
         format.html { redirect_on_success }
         format.json { render :json => @item }
@@ -167,6 +160,10 @@ class Admin::ResourcesController < Admin::BaseController
   end
   helper_method :fields
 
+  def whitelist
+    fields.keys
+  end
+
   def set_scope
     return unless params[:scope]
 
@@ -222,13 +219,55 @@ class Admin::ResourcesController < Admin::BaseController
 
   def set_default_action
     default_action = @resource.typus_options_for(:default_action_on_item)
-    action = admin_user.can?('edit', @resource.model_name) ? default_action : "show"
+    action = admin_user.can?('edit', @resource.model_name.to_s) ? default_action : "show"
     prepend_resource_action(action.titleize, {:action => action})
   end
 
   def custom_actions_for(action)
     return [] if headless_mode?
     @resource.typus_actions_on(action).reject { |a| admin_user.cannot?(a, @resource.model_name) }
+  end
+
+  def item_params_for_new
+    if params[:resource]
+      extras = []
+
+      params[@object_name] = params[:resource]
+
+      params[:resource].keys.each do |attribute|
+        if attribute.end_with?('_id')
+          extras << attribute if whitelist.include?(attribute.chomp('_id'))
+        end
+      end
+
+      params.delete(:resource)
+      item_params(extras)
+    end
+  end
+
+  # Note that we still can assign the item to another model. To change this
+  # behavior we need only to change how we merge the params.
+  def item_params_for_create
+    item_params(whitelist_extras)
+  end
+
+  def item_params_for_update
+    if (attr = params[:_nullify])
+      params[@object_name] = { attr => nil }
+    end
+
+    item_params(whitelist_extras)
+  end
+
+  def item_params(extra_params = [])
+    permitted_attrs = whitelist + extra_params
+    params.require(@object_name).permit(permitted_attrs)
+  end
+
+  def whitelist_extras
+    params[@object_name].keys.delete_if do |p|
+      !p.end_with?('_id') && !whitelist.include?(p.chomp('_id'))
+    end
   end
 
 end
