@@ -67,8 +67,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test 'accessible_attributes_for(role)' do
-    assert_equal :admin, Entry.accessible_attributes_role_for(:admin)
-    assert_equal :default, Entry.accessible_attributes_role_for(:editor)
+    assert_equal :root, Entry.accessible_attributes_role_for(:root)
+    assert_equal :default, Entry.accessible_attributes_role_for(:admin)
   end
 
 end
