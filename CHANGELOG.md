@@ -2,6 +2,8 @@
 
 ## 3.2.0 (unrelased)
 
+ * [FIXED] Problems with attr_accessible.
+
  * [CHANGED] Application emails now use host_with_port to generate the
    url. This is usefull when running multi-domain applications.
 
