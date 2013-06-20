@@ -66,4 +66,9 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal "delayed/tasks", Delayed::Task.to_resource
   end
 
+  test 'accessible_attributes_for(role)' do
+    assert_equal :admin, Entry.accessible_attributes_role_for(:admin)
+    assert_equal :default, Entry.accessible_attributes_role_for(:editor)
+  end
+
 end
