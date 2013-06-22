@@ -1,7 +1,7 @@
 rvm:
   - 1.9.3
   - 2.0.0
-  - jruby-19mode
+  # - jruby-19mode
 
 notifications:
   recipients:
@@ -15,14 +15,15 @@ branches:
     - master
     - 3-1-stable
     - 3-2-stable
-    - features/rails-4
+    - 4-0-stable
 
 before_script:
   - psql -c 'create database typus_test;' -U postgres
 
 before_install:
   - git submodule update --init --recursive
-  - gem update --system 1.8.24
+  # - gem update --system 1.8.24
 
 env:
+  - DB=postgresql
   - DB_USERNAME=postgres
