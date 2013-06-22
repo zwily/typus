@@ -1,6 +1,6 @@
 rvm:
-  - 1.9.3
   - 2.0.0
+  - 1.9.3
   # - jruby-19mode
 
 notifications:
@@ -13,9 +13,9 @@ services:
 branches:
   only:
     - master
-    - 3-1-stable
-    - 3-2-stable
     - 4-0-stable
+    - 3-2-stable
+    - 3-1-stable
 
 before_script:
   - psql -c 'create database typus_test;' -U postgres
