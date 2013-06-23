@@ -22,14 +22,4 @@ module Admin::ResourcesHelper
     end
   end
 
-  # TODO: This method should be moved to `lib/typus/controller/actions.rb`
-  def resource_actions
-    @resource_actions ||= []
-  end
-
-  # TODO: This method should be moved to `lib/typus/controller/actions.rb`
-  def resources_actions
-    @resources_actions ||= []
-  end
-
 end

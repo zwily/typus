@@ -1,6 +1,23 @@
+require 'active_support/concern'
+
 module Typus
   module Controller
     module Actions
+
+      extend ActiveSupport::Concern
+
+      included do
+        helper_method :resource_actions
+        helper_method :resources_actions
+      end
+
+      def resource_actions
+        @resource_actions ||= []
+      end
+
+      def resources_actions
+        @resources_actions ||= []
+      end
 
       protected
 
