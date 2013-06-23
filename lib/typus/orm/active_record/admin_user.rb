@@ -5,7 +5,7 @@ require 'bcrypt'
 module Typus
   module Orm
     module ActiveRecord
-      module AdminUserV2
+      module AdminUser
 
         module ClassMethods
 

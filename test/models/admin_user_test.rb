@@ -4,7 +4,7 @@ require "test_helper"
 
   Here we test:
 
-  - Typus::Orm::ActiveRecord::AdminUserV2
+  - Typus::Orm::ActiveRecord::AdminUser
   - Typus::Orm::ActiveRecord::User::ClassMethods
 
 =end
