@@ -170,7 +170,7 @@ class Admin::ResourcesController < Admin::BaseController
     if @resource.typus_scopes.include?(params[:scope])
       @resource = @resource.send(params[:scope])
     else
-      not_allowed("Requested scope not defined on your whitelist.")
+      not_allowed("Not allowed! Requested scope not defined on your whitelist.")
     end
   end
 
