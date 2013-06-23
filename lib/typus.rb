@@ -10,7 +10,6 @@ require "typus/version"
 require "typus/orm/base/class_methods"
 require "typus/orm/base/search"
 require "typus/orm/active_record"
-require "typus/orm/mongoid"
 
 autoload :FakeUser, "support/fake_user"
 
@@ -183,7 +182,7 @@ module Typus
       detect_application_models.map do |model|
         class_name = model.sub(/\.rb$/,"").camelize
         klass = class_name.split("::").inject(Object) { |klass,part| klass.const_get(part) }
-        class_name if is_active_record?(klass) && !is_mongoid?(klass)
+        class_name if is_active_record?(klass)
       end.compact
     end
 
@@ -191,11 +190,6 @@ module Typus
       (defined?(ActiveRecord) && klass < ActiveRecord::Base && !klass.abstract_class?)
     end
     private :is_active_record?
-
-    def is_mongoid?(klass)
-      (defined?(Mongoid) && klass < Mongoid::Document)
-    end
-    private :is_mongoid?
 
     def user_class
       user_class_name.constantize
