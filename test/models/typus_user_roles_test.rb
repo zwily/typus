@@ -9,7 +9,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   test 'admin role' do
     typus_user = FactoryGirl.create(:typus_user)
 
-    expected = %w(AdminUser Article::Entry Asset Bird Case Category Comment
+    expected = %w(Article::Entry Asset Bird Case Category Comment
                   DeviseUser Dog Entry EntryBulk EntryDefault EntryTrash Git
                   ImageHolder Invoice Order Page Post Project ProjectCollaborator
                   ReadOnlyEntry Status Task TypusUser User View WatchDog)
