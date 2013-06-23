@@ -21,11 +21,8 @@ class ActiveRecord::Base
   #     => "Publicado"
   #++
   def mapping(attribute)
-    klass = self.class
-    values = klass.send(attribute.to_s.pluralize)
-
+    values = self.class.send(attribute.to_s.pluralize)
     array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
-
     value = array.to_a.rassoc(send(attribute))
     value ? value.first : send(attribute)
   end
