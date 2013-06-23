@@ -31,8 +31,8 @@ class ActiveRecord::Base
   end
 
   def to_label
-    if respond_to?(:name) && send(:name).present?
-      send(:name)
+    if respond_to?(:name) && name.present?
+      name
     else
       [self.class, id].join("#")
     end
