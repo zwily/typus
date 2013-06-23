@@ -5,19 +5,12 @@ source 'https://rubygems.org'
 # development dependencies will be added by default to the :development group.
 gemspec
 
-# Gems used only for assets and not required
-# in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 4.0.0.beta1'
   gem 'coffee-rails', '~> 4.0.0.beta1'
-
-  # See https://github.com/sstephenson/execjs#readme for more supported runtimes
-  # gem 'therubyracer', :platforms => :ruby
-
   gem 'uglifier', '~> 1.3.0'
 end
 
-# Database adapters
 platforms :jruby do
   gem 'activerecord-jdbcmysql-adapter'
   gem 'activerecord-jdbcpostgresql-adapter'
@@ -28,7 +21,6 @@ platforms :ruby do
   gem 'mysql2', '~> 0.3.11'
   gem 'pg', '~> 0.15.0'
   gem 'sqlite3', '~> 1.3.7'
-  gem 'bson_ext'
 end
 
 # Typus can manage lists, trees, trashes, so we want to enable this stuff
@@ -36,9 +28,7 @@ end
 gem 'acts_as_list', :git => 'git://github.com/typus/acts_as_list.git'
 gem 'acts_as_tree'
 gem 'rails-permalink', '~> 1.0.0'
-# gem 'rails-trash', '~> 2.0.0'
 gem 'rails-trash', :git => 'git://github.com/fesplugas/rails-trash.git'
-# gem 'rails-trash', :path => "~/Development/rails-trash"
 
 # We want to be able to use Factory Girl for seeding data.
 gem 'factory_girl_rails', '~> 4.2.1'
@@ -47,34 +37,18 @@ gem 'factory_girl_rails', '~> 4.2.1'
 gem 'jquery-rails'
 
 # Rich Text Editor
-# gem "ckeditor-rails", "~> 0.0.5"
 gem "ckeditor-rails", :git => "git://github.com/fesplugas/rails-ckeditor.git"
 
 # Alternative authentication
-# gem 'devise', '~> 2.0.5'
 gem 'devise', :git => 'git://github.com/plataformatec/devise.git', :branch => 'rails4'
 
-# Asset Management with Dragonfly
+# Asset Management
 gem 'dragonfly', '~> 0.9.14'
 gem 'rack-cache', :require => 'rack/cache'
-
-# Asset Management with Paperclip
 gem 'paperclip', '~> 3.4.1'
 
 # MongoDB
-# gem 'mongoid', '~> 2.4.6'
 gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
 
-group :test do
-  gem 'mocha', '~> 0.13.3', :require => false
-end
-
+# Pagination
 gem 'kaminari'
-# gem 'will_paginate'
-
-# Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 1.2.0'
-gem 'figaro'
