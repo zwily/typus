@@ -21,8 +21,8 @@ Typus.setup do |config|
   # config.file_preview = :medium
   # config.file_thumbnail = :thumb
 
-  # Authentication: +:none+, +:http_basic+
-  # Run `rails g typus:migration` if want an advanced authentication system.
+  # Define authentication: +:none+, +:http_basic+, +:session+
+  # Run `rails g typus:migration` if want +:session+
   # config.authentication = :none
 
   # Define username and password for +:http_basic+ authentication.
