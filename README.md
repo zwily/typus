@@ -3,7 +3,7 @@
 **Typus** is a control panel for [Ruby on Rails][rails] applications to
 allow trusted users edit structured content.
 
-It’s not a CMS with a full working system but it provides a part of the
+It's not a CMS with a full working system but it provides a part of the
 system: authentication, permissions and basic look and feel for your
 websites control panel. So using [Rails][rails] with **Typus** lets you
 concentrate on your application instead of the bits to manage the system.
