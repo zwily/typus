@@ -12,7 +12,7 @@ require "test_helper"
 class AdminUserTest < ActiveSupport::TestCase
 
   test "token changes everytime we save the user" do
-    admin_user = FactoryGirl.create(:admin_user)
+    admin_user = FactoryGirl.create(:typus_user)
     first_token = admin_user.token
     admin_user.save
     second_token = admin_user.token
@@ -20,7 +20,7 @@ class AdminUserTest < ActiveSupport::TestCase
   end
 
   test "mapping locales" do
-    admin_user = FactoryGirl.build(:admin_user, :locale => "en")
+    admin_user = FactoryGirl.build(:typus_user, :locale => "en")
     assert_equal "English", admin_user.mapping(:locale)
   end
 
@@ -33,7 +33,7 @@ class AdminUserTest < ActiveSupport::TestCase
   end
 
   test "validate :password" do
-    admin_user = FactoryGirl.build(:admin_user, :password => "00000")
+    admin_user = FactoryGirl.build(:typus_user, :password => "00000")
     assert admin_user.invalid?
     assert_equal "is too short (minimum is 6 characters)", admin_user.errors[:password].first
 
