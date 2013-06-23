@@ -54,7 +54,7 @@ module Typus
 <a href="http://core.typuscmf.com/">core.typuscmf.com</a>
   CODE
 
-  # Set authentication (none, basic, session or devise)
+  # Set authentication (none, http_basic, session)
   mattr_accessor :authentication
   @@authentication = :none
 
