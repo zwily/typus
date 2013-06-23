@@ -1,6 +1,6 @@
 require 'active_support/concern'
 require 'bcrypt'
-require 'typus/orm/active_record/user/instance_methods'
+require 'typus/orm/active_record/instance_methods'
 
 module Typus
   module Orm
@@ -8,7 +8,7 @@ module Typus
       module AdminUser
 
         extend ActiveSupport::Concern
-        include Typus::Orm::ActiveRecord::User::InstanceMethods
+        include Typus::Orm::ActiveRecord::InstanceMethods
 
         included do
           attr_reader   :password

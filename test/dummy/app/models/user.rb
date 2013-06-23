@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   # Modules
   #
 
-  include Typus::Orm::ActiveRecord::User::InstanceMethods
+  include Typus::Orm::ActiveRecord::InstanceMethods
 
   ##
   # Validations

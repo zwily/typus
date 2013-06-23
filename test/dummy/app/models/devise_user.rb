@@ -1,4 +1,4 @@
-require 'typus/orm/active_record/user/instance_methods'
+require 'typus/orm/active_record/instance_methods'
 
 class DeviseUser < ActiveRecord::Base
   # Include default devise modules. Others available are:
@@ -10,7 +10,7 @@ class DeviseUser < ActiveRecord::Base
   # attr_accessible :email, :password, :password_confirmation, :remember_me
   # attr_accessible :email, :password, :password_confirmation, :remember_me, :as => :admin
 
-  include Typus::Orm::ActiveRecord::User::InstanceMethods
+  include Typus::Orm::ActiveRecord::InstanceMethods
 
   # If DeviseUser#locale is not found, we will use the default one.
   def locale
