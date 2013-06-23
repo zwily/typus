@@ -4,7 +4,7 @@ class TypusUser < ActiveRecord::Base
   # Mixins
   #
 
-  has_admin
+  include Typus::Orm::ActiveRecord::AdminUser
 
   ##
   # Associations

@@ -1,3 +1,3 @@
 class AdminUser < ActiveRecord::Base
-  has_admin
+  include Typus::Orm::ActiveRecord::AdminUser
 end
