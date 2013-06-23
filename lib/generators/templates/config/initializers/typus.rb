@@ -22,14 +22,14 @@ Typus.setup do |config|
   # config.file_thumbnail = :thumb
 
   # Authentication: +:none+, +:http_basic+
-  # Run `rails g typus:migration` if you need an advanced authentication system.
+  # Run `rails g typus:migration` if want an advanced authentication system.
   # config.authentication = :none
 
   # Define username and password for +:http_basic+ authentication.
   # config.username = "admin"
   # config.password = "columbia"
 
-  # Define subdomain to use instead of additional path
+  # Define subdomain to use instead of additional path.
   # config.subdomain = "admin"
 
   # Pagination options: These options are passed to the pagination method
