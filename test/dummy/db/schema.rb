@@ -209,20 +209,20 @@ ActiveRecord::Schema.define(:version => 20110906010101) do
 
   add_index "tasks", ["project_id"], :name => "index_tasks_on_project_id"
 
-  # create_table "users", :force => true do |t|
-  #   t.string   "name",                                :null => false
-  #   t.string   "first_name",       :default => ""
-  #   t.string   "last_name",        :default => ""
-  #   t.string   "role"
-  #   t.string   "email",                               :null => false
-  #   t.boolean  "status",           :default => false
-  #   t.string   "token"
-  #   t.string   "salt"
-  #   t.string   "crypted_password"
-  #   t.string   "preferences"
-  #   t.datetime "created_at"
-  #   t.datetime "updated_at"
-  # end
+  create_table "users", :force => true do |t|
+    t.string   "name",                                :null => false
+    t.string   "first_name",       :default => ""
+    t.string   "last_name",        :default => ""
+    t.string   "role"
+    t.string   "email",                               :null => false
+    t.boolean  "status",           :default => false
+    t.string   "token"
+    t.string   "salt"
+    t.string   "crypted_password"
+    t.string   "preferences"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "views", :force => true do |t|
     t.string   "ip",         :default => "127.0.0.1"
