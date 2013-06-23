@@ -41,11 +41,6 @@ If you are using **Rails 3.2**:
 
     gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "3-2-stable"
 
-If you are using **Rails 3.1**:
-
-    gem "typus", "~> 3.1.10"
-    gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "3-1-stable"
-
 Update your bundle, run the generator and start the application server:
 
     $ bundle install
