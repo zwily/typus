@@ -1,5 +1,4 @@
 require 'typus/orm/active_record/user/instance_methods'
-require 'typus/orm/active_record/user/class_methods'
 require 'bcrypt'
 
 module Typus
@@ -10,8 +9,6 @@ module Typus
         module ClassMethods
 
           def has_admin
-
-            extend Typus::Orm::ActiveRecord::User::ClassMethods
 
             include Typus::Orm::ActiveRecord::User::InstanceMethods
             include InstanceMethods
@@ -34,6 +31,23 @@ module Typus
             def authenticate(email, password)
               user = find_by_email_and_status(email, true)
               user && user.authenticated?(password) ? user : nil
+            end
+
+            def generate(*args)
+              options = args.extract_options!
+              options[:password] ||= Typus.password
+              options[:role] ||= Typus.master_role
+              options[:status] = true
+              user = new(options)
+              user.save ? user : false
+            end
+
+            def roles
+              Typus::Configuration.roles.keys.sort
+            end
+
+            def locales
+              Typus::I18n.available_locales
             end
 
           end
