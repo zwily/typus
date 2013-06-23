@@ -1,6 +1,23 @@
+require 'active_support/concern'
+
 module Typus
   module Controller
     module Actions
+
+      extend ActiveSupport::Concern
+
+      included do
+        helper_method :resource_actions
+        helper_method :resources_actions
+      end
+
+      def resource_actions
+        @resource_actions ||= []
+      end
+
+      def resources_actions
+        @resources_actions ||= []
+      end
 
       protected
 
@@ -15,8 +32,9 @@ module Typus
       #       super
       #     end
       #
-      # Additionally you can set a condition to each action passing a Proc as 4th parameter. If the proc return true
-      # the item will be showed and if return false will be hidden.
+      # Additionally you can set a condition to each action passing a Proc as
+      # 4th parameter. If the proc return true the item will be showed and if
+      # return false will be hidden.
       #
       #     def index
       #       add_resource_action('Recover', {:action => 'untrash'}, {}, Proc.new {|item| item.is_trash? })

@@ -6,24 +6,6 @@ class ClassMethodsTest < ActiveSupport::TestCase
     assert TypusUser.model_fields.instance_of?(ActiveSupport::OrderedHash)
   end
 
-  test "model_fields for TypusUser" do
-    expected = [[:id, :integer],
-                [:first_name, :string],
-                [:last_name, :string],
-                [:role, :string],
-                [:email, :string],
-                [:status, :boolean],
-                [:token, :string],
-                [:salt, :string],
-                [:crypted_password, :string],
-                [:preferences, :string],
-                [:created_at, :datetime],
-                [:updated_at, :datetime]]
-
-    assert_equal expected.map(&:first), TypusUser.model_fields.keys
-    assert_equal expected.map(&:last), TypusUser.model_fields.values
-  end
-
   test "model_fields for Post" do
     expected = [[:id, :integer],
                 [:title, :string],

@@ -10,7 +10,6 @@ require "typus/version"
 require "typus/orm/base/class_methods"
 require "typus/orm/base/search"
 require "typus/orm/active_record"
-require "typus/orm/mongoid"
 
 autoload :FakeUser, "support/fake_user"
 
@@ -37,11 +36,12 @@ module Typus
 
   module Authentication
     autoload :Base, "typus/authentication/base"
-    autoload :Devise, "typus/authentication/devise"
     autoload :None, "typus/authentication/none"
     autoload :NoneWithRole, "typus/authentication/none_with_role"
     autoload :HttpBasic, "typus/authentication/http_basic"
     autoload :Session, "typus/authentication/session"
+
+    autoload :Devise, "typus/authentication/devise"
   end
 
   mattr_accessor :admin_title
@@ -55,7 +55,7 @@ module Typus
 <a href="http://core.typuscmf.com/">core.typuscmf.com</a>
   CODE
 
-  # Set authentication (none, basic, session or devise)
+  # Set authentication (none, http_basic, session)
   mattr_accessor :authentication
   @@authentication = :none
 
@@ -183,7 +183,7 @@ module Typus
       detect_application_models.map do |model|
         class_name = model.sub(/\.rb$/,"").camelize
         klass = class_name.split("::").inject(Object) { |klass,part| klass.const_get(part) }
-        class_name if is_active_record?(klass) && !is_mongoid?(klass)
+        class_name if is_active_record?(klass)
       end.compact
     end
 
@@ -191,11 +191,6 @@ module Typus
       (defined?(ActiveRecord) && klass < ActiveRecord::Base && !klass.abstract_class?)
     end
     private :is_active_record?
-
-    def is_mongoid?(klass)
-      (defined?(Mongoid) && klass < Mongoid::Document)
-    end
-    private :is_mongoid?
 
     def user_class
       user_class_name.constantize

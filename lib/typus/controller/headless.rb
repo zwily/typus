@@ -1,10 +1,14 @@
+require 'active_support/concern'
+
 module Typus
   module Controller
     module Headless
 
-      def self.included(base)
-        base.helper_method :headless_mode?
-        base.layout :headless_layout
+      extend ActiveSupport::Concern
+
+      included do
+        helper_method :headless_mode?
+        layout :headless_layout
       end
 
       def headless_layout

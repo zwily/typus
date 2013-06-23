@@ -11,14 +11,15 @@ module Admin::ResourcesHelper
     end
   end
 
-  # TODO: This method should be moved to `lib/typus/controller/actions.rb`
-  def resource_actions
-    @resource_actions ||= []
-  end
+  def build_sidebar
+    app_name = @resource.typus_application
+    resources = admin_user.application(app_name).map(&:constantize).delete_if { |k| k.typus_options_for(:hide_from_sidebar) }
 
-  # TODO: This method should be moved to `lib/typus/controller/actions.rb`
-  def resources_actions
-    @resources_actions ||= []
+    if resources.any?
+      render "helpers/admin/resources/sidebar", :resources => resources
+    else
+      render "admin/dashboard/sidebar"
+    end
   end
 
 end

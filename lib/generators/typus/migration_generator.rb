@@ -43,7 +43,7 @@ Examples:
         inject_into_class "app/models/#{model_filename}.rb", options[:user_class_name] do
           <<-MSG
 
-  enable_as_typus_user
+  has_admin
 
           MSG
         end

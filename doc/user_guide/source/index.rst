@@ -4,7 +4,7 @@ Typus User Guide
 **Typus** is a control panel for `Rails`_ applications to allow
 trusted users edit structured content.
 
-It’s not a CMS with a full working system but it provides a part of the system:
+It's not a CMS with a full working system but it provides a part of the system:
 authentication, permissions and basic look and feel for your websites control
 panel. So using `Rails`_ with **Typus** lets you concentrate on your
 application instead of the bits to manage the system.

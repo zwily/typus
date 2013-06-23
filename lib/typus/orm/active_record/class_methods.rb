@@ -19,10 +19,14 @@ module Typus
           end
         end
 
+        def typus_supported_attributes
+          [:virtual, :custom, :association, :selector, :dragonfly, :paperclip]
+        end
+
         def typus_fields_for(filter)
           ActiveSupport::OrderedHash.new.tap do |fields_with_type|
             get_typus_fields_for(filter).each do |field|
-              [:virtual, :custom, :association, :selector, :dragonfly, :paperclip].each do |attribute|
+              typus_supported_attributes.each do |attribute|
                 if (value = send("#{attribute}_attribute?", field))
                   fields_with_type[field.to_s] = value
                 end

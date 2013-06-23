@@ -1,34 +1,29 @@
-# -*- encoding: utf-8 -*-
+# coding: utf-8
+lib = File.expand_path('../lib', __FILE__)
+$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
+require 'typus/version'
 
-$:.push File.expand_path("../lib", __FILE__)
+files = `git ls-files`.split($/)
+test_files = `git ls-files -- test/*`.split($/)
+ignores = `git ls-files -- doc/* .travis.yml .gitignore`.split($/)
 
-# Maintain your gem's version:
-require "typus/version"
+Gem::Specification.new do |spec|
+  spec.name          = "typus"
+  spec.version       = Typus::VERSION::STRING
+  spec.authors       = ["Francesc Esplugas"]
+  spec.email         = ["support@typuscmf.com"]
+  spec.description   = "Ruby on Rails Admin Panel (Engine) to allow trusted users edit structured content."
+  spec.summary       = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator)"
+  spec.homepage      = "http://www.typuscmf.com/"
+  spec.license       = "MIT"
 
-files = `git ls-files`.split("\n")
-test_files = `git ls-files -- test/*`.split("\n")
-ignores = `git ls-files -- doc/* Guardfile .travis.yml .gitignore`.split("\n")
+  spec.platform = Gem::Platform::RUBY
 
-# Describe your gem and declare its dependencies:
-Gem::Specification.new do |s|
-  s.name = "typus"
-  s.version = Typus::VERSION::STRING
-  s.platform = Gem::Platform::RUBY
-  s.authors = ["Francesc Esplugas"]
-  s.email = ["support@typuscmf.com"]
-  s.homepage = "http://www.typuscmf.com/"
-  s.summary = "Effortless backend interface for Ruby on Rails applications. (Admin scaffold generator)"
-  s.description = "Ruby on Rails Admin Panel (Engine) to allow trusted users edit structured content."
+  spec.files         = files - test_files - ignores
+  spec.test_files    = []
+  spec.require_paths = ["lib"]
 
-  s.rubyforge_project = "typus"
-
-  s.files         = files - test_files - ignores
-  s.test_files    = []
-  s.require_paths = ["lib"]
-
-  s.add_dependency "bcrypt-ruby", "~> 3.0.1"
-  s.add_dependency "jquery-rails", "~> 2.2.1"
-  s.add_dependency "rails", "~> 4.0.0.beta1"
-
-  # Development dependencies are defined in the `Gemfile`.
+  spec.add_dependency "bcrypt-ruby", "~> 3.0.1"
+  spec.add_dependency "jquery-rails", "~> 2.2.1"
+  spec.add_dependency "rails", "~> 4.0.0.beta1"
 end

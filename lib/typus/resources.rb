@@ -1,8 +1,7 @@
 module Typus
   module Resources
 
-    ##
-    # Setup Typus::Resources:
+    # Usage:
     #
     #     Typus::Resources.setup do |config|
     #       config.default_action_on_item = "index"

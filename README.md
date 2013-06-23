@@ -3,7 +3,7 @@
 **Typus** is a control panel for [Ruby on Rails][rails] applications to
 allow trusted users edit structured content.
 
-It’s not a CMS with a full working system but it provides a part of the
+It's not a CMS with a full working system but it provides a part of the
 system: authentication, permissions and basic look and feel for your
 websites control panel. So using [Rails][rails] with **Typus** lets you
 concentrate on your application instead of the bits to manage the system.
@@ -25,7 +25,7 @@ You can try a demo [here][typus_demo].
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
 - Support for [Kamaniri][kaminari] and [WillPaginate][will_paginate].
-- Supports multiple Rails versions.
+- Supports Rails 4.0 and 3.2.
 
 
 ## Installing
@@ -40,11 +40,6 @@ If you are using **Rails 4.0**, you can use `master` or `4-0-stable` branch:
 If you are using **Rails 3.2**:
 
     gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "3-2-stable"
-
-If you are using **Rails 3.1**:
-
-    gem "typus", "~> 3.1.10"
-    gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "3-1-stable"
 
 Update your bundle, run the generator and start the application server:
 

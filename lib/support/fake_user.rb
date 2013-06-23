@@ -1,8 +1,4 @@
-require 'typus/orm/active_record/user/instance_methods_more'
-
 class FakeUser
-
-  include Typus::Orm::ActiveRecord::User::InstanceMethodsMore
 
   def id
     0
@@ -38,6 +34,14 @@ class FakeUser
 
   def owns?(resource)
     true
+  end
+
+  def locale
+    ::I18n.locale
+  end
+
+  def role
+    Typus.master_role
   end
 
 end

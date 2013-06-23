@@ -45,7 +45,7 @@ Typus.setup do |config|
 
   # Authenticate using typus provided authentication.
   config.authentication = :session
-  config.user_class_name = "AdminUser"
+  config.user_class_name = "TypusUser"
 
   # Authenticate using devise.
   # config.authentication = :devise

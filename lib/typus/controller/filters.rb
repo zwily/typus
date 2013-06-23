@@ -20,12 +20,17 @@
 #       ...
 #     <% end %>
 #
+
+require 'active_support/concern'
+
 module Typus
   module Controller
     module Filters
 
-      def self.included(base)
-        base.helper_method :predefined_filters
+      extend ActiveSupport::Concern
+
+      included do
+        helper_method :predefined_filters
       end
 
       protected
