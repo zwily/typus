@@ -5,7 +5,6 @@ require "test_helper"
   Here we test:
 
   - Typus::Orm::ActiveRecord::User::InstanceMethods
-  - Typus::Orm::ActiveRecord::User::InstanceMethodsMore
 
 =end
 
