@@ -24,7 +24,6 @@ module Typus
             validates :email, :presence => true, :uniqueness => true, :format => { :with => Typus::Regex::Email }
             validates :password, :confirmation => true
             validates :password_digest, :presence => true
-
             validate :password_must_be_strong
 
             serialize :preferences
