@@ -25,6 +25,7 @@ module Typus
             validates :password, :confirmation => true
             validates :password_digest, :presence => true
             validate :password_must_be_strong
+            validates :role, :presence => true
 
             serialize :preferences
 
@@ -32,7 +33,7 @@ module Typus
 
             def authenticate(email, password)
               user = find_by_email_and_status(email, true)
-              user && user.authenticate(password) ? user : nil
+              user && user.authenticated?(password) ? user : nil
             end
 
           end
@@ -50,7 +51,7 @@ module Typus
             self.preferences[:locale] = locale
           end
 
-          def authenticate(unencrypted_password)
+          def authenticated?(unencrypted_password)
             equal = BCrypt::Password.new(password_digest) == unencrypted_password
             equal ? self : false
           end
