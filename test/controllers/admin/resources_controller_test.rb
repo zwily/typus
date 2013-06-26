@@ -56,24 +56,30 @@ class Admin::EntriesControllerTest < ActionController::TestCase
   end
 
   test "post create and redirect to index" do
+    entry_data = FactoryGirl.build(:entry).attributes
+
     assert_difference('Entry.count') do
-      post :create, :entry => @entry.attributes, :_save => true
+      post :create, :entry => entry_data, :_save => true
       assert_response :redirect
       assert_redirected_to "/admin/entries"
     end
   end
 
   test "post create and redirect to add new" do
+    entry_data = FactoryGirl.build(:entry).attributes
+
     assert_difference('Entry.count') do
-      post :create, :entry => @entry.attributes, :_addanother => true
+      post :create, :entry => entry_data, :_addanother => true
       assert_response :redirect
       assert_redirected_to "/admin/entries/new"
     end
   end
 
   test "post create and continue editing" do
+    entry_data = FactoryGirl.build(:entry).attributes
+
     assert_difference('Entry.count') do
-      post :create, :entry => @entry.attributes, :_continue => true
+      post :create, :entry => entry_data, :_continue => true
       assert_response :redirect
       assert_redirected_to "/admin/entries/edit/#{Entry.last.id}"
     end
