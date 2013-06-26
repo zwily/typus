@@ -12,15 +12,12 @@ class Admin::EntriesControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
+    Entry.delete_all
   end
 
   test 'adding multiple categories to an entry' do
     category_1 = FactoryGirl.create(:category)
     category_2 = FactoryGirl.create(:category)
-
-    user = FactoryGirl.create(:user)
-
-    Entry.delete_all
 
     assert_difference('Entry.count') do
       entry_data = {
