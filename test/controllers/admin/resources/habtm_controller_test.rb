@@ -12,10 +12,11 @@ class Admin::EntriesControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    Entry.delete_all
   end
 
   test 'adding multiple categories to an entry' do
+    Entry.delete_all
+
     category_1 = FactoryGirl.create(:category)
     category_2 = FactoryGirl.create(:category)
 
