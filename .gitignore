@@ -1,4 +1,6 @@
 .bundle/
+bin
+
 log/*.log
 pkg/
 
