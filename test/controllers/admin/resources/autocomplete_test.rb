@@ -4,7 +4,7 @@ require "test_helper"
 
   What's being tested here?
 
-    - Typus::Controller::Autocomplete
+    - Admin::Autocomplete
 
 =end
 

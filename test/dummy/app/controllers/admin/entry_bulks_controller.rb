@@ -1,5 +1,5 @@
 class Admin::EntryBulksController < Admin::ResourcesController
 
-  include Typus::Controller::Bulk
+  include Admin::Bulk
 
 end

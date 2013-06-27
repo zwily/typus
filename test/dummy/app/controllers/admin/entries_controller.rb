@@ -1,5 +1,5 @@
 class Admin::EntriesController < Admin::ResourcesController
 
-  include Typus::Controller::Autocomplete
+  include Admin::Autocomplete
 
 end
