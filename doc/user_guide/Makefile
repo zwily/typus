@@ -131,4 +131,4 @@ doctest:
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
 publish:
-	@s3cmd sync --acl-public build/html/ s3://docs.typuscmf.com/
+	@s3cmd sync --no-preserve --delete-removed --acl-public build/html/ s3://docs.typuscmf.com/
