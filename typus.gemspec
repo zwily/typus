@@ -3,9 +3,9 @@ lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'typus/version'
 
-files = `git ls-files`.split($/)
-test_files = `git ls-files -- test/*`.split($/)
-ignores = `git ls-files -- doc/* .travis.yml .gitignore`.split($/)
+files = Dir['**/*'].keep_if{|file| File.file?(file)}
+test_files = Dir['test/**/*'].keep_if{|file| File.file?(file)}
+ignores = Dir['doc/**/*'].keep_if{|file| File.file?(file)} + %w(.travis.yml .gitignore)
 
 Gem::Specification.new do |spec|
   spec.name          = "typus"
