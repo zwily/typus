@@ -36,8 +36,8 @@ Key Features
 .. _WillPaginate: http://rubygems.org/gems/will_paginate
 
 
-Support and Development
------------------------
+Support
+-------
 
 You can directly participate in the support and development of **Typus**,
 including new features, by hiring our team to work on your project. We offer
