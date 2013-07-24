@@ -1,8 +1,8 @@
 Requirements
 ============
 
-Are you using Rails 3.0?
-------------------------
+Are you using Rails 3.0 or higher?
+----------------------------------
 
 A clean ``admin`` namespace, this means, your application should not have any
 controllers under ``controllers/admin`` as **Typus** will be "mounted" there.
