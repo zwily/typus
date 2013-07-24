@@ -8,7 +8,7 @@ To install **Typus**, edit the application ``Gemfile`` and add:
   gem 'typus'
 
   # Bundle edge Typus instead:
-  # gem 'typus', :git => 'https://github.com/typus/typus.git'
+  # gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
 
 Install the **RubyGem** using ``bundler``:
 

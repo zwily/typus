@@ -16,7 +16,7 @@ at `GitHub`_.
 
 .. code-block:: bash
 
-    script/plugin install https://github.com/typus/typus.git -r 2-3-stable
+    script/plugin install https://github.com/fesplugas/typus.git -r 2-3-stable
 
 .. note::
 
@@ -24,4 +24,4 @@ at `GitHub`_.
   **Typus**. I recommend you upgrading to **Rails 3.0** in order to use the
   latest **Typus** features.
 
-.. _GitHub: https://github.com/typus/typus/tree/2-3-stable
+.. _GitHub: https://github.com/fesplugas/typus/tree/2-3-stable

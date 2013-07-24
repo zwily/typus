@@ -133,7 +133,7 @@ Somehow involved in the project:
 .. _David Heinemeier Hansson: http://loudthinking.com/
 .. _Rails: http://rubyonrails.org/
 .. _Django Admin: http://www.djangoproject.com/
-.. _Contributors: http://github.com/typus/typus/contributors
+.. _Contributors: http://github.com/fesplugas/typus/contributors
 
 
 MIT License
