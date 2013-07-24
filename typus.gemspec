@@ -5,9 +5,9 @@ $:.push File.expand_path("../lib", __FILE__)
 # Maintain your gem's version:
 require "typus/version"
 
-files = `git ls-files`.split("\n")
-test_files = `git ls-files -- test/*`.split("\n")
-ignores = `git ls-files -- doc/* Guardfile .travis.yml .gitignore`.split("\n")
+files = Dir['**/*'].keep_if{|file| File.file?(file)}
+test_files = Dir['test/**/*'].keep_if{|file| File.file?(file)}
+ignores = Dir['doc/**/*'].keep_if{|file| File.file?(file)} + %w(.travis.yml .gitignore)
 
 # Describe your gem and declare its dependencies:
 Gem::Specification.new do |s|
