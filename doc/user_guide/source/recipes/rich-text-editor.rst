@@ -1,9 +1,6 @@
 Adding a Rich Text Editor
 =========================
 
-CKEditor on Rails 3.2 or higher
--------------------------------
-
 Include the ``rails-ckeditor`` gem in your ``Gemfile``:
 
 .. code-block:: ruby
@@ -28,3 +25,7 @@ new template where needed. Eg.
       options:
         templates:
           content: text_with_ckeditor
+
+.. note::
+
+   CKEditor is only available for Typus 3.2 or higher.
