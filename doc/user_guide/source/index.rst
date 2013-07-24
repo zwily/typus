@@ -13,7 +13,9 @@ application instead of the bits to manage the system.
 
     A category of people or things having common characteristics.
 
-Key Features:
+
+Key Features
+------------
 
 * Built-in Authentication and Access Control Lists.
 * CRUD and custom actions for your models on a clean interface.
@@ -26,18 +28,22 @@ Key Features:
 * Tested with **SQLite3**, **MySQL** and **PostgreSQL**.
 * **MIT License**, the same as `Rails`_.
 
-You can directly participate in the support and development of **Typus**,
-including new features, by hiring our team to work on your project. We offer
-customization services for modules and extensions for a fee.
-
-Send your inquiries to contact@typuscmf.com.
-
 
 .. _See available translations: https://github.com/fesplugas/typus/tree/master/config/locales
 .. _paperclip: http://rubygems.org/gems/paperclip
 .. _dragonfly: http://rubygems.org/gems/dragonfly
 .. _Kaminari: http://rubygems.org/gems/kaminari
 .. _WillPaginate: http://rubygems.org/gems/will_paginate
+
+
+Support and Development
+-----------------------
+
+You can directly participate in the support and development of **Typus**,
+including new features, by hiring our team to work on your project. We offer
+customization services for modules and extensions for a fee.
+
+Send your inquiries to contact@typuscmf.com.
 
 
 Installation
