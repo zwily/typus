@@ -161,7 +161,7 @@ module Typus
     # Lists models under <tt>app/models</tt>.
     def detect_application_models
       model_dir = Rails.root.join("app/models")
-      Dir.chdir(model_dir.to_s) { Dir["**/*.rb"] }
+      Dir.chdir(model_dir.to_s) { Dir["**/*.rb"].reject {|f| f["concerns/"] } }
     end
 
     def application_models
