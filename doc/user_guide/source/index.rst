@@ -53,7 +53,6 @@ Installation
   :maxdepth: 1
 
   requirements
-  installation/impatients
   installation/instructions
   installation/generators-and-rake-tasks
 
