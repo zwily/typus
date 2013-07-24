@@ -49,12 +49,63 @@ Send your inquiries to contact@typuscmf.com.
 Installation
 ------------
 
-.. toctree::
-  :maxdepth: 1
+Before installing make sure your application does not have any controller
+under ``controllers/admin`` as all **Typus** controllers will be generated
+there.
 
-  requirements
-  installation/instructions
-  installation/generators-and-rake-tasks
+To install **Typus**, edit the application ``Gemfile`` and add:
+
+.. code-block:: ruby
+
+  gem 'typus'
+
+  # Bundle edge Typus instead:
+  # gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
+
+Install the **RubyGem** using ``bundler``:
+
+.. code-block:: bash
+
+  bundle install
+
+**Typus** expects to have models to manage, so run the generator in order to
+generate the required configuration files:
+
+.. code-block:: bash
+
+  rails generate typus
+
+Start the application server, go to http://0.0.0.0:3000/admin and follow the
+instructions.
+
+By default **Typus** will not enable any authentication mechanism. If you want
+to add ``session`` authentication you need to run a generator and migrate your
+application database:
+
+.. code-block:: bash
+
+  rails generate typus:migration
+  rake db:migrate
+
+This generator creates a new model, ``AdminUser`` and adds some settings which
+will be stored under ``config/typus`` folder. You can see some options of this
+generator running the following command:
+
+.. code-block:: bash
+
+  rails generate typus:migration -h
+
+If you want to customize views you can copy default views to your application:
+
+.. code-block:: bash
+
+  rails generate typus:views
+
+To see a list of **Typus** related tasks run:
+
+.. code-block:: bash
+
+  rake -T typus
 
 
 Configuration
