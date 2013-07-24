@@ -94,7 +94,6 @@ Misc
 
   usage
   upgrade
-  credits
 
 
 Contribute
