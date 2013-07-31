@@ -1,19 +1,19 @@
 <div class="well" style="padding: 8px 0;">
   <ul class="nav nav-list">
 
-    <li class="nav-header"><%= sidebar_title %></li>
-
-    <% actions.each do |action| %>
-      <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
-      <li class="<%= klass %>">
+    <% if actions.any? %>
+      <% actions.each do |action| %>
+        <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
+        <li class="<%= klass %>">
         <%= link_to url_for(action[:url]) do %>
           <i class="icon-<%= action[:icon] %>"></i>
           <%= action[:message] %>
         <% end %>
-      </li>
-    <% end %>
+        </li>
+      <% end %>
 
-    <li class="divider"></li>
+      <li class="divider"></li>
+    <% end %>
 
     <% extra_actions.each do |action| %>
       <li>
