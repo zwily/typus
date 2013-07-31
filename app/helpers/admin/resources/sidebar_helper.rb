@@ -8,12 +8,6 @@ module Admin::Resources::SidebarHelper
       locals[:sidebar_title] = @resource.model_name.human.pluralize
     end
 
-    locals[:extra_actions] = [
-      sidebar_dashboard,
-      sidebar_help,
-      sidebar_view_site,
-    ].compact
-
     render "helpers/admin/resources/sidebar", locals
   end
 
@@ -33,20 +27,7 @@ module Admin::Resources::SidebarHelper
     end
   end
 
-  def sidebar_dashboard
-    { :message => Typus::I18n.t("Dashboard"),
-      :url => admin_dashboard_index_path,
-      :icon => "home" }
-  end
-
-  def sidebar_help
-    if Typus.link_to_help
-      { :message => Typus::I18n.t("Help"),
-        :url => "#",
-        :icon => "info-sign" }
-    end
-  end
-
+  # TODO: Move it to the header.
   def sidebar_view_site
     if Typus.link_to_view_site
       { :message => Typus::I18n.t("View Site"),

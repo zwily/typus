@@ -9,12 +9,12 @@
 <body class="<%= body_class %>">
 
   <div class="container-fluid">
-    <div class="navbar navbar-inverse">
+    <div class="navbar">
       <div class="navbar-inner">
         <div class="container">
           <div class="brand"><%= admin_title %></div>
-          <%= admin_apps %>
-          <%= admin_login_info %>
+          <%= render "helpers/admin/base/apps" %>
+          <%= render "helpers/admin/base/login_info" %>
         </div>
       </div>
     </div>

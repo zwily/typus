@@ -9,14 +9,6 @@ module Admin::BaseHelper
     end
   end
 
-  def admin_apps
-    render "helpers/admin/base/apps"
-  end
-
-  def admin_login_info
-    render "helpers/admin/base/login_info" unless admin_user.is_a?(FakeUser)
-  end
-
   def admin_sign_out_path
     case Typus.authentication
     when :devise

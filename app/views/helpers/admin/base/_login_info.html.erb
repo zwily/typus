@@ -1,3 +1,5 @@
+<% return if admin_user.is_a?(FakeUser) %>
+
 <ul class="nav pull-right">
   <li class="dropdown" data-dropdown="dropdown">
     <%= link_to "#", :class => "dropdown-toggle", "data-toggle" => "dropdown" do %>
@@ -12,7 +14,18 @@
           <%= Typus::I18n.t("Settings") %>
         <% end %>
       </li>
+
       <li class="divider"></li>
+
+      <% if Typus.link_to_help %>
+        <li>
+          <%= link_to '#' do %>
+            <i class="icon-info-sign"></i>
+            <%= Typus::I18n.t("Help") %>
+          <% end %>
+        </li>
+      <% end %>
+
       <li>
         <%= link_to admin_sign_out_path, :method => :delete do %>
           <i class="icon-off"></i>
