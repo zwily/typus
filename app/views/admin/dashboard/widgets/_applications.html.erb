@@ -1,25 +1,17 @@
 <%
   applications = admin_user.applications
 
-  # Detect if we are inside an application.
-  title = if (application = params[:application])
-    applications.each do |app|
-      applications = [app] if app.parameterize == application
-    end
-    applications.first
-  else
-    "Site"
+  if params[:application]
+    applications.reject! { |a| a.parameterize != params[:application] }
   end
-
-  page_title = Typus::I18n.t("#{title} administration", :title => title)
 %>
 
-<h1><%= page_title %></h1>
+<h2><%= Typus::I18n.t("Site administration") %></h2>
 
 <% if applications.any? %>
   <% applications.each do |app| %>
 
-    <table class="table table-striped table-bordered">
+    <table class="table">
 
       <thead>
         <tr>
@@ -29,7 +21,7 @@
 
       <% admin_user.application(app).map(&:constantize).each do |klass| %>
         <% unless klass.typus_options_for(:hide_from_dashboard) %>
-          <tr class="<%= cycle("even", "odd") %>">
+          <tr>
             <td>
               <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>
             </td>
