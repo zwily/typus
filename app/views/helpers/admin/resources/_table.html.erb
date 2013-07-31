@@ -9,11 +9,12 @@
       <% headers.each do |header| %>
         <th><%= header %></th>
       <% end %>
+      <th width="120"><%= Typus::I18n.t('Actions') %></th>
     </tr>
   </thead>
 <% end %>
 
-<table class="table">
+<table class="table table-hover">
 
   <%= yield yield_name %>
 
@@ -24,19 +25,22 @@
           <%= check_box_tag "selected_item_ids[]", item.id, false, :class => "action-select" %>
         </td>
       <% end %>
-      <% table_fields_for_item(item, fields).each_with_index do |field, index| %>
-        <td>
-          <%= field %>
-          <% if index.zero? %>
-            <div class="resource_actions">
-              <% table_actions(model, item, association_name).each_with_index do |action, index| %>
-                <%= "/" unless index.zero? %>
-                <%= link_to action[:message], action[:url], action[:options] %>
-              <% end %>
-            </div>
-          <% end %>
-        </td>
+      <% table_fields_for_item(item, fields).each do |field| %>
+        <td><%= field %></td>
       <% end %>
+      <td>
+        <div class="btn-toolbar" style="margin: 0px;">
+          <div class="btn-group">
+            <% table_actions(model, item, association_name).each do |action| %>
+              <% html_options = action[:options] || {} %>
+              <%= link_to url_for(action[:url]), html_options.merge(class: 'btn btn-small') do %>
+                <i class="icon-<%= action[:url][:action] %>"></i>
+                <%= action[:message] %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </td>
     </tr>
   <% end %>
 
