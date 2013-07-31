@@ -53,11 +53,6 @@ module Typus
   mattr_accessor :subdomain
   @@subdomain = nil
 
-  # Pagination options passed to pagination helper. Note that pagination
-  # options are different in Kaminari and WillPaginate.
-  mattr_accessor :pagination
-  @@pagination = { :theme => 'twitter-bootstrap' }
-
   # Define a default password for http authentication.
   mattr_accessor :password
   @@password = "columbia"

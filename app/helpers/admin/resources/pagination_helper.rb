@@ -1,21 +1,26 @@
 module Admin::Resources::PaginationHelper
 
-  def admin_paginate(items, options)
-    helper = if defined?(Kaminari)
-      "paginate"
-    elsif defined?(WillPaginate)
-      "will_paginate"
-    else
-      "typus_paginate"
+  def admin_paginate
+    params[:per_page] ||= @resource.typus_options_for(:per_page)
+    params[:per_page] = params[:per_page].to_i
+
+    params[:offset] ||= 0
+    params[:offset] = params[:offset].to_i
+
+    next_offset = params[:offset] + params[:per_page]
+    previous_offset = params[:offset] - params[:per_page]
+
+    options = {}
+
+    if @items.size >= params[:per_page]
+      options[:next] = params.merge(offset: next_offset)
     end
 
-    send(helper, items, options)
-  end
+    if previous_offset >= 0
+      options[:previous] = params.merge(offset: previous_offset)
+    end
 
-  # TODO: Quick and dirty pagination solution! We only want to go back and
-  # forward, so it will be simple.
-  def typus_paginate(items, options)
-    render "admin/resources/pagination"
+    render "admin/resources/pagination", { :options => options }
   end
 
 end

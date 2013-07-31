@@ -49,6 +49,3 @@ gem 'paperclip', '~> 3.4.1'
 
 # MongoDB
 gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
-
-# Pagination
-gem 'kaminari'

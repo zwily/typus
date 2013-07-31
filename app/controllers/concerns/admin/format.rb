@@ -5,19 +5,10 @@ module Admin
 
     protected
 
-    # We want to have support for Kaminari, WillPaginate and other
-    # pagination systems. If no pagination system is found, we just
-    # limit items using `per_page` option.
     def get_paginated_data
-      items_per_page = @resource.typus_options_for(:per_page)
-
-      @items = if defined?(Kaminari)
-        @resource.page(params[:page]).per(items_per_page)
-      elsif defined?(WillPaginate)
-        @resource.paginate(:page => params[:page], :per_page => items_per_page)
-      else
-        @resource.limit(items_per_page)
-      end
+      items_per_page = params[:per_page] || @resource.typus_options_for(:per_page)
+      offset = params[:offset] || 0
+      @items = @resource.limit(items_per_page).offset(offset)
     end
 
     def generate_csv

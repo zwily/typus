@@ -23,7 +23,6 @@ Key Features
 * Internationalized interface (`See available translations`_)
 * Customizable and extensible templates.
 * Integrated `paperclip`_ and `dragonfly`_ attachments viewer.
-* Support for `Kaminari`_ and `WillPaginate`_.
 * Supports Rails 4.0 and 3.2.
 * Tested with **SQLite3**, **MySQL** and **PostgreSQL**.
 * **MIT License**, the same as `Rails`_.
@@ -32,8 +31,6 @@ Key Features
 .. _See available translations: https://github.com/fesplugas/typus/tree/master/config/locales
 .. _paperclip: http://rubygems.org/gems/paperclip
 .. _dragonfly: http://rubygems.org/gems/dragonfly
-.. _Kaminari: http://rubygems.org/gems/kaminari
-.. _WillPaginate: http://rubygems.org/gems/will_paginate
 
 
 Support

@@ -24,7 +24,6 @@ You can try a demo [here][typus_demo].
 - Internationalized interface ([See available translations][typus_locales])
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
-- Support for [Kaminari][kaminari] and [WillPaginate][will_paginate].
 - Supports Rails 4.0 and 3.2.
 
 

@@ -32,9 +32,4 @@ Typus.setup do |config|
   # Define subdomain to use instead of additional path.
   # config.subdomain = "admin"
 
-  # Pagination options: These options are passed to the pagination method
-  # which can be Kaminari or WillPaginate.
-  # config.pagination = { :previous_label => "&larr; " + Typus::I18n.t("Previous"),
-  #                       :next_label => Typus::I18n.t("Next") + " &rarr;" }
-
 end

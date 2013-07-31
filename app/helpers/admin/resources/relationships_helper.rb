@@ -9,17 +9,10 @@ module Admin::Resources::RelationshipsHelper
   end
 
   def build_pagination
-    items_per_page = @model_to_relate.typus_options_for(:per_page)
     @data = @item.send(@field).order(@model_to_relate.typus_order_by).where(set_conditions)
     page = params["#{@association_name}_page"]
-
-    @items = if defined?(Kaminari)
-      @data.page(page).per(items_per_page)
-    elsif defined?(WillPaginate)
-      @data.paginate(:page => params[:page], :per_page => items_per_page)
-    else
-      @data.limit(items_per_page)
-    end
+    items_per_page = @model_to_relate.typus_options_for(:per_page)
+    @items = @data.limit(items_per_page)
   end
 
   def build_relationship_table
