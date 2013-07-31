@@ -35,4 +35,8 @@ class ActiveRecord::Base
     end
   end
 
+  def identifier
+    "##{id}"
+  end
+
 end

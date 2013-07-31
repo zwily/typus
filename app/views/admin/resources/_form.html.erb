@@ -7,10 +7,6 @@
   <%= render "helpers/admin/resources/errors" %>
 
   <fieldset>
-    <% unless headless_mode? %>
-      <legend><%= @item.to_label %></legend>
-    <% end %>
-
     <%= build_form(fields, form) %>
 
     <% unless headless_mode? %>

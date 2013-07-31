@@ -1,11 +1,9 @@
 <%
-  page_title = Typus::I18n.t("Show %{resource}", :resource => @resource.model_name.human)
+  page_title = Typus::I18n.t("%{resource} %{id}", :resource => @resource.model_name.human, :id => @item.identifier)
   admin_title(page_title)
 %>
 
 <% content_for :main_grid do %>
-  <%= render 'show' %>
-
   <% unless params[:_popup] %>
     <h1>
       <%= page_title %>
@@ -13,6 +11,8 @@
   <% end %>
 
   <%= admin_display_flash_message %>
+
+  <%= render 'show' %>
 
   <dl class="dl-horizontal">
     <% build_display(@item, fields).each do |attribute, type| %>

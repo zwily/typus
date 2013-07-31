@@ -8,7 +8,11 @@ module Admin::Resources::SidebarHelper
       locals[:sidebar_title] = @resource.model_name.human.pluralize
     end
 
-    locals[:extra_actions] = [sidebar_dashboard, sidebar_help, sidebar_view_site].compact
+    locals[:extra_actions] = [
+      sidebar_dashboard,
+      sidebar_help,
+      sidebar_view_site,
+    ].compact
 
     render "helpers/admin/resources/sidebar", locals
   end
@@ -36,25 +40,20 @@ module Admin::Resources::SidebarHelper
   end
 
   def sidebar_help
-    { :message => Typus::I18n.t("Help"),
-      :url => "#",
-      :icon => "info-sign" }
-  end
-
-  def sidebar_view_site
-    if Typus.admin_title_link
-      { :message => Typus::I18n.t("View Site"),
-        :url => Typus.admin_title_link,
-        :icon => "share" }
+    if Typus.link_to_help
+      { :message => Typus::I18n.t("Help"),
+        :url => "#",
+        :icon => "info-sign" }
     end
   end
 
-  # def sidebar_actions
-  #   resources_actions_for_current_role.map do |body, url, options|
-  #     path = params.dup.merge!(url).compact.cleanup
-  #     { :message => Typus::I18n.t(body), :url => path, :options => options }
-  #     # link_to , path, options
-  #   end.compact #.reverse.join(" / ").html_safe
-  # end
+  def sidebar_view_site
+    if Typus.link_to_view_site
+      { :message => Typus::I18n.t("View Site"),
+        :url => Typus.admin_title_link,
+        :link_to_options => { :target => '_blank' },
+        :icon => "share" }
+    end
+  end
 
 end

@@ -124,6 +124,12 @@ module Typus
   mattr_accessor :ip_whitelist
   @@ip_whitelist = []
 
+  mattr_accessor :link_to_view_site
+  @@link_to_view_site = false
+
+  mattr_accessor :link_to_help
+  @@link_to_help = false
+
   class << self
 
     # Default way to setup typus. Run `rails generate typus` to create a

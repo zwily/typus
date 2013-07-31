@@ -1,9 +1,5 @@
 module Admin::BaseHelper
 
-  def admin_header
-    render "helpers/admin/base/header", { :admin_title => admin_title }
-  end
-
   def admin_title(page_title = nil)
     if page_title
       content_for(:title) { page_title }
@@ -56,6 +52,14 @@ module Admin::BaseHelper
       "data-keyboard" => "true",
       "class" => "ajax-modal",
       "url" => "override-this" }
+  end
+
+  def body_class
+    if params[:controller] == 'admin/dashboard'
+      "base dashboard #{params[:action].parameterize}"
+    else
+      "base #{@resource.model_name.human.parameterize} #{params[:action].parameterize}"
+    end
   end
 
 end

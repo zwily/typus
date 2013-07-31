@@ -6,13 +6,13 @@
   <%= render 'admin/shared/head' %>
 </head>
 
-<body class="base">
+<body class="<%= body_class %>">
 
   <div class="container-fluid">
     <div class="navbar navbar-inverse">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to admin_title, Typus.admin_title_link || '/', :title => Typus::I18n.t("View site"), :class => 'brand' %>
+          <div class="brand"><%= admin_title %></div>
           <%= admin_apps %>
           <%= admin_login_info %>
         </div>
