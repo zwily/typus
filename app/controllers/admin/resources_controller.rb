@@ -1,10 +1,10 @@
 class Admin::ResourcesController < Admin::BaseController
 
-  include Typus::Controller::Navigation
-  include Typus::Controller::Actions
-  include Typus::Controller::Filters
-  include Typus::Controller::Format
-  include Typus::Controller::Headless
+  include Admin::Navigation
+  include Admin::Actions
+  include Admin::Filters
+  include Admin::Format
+  include Admin::Headless
 
   Whitelist = [:edit, :update, :destroy, :toggle]
 

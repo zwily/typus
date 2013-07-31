@@ -32,8 +32,7 @@ help:
 	@echo "  changes    to make an overview of all changed/added/deprecated items"
 	@echo "  linkcheck  to check all external links for integrity"
 	@echo "  doctest    to run all doctests embedded in the documentation (if enabled)"
-	@echo "  deploy     to push changes to the documentation server"
-	@echo "  open       to view html on your default browser"
+	@echo "  publish    to publish changes to docs.typuscmf.com"
 
 clean:
 	-rm -rf $(BUILDDIR)/*
@@ -131,8 +130,5 @@ doctest:
 	@echo "Testing of doctests in the sources finished, look at the " \
 	      "results in $(BUILDDIR)/doctest/output.txt."
 
-deploy:
-	ssh fesplugas@docs.typuscmf.com 'cd ~/projects/typus && git pull && cd ~/projects/typus/doc/user_guide && make html'
-
-open:
-	open build/html/index.html
+publish:
+	@s3cmd sync --no-preserve --delete-removed --acl-public build/html/ s3://docs.typuscmf.com/

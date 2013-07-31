@@ -1,5 +1,5 @@
 class Admin::CategoriesController < Admin::ResourcesController
 
-  include Typus::Controller::ActsAsList
+  include Admin::ActsAsList
 
 end

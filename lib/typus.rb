@@ -19,21 +19,6 @@ module Typus
   autoload :I18n, "typus/i18n"
   autoload :Resources, "typus/resources"
 
-  module Controller
-    autoload :Actions, "typus/controller/actions"
-    autoload :ActsAsList, "typus/controller/acts_as_list"
-    autoload :Ancestry, "typus/controller/ancestry"
-    autoload :Autocomplete, "typus/controller/autocomplete"
-    autoload :Bulk, "typus/controller/bulk"
-    autoload :FeaturedImage, "typus/controller/featured_image"
-    autoload :Filters, "typus/controller/filters"
-    autoload :Format, "typus/controller/format"
-    autoload :Headless, "typus/controller/headless"
-    autoload :Multisite, "typus/controller/multisite"
-    autoload :Navigation, "typus/controller/navigation"
-    autoload :Trash, "typus/controller/trash"
-  end
-
   module Authentication
     autoload :Base, "typus/authentication/base"
     autoload :None, "typus/authentication/none"
@@ -182,7 +167,7 @@ module Typus
     # Lists models under <tt>app/models</tt>.
     def detect_application_models
       model_dir = Rails.root.join("app/models")
-      Dir.chdir(model_dir.to_s) { Dir["**/*.rb"] }
+      Dir.chdir(model_dir.to_s) { Dir["**/*.rb"].reject {|f| f["concerns/"] } }
     end
 
     def application_models

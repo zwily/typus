@@ -1,17 +1,10 @@
 require "test_helper"
 
-=begin
-
-  What's being tested here?
-
-    - Nothing ...
-
-=end
-
 class Admin::BaseControllerTest < ActionController::TestCase
 
-  test "nothing" do
-    assert true
+  test 'white_label' do
+    base = Admin::BaseController.new
+    assert base.respond_to?(:white_label)
   end
 
 end
