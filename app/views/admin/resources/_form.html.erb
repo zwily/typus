@@ -1,15 +1,22 @@
 <%= render "form_javascripts" %>
+<% form_class = headless_mode? ? 'form-vertical' : 'form-horizontal' %>
 
 <%= form_for @item,
             :url => options,
-            :html => { :multipart => true, :class => "form-horizontal" } do |form| %>
+            :html => { :multipart => true, :class => form_class } do |form| %>
 
   <%= render "helpers/admin/resources/errors" %>
 
   <fieldset>
     <%= build_form(fields, form) %>
 
-    <% unless headless_mode? %>
+    <% if headless_mode? %>
+      <% unless @item.new_record? %>
+        <%= hidden_field_tag "_id", @item.id %>
+        <%= hidden_field_tag "_label", @item.to_label %>
+      <% end %>
+      <%= hidden_field_tag "_continue" %>
+    <% else %>
       <div class="form-actions">
         <% build_save_options.each do |key, value, special| %>
           <% klass = key.eql?("_save") ? 'btn-primary' : 'btn' %>
@@ -23,12 +30,6 @@
           <%= submit_tag message, options %>
         <% end %>
       </div>
-    <% else %>
-      <% unless @item.new_record? %>
-        <%= hidden_field_tag "_id", @item.id %>
-        <%= hidden_field_tag "_label", @item.to_label %>
-      <% end %>
-      <%= hidden_field_tag "_continue" %>
     <% end %>
   </fieldset>
 
