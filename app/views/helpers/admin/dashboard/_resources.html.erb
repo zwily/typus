@@ -9,7 +9,7 @@
     </thead>
 
     <% resources.each do |resource| %>
-      <tr class="<%= cycle("even", "odd") %>">
+      <tr>
         <td><%= link_to Typus::I18n.t(resource.titleize.capitalize), :controller => "/admin/#{resource.underscore}" %></td>
       </tr>
     <% end %>

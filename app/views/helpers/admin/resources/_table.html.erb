@@ -18,7 +18,7 @@
   <%= yield yield_name %>
 
   <% items.each do |item| %>
-    <tr class="<%= cycle('even', 'odd') %>" id="<%= dom_id(item) %>">
+    <tr id="<%= dom_id(item) %>">
       <% if controller.respond_to?(:bulk) %>
         <td width="16">
           <%= check_box_tag "selected_item_ids[]", item.id, false, :class => "action-select" %>
