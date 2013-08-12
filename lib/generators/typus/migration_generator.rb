@@ -42,9 +42,7 @@ Examples:
       def inject_mixins_into_model
         inject_into_class "app/models/#{model_filename}.rb", options[:user_class_name] do
           <<-MSG
-
-  has_admin
-
+  include Typus::Orm::ActiveRecord::AdminUser
           MSG
         end
       end
