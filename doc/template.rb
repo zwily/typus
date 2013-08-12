@@ -14,3 +14,6 @@ run 'bundle install --quiet'
 generate 'typus'
 generate 'typus:migration'
 rake 'db:migrate'
+
+# Redirect root to admin
+root :to => redirect('/admin')
