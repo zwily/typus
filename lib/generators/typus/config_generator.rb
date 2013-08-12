@@ -28,7 +28,7 @@ Description:
 
       def fields_for(model, *defaults)
         rejections = %w( ^id$ _type$ type created_at created_on updated_at updated_on deleted_at ).join("|")
-        fields = ActiveRecord::Base.connected? && model.table_exists? ? model.columns.map(&:name) : defaults
+        fields = model.table_exists? ? model.columns.map(&:name) : defaults
         fields.reject { |f| f.match(rejections) }.join(", ")
       end
 
