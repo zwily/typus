@@ -12,7 +12,9 @@ module Admin::Resources::PaginationHelper
 
     options = {}
 
-    if @items.size >= params[:per_page]
+    current_page = (params[:offset].to_f / params[:per_page]) + 1
+    num_pages = (@resource.count.to_f / params[:per_page]).ceil
+    unless current_page >= num_pages
       options[:next] = params.merge(offset: next_offset)
     end
 
