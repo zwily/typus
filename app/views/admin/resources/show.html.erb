@@ -4,8 +4,11 @@
 %>
 
 <% content_for :main_grid do %>
-  <% unless params[:_popup] %>
+
+  <% unless headless_mode? %>
     <h1>
+      <%= link_to @resource.model_name.human.pluralize, url_for(params.merge(action: nil, id: nil)) %>
+      /
       <%= page_title %>
     </h1>
   <% end %>

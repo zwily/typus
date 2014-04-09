@@ -12,19 +12,23 @@ module Admin::Resources::SidebarHelper
   end
 
   def sidebar_add_new(klass)
-    if admin_user.can?("create", klass)
-      { :message => Typus::I18n.t("Add"),
-        :url => { :controller => "/admin/#{klass.to_resource}", :action => "new" },
-        :icon => "plus" }
-    end
+    return if admin_user.cannot?("create", klass)
+
+    {
+      message: Typus::I18n.t("Add"),
+      url: { controller: "/admin/#{klass.to_resource}", action: "new" },
+      icon: "plus",
+    }
   end
 
   def sidebar_list(klass)
-    if admin_user.can?("read", klass)
-      { :message => Typus::I18n.t("List"),
-        :url => { :controller => "/admin/#{klass.to_resource}", :action => "index" },
-        :icon => "list" }
-    end
+    return if admin_user.cannot?("read", klass)
+
+    {
+      message: Typus::I18n.t("List"),
+      url: { controller: "/admin/#{klass.to_resource}", action: "index" },
+      icon: "list",
+    }
   end
 
   # TODO: Move it to the header.
