@@ -26,10 +26,10 @@ FactoryGirl.create_list(:category, 5)
 FactoryGirl.create_list(:post, 5)
 
 assets_path = "#{Rails.root}/db/seeds/assets"
-5.times { |i| FactoryGirl.create(:asset,
-                                 :dragonfly => File.new("#{assets_path}/00#{i}.jpg"),
-                                 :dragonfly_required => File.new("#{assets_path}/00#{i}.jpg"),
-                                 :paperclip => File.new("#{assets_path}/00#{i}.jpg")) }
+# 5.times { |i| FactoryGirl.create(:asset,
+#                                  :dragonfly => File.new("#{assets_path}/00#{i}.jpg"),
+#                                  :dragonfly_required => File.new("#{assets_path}/00#{i}.jpg"),
+#                                  :paperclip => File.new("#{assets_path}/00#{i}.jpg")) }
 
 ##
 # HasManyThrough

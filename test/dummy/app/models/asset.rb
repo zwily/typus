@@ -15,10 +15,10 @@ class Asset < ActiveRecord::Base
 
   if defined?(Dragonfly)
 
-    image_accessor :dragonfly
+    # image_accessor :dragonfly
 
-    image_accessor :dragonfly_required
-    validates :dragonfly_required, :presence => true
+    # image_accessor :dragonfly_required
+    # validates :dragonfly_required, :presence => true
 
   end
 
