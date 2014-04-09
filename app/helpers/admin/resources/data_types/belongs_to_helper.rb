@@ -10,13 +10,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
     end
 
     related_fk = association.foreign_key
-    html_options = {}
-    options = { :attribute => "#{@resource.name.underscore}_#{related_fk}" }
-
     label_text = @resource.human_attribute_name(attribute)
-    if (text = build_label_text_for_belongs_to(related, html_options, options))
-      label_text += " <small>#{text}</small>"
-    end
 
     values = if related.respond_to?(:roots)
       expand_tree_into_select_field(related.roots, related_fk)
@@ -34,8 +28,8 @@ module Admin::Resources::DataTypes::BelongsToHelper
            :related => related,
            :label_text => label_text.html_safe,
            :values => values,
-           :html_options => html_options,
-           :options => { :include_blank => true }
+           :html_options => {},
+           :options => { :include_blank => true, :attribute => "#{@resource.name.underscore}_#{related_fk}" }
   end
 
   def table_belongs_to_field(attribute, item)
