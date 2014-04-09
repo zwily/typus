@@ -11,7 +11,6 @@ module Admin::Resources::DataTypes::BelongsToHelper
 
     related_fk = association.foreign_key
     html_options = {}
-    label_text = @resource.human_attribute_name(attribute)
     options = { :attribute => "#{@resource.name.underscore}_#{related_fk}" }
 
     label_text = @resource.human_attribute_name(attribute)
