@@ -14,7 +14,7 @@
 
   <%= render 'navigation' %>
 
-  <% locals = { :options => params.dup.cleanup.merge!(:action => 'update') } %>
+  <% locals = { options: params.dup.cleanup.merge!(action: 'update') } %>
   <%= render 'form', locals %>
 
   <% unless headless_mode? %>

@@ -1,11 +1,32 @@
-<% if actions.any? %>
-  <% actions.each do |action| %>
-    <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
-    <li class="<%= klass %>">
-    <%= link_to url_for(action[:url]) do %>
-      <i class="icon-<%= action[:icon] %>"></i>
-      <%= action[:message] %>
+<% if @item && @item.persisted? %>
+  <%
+    item_actions = {
+      edit: { message: Typus::I18n.t('Edit'), icon: 'edit' },
+      show: { message: Typus::I18n.t('Show'), icon: 'info-sign' },
+      destroy: { message: Typus::I18n.t('Destroy'), icon: 'remove' },
+    }
+  %>
+
+  <% item_actions.each do |key, value| %>
+    <li class="<%= params[:action].to_sym.eql?(key) ? "active" : "inactive" %>">
+    <%= link_to url_for(params.merge(action: key)) do %>
+      <i class="icon-<%= value[:icon] %>"></i>
+      <%= value[:message] %>
     <% end %>
     </li>
   <% end %>
+<% else %>
+
+  <% if actions.any? %>
+    <% actions.each do |action| %>
+      <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
+      <li class="<%= klass %>">
+      <%= link_to url_for(action[:url]) do %>
+        <i class="icon-<%= action[:icon] %>"></i>
+        <%= action[:message] %>
+      <% end %>
+      </li>
+    <% end %>
+  <% end %>
+
 <% end %>

@@ -99,11 +99,12 @@ class Admin::ResourcesController < Admin::BaseController
 
   def destroy
     if @item.destroy
-      notice = Typus::I18n.t("%{model} successfully removed.", :model => @resource.model_name.human)
+      flash[:notice] = Typus::I18n.t("%{model} successfully removed.", model: @resource.model_name.human)
     else
-      alert = @item.errors.full_messages
+      flash[:alert] = @item.errors.full_messages
     end
-    redirect_to :back, :notice => notice, :alert => alert
+
+    redirect_to action: :index
   end
 
   def toggle

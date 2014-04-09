@@ -2,51 +2,6 @@
   <ul class="nav nav-tabs">
     <%= build_sidebar %>
 
-    <% if params[:action] == 'index' && (@resource.typus_scopes.any? || predefined_filters.any?) %>
-      <li class="dropdown" style="float:right;">
-        <a class="dropdown-toggle" data-toggle="dropdown" href="#">View <b class="caret"></b></a>
-        <ul class="dropdown-menu" style="left:auto; right:0;">
-          <% all_klass = params[:scope] ? "inactive" : "active" %>
-          <li class="<%= all_klass %>">
-            <%= link_to url_for(params.dup.cleanup.merge(:action => 'index')) do %>
-              <%= Typus::I18n.t("All") %>
-              <% if @resource.typus_options_for(:counters) %>
-                <%= "&nbsp;<span class='badge'>#{resource.count}</span>".html_safe %>
-              <% end %>
-            <% end %>
-          </li>
-
-          <% @resource.typus_scopes.each do |scope| %>
-            <% klass = params[:scope].eql?(scope) ? "active" : "inactive" %>
-            <li class="<%= klass %>">
-              <%= link_to url_for(params.dup.cleanup.merge(:action => 'index', :scope => scope)) do %>
-                <%= Typus::I18n.t(scope.humanize) %>
-                <% if @resource.typus_options_for(:counters)  %>
-                  <%= "&nbsp; <span class='badge'>#{@resource.send(scope).count}</span>".html_safe %>
-                <% end %>
-            <% end %>
-            </li>
-          <% end %>
-        </ul>
-      </li>
-
-      <% predefined_filters.each do |filter, action, scope| %>
-        <li>
-          <% url = action.is_a?(String) ? params.dup.cleanup.merge(:action => action) : action %>
-          <%= link_to url do %>
-            <%= Typus::I18n.t(filter) %>
-            <% if @resource.typus_options_for(:counters) && scope && @resource.respond_to?(scope) %>
-              <%= "&nbsp;<span class='badge'>#{@resource.send(scope).count}</span>".html_safe %>
-            <% end %>
-          <% end %>
-        </li>
-      <% end %>
-
-      <% if 1 == 2 && resource.any? && (formats = resource.typus_options_for(:export).extract_settings).any? %>
-        <% formats.each do |format| %>
-          <li><%= link_to format.upcase, :format => format %></li>
-        <% end %>
-      <% end %>
-    <% end %>
+    <%= render partial: 'admin/resources/navigation/index' if params[:action] == 'index' %>
   </ul>
 </div>
