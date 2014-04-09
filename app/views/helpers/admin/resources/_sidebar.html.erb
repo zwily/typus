@@ -4,13 +4,20 @@
     item_actions = {
       edit: { message: Typus::I18n.t('Edit'), icon: 'edit' },
       show: { message: Typus::I18n.t('Show'), icon: 'info-sign' },
-      destroy: { message: Typus::I18n.t('Destroy'), icon: 'remove' },
+      destroy: {
+        message: Typus::I18n.t('Destroy'),
+        icon: 'remove',
+        data: {
+          confirm: "#{Typus::I18n.t("Trash")}?",
+          method: 'delete',
+        },
+      },
     }
   %>
 
   <% item_actions.each do |key, value| %>
     <li class="<%= params[:action].to_sym.eql?(key) ? "active" : "inactive" %>">
-    <%= link_to url_for(params.merge(action: key)) do %>
+    <%= link_to url_for(params.merge(action: key)), data: value[:data] do %>
       <i class="icon-<%= value[:icon] %>"></i>
       <%= value[:message] %>
     <% end %>

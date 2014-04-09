@@ -8,7 +8,11 @@ module Admin::Resources::DataTypes::HasOneHelper
 
     set_has_one_resource_actions
 
-    locals = { :association_name => @association_name, :table => build_relationship_table, :add_new => nil }
+    locals = {
+      association_name: @association_name,
+      table: build_relationship_table,
+      add_new: nil,
+    }
 
     if @items.empty?
       options = { "resource[#{@reflection.foreign_key}]" => @item.id }
@@ -20,17 +24,21 @@ module Admin::Resources::DataTypes::HasOneHelper
 
   def build_add_new_for_has_one(klass, field, options = {})
     if admin_user.can?("create", klass)
-      default_options = { :controller => "/admin/#{klass.to_resource}",
-                          :action => "new",
-                          :_popup => true }
+      default_options = {
+        controller: "/admin/#{klass.to_resource}",
+        action: "new",
+        _popup: true,
+      }
 
-      link_to Typus::I18n.t("Add"), default_options.merge(options), { :class => "iframe_with_page_reload" }
+      link_to Typus::I18n.t("Add"), default_options.merge(options), { class: "iframe_with_page_reload" }
     end
   end
 
   def set_has_one_resource_actions
-    @resource_actions = [["Edit", { :action => "edit" }, {}],
-                         ["Trash", { :action => "destroy" }, { :data => { :confirm => Typus::I18n.t("Trash?") } }]]
+    @resource_actions = [
+      ["Edit", { :action => "edit" }, {}],
+      ["Trash", { :action => "destroy" }, { :data => { :confirm => Typus::I18n.t("Trash?") } }],
+    ]
   end
 
 end

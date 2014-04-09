@@ -18,13 +18,13 @@ class Admin::ResourcesController < Admin::BaseController
     get_objects
 
     custom_actions_for(:index).each do |action|
-      prepend_resources_action(action.titleize, {:action => action, :id => nil})
+      prepend_resources_action(action.titleize, {action: action, id: nil})
     end
 
     respond_to do |format|
       format.html do
         set_default_action
-        add_resource_action("Destroy", {:action => "destroy"}, { :data => { :confirm => "#{Typus::I18n.t("Trash")}?" }, :method => 'delete'})
+        add_resource_action("Destroy", {action: "destroy"}, {data: {confirm: "#{Typus::I18n.t("Trash")}?"}, method: 'delete'})
         get_paginated_data
       end
 
