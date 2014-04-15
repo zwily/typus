@@ -2,16 +2,9 @@
 
   <%
      item_actions = {
-             edit: { message: Typus::I18n.t('Edit'), icon: 'edit' },
-             show: { message: Typus::I18n.t('Show'), icon: 'info-sign' },
-             destroy: {
-                     message: Typus::I18n.t('Destroy'),
-                     icon: 'remove',
-                     data: {
-                             confirm: "#{Typus::I18n.t('Trash')}?",
-                             method: 'delete',
-                     },
-             },
+       edit: { message: Typus::I18n.t('Edit'), icon: 'edit' },
+       show: { message: Typus::I18n.t('Show'), icon: 'info-sign' },
+       destroy: { message: Typus::I18n.t('Destroy'), icon: 'remove' },
      }
   %>
 
