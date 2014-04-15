@@ -8,7 +8,7 @@
         message: Typus::I18n.t('Destroy'),
         icon: 'remove',
         data: {
-          confirm: "#{Typus::I18n.t("Trash")}?",
+          confirm: "#{Typus::I18n.t('Trash')}?",
           method: 'delete',
         },
       },
@@ -16,7 +16,7 @@
   %>
 
   <% item_actions.each do |key, value| %>
-    <li class="<%= params[:action].to_sym.eql?(key) ? "active" : "inactive" %>">
+    <li class="<%= params[:action].to_sym.eql?(key) ? 'active' : 'inactive' %>">
     <%= link_to url_for(params.merge(action: key)), data: value[:data] do %>
       <i class="icon-<%= value[:icon] %>"></i>
       <%= value[:message] %>
@@ -28,7 +28,7 @@
 
   <% if actions.any? %>
     <% actions.each do |action| %>
-      <% klass = action[:url][:action].eql?(params[:action]) ? "active" : "inactive" %>
+      <% klass = action[:url][:action].eql?(params[:action]) ? 'active' : 'inactive' %>
       <li class="<%= klass %>">
       <%= link_to url_for(action[:url]) do %>
         <i class="icon-<%= action[:icon] %>"></i>

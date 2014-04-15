@@ -24,11 +24,11 @@ module Admin::Resources::FormHelper
 
   def typus_template_field(attribute, template, form)
     options = {
-      :start_year => @resource.typus_options_for(:start_year),
-      :end_year => @resource.typus_options_for(:end_year),
-      :minute_step => @resource.typus_options_for(:minute_step),
-      :include_blank => true,
-      :class => 'input-xxlarge',
+      start_year: @resource.typus_options_for(:start_year),
+      end_year: @resource.typus_options_for(:end_year),
+      minute_step: @resource.typus_options_for(:minute_step),
+      include_blank: true,
+      class: 'form-control',
     }
 
     label_text = @resource.human_attribute_name(attribute)
@@ -38,14 +38,14 @@ module Admin::Resources::FormHelper
     end
 
     locals = {
-      :resource => @resource,
-      :attribute => attribute,
-      :attribute_id => "#{@resource.table_name}_#{attribute}",
-      :options => options,
-      :html_options => {},
-      :form => form,
-      :label_text => label_text,
-      :help_block => help_block,
+      resource: @resource,
+      attribute: attribute,
+      attribute_id: "#{@resource.table_name}_#{attribute}",
+      options: options,
+      html_options: {},
+      form: form,
+      label_text: label_text,
+      help_block: help_block,
     }
 
     render "admin/templates/#{template}", locals
@@ -59,26 +59,26 @@ module Admin::Resources::FormHelper
     options = {}
 
     if admin_user.can?('create', @resource.model_name)
-      options["_addanother"] = "Save and add another"
+      options[:_addanother] = 'Save and add another'
     end
 
     if admin_user.can?('edit', @resource.model_name)
-      options["_continue"] = "Save and continue editing"
+      options[:_continue] = 'Save and continue editing'
     end
 
-    options["_save"] = "Save"
+    options[:_save] = 'Save'
 
     options
   end
 
   def save_options_for_headless_mode
     return unless headless_mode?
-    { "_continue" => "Save" }
+    { _continue: 'Save' }
   end
 
   def save_options_for_user_class
     return unless !defined?(Typus.user_class) && Typus.user_class == @resource && admin_user.is_not_root?
-    { "_continue" => "Save and continue editing" }
+    { _continue: 'Save and continue editing' }
   end
 
 end

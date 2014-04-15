@@ -105,10 +105,10 @@ module Typus
   @@ip_whitelist = []
 
   mattr_accessor :link_to_view_site
-  @@link_to_view_site = false
+  @@link_to_view_site = true
 
   mattr_accessor :link_to_help
-  @@link_to_help = false
+  @@link_to_help = true
 
   class << self
 

@@ -14,7 +14,7 @@ module Admin::Resources::ListHelper
   end
 
   def build_actions(&block)
-    render "helpers/admin/resources/actions", block: block
+    render 'helpers/admin/resources/actions', block: block
   end
 
   #--

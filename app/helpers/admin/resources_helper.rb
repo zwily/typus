@@ -7,7 +7,7 @@ module Admin::ResourcesHelper
       rejections = %w(controller action locale utf8 sort_order order_by search page)
       hidden_filters.delete_if { |k, v| rejections.include?(k) }
 
-      render "helpers/admin/resources/search", hidden_filters: hidden_filters
+      render 'helpers/admin/resources/search', hidden_filters: hidden_filters
     end
   end
 
@@ -16,9 +16,9 @@ module Admin::ResourcesHelper
     resources = admin_user.application(app_name).map(&:constantize).delete_if { |k| k.typus_options_for(:hide_from_sidebar) }
 
     if resources.any?
-      render "helpers/admin/resources/sidebar", resources: resources
+      render 'helpers/admin/resources/sidebar', resources: resources
     else
-      render "admin/dashboard/sidebar"
+      render 'admin/dashboard/sidebar'
     end
   end
 
