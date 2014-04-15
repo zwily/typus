@@ -17,8 +17,5 @@
   <% locals = { options: params.dup.cleanup.merge!(action: 'update') } %>
   <%= render 'form', locals %>
 
-  <% unless headless_mode? %>
-    <%= render 'admin/shared/modals' %>
-    <%= typus_relationships %>
-  <% end %>
+  <%= render 'admin/shared/modals' unless headless_mode? %>
 <% end %>
