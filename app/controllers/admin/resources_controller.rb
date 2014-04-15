@@ -148,6 +148,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def get_objects
+    cleanup_params
     set_scope
     set_wheres
     set_joins
@@ -246,6 +247,10 @@ class Admin::ResourcesController < Admin::BaseController
 
   def permit_params!
     params[@object_name].permit!
+  end
+
+  def cleanup_params
+    params.delete_if { |_, v| v.empty? }
   end
 
 end
