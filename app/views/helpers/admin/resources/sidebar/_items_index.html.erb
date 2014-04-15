@@ -1,0 +1,53 @@
+<% return unless params[:action] == 'index' %>
+
+<% if @resource.typus_scopes.any? %>
+  <h3>Scopes</h3>
+
+  <ul class="nav nav-pills nav-stacked">
+    <% @resource.typus_scopes.each do |scope| %>
+      <% klass = params[:scope].eql?(scope) ? "active" : "inactive" %>
+       <li class="<%= klass %>">
+        <%= link_to url_for(params.dup.cleanup.merge(:action => 'index', :scope => scope)) do %>
+          <span class="glyphicon glyphicon-list"></span>
+          <%= Typus::I18n.t(scope.humanize) %>
+          <% if @resource.typus_options_for(:counters)  %>
+            <%= "&nbsp; <span class='badge'>#{@resource.send(scope).count}</span>".html_safe %>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if predefined_filters.any? %>
+  <h3>Filters</h3>
+
+  <ul class="nav nav-pills nav-stacked">
+    <% predefined_filters.each do |filter, action, scope| %>
+      <li>
+        <% url = action.is_a?(String) ? params.dup.cleanup.merge(:action => action) : action %>
+        <%= link_to url do %>
+          <%= Typus::I18n.t(filter) %>
+          <% if @resource.typus_options_for(:counters) && scope && @resource.respond_to?(scope) %>
+            <%= "&nbsp;<span class='badge'>#{@resource.send(scope).count}</span>".html_safe %>
+          <% end %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if resource.any? && (formats = resource.typus_options_for(:export).extract_settings).any? %>
+  <h3>Export</h3>
+
+  <ul class="nav nav-pills nav-stacked">
+    <% formats.each do |format| %>
+      <li>
+        <%= link_to format: format do %>
+          <span class="glyphicon glyphicon-download"></span>
+          <%= format.upcase %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

@@ -1,0 +1,31 @@
+<% if @item && @item.persisted? %>
+
+  <%
+     item_actions = {
+             edit: { message: Typus::I18n.t('Edit'), icon: 'edit' },
+             show: { message: Typus::I18n.t('Show'), icon: 'info-sign' },
+             destroy: {
+                     message: Typus::I18n.t('Destroy'),
+                     icon: 'remove',
+                     data: {
+                             confirm: "#{Typus::I18n.t('Trash')}?",
+                             method: 'delete',
+                     },
+             },
+     }
+  %>
+
+  <h3>Entry</h3>
+
+  <ul class="nav nav-pills nav-stacked">
+    <% item_actions.each do |key, value| %>
+      <li class="<%= params[:action].to_sym.eql?(key) ? 'active' : 'inactive' %>">
+        <%= link_to url_for(params.merge(action: key)), data: value[:data] do %>
+          <span class="glyphicon glyphicon-<%= value[:icon] %>"></span>
+          <%= value[:message] %>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+
+<% end %>
