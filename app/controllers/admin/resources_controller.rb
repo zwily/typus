@@ -24,7 +24,7 @@ class Admin::ResourcesController < Admin::BaseController
     respond_to do |format|
       format.html do
         set_default_action
-        add_resource_action("Destroy", {action: "destroy"}, {glyphicon: 'trash', data: {confirm: "#{Typus::I18n.t("Trash")}?"}, method: 'delete'})
+        add_resource_action("Destroy", {action: "destroy"}, {glyphicon: 'trash'})
         get_paginated_data
       end
 
@@ -98,13 +98,14 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def destroy
-    if @item.destroy
-      flash[:notice] = Typus::I18n.t("%{model} successfully removed.", model: @resource.model_name.human)
-    else
-      flash[:alert] = @item.errors.full_messages
+    if request.delete?
+      if @item.destroy
+        flash[:notice] = Typus::I18n.t("%{model} successfully removed.", model: @resource.model_name.human)
+      else
+        flash[:alert] = @item.errors.full_messages
+      end
+      redirect_to action: :index
     end
-
-    redirect_to action: :index
   end
 
   def toggle
