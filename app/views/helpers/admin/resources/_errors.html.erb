@@ -1,7 +1,7 @@
 <% if @item.errors.any? %>
-  <div class="alert alert-error">
+  <div class="alert alert-danger">
     <h4 class="alert-heading" style="margin-bottom: 10px;">
-      <%= Typus::I18n.t("%{errors} prohibited this page from being saved:", :errors => pluralize(@item.errors.count, "error")) %>
+      <%= Typus::I18n.t('%{errors} prohibited this page from being saved:', errors: pluralize(@item.errors.count, 'error')) %>
     </h4>
     <ul>
     <% @item.errors.full_messages.each do |full_message| %>
