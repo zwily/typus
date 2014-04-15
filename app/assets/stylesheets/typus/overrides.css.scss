@@ -4,9 +4,9 @@
 
 // form .button_to { display: inline!important; }
 
-.base.entry.edit .main form,
-.base.entry.create .main form,
-.base.entry.new .main form {
+.base.edit .main form,
+.base.create .main form,
+.base.new .main form {
   margin-bottom: 20px;
 }
 
