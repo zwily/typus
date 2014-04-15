@@ -1,12 +1,12 @@
-Dummy::Application.routes.draw do
+Rails.application.routes.draw do
 
   devise_for :devise_users
 
-  scope "admin", :module => :admin, :as => "admin" do
-    get "settings" => "settings#index", :as => "settings"
-    post "settings" => "settings#update"
+  scope 'admin', :module => :admin, :as => 'admin' do
+    get 'settings' => 'settings#index', :as => 'settings'
+    post 'settings' => 'settings#update'
   end
 
-  root :to => redirect("/admin") unless Typus.subdomain
+  root :to => redirect('/admin') unless Typus.subdomain
 
 end

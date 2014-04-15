@@ -2,15 +2,7 @@
 
 <%= render partial: 'admin/templates/modals/belongs_to', locals: locals %>
 
-<div class="control-group" id="<%= attribute_id %>_li">
-  <%= form.label attribute, label_text, { :class => "control-label" } %>
-  <div class="controls">
-    <% if values.any? %>
-      <%= form.select related_fk, values, options, html_options %>
-    <% else %>
-      <%= Typus::I18n.t("No entries found.") %>
-    <% end %>
-
-    <%= build_label_text_for_belongs_to(related, html_options, options) %>
-  </div>
+<div class="form-group" id="<%= attribute_id %>_li">
+  <%= form.label attribute, label_text, { class: 'control-label' } %> <%= build_label_text_for_belongs_to(related, html_options, options) %>
+  <%= form.select related_fk, values, options, html_options %>
 </div>

@@ -18,18 +18,18 @@ module Admin::Resources::DataTypes::BelongsToHelper
       related.order(related.typus_order_by).map { |p| [p.to_label, p.id] }
     end
 
-    attribute_id = "#{@resource.name.underscore}_#{attribute}_id".gsub("/", "_")
+    attribute_id = "#{@resource.name.underscore}_#{attribute}_id".gsub('/', '_')
 
-    render "admin/templates/belongs_to",
-           :attribute => attribute,
-           :attribute_id => attribute_id,
-           :form => form,
-           :related_fk => related_fk,
-           :related => related,
-           :label_text => label_text.html_safe,
-           :values => values,
-           :html_options => {},
-           :options => { :include_blank => true, :attribute => "#{@resource.name.underscore}_#{related_fk}" }
+    render 'admin/templates/belongs_to',
+           attribute: attribute,
+           attribute_id: attribute_id,
+           form: form,
+           related_fk: related_fk,
+           related: related,
+           label_text: label_text.html_safe,
+           values: values,
+           html_options: { class: 'form-control' },
+           options: { include_blank: true, attribute: "#{@resource.name.underscore}_#{related_fk}" }
   end
 
   def table_belongs_to_field(attribute, item)
@@ -48,9 +48,9 @@ module Admin::Resources::DataTypes::BelongsToHelper
     data = item.send(attribute)
 
     options = {
-      :controller => data.class.to_resource,
-      :action => params[:action],
-      :id => data.id
+      controller: data.class.to_resource,
+      action: params[:action],
+      id: data.id,
     }
 
     params[:_popup] ? data.to_label : link_to(data.to_label, options)
@@ -61,13 +61,13 @@ module Admin::Resources::DataTypes::BelongsToHelper
     class_name = att_assoc.options[:class_name] || filter.capitalize.camelize
     resource = class_name.constantize
 
-    items = [[Typus::I18n.t("View all %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase.pluralize), ""]]
+    items = [[Typus::I18n.t('View all %{attribute}', attribute: @resource.human_attribute_name(filter).downcase.pluralize), '']]
     items += resource.order(resource.typus_order_by).map { |v| [v.to_label, v.id] }
   end
 
   def build_label_text_for_belongs_to(klass, html_options, options)
     if html_options[:disabled] == true
-      Typus::I18n.t("Read only")
+      Typus::I18n.t('Read only')
     elsif admin_user.can?('create', klass) && !headless_mode?
       build_add_new_for_belongs_to(klass, options)
     end
@@ -75,10 +75,10 @@ module Admin::Resources::DataTypes::BelongsToHelper
 
   def build_add_new_for_belongs_to(klass, options)
     html_options = set_modal_options_for(klass)
-    html_options["data-controls-modal"] = "modal-from-dom-#{options[:attribute]}"
-    html_options["url"] = "/admin/#{klass.to_resource}/new?_popup=true"
+    html_options['data-controls-modal'] = "modal-from-dom-#{options[:attribute]}"
+    html_options['url'] = "/admin/#{klass.to_resource}/new?_popup=true"
 
-    link_to Typus::I18n.t("Add"), { :anchor => html_options['data-controls-modal'] }, html_options
+    link_to Typus::I18n.t('Add'), { :anchor => html_options['data-controls-modal'] }, html_options
   end
 
 end

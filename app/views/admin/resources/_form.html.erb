@@ -1,10 +1,8 @@
 <%= render 'form_javascripts' %>
 
-<% form_class = headless_mode? ? 'form-vertical' : 'form-horizontal' %>
-
 <%= form_for @item,
             :url => options,
-            :html => { role: 'form', multipart: true, class: form_class } do |form| %>
+            :html => { role: 'form', multipart: true } do |form| %>
 
   <%= render 'helpers/admin/resources/errors' %>
 

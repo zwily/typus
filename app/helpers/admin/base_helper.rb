@@ -19,19 +19,17 @@ module Admin::BaseHelper
   end
 
   def admin_edit_user_path(user)
-    { :controller => "/admin/#{Typus.user_class.to_resource}",
-      :action => "edit",
-      :id => user.id }
+    { controller: "/admin/#{Typus.user_class.to_resource}",
+      action: 'edit',
+      id: user.id }
   end
 
   def admin_display_flash_message
     if flash.any?
       String.new.tap do |html|
         flash.each do |type, message|
-          if type == :notice
-            type = 'info'
-          end
-          html << content_tag(:div, message, :id => 'flash', :class => "alert alert-#{type}")
+          type = 'info' if type.to_sym == :notice
+          html << content_tag(:div, message, id: 'flash', class: "alert alert-#{type}")
         end
       end.html_safe
     end

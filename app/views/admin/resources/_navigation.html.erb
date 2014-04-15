@@ -1,9 +1,6 @@
 <% unless headless_mode? %>
-  <div class="tabbable tabs" style="margin-bottom: 10px;">
-    <ul class="nav nav-tabs">
-      <%= build_sidebar %>
-
-      <%= render partial: 'admin/resources/navigation/index' if params[:action] == 'index' %>
-    </ul>
-  </div>
+  <ul class="nav nav-tabs">
+    <%= build_sidebar %>
+    <%= render partial: 'admin/resources/navigation/index' if params[:action] == 'index' %>
+  </ul>
 <% end %>

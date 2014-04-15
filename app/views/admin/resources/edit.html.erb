@@ -8,7 +8,7 @@
 
   <% unless headless_mode? %>
     <h1>
-      <%= link_to @resource.model_name.human.pluralize, url_for(params.merge(action: nil, id: nil)) %>
+      <%= link_to @resource.model_name.human.pluralize, url_for(params.merge(action: '', id: nil)) %>
       /
       <%= page_title %>
     </h1>
