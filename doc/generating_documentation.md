@@ -1,8 +1,14 @@
 # Generating the docs
 
-    # install Sphinx
-    sudo easy_install -U Sphinx
-    # go to the guide
-    doc/user_guide
-    # run the build
+Install Sphinx:
+
+    sudo easy_install pip
+    sudo pip install Sphinx
+
+Go to the guide:
+
+    cd doc/user_guide
+
+Build the docs:
+
     make html
