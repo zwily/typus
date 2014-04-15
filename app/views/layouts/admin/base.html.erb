@@ -16,16 +16,12 @@
 
   <div class="container-fluid">
     <div class="row-fluid">
-      <% if controller.controller_name.eql?('dashboard') %>
-        <%= yield %>
-      <% else %>
-        <div class="col-md-3 sidebar">
-          <%= render 'navigation' %>
-        </div>
-        <div class="col-md-9 main">
-          <%= yield :main_grid %>
-        </div>
-      <% end %>
+      <div class="col-md-3 sidebar">
+        <%= render 'sidebar' %>
+      </div>
+      <div class="col-md-9 main">
+        <%= yield :main_grid %>
+      </div>
     </div>
   </div>
 

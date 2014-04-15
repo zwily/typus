@@ -6,7 +6,14 @@
     <span class="icon-bar"></span>
     <span class="icon-bar"></span>
   </button>
-  <a class="navbar-brand" href="#"><%= admin_title %></a>
+
+  <% if (url = Typus.link_to_view_site) %>
+    <%= link_to url, class: 'navbar-brand' do %>
+      <%= admin_title %>
+    <% end %>
+  <% else %>
+    <span class="navbar-brand"><%= admin_title %></span>
+  <% end %>
 </div>
 
 <!-- Collect the nav links, forms, and other content for toggling -->

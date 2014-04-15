@@ -12,8 +12,6 @@
 
   <%= admin_display_flash_message %>
 
-  <% render 'navigation' %>
-
   <% locals = { options: params.dup.cleanup.merge!(action: 'update') } %>
   <%= render 'form', locals %>
 
