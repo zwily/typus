@@ -61,3 +61,6 @@ gem 'paperclip', '~> 4.1.1'
 
 # MongoDB
 gem 'mongoid', :git => 'git://github.com/mongoid/mongoid.git'
+
+# Webserver
+gem 'puma'
