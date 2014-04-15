@@ -5,6 +5,9 @@ source 'https://rubygems.org'
 # development dependencies will be added by default to the :development group.
 gemspec
 
+# Spring!
+gem 'spring'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
 
