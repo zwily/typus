@@ -1,11 +1,11 @@
 <% if @resource.typus_scopes.any? || predefined_filters.any? %>
   <li class="dropdown" style="float:right;">
     <a class="dropdown-toggle" data-toggle="dropdown" href="#">View <b class="caret"></b></a>
-    <ul class="dropdown-menu" style="left:auto; right:0;">
-      <% all_klass = params[:scope] ? "inactive" : "active" %>
+    <ul class="dropdown-menu">
+      <% all_klass = params[:scope] ? 'inactive' : 'active' %>
       <li class="<%= all_klass %>">
         <%= link_to url_for(params.dup.cleanup.merge(:action => 'index')) do %>
-          <%= Typus::I18n.t("All") %>
+          <%= Typus::I18n.t('All') %>
           <% if @resource.typus_options_for(:counters) %>
             <%= "&nbsp;<span class='badge'>#{resource.count}</span>".html_safe %>
           <% end %>
@@ -38,7 +38,8 @@
     </li>
   <% end %>
 
-  <% if 1 == 2 && resource.any? && (formats = resource.typus_options_for(:export).extract_settings).any? %>
+  <% if resource.any? && (formats = resource.typus_options_for(:export).extract_settings).any? %>
+    <h3>Export</h3>
     <% formats.each do |format| %>
       <li><%= link_to format.upcase, :format => format %></li>
     <% end %>

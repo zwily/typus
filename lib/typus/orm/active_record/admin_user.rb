@@ -11,16 +11,16 @@ module Typus
         include Typus::Orm::ActiveRecord::InstanceMethods
 
         included do
-          attr_reader   :password
+          attr_reader :password
           attr_accessor :password_confirmation
 
           # attr_protected :role, :status
 
-          validates :email, :presence => true, :uniqueness => true, :format => { :with => Typus::Regex::Email }
-          validates :password, :confirmation => true
-          validates :password_digest, :presence => true
+          validates :email, presence: true, uniqueness: true, format: { with: Typus::Regex::Email }
+          validates :password, confirmation: true
+          validates :password_digest, presence: true
           validate :password_must_be_strong
-          validates :role, :presence => true
+          validates :role, presence: true
 
           serialize :preferences
 
@@ -74,7 +74,7 @@ module Typus
 
         def password_must_be_strong(count = 6)
           if password.present? && password.size < count
-            errors.add(:password, :too_short, :count => count)
+            errors.add(:password, :too_short, count: count)
           end
         end
 

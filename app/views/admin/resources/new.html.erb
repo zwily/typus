@@ -12,8 +12,6 @@
 
   <%= admin_display_flash_message %>
 
-  <%= render 'navigation' %>
-
   <%= render 'form', { :options => params.dup.cleanup.merge(:action => 'create') } %>
 
   <% unless headless_mode? %>
