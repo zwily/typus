@@ -4,6 +4,12 @@
 
 // form .button_to { display: inline!important; }
 
+.base.entry.edit .main form,
+.base.entry.create .main form,
+.base.entry.new .main form {
+  margin-bottom: 20px;
+}
+
 form .form-group { margin-left: 0px!important; margin-right: 0px!important; }
 
 .sidebar {

@@ -1,8 +1,6 @@
 <%= render 'form_javascripts' %>
 
-<%= form_for @item,
-            url: options,
-            html: { role: 'form', multipart: true } do |form| %>
+<%= form_for @item, url: options, html: { role: 'form', multipart: true } do |form| %>
 
   <%= render 'helpers/admin/resources/errors' %>
 
@@ -16,15 +14,11 @@
     <%= hidden_field_tag '_continue' %>
   <% else %>
     <% build_save_options.each do |key, value, special| %>
-      <% klass = key.eql?(:_save) ? 'btn-primary' : 'btn-default' %>
       <%
-        message = Typus::I18n.t(value)
-        options = { :name => key,
-                    :onclick => 'Typus.setConfirmUnload(false);',
-                    'data-disable-with' => message,
-                    :class => "btn #{klass}" }
+        klass = key.eql?(:_save) ? 'btn btn-primary' : 'btn btn-default'
+        options = { name: key, onclick: 'Typus.setConfirmUnload(false);', class: klass }
       %>
-      <%= submit_tag message, options %>
+      <%= submit_tag Typus::I18n.t(value), options %>
     <% end %>
   <% end %>
 
