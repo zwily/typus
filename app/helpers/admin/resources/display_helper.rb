@@ -1,7 +1,7 @@
 module Admin::Resources::DisplayHelper
 
   def mdash
-    "&mdash;".html_safe
+    '&mdash;'.html_safe
   end
 
   def build_display(item, fields)

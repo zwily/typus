@@ -1,7 +1,8 @@
-<div class="control-group" id="<%= attribute_id %>">
-  <%= form.label attribute, label_text, { :class => "control-label" } %>
+<% html_options = { class: 'control-label' } %>
+
+<div class="form-group" id="<%= attribute_id %>">
+  <%= form.label attribute, label_text, { class: 'control-label' } %>
   <div class="controls">
-    <%#= form.datetime_select attribute, options, html_options %>
-    <%= form.text_field attribute, options %>
+    <%= form.datetime_select attribute, options, html_options %>
   </div>
 </div>

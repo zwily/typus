@@ -3,7 +3,7 @@
   options = options.merge!(custom)
 %>
 
-<div class="control-group" id="<%= attribute_id %>">
+<div class="form-group" id="<%= attribute_id %>">
   <%= form.label attribute, label_text.html_safe, { :class => "control-label" } %>
   <div class="controls">
     <%= form.text_area attribute, options %>

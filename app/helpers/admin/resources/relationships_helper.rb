@@ -10,7 +10,6 @@ module Admin::Resources::RelationshipsHelper
 
   def build_pagination
     @data = @item.send(@field).order(@model_to_relate.typus_order_by).where(set_conditions)
-    page = params["#{@association_name}_page"]
     items_per_page = @model_to_relate.typus_options_for(:per_page)
     @items = @data.limit(items_per_page)
   end

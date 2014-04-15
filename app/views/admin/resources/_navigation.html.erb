@@ -1,6 +1,8 @@
 <% unless headless_mode? %>
   <ul class="nav nav-pills nav-stacked">
     <%= build_sidebar %>
-    <%= render partial: 'admin/resources/navigation/index' if params[:action] == 'index' %>
+    <% if params[:action] == 'index' %>
+      <%= render partial: 'admin/resources/navigation/index' %>
+    <% end %>
   </ul>
 <% end %>
