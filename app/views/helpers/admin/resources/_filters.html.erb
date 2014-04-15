@@ -1,5 +1,5 @@
-<div class="well well-small" style="margin-top: 10px;">
-  <%= form_tag nil, method: :get, class: "form-inline", role: 'form' do %>
+<div class="well well-sm" style="margin-top: 10px;">
+  <%= form_tag nil, method: :get, class: 'form-inline', role: 'form' do %>
 
     <% filters.each do |filter| %>
       <% key, value = filter[:key], filter[:value] %>
@@ -10,7 +10,7 @@
       <%= hidden_field_tag key, value %>
     <% end %>
 
-    <%= submit_tag Typus::I18n.t("Filter"), name: nil, class: "btn btn-default" %>
+    <%= submit_tag Typus::I18n.t('Filter'), name: nil, class: 'btn btn-primary btn-xs' %>
 
   <% end %>
 </div>

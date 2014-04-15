@@ -1,5 +1,5 @@
 <%
-  page_title = Typus::I18n.t("Add %{resource}", :resource => @resource.model_name.human)
+  page_title = Typus::I18n.t('Add %{resource}', :resource => @resource.model_name.human)
   admin_title(page_title)
 %>
 
@@ -14,9 +14,7 @@
 
   <%= render 'navigation' %>
 
-  <% locals = { :options => params.dup.cleanup.merge(:action => 'create') } %>
-
-  <%= render 'form', locals %>
+  <%= render 'form', { :options => params.dup.cleanup.merge(:action => 'create') } %>
 
   <% unless headless_mode? %>
     <%= render 'admin/shared/modals' %>

@@ -18,7 +18,7 @@
   <%= render 'show' %>
   <%= render 'navigation' %>
 
-  <dl class="dl-horizontal">
+  <dl>
     <% build_display(@item, fields).each do |attribute, type| %>
       <dt><%= attribute %></dt>
       <dd><%= type %></dd>

@@ -8,28 +8,26 @@
 
   <%= render 'helpers/admin/resources/errors' %>
 
-  <fieldset>
-    <%= build_form(fields, form) %>
+  <%= build_form(fields, form) %>
 
-    <% if headless_mode? %>
-      <% unless @item.new_record? %>
-        <%= hidden_field_tag '_id', @item.id %>
-        <%= hidden_field_tag '_label', @item.to_label %>
-      <% end %>
-      <%= hidden_field_tag '_continue' %>
-    <% else %>
-      <% build_save_options.each do |key, value, special| %>
-        <% klass = key.eql?(:_save) ? 'btn-primary' : 'btn-default' %>
-        <%
-          message = Typus::I18n.t(value)
-          options = { :name => key,
-                      :onclick => 'Typus.setConfirmUnload(false);',
-                      'data-disable-with' => message,
-                      :class => "btn #{klass}" }
-        %>
-        <%= submit_tag message, options %>
-      <% end %>
+  <% if headless_mode? %>
+    <% unless @item.new_record? %>
+      <%= hidden_field_tag '_id', @item.id %>
+      <%= hidden_field_tag '_label', @item.to_label %>
     <% end %>
-  </fieldset>
+    <%= hidden_field_tag '_continue' %>
+  <% else %>
+    <% build_save_options.each do |key, value, special| %>
+      <% klass = key.eql?(:_save) ? 'btn-primary' : 'btn-default' %>
+      <%
+        message = Typus::I18n.t(value)
+        options = { :name => key,
+                    :onclick => 'Typus.setConfirmUnload(false);',
+                    'data-disable-with' => message,
+                    :class => "btn #{klass}" }
+      %>
+      <%= submit_tag message, options %>
+    <% end %>
+  <% end %>
 
 <% end %>
