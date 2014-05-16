@@ -45,11 +45,11 @@ module Admin::Resources::TableHelper
   end
 
   def table_actions(model, item, association_name = nil)
-    resource_actions.reject! do |body, url, options, proc|
+    @resource_actions.reject! do |body, url, options, proc|
       admin_user.cannot?(url[:action], model.name)
     end
 
-    resource_actions.map do |body, url, options, proc|
+    @resource_actions.map do |body, url, options, proc|
       next if proc && proc.respond_to?(:call) && proc.call(item) == false
       { :message => Typus::I18n.t(body),
         :url => params.dup.cleanup.merge({ :controller => "/admin/#{model.to_resource}", :id => item.id }).merge(url),
