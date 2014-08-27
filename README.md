@@ -12,8 +12,6 @@ concentrate on your application instead of the bits to manage the system.
 
 > A category of people or things having common characteristics.
 
-![Main View](http://cloud.github.com/downloads/fesplugas/typus/001-typus.png)
-
 
 ## Key Features
 
@@ -22,21 +20,20 @@ concentrate on your application instead of the bits to manage the system.
 - Internationalized interface ([See available translations][typus_locales])
 - Customizable and extensible templates.
 - Integrated [paperclip][paperclip] and [dragonfly][dragonfly] attachments viewer.
-- Supports Rails 4.0 and 3.2.
+- Supports Rails 4
 
 
 ## Installing
 
 Add **Typus** to your `Gemfile`.
 
-If you are using **Rails 4.0**, you can use `master` or `4-0-stable` branch:
+If you are using **Rails 4.1** or **Rails 4.2**:
 
-    gem "typus", :git => "git://github.com/fesplugas/typus.git"
-    gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "4-0-stable"
+    gem "typus", github: "typus/typus"
 
-If you are using **Rails 3.2**:
+If you are using **Rails 4.0**:
 
-    gem "typus", :git => "git://github.com/fesplugas/typus.git", :branch => "3-2-stable"
+    gem "typus", github: "typus/typus", branch: "4-0-stable"
 
 Update your bundle, run the generator and start the application server:
 
@@ -54,8 +51,18 @@ and go to <http://0.0.0.0:3000/admin>.
 To test, clone the repo and run:
 
     $ git clone --recursive git://github.com/fesplugas/typus.git
-    $ bundle install --path vendor/bundle
+    $ bundle install
     $ bundle exec rake
+
+
+## Running a demo on localhost
+
+To run a demo on localhost:
+
+    git clone --recursive git://github.com/typus/typus.git
+    cd test/dummy
+    ./bin/setup
+    ./bin/rails server
 
 
 ## Submitting an Issue
