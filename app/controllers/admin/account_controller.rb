@@ -4,8 +4,8 @@ class Admin::AccountController < Admin::BaseController
 
   skip_before_filter :reload_config_and_roles, :authenticate, :set_locale
 
-  before_filter :sign_in?, :except => [:forgot_password, :send_password, :show]
-  before_filter :new?, :only => [:forgot_password, :send_password]
+  before_filter :sign_in?, except: [:forgot_password, :send_password, :show]
+  before_filter :new?, only: [:forgot_password, :send_password]
 
   def new
     flash[:notice] = Typus::I18n.t("Enter your email below to create the first user.")
@@ -13,7 +13,7 @@ class Admin::AccountController < Admin::BaseController
 
   def create
     user = Typus.user_class.generate(:email => admin_user_params[:email])
-    redirect_to user ? { :action => "show", :id => user.token } : { :action => :new }
+    redirect_to user ? { action: 'show', id: user.token } : { action: :new }
   end
 
   def forgot_password; end
@@ -31,7 +31,7 @@ class Admin::AccountController < Admin::BaseController
     flash[:notice] = Typus::I18n.t("Please set a new password.")
     typus_user = Typus.user_class.find_by_token!(params[:id])
     session[:typus_user_id] = typus_user.id
-    redirect_to params[:return_to] || { :controller => "/admin/#{Typus.user_class.to_resource}", :action => "edit", :id => typus_user.id }
+    redirect_to params[:return_to] || { controller: "/admin/#{Typus.user_class.to_resource}", action: 'edit', id: typus_user.id }
   end
 
   private
