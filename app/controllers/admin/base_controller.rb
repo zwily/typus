@@ -12,7 +12,7 @@ class Admin::BaseController < ActionController::Base
   def verify_remote_ip
     if !request.local? && Typus.ip_whitelist.any?
       unless Typus.ip_whitelist.include?(request.ip)
-        render :text => "IP not in our whitelist."
+        render text: 'IP not in our whitelist.'
       end
     end
   end
@@ -34,7 +34,7 @@ class Admin::BaseController < ActionController::Base
   end
 
   def not_allowed(reason = 'Not allowed!')
-    render :text => reason, :status => :unprocessable_entity
+    render text: reason, status: :unprocessable_entity
   end
 
   def admin_user_params
