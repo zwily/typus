@@ -31,4 +31,4 @@ following example:
 
 I recommend using `Typus Templates`_ as an starting point create you own.
 
-.. _Typus Templates: https://github.com/fesplugas/typus/tree/master/app/views/admin/templates
+.. _Typus Templates: https://github.com/typus/typus/tree/master/app/views/admin/templates

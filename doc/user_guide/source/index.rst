@@ -28,7 +28,7 @@ Key Features
 * **MIT License**, the same as `Rails`_.
 
 
-.. _See available translations: https://github.com/fesplugas/typus/tree/master/config/locales
+.. _See available translations: https://github.com/typus/typus/tree/master/config/locales
 .. _paperclip: http://rubygems.org/gems/paperclip
 .. _dragonfly: http://rubygems.org/gems/dragonfly
 
@@ -57,7 +57,7 @@ To install **Typus**, edit the application ``Gemfile`` and add:
   gem 'typus'
 
   # Bundle edge Typus instead:
-  # gem 'typus', :git => 'https://github.com/fesplugas/typus.git'
+  # gem 'typus', github: 'typus/typus'
 
 Install the **RubyGem** using ``bundler``:
 
@@ -163,7 +163,7 @@ Some interesting ways to contribute to the project:
 * **Hire us** to work on your next project - we build websites large and small.
 
 
-.. _GitHub: https://github.com/fesplugas/typus/
+.. _GitHub: https://github.com/typus/typus/
 .. _Rails: http://rubyonrails.org/
 
 
@@ -185,7 +185,7 @@ Somehow involved in the project:
 .. _David Heinemeier Hansson: http://loudthinking.com/
 .. _Rails: http://rubyonrails.org/
 .. _Django Admin: http://www.djangoproject.com/
-.. _Contributors: http://github.com/fesplugas/typus/contributors
+.. _Contributors: http://github.com/typus/typus/contributors
 
 
 MIT License
