@@ -3,7 +3,6 @@
   This model is used to test:
 
     - ActsAsList on resources_controller
-    - Relate and unrelate for has_and_belongs_to_many.
 
 =end
 
@@ -27,7 +26,7 @@ class Category < ActiveRecord::Base
   # Validations
   #
 
-  validates :name, :presence => true
+  validates :name, presence: true
 
   ##
   # Associations
