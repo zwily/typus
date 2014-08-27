@@ -82,14 +82,14 @@
    to log into Typus, this is useful on systems with critical data
    stored.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...master>
+Changes: <https://github.com/typus/typus/compare/v3.1.10...master>
 
 
 ## 3.1.11 (unreleased)
 
  * Added pagination detection on associations.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...3-1-stable>
+Changes: <https://github.com/typus/typus/compare/v3.1.10...3-1-stable>
 
 
 ## 3.1.10 (2012-03-27)
@@ -99,7 +99,7 @@ Changes: <https://github.com/fesplugas/typus/compare/v3.1.10...3-1-stable>
 
  * [NEW] `Model.typus_scopes` to detect defined scopes.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...v3.1.10>
+Changes: <https://github.com/typus/typus/compare/v3.1.9...v3.1.10>
 
 
 ## 3.1.9 (2012-03-08)
@@ -127,7 +127,7 @@ Changes: <https://github.com/fesplugas/typus/compare/v3.1.9...v3.1.10>
  * [FIXED] Fixed converting route to resource for "singular" class. Eg.
    "CustomerData" was being converted to "CustomerDatum".
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...v3.1.9>
+Changes: <https://github.com/typus/typus/compare/v3.1.8...v3.1.9>
 
 
 # 3.1.8 (2012-02-05)
@@ -147,7 +147,7 @@ Changes: <https://github.com/fesplugas/typus/compare/v3.1.8...v3.1.9>
  * [CHANGED] Updated Gems for the dummy application. This fixes deprecation
    warnings and keeps the plugin up to date.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.7...v3.1.8>
+Changes: <https://github.com/typus/typus/compare/v3.1.7...v3.1.8>
 
 
 ## 3.1.7 (2012-01-25)
@@ -158,7 +158,7 @@ Changes: <https://github.com/fesplugas/typus/compare/v3.1.7...v3.1.8>
 
  * [FIXED] Fixed gemspec to add compatibility with Rails 3.2.0
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.6...v3.1.7>
+Changes: <https://github.com/typus/typus/compare/v3.1.6...v3.1.7>
 
 
 ## 3.1.6 (2012-01-02)
@@ -172,7 +172,7 @@ Changes: <https://github.com/fesplugas/typus/compare/v3.1.6...v3.1.7>
 
  * [FIXED] Independent paginators when showing associations.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.5...v3.1.6>
+Changes: <https://github.com/typus/typus/compare/v3.1.5...v3.1.6>
 
 
 ## 3.1.5 (2011-12-10)
@@ -185,16 +185,16 @@ Changes: <https://github.com/fesplugas/typus/compare/v3.1.5...v3.1.6>
 
  * [CHANGED] ActsAsList hooks moved completely to it's module.
 
- * [CHANGED] Repository moved again to http://github.com/fesplugas/typus
+ * [CHANGED] Repository moved again to http://github.com/typus/typus
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.4...v3.1.5>
+Changes: <https://github.com/typus/typus/compare/v3.1.4...v3.1.5>
 
 
 ## 3.1.4
 
  * [FIXED] Belongs to helper was not creating properly class ids.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.3...v3.1.4>
+Changes: <https://github.com/typus/typus/compare/v3.1.3...v3.1.4>
 
 
 ## 3.1.3
@@ -220,7 +220,7 @@ Changes: <https://github.com/fesplugas/typus/compare/v3.1.3...v3.1.4>
 
  * [FIXED] Detaching a Paperclip was not working.
 
-Changes: <https://github.com/fesplugas/typus/compare/v3.1.2...v3.1.3>
+Changes: <https://github.com/typus/typus/compare/v3.1.2...v3.1.3>
 
 
 ## 3.1.2
