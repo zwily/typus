@@ -23,10 +23,10 @@ class Admin::BaseController < ActionController::Base
 
   def set_locale
     I18n.locale = if admin_user && admin_user.respond_to?(:locale)
-      admin_user.locale
-    else
-      Typus::I18n.default_locale
-    end
+                    admin_user.locale
+                  else
+                    Typus::I18n.default_locale
+                  end
   end
 
   def zero_users
