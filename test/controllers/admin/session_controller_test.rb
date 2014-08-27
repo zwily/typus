@@ -42,7 +42,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
   test 'new is rendered when there are users' do
     FactoryGirl.create(:typus_user)
-    Typus.mailer_sender = nil
+    Typus.stubs(:mailer_sender).returns(nil)
 
     get :new
     assert_response :success
@@ -57,19 +57,14 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
     # verify_typus_sign_in_layout_does_not_include_recover_password_link
     assert !response.body.include?("Recover password")
-
-    Typus.mailer_sender = 'john@example.com'
   end
 
   test "new includes recover_password_link when mailer_sender is set" do
     FactoryGirl.create(:typus_user)
-
-    Typus.mailer_sender = 'john@example.com'
+    Typus.stubs(:mailer_sender).returns('john@example.com')
 
     get :new
     assert response.body.include?("Recover password")
-
-    Typus.mailer_sender = nil
   end
 
   test 'create should not create session for invalid users' do
