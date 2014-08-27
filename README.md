@@ -46,8 +46,6 @@ and go to <http://0.0.0.0:3000/admin>.
 
 ## Testing
 
-[![Build Status](https://travis-ci.org/fesplugas/typus.png?branch=master)](https://travis-ci.org/fesplugas/typus)
-
 To test, clone the repo and run:
 
     $ git clone --recursive git://github.com/fesplugas/typus.git
@@ -81,21 +79,21 @@ pull request with failing specs.
 
 - [Documentation](http://docs.typuscmf.com/)
 - [RubyGems][typus_gem]
-- [Contributors List](http://github.com/fesplugas/typus/contributors)
+- [Contributors List](http://github.com/typus/typus/contributors)
 
 
 ## License
 
 **Typus** is released under the MIT license.
 
-[typus]: http://github.com/fesplugas/typus
+[typus]: http://github.com/typus/typus
 [typus_demo]: http://demo.typuscmf.com/
-[typus_locales]: https://github.com/fesplugas/typus/tree/master/config/locales
+[typus_locales]: https://github.com/typus/typus/tree/master/config/locales
 [typus_gem]: http://rubygems.org/gems/typus
 [paperclip]: http://rubygems.org/gems/paperclip
 [dragonfly]: http://rubygems.org/gems/dragonfly
 [rails]: http://rubyonrails.org/
 [gist]: https://gist.github.com/
-[issues]: https://github.com/fesplugas/typus/issues
+[issues]: https://github.com/typus/typus/issues
 [kaminari]: http://rubygems.org/gems/kaminari
 [will_paginate]: http://rubygems.org/gems/will_paginate
