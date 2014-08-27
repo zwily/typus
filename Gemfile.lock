@@ -120,8 +120,11 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
+    metaclass (0.0.4)
     mime-types (1.25.1)
     minitest (5.4.0)
+    mocha (1.1.0)
+      metaclass (~> 0.0.1)
     moped (2.0.0)
       bson (~> 2.2)
       connection_pool (~> 2.0)
@@ -211,6 +214,7 @@ DEPENDENCIES
   factory_girl_rails
   jbuilder
   jquery-rails
+  mocha
   mongoid!
   mysql2 (~> 0.3.16)
   paperclip (~> 4.2.0)

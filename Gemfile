@@ -61,3 +61,6 @@ gem 'mongoid', github: 'mongoid/mongoid'
 
 # Puma
 gem 'puma'
+
+# Testing stuff
+gem 'mocha'

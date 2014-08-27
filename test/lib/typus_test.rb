@@ -61,10 +61,15 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   test "models are sorted" do
-    expected = %w(AdminUser Animal Article::Entry Asset Bird Case Category Comment
-                DeviseUser Dog Entry EntryBulk EntryDefault EntryTrash
-                ImageHolder Invoice Order Page Post Project ProjectCollaborator
-                Task TypusUser User View)
+    config = {
+      'View' => {},
+      'AdminUser' => {},
+      'Category' => {},
+    }
+
+    Typus::Configuration.stubs(:config).returns(config)
+
+    expected = %w(AdminUser Category View)
     assert_equal expected, Typus.models
   end
 
