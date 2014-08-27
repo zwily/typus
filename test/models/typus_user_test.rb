@@ -102,7 +102,7 @@ class TypusUserTest < ActiveSupport::TestCase
 
   test "admin gets a list of application resources for Admin application" do
     typus_user = FactoryGirl.build(:typus_user)
-    expected = %w(TypusUser DeviseUser).sort
+    expected = %w(AdminUser TypusUser DeviseUser).sort
     assert_equal expected, typus_user.application("Admin").sort
   end
 
