@@ -21,8 +21,12 @@ module Admin::Resources::DataTypes::BooleanHelper
 
   def boolean_filter(filter)
     values  = @resource.typus_boolean(filter)
-    items = [[Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase), ""]]
-    items += values.map { |k, v| [Typus::I18n.t(k.humanize), v] }
+    attribute = @resource.human_attribute_name(filter)
+
+    items = [[attribute.titleize, '']]
+    array = values.map { |k, v| ["#{attribute}:#{Typus::I18n.t(k.humanize)}", v] }
+
+    items + array
   end
 
 end
