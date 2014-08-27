@@ -13,10 +13,14 @@
 
   <%= render 'show' %>
 
-  <dl>
-    <% build_display(@item, fields).each do |attribute, type| %>
-      <dt><%= attribute %></dt>
-      <dd><%= type %></dd>
-    <% end %>
-  </dl>
+  <% build_display(@item, fields).each do |attribute, type| %>
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title"><%= attribute %></h3>
+      </div>
+      <div class="panel-body">
+        <%= type %>
+      </div>
+    </div>
+  <% end %>
 <% end %>
