@@ -23,10 +23,6 @@ Gem::Specification.new do |spec|
   spec.test_files    = []
   spec.require_paths = ["lib"]
 
-<<<<<<< HEAD
-  # spec.add_dependency "jquery-rails"
-=======
->>>>>>> Bumped Rails typus.gemspec
   spec.add_dependency "rails", "~> 4.1.5"
   spec.add_dependency "bcrypt-ruby", "~> 3.1.5"
 end
