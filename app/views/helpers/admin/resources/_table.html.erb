@@ -29,7 +29,7 @@
         <td><%= field %></td>
       <% end %>
       <td width="250">
-        <div class="btn-group">
+        <div class="btn-group btn-group-xs">
           <% table_actions(model, item, association_name).each do |action| %>
             <% html_options = action[:options] || {} %>
             <%= link_to url_for(action[:url]), html_options.merge(class: 'btn btn-default btn-sm') do %>
