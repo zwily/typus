@@ -45,11 +45,19 @@ module Admin::BaseHelper
   end
 
   def body_class
+    klass = %w(base)
+
     if params[:controller] == 'admin/dashboard'
-      "base dashboard #{params[:action].parameterize}"
-    else
-      "base #{@resource.model_name.human.parameterize} #{params[:action].parameterize}"
+      klass << 'dashboard'
     end
+
+    if @resource.try(:model_name)
+      klass << @resource.model_name.human.parameterize
+    end
+
+    klass << params[:action].parameterize
+
+    klass.join(" ")
   end
 
   def typus_search_path
