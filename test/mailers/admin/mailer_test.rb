@@ -18,9 +18,4 @@ class Admin::MailerTest < ActiveSupport::TestCase
     assert_match url, mail.body.encoded
   end
 
-  # This is a kind of hack to verify we are properly setting a value.
-  test 'from is set from test.rb' do
-    assert_equal 'typus@example.com', Admin::Mailer.default[:from]
-  end
-
 end
