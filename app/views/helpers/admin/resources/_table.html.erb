@@ -28,12 +28,12 @@
       <% table_fields_for_item(item, fields).each do |field| %>
         <td><%= field %></td>
       <% end %>
-      <td width="200">
+      <td width="250">
         <div class="btn-group">
           <% table_actions(model, item, association_name).each do |action| %>
             <% html_options = action[:options] || {} %>
             <%= link_to url_for(action[:url]), html_options.merge(class: 'btn btn-default btn-sm') do %>
-              <span class="glyphicon glyphicon-<%= action[:options][:glyphicon] rescue action[:url][:action] %>"></span>
+              <span class="glyphicon glyphicon-<%= action[:options] && action[:options][:glyphicon] || 'asterisk' %>"></span>
               <%= action[:message] %>
             <% end %>
           <% end %>
