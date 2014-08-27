@@ -1,5 +1,6 @@
 .bundle/
 
+dragonfly
 log/*.log
 pkg/
 
