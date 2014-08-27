@@ -47,6 +47,11 @@ module Admin::Resources::FormHelper
     render "admin/templates/#{template}", locals
   end
 
+  # Placeholder
+  def help_block
+    false
+  end
+
   def build_save_options
     save_options_for_user_class || save_options_for_headless_mode || save_options
   end
