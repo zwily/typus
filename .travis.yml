@@ -1,10 +1,9 @@
 rvm:
-  - 2.0.0
-  - 1.9.3
+  - 2.1
 
-notifications:
-  recipients:
-    - support@typuscmf.com
+# notifications:
+#   recipients:
+#     - support@typuscmf.com
 
 services:
   - mongodb
