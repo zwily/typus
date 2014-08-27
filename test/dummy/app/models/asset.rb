@@ -14,12 +14,13 @@ class Asset < ActiveRecord::Base
   #
 
   if defined?(Dragonfly)
+    extend Dragonfly::Model
+    extend Dragonfly::Model::Validations
 
-    # image_accessor :dragonfly
+    dragonfly_accessor :dragonfly
+    dragonfly_accessor :dragonfly_required
 
-    # image_accessor :dragonfly_required
-    # validates :dragonfly_required, :presence => true
-
+    validates :dragonfly_required, presence: true
   end
 
   ##
@@ -27,12 +28,15 @@ class Asset < ActiveRecord::Base
   #
 
   if defined?(Paperclip)
+    PAPERCLIP_STYLES = { medium: '300x300>', thumb: '100x100>' }
 
-    has_attached_file :paperclip, :styles => { :medium => "300x300>", :thumb => "100x100>" }
+    has_attached_file :paperclip, styles: PAPERCLIP_STYLES
 
-    has_attached_file :paperclip_required, :styles => { :medium => "300x300>", :thumb => "100x100>" }
-    validates_attachment_presence :paperclip_required
+    has_attached_file :paperclip_required, styles: PAPERCLIP_STYLES
+    validates_with AttachmentPresenceValidator, attributes: :paperclip_required
 
+    # https://github.com/thoughtbot/paperclip#security-validations
+    do_not_validate_attachment_file_type :paperclip, :paperclip_required
   end
 
   ##
