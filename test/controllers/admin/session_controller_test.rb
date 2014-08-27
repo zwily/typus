@@ -35,7 +35,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
   end
 
   test "get new always sets locale to Typus::I18n.default_locale" do
-    I18n.locale = :jp
+    I18n.locale = :es
     get :new
     assert_equal :en, I18n.locale
   end
