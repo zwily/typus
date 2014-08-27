@@ -52,4 +52,8 @@ module Admin::BaseHelper
     end
   end
 
+  def typus_search_path
+    "/admin/#{params[:controller].remove_prefix}"
+  end
+
 end
