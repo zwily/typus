@@ -27,7 +27,8 @@
 
   <ul class="nav nav-pills nav-stacked">
     <% predefined_filters.each do |filter, action, scope| %>
-      <li>
+      <% klass = params[:action].eql?(action) ? "active" : "inactive" %>
+      <li class="<%= klass %>">
         <% url = action.is_a?(String) ? params.dup.cleanup.merge(:action => action) : action %>
         <%= link_to url do %>
           <%= Typus::I18n.t(filter) %>
