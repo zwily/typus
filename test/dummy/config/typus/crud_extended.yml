@@ -84,11 +84,6 @@ EntryDefault:
   filters: published
   application: CRUD Extended
 
-ReadOnlyEntry:
-  fields:
-    default: title, content, published
-  application: CRUD Extended
-
 Category:
   fields:
     default: name, position

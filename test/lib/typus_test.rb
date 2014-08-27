@@ -64,7 +64,7 @@ class TypusTest < ActiveSupport::TestCase
     expected = %w(AdminUser Animal Article::Entry Asset Bird Case Category Comment
                 DeviseUser Dog Entry EntryBulk EntryDefault EntryTrash
                 ImageHolder Invoice Order Page Post Project ProjectCollaborator
-                ReadOnlyEntry Task TypusUser User View)
+                Task TypusUser User View)
     assert_equal expected, Typus.models
   end
 

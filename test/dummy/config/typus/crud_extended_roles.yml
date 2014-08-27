@@ -7,7 +7,6 @@ admin:
   Page: all, rebuild, rebuild_all
   Post: all
   EntryDefault: all
-  ReadOnlyEntry: all
   Category: all
   EntryBulk: all
   EntryTrash: all

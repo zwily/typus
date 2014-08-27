@@ -12,7 +12,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
     expected = %w(Article::Entry Asset Bird Case Category Comment
                   DeviseUser Dog Entry EntryBulk EntryDefault EntryTrash Git
                   ImageHolder Invoice Order Page Post Project ProjectCollaborator
-                  ReadOnlyEntry Status Task TypusUser User View WatchDog)
+                  Status Task TypusUser User View WatchDog)
     assert_equal expected, typus_user.resources.map(&:first).sort
 
     # FIXME: Order is not included in the list of resources ...
