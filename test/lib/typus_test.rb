@@ -40,7 +40,7 @@ class TypusTest < ActiveSupport::TestCase
   end
 
   test "default_config for image_preview_size and image_thumb_size (dragonfly)" do
-    assert_equal "x650>", Typus.image_preview_size
+    assert_equal "530x", Typus.image_preview_size
     assert_equal "x100", Typus.image_thumb_size
   end
 
