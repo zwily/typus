@@ -49,7 +49,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
 
     # render new and verify title and header
     assert_select "title", "Typus &mdash; Sign in"
-    assert_select "h1", "Typus"
+    assert_select "h2", "Typus"
 
     # render session layout
     assert_template "new"
