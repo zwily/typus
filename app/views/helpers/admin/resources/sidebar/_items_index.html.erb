@@ -1,4 +1,7 @@
-<% return unless params[:action] == 'index' %>
+<%
+  whitelist = %w(index trash)
+  return unless whitelist.include?(params[:action])
+%>
 
 <% if @resource.typus_scopes.any? %>
   <h3>Scopes</h3>
