@@ -14,9 +14,6 @@ class Asset < ActiveRecord::Base
   #
 
   if defined?(Dragonfly)
-    extend Dragonfly::Model
-    extend Dragonfly::Model::Validations
-
     dragonfly_accessor :dragonfly
     dragonfly_accessor :dragonfly_required
 

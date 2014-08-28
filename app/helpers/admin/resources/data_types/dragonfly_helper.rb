@@ -39,13 +39,13 @@ module Admin::Resources::DataTypes::DragonflyHelper
     return unless data
 
     if data.mime_type =~ /^image\/.+/
-      render "admin/templates/dragonfly_form_preview",
-             :attachment => data,
-             :preview => data.process(:thumb, Typus.image_preview_size).url,
-             :thumb => data.process(:thumb, Typus.image_thumb_size).url,
-             :options => options,
-             :item => item,
-             :attribute => attachment
+      render 'admin/templates/dragonfly_form_preview',
+             attachment: data,
+             preview: data.thumb(Typus.image_preview_size).url,
+             thumb: data.thumb(Typus.image_thumb_size).url,
+             options: options,
+             item: item,
+             attribute: attachment
     else
       html = params[:_popup] ? data.name : link_to(data.name, data.url)
       # OPTIMIZE: Generate the tag with Ruby.
