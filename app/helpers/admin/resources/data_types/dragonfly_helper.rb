@@ -5,7 +5,7 @@ module Admin::Resources::DataTypes::DragonflyHelper
   end
 
   def link_to_detach_attribute_for_dragonfly(attribute)
-    validators = @item.class.validators.delete_if { |i| i.class != ActiveModel::Validations::PresenceValidator }.map(&:attributes).flatten.map(&:to_s)
+    validators = @item.class.validators.delete_if { |i| i.class != ActiveRecord::Validations::PresenceValidator }.map(&:attributes).flatten.map(&:to_s)
     attachment = @item.send(attribute)
 
     if attachment.present? && !validators.include?(attribute) && attachment
