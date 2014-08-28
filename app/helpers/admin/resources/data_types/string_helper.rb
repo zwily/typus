@@ -13,10 +13,12 @@ module Admin::Resources::DataTypes::StringHelper
 
   def string_filter(filter)
     values = set_context.send(filter.to_s.pluralize).to_a
+    attribute = @resource.human_attribute_name(filter)
 
-    items = [[Typus::I18n.t("Show by %{attribute}", :attribute => @resource.human_attribute_name(filter).downcase), ""]]
-    array = values.first.is_a?(Array) ? values : values.map { |i| [i, i] }
-    items += array
+    items = [[attribute.capitalize, '']]
+    array = values.first.is_a?(Array) ? values : values.map { |i| ["#{attribute}:#{i}", i] }
+
+    items + array
   end
 
   def table_string_field(attribute, item)

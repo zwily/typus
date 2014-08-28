@@ -24,7 +24,7 @@ class Admin::ResourcesController < Admin::BaseController
     respond_to do |format|
       format.html do
         set_default_action
-        add_resource_action("Destroy", {action: "destroy"}, {glyphicon: 'trash'})
+        add_resource_action("Destroy", {action: "destroy"}, {glyphicon: 'remove'})
         get_paginated_data
       end
 
@@ -113,10 +113,7 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       if @item.save
-        format.html do
-          notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
-          redirect_to :back, :notice => notice
-        end
+        format.html { redirect_to :back }
         format.json { render :json => @item }
       else
         format.html { render :edit }
@@ -219,7 +216,7 @@ class Admin::ResourcesController < Admin::BaseController
   def set_default_action
     default_action = @resource.typus_options_for(:default_action_on_item)
     action = admin_user.can?('edit', @resource.model_name.to_s) ? default_action : "show"
-    prepend_resource_action(action.titleize, {:action => action})
+    prepend_resource_action(action.titleize, {:action => action}, {glyphicon: action})
   end
 
   def custom_actions_for(action)

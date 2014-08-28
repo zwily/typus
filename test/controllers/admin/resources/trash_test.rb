@@ -59,7 +59,7 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
 
-    assert_equal "Entry trash can't be recovered from trash.", flash[:notice]
+    assert_equal "Entry trash cannot be recovered from trash.", flash[:notice]
   end
 
   # test "get restore returns error when user does not have edit access" do

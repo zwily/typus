@@ -61,8 +61,12 @@ module Admin::Resources::DataTypes::BelongsToHelper
     class_name = att_assoc.options[:class_name] || filter.capitalize.camelize
     resource = class_name.constantize
 
-    items = [[Typus::I18n.t('View all %{attribute}', attribute: @resource.human_attribute_name(filter).downcase.pluralize), '']]
-    items += resource.order(resource.typus_order_by).map { |v| [v.to_label, v.id] }
+    attribute = @resource.human_attribute_name(filter)
+
+    items = [[attribute, '']]
+    array = resource.order(resource.typus_order_by).map { |v| ["#{attribute}:#{v.to_label}", v.id] }
+
+    items + array
   end
 
   def build_label_text_for_belongs_to(klass, html_options, options)

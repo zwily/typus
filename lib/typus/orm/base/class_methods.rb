@@ -169,7 +169,6 @@ module Typus
           case field.to_s
           when 'parent', 'parent_id' then :tree
           when /password/            then :password
-          when 'position'            then :position
           when /\./                  then :transversal
           end
         end
