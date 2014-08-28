@@ -10,9 +10,12 @@ module Admin::Resources::DataTypes::DragonflyHelper
 
     if attachment.present? && !validators.include?(attribute) && attachment
       attribute_i18n = @item.class.human_attribute_name(attribute)
+
+      link = link_to Typus::I18n.t('Remove'), { action: 'update', id: @item.id, _nullify: attribute, _continue: true }, { data: { confirm: Typus::I18n.t('Are you sure?') } }
+
       label_text = <<-HTML
 #{attribute_i18n}
-<small>#{link_to Typus::I18n.t("Remove"), { :action => 'update', :id => @item.id, :_nullify => attribute, :_continue => true }, { :data => { :confirm => Typus::I18n.t("Are you sure?") } } }</small>
+<small>#{link}</small>
       HTML
       label_text.html_safe
     end
