@@ -45,7 +45,7 @@ module Admin::Resources::TableHelper
     fields.map { |k, v| send("table_#{v}_field", k, item) }
   end
 
-  def table_actions(model, item, association_name = nil)
+  def table_actions(model, item)
     resource_actions.reject! do |body, url, options, proc|
       admin_user.cannot?(url[:action], model.name)
     end
