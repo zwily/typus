@@ -113,10 +113,7 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       if @item.save
-        format.html do
-          notice = Typus::I18n.t("%{model} successfully updated.", :model => @resource.model_name.human)
-          redirect_to :back, :notice => notice
-        end
+        format.html { redirect_to :back }
         format.json { render :json => @item }
       else
         format.html { render :edit }
