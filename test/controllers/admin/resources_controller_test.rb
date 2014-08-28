@@ -111,7 +111,6 @@ class Admin::EntriesControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to @request.env["HTTP_REFERER"]
-    assert_equal "Entry successfully updated.", flash[:notice]
     assert @entry.reload.published
   end
 
