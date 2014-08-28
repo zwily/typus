@@ -12,12 +12,14 @@
 
   <ul class="nav nav-pills nav-stacked">
     <% item_actions.each do |key, value| %>
-      <li class="<%= params[:action].to_sym.eql?(key) ? 'active' : 'inactive' %>">
-        <%= link_to url_for(params.merge(action: key)), data: value[:data] do %>
-          <span class="glyphicon glyphicon-<%= value[:icon] %>"></span>
-          <%= value[:message] %>
-        <% end %>
-      </li>
+      <% if admin_user.can?(key.to_s, @resource.model_name) %>
+        <li class="<%= params[:action].to_sym.eql?(key) ? 'active' : 'inactive' %>">
+          <%= link_to url_for(params.merge(action: key)), data: value[:data] do %>
+            <span class="glyphicon glyphicon-<%= value[:icon] %>"></span>
+            <%= value[:message] %>
+          <% end %>
+        </li>
+      <% end %>
     <% end %>
   </ul>
 
