@@ -7,6 +7,17 @@ module Admin
 
     extend ActiveSupport::Concern
 
+    included do
+      # before_filter :set_predefined_filter_for_position, only: [:index]
+    end
+
+    def set_predefined_filter_for_position
+      if admin_user.can?('edit', @resource.model_name)
+        add_resource_action('Position', {action: 'position'}, {glyphicon: 'th-list'})
+      end
+    end
+    private :set_predefined_filter_for_position
+
     def position
       get_object
       check_resource_ownership
