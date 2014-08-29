@@ -183,7 +183,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def set_order
-    params[:sort_order] ||= "desc"
+    params[:sort_order] ||= 'desc'
 
     if (order = params[:order_by] ? "#{params[:order_by]} #{params[:sort_order]}" : @resource.typus_order_by).present?
       @resource = @resource.reorder(order)
@@ -200,17 +200,20 @@ class Admin::ResourcesController < Admin::BaseController
     path = params.dup.cleanup
 
     options = if params[:_addanother]
-      { :action => 'new', :id => nil }
+      { action: 'new', id: nil }
     elsif params[:_continue]
-      { :action => 'edit', :id => @item.id }
+      { action: 'edit', id: @item.id }
     else
-      { :action => nil, :id => nil }
+      { action: nil, id: nil }
     end
 
-    message = params[:action].eql?('create') ? "%{model} successfully created." : "%{model} successfully updated."
-    notice = Typus::I18n.t(message, :model => @resource.model_name.human)
+    notice = if params[:action].eql?('create')
+                Typus::I18n.t("%{model} successfully created.", model: @resource.model_name.human)
+              else
+                Typus::I18n.t("%{model} successfully updated.", model: @resource.model_name.human)
+              end
 
-    redirect_to path.merge!(options).compact, :notice => notice
+    redirect_to path.merge!(options).compact, notice: notice
   end
 
   def set_default_action
