@@ -62,7 +62,7 @@ class Admin::ResourcesController < Admin::BaseController
 
   def edit
     custom_actions_for(:edit).each do |action|
-      prepend_resources_action(action.titleize, {:action => action, :id => @item})
+      prepend_resources_action(action.titleize, {action: action, id: @item})
     end
   end
 
