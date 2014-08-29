@@ -26,9 +26,8 @@ module Typus
           data.join(' OR ')
         end
 
-        # TODO: Use Rails scopes to build the search: where(key => interval)
         def build_filter_interval(interval, key)
-          ["#{table_name}.#{key} BETWEEN ? AND ?", interval.first.to_s(:db), interval.last.to_s(:db)]
+          {key => interval.first.to_s(:db)..interval.last.to_s(:db)}
         end
 
         def build_my_joins(params)
