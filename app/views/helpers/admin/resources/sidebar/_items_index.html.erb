@@ -47,7 +47,7 @@
   <ul class="nav nav-pills nav-stacked">
     <% formats.each do |format| %>
       <li>
-        <%= link_to format: format do %>
+        <%= link_to({ format: format }, { target: '_blank' }) do %>
           <span class="glyphicon glyphicon-download"></span>
           <%= format.upcase %>
         <% end %>
