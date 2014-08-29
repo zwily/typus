@@ -45,23 +45,30 @@ module Admin::Resources::DataTypes::HasManyHelper
 
   def set_has_many_resource_actions
     klass = @model_to_relate
-    @resource_actions = [set_has_many_resource_edit_action(klass),
-                         set_has_many_resource_show_action(klass),
-                         set_has_many_resource_destroy_action(klass)]
+
+    @resource_actions = [
+      set_has_many_resource_edit_action(klass),
+      set_has_many_resource_show_action(klass),
+      set_has_many_resource_destroy_action(klass),
+    ]
   end
 
   def set_has_many_resource_edit_action(klass)
     html_options = set_modal_options_for(klass)
+    html_options[:glyphicon] = 'edit'
     [ 'Edit', { action: 'edit', anchor: html_options['data-controls-modal'] }, html_options ]
   end
 
   def set_has_many_resource_show_action(klass)
     html_options = set_modal_options_for(klass)
+    html_options[:glyphicon] = 'info'
     [ 'Show', { action: 'show', anchor: html_options['data-controls-modal'] }, html_options ]
   end
 
   def set_has_many_resource_destroy_action(klass)
-    [ 'Trash', { action: 'destroy' }, {data: { confirm: 'Trash?' }} ]
+    html_options = {}
+    html_options[:glyphicon] = 'remove'
+    [ 'Trash', { action: 'destroy' }, html_options ]
   end
 
 end
