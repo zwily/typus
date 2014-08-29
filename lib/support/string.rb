@@ -1,11 +1,11 @@
 class String
 
   def extract_settings
-    split(",").map(&:strip)
+    split(',').map(&:strip)
   end
 
   def remove_prefix
-    split("/")[1..-1].join("/")
+    split('/')[1..-1].join('/')
   end
 
   def extract_class
@@ -20,14 +20,14 @@ class String
   # Read more at http://en.wikipedia.org/wiki/Create,_read,_update_and_delete
   def acl_action_mapper
     case self
-    when "new", "create"
-      "create"
-    when "index", "show"
-      "read"
-    when "edit", "update", "position", "toggle", "relate", "unrelate"
-      "update"
-    when "destroy", "trash"
-      "delete"
+    when 'new', 'create'
+      'create'
+    when 'index', 'show'
+      'read'
+    when 'edit', 'update', 'position', 'toggle', 'relate', 'unrelate'
+      'update'
+    when 'destroy', 'trash'
+      'delete'
     else
       self
     end
