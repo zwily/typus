@@ -5,7 +5,7 @@ module Admin::ResourcesHelper
 
       hidden_filters = params.dup
       rejections = %w(controller action locale utf8 sort_order order_by search page)
-      hidden_filters.delete_if { |k, v| rejections.include?(k) }
+      hidden_filters.delete_if { |k, _| rejections.include?(k) }
 
       render 'helpers/admin/resources/search', hidden_filters: hidden_filters
     end
