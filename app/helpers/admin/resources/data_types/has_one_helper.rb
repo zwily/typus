@@ -19,25 +19,25 @@ module Admin::Resources::DataTypes::HasOneHelper
       locals[:add_new] = build_add_new_for_has_one(@model_to_relate, field, options)
     end
 
-    render "admin/templates/has_one", locals
+    render 'admin/templates/has_one', locals
   end
 
   def build_add_new_for_has_one(klass, field, options = {})
-    if admin_user.can?("create", klass)
+    if admin_user.can?('create', klass)
       default_options = {
         controller: "/admin/#{klass.to_resource}",
-        action: "new",
+        action: 'new',
         _popup: true,
       }
 
-      link_to Typus::I18n.t("Add"), default_options.merge(options), { class: "iframe_with_page_reload" }
+      link_to Typus::I18n.t('Add'), default_options.merge(options), { class: 'iframe_with_page_reload' }
     end
   end
 
   def set_has_one_resource_actions
     @resource_actions = [
-      ["Edit", { :action => "edit" }, {}],
-      ["Trash", { :action => "destroy" }, { :data => { :confirm => Typus::I18n.t("Trash?") } }],
+      ['Edit', { action: 'edit' }, {}],
+      ['Trash', { action: 'destroy' }, { data: { confirm: Typus::I18n.t('Trash?') } }],
     ]
   end
 
