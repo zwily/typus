@@ -7,8 +7,8 @@ class Admin::Mailer < ActionMailer::Base
     @token_url = admin_account_url(user.token, :host => host)
 
     options = {
-      :to => user.email,
-      :subject => "[#{Typus.admin_title}] #{Typus::I18n.t("Reset password")}",
+      to: user.email,
+      subject: "[#{Typus.admin_title}] #{Typus::I18n.t('Reset password')}",
     }
 
     mail(options) do |format|
