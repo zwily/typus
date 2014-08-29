@@ -80,3 +80,10 @@ de:
   "%{model} successfully created": "%{model} wurde erfolgreich erstellt"
   "%{model} successfully removed": "%{model} wurde erfolgreich gelöscht"
   "%{model} successfully updated": "%{model} wurde erfolgreich geändert"
+
+  "Scopes": "Auswahlen"
+  "Filters": "Filtern"
+  "Export": "Exportieren"
+  "Actions": "Aktionen"
+  "Entry": "Eintrag"
+  "Search": "Suche"

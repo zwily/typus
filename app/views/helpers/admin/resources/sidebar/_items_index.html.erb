@@ -4,7 +4,7 @@
 %>
 
 <% if @resource.typus_scopes.any? %>
-  <h3>Scopes</h3>
+  <h3><%= Typus::I18n.t('Scopes') %></h3>
 
   <ul class="nav nav-pills nav-stacked">
     <% @resource.typus_scopes.each do |scope| %>
@@ -23,7 +23,7 @@
 <% end %>
 
 <% if predefined_filters.any? %>
-  <h3>Filters</h3>
+  <h3><%= Typus::I18n.t('Filters') %></h3>
 
   <ul class="nav nav-pills nav-stacked">
     <% predefined_filters.each do |filter, action, scope| %>
@@ -42,7 +42,7 @@
 <% end %>
 
 <% if resource.any? && (formats = resource.typus_options_for(:export).extract_settings).any? %>
-  <h3>Export</h3>
+  <h3><%= Typus::I18n.t('Export') %></h3>
 
   <ul class="nav nav-pills nav-stacked">
     <% formats.each do |format| %>

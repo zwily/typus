@@ -1,5 +1,5 @@
 <% if actions.any? %>
-  <h3>Actions</h3>
+  <h3><%= Typus::I18n.t('Actions') %></h3>
   <ul class="nav nav-pills nav-stacked">
     <% actions.each do |action| %>
       <% klass = action[:url][:action].eql?(params[:action]) && params[:scope].nil? ? 'active' : 'inactive' %>
