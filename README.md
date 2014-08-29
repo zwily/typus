@@ -39,9 +39,9 @@ If you are using **Rails 4.0**:
 
 Update your bundle, run the generator and start the application server:
 
-    $ bundle install
-    $ rails generate typus
-    $ rails server
+    bundle install
+    rails generate typus
+    rails server
 
 and go to <http://0.0.0.0:3000/admin>.
 
@@ -50,9 +50,9 @@ and go to <http://0.0.0.0:3000/admin>.
 
 To test, clone the repo and run:
 
-    $ git clone --recursive git://github.com/typus/typus.git
-    $ bundle install
-    $ bundle exec rake
+    git clone --recursive git://github.com/typus/typus.git
+    bundle install
+    bundle exec rake
 
 
 ## Running a demo on localhost
