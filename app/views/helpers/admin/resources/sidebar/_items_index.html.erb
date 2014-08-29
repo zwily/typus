@@ -8,9 +8,9 @@
 
   <ul class="nav nav-pills nav-stacked">
     <% @resource.typus_scopes.each do |scope| %>
-      <% klass = params[:scope].eql?(scope) ? "active" : "inactive" %>
+      <% klass = params[:scope].eql?(scope) ? 'active' : 'inactive' %>
        <li class="<%= klass %>">
-        <%= link_to url_for(params.dup.cleanup.merge(:action => 'index', :scope => scope)) do %>
+        <%= link_to url_for(params.dup.cleanup.merge(action: 'index', scope: scope)) do %>
           <span class="glyphicon glyphicon-list"></span>
           <%= Typus::I18n.t(scope.humanize) %>
           <% if @resource.typus_options_for(:counters)  %>
@@ -27,9 +27,9 @@
 
   <ul class="nav nav-pills nav-stacked">
     <% predefined_filters.each do |filter, action, scope| %>
-      <% klass = params[:action].eql?(action) ? "active" : "inactive" %>
+      <% klass = params[:action].eql?(action) ? 'active' : 'inactive' %>
       <li class="<%= klass %>">
-        <% url = action.is_a?(String) ? params.dup.cleanup.merge(:action => action) : action %>
+        <% url = action.is_a?(String) ? params.dup.cleanup.merge(action: action) : action %>
         <%= link_to url do %>
           <%= Typus::I18n.t(filter) %>
           <% if @resource.typus_options_for(:counters) && scope && @resource.respond_to?(scope) %>
