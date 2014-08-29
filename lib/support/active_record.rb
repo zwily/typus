@@ -31,7 +31,7 @@ class ActiveRecord::Base
     if respond_to?(:name) && name.present?
       name
     else
-      [self.class, id].join("#")
+      [self.class, id].join('#')
     end
   end
 
