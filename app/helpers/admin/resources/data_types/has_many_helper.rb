@@ -28,16 +28,16 @@ module Admin::Resources::DataTypes::HasManyHelper
                :add_new => build_add_new_for_has_many(@model_to_relate, field, options),
                :table => build_relationship_table }
 
-    render "admin/templates/has_many", locals
+    render 'admin/templates/has_many', locals
   end
 
   def build_add_new_for_has_many(klass, field, options = {})
-    if admin_user.can?("create", klass)
+    if admin_user.can?('create', klass)
 
       html_options = set_modal_options_for(klass)
-      html_options["url"] = "/admin/#{klass.to_resource}/new?_popup=true"
+      html_options['url'] = "/admin/#{klass.to_resource}/new?_popup=true"
 
-      link_to Typus::I18n.t("Add"), "##{html_options['data-controls-modal']}", html_options
+      link_to Typus::I18n.t('Add'), "##{html_options['data-controls-modal']}", html_options
     end
   end
 
@@ -50,16 +50,16 @@ module Admin::Resources::DataTypes::HasManyHelper
 
   def set_has_many_resource_edit_action(klass)
     html_options = set_modal_options_for(klass)
-    [ "Edit", { :action => 'edit', :anchor => html_options['data-controls-modal'] }, html_options ]
+    [ 'Edit', { action: 'edit', anchor: html_options['data-controls-modal'] }, html_options ]
   end
 
   def set_has_many_resource_show_action(klass)
     html_options = set_modal_options_for(klass)
-    [ "Show", { :action => 'show', :anchor => html_options['data-controls-modal'] }, html_options ]
+    [ 'Show', { action: 'show', anchor: html_options['data-controls-modal'] }, html_options ]
   end
 
   def set_has_many_resource_destroy_action(klass)
-    [ "Trash", { :action => 'destroy' }, { :confirm => "Trash?" } ]
+    [ 'Trash', { action: 'destroy' }, { confirm: 'Trash?' } ]
   end
 
 end
