@@ -19,9 +19,11 @@ module Admin::BaseHelper
   end
 
   def admin_edit_user_path(user)
-    { controller: "/admin/#{Typus.user_class.to_resource}",
+    {
+      controller: "/admin/#{Typus.user_class.to_resource}",
       action: 'edit',
-      id: user.id }
+      id: user.id,
+    }
   end
 
   def admin_display_flash_message
@@ -36,12 +38,14 @@ module Admin::BaseHelper
   end
 
   def set_modal_options_for(klass)
-    { "data-toggle" => "modal",
-      "data-controls-modal" => "modal-from-dom-#{klass.to_resource}",
-      "data-backdrop" => "true",
-      "data-keyboard" => "true",
-      "class" => "ajax-modal",
-      "url" => "override-this" }
+    {
+      'data-toggle' => 'modal',
+      'data-controls-modal' => "modal-from-dom-#{klass.to_resource}",
+      'data-backdrop' => 'true',
+      'data-keyboard' => 'true',
+      'class' => 'ajax-modal',
+      'url' => 'override-this',
+    }
   end
 
   def body_class
@@ -57,7 +61,7 @@ module Admin::BaseHelper
 
     klass << params[:action].parameterize
 
-    klass.join(" ")
+    klass.join(' ')
   end
 
   def typus_search_path
