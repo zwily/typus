@@ -4,11 +4,11 @@ module Admin::Resources::ListHelper
     resources_actions_for_current_role.map do |body, url, options|
       path = params.dup.merge!(url).compact.cleanup
       link_to Typus::I18n.t(body), path, options
-    end.compact.reverse.join(" / ").html_safe
+    end.compact.reverse.join(' / ').html_safe
   end
 
   def resources_actions_for_current_role
-    resources_actions.reject do |body, url, options|
+    resources_actions.reject do |_, url, _|
       admin_user.cannot?(url[:action], @resource.name)
     end
   end
