@@ -20,7 +20,7 @@
 
         <script>
 
-          <%= object_id = "new_#{related.model_name.to_s.downcase}" %>
+          <% object_id = "new_#{related.model_name.to_s.downcase}" %>
 
           $('#modal-form-submit').click(function(e){
             e.preventDefault();
