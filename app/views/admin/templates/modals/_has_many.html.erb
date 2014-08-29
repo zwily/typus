@@ -5,50 +5,55 @@
   modal_association = "#{@resource.model_name.to_s.downcase}_#{@model_to_relate.table_name}"
 %>
 
-<div id="<%= html_modal_class %>" class="modal hide fade">
-  <div class="modal-header">
-    <a class="close" data-dismiss="modal">&times;</a>
-    <h3><%= new_page_title %></h3>
-  </div>
+<div id="<%= html_modal_class %>" class="modal fade">
+  <div class="modal-dialog">
+    <div class="modal-content">
 
-  <div class="modal-body"></div>
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+        <h4 class="modal-title"><%= new_page_title %></h4>
+      </div>
 
-  <div class="modal-footer">
-    <% html_options = { :id => "modal-form-submit-#{modal_association}", :class => "btn btn-primary" } %>
-    <%= link_to Typus::I18n.t("Save"), "#", html_options %>
-  </div>
+      <div class="modal-body"></div>
 
-  <script>
-    $('#modal-form-submit-<%= modal_association %>').on('click', function(e){
-      e.preventDefault();
+      <div class="modal-footer">
+        <% html_options = { id: "modal-form-submit-#{modal_association}", class: 'btn btn-primary' } %>
+        <%= link_to Typus::I18n.t('Save'), '#', html_options %>
+      </div>
 
-      var form_data = $('#<%= html_class %>').serialize();
-      var my_data = $("#view_ip").attr('value');
+      <script>
+        $('#modal-form-submit-<%= modal_association %>').on('click', function(e){
+          e.preventDefault();
 
-      $('#<%= html_class %>').on('submit', function(event) {
+          var form_data = $('#<%= html_class %>').serialize();
+          var my_data = $("#view_ip").attr('value');
 
-        event.preventDefault();
+          $('#<%= html_class %>').on('submit', function(event) {
 
-        // Get the action url:
-        var action = $('#<%= html_class %>').attr('action');
-        var form_data = $('#<%= html_class %>').serialize();
+            event.preventDefault();
 
-        $.post(action, form_data, function(data){})
-        .success(function(data, text, xhr) {
-          $("#<%= html_modal_class %>").modal('hide');
-          parent.location.reload();
-        })
-        .error(function(request, status, error) {
-          $('#<%= html_modal_class %> .modal-body').html(request.responseText);
+            // Get the action url:
+            var action = $('#<%= html_class %>').attr('action');
+            var form_data = $('#<%= html_class %>').serialize();
+
+            $.post(action, form_data, function(data){})
+            .success(function(data, text, xhr) {
+              $("#<%= html_modal_class %>").modal('hide');
+              parent.location.reload();
+            })
+            .error(function(request, status, error) {
+              $('#<%= html_modal_class %> .modal-body').html(request.responseText);
+            });
+
+            return false;
+          });
+
+          $('#<%= html_class %>').submit();
+          return false;
         });
 
-        return false;
-      });
+      </script>
 
-      $('#<%= html_class %>').submit();
-      return false;
-    });
-
-  </script>
-
+    </div>
+  </div>
 </div>
