@@ -11,7 +11,7 @@ module Admin
     end
 
     def headless_layout
-      headless_mode? ? "admin/headless" : "admin/base"
+      headless_mode? ? 'admin/headless' : 'admin/base'
     end
     private :headless_layout
 
