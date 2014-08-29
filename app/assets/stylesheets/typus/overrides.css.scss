@@ -1,33 +1,10 @@
-// body.base { padding-top: 20px; }
-// h1 { padding-bottom: 0.5em; }
-// .icon-destroy { background-position: -456px 0; }
-
-// form .button_to { display: inline!important; }
-
 .base.edit .main form,
 .base.create .main form,
 .base.new .main form {
   margin-bottom: 20px;
 }
 
-form .form-group { margin-left: 0px!important; margin-right: 0px!important; }
-
-.sidebar {
-//  position: fixed;
-//  top: 51px;
-//  bottom: 0;
-//  left: 0;
-//  z-index: 1000;
-//  display: block;
-  // padding: 20px;
-//  overflow-x: hidden;
-//  overflow-y: auto;
-//  background-color: #f5f5f5;
-//  border-right: 1px solid #eee;
+form .form-group {
+  margin-left: 0px!important;
+  margin-right: 0px!important;
 }
-
-//.main {
-//  padding-right: 40px;
-//  padding-left: 40px;
-//  padding: 20px;
-//}
