@@ -1,5 +1,9 @@
 module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
 
+  def display_has_and_belongs_to_many(item, attribute)
+    item.send(attribute).map(&:to_label).join(', ')
+  end
+
   def table_has_and_belongs_to_many_field(attribute, item)
     item.send(attribute).map(&:to_label).join(', ')
   end

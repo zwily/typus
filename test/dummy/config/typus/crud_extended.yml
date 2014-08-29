@@ -47,7 +47,7 @@ Post:
     relationship: title, created_at
     csv: title, status
     xml: title, status
-    show: title, body, status, published, created_at
+    show: title, body, status, published, created_at, categories
     options:
       selectors: status, numeric_status
       date_formats:
