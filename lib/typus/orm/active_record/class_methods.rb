@@ -90,7 +90,7 @@ module Typus
         end
 
         def get_typus_filters
-          data = read_model_config['filters'] || ""
+          data = read_model_config['filters'] || ''
           data.extract_settings.map(&:to_sym)
         end
 
