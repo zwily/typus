@@ -17,3 +17,4 @@ vendor/gems
 vendor/ruby
 
 .DS_Store
+TODO_*
