@@ -4,7 +4,7 @@ module Typus
       module Search
 
         def build_search_conditions(key, value)
-          raise "Not implemented!"
+          raise 'Not implemented!'
         end
 
         def build_boolean_conditions(key, value)
@@ -24,7 +24,7 @@ module Typus
         alias_method :build_timestamp_conditions, :build_date_conditions
 
         def build_filter_interval(interval, key)
-          raise "Not implemented!"
+          raise 'Not implemented!'
         end
 
         def build_string_conditions(key, value)
@@ -60,8 +60,8 @@ module Typus
 
         def build_my_joins(params)
           query_params = params.dup
-          query_params.reject! { |k, v| !model_relationships.keys.include?(k.to_sym) }
-          query_params.compact.map { |k, v| k.to_sym }
+          query_params.reject! { |k, _| !model_relationships.keys.include?(k.to_sym) }
+          query_params.compact.map { |k, _| k.to_sym }
         end
 
       end
