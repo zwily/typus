@@ -38,14 +38,14 @@ module Admin
 
     def bulk_destroy(ids)
       ids.each { |id| @resource.destroy(id) }
-      notice = Typus::I18n.t("Successfully deleted #{ids.count} entries.")
+      notice = Typus::I18n.t('Successfully deleted %{count} entries.', count: ids.count)
       redirect_to :back, notice: notice
     end
     private :bulk_destroy
 
     def bulk_restore(ids)
       ids.each { |id| @resource.deleted.find(id).restore }
-      notice = Typus::I18n.t("Successfully restored #{ids.count} entries.")
+      notice = Typus::I18n.t('Successfully restored %{count} entries.', count: ids.count)
       redirect_to :back, notice: notice
     end
     private :bulk_restore
