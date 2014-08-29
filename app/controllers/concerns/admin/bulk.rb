@@ -7,46 +7,46 @@ module Admin
 
     included do
       helper_method :bulk_actions
-      before_filter :set_bulk_action, :only => [:index]
-      before_filter :set_bulk_action_for_trash, :only => [:trash]
+      before_filter :set_bulk_action, only: [:index]
+      before_filter :set_bulk_action_for_trash, only: [:trash]
     end
 
     def set_bulk_action
-      add_bulk_action("Move to Trash", "bulk_destroy")
+      add_bulk_action('Move to Trash', 'bulk_destroy')
     end
     private :set_bulk_action
 
     # This only happens if we try to access the trash, which won't happen
     # if trash module is not loaded.
     def set_bulk_action_for_trash
-      add_bulk_action("Restore from Trash", "bulk_restore")
+      add_bulk_action('Restore from Trash', 'bulk_restore')
     end
     private :set_bulk_action_for_trash
 
     def bulk
-      if (ids = params[:selected_item_ids]) && (action = params[:batch_action]).present?
-        send(params[:batch_action], ids)
+      if params[:selected_item_ids] && params[:batch_action].present?
+        send(params[:batch_action], params[:selected_item_ids])
       else
-        notice = if action.empty?
-          Typus::I18n.t("No bulk action selected.")
+        notice = if params[:batch_action].empty?
+          Typus::I18n.t('No bulk action selected.')
         else
-          Typus::I18n.t("Items must be selected in order to perform actions on them. No items have been changed.")
+          Typus::I18n.t('Items must be selected in order to perform actions on them. No items have been changed.')
         end
-        redirect_to :back, :notice => notice
+        redirect_to :back, notice: notice
       end
     end
 
     def bulk_destroy(ids)
       ids.each { |id| @resource.destroy(id) }
       notice = Typus::I18n.t("Successfully deleted #{ids.count} entries.")
-      redirect_to :back, :notice => notice
+      redirect_to :back, notice: notice
     end
     private :bulk_destroy
 
     def bulk_restore(ids)
       ids.each { |id| @resource.deleted.find(id).restore }
       notice = Typus::I18n.t("Successfully restored #{ids.count} entries.")
-      redirect_to :back, :notice => notice
+      redirect_to :back, notice: notice
     end
     private :bulk_restore
 
