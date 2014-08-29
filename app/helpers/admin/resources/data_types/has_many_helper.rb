@@ -24,9 +24,11 @@ module Admin::Resources::DataTypes::HasManyHelper
     build_pagination
     set_has_many_resource_actions
 
-    locals = { :association_name => @association_name,
-               :add_new => build_add_new_for_has_many(@model_to_relate, field, options),
-               :table => build_relationship_table }
+    locals = {
+      association_name: @association_name,
+      add_new: build_add_new_for_has_many(@model_to_relate, field, options),
+      table: build_relationship_table,
+    }
 
     render 'admin/templates/has_many', locals
   end
