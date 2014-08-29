@@ -70,17 +70,17 @@ class Admin::ResourcesController < Admin::BaseController
     check_resource_ownership if @resource.typus_options_for(:only_user_items)
 
     if admin_user.can?('edit', @resource)
-      prepend_resources_action("Edit", {:action => 'edit', :id => @item})
+      prepend_resources_action('Edit', {action: 'edit', id: @item})
     end
 
     custom_actions_for(:show).each do |action|
-      prepend_resources_action(action.titleize, {:action => action, :id => @item})
+      prepend_resources_action(action.titleize, {action: action, id: @item})
     end
 
     respond_to do |format|
       format.html
-      format.xml { render :xml => @item }
-      format.json { render :json => @item }
+      format.xml { render xml: @item }
+      format.json { render json: @item }
     end
   end
 
