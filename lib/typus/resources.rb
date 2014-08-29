@@ -4,7 +4,7 @@ module Typus
     # Usage:
     #
     #     Typus::Resources.setup do |config|
-    #       config.default_action_on_item = "index"
+    #       config.default_action_on_item = 'index'
     #     end
     #
     def self.setup
@@ -12,7 +12,7 @@ module Typus
     end
 
     mattr_accessor :default_action_on_item
-    @@default_action_on_item = "edit"
+    @@default_action_on_item = 'edit'
 
     mattr_accessor :end_year
     @@end_year = nil
@@ -42,7 +42,7 @@ module Typus
     @@hide_from_dashboard = false
 
     mattr_accessor :export
-    @@export = ""
+    @@export = ''
 
     mattr_accessor :counters
     @@counters = false
