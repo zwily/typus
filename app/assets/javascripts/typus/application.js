@@ -1,6 +1,6 @@
-//= require typus/jquery-1.8.3-min
+//= require typus/jquery-2.1.1.min
 //= require jquery_ujs
-//= require js/bootstrap.min.js
+//= require js/bootstrap.min
 //= require typus/jquery.application
 //= require typus/custom
 
