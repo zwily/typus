@@ -1,4 +1,4 @@
-[ ] Fix has_and_belongs_to_many associations.
+- [ ] Fix has_and_belongs_to_many associations.
     Eg. http://localhost:3000/admin/projects/edit/2
 
 [ ] Fix has_many associations.
