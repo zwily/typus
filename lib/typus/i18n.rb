@@ -27,18 +27,18 @@ module Typus
 
       def available_locales
         {
-          "Brazilian Portuguese" => "pt-BR",
-          "Català" => "ca",
-          "German" => "de",
-          "Greek"  => "el",
-          "Italiano" => "it",
-          "English" => "en",
-          "Español" => "es",
-          "Français" => "fr",
-          "Magyar" => "hu",
-          "Portuguese" => "pt-PT",
-          "Russian" => "ru",
-          "中文" => "zh-CN",
+          'Brazilian Portuguese' => 'pt-BR',
+          'Català' => 'ca',
+          'German' => 'de',
+          'Greek'  => 'el',
+          'Italiano' => 'it',
+          'English' => 'en',
+          'Español' => 'es',
+          'Français' => 'fr',
+          'Magyar' => 'hu',
+          'Portuguese' => 'pt-PT',
+          'Russian' => 'ru',
+          '中文' => 'zh-CN',
         }
       end
 
