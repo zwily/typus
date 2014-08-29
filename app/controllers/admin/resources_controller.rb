@@ -24,7 +24,7 @@ class Admin::ResourcesController < Admin::BaseController
     respond_to do |format|
       format.html do
         set_default_action
-        add_resource_action("Destroy", {action: "destroy"}, {glyphicon: 'remove'})
+        add_resource_action('Destroy', {action: 'destroy'}, {glyphicon: 'remove'})
         get_paginated_data
       end
 
