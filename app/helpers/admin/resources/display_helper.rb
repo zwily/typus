@@ -6,7 +6,7 @@ module Admin::Resources::DisplayHelper
 
   def build_display(item, fields)
     fields.map do |attribute, type|
-      condition = (type == :boolean) || item.send(attribute).present?
+      condition = (type == :boolean) || item.respond_to?(attribute)
       next unless condition
       [@resource.human_attribute_name(attribute), send("display_#{type}", item, attribute)]
     end.compact
