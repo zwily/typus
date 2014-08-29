@@ -50,9 +50,7 @@ module Admin::Resources::DataTypes::DragonflyHelper
              item: item,
              attribute: attachment
     else
-      html = params[:_popup] ? data.name : link_to(data.name, data.url)
-      # OPTIMIZE: Generate the tag with Ruby.
-      "<p>#{html}</p>".html_safe
+      params[:_popup] ? data.name : link_to(data.name, data.url, {target: '_blank'})
     end
   end
 
