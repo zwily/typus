@@ -33,7 +33,7 @@ module Admin::Resources::DataTypes::DragonflyHelper
              item: item,
              attribute: attachment
     else
-      params[:_popup] ? data.name : link_to(data.name, data.url)
+      params[:_popup] ? data.name : link_to(data.name, data.url, {target: '_blank'})
     end
   end
 
