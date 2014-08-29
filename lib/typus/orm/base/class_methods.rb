@@ -37,14 +37,14 @@ module Typus
         def typus_search_fields
           Hash.new.tap do |search|
             typus_defaults_for(:search).each do |field|
-              if field.starts_with?("=")
+              if field.starts_with?('=')
                 field.slice!(0)
-                search[field] = "="
-              elsif field.starts_with?("^")
+                search[field] = '='
+              elsif field.starts_with?('^')
                 field.slice!(0)
-                search[field] = "^"
+                search[field] = '^'
               else
-                search[field] = "@"
+                search[field] = '@'
               end
             end
           end
