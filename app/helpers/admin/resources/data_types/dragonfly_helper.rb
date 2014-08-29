@@ -1,5 +1,9 @@
 module Admin::Resources::DataTypes::DragonflyHelper
 
+  def display_dragonfly(item, attribute)
+    typus_dragonfly_preview(item, attribute, partial = 'dragonfly_form_preview')
+  end
+
   def table_dragonfly_field(attribute, item)
     typus_dragonfly_preview(item, attribute)
   end
