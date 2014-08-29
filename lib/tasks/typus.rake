@@ -1,6 +1,6 @@
 namespace :typus do
 
-  desc "List current roles."
+  desc 'List current roles.'
   task :roles => :environment do
     Typus::Configuration.roles.each do |role|
       puts "'#{role.first}' role has access to:"
