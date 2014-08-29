@@ -46,7 +46,7 @@ module Admin::Resources::TableHelper
   end
 
   def table_actions(model, item)
-    resource_actions.reject! do |body, url, options, proc|
+    resource_actions.reject! do |_, url, _, _|
       admin_user.cannot?(url[:action], model.name)
     end
 
