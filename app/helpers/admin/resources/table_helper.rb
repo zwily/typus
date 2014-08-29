@@ -54,7 +54,7 @@ module Admin::Resources::TableHelper
       next if proc && proc.respond_to?(:call) && proc.call(item) == false
 
       # Hack to fix options URL
-      if options && options["data-toggle"]
+      if options && options['data-toggle']
         options[:url] = url_for(controller: "/admin/#{model.to_resource}", action: url[:action], id: item.id, _popup: true)
       end
 
