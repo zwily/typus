@@ -9,5 +9,5 @@ Entry:
   filters: published
   application: CRUD, 1
   options:
-    export: csv
+    export: csv, xml, json
   scopes: published
