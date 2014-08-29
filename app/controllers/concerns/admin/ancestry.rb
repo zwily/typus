@@ -10,8 +10,8 @@ module Admin
           item.children.each do |child|
             @items << child
             if child.has_children?
-              child.children.each do |child|
-                @items << child
+              child.children.each do |local_child|
+                @items << local_child
               end
             end
           end
@@ -19,7 +19,7 @@ module Admin
       end
 
       set_default_action
-      add_resource_action("Trash", {:action => "destroy"}, {:confirm => "#{Typus::I18n.t("Trash")}?", :method => 'delete'})
+      add_resource_action('Trash', {action: 'destroy'}, {confirm: "#{Typus::I18n.t('Trash')}?", method: 'delete'})
     end
 
   end
