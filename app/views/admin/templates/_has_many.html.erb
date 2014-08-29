@@ -1,6 +1,4 @@
-<% param_name = "#{association_name}_page" %>
-
-<%= render :partial => 'admin/templates/modals/has_many' %>
+<%= render partial: 'admin/templates/modals/has_many' %>
 
 <div class="box_relationships" id="<%= association_name %>">
 
@@ -12,9 +10,9 @@
 
   <% if @items.any? -%>
     <%= table %>
-    <%= admin_paginate %>
+    <%= admin_paginate(@model_to_relate) %>
   <% else %>
-    <p><%= Typus::I18n.t("No entries found.") %></p>
+    <p><%= Typus::I18n.t('No entries found.') %></p>
   <% end %>
 
 </div>
