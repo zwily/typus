@@ -8,7 +8,7 @@ module Typus
 
       def authenticate
         unless session[:typus_user_id] && admin_user && admin_user.active?
-          path = request.path != "/admin/dashboard" ? request.path : nil
+          path = request.path != '/admin/dashboard' ? request.path : nil
           deauthenticate(path)
         end
       end
@@ -56,7 +56,7 @@ module Typus
           # Admin can update himself except setting the status to false!. Other
           # users can update their profile as the attributes (role & status)
           # are protected.
-          status_as_boolean = params[@object_name][:status] == "1" ? true : false
+          status_as_boolean = params[@object_name][:status] == '1' ? true : false
 
           status_changed = !(@item.status == status_as_boolean)
           role_changed = !(@item.role == params[@object_name][:role])
