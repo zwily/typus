@@ -21,34 +21,18 @@ module Admin::Resources::DataTypes::DragonflyHelper
     end
   end
 
-  def typus_dragonfly_preview(item, attachment)
-    data = item.send(attachment)
+  def typus_dragonfly_preview(item, attribute, partial = 'dragonfly_preview')
+    data = item.send(attribute)
     return unless data
 
     if data.mime_type =~ /^image\/.+/
-      render 'admin/templates/dragonfly_preview',
-             attachment: data,
-             preview: data.process(:thumb, Typus.image_preview_size).url,
-             thumb: data.process(:thumb, Typus.image_table_thumb_size).url,
-             item: item,
-             attribute: attachment
-    else
-      params[:_popup] ? data.name : link_to(data.name, data.url, {target: '_blank'})
-    end
-  end
-
-  def typus_dragonfly_form_preview(item, attachment, options = {})
-    data = item.send(attachment)
-    return unless data
-
-    if data.mime_type =~ /^image\/.+/
-      render 'admin/templates/dragonfly_form_preview',
+      render "admin/templates/#{partial}",
              attachment: data,
              preview: data.thumb(Typus.image_preview_size).url,
              thumb: data.thumb(Typus.image_thumb_size).url,
-             options: options,
+             table_thumb: data.thumb(Typus.image_table_thumb_size).url,
              item: item,
-             attribute: attachment
+             attribute: attribute
     else
       params[:_popup] ? data.name : link_to(data.name, data.url, {target: '_blank'})
     end
