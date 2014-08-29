@@ -45,7 +45,7 @@ PATH
   specs:
     typus (4.0.0.beta1)
       bcrypt-ruby (~> 3.1.5)
-      rails (~> 4.1.5)
+      rails (~> 4.0)
 
 GEM
   remote: https://rubygems.org/

@@ -2,6 +2,10 @@ require "test_helper"
 
 class HashTest < ActiveSupport::TestCase
 
+  test 'compact' do
+    assert_equal({a: "A", c: "C"}, {a: "A", b: nil, c: "C"}.compact)
+  end
+
   test "cleanup" do
     whitelist = %w(controller action id _input _popup resource attribute)
     whitelist.each do |w|
