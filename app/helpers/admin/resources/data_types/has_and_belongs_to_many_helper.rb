@@ -1,7 +1,7 @@
 module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
 
   def table_has_and_belongs_to_many_field(attribute, item)
-    item.send(attribute).map(&:to_label).join(", ")
+    item.send(attribute).map(&:to_label).join(', ')
   end
 
   alias_method :table_has_many_field, :table_has_and_belongs_to_many_field
@@ -44,10 +44,10 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
 
   def build_add_new_for_has_and_belongs_to_many(klass, options)
     html_options = set_modal_options_for(klass)
-    html_options["url"] = url_for(:controller => "/admin/#{klass.to_resource}", :action => :new, :_popup => true)
-    html_options["data-controls-modal"] = "modal-from-dom-#{options[:attribute]}"
+    html_options['url'] = url_for(controller: "/admin/#{klass.to_resource}", action: :new, _popup: true)
+    html_options['data-controls-modal'] = "modal-from-dom-#{options[:attribute]}"
 
-    options = { :anchor => html_options["data-controls-modal"] }
+    options = { anchor: html_options['data-controls-modal'] }
 
     link_to Typus::I18n.t('Add'), options, html_options
   end
