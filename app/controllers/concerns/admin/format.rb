@@ -32,7 +32,7 @@ module Admin
         end
       end
 
-      send_data data, :filename => "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv"
+      send_data data, filename: "export-#{@resource.to_resource}-#{Time.zone.now.to_s(:number)}.csv"
     end
 
     def export(format)
@@ -42,7 +42,7 @@ module Admin
 
       get_paginated_data
 
-      render format => @items.send("to_#{format}", :methods => methods, :except => except)
+      render format => @items.send("to_#{format}", methods: methods, except: except)
     end
 
   end

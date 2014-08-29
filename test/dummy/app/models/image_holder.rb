@@ -10,12 +10,12 @@ class ImageHolder < ActiveRecord::Base
   # Validations
   #
 
-  validates :name, :presence => true
+  validates :name, presence: true
 
   ##
   # Associations
   #
 
-  belongs_to :imageable, :polymorphic => true
+  belongs_to :imageable, polymorphic: true
 
 end

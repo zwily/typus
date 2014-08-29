@@ -16,14 +16,14 @@ class Admin::EntriesControllerTest < ActionController::TestCase
   end
 
   test "autocomplete returns up to 20 items" do
-    get :autocomplete, :search => "Entry"
+    get :autocomplete, search: "Entry"
     assert_response :success
     assert_equal 20, assigns(:items).size
   end
 
   test "autocomplete with a search result" do
-    FactoryGirl.create(:entry, :title => "fesplugas", :id => 10000)
-    get :autocomplete, :search => "fesp"
+    FactoryGirl.create(:entry, title: "fesplugas", id: 10000)
+    get :autocomplete, search: "fesp"
     assert_response :success
     assert assigns(:items).size.eql?(1)
 
@@ -32,7 +32,7 @@ class Admin::EntriesControllerTest < ActionController::TestCase
   end
 
   test "autocomplete with only a search result" do
-    get :autocomplete, :search => "jmeiss"
+    get :autocomplete, search: "jmeiss"
     assert_response :success
     assert assigns(:items).empty?
     assert_equal "[]", response.body

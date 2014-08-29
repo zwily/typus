@@ -18,7 +18,7 @@ class Admin::AssetsControllerTest < ActionController::TestCase
   test 'should verify update can remove a single attribute' do
     asset = FactoryGirl.create(:asset)
 
-    get :update, :id => asset.id, :_nullify => 'dragonfly', :_continue => true
+    get :update, id: asset.id, _nullify: 'dragonfly', _continue: true
 
     assert_response :redirect
     assert_redirected_to "/admin/assets/edit/#{asset.id}"

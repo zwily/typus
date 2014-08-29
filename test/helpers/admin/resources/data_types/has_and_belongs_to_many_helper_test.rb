@@ -32,7 +32,7 @@ class Admin::Resources::DataTypes::HasAndBelongsToManyHelperTest < ActiveSupport
 
   test "build_label_text_for_has_and_belongs_to_many when disabled" do
     expected = "Read only"
-    output = build_label_text_for_has_and_belongs_to_many(Entry, { :disabled => true })
+    output = build_label_text_for_has_and_belongs_to_many(Entry, { disabled: true })
     assert_equal expected, output
   end
 

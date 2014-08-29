@@ -10,15 +10,15 @@ class User < ActiveRecord::Base
   # Validations
   #
 
-  validates :name, :presence => true, :uniqueness => true
+  validates :name, presence: true, uniqueness: true
 
   ##
   # Associations
   #
 
-  has_many :projects, :dependent => :destroy
-  has_many :featured_projects, -> { where("name LIKE '%featured%'") }, :class_name => 'Project', :dependent => :destroy
-  has_many :third_party_projects, :through => :project_collaborators, :dependent => :destroy
+  has_many :projects, dependent: :destroy
+  has_many :featured_projects, -> { where("name LIKE '%featured%'") }, class_name: 'Project', dependent: :destroy
+  has_many :third_party_projects, through: :project_collaborators, dependent: :destroy
 
   ##
   # Scopes

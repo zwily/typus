@@ -9,10 +9,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
       post = FactoryGirl.build(:post)
       assert_equal "published", post.mapping(:status)
 
-      post = FactoryGirl.build(:post, :status => "unpublished")
+      post = FactoryGirl.build(:post, status: "unpublished")
       assert_equal "unpublished", post.mapping('status')
 
-      post = FactoryGirl.build(:post, :status => "unexisting")
+      post = FactoryGirl.build(:post, status: "unexisting")
       assert_equal "unexisting", post.mapping(:status)
     end
   end
@@ -24,7 +24,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
       post = FactoryGirl.build(:post)
       assert_equal "Publicado", post.mapping(:status)
 
-      post = FactoryGirl.build(:post, :status => "unpublished")
+      post = FactoryGirl.build(:post, status: "unpublished")
       assert_equal "No publicado", post.mapping(:status)
     end
   end
@@ -35,14 +35,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
     Post.stub :statuses, expected do
       post = FactoryGirl.build(:post)
       assert_equal "Published - Hash", post.mapping(:status)
-      post = FactoryGirl.build(:post, :status => "unpublished")
+      post = FactoryGirl.build(:post, status: "unpublished")
       assert_equal "Not Published - Hash", post.mapping(:status)
     end
   end
 
   test "mapping with a hash when value does not exist on the mapping definition" do
     Post.stub :statuses, Hash.new do
-      page = FactoryGirl.build(:post, :status => "unexisting")
+      page = FactoryGirl.build(:post, status: "unexisting")
       assert_equal "unexisting", page.mapping(:status)
     end
   end
@@ -53,12 +53,12 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test "to_label returns name for Category" do
-    category = FactoryGirl.build(:category, :name => "Chunky Bacon")
+    category = FactoryGirl.build(:category, name: "Chunky Bacon")
     assert_match "Chunky Bacon", category.to_label
   end
 
   test "to_label returns Model#id because Category#name is empty" do
-    assert_match /Category#/, FactoryGirl.build(:category, :name => nil).to_label
+    assert_match /Category#/, FactoryGirl.build(:category, name: nil).to_label
   end
 
   test "to_label returns default Model#id" do

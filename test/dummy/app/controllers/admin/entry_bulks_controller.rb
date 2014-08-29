@@ -2,8 +2,8 @@ class Admin::EntryBulksController < Admin::ResourcesController
 
   include Admin::Bulk
 
-  before_filter :set_bulk_action_to_publish, :only => [:index]
-  before_filter :set_bulk_action_to_unpublish, :only => [:index]
+  before_filter :set_bulk_action_to_publish, only: [:index]
+  before_filter :set_bulk_action_to_unpublish, only: [:index]
 
   def bulk_publish(ids)
     EntryBulk.where(id: ids).update_all(published: true)

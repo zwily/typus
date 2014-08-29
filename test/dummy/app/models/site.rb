@@ -4,8 +4,8 @@ class Site < ActiveRecord::Base
   # Validations
   #
 
-  validates :domain, :presence => true
-  validates :name, :presence => true
+  validates :domain, presence: true
+  validates :name, presence: true
 
   ##
   # Associations

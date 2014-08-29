@@ -23,7 +23,7 @@ Title,Published
 #{entry.title},#{entry.published}
      RAW
 
-    get :index, :format => "csv"
+    get :index, format: "csv"
 
     assert_response :success
     assert_equal expected, response.body
@@ -31,15 +31,15 @@ Title,Published
 
   test "export CSV with filters" do
     Entry.delete_all
-    entry_published = FactoryGirl.create(:entry, :published => true)
-    entry_unpublished = FactoryGirl.create(:entry, :published => false)
+    entry_published = FactoryGirl.create(:entry, published: true)
+    entry_unpublished = FactoryGirl.create(:entry, published: false)
 
     expected_published = <<-RAW
 Title,Published
 #{entry_published.title},true
      RAW
 
-     get :index, :format => "csv", :published => "true"
+     get :index, format: "csv", published: "true"
      assert_response :success
      assert_equal expected_published, response.body
 
@@ -48,7 +48,7 @@ Title,Published
 #{entry_unpublished.title},false
      RAW
 
-     get :index, :format => "csv", :published => "false"
+     get :index, format: "csv", published: "false"
      assert_response :success
      assert_equal expected_unpublished, response.body
   end

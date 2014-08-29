@@ -23,7 +23,7 @@ module Admin::Resources::ListHelper
   # is still available.
   #++
   def build_list(model, fields, items, resource = @resource.to_resource, link_options = {}, association = nil, association_name = nil)
-    render "admin/#{resource}/list", :items => items
+    render "admin/#{resource}/list", items: items
   rescue ActionView::MissingTemplate
     build_table(model, fields, items, link_options, association, association_name)
   end

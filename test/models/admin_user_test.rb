@@ -20,7 +20,7 @@ class AdminUserTest < ActiveSupport::TestCase
   end
 
   test "mapping locales" do
-    admin_user = FactoryGirl.build(:typus_user, :locale => "en")
+    admin_user = FactoryGirl.build(:typus_user, locale: "en")
     assert_equal "English", admin_user.mapping(:locale)
   end
 
@@ -33,11 +33,11 @@ class AdminUserTest < ActiveSupport::TestCase
   end
 
   test "validate :password" do
-    admin_user = FactoryGirl.build(:typus_user, :password => "00000")
+    admin_user = FactoryGirl.build(:typus_user, password: "00000")
     assert admin_user.invalid?
     assert_equal "is too short (minimum is 6 characters)", admin_user.errors[:password].first
 
-    assert FactoryGirl.build(:typus_user, :password => "000000").valid?
+    assert FactoryGirl.build(:typus_user, password: "000000").valid?
   end
 
 end

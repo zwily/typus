@@ -10,7 +10,7 @@
 # Setup an initial site ...
 ##
 
-FactoryGirl.create(:site, :domain => "localhost")
+FactoryGirl.create(:site, domain: "localhost")
 
 ##
 # CRUD

@@ -2,7 +2,7 @@ class Admin::SessionController < Admin::BaseController
 
   skip_before_filter :reload_config_and_roles, :authenticate
 
-  before_filter :create_an_account?, :only => [:new, :create]
+  before_filter :create_an_account?, only: [:new, :create]
 
   def new; end
 
@@ -14,7 +14,7 @@ class Admin::SessionController < Admin::BaseController
       session[:typus_user_id] = user.id
       params[:return_to] || admin_dashboard_index_path
     else
-      new_admin_session_path(:return_to => params[:return_to])
+      new_admin_session_path(return_to: params[:return_to])
     end
 
     redirect_to path

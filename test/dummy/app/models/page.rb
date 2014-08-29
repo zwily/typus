@@ -19,7 +19,7 @@ class Page < ActiveRecord::Base
   # Scopes
   #
 
-  default_scope { where(:status => true) }
+  default_scope { where(status: true) }
 
   ##
   # Instance Methods

@@ -22,12 +22,12 @@ class Admin::EntriesControllerTest < ActionController::TestCase
 
     assert_difference('Entry.count') do
       entry_data = {
-        :title => 'Title' ,
-        :content => 'Content',
-        :category_ids => ["", "#{category_1.id}", "#{category_2.id}" ]
+        title: 'Title' ,
+        content: 'Content',
+        category_ids: ["", "#{category_1.id}", "#{category_2.id}" ]
       }
 
-      post :create, :entry => entry_data
+      post :create, entry: entry_data
     end
 
     assert_equal [category_1, category_2], Entry.first.categories

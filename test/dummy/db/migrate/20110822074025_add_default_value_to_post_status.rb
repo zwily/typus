@@ -1,6 +1,6 @@
 class AddDefaultValueToPostStatus < ActiveRecord::Migration
   def self.up
-    change_column :posts, :status, :string, :default => 'draft', :null => false
+    change_column :posts, :status, :string, default: 'draft', null: false
   end
 
   def self.down

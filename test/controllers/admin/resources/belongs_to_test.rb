@@ -20,14 +20,14 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
   end
 
   test 'get new reads params[:resource] and allows the usage of _id' do
-    get :new, { :resource => { :user_id => 1 } }
+    get :new, { resource: { user_id: 1 } }
     assert_response :success
     assert_template 'new'
     assert_equal 1, assigns(:item).user_id
   end
 
   test 'get new reads params[:resource]' do
-    get :new, { :resource => { :user_id => 1, :name => 'Chunky Bacon'} }
+    get :new, { resource: { user_id: 1, name: 'Chunky Bacon'} }
     assert_response :success
     assert_template 'new'
     assert_equal 'Chunky Bacon', assigns(:item).name
@@ -39,7 +39,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     user = FactoryGirl.create(:user)
 
     assert_difference('Project.count') do
-      post :create, :project => { :user_id => user.id, :name => 'Chunky Bacon' }
+      post :create, project: { user_id: user.id, name: 'Chunky Bacon' }
     end
 
     assert_redirected_to '/admin/projects'
@@ -49,7 +49,7 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     project = FactoryGirl.create(:project)
     user = FactoryGirl.create(:user)
 
-    patch :update, :id => project, :project => { :user_id => user.id }
+    patch :update, id: project, project: { user_id: user.id }
     assert_redirected_to '/admin/projects'
     assert_equal user, project.reload.user
   end

@@ -9,7 +9,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
   def render(*args); args; end
 
   setup do
-    @expected = ["helpers/admin/resources/search", {:hidden_filters => {}}]
+    @expected = ["helpers/admin/resources/search", {hidden_filters: {}}]
   end
 
   test "search rejects controller and action params" do
@@ -44,7 +44,7 @@ class Admin::ResourcesHelperTest < ActiveSupport::TestCase
 
   test "search not rejects applied filters" do
     parameters = {"published"=>"true", "user_id"=>"1"}
-    expected = ["helpers/admin/resources/search", {:hidden_filters=>{"published"=>"true", "user_id"=>"1"}}]
+    expected = ["helpers/admin/resources/search", {hidden_filters:{"published"=>"true", "user_id"=>"1"}}]
     assert_equal expected, admin_search(Entry, parameters)
   end
 

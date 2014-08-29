@@ -10,12 +10,12 @@ class Animal < ActiveRecord::Base
   # Validations
   #
 
-  validates :name, :presence => true
+  validates :name, presence: true
 
   ##
   # Associations
   #
 
-  has_many :image_holders, :as => :imageable
+  has_many :image_holders, as: :imageable
 
 end

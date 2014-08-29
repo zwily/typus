@@ -4,14 +4,14 @@ class Post < ActiveRecord::Base
   # Validations
   #
 
-  validates :body, :presence => true
-  validates :title, :presence => true
+  validates :body, presence: true
+  validates :title, presence: true
 
   ##
   # Associations
   #
 
-  belongs_to :favorite_comment, :class_name => "Comment"
+  belongs_to :favorite_comment, class_name: "Comment"
   belongs_to :typus_user
   has_and_belongs_to_many :categories
   has_many :comments
@@ -21,8 +21,8 @@ class Post < ActiveRecord::Base
   # Scopes
   #
 
-  scope :draft, -> { where(:status => "draft") }
-  scope :published, -> { where(:status => "published") }
+  scope :draft, -> { where(status: "draft") }
+  scope :published, -> { where(status: "published") }
 
   ##
   # Class Methods

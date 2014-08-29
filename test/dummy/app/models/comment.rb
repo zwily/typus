@@ -4,10 +4,10 @@ class Comment < ActiveRecord::Base
   # Validations
   #
 
-  validates :email, :presence => true
-  validates :body, :presence => true
-  validates :name, :presence => true
-  validates :post, :presence => true
+  validates :email, presence: true
+  validates :body, presence: true
+  validates :name, presence: true
+  validates :post, presence: true
 
   ##
   # Associations

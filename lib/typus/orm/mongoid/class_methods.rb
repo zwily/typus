@@ -5,7 +5,7 @@ module Typus
 
         include Typus::Orm::Base::ClassMethods
 
-        delegate :any?, :to => :all
+        delegate :any?, to: :all
 
         def table_name
           collection_name

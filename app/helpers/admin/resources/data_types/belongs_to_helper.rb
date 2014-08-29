@@ -37,7 +37,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
       action = item.send(attribute).class.typus_options_for(:default_action_on_item)
       message = att_value.to_label
       if !params[:_popup] && admin_user.can?(action, att_value.class.name)
-        message = link_to(message, :controller => "/admin/#{att_value.class.to_resource}", :action => action, :id => att_value.id)
+        message = link_to(message, controller: "/admin/#{att_value.class.to_resource}", action: action, id: att_value.id)
       end
     end
 
@@ -82,7 +82,7 @@ module Admin::Resources::DataTypes::BelongsToHelper
     html_options['data-controls-modal'] = "modal-from-dom-#{options[:attribute]}"
     html_options['url'] = "/admin/#{klass.to_resource}/new?_popup=true"
 
-    link_to Typus::I18n.t('Add'), { :anchor => html_options['data-controls-modal'] }, html_options
+    link_to Typus::I18n.t('Add'), { anchor: html_options['data-controls-modal'] }, html_options
   end
 
 end

@@ -15,7 +15,7 @@ module Typus
 
       def deauthenticate(return_to = nil)
         session.delete(:typus_user_id)
-        redirect_to new_admin_session_path(:return_to => return_to)
+        redirect_to new_admin_session_path(return_to: return_to)
       end
 
       #--
@@ -74,7 +74,7 @@ module Typus
       #++
       def check_if_user_can_perform_action_on_resource
         resource = params[:controller].remove_prefix.camelize
-        not_allowed if admin_user.cannot?(params[:action], resource, { :special => true })
+        not_allowed if admin_user.cannot?(params[:action], resource, { special: true })
       end
 
       #--

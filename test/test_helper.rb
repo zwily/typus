@@ -34,7 +34,7 @@ class ActiveSupport::TestCase
   end
 
   def build_editor
-    @typus_user = FactoryGirl.create(:typus_user, :email => "editor@example.com", :role => "editor")
+    @typus_user = FactoryGirl.create(:typus_user, email: "editor@example.com", role: "editor")
   end
 
   def editor_sign_in
@@ -44,7 +44,7 @@ class ActiveSupport::TestCase
   end
 
   def build_designer
-    @typus_user = FactoryGirl.create(:typus_user, :email => "designer@example.com", :role => "designer")
+    @typus_user = FactoryGirl.create(:typus_user, email: "designer@example.com", role: "designer")
   end
 
   def designer_sign_in

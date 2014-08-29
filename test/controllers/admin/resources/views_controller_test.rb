@@ -12,8 +12,8 @@ class Admin::ViewsControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    @site = FactoryGirl.create(:site, :domain => 'test.host')
-    FactoryGirl.create(:view, :site => @site)
+    @site = FactoryGirl.create(:site, domain: 'test.host')
+    FactoryGirl.create(:view, site: @site)
     FactoryGirl.create(:view)
   end
 

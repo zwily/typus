@@ -70,15 +70,15 @@ class Admin::SessionControllerTest < ActionController::TestCase
   test 'create should not create session for invalid users' do
     FactoryGirl.create(:typus_user)
 
-    post :create, { :typus_user => { :email => "john@example.com", :password => "XXXXXXXX" } }
+    post :create, { typus_user: { email: "john@example.com", password: "XXXXXXXX" } }
     assert_response :redirect
     assert_redirected_to new_admin_session_path
   end
 
   test 'create should not create session for a disabled user' do
-    typus_user = FactoryGirl.create(:typus_user, :status => false)
+    typus_user = FactoryGirl.create(:typus_user, status: false)
 
-    post :create, { :typus_user => { :email => typus_user.email, :password => '12345678' } }
+    post :create, { typus_user: { email: typus_user.email, password: '12345678' } }
 
     assert_nil request.session[:typus_user_id]
     assert_response :redirect
@@ -86,9 +86,9 @@ class Admin::SessionControllerTest < ActionController::TestCase
   end
 
   test 'create should create session for an enabled user' do
-    typus_user = FactoryGirl.create(:typus_user, :status => true)
+    typus_user = FactoryGirl.create(:typus_user, status: true)
 
-    post :create, { :typus_user => { :email => typus_user.email, :password => "12345678" } }
+    post :create, { typus_user: { email: typus_user.email, password: "12345678" } }
     assert_equal typus_user.id, request.session[:typus_user_id]
     assert_response :redirect
     assert_redirected_to admin_dashboard_index_path

@@ -26,7 +26,7 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
     items_to_destroy = EntryBulk.limit(5).map(&:id)
     items_to_keep = EntryBulk.limit(5).offset(5).map(&:id)
 
-    get :bulk, :batch_action => "bulk_destroy", :selected_item_ids => items_to_destroy
+    get :bulk, batch_action: "bulk_destroy", selected_item_ids: items_to_destroy
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
 
@@ -36,7 +36,7 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
   test "get bulk with empty action and selected items redirects to back with a feedback message" do
     items = EntryBulk.limit(5).map(&:id)
 
-    get :bulk, :batch_action => "", :selected_item_ids => items
+    get :bulk, batch_action: "", selected_item_ids: items
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
 

@@ -12,8 +12,8 @@ class Entry < ActiveRecord::Base
   # Validations
   #
 
-  validates :title, :presence => true
-  validates :content, :presence => true
+  validates :title, presence: true
+  validates :content, presence: true
 
   ##
   # Associations
@@ -25,7 +25,7 @@ class Entry < ActiveRecord::Base
   # Scopes
   #
 
-  scope :published, -> { where(:published => true) }
+  scope :published, -> { where(published: true) }
 
   ##
   # Instance Methods

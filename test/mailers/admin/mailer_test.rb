@@ -4,7 +4,7 @@ class Admin::MailerTest < ActiveSupport::TestCase
 
   test "reset_password_instructions" do
     host = 'example.com'
-    user = FactoryGirl.build(:typus_user, :token => "qswed3-64g3fb")
+    user = FactoryGirl.build(:typus_user, token: "qswed3-64g3fb")
     mail = Admin::Mailer.reset_password_instructions(user, host)
 
     refute mail.from.empty?

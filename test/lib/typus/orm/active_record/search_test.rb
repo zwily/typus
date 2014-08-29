@@ -108,7 +108,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test "build_conditions should return an array" do
-    assert Post.build_conditions({:search => '1'}).is_a?(Array)
+    assert Post.build_conditions({search: '1'}).is_a?(Array)
   end
 
   test "build_conditions should return_sql_conditions_on_search_for_typus_user" do
@@ -125,7 +125,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
                   "typus_users.role LIKE '%francesc%'"]
                end
 
-    [{:search =>"francesc"}, {:search => "Francesc"}].each do |params|
+    [{search:"francesc"}, {search: "Francesc"}].each do |params|
       expected.each do |expect|
         assert_match expect, TypusUser.build_conditions(params).first
       end
@@ -147,10 +147,10 @@ class ActiveRecordTest < ActiveSupport::TestCase
                   "typus_users.role LIKE '%francesc%'"]
                end
 
-    params = { :search => "francesc", :status => "true" }
+    params = { search: "francesc", status: "true" }
 
-    FactoryGirl.create(:typus_user, :email => "francesc.one@example.com")
-    FactoryGirl.create(:typus_user, :email => "francesc.dos@example.com", :status => false)
+    FactoryGirl.create(:typus_user, email: "francesc.one@example.com")
+    FactoryGirl.create(:typus_user, email: "francesc.dos@example.com", status: false)
 
     resource = TypusUser
     resource.build_conditions(params).each do |condition|
@@ -161,13 +161,13 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test 'build_conditions return_sql_conditions_on_filtering_typus_users_by_status true' do
-    expected = { :status => true }
-    assert_equal expected, TypusUser.build_conditions({:status => 'true'}).first
+    expected = { status: true }
+    assert_equal expected, TypusUser.build_conditions({status: 'true'}).first
   end
 
   test 'build_conditions should return_sql_conditions_on_filtering_typus_users_by_status false' do
-    expected = { :status => false }
-    assert_equal expected, TypusUser.build_conditions({:status => 'false'}).first
+    expected = { status: false }
+    assert_equal expected, TypusUser.build_conditions({status: 'false'}).first
   end
 
   # This applies for all_day, all_week, all_month, all_year, so there's no
@@ -175,25 +175,25 @@ class ActiveRecordTest < ActiveSupport::TestCase
   test 'build_conditions should return sql conditions on filtering posts published_at all_day' do
     all_day = Time.zone.now.all_day
     expected = ["posts.published_at BETWEEN ? AND ?", all_day.first.to_s(:db), all_day.last.to_s(:db)]
-    assert_equal expected, Post.build_conditions({:published_at => "all_day"}).first
+    assert_equal expected, Post.build_conditions({published_at: "all_day"}).first
   end
 
   test 'build_conditions return_sql_conditions_on_filtering_posts_by_string' do
-    expected = { :role => 'admin' }
-    assert_equal expected, TypusUser.build_conditions({:role => 'admin'}).first
+    expected = { role: 'admin' }
+    assert_equal expected, TypusUser.build_conditions({role: 'admin'}).first
   end
 
   test "build_my_joins return the expected joins" do
     @project = FactoryGirl.create(:project)
     FactoryGirl.create_list(:project, 2)
-    assert_equal [:projects], User.build_my_joins({:projects => @project.id})
+    assert_equal [:projects], User.build_my_joins({projects: @project.id})
   end
 
   test "build_my_joins works when users are filtered by projects" do
     @project = FactoryGirl.create(:project)
     FactoryGirl.create_list(:project, 2)
 
-    params = { :projects => @project.id }
+    params = { projects: @project.id }
 
     @resource = User
     @resource.build_conditions(params).each { |c| @resource = @resource.where(c) }

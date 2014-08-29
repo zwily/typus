@@ -10,8 +10,8 @@ class Admin::ResourcesController < Admin::BaseController
 
   before_filter :get_model
   before_filter :set_context
-  before_filter :get_object, :only => Whitelist + [:show]
-  before_filter :check_resource_ownership, :only => Whitelist
+  before_filter :get_object, only: Whitelist + [:show]
+  before_filter :check_resource_ownership, only: Whitelist
   before_filter :check_if_user_can_perform_action_on_resources
 
   def index
@@ -39,7 +39,7 @@ class Admin::ResourcesController < Admin::BaseController
 
     respond_to do |format|
       format.html
-      format.json { render :json => @item }
+      format.json { render json: @item }
     end
   end
 

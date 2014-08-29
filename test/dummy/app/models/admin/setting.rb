@@ -4,7 +4,7 @@ class Admin::Setting < ActiveRecord::Base
   # Validations
   #
 
-  validates :key, :presence => true, :uniqueness => true
+  validates :key, presence: true, uniqueness: true
 
   ##
   # Class Methods
@@ -15,7 +15,7 @@ class Admin::Setting < ActiveRecord::Base
   end
 
   def self.admin_title
-    setting = where(:key => "admin_title").first
+    setting = where(key: "admin_title").first
     if setting && setting.value.present?
       setting.value
     end

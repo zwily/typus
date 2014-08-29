@@ -43,7 +43,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   end
 
   test 'editor role' do
-    typus_user = FactoryGirl.create(:typus_user, :role => "editor")
+    typus_user = FactoryGirl.create(:typus_user, role: "editor")
 
     expected = %w(Comment Git Post View)
     assert_equal expected, typus_user.resources.map(&:first).sort
@@ -59,7 +59,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   end
 
   test 'designer role' do
-    typus_user = FactoryGirl.create(:typus_user, :role => 'designer')
+    typus_user = FactoryGirl.create(:typus_user, role: 'designer')
 
     expected = %w(Comment Post)
     assert_equal expected, typus_user.resources.map(&:first).sort
