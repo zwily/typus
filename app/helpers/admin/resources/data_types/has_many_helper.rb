@@ -61,7 +61,7 @@ module Admin::Resources::DataTypes::HasManyHelper
 
   def set_has_many_resource_show_action(klass)
     html_options = set_modal_options_for(klass)
-    html_options[:glyphicon] = 'info'
+    html_options[:glyphicon] = 'info-sign'
     [ 'Show', { action: 'show', anchor: html_options['data-controls-modal'] }, html_options ]
   end
 
