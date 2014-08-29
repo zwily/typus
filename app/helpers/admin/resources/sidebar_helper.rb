@@ -1,7 +1,7 @@
 module Admin::Resources::SidebarHelper
 
   def build_sidebar
-    locals = { :sidebar_title => Typus::I18n.t("Dashboard"), :actions => []}
+    locals = { sidebar_title: Typus::I18n.t('Dashboard'), actions: []}
 
     if @resource
       locals[:actions] = [sidebar_list(@resource.name), sidebar_add_new(@resource.name)].compact
@@ -12,7 +12,7 @@ module Admin::Resources::SidebarHelper
   end
 
   def sidebar_add_new(klass)
-    return if admin_user.cannot?("create", klass)
+    return if admin_user.cannot?('create', klass)
 
     {
       message: Typus::I18n.t('Add'),
@@ -34,10 +34,12 @@ module Admin::Resources::SidebarHelper
   # TODO: Move it to the header.
   def sidebar_view_site
     if Typus.link_to_view_site
-      { message: Typus::I18n.t('View Site'),
+      {
+        message: Typus::I18n.t('View Site'),
         url: Typus.admin_title_link,
         link_to_options: { target: '_blank' },
-        icon: 'share' }
+        icon: 'share',
+      }
     end
   end
 
