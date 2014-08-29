@@ -23,5 +23,6 @@ before_install:
   - git submodule update --init --recursive
 
 env:
-  - DB=postgresql
-  - DB_USERNAME=postgres
+  global:
+    - DB=postgresql
+    - DB_USERNAME=postgres
