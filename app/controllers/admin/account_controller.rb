@@ -8,7 +8,7 @@ class Admin::AccountController < Admin::BaseController
   before_filter :new?, only: [:forgot_password, :send_password]
 
   def new
-    flash[:notice] = Typus::I18n.t("Enter your email below to create the first user.")
+    flash[:notice] = I18n.t("Enter your email below to create the first user.")
   end
 
   def create
@@ -21,14 +21,14 @@ class Admin::AccountController < Admin::BaseController
   def send_password
     if user = Typus.user_class.find_by_email(admin_user_params[:email])
       Admin::Mailer.reset_password_instructions(user, request.host_with_port).deliver
-      redirect_to new_admin_session_path, notice: Typus::I18n.t("Password recovery link sent to your email.")
+      redirect_to new_admin_session_path, notice: I18n.t("Password recovery link sent to your email.")
     else
       render action: :forgot_password
     end
   end
 
   def show
-    flash[:notice] = Typus::I18n.t("Please set a new password.")
+    flash[:notice] = I18n.t("Please set a new password.")
     typus_user = Typus.user_class.find_by_token!(params[:id])
     session[:typus_user_id] = typus_user.id
     redirect_to params[:return_to] || { controller: "/admin/#{Typus.user_class.to_resource}", action: 'edit', id: typus_user.id }

@@ -2,19 +2,19 @@
 
 <% if (resources = Typus.resources.delete_if { |r| !(admin_user.is_a?(FakeUser) || admin_user.resources.include?(r)) }).any? %>
 
-  <h2><%= Typus::I18n.t("Resources") %></h2>
+  <h2><%= t("Resources") %></h2>
 
   <table>
 
     <thead>
       <tr>
-        <th><%= Typus::I18n.t("Name") %></th>
+        <th><%= t("Name") %></th>
       </tr>
     </thead>
 
     <% resources.each do |resource| %>
       <tr>
-        <td><%= link_to Typus::I18n.t(resource.titleize.capitalize), :controller => "/admin/#{resource.underscore}" %></td>
+        <td><%= link_to t(resource.titleize.capitalize), :controller => "/admin/#{resource.underscore}" %></td>
       </tr>
     <% end %>
 

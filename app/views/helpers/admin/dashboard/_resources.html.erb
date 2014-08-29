@@ -4,13 +4,13 @@
 
     <thead>
       <tr>
-        <th><%= Typus::I18n.t("Resources") %></th>
+        <th><%= t("Resources") %></th>
       </tr>
     </thead>
 
     <% resources.each do |resource| %>
       <tr>
-        <td><%= link_to Typus::I18n.t(resource.titleize.capitalize), :controller => "/admin/#{resource.underscore}" %></td>
+        <td><%= link_to t(resource.titleize.capitalize), :controller => "/admin/#{resource.underscore}" %></td>
       </tr>
     <% end %>
 

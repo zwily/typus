@@ -8,7 +8,7 @@
 
 <div class="col-md-12">
 
-  <h2><%= Typus::I18n.t('Dashboard') %></h2>
+  <h2><%= t('Dashboard') %></h2>
 
   <% if applications.any? %>
     <% applications.each do |app| %>
@@ -17,7 +17,7 @@
 
         <thead>
           <tr>
-            <th><%= Typus::I18n.t(app) %></th>
+            <th><%= t(app) %></th>
           </tr>
         </thead>
 
@@ -36,7 +36,7 @@
     <% end %>
   <% else %>
     <div class="notice">
-      <%= Typus::I18n.t('No applications detected.') %>
+      <%= t('No applications detected.') %>
     </div>
   <% end %>
 

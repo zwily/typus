@@ -2,13 +2,13 @@
 
   <%
      item_actions = {
-       edit: { message: Typus::I18n.t('Edit'), icon: 'edit' },
-       show: { message: Typus::I18n.t('Show'), icon: 'info-sign' },
-       destroy: { message: Typus::I18n.t('Destroy'), icon: 'remove' },
+       edit: { message: t('Edit'), icon: 'edit' },
+       show: { message: t('Show'), icon: 'info-sign' },
+       destroy: { message: t('Destroy'), icon: 'remove' },
      }
   %>
 
-  <h3><%= Typus::I18n.t('Entry') %></h3>
+  <h3><%= t('Entry') %></h3>
 
   <ul class="nav nav-pills nav-stacked">
     <% item_actions.each do |key, value| %>

@@ -40,7 +40,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
 
   def build_label_text_for_has_and_belongs_to_many(klass, html_options, options = {})
     if html_options[:disabled] == true
-      Typus::I18n.t('Read only')
+      t('Read only')
     elsif admin_user.can?('create', klass) && !headless_mode?
       build_add_new_for_has_and_belongs_to_many(klass, options)
     end
@@ -53,7 +53,7 @@ module Admin::Resources::DataTypes::HasAndBelongsToManyHelper
 
     options = { anchor: html_options['data-controls-modal'] }
 
-    link_to Typus::I18n.t('Add'), options, html_options
+    link_to t('Add'), options, html_options
   end
 
 end

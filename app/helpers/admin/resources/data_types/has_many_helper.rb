@@ -5,7 +5,7 @@ module Admin::Resources::DataTypes::HasManyHelper
     class_name = att_assoc.options[:class_name] || filter.classify
     resource = class_name.constantize
 
-    items = [[Typus::I18n.t('View all %{attribute}', attribute: @resource.human_attribute_name(filter).downcase.pluralize), '']]
+    items = [[t('View all %{attribute}', attribute: @resource.human_attribute_name(filter).downcase.pluralize), '']]
     items += resource.order(resource.typus_order_by).map { |v| [v.to_label, v.id] }
   end
 
@@ -39,7 +39,7 @@ module Admin::Resources::DataTypes::HasManyHelper
       html_options = set_modal_options_for(klass)
       html_options['url'] = "/admin/#{klass.to_resource}/new?_popup=true"
 
-      link_to Typus::I18n.t('Add'), "##{html_options['data-controls-modal']}", html_options
+      link_to t('Add'), "##{html_options['data-controls-modal']}", html_options
     end
   end
 

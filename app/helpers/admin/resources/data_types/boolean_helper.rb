@@ -17,7 +17,7 @@ module Admin::Resources::DataTypes::BooleanHelper
     }
 
     human_boolean = display_boolean(item, attribute)
-    link_to Typus::I18n.t(human_boolean), options
+    link_to t(human_boolean), options
   end
 
   def boolean_filter(filter)
@@ -25,7 +25,7 @@ module Admin::Resources::DataTypes::BooleanHelper
     attribute = @resource.human_attribute_name(filter)
 
     items = [[attribute.titleize, '']]
-    array = values.map { |k, v| ["#{attribute}:#{Typus::I18n.t(k.humanize)}", v] }
+    array = values.map { |k, v| ["#{attribute}:#{t(k.humanize)}", v] }
 
     items + array
   end

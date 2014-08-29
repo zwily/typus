@@ -27,7 +27,7 @@ module Admin
     # a "Recover from Trash" action:
     #
     #     def index
-    #       add_resource_action('Recover', {action: 'untrash'}, {data: {confirm: Typus::I18n.t("Recover %{resource}?"}, resource: @resource.model_name.human)})
+    #       add_resource_action('Recover', {action: 'untrash'}, {data: {confirm: I18n.t("Recover %{resource}?"}, resource: @resource.model_name.human)})
     #       super
     #     end
     #

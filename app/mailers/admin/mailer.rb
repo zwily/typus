@@ -8,7 +8,7 @@ class Admin::Mailer < ActionMailer::Base
 
     options = {
       to: user.email,
-      subject: "[#{Typus.admin_title}] #{Typus::I18n.t('Reset password')}",
+      subject: "[#{Typus.admin_title}] #{I18n.t('Reset password')}",
     }
 
     mail(options) do |format|

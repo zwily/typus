@@ -8,14 +8,14 @@ module Admin
       item.set_featured_image(attachment.id)
 
       options = { controller: params[:resource].tableize, action: 'edit', id: item.id }
-      redirect_to options, notice: Typus::I18n.t('Featured image set')
+      redirect_to options, notice: I18n.t('Featured image set')
     end
 
     def remove_featured_image
       item = @resource.unscoped.find(params[:id])
       item.try(:remove_featured_image)
       options = { action: 'edit', id: item.id }
-      redirect_to options, notice: Typus::I18n.t('Featured image removed')
+      redirect_to options, notice: I18n.t('Featured image removed')
     end
 
   end

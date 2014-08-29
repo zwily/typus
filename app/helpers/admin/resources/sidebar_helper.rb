@@ -1,7 +1,7 @@
 module Admin::Resources::SidebarHelper
 
   def build_sidebar
-    locals = { sidebar_title: Typus::I18n.t('Dashboard'), actions: []}
+    locals = { sidebar_title: t('Dashboard'), actions: []}
 
     if @resource
       locals[:actions] = [sidebar_list(@resource.name), sidebar_add_new(@resource.name)].compact
@@ -15,7 +15,7 @@ module Admin::Resources::SidebarHelper
     return if admin_user.cannot?('create', klass)
 
     {
-      message: Typus::I18n.t('Add'),
+      message: t('Add'),
       url: { controller: "/admin/#{klass.to_resource}", action: 'new' },
       icon: 'plus',
     }
@@ -25,7 +25,7 @@ module Admin::Resources::SidebarHelper
     return if admin_user.cannot?('read', klass)
 
     {
-      message: Typus::I18n.t('List'),
+      message: t('List'),
       url: { controller: "/admin/#{klass.to_resource}", action: 'index' },
       icon: 'list',
     }
@@ -35,7 +35,7 @@ module Admin::Resources::SidebarHelper
   def sidebar_view_site
     if Typus.link_to_view_site
       {
-        message: Typus::I18n.t('View Site'),
+        message: t('View Site'),
         url: Typus.admin_title_link,
         link_to_options: { target: '_blank' },
         icon: 'share',

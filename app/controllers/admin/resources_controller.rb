@@ -100,7 +100,7 @@ class Admin::ResourcesController < Admin::BaseController
   def destroy
     if request.delete?
       if @item.destroy
-        flash[:notice] = Typus::I18n.t("%{model} successfully removed.", model: @resource.model_name.human)
+        flash[:notice] = I18n.t("%{model} successfully removed.", model: @resource.model_name.human)
       else
         flash[:alert] = @item.errors.full_messages
       end
@@ -208,9 +208,9 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     notice = if params[:action].eql?('create')
-                Typus::I18n.t("%{model} successfully created.", model: @resource.model_name.human)
+                I18n.t("%{model} successfully created.", model: @resource.model_name.human)
               else
-                Typus::I18n.t("%{model} successfully updated.", model: @resource.model_name.human)
+                I18n.t("%{model} successfully updated.", model: @resource.model_name.human)
               end
 
     redirect_to path.merge!(options).compact, notice: notice

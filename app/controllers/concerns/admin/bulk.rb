@@ -28,9 +28,9 @@ module Admin
         send(params[:batch_action], params[:selected_item_ids])
       else
         notice = if params[:batch_action].empty?
-          Typus::I18n.t('No bulk action selected.')
+          I18n.t('No bulk action selected.')
         else
-          Typus::I18n.t('Items must be selected in order to perform actions on them. No items have been changed.')
+          I18n.t('Items must be selected in order to perform actions on them. No items have been changed.')
         end
         redirect_to :back, notice: notice
       end
@@ -38,14 +38,14 @@ module Admin
 
     def bulk_destroy(ids)
       ids.each { |id| @resource.destroy(id) }
-      notice = Typus::I18n.t('Successfully deleted %{count} entries.', count: ids.count)
+      notice = I18n.t('Successfully deleted %{count} entries.', count: ids.count)
       redirect_to :back, notice: notice
     end
     private :bulk_destroy
 
     def bulk_restore(ids)
       ids.each { |id| @resource.deleted.find(id).restore }
-      notice = Typus::I18n.t('Successfully restored %{count} entries.', count: ids.count)
+      notice = I18n.t('Successfully restored %{count} entries.', count: ids.count)
       redirect_to :back, notice: notice
     end
     private :bulk_restore

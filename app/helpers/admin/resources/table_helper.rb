@@ -59,7 +59,7 @@ module Admin::Resources::TableHelper
       end
 
       {
-        message: Typus::I18n.t(body),
+        message: t(body),
         url: params.dup.cleanup.merge({controller: "/admin/#{model.to_resource}", id: item.id}).merge(url),
         options: options,
       }

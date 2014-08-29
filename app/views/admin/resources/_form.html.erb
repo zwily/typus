@@ -18,7 +18,7 @@
         klass = key.eql?(:_save) ? 'btn btn-primary' : 'btn btn-default'
         options = { name: key, onclick: 'Typus.setConfirmUnload(false);', class: klass }
       %>
-      <%= submit_tag Typus::I18n.t(value), options %>
+      <%= submit_tag t(value), options %>
     <% end %>
   <% end %>
 

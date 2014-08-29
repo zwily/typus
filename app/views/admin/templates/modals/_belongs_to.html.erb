@@ -1,6 +1,6 @@
 <% content_for "modal_for_#{attribute}" do %>
 
-  <% new_page_title = Typus::I18n.t("Add %{resource}", :resource => related.model_name.human.titleize) %>
+  <% new_page_title = t("Add %{resource}", :resource => related.model_name.human.titleize) %>
 
   <div id="modal-from-dom-<%= attribute_id %>" class="modal fade">
     <div class="modal-dialog">
@@ -15,7 +15,7 @@
 
         <div class="modal-footer">
           <% html_options = { id: 'modal-form-submit', class: 'btn btn-primary' } %>
-          <%= link_to Typus::I18n.t('Save'), { anchor: '', _continue: true }, html_options %>
+          <%= link_to t('Save'), { anchor: '', _continue: true }, html_options %>
         </div>
 
         <script>

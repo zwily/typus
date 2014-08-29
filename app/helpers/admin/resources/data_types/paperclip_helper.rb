@@ -11,7 +11,7 @@ module Admin::Resources::DataTypes::PaperclipHelper
 
     if attachment.present? && !validators.include?(attribute) && attachment
       attribute_i18n = @item.class.human_attribute_name(attribute)
-      link = link_to Typus::I18n.t('Remove'), { action: 'update', id: @item.id, _nullify: attribute, _continue: true }, { data: { confirm: Typus::I18n.t('Are you sure?') } }
+      link = link_to t('Remove'), { action: 'update', id: @item.id, _nullify: attribute, _continue: true }, { data: { confirm: t('Are you sure?') } }
 
       label_text = <<-HTML
 #{attribute_i18n}

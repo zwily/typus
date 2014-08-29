@@ -7,11 +7,11 @@
       <select id="bulk_action" name="batch_action">
         <option value="" selected="selected">Bulk actions</option>
         <% bulk_actions.each do |name, action| %>
-          <option value="<%= action %>"><%= Typus::I18n.t(name) %></option>
+          <option value="<%= action %>"><%= t(name) %></option>
         <% end %>
       </select>
 
-      <%= submit_tag Typus::I18n.t('Apply'), name: nil, class: 'btn btn-default btn-xs' %>
+      <%= submit_tag t('Apply'), name: nil, class: 'btn btn-default btn-xs' %>
     </div>
   <% end %>
 

@@ -26,8 +26,8 @@ module Admin
       respond_to do |format|
         format.html do
           # Actions by resource.
-          add_resource_action 'Restore', { action: 'restore' }, { glyphicon: 'refresh', data: { confirm: Typus::I18n.t('Restore?', resource: @resource.model_name.human) } }
-          add_resource_action 'Delete Permanently', { action: 'wipe' }, { glyphicon: 'remove', data: { confirm: Typus::I18n.t('Delete Permanently?') } }
+          add_resource_action 'Restore', { action: 'restore' }, { glyphicon: 'refresh', data: { confirm: I18n.t('Restore?', resource: @resource.model_name.human) } }
+          add_resource_action 'Delete Permanently', { action: 'wipe' }, { glyphicon: 'remove', data: { confirm: I18n.t('Delete Permanently?') } }
           # Generate and render.
           get_paginated_data
           render 'index'
@@ -42,9 +42,9 @@ module Admin
     def restore
       begin
         @resource.restore(params[:id])
-        message = Typus::I18n.t('%{resource} recovered from trash.', resource: @resource.model_name.human)
+        message = I18n.t('%{resource} recovered from trash.', resource: @resource.model_name.human)
       rescue ActiveRecord::RecordNotFound
-        message = Typus::I18n.t('%{resource} cannot be recovered from trash.', resource: @resource.model_name.human)
+        message = I18n.t('%{resource} cannot be recovered from trash.', resource: @resource.model_name.human)
       end
 
       redirect_to :back, notice: message
@@ -53,7 +53,7 @@ module Admin
     def wipe
       item = @resource.find_in_trash(params[:id])
       item.disable_trash { item.destroy }
-      redirect_to :back, notice: Typus::I18n.t('%{resource} has been successfully removed from trash.', resource: @resource.model_name.human)
+      redirect_to :back, notice: I18n.t('%{resource} has been successfully removed from trash.', resource: @resource.model_name.human)
     end
 
     def set_deleted

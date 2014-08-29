@@ -7,7 +7,7 @@ module Admin::Resources::DataTypes::DateHelper
                all_year: "This year" }
 
     items = [[@resource.human_attribute_name(filter).capitalize, ""]]
-    items += values.map { |k, v| [Typus::I18n.t(v), k] }
+    items += values.map { |k, v| [t(v), k] }
   end
 
   alias_method :datetime_filter, :date_filter
