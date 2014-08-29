@@ -22,7 +22,7 @@ module Admin::Resources::PaginationHelper
       options[:previous] = params.merge(offset: previous_offset)
     end
 
-    render "admin/resources/pagination", { options: options }
+    render 'admin/resources/pagination', { options: options }
   end
 
 end
