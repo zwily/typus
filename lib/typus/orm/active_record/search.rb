@@ -6,25 +6,24 @@ module Typus
         include Typus::Orm::Base::Search
 
         def build_search_conditions(key, value)
-          Array.new.tap do |search|
+          data = Array.new.tap do |search|
             query = ::ActiveRecord::Base.connection.quote_string(value.downcase)
 
-            search_fields = typus_search_fields
-            search_fields = search_fields.empty? ? { "name" => "@" } : search_fields
-
-            search_fields.each do |key, value|
-              _query = case value
-                       when "=" then query
-                       when "^" then "#{query}%"
-                       when "@" then "%#{query}%"
+            typus_search_fields.each do |local_key, local_value|
+              _query = case local_value
+                       when '=' then query
+                       when '^' then "#{query}%"
+                       when '@' then "%#{query}%"
                        end
 
-              column_name = (key.match('\.') ? key : "#{table_name}.#{key}")
+              column_name = (local_key.match('\.') ? local_key : "#{table_name}.#{local_key}")
               table_key = (adapter == 'postgresql') ? "LOWER(TEXT(#{column_name}))" : "#{column_name}"
 
               search << "#{table_key} LIKE '#{_query}'"
             end
-          end.join(" OR ")
+          end
+
+          data.join(' OR ')
         end
 
         # TODO: Use Rails scopes to build the search: where(key => interval)
@@ -34,8 +33,8 @@ module Typus
 
         def build_my_joins(params)
           query_params = params.dup
-          query_params.reject! { |k, v| !model_relationships.keys.include?(k.to_sym) }
-          query_params.compact.map { |k, v| k.to_sym }
+          query_params.reject! { |k, _| !model_relationships.keys.include?(k.to_sym) }
+          query_params.compact.map { |k, _| k.to_sym }
         end
 
       end
