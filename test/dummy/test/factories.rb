@@ -3,21 +3,21 @@
 FactoryGirl.define do
   factory :admin_user do
     sequence(:email) { |n| "admin+#{n}@example.com" }
-    password "XXXXXXXX"
-    role "admin"
+    password 'XXXXXXXX'
+    role 'admin'
   end
 
   factory :devise_user do
     sequence(:email) { |n| "john+#{n}@example.com"}
-    password "12345678"
+    password '12345678'
   end
 
   factory :typus_user do
     sequence(:email) { |n| "user+#{n}@example.com" }
-    role "admin"
+    role 'admin'
     status true
-    token "1A2B3C4D5E6F"
-    password "12345678"
+    token '1A2B3C4D5E6F'
+    password '12345678'
   end
 end
 
@@ -26,22 +26,22 @@ end
 FactoryGirl.define do
   factory :entry do
     sequence(:title) { |n| "Entry##{n}" }
-    content "Body of the entry"
+    content 'Body of the entry'
   end
 
   factory :entry_bulk do
     sequence(:title) { |n| "EntryBulk##{n}" }
-    content "Body of the entry"
+    content 'Body of the entry'
   end
 
   factory :entry_trash do
     sequence(:title) { |n| "EntryTrash##{n}" }
-    content "Body of the entry"
+    content 'Body of the entry'
   end
 
   factory :case do
     sequence(:title) { |n| "Case##{n}" }
-    content "Body of the entry"
+    content 'Body of the entry'
   end
 end
 
@@ -63,23 +63,23 @@ FactoryGirl.define do
   factory :comment do
     sequence(:name) { |n| "Comment##{n}" }
     sequence(:email) { |n| "john+#{n}@example.com" }
-    body "Body of the comment"
+    body 'Body of the comment'
     association :post
   end
 
   factory :page do
     sequence(:title) { |n| "Page##{n}" }
-    body "Content"
+    body 'Content'
   end
 
   factory :post do
     sequence(:title) { |n| "Post##{n}" }
-    body "Body"
-    status "published"
+    body 'Body'
+    status 'published'
   end
 
   factory :view do
-    ip "127.0.0.1"
+    ip '127.0.0.1'
     association :post
     association :site
   end
@@ -104,8 +104,8 @@ FactoryGirl.define do
   factory :user do
     sequence(:name) { |n| "User##{n}" }
     sequence(:email) { |n| "user.#{n}@example.com" }
-    role "admin"
-    token "qw1rd3-1w3f5b"
+    role 'admin'
+    token 'qw1rd3-1w3f5b'
   end
 
   factory :project do
