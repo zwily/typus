@@ -27,7 +27,7 @@ module Typus
           resource = resource.to_s
 
           return false if !resources.include?(resource)
-          return true if resources[resource].include?("all")
+          return true if resources[resource].include?('all')
 
           action = options[:special] ? action : action.acl_action_mapper
 
