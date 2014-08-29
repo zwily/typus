@@ -52,10 +52,10 @@ class Admin::ResourcesController < Admin::BaseController
     respond_to do |format|
       if @item.save
         format.html { redirect_on_success }
-        format.json { render :json => @item, :status => :created, :location => @item }
+        format.json { render json: @item, status: :created, location: @item }
       else
-        format.html { render :action => "new", :status => :unprocessable_entity }
-        format.json { render :json => @item.errors, :status => :unprocessable_entity }
+        format.html { render action: 'new', status: :unprocessable_entity }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
   end
