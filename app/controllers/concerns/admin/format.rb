@@ -21,7 +21,7 @@ module Admin
           csv << fields.map do |key, value|
                    case value
                    when :transversal
-                     a, b = key.split(".")
+                     a, b = key.split('.')
                      record.send(a).send(b)
                    when :belongs_to
                      record.send(key).try(:to_label)
