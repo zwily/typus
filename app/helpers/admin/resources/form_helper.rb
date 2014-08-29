@@ -3,16 +3,20 @@ module Admin::Resources::FormHelper
   def build_form(fields, form)
     String.new.tap do |html|
       fields.each do |key, value|
-        value = @resource.typus_template(key) || value
+        value = :template if (template = @resource.typus_template(key))
         html << case value
                 when :belongs_to
                   typus_belongs_to_field(key, form)
                 when :tree
                   typus_tree_field(key, form)
+                when :boolean, :date, :datetime, :text, :time, :password, :selector, :dragonfly, :paperclip
+                  typus_template_field(key, value, form)
+                when :template
+                  typus_template_field(key, template, form)
                 when :has_and_belongs_to_many
                   typus_has_and_belongs_to_many_field(key, form)
                 else
-                  typus_template_field(key, value, form)
+                  typus_template_field(key, :string, form)
                 end
       end
     end.html_safe
