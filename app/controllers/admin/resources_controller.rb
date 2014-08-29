@@ -89,10 +89,10 @@ class Admin::ResourcesController < Admin::BaseController
       if @item.update_attributes(item_params_for_update)
         set_attributes_on_update
         format.html { redirect_on_success }
-        format.json { render :json => @item }
+        format.json { render json: @item }
       else
-        format.html { render :edit, :status => :unprocessable_entity }
-        format.json { render :json => @item.errors, :status => :unprocessable_entity }
+        format.html { render :edit, status: :unprocessable_entity }
+        format.json { render json: @item.errors, status: :unprocessable_entity }
       end
     end
   end
