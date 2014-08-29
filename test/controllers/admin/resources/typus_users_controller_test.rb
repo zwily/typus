@@ -30,10 +30,11 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   test "admin should be able to toggle other users status" do
     setup_admin
+    assert_equal true, @typus_user_editor.status
     get :toggle, { :id => @typus_user_editor.id, :field => 'status' }
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-    assert_equal "Typus user successfully updated.", flash[:notice]
+    assert_equal false, @typus_user_editor.reload.status
   end
 
   test "admin should not be able to destroy himself" do

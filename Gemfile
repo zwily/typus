@@ -63,4 +63,8 @@ gem 'mongoid', github: 'mongoid/mongoid'
 gem 'puma'
 
 # Testing stuff
-gem 'mocha'
+group :test do
+  gem 'mocha'
+  gem 'minitest-rails-capybara' # makes capybara's DSL methods available in Rails minitests
+  gem 'poltergeist' # a headless browser (webkit) as capybara driver
+end
