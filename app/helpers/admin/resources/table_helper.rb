@@ -46,11 +46,11 @@ module Admin::Resources::TableHelper
   end
 
   def table_actions(model, item)
-    resource_actions.reject! do |_, url, _, _|
+    @resource_actions.reject! do |_, url, _, _|
       admin_user.cannot?(url[:action], model.name)
     end
 
-    resource_actions.map do |body, url, options, proc|
+    @resource_actions.map do |body, url, options, proc|
       next if proc && proc.respond_to?(:call) && proc.call(item) == false
 
       # Hack to fix options URL
