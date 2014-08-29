@@ -2,55 +2,59 @@
 
   <% new_page_title = Typus::I18n.t("Add %{resource}", :resource => related.model_name.human.titleize) %>
 
-  <div id="modal-from-dom-<%= attribute_id %>" class="modal hide fade">
+  <div id="modal-from-dom-<%= attribute_id %>" class="modal fade">
+    <div class="modal-dialog">
+      <div class="modal-content">
 
-    <div class="modal-header">
-      <a class="close" data-dismiss="modal">&times;</a>
-      <h3><%= new_page_title %></h3>
-    </div>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+          <h4 class="modal-title"><%= new_page_title %></h4>
+        </div>
 
-    <div class="modal-body"></div>
+        <div class="modal-body"></div>
 
-    <div class="modal-footer">
-      <% html_options = { :id => "modal-form-submit", :class => "btn btn-primary" } %>
-      <%= link_to Typus::I18n.t("Save"), { :anchor => "", :_continue => true }, html_options %>
-    </div>
+        <div class="modal-footer">
+          <% html_options = { id: 'modal-form-submit', class: 'btn btn-primary' } %>
+          <%= link_to Typus::I18n.t('Save'), { anchor: '', _continue: true }, html_options %>
+        </div>
 
-    <script>
+        <script>
 
-      <%= object_id = "new_#{related.model_name.to_s.downcase}" %>
+          <%= object_id = "new_#{related.model_name.to_s.downcase}" %>
 
-      $('#modal-form-submit').click(function(e){
-        e.preventDefault();
+          $('#modal-form-submit').click(function(e){
+            e.preventDefault();
 
-        $('#<%= object_id %>').submit(function() {
+            $('#<%= object_id %>').submit(function() {
 
-          // Get the action url:
-          var action;
-          action = $('#<%= object_id %>').attr('action');
+              // Get the action url:
+              var action;
+              action = $('#<%= object_id %>').attr('action');
 
-          $.post(action, $(this).serialize(), function(data){})
-          .success(function(data, text, xhr) {
-            $('.modal-body').html(data);
+              $.post(action, $(this).serialize(), function(data){})
+              .success(function(data, text, xhr) {
+                $('.modal-body').html(data);
 
-            var option = new Option($("#_label").attr("value"), $("#_id").attr("value"), true, true);
-            parent.$("#<%= attribute_id %>").prepend(option);
+                var option = new Option($("#_label").attr("value"), $("#_id").attr("value"), true, true);
+                parent.$("#<%= attribute_id %>").prepend(option);
 
-            $("#modal-from-dom-<%= attribute_id %>").modal('hide');
-          })
-          .error(function(request, status, error) {
-            $('.modal-body').html(request.responseText);
+                $("#modal-from-dom-<%= attribute_id %>").modal('hide');
+              })
+              .error(function(request, status, error) {
+                $('.modal-body').html(request.responseText);
+              });
+
+              return false;
+            });
+
+            $('#<%= related.model_name.to_s.downcase %>').submit();
+
+            return false;
           });
+        </script>
 
-          return false;
-        });
-
-        $('#<%= related.model_name.to_s.downcase %>').submit();
-
-        return false;
-      });
-    </script>
-
+      </div>
+    </div>
   </div>
 
 <% end %>
