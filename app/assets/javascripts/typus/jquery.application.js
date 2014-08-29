@@ -19,12 +19,12 @@ var Typus = {};
 
 Typus.setConfirmUnload = function(on) {
     window.onbeforeunload = (on) ? Typus.unloadMessage : null;
-}
+};
 
 Typus.reloadParent = function() {
     if (Typus.parent_location_reload) parent.location.reload(true);
-}
+};
 
 Typus.unloadMessage = function () {
     return "You have entered new data on this page. If you navigate away from this page without first saving your data, the changes will be lost.";
-}
+};
