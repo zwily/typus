@@ -5,7 +5,7 @@ module Admin::Resources::SidebarHelper
 
     if @resource
       locals[:actions] = [sidebar_list(@resource.name), sidebar_add_new(@resource.name)].compact
-      locals[:sidebar_title] = @resource.model_name.human.pluralize
+      locals[:sidebar_title] = @resource.model_name.human(count: 1_000)
     end
 
     render 'helpers/admin/resources/sidebar', locals

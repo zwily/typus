@@ -1,0 +1,6 @@
+ca:
+  activerecord:
+    models:
+      entry:
+        one: Entrada
+        other: Entrades

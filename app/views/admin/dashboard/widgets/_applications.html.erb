@@ -26,7 +26,7 @@
               <% unless klass.typus_options_for(:hide_from_dashboard) %>
                 <tr>
                   <td>
-                    <%= link_to klass.model_name.human.pluralize, :controller => "/admin/#{klass.to_resource}" %>
+                    <%= link_to klass.model_name.human(count: 1_000), controller: "/admin/#{klass.to_resource}" %>
                   </td>
                 </tr>
               <% end %>
