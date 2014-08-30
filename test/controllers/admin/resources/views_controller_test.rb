@@ -12,18 +12,21 @@ class Admin::ViewsControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    @site = FactoryGirl.create(:site, domain: 'test.host')
-    FactoryGirl.create(:view, site: @site)
-    FactoryGirl.create(:view)
+
+    @site = sites(:default)
+    @site.update_column(:domain, 'test.host')
+
+    View.create(ip: '127.0.0.1', site: @site)
+    View.create(ip: '127.0.0.1')
   end
 
-  test "get index returns only views on the current_context" do
+  test 'get index returns only views on the current_context' do
     get :index
     assert_response :success
-    assert_equal @site.views, assigns(:items)
+    assert_equal [@site], assigns(:items).map(&:site)
   end
 
-  test "get new initializes item in the current_scope" do
+  test 'get new initializes item in the current_scope' do
     get :new
     assert_response :success
     assert_equal @site, assigns(:item).site

@@ -7,7 +7,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   end
 
   test 'admin role' do
-    typus_user = FactoryGirl.create(:typus_user)
+    typus_user = typus_users(:admin)
 
     config = {
       'View' => {},
@@ -22,28 +22,28 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   end
 
   test 'admin role has access to all actions on models' do
-    typus_user = FactoryGirl.create(:typus_user)
+    typus_user = typus_users(:admin)
     models = %w(Asset Category Comment Page Post TypusUser View)
     %w(create read update destroy).each { |a| models.each { |m| assert typus_user.can?(a, m) } }
   end
 
   test 'admin role can perform action on resource' do
-    typus_user = FactoryGirl.create(:typus_user)
+    typus_user = typus_users(:admin)
     assert typus_user.can?('index', 'Status', { special: true })
   end
 
   test 'admin role cannot perform action on resource' do
-    typus_user = FactoryGirl.create(:typus_user)
+    typus_user = typus_users(:admin)
     assert typus_user.cannot?('show', 'Status', { special: true })
   end
 
   test 'admin role cannot perform actions on resources which do not have that action defined' do
-    typus_user = FactoryGirl.create(:typus_user)
+    typus_user = typus_users(:admin)
     assert typus_user.cannot?('destroy', 'Order')
   end
 
   test 'editor role' do
-    typus_user = FactoryGirl.create(:typus_user, role: "editor")
+    typus_user = typus_users(:editor)
 
     expected = %w(Comment Git Post View)
     assert_equal expected, typus_user.resources.map(&:first).sort
@@ -59,7 +59,7 @@ class TypusUserRolesTest < ActiveSupport::TestCase
   end
 
   test 'designer role' do
-    typus_user = FactoryGirl.create(:typus_user, role: 'designer')
+    typus_user = typus_users(:designer)
 
     expected = %w(Comment Post)
     assert_equal expected, typus_user.resources.map(&:first).sort

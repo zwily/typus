@@ -12,7 +12,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
   def setup_admin
     admin_sign_in
-    @typus_user_editor = FactoryGirl.create(:typus_user, email: "editor@example.com", role: "editor")
+    @typus_user_editor = typus_users(:editor)
     @request.env['HTTP_REFERER'] = '/admin/typus_users'
   end
 
@@ -128,27 +128,27 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
     assert_response :unprocessable_entity
   end
 
-  test "editor should not be able to edit other profiles" do
+  test 'editor should not be able to edit other profiles' do
     editor_sign_in
-    get :edit, id: FactoryGirl.create(:typus_user).id
+    get :edit, id: typus_users(:admin)
     assert_response :unprocessable_entity
   end
 
-  test "editor should not be able to update other profiles" do
+  test 'editor should not be able to update other profiles' do
     editor_sign_in
-    post :update, id: FactoryGirl.create(:typus_user).id, typus_user: { role: 'admin' }
+    post :update, id: typus_users(:admin), typus_user: { role: 'admin' }
     assert_response :unprocessable_entity
   end
 
-  test "editor should not be able to destroy other profiles" do
+  test 'editor should not be able to destroy other profiles' do
     editor_sign_in
-    delete :destroy, id: FactoryGirl.create(:typus_user).id
+    delete :destroy, id: typus_users(:admin)
     assert_response :unprocessable_entity
   end
 
-  test "editor should not be able to toggle other profiles status" do
+  test 'editor should not be able to toggle other profiles status' do
     editor_sign_in
-    get :toggle, id: FactoryGirl.create(:typus_user).id, field: 'status'
+    get :toggle, id: typus_users(:admin), field: 'status'
     assert_response :unprocessable_entity
   end
 

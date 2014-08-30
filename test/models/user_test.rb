@@ -10,30 +10,37 @@ require "test_helper"
 
 class UserTest < ActiveSupport::TestCase
 
-  test "to_label" do
-    user = FactoryGirl.build(:typus_user)
-    assert_equal user.email, user.to_label
+  test 'to_label' do
+    typus_user = typus_users(:admin)
+    assert_equal typus_user.email, typus_user.to_label
   end
 
-  test "can?" do
-    user = FactoryGirl.build(:typus_user, role: 'admin')
-    assert user.can?('delete', TypusUser)
-    refute user.cannot?('delete', TypusUser)
-    assert user.can?('delete', 'TypusUser')
-    refute user.cannot?('delete', 'TypusUser')
+  test 'can?' do
+    typus_user = typus_users(:admin)
+    assert typus_user.can?('delete', TypusUser)
+    refute typus_user.cannot?('delete', TypusUser)
+    assert typus_user.can?('delete', 'TypusUser')
+    refute typus_user.cannot?('delete', 'TypusUser')
   end
 
-  test "is_root?" do
-    user = FactoryGirl.build(:typus_user, role: 'admin')
-    assert user.is_root?
-    refute user.is_not_root?
+  test 'is_root?' do
+    typus_user = typus_users(:admin)
+    assert typus_user.is_root?
+    refute typus_user.is_not_root?
   end
 
-  test "active?" do
-    assert FactoryGirl.build(:typus_user, role: 'admin', status: true).active?
-    refute FactoryGirl.build(:typus_user, role: 'admin', status: false).active?
-    refute FactoryGirl.build(:typus_user, role: 'unexisting', status: true).active?
-    refute FactoryGirl.build(:typus_user, role: 'unexisting', status: false).active?
+  test 'active?' do
+    typus_user = typus_users(:admin)
+    assert typus_user.active?
+
+    typus_user.status = false
+    refute typus_user.active?
+
+    typus_user.role = 'unexisting'
+    refute typus_user.active?
+
+    typus_user.status = true
+    refute typus_user.active?
   end
 
 end

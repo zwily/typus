@@ -115,7 +115,7 @@ class ActiveRecordTest < ActiveSupport::TestCase
     expected = case db_adapter
                when "postgresql"
                  ["LOWER(TEXT(typus_users.first_name)) LIKE '%francesc%'",
-                  "LOWER(TEXT(typus_users.last_name)) LIKE '%francesc%'", 
+                  "LOWER(TEXT(typus_users.last_name)) LIKE '%francesc%'",
                   "LOWER(TEXT(typus_users.email)) LIKE '%francesc%'",
                   "LOWER(TEXT(typus_users.role)) LIKE '%francesc%'"]
                else
@@ -147,17 +147,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
                   "typus_users.role LIKE '%francesc%'"]
                end
 
-    params = { search: "francesc", status: "true" }
-
-    FactoryGirl.create(:typus_user, email: "francesc.one@example.com")
-    FactoryGirl.create(:typus_user, email: "francesc.dos@example.com", status: false)
+    params = { search: 'admin@example', status: 'true' }
 
     resource = TypusUser
     resource.build_conditions(params).each do |condition|
       resource = resource.where(condition)
     end
 
-    assert_equal ["francesc.one@example.com"], resource.map(&:email)
+    assert_equal ['admin@example.com'], resource.map(&:email)
   end
 
   test 'build_conditions return_sql_conditions_on_filtering_typus_users_by_status true' do

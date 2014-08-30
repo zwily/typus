@@ -15,7 +15,9 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     @request.env['HTTP_REFERER'] = '/admin/categories'
   end
 
-  test "get position" do
+  test 'get position' do
+    Category.delete_all
+
     first_category = FactoryGirl.create(:category, position: 1)
     second_category = FactoryGirl.create(:category, position: 2)
 
@@ -24,7 +26,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert_redirected_to @request.env['HTTP_REFERER']
 
     get :position, id: first_category.id, go: 'move_lower'
-    assert_equal "Category successfully updated.", flash[:notice]
+    assert_equal 'Category successfully updated.', flash[:notice]
     assert assigns(:item).position.eql?(2)
 
     get :position, id: second_category.id, go: 'move_higher'
@@ -37,11 +39,11 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
     assert assigns(:item).position.eql?(1)
   end
 
-  test "get position with not allowed go option" do
+  test 'get position with not allowed go option' do
     category = FactoryGirl.create(:category, position: 1)
     get :position, id: category.id, go: 'move_up'
     assert_response :unprocessable_entity
-    assert_equal "Not allowed!", response.body
+    assert_equal 'Not allowed!', response.body
   end
 
 end

@@ -47,8 +47,8 @@ class ActiveRecordTest < ActiveSupport::TestCase
     end
   end
 
-  test "to_label returns email for TypusUser" do
-    typus_user = FactoryGirl.build(:typus_user)
+  test 'to_label returns email for TypusUser' do
+    typus_user = typus_users(:admin)
     assert_equal typus_user.email, typus_user.to_label
   end
 

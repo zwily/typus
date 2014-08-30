@@ -1,26 +1,3 @@
-# Authentication
-
-FactoryGirl.define do
-  factory :admin_user do
-    sequence(:email) { |n| "admin+#{n}@example.com" }
-    password 'XXXXXXXX'
-    role 'admin'
-  end
-
-  factory :devise_user do
-    sequence(:email) { |n| "john+#{n}@example.com"}
-    password '12345678'
-  end
-
-  factory :typus_user do
-    sequence(:email) { |n| "user+#{n}@example.com" }
-    role 'admin'
-    status true
-    token '1A2B3C4D5E6F'
-    password '12345678'
-  end
-end
-
 # CRUD
 
 FactoryGirl.define do
@@ -136,14 +113,5 @@ FactoryGirl.define do
 
   factory :image_holder do
     sequence(:name) { |n| "ImageHolder##{n}" }
-  end
-end
-
-# Contexts
-
-FactoryGirl.define do
-  factory :site do
-    sequence(:name) { |n| "Site##{n}" }
-    sequence(:domain) { |n| "site#{n}.local" }
   end
 end
