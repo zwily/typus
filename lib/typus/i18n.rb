@@ -17,6 +17,7 @@ module Typus
       #     Typus::I18n.t("Hello %{world}!", :world => @world)
       #
       def t(key, options = {})
+        raise "Typus::I18n.t is deprecated, please use I18n.t with a resource key"
         options[:default] ||= key
         ::I18n.t(key, options)
       end
