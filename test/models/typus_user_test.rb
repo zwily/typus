@@ -128,13 +128,15 @@ class TypusUserTest < ActiveSupport::TestCase
 
   test 'user owns a resource' do
     typus_user = typus_users(:admin)
-    resource = FactoryGirl.build(:post, typus_user: typus_user)
+    resource = posts(:default)
+    resource.typus_user = typus_user
     assert typus_user.owns?(resource)
   end
 
   test 'user does not own a resource' do
     typus_user = typus_users(:admin)
-    resource = FactoryGirl.create(:post, typus_user: typus_users(:editor))
+    resource = posts(:default)
+    resource.typus_user = typus_users(:editor)
     refute typus_user.owns?(resource)
   end
 

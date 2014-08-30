@@ -17,7 +17,7 @@ class AddAssociatedRecordFromFormTest < Capybara::Rails::TestCase
     within('div#project_user_id_li') { click_on('Add') }
     assert_css 'h4', text: 'Add User' # wait until modal becomes visible
     # fill in user
-    user = FactoryGirl.attributes_for(:typus_user)
+    user = typus_users(:admin).attributes
     user_count = User.count
     within('div.modal-dialog') do
       fill_in('Name', with: 'Fritz')

@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 class Admin::Resources::DataTypes::HasAndBelongsToManyHelperTest < ActiveSupport::TestCase
 
@@ -10,7 +10,7 @@ class Admin::Resources::DataTypes::HasAndBelongsToManyHelperTest < ActiveSupport
   test 'typus_has_and_belongs_to_many_field' do
     @resource, attribute, form = EntryDefault, 'categories', {}
     categories = FactoryGirl.create_list(:category, 5)
-    @item = FactoryGirl.create(:entry)
+    @item = entries(:default)
     @item.categories << categories.first
 
     template, options = typus_has_and_belongs_to_many_field(attribute, form)

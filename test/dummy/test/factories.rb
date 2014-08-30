@@ -1,11 +1,6 @@
 # CRUD
 
 FactoryGirl.define do
-  factory :entry do
-    sequence(:title) { |n| "Entry##{n}" }
-    content 'Body of the entry'
-  end
-
   factory :entry_bulk do
     sequence(:title) { |n| "EntryBulk##{n}" }
     content 'Body of the entry'
@@ -49,17 +44,6 @@ FactoryGirl.define do
     body 'Content'
   end
 
-  factory :post do
-    sequence(:title) { |n| "Post##{n}" }
-    body 'Body'
-    status 'published'
-  end
-
-  factory :view do
-    ip '127.0.0.1'
-    association :post
-    association :site
-  end
 end
 
 # HasOne Association

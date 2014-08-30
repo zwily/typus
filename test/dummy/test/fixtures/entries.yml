@@ -1,0 +1,4 @@
+default:
+  title: "Default Entry"
+  content: "Default Content of the Default Entry"
+  published: true
