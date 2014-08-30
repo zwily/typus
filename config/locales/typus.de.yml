@@ -7,6 +7,7 @@ de:
       help: "Hilfe"
       settings: "Einstellungen"
       confirm_question: "Sind Sie sicher?"
+      restore_question: 'Restore?'
 
     buttons:
       add: "Hinzufügen"
@@ -28,6 +29,11 @@ de:
     flash:
       update_success: "%{model} erfolgreich aktualisiert."
       create_success: "%{model} erfolgreich erstellt."
+      delete_success: "%{model} erfolgreich gelöscht."
+      wipe_success: "%{resource} wurde erfolgreich aus dem Papierkorb gelöscht."
+      bulk_delete_success: 
+        one: "Element wurde erfolgreich gelöscht."
+        other: "%{count} Elemente wurden erfolgreich gelöscht."
       settings_update_success: "Einstellungen erfolgreich aktualisiert." # this can probably be removed later
       image_removed: "Bild entfernt"
       image_set: "Bild hinzugefügt"
@@ -35,6 +41,8 @@ de:
       password_reset_email_success: "Die Email zum Rücksetzen des Passworts wurde gesendet."
       bulk_no_action: "Keine Aktion ausgewählt."
       bulk_no_items: "Es wurden keine Elemente ausgewählt, elemente wurden nicht verändert."
+      trash_recover_failed: "%{resource} wurde wiederhergestellt."
+      trash_recover_success: "%{resource} konnte nicht wiederhergestellt werden."
 
     errors:
       intro: 

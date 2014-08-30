@@ -100,7 +100,7 @@ class Admin::ResourcesController < Admin::BaseController
   def destroy
     if request.delete?
       if @item.destroy
-        flash[:notice] = I18n.t("%{model} successfully removed.", model: @resource.model_name.human)
+        flash[:notice] = I18n.t("typus.flash.delete_success", model: @resource.model_name.human)
       else
         flash[:alert] = @item.errors.full_messages
       end

@@ -52,7 +52,7 @@ class Admin::TypusUsersControllerTest < ActionController::TestCase
 
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
-    assert_equal "Typus user successfully removed.", flash[:notice]
+    assert_equal "Typus user successfully deleted.", flash[:notice]
   end
 
   test "admin should be able to update his profile" do

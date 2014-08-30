@@ -38,7 +38,7 @@ module Admin
 
     def bulk_destroy(ids)
       ids.each { |id| @resource.destroy(id) }
-      notice = I18n.t('Successfully deleted %{count} entries.', count: ids.count)
+      notice = I18n.t('typus.flash.bulk_delete_success', count: ids.count)
       redirect_to :back, notice: notice
     end
     private :bulk_destroy
