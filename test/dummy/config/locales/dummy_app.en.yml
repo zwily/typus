@@ -9,3 +9,12 @@ en:
   "Published": "Published"
   "Yes": "Yes"
   "No": "No"
+  # more stuff ...
+  "CRUD": "CRUD"
+  "CRUD Extended": "CRUD Extended"
+  "Admin": "Admin"
+  "Polymorphic": "Polymorphic"
+  "HasMany": "HasMany"
+  "HasOne": "HasOne"
+  "MongoDB": "MongoDB"
+  "Dashboard": "Dashboard"
