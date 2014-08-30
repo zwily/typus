@@ -10,18 +10,18 @@ editor:
   role: 'editor'
   status: true
   token: 1A2B3C4D5E6F
-  password_digest: XXXXXXXXX
+  password_digest: <%= BCrypt::Password.create('12345678') %>
 
 designer:
   email: 'designer@example.com'
   role: 'designer'
   status: true
   token: 1A2B3C4D5E6F
-  password_digest: XXXXXXXXX
+  password_digest: <%= BCrypt::Password.create('12345678') %>
 
 removed:
   email: 'removed@example.com'
   role: 'removed'
   status: true
   token: 1A2B3C4D5E6F
-  password_digest: XXXXXXXXX
+  password_digest: <%= BCrypt::Password.create('12345678') %>
