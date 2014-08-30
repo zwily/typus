@@ -1,0 +1,11 @@
+en:
+  #
+  # These are model attributes and their states, needed for the filters.
+  # Since they are application-specific, they live here rather than in the core Typus engine
+  #
+  "Status": "Status"
+  "Active": "Active"
+  "Inactive": "Inactive"
+  "Published": "Published"
+  "Yes": "Yes"
+  "No": "No"
