@@ -1,5 +1,5 @@
 <%
-  page_title = t("Sign in")
+  page_title = t('typus.sessions.new.title')
   admin_title(page_title)
 %>
 
@@ -8,14 +8,14 @@
              html: { class: "form-signin" } do |form| %>
 
   <%= render partial: 'admin/account/form',
-             locals: { form: form, submit_text: "Sign in" } %>
+             locals: { form: form, submit_text: 'typus.buttons.sign_in' } %>
 
 <% end %>
 
 <% if Typus.mailer_sender %>
   <% content_for :actions do %>
     <ul>
-      <li><%= link_to t("Recover password"), forgot_password_admin_account_index_path %></li>
+      <li><%= link_to t('typus.sessions.recover_password'), forgot_password_admin_account_index_path %></li>
     </ul>
   <% end %>
 <% end %>

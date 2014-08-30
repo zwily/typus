@@ -14,7 +14,7 @@ class Admin::SettingsController < Admin::BaseController
       end
     end
 
-    flash[:notice] = Typus::I18n.t("Settings successfully updated.")
+    flash[:notice] = I18n.t('typus.flash.settings_update_success')
     redirect_to action: "index"
   end
 

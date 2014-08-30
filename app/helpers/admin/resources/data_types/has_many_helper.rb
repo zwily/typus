@@ -39,7 +39,7 @@ module Admin::Resources::DataTypes::HasManyHelper
       html_options = set_modal_options_for(klass)
       html_options['url'] = "/admin/#{klass.to_resource}/new?_popup=true"
 
-      link_to t('Add'), "##{html_options['data-controls-modal']}", html_options
+      link_to t('typus.buttons.add'), "##{html_options['data-controls-modal']}", html_options
     end
   end
 
@@ -56,13 +56,13 @@ module Admin::Resources::DataTypes::HasManyHelper
   def set_has_many_resource_edit_action(klass)
     html_options = set_modal_options_for(klass)
     html_options[:glyphicon] = 'edit'
-    [ 'Edit', { action: 'edit', anchor: html_options['data-controls-modal'] }, html_options ]
+    [ 'typus.buttons.edit', { action: 'edit', anchor: html_options['data-controls-modal'] }, html_options ]
   end
 
   def set_has_many_resource_show_action(klass)
     html_options = set_modal_options_for(klass)
     html_options[:glyphicon] = 'info-sign'
-    [ 'Show', { action: 'show', anchor: html_options['data-controls-modal'] }, html_options ]
+    [ 'typus.buttons.show', { action: 'show', anchor: html_options['data-controls-modal'] }, html_options ]
   end
 
   def set_has_many_resource_destroy_action(klass)

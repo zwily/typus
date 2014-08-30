@@ -2,13 +2,13 @@
 
   <%
      item_actions = {
-       edit: { message: t('Edit'), icon: 'edit' },
-       show: { message: t('Show'), icon: 'info-sign' },
-       destroy: { message: t('Destroy'), icon: 'remove' },
+       edit: { message: t('typus.buttons.edit'), icon: 'edit' },
+       show: { message: t('typus.buttons.show'), icon: 'info-sign' },
+       destroy: { message: t('typus.buttons.destroy'), icon: 'remove' },
      }
   %>
 
-  <h3><%= t('Entry') %></h3>
+  <h3><%= t('typus.sidebar.entry') %></h3>
 
   <ul class="nav nav-pills nav-stacked">
     <% item_actions.each do |key, value| %>

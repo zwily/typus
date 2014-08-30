@@ -19,7 +19,7 @@ module Admin
       end
 
       set_default_action
-      add_resource_action('Trash', {action: 'destroy'}, {data: {confirm: "#{I18n.t('Trash')}?"}, method: 'delete'})
+      add_resource_action('typus.buttons.destroy', {action: 'destroy'}, {data: {confirm: "#{I18n.t('Trash')}?"}, method: 'delete'})
     end
 
   end

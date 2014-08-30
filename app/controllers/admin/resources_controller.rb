@@ -24,7 +24,7 @@ class Admin::ResourcesController < Admin::BaseController
     respond_to do |format|
       format.html do
         set_default_action
-        add_resource_action('Destroy', {action: 'destroy'}, {glyphicon: 'remove'})
+        add_resource_action('typus.buttons.destroy', {action: 'destroy'}, {glyphicon: 'remove'})
         get_paginated_data
       end
 
@@ -70,7 +70,7 @@ class Admin::ResourcesController < Admin::BaseController
     check_resource_ownership if @resource.typus_options_for(:only_user_items)
 
     if admin_user.can?('edit', @resource)
-      prepend_resources_action('Edit', {action: 'edit', id: @item})
+      prepend_resources_action('typus.buttons.edit', {action: 'edit', id: @item})
     end
 
     custom_actions_for(:show).each do |action|
@@ -208,9 +208,9 @@ class Admin::ResourcesController < Admin::BaseController
     end
 
     notice = if params[:action].eql?('create')
-                I18n.t("%{model} successfully created.", model: @resource.model_name.human)
+                I18n.t('typus.flash.create_success', model: @resource.model_name.human)
               else
-                I18n.t("%{model} successfully updated.", model: @resource.model_name.human)
+                I18n.t('typus.flash.update_success', model: @resource.model_name.human)
               end
 
     redirect_to path.merge!(options).compact, notice: notice

@@ -11,7 +11,7 @@ module Admin
     end
 
     def set_resources_action_on_lists
-      add_resources_action('Add', {action: 'new'})
+      add_resources_action('typus.buttons.add', {action: 'new'})
     end
     private :set_resources_action_on_lists
 

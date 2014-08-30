@@ -1,5 +1,5 @@
 <%
-  page_title = t("Sign up")
+  page_title = t('typus.accounts.new.title')
   admin_title(page_title)
 %>
 
@@ -8,6 +8,6 @@
              html: { class: "form-signin" } do |form| %>
 
   <%= render partial: "form",
-             locals: { form: form, submit_text: "Sign up" } %>
+             locals: { form: form, submit_text: 'typus.buttons.sign_up' } %>
 
 <% end %>

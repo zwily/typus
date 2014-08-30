@@ -60,26 +60,26 @@ module Admin::Resources::FormHelper
     options = {}
 
     if admin_user.can?('create', @resource.model_name)
-      options[:_addanother] = 'Save and add another'
+      options[:_addanother] = 'typus.buttons.save_addanother'
     end
 
     if admin_user.can?('edit', @resource.model_name)
-      options[:_continue] = 'Save and continue editing'
+      options[:_continue] = 'typus.buttons.save_continue'
     end
 
-    options[:_save] = 'Save'
+    options[:_save] = 'typus.buttons.save'
 
     options
   end
 
   def save_options_for_headless_mode
     return unless headless_mode?
-    { _continue: 'Save' }
+    { _continue: 'typus.buttons.save' }
   end
 
   def save_options_for_user_class
     return unless !defined?(Typus.user_class) && Typus.user_class == @resource && admin_user.is_not_root?
-    { _continue: 'Save and continue editing' }
+    { _continue: 'typus.buttons.save_continue' }
   end
 
 end

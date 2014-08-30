@@ -28,9 +28,9 @@ module Admin
         send(params[:batch_action], params[:selected_item_ids])
       else
         notice = if params[:batch_action].empty?
-          I18n.t('No bulk action selected.')
+          I18n.t('typus.flash.bulk_no_action')
         else
-          I18n.t('Items must be selected in order to perform actions on them. No items have been changed.')
+          I18n.t('typus.flash.bulk_no_items')
         end
         redirect_to :back, notice: notice
       end

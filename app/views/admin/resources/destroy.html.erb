@@ -1,5 +1,5 @@
 <%
-   page_title = t("Destroy '%{label}'", label: @item.to_label)
+   page_title = t("typus.resources.destroy.title", label: @item.to_label)
    admin_title(page_title)
 %>
 
@@ -9,7 +9,7 @@
   <%= admin_display_flash_message %>
 
   <%= form_for @item, url: {}, html: { method: :delete }, html_options: { role: 'form', multipart: true } do |f| %>
-    <%= f.submit t('Destroy'), class: 'btn btn-danger' %>
+    <%= f.submit t('typus.buttons.destroy'), class: 'btn btn-danger' %>
   <% end %>
 
   <%= render 'admin/shared/modals' %>

@@ -15,7 +15,7 @@ module Admin::Resources::SidebarHelper
     return if admin_user.cannot?('create', klass)
 
     {
-      message: t('Add'),
+      message: t('typus.buttons.add'),
       url: { controller: "/admin/#{klass.to_resource}", action: 'new' },
       icon: 'plus',
     }
@@ -25,7 +25,7 @@ module Admin::Resources::SidebarHelper
     return if admin_user.cannot?('read', klass)
 
     {
-      message: t('List'),
+      message: t('typus.buttons.list'),
       url: { controller: "/admin/#{klass.to_resource}", action: 'index' },
       icon: 'list',
     }
@@ -35,7 +35,7 @@ module Admin::Resources::SidebarHelper
   def sidebar_view_site
     if Typus.link_to_view_site
       {
-        message: t('View Site'),
+        message: t('typus.sidebar.view_site'),
         url: Typus.admin_title_link,
         link_to_options: { target: '_blank' },
         icon: 'share',

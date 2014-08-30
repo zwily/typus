@@ -64,7 +64,7 @@
             <li>
               <%= link_to url_for(admin_edit_user_path(admin_user)) do %>
                 <span class="glyphicon glyphicon-user"></span>
-                <%= t("Settings") %>
+                <%= t("typus.shared.settings") %>
               <% end %>
             </li>
 
@@ -74,7 +74,7 @@
               <li>
                 <%= link_to '#' do %>
                   <span class="glyphicon glyphicon-info-sign"></span>
-                  <%= t("Help") %>
+                  <%= t("typus.shared.help") %>
                 <% end %>
               </li>
             <% end %>
@@ -82,7 +82,7 @@
             <li>
               <%= link_to admin_sign_out_path, :method => :delete do %>
                 <span class="glyphicon glyphicon-off"></span>
-                <%= t("Sign out") %>
+                <%= t('typus.buttons.sign_out') %>
               <% end %>
             </li>
           </ul>

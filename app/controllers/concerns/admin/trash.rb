@@ -27,7 +27,7 @@ module Admin
         format.html do
           # Actions by resource.
           add_resource_action 'Restore', { action: 'restore' }, { glyphicon: 'refresh', data: { confirm: I18n.t('Restore?', resource: @resource.model_name.human) } }
-          add_resource_action 'Delete Permanently', { action: 'wipe' }, { glyphicon: 'remove', data: { confirm: I18n.t('Delete Permanently?') } }
+          add_resource_action 'Delete Permanently', { action: 'wipe' }, { glyphicon: 'remove', data: { confirm: I18n.t('typus.shared.confirm_question') } }
           # Generate and render.
           get_paginated_data
           render 'index'

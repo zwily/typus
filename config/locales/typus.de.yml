@@ -1,89 +1,100 @@
-# German (de) translations for Typus by:
-# - Michael Grunewalder <http://michael.grunewalder.com>
-# - Thomas von Deyen <http://thomas.vondeyen.com>
-
 de:
-  "Actions": "Aktionen"
-  "Active": "Aktiv"
-  "List" : 'Liste'
-  "Add": "Hinzufügen"
-  "Add New": "Erstellen"
-  "All" : 'Alle'
-  "Are you sure?": "Sind Sie sicher?"
-  "Assign": "Zuweisen"
+  typus:
 
-  "Change %{attribute}?": "%{attribute} ändern?"
-  "Create %{resource}": "%{resource} erstellen"
+    # this is a catch-all for stuff I didn't know where else to put.
+    shared:
+      no_entries_found: "Keine Einträge gefunden."
+      help: "Hilfe"
+      settings: "Einstellungen"
+      confirm_question: "Sind Sie sicher?"
 
-  "Dashboard": "Dashboard"
-  "Down": "Runter"
+    buttons:
+      add: "Hinzufügen"
+      save: 'Speichern'
+      save_addanother: 'Speichern und weitere hinzufügen'
+      save_continue: 'Speichern und weiter bearbeiten'
+      filter: "Filter"
+      list: "Zur Liste"
+      sign_in: "Login"
+      sign_up: "Registrieren"
+      sign_out: "Abmelden"
+      show: "Anzeigen"
+      edit: "Bearbeiten"
+      destroy: "Löschen"
+      remove: "Entfernen"
+      preview: "Vorschau"
+      apply: "Anwenden"
 
-  "Edit": "Bearbeiten"
-  "Edit %{resource}": "%{resource} bearbeiten"
-  "Enter your email below to create the first user": "Geben Sie Ihre Email Adresse unten ein, um den ersten Benutzer zu erstellen"
+    flash:
+      update_success: "%{model} erfolgreich aktualisiert."
+      create_success: "%{model} erfolgreich erstellt."
+      settings_update_success: "Einstellungen erfolgreich aktualisiert." # this can probably be removed later
+      image_removed: "Bild entfernt"
+      image_set: "Bild hinzugefügt"
+      set_new_password: "Bitte geben Sie ein neues Passwort ein"
+      password_reset_email_success: "Die Email zum Rücksetzen des Passworts wurde gesendet."
+      bulk_no_action: "Keine Aktion ausgewählt."
+      bulk_no_items: "Es wurden keine Elemente ausgewählt, elemente wurden nicht verändert."
 
-  "False": "Nein"
-  "Filter": "Filter"
+    errors:
+      intro: 
+        one: "Beim Speichern ist ein Fehler aufgetreten:"
+        other: "Beim Speichern sind %{count} Fehler aufgetreten:"
 
-  "I remember my password": "Ich erinnere mein Passwort"
-  "If you didn't request a password update, you can ignore this message": "Falls Sie keine Passwort Änderung beantragt haben, können Sie diese Nachricht ignorieren"
-  "If you have made any changes to the fields without clicking the Save/Update entry button, your changes will be lost": "Wenn Sie Änderungen an Feldern vorgenommen haben, ohne den Speichern/Bearbeiten Knopf gedrückt zu haben, gehen diese Änderungen verloren"
-  "Inactive":
+    dashboard:
+      title: "Seiten-Verwaltung"
+      model: "Modell"
+      model_name: "Modell-Name"
+      items: "Elemente"
+      actions: "Aktionen"
+      no_applications: "Keine Anwendungen gefunden."
+      user: "Benutzer"
+      user: "Benutzer"
+      status: "Status"
+      last_logged_in: "Letzter login"
+      resources: "Ressourcen"
+      name: "Name"
 
-  "Last few days": "Letzten Tage"
-  "Last 30 days": "Letzten 30 Tage"
-  "Last 7 days": "Letzten 7 Tage"
-  "List" : "Liste"
-  "Login": "Anmelden"
+    resources:
+      add:
+        title: "%{resource} hinzufügen"
+      edit:
+        title: "%{label} bearbeiten"
+      edited_recently:
+        title: "Vor kurzem bearbeitet"
+      destroy:
+        title: "%{label} löschen"
 
-  "New": "Neu"
-  "New %{resource}": "%{resource} erstellen"
-  "Next": "Nächste"
-  "No %{resources} found": "Keine %{resources} gefunden"
+    accounts:
+      new:
+        title: "Registrieren"
+      forgot_password:
+        title: "Passwort vergessen"
+      remember_password: "Ich weiß mein Passwort"
 
-  "Password recovery link sent to your email": "Der Link zur Wiederherstelllung Ihres Passworts wurde an Ihre Email Adresse geschickt"
-  "Previous": "Vorheriger"
+    sessions:
+      initial_user_registration_message: "Geben Sie ihre Email-Adresse ein um den ersten Benutzer anzulegen."
+      recover_password: "Passwort vergessen?"
+      new:
+        title: "Login"
 
-  "Record moved %{to}": "Datensatz wurde verschoben nach %{to}"
-  "Recover password": "Passwort vergessen?"
-  "Remove": "Eintrag"
-  "Remove %{resource}?": "%{resource} entfernen?"
-  "Reset password": "Passwort zurücksetzen"
-  "Resources": "Resourcen"
+    pagination:
+      previous: "&larr; Vorherige"
+      next: "Nächste &rarr;"
 
-  "Save %{resource}": "%{resource} speichern"
-  "Search": "Suchen"
-  "Show": "Anzeigen"
-  "Show all dates": "Alle anzeigen"
-  "Show by %{attribute}": "An Hand von %{attribute} anzeigen"
-  "Show %{resource}": "%{resource} anzeigen"
-  "Sign in": "Anmelden"
-  "Sign out": "Abmelden"
-  "Sign up": "Konto erstellen"
-  "System Users Administration": "Admin Benutzer Verwaltung"
+    sidebar:
+      filters: "Filter"
+      scopes: "Auswahlen"
+      export: "Export"
+      entry: "Eintrag"
+      actions: "Aktionen"
+      view_site: "Seite ansehen"
+      search: "Suche"
+      search_placeholder: "Suchbegriff ..."
 
-  "Today": "Heute"
-  "Trash": "Löschen"
-  "True": "Ja"
+    labels:
+      read_only: "Nur-lesen"
 
-  "Unrelate": "Trennen"
-  "Up": "Hoch"
-
-  "View all %{attribute}": "Alle %{attribute} anzeigen"
-  "View site": "Webseite anzeigen"
-
-  "You can update your password at": "Sie können Ihr Passwort ändern unter"
-  "You can't change your role": "Sie können Ihre Rolle nicht ändern"
-  "You can't toggle your status": "Sie können Ihren Status nicht umschalten"
-
-  "%{errors} prohibited this page from being saved:": "%{errors} haben diese Seite davon abgehalten gespeichert zu werden:"
-  "%{model} successfully created": "%{model} wurde erfolgreich erstellt"
-  "%{model} successfully removed": "%{model} wurde erfolgreich gelöscht"
-  "%{model} successfully updated": "%{model} wurde erfolgreich geändert"
-
-  "Scopes": "Auswahlen"
-  "Filters": "Filtern"
-  "Export": "Exportieren"
-  "Actions": "Aktionen"
-  "Entry": "Eintrag"
-  "Search": "Suche"
+    emails:
+      password_reset:
+        title: "[%{admin_title}] Passwort zurücksetzen"

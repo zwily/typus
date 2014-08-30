@@ -2,13 +2,13 @@
 
 <% if (resources = Typus.resources.delete_if { |r| !(admin_user.is_a?(FakeUser) || admin_user.resources.include?(r)) }).any? %>
 
-  <h2><%= t("Resources") %></h2>
+  <h2><%= t("typus.dashboard.resources") %></h2>
 
   <table>
 
     <thead>
       <tr>
-        <th><%= t("Name") %></th>
+        <th><%= t("typus.dashboard.name") %></th>
       </tr>
     </thead>
 

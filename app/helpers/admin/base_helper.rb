@@ -1,5 +1,10 @@
 module Admin::BaseHelper
 
+  # a simple wrapper to prevent repeating "typus." in the key name
+  def tt(key, options = {})
+    t(key, {scope: "typus.#{options[:scope]}"}.merge(options))
+  end
+
   def admin_title(page_title = nil)
     if page_title
       content_for(:title) { page_title }
