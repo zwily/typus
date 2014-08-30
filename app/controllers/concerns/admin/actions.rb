@@ -27,7 +27,7 @@ module Admin
     # a "Recover from Trash" action:
     #
     #     def index
-    #       add_resource_action('Recover', {action: 'untrash'}, {data: {confirm: I18n.t("Recover %{resource}?"}, resource: @resource.model_name.human)})
+    #       add_resource_action('typus.buttons.restore', {action: 'untrash'}, {data: {confirm: I18n.t("Recover %{resource}?"}, resource: @resource.model_name.human)})
     #       super
     #     end
     #
@@ -36,7 +36,7 @@ module Admin
     # return false will be hidden.
     #
     #     def index
-    #       add_resource_action('Recover', {action: 'untrash'}, {}, Proc.new { |item| item.is_trash? })
+    #       add_resource_action('typus.buttons.restore', {action: 'untrash'}, {}, Proc.new { |item| item.is_trash? })
     #       super
     #     end
     #

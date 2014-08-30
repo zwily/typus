@@ -21,10 +21,17 @@ de:
       sign_out: "Abmelden"
       show: "Anzeigen"
       edit: "Bearbeiten"
-      destroy: "Löschen"
       remove: "Entfernen"
       preview: "Vorschau"
       apply: "Anwenden"
+      send: "Senden"
+      restore: "Wiederherstellen"
+      destroy: "Löschen"
+      destroy_permanently: "Dauerhaft löschen"
+      position: "Position"
+      move_to_trash: "In den Papierkorb verschieben"
+      mark_published: "Als publiziert markieren"
+      mark_unpublished: "Als nicht publiziert markieren"
 
     flash:
       update_success: "%{model} erfolgreich aktualisiert."
@@ -50,7 +57,7 @@ de:
         other: "Beim Speichern sind %{count} Fehler aufgetreten:"
 
     dashboard:
-      title: "Seiten-Verwaltung"
+      title: "Dashboard"
       model: "Modell"
       model_name: "Modell-Name"
       items: "Elemente"
@@ -106,3 +113,6 @@ de:
     emails:
       password_reset:
         title: "[%{admin_title}] Passwort zurücksetzen"
+
+    filters:
+      trash: "Papierkorb"

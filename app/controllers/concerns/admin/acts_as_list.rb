@@ -13,7 +13,7 @@ module Admin
 
     def set_predefined_filter_for_position
       if admin_user.can?('edit', @resource.model_name)
-        add_resource_action('Position', {action: 'position'}, {glyphicon: 'th-list'})
+        add_resource_action('typus.buttons.position', {action: 'position'}, {glyphicon: 'th-list'})
       end
     end
     private :set_predefined_filter_for_position

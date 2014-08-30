@@ -68,7 +68,7 @@ module Admin::Resources::DataTypes::HasManyHelper
   def set_has_many_resource_destroy_action(klass)
     html_options = {}
     html_options[:glyphicon] = 'remove'
-    [ 'Trash', { action: 'destroy' }, html_options ]
+    [ 'typus.actions.destroy', { action: 'destroy' }, html_options ]
   end
 
 end

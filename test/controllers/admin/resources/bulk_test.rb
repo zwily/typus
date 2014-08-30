@@ -18,7 +18,11 @@ class Admin::EntryBulksControllerTest < ActionController::TestCase
 
   test "get index shows available bulk_actions" do
     get :index
-    expected = [["Move to Trash", "bulk_destroy"], ["Mark as published", "bulk_publish"], ["Mark as unpublished", "bulk_unpublish"]]
+    expected = [
+      ["typus.buttons.move_to_trash", "bulk_destroy"], 
+      ["typus.buttons.mark_published", "bulk_publish"], 
+      ["typus.buttons.mark_published", "bulk_unpublish"]
+    ]
     assert_equal expected, assigns(:bulk_actions)
   end
 

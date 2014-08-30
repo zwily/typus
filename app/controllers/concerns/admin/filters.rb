@@ -10,7 +10,7 @@
 #       #     add_predefined_filter(filter_name, action, scope)
 #       #
 #       ...
-#       add_predefined_filter("Trash", "trash", "deleted")
+#       add_predefined_filter("typus.filters.trash", "trash", "deleted")
 #       ...
 #     end
 #

@@ -13,7 +13,7 @@ module Admin
 
     def set_predefined_filter_for_trash
       if admin_user.can?('edit', @resource.model_name)
-        add_predefined_filter('Trash', 'trash', 'deleted')
+        add_predefined_filter('typus.filters.trash', 'trash', 'deleted')
       end
     end
     private :set_predefined_filter_for_trash
@@ -26,8 +26,8 @@ module Admin
       respond_to do |format|
         format.html do
           # Actions by resource.
-          add_resource_action 'Restore', { action: 'restore' }, { glyphicon: 'refresh', data: { confirm: I18n.t('typus.shared.restore_question', resource: @resource.model_name.human) } }
-          add_resource_action 'Delete Permanently', { action: 'wipe' }, { glyphicon: 'remove', data: { confirm: I18n.t('typus.shared.confirm_question') } }
+          add_resource_action 'typus.buttons.restore', { action: 'restore' }, { glyphicon: 'refresh', data: { confirm: I18n.t('typus.shared.restore_question', resource: @resource.model_name.human) } }
+          add_resource_action 'typus.buttons.destroy_permanently', { action: 'wipe' }, { glyphicon: 'remove', data: { confirm: I18n.t('typus.shared.confirm_question') } }
           # Generate and render.
           get_paginated_data
           render 'index'

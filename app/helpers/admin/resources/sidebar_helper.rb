@@ -1,7 +1,7 @@
 module Admin::Resources::SidebarHelper
 
   def build_sidebar
-    locals = { sidebar_title: t('Dashboard'), actions: []}
+    locals = { sidebar_title: t('typus.dashboard.title'), actions: []}
 
     if @resource
       locals[:actions] = [sidebar_list(@resource.name), sidebar_add_new(@resource.name)].compact

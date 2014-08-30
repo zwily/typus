@@ -10,7 +10,7 @@ en:
       restore_question: 'Restore?'
 
     buttons:
-      add: "Hinzufügen"
+      add: "Add"
       save: 'Save'
       save_addanother: 'Save and add another'
       save_continue: 'Save and continue editing'
@@ -21,10 +21,17 @@ en:
       sign_out: "Sign out"
       show: "Show"
       edit: "Edit"
-      destroy: "Destroy"
       remove: "Remove"
       preview: "Preview"
       apply: "Apply"
+      send: "Send"
+      restore: "Restore"
+      destroy: "Destroy"
+      destroy_permanently: "Destroy permanently"
+      position: "Position"
+      move_to_trash: "Move to Trash"
+      mark_published: "Mark as published"
+      mark_unpublished: "Mark as unpublished"
 
     flash:
       update_success: "%{model} successfully updated."
@@ -50,7 +57,7 @@ en:
         other: "%{count} errors prohibited this page from being saved:"
 
     dashboard:
-      title: "Site Administration"
+      title: "Dashboard"
       model: "Model"
       model_name: "Model Name"
       items: "Items"
@@ -106,3 +113,6 @@ en:
     emails:
       password_reset:
         title: "[%{admin_title}] Reset password"
+
+    filters:
+      trash: "Trash"

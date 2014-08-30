@@ -16,12 +16,12 @@ class Admin::EntryBulksController < Admin::ResourcesController
   end
 
   def set_bulk_action_to_publish
-    add_bulk_action("Mark as published", "bulk_publish")
+    add_bulk_action("typus.buttons.mark_published", "bulk_publish")
   end
   private :set_bulk_action_to_publish
 
   def set_bulk_action_to_unpublish
-    add_bulk_action("Mark as unpublished", "bulk_unpublish")
+    add_bulk_action("typus.buttons.mark_published", "bulk_unpublish")
   end
   private :set_bulk_action_to_unpublish
 
