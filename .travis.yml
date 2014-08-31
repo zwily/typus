@@ -26,3 +26,8 @@ env:
   global:
     - DB=postgresql
     - DB_USERNAME=postgres
+
+cache:
+  bundler: true
+  apt: true
+  edge: true
