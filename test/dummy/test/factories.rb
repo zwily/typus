@@ -58,18 +58,6 @@ end
 # HasManyThrough Association
 
 FactoryGirl.define do
-  factory :user do
-    sequence(:name) { |n| "User##{n}" }
-    sequence(:email) { |n| "user.#{n}@example.com" }
-    role 'admin'
-    token 'qw1rd3-1w3f5b'
-  end
-
-  factory :project do
-    sequence(:name) { |n| "Project##{n}" }
-    association :user
-  end
-
   factory :project_collaborators do
     association :user
     association :project

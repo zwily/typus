@@ -180,23 +180,20 @@ class ActiveRecordTest < ActiveSupport::TestCase
     assert_equal expected, TypusUser.build_conditions({role: 'admin'}).first
   end
 
-  test "build_my_joins return the expected joins" do
-    @project = FactoryGirl.create(:project)
-    FactoryGirl.create_list(:project, 2)
-    assert_equal [:projects], User.build_my_joins({projects: @project.id})
+  test 'build_my_joins return the expected joins' do
+    project = projects(:default)
+    assert_equal [:projects], User.build_my_joins({projects: project.id})
   end
 
-  test "build_my_joins works when users are filtered by projects" do
-    @project = FactoryGirl.create(:project)
-    FactoryGirl.create_list(:project, 2)
-
-    params = { projects: @project.id }
+  test 'build_my_joins works when users are filtered by projects' do
+    project = projects(:default)
+    params = { projects: project.id }
 
     @resource = User
     @resource.build_conditions(params).each { |c| @resource = @resource.where(c) }
     @resource.build_my_joins(params).each { |j| @resource = @resource.joins(j) }
 
-    assert_equal [@project.user.id], @resource.map(&:id)
+    assert_equal [project.user.id], @resource.map(&:id)
   end
 
 end

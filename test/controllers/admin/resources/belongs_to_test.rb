@@ -46,10 +46,12 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
   end
 
   test 'should update project' do
-    project = FactoryGirl.create(:project)
-    user = FactoryGirl.create(:user)
+    project = projects(:default)
+    project.update_column(:user_id, 0)
+    user = users(:default)
 
     patch :update, id: project, project: { user_id: user.id }
+
     assert_redirected_to '/admin/projects'
     assert_equal user, project.reload.user
   end

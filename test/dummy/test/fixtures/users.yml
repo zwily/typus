@@ -1,0 +1,5 @@
+default:
+  name: 'Default User'
+  email: 'default.user@example.com'
+  role: 'admin'
+  token: 'qw1rd3-1w3f5b'
