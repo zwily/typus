@@ -10,6 +10,10 @@ class TypusTest < ActiveSupport::TestCase
     assert Typus.default_locale.eql?(:en)
   end
 
+  test 'default_config for available_locales' do
+    assert Typus.available_locales.eql?({'English' => 'en'})
+  end
+
   test 'default_config for admin_title_link' do
     assert Typus.admin_title_link.nil?
   end

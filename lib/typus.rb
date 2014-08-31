@@ -216,6 +216,11 @@ module Typus
       Typus::Configuration.models!
     end
 
+    # this should be overridden in typus-i18n
+    def available_locales
+      { 'English' => 'en' }
+    end
+
   end
 
 end

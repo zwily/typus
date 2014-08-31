@@ -48,7 +48,7 @@ module Typus
           end
 
           def locales
-            Typus::I18n.available_locales
+            Typus.available_locales
           end
 
         end

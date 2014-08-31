@@ -26,7 +26,7 @@ class AdminUserTest < ActiveSupport::TestCase
   end
 
   test 'locales' do
-    assert_equal Typus::I18n.available_locales, AdminUser.locales
+    assert_equal Typus.available_locales, AdminUser.locales
   end
 
   test 'roles' do

@@ -205,7 +205,7 @@ Example: Show available locales for posts.
   # app/models/post.rb
   class Post < ActiveRecord::Base
     def self.locales
-      Typus::I18n.available_locales
+      Typus.available_locales
     end
   end
 
