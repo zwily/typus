@@ -42,9 +42,6 @@ gem 'acts_as_tree'
 gem 'rails-permalink', '~> 1.0.0'
 gem 'rails-trash', github: 'fesplugas/rails-trash'
 
-# We want to be able to use Factory Girl for seeding data.
-gem 'factory_girl_rails'
-
 # Rich Text Editor
 gem 'ckeditor-rails', github: 'fesplugas/rails-ckeditor'
 
