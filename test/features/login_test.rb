@@ -3,7 +3,8 @@ require 'feature_test_helper'
 class LoginTest < Capybara::Rails::TestCase
 
   before do
-    @user = TypusUser.where(role: 'admin').first
+    @user = typus_users(:admin)
+    @user.password = "12345678"
   end
 
   test 'Successful login' do

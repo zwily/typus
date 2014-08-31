@@ -21,6 +21,8 @@ Rails.application.config.action_view.raise_on_missing_translations = true
 
 class ActiveSupport::TestCase
 
+  fixtures :all
+
   self.use_transactional_fixtures = false
 
   teardown do
