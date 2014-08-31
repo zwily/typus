@@ -28,10 +28,6 @@ FactoryGirl.define do
     paperclip_required File.new("#{Rails.root}/public/images/rails.png")
   end
 
-  factory :category do
-    sequence(:name) { |n| "Category##{n}" }
-  end
-
   factory :comment do
     sequence(:name) { |n| "Comment##{n}" }
     sequence(:email) { |n| "john+#{n}@example.com" }

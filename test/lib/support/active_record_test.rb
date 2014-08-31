@@ -57,12 +57,14 @@ class ActiveRecordTest < ActiveSupport::TestCase
   end
 
   test 'to_label returns name for Category' do
-    category = FactoryGirl.build(:category, name: 'Chunky Bacon')
-    assert_match 'Chunky Bacon', category.to_label
+    category = categories(:default)
+    assert_equal 'Default Category', category.to_label
   end
 
   test 'to_label returns Model#id because Category#name is empty' do
-    assert_match /Category#/, FactoryGirl.build(:category, name: nil).to_label
+    category = categories(:default)
+    category.name = nil
+    assert_match /Category#/, category.to_label
   end
 
   test 'to_label returns default Model#id' do

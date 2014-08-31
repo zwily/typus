@@ -16,10 +16,8 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
   end
 
   test 'get position' do
-    Category.delete_all
-
-    first_category = FactoryGirl.create(:category, position: 1)
-    second_category = FactoryGirl.create(:category, position: 2)
+    first_category = Category.create(name: 'Category#1', position: 1)
+    second_category = Category.create(name: 'Category#2', position: 2)
 
     get :position, id: first_category.id, go: 'move_lower'
     assert_response :redirect
@@ -40,7 +38,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
   end
 
   test 'get position with not allowed go option' do
-    category = FactoryGirl.create(:category, position: 1)
+    category = categories(:default)
     get :position, id: category.id, go: 'move_up'
     assert_response :unprocessable_entity
     assert_equal 'Not allowed!', response.body
