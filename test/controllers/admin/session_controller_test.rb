@@ -13,7 +13,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
   test 'verify_remote_ip' do
     Typus.stubs(:ip_whitelist).returns(%w(10.0.0.5))
     get :new
-    assert_equal "IP not in our whitelist.", @response.body
+    assert_equal 'IP not in our whitelist.', @response.body
 
     request.stubs(:local?).returns(true)
 
