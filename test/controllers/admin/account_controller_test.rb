@@ -86,6 +86,8 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   test 'show with token generates a session a redirects user to edit' do
     typus_user = typus_users(:admin)
+    puts typus_user.inspect
+
     get :show, id: typus_user.token
     assert_equal typus_user.id, @request.session[:typus_user_id]
     assert_response :redirect
@@ -94,6 +96,8 @@ class Admin::AccountControllerTest < ActionController::TestCase
 
   test 'show with token and return_to redirects to user dashboard' do
     typus_user = typus_users(:admin)
+    puts typus_user.inspect
+
     get :show, id: typus_user.token, return_to: '/admin'
     assert_equal typus_user.id, @request.session[:typus_user_id]
     assert_response :redirect
