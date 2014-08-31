@@ -31,7 +31,7 @@ namespace :test do
   Rake::TestTask.new("features") do |t|
     t.description = "run feature tests, which use a headless browser"
     t.libs += %w(lib test)
-    t.test_files = FileList['test/features/*_test.rb']
+    t.test_files = FileList['test/features/**/*_test.rb']
   end
 
   # right now it is better to run without_features and features separately since they need
