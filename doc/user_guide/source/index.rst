@@ -19,8 +19,6 @@ Key Features
 
 * Built-in Authentication and Access Control Lists.
 * CRUD and custom actions for your models on a clean interface.
-* Internationalized interface.
-* Internationalized interface (`See available translations`_)
 * Customizable and extensible templates.
 * Integrated `paperclip`_ and `dragonfly`_ attachments viewer.
 * Supports Rails 4.0 and 3.2.
