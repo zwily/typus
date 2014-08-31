@@ -1,3 +1,7 @@
 default:
   name: 'Default Category'
   position: 1
+
+second:
+  name: 'Category#2'
+  position: 2

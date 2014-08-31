@@ -1,5 +1,0 @@
-default:
-  title: 'Default EntryTrash'
-  content: 'Default Body of Default EntryTrash'
-  type: EntryTrash
-

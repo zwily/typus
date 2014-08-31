@@ -12,7 +12,7 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    @entry = entry_trashes(:default)
+    @entry = entries(:default_entry_trash)
   end
 
   # test "get index shows link to trash" do

@@ -16,8 +16,7 @@ class Admin::CategoriesControllerTest < ActionController::TestCase
   end
 
   test 'get position' do
-    first_category = Category.create(name: 'Category#1', position: 1)
-    second_category = Category.create(name: 'Category#2', position: 2)
+    first_category, second_category = categories(:default), categories(:second)
 
     get :position, id: first_category.id, go: 'move_lower'
     assert_response :redirect

@@ -2,3 +2,9 @@ default:
   title: "Default Entry"
   content: "Default Content of the Default Entry"
   published: true
+
+default_entry_trash:
+  title: 'Default EntryTrash'
+  content: 'Default Body of Default EntryTrash'
+  type: EntryTrash
+  published: false

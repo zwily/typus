@@ -15,11 +15,10 @@ class Admin::EntriesControllerTest < ActionController::TestCase
   end
 
   test 'export csv' do
-    entry = entries(:default)
-
     expected = <<-RAW
 Title,Published
-#{entry.title},#{entry.published}
+Default EntryTrash,false
+Default Entry,true
      RAW
 
     get :index, format: 'csv'
@@ -42,6 +41,7 @@ Title,Published
 
     expected_unpublished = <<-RAW
 Title,Published
+Default EntryTrash,false
      RAW
 
      get :index, format: 'csv', published: 'false'
