@@ -2,6 +2,8 @@ require 'feature_test_helper'
 
 class LoginTest < Capybara::Rails::TestCase
 
+  fixtures :typus_users
+
   before do
     @user = typus_users(:admin)
     @user.password = "12345678"

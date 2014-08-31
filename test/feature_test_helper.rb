@@ -19,9 +19,7 @@ Capybara.default_driver = :poltergeist
 #
 Rails.application.config.action_view.raise_on_missing_translations = true
 
-class ActiveSupport::TestCase
-
-  fixtures :all
+class Capybara::Rails::TestCase
 
   self.use_transactional_fixtures = false
 
