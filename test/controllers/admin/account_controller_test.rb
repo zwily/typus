@@ -101,7 +101,8 @@ class Admin::AccountControllerTest < ActionController::TestCase
     puts @request.session[:typus_user_id].inspect
 
     get :show, id: typus_user.token, return_to: '/admin'
-
+    puts @request.session[:typus_user_id].inspect
+    
     assert_equal typus_user.id, @request.session[:typus_user_id]
     assert_response :redirect
     assert_redirected_to 'http://test.host/admin'
