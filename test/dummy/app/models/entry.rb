@@ -25,6 +25,7 @@ class Entry < ActiveRecord::Base
   # Scopes
   #
 
+  default_scope { order(id: :asc) }
   scope :published, -> { where(published: true) }
 
   ##
