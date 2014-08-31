@@ -46,7 +46,6 @@ class Admin::EntriesControllerTest < ActionController::TestCase
     assert_equal '[]', response.body
   end
 
-
   def create_25_entries
     25.times do  |i|
       Entry.create(
