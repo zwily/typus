@@ -30,6 +30,9 @@ module Typus
     autoload :Devise, "typus/authentication/devise"
   end
 
+  mattr_accessor :default_locale
+  @@default_locale = :en
+  
   mattr_accessor :admin_title
   @@admin_title = "Typus"
 

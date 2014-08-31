@@ -31,7 +31,7 @@ class Admin::SessionController < Admin::BaseController
   end
 
   def set_locale
-    I18n.locale = Typus::I18n.default_locale
+    I18n.locale = Typus.default_locale
   end
 
   def user_scope

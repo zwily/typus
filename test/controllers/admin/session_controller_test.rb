@@ -33,7 +33,7 @@ class Admin::SessionControllerTest < ActionController::TestCase
     assert_redirected_to new_admin_account_path
   end
 
-  test 'get new always sets locale to Typus::I18n.default_locale' do
+  test 'get new always sets locale to Typus.default_locale' do
     I18n.locale = :es
     get :new
     assert_equal :en, I18n.locale
