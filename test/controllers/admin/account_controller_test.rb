@@ -87,6 +87,8 @@ class Admin::AccountControllerTest < ActionController::TestCase
   test 'show with token generates a session a redirects user to edit' do
     typus_user = typus_users(:admin)
 
+    puts TypusUser.class_name
+
     get :show, id: typus_user.token
     assert_response :redirect
     assert_redirected_to controller: '/admin/typus_users', action: 'edit', id: typus_user.id
