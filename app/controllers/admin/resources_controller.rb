@@ -239,10 +239,7 @@ class Admin::ResourcesController < Admin::BaseController
   end
 
   def item_params_for_update
-    if (attr = params[:_nullify])
-      params[@object_name] = { attr => nil }
-    end
-
+    params[@object_name] = { params[:_nullify] => nil } if params[:_nullify]
     permit_params!
   end
 

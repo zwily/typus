@@ -1,0 +1,9 @@
+default:
+  caption: 'Caption for Default Asset'
+#  factory :asset do
+#    sequence(:caption) { |n| "Asset##{n}" }
+#    dragonfly File.new("#{Rails.root}/public/images/rails.png")
+#    dragonfly_required File.new("#{Rails.root}/public/images/rails.png")
+#    paperclip File.new("#{Rails.root}/public/images/rails.png")
+#    paperclip_required File.new("#{Rails.root}/public/images/rails.png")
+#  end

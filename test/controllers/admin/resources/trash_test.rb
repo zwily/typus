@@ -12,7 +12,7 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
 
   setup do
     admin_sign_in
-    @entry = FactoryGirl.create(:entry_trash)
+    @entry = entry_trashes(:default)
   end
 
   # test "get index shows link to trash" do
@@ -23,11 +23,12 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
   #   pending
   # end
 
-  test "get trash lists destroyed items" do
+  test 'get trash lists destroyed items' do
     get :trash
     assert assigns(:items).empty?
 
     @entry.destroy
+
     get :trash
     assert_response :success
     assert_template 'admin/resources/index'
@@ -39,7 +40,7 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
   # end
 
   test 'get restore recovers an item from the trash' do
-    @request.env['HTTP_REFERER'] = "/admin/entries/trash"
+    @request.env['HTTP_REFERER'] = '/admin/entries/trash'
 
     @entry.destroy
     get :restore, id: @entry.id
@@ -49,17 +50,17 @@ class Admin::EntryTrashesControllerTest < ActionController::TestCase
     get :trash
     assert assigns(:items).empty?
 
-    assert_equal "Entry trash recovered from trash.", flash[:notice]
+    assert_equal 'Entry trash recovered from trash.', flash[:notice]
   end
 
   test 'get restore when record does not exist' do
-    @request.env['HTTP_REFERER'] = "/admin/entries/trash"
+    @request.env['HTTP_REFERER'] = '/admin/entries/trash'
 
     get :restore, id: 'unexisting'
     assert_response :redirect
     assert_redirected_to @request.env['HTTP_REFERER']
 
-    assert_equal "Entry trash cannot be recovered from trash.", flash[:notice]
+    assert_equal 'Entry trash cannot be recovered from trash.', flash[:notice]
   end
 
   # test "get restore returns error when user does not have edit access" do

@@ -33,10 +33,10 @@ class Admin::ProjectsControllerTest < ActionController::TestCase
     assert_equal 'Chunky Bacon', assigns(:item).name
   end
 
-  # Project has a dropdown of users and we want to make sure we are
+  # Project has a drop down of users and we want to make sure we are
   # creating the association properly.
   test 'should create project' do
-    user = FactoryGirl.create(:user)
+    user = users(:default)
 
     assert_difference('Project.count') do
       post :create, project: { user_id: user.id, name: 'Chunky Bacon' }
