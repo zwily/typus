@@ -3,10 +3,6 @@ module Typus
 
     class << self
 
-      def default_locale
-        :en
-      end
-
       def available_locales
         {
           'Brazilian Portuguese' => 'pt-BR',
