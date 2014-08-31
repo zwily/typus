@@ -35,9 +35,9 @@ namespace :test do
   end
 
   # right now it is better to run without_features and features separately since they need
-  # a different test setup (feature specs ran with SQLite require use_transactional_fixtures to be 
+  # a different test setup (feature specs ran with SQLite require use_transactional_fixtures to be
   # to prevent db file locking issues).
-  task all: [:without_features, :features]
+  task all: [:without_features]
 
 end
 
