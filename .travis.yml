@@ -5,8 +5,8 @@ rvm:
 #   recipients:
 #     - support@typuscmf.com
 
-services:
-  - mongodb
+# services:
+#  - mongodb
 
 branches:
   only:
@@ -19,8 +19,8 @@ branches:
 before_script:
   - psql -c 'create database typus_test;' -U postgres
 
-before_install:
-  - git submodule update --init --recursive
+#before_install:
+#  - git submodule update --init --recursive
 
 env:
   global:
