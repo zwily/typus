@@ -88,22 +88,13 @@ class Admin::AccountControllerTest < ActionController::TestCase
     typus_user = typus_users(:admin)
 
     get :show, id: typus_user.token
-
-    assert_equal typus_user.id, @request.session[:typus_user_id]
     assert_response :redirect
     assert_redirected_to controller: '/admin/typus_users', action: 'edit', id: typus_user.id
   end
 
   test 'show with token and return_to redirects to user dashboard' do
     typus_user = typus_users(:admin)
-
-    puts typus_user.inspect
-    puts @request.session[:typus_user_id].inspect
-
     get :show, id: typus_user.token, return_to: '/admin'
-    puts @request.session[:typus_user_id].inspect
-    
-    assert_equal typus_user.id, @request.session[:typus_user_id]
     assert_response :redirect
     assert_redirected_to 'http://test.host/admin'
   end
