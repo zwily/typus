@@ -18,16 +18,16 @@ gem 'coffee-rails', '~> 4.0.0'
 gem 'jquery-rails'
 
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+# gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder'
+# gem 'jbuilder'
 
-platforms :jruby do
-  gem 'activerecord-jdbcmysql-adapter'
-  gem 'activerecord-jdbcpostgresql-adapter'
-  gem 'activerecord-jdbcsqlite3-adapter'
-end
+# platforms :jruby do
+#   gem 'activerecord-jdbcmysql-adapter'
+#   gem 'activerecord-jdbcpostgresql-adapter'
+#   gem 'activerecord-jdbcsqlite3-adapter'
+# end
 
 platforms :ruby do
   gem 'mysql2', '~> 0.3.16'
@@ -41,9 +41,6 @@ gem 'acts_as_list', github: 'typus/acts_as_list'
 gem 'acts_as_tree'
 gem 'rails-permalink', '~> 1.0.0'
 gem 'rails-trash', github: 'fesplugas/rails-trash'
-
-# We want to be able to use Factory Girl for seeding data.
-gem 'factory_girl_rails'
 
 # Rich Text Editor
 gem 'ckeditor-rails', github: 'fesplugas/rails-ckeditor'

@@ -1,0 +1,4 @@
+default:
+  title: 'Default Post'
+  body: 'Default Body'
+  status: 'published'

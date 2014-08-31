@@ -110,16 +110,8 @@ GEM
       rack
     erubis (2.7.0)
     execjs (2.2.1)
-    factory_girl (4.4.0)
-      activesupport (>= 3.0.0)
-    factory_girl_rails (4.4.1)
-      factory_girl (~> 4.4.0)
-      railties (>= 3.0.0)
     hike (1.2.3)
     i18n (0.6.11)
-    jbuilder (2.1.3)
-      activesupport (>= 3.0.0, < 5)
-      multi_json (~> 1.2)
     jquery-rails (3.1.1)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
@@ -217,8 +209,6 @@ GEM
     treetop (1.4.15)
       polyglot
       polyglot (>= 0.3.1)
-    turbolinks (2.3.0)
-      coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uglifier (2.5.3)
@@ -234,17 +224,12 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
-  activerecord-jdbcmysql-adapter
-  activerecord-jdbcpostgresql-adapter
-  activerecord-jdbcsqlite3-adapter
   acts_as_list!
   acts_as_tree
   ckeditor-rails!
   coffee-rails (~> 4.0.0)
   devise!
   dragonfly (~> 1.0.7)
-  factory_girl_rails
-  jbuilder
   jquery-rails
   minitest-rails-capybara
   mocha
@@ -259,6 +244,5 @@ DEPENDENCIES
   rails-trash!
   sass-rails (~> 4.0.0)
   sqlite3 (~> 1.3.9)
-  turbolinks
   typus!
   uglifier

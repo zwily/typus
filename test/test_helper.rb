@@ -1,11 +1,11 @@
-ENV["RAILS_ENV"] = "test"
+ENV['RAILS_ENV'] = 'test'
 
-require File.expand_path("../dummy/config/environment",  __FILE__)
+require File.expand_path('../dummy/config/environment',  __FILE__)
 
 ActiveRecord::Schema.verbose = false
-require File.expand_path("../dummy/db/schema",  __FILE__)
+require File.expand_path('../dummy/db/schema',  __FILE__)
 
-require "rails/test_help"
+require 'rails/test_help'
 require 'minitest/autorun'
 
 Rails.backtrace_cleaner.remove_silencers!
@@ -17,12 +17,10 @@ Rails.application.config.action_view.raise_on_missing_translations = true
 
 class ActiveSupport::TestCase
 
-  self.use_transactional_fixtures = true
-  self.use_instantiated_fixtures  = false
+  fixtures :all
 
   teardown do
     reset_session
-    [Entry, Page, Post, TypusUser].each { |i| i.delete_all }
   end
 
   def db_adapter
@@ -30,7 +28,7 @@ class ActiveSupport::TestCase
   end
 
   def build_admin
-    @typus_user = FactoryGirl.create(:typus_user)
+    @typus_user = typus_users(:admin)
   end
 
   def admin_sign_in
@@ -39,7 +37,7 @@ class ActiveSupport::TestCase
   end
 
   def build_editor
-    @typus_user = FactoryGirl.create(:typus_user, email: "editor@example.com", role: "editor")
+    @typus_user = typus_users(:editor)
   end
 
   def editor_sign_in
@@ -49,7 +47,7 @@ class ActiveSupport::TestCase
   end
 
   def build_designer
-    @typus_user = FactoryGirl.create(:typus_user, email: "designer@example.com", role: "designer")
+    @typus_user = typus_users(:designer)
   end
 
   def designer_sign_in

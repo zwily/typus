@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 =begin
 
@@ -14,41 +14,37 @@ class Admin::EntriesControllerTest < ActionController::TestCase
     admin_sign_in
   end
 
-  test "export csv" do
-    Entry.delete_all
-    entry = FactoryGirl.create(:entry)
-
+  test 'export csv' do
     expected = <<-RAW
 Title,Published
-#{entry.title},#{entry.published}
+Default EntryTrash,false
+Default Entry,true
      RAW
 
-    get :index, format: "csv"
+    get :index, format: 'csv'
 
     assert_response :success
     assert_equal expected, response.body
   end
 
-  test "export CSV with filters" do
-    Entry.delete_all
-    entry_published = FactoryGirl.create(:entry, published: true)
-    entry_unpublished = FactoryGirl.create(:entry, published: false)
+  test 'export CSV with filters' do
+    entry = entries(:default)
 
     expected_published = <<-RAW
 Title,Published
-#{entry_published.title},true
+#{entry.title},true
      RAW
 
-     get :index, format: "csv", published: "true"
-     assert_response :success
-     assert_equal expected_published, response.body
+    get :index, format: 'csv', published: 'true'
+    assert_response :success
+    assert_equal expected_published, response.body
 
     expected_unpublished = <<-RAW
 Title,Published
-#{entry_unpublished.title},false
+Default EntryTrash,false
      RAW
 
-     get :index, format: "csv", published: "false"
+     get :index, format: 'csv', published: 'false'
      assert_response :success
      assert_equal expected_unpublished, response.body
   end

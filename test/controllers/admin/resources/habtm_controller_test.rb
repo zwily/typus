@@ -15,22 +15,20 @@ class Admin::EntriesControllerTest < ActionController::TestCase
   end
 
   test 'adding multiple categories to an entry' do
-    Entry.delete_all
+    category_1 = categories(:default)
+    category_2 = categories(:default)
 
-    category_1 = FactoryGirl.create(:category)
-    category_2 = FactoryGirl.create(:category)
+    entry_data = {
+      title: 'Title' ,
+      content: 'Content',
+      category_ids: ['', "#{category_1.id}", "#{category_2.id}" ]
+    }
 
     assert_difference('Entry.count') do
-      entry_data = {
-        title: 'Title' ,
-        content: 'Content',
-        category_ids: ["", "#{category_1.id}", "#{category_2.id}" ]
-      }
-
       post :create, entry: entry_data
     end
 
-    assert_equal [category_1, category_2], Entry.first.categories
+    assert_equal [category_1, category_2], assigns(:item).categories
   end
 
 end

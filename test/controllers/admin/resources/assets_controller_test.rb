@@ -16,7 +16,14 @@ class Admin::AssetsControllerTest < ActionController::TestCase
   end
 
   test 'should verify update can remove a single attribute' do
-    asset = FactoryGirl.create(:asset)
+    asset = assets(:default)
+
+    asset.dragonfly = File.new("#{Rails.root}/public/images/rails.png")
+    asset.dragonfly_required = File.new("#{Rails.root}/public/images/rails.png")
+    asset.paperclip = File.new("#{Rails.root}/public/images/rails.png")
+    asset.paperclip_required = File.new("#{Rails.root}/public/images/rails.png")
+
+    asset.save
 
     get :update, id: asset.id, _nullify: 'dragonfly', _continue: true
 

@@ -1,4 +1,4 @@
-require "test_helper"
+require 'test_helper'
 
 =begin
 
@@ -10,31 +10,33 @@ require "test_helper"
 
 class DeviseUserTest < ActiveSupport::TestCase
 
-  test "to_label" do
-    user = FactoryGirl.build(:devise_user)
+  test 'to_label' do
+    user = devise_users(:default)
     assert_equal user.email, user.to_label
   end
 
-  test "can?" do
-    user = FactoryGirl.build(:devise_user)
+  test 'can?' do
+    user = devise_users(:default)
     assert user.can?('delete', TypusUser)
     refute user.cannot?('delete', TypusUser)
     assert user.can?('delete', 'TypusUser')
     refute user.cannot?('delete', 'TypusUser')
   end
 
-  test "is_root?" do
-    user = FactoryGirl.build(:devise_user)
+  test 'is_root?' do
+    user = devise_users(:default)
     assert user.is_root?
     refute user.is_not_root?
   end
 
-  test "role" do
-    assert_equal 'admin', FactoryGirl.build(:devise_user).role
+  test 'role' do
+    user = devise_users(:default)
+    assert_equal 'admin', user.role
   end
 
-  test "locale" do
-    assert_equal :en, FactoryGirl.build(:devise_user).locale
+  test 'locale' do
+    user = devise_users(:default)
+    assert_equal :en, user.locale
   end
 
 end
