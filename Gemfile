@@ -54,7 +54,7 @@ gem 'rack-cache', require: 'rack/cache'
 gem 'paperclip', '~> 4.2.0'
 
 # MongoDB
-gem 'mongoid', github: 'mongoid/mongoid'
+# gem 'mongoid', github: 'mongoid/mongoid'
 
 # Puma
 gem 'puma'

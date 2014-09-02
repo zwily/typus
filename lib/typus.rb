@@ -10,7 +10,6 @@ require "typus/version"
 require "typus/orm/base/class_methods"
 require "typus/orm/base/search"
 require "typus/orm/active_record"
-require "typus/orm/mongoid"
 
 autoload :FakeUser, "support/fake_user"
 
@@ -176,11 +175,6 @@ module Typus
         class_name if is_active_record?(klass)
       end.compact
     end
-
-    def is_mongoid?(klass)
-      (defined?(Mongoid) && klass < Mongoid::Document)
-    end
-    private :is_mongoid?
 
     def is_active_record?(klass)
       (defined?(ActiveRecord) && klass < ActiveRecord::Base && !klass.abstract_class?)
